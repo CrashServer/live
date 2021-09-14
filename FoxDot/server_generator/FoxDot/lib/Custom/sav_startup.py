@@ -1,0 +1,1045 @@
+#coding: utf8
+#!/usr/bin/env python3
+#####  CRASH SERVER CUSTOM STARTUP ###########
+import os
+import sys
+import pickle
+import time
+from .Settings import FOXDOT_ROOT
+from .Buffers import alpha, nonalpha
+from .Crashserver.crash_conf import *
+
+# copy / paste code + ascii art lib
+try:
+    import pyperclip as clip # copy to clipboard
+    from pyfiglet import figlet_format, FigletFont # ASCII GENERATOR
+    cool_ascii = [1,6,8,11,13,15,17,18,19,21,22,24,26,30,31,32,33,34,35,37,38,43,44,45,46,47,48,50,59,62,64,65,68,69,77,79,81,82,83,84,85,88,89,96,98,103,104,105,107,111,113,114,117,119,123,124,131,135,143,150,151,152,159,187,190,193,19,201,203,217,225,227,230,240,243,244,245,251,273,275,280,308,325,329,347,363,385,410]
+    fig_font = FigletFont()
+    fig_fonts_list = fig_font.getFonts()
+    fig_skip = ['fbr12___', 'mshebrew210', 'term', 'runic', 'pyramid', 'eftifont', 'DANC4', 'dietcola']
+    fig_skip += ['emboss', 'emboss2', 'future', 'letter', 'pagga',
+                      'smblock', 'smbraille', 'wideterm']
+    fig_skip += ['dosrebel', 'konto', 'kontoslant']
+    font_list = [x for x in fig_fonts_list if x not in fig_skip]
+except:
+    print("Please install pyperclip & pyfiglet")
+
+#########################
+### SERVER CONFIG     ###
+#########################
+
+### Read the config file data
+file = os.path.realpath(FOXDOT_ROOT + "/lib/Crashserver/crash_gui/server_data.cs")
+lostfile = os.path.realpath(FOXDOT_ROOT + "/lib/Crashserver/crash_gui/lostfile.cs")
+
+with open(file, "rb") as fichier:
+    mon_depickler = pickle.Unpickler(fichier)
+    code_server = mon_depickler.load()
+
+with open(lostfile, "rb") as lost:
+    lost_depickler = pickle.Unpickler(lost)
+    lost_list = lost_depickler.load()
+
+lost_played = lost_list[:]
+server_data = code_server["server_data"]
+attack_data = code_server["attack_data"]
+
+### Lieu du Server
+lieu = str(server_data["lieu"])
+### Longueur mesure d'intro
+tmps = int(server_data["tmps"])
+### Language
+lang = str(server_data["lang"])
+if sys.platform.startswith("win") and lang.startswith("english"):
+    lang = "english"
+voice = int(server_data["voice"])
+### BPM intro
+bpm_intro = int(server_data["bpm_intro"])
+### Scale intro
+scale_intro = str(server_data["scale_intro"])
+### Root intro
+root_intro = str(server_data["root_intro"])
+### Video on/off
+video_player = int(server_data["video"])
+#adresse = str(server_data["adresse"])
+#adresse = video_adress
+horodatage = int(server_data["horo"])
+
+### Voice parameters ####
+rate_voice = 100
+pitch = 0
+voiceamp = 0.5
+
+### sample description ###
+sample_description_path = os.path.join(crash_path, "description.cs")
+if os.path.isfile(sample_description_path):
+    with open(sample_description_path, "rb") as file:
+        sample_description = pickle.load(file)
+
+### Useful path and list
+push_path = os.path.realpath(FOXDOT_ROOT + "/lib/Crashserver/" + "code_storage/" + "archiveCode.py")
+gamme = ["locrianMajor", "locrian", "phrygian", "minor", "dorian", "mixolydian", "major", "lydian", "lydianAug"]
+crash_function = ["lost", "binary", "desynchro", "PTime", "PTimebin" "lininf", "PDrum", "darker", "lighter", \
+"human", "unison", "ascii_gen", "attack", "PChords", "fourths", "thirds", "seconds", "duree", "print_synth", "print_sample", "print_fx", "PChain2"]
+
+### LOAD CUSTOM SYNTHDEFS #####
+try:
+    from .Crashserver.crashSynthDefs import * ### Crash Custom SynthDefs
+    from .Crashserver.crashFX import * ### Crash Custom Fx
+except:
+    print("Error importing SynthDefs, FX or Loop player : ", sys.exc_info()[0])
+
+### EXTENSIONS #######
+### TXT 2 Speech ####
+try:
+    if sys.platform == "Windows":
+        from .Crashserver.speech.voice import *   ### Text2Speech Windows
+    elif sys.platform.startswith("linux"):
+        from .Crashserver.speech.voice_linux_mbrola import *   ### Text2Speech linux
+    else:
+        print("Txt2Speech don't work for ", sys.platform)
+except:
+    print("Error importing Speech Extension")
+
+### Foxdot tools
+try:
+    from .Crashserver.arpy import *
+    from .Crashserver.sdur import *
+    from .Crashserver.drumspattern2 import *
+    from .Chords import *
+except:
+    print("Error importing Extensions : ", sys.exc_info())
+
+### Load weapons - Code generator
+try:
+    from .Crashserver.crash_generator.weapons import *
+except:
+    print("Error in generating weapons code")
+
+### Sample custom directory 
+try:
+    FOXDOT_SND   = crash_path
+    FOXDOT_LOOP  = os.path.realpath(crash_path + "/_loop_/")
+    FoxDotCode.use_sample_directory(FOXDOT_SND)
+    Samples.addPath(FOXDOT_LOOP)
+    loops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(FOXDOT_LOOP)])
+except:
+    print("Error importing Custom Sound", sys.exc_info()[0])
+
+### OSC VIDEO Filtered FORWARD
+try:
+    if video_player == 1:
+        class FilterOSCClient(OSCClient):
+                def send(self, message, *args):
+                        if "video" in str(message.message):
+                                OSCClient.send(self, message, *args)
+        def OSCVideo(video_adress):
+            my_client = FilterOSCClient()
+            my_client.connect((video_adress, 12345))
+            Server.forward = my_client
+except:
+    print("Error forwarding OSC to video", sys.exc_info()[0])
+
+####################
+###    VOICE     ###
+####################
+def init_voice(horodatage=False):
+    ''' Voice initalisation, windows / linux '''
+    if sys.platform.startswith("win"):
+        voix = Voice(lang=lang, rate=0.45, amp=1.0)
+        voix.initi(lieu)
+    elif sys.platform.startswith("linux"):
+        serv = init_server(lang, lieu, horodatage)
+        txt_init = serv.initi()
+        Voice(txt_init, rate=rate_voice, amp=voiceamp, pitch=pitch, lang=lang, voice=voice)
+    else:
+        print("Sorry, we crash only from windows or linux")
+
+def voice_lpf(freq=400):
+    ''' Low pass everything during speech voice '''
+    Master().lpf=freq
+
+def calc_dur_voice(phrase=""):
+    ''' return the voice duration in beats '''  
+    phrase = len(phrase.split())
+    try:
+        if phrase or phrase > 0:
+            return (Clock.seconds_to_beats(phrase * 0.6))
+        else:
+            return 8
+    except:
+        return 8
+
+def ascii_gen(text="", font=""):
+    ''' Generate ASCII art from text '''
+    if font == "":
+        font = randint(0,len(cool_ascii))
+    if type(font) != str:
+        font = fig_fonts_list[cool_ascii[int(font)]]
+    if text != None:
+        clip.copy(figlet_format(text, font=font))
+
+def clear_voice_dir():
+    ''' delete all voice sample in _loop_/voicetxt dir '''
+    voicetxt_path = os.path.join(crash_path, "_loop_", "voicetxt")
+    voices_files = os.listdir(voicetxt_path)
+    for f in voices_files:
+        os.remove(os.path.join(voicetxt_path, f))
+
+clear_voice_dir()
+
+##########################################
+###     CRASH SERVER LIVE FUNCTIONS    ###
+##########################################
+
+def connect(video=video):
+    ''' Full reset and set bpm, root, sos & video player '''
+    Master().reset()
+    Clock.set_time(0)
+    lost(2)
+    print(attack_data["connect"][1].strip())
+    if "connect" in lost_played:
+        lost_played.remove("connect")
+    Clock.bpm = bpm_intro
+    Scale.default = scale_intro
+    Root.default = root_intro
+    video_line = ""
+    if video_player == 1:
+        OSCVideo(video_adress)
+        vi >> video(vid1=0, vid2=0, vid1rate=1, vid2rate=1, vid1kal=0, vid2kal=0, vid1glitch=0, vid2glitch=0, vidblend=0, vidmix=0, vid1index=0, vid2index=0)
+        video_line = "vi >> video(vid1=0, vid2=0, vid1rate=1, vid2rate=1, vid1kal=0, vid2kal=0, vid1glitch=0, vid2glitch=0, vidblend=0, vidmix=0, vid1index=0, vid2index=0)"
+    i3 >> sos(dur=8, lpf=linvar([60,4800],[tmps*1.5, tmps*3], start=now), hpf=expvar([0,500],[tmps*6, tmps*2]), amplify=0.5)
+    clip.copy(figlet_format(attack_data["connect"][0].strip(), font=fig_fonts_list[cool_ascii[51]]) + "\n" + attack_data["connect"][2].strip() + "\n" + video_line)
+
+
+def attack(part="", active_voice=1):
+    ''' Lanch an attack and copy it to the clipboard, attack voice '''
+    if type(part) != str:  ### so we can type attack(42) or attack(43)
+        part = str(part)
+
+    ### next part
+    elif part == "":
+        part = lost_played[0]
+
+    if part in lost_played:
+        lost_played.remove(part)
+
+    blase = attack_data[part][0].strip()
+    voice_txt = attack_data[part][1].strip()
+    code_txt = attack_data[part][2].strip()
+
+    ### Define prompt
+    exten = ''.join(choice(string.ascii_lowercase) for x in range(3))
+    prompt = "### attack@{}.{}:~$ ".format(part, exten)
+
+    ### Init server
+    if part == "init":
+        if active_voice == 1:
+            init_voice(horodatage)
+        global time_init
+        time_init = time.time()
+        clip.copy(figlet_format(blase) + "\n" + prompt + define_virus()+ "\n" + code_txt)
+
+    ### Random code generator
+    if part == "42" or part == "random":   ### Random Synth code
+        clip.copy(prompt + define_virus()+ "\n" + random_virus())
+    elif part=="43":  ### Random play code
+        clip.copy(prompt + define_virus()+ "\n" + random_virus_char())
+
+    ### Select Part and generate Ascii text
+    else:
+        clip.copy((figlet_format(blase, font=fig_fonts_list[choice(cool_ascii)]) if blase != None else "") + "\n" + prompt + define_virus()+ "\n" + (code_txt if code_txt is not None else ""))
+
+    ### Generate Voice
+    if voice_txt != None:   ### Voice generator
+        if voice_txt != "" and active_voice==1:
+            voice_lpf(400)
+            Voice(voice_txt, rate=rate_voice, amp=voiceamp, pitch=pitch + randint(-10,50), lang=lang, voice=voice)
+            Clock.future(calc_dur_voice(voice_txt), lambda: voice_lpf(0))
+
+def chaos(level='PASS'):
+    try:
+        txt =''
+        for i in range(int(level, 2)):
+            txt += choose([random_virus(), random_virus_char()])
+            txt += '\n'
+        clip.copy(txt)
+        print("CHAOS LEVEL {} ENGAGED, [{}{}]".format(int(level, 2), "#"*int(level, 2), "-"*(20-int(level, 2))))
+    except:
+       print("WRONG TOTAL DESTUCTION CODE // YOu'RE NOT ALLOWED TO CRASH")
+
+###########################
+###   PLAYERS METHODS   ###
+###########################
+
+@player_method
+def unison(self, unison=2, detune=0.125, analog=0):
+    """ Like spread(), but can specify number of voices(unison)
+    Sets pan to (-1,-0.5,..,0.5,1) and pshift to (-0.125,-0.0625,...,0.0625,0.125)
+    If unison is odd, an unchanged voice is added in the center
+    Eg : p1.unison(4, 0.5) => pshift=(-0.5,-0.25,0.25,0.5), pan=(-1.0,-0.5,0.5,1.0)
+         p1.unison(5, 0.8) => pshift=(-0.8,-0.4,0,0.4,0.8), pan=(-1.0,-0.5,0,0.5,1.0)
+         p1.unison(5,(0.3,2)) => pshift=(-2.0,-0.3,0,0.3,2.0), pan=(-1,-0.5,0,0.5,1)
+    """
+    if unison > 1:
+        pan=[]
+        pshift=[]
+        uni = int(unison if unison%2==0 else unison-1)
+        for i in range(1,int(uni/2)+1):
+            pan.append(2*i/uni)
+            pan.insert(0, -2*i/uni)
+        for i in range(1, int(uni/2)+1):
+            if type(detune)==tuple:
+                pshift.append(detune[i-1]+PWhite(0,detune[i-1]*(analog/100)))
+                pshift.insert(0,detune[i-1]*-1+PWhite(0,-1*detune[i-1]*(analog/100)))
+            else:   
+                pshift.append(detune*(i/(uni/2))+PWhite(0,detune*(analog/100)))
+                pshift.insert(0,detune*-(i/(uni/2))+PWhite(0,-1*detune*(analog/100)))
+        if unison%2!=0 and unison > 1:
+            pan.insert(int(len(pan)/2), 0)
+            pshift.insert(int(len(pan)/2), 0)
+        self.pan = tuple(pan)
+        self.pshift = tuple(pshift)
+    else:
+        self.pan=0
+        self.pshift=0
+    return self
+
+@player_method
+def human(self, velocity=20, humanize=5, swing=0):
+    """ Humanize the velocity, delay and add swing in % (less to more)"""
+    humanize += 0.1
+    if velocity!=0:
+        self.delay=[0,PWhite((-1*humanize/100)*self.dur, (humanize/100)*self.dur) + (self.dur*swing/100)]
+        self.amplify=[1,PWhite((100-velocity)/100,1)]
+    else:
+        self.delay=0
+        self.amplify=1
+    return self
+
+@player_method
+def fill(self, mute_player=0, on=1):
+    """ add fill to a drum player
+    you can mute other players with .fill(Group(p1,d2,d3))
+    0 = off
+    1 = dur + amplify
+    2 = dur  //  amplify =1
+    3 = amplify // dur=1/2
+    """
+    if on==1:
+        self.dur = PwRand([1/4,1/2,3/4],[45,45,10])
+        self.amplify = var([0,1],[[PRand([3,7,15]),PRand([6,2,14])],[1,2]])*[1,PWhite(0.2,1)]
+        if mute_player != 0:
+            mute_player.amplify = self.amplify.map({0:1, 1:0})
+    elif on==2:
+        self.dur = PRand([1/4,1/2,3/4])
+        self.amplify=1
+    elif on==3:
+        self.amplify = var([0,1],[[3,6,7,2,15,2,3,14],[1,2]])*PWhite(0,1)
+        self.dur = 1/2
+    else:
+        self.dur = 1/2
+        self.amplify = 1
+
+@player_method
+class PChain2(RandomGenerator):
+    """ PChain Mod Markov Chain generator pattern with probability."""
+    def __init__(self, mapping, **kwargs):
+        assert isinstance(mapping, dict)
+        RandomGenerator.__init__(self, **kwargs)
+        self.args = (mapping)
+        self.last_value = 0
+        self.mapping = {}
+        i = 0
+        for key, value in mapping.items():
+            self.mapping[key] = [asStream(value[0]), asStream(value[1])]
+            if i == 0:
+                self.last_value = key
+                i += 1
+        self.init_random(**kwargs)
+    def func(self, index):
+        key = list(self.mapping[self.last_value][0])
+        prob = list(self.mapping[self.last_value][1])
+        self.last_value = random.choices(key, prob)[0]
+        return self.last_value
+
+###############################
+###     PATTERN METHODS     ###
+############################### 
+
+@PatternMethod
+def renv(self, nbr=1):
+    """ Chord Inversion """
+    sorted_chord = sorted(self)
+    if nbr > 0:
+        for i in range(0,nbr+1):
+            sorted_chord[0] += 7
+            sorted_chord = sorted(sorted_chord)
+    return PGroup(sorted_chord)
+
+def lost(total=0):
+    ''' Print the part for live show'''
+    global lost_played
+    global lost_list
+    if total==0:
+        print(lost_played)
+    elif total==1:
+        print(lost_list)
+    elif total==2:
+        print("Reinit lost")
+        lost_played=lost_list[:]
+        print(lost_played)
+
+###########################
+###   Useful FUNCTIONS  ###
+###########################
+
+def binary(number):
+    """return a list converted to binary from a number"""
+    binlist = [int(i) for i in str(bin(number)[2:])]
+    return binlist
+
+def duree():
+    ''' print the duration of the show from init() to now '''
+    global time_init
+    duree = time.time()- time_init
+    print("Durée de la tentative de Crash :", time.strftime('%H:%M:%S', time.gmtime(duree)))
+
+def desynchro():
+    ''' Generate a random bpm var, need ctrl+v '''
+    clip.copy(random_bpm())
+
+def PTime():
+    """Generate a pattern from the local machine time"""
+    return [int(t) for t in str(Clock.get_time_at_beat(int(Clock.now()))) if t != '.']
+
+def PTimebin():
+    """Generate a pattern of actual time converted to binary"""
+    return binary(int(Clock.get_time_at_beat(int(Clock.now()))))
+
+def lininf(start=0, finish=1, time=32):
+    ''' linvar from start to finish but stay at finish after time '''
+    return linvar([start,finish],[time,inf], start=now)
+
+def expinf(start=0, finish=1, time=32):
+    ''' expvar from start to finish but stay at finish after time '''
+    return expvar([start,finish],[time,inf], start=now)    
+
+def PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer="d") :
+    ''' Generate a drum pattern style '''
+    ppat = ""
+    dplayers = {"d1":d1,"d2":d2,"d3":d3,"d4":d4,"d5":d5,"d6":d6,"d7":d7,"d8":d8,"d9":d9,"d0":d0}
+    stopList = [p for p in dplayers.keys()]
+    sample = "x-u=~r+"
+    if style == None:
+        print(DrumsPattern2.keys())
+    else:
+        patlist = [key for key in DrumsPattern2[style].keys()]
+        if pat == "":
+            print(DrumsPattern2[style].keys())
+        elif type(pat) == int:
+            if pat > len(DrumsPattern2[style])-1:
+                pat = 0
+                print("no more patterns...")
+            player_idx = 0
+            ppat = ""
+            for i in DrumsPattern2[style][patlist[pat]]:
+                ply, pat, rst = i.split('"')
+                if khsor != '':
+                    for idx, char in enumerate(sample):
+                        try:
+                            pat = pat.replace(char, khsor[idx])
+                        except:
+                            pass
+                player_idx += 1
+                ppat += f'{charPlayer}{player_idx} >> play("{pat}", dur={duree}, sample={spl})'
+                ppat += "\n"
+                stopList.remove(f'd{player_idx}')
+                if listen:
+                    dplayers[f"d{player_idx}"] >> play(pat, dur=duree, sus=duree, sample=spl)
+            clip.copy(ppat)
+            if listen:
+                for p in stopList:
+                    dplayers[p].stop()
+            else:
+                print(ppat)
+        else:
+            for i in DrumsPattern2[style][pat]:
+                ppat += i
+                ppat += "\n"
+            clip.copy(ppat)
+
+def darker():
+    ''' Change Scale to a darkest one '''
+    if Scale.default.name not in gamme:
+        Scale.default = "major"
+    if Scale.default.name == gamme[0]:
+        print("Darkest scale reach !")
+    else:
+        actual = Scale.default.name
+        Scale.default = gamme[gamme.index(actual) - 1]
+
+def lighter():
+    ''' Change Scale to a lightest one '''
+    if Scale.default.name not in gamme:
+        Scale.default = "major"
+    if Scale.default.name == gamme[-1]:
+        print("Lightest scale reach !")
+    else:
+        actual = Scale.default.name
+        Scale.default = gamme[gamme.index(actual) + 1]
+
+class PChords(GeneratorPattern):
+    ''' Chords generator '''
+    def __init__(self, chord=None, **kwargs):
+        GeneratorPattern.__init__(self, **kwargs)
+        self.list_chords = {"I": I, "II": II, "III": III, "IV": IV, "V": V, "VI": VI, "VII":VII}
+        self.last_value = None
+        self.chord = None
+        self.list_of_choice = []
+    def func(self, index, list_of_choice=[]):
+        self.list_of_choice = []
+        if self.chord == None:
+            self.chord = tuple(self.list_chords[choice(list(self.list_chords))])
+        for keys, values in self.list_chords.items():
+            for note in values:
+                if note in list(self.chord):
+                    if values not in self.list_of_choice:
+                        self.list_of_choice.append(values)
+        self.list_of_choice.remove(self.chord)
+        self.last_value = choice(self.list_of_choice)
+        self.chord = self.last_value
+        return self.last_value
+
+class PGauss(RandomGenerator):
+    ''' Returns random floating point values using Gaussian distribution '''
+    def __init__(self, mean=0, deviation=1, **kwargs):
+        RandomGenerator.__init__(self, **kwargs)
+        self.args = (mean, deviation)
+        self.mean = mean
+        self.deviation = deviation
+        self.init_random(**kwargs)
+    def func(self, index):
+        if isinstance(self.mean, float):
+            return random.gauss(self.mean, self.deviation)
+        elif isinstance(self.mean, int):
+            return int(round(random.gauss(self.mean, self.deviation)))
+
+class PLog(RandomGenerator):
+    ''' Returns random floating point values using logarithmic distribution '''
+    def __init__(self, mean=0, deviation=1, **kwargs):
+        RandomGenerator.__init__(self, **kwargs)
+        self.args = (mean, deviation)
+        self.mean = mean
+        self.deviation = deviation
+        self.init_random(**kwargs)
+    def func(self, index):
+        if isinstance(self.mean, float):
+            return random.lognormvariate(self.mean, self.deviation)
+        elif isinstance(self.mean, int):
+            return int(round(random.lognormvariate(self.mean, self.deviation)))
+
+class PTrir(RandomGenerator):
+    ''' Returns random floating or int point values using triangular distribution '''
+    def __init__(self, low=0, high=8, mode=None, **kwargs):
+        RandomGenerator.__init__(self, **kwargs)
+        self.args = (low, high)
+        self.low = low
+        self.high = high
+        if mode is None:
+            self.mode = (self.high-self.low) / 2
+        else:
+            self.mode = mode 
+        self.init_random(**kwargs)
+    def func(self, index):
+        if isinstance(self.low, float) or isinstance(self.high, float):
+            return random.triangular(self.low, self.high, self.mode)
+        else:
+            return int(round(random.triangular(self.low, self.high, self.mode)))
+
+class PCoin(RandomGenerator):
+    ''' Choose between 2 values with probability, eg : PCoin(0.25,2,0.2)'''
+    def __init__(self, low=0, high=1, proba=0.5, **kwargs):
+        RandomGenerator.__init__(self, **kwargs)
+        self.init_random(**kwargs)
+        self.low = low
+        self.high = high
+        self.proba = proba
+        if self.proba > 1:
+            self.proba /= 100
+    def func(self, index):
+        return random.choices([self.low, self.high], [1-self.proba, self.proba])[0]
+        
+class PChar(RandomGenerator):
+    ''' Generate characters randomly, PChar(case, alpha) 
+        case = 0 , only lowercase 
+        case = 1 , only uppercase
+        case = 2 , lower case and uppercase
+        alpha = 0, only alpha 
+        alpha = 1, only nonalpha
+        alpha = 2, alpha + nonalpha'''
+    def __init__(self, case=2, alpha=2, **kwargs):
+        RandomGenerator.__init__(self, **kwargs)
+        self.init_random(**kwargs)
+        self.case = case
+        self.alpha = alpha
+    def func(self, index):
+        if self.alpha == 0:
+            charList = alpha
+        if self.alpha == 1:
+            charList = ''.join([x for x in nonalpha.keys()])
+        else:
+            charList = ''.join([x for x in nonalpha.keys()]) + alpha    
+        if self.case == 0:
+            char = random.choice(charList)
+        elif self.case == 1:
+            char = random.choice(charList).upper()
+        else:
+            char = random.choice([random.choice(charList), random.choice(charList).upper()])
+        return char
+
+
+def print_video():
+    ''' copy to the clipboard the video line '''
+    clip.copy("v1 >> video(vid1=0, vid2=0, vid1rate=1, vid2rate=1, vid1kal=0, vid2kal=0, vid1glitch=0, vid2glitch=0, vidblend=0, vidmix=0, vid1index=0, vid2index=0)")
+
+def print_synth(synth=""):
+    ''' Show the name and the args of a synth '''
+    path = os.path.realpath(FOXDOT_ROOT + "/osc/scsyndef/")
+    if synth == "":
+        dir_list = os.listdir(path)
+        synth_list = []
+        for p in dir_list:
+            files,sep,ext = p.partition('.')
+            synth_list.append(files)
+        print(sorted(synth_list))
+    else:
+        path = os.path.realpath(FOXDOT_ROOT + "/osc/scsyndef/" + synth + ".scd")
+        with open(str(path), "r") as synth:
+            synth = synth.readlines()
+        synth_txt = [line.strip() for line in synth if line != "\n"]
+        txt = str(''.join(synth_txt))
+        synthname = re.findall('SynthDef[.new]*[(\\\]*(.+?),',txt)
+        synthargs = re.findall('\{\|(.*)\|', txt)
+        print(str(synthname[0]), " : ", str(synthargs[0]))
+
+def print_fx(fx=""):
+    ''' Show the name and the args of a fx '''
+    path = os.path.realpath(FOXDOT_ROOT + "/osc/sceffects/")
+    if fx == "":
+        dir_list = os.listdir(path)
+        fx_list = []
+        for p in dir_list:
+            files,sep,ext = p.partition('.')
+            fx_list.append(files)
+        print(sorted(fx_list))
+    else:
+        path = os.path.realpath(FOXDOT_ROOT + "/osc/sceffects/" + fx + ".scd")
+        with open(str(path), "r") as fx:
+            fx = fx.readlines()
+        fx_txt = [line.strip() for line in fx if line != "\n"]
+        txt = str(''.join(fx_txt))
+        fxname = re.findall('SynthDef[.new]*[(\\\]*(.+?),',txt)
+        fxargs = re.findall('\{\|(.*)\|', txt)
+        print(str(fxname[0]), " : ", str(fxargs[0]))
+
+def print_sample(sample=""):
+    ''' print description of samples or find the corresponding letter '''
+    if sample=="":
+        print("")
+        for k, v in sorted(sample_description.items(), key= lambda x: x[0].casefold()):
+            print(k.ljust(2, " ") + ': ' + v.ljust(40), end="")
+        print("")
+    else:
+        if len(sample) == 1:
+            if sample.lower() in alpha or sample.upper() in alpha or sample in nonalpha:
+                print(f'{sample}: {sample_description[sample]}')
+        else:
+            for key, value in sample_description.items():
+                if sample.lower() in value.lower():
+                    print(f'{key}: {value}')
+
+def print_loops(loop=""):
+    ''' print all available loops samples '''
+    if loop=="":
+        print(loops)
+    else:
+        listloops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_LOOP, loop))])
+        print(listloops)
+
+from .Crashserver.chords_dict import *
+
+@player_method
+class PMarkov(RandomGenerator):
+    """ An example of a Markov Chain generator pattern. The mapping argument
+        should be a dictionary of keys whose values are a list/pattern of possible
+        destinations.  Mod to add probability"""
+    def __init__(self, init_value="", **kwargs):
+        RandomGenerator.__init__(self, **kwargs)
+        self.init_value = init_value
+        self.active_value = 0
+        self.first_value = 0
+        self.second_value = 0
+        self.third_value = 0
+        self.mapping = {}
+        self.init_random(**kwargs)
+        self.turn = 0
+    def stream_value(self, active_dict):
+        """ Return mapping dict with a list of keys and probability"""
+        for key, value in active_dict.items():
+            self.mapping[key] = [asStream(value[0]), asStream(value[1])]
+            #self.last_value = key
+    def key_prob(self, active_dict):
+        """return the key and prob of previous value from active dictionnary"""
+        self.stream_value(active_dict)
+        key = list(self.mapping[self.active_value][0])
+        prob = list(self.mapping[self.active_value][1])
+        return key, prob
+    def value_choice(self, active_dict):
+        """ Return a key from probabilty of active dictionnary """
+        key, prob = self.key_prob(active_dict)
+        return random.choices(key, prob)[0]
+    def func(self, index):
+        if self.turn == 0:
+            if self.init_value == "":
+                self.init_value = random.choice(list(cho1.keys()))
+            self.active_value = self.init_value
+            #print("Turn : {}, chord : {}".format(self.turn, self.active_value))
+            self.turn += 1
+            return self.active_value
+        else:
+            if self.turn == 1:
+                self.first_value = self.value_choice(cho1)
+                self.active_value = self.first_value
+                #print("Turn : {}, chord : {}".format(self.turn, self.active_value))
+
+            elif self.turn == 2:
+                self.second_value = self.value_choice(cho2[self.init_value])
+                self.active_value= self.second_value
+                #print("Turn : {}, chord : {}".format(self.turn, self.active_value))
+
+            elif self.turn == 3:
+                try:
+                    self.third_value = self.value_choice(cho3[self.init_value][self.first_value])
+                    self.active_value = self.third_value
+                except:
+                    list_cho = list(cho1.keys())
+                    list_cho.remove(self.init_value)
+                    self.third_value = random.choice(list_cho)
+                    self.active_value = self.third_value
+                #print("Turn : {}, chord : {}".format(self.turn, self.active_value))
+
+            self.turn += 1
+            if self.turn > 3:
+                self.turn = 0
+            return self.active_value
+
+@player_method
+def switch(self, other, key, bypass=1):
+    """ Switch the attr of a player
+        eg: b1 >> dbass(P[0:4], amp=1)
+            b2 >> blip(-2, amp=1).switch(b1, "degree")"""
+    if bypass != 0:
+        self_temp = self.attr[key]
+        other_temp = other.attr[key]
+        other.attr[key] = self_temp
+        self.attr[key] = other_temp
+        return self
+
+@player_method
+def clone(self, player):
+    """ Clone a player, eg: a2 >> saw().clone(a1)"""
+    self.attr = copy(player.attr)
+    return self
+
+@PatternMethod
+def add(self, value):
+    ''' pattern method add, eg:  s1.sometimes("degree.add",2) '''
+    return self + value    
+
+@PatternMethod
+def mul(self, value):
+    ''' pattern method mul, eg: d1.often("rate.mul", -1) '''
+    return self * value   
+
+class SynthIterator:
+    ''' a synth iterator class to use with test_synth '''
+    def __init__(self):
+        self.notSynth = ["loop", "stretch", "play1", "play2", "audioin", "video", "gsynth", "vrender", "breakcore", "splitter", "splaffer"]
+        self.synthList = [i for i in sorted(SynthDefs) if i not in self.notSynth]
+        self.idx = 0
+    def __iter__(self):
+        return self
+    def rewind(self):
+        self.idx = 0
+    def __next__(self):
+        try:
+            return self.synthList[self.idx]
+        except IndexError:
+            self.rewind()
+            return 'stopIter'
+            raise StopIteration
+        finally:
+            self.idx += 1
+
+synthList = SynthIterator()
+
+@PlayerMethod
+def test_synth(self):
+    """ Change synth player, nice for test like a1 >> blip().every(4, "test_synth") """
+    actualSynth = next(synthList)
+    if actualSynth == 'stopIter':
+        try:
+            self.never("test_synth")
+        except:
+            pass
+    else:
+        print(actualSynth)
+        self.synthdef = actualSynth
+
+import random
+def drop(playTime=15, dropTime=1, nbloop=8):
+    """ Drop the amplify to 0 for random players.
+        ex : drop(6,2,4) => amplify=0 for random playing players at the 2 last beats of 8, 4 times
+    """
+    if nbloop > 0:
+        totalTime = playTime + dropTime
+        clkPly = [p for p in Clock.playing]
+        if clkPly:
+            for p in clkPly:
+                p.amplify=1
+            if nbloop == 1:
+                rndPlayerIndex = random.sample(range(0,len(clkPly)), len(clkPly))
+                print("Final Drop !!!")
+            else:
+                rndPlayerIndex = random.sample(range(0,len(clkPly)), random.randint(1,len(clkPly)-1))
+                print(f"Drop loop left : {nbloop}")
+            if rndPlayerIndex:
+                for i in rndPlayerIndex:
+                    clkPly[i].amplify = var([1,0],[playTime, dropTime])
+        nbloop -= 1
+        Clock.future(totalTime, drop, args=(playTime, dropTime, nbloop))
+    else:
+        for p in Clock.playing:
+            p.amplify = 1
+        return
+
+
+def drop_bpm(duree=32, nbr=0, end=4):
+    """ Create a drop bpm effect (var bpm),
+        duree = durée totale de la partie,
+        nbr = nombre de division du drop,
+        end = duree du drop en partant de la fin
+        pour retablir le tempo simplement drop(92)
+        """
+    if nbr == 0:
+        Clock.bpm = duree
+    else:
+        init_bpm = Clock.bpm
+        actual_bpm = Clock.bpm
+        divi = 1
+        bpm_list = []
+        duree_list = []
+        for i in range(nbr):
+            actual_bpm /= divi
+            if actual_bpm < 10:
+                actual_bpm = 10
+            bpm_list.append(int(actual_bpm))
+            if i == 0:
+                duree_list.append(duree-end)
+            else:
+                duree_list.append(end/(2**i))
+            divi = 2
+        duree_list[-1] = end-sum(duree_list[1:-1])
+        Clock.bpm = var([bpm_list], [duree_list], start=Clock.mod(8))
+        print('var({}, {})'.format([bpm_list], [duree_list]))
+
+
+def PMorse(text, point=1/4, tiret=3/4):
+    """ Convert a string to the value of point & tiret """
+    MORSE_DICT = { 'A':'.-', 'B':'-...',
+                    'C':'-.-.', 'D':'-..', 'E':'.',
+                    'F':'..-.', 'G':'--.', 'H':'....',
+                    'I':'..', 'J':'.---', 'K':'-.-',
+                    'L':'.-..', 'M':'--', 'N':'-.',
+                    'O':'---', 'P':'.--.', 'Q':'--.-',
+                    'R':'.-.', 'S':'...', 'T':'-',
+                    'U':'..-', 'V':'...-', 'W':'.--',
+                    'X':'-..-', 'Y':'-.--', 'Z':'--..',
+                    '1':'.----', '2':'..---', '3':'...--',
+                    '4':'....-', '5':'.....', '6':'-....',
+                    '7':'--...', '8':'---..', '9':'----.',
+                    '0':'-----', ', ':'--..--', '.':'.-.-.-',
+                    '?':'..--..', '/':'-..-.', '-':'-....-',
+                    '(':'-.--.', ')':'-.--.-'}
+    morse = []
+    for l in text.split(" "):
+        for w in l:
+            for i in MORSE_DICT[w.upper()]:
+                if i == ".":
+                    morse.append(point)
+                elif i == "-":
+                    morse.append(tiret)
+            morse.append(rest(5*point))
+    morse[-1] += rest(2*point)
+    return morse
+
+
+#### Convert sample
+def convert(note, scale=Scale.default):
+    ''' Convert note to chromatic scale'''
+    def create_dict_map(scale):
+        scale_cpy = copy(scale)
+        scale_dict = {}
+        for i in range(0,50):
+            scale_dict[i] = scale_cpy[i:i+1][0] + Root.default
+        return scale_dict
+    create_dict_map(scale)
+    return note.submap(create_dict_map(scale))
+
+### push/pull function
+push_dict = {}
+
+def save_to_dict(line):
+    with open(push_path, "a") as file:
+        file.write(f"{line}\n")
+
+def push(text="", name=""):
+    push_dict[name] = text
+    save_to_dict(f"{name} : {text}")
+
+def pull(name=""):
+    if name == "all":
+        with open(push_path, 'r') as file:
+            print(file.read())
+    elif name == "":
+        print(push_dict.keys())
+    else:
+        print(push_dict[name])
+        clip.copy(push_dict[name])
+
+### Chord progression, Root mouvement by fourths, thirds, seconds
+fourths = PChain({
+    I: [IV, V],
+    II: [V, VI],
+    III: [VI, VII],
+    IV: [VII, I],
+    V: [I, II],
+    VI: [II, III],
+    VII: [III, IV]
+})
+
+thirds = PChain({
+    I: [III, VI],
+    II: [IV, VII],
+    III: [I, V],
+    IV: [II, VI],
+    V: [III, VII],
+    VI: [I, IV],
+    VII: [II, V]
+})
+
+seconds = PChain({
+    I: [II, VII],
+    II: [I, III],
+    III: [II, IV],
+    IV: [III, V],
+    V: [IV, VI],
+    VI: [V, VII],
+    VII: [VI, I]
+})
+
+def melody(scale_melody=Scale.default.name):
+    melody_dict = {
+        0: [[0,1,2,3,4,5,6,7,8,9,10,11], [27,0,22,0,19,1,0,12,0,6,1,13]],
+        1: [[0,1,2,3,4,5,6,7,8,9,10,11], [9,0,77,0,14,0,0,0,0,0,0,0]],
+        2: [[0,1,2,3,4,5,6,7,8,9,10,11], [32,0,22,0,26,6,0,8,0,2,0,3]],
+        3: [[0,1,2,3,4,5,6,7,8,9,10,11], [10,0,38,16,0,29,0,7,0,0,0,0]],
+        4: [[0,1,2,3,4,5,6,7,8,9,10,11], [11,0,30,0,22,16,0,19,0,2,0,0]],
+        5: [[0,1,2,3,4,5,6,7,8,9,10,11], [0,0,13,0,43,17,0,18,0,6,0,1]],
+        6: [[0,1,2,3,4,5,6,7,8,9,10,11], [1,0,4,0,7,1,12,67,0,8,0,0]],
+        7: [[0,1,2,3,4,5,6,7,8,9,10,11], [16,0,3,0,17,22,1,30,0,10,0,1]],
+        8: [[0,1,2,3,4,5,6,7,8,9,10,11], [0,0,0,0,0,27,0,55,0,18,0,0]],
+        9: [[0,1,2,3,4,5,6,7,8,9,10,11], [4,0,2,0,1,5,0,60,0,19,1,8]],
+        10: [[0,1,2,3,4,5,6,7,8,9,10,11], [17,0,2,1,12,2,0,22,1,18,24,2]],
+        11: [[0,1,2,3,4,5,6,7,8,9,10,11], [45,0,12,0,0,1,0,7,0,26,0,9]]
+        }
+
+    scale_melody_dict = {key: melody_dict[key] for key in melody_dict.keys() if key in Scale[scale_melody]}
+    for keys, values in scale_melody_dict.items():
+        note, prob = values
+        fnote, fprob = zip(*((key, pro) for key, pro in zip(note, prob) if key in Scale[scale_melody]))
+        scale_melody_dict[keys] = [list(fnote), list(fprob)]
+    return PChain2(scale_melody_dict)
+
+
+chords = {
+    I: [[I, II, III, IV, V, VI], [2,2,2,39,20,35]],
+    II: [[I, II, III, IV, V, VI], [3,2,1,4,86,4]],
+    III: [[I, II, III, IV, V, VI], [0,5,0,85,2,8]],
+    IV: [[I, II, III, IV, V, VI], [20,1,1,1,76,1]],
+    V: [[I, II, III, IV, V, VI], [70,1,2,13,1,14]],
+    VI: [[I, II, III, IV, V, VI], [5,5,1,49,39,1]],
+    }
+
+krhytm = {
+    0.25: [0.25,0.25,0.25,0.5],
+    0.5:  [0.25,0.5,0.125,0.125,0.125,0.125],
+    0.125: [0.375,0.125],
+    0.375: [0.375,0.375,1],
+    1: [0.75,0.25],
+    0.75: [0.25,1,0.125,0.125]
+    }
+
+
+def quatrevin(instr="", rnd=0):
+    """ 80s set choice """
+    quatrevinList = {
+    "pads" : ["ambi", "angst", "charm", "creep", "glass", "organ", "ripple", "sinepad", "soprano", "space", "swell", "total", "varsaw"],
+    "lead" : ["arpy", "blip", "dirt", "karp", "lapin", "nylon", "pasha", "piano", "pluck", "prof", "prophet", "pulse", "quin", "razz", "saw", "scatter", "sine", "sitar", "spark", "star", "supersaw", "tb303", "tritri", "varicelle", "zap"],
+    "fx" : ["noise", "lazer", "scratch", "snick"],
+    "bass" : ["bass", "bbass", "dab", "dafbass", "dbass", "dirt", "faim", "glitchbass", "jbass", "pbass", "sawbass"],
+    "effects" : ["fmod", "vib", "rate", "room2", "phaser"]
+    }
+    if instr in quatrevinList.keys():
+        if rnd == 42:
+            print(choice(quatrevinList[instr]))
+        else:
+            print(quatrevinList[instr])
+    else:
+        print(quatrevinList.keys())
+
+class TapDur:
+    ''' Tap duration with the <space> bar. 
+        Always tap the fist beat, you can offset the pattern if you need to start on the 2nd beat
+        TapDur(loop_lenght, quantize, offset)
+        TapDur(8,0.25,0)
+    '''
+    def __init__(self, total_dur=8, quantize=0.125, offset=0):
+        self.prev_time = None
+        self.total_dur = total_dur
+        self.time_count = []
+        self.quantize = quantize
+        self.offset = offset
+        GUI.text.bind("<space>", lambda e: self.count())
+    def rounder(self, value, base):
+        ''' Round the value ''' 
+        if isinstance(base, float):
+            decimal = str(base)[::-1].find(".")
+        if base > 0 :    
+            return round(base * round(float(value) / base),decimal)
+    def count(self):
+        if self.prev_time == None:
+            self.prev_time = time.time()
+        duration = self.rounder(Clock.seconds_to_beats(time.time() - self.prev_time),self.quantize)
+        self.time_count.append(duration)
+        print(duration) 
+        self.prev_time = time.time()    
+        if sum(self.time_count) >= self.total_dur:
+            self.time_count[0] -= self.offset
+            print("dur=", self.time_count[1:], ",delay=", self.offset)
+            total_sum = sum(self.time_count) + self.offset 
+            if total_sum != self.total_dur:
+                print("!! Warning Total Dur = ", total_sum)
+            GUI.text.unbind("<space>")
+            return "break"

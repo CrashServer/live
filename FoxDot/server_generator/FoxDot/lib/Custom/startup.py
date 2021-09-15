@@ -59,6 +59,7 @@ if __name__ != "__main__":
 		FOXDOT_LOOP  = os.path.join(crash_path, "_loop_")
 		FoxDotCode.use_sample_directory(FOXDOT_SND)
 		Samples.addPath(FOXDOT_LOOP)
+		loops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(FOXDOT_LOOP)])
 	except:
 		print("Error importing Custom Sound", sys.exc_info()[0])
 
@@ -72,20 +73,6 @@ if __name__ != "__main__":
 			execute.load_startup_file()
 	except Exception as e:
 		print("fail : ", e)
-
-	### OSC VIDEO Filtered FORWARD
-	try:
-		if oscOut:
-			class FilterOSCClient(OSCClient):
-					def send(self, message, *args):
-							if "video" in str(message.message):
-									OSCClient.send(self, message, *args)
-			def OSCVideo(oscIp=oscIp, oscPort=oscPort):
-				my_client = FilterOSCClient()
-				my_client.connect((oscIp, oscPort))
-				Server.forward = my_client
-	except:
-		print("Error forwarding OSC to video", sys.exc_info()[0])
 
 	####################
 	###    VOICE     ###

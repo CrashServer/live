@@ -98,11 +98,6 @@ def connect():
 	Clock.bpm = bpm_intro
 	Scale.default = scale_intro
 	Root.default = root_intro
-	#video_line = ""
-	#if oscOut:
-		#OSCVideo(oscIp, oscPort)
-		#vi >> video(vid1=0, vid2=0, vid1rate=1, vid2rate=1, vid1kal=0, vid2kal=0, vid1glitch=0, vid2glitch=0, vidblend=0, vidmix=0, vid1index=0, vid2index=0)
-		#video_line = "vi >> video(vid1=0, vid2=0, vid1rate=1, vid2rate=1, vid1kal=0, vid2kal=0, vid1glitch=0, vid2glitch=0, vidblend=0, vidmix=0, vid1index=0, vid2index=0)"
 	i3 >> sos(dur=8, lpf=linvar([60,4800],[tmps*1.5, tmps*3], start=now), hpf=expvar([0,500],[tmps*6, tmps*2]), amplify=0.5)
 	if clipcopyEnable:
 		clip.copy(figlet_format(attack_data["connect"][0].strip(), font=fig_fonts_list[cool_ascii[51]]) + "\n" + attack_data["connect"][2].strip() + "\n" + video_line)
@@ -166,13 +161,6 @@ def lost(total=0):
 		print("Reinit lost")
 		lost_played=lost_list[:]
 		print(lost_played)
-
-# def print_video():
-# 	''' copy to the clipboard the video line '''
-# 	if clipcopyEnable:
-# 		clip.copy("vi >> video(vid1=0, vid2=0, vid1rate=1, vid2rate=1, vid1kal=0, vid2kal=0, vid1glitch=0, vid2glitch=0, vidblend=0, vidmix=0, vid1index=0, vid2index=0)")
-# 	else:
-# 		print("vi >> video(vid1=0, vid2=0, vid1rate=1, vid2rate=1, vid1kal=0, vid2kal=0, vid1glitch=0, vid2glitch=0, vidblend=0, vidmix=0, vid1index=0, vid2index=0)")
 
 def print_synth(synth=""):
 	''' Show the name and the args of a synth '''

@@ -34,27 +34,27 @@ except Exception as e:
 serverActive = False
 # osc receive state
 if oscOut:
-	## OSC Receiver
-	# try:
-	# 	oscReceive = ThreadingOSCServer((oscReceiveIp, oscReceivePort))
-	# 	oscReceive.addDefaultHandlers()
-	# 	def setState(addr, tags, stuff, source):
-	# 		global serverActive
-	# 		try: 
-	# 			if stuff[0] == 1:
-	# 				serverActive = True
-	# 			else:
-	# 				serverActive = False
-	# 		except:
-	# 			serverActive = False
-	# 			print("Osc receive message problem")
+	# OSC Receiver
+	try:
+		oscReceive = ThreadingOSCServer((oscReceiveIp, oscReceivePort))
+		def setState(addr, tags, stuff, source):
+			global serverActive
+			try: 
+				if str(stuff[0]) == "s":
+					serverActive = True
+				else:
+					serverActive = False
+			except:
+				serverActive = False
+				print("Osc receive message problem, receive : " + str(stuff))
 
-	# 	oscReceive.addMsgHandler("/state", setState)
+		oscReceive.addDefaultHandlers()
+		oscReceive.addMsgHandler("/stateServer", setState)
 
-	# 	st = threading.Thread(target=oscReceive.serve_forever, daemon = True)
-	# 	st.start()
-	# except:
-	# 	print("Osc receiver problem")
+		st = threading.Thread(target=oscReceive.serve_forever, daemon = True)
+		st.start()
+	except:
+		print("Osc receiver problem")
 
 	# Osc sender
 	try:
@@ -270,7 +270,6 @@ def sendOsc(msg=""):
 		oscMsg = OSCMessage("/codeServer")
 		oscMsg.append(msg)
 		myclient.send(oscMsg)
-		print("send : " + oscMsg)
 	except:
 		pass
 
@@ -283,14 +282,14 @@ def video(msg=""):
 	except:
 		pass
 
-# def statusOsc(msg = False):
-# 	''' Send osc message for server status '''
-# 	try:
-# 		oscMsg = OSCMessage("/status")
-# 		oscMsg.append(str(msg))
-# 		myclient.send(oscMsg)
-# 	except:
-# 		pass
+def state(msg=0):
+	''' Send osc message for server status '''
+	try:
+		oscMsg = OSCMessage("/state")
+		oscMsg.append(msg)
+		myclient.send(oscMsg)
+	except:
+		pass
 
 def player_type(player):
 	''' return player type '''
@@ -397,5 +396,5 @@ def killserver():
 		sendOut(f"{ply}.stop()")
 		ply.stop()
 
-if __name__ != '__main__':
-	server.start()
+# if __name__ != '__main__':
+# 	server.start()

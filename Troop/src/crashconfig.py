@@ -1,6 +1,6 @@
-crashHost="127.0.0.1"
+crashHost="192.168.0.42"
 crashPort=57890
-crashName="Crash"
+crashName="Server"
 crashPassword=""
-crashOSIp = "127.0.0.1"
+crashOSIp = "192.168.0.40"
 crashOSPort = 20000

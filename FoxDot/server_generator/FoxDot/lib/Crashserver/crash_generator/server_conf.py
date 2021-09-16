@@ -8,9 +8,9 @@
 crash_path = "/home/zbdm/crashserver/UltimateSamples/"
 
 ''' CrashOS & osc out '''
-oscReceiveIp = "127.0.0.1" # ip locale
-oscReceivePort = 10200 # port receive osc
-oscIp = "127.0.0.1" # ip CrashOS sender
+oscReceiveIp = "192.168.0.42" # ip locale
+oscReceivePort = 10200 # or 10202 (other player) // port receive osc 
+oscIp = "192.168.0.42" ip CrashOS sender
 oscPort = 20001 # port osc sender
 oscOut = True # CrashOS osc server message out enable
 

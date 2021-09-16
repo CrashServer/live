@@ -9,7 +9,7 @@ import subprocess
 from threading import Thread 
 
 from ...Settings import FOXDOT_ROOT
-from ..crash_conf import crash_path
+from ..crash_generator.server_conf import crash_path
 
 class Voice(Thread):
 	""" Text 2 Speech Linux Mbrola Mod

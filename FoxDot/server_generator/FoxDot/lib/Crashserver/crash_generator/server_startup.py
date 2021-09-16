@@ -35,26 +35,26 @@ serverActive = False
 # osc receive state
 if oscOut:
 	# OSC Receiver
-	try:
-		oscReceive = ThreadingOSCServer((oscReceiveIp, oscReceivePort))
-		def setState(addr, tags, stuff, source):
-			global serverActive
-			try: 
-				if str(stuff[0]) == "s":
-					serverActive = True
-				else:
-					serverActive = False
-			except:
-				serverActive = False
-				print("Osc receive message problem, receive : " + str(stuff))
+	# try:
+	# 	oscReceive = ThreadingOSCServer((oscReceiveIp, oscReceivePort))
+	# 	def setState(addr, tags, stuff, source):
+	# 		global serverActive
+	# 		try: 
+	# 			if str(stuff[0]) == "s":
+	# 				serverActive = True
+	# 			else:
+	# 				serverActive = False
+	# 		except:
+	# 			serverActive = False
+	# 			print("Osc receive message problem, receive : " + str(stuff))
 
-		oscReceive.addDefaultHandlers()
-		oscReceive.addMsgHandler("/stateServer", setState)
+	# 	oscReceive.addDefaultHandlers()
+	# 	oscReceive.addMsgHandler("/stateServer", setState)
 
-		st = threading.Thread(target=oscReceive.serve_forever, daemon = True)
-		st.start()
-	except:
-		print("Osc receiver problem")
+	# 	st = threading.Thread(target=oscReceive.serve_forever, daemon = True)
+	# 	st.start()
+	# except:
+	# 	print("Osc receiver problem")
 
 	# Osc sender
 	try:
@@ -284,6 +284,11 @@ def video(msg=""):
 
 def state(msg=0):
 	''' Send osc message for server status '''
+	global serverActive
+	if msg == 4:
+		serverActive = True
+	else:
+		serverActive = False
 	try:
 		oscMsg = OSCMessage("/state")
 		oscMsg.append(msg)

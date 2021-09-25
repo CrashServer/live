@@ -208,6 +208,18 @@ if __name__ != "__main__":
 			self.amplify = 1
 
 	@player_method
+	def brk(self, multi=1):
+		""" turn loop into break beat (only with splitter player """
+		if self.synthdef == "splitter":
+			self.dur = P*[1/4,1/2,1]*multi
+			self.pos = PWhite(0,1).rnd(1/8)
+			self.rate = PwRand([1,0.5,-1,-0.5],[60,10,10,10])
+			self.often("stutter", PRand(1,8))
+			self.beat_stretch=0
+		else:
+			print("only with splitter")
+
+	@player_method
 	class PChain2(RandomGenerator):
 		""" PChain Mod Markov Chain generator pattern with probability."""
 		def __init__(self, mapping, **kwargs):

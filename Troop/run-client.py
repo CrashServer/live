@@ -144,10 +144,10 @@ options = {}
 
 #     options['args'] = args.args
 
-options['host'] = crashHost
-options['port'] = crashPort
-options['name'] = crashName
-options['password'] = crashPassword
+options['host'] = crashTroopHost
+options['port'] = crashTroopPort
+options['name'] = crashTroopName
+options['password'] = crashTroopPassword
 options['get_info'] = False
 
 myClient = Client(**options)

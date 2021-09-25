@@ -1,6 +1,10 @@
-crashHost="192.168.0.42"
-crashPort=57890
-crashName="Server"
-crashPassword=""
-crashOSIp = "192.168.0.40"
+# Troop
+crashTroopHost="localhost" # Troop server IP
+crashTroopPort=57890 
+crashTroopName="Server"    # your name
+crashTroopPassword=""
+
+# Crash OS
+crashOsEnable = True
+crashOSIp = "localhost"   # Crash OS IP
 crashOSPort = 20000

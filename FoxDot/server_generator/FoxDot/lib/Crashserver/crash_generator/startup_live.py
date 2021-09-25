@@ -3,6 +3,7 @@ try:
 	import os
 	import sys
 	import time
+	import re
 	from random import choice
 except Exception as e:
 	print(e)
@@ -197,10 +198,7 @@ def print_fx(fx=""):
 		with open(str(path), "r") as fx:
 			fx = fx.readlines()
 		fx_txt = [line.strip() for line in fx if line != "\n"]
-		txt = str(''.join(fx_txt))
-		fxname = re.findall('SynthDef[.new]*[(\\\]*(.+?),',txt)
-		fxargs = re.findall('\{\|(.*)\|', txt)
-		print(str(fxname[0]), " : ", str(fxargs[0]))
+		print(fx_txt[1])
 
 def print_sample(sample=""):
 	''' print description of samples or find the corresponding letter '''

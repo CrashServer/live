@@ -1494,7 +1494,7 @@ class GeneratorPattern:
 
     def rnd(self, base=2):        
         """ Round up the generator value to nearest base value"""
-        return self.transform(lambda value: round(base * round(float(value) / base),2))    
+        return self.transform(lambda value: round(base * round(float(value) / base),3))    
 
 
 class PatternContainer(metaPattern):

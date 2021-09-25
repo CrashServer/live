@@ -34,34 +34,11 @@ except Exception as e:
 serverActive = False
 # osc receive state
 if oscOut:
-	# OSC Receiver
-	# try:
-	# 	oscReceive = ThreadingOSCServer((oscReceiveIp, oscReceivePort))
-	# 	def setState(addr, tags, stuff, source):
-	# 		global serverActive
-	# 		try: 
-	# 			if str(stuff[0]) == "s":
-	# 				serverActive = True
-	# 			else:
-	# 				serverActive = False
-	# 		except:
-	# 			serverActive = False
-	# 			print("Osc receive message problem, receive : " + str(stuff))
-
-	# 	oscReceive.addDefaultHandlers()
-	# 	oscReceive.addMsgHandler("/stateServer", setState)
-
-	# 	st = threading.Thread(target=oscReceive.serve_forever, daemon = True)
-	# 	st.start()
-	# except:
-	# 	print("Osc receiver problem")
-
 	# Osc sender
 	try:
-		myclient = OSCClient()
-		myclient.connect((oscIp, oscPort))	
+		crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)	
 	except:
-		print("send osc problem")
+		print("config UDP problem")
 
 class runServer():
 	''' Run the server with runserver.start() and generate randomly players'''
@@ -267,32 +244,30 @@ def sendOut(msg=""):
 def sendOsc(msg=""):
 	''' Send osc text to osc ip '''
 	try:
-		oscMsg = OSCMessage("/codeServer")
-		oscMsg.append(msg)
-		myclient.send(oscMsg)
+		byte_message = bytes("@" + msg, "utf-8")
+		crashFoxDot_socket.sendto(byte_message, (oscIp, oscPort))
 	except:
 		pass
 
-def video(msg=""):
-	''' Send osc message for video '''
-	try:
-		oscMsg = OSCMessage("/video")
-		oscMsg.append(msg)
-		myclient.send(oscMsg)
-	except:
-		pass
+# def video(msg=""):
+# 	''' Send osc message for video '''
+# 	try:
+# 		oscMsg = OSCMessage("/video")
+# 		oscMsg.append(msg)
+# 		myclient.send(oscMsg)
+# 	except:
+# 		pass
 
-def state(msg=0):
+def state(msg=1):
 	''' Send osc message for server status '''
 	global serverActive
-	if msg == 4:
+	if msg == 0:
 		serverActive = True
 	else:
 		serverActive = False
 	try:
-		oscMsg = OSCMessage("/state")
-		oscMsg.append(msg)
-		myclient.send(oscMsg)
+		byte_message = bytes("_" + str(msg), "utf-8")
+		crashFoxDot_socket.sendto(byte_message, (oscIp, oscPort))
 	except:
 		pass
 
@@ -366,8 +341,8 @@ def addFilter(player=None):
 	if player == None:
 		player = choice(Clock.playing)
 	filType, filFreq = gen_filter()
-	if filFreq != '0':
-		sendOut(f'{player}.{filType}={filFreq}')
+	#if filFreq != '0':
+		#sendOut(f'{player}.{filType}={filFreq}')
 	player.__setattr__(filType, eval(filFreq))
 
 def addKick():
@@ -377,7 +352,7 @@ def addKick():
 	sple = randint(0,99)
 	lpf = randint(40,7000)
 	sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
-	~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,2)).sometimes("stutter")
+	~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
 	addPlayerTurn()
 
 def generate_rytm(length=16, mult=1):
@@ -401,5 +376,5 @@ def killserver():
 		sendOut(f"{ply}.stop()")
 		ply.stop()
 
-# if __name__ != '__main__':
-# 	server.start()
+if __name__ != '__main__':
+ 	server.start()

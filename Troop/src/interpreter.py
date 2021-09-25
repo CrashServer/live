@@ -35,9 +35,12 @@ import threading
 import shlex
 import tempfile
 import os, os.path
+import socket
 
 # Crashmod
 from .crashconfig import *
+if crashOsEnable:
+    crashOS_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
@@ -48,9 +51,7 @@ def compile_regex(kw):
 
 SEPARATOR = ":"; _ = " %s " % SEPARATOR
 
-# crash MOD
-codeSend = OSC.OSCClient()
-codeSend.connect((crashOSIp, crashOSPort))
+
 
 def colour_format(text, colour):
     return '<colour="{}">{}</colour>'.format(colour, text)
@@ -135,12 +136,17 @@ class DummyInterpreter:
             
             # crash mod
             try:
-                oscCode = OSC.OSCMessage("/codeMsg")
-                oscCode.append(name)
-                oscCode.append(string[0])
-                codeSend.send(oscCode)
+                if crashOsEnable:
+                    if string[0][0].isalpha() and string[0][1].isdigit():
+                        if name == "Crash":
+                            byte_message = bytes("#" + string[0], "utf-8")
+                        elif name == "Server":
+                            byte_message = bytes("!" + string[0], "utf-8")
+                        else:
+                            byte_message = ""
+                        crashOS_socket.sendto(byte_message, (crashOSIp, crashOSPort))
             except:
-                print("osc error")
+                print("Send udp error")
             #
 
             # Use ... for the remainder  of the  lines

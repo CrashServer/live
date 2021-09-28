@@ -26,6 +26,9 @@ brown.add()
 bell = FileSynthDef("bell")
 bell.add()
 
+braids = FileSynthDef("braids")
+braids.add()
+
 click = FileSynthDef("click")
 click.add()
 
@@ -97,6 +100,9 @@ mpluck.add()
 
 organ = FileSynthDef("organ")
 organ.add()
+
+plaits = FileSynthDef("plaits")
+plaits.add()
 
 pianovel = FileSynthDef("pianovel")
 pianovel.add()

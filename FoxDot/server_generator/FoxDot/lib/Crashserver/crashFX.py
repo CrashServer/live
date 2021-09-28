@@ -217,6 +217,11 @@ fx = FxList.new("comp", "comp", {"comp": 0, "comp_down": 1, "comp_up": 0.8}, ord
 fx.add("osc = Compander.ar(osc, osc, thresh: comp, slopeAbove: comp_down, slopeBelow: comp_up, clampTime: 0.01, relaxTime: 0.01, mul: 1)")
 fx.save()
 
+fx = FxList.new("mu", "mimu", {"mu": 0}, order=2)
+fx.add("osc = MiMu.ar(osc, mu)")
+fx.save()
+
+
 fx = FxList.new("sidechain", "sidechain", {"sidechain": 0, "sidechain_atk": 0.05, "sidechain_rel": 0.1, "thresh":0.006}, order=2)
 fx.add_var("schain")
 fx.add("schain = In.ar(sidechain,1)")
@@ -311,6 +316,10 @@ fx.add("osc = osc * EnvGen.ar(Env([0,1,0], [revatk,revsus], curve: 'welch'))")
 fx.add("osc = SelectX.ar(mix2, [dry, osc])")
 fx.save()
 
+fx = FxList.new('mverb', 'miVerb', {'mverb': 0, 'mverbmix': 0.5, 'mverbdamp':0.5, 'mverbdiff':0.625}, order=2)
+fx.add("osc = MiVerb.ar(osc, mverb, mverbmix, mverbdamp, 0.05, 0, mverbdiff)")
+fx.save()
+
 fx = FxList.new('stut', 'stutterfx', {'t_reset': 0, 'stut': 1, 'stutrate':1, 'stutlen':0.02}, order=2)
 fx.add_var("dry")
 fx.add_var("reset")
@@ -320,6 +329,12 @@ fx.add("dry = osc")
 fx.add("reset = Onsets.kr(FFT(LocalBuf(1024), osc), t_reset)")
 fx.add("wet = ~stutter.(osc, reset, stutlen)")
 fx.add("osc = SelectX.ar(stut, [dry, wet], wrap:1)")
+fx.save()
+
+fx = FxList.new('clouds','clouds', {'clouds': 0, 'cpos':0.5, 'csize':0.25, 'cdens': 0.4, 'ctex': 0.5, 'cmix': 0.5, 'cgain':2, 'cfb': 0, 'cmode': 0}, order=2)
+fx.doc("Clouds granulator")
+fx.add("osc = MiClouds.ar(osc, pit: clouds, pos: cpos, size:csize, dens: cdens, tex: ctex, drywet: cmix, in_gain: cgain, fb: cfb, mode:cmode)")
+fx.add("ReplaceOut.ar(bus, osc)")
 fx.save()
 
 fx = FxList.new('vol','volume', {'vol': 1}, order=2)

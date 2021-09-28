@@ -32,6 +32,8 @@ public:
     void gotMessage(ofMessage msg);
     void exit();
 
+    string insertNewlines(string in, const size_t every_n);
+
     // void codeMsgAdd(ofxOscMessage);
     // void serverMsgAdd(ofxOscMessage);
     void setFx();
@@ -57,6 +59,8 @@ public:
     float firstPlayerAlpha, secPlayerAlpha, serverAlpha;
     bool activeServer;
     int nbrOfState;
+    bool bArduinoActive, bDrawActive;
+    int paddingSide, maxTextWidth;
 
     // gui
     ofxPanel gui;
@@ -74,7 +78,7 @@ public:
     // colors
     //ofColor colState0, colState1, colState2, colState3, colState4;
     vector <ofColor> stateColor;
-    ofColor bg, fontColor;
+    ofColor bg, fontColor, fontBackColor;
     ofColor firstCol, secCol, serverCol;
 
     // fonts

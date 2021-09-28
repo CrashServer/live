@@ -30,6 +30,7 @@ void ofApp::setup(){
     firstCol.set(0,255,0); // green 1st player
     secCol.set(255,127,0); // orange 2nd player
     serverCol.set(255,0,0); // red Server
+    fontBackColor.set(150); // font shadow
     firstPlayerAlpha = 255;
     secPlayerAlpha = 255;
     serverAlpha = 255;
@@ -48,23 +49,33 @@ void ofApp::setup(){
     textFirstPlayer = ">> ";
     textSecPlayer = ">> ";
     textServer = ">>";
-    nbrOfState = 5;
+    nbrOfState = 5;    // Number of State
     videoPlayer.resize(nbrOfState);
     videoCurrent = 1;
+    paddingSide = 30;
+    maxTextWidth = (int) (width - 2 * paddingSide) / (font.getStringBoundingBox("G",0,0).width);
 
     //XML & video loading
     ofxXmlSettings xmlSettings;
     xmlSettings.loadFile("settings.xml");
     serverName = xmlSettings.getValue("crashos:serverName", "anonymous_server");
     serverBoot = xmlSettings.getValue("crashos:serverBoot", "generic booting");
-    for (int i=0; i<nbrOfState; i++){
-        string c = ofToString(i);
-        stateString.push_back(xmlSettings.getValue("crashos:serverState" + c, "current_" + c + "_state")); // load xml
-        videoPlayer[i].load("videos/0" + c + ".mp4"); // load video
-        videoPlayer[i].play(); // play video
-        videoPlayer[i].setPaused(true);
+    bArduinoActive = xmlSettings.getValue("crashos:bArduinoActive", false);
+    bDrawActive = xmlSettings.getValue("crashos:bDrawActive", false);
+
+    if (bDrawActive){
+        for (int i=0; i<nbrOfState; i++){
+            string c = ofToString(i);
+            stateString.push_back(xmlSettings.getValue("crashos:serverState" + c, "current_" + c + "_state")); // load xml
+            videoPlayer[i].load("videos/0" + c + ".mp4"); // load video
+            videoPlayer[i].play(); // play video
+            videoPlayer[i].setPaused(true);
+            }
+        videoPlayer[videoCurrent].setPaused(false);
+    // TEXTURE LOADING
+    crashos.load("crashos.jpg");
+    alertImage.load("alert.jpg");
         }
-    videoPlayer[videoCurrent].setPaused(false);
 
     stateColor.push_back(ofColor (255,0,0,180));  // state 0 - RED
     stateColor.push_back(ofColor (69,88,90,180)); // state 1 - POWERBLUE
@@ -76,9 +87,9 @@ void ofApp::setup(){
     // gui
     gui.setup();
     showGui = false;
-    gui.add(codeFirstPos.set("1st Code box", glm::vec2(30,250), glm::vec2(0,0), glm::vec2(width,height)));
-    gui.add(codeSecondPos.set("2nd Code Box", glm::vec2(30,350), glm::vec2(0,0), glm::vec2(width, height)));
-    gui.add(serverPos.set("server Code Box", glm::vec2(30,500), glm::vec2(0,0), glm::vec2(width, height)));
+    gui.add(codeFirstPos.set("1st Code box", glm::vec2(paddingSide,250), glm::vec2(0,0), glm::vec2(width,height)));
+    gui.add(codeSecondPos.set("2nd Code Box", glm::vec2(paddingSide,350), glm::vec2(0,0), glm::vec2(width, height)));
+    gui.add(serverPos.set("server Code Box", glm::vec2(paddingSide,500), glm::vec2(0,0), glm::vec2(width, height)));
     gui.add(cpuPos.set("CPU Box", glm::vec2(width-250,(height-height*0.1) + height*0.05), glm::vec2(0,0), glm::vec2(width, height)));
     gui.add(stateSlider.setup("State slider", 1, 0, 4));
     //gui.add(cpu.setup("CPU stress", 0, 0, 100));
@@ -91,20 +102,19 @@ void ofApp::setup(){
     gui.add(bVNoise.setup("V - Noise", false));
     gui.add(bSlide.setup("Slide", false));
 
-    // TEXTURE LOADING
-    crashos.load("crashos.jpg");
-    alertImage.load("alert.jpg");
 
     // arduino
-    // serial.setup("/dev/ttyACM0", 115200);
-    serial.setup(0, 115200);
+    if (bArduinoActive){
+        // serial.setup("/dev/ttyACM0", 115200);
+        serial.setup(0, 115200);
+        }
 
     // OSC & UDP
-    oscSc.setup(PORTCPU);
-    ofxUDPSettings settings;
-    settings.receiveOn(20000);
-    settings.blocking = false;
-    udpConnection.Setup(settings);
+        oscSc.setup(PORTCPU);
+        ofxUDPSettings settings;
+        settings.receiveOn(20000);
+        settings.blocking = false;
+        udpConnection.Setup(settings);
 }
 
 
@@ -113,67 +123,72 @@ void ofApp::update(){
     // Osc & udp & arduino
     getData();
 
-    // fx
-    setFx();
+    if (bDrawActive){
+        // fx
+        setFx();
 
-    // video
-    if (stateSlider != videoCurrent){
-        videoPlayer[videoCurrent].setPaused(true);
-        videoPlayer[stateSlider].setPaused(false);
-        videoCurrent = stateSlider;
-    }
-    videoPlayer[stateSlider].update();
+        // video
+        if (stateSlider != videoCurrent){
+            videoPlayer[videoCurrent].setPaused(true);
+            videoPlayer[stateSlider].setPaused(false);
+            videoCurrent = stateSlider;
+        }
+        videoPlayer[stateSlider].update();
 
-    if (firstPlayerAlpha>0){firstPlayerAlpha -= 0.4;}
-    if (secPlayerAlpha>0){secPlayerAlpha -= 0.4;}
-    if (serverAlpha>0){serverAlpha -= 0.4;}
-}
+        if (firstPlayerAlpha>0){firstPlayerAlpha -= 0.4;}
+        if (secPlayerAlpha>0){secPlayerAlpha -= 0.4;}
+        if (serverAlpha>0){serverAlpha -= 0.4;}
+        }
+   }
 
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    original.begin();
-    //ofClear(0, 0, 0, 255);
-    ofSetColor(255);
-    videoPlayer[stateSlider].draw(0,0,width,height);
+    if (bDrawActive){
+        original.begin();
+        //ofClear(0, 0, 0, 255);
+        ofSetColor(255);
+        videoPlayer[stateSlider].draw(0,0,width,height);
 
-    ofSetBackgroundColor(0);
-    ofSetColor(stateColor[stateSlider]);
+        ofSetBackgroundColor(0);
+        ofSetColor(stateColor[stateSlider]);
 
-    ofDisableDepthTest();
-    ofEnableAlphaBlending();
-    drawTop();
-    drawCode();
-    drawBottom();
-    ofDisableAlphaBlending();
-//      post.end();
-    original.end();
+        ofDisableDepthTest();
+        ofEnableAlphaBlending();
+        drawTop();
+        drawCode();
+        drawBottom();
+        ofDisableAlphaBlending();
+    //      post.end();
+        original.end();
 
-    //apply active Effects
-    fx.applyFx();
+        //apply active Effects
+        fx.applyFx();
 
-    //draw applied buffer
-    original.draw(0, 0);
+        //draw applied buffer
+        original.draw(0, 0);
 
-    if (activeServer) { alertImage.draw((width/2.25) - 200,0); }
-    if (showGui){
-        gui.draw();
+        if (activeServer) { alertImage.draw((width/2.25) - 200,0); }
+        if (showGui){
+            gui.draw();
+        }
     }
-
 }
 
 //--------------------------------------------------------------
 void ofApp::getData(){
     // Arduino
-    if (serial.available()){
-        char button = serial.readByte();
-        if (button == 's' && !activeServer){
-            activeServer = true;
-            stateSlider = 0;
-            }
-        else if (button == 'c' && activeServer){
-            activeServer = false;
-            stateSlider = (int) ofRandom(1, nbrOfState);
+    if (bArduinoActive){
+        if (serial.available()){
+            char button = serial.readByte();
+            if (button == 's' && !activeServer){
+                activeServer = true;
+                stateSlider = 0;
+                }
+            else if (button == 'c' && activeServer){
+                activeServer = false;
+                stateSlider = (int) ofRandom(1, nbrOfState);
+                }
             }
         }
 
@@ -188,25 +203,28 @@ void ofApp::getData(){
         }
 
     // Udp Code player *2 + Code Server
-    char udpMessage[100];
-    udpConnection.Receive(udpMessage,100);
+    char udpMessage[500];
+    udpConnection.Receive(udpMessage,500);
     string message=udpMessage;
     char *msgType = &message[0];
     if (message!=""){
         if (*msgType == '#'){
             textFirstPlayer = message.erase(0,1);
+            textFirstPlayer = insertNewlines(textFirstPlayer, maxTextWidth-20);
             firstPlayerAlpha = 255;
-            serial.writeByte('g');
+            if(bArduinoActive){serial.writeByte('g');}
             }
         else if (*msgType == '!'){
             textSecPlayer = message.erase(0,1);
+            textSecPlayer = insertNewlines(textSecPlayer, maxTextWidth-20);
             secPlayerAlpha = 255;
-            serial.writeByte('o');
+            if(bArduinoActive){serial.writeByte('o');}
             }
         else if (*msgType == '@'){
             textServer = message.erase(0,1);
+            textServer = insertNewlines(textServer, maxTextWidth-20);
             serverAlpha = 255;
-            serial.writeByte('r');
+            if(bArduinoActive){serial.writeByte('r');}
             }
         else if (*msgType == '_'){
             string msgState = message.erase(0,1);
@@ -216,6 +234,7 @@ void ofApp::getData(){
                 }
             }
         }
+    // cout << textSecPlayer << endl;
 }
 
 //--------------------------------------------------------------
@@ -280,16 +299,22 @@ void ofApp::drawCode(){
     ofPushMatrix();
     ofTranslate(codeFirstPos->x, codeFirstPos->y);
     firstCol.a = firstPlayerAlpha;
-    ofSetColor(firstCol);
+    fontBackColor.a = secPlayerAlpha;
+    ofSetColor(fontBackColor);
     font.drawString(textFirstPlayer, 0, 0);
+    ofSetColor(firstCol);
+    font.drawString(textFirstPlayer, -1, -1);
     ofPopMatrix();
 
     // Second Player code box
     ofPushMatrix();
     ofTranslate(codeSecondPos->x, codeSecondPos->y);
     secCol.a = secPlayerAlpha;
-    ofSetColor(secCol);
+    fontBackColor.a = secPlayerAlpha;
+    ofSetColor(fontBackColor);
     font.drawString(textSecPlayer, 0, 0);
+    ofSetColor(secCol);
+    font.drawString(textSecPlayer, -1, -1);
     ofPopMatrix();
 
     // Server code box
@@ -301,6 +326,7 @@ void ofApp::drawCode(){
     ofPopMatrix();
     ofPopStyle();
 }
+
 
 //-------------------------
 void ofApp::exit(){
@@ -431,5 +457,19 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
 
+}
+
+// return a text with a new line every x
+string ofApp::insertNewlines(string in, const size_t every_n)
+{
+    string out;
+    out.reserve(in.size() + in.size() / every_n);
+    for(std::string::size_type i = 0; i < in.size(); i++) {
+        if (!(i % every_n) && i) {
+            out.push_back('\n');
+        }
+        out.push_back(in[i]);
+    }
+    return out;
 }
 

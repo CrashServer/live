@@ -60,12 +60,12 @@ public:
     bool activeServer;
     int nbrOfState;
     bool bArduinoActive, bDrawActive;
-    int paddingSide, maxTextWidth;
+    int paddingSide, maxTextWidth, maxLogWidth;
 
     // gui
     ofxPanel gui;
     ofxIntSlider stateSlider;
-    //ofxIntSlider cpu; // stress vritualy the cpu
+    ofxIntSlider cpuStress; // stress vritualy the cpu
     ofParameter<ofVec2f> codeFirstPos, codeSecondPos, serverPos, cpuPos;
     ofxToggle bNoise, bEdge, bFringe, bInvert, bShift, bChip, bVNoise, bSlide;
     bool showGui;
@@ -74,6 +74,7 @@ public:
     ofImage crashos;  // Crash OS picture
     ofImage alertImage;
     ofIcoSpherePrimitive icoSphere;
+    int topBorder, bottomBorder;
 
     // colors
     //ofColor colState0, colState1, colState2, colState3, colState4;
@@ -86,14 +87,14 @@ public:
     ofTrueTypeFont vagRounded;
     ofTrueTypeFont vagRoundedMini;
 
-
     // videoPlayer
     vector <ofVideoPlayer> videoPlayer;
 
     // XML DATA / TITLES & such
     string serverState0, serverState1, serverState2, serverState3, serverState4;
     string serverName, serverBoot;
-    vector <string> stateString;
+    vector <string> stateString, logString;
+    int logStringIndex;
 
     // elapsed time, logic & states
     string timeString;

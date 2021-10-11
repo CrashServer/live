@@ -3,7 +3,7 @@ SynthDef.new(\plaits,
 var osc, env;
 sus = sus * blur;
 freq = In.kr(bus, 1);
-		osc = MiPlaits.ar(freq.cpsmidi, engine: engine.clip(0,15), harm: harm, timbre: timbre, morph: LFNoise2.kr(0.2).range(0,1), fm_mod: fmod);
+		osc = MiPlaits.ar(freq.cpsmidi, engine: engine.clip(0,15), harm: harm, timbre: timbre, morph: morph, fm_mod: fmod);
 env=EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);
 osc=(osc * env);
 osc = Mix(osc) * 0.5;

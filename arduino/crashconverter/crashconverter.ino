@@ -58,7 +58,7 @@ if (Serial.available()>0) {
       for (int i=0; i < nbrPulseMax; i++){
           if(!activePulse[i]){
             activePulse[i] = true;
-            color[i] = CRGB(0x7CFC00); // GREEN
+            color[i] = CRGB(0x37B5F0); // Blue //CRGB(0x7CFC00); // GREEN
           break;
           }
          }
@@ -67,7 +67,7 @@ if (Serial.available()>0) {
       for (int i=0; i < nbrPulseMax; i++){
           if(!activePulse[i]){
             activePulse[i] = true;
-            color[i] = CRGB(0xFFA500);  // ORANGE
+            color[i] = CRGB(0xE027F5); // Viiolet // CRGB(0xFFA500);  // ORANGE
           break;
             }
           }

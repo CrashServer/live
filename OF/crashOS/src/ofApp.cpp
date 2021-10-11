@@ -24,7 +24,9 @@ void ofApp::setup(){
 
     post.init(width, height);
     post.createPass<BloomPass>();
-    post.createPass<PixelatePass>();
+    //post.createPass<PixelatePass>();
+    //post.createPass<EdgePass>();
+    //post.createPass<BleachBypassPass>();
 
     // interface
     firstCol.set(0,255,0); // green 1st player
@@ -42,6 +44,9 @@ void ofApp::setup(){
     // Top interface
     icoSphere.setRadius(30);
     icoSphere.setResolution(1);
+    topBorder = height*0.1;
+
+    bottomBorder = height * 1/15;
 
     // init variable
     activeServer = false;
@@ -52,8 +57,9 @@ void ofApp::setup(){
     nbrOfState = 5;    // Number of State
     videoPlayer.resize(nbrOfState);
     videoCurrent = 1;
-    paddingSide = 30;
-    maxTextWidth = (int) (width - 2 * paddingSide) / (font.getStringBoundingBox("G",0,0).width);
+    paddingSide = 30; // padding text
+    maxTextWidth = (int) (width/2 - paddingSide*2) / (font.getStringBoundingBox("P",0,0).width); // max code text char witdh
+    maxLogWidth = (int) (width/2 - paddingSide*2) / (vagRoundedMini.getStringBoundingBox("P",0,0).width); // max code text char witdh
 
     //XML & video loading
     ofxXmlSettings xmlSettings;
@@ -62,6 +68,7 @@ void ofApp::setup(){
     serverBoot = xmlSettings.getValue("crashos:serverBoot", "generic booting");
     bArduinoActive = xmlSettings.getValue("crashos:bArduinoActive", false);
     bDrawActive = xmlSettings.getValue("crashos:bDrawActive", false);
+    string txtLog = xmlSettings.getValue("crashos:logText", "******");
 
     if (bDrawActive){
         for (int i=0; i<nbrOfState; i++){
@@ -72,6 +79,15 @@ void ofApp::setup(){
             videoPlayer[i].setPaused(true);
             }
         videoPlayer[videoCurrent].setPaused(false);
+
+    stringstream s_stream(txtLog);
+    while(s_stream.good()){
+        string substr;
+        getline(s_stream, substr, ',');
+        logString.push_back(substr);
+            }
+    logStringIndex = 0;
+
     // TEXTURE LOADING
     crashos.load("crashos.jpg");
     alertImage.load("alert.jpg");
@@ -87,12 +103,12 @@ void ofApp::setup(){
     // gui
     gui.setup();
     showGui = false;
-    gui.add(codeFirstPos.set("1st Code box", glm::vec2(paddingSide,250), glm::vec2(0,0), glm::vec2(width,height)));
-    gui.add(codeSecondPos.set("2nd Code Box", glm::vec2(paddingSide,350), glm::vec2(0,0), glm::vec2(width, height)));
-    gui.add(serverPos.set("server Code Box", glm::vec2(paddingSide,500), glm::vec2(0,0), glm::vec2(width, height)));
-    gui.add(cpuPos.set("CPU Box", glm::vec2(width-250,(height-height*0.1) + height*0.05), glm::vec2(0,0), glm::vec2(width, height)));
+    gui.add(codeFirstPos.set("1st Code box", glm::vec2(paddingSide,(height - (topBorder+bottomBorder))*1/4), glm::vec2(0,0), glm::vec2(width,height)));
+    gui.add(codeSecondPos.set("2nd Code Box", glm::vec2(paddingSide,(height - (topBorder+bottomBorder))*2/4), glm::vec2(0,0), glm::vec2(width, height)));
+    gui.add(serverPos.set("server Code Box", glm::vec2(paddingSide,(height - (topBorder+bottomBorder))*3/4), glm::vec2(0,0), glm::vec2(width, height)));
+    gui.add(cpuPos.set("CPU Box", glm::vec2(width-250,(height-bottomBorder+vagRounded.getAscenderHeight())), glm::vec2(0,0), glm::vec2(width, height)));
     gui.add(stateSlider.setup("State slider", 1, 0, 4));
-    //gui.add(cpu.setup("CPU stress", 0, 0, 100));
+    gui.add(cpuStress.setup("CPU stress", 100, 0, 100));
     gui.add(bNoise.setup("Noise", false));
     gui.add(bEdge.setup("Edge", false));
     gui.add(bFringe.setup("Fringe", false));
@@ -159,14 +175,15 @@ void ofApp::draw(){
         drawCode();
         drawBottom();
         ofDisableAlphaBlending();
-    //      post.end();
         original.end();
 
         //apply active Effects
         fx.applyFx();
 
+        post.begin();
         //draw applied buffer
         original.draw(0, 0);
+        post.end();
 
         if (activeServer) { alertImage.draw((width/2.25) - 200,0); }
         if (showGui){
@@ -210,19 +227,21 @@ void ofApp::getData(){
     if (message!=""){
         if (*msgType == '#'){
             textFirstPlayer = message.erase(0,1);
-            textFirstPlayer = insertNewlines(textFirstPlayer, maxTextWidth-20);
+            textFirstPlayer = insertNewlines(textFirstPlayer, maxTextWidth);
             firstPlayerAlpha = 255;
             if(bArduinoActive){serial.writeByte('g');}
+            logStringIndex = (int) ofRandom(0, logString.size()-1);
             }
         else if (*msgType == '!'){
             textSecPlayer = message.erase(0,1);
-            textSecPlayer = insertNewlines(textSecPlayer, maxTextWidth-20);
+            textSecPlayer = insertNewlines(textSecPlayer, maxTextWidth);
             secPlayerAlpha = 255;
             if(bArduinoActive){serial.writeByte('o');}
+            logStringIndex = (int) ofRandom(0, logString.size()-1);
             }
         else if (*msgType == '@'){
             textServer = message.erase(0,1);
-            textServer = insertNewlines(textServer, maxTextWidth-20);
+            textServer = insertNewlines(textServer, maxTextWidth);
             serverAlpha = 255;
             if(bArduinoActive){serial.writeByte('r');}
             }
@@ -239,7 +258,6 @@ void ofApp::getData(){
 
 //--------------------------------------------------------------
 void ofApp::drawTop(){
-    int topBorder = height*0.1;
     ofPushStyle();
     // rectangle
     ofFill();
@@ -247,14 +265,14 @@ void ofApp::drawTop(){
     ofDrawRectangle(0,0,width, topBorder);
     ofPushMatrix();
     ofScale(topBorder / crashos.getHeight(), topBorder / crashos.getHeight(), 1);
-    crashos.draw(width/2,0);
+    crashos.draw(width/2 + crashos.getWidth()/2,0);
     ofPopMatrix();
-
-    ofSetColor(0);
-    vagRoundedMini.drawString(stateString[stateSlider], 20, topBorder/2);
-
+    ofSetColor(255);
+    string logTextI= logString[logStringIndex];
+    logTextI = insertNewlines(logTextI, maxLogWidth);
+    vagRoundedMini.drawString(logTextI, paddingSide, topBorder/2);
     // icosphere
-    float cpuMult = ofMap(cpu,0,100,0,8);
+    float cpuMult = ofMap(cpu,0,100,0.2,8);
     float spinX = sin(ofGetElapsedTimef()*0.05f);
     float spinY = cos(ofGetElapsedTimef()*0.75f);
     ofNoFill();
@@ -269,26 +287,25 @@ void ofApp::drawTop(){
 void ofApp::drawBottom(){
     ofPushMatrix();
     ofPushStyle();
-    int heightBottom = height *0.1;
     int shadowLetter = 3;
-    ofTranslate(0,height-heightBottom);
+    ofTranslate(0,height-bottomBorder);
     ofFill();
-    ofDrawRectangle(0,0, width, heightBottom);
+    ofDrawRectangle(0,0, width, bottomBorder);
     ofSetColor(ofColor(ofMap((int) cpu, 0, 100,0,255), 0,0),160);
-    ofDrawRectangle(width-300,0, 300,heightBottom);
+    ofDrawRectangle(width-300,0, 300,bottomBorder);
 
     ofSetColor(0,120);
-    vagRounded.drawString(serverName, 60, heightBottom/2); // server name
+    vagRounded.drawString(serverName, paddingSide, vagRounded.getAscenderHeight()); // server name
 
     ofSetColor(255);
-    vagRounded.drawString(serverName, 60 - shadowLetter, (heightBottom/2) - shadowLetter);
+    vagRounded.drawString(serverName, paddingSide - shadowLetter, vagRounded.getAscenderHeight() - shadowLetter);
     ofPopStyle();
     ofPopMatrix();
 
     ofSetColor(0,120);
-    vagRounded.drawString("CPU : " + ofToString(cpu), cpuPos->x, cpuPos->y); // CPU
+    vagRounded.drawString("CPU : " + ofToString(cpu) + " %", cpuPos->x, cpuPos->y); // CPU
     ofSetColor(255);
-    vagRounded.drawString("CPU : " + ofToString(cpu), cpuPos->x - shadowLetter , cpuPos->y - shadowLetter);
+    vagRounded.drawString("CPU : " + ofToString(cpu) + " %", cpuPos->x - shadowLetter , cpuPos->y - shadowLetter);
 }
 
 
@@ -381,14 +398,14 @@ void ofApp::setFx(){
     fx.getfxUnit(KSMR_FRAGFX_VERTNOISE)->bEnable	= bVNoise;
     fx.getfxUnit(KSMR_FRAGFX_VERTSLIDE)->bEnable	= bSlide;
 
-    fx.getfxUnit(KSMR_FRAGFX_NOISE)->u_Volume = ofMap(cpu, 0,100,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_EDGEONTOP)->u_Volume = ofMap(cpu, 0,100,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_FRINGE)->u_Volume = ofMap(cpu, 0,100,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_INVERT)->u_Volume = ofMap(cpu, 0,100,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_SLANTSHIFT)->u_Volume = ofMap(cpu, 0,100,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_TEXCHIP)->u_Volume = ofMap(cpu, 0,100,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_VERTNOISE)->u_Volume = ofMap(cpu, 0,100,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_VERTSLIDE)->u_Volume = ofMap(cpu, 0,100,0,1);
+    fx.getfxUnit(KSMR_FRAGFX_NOISE)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
+    fx.getfxUnit(KSMR_FRAGFX_EDGEONTOP)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
+    fx.getfxUnit(KSMR_FRAGFX_FRINGE)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
+    fx.getfxUnit(KSMR_FRAGFX_INVERT)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
+    fx.getfxUnit(KSMR_FRAGFX_SLANTSHIFT)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
+    fx.getfxUnit(KSMR_FRAGFX_TEXCHIP)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
+    fx.getfxUnit(KSMR_FRAGFX_VERTNOISE)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
+    fx.getfxUnit(KSMR_FRAGFX_VERTSLIDE)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
 
 }
 

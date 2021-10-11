@@ -433,6 +433,7 @@ class LoopSynthDef(SampleSynthDef):
         self.pos = self.new_attr_instance("pos")
         self.sample = self.new_attr_instance("sample")
         self.beat_stretch = self.new_attr_instance("beat_stretch")
+        self.filename = self.new_attr_instance("filename")
         self.defaults['pos']   = 0
         self.defaults['sample']   = 0
         self.defaults['beat_stretch'] = 1
@@ -443,6 +444,8 @@ class LoopSynthDef(SampleSynthDef):
         self.add()
     def __call__(self, filename, pos=0, sample=0, **kwargs):
         kwargs["buf"] = Samples.loadBuffer(filename, sample)
+        kwargs["filename"] = filename
+        #self.filename = filename
         return SampleSynthDef.__call__(self, pos, **kwargs)
 
 class StretchSynthDef(SampleSynthDef):
@@ -504,6 +507,7 @@ class SplitterSynthDef(SampleSynthDef):
         self.sample = self.new_attr_instance("sample")
         self.rd = self.new_attr_instance("rd")
         self.beat_stretch = self.new_attr_instance("beat_stretch")
+        self.filename = self.new_attr_instance("filename")
         self.defaults['pos']   = 0
         self.defaults['sample']   = 0
         self.defaults['rd'] = 0
@@ -518,6 +522,7 @@ class SplitterSynthDef(SampleSynthDef):
         self.add()
     def __call__(self, filename, pos=0, sample=0, **kwargs):
         kwargs["buf"] = Samples.loadBuffer(filename, sample)
+        kwargs["filename"] = filename
         proxy = SampleSynthDef.__call__(self, pos, **kwargs)
         proxy.kwargs["filename"] = filename
         return proxy

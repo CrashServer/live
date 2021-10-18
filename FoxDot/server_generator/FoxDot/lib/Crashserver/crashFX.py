@@ -24,6 +24,18 @@ fx.doc("DFM1 filter")
 fx.add('osc = DFM1.ar(osc, dfm, dfmr, dfmd,0.0)')
 fx.save()
 
+fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0)
+fx.add("osc = osc + (fm_sin_i * SinOsc.kr(osc * fm_sin))")
+fx.save()
+
+fx = FxList.new("fm_saw", "FrequencyModulationSaw", {"fm_saw":0, "fm_saw_i":1}, order=0)
+fx.add("osc = osc + (fm_saw_i * Saw.kr(osc * fm_saw))")
+fx.save()
+
+fx = FxList.new("fm_pulse", "FrequencyModulationPulse", {"fm_pulse":0, "fm_pulse_i":1}, order=0)
+fx.add("osc = osc + (fm_pulse_i * Pulse.kr(osc * fm_pulse))")
+fx.save()
+
 if SC3_PLUGINS:
     #Dist mod
     fx = FxList.new('disto', 'disto_mod', {'disto': 0, 'smooth': 0.3, 'distomix': 1}, order=1)

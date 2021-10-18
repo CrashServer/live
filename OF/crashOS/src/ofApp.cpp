@@ -1,5 +1,5 @@
 #include "ofApp.h"
-#include "Poco/Base64Decoder.h"
+//#include "Poco/Base64Decoder.h"
 //--------------------------------------------------------------
 void ofApp::setup(){
     // rendering setup
@@ -15,18 +15,29 @@ void ofApp::setup(){
     // set dimension w * h
     width = 1920;
     height = 1080;
-    setting.width  = width;
-    setting.height = height;
 
     // Fx setup
-    original.allocate(setting);
-    fx.setup(&original, setting);
-
     post.init(width, height);
-    post.createPass<BloomPass>();
-    //post.createPass<PixelatePass>();
-    //post.createPass<EdgePass>();
-    //post.createPass<BleachBypassPass>();
+
+
+    bloom = post.createPass<BloomPass>();
+    bleach = post.createPass<BleachBypassPass>();
+    contrast = post.createPass<ContrastPass>();
+    convo = post.createPass<ConvolutionPass>();
+    edge = post.createPass<EdgePass>();
+    fxaa = post.createPass<FxaaPass>();
+    kaleido = post.createPass<KaleidoscopePass>();
+    lut = post.createPass<LUTPass>();
+    warp = post.createPass<NoiseWarpPass>();
+    pixelate = post.createPass<PixelatePass>();
+    rgb = post.createPass<RGBShiftPass>();
+    rim = post.createPass<RimHighlightingPass>();
+    toon = post.createPass<ToonPass>();
+    zoom = post.createPass<ZoomBlurPass>();
+
+    for (int i=0; i<post.size();i++){
+        post[i]->setEnabled(false);
+    }
 
     // interface
     firstCol.set(0,255,0); // green 1st player
@@ -102,22 +113,27 @@ void ofApp::setup(){
 
     // gui
     gui.setup();
-    showGui = false;
+    showGui = true;
     gui.add(codeFirstPos.set("1st Code box", glm::vec2(paddingSide,(height - (topBorder+bottomBorder))*1/4), glm::vec2(0,0), glm::vec2(width,height)));
     gui.add(codeSecondPos.set("2nd Code Box", glm::vec2(paddingSide,(height - (topBorder+bottomBorder))*2/4), glm::vec2(0,0), glm::vec2(width, height)));
     gui.add(serverPos.set("server Code Box", glm::vec2(paddingSide,(height - (topBorder+bottomBorder))*3/4), glm::vec2(0,0), glm::vec2(width, height)));
     gui.add(cpuPos.set("CPU Box", glm::vec2(width-250,(height-bottomBorder+vagRounded.getAscenderHeight())), glm::vec2(0,0), glm::vec2(width, height)));
     gui.add(stateSlider.setup("State slider", 1, 0, 4));
     gui.add(cpuStress.setup("CPU stress", 100, 0, 100));
-    gui.add(bNoise.setup("Noise", false));
+    gui.add(bBleach.setup("Bleach", false));
+    gui.add(bBloom.setup("Bloom", false));
+    gui.add(bContrast.setup("contrast", false));
+    gui.add(bConvolution.setup("Convo", false));
     gui.add(bEdge.setup("Edge", false));
-    gui.add(bFringe.setup("Fringe", false));
-    gui.add(bInvert.setup("Invert", false));
-    gui.add(bShift.setup("Shift", false));
-    gui.add(bChip.setup("Chip", false));
-    gui.add(bVNoise.setup("V - Noise", false));
-    gui.add(bSlide.setup("Slide", false));
-
+    gui.add(bFxaa.setup("fxaa", false));
+    gui.add(bKaleid.setup("Kaleid", false));
+    gui.add(bLUT.setup("Lut", false));
+    gui.add(bNoizeWarp.setup("NoiseWarp", false));
+    gui.add(bPixelate.setup("Pixelate", false));
+    gui.add(bRGB.setup("RGB", false));
+    gui.add(bRimHigh.setup("RimHigh", false));
+    gui.add(bToon.setup("Toon", false));
+    gui.add(bZoom.setup("Zoom", false));
 
     // arduino
     if (bArduinoActive){
@@ -161,8 +177,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     if (bDrawActive){
-        original.begin();
-        //ofClear(0, 0, 0, 255);
+        post.begin();
         ofSetColor(255);
         videoPlayer[stateSlider].draw(0,0,width,height);
 
@@ -174,19 +189,20 @@ void ofApp::draw(){
         drawTop();
         drawCode();
         drawBottom();
-        ofDisableAlphaBlending();
-        original.end();
 
-        //apply active Effects
-        fx.applyFx();
 
-        post.begin();
-        //draw applied buffer
-        original.draw(0, 0);
         post.end();
+        ofEnableAlphaBlending();
+        ofDisableDepthTest();
+        drawTop();
+        drawBottom();
 
+
+        //ofDisableAlphaBlending();
+        //ofEnableDepthTest();
         if (activeServer) { alertImage.draw((width/2.25) - 200,0); }
         if (showGui){
+            ofDisableDepthTest();
             gui.draw();
         }
     }
@@ -229,6 +245,7 @@ void ofApp::getData(){
             textFirstPlayer = message.erase(0,1);
             textFirstPlayer = insertNewlines(textFirstPlayer, maxTextWidth);
             firstPlayerAlpha = 255;
+            videoPlayer[stateSlider].setPosition(ofRandom(0,1));
             if(bArduinoActive){serial.writeByte('g');}
             logStringIndex = (int) ofRandom(0, logString.size()-1);
             }
@@ -236,6 +253,7 @@ void ofApp::getData(){
             textSecPlayer = message.erase(0,1);
             textSecPlayer = insertNewlines(textSecPlayer, maxTextWidth);
             secPlayerAlpha = 255;
+            videoPlayer[stateSlider].setSpeed(ofRandom(-2,2));
             if(bArduinoActive){serial.writeByte('o');}
             logStringIndex = (int) ofRandom(0, logString.size()-1);
             }
@@ -276,9 +294,10 @@ void ofApp::drawTop(){
     float spinX = sin(ofGetElapsedTimef()*0.05f);
     float spinY = cos(ofGetElapsedTimef()*0.75f);
     ofNoFill();
+    ofSetLineWidth(2);
     icoSphere.setPosition(width-100, 50,0);
-    icoSphere.rotateDeg(spinX, 0.8*cpuMult, 0.03*cpuMult, 0.7*cpuMult);
-    icoSphere.rotateDeg(spinY, 0.3*cpuMult, 0.8*cpuMult, 0.4*cpuMult);
+    icoSphere.rotateDeg(spinX, 0.8, 0.03, 0.7);
+    icoSphere.rotateDeg(spinY, 0.3, 0.8, 0.4);
     icoSphere.drawWireframe();
     ofPopStyle();
 
@@ -287,6 +306,7 @@ void ofApp::drawTop(){
 void ofApp::drawBottom(){
     ofPushMatrix();
     ofPushStyle();
+    ofSetColor(stateColor[stateSlider]);
     int shadowLetter = 3;
     ofTranslate(0,height-bottomBorder);
     ofFill();
@@ -355,58 +375,58 @@ void ofApp::exit(){
 //-------------------------
 void ofApp::setFx(){
     if (!showGui){
-    bNoise = false;
-    bEdge = false;
-    bFringe = false;
-    bInvert = false;
-    bShift = false;
-    bChip = false;
-    bVNoise = false;
-    bSlide = false;
+        for (int i=0; i<post.size(); i++){
+            post[i]->setEnabled(false);
+        }
 
         switch(stateSlider)
           {
             case 0:            // server attack
-                bNoise = true;
-                bEdge = true;
-                bShift = true;
-                bChip = true;
-                bSlide = true;
+                kaleido->setSegments(kaleido->getSegments() + ofRandom(-4,4));
+                kaleido->setEnabled(true);
                 break;
             case 1:
+                bloom->setEnabled(true);
+                fxaa->setEnabled(true);
                 break;
             case 2:
-                bShift = true;
-                bChip = true;
+                bloom->setEnabled(true);
+                fxaa->setEnabled(true);
+                toon->setEnabled(true);
+                toon->setShinyness(ofRandom(0,100));
+                toon->setDiffuseColor(ofVec4f(ofRandom(255),ofRandom(255),ofRandom(255),ofRandom(255)));
                 break;
             case 3:
-                bVNoise = true;
-                bSlide = true;
+                bloom->setEnabled(true);
+                fxaa->setEnabled(true);
+                pixelate->setEnabled(true);
                 break;
             case 4:
-                bEdge = true;
-                bFringe = true;
+                bloom->setEnabled(true);
+                fxaa->setEnabled(true);
+                edge->setEnabled(true);
+                edge->setHue(ofRandom(0,1));
+                edge->setSaturation(ofRandom(0,1));
                 break;
           }
         }
-    fx.getfxUnit(KSMR_FRAGFX_NOISE)->bEnable		= bNoise;
-    fx.getfxUnit(KSMR_FRAGFX_EDGEONTOP)->bEnable	= bEdge;
-    fx.getfxUnit(KSMR_FRAGFX_FRINGE)->bEnable		= bFringe;
-    fx.getfxUnit(KSMR_FRAGFX_INVERT)->bEnable		= bInvert;
-    fx.getfxUnit(KSMR_FRAGFX_SLANTSHIFT)->bEnable	= bShift;
-    fx.getfxUnit(KSMR_FRAGFX_TEXCHIP)->bEnable		= bChip;
-    fx.getfxUnit(KSMR_FRAGFX_VERTNOISE)->bEnable	= bVNoise;
-    fx.getfxUnit(KSMR_FRAGFX_VERTSLIDE)->bEnable	= bSlide;
-
-    fx.getfxUnit(KSMR_FRAGFX_NOISE)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_EDGEONTOP)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_FRINGE)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_INVERT)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_SLANTSHIFT)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_TEXCHIP)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_VERTNOISE)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
-    fx.getfxUnit(KSMR_FRAGFX_VERTSLIDE)->u_Volume = ofMap(cpu, 0,cpuStress,0,1);
-
+    else{
+        post[0]->setEnabled(bBloom);
+        post[1]->setEnabled(bBleach);
+        post[2]->setEnabled(bContrast);
+        post[3]->setEnabled(bConvolution);
+        post[4]->setEnabled(bEdge);
+        post[5]->setEnabled(bFxaa);
+        post[6]->setEnabled(bKaleid);
+        post[7]->setEnabled(bLUT);
+        post[8]->setEnabled(bNoizeWarp);
+        post[9]->setEnabled(bPixelate);
+        post[10]->setEnabled(bRGB);
+        post[11]->setEnabled(bRimHigh);
+        post[12]->setEnabled(bToon);
+        post[13]->setEnabled(bZoom);
+    }
+   //
 }
 
 //--------------------------------------------------------------

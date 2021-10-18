@@ -67,7 +67,7 @@ public:
     ofxIntSlider stateSlider;
     ofxIntSlider cpuStress; // stress vritualy the cpu
     ofParameter<ofVec2f> codeFirstPos, codeSecondPos, serverPos, cpuPos;
-    ofxToggle bNoise, bEdge, bFringe, bInvert, bShift, bChip, bVNoise, bSlide;
+    ofxToggle bBleach, bBloom, bContrast, bConvolution, bEdge, bFxaa, bKaleid, bLUT,bNoizeWarp, bPixelate, bRGB, bRimHigh, bToon, bZoom;
     bool showGui;
 
     // interface
@@ -105,14 +105,28 @@ public:
     int videoCurrent;
 
     // 3D STUFF
-    ofEasyCam easyCam;
-    ofVboMesh mesh;
+    //ofEasyCam easyCam;
+    //ofVboMesh mesh;
 
     // Fx & post processing
-    //bool bNoise, bEdge, bFringe, bInvert, bShift, bChip, bVNoise, bSlide;
     ofxPostProcessing post;
-    ofFbo::Settings		setting;
-    ofFbo				original;
-    ofxKsmrFragmentFx	fx;
-    vector <bool> fxVect[8];
+    BloomPass::Ptr bloom;
+    BleachBypassPass::Ptr bleach;
+    ContrastPass::Ptr contrast;
+    ConvolutionPass::Ptr convo;
+    EdgePass::Ptr edge;
+    FxaaPass::Ptr fxaa;
+    KaleidoscopePass::Ptr kaleido;
+    LUTPass::Ptr lut;
+    NoiseWarpPass::Ptr warp;
+    PixelatePass::Ptr pixelate;
+    RGBShiftPass::Ptr rgb;
+    RimHighlightingPass::Ptr rim;
+    ToonPass::Ptr toon;
+    ZoomBlurPass::Ptr zoom;
+
+    //ofFbo::Settings		setting;
+    //ofFbo				original;
+    //ofxKsmrFragmentFx	fx;
+    //vector <bool> fxVect[8];
 };

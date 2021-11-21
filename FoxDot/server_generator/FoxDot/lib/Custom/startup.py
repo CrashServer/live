@@ -625,3 +625,10 @@ if __name__ != "__main__":
 			fnote, fprob = zip(*((key, pro) for key, pro in zip(note, prob) if key in Scale[scale_melody]))
 			scale_melody_dict[keys] = [list(fnote), list(fprob)]
 		return PChain2(scale_melody_dict)
+
+	def chaos(chaosInt=1):
+		chaosText = ""
+		for i in range(chaosInt):
+			chaosText += add_player(True)
+			chaosText += "\n"        
+		clip.copy(chaosText)

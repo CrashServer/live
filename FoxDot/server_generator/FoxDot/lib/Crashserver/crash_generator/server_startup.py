@@ -98,21 +98,34 @@ def server_order():
 	order[0]()  # evaluate order
 	addPlayerTurn()  # add 1 turn to each playing players
 
-def add_player(playerType=None):
+def add_player(copyText=False, playerType=None):
 	''' add a random synth, drum, loop player  '''
 	para_dict = {}
+	textGenerated = ""
 	if playerType == None:
 		playerType = choices(["synth","drum","loop"],[probAddSynth, probAddDrum, probAddLoop])[0]
 	#generate parameter
 	if playerType == "synth":
 		para_dict = generate_random_synth_player()
-		run_player_synth(**para_dict)
+		if not copyText:
+			run_player_synth(copyText, **para_dict)
+		else:
+			textGenerated = run_player_synth(copyText, **para_dict)
+			return textGenerated 
 	if playerType == "drum":
 		para_dict = choices([generate_drum_style_player(), generate_random_drum_player()],[probAddStyleDrum,probAddRandomDrum])[0]
-		run_player_drum(**para_dict)
+		if not copyText:
+			run_player_drum(copyText, **para_dict)
+		else:
+			textGenerated = run_player_drum(copyText, **para_dict)
+			return textGenerated
 	if playerType == "loop":
 		para_dict = generate_random_loop_player()
-		run_player_loop(**para_dict)
+		if not copyText:
+			run_player_loop(copyText, **para_dict)
+		else:
+			textGenerated = run_player_loop(copyText, **para_dict)
+			return textGenerated
 
 def stop_player():
 	''' choose randomly playing players and stop them'''
@@ -138,7 +151,7 @@ def add_fx():
 		sendOut(f'{player}.{name}={argm}')
 		player.__setattr__(name, eval(argm))
 
-def run_player_synth(**	kwargs):
+def run_player_synth(copyText=False, **kwargs):
 	''' Play synth player'''
 	player = kwargs.get("player")
 	synth = kwargs.get("synth")
@@ -149,13 +162,16 @@ def run_player_synth(**	kwargs):
 	if max(degree) > 10:
 		degree = remap_pattern(degree, 0,7)
 	try:
-		sendOut(f'{player} >> {synth}({degree}, dur={dur}, oct={oct})')
-		~eval(player) >> eval(synth)(eval(str(degree)), dur=eval(dur), oct=eval(oct))
-		addFilter(eval(player))
+		if not copyText:
+			sendOut(f'{player} >> {synth}({degree}, dur={dur}, oct={oct})')
+			~eval(player) >> eval(synth)(eval(str(degree)), dur=eval(dur), oct=eval(oct))
+			addFilter(eval(player))
+		else:
+			return f'{player} >> {synth}({degree}, dur={dur}, oct={oct})'
 	except Exception as e:
 		print(e)
 
-def run_player_drum(**kwargs):
+def run_player_drum(copyText=False, **kwargs):
 	''' Play drum player'''
 	player = kwargs.get("player")
 	synth = kwargs.get("synth")
@@ -163,20 +179,32 @@ def run_player_drum(**kwargs):
 	dur = kwargs.get("dur")
 	sample = kwargs.get("sample")
 	rate = kwargs.get("rate")
-	sendOut(f'{player} >> {synth}("{degree}", dur={dur}, sample={sample}, rate={rate})')
-	~eval(player) >> eval(synth)(degree, dur=eval(dur), sample=eval(sample), rate=eval(rate))
-	addFilter(eval(player))
+	try:
+		if not copyText:
+			sendOut(f'{player} >> {synth}("{degree}", dur={dur}, sample={sample}, rate={rate})')
+			~eval(player) >> eval(synth)(degree, dur=eval(dur), sample=eval(sample), rate=eval(rate))
+			addFilter(eval(player))
+		else:
+			return f'{player} >> {synth}("{degree}", dur={dur}, sample={sample}, rate={rate})'
+	except Exception as e:
+		print(e)
 
-def run_player_loop(**kwargs):
+def run_player_loop(copyText=False, **kwargs):
 	''' Play loop player'''
 	player = kwargs.get("player")
 	synth = kwargs.get("synth")
 	degree = kwargs.get("degree")
 	dur = kwargs.get("dur")
 	sample = kwargs.get("sample")
-	sendOut(f'{player} >> {synth}("{degree}", dur={dur}, sample={sample})')
-	~eval(player) >> eval(synth)(degree, dur=eval(dur), sample=eval(sample))
-	addFilter(eval(player))
+	try:
+		if not copyText:
+			sendOut(f'{player} >> {synth}("{degree}", dur={dur}, sample={sample})')
+			~eval(player) >> eval(synth)(degree, dur=eval(dur), sample=eval(sample))
+			addFilter(eval(player))
+		else:
+			return f'{player} >> {synth}("{degree}", dur={dur}, sample={sample})'
+	except Exception as e:
+		print(e)
 
 def addPlayerTurn():
 	''' add one to player dictionnary turn '''
@@ -376,5 +404,4 @@ def killserver():
 		sendOut(f"{ply}.stop()")
 		ply.stop()
 
-if __name__ != '__main__':
- 	server.start()
+server.start()

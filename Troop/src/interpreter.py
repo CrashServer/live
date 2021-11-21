@@ -137,14 +137,14 @@ class DummyInterpreter:
             # crash mod
             try:
                 if crashOsEnable:
-                    if string[0][0].isalpha() and string[0][1].isdigit():
-                        if name == "Crash":
-                            byte_message = bytes("#" + string[0], "utf-8")
-                        elif name == "Server":
-                            byte_message = bytes("!" + string[0], "utf-8")
-                        else:
-                            byte_message = ""
-                        crashOS_socket.sendto(byte_message, (crashOSIp, crashOSPort))
+                    #if string[0][0].isalpha() and string[0][1].isdigit():
+                    if name == "Crash":
+                        byte_message = bytes("#" + string[0], "utf-8")
+                    elif name == "Server":
+                        byte_message = bytes("!" + string[0], "utf-8")
+                    else:
+                        byte_message = ""
+                    crashOS_socket.sendto(byte_message, (crashOSIp, crashOSPort))
             except:
                 print("Send udp error")
             #

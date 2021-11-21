@@ -266,3 +266,24 @@ def define_virus():
 	### Generate a random virus text
 	virus = "###" + choice(virus_method) + choice(virus_name) + "." + choice(virus_access) + "." + choice(virus_protocole) + choice(virus_status)  
 	return virus
+
+
+@player_method
+def gtr(self, string=0):
+	gtrTuning = [-10,-8,-3,2,7,11,16]
+	self.root = gtrTuning[string]
+	self.scale = Scale.chromatic
+
+@player_method
+def chroma(self):
+	self.scale = Scale.chromatic
+
+@player_method
+def porta(self, portDelay=0.5):
+	if portDelay != 0:
+		actualDegree = self.attr["degree"][self.event_n]
+		nextDegree = self.attr["degree"][self.event_n+1]
+		self.slide = (nextDegree - actualDegree)/12
+		self.slidedelay = portDelay
+	else:
+		self.slide = 0

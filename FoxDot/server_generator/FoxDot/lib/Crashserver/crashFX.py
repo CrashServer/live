@@ -12,6 +12,12 @@ fx.add('spfenv = EnvGen.ar(Env.new([spf, spfend], [spfslide]))')
 fx.add('osc = RLPF.ar(osc, spfenv, spr)')
 fx.save()
 
+# Test FX
+fx = FxList.new('test','test', {'test': 0, 'testa': 0, 'testb': 0, 'testc': 0, 'testd': 0}, order=2)
+fx.doc("Test Fx")
+fx.add('osc = osc*test')
+fx.save()
+
 # MoogLPF
 fx = FxList.new('mpf','MoogFF', {'mpf': 0, 'mpr': 0}, order=2)
 fx.doc("MoogFF filter")
@@ -343,9 +349,9 @@ fx.add("wet = ~stutter.(osc, reset, stutlen)")
 fx.add("osc = SelectX.ar(stut, [dry, wet], wrap:1)")
 fx.save()
 
-fx = FxList.new('clouds','clouds', {'clouds': 0, 'cpos':0.5, 'csize':0.25, 'cdens': 0.4, 'ctex': 0.5, 'cmix': 0.5, 'cgain':2, 'cfb': 0, 'cmode': 0}, order=2)
+fx = FxList.new('clouds','clouds', {'clouds': 0, 'cpos':0.5, 'csize':0.25, 'cdens': 0.4, 'ctex': 0.5, 'cpitch': 0, 'cgain':2, 'cfb': 0, 'cmode': 0}, order=2)
 fx.doc("Clouds granulator")
-fx.add("osc = MiClouds.ar(osc, pit: clouds, pos: cpos, size:csize, dens: cdens, tex: ctex, drywet: cmix, in_gain: cgain, fb: cfb, mode:cmode)")
+fx.add("osc = MiClouds.ar(osc, pit: cpitch, pos: cpos, size:csize, dens: cdens, tex: ctex, drywet: clouds, in_gain: cgain, fb: cfb, mode:cmode)")
 fx.add("ReplaceOut.ar(bus, osc)")
 fx.save()
 

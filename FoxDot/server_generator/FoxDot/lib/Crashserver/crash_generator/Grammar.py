@@ -10,10 +10,11 @@ if __name__ != "__main__":
 		from ...Effects.Util import FxList
 		from .server_conf import crash_path
 		from .composition import *
+		from .synthArgs import *
 
 		from types import FunctionType
 		from random import random, randint, uniform
-		from random import choice
+		from random import choice, sample
 		from os import listdir
 		from os.path import join, isdir
 		from inspect import signature
@@ -38,22 +39,14 @@ if __name__ != "__main__":
 	#SYNTH LIST & Exclude
 	synthdefNames = [i for i in SynthDefs]
 	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin' ]
-	penible_synth = ['quin', 'glitchbass', 'crackle', 'gray', 'grat']
+	#penible_synth = ['quin', 'glitchbass', 'crackle', 'gray', 'grat']
+	penible_synth = [gray]
 	synthExclude += penible_synth
 	for exclude in synthExclude:
 		try:
 			synthdefNames.remove(exclude)
 		except:
 			pass
-		
-	#FX LIST
-	# fxNames = [x for x in FxList.keys()]
-	# fxExclude = ["fx1", "fx2", "tek","output", "vol", "comp","sidechain", "dfm", "high", "low","mid", "feed", "dubd", "fdist", "fdistc", "output", "stut", "lofi", "striate"]
-	# for fxxclude in fxExclude:
-	# 	try:
-	# 		fxNames.remove(fxxclude)
-	# 	except:
-	# 		pass
 
 	#LOOP LIST
 	loopNames = sorted([fn for fn in listdir(FOXDOT_LOOP)])
@@ -64,7 +57,7 @@ if __name__ != "__main__":
 		except:
 			pass
 		
-# Generic actions
+# Generic actions	
 
 def GENERATE_PATTERN(_min=1, _max=9):
 	pat = choice(list(patternNames.values()))
@@ -102,8 +95,15 @@ def GENERATE_NOTHING(_min=1, _max=9):
 def GENERATE_RDM(_min=0, _max=1):
 	return round(uniform(_min,_max),2)
 
+def GENERATE_WHITE(_min=0, _max=1):
+	return round(uniform(0,1),2)
+
 def GENERATE_FREQLIST(_min=0, _max=22000, length=6):
 	return 'linvar([{},{}],{})'.format(GENERATE_LIST(_min,_max, randint(2,length)),GENERATE_LIST(_min,_max, randint(2,length)),GENERATE_LIST(1,32,randint(2,length)))
+
+def GENERATE_VARLIST(_min=0, _max=1, length=6):
+	''' Generate a linvar float list '''
+	return 'linvar([{},{}],{})'.format(GENERATE_FLOAT_LIST(_min,_max, randint(2,length)),GENERATE_FLOAT_LIST(_min,_max, randint(2,length)),GENERATE_FLOAT_LIST(1,32,randint(2,length)))
 
 def GENERATE_FX(fxdict):
 	### Generate a fx LIST
@@ -119,6 +119,30 @@ def GENERATE_FX(fxdict):
 		else: # int fx
 			fx_arg[argmt] = GENERATE_LIST(fx_min, fx_max,8)
 	return fx_arg
+
+def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
+	### Generate synth arguments
+	synth_arg = {}
+	if synthName in synthArgsDict.keys():
+		synthParam = synthArgsDict[synthName]
+		if len(synthParam) > 0:
+			randArgs = sample(list(synthParam), randint(0,len(synthParam)))
+			for argmt in randArgs:
+				if argmt not in ["atk", "decay", "rel"]:
+					para_min = synthParam[argmt][0]
+					para_max = synthParam[argmt][1]	
+					if random() < 0.2:
+						synth_arg[argmt] = GENERATE_VARLIST(para_min, para_max, 8)
+					else:
+						if type(para_min) == float or type(para_max) == float:
+							synth_arg[argmt] = GENERATE_FLOAT_LIST(para_min,para_max,8)
+						elif type(para_max) == int and para_min > 100:  # freq args
+							synth_arg[argmt] = GENERATE_FREQLIST(para_min, para_max)
+						else: # int args
+							synth_arg[argmt] = GENERATE_LIST(para_min, para_max,8)
+	else:
+		print(synthName, "not found in dictionnay")
+	return synth_arg
 
 def GENERATE_CHAR():
 	### Generate a character LIST 
@@ -183,6 +207,7 @@ _num = GENERATE_NUMBER
 _tuple = GENERATE_TUPLE
 _list = GENERATE_LIST
 _rdm = GENERATE_RDM
+_white = GENERATE_WHITE
 _null = GENERATE_NOTHING
 _para_player = GENERATE_PARA
 _para_player2 = GENERATE_PARA2
@@ -196,9 +221,10 @@ patternInputs = {
 	'PStretch'  : [_pat, _int],
 	'PZip'     : [_pat, _pat, _pat],
 	'PRhythm'  : [_tuple],
-	'PBern'    : [_int, _rdm],
+	'PBern'    : [_int, _white],
 	'PDur'     : [_int, _int, _int, _null],
-	'PRange'	: [_int, _int, _null]
+	'PRange'	: [_int, _int, _null],
+	'PTri'		: [_list, _list, _null]
 				 }
 
 # parameters
@@ -261,21 +287,21 @@ def checkPattern(pat =""):
 
 ########## en cours
 
-synthArgs = {}
+# synthArgs = {}
 
-def get_arg_synth(synth=""):
-	''' Show the name and the args of a synth '''
-	path = realpath(FOXDOT_ROOT + "/osc/scsyndef/" + synth + ".scd")
-	default_args = ["bus", "amp", "level", "peak", "gate", "pan","freq","blur","beat_dur",'atk',"decay","sus","rel","rate", "wide", "mul", "dec"]
-	sArgs = {}
-	with open(str(path), "r") as synth:
-		synth = synth.readlines()
-	synth_txt = [line.strip() for line in synth if line != "\n"]
-	txt = str(''.join(synth_txt))
-	synthname = findall('SynthDef[.new]*[(\\\]*(.+?),',txt)
-	synthargs = findall('\{\|(.*)\|', txt)
-	for a in str(synthargs[0]).split(","):
-		a = a.split("=")
-		if a[0].strip() not in default_args:
-			sArgs[a[0].strip()] = a[1]
-	return sArgs
+# def get_arg_synth(synth=""):
+# 	''' Show the name and the args of a synth '''
+# 	path = realpath(FOXDOT_ROOT + "/osc/scsyndef/" + synth + ".scd")
+# 	default_args = ["bus", "amp", "level", "peak", "gate", "pan","freq","blur","beat_dur",'atk',"decay","sus","rel","rate", "wide", "mul", "dec"]
+# 	sArgs = {}
+# 	with open(str(path), "r") as synth:
+# 		synth = synth.readlines()
+# 	synth_txt = [line.strip() for line in synth if line != "\n"]
+# 	txt = str(''.join(synth_txt))
+# 	synthname = findall('SynthDef[.new]*[(\\\]*(.+?),',txt)
+# 	synthargs = findall('\{\|(.*)\|', txt)
+# 	for a in str(synthargs[0]).split(","):
+# 		a = a.split("=")
+# 		if a[0].strip() not in default_args:
+# 			sArgs[a[0].strip()] = a[1]
+# 	return sArgs

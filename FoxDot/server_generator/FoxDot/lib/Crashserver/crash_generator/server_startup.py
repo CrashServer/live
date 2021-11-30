@@ -159,17 +159,29 @@ def run_player_synth(copyText=False, **kwargs):
 	dur = kwargs.get("dur")
 	oct = kwargs.get("oct")
 	degree = eval(degree)
+	params = GENERATE_SYNTH_ARGS(synth)
+	paramsText = synthArgsToText(params)
+	dur = kwargs.get("dur")
 	if max(degree) > 10:
 		degree = remap_pattern(degree, 0,7)
 	try:
 		if not copyText:
-			sendOut(f'{player} >> {synth}({degree}, dur={dur}, oct={oct})')
 			~eval(player) >> eval(synth)(eval(str(degree)), dur=eval(dur), oct=eval(oct))
+			for argm, value in params.items():
+				eval(player).__setattr__(str(argm), eval(str(value)))
+			sendOut(f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText})')
 			addFilter(eval(player))
 		else:
-			return f'{player} >> {synth}({degree}, dur={dur}, oct={oct})'
+			return f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText})'
 	except Exception as e:
 		print(e)
+
+def synthArgsToText(params=''):
+	''' Add synth parameters '''
+	paratxt = ''
+	for argm, value in params.items():
+		paratxt += f'{argm} = {value}, '	
+	return paratxt
 
 def run_player_drum(copyText=False, **kwargs):
 	''' Play drum player'''

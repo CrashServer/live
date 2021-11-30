@@ -17,7 +17,7 @@ osc=Mix.fill(
 			Lag.kr(
 				Select.kr(Demand.kr(trig, 0, dseq_index), freq) + TRand.kr(detune.neg, detune, trig),
 				0.2 * Rand(0.8, 1.2)
-			).midicps;
+			);
 		SinOscFB.ar(
 			pitches,
 			Rand(0, 1.22),
@@ -31,8 +31,8 @@ osc=Mix.fill(
 osc = Mix(osc) * (1 / 25) * Line.kr(0.0, 1.0, 0.3);
 		osc = AllpassN.ar(osc, 0.050, [Rand(0, 0.05), Rand(0,0.05)], 1)!3;
 		osc = RLPF.ar(osc, cutoff, 2);
-	
-		
+
+
 env=EnvGen.ar(Env(times: [(sus), (sus)],levels: [0, amp, 0],curve: 'lin'), doneAction: 0);
 osc=(osc * env);
 osc = Mix(osc) * 1;

@@ -26,6 +26,9 @@ brown.add()
 bell = FileSynthDef("bell")
 bell.add()
 
+bellmod = FileSynthDef("bellmod")
+bellmod.add()
+
 braids = FileSynthDef("braids")
 braids.add()
 
@@ -65,8 +68,8 @@ fbass.add()
 four = FileSynthDef("four")
 four.add()
 
-gaze = FileSynthDef("gaze")
-gaze.add()
+# gaze = FileSynthDef("gaze")
+# gaze.add()
 
 glitcher = FileSynthDef("glitcher")
 glitcher.add()

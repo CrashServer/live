@@ -40,7 +40,7 @@ if __name__ != "__main__":
 	synthdefNames = [i for i in SynthDefs]
 	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin' ]
 	#penible_synth = ['quin', 'glitchbass', 'crackle', 'gray', 'grat']
-	penible_synth = [gray]
+	penible_synth = ['gray']
 	synthExclude += penible_synth
 	for exclude in synthExclude:
 		try:

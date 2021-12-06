@@ -8,8 +8,8 @@
 crash_path = "/home/zbdm/crashserver/UltimateSamples/"
 
 ''' CrashOS & osc out '''
-oscIp = "localhost" #"192.168.0.40" # ip CrashOS 
-oscPort = 20000 # port Osc 
+oscIp = "localhost" #"192.168.0.40" # ip CrashOS
+oscPort = 20000 # port Osc
 oscOut = True # CrashOS osc server message out enable
 
 ''' Console output '''
@@ -35,6 +35,7 @@ probChangeDegree = 3 # probability to change a synth degree, drum char or loop p
 probAddPlayerParam = 2 # probability to add a player param (.stutter, .spread, .shuffle)
 probAddPlayerAttribute = 4 # probability to a change a player attributes (dur, pan, sus)
 probAddEvent = 2 #probabilty to add a master event (change bpm, change root, master.lpf(), drop)
+probChangeAdsr = 3 # probabilty to change player adsr
 probAddFxOut = 1 # probability to add an fx output
 
 #Add Master event Probability

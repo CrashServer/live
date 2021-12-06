@@ -93,8 +93,9 @@ def server_order():
 						change_degree,
 						add_player_param,
 						add_player_attribute,
-						add_event],
-						[probAddPlayer,probStopPlayer,probAddFx,probChangeDegree,probAddPlayerParam,probAddPlayerAttribute,probAddEvent]) # probability
+						add_event,
+						change_adsr],
+						[probAddPlayer,probStopPlayer,probAddFx,probChangeDegree,probAddPlayerParam,probAddPlayerAttribute,probAddEvent,probChangeAdsr]) # probability
 	order[0]()  # evaluate order
 	addPlayerTurn()  # add 1 turn to each playing players
 
@@ -267,6 +268,24 @@ def change_degree(player=None):
 		sendOut(f'{player}.degree = {deg}')
 		player.__setattr__("degree", eval(deg))
 
+def change_adsr(player=None):
+	if player == None:
+		player = choice(Clock.playing)
+	playerType = player_type(player)
+	if playerType == "loop" or playerType == "drum":
+		genAtk = GENERATE_FLOAT_LIST(0.0,1.0)
+		genSus = GENERATE_FLOAT_LIST(0.0,1.0)
+		player.__setattr__('sample_atk',eval(genAtk))
+		sendOut(f"{player}.sample_atk={genAtk}")
+		player.__setattr__('sample_sus',eval(genSus))
+		sendOut(f"{player}.sample_sus={genSus}")
+	else:
+		adsr = GENERATE_ADSR(player.synthdef, float(player.sus))
+		for argm, value in adsr.items():
+			player.__setattr__(argm,eval(value))
+			sendOut(f"{player}.{argm}={value}")
+
+
 def add_event():
 	rnd_event = choices([change_scale, change_root, humanizer, change_bpm, masterFilter, dropevent, addKick, addFxOut],
 						[probChangeScale, probChangeRoot, probChangeHumanizer, probChangeBpm, probAddLpf, probAddDrop, probAddKick,probAddFxOut])[0]
@@ -319,6 +338,7 @@ def player_type(player):
 		return "drum"
 	else:
 		return "synth"
+
 
 def change_bpm():
 	''' Change randomly and lineary the bpm'''

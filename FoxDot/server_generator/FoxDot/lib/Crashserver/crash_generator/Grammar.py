@@ -73,8 +73,8 @@ def GENERATE_PATTERN(_min=1, _max=9):
 def GENERATE_LIST(_min=1, _max=9, length=6):
 	return '[{}]'.format(", ".join([str(GENERATE_INTEGER(_min, _max)) for n in range(randint(2,length))]))
 
-def GENERATE_FLOAT_LIST(_min=1, _max=9, length=6):
-	return '[{}]'.format(", ".join([str(GENERATE_RDM(_min, _max)) for n in range(randint(2,length))]))
+def GENERATE_FLOAT_LIST(_min=1, _max=9, length=6, digits=2):
+	return '[{}]'.format(", ".join([str(GENERATE_RDM(_min, _max, digits)) for n in range(randint(2,length))]))
 
 def GENERATE_TUPLE(_min=1, _max=9, length=4):
 	return '({})'.format(", ".join([str(GENERATE_INTEGER(_min, _max)) for n in range(randint(2,length))]))
@@ -92,8 +92,8 @@ def GENERATE_NUMBER(_min=1, _max=9):
 def GENERATE_NOTHING(_min=1, _max=9):
 	return " "
 
-def GENERATE_RDM(_min=0, _max=1):
-	return round(uniform(_min,_max),2)
+def GENERATE_RDM(_min=0, _max=1, digits=2):
+	return round(uniform(_min,_max), digits)
 
 def GENERATE_WHITE(_min=0, _max=1):
 	return round(uniform(0,1),2)
@@ -198,6 +198,15 @@ def GENERATE_PAN(_min=-1, _max=1):
 	pan = choice([f'PSine({randint(2,128)})', f'{GENERATE_FLOAT_LIST(-1,1,12)}', f'PWhite(-1,1)'])
 	return pan
 
+def GENERATE_ADSR(synthName='', sustain=1):
+	adsrArg = sample(['atk', 'decay', 'rel'], randint(1,3))
+	adsrDict = {}
+	for argm in adsrArg:
+		if argm in synthArgs[synthName]:
+			argMin = synthArgs[synthName][argm][0]
+			argMax = (synthArgs[synthName][argm][1])*float(sustain/3)
+			adsrDict[argm] = GENERATE_FLOAT_LIST(_min=argMin, _max=argMax, length=6, digits=5)
+	return adsrDict
 
 # Patterns that take patterns as input
 

@@ -52,7 +52,9 @@ fxdict = {
 'shift' : {'shift': [0.0,5.0], 'shiftsize': [0.0,0.5]},
 'fold' : {'fold': [0.0,0.5], 'symetry': preso, 'smooth': preso},
 'phaser' : {'phaser': preso, 'phaserdepth': preso},
-'ringz' : {'ringzfreq': [50,1000], 'ringz': preso},
+'ringz' : {'ringz': preso, 'ringzfreq': [50,1000]},
+'mverb': {'mverb': preso, 'mverbmix': preso, 'mverbdamp': preso, 'mverbdiff': [0.5,0.99]},
+'clouds': {'clouds': preso, 'cpos': [0.0,1.0], 'csize': [0.0,1.0], 'cdens': [0.0,1.0], 'ctex': [0.0,1.0], 'cpitch': [-48,48], 'cgain': [1,4], 'cfb': [0.0,0.5], 'cmode': [0,3]}
 }
 
 sorted_sample = {

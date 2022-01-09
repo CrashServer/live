@@ -71,7 +71,7 @@ def generate_drum_style_player():
 
 def generate_player_name():
 	player = "os"
-	while player in ["os", "in", "fx", "if", "at", "or", "is", "in", "as", "id", "it"]:
+	while player in ["os", "in", "fx", "if", "at", "or", "is", "in", "as", "id", "it", "re"]:
 		player = ''.join(choice(string.ascii_lowercase) for x in range(2))
 	return player
 

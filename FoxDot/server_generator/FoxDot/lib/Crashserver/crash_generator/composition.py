@@ -58,7 +58,7 @@ fxdict = {
 }
 
 sorted_sample = {
-'kick_sample': ["g","k","K","v","V","W","x","X"],
+'kick_sample': ["k","K","v","V","W","x","X"],
 'hh_sample': ["-","h","7","d"],
 'snare_sample': ["o","O","u","U","c","C","d","p","P","^","@"],
 'oh_sample': ["=",":","!"],

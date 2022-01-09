@@ -81,91 +81,104 @@ playerCount = {}
 
 def server_order():
 	''' Server routine, choose [add/stop player, change param, add fx, add function,...'''
-	numPlayer = len(Clock.playing)
-	if numPlayer < 3:
-		order = [add_player]
-	elif numPlayer > maxPlayer:
-		order = [stop_player]
-	else:
-		order = choices([add_player,
-						stop_player,
-						add_fx,
-						change_degree,
-						add_player_param,
-						add_player_attribute,
-						add_event,
-						change_adsr],
-						[probAddPlayer,probStopPlayer,probAddFx,probChangeDegree,probAddPlayerParam,probAddPlayerAttribute,probAddEvent,probChangeAdsr]) # probability
-	order[0]()  # evaluate order
-	addPlayerTurn()  # add 1 turn to each playing players
+	try:
+		numPlayer = len(Clock.playing)
+		if numPlayer < 3:
+			order = [add_player]
+		elif numPlayer > maxPlayer:
+			order = [stop_player]
+		else:
+			order = choices([add_player,
+							stop_player,
+							add_fx,
+							change_degree,
+							add_player_param,
+							add_player_attribute,
+							add_event,
+							change_adsr],
+							[probAddPlayer,probStopPlayer,probAddFx,probChangeDegree,probAddPlayerParam,probAddPlayerAttribute,probAddEvent,probChangeAdsr]) # probability
+		order[0]()  # evaluate order
+		addPlayerTurn()  # add 1 turn to each playing players
+	except Exception as err:
+		print("server_order problem : " + err)
 
 def add_player(copyText=False, playerType=None):
 	''' add a random synth, drum, loop player  '''
-	para_dict = {}
-	textGenerated = ""
-	if playerType == None:
-		playerType = choices(["synth","drum","loop"],[probAddSynth, probAddDrum, probAddLoop])[0]
-	#generate parameter
-	if playerType == "synth":
-		para_dict = generate_random_synth_player()
-		if not copyText:
-			run_player_synth(copyText, **para_dict)
-		else:
-			textGenerated = run_player_synth(copyText, **para_dict)
-			return textGenerated 
-	if playerType == "drum":
-		para_dict = choices([generate_drum_style_player(), generate_random_drum_player()],[probAddStyleDrum,probAddRandomDrum])[0]
-		if not copyText:
-			run_player_drum(copyText, **para_dict)
-		else:
-			textGenerated = run_player_drum(copyText, **para_dict)
-			return textGenerated
-	if playerType == "loop":
-		para_dict = generate_random_loop_player()
-		if not copyText:
-			run_player_loop(copyText, **para_dict)
-		else:
-			textGenerated = run_player_loop(copyText, **para_dict)
-			return textGenerated
+	try:
+		para_dict = {}
+		textGenerated = ""
+		if playerType == None:
+			playerType = choices(["synth","drum","loop"],[probAddSynth, probAddDrum, probAddLoop])[0]
+		#generate parameter
+		if playerType == "synth":
+			para_dict = generate_random_synth_player()
+			if not copyText:
+				run_player_synth(copyText, **para_dict)
+			else:
+				textGenerated = run_player_synth(copyText, **para_dict)
+				return textGenerated 
+		if playerType == "drum":
+			para_dict = choices([generate_drum_style_player(), generate_random_drum_player()],[probAddStyleDrum,probAddRandomDrum])[0]
+			if not copyText:
+				run_player_drum(copyText, **para_dict)
+			else:
+				textGenerated = run_player_drum(copyText, **para_dict)
+				return textGenerated
+		if playerType == "loop":
+			para_dict = generate_random_loop_player()
+			if not copyText:
+				run_player_loop(copyText, **para_dict)
+			else:
+				textGenerated = run_player_loop(copyText, **para_dict)
+				return textGenerated
+	except Exception as err:
+		print("add_player problem : " + err)
+
 
 def stop_player():
 	''' choose randomly playing players and stop them'''
-	plyList = Clock.playing
-	if len(plyList) > 1:
-		playerChoice = choices([choices(plyList),sample(plyList,randint(1,len(plyList)-1))],[probStopOnePlayer,probStopMorePlayers])[0]
-		playerChoice += [p for p in Clock.playing if p in playerCount.keys() and playerCount[p] > maxPlayerTurn]
-		for ply in playerChoice:
-			if ply in playerCount.keys() and playerCount[ply] > minPlayerTurn:
-				sendOut(f"{ply}.stop()")
-				ply.stop()
-			else:
-				pass
-	if len(Clock.playing) == 0:
-		add_player()
-		addPlayerTurn()
+	try:
+		plyList = Clock.playing
+		if len(plyList) > 1:
+			playerChoice = choices([choices(plyList),sample(plyList,randint(1,len(plyList)-1))],[probStopOnePlayer,probStopMorePlayers])[0]
+			playerChoice += [p for p in Clock.playing if p in playerCount.keys() and playerCount[p] > maxPlayerTurn]
+			for ply in playerChoice:
+				if ply in playerCount.keys() and playerCount[ply] > minPlayerTurn:
+					sendOut(f"{ply}.stop()")
+					ply.stop()
+				else:
+					pass
+		if len(Clock.playing) == 0:
+			add_player()
+			addPlayerTurn()
+	except Exception as err:
+		print("stop_player problem : " + err)
 
 def add_fx():
 	''' add fx parameters '''
-	player = choice(Clock.playing)
-	fx = GENERATE_FX(fxdict)
-	for name, argm in fx.items():
-		sendOut(f'{player}.{name}={argm}')
-		player.__setattr__(name, eval(argm))
+	try: 
+		player = choice(Clock.playing)
+		fx = GENERATE_FX(fxdict)
+		for name, argm in fx.items():
+			sendOut(f'{player}.{name}={argm}')
+			player.__setattr__(name, eval(argm))
+	except Exception as err:
+		print("add_fx problem : " + err)
 
 def run_player_synth(copyText=False, **kwargs):
 	''' Play synth player'''
-	player = kwargs.get("player")
-	synth = kwargs.get("synth")
-	degree = kwargs.get("degree")
-	dur = kwargs.get("dur")
-	oct = kwargs.get("oct")
-	degree = eval(degree)
-	params = GENERATE_SYNTH_ARGS(synth)
-	paramsText = synthArgsToText(params)
-	dur = kwargs.get("dur")
-	if max(degree) > 10:
-		degree = remap_pattern(degree, 0,7)
 	try:
+		player = kwargs.get("player")
+		synth = kwargs.get("synth")
+		degree = kwargs.get("degree")
+		dur = kwargs.get("dur")
+		oct = kwargs.get("oct")
+		degree = eval(degree)
+		params = GENERATE_SYNTH_ARGS(synth)
+		paramsText = synthArgsToText(params)
+		dur = kwargs.get("dur")
+		if max(degree) > 10:
+			degree = remap_pattern(degree, 0,7)
 		if not copyText:
 			~eval(player) >> eval(synth)(eval(str(degree)), dur=eval(dur), oct=eval(oct))
 			for argm, value in params.items():
@@ -174,131 +187,154 @@ def run_player_synth(copyText=False, **kwargs):
 			addFilter(eval(player))
 		else:
 			return f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText})'
-	except Exception as e:
-		print(e)
+	except Exception as err:
+		print("run_player_synth problem : " + err)
 
 def synthArgsToText(params=''):
 	''' Add synth parameters '''
-	paratxt = ''
-	for argm, value in params.items():
-		paratxt += f'{argm} = {value}, '	
-	return paratxt
+	try:
+		paratxt = ''
+		for argm, value in params.items():
+			paratxt += f'{argm} = {value}, '	
+		return paratxt
+	except Exception as err:
+		print("synthArgsToText problem : " + err)
 
 def run_player_drum(copyText=False, **kwargs):
 	''' Play drum player'''
-	player = kwargs.get("player")
-	synth = kwargs.get("synth")
-	degree = kwargs.get("degree")
-	dur = kwargs.get("dur")
-	sample = kwargs.get("sample")
-	rate = kwargs.get("rate")
 	try:
+		player = kwargs.get("player")
+		synth = kwargs.get("synth")
+		degree = kwargs.get("degree")
+		dur = kwargs.get("dur")
+		sample = kwargs.get("sample")
+		rate = kwargs.get("rate")
 		if not copyText:
 			sendOut(f'{player} >> {synth}("{degree}", dur={dur}, sample={sample}, rate={rate})')
 			~eval(player) >> eval(synth)(degree, dur=eval(dur), sample=eval(sample), rate=eval(rate))
 			addFilter(eval(player))
 		else:
 			return f'{player} >> {synth}("{degree}", dur={dur}, sample={sample}, rate={rate})'
-	except Exception as e:
-		print(e)
+	except Exception as err:
+		print("run_player_drum problem : " + err)
 
 def run_player_loop(copyText=False, **kwargs):
 	''' Play loop player'''
-	player = kwargs.get("player")
-	synth = kwargs.get("synth")
-	degree = kwargs.get("degree")
-	dur = kwargs.get("dur")
-	sample = kwargs.get("sample")
 	try:
+		player = kwargs.get("player")
+		synth = kwargs.get("synth")
+		degree = kwargs.get("degree")
+		dur = kwargs.get("dur")
+		sample = kwargs.get("sample")
 		if not copyText:
 			sendOut(f'{player} >> {synth}("{degree}", dur={dur}, sample={sample})')
 			~eval(player) >> eval(synth)(degree, dur=eval(dur), sample=eval(sample))
 			addFilter(eval(player))
 		else:
 			return f'{player} >> {synth}("{degree}", dur={dur}, sample={sample})'
-	except Exception as e:
-		print(e)
+	except Exception as err:
+		print("run_player_loop problem : " + err)
 
 def addPlayerTurn():
 	''' add one to player dictionnary turn '''
-	playerList = Clock.playing
-	for p in playerList:
-		if p in playerCount.keys():
-			playerCount[p] += 1
-		else:
-			playerCount[p] = 1
-	# Clean non playing player
-	delplayer = [k for k in playerCount.keys() if k not in playerList]
-	for d in delplayer:
-		playerCount.pop(d, None)
+	try:
+		playerList = Clock.playing
+		for p in playerList:
+			if p in playerCount.keys():
+				playerCount[p] += 1
+			else:
+				playerCount[p] = 1
+		# Clean non playing player
+		delplayer = [k for k in playerCount.keys() if k not in playerList]
+		for d in delplayer:
+			playerCount.pop(d, None)
+	except Exception as err:
+		print("addPlayerTurn problem : " + err)
 
 def add_player_param():
 	''' add player parameters (like .spread, .offbeat, .jump, ...) '''
-	player = choice(Clock.playing)
-	param = gen_player_param()
-	sendOut(f'{player}.{param}')
-	eval(f'{player.name}.{param}')
+	try:
+		player = choice(Clock.playing)
+		param = gen_player_param()
+		sendOut(f'{player}.{param}')
+		eval(f'{player.name}.{param}')
+	except Exception as err:
+		print("add_player_param problem : " + err)
 
 def add_player_attribute():
 	''' add or change player attribute (sus, pan, ) '''
-	player = choice(Clock.playing)
-	attr = gen_player_attributes(player_type(player))
-	sendOut(f'{player}.{attr[0]}={attr[1]}')
-	player.__setattr__(attr[0], eval(str(attr[1])))
+	try:
+		player = choice(Clock.playing)
+		attr = gen_player_attributes(player_type(player))
+		sendOut(f'{player}.{attr[0]}={attr[1]}')
+		player.__setattr__(attr[0], eval(str(attr[1])))
+	except Exception as err:
+		print("add_player_attribute problem : " + err)
 
 def change_degree(player=None):
 	''' According to player type change degree(synth), char(drum), sample(loop)'''
-	if not player:
-		player = choice(Clock.playing)
-	playerType = player_type(player)
-	if playerType == "loop":
-		param = choices(["degree", "position", "sample"],probLoopChangeDegree)[0]
-		if param == "position":
-			deg = GENERATE_FLOAT_LIST(0,1)
+	try:
+		if not player:
+			player = choice(Clock.playing)
+		playerType = player_type(player)
+		if playerType == "loop":
+			param = choices(["degree", "position", "sample"],probLoopChangeDegree)[0]
+			if param == "position":
+				deg = GENERATE_FLOAT_LIST(0,1)
+			else:
+				deg = GENERATE_INTEGER(0,99)
+			sendOut(f"{player}.{param}={deg}")
+			player.__setattr__(param,eval(deg))
+		elif playerType == "drum":
+			deg = change_drum_char(player.__getitem__("degree"))
+			sendOut(f'{player}.degree = {deg}')
+			player.__setattr__("degree", eval(str(deg)))
 		else:
-			deg = GENERATE_INTEGER(0,99)
-		sendOut(f"{player}.{param}={deg}")
-		player.__setattr__(param,eval(deg))
-	elif playerType == "drum":
-		deg = change_drum_char(player.__getitem__("degree"))
-		sendOut(f'{player}.degree = {deg}')
-		player.__setattr__("degree", eval(str(deg)))
-	else:
-		deg = choices([gen_arp(), 'melody()', 'PGauss()','PChain2(chords)'],probSynthChangeDegree)[0]
-		sendOut(f'{player}.degree = {deg}')
-		player.__setattr__("degree", eval(deg))
+			deg = choices([gen_arp(), 'melody()', 'PGauss()','PChain2(chords)'],probSynthChangeDegree)[0]
+			sendOut(f'{player}.degree = {deg}')
+			player.__setattr__("degree", eval(deg))
+	except Exception as err:
+		print("change_degree problem : " + err)
 
 def change_adsr(player=None):
-	if player == None:
-		player = choice(Clock.playing)
-	playerType = player_type(player)
-	if playerType == "loop" or playerType == "drum":
-		genAtk = GENERATE_FLOAT_LIST(0.0,1.0)
-		genSus = GENERATE_FLOAT_LIST(0.0,1.0)
-		player.__setattr__('sample_atk',eval(genAtk))
-		sendOut(f"{player}.sample_atk={genAtk}")
-		player.__setattr__('sample_sus',eval(genSus))
-		sendOut(f"{player}.sample_sus={genSus}")
-	else:
-		adsr = GENERATE_ADSR(player.synthdef, float(player.sus))
-		for argm, value in adsr.items():
-			player.__setattr__(argm,eval(value))
-			sendOut(f"{player}.{argm}={value}")
-
+	try:
+		if player == None:
+			player = choice(Clock.playing)
+		playerType = player_type(player)
+		if playerType == "loop" or playerType == "drum":
+			genAtk = GENERATE_FLOAT_LIST(0.0,1.0)
+			genSus = GENERATE_FLOAT_LIST(0.0,1.0)
+			player.__setattr__('sample_atk',eval(genAtk))
+			sendOut(f"{player}.sample_atk={genAtk}")
+			player.__setattr__('sample_sus',eval(genSus))
+			sendOut(f"{player}.sample_sus={genSus}")
+		else:
+			adsr = GENERATE_ADSR(player.synthdef, float(player.sus))
+			for argm, value in adsr.items():
+				player.__setattr__(argm,eval(value))
+				sendOut(f"{player}.{argm}={value}")
+	except Exception as err:
+		print("change_adsr problem : " + err)
 
 def add_event():
-	rnd_event = choices([change_scale, change_root, humanizer, change_bpm, masterFilter, dropevent, addKick, addFxOut],
-						[probChangeScale, probChangeRoot, probChangeHumanizer, probChangeBpm, probAddLpf, probAddDrop, probAddKick,probAddFxOut])[0]
-	rnd_event()
+	try:
+		rnd_event = choices([change_scale, change_root, humanizer, change_bpm, masterFilter, dropevent, addKick, addFxOut],
+							[probChangeScale, probChangeRoot, probChangeHumanizer, probChangeBpm, probAddLpf, probAddDrop, probAddKick,probAddFxOut])[0]
+		rnd_event()
+	except Exception as err:
+		print("add_event problem : " + err)
 
 def sendOut(msg=""):
 	''' send all generated text to output : console, osc '''
-	if oscOut:
-		sendOsc(msg)
-	if printOut:
-		if startupLive:
-			msg = 'SERVER: ' + msg
-		print(msg)
+	try:
+		if oscOut:
+			sendOsc(msg)
+		if printOut:
+			if startupLive:
+				msg = 'SERVER: ' + msg
+			print(msg)
+	except Exception as err:
+		print("sendOut problem : " + err)
 
 def sendOsc(msg=""):
 	''' Send osc text to osc ip '''
@@ -332,102 +368,140 @@ def state(msg=1):
 
 def player_type(player):
 	''' return player type '''
-	if player.synthdef in ["loop"]:
-		return "loop"
-	elif player.synthdef in ["play", "play2"]:
-		return "drum"
-	else:
-		return "synth"
-
+	try:
+		if player.synthdef in ["loop"]:
+			return "loop"
+		elif player.synthdef in ["play", "play2"]:
+			return "drum"
+		else:
+			return "synth"
+	except Exception as err:
+		print("player_type problem : " + err)
 
 def change_bpm():
 	''' Change randomly and lineary the bpm'''
-	bpmNow = int(Clock.bpm)
-	bpmTarget = randint(changeBpmMin,changeBpmMax)
-	randTime = randint(changeBpmTimeMin,changeBpmTimeMax)
-	sendOut(f'Clock.bpm = lininf({bpmNow}, {bpmTarget},{randTime})')
-	Clock.bpm = lininf(bpmNow, bpmTarget,randTime)
+	try:
+		bpmNow = int(Clock.bpm)
+		bpmTarget = randint(changeBpmMin,changeBpmMax)
+		randTime = randint(changeBpmTimeMin,changeBpmTimeMax)
+		sendOut(f'Clock.bpm = lininf({bpmNow}, {bpmTarget},{randTime})')
+		Clock.bpm = lininf(bpmNow, bpmTarget,randTime)
+	except Exception as err:
+		print("change_bpm problem : " + err)
 
 def change_scale():
 	''' set a random scale '''
-	scale_name = "freq"
-	while scale_name == "freq":
-		scale_name = choice(Scale.names())
-	Scale.__setattr__("default", Scale.get_scale(scale_name))
-	sendOut(f'Scale.default={scale_name}')
+	try:
+		scale_name = "freq"
+		while scale_name == "freq":
+			scale_name = choice(Scale.names())
+		Scale.__setattr__("default", Scale.get_scale(scale_name))
+		sendOut(f'Scale.default={scale_name}')
+	except Exception as err:
+		print("change_scale problem : " + err)
 
 def change_root():
 	''' up or down root '''
-	updown = 0
-	while updown == 0:
-		updown = randint(changeRootMin,changeRootMax)
-	if int(Root.default) > 5:
-		updown = -1
-	elif int(Root.default) < -4:
-		updown = 1
-	sendOut(f'Root.default+={updown}')
-	Root.default=Root.default + updown
+	try:
+		updown = 0
+		while updown == 0:
+			updown = randint(changeRootMin,changeRootMax)
+		if int(Root.default) > 5:
+			updown = -1
+		elif int(Root.default) < -4:
+			updown = 1
+		sendOut(f'Root.default+={updown}')
+		Root.default=Root.default + updown
+	except Exception as err:
+		print("change_root problem : " + err)
 
 def humanizer(player=None):
 	''' humanize a drum pattern '''
-	if player == None:
-		player = choice(Clock.playing)
-	hum = [int(GENERATE_INTEGER(humanAmpMin,humanAmpMax)), int(GENERATE_INTEGER(humanDelayMin,humanDelayMax)), int(GENERATE_INTEGER(humanSwingMin,humanSwingMax))]
-	sendOut(f'{player}.humanize({hum[0]}, {hum[1]}, {hum[2]})')
-	player.human(hum[0], hum[1], hum[2])
+	try:
+		if player == None:
+			player = choice(Clock.playing)
+		hum = [int(GENERATE_INTEGER(humanAmpMin,humanAmpMax)), int(GENERATE_INTEGER(humanDelayMin,humanDelayMax)), int(GENERATE_INTEGER(humanSwingMin,humanSwingMax))]
+		sendOut(f'{player}.humanize({hum[0]}, {hum[1]}, {hum[2]})')
+		player.human(hum[0], hum[1], hum[2])
+	except Exception as err:
+		print("humanizer problem : " + err)
 
 def masterFilter():
 	''' Add random Master().lpf, Master().bpf, Master().hpf '''
-	timef = 4*round(randint(3,32)/4)
-	filtr = choice(["lpf", "hpf", "bpf"])
-	set_master_filter(filtr, freqs[filtr], timef)
-	sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-1},1])')
-	Clock.future(timef, lambda: set_master_filter(filtr, 0, 0))
+	try:
+		timef = 4*round(randint(3,32)/4)
+		filtr = choice(["lpf", "hpf", "bpf"])
+		set_master_filter(filtr, freqs[filtr], timef)
+		sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-1},1])')
+		Clock.future(timef, lambda: set_master_filter(filtr, 0, 0))
+	except Exception as err:
+		Master().__setattr__("lpf", 0)
+		Master().__setattr__("bpf", 0)
+		Master().__setattr__("hpf", 0)
+		print("masterFilter problem : " + err)
 
 def set_master_filter(filtr, freqf, timef):
 	''' set the master filter, use with clock.future '''
-	if timef == 0:
-		Master().__setattr__(filtr, 0)
-	else:
-		Master().__setattr__(filtr, linvar(freqf, [timef-1, 1], start=now))
+	try:
+		if timef == 0:
+			Master().__setattr__(filtr, 0)
+		else:
+			Master().__setattr__(filtr, linvar(freqf, [timef-1, 1], start=now))
+	except Exception as err:
+		print("set_master_filter problem : " + err)
 
 def dropevent():
 	''' Add random drop() '''
-	time = randint(dropTimeMin,dropTimeMax)
-	drop(time, dropTimeMax-time,dropLoop)
+	try:
+		time = randint(dropTimeMin,dropTimeMax)
+		drop(time, dropTimeMax-time,dropLoop)
+	except Exception as err:
+		print("dropevent problem : " + err)
 
 def addFilter(player=None):
 	''' add lpf or hpf to player '''
-	if player == None:
-		player = choice(Clock.playing)
-	filType, filFreq = gen_filter()
-	#if filFreq != '0':
-		#sendOut(f'{player}.{filType}={filFreq}')
-	player.__setattr__(filType, eval(filFreq))
+	try:
+		if player == None:
+			player = choice(Clock.playing)
+		filType, filFreq = gen_filter()
+		if filFreq != '0':
+			sendOut(f'{player}.{filType}={filFreq}')
+		player.__setattr__(filType, eval(filFreq))
+	except Exception as err:
+		print("addFilter problem : " + err)
 
 def addKick():
 	''' Add 4 to the floor Kick player '''
-	player = generate_player_name()
-	kick = choice(sorted_sample["kick_sample"])	+ "."
-	sple = randint(0,99)
-	lpf = randint(40,7000)
-	sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
-	~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
-	addPlayerTurn()
+	try:
+		player = generate_player_name()
+		kick = choice(sorted_sample["kick_sample"])	+ "."
+		sple = randint(0,99)
+		lpf = randint(40,5000)
+		sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
+		~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
+		addPlayerTurn()
+	except Exception as err:
+		print("addKick problem : " + err)
 
 def generate_rytm(length=16, mult=1):
-	rytm = PChain2(rythmMarkov)[:length]*mult
-	for i,n in enumerate(rytm):
-		if n == 0:
-			rytm[i] = f'rest({0.5*mult})'
-	return str(rytm).replace("'","")
+	try:
+		rytm = PChain2(rythmMarkov)[:length]*mult
+		for i,n in enumerate(rytm):
+			if n == 0:
+				rytm[i] = f'rest({0.5*mult})'
+		return str(rytm).replace("'","")
+	except Exception as err:
+		print("generate_rytm problem : " + err)
 
 def addFxOut():
 	''' add fxOut to player '''
-	player = choice(Clock.playing)
-	fxout = choice(["fx1", "fx2"])
-	sendOut(f'{player}.{fxout}=1')
-	player.__setattr__(fxout, 1)
+	try:
+		player = choice(Clock.playing)
+		fxout = choice(["fx1", "fx2"])
+		sendOut(f'{player}.{fxout}=1')
+		player.__setattr__(fxout, 1)
+	except Exception as err:
+		print("addFxOut problem : " + err)
 
 def killserver():
 	''' stop all server's players, preserve numeric end players (d1, s3, e8)'''
@@ -437,3 +511,4 @@ def killserver():
 		ply.stop()
 
 server.start()
+#serverActive = True

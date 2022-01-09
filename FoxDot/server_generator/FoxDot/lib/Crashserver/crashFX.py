@@ -85,6 +85,16 @@ fx = FxList.new("tanh", "tanhDisto", {"tanh":0}, order=2)
 fx.add("osc = osc + (osc*tanh).tanh.sqrt()")
 fx.save()
 
+fx = FxList.new("dist2", "dist2", {"dist2":0, "dist2mix": 1, "dist2shape": 0.1}, order=2)
+fx.add_var("tmp")
+fx.add("tmp = Fold.ar(osc, -1*dist2shape,dist2shape)")
+fx.add("tmp = (tmp * 16.dbamp * dist2).tanh")
+fx.add("tmp = BHiShelf.ar(tmp, 9000, 0.8, -12)")
+fx.add("tmp = LPF.ar(tmp, 9000)")
+fx.add("osc = LinXFade2.ar(tmp, osc, 1-dist2mix)")
+fx.save()
+
+
 fx = FxList.new("fdist", "fdist", {"fdist":0, "fdistfreq":1600}, order=2)
 fx.add("osc = LPF.ar(osc, fdistfreq)")
 fx.add("osc = (osc * 1.1 * fdist).tanh")
@@ -215,6 +225,26 @@ fx = FxList.new("sample_atk", "sample_atk", {"sample_atk":0, "sample_sus":1}, or
 fx.add_var("env")
 fx.add("env = EnvGen.ar(Env.new(levels: [0,1,0], times:[sample_atk, sample_sus], curve: 'lin'))")
 fx.add("osc = osc*env")
+fx.save()
+
+fx = FxList.new("a", "adsr", {"a":0, "r":1, "sus": 1}, order=2)
+fx.add_var("env")
+fx.add("env = EnvGen.ar(Env.new(levels: [0,1,1,0], times:[a*sus, sus - a*sus - r*sus, r*sus], curve: 'lin'))")
+fx.add("osc = osc*env")
+fx.save()
+
+fx = FxList.new('ehpf','envHPF', {'ehpf': 0, 'ehpr': 0.7, 'ehpa':0.001, 'ehps':0.01, 'ehpc':-3, 'sus':1}, order=2)
+fx.doc("ehpf")
+fx.add_var("env")
+fx.add('env = EnvGen.ar(Env.new([0, 1, 1, 0.1], [ehpa*sus, sus-(ehpa*sus)-(ehps*sus), ehps], ehpc))')
+fx.add('osc = RHPF.ar(osc, ehpf, ehpr, mul: env)')
+fx.save()
+
+fx = FxList.new('elpf','envLPF', {'elpf': 0, 'elpr': 0.7, 'elpa':0.001, 'elps':0.01, 'elpc':-3, 'sus':1}, order=2)
+fx.doc("elpf")
+fx.add_var("env")
+fx.add('env = EnvGen.ar(Env.new([0.01, 1, 1, 0.01], [elpa*sus, sus-(elpa*sus)-(elps*sus), elps], elpc), doneAction:0)')
+fx.add('osc = RLPF.ar(osc, LinLin.ar(env, 0,1,0,elpf)+10, elpr, mul: 1);')
 fx.save()
 
 fx = FxList.new("position", "trimPos", {"position": 0, "sus": 1}, order=2)

@@ -20,7 +20,7 @@ startupLive = True	# load crashserver live funtion (attack,  lost, ...)
 #pusherLive = True   # activate/desactivate server with a push button (arduino usb)
 
 # Global
-maxPlayer = 6 # Number of max players playing together
+maxPlayer = 10 # Number of max players playing together
 
 timeChange = 4 # Time in beats for a new event
 multDurationMin = 1 #
@@ -131,5 +131,5 @@ probDrumStyleDur = [1,1,1]  # probability of this list
 probLowPass = 8  # probability to add a low pass
 probHighPass = 2 # probability to add a high pass
 filterFreqMin = 40 # freq min
-filterFreqMax = 8000 # freq max
-probFilterFreq = [1,3,2] # probability to [linvar, integer, 0]
+filterFreqMax = 7000 # freq max
+probFilterFreq = [3,3,1] # probability to [linvar, integer, 0]

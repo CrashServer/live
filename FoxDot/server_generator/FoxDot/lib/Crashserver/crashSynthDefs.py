@@ -158,9 +158,14 @@ varicelle.add()
 waves = FileSynthDef("waves")
 waves.add()
 
+vati = FileSynthDef("vati")
+vati.add()
+
 video = FileSynthDef("video")
 video.add()
 
 virus = FileSynthDef("virus")
 virus.add()
 
+wobble = FileSynthDef("wobble")
+wobble.add()

@@ -61,12 +61,12 @@ maxPlayerTurn = 16 # max number of player turn until a stop
 probPatternDur = [3,1] # probability dur synth player [PDur(random,8), Generate Pattern]
 
 # Add Drum Probabilty
-probAddStyleDrum = 1 # probability to pick a style drum pattern
+probAddStyleDrum = 3 # probability to pick a style drum pattern
 probAddRandomDrum = 1 # probability to generate random char pattern
 
 # Stop player Probability
 probStopOnePlayer = 6  # porbability to stop randomly only one player
-probStopMorePlayers = 2 # probabilty to stop 1 to (all-1) players
+probStopMorePlayers = 1 # probabilty to stop 1 to (all-1) players
 
 # Change degree
 probLoopChangeDegree = [4,	# probability to change loop degree
@@ -78,7 +78,7 @@ probSynthChangeDegree = [5, # probability to change synth degree player to PArp(
 						 3, # probabiltiy to change synth degree player to PGauss()
 						 1] # probability to change synth degree player to PChain2(chords)
 
-probChangeDrumChar = [6,4] # probability to change to [same type char (kick, snare, hh) or random char]
+probChangeDrumChar = [6,2] # probability to change to [same type char (kick, snare, hh) or random char]
 
 # Change bpm parameters
 changeBpmMin = 30 # min bpm
@@ -93,8 +93,8 @@ changeRootMax = 1
 # Humanizer parameters
 humanAmpMin = 5   # % min random human amp
 humanAmpMax = 60  # % max random human amp
-humanDelayMin = -40 # % min random dur delay
-humanDelayMax = 40 # % max random dur delay
+humanDelayMin = -10 # % min random dur delay
+humanDelayMax = 10 # % max random dur delay
 humanSwingMin = -10 # % min swing
 humanSwingMax = 10 # % max swing
 
@@ -111,19 +111,19 @@ probPlayerAttributes = [2, #amp
 						4] #pan
 
 # Synth player generator
-synthOctMin = 2   # octave min
-synthOctMax = 5   # octave max
+synthOctMin = 3   # octave min
+synthOctMax = 6   # octave max
 
 # Drum player generator
 drumRateMin = -1  # rate drum PWhite min
-drumRateMax = 6 # rate drum PWhite max
+drumRateMax = 4 # rate drum PWhite max
 
 # Loop player generator
 multDurLoopPLayer = [1,2]  # list of multiply the loop player duration
 probDurLoopPlayer = [1,1]  # probability of this list
 
 # drum style generator
-probDrumStyleRate = [1,1] # probabilty to change drm style rate to: [randomRateList, 1]
+probDrumStyleRate = [1,5] # probabilty to change drm style rate to: [randomRateList, 1]
 DrumStyleDur = [0.25,0.5,1]  # list of dur for drum style
 probDrumStyleDur = [1,1,1]  # probability of this list
 
@@ -131,5 +131,5 @@ probDrumStyleDur = [1,1,1]  # probability of this list
 probLowPass = 8  # probability to add a low pass
 probHighPass = 2 # probability to add a high pass
 filterFreqMin = 40 # freq min
-filterFreqMax = 7000 # freq max
+filterFreqMax = 9000 # freq max
 probFilterFreq = [3,3,1] # probability to [linvar, integer, 0]

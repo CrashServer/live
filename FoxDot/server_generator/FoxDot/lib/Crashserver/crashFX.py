@@ -244,7 +244,7 @@ fx = FxList.new('elpf','envLPF', {'elpf': 0, 'elpr': 0.7, 'elpa':0.001, 'elps':0
 fx.doc("elpf")
 fx.add_var("env")
 fx.add('env = EnvGen.ar(Env.new([0.01, 1, 1, 0.01], [elpa*sus, sus-(elpa*sus)-(elps*sus), elps], elpc), doneAction:0)')
-fx.add('osc = RLPF.ar(osc, LinLin.ar(env, 0,1,0,elpf)+10, elpr, mul: 1);')
+fx.add('osc = RLPF.ar(osc, LinLin.ar(env, 0,1,0,elpf)+10, elpr, mul: 1)')
 fx.save()
 
 fx = FxList.new("position", "trimPos", {"position": 0, "sus": 1}, order=2)

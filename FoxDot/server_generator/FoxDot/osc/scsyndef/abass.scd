@@ -1,5 +1,5 @@
 SynthDef.new(\abass,
-	{|bus=0, amp=1, gate=1, pan=0, spread=0.8, freq=440, atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, fmod=0, blur=1|
+	{|bus=0, amp=1, gate=1, pan=0, spread=0.8, freq=440, atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, fmod=0, blur=1, cutoff=2800, rq=0.8|
 	var sig, sig1, sig2, sig3, osc, env;
 
 	sus = sus * blur;
@@ -20,7 +20,7 @@ SynthDef.new(\abass,
 	// env=EnvGen.ar(Env.perc(level: amp,releaseTime: sus,attackTime: 0.1,curve: 'lin'), doneAction: 0);
 	//add a ADSR envelope
 	env = EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);
-
+		sig = RLPF.ar(sig, cutoff, rq);
 	sig = sig.tanh;
 	osc = Mix(sig) * 0.25;
 	osc = Pan2.ar(osc * env , pan);

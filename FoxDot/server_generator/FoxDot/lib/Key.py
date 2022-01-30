@@ -314,6 +314,9 @@ class NumberKey(object):
 
         return self.spawn_child(new_func)
 
+    def lmap(self, start1=0, stop1=0, start2=0, stop2=0):
+        return self.transform(Lmap(start1, stop1, start2, stop2))
+
     def accompany(self, rel=[0,2,4]):
         """ Returns a PlayerKey whose function returns an accompanying note """
         return self.transform(Accompany(rel=rel))
@@ -328,7 +331,7 @@ class NumberKey(object):
         # 2. Returns a new PlayKey
 
         return 
-    
+
     # Values
     
     def __nonzero__(self):
@@ -471,6 +474,42 @@ class Accompany:
         index = indices[i % len(indices)]
 
         return values[index]
+
+class Lmap:
+    this_last_value = 0
+    keys_last_value = None
+
+    def __init__(self, start1=0, stop1=0, start2=0, stop2=0):
+        self.start1 = start1
+        self.start2 = start2
+        self.stop1 = stop1
+        self.stop2 = stop2
+
+    def __call__(self, playerkey):
+        """ Acts as a function in Player Key """
+        # Only change value if the player key has changed - maybe set a frequency?
+        return self.find_new_value(playerkey)
+
+        # if self.keys_last_value != playerkey:
+        #     self.this_last_value = self.find_new_value(playerkey)
+        #     self.keys_last_value = playerkey
+        # return self.this_last_value
+
+    def constrain(self, n, low, high):
+        return max(min(n,high), low)
+
+    def find_new_value(self, playerkey):
+        if isinstance(playerkey, PGroup):
+                return PGroup([self.find_new_value(item) for item in playerkey])
+        newval = (playerkey - self.start1) / (self.stop1 - self.start1) * (self.stop2 - self.start2) + self.start2
+        if (self.start1 != self.stop1):
+            if (self.start2 < self.stop2):
+                return self.constrain(newval, self.start2, self.stop2)
+            else:
+                return self.constrain(newval, self.stop2, self.start2)
+        else:
+            return playerkey
+
 
 class Versus(Accompany):
     def __init__(self):

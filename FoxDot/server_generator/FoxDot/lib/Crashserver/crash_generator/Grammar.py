@@ -126,7 +126,7 @@ def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
 	if synthName in synthArgsDict.keys():
 		synthParam = synthArgsDict[synthName]
 		if len(synthParam) > 0:
-			randArgs = sample(list(synthParam), randint(0,len(synthParam)))
+			randArgs = sample(list(synthParam), randint(1,len(synthParam)))
 			for argmt in randArgs:
 				if argmt not in ["atk", "decay", "rel"]:
 					para_min = synthParam[argmt][0]

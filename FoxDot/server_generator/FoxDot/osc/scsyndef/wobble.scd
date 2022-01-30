@@ -1,6 +1,5 @@
-(
 SynthDef(\wobble, {
-arg out=0, rate=6, decay=0.01, gate=1, cutoff=8500, freq, level=0.8, sus=0.1, atk=0.02, wphase=0.5, peak=1, amp=1, rel=0.1, bus=0, fmod=0;
+|out=0, rate=6, decay=0.01, gate=1, cutoff=8500, freq, level=0.8, sus=0.1, atk=0.02, wphase=0.5, peak=1, amp=1, rel=0.1, bus=0, fmod=0|
 var rev, osc, env, son;
 env=EnvGen.ar(Env([0,peak,level,level,0], [atk, decay, sus/2, sus/2]), doneAction: 2);
 	freq = In.kr(bus, 1);
@@ -21,4 +20,3 @@ osc = Mix(osc) * 0.2;
 osc = HPF.ar(osc, 40);
 ReplaceOut.ar(bus, osc * env);
 }).add;
-)

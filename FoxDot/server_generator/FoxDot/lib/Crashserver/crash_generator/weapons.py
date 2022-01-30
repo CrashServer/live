@@ -21,8 +21,8 @@ def generate_random_synth_player():
 	''' Generate a random synth pattern '''
 	player = generate_player_name()
 	synth = choice(synthdefNames)
-	degree = checkPattern(GENERATE_PATTERN())
-	dur = choices([f"PDur({randint(2,8)},8)",checkPattern(GENERATE_PATTERN())],probPatternDur)[0]
+	degree = gen_synth_degree()
+	dur = choices([f"PDur({randint(2,8)},8)",f'SDur({choice([8,16,32])})',checkPattern(GENERATE_PATTERN())],probPatternDur)[0]
 	oct = GENERATE_LIST(synthOctMin,synthOctMax)
 	return {"player": player, "synth": synth, "degree": degree, "dur": dur, "oct": oct}
 
@@ -91,14 +91,15 @@ def gen_player_param():
 		args.append(player_time_para[timePlayer][i]())
 	return str(timePlayer) + "({})".format(", ".join(args))
 
+
 def gen_player_attributes(playerType=None):
 	''' Generate player attribute: sus, dur, amp, pan,... '''
 	attr = 	choices(['amp','amplify','dur','sus','pan'],probPlayerAttributes)[0]		
 	if attr in ["amp", "amplify"]:
 		value = GENERATE_AMPLIFY()
 	elif attr in ["dur"]:
-		if playerType != "loop":
-			value = 'eval(generate_rytm(16,choice([0.5,1,2,4])))'
+		if playerType != "loop": 
+			value = f'SDur({choice([8,16,32])})'
 		else:
 			attr = "blur"
 			value = GENERATE_LIST(1,4) 	
@@ -123,6 +124,13 @@ def gen_arp():
 def gen_filter():
 	''' generate a lpf or hpf, linvar or int '''
 	filType = choices(['lpf', 'hpf'],[probLowPass,probHighPass])[0]
-	filfreq = choices([GENERATE_FREQLIST(filterFreqMin,filterFreqMax,5), GENERATE_INTEGER(filterFreqMin,filterFreqMax), "0"],probFilterFreq)[0]
+	if filType == 'hpf':
+		filfreq = choices([GENERATE_FREQLIST(filterFreqMin,int(filterFreqMax/3),5), GENERATE_INTEGER(filterFreqMin,int(filterFreqMax/3)), "0"],probFilterFreq)[0]
+	else:	 
+		filfreq = choices([GENERATE_FREQLIST(filterFreqMin,filterFreqMax,5), GENERATE_INTEGER(filterFreqMin,filterFreqMax), "0"],probFilterFreq)[0]
 	return (filType,filfreq)
 
+def gen_synth_degree():
+	''' generate degree for synth '''
+	melody_length = choice([4,8,16])
+	return f'melody()[:{melody_length}]'

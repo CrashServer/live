@@ -77,7 +77,7 @@ synthArgs = {
 	'pasha': {'rate': [0.0,10.0], 'cutoff': pfreq, 'rq': prq},
 	'pbass': {'rate': [0,10]},	
 	'piano' : {},
-	'pianovel': {'velocity': [45,128], 'hard': [0.0,1.0], 'velhard': [0.0,1.0]},
+	'pianovel': {'velocity': [35,70], 'hard': [0.0,1.0], 'velhard': [0.0,1.0]},
 	'pink': {},
 	'plaits': {'atk': patk, 'decay': pdec, 'rel': prel, 'engine': [0,15], 'harm': [0.0,1.0], 'timbre': [0.0,0.6], 'morph': [0.0,1.0], 'cutoff': pfreq, 'rq': prq},
 	'pluck': {},
@@ -118,6 +118,8 @@ synthArgs = {
 	'varsaw': {'rate': [0.0,1.0]},
 	'viola': {'vib': [0.0,10.0]},
 	'virus': {'len': [0,10], 'fmod': [0.0,1.0], 'vib': [0.0,1.0], 'rate': [0.0,1.0]},
+	'vati' : {'atk': patk, 'decay': pdec, 'rel': prel, 'rate': [0.5,12]},
 	'waves': {'rate': [0,100], 'fmod': [0.0,5.0]},
+	'wobble': {'atk': patk, 'decay': pdec, 'rel': prel, 'rate': [0.1,8], 'wphase': [10,1000], 'cutoff':[800,12000]},
 	'zap': {}
 }

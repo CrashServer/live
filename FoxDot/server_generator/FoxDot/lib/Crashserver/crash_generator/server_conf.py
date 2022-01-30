@@ -20,7 +20,7 @@ startupLive = True	# load crashserver live funtion (attack,  lost, ...)
 #pusherLive = True   # activate/desactivate server with a push button (arduino usb)
 
 # Global
-maxPlayer = 10 # Number of max players playing together
+maxPlayer = 8 # Number of max players playing together
 
 timeChange = 4 # Time in beats for a new event
 multDurationMin = 1 #
@@ -31,11 +31,11 @@ multDurationMax = 4
 probAddPlayer = 5  # probability to add a player (synth, drum, loop)
 probStopPlayer = 4 # probability to stop one or more running players
 probAddFx = 4 # probabilty to add a Fx
-probChangeDegree = 3 # probability to change a synth degree, drum char or loop position
-probAddPlayerParam = 2 # probability to add a player param (.stutter, .spread, .shuffle)
+probChangeDegree = 1 # probability to change a synth degree, drum char or loop position
+probAddPlayerParam = 3 # probability to add a player param (.stutter, .spread, .shuffle)
 probAddPlayerAttribute = 4 # probability to a change a player attributes (dur, pan, sus)
 probAddEvent = 2 #probabilty to add a master event (change bpm, change root, master.lpf(), drop)
-probChangeAdsr = 2 # probabilty to change player adsr
+probChangeSynthAttr = 2 # probabilty to change player adsr
 probAddFxOut = 0 # probability to add an fx output
 
 #Add Master event Probability
@@ -49,8 +49,8 @@ probAddKick = 5
 
 
 # Add player probability
-probAddSynth = 1
-probAddDrum = 1
+probAddSynth = 3
+probAddDrum = 2
 probAddLoop = 1
 
 # Stop player
@@ -58,7 +58,7 @@ minPlayerTurn = 8 # min number of player turn before a possibility stop
 maxPlayerTurn = 16 # max number of player turn until a stop
 
 # Add Player Probability
-probPatternDur = [3,1] # probability dur synth player [PDur(random,8), Generate Pattern]
+probPatternDur = [30,60,10] # probability dur synth player [PDur(random,8), SDur(), Generate Pattern]
 
 # Add Drum Probabilty
 probAddStyleDrum = 3 # probability to pick a style drum pattern
@@ -110,6 +110,9 @@ probPlayerAttributes = [2, #amp
 						1, #sus
 						4] #pan
 
+#Probability to change player duration (not loop) 
+probChangeDur = [75,15] # SDur, generate_rytm
+
 # Synth player generator
 synthOctMin = 3   # octave min
 synthOctMax = 6   # octave max
@@ -130,6 +133,6 @@ probDrumStyleDur = [1,1,1]  # probability of this list
 # gen filter player
 probLowPass = 8  # probability to add a low pass
 probHighPass = 2 # probability to add a high pass
-filterFreqMin = 40 # freq min
-filterFreqMax = 9000 # freq max
+filterFreqMin = 400 # freq min
+filterFreqMax = 7000 # freq max
 probFilterFreq = [3,3,1] # probability to [linvar, integer, 0]

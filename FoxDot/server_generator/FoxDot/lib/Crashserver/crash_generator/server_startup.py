@@ -95,8 +95,8 @@ def server_order():
 							add_player_param,
 							add_player_attribute,
 							add_event,
-							change_adsr],
-							[probAddPlayer,probStopPlayer,probAddFx,probChangeDegree,probAddPlayerParam,probAddPlayerAttribute,probAddEvent,probChangeAdsr]) # probability
+							change_synth_attr],
+							[probAddPlayer,probStopPlayer,probAddFx,probChangeDegree,probAddPlayerParam,probAddPlayerAttribute,probAddEvent,probChangeSynthAttr]) # probability
 		order[0]()  # evaluate order
 		addPlayerTurn()  # add 1 turn to each playing players
 	except Exception as err:
@@ -296,25 +296,46 @@ def change_degree(player=None):
 	except Exception as err:
 		print("change_degree problem : " + err)
 
-def change_adsr(player=None):
-	try:
+# def change_adsr(player=None):
+# 	try:
+# 		if player == None:
+# 			player = choice(Clock.playing)
+# 		playerType = player_type(player)
+# 		if playerType == "loop" or playerType == "drum":
+# 			genAtk = GENERATE_FLOAT_LIST(0.0,1.0)
+# 			genSus = GENERATE_FLOAT_LIST(0.0,1.0)
+# 			player.__setattr__('sample_atk',eval(genAtk))
+# 			sendOut(f"{player}.sample_atk={genAtk}")
+# 			player.__setattr__('sample_sus',eval(genSus))
+# 			sendOut(f"{player}.sample_sus={genSus}")
+# 		else:
+# 			adsr = GENERATE_ADSR(player.synthdef, float(player.sus))
+# 			for argm, value in adsr.items():
+# 				player.__setattr__(argm,eval(value))
+# 				sendOut(f"{player}.{argm}={value}")
+# 	except Exception as err:
+# 		print("change_adsr problem : " + err)
+
+def change_synth_attr(player=None):
+	''' add or change the synth attr or loop/play adsr '''
+	try: 
 		if player == None:
-			player = choice(Clock.playing)
+				player = choice(Clock.playing)
 		playerType = player_type(player)
-		if playerType == "loop" or playerType == "drum":
-			genAtk = GENERATE_FLOAT_LIST(0.0,1.0)
-			genSus = GENERATE_FLOAT_LIST(0.0,1.0)
+		if playerType == "synth":
+			params = GENERATE_SYNTH_ARGS(player.synthdef)
+			for k, v in params.items():
+				player.__setattr__(k, eval(v))
+				sendOut(f"{player}.{k}={eval(v)}")
+		else:
+			genAtk = GENERATE_FLOAT_LIST(0.0,0.2)
+			genSus = GENERATE_FLOAT_LIST(0.8,1.0)
 			player.__setattr__('sample_atk',eval(genAtk))
 			sendOut(f"{player}.sample_atk={genAtk}")
 			player.__setattr__('sample_sus',eval(genSus))
 			sendOut(f"{player}.sample_sus={genSus}")
-		else:
-			adsr = GENERATE_ADSR(player.synthdef, float(player.sus))
-			for argm, value in adsr.items():
-				player.__setattr__(argm,eval(value))
-				sendOut(f"{player}.{argm}={value}")
 	except Exception as err:
-		print("change_adsr problem : " + err)
+		print("change_synth_attr problem : " + err)
 
 def add_event():
 	try:

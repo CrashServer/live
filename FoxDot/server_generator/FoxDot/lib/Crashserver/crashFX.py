@@ -64,6 +64,21 @@ fx = FxList.new('echo', 'combDelay', {'echo': 0, 'echomix' : 1, 'beat_dur': 1, '
 fx.add('osc = LinXFade2.ar(osc + CombL.ar(osc, delaytime: echo * beat_dur, maxdelaytime: 2 * beat_dur, decaytime: echotime * beat_dur), osc, 1-echomix)')
 fx.save()
 
+fx = FxList.new('pong', 'pingpong', {'pong': 0, 'beat_dur': 1, 'pongtime': 1}, order=2)
+fx.add_var("left")
+fx.add_var("right")
+fx.add("left = CombN.ar(osc, delaytime: pong * beat_dur, maxdelaytime: 2 * beat_dur, decaytime: pongtime * beat_dur)")
+fx.add("left = left*2.distort.tanh")
+fx.add("left = LPF.ar(left,12000)")
+fx.add("left = HPF.ar(left,300)")
+fx.add("right = CombN.ar(osc, delaytime: pong * beat_dur + pong * beat_dur*0.5, maxdelaytime: 2 * beat_dur, decaytime: pongtime * beat_dur)")
+fx.add("right = right*2.distort.tanh")
+fx.add("right = LPF.ar(right,12000)")
+fx.add("right = HPF.ar(right,300)")
+fx.add("osc= osc + [left, right]")
+fx.save()
+
+
 fx = FxList.new('flanger', 'flanger', {'flanger': 0, 'fdecay': 0, 'flangermix':1}, order=2)
 fx.add("osc = LinXFade2.ar(CombC.ar(osc, 0.01, SinOsc.ar(flanger, 0, (0.01 * 0.5) - 0.001, (0.01 * 0.5) + 0.001), fdecay, 1),  osc, 1-flangermix)")
 fx.save()

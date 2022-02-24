@@ -92,6 +92,9 @@ latoo.add()
 lapin = FileSynthDef("lapin")
 lapin.add()
 
+lbass = FileSynthDef("lbass")
+lbass.add()
+
 lfnoise = FileSynthDef("lfnoise")
 lfnoise.add()
 

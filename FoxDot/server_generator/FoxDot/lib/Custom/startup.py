@@ -562,7 +562,7 @@ if __name__ != "__main__":
 		''' pattern method mul, eg: d1.often("rate.mul", -1) '''
 		return self * value
 
-	def drop(playTime=15, dropTime=1, nbloop=8):
+	def drop(playTime=14, dropTime=2, nbloop=1):
 		""" Drop the amplify to 0 for random players.
 			ex : drop(6,2,4) => amplify=0 for random playing players at the 2 last beats of 8, 4 times
 		"""
@@ -632,3 +632,33 @@ if __name__ != "__main__":
 			chaosText += add_player(True)
 			chaosText += "\n"        
 		clip.copy(chaosText)
+
+	valueDict = {}
+
+	def masterAll(args = "dur", value=1):
+		global valueDict
+		if args != "reset":
+			for p in Clock.playing:
+				if p in valueDict:
+					if args in valueDict[p]:
+						pass
+					else:
+						try:
+							valueDict[p][args] = p.__getitem__(args)
+						except:
+							valueDict[p][args] = 0
+				else:
+					valueDict[p] = {}
+					try:
+						valueDict[p][args] = p.__getitem__(args)
+					except:
+						valueDict[p][args] = 0
+				p.__setattr__(args, value)
+		else:
+			for k,v in valueDict.items():
+				for l, w in v.items():
+					try:
+						k.__setattr__(l, w)
+					except:
+						pass
+			valueDict = {}

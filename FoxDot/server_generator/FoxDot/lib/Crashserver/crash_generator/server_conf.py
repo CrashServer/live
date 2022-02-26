@@ -8,7 +8,7 @@
 crash_path = "/home/zbdm/crashserver/UltimateSamples/"
 
 ''' CrashOS & osc out '''
-oscIp = "localhost" #"192.168.0.40" # ip CrashOS
+oscIp = "192.168.0.10" #"192.168.0.40" # ip CrashOS
 oscPort = 20000 # port Osc
 oscOut = True # CrashOS osc server message out enable
 
@@ -22,7 +22,7 @@ startupLive = True	# load crashserver live funtion (attack,  lost, ...)
 # Global
 maxPlayer = 8 # Number of max players playing together
 
-timeChange = 4 # Time in beats for a new event
+timeChange = 8 # Time in beats for a new event
 multDurationMin = 1 #
 multDurationMax = 4
 

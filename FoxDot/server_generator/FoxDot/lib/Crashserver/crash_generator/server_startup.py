@@ -524,12 +524,21 @@ def addFxOut():
 	except Exception as err:
 		print("addFxOut problem : " + err)
 
-def killserver():
+def shutup():
 	''' stop all server's players, preserve numeric end players (d1, s3, e8)'''
 	stopPlayer = [p for p in Clock.playing if p.name[-1:] in string.ascii_lowercase]
 	for ply in stopPlayer:
 		sendOut(f"{ply}.stop()")
 		ply.stop()
+
+def on():
+    global serverActive
+    server.start()
+    serverActive = True
+
+def off():
+    global serverActive
+    severActive = False
 
 server.start()
 #serverActive = True

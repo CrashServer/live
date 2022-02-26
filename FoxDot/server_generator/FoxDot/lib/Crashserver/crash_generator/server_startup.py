@@ -531,12 +531,12 @@ def shutup():
 		sendOut(f"{ply}.stop()")
 		ply.stop()
 
-def on():
+def son():
     global serverActive
     server.start()
     serverActive = True
 
-def off():
+def soff():
     global serverActive
     severActive = False
 

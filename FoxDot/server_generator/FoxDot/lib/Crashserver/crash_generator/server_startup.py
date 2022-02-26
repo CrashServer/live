@@ -36,7 +36,7 @@ serverActive = False
 if oscOut:
 	# Osc sender
 	try:
-		crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)	
+		crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
 	except:
 		print("config UDP problem")
 
@@ -195,7 +195,7 @@ def synthArgsToText(params=''):
 	try:
 		paratxt = ''
 		for argm, value in params.items():
-			paratxt += f'{argm} = {value}, '	
+			paratxt += f'{argm} = {value}, '    
 		return paratxt
 	except Exception as err:
 		print("synthArgsToText problem : " + err)
@@ -297,24 +297,24 @@ def change_degree(player=None):
 		print("change_degree problem : " + err)
 
 # def change_adsr(player=None):
-# 	try:
-# 		if player == None:
-# 			player = choice(Clock.playing)
-# 		playerType = player_type(player)
-# 		if playerType == "loop" or playerType == "drum":
-# 			genAtk = GENERATE_FLOAT_LIST(0.0,1.0)
-# 			genSus = GENERATE_FLOAT_LIST(0.0,1.0)
-# 			player.__setattr__('sample_atk',eval(genAtk))
-# 			sendOut(f"{player}.sample_atk={genAtk}")
-# 			player.__setattr__('sample_sus',eval(genSus))
-# 			sendOut(f"{player}.sample_sus={genSus}")
-# 		else:
-# 			adsr = GENERATE_ADSR(player.synthdef, float(player.sus))
-# 			for argm, value in adsr.items():
-# 				player.__setattr__(argm,eval(value))
-# 				sendOut(f"{player}.{argm}={value}")
-# 	except Exception as err:
-# 		print("change_adsr problem : " + err)
+#   try:
+#       if player == None:
+#           player = choice(Clock.playing)
+#       playerType = player_type(player)
+#       if playerType == "loop" or playerType == "drum":
+#           genAtk = GENERATE_FLOAT_LIST(0.0,1.0)
+#           genSus = GENERATE_FLOAT_LIST(0.0,1.0)
+#           player.__setattr__('sample_atk',eval(genAtk))
+#           sendOut(f"{player}.sample_atk={genAtk}")
+#           player.__setattr__('sample_sus',eval(genSus))
+#           sendOut(f"{player}.sample_sus={genSus}")
+#       else:
+#           adsr = GENERATE_ADSR(player.synthdef, float(player.sus))
+#           for argm, value in adsr.items():
+#               player.__setattr__(argm,eval(value))
+#               sendOut(f"{player}.{argm}={value}")
+#   except Exception as err:
+#       print("change_adsr problem : " + err)
 
 def change_synth_attr(player=None):
 	''' add or change the synth attr or loop/play adsr '''
@@ -366,13 +366,13 @@ def sendOsc(msg=""):
 		pass
 
 # def video(msg=""):
-# 	''' Send osc message for video '''
-# 	try:
-# 		oscMsg = OSCMessage("/video")
-# 		oscMsg.append(msg)
-# 		myclient.send(oscMsg)
-# 	except:
-# 		pass
+#   ''' Send osc message for video '''
+#   try:
+#       oscMsg = OSCMessage("/video")
+#       oscMsg.append(msg)
+#       myclient.send(oscMsg)
+#   except:
+#       pass
 
 def state(msg=1):
 	''' Send osc message for server status '''
@@ -495,7 +495,7 @@ def addKick():
 	''' Add 4 to the floor Kick player '''
 	try:
 		player = generate_player_name()
-		kick = choice(sorted_sample["kick_sample"])	+ "."
+		kick = choice(sorted_sample["kick_sample"]) + "."
 		sple = randint(0,99)
 		lpf = randint(40,5000)
 		sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
@@ -532,13 +532,13 @@ def shutup():
 		ply.stop()
 
 def son():
-    global serverActive
-    server.start()
-    serverActive = True
+	global serverActive
+	server.start()
+	serverActive = True
 
 def soff():
-    global serverActive
-    severActive = False
+	global serverActive
+	serverActive = False
 
 server.start()
 #serverActive = True

@@ -379,8 +379,8 @@ fx.add("osc = osc * EnvGen.ar(Env([0,1,0], [revatk,revsus], curve: 'welch'))")
 fx.add("osc = SelectX.ar(mix2, [dry, osc])")
 fx.save()
 
-fx = FxList.new('mverb', 'miVerb', {'mverb': 0, 'mverbmix': 0.5, 'mverbdamp':0.5, 'mverbdiff':0.625, 'mverbfreeze': 0}, order=2)
-fx.add("osc = MiVerb.ar(osc, time: mverb.clip(1), drywet: mverbmix, damp: mverbdamp, freeze: mverbfreeze, diff: mverbdiff)")
+fx = FxList.new('mverb', 'miVerb', {'mverb': 0, 'mverbmix': 0.5, 'mverbdamp':0.8, 'mverbdiff':0.625, 'mverbfreeze': 0}, order=2)
+fx.add("osc = MiVerb.ar(osc, time: mverb.clip(0.0,1.0), drywet: mverbmix, damp: mverbdamp, hp: 0.1, freeze: mverbfreeze, diff: mverbdiff, mul:1.5)")
 fx.save()
 
 fx = FxList.new('stut', 'stutterfx', {'t_reset': 0, 'stut': 1, 'stutrate':1, 'stutlen':0.02}, order=2)

@@ -63,6 +63,7 @@ synthArgs = {
 	'karp': {'rate': [-20.0,20.0], 'cutoff': pfreq, 'rq': prq},
 	'keys': {'rate': [-2.0,10.0]},
 	'klank': {'rate': [8,17]},
+	'lbass': {'atk': patk, 'decay': pdec, 'rel': prel, 'detune': prq, 'oscmix': prq, 'submix': [0.0,0.6], 'cutoff': [500,13000], 'rq': [0.1,1.8], 'tone': [0.1,0.9]},
 	'lapin': {'atk': patk, 'decay': pdec, 'rel': prel},
 	'latoo': {},
 	'lazer': {'rate': [-150,150], 'cutoff': pfreq, 'rq': prq},

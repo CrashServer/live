@@ -526,17 +526,20 @@ def addFxOut():
 
 def shutup():
 	''' stop all server's players, preserve numeric end players (d1, s3, e8)'''
+	print("Shut the fuck up you evil server")
 	stopPlayer = [p for p in Clock.playing if p.name[-1:] in string.ascii_lowercase]
 	for ply in stopPlayer:
 		sendOut(f"{ply}.stop()")
 		ply.stop()
 
 def son():
+	print("Server On")
 	global serverActive
 	server.start()
 	serverActive = True
 
 def soff():
+	print("Server Off")
 	global serverActive
 	serverActive = False
 

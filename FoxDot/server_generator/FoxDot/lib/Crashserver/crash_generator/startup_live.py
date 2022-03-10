@@ -267,12 +267,11 @@ def define_virus():
 	virus = "###" + choice(virus_method) + choice(virus_name) + "." + choice(virus_access) + "." + choice(virus_protocole) + choice(virus_status)  
 	return virus
 
-
 @player_method
-def gtr(self, string=0):
-	gtrTuning = [-10,-8,-3,2,7,11,16]
-	self.root = gtrTuning[string]
+def gtr(self, strings=1):
+	self.root = Pattern(strings).submap({0:-10, 1:-8, 2:-3, 3:2, 4:7, 5:11, 6:16})
 	self.scale = Scale.chromatic
+	return self
 
 @player_method
 def chroma(self):

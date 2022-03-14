@@ -45,7 +45,7 @@ fxdict = {
 'drop' : {'drop': [0,99], 'dropof': [0,99]},
 'squiz' : {'squiz': pint},
 'triode' : {'triode': pint},
-'octer' : {'octer': preso, 'octersub': [0,20], 'octersubsub': [0,20]},
+'octer' : {'octer': preso, 'octersub': [0,10], 'octersubsub': [0,10]},
 'sample_atk' : {'sample_atk': preso, 'sample_sus': preso},
 'position' : {'position': preso},
 'ring' : {'ring': preso, 'ringl': [0,15000], 'ringh': [0,15000]},

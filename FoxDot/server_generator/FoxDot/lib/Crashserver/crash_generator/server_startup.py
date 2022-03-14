@@ -11,12 +11,15 @@ class genSeed():
 	''' return a seed for random based on actual time for multiplayer sync '''
 	def __init__(self):
 		self.seedR = int(''.join(map(str, map(ord, strftime("%a, %d %b %Y %H:%M", gmtime())))))
+		self.seedOrigin = self.seedR		
 	def txt(self, seedTxt):
 		self.seedR = int(sum([ord(c) for c in str(seedTxt)]))
 	def add(self):
 		self.seedR += 1
 	def set(self):
 		seed(int(self.seedR))
+	def get(self):
+		return self.seedOrigin
 
 try:
 	genSeed = genSeed()

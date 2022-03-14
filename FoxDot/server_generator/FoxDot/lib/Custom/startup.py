@@ -298,6 +298,10 @@ if __name__ != "__main__":
 		''' expvar from start to finish but stay at finish after time '''
 		return expvar([start,finish],[time,inf], start=now)
 
+	def linbpm(endBpm=170, durBpm=128):
+		''' use with Clock.bpm = linbpm(220, 12) to change bpm from current bpm to target in x beats'''
+		return linvar([Clock.bpm,endBpm],[durBpm,inf], start=now)
+
 	def PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer="d") :
 		''' Generate a drum pattern style '''
 		ppat = ""

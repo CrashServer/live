@@ -2,9 +2,11 @@ try:
 	import pickle
 	import os
 	import sys
-	import time
+	from time import *
 	import re
 	from random import choice
+	from threading import Thread
+
 except Exception as e:
 	print(e)
 
@@ -109,11 +111,9 @@ def attack(part="", active_voice=0):
 	''' Lanch an attack and copy it to the clipboard, attack voice '''
 	if type(part) != str:  ### so we can type attack(42) or attack(43)
 		part = str(part)
-
 	### next part
 	elif part == "":
 		part = lost_played[0]
-
 	if part in lost_played:
 		lost_played.remove(part)
 
@@ -130,7 +130,7 @@ def attack(part="", active_voice=0):
 		if active_voice == 1:
 			init_voice(horodatage)
 		global time_init
-		time_init = time.time()
+		time_init = time()
 		if clipcopyEnable:
 			clip.copy(figlet_format(blase) + "\n" + prompt + define_virus()+ "\n" + code_txt)
 		else:
@@ -156,8 +156,12 @@ def lost(total=0):
 	global lost_list
 	if total==0:
 		print(lost_played)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(lost_played))
 	elif total==1:
 		print(lost_list)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(lost_list))
 	elif total==2:
 		print("Reinit lost")
 		lost_played=lost_list[:]
@@ -173,6 +177,8 @@ def print_synth(synth=""):
 			files,sep,ext = p.partition('.')
 			synth_list.append(files)
 		print(sorted(synth_list))
+		if crashPanelSending:
+			crashpanel.sendOnce(str(sorted(synth_list)))
 	else:
 		path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", synth + ".scd")
 		with open(str(path), "r") as synth:
@@ -182,6 +188,8 @@ def print_synth(synth=""):
 		synthname = re.findall('SynthDef[.new]*[(\\\]*(.+?),',txt)
 		synthargs = re.findall('\{\|(.*)\|', txt)
 		print(str(synthname[0]), " : ", str(synthargs[0]))
+		if crashPanelSending:
+			crashpanel.sendOnce(str(synthname[0]) + " : " + str(synthargs[0]))
 
 def print_fx(fx=""):
 	''' Show the name and the args of a fx '''
@@ -193,12 +201,16 @@ def print_fx(fx=""):
 			files,sep,ext = p.partition('.')
 			fx_list.append(files)
 		print(sorted(fx_list))
+		if crashPanelSending:
+			crashpanel.sendOnce(str(sorted(fx_list)))
 	else:
 		path = os.path.join(FOXDOT_ROOT, "osc", "sceffects", fx + ".scd")
 		with open(str(path), "r") as fx:
 			fx = fx.readlines()
 		fx_txt = [line.strip() for line in fx if line != "\n"]
 		print(fx_txt[1])
+		if crashPanelSending:
+			crashpanel.sendOnce(str(fx_txt[1]))
 
 def print_sample(sample=""):
 	''' print description of samples or find the corresponding letter '''
@@ -220,9 +232,13 @@ def print_loops(loop=""):
 	''' print all available loops samples '''
 	if loop=="":
 		print(loops)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(loops))
 	else:
 		listloops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_LOOP, loop))])
 		print(listloops)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(listloops))
 
 def PMorse(text, point=1/4, tiret=3/4):
 	""" Convert a string to the value of point & tiret """
@@ -286,3 +302,60 @@ def porta(self, portDelay=0.5):
 		self.slidedelay = portDelay
 	else:
 		self.slide = 0
+
+### CrashPanel 
+
+if crashPanelSending:
+	class CrashPanel():
+		def __init__(self, ipZbdm="localhost", ipSvdk = None, port=2000):
+			self.ipZbdm = ipZbdm
+			self.ipSvdk = ipSvdk
+			self.port = port
+			self.bpmTime = 0.2
+			self.beatTime = 0.1
+			self.plyTime = 0.3
+			self.clientZbdm = OSCClient()
+			self.clientZbdm.connect((self.ipZbdm, self.port))
+			self.threadBpm = Thread(target = self.sendBpm)
+			self.threadBpm.daemon = True
+			self.threadBeat = Thread(target = self.sendBeat)
+			self.threadBpm.daemon = True
+			self.threadPlayer = Thread(target = self.sendPlayer)
+			self.threadPlayer.daemon = True
+			
+		def sendBpm(self):
+			''' send Clock.bpm to OSC server '''
+			while self.isrunning:
+				msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
+				self.clientZbdm.send(msg)
+				sleep(self.bpmTime)
+
+		def sendBeat(self):
+			''' send Clock.beat to OSC server '''
+			while self.isrunning:
+				msg = OSCMessage("/panel/beat", [Clock.beat])
+				self.clientZbdm.send(msg)
+				sleep(self.beatTime)    
+		
+		def sendPlayer(self):
+			''' send active player to OSC server '''
+			while self.isrunning:
+				msg = OSCMessage("/panel/player", [[str(p) for p in Clock.playing]])
+				self.clientZbdm.send(msg)
+				sleep(self.plyTime)    
+		
+		def sendOnce(self, txt):
+			msg = OSCMessage("/panel/help", [txt])
+			self.clientZbdm.send(msg)
+		
+		def stop(self):
+			self.isrunning = False
+		
+		def start(self):
+			self.isrunning = True
+			self.threadBpm.start()
+			self.threadBeat.start()
+			self.threadPlayer.start()
+
+	crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
+	crashpanel.start()

@@ -316,6 +316,8 @@ if crashPanelSending:
 			self.plyTime = 0.3
 			self.clientZbdm = OSCClient()
 			self.clientZbdm.connect((self.ipZbdm, self.port))
+			self.clientSvdk = OSCClient()
+			self.clientSvdk.connect((self.ipSvdk, self.port))
 			self.threadBpm = Thread(target = self.sendBpm)
 			self.threadBpm.daemon = True
 			self.threadBeat = Thread(target = self.sendBeat)
@@ -328,6 +330,7 @@ if crashPanelSending:
 			while self.isrunning:
 				msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
 				self.clientZbdm.send(msg)
+				self.clientSvdk.send(msg)
 				sleep(self.bpmTime)
 
 		def sendBeat(self):
@@ -335,6 +338,7 @@ if crashPanelSending:
 			while self.isrunning:
 				msg = OSCMessage("/panel/beat", [Clock.beat])
 				self.clientZbdm.send(msg)
+				self.clientSvdk.send(msg)
 				sleep(self.beatTime)    
 		
 		def sendPlayer(self):
@@ -342,11 +346,13 @@ if crashPanelSending:
 			while self.isrunning:
 				msg = OSCMessage("/panel/player", [[str(p) for p in Clock.playing]])
 				self.clientZbdm.send(msg)
+				self.clientSvdk.send(msg)
 				sleep(self.plyTime)    
 		
 		def sendOnce(self, txt):
 			msg = OSCMessage("/panel/help", [txt])
 			self.clientZbdm.send(msg)
+			self.clientSvdk.send(msg)
 		
 		def stop(self):
 			self.isrunning = False

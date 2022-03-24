@@ -7,8 +7,12 @@
 
 crash_path = "/home/zbdm/crashserver/UltimateSamples/"
 
-''' CrashOS & osc out '''
-oscIp = "192.168.0.10" #"192.168.0.40" # ip CrashOS
+''' CrashOS & osc out & CrashPanel '''
+ipZbdm = "localhost"
+ipSvdk = "192.168.0.40"
+crashPanelSending = True
+
+oscIp =  ipSvdk #"192.168.0.40" # ip CrashOS
 oscPort = 20000 # port Osc
 oscOut = True # CrashOS osc server message out enable
 
@@ -17,7 +21,6 @@ printOut = True # server msg log console output
 
 ''' Live config, startup live & arduino button '''
 startupLive = True	# load crashserver live funtion (attack,  lost, ...)
-#pusherLive = True   # activate/desactivate server with a push button (arduino usb)
 
 # Global
 maxPlayer = 8 # Number of max players playing together

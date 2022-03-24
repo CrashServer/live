@@ -8,7 +8,7 @@
 crash_path = "/home/zbdm/crashserver/UltimateSamples/"
 
 ''' CrashOS & osc out & CrashPanel '''
-ipZbdm = "localhost"
+ipZbdm = "192.168.0.42"
 ipSvdk = "192.168.0.40"
 crashPanelSending = True
 

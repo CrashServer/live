@@ -50,7 +50,8 @@
 from src.client import Client
 #from src.config import readin
 #from getpass import getpass
-from src.crashconfig import *
+#from src.crashconfig import *
+from crash_config import *
 
 # # Language and syntax
 

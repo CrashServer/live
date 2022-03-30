@@ -3,8 +3,6 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetFrameRate(5);
-    // init variable
-    //activeServer = false;
 
     // arduino
     // serial.setup("/dev/ttyACM0", 115200);
@@ -12,23 +10,15 @@ void ofApp::setup(){
 
     // OSC & UDP
     ofxUDPSettings settings;
-
-    ofxUDPManager manager;
-//    manager.SetNonBlocking("true");
-//    manager.
     settings.receiveOn(PORTUDP);
-
-    //settings.blocking = true;
-    udpConnection.SetNonBlocking(true);
+    settings.blocking = false;
+    //udpConnection.SetNonBlocking(true);
     udpConnection.Setup(settings);
 }
 
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
-
-
     getData();
    }
 
@@ -90,22 +80,6 @@ void ofApp::getData(){
               }
         else {serial.flush();}
     }
-
-
-//        if (message!=""){
-//            serial.writeByte('g'})
-//            if (*msgType == '#'){ // player 1
-//               serial.writeByte('g'); // send arduino
-//                }
-//            else if (*msgType == '!'){ // player 2
-//                serial.writeByte('o'); // send Arduino
-//                }
-//            else if (*msgType == '@'){ // server code
-//                serial.writeByte('r'); // send Arduino
-//                }
-//            }
-
-
 
 
 //-------------------------

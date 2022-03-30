@@ -3,7 +3,7 @@
 #include "ofMain.h"
 //#include "ofxOsc.h"
 #include "ofxNetwork.h"
-#include "ofTrueTypeFont.h"
+//#include "ofTrueTypeFont.h"
 //#include "ofxXmlSettings.h"
 
 #define PORTUDP 20000
@@ -37,7 +37,4 @@ public:
     // arduino
     ofSerial serial;
 
-    // Variable;
-    //bool activeServer;
-    //bool bArduinoActive;
 };

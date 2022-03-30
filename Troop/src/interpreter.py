@@ -38,7 +38,17 @@ import os, os.path
 import socket
 
 # Crashmod
-from .crashconfig import *
+import sys
+from pathlib import Path
+sys.path.append(str(Path('.').absolute().parent))
+
+try:
+    from crash_config import *
+except Exception as e:
+    print(e)
+
+
+#from .crashconfig import *
 if crashOsEnable:
     crashOS_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 

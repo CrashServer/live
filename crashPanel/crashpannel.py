@@ -6,7 +6,7 @@ from threading import *
 class ServerGui(Tk):
 	def __init__(self):
 		Tk.__init__(self)
-		self.ipPanel = "localhost"
+		self.ipPanel = "0.0.0.0"
 		self.width=200
 		self.height=1000
 		self.geometry(f"{self.width}x{self.height}")
@@ -35,6 +35,10 @@ class ServerGui(Tk):
 		self.labelBeat128 = Label(self.frameBeat, text ="0/128", padx=10, pady=0, font=("Inconsolatas", 15), relief=SUNKEN)
 		self.labelBeat128.pack(fill="both", expand="yes") ### Joke Aahahahah
 		
+		self.framePdj = LabelFrame(self, text="Le Plat du jour est :", padx=10, pady=0,  font=("Inconsolatas", 12))
+		self.framePdj.pack(fill="both", expand="yes")
+		self.labelPdj = Text(self.framePdj, wrap=WORD, height=3)
+		self.labelPdj.pack(fill=X, expand="yes")
 		
 		self.framePlayer = LabelFrame(self, text="Players : ", padx=10, pady=5,  font=("Inconsolatas", 12))
 		self.framePlayer.pack(fill="both", expand="yes")
@@ -59,17 +63,17 @@ class ServerGui(Tk):
 		self.thread.start()
 
 	def receiveBpm(self, address, tags, contents, source):
-	    self.oscBpm = contents[0]
-	    self.labelBpm.config(text=f"{self.oscBpm}")
+		self.oscBpm = contents[0]
+		self.labelBpm.config(text=f"{self.oscBpm}")
 
 	def receiveBeat(self, address, tags, contents, source):
-	    self.oscBeat = contents[0]
-	    self.labelBeat4.config(text=f"{int(self.oscBeat%4)+1}/4")
-	    self.labelBeat8.config(text=f"{int(self.oscBeat%8)+1}/8")
-	    self.labelBeat16.config(text=f"{int(self.oscBeat%16)+1}/16")
-	    self.labelBeat32.config(text=f"{int(self.oscBeat%32)+1}/32")
-	    self.labelBeat64.config(text=f"{int(self.oscBeat%64)+1}/64")
-	    self.labelBeat128.config(text=f"{int(self.oscBeat%128)+1}/128")
+		self.oscBeat = contents[0]
+		self.labelBeat4.config(text=f"{int(self.oscBeat%4)+1}/4")
+		self.labelBeat8.config(text=f"{int(self.oscBeat%8)+1}/8")
+		self.labelBeat16.config(text=f"{int(self.oscBeat%16)+1}/16")
+		self.labelBeat32.config(text=f"{int(self.oscBeat%32)+1}/32")
+		self.labelBeat64.config(text=f"{int(self.oscBeat%64)+1}/64")
+		self.labelBeat128.config(text=f"{int(self.oscBeat%128)+1}/128")
 
 	def receivePlayer(self, address, tags, contents, source):
 		self.oscPlayer = contents
@@ -78,16 +82,25 @@ class ServerGui(Tk):
 
 	def receiveHelp(self, address, tags, contents, source):
 		oscHelp = str(contents[0])
-		#self.labelHelp.config(text=oscHelp)
 		self.labelHelp.delete(1.0, END)
 		self.labelHelp.insert(END, oscHelp)
-	    
+
+	def receivePdj(self, address, tags, contents, source):
+		intitule = str(contents[0])
+		plat = str(contents[1])
+		self.framePdj.config(text=f'{intitule} du jour')
+		self.labelPdj.delete(1.0, END)
+		self.labelPdj.insert(END, plat, ("centered",))
+		self.labelPdj.tag_configure("centered", justify='center')
+		
+		
 	def start(self):
 		print("Server listening...")
 		self.oscserver.addMsgHandler("/panel/bpm", self.receiveBpm)
 		self.oscserver.addMsgHandler("/panel/beat", self.receiveBeat)
 		self.oscserver.addMsgHandler("/panel/player", self.receivePlayer)
 		self.oscserver.addMsgHandler("/panel/help", self.receiveHelp)
+		self.oscserver.addMsgHandler("/panel/pdj", self.receivePdj)
 		self.oscserver.serve_forever()
 
 if __name__ == "__main__":

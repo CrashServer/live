@@ -20,6 +20,11 @@ class ServerGui(Tk):
 		self.labelBpm = Label(self.frameBpm, text ="000", font=("Inconsolatas", 17))
 		self.labelBpm.pack()
 		
+		self.frameChrono = LabelFrame(self, text="Crashometre : ", padx=10, pady=0)
+		self.frameChrono.pack(fill="both", expand="yes")
+		self.labelChrono = Label(self.frameChrono, text ="00:00", font=("Inconsolatas", 15))
+		self.labelChrono.pack()
+
 		self.frameBeat = LabelFrame(self, text="Beat : ", padx=10, pady=5)
 		self.frameBeat.pack(fill="both", expand="yes")
 		self.labelBeat4 = Label(self.frameBeat, text ="0/4", padx=10, pady=0, font=("Inconsolatas", 15), relief=SUNKEN)
@@ -92,7 +97,14 @@ class ServerGui(Tk):
 		self.labelPdj.delete(1.0, END)
 		self.labelPdj.insert(END, plat, ("centered",))
 		self.labelPdj.tag_configure("centered", justify='center')
-		
+
+	def receiveChrono(self, address, tags, contents, source):
+		timeCrash = float(contents[0])
+		mins = timeCrash // 60
+		sec = timeCrash % 60
+		hours = mins // 60
+		mins = mins % 60
+		self.labelChrono.config(text=f"{int(hours):02d}:{int(mins):02d}:{int(sec):02d}")		
 		
 	def start(self):
 		print("Server listening...")
@@ -101,6 +113,7 @@ class ServerGui(Tk):
 		self.oscserver.addMsgHandler("/panel/player", self.receivePlayer)
 		self.oscserver.addMsgHandler("/panel/help", self.receiveHelp)
 		self.oscserver.addMsgHandler("/panel/pdj", self.receivePdj)
+		self.oscserver.addMsgHandler("/panel/chrono", self.receiveChrono)
 		self.oscserver.serve_forever()
 
 if __name__ == "__main__":

@@ -408,6 +408,7 @@ if crashPanelSending:
 			self.beatTime = 0.1 # time cycle send beat
 			self.plyTime = 0.3 # time cycle send player
 			self.pdjTime = 60 #time cycle send PlatduJour
+			self.chronoTime = 10 # time cycle send chrono
 			
 			self.clientZbdm = OSCClient()
 			self.clientZbdm.connect((self.ipZbdm, 2000))
@@ -416,6 +417,7 @@ if crashPanelSending:
 				self.clientSvdk.connect((self.ipSvdk, 2001))
 			
 			self.pdj = PlatduJour()
+			self.timeInit = time() 
 
 			self.threadBpm = Thread(target = self.sendBpm)
 			self.threadBpm.daemon = True
@@ -425,13 +427,15 @@ if crashPanelSending:
 			self.threadPlayer.daemon = True
 			self.threadPdj = Thread(target = self.sendPdj)
 			self.threadPdj.daemon = True
-			
+			self.threadChrono = Thread(target = self.sendChrono)
+			self.threadChrono.daemon = True
 
 		def sendOscMsg(self, msg):
-			try:
-				self.clientZbdm.send(msg)
-			except:
-				pass
+			if self.ipZbdm:
+				try:
+					self.clientZbdm.send(msg)
+				except:
+					pass
 			if self.ipSvdk:
 				try:
 					self.clientSvdk.send(msg)
@@ -479,6 +483,17 @@ if crashPanelSending:
 			except:
 				pass
 
+		def sendChrono(self):
+			''' send ChronoTime to OSC server '''
+			try:
+				while self.isrunning:
+					elapsedTime = time() - self.timeInit
+					msg = OSCMessage("/panel/chrono", [elapsedTime])
+					self.sendOscMsg(msg)
+					sleep(self.chronoTime)    
+			except:
+				pass
+
 		def sendOnce(self, txt):
 			''' send on txt msg to OSC '''
 			msg = OSCMessage("/panel/help", [txt])
@@ -493,10 +508,14 @@ if crashPanelSending:
 			self.threadBeat.start()
 			self.threadPlayer.start()
 			self.threadPdj.start()
+			self.threadChrono.start()
 	
 	def panelreset():
 		crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
 		crashpanel.start()
+
+	def chrono():
+		crashpanel.timeInit = time()
 
 	crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
 	crashpanel.start()

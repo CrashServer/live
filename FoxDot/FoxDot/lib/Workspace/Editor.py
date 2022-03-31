@@ -1707,6 +1707,11 @@ class workspace:
         """ Called on window close. Ends Clock thread process """
         execute("_Clock.stop()")
         execute("Server.quit()")
+        ### crash mod
+        try: 
+            execute("crashpanel.stop()")
+        except:
+            pass
         return
 
     def releaseNodes(self, event=None):

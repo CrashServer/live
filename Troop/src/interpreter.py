@@ -1,9 +1,9 @@
 """
-    Interpreter
-    -----------
+Interpreter
+-----------
 
-    Runs a block of FoxDot code. Designed to be overloaded
-    for other language communication
+Runs a block of FoxDot code. Designed to be overloaded
+for other language communication
 
 """
 from __future__ import absolute_import
@@ -393,6 +393,11 @@ class FoxDotInterpreter(BuiltinInterpreter):
 
     def kill(self):
         self.evaluate(self.stop_sound())
+        ## crash mod
+        try:
+            self.evaluate("crashpanel.stop()")
+        except:
+            pass
         Interpreter.kill(self)
         return
 

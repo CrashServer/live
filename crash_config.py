@@ -2,7 +2,7 @@
 ''' Global config '''
 crash_path = "/home/zbdm/crashserver/UltimateSamples/"
 ipZbdm = "localhost"
-ipSvdk = None #"192.168.0.40"
+ipSvdk = "192.168.0.10" #"192.168.0.40"
 
 # Who is Troop Server & what is your name
 crashTroopHost=ipZbdm # Troop server IP
@@ -14,6 +14,8 @@ crashOSIp = ipZbdm   # Crash OS IP
 ''' CrashOS & osc out & CrashPanel '''
 crashPanelSending = True  # enable output to CrashPanel
 crashOsEnable = True  # enable output to crashos
+
+crashSendMode = "osc" # enable "osc" or "udp" sending
 
 #### Not so important #################
 

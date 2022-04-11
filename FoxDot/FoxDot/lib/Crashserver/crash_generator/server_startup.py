@@ -38,11 +38,15 @@ except Exception as e:
 serverActive = False
 # osc receive state
 if crashOsEnable:
-	# Osc sender
+	# Osc/udp sender
 	try:
-		crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
-	except:
-		print("config UDP problem")
+		if crashSendMode == "udp":
+			crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
+		if crashSendMode == "osc":
+			crashFoxDot_socket = OSCClient()
+			crashFoxDot_socket.connect((crashOSIp, crashOSPort))
+	except Exception as err:
+		print(f"config UDP or OSC problem : {err}")
 
 class runServer():
 	''' Run the server with runserver.start() and generate randomly players'''
@@ -339,7 +343,7 @@ def change_synth_attr(player=None):
 			player.__setattr__('sample_sus',eval(genSus))
 			sendOut(f"{player}.sample_sus={genSus}")
 	except Exception as err:
-		print("change_synth_attr problem : " + err)
+		print(f"change_synth_attr problem : {err}")
 
 def add_event():
 	try:
@@ -353,7 +357,10 @@ def sendOut(msg=""):
 	''' send all generated text to output : console, osc '''
 	try:
 		if crashOsEnable:
-			sendOsc(msg)
+			if crashSendMode == "udp":
+				sendUdp(msg)
+			if crashSendMode == "osc":
+				sendOsc(msg)
 		if printOut:
 			if startupLive:
 				msg = 'SERVER: ' + msg
@@ -361,11 +368,19 @@ def sendOut(msg=""):
 	except Exception as err:
 		print("sendOut problem : " + err)
 
-def sendOsc(msg=""):
+def sendUdp(msg=""):
 	''' Send osc text to osc ip '''
 	try:
 		byte_message = bytes("@" + msg, "utf-8")
 		crashFoxDot_socket.sendto(byte_message, (crashOSIp, crashOSPort))
+	except:
+		pass
+
+def sendOsc(msg=""):
+	''' Send osc text to osc ip '''
+	try:
+		byte_message = OSCMessage("/serverCode", msg)
+		crashFoxDot_socket.send(byte_message)
 	except:
 		pass
 

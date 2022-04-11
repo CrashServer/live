@@ -242,9 +242,9 @@ fx.add("env = EnvGen.ar(Env.new(levels: [0,1,0], times:[sample_atk, sample_sus],
 fx.add("osc = osc*env")
 fx.save()
 
-fx = FxList.new("a", "adsr", {"a":0, "r":1, "sus": 1}, order=2)
+fx = FxList.new("a", "adsr", {"a":0, "r":1, "sus": 1, "ac": 0, "rc": 0}, order=2)
 fx.add_var("env")
-fx.add("env = EnvGen.ar(Env.new(levels: [0,1,1,0], times:[a*sus, sus - a*sus - r*sus, r*sus], curve: 'lin'))")
+fx.add("env = EnvGen.ar(Env.new(levels: [0,1,1,0], times:[a*sus, max((a*sus + r*sus), sus - (a*sus + r*sus)), r*sus], curve:[ac,0,rc]))")
 fx.add("osc = osc*env")
 fx.save()
 

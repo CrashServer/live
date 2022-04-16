@@ -10,11 +10,10 @@ try:
 except Exception as e:
 	print(e)
 
-# ASCII 
+#### ASCII 
 asciiEnable = False
 clipcopyEnable = False    
 try:
-	import pyperclip as clip # copy to clipboard
 	from pyfiglet import figlet_format, FigletFont # ASCII GENERATOR
 	cool_ascii = [1,6,8,11,13,15,17,18,19,21,22,24,26,30,31,32,33,34,35,37,38,43,44,45,46,47,48,50,59,62,64,65,68,69,77,79,81,82,83,84,85,88,89,96,98,103,104,105,107,111,113,114,117,119,123,124,131,135,143,150,151,152,159,187,190,193,19,201,203,217,225,227,230,240,243,244,245,251,273,275,280,308,325,329,347,363,385,410]
 	fig_font = FigletFont()
@@ -25,48 +24,49 @@ try:
 	fig_skip += ['dosrebel', 'konto', 'kontoslant']
 	font_list = [x for x in fig_fonts_list if x not in fig_skip]
 	asciiEnable = True
-	clipcopyEnable = True
 except:
 	asciiEnable = False
+	print("Please install pyfiglet")
+
+#### copy to clipboard
+try:
+	import pyperclip as clip 
+	clipcopyEnable = True
+except:
 	clipcopyEnable = False
-	print("Please install pyperclip & pyfiglet")
+	print("Please install pyperclip")
 
 #########################
 ### SERVER CONFIG     ###
 #########################
 
-### Read the config file data
-serverfile = os.path.join(FOXDOT_ROOT, "lib", "Crashserver", "crash_gui", "server_data.cs")
-lostfile = os.path.join(FOXDOT_ROOT, "lib", "Crashserver", "crash_gui", "lostfile.cs")
+class StorageAttack:
+	''' get attack from files and put in a dict, print / clipboardcopy'''
+	def __init__(self):
+		self.codepath = os.path.join(FOXDOT_ROOT, "lib", "Crashserver", "codeAttack",)
+		self.attackDict = {}
+		self.compileAttack()
+	def compileAttack(self):
+		for filename in os.listdir(self.codepath):
+			with open(os.path.join(self.codepath, filename)) as f:
+				content = f.readlines()
+				attackName = content[0].replace("#", "").replace("\n", "").strip()
+				self.attackDict[attackName] = ''.join(content[1:])
+	def getAttack(self, attackName, printOut=0):
+		exten = ''.join(choice(string.ascii_lowercase) for x in range(3))
+		prompt = f"##### attack@{attackName}.{exten}:~$ #####"
+		if printOut != 0:
+			print(prompt)
+			print(self.attackDict[attackName])
+		if clipcopyEnable:
+			clip.copy(prompt + '\n' + self.attackDict[attackName])
+	def lost(self):
+		attackKeys = list(self.attackDict.keys())
+		print(attackKeys)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(attackKeys))
 
-with open(serverfile, "rb") as fichier:
-	mon_depickler = pickle.Unpickler(fichier)
-	code_server = mon_depickler.load()
-
-with open(lostfile, "rb") as lost:
-	lost_depickler = pickle.Unpickler(lost)
-	lost_list = lost_depickler.load()
-
-lost_played = lost_list[:]
-server_data = code_server["server_data"]
-attack_data = code_server["attack_data"]
-
-### Lieu du Server
-lieu = str(server_data["lieu"])
-### Longueur mesure d'intro
-tmps = int(server_data["tmps"])
-### Language
-lang = str(server_data["lang"])
-if sys.platform.startswith("win") and lang.startswith("english"):
-	lang = "english"
-voice = int(server_data["voice"])
-### BPM intro
-bpm_intro = int(server_data["bpm_intro"])
-### Scale intro
-scale_intro = str(server_data["scale_intro"])
-### Root intro
-root_intro = str(server_data["root_intro"])
-horodatage = int(server_data["horo"])
+storageAttack = StorageAttack()
 
 ### sample description ###
 sample_description_path = os.path.join(crash_path, "description.cs")
@@ -94,78 +94,19 @@ def connect():
 	''' Full reset and set bpm, root, sos & video player '''
 	Master().reset()
 	Clock.set_time(0)
-	lost(2)
-	print(attack_data["connect"][1].strip())
-	if "connect" in lost_played:
-		lost_played.remove("connect")
-	Clock.bpm = bpm_intro
-	Scale.default = scale_intro
-	Root.default = root_intro
-	i3 >> sos(dur=8, lpf=linvar([60,4800],[tmps*1.5, tmps*3], start=now), hpf=expvar([0,500],[tmps*6, tmps*2]), amplify=0.5)
+	storageAttack.lost()
+	Clock.bpm = 48
+	Scale.default = "minor"
+	Root.default = "E"
+	i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)
 	if clipcopyEnable:
-		clip.copy(figlet_format(attack_data["connect"][0].strip(), font=fig_fonts_list[cool_ascii[51]]) + "\n" + attack_data["connect"][2].strip() + "\n")
-	else:
-		print(attack_data["connect"][2].strip())
+		clip.copy("i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)")
+	
+def attack(attackName, prntOut=0):
+	storageAttack.getAttack(attackName, prntOut)
 
-def attack(part="", active_voice=0):
-	''' Lanch an attack and copy it to the clipboard, attack voice '''
-	if type(part) != str:  ### so we can type attack(42) or attack(43)
-		part = str(part)
-	### next part
-	elif part == "":
-		part = lost_played[0]
-	if part in lost_played:
-		lost_played.remove(part)
-
-	blase = attack_data[part][0].strip()
-	voice_txt = attack_data[part][1].strip()
-	code_txt = attack_data[part][2].strip()
-
-	### Define prompt
-	exten = ''.join(choice(string.ascii_lowercase) for x in range(3))
-	prompt = "### attack@{}.{}:~$ ".format(part, exten)
-
-	### Init server
-	if part == "init":
-		if active_voice == 1:
-			init_voice(horodatage)
-		global time_init
-		time_init = time()
-		if clipcopyEnable:
-			clip.copy(figlet_format(blase) + "\n" + prompt + define_virus()+ "\n" + code_txt)
-		else:
-			print(code_txt)
-
-	### Select Part and generate Ascii text
-	else:
-		if clipcopyEnable:
-			clip.copy((figlet_format(blase, font=fig_fonts_list[choice(cool_ascii)]) if blase != None else "") + "\n" + prompt + define_virus()+ "\n" + (code_txt if code_txt is not None else ""))
-		else:
-			print((code_txt if code_txt is not None else ""))
-
-	### Generate Voice
-	if voice_txt != None:   ### Voice generator
-		if voice_txt != "" and active_voice==1:
-			voice_lpf(400)
-			Voice(voice_txt, rate=rate_voice, amp=voiceamp, pitch=pitch + randint(-10,50), lang=lang, voice=voice)
-			Clock.future(calc_dur_voice(voice_txt), lambda: voice_lpf(0))
-
-def lost(total=0):
-	''' Print the part for live show'''
-	global lost_played
-	global lost_list
-	if total==0:
-		print(lost_played)
-		if crashPanelSending:
-			crashpanel.sendOnce(str(lost_played))
-	elif total==1:
-		print(lost_list)
-		if crashPanelSending:
-			crashpanel.sendOnce(str(lost_list))
-	elif total==2:
-		print("Reinit lost")
-		lost_played=lost_list[:]
-		print(lost_played)
+def lost():
+	storageAttack.lost()
 
 def print_synth(synth=""):
 	''' Show the name and the args of a synth '''
@@ -193,24 +134,14 @@ def print_synth(synth=""):
 
 def print_fx(fx=""):
 	''' Show the name and the args of a fx '''
-	path = os.path.join(FOXDOT_ROOT,"osc", "sceffects", "")
 	if fx == "":
-		dir_list = os.listdir(path)
-		fx_list = []
-		for p in dir_list:
-			files,sep,ext = p.partition('.')
-			fx_list.append(files)
-		print(sorted(fx_list))
+		print(sorted(FxList.keys()))
 		if crashPanelSending:
-			crashpanel.sendOnce(str(sorted(fx_list)))
+			crashpanel.sendOnce(str(sorted(FxList)))
 	else:
-		path = os.path.join(FOXDOT_ROOT, "osc", "sceffects", fx + ".scd")
-		with open(str(path), "r") as fx:
-			fx = fx.readlines()
-		fx_txt = [line.strip() for line in fx if line != "\n"]
-		print(fx_txt[1])
+		print(FxList[fx])
 		if crashPanelSending:
-			crashpanel.sendOnce(str(fx_txt[1]))
+			crashpanel.sendOnce(str(FxList[fx]))
 
 def print_sample(sample=""):
 	''' print description of samples or find the corresponding letter '''
@@ -269,19 +200,18 @@ def PMorse(text, point=1/4, tiret=3/4):
 	morse[-1] += rest(2*point)
 	return morse
 
-virus_method = ["Injecting... ", "Loading... ", "Init: ", "Dumping: ", "Hacking: ", "Run.."]
-virus_name = ["MyDoom", "Brain", "Zeus", "Sality", "Virut", "Ramnit", "Blaster", "Conficker",\
-"Worm", "TDSS TDL 4"]
-virus_access = ["Kernel", "MBR", "Kernel", "bsdriver.sys", "Hardware", "Security", ]
-virus_protocole = ["Spambot", "PWS", "Stealer", "Proxy", "BackDoor", "KeyLogger", "InfoStealer", "Cryto",\
-"Autoruns", "Rootkit", "Trojan", "Rogue", "Scareware", "Script", "D.O.S." ]
-virus_status = [" | [###.......] % Completed | ###",  "- Lost: 78% - ###", " @@88@@", " /Please Wait...", " |***--------| ", " , ping=3ms", "!WARNING BUFFER(#4F,5E) - VIOLATION ACCESS"]
+# virus_method = ["Injecting... ", "Loading... ", "Init: ", "Dumping: ", "Hacking: ", "Run.."]
+# virus_name = ["MyDoom", "Brain", "Zeus", "Sality", "Virut", "Ramnit", "Blaster", "Conficker",\
+# "Worm", "TDSS TDL 4"]
+# virus_access = ["Kernel", "MBR", "Kernel", "bsdriver.sys", "Hardware", "Security", ]
+# virus_protocole = ["Spambot", "PWS", "Stealer", "Proxy", "BackDoor", "KeyLogger", "InfoStealer", "Cryto",\
+# "Autoruns", "Rootkit", "Trojan", "Rogue", "Scareware", "Script", "D.O.S." ]
+# virus_status = [" | [###.......] % Completed | ###",  "- Lost: 78% - ###", " @@88@@", " /Please Wait...", " |***--------| ", " , ping=3ms", "!WARNING BUFFER(#4F,5E) - VIOLATION ACCESS"]
 
-
-def define_virus():
-	### Generate a random virus text
-	virus = "###" + choice(virus_method) + choice(virus_name) + "." + choice(virus_access) + "." + choice(virus_protocole) + choice(virus_status)  
-	return virus
+# def define_virus():
+# 	### Generate a random virus text
+# 	virus = "###" + choice(virus_method) + choice(virus_name) + "." + choice(virus_access) + "." + choice(virus_protocole) + choice(virus_status)  
+# 	return virus
 
 @player_method
 def gtr(self, strings=1):
@@ -414,7 +344,7 @@ if crashPanelSending:
 			self.clientZbdm.connect((self.ipZbdm, 2000))
 			if self.ipSvdk:
 				self.clientSvdk = OSCClient()
-				self.clientSvdk.connect((self.ipSvdk, 2001))
+				self.clientSvdk.connect((self.ipSvdk, 2000))
 			
 			self.pdj = PlatduJour()
 			self.timeInit = time() 

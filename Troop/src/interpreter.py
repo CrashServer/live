@@ -53,10 +53,10 @@ if crashOsEnable:
     # Osc/udp sender
     try:
         if crashSendMode == "udp":
-            crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
+            crashTroop_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
         if crashSendMode == "osc":
-            crashFoxDot_socket = OSC.OSCClient()
-            crashFoxDot_socket.connect((crashOSIp, crashOSPort))
+            crashTroop_socket = OSC.OSCClient()
+            crashTroop_socket.connect((crashOSIp, crashOSPort))
     except Exception as e:
         print(f"config UDP or OSC problem : {e}")
 
@@ -157,14 +157,14 @@ class DummyInterpreter:
                 for i in range(0,len(string)):
                     if crashOsEnable:
                         #if string[0][0].isalpha() and string[0][1].isdigit():
-                        if crashSendMode == "upd":
+                        if crashSendMode == "udp":
                             if name == "Crash":
                                 byte_message = bytes("#" + string[i], "utf-8")
                             elif name == "Server":
                                 byte_message = bytes("!" + string[i], "utf-8")
                             else:
                                 byte_message = ""
-                            crashOS_socket.sendto(byte_message, (crashOSIp, crashOSPort))
+                            crashTroop_socket.sendto(byte_message, (crashOSIp, crashOSPort))
                         if crashSendMode == "osc":
                             if name == "Crash":
                                 byte_message = OSC.OSCMessage("/svdkCode", string[i])
@@ -172,9 +172,9 @@ class DummyInterpreter:
                                 byte_message = OSC.OSCMessage("/zbdmCode", string[i])
                             else:
                                 byte_message = ""
-                            crashFoxDot_socket.send(byte_message)
-            except:
-                print("Send udp error")
+                            crashTroop_socket.send(byte_message)
+            except Exception as err:
+                print("Send udp error : ", err)
             #
 
             # Use ... for the remainder  of the  lines

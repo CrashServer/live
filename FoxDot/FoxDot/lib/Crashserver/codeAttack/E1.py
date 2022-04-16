@@ -1,0 +1,10 @@
+# E1
+e1 >> play("K ", hpf=0)
+e2 >> play("--")
+e3 >> loop("fill16", dur=16, sample=4, hpf=400, amp=[1, 1, 1, 0])
+e4 >> loop("nshits16", dur=16, sample=0, hpf=600, amp=[0, 0, 0, 1])
+e5 >> loop("nshits16", dur=16, sample=3, hpf=600, amp=[0, 0, 0, 0, 0, 0, 0, 1])
+e6 >> play("x ", dur=8, lpf=400, room2=1, damp2=0, revus=8, shape=0.1, echo=0.05, echotime=8)
+e7 >> play("a ", sample=4, shift=(0, 0.5), feed=0.2, tremolo=4, dur=8, delay=4, lpf=1200, room2=1, damp2=0, revus=8, shape=0.1, amp=0.2, spf=400, spfslide=4, spfend=3200, echo=(0.025,0.25), echotime=8)
+e8 >> play("p.", dur=1/2, lpf=1400, room2=0.2, damp2=1, sample=0, revus=8, shape=0.1, echo=[0.05, 0.25], echotime=x3.dur).sometimes("stutter", 2, rate=2, amp=1.5, dur=1/4)
+e9 >> play("p.", dur=1/4, lpf=linvar([800, 1400], 32), sample=0, room2=0.1, damp2=0, revus=2, shape=0, amp=[0.5, 0.7], echo=[0.05, 0.25], echotime=x3.dur).often("stutter", 2, rate=2, amp=1.5, dur=1/2)

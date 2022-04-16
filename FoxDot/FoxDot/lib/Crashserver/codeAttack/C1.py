@@ -1,0 +1,11 @@
+# C1
+c1 >> loop("core16", dur=16, sample=1, cut=1, lpf=0)
+c2 >> loop("xvermin16", dur=16, sample=2).unison(2)
+c3 >> loop("xbassphase16", dur=16, sample=2).unison(2)
+c4 >> loop("nspad16", dur=16, sample=1, amp=0.5)
+c5 >> loop("electrodrum32", dur=32, sample=0, lpf=0)
+c6 >> loop("break32", dur=32, sample=2, lpf=0)
+c7 >> loop("break32", dur=1/4, cut=0.1, sample=PRand(8), pan=PWhite(0.1, 0.5), lpf=0)
+c8 >> play("w", dur=4, echo=2, sample=6, amp=1)
+c9 >> loop("drum4", dur=4, sample=1, amp=[1, 0])
+c0 >> loop("drum4", dur=4, sample=0, amp=[0, 1])

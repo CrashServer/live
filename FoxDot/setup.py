@@ -34,7 +34,8 @@ setup(name='FoxDot',
                 'FoxDot.lib.Crashserver',
                 'FoxDot.lib.Crashserver.speech',
                 'FoxDot.lib.Crashserver.crash_generator',
-                'FoxDot.lib.Crashserver.crash_gui'
+                'FoxDot.lib.Crashserver.crash_gui',
+                'FoxDot.lib.Crashserver.codeAttack'             
                 ],
       long_description=long_description,
       long_description_content_type="text/markdown",

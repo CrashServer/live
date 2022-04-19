@@ -48,10 +48,11 @@ class StorageAttack:
 		self.compileAttack()
 	def compileAttack(self):
 		for filename in os.listdir(self.codepath):
-			with open(os.path.join(self.codepath, filename)) as f:
-				content = f.readlines()
-				attackName = content[0].replace("#", "").replace("\n", "").strip()
-				self.attackDict[attackName] = ''.join(content[1:])
+			if filename.endswith(('.py')):
+				with open(os.path.join(self.codepath, filename)) as f:
+					content = f.readlines()
+					attackName = content[0].replace("#", "").replace("\n", "").strip()
+					self.attackDict[attackName] = ''.join(content[1:])
 	def getAttack(self, attackName, printOut=0):
 		exten = ''.join(choice(string.ascii_lowercase) for x in range(3))
 		prompt = f"##### attack@{attackName}.{exten}:~$ #####"

@@ -158,17 +158,17 @@ class DummyInterpreter:
                     if crashOsEnable:
                         #if string[0][0].isalpha() and string[0][1].isdigit():
                         if crashSendMode == "udp":
-                            if name == "Crash":
+                            if name == "Svdk":
                                 byte_message = bytes("#" + string[i], "utf-8")
-                            elif name == "Server":
+                            elif name == "Zbdm":
                                 byte_message = bytes("!" + string[i], "utf-8")
                             else:
                                 byte_message = ""
                             crashTroop_socket.sendto(byte_message, (crashOSIp, crashOSPort))
                         if crashSendMode == "osc":
-                            if name == "Crash":
+                            if name == "Svdk":
                                 byte_message = OSC.OSCMessage("/svdkCode", string[i])
-                            elif name == "Server":
+                            elif name == "Zbdm":
                                 byte_message = OSC.OSCMessage("/zbdmCode", string[i])
                             else:
                                 byte_message = ""

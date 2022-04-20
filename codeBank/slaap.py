@@ -1,5 +1,4 @@
 # slaap
-Samples.addPath("/mnt/70225B03225ACDAA/CRASH SERVER/Production/Slaap - remix/zbdm version/")
 Root.default="C"
 Scale.default="minor"
 Clock.bpm=176

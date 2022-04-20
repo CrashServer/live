@@ -6,7 +6,7 @@ try:
 	import re
 	from random import choice
 	from threading import Thread
-
+	from pathlib import Path
 except Exception as e:
 	print(e)
 
@@ -43,7 +43,7 @@ except:
 class StorageAttack:
 	''' get attack from files and put in a dict, print / clipboardcopy'''
 	def __init__(self):
-		self.codepath = os.path.join(FOXDOT_ROOT, "lib", "Crashserver", "codeAttack",)
+		self.codepath = os.path.join(Path('.').absolute().parent, 'codeBank')
 		self.attackDict = {}
 		self.compileAttack()
 	def compileAttack(self):

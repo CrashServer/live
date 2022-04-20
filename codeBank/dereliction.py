@@ -1,4 +1,4 @@
-# suddation
+# dereliction
 a = var(PWhite(2, 4), 4)
 b = var(PWhite(2, 4), 4)
 c = linvar([a, b], 2)

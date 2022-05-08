@@ -300,7 +300,7 @@ if __name__ != "__main__":
 
 	def linbpm(endBpm=170, durBpm=128):
 		''' use with Clock.bpm = linbpm(220, 12) to change bpm from current bpm to target in x beats'''
-		Clock.bpm = linvar([Clock.bpm,endBpm],[durBpm,inf], start=now)
+		Clock.bpm = linvar([int(Clock.bpm),endBpm],[durBpm,inf], start=now)
 
 	def PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer="d") :
 		''' Generate a drum pattern style '''

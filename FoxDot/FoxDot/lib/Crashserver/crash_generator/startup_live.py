@@ -62,7 +62,7 @@ class StorageAttack:
 		if clipcopyEnable:
 			clip.copy(prompt + '\n' + self.attackDict[attackName])
 	def lost(self):
-		attackKeys = list(self.attackDict.keys())
+		attackKeys = list(sorted(self.attackDict.keys()))
 		print(attackKeys)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(attackKeys))

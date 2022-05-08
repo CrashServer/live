@@ -1,9 +1,9 @@
 """
-    Interpreter
-    -----------
+Interpreter
+-----------
 
-    Runs a block of FoxDot code. Designed to be overloaded
-    for other language communication
+Runs a block of FoxDot code. Designed to be overloaded
+for other language communication
 
 """
 from __future__ import absolute_import
@@ -35,9 +35,30 @@ import threading
 import shlex
 import tempfile
 import os, os.path
+import socket
 
 # Crashmod
-from .crashconfig import *
+import sys
+from pathlib import Path
+sys.path.append(str(Path('.').absolute().parent))
+
+try:
+    from crash_config import *
+except Exception as e:
+    print(e)
+
+
+#from .crashconfig import *
+if crashOsEnable:
+    # Osc/udp sender
+    try:
+        if crashSendMode == "udp":
+            crashTroop_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
+        if crashSendMode == "osc":
+            crashTroop_socket = OSC.OSCClient()
+            crashTroop_socket.connect((crashOSIp, crashOSPort))
+    except Exception as e:
+        print(f"config UDP or OSC problem : {e}")
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
@@ -48,9 +69,7 @@ def compile_regex(kw):
 
 SEPARATOR = ":"; _ = " %s " % SEPARATOR
 
-# crash MOD
-codeSend = OSC.OSCClient()
-codeSend.connect((crashOSIp, crashOSPort))
+
 
 def colour_format(text, colour):
     return '<colour="{}">{}</colour>'.format(colour, text)
@@ -135,12 +154,27 @@ class DummyInterpreter:
             
             # crash mod
             try:
-                oscCode = OSC.OSCMessage("/codeMsg")
-                oscCode.append(name)
-                oscCode.append(string[0])
-                codeSend.send(oscCode)
-            except:
-                print("osc error")
+                for i in range(0,len(string)):
+                    if crashOsEnable:
+                        #if string[0][0].isalpha() and string[0][1].isdigit():
+                        if crashSendMode == "udp":
+                            if name == "Svdk":
+                                byte_message = bytes("#" + string[i], "utf-8")
+                            elif name == "Zbdm":
+                                byte_message = bytes("!" + string[i], "utf-8")
+                            else:
+                                byte_message = ""
+                            crashTroop_socket.sendto(byte_message, (crashOSIp, crashOSPort))
+                        if crashSendMode == "osc":
+                            if name == "Svdk":
+                                byte_message = OSC.OSCMessage("/svdkCode", string[i])
+                            elif name == "Zbdm":
+                                byte_message = OSC.OSCMessage("/zbdmCode", string[i])
+                            else:
+                                byte_message = ""
+                            crashTroop_socket.send(byte_message)
+            except Exception as err:
+                print("Send udp error : ", err)
             #
 
             # Use ... for the remainder  of the  lines
@@ -376,6 +410,11 @@ class FoxDotInterpreter(BuiltinInterpreter):
 
     def kill(self):
         self.evaluate(self.stop_sound())
+        ## crash mod
+        try:
+            self.evaluate("crashpanel.stop()")
+        except:
+            pass
         Interpreter.kill(self)
         return
 

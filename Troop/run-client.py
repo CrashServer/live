@@ -23,18 +23,18 @@
         `--mode` flag.
 """
 
-# import argparse
+import argparse
 # from src.config import langnames
 
-# parser = argparse.ArgumentParser(
-#     prog="Troop Client",
-#     description="Collaborative interface for Live Coding")
+parser = argparse.ArgumentParser(
+     prog="Troop Client",
+     description="Collaborative interface for Live Coding")
 
 # parser.add_argument('-i', '--cli', action='store_true', help="Use the command line to enter connection info")
 # parser.add_argument('-p', '--public', action='store_true', help="Connect to public Troop server")
-# parser.add_argument('-H', '--host', action='store', help="IP Address of the machine running the Troop server")
-# parser.add_argument('-P', '--port', action='store', help="Port for Troop server (default 57890)")
-# parser.add_argument('-n', '--name', action='store', help="Display name to use")
+parser.add_argument('-H', '--host', action='store', help="IP Address of the machine running the Troop server")
+parser.add_argument('-P', '--port', action='store', help="Port for Troop server (default 57890)")
+parser.add_argument('-n', '--name', action='store', help="Display name to use")
 # parser.add_argument('-m', '--mode', action='store', default='foxdot',
 #                     help='Name of live coding language ({}) or a valid executable'.format(', '.join(langnames.keys())))
 # parser.add_argument('-s', '--syntax', action='store',
@@ -43,14 +43,15 @@
 # parser.add_argument('-c', '--config', action='store_true', help="Load connection info from 'client.cfg'")
 # parser.add_argument('--hub', help="Connect to a named Troop server running on the Troop Hub Service")
 
-# args = parser.parse_args()
+args = parser.parse_args()
 
 # Set up client
 
 from src.client import Client
 #from src.config import readin
 #from getpass import getpass
-from src.crashconfig import *
+#from src.crashconfig import *
+from crash_config import *
 
 # # Language and syntax
 
@@ -83,13 +84,13 @@ options = {}
 
 # else:
 
-#     if args.host:
+    # if args.host:
 
-#         options['host'] = args.host
+    #     options['host'] = args.host
 
-#     if args.port:
+    # if args.port:
 
-#         options['port'] = args.port
+    #     options['port'] = args.port
 
 # # User name
 
@@ -144,10 +145,20 @@ options = {}
 
 #     options['args'] = args.args
 
-options['host'] = crashHost
-options['port'] = crashPort
-options['name'] = crashName
-options['password'] = crashPassword
+if args.host:
+    options['host'] = args.host
+else:
+    options['host'] = crashTroopHost
+if args.port:
+    options['port'] = args.port
+else:
+    options['port'] = crashTroopPort
+if args.name:
+    options['name'] = args.name
+else:
+    options['name'] = crashTroopName
+
+options['password'] = crashTroopPassword
 options['get_info'] = False
 
 myClient = Client(**options)

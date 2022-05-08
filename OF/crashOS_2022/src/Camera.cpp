@@ -1,0 +1,41 @@
+#include "Camera.h"
+
+Camera::Camera(){
+}
+
+
+void Camera::setup(ofColor uiColor){
+    width = ofGetWidth();
+    height = ofGetHeight();
+    parameters.setName("webcam");
+    parameters.add(pos.set("Webcam Box", glm::vec3(1480, 220, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+    parameters.add(size.set("Webcam size", glm::vec2(320, 240), glm::vec2(0, 0), glm::vec2(width, height)));
+    webcam.setup(size->x,size->y);
+    camFbo.allocate(size->x, size->y, GL_RGBA);
+    this->uiColor = uiColor;
+}
+
+
+void Camera::update(){
+    webcam.update();
+}
+
+void Camera::draw(){
+    ofPushMatrix();
+    ofPushStyle();
+    ofDisableDepthTest();
+    ofDisableAlphaBlending();
+    ofDisableLighting();
+    ofDisableNormalizedTexCoords();
+        camFbo.begin();
+            ofSetColor(ofColor::paleGreen);
+            webcam.draw(0,0, size->x, size->y);
+        //webcam.draw(webcamPos.x,webcamPos.y, webcamSize.x,webcamSize.y);
+        //ofApp::windowDraw(webcamPos, webcamSize, uiColor);
+        camFbo.end();
+        cameraWin.drawWin(pos, size, this->uiColor);
+        camFbo.draw(pos->x,pos->y, size->x, size->y);
+
+    ofPopStyle();
+    ofPopMatrix();
+}

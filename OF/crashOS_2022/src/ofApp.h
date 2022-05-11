@@ -16,6 +16,7 @@
 #include "Getdata.h"
 #include "glitcher.h"
 #include "drawwindows.h"
+#include "render.h"
 
 class ofApp : public ofBaseApp{
 
@@ -36,11 +37,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-        //void getData();
-//        void dataSetup();
-//        void dataUpdate();
-//        string insertNewlines(string in, const size_t every_n);
-
         void bangUpdate(char playerID);
 		void bang(char playerID);
 		void bigBang();
@@ -56,6 +52,8 @@ class ofApp : public ofBaseApp{
         void sphereMapDraw();
         void sphereMapSetup();
 
+        void changeColorUi(ofColor&);
+
         // Post processingideoplaye
         void postprocSetup();
 
@@ -64,29 +62,24 @@ class ofApp : public ofBaseApp{
         ofParameter<int> cpuStress; // stress vritualy the cpu
         ofParameter<glm::vec2> webcamSize; // logSize, scoreSize, targetWindowSize,;
         ofParameter<glm::vec3> webcamPos;// targetWindowPos, logPos, scorePos;
-        ofParameter<int> currentModelSubAttack;
-        ofParameter<int> intMeshSlider;
-        ofParameter<int> pillarMeshSlider;
-        ofParameter<int> extMeshSlider;
-        ofParameter<int> midMeshSlider;
-        ofParameter<int> targetMeshSlider;
+//        ofParameter<int> currentModelSubAttack;
+//        ofParameter<int> intMeshSlider;
+//        ofParameter<int> pillarMeshSlider;
+//        ofParameter<int> extMeshSlider;
+//        ofParameter<int> midMeshSlider;
+//        ofParameter<int> targetMeshSlider;
         ofParameter<int> scene;
         ofParameter<int> integrityIncr;
-		bool showGui;
+        ofParameter<float> audioThresh;
+        ofParameter<ofColor> colorPicker;
+        //ofEventListener listener;
+        bool showGui;
 
         ofParameterGroup parameters;
 
 		/// UI
-        //ofImage alertCpu;
-        //ofImage windows;
 		int height, width;
-        //ofTrueTypeFont font;
         ofColor uiColor;
-
-		// WINDOWS MANAGEMENT 
-//        int paddingWindow, maxLineCode, maxCodeWidth;
-//        int codeTotalHeight, codeTotalWidth;
-//        ofRectangle fontCharBox, cpuStringBox;
 
 		// CAMERA 
 		ofEasyCam cam;
@@ -96,64 +89,10 @@ class ofApp : public ofBaseApp{
 		// game logic;
 		int integrity = 100;
 			
-        /// data
-//        ofxOscReceiver oscReceiver;
-//        ofSerial serial;
-//        float scCPU;
-//        vector<string> vectorCode;
-//        vector<char> vectorSymbol;
-
-		/// 3D
-		int intId = 0; 
-		int pillarId = 0;
-		int midId = 0;
-		int extId = 0;
-        int currentTargetID = 0;
-
-		ofLight pointLight;
-		ofxAssimpModelLoader targetModel;
-		ofVboMesh targetMesh;
-		ofxAssimpModelLoader alphabet;
-		ofVboMesh alphabetLetter;
-		string currentText;
-		ofSpherePrimitive sphere;
-		ofImage sphereMapTex; 
-		vector<string> currentModelSubNames;
-		/// MATERIALS 
-		ofMaterial materialMesh, materialAttack, materialEnv;
-		ofMaterial materialText;
-		
-	
-		ofxAssimpModelLoader intModel;
-		ofxAssimpModelLoader midModel;
-		ofxAssimpModelLoader pillarModel;
-		ofxAssimpModelLoader extModel;
-		ofVboMesh intMesh;
-		ofVboMesh midMesh;
-		ofVboMesh pillarMesh;
-		ofVboMesh extMesh;
-
-
-		// POST PROCESSING
-		ofFbo fbo;
-
-        //ofFbo videoFbo;
-        //ofFbo uiFbo;
-		ofFbo secondPassFbo;
-		ofFbo renderFbo;
-
-		ofShader shaderBlurY;
-		ofShader swell;
-		ofShader glow;
-		ofShader glitch;
-		ofShader crBlueinvert;
-		ofShader test;
-
-		
-		/// VARIABLES 
-//        ofFbo fboCpu;
-        /// Modules call
-        ///
+        Render render;
+        ProcBackground procBackground;
+        SphereMap sphereMap;
+        Text3d text3d;
 
 //        Win win;
         Data data;
@@ -169,6 +108,49 @@ class ofApp : public ofBaseApp{
 		/// DMX
 
 		///
+        /// 3D
+//		int intId = 0;
+//		int pillarId = 0;
+//		int midId = 0;
+//		int extId = 0;
+//        int currentTargetID = 0;
+
+//		ofLight pointLight;
+//		ofxAssimpModelLoader targetModel;
+//		ofVboMesh targetMesh;
+//		ofxAssimpModelLoader alphabet;
+//		ofVboMesh alphabetLetter;
+//		string currentText;
+//		ofSpherePrimitive sphere;
+//		ofImage sphereMapTex;
+//		vector<string> currentModelSubNames;
+        /// MATERIALS
+//		ofMaterial materialMesh, materialAttack, materialEnv;
+//		ofMaterial materialText;
+
+
+//		ofxAssimpModelLoader intModel;
+//		ofxAssimpModelLoader midModel;
+//		ofxAssimpModelLoader pillarModel;
+//		ofxAssimpModelLoader extModel;
+//		ofVboMesh intMesh;
+//		ofVboMesh midMesh;
+//		ofVboMesh pillarMesh;
+//		ofVboMesh extMesh;
+
+
+        // POST PROCESSING
+//		ofFbo fbo;
+
+//		ofFbo secondPassFbo;
+//		ofFbo renderFbo;
+
+//		ofShader shaderBlurY;
+//		ofShader swell;
+//		ofShader glow;
+//		ofShader glitch;
+//		ofShader crBlueinvert;
+//		ofShader test;
 
 		
 };

@@ -24,22 +24,23 @@ void Videoplayer::setup(){
 
     alpha = 20; // video blending
     vidCat = 0;
-    vidId = 0;
     videoDir.listDir("video/");
     videoDir.sort();
     // outputs main themes [0/1/2]
     videoGrp.listDir(videoDir.getPath(vidCat));
     videoGrp.sort();
+//    vidId = ofRandom(0,videoGrp.size());
+    vidId = 0;
     // output all selected videos in selected [vidCat] theme
-    for (unsigned int i = 0; i < videoGrp.size(); i++) {
-        ofLogNotice("output all selected videos in selected theme");
-        ofLogNotice(videoGrp.getPath(i));
-    }
+//    for (unsigned int i = 0; i < videoGrp.size(); i++) {
+//        ofLogNotice("output all selected videos in selected theme");
+//        ofLogNotice(videoGrp.getPath(i));
+//    }
 
     vid.listDir(videoGrp.getPath(vidId));
     vid.sort();
-    ofLogNotice("display selected video");
-    ofLogNotice(videoGrp.getPath(vidId));
+//    ofLogNotice("display selected video");
+//    ofLogNotice(videoGrp.getPath(vidId));
     mySequence.mSequence.enableThreadedLoad(bthread);
     mySequence.loadSequence(videoGrp.getPath(vidId), 30.0f);
     mySequence.setShouldLoop(true);
@@ -108,7 +109,31 @@ void Videoplayer::update(int _videoCat, bool b3d, float audioRms){
         ofPushStyle();
     }
 
-    if (b3d && mySequence.mSequence.isLoaded()){
+    if (b3d){
+        update3d(audioRms);
+    }
+
+}
+
+void Videoplayer::draw(bool b3d){
+    ofSetBackgroundColor(0,0,0);
+
+    ofPushMatrix();
+    ofPushStyle();
+    if (b3d){
+        draw3d();
+    }
+    // 2D
+    else {
+        ofSetColor(ofColor::white);
+        videoFbo.draw(0, 0, size.x, size.y);
+        }
+    ofPopStyle();
+    ofPopMatrix();
+    }
+
+void Videoplayer::update3d(float audioRms){
+    if (mySequence.mSequence.isLoaded()){
     //3D
     //convert fbo to ofImage format
     videoFbo.readToPixels(fboPixels);
@@ -136,7 +161,8 @@ void Videoplayer::update(int _videoCat, bool b3d, float audioRms){
             }
         }
      }
-    else if (b3d && mySequence.mSequence.isLoading()){
+    else if (mySequence.mSequence.isLoading()){
+
         for (int y=0; y<H; y++) {
             for (int x=0; x<W; x++) {
                 //Vertex index
@@ -144,11 +170,12 @@ void Videoplayer::update(int _videoCat, bool b3d, float audioRms){
                 glm::vec3 p = mesh.getVertex( i );
 
                 //Change z-coordinate of vertex
-                p.z = audioRms*20*ofNoise(x * 0.05, y * 0.05, ofGetElapsedTimef() * 0.5) * 100;
+                p.z = audioRms*ofNoise(x * 0.15, y * 0.15, ofGetElapsedTimef()) * 255;
                 mesh.setVertex( i, p );
 
                 //Change color of vertex
-                mesh.setColor(i , ofColor(ofRandom(0,255), ofRandom(0,255), ofRandom(0.255), ofRandom(0,255)));
+                mesh.setColor(i , ofColor::fromHsb(p.z, ofNoise(x * 0.05 + 100, y * 0.05 + 400, ofGetElapsedTimef()) * 255,
+                                                   ofNoise(x * 0.05 + 300, y * 0.05 + 700, ofGetElapsedTimef()) * 255));
                 }
             }
 
@@ -156,37 +183,25 @@ void Videoplayer::update(int _videoCat, bool b3d, float audioRms){
     }
 }
 
-void Videoplayer::draw(bool b3d){
-    ofSetBackgroundColor(0,0,0);
+void Videoplayer::draw3d(){
+    if (mySequence.mSequence.isLoading()){
+        // 3D loading
+        ofSetColor(255);
+        ofTranslate( width/2, height/2, 0);
+        ofRotateDeg(ofGetElapsedTimef()*5, 1,1,1);
+        mesh.drawWireframe();
+    }
+    else{
+        // 3D showing
+        ofSetColor(255);
+        ofTranslate( width/2, height/2, 0);
+        ofRotateDeg(ofGetElapsedTimef()*5, 1,1,1);
+        image.bind();
+        mesh.draw();
+        image.unbind();
+    }
+}
 
-    ofPushMatrix();
-    ofPushStyle();
-    if (b3d){
-        if (mySequence.mSequence.isLoading()){
-            // 3D loading
-            ofSetColor(255);
-            ofTranslate( width/2, height/2, 0);
-            ofRotateDeg(ofGetElapsedTimef()*5, 1,1,1);
-            mesh.drawWireframe();
-        }
-        else{
-            // 3D showing
-            ofSetColor(255);
-            ofTranslate( width/2, height/2, 0);
-            ofRotateDeg(ofGetElapsedTimef()*5, 1,1,1);
-            image.bind();
-            mesh.draw();
-            image.unbind();
-        }
-    }
-    // 2D
-    else {
-        ofSetColor(ofColor::white);
-        videoFbo.draw(0, 0, size.x, size.y);
-        }
-    ofPopStyle();
-    ofPopMatrix();
-    }
 
 
 void Videoplayer::newSeq(){

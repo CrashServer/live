@@ -12,18 +12,17 @@ void Glitcher::setup(ofFbo &targetFbo){
 }
 
 void Glitcher::update(ofFbo &targetFbo, float trigger){
-    trigger*=100;
     ofPushStyle();
     glitcherFbo.begin();
         //ofSetColor(col);
-        if (trigger == 0){trigger= ofRandom(0,100);}
-        if (trigger >= 50) {
+        if (trigger == 0){trigger= ofRandom(0,100)/100;}
+        if (trigger >= 0.5) {
             for (int i=0; i<500; i++){
                 ofSetColor(ofRandom(0, 255), ofRandom(150, 255));
                 ofDrawRectangle(ofRandom(0,size.x), ofRandom(0,size.y),10,50);
                 }
          }
-         else if (trigger >= 20) {
+         else if (trigger >= 0.20) {
              glitcherFbo.allocate(ofRandom(20, (int) size.x), ofRandom(50, size.y), GL_RGBA);
              ofSetColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255));
          }

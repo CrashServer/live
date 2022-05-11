@@ -360,13 +360,13 @@ char *WindowFuncName(int whichFunction)
    switch (whichFunction) {
    default:
    case 0:
-      return "Rectangular";
+      return (char *)"Rectangular";
    case 1:
-      return "Bartlett";
+      return (char *)"Bartlett";
    case 2:
-      return "Hamming";
+      return (char *)"Hamming";
    case 3:
-      return "Hanning";
+      return (char *)"Hanning";
    }
 }
 

@@ -15,7 +15,9 @@ void ofApp::postprocSetup(){
 //	}
 //#endif
     //glow.load("shadersGL3/glow");
-    shaderBlurY.load("shadersGL3/shaderBlurY");
+
+//    shaderBlurY.load("shadersGL3/shaderBlurY");
+
     //swell.load("shaderGL3/swell");
     //glitch.load("shaderGL3/glitch");
     //crBlueinvert.load("shaderGL3/crBlueinvert");

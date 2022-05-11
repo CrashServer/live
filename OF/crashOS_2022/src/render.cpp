@@ -1,11 +1,17 @@
 #include "render.h"
 #include "ofApp.h"
 
+Render::Render(){}
 
-void ofApp::renderSetup()
+ProcBackground::ProcBackground(){}
+
+SphereMap::SphereMap(){}
+
+Text3d::Text3d(){}
+
+void Render::setup()
 {
-
-	/// 3D RENDERING SETUP 
+    /// MATERIAL
 	materialMesh.setShininess(56);
 	materialMesh.setDiffuseColor(ofFloatColor::blue);
 	materialMesh.setSpecularColor(ofColor(255, 0, 0, 255));
@@ -14,14 +20,6 @@ void ofApp::renderSetup()
 	materialAttack.setShininess(120);
 	materialAttack.setSpecularColor(ofColor(0, 25, 255, 255));
 
-	materialEnv.setDiffuseColor(ofFloatColor::black);
-	materialEnv.setShininess(120);
-	materialEnv.setSpecularColor(ofColor(0, 124, 255, 255));
-
-	materialText.setDiffuseColor(ofFloatColor::green);
-	materialText.setShininess(120);
-	materialText.setSpecularColor(ofColor(0, 0, 155, 255));
-
 	/// LIGHT CONFIG
 	ofSetSmoothLighting(true);
 	pointLight.setDiffuseColor(ofFloatColor::floralWhite);
@@ -29,23 +27,15 @@ void ofApp::renderSetup()
 
     // Load mesh
     targetModel.loadModel("target/2.obj");
+//    targetMesh = targetModel.getMesh(2);
 
-    targetMesh = targetModel.getMesh(2);
+    // GUI
+    parameters.setName("Target sub attack");
+    parameters.add(currentModelSubAttack.set("target Sub attack", 0, 0, targetModel.getMeshCount() - 1));
     currentModelSubNames = targetModel.getMeshNames();
-    intModel.loadModel("envi/s_int.obj");
-    intMesh = intModel.getMesh(0);
-    extModel.loadModel("envi/s_ext.obj");
-    extMesh = extModel.getMesh(0);
-    midModel.load("envi/s_mid.obj");
-    midMesh = midModel.getMesh(0);
-    pillarModel.loadModel("envi/s_pillar.obj");
-    pillarMesh = intModel.getMesh(0);
-
-    alphabet.loadModel("ui/alphabet.obj"); // 3D font;
 }
 
-
-void ofApp::renderUpdate(int targetID){
+void Render::update(int targetID){
     if (targetID != currentTargetID){
         switch (targetID) {
         case 1:
@@ -62,58 +52,43 @@ void ofApp::renderUpdate(int targetID){
 }
 
 
-void ofApp::renderDraw()
+void Render::draw()
 
 {
     ofPushStyle();
     ofPushMatrix();
-	/// LIGHT & INIT
-	ofEnableDepthTest();
-	ofEnableLighting();
-	pointLight.enable();
-	ofEnableNormalizedTexCoords();
-	//ofClear(0);
-	
+    /// LIGHT & INIT
+    ofEnableDepthTest();
+    ofEnableLighting();
+    pointLight.enable();
+    ofEnableNormalizedTexCoords();
+    //ofClear(0);
 
-		/// TARGET 
 
-	materialMesh.begin();
-	// submesh not under attack (before)
-	for (int i = 0; i < currentModelSubAttack; i++) {
-		targetModel.getMesh(i).drawFaces();
-	}
-	// submesh not under attack (after)
-	for (int i = currentModelSubAttack + 1; i < targetModel.getMeshCount(); i++) {
-		targetModel.getMesh(i).drawFaces();
-	}
+        /// TARGET
 
-	materialMesh.end();
+    materialMesh.begin();
+    // submesh not under attack (before)
+    for (int i = 0; i < currentModelSubAttack; i++) {
+        targetModel.getMesh(i).drawFaces();
+    }
+    // submesh not under attack (after)
+    for (int i = currentModelSubAttack + 1; i < targetModel.getMeshCount(); i++) {
+        targetModel.getMesh(i).drawFaces();
+    }
 
-	materialAttack.begin();
-	// mesh under attack 
-	targetModel.getMesh(currentModelSubAttack).drawWireframe();
-	materialAttack.end();
+    materialMesh.end();
 
-	/// <summary>
-	///  3D TEXT RENDERING 
-	/// </summary>
-	
-	materialText.begin();
-	currentText = currentModelSubNames[currentModelSubAttack];
-	for (int i = 0; i < currentText.size(); i++) {
-		int a = (currentText[i] - 'A');
-        alphabetLetter = alphabet.getMesh(a);
-		ofPushMatrix();
-		ofScale(0.2, 0.2, 0.2);
-		ofTranslate((i * 100) + 300, 0, 0);
-		//ofTranslate(pos);
-		//ofRotate(ang, vec.x, vec.y, vec.z);
-		//ofRotate(i * vec.x,0, 1, 0);       // rotate alittle bit, so you can see the "box" of the object
-		//ofScale(-1, 1, 1);
-		alphabetLetter.drawFaces();
-		ofPopMatrix();
-	}
-	materialText.end();
+    materialAttack.begin();
+    // mesh under attack
+    targetModel.getMesh(currentModelSubAttack).drawWireframe();
+    materialAttack.end();
+
+    /// <summary>
+    ///  3D TEXT RENDERING
+    /// </summary>
+
+    currentText = currentModelSubNames[currentModelSubAttack];
     ofDisableDepthTest();
     ofDisableLighting();
     ofDisableNormalizedTexCoords();
@@ -121,14 +96,47 @@ void ofApp::renderDraw()
     ofPopStyle();
 }
 
-/// Sphere map
 
-void ofApp::sphereMapSetup(){
+
+
+void Text3d::setup(){
+    materialText.setDiffuseColor(ofFloatColor::green);
+    materialText.setShininess(120);
+    materialText.setSpecularColor(ofColor(0, 0, 155, 255));
+
+    alphabet.loadModel("ui/alphabet.obj"); // 3D font;
+}
+
+void Text3d::update(){
+}
+
+void Text3d::draw(string currentText){
+    materialText.begin();
+    for (int i = 0; i < currentText.size(); i++) {
+        int a = (currentText[i] - 'A');
+        alphabetLetter = alphabet.getMesh(a);
+        ofPushMatrix();
+        ofScale(0.2, 0.2, 0.2);
+        ofTranslate((i * 100) + 300, 0, 0);
+        //ofTranslate(pos);
+        //ofRotate(ang, vec.x, vec.y, vec.z);
+        //ofRotate(i * vec.x,0, 1, 0);       // rotate alittle bit, so you can see the "box" of the object
+        //ofScale(-1, 1, 1);
+        alphabetLetter.drawFaces();
+        ofPopMatrix();
+    }
+    materialText.end();
+}
+
+/// Sphere map
+void SphereMap::setup(){
     sphereMapTex.load("spheremap/3.jpg");
 }
 
+void SphereMap::update(){
+}
 
-void ofApp::sphereMapDraw(){
+void SphereMap::draw(){
     ///  SPHERE MAP
     ofEnableDepthTest();
     ofEnableNormalizedTexCoords();
@@ -144,41 +152,73 @@ void ofApp::sphereMapDraw(){
     ofDisableDepthTest();
 }
 
+void ProcBackground::setup(){
+    // load model
+    intModel.loadModel("envi/s_int.obj");
+    intMesh = intModel.getMesh(0);
+    extModel.loadModel("envi/s_ext.obj");
+    extMesh = extModel.getMesh(0);
+    midModel.load("envi/s_mid.obj");
+    midMesh = midModel.getMesh(0);
+    pillarModel.loadModel("envi/s_pillar.obj");
+    pillarMesh = intModel.getMesh(0);
 
-void ofApp::procBackgroundUpdate(){
+    // Light
+    ofSetSmoothLighting(true);
+    pointLight.setDiffuseColor(ofFloatColor::floralWhite);
+    pointLight.setSpecularColor(ofFloatColor(1.f, 1.f, 1.f));
+
+    // Material
+    materialEnv.setDiffuseColor(ofFloatColor::black);
+    materialEnv.setShininess(120);
+    materialEnv.setSpecularColor(ofColor(0, 124, 255, 255));
+
+    // GUI
+    parameters.setName("Procedural BackGround");
+    parameters.add(intMeshSlider.set("intMeshSlider", 0, 0, 10));
+    parameters.add(extMeshSlider.set("extMeshSlider", 0, 0, 10));
+    parameters.add(pillarMeshSlider.set("pillarMeshSlider", 0, 0, 10));
+    parameters.add(midMeshSlider.set("midMeshSlider", 0, 0, 10));
+
+}
+
+void ProcBackground::update(){
     intMesh = intModel.getMesh(int(intMeshSlider));
+    midMesh = midModel.getMesh(int(midMeshSlider));
     extMesh = extModel.getMesh(int(extMeshSlider));
     pillarMesh = pillarModel.getMesh(int(pillarMeshSlider));
-    midMesh = midModel.getMesh(int(midMeshSlider));
-    targetMesh = targetModel.getMesh(int(targetMeshSlider));
+//    targetMesh = targetModel.getMesh(int(targetMeshSlider));
 }
 
 
-void ofApp::procBackgroundDraw()
-{
+void ProcBackground::draw(){
     ofPushMatrix();
     ofPushStyle();
     ofEnableDepthTest();
     ofEnableLighting();
     pointLight.enable();
     ofEnableNormalizedTexCoords();
-    materialMesh.begin();
-    ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
-    ofScale(5, 5, 5);
-    pillarMesh.drawWireframe();
-    midMesh.drawWireframe();
-    extMesh.drawWireframe();
-    intMesh.drawWireframe();
-    //materialEnv.end();
-    ofPopMatrix();
-    ofEnableBlendMode(OF_BLENDMODE_SCREEN);
-    ofPushMatrix();
-    ofScale(5, 5, 5);
-    pillarMesh.drawFaces();
-    midMesh.drawWireframe();
-    extMesh.drawFaces();
-    intMesh.drawFaces();
-    materialMesh.end();
+
+        materialEnv.begin();
+
+        ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+        ofScale(5, 5, 5);
+        pillarMesh.drawWireframe();
+        midMesh.drawWireframe();
+        extMesh.drawWireframe();
+        intMesh.drawWireframe();
+        //materialEnv.end();
+        ofPopMatrix();
+        ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+        ofPushMatrix();
+        ofScale(5, 5, 5);
+
+        pillarMesh.drawFaces();
+        midMesh.drawWireframe();
+        extMesh.drawFaces();
+        intMesh.drawFaces();
+
+        materialEnv.end();
 
     ofEnableBlendMode(OF_BLENDMODE_DISABLED);
     ofDisableNormalizedTexCoords();

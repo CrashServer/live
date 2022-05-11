@@ -14,6 +14,9 @@ public:
     void newSeq();
     void videoSrcub();
 
+    void update3d(float audioRms);
+    void draw3d();
+
     // variables
     ofxImageSequencePlayback mySequence;
 

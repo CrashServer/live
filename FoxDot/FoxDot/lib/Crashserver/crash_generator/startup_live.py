@@ -138,7 +138,7 @@ def print_fx(fx=""):
 	if fx == "":
 		print(sorted(FxList.keys()))
 		if crashPanelSending:
-			crashpanel.sendOnce(str(sorted(FxList)))
+			crashpanel.sendOnce(str(sorted(FxList.keys())))
 	else:
 		print(FxList[fx])
 		if crashPanelSending:

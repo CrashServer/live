@@ -470,9 +470,10 @@ class GranularSynthDef(SampleSynthDef):
         self.defaults['pos']   = 0
         self.defaults['sample']   = 0
         self.defaults['gdur'] = 1
-        self.base.append("osc = TGrains.ar(2, trigger:1, bufnum:buf, rate: rate, centerPos: pos, dur: gdur);")
+        self.defaults['trate'] = 4
+        self.base.append("osc = TGrains.ar(2, trigger:Impulse.ar(trate), bufnum:buf, rate: rate, centerPos: pos, dur: gdur);")
         self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
-        self.osc = self.osc * self.amp
+        self.osc = self.osc * self.amp * 2
         self.add()
     def __call__(self, filename, pos=0, sample=0, **kwargs):
         kwargs["buf"] = Samples.loadBuffer(filename, sample)

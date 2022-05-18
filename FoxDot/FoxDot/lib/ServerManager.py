@@ -613,6 +613,13 @@ class SCLangServerManager(ServerManager):
         self.client.send( message )
         return
 
+    def bufferReadMono(self, path, bufnum):
+        """ Sends a message to SuperCollider to read an audio file into a mono buffer """
+        message = OSCMessage("/b_allocReadChannel")
+        message.append([bufnum, path,0,0,0])
+        self.client.send( message )
+        return
+
     def bufferFree(self, bufnum):
         """ Sends a message to SuperCollider to free a buffer """
         message = OSCMessage("/b_free")

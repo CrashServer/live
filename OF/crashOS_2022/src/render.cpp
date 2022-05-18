@@ -9,48 +9,76 @@ SphereMap::SphereMap(){}
 
 Text3d::Text3d(){}
 
+////////////
+/// 3D Model
 void Render::setup()
 {
+    width = ofGetWidth();
+    height = ofGetHeight();
     /// MATERIAL
 	materialMesh.setShininess(56);
 	materialMesh.setDiffuseColor(ofFloatColor::blue);
 	materialMesh.setSpecularColor(ofColor(255, 0, 0, 255));
 
-	materialAttack.setDiffuseColor(ofFloatColor::yellow);
 	materialAttack.setShininess(120);
+    materialAttack.setDiffuseColor(ofFloatColor::yellow);
 	materialAttack.setSpecularColor(ofColor(0, 25, 255, 255));
+
+    materialDestroyed.setShininess(12);
+    materialDestroyed.setDiffuseColor(ofColor::red);
+    materialDestroyed.setSpecularColor(ofColor::antiqueWhite);
 
 	/// LIGHT CONFIG
 	ofSetSmoothLighting(true);
 	pointLight.setDiffuseColor(ofFloatColor::floralWhite);
 	pointLight.setSpecularColor(ofFloatColor(1.f, 1.f, 1.f));
 
-    // Load mesh
-    targetModel.loadModel("target/2.obj");
-//    targetMesh = targetModel.getMesh(2);
+
+    objList.allowExt("obj");
+    objList.listDir("target/");
+    objList.sort();
 
     // GUI
-    parameters.setName("Target sub attack");
-    parameters.add(currentModelSubAttack.set("target Sub attack", 0, 0, targetModel.getMeshCount() - 1));
-    currentModelSubNames = targetModel.getMeshNames();
+    parameters.setName("Target mMdel attack");
+    parameters.add(currentModelSubAttack.set("target Sub attack", 0, 0, 10));
+    parameters.add(targetMeshInt.set("target Model", 0, 0, objList.size()-1));
+
+    changeModel(99); // load and init model 0
+
+    currentModelSubAttack.setMax(targetModel.getMeshCount()-1);
+
+    currentModelSubAttack.addListener(this, &Render::getAllMeshListener);
+    targetMeshInt.addListener(this, &Render::changeModelListener);
 }
 
-void Render::update(int targetID){
+void Render::changeModel(int targetID){
     if (targetID != currentTargetID){
-        switch (targetID) {
-        case 1:
-            targetModel.loadModel("target/1.obj");
-            break;
-        case 2:
-            targetModel.loadModel("target/2.obj");
-            break;
-        default:
-            break;
+        // check if end of directory obj.
+        if (targetID >= objList.size()){
+            targetID = 0;
+            targetMeshInt = 0; // restart to begin
         }
+
+        targetModel.load("target/" + ofToString(targetID) + ".obj");
+        destroyedMeshVector.assign(targetModel.getMeshCount(), false);
+        currentModelSubAttack= 0;
+        currentModelSubNames = targetModel.getMeshNames();
         currentTargetID = targetID;
+
+        getAllMesh();
     }
 }
 
+void Render::update(){
+}
+
+void Render::getAllMeshListener(int &){
+    getAllMesh();
+}
+
+void Render::changeModelListener(int &){
+    changeModel(targetMeshInt);
+}
 
 void Render::draw()
 
@@ -66,29 +94,18 @@ void Render::draw()
 
 
         /// TARGET
-
     materialMesh.begin();
-    // submesh not under attack (before)
-    for (int i = 0; i < currentModelSubAttack; i++) {
-        targetModel.getMesh(i).drawFaces();
-    }
-    // submesh not under attack (after)
-    for (int i = currentModelSubAttack + 1; i < targetModel.getMeshCount(); i++) {
-        targetModel.getMesh(i).drawFaces();
-    }
-
+        targetMeshNotAttack.drawFaces();
     materialMesh.end();
 
     materialAttack.begin();
-    // mesh under attack
-    targetModel.getMesh(currentModelSubAttack).drawWireframe();
+        targetMeshAttack.drawWireframe();
     materialAttack.end();
 
-    /// <summary>
-    ///  3D TEXT RENDERING
-    /// </summary>
+    materialDestroyed.begin();
+        targetMeshDestroyed.drawWireframe();
+    materialDestroyed.end();
 
-    currentText = currentModelSubNames[currentModelSubAttack];
     ofDisableDepthTest();
     ofDisableLighting();
     ofDisableNormalizedTexCoords();
@@ -96,9 +113,70 @@ void Render::draw()
     ofPopStyle();
 }
 
+void Render::destroyMesh(int amount){
+    int amountDestroy = (int) ofClamp(((amount+1)*0.01*meshIntegrityInit), 1, targetMeshAttack.getNumVertices());
 
+    for (int i=0; i< amountDestroy; i++){
+        int targetIndex = ofRandom(0,targetMeshAttack.getNumVertices());
+        targetMeshAttack.removeVertex(targetIndex);
+    }
 
+    meshIntegrityCurrent = targetMeshAttack.getNumVertices();
+    intergrity = 100-((double)(meshIntegrityInit-meshIntegrityCurrent)/ (double) meshIntegrityInit)*100;
 
+    if (targetMeshAttack.getNumVertices()<=2){
+        meshDestroyed();
+        }
+
+    // remove 3d vertex
+    //    prevCoord = targetCoord;
+    //    targetCoord = meshTarget.getVertex(targetIndex);
+}
+
+void Render::meshDestroyed(){
+    /// If a mesh is destroyed, load new obj if all destroyed
+    cout << "mesh destroyed" << endl;
+    destroyedMeshVector[currentModelSubAttack] = true;
+
+    // load new obj if all are part are destroyed
+    if (find(destroyedMeshVector.begin(), destroyedMeshVector.end(), false) == destroyedMeshVector.end())
+        {changeModel(targetMeshInt++);
+            cout << "all destroyed" << endl;
+        }
+    else{
+        currentModelSubAttack++;
+        getAllMesh();
+    }
+}
+
+void Render::getAllMesh(){
+    /// load all mesh to ofVboMesh
+    targetMeshAttack.clear();
+    targetMeshNotAttack.clear();
+    targetMeshDestroyed.clear();
+
+    for (unsigned int i=0; i < targetModel.getMeshCount(); i++){
+        if (i == currentModelSubAttack){ // mesh to attack
+           targetMeshAttack = targetModel.getMesh(currentModelSubAttack);
+        }
+        else{
+            if (destroyedMeshVector[i] == true){ // mesh always destroyed
+                targetMeshDestroyed.append(targetModel.getMesh(i));
+                }
+            else{  // mesh remain
+                targetMeshNotAttack.append(targetModel.getMesh(i));
+                }
+            }
+        }
+    // get all integrity
+    meshIntegrityInit = targetMeshAttack.getNumVertices();
+    meshIntegrityCurrent = targetMeshAttack.getNumVertices();
+    intergrity = 100.0; // must be a double for division
+    currentText = currentModelSubNames[currentModelSubAttack];
+}
+
+////////////////
+/// TEXT 3D
 void Text3d::setup(){
     materialText.setDiffuseColor(ofFloatColor::green);
     materialText.setShininess(120);
@@ -158,7 +236,7 @@ void ProcBackground::setup(){
     intMesh = intModel.getMesh(0);
     extModel.loadModel("envi/s_ext.obj");
     extMesh = extModel.getMesh(0);
-    midModel.load("envi/s_mid.obj");
+    midModel.loadModel("envi/s_mid.obj");
     midMesh = midModel.getMesh(0);
     pillarModel.loadModel("envi/s_pillar.obj");
     pillarMesh = intModel.getMesh(0);

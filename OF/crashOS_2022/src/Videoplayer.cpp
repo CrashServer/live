@@ -71,6 +71,8 @@ void Videoplayer::setup(){
 }
 
 void Videoplayer::update(int _videoCat, bool b3d, float audioRms){
+    if (_videoCat > videoDir.size()){_videoCat = videoDir.size()-1;}
+
     if (_videoCat != vidCat){
         videoGrp.listDir(videoDir.getPath(_videoCat));
         mySequence.loadSequence(videoGrp.getPath(ofRandom(0,videoGrp.size())), 30.0f);
@@ -91,7 +93,7 @@ void Videoplayer::update(int _videoCat, bool b3d, float audioRms){
     else {
         ofPopStyle();
         float loading = mySequence.mSequence.percentLoaded();
-        if (loading<90){
+        if (loading<0.9){
             videoFbo.allocate((int) ofMap(width*loading+ofRandom(1,30), 0,width+30,1,width, true),
                               (int) ofMap(height*loading+ofRandom(1,30), 0,height+30,1,height, true) , GL_RGBA);
             videoFbo.begin();

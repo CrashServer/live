@@ -7,8 +7,15 @@
 class Render {
 public:
     void setup();
-    void update(int targetID=0);
+    void update();
     void draw();
+
+    void changeModel(int targetID=0);
+    void destroyMesh(int amount);
+    void meshDestroyed();
+    void getAllMesh();
+    void getAllMeshListener(int &);
+    void changeModelListener(int &);
 
     int width, height;
     glm::vec3 pos;
@@ -17,18 +24,23 @@ public:
     ofFbo renderFbo;
 
     ofParameterGroup parameters;
-    ofParameter<int> targetMeshSlider;
+    ofParameter<int> targetMeshInt;
     ofParameter<int> currentModelSubAttack;
+
+    ofDirectory objList;
 
     ofLight pointLight;
 
     ofxAssimpModelLoader targetModel;
-//    ofVboMesh targetMesh;
-    ofMaterial materialMesh, materialAttack;
+    ofVboMesh targetMeshAttack, targetMeshNotAttack, targetMeshDestroyed;
+    ofMaterial materialMesh, materialAttack, materialDestroyed;
 
+    vector<bool> destroyedMeshVector;
     vector<string> currentModelSubNames;
     int currentTargetID = 0;
     string currentText;
+    int meshIntegrityInit, meshIntegrityCurrent;
+    double intergrity;
     Render();
 
 private:

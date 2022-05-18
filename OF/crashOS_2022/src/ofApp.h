@@ -42,15 +42,15 @@ class ofApp : public ofBaseApp{
 		void bigBang();
 		void superBang();
 
-        // 3d render
-        void renderSetup();
-        void renderUpdate(int targetID);
-        void renderDraw();
+//        // 3d render
+//        void renderSetup();
+//        void renderUpdate(int targetID);
+//        void renderDraw();
 
-        void procBackgroundUpdate();
-        void procBackgroundDraw();
-        void sphereMapDraw();
-        void sphereMapSetup();
+//        void procBackgroundUpdate();
+//        void procBackgroundDraw();
+//        void sphereMapDraw();
+//        void sphereMapSetup();
 
         void changeColorUi(ofColor&);
 
@@ -62,17 +62,10 @@ class ofApp : public ofBaseApp{
         ofParameter<int> cpuStress; // stress vritualy the cpu
         ofParameter<glm::vec2> webcamSize; // logSize, scoreSize, targetWindowSize,;
         ofParameter<glm::vec3> webcamPos;// targetWindowPos, logPos, scorePos;
-//        ofParameter<int> currentModelSubAttack;
-//        ofParameter<int> intMeshSlider;
-//        ofParameter<int> pillarMeshSlider;
-//        ofParameter<int> extMeshSlider;
-//        ofParameter<int> midMeshSlider;
-//        ofParameter<int> targetMeshSlider;
         ofParameter<int> scene;
         ofParameter<int> integrityIncr;
         ofParameter<float> audioThresh;
         ofParameter<ofColor> colorPicker;
-        //ofEventListener listener;
         bool showGui;
 
         ofParameterGroup parameters;
@@ -83,8 +76,8 @@ class ofApp : public ofBaseApp{
 
 		// CAMERA 
 		ofEasyCam cam;
-		bool camShake; 
-		float camShakeTime;
+        bool camShake;
+        float camShakeTime;
 
 		// game logic;
 		int integrity = 100;

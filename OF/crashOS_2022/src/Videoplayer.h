@@ -35,7 +35,7 @@ public:
     glm::vec2 size;
 
     // 3D
-    ofMesh mesh;
+    ofVboMesh mesh;
     ofImage image;
     ofPixels fboPixels;
 

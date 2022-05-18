@@ -55,7 +55,7 @@ void ofApp::setup(){
     parameters.add(procBackground.parameters);
     parameters.add(audioThresh.set("audio Threshold", 1.0, 0.0, 10.0));
     parameters.add(colorPicker.set("Color Ui", uiColor, ofColor(0,0,0), ofColor(255,255,255)));
-    parameters.add(scene.set("scene", 0, 0, 7));
+    parameters.add(scene.set("scene", 4, 0, 7));
 
     colorPicker.addListener(this, &ofApp::changeColorUi);
 
@@ -109,15 +109,15 @@ void ofApp::update(){
 
         uiMisc.update(true);
         webcam.update();
-        //renderUpdate(1);
         audioFft.update();
 
         videoplayer.update(2, true, audioFft.beat.getMagnitude()*audioThresh/20);
         break;
 
     case 3: // glitch video & webcam  + code
-        glitcherLogo.update(uiMisc.uiFbo, audioFft.beat.isKick()*audioThresh);
-        glitcherCam.update(webcam.camFbo, audioFft.beat.isSnare()*audioThresh);
+        audioFft.update();
+        glitcherLogo.update(uiMisc.uiFbo, audioFft.beat.getMagnitude()*audioThresh/20);
+        glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
         glitcherVideo.update(videoplayer.videoFbo, audioFft.beat.getMagnitude()*audioThresh/20);
 
         // Windows update
@@ -132,7 +132,9 @@ void ofApp::update(){
         break;
 
     case 4:
-
+        winCode.update(data.vectorCode);
+        winCpu.update(data.scCPU);
+        winIntegrity.update(integrity, render.currentText);
         break;
 
     default:
@@ -217,7 +219,7 @@ void ofApp::draw(){
 
     case 4:
         cam.begin();
-        cam.setDistance(160);
+        cam.setDistance(260);
             sphereMap.draw();
             render.draw();
             text3d.draw(render.currentText);
@@ -304,7 +306,21 @@ void ofApp::windowResized(int w, int h){
 	width = w;
 	height = h;
 
-//	fbo.allocate(w, h);
+    winCode.setup(10, uiColor);
+    winCpu.setup(10, uiColor);
+    winIntegrity.setup(10, uiColor);
+    uiMisc.setup();
+
+    /// audio video
+    webcam.setup(uiColor);
+    videoplayer.setup();
+    //audioFft.setup();
+
+    // Glitcher
+    glitcherCam.setup(webcam.camFbo);
+    glitcherLogo.setup(uiMisc.uiFbo);
+    glitcherVideo.setup(videoplayer.videoFbo);
+
 }
 
 //--------------------------------------------------------------
@@ -350,14 +366,40 @@ void ofApp::bangUpdate(char playerID)
 }
 
 void ofApp::bang(char playerID){
-    videoplayer.videoSrcub();
 
-    integrity -= integrityIncr;
     camShake = 1;
 
     if (integrity <= 1 or integrity >= 4000) { // 4000 is for edgecase missed the [0/1] > doesn't generate -inf +inf numbers
         bigBang();
     }
+
+    switch (scene) {
+    case 0:
+        videoplayer.videoSrcub();
+        integrity -= integrityIncr;
+        break;
+    case 1:
+        videoplayer.videoSrcub();
+        integrity -= integrityIncr;
+        break;
+    case 2:
+        videoplayer.videoSrcub();
+        integrity -= integrityIncr;
+        break;
+    case 3:
+        videoplayer.videoSrcub();
+        integrity -= integrityIncr;
+        break;
+    case 4:
+        render.destroyMesh(integrityIncr);
+        integrity = (int) render.intergrity;
+        break;
+
+    default:
+        videoplayer.videoSrcub();
+        break;
+    }
+
     //	// based on 4 submeshes
     //	pointLight.setDiffuseColor(ofColor(ofRandom(255), ofRandom(255), ofRandom(255)));
     //	materialText.setDiffuseColor(ofColor(ofRandom(255), ofRandom(255), ofRandom(255)));
@@ -386,10 +428,11 @@ void ofApp::bigBang()
         if (ofRandom(0,100)>70){superBang();}
         break;
     case 4:
-        if (render.currentModelSubAttack >= 2){
-            render.currentModelSubAttack = 1;}
-        else {render.currentModelSubAttack+=1;}
-        render.update(render.currentModelSubAttack);
+//        if (render.currentModelSubAttack >= 2){
+//            render.currentModelSubAttack = 1;}
+//        else {render.currentModelSubAttack+=1;}
+        render.currentModelSubAttack = ofRandom(0,render.objList.size());
+        render.changeModel(render.currentModelSubAttack);
         break;
 
     default:
@@ -425,6 +468,7 @@ void ofApp::changeColorUi(ofColor &){
     winIntegrity.uiColor = colorPicker;
     webcam.uiColor = colorPicker;
 }
+
 
 
 

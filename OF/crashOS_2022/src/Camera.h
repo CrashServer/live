@@ -11,6 +11,7 @@ public:
     void setup(ofColor uiColor);
     void update();
     void draw();
+    void resize(glm::vec2 &);
 
     // variables
     int width;

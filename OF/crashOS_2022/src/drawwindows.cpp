@@ -6,8 +6,6 @@ Windo::Windo(){
     height = ofGetHeight();
     font.load("ui/font/pixe.ttf", 24);
     fontCharBox = font.getStringBoundingBox("P", 0, 0); // size of a char
-    //gui.setup();
-    //gui.setPosition(50,50);
 }
 
 //-------------------------
@@ -67,10 +65,13 @@ void WinCode::setup(int padding, ofColor uiColor){
         ofClear(255,255,255, 0);
     codeFbo.end();
 
-    parameters.setName("code");
-    parameters.add(nbrLineCode.set("Nbr of line of Code", 20, 1, maxLineCode));
-    parameters.add(pos.set("CodeBox pos", glm::vec3(50, 82, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
-    parameters.add(size.set("CodeBox size", glm::vec2(width / 2, 5), glm::vec2(50, 0), glm::vec2(width, 40)));
+    if (parameters.size()==0){
+        parameters.setName("code");
+        parameters.add(nbrLineCode.set("Nbr of line of Code", 20, 1, maxLineCode));
+        parameters.add(size.set("CodeBox size", glm::vec2(width / 2, 5), glm::vec2(50, 0), glm::vec2(width, 40)));
+        parameters.add(pos.set("CodeBox pos", glm::vec3(50, 90, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+    }
+
 }
 
 //-------------------------
@@ -126,9 +127,12 @@ void WinCpu::setup(int padding, ofColor uiColor){
     cpuFbo.end();
     noiseCount = 0;
 
-    parameters.setName("cpu");
-    parameters.add(pos.set("CPU Box", glm::vec3(1600, 780, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
-    parameters.add(size.set("CPU Box size", glm::vec2(200, 200), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
+    if (parameters.size()==0){
+        parameters.setName("cpu");
+        parameters.add(size.set("CPU Box size", glm::vec2(200, 200), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
+        parameters.add(pos.set("CPU Box", glm::vec3(1600, 780, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+    }
+
 }
 
 void WinCpu::update(int scCPU){
@@ -186,9 +190,11 @@ void WinIntegrity::setup(int padding, ofColor uiColor){
         ofClear(255,255,255, 0);
     integrityFbo.end();
 
-    parameters.setName("integrity");
-    parameters.add(pos.set("Integrity Box", glm::vec3(1480, 100, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
-    parameters.add(size.set("Integrity size", glm::vec2(320, 100), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
+    if (parameters.size()==0){
+        parameters.setName("integrity");
+        parameters.add(pos.set("Integrity Box", glm::vec3(1480, 100, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+        parameters.add(size.set("Integrity size", glm::vec2(320, 100), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
+    }
 
 }
 

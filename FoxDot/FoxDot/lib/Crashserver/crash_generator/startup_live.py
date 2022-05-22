@@ -10,9 +10,9 @@ try:
 except Exception as e:
 	print(e)
 
-#### ASCII 
+#### ASCII
 asciiEnable = False
-clipcopyEnable = False    
+clipcopyEnable = False
 try:
 	from pyfiglet import figlet_format, FigletFont # ASCII GENERATOR
 	cool_ascii = [1,6,8,11,13,15,17,18,19,21,22,24,26,30,31,32,33,34,35,37,38,43,44,45,46,47,48,50,59,62,64,65,68,69,77,79,81,82,83,84,85,88,89,96,98,103,104,105,107,111,113,114,117,119,123,124,131,135,143,150,151,152,159,187,190,193,19,201,203,217,225,227,230,240,243,244,245,251,273,275,280,308,325,329,347,363,385,410]
@@ -30,7 +30,7 @@ except:
 
 #### copy to clipboard
 try:
-	import pyperclip as clip 
+	import pyperclip as clip
 	clipcopyEnable = True
 except:
 	clipcopyEnable = False
@@ -102,7 +102,7 @@ def connect():
 	i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)
 	if clipcopyEnable:
 		clip.copy("i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)")
-	
+
 def attack(attackName, prntOut=0):
 	storageAttack.getAttack(attackName, prntOut)
 
@@ -211,12 +211,12 @@ def PMorse(text, point=1/4, tiret=3/4):
 
 # def define_virus():
 # 	### Generate a random virus text
-# 	virus = "###" + choice(virus_method) + choice(virus_name) + "." + choice(virus_access) + "." + choice(virus_protocole) + choice(virus_status)  
+# 	virus = "###" + choice(virus_method) + choice(virus_name) + "." + choice(virus_access) + "." + choice(virus_protocole) + choice(virus_status)
 # 	return virus
 
 @player_method
 def gtr(self, strings=1):
-	''' set player to match guitar string''' 
+	''' set player to match guitar string'''
 	self.root = Pattern(strings).submap({0:-10, 1:-8, 2:-3, 3:2, 4:7, 5:11, 6:16})
 	self.scale = Scale.chromatic
 	return self
@@ -246,17 +246,17 @@ def PRy(duration=16, div=4, restprob=0.3):
 	if rest !=0:
 		for i in range(0,len(pat)):
 			if randint(0,100) < restprob*100:
-				pat_total[i] = rest(pat_total[i])    
+				pat_total[i] = rest(pat_total[i])
 	return pat_total
 
-### CrashPanel 
+### CrashPanel
 ### Root, scale
 ### generateur de "Plat du jour"
 
 if crashPanelSending:
 	class PlatduJour():
 		def __init__(self):
-			self.choicePlat = [self.pat_du_jour, self.synth_du_jour, self.loop_du_jour, self.nombre_du_jour, 
+			self.choicePlat = [self.pat_du_jour, self.synth_du_jour, self.loop_du_jour, self.nombre_du_jour,
 								self.fx_du_jour, self.para_du_jour, self.pattern_du_jour, self.gen_dict_words,
 								self.scale_du_jour, self.fonction_du_jour]
 
@@ -270,7 +270,7 @@ if crashPanelSending:
 			return ("Loop", loopNames)
 
 		def nombre_du_jour(self):
-			return ("Nombre", [GENERATE_AMPLIFY(), GENERATE_LIST(), GENERATE_FLOAT_LIST(), GENERATE_TUPLE(), 
+			return ("Nombre", [GENERATE_AMPLIFY(), GENERATE_LIST(), GENERATE_FLOAT_LIST(), GENERATE_TUPLE(),
 					GENERATE_NUMBER(), GENERATE_RDM(), GENERATE_VARLIST(), GENERATE_FREQLIST()])
 
 		def fx_du_jour(self):
@@ -287,7 +287,7 @@ if crashPanelSending:
 		def pattern_du_jour(self):
 			pat = GENERATE_PATTERN()
 			return ("Pattern", [f"{pat}\n\n{eval(pat)}"])
-		
+
 		def gen_dict_words(self):
 			try:
 				aa33listimpp = '''
@@ -305,9 +305,9 @@ if crashPanelSending:
 				pass
 				return ("Mot", aa33listword)
 			except:
-				return ("Mot", ["composite", "occidental", "demembrer", "chimique", "fissure", "serpent", "perturbation", 
-						"berserker", "plaid", "donut", "jaillissement", "citron vert", "rouille", "barbouillage", "hiver", 
-						"assurance", "nerveux", "aversion", "mixeur", "innocent", "canard", "objet", "rage", "anonyme", "perturber", "meurtre", "sagesse", 
+				return ("Mot", ["composite", "occidental", "demembrer", "chimique", "fissure", "serpent", "perturbation",
+						"berserker", "plaid", "donut", "jaillissement", "citron vert", "rouille", "barbouillage", "hiver",
+						"assurance", "nerveux", "aversion", "mixeur", "innocent", "canard", "objet", "rage", "anonyme", "perturber", "meurtre", "sagesse",
 						"encore", "secteur", "horrible", "puissant"])
 
 		def scale_du_jour(self):
@@ -315,13 +315,13 @@ if crashPanelSending:
 
 		def fonction_du_jour(self):
 			fct = ["PMorse(text, point=1/4, tiret=3/4)", ".gtr(string=1)", "random_bpm_var()", ".unison(unison=2, detune=0.125, analog=0)",
-					 ".human(velocity=20, humanize=5, swing=0)", ".fill(mute_player=0, on=1)", "brk(multi=1, code='')", 
+					 ".human(velocity=20, humanize=5, swing=0)", ".fill(mute_player=0, on=1)", "brk(multi=1, code='')",
 					 ".renv(nbr=1)", "binary(number)", "PTime()", "PTimebin()", "lininf(start=0, finish=1, time=32)", "expinf(start=0, finish=1, time=32)",
-					 "PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer='d')", "darker()", "lighter()", "PChords(chords)", 
-					 "PGauss(mean, deviation)", "PLog(mean, deviation)", "PTrir(low,high,mode)", "PCoin(low, high, proba)", "PChar(case=2, alpha=2)", 
+					 "PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer='d')", "darker()", "lighter()", "PChords(chords)",
+					 "PGauss(mean, deviation)", "PLog(mean, deviation)", "PTrir(low,high,mode)", "PCoin(low, high, proba)", "PChar(case=2, alpha=2)",
 					 "PMarkov(init_value='')", "switch(other, key, bypass=1)", "clone(player)", "add(value)", "mul(value)", "drop(playTime=6, dropTime=2, nbloop=1)",
 					 "drop_bpm(duree=32, nbr=0, end=4)", "melody(scale_melody=Scale.default.name, melody_dict=melody_dict)", "PArp(seq, index=0)", "SDur(target)"]
-			return ("Fonction", fct)		 
+			return ("Fonction", fct)
 
 		def choix(self):
 			choix = choice(self.choicePlat)
@@ -334,21 +334,21 @@ if crashPanelSending:
 			self.ipZbdm = ipZbdm
 			self.ipSvdk = ipSvdk
 			self.port = port
-			
+
 			self.bpmTime = 0.2  # time cycle send bpm
 			self.beatTime = 0.1 # time cycle send beat
 			self.plyTime = 0.3 # time cycle send player
 			self.pdjTime = 60 #time cycle send PlatduJour
 			self.chronoTime = 10 # time cycle send chrono
-			
+
 			self.clientZbdm = OSCClient()
 			self.clientZbdm.connect((self.ipZbdm, 2000))
 			if self.ipSvdk:
 				self.clientSvdk = OSCClient()
 				self.clientSvdk.connect((self.ipSvdk, 2000))
-			
+
 			self.pdj = PlatduJour()
-			self.timeInit = time() 
+			self.timeInit = time()
 
 			self.threadBpm = Thread(target = self.sendBpm)
 			self.threadBpm.daemon = True
@@ -375,7 +375,7 @@ if crashPanelSending:
 
 		def sendBpm(self):
 			''' send Clock.bpm to OSC server '''
-			try: 
+			try:
 				while self.isrunning:
 					msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
 					self.sendOscMsg(msg)
@@ -389,20 +389,20 @@ if crashPanelSending:
 				while self.isrunning:
 					msg = OSCMessage("/panel/beat", [Clock.beat])
 					self.sendOscMsg(msg)
-					sleep(self.beatTime)    
+					sleep(self.beatTime)
 			except:
 				pass
-		
+
 		def sendPlayer(self):
 			''' send active player to OSC server '''
 			try:
 				while self.isrunning:
 					msg = OSCMessage("/panel/player", [[str(p) for p in Clock.playing]])
 					self.sendOscMsg(msg)
-					sleep(self.plyTime)    
+					sleep(self.plyTime)
 			except:
 				pass
-		
+
 		def sendPdj(self):
 			''' send platdujour to OSC server '''
 			try:
@@ -410,7 +410,7 @@ if crashPanelSending:
 					intitule, plat = self.pdj.choix()
 					msg = OSCMessage("/panel/pdj", [intitule, plat])
 					self.sendOscMsg(msg)
-					sleep(self.pdjTime)    
+					sleep(self.pdjTime)
 			except:
 				pass
 
@@ -421,7 +421,7 @@ if crashPanelSending:
 					elapsedTime = time() - self.timeInit
 					msg = OSCMessage("/panel/chrono", [elapsedTime])
 					self.sendOscMsg(msg)
-					sleep(self.chronoTime)    
+					sleep(self.chronoTime)
 			except:
 				pass
 
@@ -429,10 +429,10 @@ if crashPanelSending:
 			''' send on txt msg to OSC '''
 			msg = OSCMessage("/panel/help", [txt])
 			self.sendOscMsg(msg)
-		
+
 		def stop(self):
 			self.isrunning = False
-		
+
 		def start(self):
 			self.isrunning = True
 			self.threadBpm.start()
@@ -440,7 +440,7 @@ if crashPanelSending:
 			self.threadPlayer.start()
 			self.threadPdj.start()
 			self.threadChrono.start()
-	
+
 	def panelreset():
 		crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
 		crashpanel.start()
@@ -451,4 +451,12 @@ if crashPanelSending:
 	crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
 	crashpanel.start()
 
-	
+### French cut
+
+é = linvar([0,1],[16,0])
+è = linvar([1,0],[16,0])
+ê = linvar([0,1],[16,16])
+ù = PDur(var([4,PRand(8)],[6,2]), 8)
+à = PRand(10)
+ç = PWhite(-1,1)
+ô = PGauss(0, 1)

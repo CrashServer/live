@@ -257,7 +257,7 @@ class BufferManager(object):
         """ Get buffer information from the buffer number """
         return self._buffers[bufnum]
 
-    def _allocateAndLoad(self, filename):
+    def _allocateAndLoad(self, filename, force=False):
         """ Allocates and loads a buffer from a filename, with caching """
         if filename not in self._fn_to_buf:
             bufnum = self._getNextBufnum()
@@ -265,7 +265,26 @@ class BufferManager(object):
             self._server.bufferRead(filename, bufnum)
             self._fn_to_buf[filename] = buf
             self._buffers[bufnum] = buf
+        elif force:
+            buf = self._fn_to_buf[filename]
+            self._server.bufferRead(filename, buf.bufnum)
         return self._fn_to_buf[filename]
+    
+    def _allocateAndLoadMono(self, filename, force=False):
+        """ Allocates and loads a buffer from a filename, with caching """
+        if filename not in self._fn_to_buf:
+            bufnum = self._getNextBufnum()
+            buf = Buffer.fromFile(filename, bufnum)
+            self._server.bufferReadMono(filename, bufnum)
+            self._fn_to_buf[filename] = buf
+            self._buffers[bufnum] = buf
+        elif force:
+            buf = self._fn_to_buf[filename]
+            self._server.bufferReadMono(filename, buf.bufnum)
+        return self._fn_to_buf[filename]
+
+    def reload(self, filename):
+        return self.loadBuffer(filename, force=True)
 
     def _getSoundFile(self, filename):
         """ Look for a file with all possible extensions """
@@ -410,13 +429,22 @@ class BufferManager(object):
             WarningMsg("Could not find any sample matching %r" % filename)
             return None
 
-    def loadBuffer(self, filename, index=0):
+    def loadBuffer(self, filename, index=0, force=False):
         """ Load a sample and return the number of a buffer """
         samplepath = self._findSample(filename, index)
         if samplepath is None:
             return 0
         else:
-            buf = self._allocateAndLoad(samplepath)
+            buf = self._allocateAndLoad(samplepath, force=force)
+            return buf.bufnum
+        
+    def loadBufferMono(self, filename, index=0, force=False):
+        """ Load a sample and return the number of a buffer """
+        samplepath = self._findSample(filename, index)
+        if samplepath is None:
+            return 0
+        else:
+            buf = self._allocateAndLoadMono(samplepath, force=force)
             return buf.bufnum
 
 
@@ -469,14 +497,15 @@ class GranularSynthDef(SampleSynthDef):
         self.gdur = self.new_attr_instance("gdur")
         self.defaults['pos']   = 0
         self.defaults['sample']   = 0
-        self.defaults['gdur'] = 1
-        self.defaults['trate'] = 4
-        self.base.append("osc = TGrains.ar(2, trigger:Impulse.ar(trate), bufnum:buf, rate: rate, centerPos: pos, dur: gdur);")
+        self.defaults['size'] = 0.5
+        self.defaults['density'] = 10
+        self.defaults['deg'] = 1
+        self.base.append("osc = TGrains.ar(2, trigger:Impulse.ar(density), bufnum:buf, rate: deg, centerPos: pos*BufDur.kr(buf), dur: size);")
         self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
         self.osc = self.osc * self.amp * 2
         self.add()
     def __call__(self, filename, pos=0, sample=0, **kwargs):
-        kwargs["buf"] = Samples.loadBuffer(filename, sample)
+        kwargs["buf"] = Samples.loadBufferMono(filename, sample)
         proxy = SampleSynthDef.__call__(self, pos, **kwargs)
         proxy.kwargs["filename"] = filename
         return proxy

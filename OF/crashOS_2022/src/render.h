@@ -113,5 +113,32 @@ public:
 private:
 };
 
+class ObjectTunnel {
+public:
+    glm::vec3 pos;
+    glm::vec3 size;
+
+    ofBoxPrimitive object;
+
+    ObjectTunnel();
+private:
+};
+
+
+class Tunnel3d {
+public:
+    void setup();
+    void update();
+    void draw();
+
+    int width, height;
+    int nbrObject;
+    vector<ObjectTunnel> vecObject;
+
+    Tunnel3d();
+
+private:
+
+};
 
 #endif // RENDER_H

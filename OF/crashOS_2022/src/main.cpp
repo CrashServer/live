@@ -9,8 +9,8 @@ int main() {
 	ofGLESWindowSettings settings;
 	settings.glesVersion = 2;
 #else
-	ofGLWindowSettings settings;
-	settings.setGLVersion(3, 2);
+    ofGLWindowSettings settings;
+//    settings.setGLVersion(4, 5);
 #endif
 	settings.setSize(1920, 1080);
 	ofCreateWindow(settings);

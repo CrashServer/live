@@ -1,6 +1,18 @@
 #include "Camera.h"
 
 Camera::Camera(){
+//    vector<ofVideoDevice> devices = webcam.listDevices();
+
+//     for(size_t i = 0; i < devices.size(); i++){
+//         if(devices[i].bAvailable){
+//             //log the device
+//             ofLogNotice() << devices[i].id << ": " << devices[i].deviceName;
+//         }else{
+//             //log the device and note it as unavailable
+//             ofLogNotice() << devices[i].id << ": " << devices[i].deviceName << " - unavailable ";
+//         }
+//     }
+//    webcam.setDeviceID(1);
     webcam.setup(320,240);
 }
 

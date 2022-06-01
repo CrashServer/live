@@ -5,6 +5,7 @@
 #include "ofxAssimpModelLoader.h"
 #include "ofEasyCam.h" 
 #include "ofxGui.h"
+#include "ofxXmlSettings.h"
 //#include "ofTrueTypeFont.h"
 //#include "ofxOsc.h"
 //#include "ofxNetwork.h"
@@ -17,6 +18,8 @@
 #include "glitcher.h"
 #include "drawwindows.h"
 #include "render.h"
+#include "boot.h"
+#include "postproc.h"
 
 class ofApp : public ofBaseApp{
 
@@ -42,30 +45,21 @@ class ofApp : public ofBaseApp{
 		void bigBang();
 		void superBang();
 
-//        // 3d render
-//        void renderSetup();
-//        void renderUpdate(int targetID);
-//        void renderDraw();
-
-//        void procBackgroundUpdate();
-//        void procBackgroundDraw();
-//        void sphereMapDraw();
-//        void sphereMapSetup();
-
         void changeColorUi(ofColor&);
+        void loadDefaultParam(bool&);
 
         // Post processingideoplaye
         void postprocSetup();
 
         // PANEL GUI
 		ofxPanel gui;
+        ofParameter<bool> defaultParam;
         ofParameter<int> cpuStress; // stress vritualy the cpu
-        ofParameter<glm::vec2> webcamSize; // logSize, scoreSize, targetWindowSize,;
-        ofParameter<glm::vec3> webcamPos;// targetWindowPos, logPos, scorePos;
         ofParameter<int> scene;
         ofParameter<int> integrityIncr;
         ofParameter<float> audioThresh;
         ofParameter<ofColor> colorPicker;
+
         bool showGui;
 
         ofParameterGroup parameters;
@@ -74,12 +68,16 @@ class ofApp : public ofBaseApp{
 		int height, width;
         ofColor uiColor;
 
-		// CAMERA 
+        /// Settings
+        ofxXmlSettings settings;
+        bool barduino;
+
+        /// CAMERA
 		ofEasyCam cam;
         bool camShake;
         float camShakeTime;
 
-		// game logic;
+        /// game logic;
 		int integrity = 100;
 			
         Render render;
@@ -87,7 +85,7 @@ class ofApp : public ofBaseApp{
         SphereMap sphereMap;
         Text3d text3d;
 
-//        Win win;
+        /// Win win;
         Data data;
         WinCode winCode;
         WinCpu winCpu;
@@ -97,6 +95,12 @@ class ofApp : public ofBaseApp{
         Camera webcam;
         UiMisc uiMisc;
         Glitcher glitcherCam, glitcherLogo, glitcherVideo;
+
+        OverHeating overheating;
+        Boot boot;
+        PostProc postCode, postPixel, postProc;
+
+//        Tunnel3d tunnel3d;
 
 		/// DMX
 

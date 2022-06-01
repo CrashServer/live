@@ -3,18 +3,19 @@
 
 Data::Data(){}
 
-void Data::setup(){
+void Data::setup(bool barduino){
     oscReceiver.setup(PORTOSC);
     maxLineCode = 40;
     vectorCode.assign(maxLineCode + 1, ">> CrashServer OS");
     vectorSymbol.assign(maxLineCode + 1, '!');
     bang = '0';
-    //oscReceiver.setup(PORTUDP);
-    //ofxUDPSettings settings;
-    //settings.receiveOn(PORTUDP);
-    //settings.blocking = false;
-    //udpConnection.Setup(settings);
 
+    if (barduino){
+        serial.setup(0, 115200);
+        this->barduino = barduino;
+    }
+    else {barduino = false;}
+    isServerActive = false;
 }
 
 void Data::update(int cpuStress, int maxCodeWidth) {
@@ -37,6 +38,10 @@ void Data::update(int cpuStress, int maxCodeWidth) {
             vectorCode.push_back(txt);
             vectorSymbol.push_back('#');
             bang ='#';
+            if (barduino){
+                serial.writeByte('g'); // send arduino
+                serial.flush();
+            }
         }
         else if (oscAdress == "/zbdmCode") {
             string txt = messageOsc.getArgAsString(0);
@@ -44,6 +49,10 @@ void Data::update(int cpuStress, int maxCodeWidth) {
             vectorCode.push_back(txt);
             vectorSymbol.push_back('!');
             bang='!';
+            if (barduino){
+                serial.writeByte('o'); // send arduino
+                serial.flush();
+            }
         }
         else if (oscAdress == "/serverCode") {
             string txt = messageOsc.getArgAsString(0);
@@ -51,30 +60,18 @@ void Data::update(int cpuStress, int maxCodeWidth) {
             vectorCode.push_back(txt);
             vectorSymbol.push_back('@');
             bang='@';
+            if (barduino){
+                serial.writeByte('r'); // send arduino
+                serial.flush();
+            }
+            delayServerActivity = serverInitTimer;
+            isServerActive = true;
         }
     }
-
-    //    // Udp Code player *2 + Code Server
-    //    char udpMessage[500];
-    //    udpConnection.Receive(udpMessage,500);
-    //    string message=udpMessage;
-    //    char msgType = message[0];
-    //    if (vectorCode.size() >= maxLineCode){
-    //        vectorCode.erase(vectorCode.begin());
-    //        vectorSymbol.erase(vectorSymbol.begin());
-    //        }
-    //    if (message!=""){
-    //        if (msgType == '_'){
-    //            superBang();
-    //        }
-    //        else {
-    //            string txt = message.erase(0,1);
-    //            txt = insertNewlines(txt, maxCodeWidth); // do on receive to avoid on udpate, cpu efficience
-    //            vectorCode.push_back(txt);
-    //            vectorSymbol.push_back(msgType);
-    //            bang(msgType);
-    //            }
-    //        }
+    if (delayServerActivity > 0) {
+        delayServerActivity--;
+    }
+    else {isServerActive = false;}
 }
 
 // return a text with a new line every x

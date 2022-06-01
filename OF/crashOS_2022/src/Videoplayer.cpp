@@ -7,46 +7,46 @@ void Videoplayer::setup(){
     // Don't forget in ofxImageSequencePlayback.h to change mSequence to public and not private.
     // and add mSequence.enableThreadedLoad(true); in ofxImageSequencePlayback::newSequenceSetup()
 
-    // videoPlayer
     width = ofGetWidth();
     height = ofGetHeight();
     pos = glm::vec3(0,0,0);
     size = glm::vec2(width, height);
     bthread = true;
+    vidFps = 60.0f;
 
+    // Fbo init
     videoFbo.allocate(width, height, GL_RGBA);
     videoFbo.begin();
         ofClear(0,0,0, 0);
     videoFbo.end();
 
-    videoFbo.readToPixels(fboPixels);
-    image.setFromPixels(fboPixels);
+    fxFbo.allocate(width/10, height/10, GL_RGBA);
 
-    alpha = 20; // video blending
+    // index all video directory
+    setupIndex();
+
+    // list all video from category 0 and random select a video
     vidCat = 0;
-    videoDir.listDir("video/");
+    videoDir.listDir(videoCat.getPath(vidCat));
     videoDir.sort();
-    // outputs main themes [0/1/2]
-    videoGrp.listDir(videoDir.getPath(vidCat));
-    videoGrp.sort();
-//    vidId = ofRandom(0,videoGrp.size());
-    vidId = 0;
-    // output all selected videos in selected [vidCat] theme
-//    for (unsigned int i = 0; i < videoGrp.size(); i++) {
-//        ofLogNotice("output all selected videos in selected theme");
-//        ofLogNotice(videoGrp.getPath(i));
-//    }
+    vidId = ofRandom(0, videoDir.size());
 
-    vid.listDir(videoGrp.getPath(vidId));
-    vid.sort();
-//    ofLogNotice("display selected video");
-//    ofLogNotice(videoGrp.getPath(vidId));
+    // load and play video
     mySequence.mSequence.enableThreadedLoad(bthread);
-    mySequence.loadSequence(videoGrp.getPath(vidId), 30.0f);
+    mySequence.loadSequence(videoDir.getPath(vecVideoDirIdx[vidCat][vidId]), vidFps);
     mySequence.setShouldLoop(true);
     mySequence.play();
 
-    // 3D
+    // remove video index
+    vecVideoDirIdx[vidCat].erase(std::remove(vecVideoDirIdx[vidCat].begin(), vecVideoDirIdx[vidCat].end(), vidId), vecVideoDirIdx[vidCat].end());
+
+//    for (int cat=0; cat < vecVideoDirIdx.size(); cat++){
+//        cout << ofToString(cat) << " : " << ofToString(vecVideoDirIdx[cat]) << endl;
+//        }
+
+    // 3D setup
+    videoFbo.readToPixels(fboPixels);
+    image.setFromPixels(fboPixels);
     //Set up vertices
     for (int y=0; y<H; y++) {
         for (int x=0; x<W; x++) {
@@ -68,36 +68,51 @@ void Videoplayer::setup(){
             mesh.addTriangle( i2, i4, i3 );
             }
         }
+
+    // Glitch Fbo
+    vecGlitch.reserve(100);
+    for (int x=0; x<10; x++){
+        for (int y=0; y<10; y++){
+            vecGlitch.push_back(glm::vec2(x,y));
+        }
+    }
+    ofRandomize(vecGlitch);
+
 }
 
-void Videoplayer::update(int _videoCat, bool b3d, float audioRms){
-    if (_videoCat > videoDir.size()){_videoCat = videoDir.size()-1;}
-
-    if (_videoCat != vidCat){
-        videoGrp.listDir(videoDir.getPath(_videoCat));
-        mySequence.loadSequence(videoGrp.getPath(ofRandom(0,videoGrp.size())), 30.0f);
-        vidCat = _videoCat;
-    }
+void Videoplayer::update(int integrity, bool b3d, float audioRms){
+    // reset vector glitch order at new video
+    this->integrity = integrity;
+    if (integrity<1){ofRandomize(vecGlitch);}
 
     if (!mySequence.mSequence.isLoading()){
         mySequence.update();
 
         videoFbo.begin();
             ofEnableAlphaBlending();
-            ofSetColor(255, 255, 255, alpha);
+            ofSetColor(255, 255, 255, ofMap(integrity, 0,100,30,255, true));
             ofScale(size.x / 1280.0, size.y / 720.0);
             mySequence.draw();
             ofDisableAlphaBlending();
         videoFbo.end();
+
+        /// FXfbo remplissage des carrés de destruction
+        fxFbo.begin();
+            for (int i = 0; i < 10; i++) {
+                ofSetColor(ofRandom(0, 255), ofRandom(10,180));
+                ofDrawRectangle(ofRandom(0, width/10), ofRandom(0, height/10), ofRandom(1, 5), ofRandom(1, 5));
+                }
+        fxFbo.end();
     }
     else {
         ofPopStyle();
         float loading = mySequence.mSequence.percentLoaded();
-        if (loading<0.9){
+        if (loading<0.98){
             videoFbo.allocate((int) ofMap(width*loading+ofRandom(1,30), 0,width+30,1,width, true),
                               (int) ofMap(height*loading+ofRandom(1,30), 0,height+30,1,height, true) , GL_RGBA);
             videoFbo.begin();
-            ofSetColor(ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255)));
+            fxFbo.draw(ofRandom(0,width),ofRandom(0,height));
+            ofSetColor(ofColor(ofRandom(0,255)));
             ofDrawRectangle(ofRandom(0,width), ofRandom(0,height), ofRandom(1,100), ofRandom(1,100));
             ofDrawBitmapString("Loading " + ofToString(loading*100) + " %", ofRandom(0,width*loading), ofRandom(0,height*loading));
             videoFbo.end();
@@ -129,6 +144,18 @@ void Videoplayer::draw(bool b3d){
     else {
         ofSetColor(ofColor::white);
         videoFbo.draw(0, 0, size.x, size.y);
+
+        // draw FX Fbo
+        ofDisableAlphaBlending();
+        ofDisableDepthTest();
+        float xpos = width/10;
+        float ypos = height/10;
+        for (int i=0; i< (100 - this->integrity); i++){
+            ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+            fxFbo.draw(vecGlitch[i].x*xpos, vecGlitch[i].y*ypos, xpos, ypos);
+            }
+        ofDisableBlendMode();
+
         }
     ofPopStyle();
     ofPopMatrix();
@@ -136,7 +163,7 @@ void Videoplayer::draw(bool b3d){
 
 void Videoplayer::update3d(float audioRms){
     if (mySequence.mSequence.isLoaded()){
-    //3D
+    // video on a 3d mesh audio reactive
     //convert fbo to ofImage format
     videoFbo.readToPixels(fboPixels);
     image.setFromPixels(fboPixels);
@@ -164,7 +191,7 @@ void Videoplayer::update3d(float audioRms){
         }
      }
     else if (mySequence.mSequence.isLoading()){
-
+        // 3d mesh audio reactive with color waiting for video loading
         for (int y=0; y<H; y++) {
             for (int x=0; x<W; x++) {
                 //Vertex index
@@ -180,9 +207,7 @@ void Videoplayer::update3d(float audioRms){
                                                    ofNoise(x * 0.05 + 300, y * 0.05 + 700, ofGetElapsedTimef()) * 255));
                 }
             }
-
-
-    }
+        }
 }
 
 void Videoplayer::draw3d(){
@@ -204,15 +229,112 @@ void Videoplayer::draw3d(){
     }
 }
 
-
+void Videoplayer::setupIndex(){
+    // List all video category and populate vector vecVideoDirIdx[cat][video]
+    videoCat.listDir("video/");
+    videoCat.sort();
+    vecVideoDirIdx.clear();
+    vecVideoDirIdx.reserve(videoCat.size());
+    vecVideoCat.reserve(videoCat.size());
+    for (unsigned int cat=0; cat< videoCat.size(); cat++){
+        vecVideoCat.push_back(cat);
+        videoDir.listDir(videoCat.getPath(cat));
+        vector <int> vidIdx;
+        for (unsigned int vid=0; vid<videoDir.size(); vid++){
+            vidIdx.push_back(vid);
+            }
+        vecVideoDirIdx.push_back(vidIdx);
+        }
+    vidCat = 0;
+}
 
 void Videoplayer::newSeq(){
-    videoGrp.listDir(videoDir.getPath(ofRandom(0,videoDir.size())));
-    mySequence.loadSequence(videoGrp.getPath(ofRandom(0,videoGrp.size())), 30.0f);
+    // load a random new video from a random new category
+    if( find(vecVideoCat.begin(), vecVideoCat.end(), vidCat) != vecVideoCat.end() ){
+//        vidCat = vecVideoCat[vidCat];
+        vidId = ofRandom(0, vecVideoDirIdx[vidCat].size());
+
+//     cout << "Video count. " << "vidcat : "<< vidCat << " / vidId : " << vidId << endl;
+
+        videoDir.listDir(videoCat.getPath(vidCat));
+        mySequence.loadSequence(videoDir.getPath(vecVideoDirIdx[vidCat][vidId]), vidFps);
+        // remove video index
+        vecVideoDirIdx[vidCat].erase(std::remove(vecVideoDirIdx[vidCat].begin(), vecVideoDirIdx[vidCat].end(), vecVideoDirIdx[vidCat][vidId]), vecVideoDirIdx[vidCat].end());
+
+        // remove category if no more videos
+        if (vecVideoDirIdx[vidCat].size()<=0){
+            vecVideoCat.erase(std::remove(vecVideoCat.begin(), vecVideoCat.end(), vidCat), vecVideoCat.end());
+            vidCat++;// next category
+        }
+        // reload all video if no more
+        if (vecVideoCat.size() <=0){
+            setupIndex();
+            }
+        }
+    else{
+        vidCat = vecVideoCat[ofRandom(0,vecVideoCat.size())];
+    }
+    //
+
+//    for (int cat=0; cat < vecVideoDirIdx.size(); cat++){
+//        cout << ofToString(cat) << " : " << ofToString(vecVideoDirIdx[cat]) << endl;
+//    }
+//    cout << "------------------" << endl;
+}
+
+void Videoplayer::newSeq(int _vidCat){
+    // load a random video from a category and check if category not empty
+    vidCat = _vidCat;
+    if( find(vecVideoCat.begin(), vecVideoCat.end(), vidCat) != vecVideoCat.end() ){
+        vidId = ofRandom(0, vecVideoDirIdx[vidCat].size());
+        videoDir.listDir(videoCat.getPath(vidCat));
+        mySequence.loadSequence(videoDir.getPath(vecVideoDirIdx[vidCat][vidId]), vidFps);
+
+        // remove video index
+        vecVideoDirIdx[vidCat].erase(std::remove(vecVideoDirIdx[vidCat].begin(), vecVideoDirIdx[vidCat].end(), vecVideoDirIdx[vidCat][vidId]), vecVideoDirIdx[vidCat].end());
+
+        // remove category if no more videos
+        if (vecVideoDirIdx[vidCat].size()<=0){
+            vecVideoCat.erase(std::remove(vecVideoCat.begin(), vecVideoCat.end(), vidCat), vecVideoCat.end());
+            vidCat++; // next category
+            }
+        // reload all video if no more
+        if (vecVideoCat.size() <= 0){
+            setupIndex();
+            }
+
+//    cout << "Video count. " << "vidcat : "<< vidCat << "/ vidId : " << vidId << endl;
+//    for (int cat=0; cat < vecVideoDirIdx.size(); cat++){
+//        cout << ofToString(cat) << " : " << ofToString(vecVideoDirIdx[cat]) << endl;
+//    }
+//    cout << "------------------" << endl;
+    }
+    else {
+        if (vecVideoCat.size() <= 0){
+            setupIndex();
+            }
+        newSeq();
+    }
+
 }
 
 void Videoplayer::videoSrcub(){
     mySequence.mSequence.getTextureForPercent(ofRandom(1,99));
 }
 
+
+void Videoplayer::resize(){
+    width = ofGetWidth();
+    height = ofGetHeight();
+    pos = glm::vec3(0,0,0);
+    size = glm::vec2(width, height);
+
+    // Fbo init
+    videoFbo.allocate(width, height, GL_RGBA);
+    videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoFbo.end();
+
+    fxFbo.allocate(width/10, height/10, GL_RGBA);
+}
 

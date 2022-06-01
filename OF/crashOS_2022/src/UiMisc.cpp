@@ -10,6 +10,10 @@ void UiMisc::setup(){
     logo.setShouldLoop(true);
     logo.play();
 
+    alert.loadSequence("ui/alert/", 24.0f);
+    alert.setShouldLoop(true);
+    alert.play();
+
     size = glm::vec2(logo.mSequence.getWidth(),logo.mSequence.getHeight());
     pos = glm::vec3(width / 2 - size.x/2, 0,0);
     uiFbo.allocate(size.x, size.y, GL_RGBA);
@@ -25,11 +29,11 @@ void UiMisc::update(bool blogo){
     }
 }
 
-void UiMisc::draw(bool blogo){
+void UiMisc::draw(bool blogo, bool isServerActive){
     if (blogo){
         ofPushMatrix();
         ofPushStyle();
-        ofEnableBlendMode(OF_BLENDMODE_ADD);
+        ofEnableBlendMode(OF_BLENDMODE_SCREEN);
 
             ofTranslate(pos.x, pos.y); // logo is 600 pixels, take half
             uiFbo.draw(0,0,size.x, size.y);
@@ -38,6 +42,20 @@ void UiMisc::draw(bool blogo){
         ofPopMatrix();
         ofPopStyle();
     }
+
+    /// Alert logo
+    if (isServerActive){
+        ofPushMatrix();
+        ofPushStyle();
+        ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+            ofTranslate(width/2, height/2);
+            alert.update();
+            alert.draw();
+        ofDisableBlendMode();
+        ofPopMatrix();
+        ofPopStyle();
+    }
+
 }
 
 void UiMisc::changeLogo(int index){

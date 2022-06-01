@@ -9,10 +9,13 @@ class Videoplayer {
 public:
     // methods
     void setup();
-    void update(int _videoCat=0, bool b3d=false, float audioRms=1);
+    void update(int integrity=100, bool b3d=false, float audioRms=1);
     void draw(bool b3d=false);
     void newSeq();
+    void newSeq(int _vidCat);
     void videoSrcub();
+    void setupIndex();
+    void resize();
 
     void update3d(float audioRms);
     void draw3d();
@@ -20,16 +23,25 @@ public:
     // variables
     ofxImageSequencePlayback mySequence;
 
-    ofDirectory videoDir;
-    ofDirectory videoGrp;
-    ofDirectory vid;
+//    ofDirectory videoDir; //-> category
+//    ofDirectory videoGrp; //-> dir
+
+    ofDirectory videoCat; // dir of category
+    ofDirectory videoDir; // dir of video
+    vector <int> vecVideoCat; // store category to track empty
+    vector <vector <int>> vecVideoDirIdx; // store videos sequence for each category
+
+
     int vidCat;
     int vidId;
-    ofFbo videoFbo;
+    float vidFps;
+    ofFbo videoFbo, fxFbo;
     int width, height;
-    int alpha;
 
     bool bthread;
+    int integrity;
+    vector<glm::vec2> vecGlitch;
+
 
     glm::vec3 pos;
     glm::vec2 size;
@@ -43,9 +55,9 @@ public:
     Videoplayer();
 
 private:
-    int W = 200; //Grid size
-    int H = 200;
-    int meshSize = 6;
+    int W = 100; //Grid size
+    int H = 100;
+    int meshSize = 20;
 };
 
 

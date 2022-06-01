@@ -1,4 +1,7 @@
 #include "drawwindows.h"
+#include "Getdata.h"
+
+
 
 Windo::Windo(){
 //    // Parametre
@@ -6,6 +9,9 @@ Windo::Windo(){
     height = ofGetHeight();
     font.load("ui/font/pixe.ttf", 24);
     fontCharBox = font.getStringBoundingBox("P", 0, 0); // size of a char
+}
+
+OverHeating::OverHeating(){
 }
 
 //-------------------------
@@ -144,7 +150,7 @@ void WinCpu::update(int scCPU){
         ofPushStyle();
         ofSetColor(ofColor(ofMap(scCPU, 0,70,0,255, true),ofMap(scCPU, 0,70,255,0, true),0));
         ofDrawCircle(ofMap(ofNoise(noiseCount*0.001, noiseCount*0.003),0,1,0,400),
-                     ofMap(ofNoise(noiseCount*0.004 , noiseCount*0.002),0,1,0,400),2);
+                     ofMap(ofNoise(noiseCount*0.004 , noiseCount*0.002),0,1,0,400),ofMap(scCPU, 0,100,2,15, true));
         ofPopStyle();
     cpuFbo.end();
 
@@ -210,13 +216,67 @@ void WinIntegrity::draw()
         Windo::drawWin(this->pos, this->size, this->uiColor);
         ofTranslate(pos->x + this->padding, pos->y + size->y/2 - fontCharBox.height, pos->z);
         ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
-        ofSetColor(ofColor::white);
+        ofSetColor(ofMap(integrity,100,0,0,255), ofMap(integrity,100,0,255,0),0);
         font.drawString("TARGET INTEGRITY " + ofToString(this->integrity) + "%"
                 + "\n" + nameModel, 0,0);
         ofEnableBlendMode(OF_BLENDMODE_DISABLED);
     ofPopMatrix();
     ofPopStyle();
 }
+
+void OverHeating::add(){
+    if (vecOverWindow.size() >= maxWindow){
+        vecOverWindow.erase(vecOverWindow.begin());
+        vecStringError.erase(vecStringError.begin());
+    }
+    Windo newWin;
+    newWin.size = glm::vec2(ofRandom(50,ofGetWidth()/2),ofRandom(50,ofGetHeight()/2));
+    newWin.pos = glm::vec3(ofRandom(0, ofGetWidth() - newWin.size->x),
+                           ofRandom(0, ofGetHeight() - newWin.size->y),
+                           0);
+    newWin.uiColor = ofColor(ofRandom(50,255), ofRandom(0,50), ofRandom(0,50));
+    vecOverWindow.push_back(newWin);
+    // generate string code error
+    float maxWidth = newWin.size->x / newWin.fontCharBox.width;
+    float maxHeight = newWin.size->y / newWin.fontCharBox.height;
+    float maxNbrChar = ( maxWidth * maxHeight * 0.4);
+    string generateString;
+    for (u_int i=0; i< (int) maxNbrChar; i++){
+        char ch = ofRandom(33,126);
+        generateString.push_back(ch);
+        }
+    generateString = insertNewlines(generateString, (int) ofClamp((maxWidth - 3), 3.0,200.0));
+    vecStringError.push_back(generateString);
+}
+
+
+void OverHeating::draw(){
+    ofDisableAlphaBlending();
+    ofDisableDepthTest();
+    for (unsigned int i=0; i<vecOverWindow.size(); i++){
+        vecOverWindow[i].drawWin(vecOverWindow[i].pos, vecOverWindow[i].size, vecOverWindow[i].uiColor);
+        vecOverWindow[i].font.drawString(vecStringError[i],vecOverWindow[i].pos->x + 15, vecOverWindow[i].pos->y + 25);
+    }
+}
+
+void OverHeating::clear(){
+    vecOverWindow.clear();
+    vecStringError.clear();
+}
+
+string OverHeating::insertNewlines(string in, const size_t every_n)
+{
+    string out;
+    out.reserve(in.size() + in.size() / every_n);
+    for (std::string::size_type i = 0; i < in.size(); i++) {
+        if (!(i % every_n) && i) {
+            out.push_back('\n');
+        }
+        out.push_back(in[i]);
+    }
+    return out;
+}
+
 
 //void ofApp::windowImageDraw(glm::vec3 windowPos, glm::vec2 windowSize, ofColor winColor){
 //    ofPushStyle();

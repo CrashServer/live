@@ -10,7 +10,7 @@ public:
     // methods
     void setup();
     void update(bool blogo);
-    void draw(bool blogo);
+    void draw(bool blogo, bool isServerActive=false);
     void changeLogo(int index=0);
 
     // variables
@@ -22,6 +22,7 @@ public:
 
     ofxImageSequencePlayback logo;
     ofFbo uiFbo;
+    ofxImageSequencePlayback alert;
 
     // constructor
     UiMisc();

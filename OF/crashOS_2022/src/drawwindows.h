@@ -73,6 +73,7 @@ public:
     void update(int integrity, string nameModel=" ");
     void draw();
 
+
     int integrity;
     string nameModel;
     ofFbo integrityFbo;
@@ -80,6 +81,24 @@ public:
 private:
 };
 
+class OverHeating{
+public:
+    //void setup();
+    //void update();
+    void draw();
+    void add();
+    void clear();
+    string insertNewlines(string in, const size_t every_n);
+
+    bool isOverheating;
+    float initTime;
+    int maxWindow = 100;
+    vector <Windo> vecOverWindow;
+    vector <string> vecStringError;
+
+    OverHeating();
+private:
+};
 
 
 #endif // DRAWWINDOWS_H

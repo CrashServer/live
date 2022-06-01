@@ -59,7 +59,7 @@ void Render::changeModel(int targetID){
             targetMeshInt = 0; // restart to begin
         }
 
-        targetModel.load("target/" + ofToString(targetID) + ".obj");
+        targetModel.loadModel("target/" + ofToString(targetID) + ".obj");
         destroyedMeshVector.assign(targetModel.getMeshCount(), false);
         currentModelSubAttack= 0;
         currentModelSubNames = targetModel.getMeshNames();
@@ -305,3 +305,41 @@ void ProcBackground::draw(){
     ofPopStyle();
 }
 
+ObjectTunnel::ObjectTunnel(){}
+Tunnel3d::Tunnel3d(){}
+
+void Tunnel3d::setup(){
+    width=ofGetWidth();
+    height=ofGetHeight();
+    nbrObject = 20;
+    vecObject.reserve(nbrObject);
+    glm::vec3 boxSize = glm::vec3(50,50,50);
+
+    for (int i=0; i<nbrObject; i++){
+        ObjectTunnel box;
+        box.size = boxSize;
+        box.pos = glm::vec3(0,0,i*boxSize.z);
+        box.object.set(box.pos.x, box.pos.y, box.pos.z);
+        vecObject.push_back(box);
+    }
+}
+
+void Tunnel3d::update(){
+
+}
+
+void Tunnel3d::draw(){
+    ofPushMatrix();
+    ofPushStyle();
+    ofEnableDepthTest();
+    ofSetLineWidth(10);
+    ofTranslate(0, 0);
+    ofSetColor(255,0,0);
+        for (int i=0; i<nbrObject;i++){
+            vecObject[i].object.draw();
+        }
+    ofDisableDepthTest();
+
+    ofPopMatrix();
+    ofPopStyle();
+}

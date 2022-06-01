@@ -9,17 +9,28 @@ void ofApp::setup(){
 	/// rules : a mesh in obj has 5 submeshes to be destroyed (not more)
 	/// at some point the will be safeguard for errors, not yet 
 
+    settings.loadFile("xml/config.xml");
+
+    width = settings.getValue("config:width", 1920);
+    height = settings.getValue("config:height", 1080);
+    barduino = settings.getValue("config:arduino", false);
+
 	/// SETUP 
     ofSetFrameRate(60);
-	width = ofGetWidth();
-	height = ofGetHeight();
+    ofSetWindowShape(width, height);
     uiColor = ofColor(0,20,20);
     ofSetBackgroundColor(0);
 
-//    fbo.allocate(width, height, GL_RGBA);
-
 	/// NETWORK
-    data.setup();
+    data.setup(barduino);
+    postCode.begin();
+        boot.draw();
+    ofBlendMode(OF_BLENDMODE_MULTIPLY);
+    postProc.begin();
+        boot.draw();
+    postProc.end();
+    ofBlendMode(OF_BLENDMODE_DISABLED);
+    postCode.end();
 
 	/// 3D MODELS
 //    postprocSetup();
@@ -28,16 +39,24 @@ void ofApp::setup(){
     text3d.setup();
     procBackground.setup();
 
+//    tunnel3d.setup();
+
     /// Windows
     winCode.setup(10, uiColor);
     winCpu.setup(10, uiColor);
     winIntegrity.setup(10, uiColor);
     uiMisc.setup();
 
+    boot.setup();
+
     /// audio video
     webcam.setup(uiColor);
     videoplayer.setup();
     audioFft.setup();
+
+    // Post processing
+    postProc.setup(false, true);
+    postCode.setup(true, false, true);
 
     // Glitcher
     glitcherCam.setup(webcam.camFbo);
@@ -45,6 +64,7 @@ void ofApp::setup(){
     glitcherVideo.setup(videoplayer.videoFbo);
 
     // GUI
+    parameters.add(defaultParam.set("Reset default parameters", false));
     parameters.add(winCode.parameters);
     parameters.add(winCpu.parameters);
     parameters.add(winIntegrity.parameters);
@@ -55,13 +75,15 @@ void ofApp::setup(){
     parameters.add(procBackground.parameters);
     parameters.add(audioThresh.set("audio Threshold", 1.0, 0.0, 10.0));
     parameters.add(colorPicker.set("Color Ui", uiColor, ofColor(0,0,0), ofColor(255,255,255)));
-    parameters.add(scene.set("scene", 4, 0, 7));
+    parameters.add(scene.set("scene", 0, 0, 7));
 
     colorPicker.addListener(this, &ofApp::changeColorUi);
+    defaultParam.addListener(this, &ofApp::loadDefaultParam);
 
-    gui.setup(parameters);
+    gui.setup(parameters, "xml/mysettings.xml");
     gui.setPosition(50,50);
     gui.minimizeAll();
+    gui.loadFromFile("xml/mysettings.xml");
     showGui = true;
 }
 
@@ -73,11 +95,14 @@ void ofApp::update(){
 
     //changeColorUi();
 
-    if (data.scCPU>60){scene=3;}
-    else if (data.scCPU>40){scene=2;}
+    if (data.scCPU>80){scene=3;}
 
     switch (scene) {
-    case 0: // Video player + webcam + windows
+    case 0:
+        boot.update();
+        break;
+
+    case 1: // Video player + webcam + windows
         webcam.update();
 
         winCode.update(data.vectorCode);
@@ -86,10 +111,10 @@ void ofApp::update(){
 
         uiMisc.update(true);
 
-        videoplayer.update(0, false);
+        videoplayer.update(integrity, false);
         break;
 
-    case 1: // videoplayer + webcam + windows + glitcher logo
+    case 2: // videoplayer + webcam + windows + glitcher logo
         glitcherLogo.update(uiMisc.uiFbo);
 
         winCode.update(data.vectorCode);
@@ -99,10 +124,10 @@ void ofApp::update(){
         uiMisc.update(true);
         webcam.update();
 
-        videoplayer.update(1, false);
+        videoplayer.update(integrity, false);
         break;
 
-    case 2: // Video player 3d + windows + webcam
+    case 3: // Video player 3d + windows + webcam
         winCode.update(data.vectorCode);
         winCpu.update(data.scCPU);
         winIntegrity.update(integrity);
@@ -111,10 +136,10 @@ void ofApp::update(){
         webcam.update();
         audioFft.update();
 
-        videoplayer.update(2, true, audioFft.beat.getMagnitude()*audioThresh/20);
+        videoplayer.update(integrity, true, audioFft.beat.getMagnitude()*audioThresh/20);
         break;
 
-    case 3: // glitch video & webcam  + code
+    case 4: // glitch video & webcam  + code
         audioFft.update();
         glitcherLogo.update(uiMisc.uiFbo, audioFft.beat.getMagnitude()*audioThresh/20);
         glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
@@ -128,13 +153,15 @@ void ofApp::update(){
         uiMisc.update(true);
         webcam.update();
 
-        videoplayer.update(3);
+        videoplayer.update();
         break;
 
-    case 4:
+    case 5:
         winCode.update(data.vectorCode);
         winCpu.update(data.scCPU);
         winIntegrity.update(integrity, render.currentText);
+
+//        tunnel3d.update();
         break;
 
     default:
@@ -144,7 +171,7 @@ void ofApp::update(){
 
         uiMisc.update(true);
         webcam.update();
-        videoplayer.update(3);
+        videoplayer.update();
         break;
     }
 
@@ -164,21 +191,47 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+
 	switch (scene) {
 
-    case 0: // Video player + webcam + windows
-        videoplayer.draw();
-        webcam.draw();
-
-        winCode.draw(data.vectorCode, data.vectorSymbol);
-        winCpu.draw();
-        winIntegrity.draw();
-
-        uiMisc.draw(true);
+    case 0:
+        postCode.begin();
+            boot.draw();
+        ofBlendMode(OF_BLENDMODE_MULTIPLY);
+        postProc.begin();
+            boot.draw();
+        postProc.end();
+        ofBlendMode(OF_BLENDMODE_DISABLED);
+        postCode.end();
 
         break;
 
-    case 1: // videoplayer + webcam + windows + glitcher logo
+    case 1: // Video player + webcam + windows
+
+        postCode.begin();
+            videoplayer.draw();
+//        ofBlendMode(OF_BLENtrueDMODE_MULTIPLY);
+//        postProc.begin();
+            webcam.draw();
+//        postProc.end();
+//        ofBlendMode(OF_BLENDMODE_DISABLED);
+
+postCode.end();
+
+    postProc.begin();
+        winCode.draw(data.vectorCode, data.vectorSymbol);
+        winCpu.draw();
+        winIntegrity.draw();
+
+
+//        cout << "is active : " << data.isServerActive << endl;
+        uiMisc.draw(true, data.isServerActive);
+
+        postProc.end();
+
+        break;
+
+    case 2: // videoplayer + webcam + windows + glitcher logo
         videoplayer.draw();
         webcam.draw();
 
@@ -186,12 +239,12 @@ void ofApp::draw(){
         winCpu.draw();
         winIntegrity.draw();
 
-        uiMisc.draw(false);
+        uiMisc.draw(true, data.isServerActive);
 
         glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
         break;
 
-    case 2: // Video player 3d + windows + webcam
+    case 3: // Video player 3d + windows + webcam
         videoplayer.draw(true);
         webcam.draw();
 
@@ -199,10 +252,10 @@ void ofApp::draw(){
         winCpu.draw();
         winIntegrity.draw();
 
-        uiMisc.draw(true);
+        uiMisc.draw(true, data.isServerActive);
         break;
 
-    case 3: // glitch video & webcam & logo + code
+    case 4: // glitch video & webcam & logo + code
         glitcherVideo.draw(videoplayer.pos, videoplayer.size);
 
         winCode.draw(data.vectorCode, data.vectorSymbol);
@@ -210,25 +263,26 @@ void ofApp::draw(){
         winIntegrity.draw();
 
         webcam.draw();
-        uiMisc.draw(false);
+        uiMisc.draw(false, data.isServerActive);
 
         glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
         glitcherCam.draw(webcam.pos, webcam.size);
 
         break;
 
-    case 4:
+    case 5:
         cam.begin();
         cam.setDistance(260);
             sphereMap.draw();
             render.draw();
             text3d.draw(render.currentText);
+            //tunnel3d.draw();
         cam.end();
 
         winCode.draw(data.vectorCode, data.vectorSymbol);
         winCpu.draw();
         winIntegrity.draw();
-        uiMisc.draw(false);
+        uiMisc.draw(false, data.isServerActive);
 
         break;
 
@@ -242,6 +296,8 @@ void ofApp::draw(){
         uiMisc.draw(true);
 		break;
 	}
+
+    overheating.draw();
 
     if (showGui) {
         ofDisableAlphaBlending();
@@ -265,27 +321,22 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
 }
 
 //--------------------------------------------------------------
@@ -313,8 +364,7 @@ void ofApp::windowResized(int w, int h){
 
     /// audio video
     webcam.setup(uiColor);
-    videoplayer.setup();
-    //audioFft.setup();
+    videoplayer.resize();
 
     // Glitcher
     glitcherCam.setup(webcam.camFbo);
@@ -373,6 +423,12 @@ void ofApp::bang(char playerID){
         bigBang();
     }
 
+    if (data.scCPU > 80){
+        overheating.add();
+        }
+    else {
+        overheating.clear();
+    }
     switch (scene) {
     case 0:
         videoplayer.videoSrcub();
@@ -410,6 +466,8 @@ void ofApp::bang(char playerID){
 
 void ofApp::bigBang()
 {
+    if (data.scCPU<80){scene=0;}
+
     switch (scene) {
     case 0:
         videoplayer.newSeq();
@@ -441,7 +499,7 @@ void ofApp::bigBang()
         break;
     }
 
-    integrity = 100;
+    integrity = 100 + integrityIncr;
     uiMisc.changeLogo();
 //  intMeshSlider = ofRandom(0, intMeshSlider.getMax());
 //	extMeshSlider = ofRandom(0, extMeshSlider.getMax());
@@ -459,7 +517,7 @@ void ofApp::bigBang()
 
 void ofApp::superBang()
 {
-    scene = ofRandom(0,4);
+    scene = ofRandom(0,3);
 }
 
 void ofApp::changeColorUi(ofColor &){
@@ -469,6 +527,8 @@ void ofApp::changeColorUi(ofColor &){
     webcam.uiColor = colorPicker;
 }
 
-
+void ofApp::loadDefaultParam(bool &){
+    gui.loadFromFile("xml/default_settings.xml");
+}
 
 

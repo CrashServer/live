@@ -2,3 +2,4 @@ ofxAssimpModelLoader
 ofxGui
 ofxNetwork
 ofxOsc
+ofxPosProcessing

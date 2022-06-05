@@ -14,6 +14,12 @@ Project{
         files: [
             "src/Audio.cpp",
             "src/Audio.h",
+            "src/boot.cpp",
+            "src/boot.h",
+            "src/dmx.cpp",
+            "src/dmx.h",
+            "src/ofxBeat.cpp",
+            "src/ofxBeat.h",
             "src/Camera.cpp",
             "src/Camera.h",
             "src/Getdata.cpp",
@@ -45,6 +51,9 @@ Project{
             'ofxImageSequence',
             'ofxNetwork',
             'ofxOsc',
+            'ofxXmlSettings',
+            'ofxPostProcessing',
+            'ofxGenericDmx'
         ]
 
         // additional flags for the project. the of module sets some
@@ -58,7 +67,7 @@ Project{
         of.defines: []          // defines are passed as -D to the compiler
                                 // and can be checked with #ifdef or #if in the code
         of.frameworks: []       // osx only, additional frameworks to link with the project
-        of.staticLibraries: []  // static libraries
+        of.staticLibraries: ["ftdi"]  // static libraries
         of.dynamicLibraries: [] // dynamic libraries
 
         // other flags can be set through the cpp module: http://doc.qt.io/qbs/cpp-module.html

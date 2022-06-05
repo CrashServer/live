@@ -1,4 +1,4 @@
-
+#pragma once
 #ifndef _FFT
 #define _FFT
 

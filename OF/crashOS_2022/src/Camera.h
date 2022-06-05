@@ -2,7 +2,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "drawwindows.h"
 
 class Camera {

@@ -1,3 +1,4 @@
+#include "ofApp.h"
 #include "UiMisc.h"
 
 UiMisc::UiMisc(){

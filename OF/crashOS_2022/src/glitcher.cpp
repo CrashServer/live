@@ -1,3 +1,4 @@
+#include "ofApp.h"
 #include "glitcher.h"
 
 Glitcher::Glitcher(){

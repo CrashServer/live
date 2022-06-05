@@ -2,7 +2,7 @@
 #ifndef VIDEOPLAYER_H
 #define VIDEOPLAYER_H
 
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "ofxImageSequencePlayback.h"
 
 class Videoplayer {

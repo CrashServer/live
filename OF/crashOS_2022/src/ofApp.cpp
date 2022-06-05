@@ -16,7 +16,7 @@ void ofApp::setup(){
     barduino = settings.getValue("config:arduino", false);
 
 	/// SETUP 
-    ofSetFrameRate(60);
+    ofSetFrameRate(30);
     ofSetWindowShape(width, height);
     uiColor = ofColor(0,20,20);
     ofSetBackgroundColor(0);
@@ -53,6 +53,7 @@ void ofApp::setup(){
     webcam.setup(uiColor);
     videoplayer.setup();
     audioFft.setup();
+    dmx.setup();
 
     // Post processing
     postProc.setup(false, true);
@@ -92,6 +93,9 @@ void ofApp::update(){
 	ofSetWindowTitle("CRASH/OS " + (ofToString((int) ofGetFrameRate())));
     data.update(cpuStress, winCode.maxCodeWidth);
     bangUpdate(data.bang);
+
+    audioFft.update();
+//    dmx.update(ofColor(255,0,audioFft.beat.getBand(0)*255), ofColor(0,audioFft.beat.getBand(5)*255,255));
 
     //changeColorUi();
 
@@ -134,7 +138,7 @@ void ofApp::update(){
 
         uiMisc.update(true);
         webcam.update();
-        audioFft.update();
+//        audioFft.update();
 
         videoplayer.update(integrity, true, audioFft.beat.getMagnitude()*audioThresh/20);
         break;
@@ -208,7 +212,6 @@ void ofApp::draw(){
 
     case 1: // Video player + webcam + windows
 
-        postCode.begin();
             videoplayer.draw();
 //        ofBlendMode(OF_BLENtrueDMODE_MULTIPLY);
 //        postProc.begin();
@@ -216,18 +219,15 @@ void ofApp::draw(){
 //        postProc.end();
 //        ofBlendMode(OF_BLENDMODE_DISABLED);
 
-postCode.end();
-
-    postProc.begin();
-        winCode.draw(data.vectorCode, data.vectorSymbol);
+        postCode.begin();
+        winCode.draw();
         winCpu.draw();
         winIntegrity.draw();
+        postCode.end();
 
 
 //        cout << "is active : " << data.isServerActive << endl;
         uiMisc.draw(true, data.isServerActive);
-
-        postProc.end();
 
         break;
 
@@ -235,7 +235,7 @@ postCode.end();
         videoplayer.draw();
         webcam.draw();
 
-        winCode.draw(data.vectorCode, data.vectorSymbol);
+        winCode.draw();
         winCpu.draw();
         winIntegrity.draw();
 
@@ -248,7 +248,7 @@ postCode.end();
         videoplayer.draw(true);
         webcam.draw();
 
-        winCode.draw(data.vectorCode, data.vectorSymbol);
+        winCode.draw();
         winCpu.draw();
         winIntegrity.draw();
 
@@ -258,7 +258,7 @@ postCode.end();
     case 4: // glitch video & webcam & logo + code
         glitcherVideo.draw(videoplayer.pos, videoplayer.size);
 
-        winCode.draw(data.vectorCode, data.vectorSymbol);
+        winCode.draw();
         winCpu.draw();
         winIntegrity.draw();
 
@@ -279,7 +279,7 @@ postCode.end();
             //tunnel3d.draw();
         cam.end();
 
-        winCode.draw(data.vectorCode, data.vectorSymbol);
+        winCode.draw();
         winCpu.draw();
         winIntegrity.draw();
         uiMisc.draw(false, data.isServerActive);
@@ -288,7 +288,7 @@ postCode.end();
 
 	default:
         videoplayer.draw();
-        winCode.draw(data.vectorCode, data.vectorSymbol);
+        winCode.draw();
         winCpu.draw();
         winIntegrity.draw();
 
@@ -316,6 +316,12 @@ void ofApp::keyPressed(int key) {
 	if (key == 'c') superBang();
 	if (key == 'f') ofToggleFullscreen();
 	if (key == 'g') showGui = !showGui;
+}
+
+//--------------------------------------------------------------
+void ofApp::exit(){
+    dmx.exit();
+
 }
 
 
@@ -371,6 +377,7 @@ void ofApp::windowResized(int w, int h){
     glitcherLogo.setup(uiMisc.uiFbo);
     glitcherVideo.setup(videoplayer.videoFbo);
 
+    boot.resize();
 }
 
 //--------------------------------------------------------------
@@ -431,10 +438,23 @@ void ofApp::bang(char playerID){
     }
     switch (scene) {
     case 0:
+
         videoplayer.videoSrcub();
         integrity -= integrityIncr;
         break;
     case 1:
+        if (playerID =='!'){
+            ofColor dmx1 = ofColor(0,255,0);
+            dmx.update(dmx1, ofColor(0,0,0));
+        }
+        else if (playerID =='#'){
+            ofColor dmx1 = ofColor(0,0,255);
+            dmx.update(dmx1, ofColor(0,0,0));
+        }
+        else if (playerID =='@'){
+            ofColor dmx1 = ofColor(255,0,0);
+            dmx.update(dmx1, ofColor(0,0,0));
+        }
         videoplayer.videoSrcub();
         integrity -= integrityIncr;
         break;
@@ -466,7 +486,7 @@ void ofApp::bang(char playerID){
 
 void ofApp::bigBang()
 {
-    if (data.scCPU<80){scene=0;}
+    if (data.scCPU<80){scene=1;}
 
     switch (scene) {
     case 0:
@@ -517,7 +537,7 @@ void ofApp::bigBang()
 
 void ofApp::superBang()
 {
-    scene = ofRandom(0,3);
+    scene = ofRandom(1,3);
 }
 
 void ofApp::changeColorUi(ofColor &){

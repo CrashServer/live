@@ -1,13 +1,23 @@
-#include "Getdata.h"
 #include "ofApp.h"
+//#include "Getdata.h"
 
 Data::Data(){}
+CodeLine::CodeLine(){
+    code = ">> CrashServer";
+    symbol = '!';
+    typeCodePos = 0;
+}
+
 
 void Data::setup(bool barduino){
     oscReceiver.setup(PORTOSC);
     maxLineCode = 40;
-    vectorCode.assign(maxLineCode + 1, ">> CrashServer OS");
-    vectorSymbol.assign(maxLineCode + 1, '!');
+    for (int i=0; i<maxLineCode; i++){
+        CodeLine lineC;
+        vectorCode.push_back(lineC);
+    }
+
+    //    vectorCode.assign(maxLineCode + 1, CodeLine);
     bang = '0';
 
     if (barduino){
@@ -21,7 +31,6 @@ void Data::setup(bool barduino){
 void Data::update(int cpuStress, int maxCodeWidth) {
     if (vectorCode.size() >= maxLineCode) {
         vectorCode.erase(vectorCode.begin());
-        vectorSymbol.erase(vectorSymbol.begin());
     }
     if (oscReceiver.hasWaitingMessages()) {
         ofxOscMessage messageOsc;
@@ -33,10 +42,14 @@ void Data::update(int cpuStress, int maxCodeWidth) {
             bang = 'c';
             }
         else if (oscAdress == "/svdkCode") {
-            string txt = messageOsc.getArgAsString(0);
-            txt = insertNewlines(txt, maxCodeWidth);
-            vectorCode.push_back(txt);
-            vectorSymbol.push_back('#');
+            //string txt = messageOsc.getArgAsString(0);
+            //txt = insertNewlines(txt, maxCodeWidth);
+            CodeLine codeLine;
+            codeLine.code = messageOsc.getArgAsString(0);
+            codeLine.symbol = '#';
+            vectorCode.push_back(codeLine);
+            //vectorCode.push_back(txt);
+            //vectorSymbol.push_back('#');
             bang ='#';
             if (barduino){
                 serial.writeByte('g'); // send arduino
@@ -44,10 +57,14 @@ void Data::update(int cpuStress, int maxCodeWidth) {
             }
         }
         else if (oscAdress == "/zbdmCode") {
-            string txt = messageOsc.getArgAsString(0);
-            txt = insertNewlines(txt, maxCodeWidth);
-            vectorCode.push_back(txt);
-            vectorSymbol.push_back('!');
+//            string txt = messageOsc.getArgAsString(0);
+//            txt = insertNewlines(txt, maxCodeWidth);
+//            vectorCode.push_back(txt);
+//            vectorSymbol.push_back('!');
+            CodeLine codeLine;
+            codeLine.code = messageOsc.getArgAsString(0);
+            codeLine.symbol = '!';
+            vectorCode.push_back(codeLine);
             bang='!';
             if (barduino){
                 serial.writeByte('o'); // send arduino
@@ -55,10 +72,14 @@ void Data::update(int cpuStress, int maxCodeWidth) {
             }
         }
         else if (oscAdress == "/serverCode") {
-            string txt = messageOsc.getArgAsString(0);
-            txt = insertNewlines(txt, maxCodeWidth);
-            vectorCode.push_back(txt);
-            vectorSymbol.push_back('@');
+//            string txt = messageOsc.getArgAsString(0);
+//            txt = insertNewlines(txt, maxCodeWidth);
+//            vectorCode.push_back(txt);
+//            vectorSymbol.push_back('@');
+            CodeLine codeLine;
+            codeLine.code = messageOsc.getArgAsString(0);
+            codeLine.symbol = '@';
+            vectorCode.push_back(codeLine);
             bang='@';
             if (barduino){
                 serial.writeByte('r'); // send arduino
@@ -75,16 +96,16 @@ void Data::update(int cpuStress, int maxCodeWidth) {
 }
 
 // return a text with a new line every x
-string Data::insertNewlines(string in, const size_t every_n)
-{
-    string out;
-    out.reserve(in.size() + in.size() / every_n);
-    for (std::string::size_type i = 0; i < in.size(); i++) {
-        if (!(i % every_n) && i) {
-            out.push_back('\n');
-        }
-        out.push_back(in[i]);
-    }
-    return out;
-}
+//string Data::insertNewlines(string in, const size_t every_n)
+//{
+//    string out;
+//    out.reserve(in.size() + in.size() / every_n);
+//    for (std::string::size_type i = 0; i < in.size(); i++) {
+//        if (!(i % every_n) && i) {
+//            out.push_back('\n');
+//        }
+//        out.push_back(in[i]);
+//    }
+//    return out;
+//}
 

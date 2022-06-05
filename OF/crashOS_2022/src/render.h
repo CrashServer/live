@@ -1,7 +1,7 @@
 #pragma once
 #ifndef RENDER_H
 #define RENDER_H
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "ofxAssimpModelLoader.h"
 
 class Render {

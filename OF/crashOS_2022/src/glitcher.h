@@ -1,7 +1,8 @@
 #pragma once
 #ifndef GLITCH_H
 #define GLITCH_H
-#include "ofMain.h"
+
+//#include "ofMain.h"
 
 class Glitcher {
 public:

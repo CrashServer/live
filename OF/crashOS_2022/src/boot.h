@@ -1,7 +1,8 @@
+#pragma once
 #ifndef BOOT_H
 #define BOOT_H
 
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "ofTrueTypeFont.h"
 #include "ofxPostProcessing.h"
@@ -11,9 +12,11 @@ public:
     void setup();
     void update();
     void draw();
+    void resize();
 
     int width, height;
     int maxLine;
+    int rtime, incr;
     ofxXmlSettings xml;
     ofTrueTypeFont font;
     ofRectangle fontCharBox;
@@ -27,5 +30,8 @@ public:
 private:
 
 };
+
+
+
 
 #endif // BOOT_H

@@ -46,8 +46,10 @@
  */
 
 #pragma once
+#ifndef IMAGESEQUENCE_H
+#define IMAGESEQUENCE_H
 
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "ofxImageSequence.h"
 
 class ofxImageSequencePlayback {
@@ -117,5 +119,5 @@ protected:
     //ofxImageSequence mSequence;
 };
 
-
+#endif // IMAGESEQUENCE_H
 

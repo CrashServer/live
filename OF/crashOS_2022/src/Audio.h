@@ -2,7 +2,7 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "fft.h"
 #include "ofxBeat.h"
 

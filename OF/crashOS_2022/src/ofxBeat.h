@@ -6,6 +6,7 @@
 //
 //
 
+#pragma once
 #ifndef __Cyril__ofxBeat__
 #define __Cyril__ofxBeat__
 

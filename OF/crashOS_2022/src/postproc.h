@@ -1,7 +1,8 @@
 #pragma once
 #ifndef POSTPROC_H
 #define POSTPROC_H
-#include "ofMain.h"
+
+//#include "ofMain.h"
 #include "ofxPostProcessing.h"
 
 class PostProc{

@@ -1,7 +1,6 @@
+#include "ofApp.h"
 #include "drawwindows.h"
 #include "Getdata.h"
-
-
 
 Windo::Windo(){
 //    // Parametre
@@ -81,13 +80,16 @@ void WinCode::setup(int padding, ofColor uiColor){
 }
 
 //-------------------------
-void WinCode::update(vector<string> vectorCode){
+void WinCode::update(vector<CodeLine> vectorCode){
+    this->vecCode = vectorCode;
     maxCodeWidth = (int)(size->x) / fontCharBox.width; // max code text char witdh
     codeTotalHeight = 0;
     codeTotalWidth = 0;
 
-    for (int i = vectorCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
-        ofRectangle rectString = font.getStringBoundingBox(vectorCode[i], 0, 0);
+    for (int i = vecCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
+        string codeString = insertNewlines(vecCode[i].code, maxCodeWidth);
+        vecCode[i].code = codeString;
+        ofRectangle rectString = font.getStringBoundingBox(codeString, 0, 0);
         codeTotalHeight += rectString.height + size->y;
         if (rectString.width > codeTotalWidth) {
             codeTotalWidth = rectString.width;
@@ -96,26 +98,27 @@ void WinCode::update(vector<string> vectorCode){
 }
 
 //--------------------------------------------------------------
-void WinCode::draw(vector<string> vectorCode, vector<char> vectorSymbol) {
+void WinCode::draw() {
     ofPushStyle();
     ofPushMatrix();
         Windo::drawWin(this->pos, glm::vec2(codeTotalWidth + 2 * this->padding, codeTotalHeight + (2*this->padding)), this->uiColor);
         ofTranslate(pos->x + this->padding, pos->y + font.getLineHeight(), pos->z);
-        for (int i = vectorCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
+
+        for (int i = vecCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
             float stringHeight;
 
-            if (vectorSymbol[i] == '#') {
+            if (vecCode[i].symbol == '#') {
                 ofSetColor(ofColor(0, 255, 0));
             }
-            else if (vectorSymbol[i] == '!') {
+            else if (vecCode[i].symbol == '!') {
                 ofSetColor(ofColor::paleTurquoise);
             }
-            else if (vectorSymbol[i] == '@') {
+            else if (vecCode[i].symbol == '@') {
                 ofSetColor(ofColor(255, 0, 0));
             }
 
-            font.drawString(vectorCode[i], 0, 0);
-            stringHeight = font.stringHeight(vectorCode[i]);
+            font.drawString(vecCode[i].code, 0, 0);
+            stringHeight = font.stringHeight(vecCode[i].code);
             ofTranslate(0, stringHeight + size->y);
             }
     ofPopMatrix();
@@ -263,6 +266,20 @@ void OverHeating::clear(){
     vecOverWindow.clear();
     vecStringError.clear();
 }
+
+string Windo::insertNewlines(string in, const size_t every_n)
+{
+    string out;
+    out.reserve(in.size() + in.size() / every_n);
+    for (std::string::size_type i = 0; i < in.size(); i++) {
+        if (!(i % every_n) && i) {
+            out.push_back('\n');
+        }
+        out.push_back(in[i]);
+    }
+    return out;
+}
+
 
 string OverHeating::insertNewlines(string in, const size_t every_n)
 {

@@ -1,5 +1,5 @@
-#include "Audio.h"
 #include "ofApp.h"
+#include "Audio.h"
 
 AudioFft::AudioFft(){
 }

@@ -1,4 +1,8 @@
 #pragma once
+#ifndef OFAPP_H
+#define OFAPP_H
+
+
 
 #include "ofMain.h"
 
@@ -20,6 +24,7 @@
 #include "render.h"
 #include "boot.h"
 #include "postproc.h"
+#include "dmx.h"
 
 class ofApp : public ofBaseApp{
 
@@ -39,6 +44,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+        void exit();
 
         void bangUpdate(char playerID);
 		void bang(char playerID);
@@ -98,7 +104,10 @@ class ofApp : public ofBaseApp{
 
         OverHeating overheating;
         Boot boot;
+
         PostProc postCode, postPixel, postProc;
+        Dmx dmx;
+
 
 //        Tunnel3d tunnel3d;
 
@@ -147,7 +156,9 @@ class ofApp : public ofBaseApp{
 //		ofShader glow;
 //		ofShader glitch;
 //		ofShader crBlueinvert;
-//		ofShader test;
-
-		
+//		ofShader test;		
 };
+
+
+
+#endif // OFAPP_H

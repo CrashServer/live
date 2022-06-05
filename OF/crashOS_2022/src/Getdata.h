@@ -2,11 +2,23 @@
 #ifndef GETDATA_H
 #define GETDATA_H
 
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxNetwork.h"
 
 #define PORTOSC 20000 // OSC
+
+class CodeLine {
+public:
+    glm::vec3 pos;
+    string code;
+    char symbol;
+    int typeCodePos;
+
+    CodeLine();
+private:
+};
+
 
 class Data {
 public:
@@ -16,7 +28,7 @@ public:
     void draw();
     void detectServerActivity();
 
-    string insertNewlines(string in, const size_t every_n);
+//    string insertNewlines(string in, const size_t every_n);
 
     // variables
     int width, height;
@@ -24,8 +36,8 @@ public:
 
     ofxOscReceiver oscReceiver;
     float scCPU;
-    vector<string> vectorCode;
-    vector<char> vectorSymbol;
+    vector<CodeLine> vectorCode;
+//    vector<char> vectorSymbol;
     char bang;
 
     ofSerial serial;
@@ -40,6 +52,8 @@ public:
 
 private:
 };
+
+
 
 
 

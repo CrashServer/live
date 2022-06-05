@@ -1,3 +1,4 @@
+#include "ofApp.h"
 #include "Videoplayer.h"
 
 Videoplayer::Videoplayer(){

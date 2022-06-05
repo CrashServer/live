@@ -2,7 +2,7 @@
 #ifndef UIMISC_H
 #define UIMISC_H
 
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "ofxImageSequencePlayback.h"
 
 class UiMisc {

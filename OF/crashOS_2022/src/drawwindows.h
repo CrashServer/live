@@ -2,13 +2,15 @@
 #ifndef DRAWWINDOWS_H
 #define DRAWWINDOWS_H
 
-#include "ofMain.h"
+//#include "ofMain.h"
 #include "ofTrueTypeFont.h"
 #include "ofxGui.h"
+#include "Getdata.h"
 
 class Windo {
 public:
     void drawWin(glm::vec3 winPos, glm::vec2 winSize, ofColor uiColor);
+    string insertNewlines(string in, const size_t every_n);
 
     int width, height;
     int padding;
@@ -20,6 +22,8 @@ public:
     ofParameterGroup parameters;
     ofParameter<glm::vec3> pos;
     ofParameter<glm::vec2> size;
+
+    vector <CodeLine> vecCode;
 
     int paddingWindow;
     ofRectangle fontCharBox;
@@ -35,8 +39,8 @@ private:
 class WinCode : public Windo{
 public:
     void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
-    void update(vector<string> vectorCode);
-    void draw(vector<string> vectorCode, vector<char> vectorSymbol);
+    void update(vector<CodeLine> vectorCode);
+    void draw();
 
     ofParameter<int> nbrLineCode;
 

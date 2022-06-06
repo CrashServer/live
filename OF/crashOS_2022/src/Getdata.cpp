@@ -28,7 +28,7 @@ void Data::setup(bool barduino){
     isServerActive = false;
 }
 
-void Data::update(int cpuStress, int maxCodeWidth) {
+void Data::update() {
     if (vectorCode.size() >= maxLineCode) {
         vectorCode.erase(vectorCode.begin());
     }
@@ -38,7 +38,7 @@ void Data::update(int cpuStress, int maxCodeWidth) {
         string oscAdress = messageOsc.getAddress();
         
         if (oscAdress == "/CPU") {
-            scCPU = messageOsc.getArgAsFloat(0) * cpuStress;
+            scCPU = messageOsc.getArgAsFloat(0);
             bang = 'c';
             }
         else if (oscAdress == "/svdkCode") {

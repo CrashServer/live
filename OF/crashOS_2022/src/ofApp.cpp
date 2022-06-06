@@ -180,7 +180,7 @@ void ofApp::draw(){
 
 	default:
         videoplayer.draw();
-        winCode.draw();
+        winCode.draw(data.vectorCode);
         winCpu.draw();
         winIntegrity.draw();
 

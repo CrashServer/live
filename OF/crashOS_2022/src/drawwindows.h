@@ -39,8 +39,8 @@ private:
 class WinCode : public Windo{
 public:
     void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
-    void update(vector<CodeLine> vectorCode);
-    void draw();
+    void update(vector<CodeLine> &vectorCode);
+    void draw(vector<CodeLine>& vectorCode);
 
     ofParameter<int> nbrLineCode;
 

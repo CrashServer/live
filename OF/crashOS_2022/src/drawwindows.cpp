@@ -80,15 +80,15 @@ void WinCode::setup(int padding, ofColor uiColor){
 }
 
 //-------------------------
-void WinCode::update(vector<CodeLine> vectorCode){
-    this->vecCode = vectorCode;
+void WinCode::update(vector<CodeLine>& vectorCode){
+//    this->vecCode = vectorCode;
     maxCodeWidth = (int)(size->x) / fontCharBox.width; // max code text char witdh
     codeTotalHeight = 0;
     codeTotalWidth = 0;
 
-    for (int i = vecCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
-        string codeString = insertNewlines(vecCode[i].code, maxCodeWidth);
-        vecCode[i].code = codeString;
+    for (int i = vectorCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
+        string codeString = insertNewlines(vectorCode[i].code, maxCodeWidth);
+//        vectorCode[i].code = codeString;
         ofRectangle rectString = font.getStringBoundingBox(codeString, 0, 0);
         codeTotalHeight += rectString.height + size->y;
         if (rectString.width > codeTotalWidth) {
@@ -98,27 +98,38 @@ void WinCode::update(vector<CodeLine> vectorCode){
 }
 
 //--------------------------------------------------------------
-void WinCode::draw() {
+void WinCode::draw(vector<CodeLine>& vectorCode) {
     ofPushStyle();
     ofPushMatrix();
         Windo::drawWin(this->pos, glm::vec2(codeTotalWidth + 2 * this->padding, codeTotalHeight + (2*this->padding)), this->uiColor);
         ofTranslate(pos->x + this->padding, pos->y + font.getLineHeight(), pos->z);
-
-        for (int i = vecCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
-            float stringHeight;
-
-            if (vecCode[i].symbol == '#') {
+        float stringHeight;
+        for (int i = vectorCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
+            if (vectorCode[i].symbol == '#') {
                 ofSetColor(ofColor(0, 255, 0));
             }
-            else if (vecCode[i].symbol == '!') {
+            else if (vectorCode[i].symbol == '!') {
                 ofSetColor(ofColor::paleTurquoise);
             }
-            else if (vecCode[i].symbol == '@') {
+            else if (vectorCode[i].symbol == '@') {
                 ofSetColor(ofColor(255, 0, 0));
             }
 
-            font.drawString(vecCode[i].code, 0, 0);
-            stringHeight = font.stringHeight(vecCode[i].code);
+            string code = insertNewlines(vectorCode[i].code, maxCodeWidth);
+
+            if (i == (vectorCode.size()-1)){
+                int maxCod = code.size();
+                string subString = code.substr(0,ofClamp(vectorCode[i].typeCodePos,0,maxCod));
+                font.drawString(subString, 0, 0);
+
+                if (vectorCode[i].typeCodePos <= maxCod){
+                vectorCode[i].typeCodePos+= ofRandom(0,3);}
+            }
+            else {
+                font.drawString(code, 0, 0);
+                }
+
+            stringHeight = font.stringHeight(code);
             ofTranslate(0, stringHeight + size->y);
             }
     ofPopMatrix();

@@ -17,7 +17,7 @@
 ///// DRAW GRAMMAR
 /// videoplayer.draw();
 /// webcam.draw();
-/// winCode.draw();
+/// winCode.draw(data.vectorCode);
 /// winCpu.draw();
 /// winIntegrity.draw();
 /// uiMisc.draw(true, data.isServerActive);
@@ -69,7 +69,7 @@ void ofApp::scene1Update(){
 void ofApp::scene1Draw(){
     videoplayer.draw();
     webcam.draw();
-    winCode.draw();
+    winCode.draw(data.vectorCode);
     winCpu.draw();
     winIntegrity.draw();
     uiMisc.draw(true, data.isServerActive);
@@ -112,7 +112,7 @@ void ofApp::scene2Draw(){
     videoplayer.draw();
     webcam.draw();
 
-    winCode.draw();
+    winCode.draw(data.vectorCode);
     winCpu.draw();
     winIntegrity.draw();
 
@@ -143,7 +143,7 @@ void ofApp::scene3Draw(){
     videoplayer3d.draw3d();
     webcam.draw();
 
-    winCode.draw();
+    winCode.draw(data.vectorCode);
     winCpu.draw();
     winIntegrity.draw();
 
@@ -176,7 +176,7 @@ void ofApp::scene4Update(){
 void ofApp::scene4Draw(){
     glitcherVideo.draw(videoplayer.pos, videoplayer.size);
 
-    winCode.draw();
+    winCode.draw(data.vectorCode);
     winCpu.draw();
     winIntegrity.draw();
 
@@ -209,7 +209,7 @@ void ofApp::scene5Draw(){
         //tunnel3d.draw();
     cam.end();
 
-    winCode.draw();
+    winCode.draw(data.vectorCode);
     winCpu.draw();
     winIntegrity.draw();
     uiMisc.draw(false, data.isServerActive);

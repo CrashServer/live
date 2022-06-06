@@ -25,6 +25,8 @@
 #include "boot.h"
 #include "postproc.h"
 #include "dmx.h"
+#include "scene.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -98,6 +100,7 @@ class ofApp : public ofBaseApp{
         WinIntegrity winIntegrity;
         AudioFft audioFft;
         Videoplayer videoplayer;
+        Videoplayer3d videoplayer3d;
         Camera webcam;
         UiMisc uiMisc;
         Glitcher glitcherCam, glitcherLogo, glitcherVideo;
@@ -108,6 +111,39 @@ class ofApp : public ofBaseApp{
         PostProc postCode, postPixel, postProc;
         Dmx dmx;
 
+        /// SCENES
+        void scene0Update();
+        void scene1Update();
+        void scene2Update();
+        void scene3Update();
+        void scene4Update();
+        void scene5Update();
+        void scene6Update();
+        void scene7Update();
+        void scene8Update();
+        void scene9Update();
+
+        void scene0Draw();
+        void scene1Draw();
+        void scene2Draw();
+        void scene3Draw();
+        void scene4Draw();
+        void scene5Draw();
+        void scene6Draw();
+        void scene7Draw();
+        void scene8Draw();
+        void scene9Draw();
+
+        void scene0Bang(char playerID);
+        void scene1Bang(char playerID);
+        void scene2Bang(char playerID);
+        void scene3Bang(char playerID);
+        void scene4Bang(char playerID);
+        void scene5Bang(char playerID);
+        void scene6Bang(char playerID);
+        void scene7Bang(char playerID);
+        void scene8Bang(char playerID);
+        void scene9Bang(char playerID);
 
 //        Tunnel3d tunnel3d;
 

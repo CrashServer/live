@@ -24,7 +24,7 @@ class Data {
 public:
     // methods
     void setup(bool barduino=false);
-    void update(int cpuStress, int maxCodeWidth);
+    void update();
     void draw();
     void detectServerActivity();
 

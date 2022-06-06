@@ -52,6 +52,7 @@ void ofApp::setup(){
     /// audio video
     webcam.setup(uiColor);
     videoplayer.setup();
+    videoplayer3d.setup3d();
     audioFft.setup();
     dmx.setup();
 
@@ -91,91 +92,46 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	ofSetWindowTitle("CRASH/OS " + (ofToString((int) ofGetFrameRate())));
-    data.update(cpuStress, winCode.maxCodeWidth);
+
+    data.update();
     bangUpdate(data.bang);
-
     audioFft.update();
-//    dmx.update(ofColor(255,0,audioFft.beat.getBand(0)*255), ofColor(0,audioFft.beat.getBand(5)*255,255));
 
-    //changeColorUi();
-
-    if (data.scCPU>80){scene=3;}
+    if ((data.scCPU*cpuStress)>80){scene=3;}
 
     switch (scene) {
     case 0:
-        boot.update();
+        scene0Update();
         break;
 
     case 1: // Video player + webcam + windows
-        webcam.update();
-
-        winCode.update(data.vectorCode);
-        winCpu.update(data.scCPU);
-        winIntegrity.update(integrity);
-
-        uiMisc.update(true);
-
-        videoplayer.update(integrity, false);
+        scene1Update();
         break;
 
     case 2: // videoplayer + webcam + windows + glitcher logo
-        glitcherLogo.update(uiMisc.uiFbo);
-
-        winCode.update(data.vectorCode);
-        winCpu.update(data.scCPU);
-        winIntegrity.update(integrity);
-
-        uiMisc.update(true);
-        webcam.update();
-
-        videoplayer.update(integrity, false);
+        scene2Update();
         break;
 
     case 3: // Video player 3d + windows + webcam
-        winCode.update(data.vectorCode);
-        winCpu.update(data.scCPU);
-        winIntegrity.update(integrity);
-
-        uiMisc.update(true);
-        webcam.update();
-//        audioFft.update();
-
-        videoplayer.update(integrity, true, audioFft.beat.getMagnitude()*audioThresh/20);
+        scene3Update();
         break;
 
     case 4: // glitch video & webcam  + code
-        audioFft.update();
-        glitcherLogo.update(uiMisc.uiFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-        glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-        glitcherVideo.update(videoplayer.videoFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-
-        // Windows update
-        winCode.update(data.vectorCode);
-        winCpu.update(data.scCPU);
-        winIntegrity.update(integrity);
-
-        uiMisc.update(true);
-        webcam.update();
-
-        videoplayer.update();
+        scene4Update();
         break;
 
     case 5:
-        winCode.update(data.vectorCode);
-        winCpu.update(data.scCPU);
-        winIntegrity.update(integrity, render.currentText);
-
-//        tunnel3d.update();
+        scene5Update();
         break;
 
     default:
         winCode.update(data.vectorCode);
-        winCpu.update(data.scCPU);
+        winCpu.update(data.scCPU*cpuStress);
         winIntegrity.update(integrity);
 
         uiMisc.update(true);
         webcam.update();
-        videoplayer.update();
+        videoplayer.update(5, integrity);
         break;
     }
 
@@ -199,91 +155,27 @@ void ofApp::draw(){
 	switch (scene) {
 
     case 0:
-        postCode.begin();
-            boot.draw();
-        ofBlendMode(OF_BLENDMODE_MULTIPLY);
-        postProc.begin();
-            boot.draw();
-        postProc.end();
-        ofBlendMode(OF_BLENDMODE_DISABLED);
-        postCode.end();
-
+        scene0Draw();
         break;
 
     case 1: // Video player + webcam + windows
-
-            videoplayer.draw();
-//        ofBlendMode(OF_BLENtrueDMODE_MULTIPLY);
-//        postProc.begin();
-            webcam.draw();
-//        postProc.end();
-//        ofBlendMode(OF_BLENDMODE_DISABLED);
-
-        postCode.begin();
-        winCode.draw();
-        winCpu.draw();
-        winIntegrity.draw();
-        postCode.end();
-
-
-//        cout << "is active : " << data.isServerActive << endl;
-        uiMisc.draw(true, data.isServerActive);
-
+        scene1Draw();
         break;
 
     case 2: // videoplayer + webcam + windows + glitcher logo
-        videoplayer.draw();
-        webcam.draw();
-
-        winCode.draw();
-        winCpu.draw();
-        winIntegrity.draw();
-
-        uiMisc.draw(true, data.isServerActive);
-
-        glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
+        scene2Draw();
         break;
 
     case 3: // Video player 3d + windows + webcam
-        videoplayer.draw(true);
-        webcam.draw();
-
-        winCode.draw();
-        winCpu.draw();
-        winIntegrity.draw();
-
-        uiMisc.draw(true, data.isServerActive);
+        scene3Draw();
         break;
 
     case 4: // glitch video & webcam & logo + code
-        glitcherVideo.draw(videoplayer.pos, videoplayer.size);
-
-        winCode.draw();
-        winCpu.draw();
-        winIntegrity.draw();
-
-        webcam.draw();
-        uiMisc.draw(false, data.isServerActive);
-
-        glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
-        glitcherCam.draw(webcam.pos, webcam.size);
-
+        scene4Draw();
         break;
 
     case 5:
-        cam.begin();
-        cam.setDistance(260);
-            sphereMap.draw();
-            render.draw();
-            text3d.draw(render.currentText);
-            //tunnel3d.draw();
-        cam.end();
-
-        winCode.draw();
-        winCpu.draw();
-        winIntegrity.draw();
-        uiMisc.draw(false, data.isServerActive);
-
+        scene5Draw();
         break;
 
 	default:
@@ -321,7 +213,6 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 void ofApp::exit(){
     dmx.exit();
-
 }
 
 
@@ -430,7 +321,7 @@ void ofApp::bang(char playerID){
         bigBang();
     }
 
-    if (data.scCPU > 80){
+    if (data.scCPU*cpuStress > 80){
         overheating.add();
         }
     else {
@@ -438,72 +329,45 @@ void ofApp::bang(char playerID){
     }
     switch (scene) {
     case 0:
-
-        videoplayer.videoSrcub();
-        integrity -= integrityIncr;
+        scene0Bang(playerID);
         break;
     case 1:
-        if (playerID =='!'){
-            ofColor dmx1 = ofColor(0,255,0);
-            dmx.update(dmx1, ofColor(0,0,0));
-        }
-        else if (playerID =='#'){
-            ofColor dmx1 = ofColor(0,0,255);
-            dmx.update(dmx1, ofColor(0,0,0));
-        }
-        else if (playerID =='@'){
-            ofColor dmx1 = ofColor(255,0,0);
-            dmx.update(dmx1, ofColor(0,0,0));
-        }
-        videoplayer.videoSrcub();
-        integrity -= integrityIncr;
+        scene1Bang(playerID);
         break;
     case 2:
-        videoplayer.videoSrcub();
-        integrity -= integrityIncr;
+        scene2Bang(playerID);
         break;
     case 3:
-        videoplayer.videoSrcub();
-        integrity -= integrityIncr;
+        scene3Bang(playerID);
         break;
     case 4:
-        render.destroyMesh(integrityIncr);
-        integrity = (int) render.intergrity;
+        scene4Bang(playerID);
         break;
 
     default:
-        videoplayer.videoSrcub();
+
         break;
     }
-
-    //	// based on 4 submeshes
-    //	pointLight.setDiffuseColor(ofColor(ofRandom(255), ofRandom(255), ofRandom(255)));
-    //	materialText.setDiffuseColor(ofColor(ofRandom(255), ofRandom(255), ofRandom(255)));
-    //	materialEnv.setDiffuseColor(ofColor(ofRandom(255), ofRandom(255), ofRandom(255)));
-    //	materialEnv.setShininess(120);
-    //	materialEnv.setSpecularColor( (ofGetElapsedTimef()*255, ofRandom(255), ofRandom(255)));
 }
 
 void ofApp::bigBang()
-{
-    if (data.scCPU<80){scene=1;}
-
+{    
     switch (scene) {
     case 0:
-        videoplayer.newSeq();
-        if (ofRandom(0,100)>70){superBang();}
+//        videoplayer.newSeq();
+//        if (ofRandom(0,100)>70){superBang();}
         break;
     case 1:
-        videoplayer.newSeq();
-        if (ofRandom(0,100)>70){superBang();}
+//        videoplayer.newSeq();
+//        if (ofRandom(0,100)>70){superBang();}
         break;
     case 2:
-        videoplayer.newSeq();
-        if (ofRandom(0,100)>70){superBang();}
+//        videoplayer.newSeq();
+//        if (ofRandom(0,100)>70){superBang();}
         break;
     case 3:
-        videoplayer.newSeq();
-        if (ofRandom(0,100)>70){superBang();}
+//        videoplayer.newSeq();
+//        if (ofRandom(0,100)>70){superBang();}
         break;
     case 4:
 //        if (render.currentModelSubAttack >= 2){
@@ -514,25 +378,13 @@ void ofApp::bigBang()
         break;
 
     default:
-        videoplayer.newSeq();
-        if (ofRandom(0,100)>70){superBang();}
+//        videoplayer.newSeq();
+//        if (ofRandom(0,100)>70){superBang();}
         break;
     }
 
     integrity = 100 + integrityIncr;
     uiMisc.changeLogo();
-//  intMeshSlider = ofRandom(0, intMeshSlider.getMax());
-//	extMeshSlider = ofRandom(0, extMeshSlider.getMax());
-//	midMeshSlider = ofRandom(0, midMeshSlider.getMax());
-//	pillarMeshSlider = ofRandom(0, pillarMeshSlider.getMax());
-//	pointLight.setDiffuseColor(ofColor(ofRandom(255), ofRandom(255), ofRandom(255)));
-//	materialText.setDiffuseColor(ofColor(ofRandom(255), ofRandom(255), ofRandom(255)));
-//	materialEnv.setDiffuseColor(ofColor(ofRandom(255), ofRandom(255), ofRandom(255)));
-//	materialEnv.setShininess(120);
-//	materialEnv.setSpecularColor((ofGetElapsedTimef() * 255, ofRandom(255), ofRandom(255)));
-
-	//if (scene = 0) { currentModelSubAttack = currentModelSubAttack++; }
-	//else currentModelSubAttack = 0;
 }
 
 void ofApp::superBang()
@@ -550,5 +402,6 @@ void ofApp::changeColorUi(ofColor &){
 void ofApp::loadDefaultParam(bool &){
     gui.loadFromFile("xml/default_settings.xml");
 }
+
 
 

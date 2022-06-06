@@ -5,7 +5,7 @@ Data::Data(){}
 CodeLine::CodeLine(){
     code = ">> CrashServer";
     symbol = '!';
-    typeCodePos = 0;
+    typeCodePos = 1;
 }
 
 

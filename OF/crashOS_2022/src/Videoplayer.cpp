@@ -134,7 +134,7 @@ void Videoplayer::draw(){
 
 void Videoplayer::newSeq(){
     // load a new video from current category
-    videoDir.listDir(videoCat.getPath(vidCat));
+    videoDir.listDir(videoCat.getPath(ofClamp(vidCat,0,videoCat.size()-1)));
     videoDir.sort();
     vidId = ofClamp(vidId, 0,videoDir.size()-1);
     mySequence.loadSequence(videoDir.getPath(vidId), vidFps);

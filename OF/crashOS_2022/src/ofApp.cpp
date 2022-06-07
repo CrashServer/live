@@ -131,7 +131,7 @@ void ofApp::update(){
 
         uiMisc.update(true);
         webcam.update();
-        videoplayer.update(5, integrity);
+        videoplayer.update(6, integrity);
         break;
     }
 
@@ -345,7 +345,7 @@ void ofApp::bang(char playerID){
         break;
 
     default:
-
+        integrity -= integrityIncr;
         break;
     }
 }
@@ -385,6 +385,7 @@ void ofApp::bigBang()
 
     integrity = 100 + integrityIncr;
     uiMisc.changeLogo();
+    scene = data.scene;
 }
 
 void ofApp::superBang()

@@ -19,7 +19,7 @@ public:
     // variables
     ofxImageSequencePlayback mySequence;
 
-    string videoPath="video_test/";
+    string videoPath="video/";
     ofDirectory videoCat; // dir of category
     ofDirectory videoDir; // dir of video
 

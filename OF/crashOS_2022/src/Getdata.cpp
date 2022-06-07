@@ -42,14 +42,19 @@ void Data::update() {
             bang = 'c';
             }
         else if (oscAdress == "/svdkCode") {
-            //string txt = messageOsc.getArgAsString(0);
-            //txt = insertNewlines(txt, maxCodeWidth);
+            string msg = messageOsc.getArgAsString(0);
+            size_t found = msg.find("scene");
+            if (found!=std::string::npos){
+                string sceneStr = msg.substr(5);
+                if (isNumber(sceneStr)){
+                    scene = stoi(sceneStr);
+                    }
+                }
+
             CodeLine codeLine;
-            codeLine.code = messageOsc.getArgAsString(0);
+            codeLine.code = msg;
             codeLine.symbol = '#';
             vectorCode.push_back(codeLine);
-            //vectorCode.push_back(txt);
-            //vectorSymbol.push_back('#');
             bang ='#';
             if (barduino){
                 serial.writeByte('g'); // send arduino
@@ -57,10 +62,15 @@ void Data::update() {
             }
         }
         else if (oscAdress == "/zbdmCode") {
-//            string txt = messageOsc.getArgAsString(0);
-//            txt = insertNewlines(txt, maxCodeWidth);
-//            vectorCode.push_back(txt);
-//            vectorSymbol.push_back('!');
+            string msg = messageOsc.getArgAsString(0);
+            size_t found = msg.find("scene");
+            if (found!=std::string::npos){
+                string sceneStr = msg.substr(5);
+                if (isNumber(sceneStr)){
+                    scene = stoi(sceneStr);
+                    }
+                }
+
             CodeLine codeLine;
             codeLine.code = messageOsc.getArgAsString(0);
             codeLine.symbol = '!';
@@ -93,6 +103,14 @@ void Data::update() {
         delayServerActivity--;
     }
     else {isServerActive = false;}
+}
+
+bool Data::isNumber(const string &s){
+    for (char const &ch : s) {
+            if (isdigit(ch) == 0)
+                return false;
+        }
+        return true;
 }
 
 // return a text with a new line every x

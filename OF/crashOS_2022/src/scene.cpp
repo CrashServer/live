@@ -1,6 +1,7 @@
 #include "scene.h"
 #include "ofApp.h"
 
+////// HELP //////////
 ////// UPDATE GRAMMAR
 /// videoplayer.update("Category", integrity)
 /// winCode.update(data.vectorCode);
@@ -25,6 +26,7 @@
 /// sphereMap.draw();
 /// render.draw();
 /// text3d.draw(render.currentText);
+
 
 //// FUNCTION GRAMMAR
 /// uiMisc.changeLogo(index);

@@ -27,12 +27,15 @@ public:
     void update();
     void draw();
     void detectServerActivity();
+    bool isNumber(const string& s);
+    int setScene(string sceneMsg);
 
 //    string insertNewlines(string in, const size_t every_n);
 
     // variables
     int width, height;
     int maxLineCode;
+    int scene;
 
     ofxOscReceiver oscReceiver;
     float scCPU;

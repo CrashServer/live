@@ -14,6 +14,10 @@ void ofApp::setup(){
     width = settings.getValue("config:width", 1920);
     height = settings.getValue("config:height", 1080);
     barduino = settings.getValue("config:arduino", false);
+    string textPres = settings.getValue("config:textPres", "");
+    glm::vec2 textPresPos = glm::vec2(settings.getValue("config:textPosX", 80), settings.getValue("config:textPosY", 1060));
+    int dmxAddr1 = settings.getValue("config:dmxAddr1", 1);
+    int dmxAddr2 = settings.getValue("config:dmxAddr2", 8);
 
 	/// SETUP 
     ofSetFrameRate(30);
@@ -23,14 +27,6 @@ void ofApp::setup(){
 
 	/// NETWORK
     data.setup(barduino);
-    postCode.begin();
-        boot.draw();
-    ofBlendMode(OF_BLENDMODE_MULTIPLY);
-    postProc.begin();
-        boot.draw();
-    postProc.end();
-    ofBlendMode(OF_BLENDMODE_DISABLED);
-    postCode.end();
 
 	/// 3D MODELS
 //    postprocSetup();
@@ -45,7 +41,7 @@ void ofApp::setup(){
     winCode.setup(10, uiColor);
     winCpu.setup(10, uiColor);
     winIntegrity.setup(10, uiColor);
-    uiMisc.setup();
+    uiMisc.setup(textPres, textPresPos);
 
     boot.setup();
 
@@ -54,11 +50,75 @@ void ofApp::setup(){
     videoplayer.setup();
     videoplayer3d.setup3d();
     audioFft.setup();
-    dmx.setup();
+    dmx.setup(dmxAddr1, dmxAddr2);
 
     // Post processing
-    postProc.setup(false, true);
-    postCode.setup(true, false, true);
+    postCode.setup(
+        /* Bloom */            true,
+        /* pixelate */         false,
+        /* Bleach */           false,
+        /* shift */            false,
+        /* Edge*/              false,
+        /* Kali */             false,
+        /* Aces */             false,
+        /* Noise */            false,
+        /* TV */               false,
+        /* Glitch */           false,
+        /* filmGrain*/         false,
+        /* Toon */             false
+    );
+
+    // TV GLITCH VIDEO PLAYER
+    postTV.setup(
+        /* Bloom */            true,
+        /* pixelate */         false,
+        /* Bleach */           false,
+        /* shift */            false,
+        /* Edge*/              false,
+        /* Kali */             false,
+        /* Aces */             true,
+        /* Noise */            false,
+        /* TV */               true,
+        /* Glitch */           false,
+        /* filmGrain*/         false,
+        /* Toon */             false
+
+    );
+
+    // AUDIO REACTIVE POST-FX KALI
+    postKali.setup(
+        /* Bloom */            false,
+        /* pixelate */         false,
+        /* Bleach */           false,
+        /* shift */            false,
+        /* Edge*/              false,
+        /* Kali */             true,
+        /* Aces */             false,
+        /* Noise */            false,
+        /* TV */               false,
+        /* Glitch */           false,
+        /* filmGrain*/         false,
+        /* Toon */             false
+    );
+    //postKali.gKaleiSegments = 2;
+    postKali.kali->setSegments(2);
+
+
+    // GENERIC FILTER / ACES LUT VIDEO PLAYER
+    postProc.setup(
+        /* Bloom */            true,
+        /* pixelate */         false,
+        /* Bleach */           false,
+        /* shift */            false,
+        /* Edge*/              false,
+        /* Kali */             false,
+        /* Aces */             true,
+        /* Noise */            false,
+        /* TV */               false,
+        /* Glitch */           false,
+        /* filmGrain*/         false,
+        /* Toon */             false
+    );
 
     // Glitcher
     glitcherCam.setup(webcam.camFbo);
@@ -77,7 +137,7 @@ void ofApp::setup(){
     parameters.add(procBackground.parameters);
     parameters.add(audioThresh.set("audio Threshold", 1.0, 0.0, 10.0));
     parameters.add(colorPicker.set("Color Ui", uiColor, ofColor(0,0,0), ofColor(255,255,255)));
-    parameters.add(scene.set("scene", 0, 0, 7));
+    parameters.add(scene.set("scene", 0, 0, 10));
 
     colorPicker.addListener(this, &ofApp::changeColorUi);
     defaultParam.addListener(this, &ofApp::loadDefaultParam);
@@ -93,11 +153,12 @@ void ofApp::setup(){
 void ofApp::update(){
 	ofSetWindowTitle("CRASH/OS " + (ofToString((int) ofGetFrameRate())));
 
+    // update obligatoire
     data.update();
     bangUpdate(data.bang);
     audioFft.update();
 
-    if ((data.scCPU*cpuStress)>80){scene=3;}
+//    if ((data.scCPU*cpuStress)>80){scene=3;}
 
     switch (scene) {
     case 0:
@@ -124,29 +185,39 @@ void ofApp::update(){
         scene5Update();
         break;
 
-    default:
-        winCode.update(data.vectorCode);
-        winCpu.update(data.scCPU*cpuStress);
-        winIntegrity.update(integrity);
+    case 6:
+        scene6Update();
+        break;
 
-        uiMisc.update(true);
-        webcam.update();
-        videoplayer.update(6, integrity);
+    case 7:
+        scene7Update();
+        break;
+
+    case 8:
+        scene8Update();
+        break;
+
+    case 9:
+        scene9Update();
+        break;
+
+    default:
+        sceneDefaultUpdate();
         break;
     }
 
-	if (camShake) {
-		cam.setFov(60 + sin(ofGetElapsedTimef()) / ofRandom(0.2, 8));
-        cam.rollDeg(ofRandom(-0.05, 0.05));
-        cam.panDeg(ofRandom(-0.05, 0.05));
-		camShakeTime--;
-		if (camShakeTime <= 0) {
-			camShake = false;
-			camShakeTime = 60;
-		}
-	}
-	else
-		cam.setFov(60 + sin(ofGetElapsedTimef()) / 2);
+//	if (camShake) {
+//		cam.setFov(60 + sin(ofGetElapsedTimef()) / ofRandom(0.2, 8));
+//        cam.rollDeg(ofRandom(-0.05, 0.05));
+//        cam.panDeg(ofRandom(-0.05, 0.05));
+//		camShakeTime--;
+//		if (camShakeTime <= 0) {
+//			camShake = false;
+//			camShakeTime = 60;
+//		}
+//	}
+//	else
+//		cam.setFov(60 + sin(ofGetElapsedTimef()) / 2);
 }
 
 //--------------------------------------------------------------
@@ -177,15 +248,21 @@ void ofApp::draw(){
     case 5:
         scene5Draw();
         break;
+    case 6:
+        scene6Draw();
+        break;
+    case 7:
+        scene7Draw();
+        break;
+    case 8:
+        scene8Draw();
+        break;
+    case 9:
+        scene9Draw();
+        break;
 
 	default:
-        videoplayer.draw();
-        winCode.draw(data.vectorCode);
-        winCpu.draw();
-        winIntegrity.draw();
-
-        webcam.draw();
-        uiMisc.draw(true);
+        sceneDefaultDraw();
 		break;
 	}
 
@@ -216,71 +293,6 @@ void ofApp::exit(){
 }
 
 
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-	
-//	fbo.clear();
-
-	width = w;
-	height = h;
-
-    winCode.setup(10, uiColor);
-    winCpu.setup(10, uiColor);
-    winIntegrity.setup(10, uiColor);
-    uiMisc.setup();
-
-    /// audio video
-    webcam.setup(uiColor);
-    videoplayer.resize();
-
-    // Glitcher
-    glitcherCam.setup(webcam.camFbo);
-    glitcherLogo.setup(uiMisc.uiFbo);
-    glitcherVideo.setup(videoplayer.videoFbo);
-
-    boot.resize();
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}
-
 void ofApp::bangUpdate(char playerID)
 {
     switch (playerID) {
@@ -310,23 +322,24 @@ void ofApp::bangUpdate(char playerID)
     default:
         break;
     }
-
 }
 
 void ofApp::bang(char playerID){
 
-    camShake = 1;
+//    camShake = 1;
 
     if (integrity <= 1 or integrity >= 4000) { // 4000 is for edgecase missed the [0/1] > doesn't generate -inf +inf numbers
         bigBang();
     }
 
+    // Test overheating
     if (data.scCPU*cpuStress > 80){
         overheating.add();
         }
     else {
         overheating.clear();
     }
+
     switch (scene) {
     case 0:
         scene0Bang(playerID);
@@ -343,9 +356,24 @@ void ofApp::bang(char playerID){
     case 4:
         scene4Bang(playerID);
         break;
+    case 5:
+        scene5Bang(playerID);
+        break;
+    case 6:
+        scene6Bang(playerID);
+        break;
+    case 7:
+        scene7Bang(playerID);
+        break;
+    case 8:
+        scene8Bang(playerID);
+        break;
+    case 9:
+        scene9Bang(playerID);
+        break;
 
     default:
-        integrity -= integrityIncr;
+        sceneDefaultBang(playerID);
         break;
     }
 }
@@ -354,43 +382,49 @@ void ofApp::bigBang()
 {    
     switch (scene) {
     case 0:
-//        videoplayer.newSeq();
-//        if (ofRandom(0,100)>70){superBang();}
+        scene0BigBang();
         break;
     case 1:
-//        videoplayer.newSeq();
-//        if (ofRandom(0,100)>70){superBang();}
+        scene1BigBang();
         break;
     case 2:
-//        videoplayer.newSeq();
-//        if (ofRandom(0,100)>70){superBang();}
+        scene2BigBang();
         break;
     case 3:
-//        videoplayer.newSeq();
-//        if (ofRandom(0,100)>70){superBang();}
+        scene3BigBang();
         break;
     case 4:
-//        if (render.currentModelSubAttack >= 2){
-//            render.currentModelSubAttack = 1;}
-//        else {render.currentModelSubAttack+=1;}
-        render.currentModelSubAttack = ofRandom(0,render.objList.size());
-        render.changeModel(render.currentModelSubAttack);
+        scene4BigBang();
+        break;
+    case 5:
+        scene5BigBang();
+        break;
+    case 6:
+        scene6BigBang();
+        break;
+    case 7:
+        scene7BigBang();
+        break;
+    case 8:
+        scene8BigBang();
+        break;
+    case 9:
+        scene9BigBang();
         break;
 
     default:
-//        videoplayer.newSeq();
-//        if (ofRandom(0,100)>70){superBang();}
+        sceneDefaultBigBang();
         break;
     }
 
-    integrity = 100 + integrityIncr;
-    uiMisc.changeLogo();
+//    uiMisc.changeLogo();
     scene = data.scene;
+    integrity = 100+integrityIncr;
 }
 
 void ofApp::superBang()
 {
-    scene = ofRandom(1,3);
+//    scene = ofRandom(1,3);
 }
 
 void ofApp::changeColorUi(ofColor &){
@@ -404,5 +438,52 @@ void ofApp::loadDefaultParam(bool &){
     gui.loadFromFile("xml/default_settings.xml");
 }
 
+//--------------------------------------------------------------
+void ofApp::windowResized(int w, int h){
 
+    width = w;
+    height = h;
 
+    winCode.resize();
+    winCpu.resize();
+    winIntegrity.resize();
+    uiMisc.resize();
+
+    /// audio video
+    //webcam.setup(uiColor);
+    videoplayer.resize();
+
+    // Glitcher
+    glitcherCam.setup(webcam.camFbo);
+    glitcherLogo.setup(uiMisc.uiFbo);
+    glitcherVideo.setup(videoplayer.videoFbo);
+
+    boot.resize();
+}
+
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key){}
+
+//--------------------------------------------------------------
+void ofApp::mouseMoved(int x, int y ){}
+
+//--------------------------------------------------------------
+void ofApp::mouseDragged(int x, int y, int button){}
+
+//--------------------------------------------------------------
+void ofApp::mousePressed(int x, int y, int button){}
+
+//--------------------------------------------------------------
+void ofApp::mouseReleased(int x, int y, int button){}
+
+//--------------------------------------------------------------
+void ofApp::mouseEntered(int x, int y){}
+
+//--------------------------------------------------------------
+void ofApp::mouseExited(int x, int y){}
+
+//--------------------------------------------------------------
+void ofApp::gotMessage(ofMessage msg){}
+
+//--------------------------------------------------------------
+void ofApp::dragEvent(ofDragInfo dragInfo){ }

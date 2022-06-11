@@ -11,18 +11,19 @@ class Boot{
 public:
     void setup();
     void update();
-    void draw();
+    void draw(int integrity);
     void resize();
 
     int width, height;
     int maxLine;
     int rtime, incr;
+    glm::vec2 posIntegrity;
+
     ofxXmlSettings xml;
     ofTrueTypeFont font;
     ofRectangle fontCharBox;
 
     ofxPostProcessing post;
-
 
     vector<string> bootLine, cBoot;
 

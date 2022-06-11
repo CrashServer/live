@@ -29,7 +29,7 @@ public:
     ofFbo videoFbo, fxFbo;
     int width, height;
 
-    bool bthread, bnewSeq=false;
+    bool bthread=false, bnewSeq=false;
     int integrity;
     vector<glm::vec2> vecGlitch;
 

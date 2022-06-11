@@ -9,12 +9,14 @@
 
 class Dmx{
 public:
-    void setup();
+    void setup(int dmxAddr1, int dmxAddr2);
     void update(ofColor dmx1, ofColor dmx2);
     void exit();
 
     DmxDevice* dmxInterface_;
     unsigned char dmxData_[DMX_DATA_LENGTH];
+
+    int dmxAddr1, dmxAddr2;
 
     Dmx();
 

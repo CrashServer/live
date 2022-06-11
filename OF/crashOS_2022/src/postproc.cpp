@@ -1,11 +1,11 @@
-#include "ofApp.h"
 #include "postproc.h"
+#include "ofApp.h"
 
-PostProc::PostProc(){
+PostProc::PostProc() {
 
 }
 
-void PostProc::setup(bool bBloom, bool bPixel, bool bBleach){
+void PostProc::setup(bool bBloom, bool bPixel, bool bBleach, bool bShift, bool bEdge, bool bKali, bool bAces, bool bNoise, bool bTv, bool bGlitch, bool bFilm, bool bToon) {
     post.init(ofGetWidth(), ofGetHeight());
 
     // Bloom
@@ -20,19 +20,55 @@ void PostProc::setup(bool bBloom, bool bPixel, bool bBleach){
     bleach = post.createPass<BleachBypassPass>();
     bleach->setEnabled(bBleach);
 
-    //    post.createPass<EdgePass>()->setEnabled(true);
+    //  shift
+    shift = post.createPass<RGBShiftPass>();
+    shift->setEnabled(bShift);
+
+    //edge
+    edge = post.createPass<EdgePass>();
+    edge->setEnabled(bEdge);
+
+    //kali
+    kali = post.createPass<KaleidoscopePass>();
+    kali->setSegments(gKaleiSegments);
+    kali->setEnabled(bKali);
+
+
+    // Color ACES
+    aces = post.createPass<ACESFilmicToneMappingPass>();
+    aces->setEnabled(bAces);
+
+    //19-Noise Grains Filter
+    noise = post.createPass<NoisePass>();
+    noise->setEnabled(bNoise);
+
+    //17-Bad TV
+    tv = post.createPass<BadTVPass>();
+    tv->setEnabled(bTv);
+
+    //15-Glitch
+    glitch = post.createPass<DigitalGlitchPass>();
+    glitch->setEnabled(bGlitch);
+
+    //13-FilmGrainLines
+    film = post.createPass<FilmGrainLinesPass>();
+    film->setEnabled(bFilm);
+
+    //14-Toon
+    toon = post.createPass<ToonPass>();
+    toon->setEnabled(bToon);
+
 }
 
-void PostProc::begin(){
+void PostProc::begin() {
     ofEnableDepthTest();
     post.begin();
 }
 
-void PostProc::end(){
+void PostProc::end() {
     post.end();
     ofDisableDepthTest();
 }
-
 
 
 

@@ -35,7 +35,7 @@ public:
     // variables
     int width, height;
     int maxLineCode;
-    int scene;
+    int scene=0;
 
     ofxOscReceiver oscReceiver;
     float scCPU;

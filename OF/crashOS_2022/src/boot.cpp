@@ -16,6 +16,9 @@ void Boot::setup(){
 
     maxLine = (int) (height-300) /  (fontCharBox.height+15);
 
+    posIntegrity = glm::vec2((width - (fontCharBox.width*10) - 10),
+                             height- fontCharBox.height - 10);
+
     std::stringstream stringStream(xmlString);
     while(stringStream.good())
         {
@@ -43,7 +46,7 @@ void Boot::update(){
     }
 }
 
-void Boot::draw(){
+void Boot::draw(int integrity){
     ofSetColor(ofColor::greenYellow);
     for (unsigned int i=0; i< (cBoot.size()); i++){
 //        if (ofRandom(0,100)>90){
@@ -52,18 +55,28 @@ void Boot::draw(){
 //        else {
             if (i == (cBoot.size()-1)){
                 string subString = cBoot[i].substr(0,ofMap(incr,0,rtime,0,cBoot[i].size()-1));
-                font.drawString(subString, 100, 100+(i*(fontCharBox.height+15)));
+                font.drawString(subString, 50, 50+(i*(fontCharBox.height+15)));
                 }
             else {
-                font.drawString(cBoot[i], 100, 100+(i*(fontCharBox.height+15)));
+                font.drawString(cBoot[i], 50, 50+(i*(fontCharBox.height+15)));
                 }
             }
+
+    ofPopMatrix();
+    ofTranslate(posIntegrity.x, posIntegrity.y);
+    int integrityDiv = integrity/10;
+    for (int i=integrityDiv; i>0; i--){
+        font.drawString("*", (fontCharBox.width)*i, 0);
         }
-//}
+    ofPushMatrix();
+}
+
 
 void Boot::resize(){
-    width = ofGetWidth();
-    height = ofGetHeight();
+    this->width = ofGetWidth();
+    this->height = ofGetHeight();
     maxLine = (int) (height-300) /  (fontCharBox.height+15);
-    cBoot.assign(maxLine, " ");
+    cBoot.resize(maxLine);
+    posIntegrity = glm::vec2((this->width - (fontCharBox.width*10) - 50),
+                             this->height - fontCharBox.height - 50);
 }

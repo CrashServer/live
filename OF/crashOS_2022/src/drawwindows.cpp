@@ -38,7 +38,7 @@ void Windo::drawWin(glm::vec3 windowPos, glm::vec2 windowSize, ofColor uiColor) 
     path.setFillColor(backCol);
     path.draw();
 
-    ofSetLineWidth(8.0);
+    ofSetLineWidth(4.0);
     ofSetColor(uiColor);
 
     // the L
@@ -65,10 +65,10 @@ void WinCode::setup(int padding, ofColor uiColor){
     maxLineCode = 40; // size of the code vector
     maxCodeWidth = width/2;
     //nbrLineCode = 10;
-    codeFbo.allocate(width, height, GL_RGBA);
-    codeFbo.begin();
-        ofClear(255,255,255, 0);
-    codeFbo.end();
+//    codeFbo.allocate(width, height, GL_RGBA);
+//    codeFbo.begin();
+//        ofClear(255,255,255, 0);
+//    codeFbo.end();
 
     if (parameters.size()==0){
         parameters.setName("code");
@@ -76,7 +76,13 @@ void WinCode::setup(int padding, ofColor uiColor){
         parameters.add(size.set("CodeBox size", glm::vec2(width / 2, 5), glm::vec2(50, 0), glm::vec2(width, 40)));
         parameters.add(pos.set("CodeBox pos", glm::vec3(50, 90, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
     }
+}
 
+void Windo::resize(){
+    width = ofGetWidth();
+    height = ofGetHeight();
+    //size.setMax(glm::vec2(width, height));
+    pos.setMax(glm::vec3(width, height, 500));
 }
 
 //-------------------------
@@ -106,7 +112,7 @@ void WinCode::draw(vector<CodeLine>& vectorCode) {
         float stringHeight;
         for (int i = vectorCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
             if (vectorCode[i].symbol == '#') {
-                ofSetColor(ofColor(0, 255, 0));
+                ofSetColor(ofColor::greenYellow);
             }
             else if (vectorCode[i].symbol == '!') {
                 ofSetColor(ofColor::paleTurquoise);

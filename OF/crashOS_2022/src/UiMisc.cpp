@@ -1,12 +1,17 @@
 #include "ofApp.h"
 #include "UiMisc.h"
+#include "ofTrueTypeFont.h"
 
 UiMisc::UiMisc(){
 }
 
-void UiMisc::setup(){
+void UiMisc::setup(string textPres, glm::vec2 textPresPos){
     width = ofGetWidth();
     height = ofGetHeight();
+    font.load("ui/font/pixe.ttf", 24);
+    this->textPres = textPres;
+    this->textPresPos = textPresPos;
+
     logo.loadSequence("ui/crashos0/", 24.0f);
     logo.setShouldLoop(true);
     logo.play();
@@ -57,11 +62,20 @@ void UiMisc::draw(bool blogo, bool isServerActive){
         ofPopStyle();
     }
 
+    // Draw text description
+    if (this->textPres.size()>1){
+        ofPushMatrix();
+        ofTranslate(textPresPos);
+            font.drawString(textPres,0,0);
+        ofPopMatrix();
+    }
 }
 
 void UiMisc::changeLogo(int index){
+    if (index!=logoIndex){
+        logoIndex = index;
     if (index==0){
-        index = ofRandom(0,3);
+        index = ofRandom(0,10);
     }
 
     switch (index) {
@@ -92,6 +106,69 @@ void UiMisc::changeLogo(int index){
         logoHeight = logo.mSequence.getHeight();
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
+    case 3:
+        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.setShouldLoop(true);
+        logo.play();
+
+        logoWidth = logo.mSequence.getWidth();
+        logoHeight = logo.mSequence.getHeight();
+        uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
+        break;
+    case 4:
+        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.setShouldLoop(true);
+        logo.play();
+
+        logoWidth = logo.mSequence.getWidth();
+        logoHeight = logo.mSequence.getHeight();
+        uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
+        break;
+    case 5:
+        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.setShouldLoop(true);
+        logo.play();
+
+        logoWidth = logo.mSequence.getWidth();
+        logoHeight = logo.mSequence.getHeight();
+        uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
+        break;
+    case 6:
+        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.setShouldLoop(true);
+        logo.play();
+
+        logoWidth = logo.mSequence.getWidth();
+        logoHeight = logo.mSequence.getHeight();
+        uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
+        break;
+    case 7:
+        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.setShouldLoop(true);
+        logo.play();
+
+        logoWidth = logo.mSequence.getWidth();
+        logoHeight = logo.mSequence.getHeight();
+        uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
+        break;
+    case 8:
+        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.setShouldLoop(true);
+        logo.play();
+
+        logoWidth = logo.mSequence.getWidth();
+        logoHeight = logo.mSequence.getHeight();
+        uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
+        break;
+    case 9:
+        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.setShouldLoop(true);
+        logo.play();
+
+        logoWidth = logo.mSequence.getWidth();
+        logoHeight = logo.mSequence.getHeight();
+        uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
+        break;
 
 
     default:
@@ -104,8 +181,12 @@ void UiMisc::changeLogo(int index){
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
     }
+    }
+}
 
-
-
+void UiMisc::resize(){
+    width = ofGetWidth();
+    height = ofGetHeight();
+    pos = glm::vec3(width / 2 - size.x/2, 0,0);
 }
 

@@ -57,7 +57,7 @@ class ofApp : public ofBaseApp{
         void loadDefaultParam(bool&);
 
         // Post processingideoplaye
-        void postprocSetup();
+//        void postprocSetup();
 
         // PANEL GUI
 		ofxPanel gui;
@@ -79,6 +79,7 @@ class ofApp : public ofBaseApp{
         /// Settings
         ofxXmlSettings settings;
         bool barduino;
+
 
         /// CAMERA
 		ofEasyCam cam;
@@ -108,8 +109,11 @@ class ofApp : public ofBaseApp{
         OverHeating overheating;
         Boot boot;
 
-        PostProc postCode, postPixel, postProc;
+        PostProc postCode, postPixel, postProc, postShift, postEdge, postTV, postKali;
         Dmx dmx;
+
+        ofColor dmx1Col;
+        ofColor dmx2Col;
 
         /// SCENES
         void scene0Update();
@@ -145,56 +149,23 @@ class ofApp : public ofBaseApp{
         void scene8Bang(char playerID);
         void scene9Bang(char playerID);
 
+        void scene0BigBang();
+        void scene1BigBang();
+        void scene2BigBang();
+        void scene3BigBang();
+        void scene4BigBang();
+        void scene5BigBang();
+        void scene6BigBang();
+        void scene7BigBang();
+        void scene8BigBang();
+        void scene9BigBang();
+
+        void sceneDefaultUpdate();
+        void sceneDefaultDraw();
+        void sceneDefaultBang(char playerID);
+        void sceneDefaultBigBang();
+
 //        Tunnel3d tunnel3d;
 
-		/// DMX
-
-		///
-        /// 3D
-//		int intId = 0;
-//		int pillarId = 0;
-//		int midId = 0;
-//		int extId = 0;
-//        int currentTargetID = 0;
-
-//		ofLight pointLight;
-//		ofxAssimpModelLoader targetModel;
-//		ofVboMesh targetMesh;
-//		ofxAssimpModelLoader alphabet;
-//		ofVboMesh alphabetLetter;
-//		string currentText;
-//		ofSpherePrimitive sphere;
-//		ofImage sphereMapTex;
-//		vector<string> currentModelSubNames;
-        /// MATERIALS
-//		ofMaterial materialMesh, materialAttack, materialEnv;
-//		ofMaterial materialText;
-
-
-//		ofxAssimpModelLoader intModel;
-//		ofxAssimpModelLoader midModel;
-//		ofxAssimpModelLoader pillarModel;
-//		ofxAssimpModelLoader extModel;
-//		ofVboMesh intMesh;
-//		ofVboMesh midMesh;
-//		ofVboMesh pillarMesh;
-//		ofVboMesh extMesh;
-
-
-        // POST PROCESSING
-//		ofFbo fbo;
-
-//		ofFbo secondPassFbo;
-//		ofFbo renderFbo;
-
-//		ofShader shaderBlurY;
-//		ofShader swell;
-//		ofShader glow;
-//		ofShader glitch;
-//		ofShader crBlueinvert;
-//		ofShader test;		
 };
-
-
-
 #endif // OFAPP_H

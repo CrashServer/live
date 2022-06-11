@@ -12,7 +12,7 @@ void Videoplayer::setup(){
     height = ofGetHeight();
     pos = glm::vec3(0,0,0);
     size = glm::vec2(width, height);
-    bthread = true;
+//    bthread = true;
     vidFps = 60.0f;
 
     // Fbo init
@@ -137,6 +137,7 @@ void Videoplayer::newSeq(){
     videoDir.listDir(videoCat.getPath(ofClamp(vidCat,0,videoCat.size()-1)));
     videoDir.sort();
     vidId = ofClamp(vidId, 0,videoDir.size()-1);
+    mySequence.mSequence.enableThreadedLoad(bthread);
     mySequence.loadSequence(videoDir.getPath(vidId), vidFps);
     bnewSeq = false;
 }

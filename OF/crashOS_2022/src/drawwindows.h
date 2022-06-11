@@ -10,6 +10,7 @@
 class Windo {
 public:
     void drawWin(glm::vec3 winPos, glm::vec2 winSize, ofColor uiColor);
+    void resize();
     string insertNewlines(string in, const size_t every_n);
 
     int width, height;
@@ -42,6 +43,7 @@ public:
     void update(vector<CodeLine> &vectorCode);
     void draw(vector<CodeLine>& vectorCode);
 
+
     ofParameter<int> nbrLineCode;
 
 
@@ -49,7 +51,7 @@ public:
     int codeTotalHeight, codeTotalWidth;
     int maxLineCode, maxCodeWidth;
 
-    ofFbo codeFbo;
+//    ofFbo codeFbo;
 
 private:
 

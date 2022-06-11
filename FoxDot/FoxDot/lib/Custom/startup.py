@@ -666,3 +666,27 @@ if __name__ != "__main__":
 					except:
 						pass
 			valueDict = {}
+
+####
+#### Rock Pattern Generator
+
+try:
+		from .Crashserver.drumRockPattern import * ### Crash Drum rock pattern
+except:
+        print("Error importing drumRockPattern", sys.exc_info()[0])
+
+@player_method
+def drummer(self, duration=32):
+    if duration!=0:
+        drumCat = int(PRand(1, len(drumRockPattern)))
+        drumPat = int(PRand(1,len(drumRockPattern[drumCat])))
+        drumFillCat = int(PRand(1, len(drumRockFill)))
+        drumFillPat = int(PRand(1, len(drumRockFill[drumFillCat])))
+        fillDur = duration/4
+        self.degree=Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [duration-fillDur, fillDur])
+        self.human(30,5)
+        self.every(duration, "drummer")
+
+
+
+

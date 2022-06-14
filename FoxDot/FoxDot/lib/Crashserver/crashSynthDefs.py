@@ -56,6 +56,9 @@ ebass.add()
 eeri = FileSynthDef("eeri")
 eeri.add()
 
+elmbass = FileSynthDef("elmbass")
+elmbass.add()
+
 ews = FileSynthDef("ews")
 ews.add()
 

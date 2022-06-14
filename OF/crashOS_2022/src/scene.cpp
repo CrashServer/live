@@ -41,7 +41,7 @@
 ///
 void ofApp::scene0Update(){
    videoplayer.update(0);
-    boot.update();
+   boot.update();
    // DMX White
    dmx1Col = ofColor((audioFft.beat.getMagnitude()*audioThresh/20)*255);
    dmx2Col = ofColor((audioFft.beat.getMagnitude()*audioThresh/20)*255);
@@ -60,6 +60,10 @@ void ofApp::scene0Bang(char playerID){
 }
 
 void ofApp::scene0BigBang(){
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
     scene = data.scene;
     uiMisc.changeLogo(1);
     videoplayer.bthread = true;
@@ -94,8 +98,8 @@ void ofApp::scene1Draw(){
     winCode.draw(data.vectorCode);
     winCpu.draw();
     winIntegrity.draw();
-    uiMisc.draw(true, data.isServerActive);
     postCode.end();
+    uiMisc.draw(true, data.isServerActive);
 }
 
 void ofApp::scene1Bang(char playerID){
@@ -105,6 +109,10 @@ void ofApp::scene1Bang(char playerID){
 }
 
 void ofApp::scene1BigBang(){
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
     scene = data.scene;
 }
 /////////////////////
@@ -163,6 +171,10 @@ void ofApp::scene2Bang(char playerID){
 }
 
 void ofApp::scene2BigBang(){
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
     scene = data.scene;
 }
 ///////////////////////
@@ -192,6 +204,7 @@ void ofApp::scene3Update(){
 
 void ofApp::scene3Draw(){
     postTV.begin();
+    postTV.tv->setRollSpeed(audioFft.beat.getMagnitude()*0.001*audioThresh);
     videoplayer.draw();
     webcam.draw();
     postTV.end();
@@ -224,6 +237,10 @@ void ofApp::scene3Bang(char playerID){
 }
 
 void ofApp::scene3BigBang(){
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
     scene = data.scene;
 }
 
@@ -266,6 +283,10 @@ void ofApp::scene4Bang(char playerID){
 }
 
 void ofApp::scene4BigBang(){
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
     scene = data.scene;
 }
 ////////////////////////
@@ -291,6 +312,7 @@ void ofApp::scene5Update(){
 
 void ofApp::scene5Draw(){
     postKali.begin();
+        postKali.kali->setSegments(2);
     videoplayer.draw();
     postKali.end();
 
@@ -322,6 +344,10 @@ void ofApp::scene5Bang(char playerID){
 }
 
 void ofApp::scene5BigBang(){
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
     scene = data.scene;
 }
 ////////////////////////
@@ -360,6 +386,10 @@ void ofApp::scene6Bang(char playerID){
 }
 
 void ofApp::scene6BigBang(){
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
     scene = data.scene;
 }
 ////////////////////////
@@ -419,7 +449,11 @@ void ofApp::scene7Bang(char playerID){
 }
 
 void ofApp::scene7BigBang(){
-     scene = data.scene;
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
+    scene = data.scene;
 }
 ////////////////////////
 
@@ -480,7 +514,11 @@ void ofApp::scene8Bang(char playerID){
 }
 
 void ofApp::scene8BigBang(){
-     scene = data.scene;
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
+    scene = data.scene;
 }
 
 ////////////////////////
@@ -510,6 +548,7 @@ void ofApp::scene9Update(){
 
 void ofApp::scene9Draw(){
     postKali.begin();
+    postKali.kali->setSegments(audioFft.beat.getMagnitude()*audioThresh);
     videoplayer3d.draw3d();
 
     winCode.draw(data.vectorCode);
@@ -542,23 +581,80 @@ void ofApp::scene9Bang(char playerID){
 }
 
 void ofApp::scene9BigBang(){
-     scene = data.scene;
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
+    scene = data.scene;
 }
 ////////////////////////
+/// Scene 10
+/// Training room
+/////////////////////////
+
+void ofApp::scene10Update(){
+
+    winCode.update(data.vectorCode);
+    winCpu.update(data.scCPU*cpuStress);
+    winIntegrity.update(integrity);
+    uiMisc.changeLogo(10);
+    uiMisc.update(true);
+}
+
+void ofApp::scene10Draw(){
+    ofPushMatrix();
+    ofPushStyle();
+        postCode.begin();
+        postCode.bloom->setBlurXY(sin(ofGetElapsedTimef()*0.01)*0.01, sin(ofGetElapsedTimef()*0.005)*0.01);
+        ofEnableAntiAliasing();
+        ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+        ofRotateDeg(ofGetElapsedTimef()*0.1, 1,1,1);
+        ofNoFill();
+        ofSetColor(ofColor::blueSteel);
+        ofSetLineWidth(4);
+        ofDrawSphere(width*4);
+        postCode.end();
+    ofPopMatrix();
+    ofPopStyle();
+    winCode.draw(data.vectorCode);
+    winCpu.draw();
+    winIntegrity.draw();
+    uiMisc.draw(true, data.isServerActive);
+}
+
+void ofApp::scene10Bang(char playerID){
+    integrity -= integrityIncr;
+}
+
+void ofApp::scene10BigBang(){
+    scene = data.scene;
+    winCpu.cpuFbo.allocate(400, 400, GL_RGBA);
+    winCpu.cpuFbo.begin();
+        ofClear(255,255,255, 0);
+    winCpu.cpuFbo.end();
+    winCpu.noiseCount = 0;
+}
+
+
 
 //// SCENE DEFAULT ////////
 void ofApp::sceneDefaultUpdate(){
-    webcam.pos = glm::vec3(0,0,0);
-    webcam.size = glm::vec2(width, height);
-
+    cpuStress = 1000;
     webcam.update();
-    glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
+    glitcherCam.update(webcam.camFbo);
 
 }
 
 void ofApp::sceneDefaultDraw(){
-    webcam.draw();
-    glitcherCam.draw(webcam.pos, webcam.size);
+//    webcam.draw();
+    //postEdge.begin();
+    //postEdge.end();
+    postCode.begin();
+    glitcherCam.draw(glm::vec3 (0,0,0), glm::vec2 (ofGetWidth(), ofGetHeight()));
+    postCode.bloom->setBlurXY(ofRandom(0,0.01),ofRandom(0,0.01));
+    postCode.bloom->setEnabled(ofRandom(0,100)>80);
+    overheating.drawEnding(data.scCPU*cpuStress);
+    postCode.end();
 }
 
 void ofApp::sceneDefaultBang(char playerID){
@@ -566,6 +662,11 @@ void ofApp::sceneDefaultBang(char playerID){
 }
 
 void ofApp::sceneDefaultBigBang(){
+    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    videoplayer.videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoplayer.videoFbo.end();
     scene = data.scene;
+    cpuStress = 1;
 }
 

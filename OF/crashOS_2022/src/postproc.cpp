@@ -30,7 +30,7 @@ void PostProc::setup(bool bBloom, bool bPixel, bool bBleach, bool bShift, bool b
 
     //kali
     kali = post.createPass<KaleidoscopePass>();
-    kali->setSegments(gKaleiSegments);
+//    kali->setSegments(gKaleiSegments);
     kali->setEnabled(bKali);
 
 

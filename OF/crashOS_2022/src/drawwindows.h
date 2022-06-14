@@ -94,6 +94,7 @@ public:
     void draw();
     void add();
     void clear();
+    void drawEnding(int scCPU);
     string insertNewlines(string in, const size_t every_n);
 
     bool isOverheating;
@@ -101,6 +102,10 @@ public:
     int maxWindow = 100;
     vector <Windo> vecOverWindow;
     vector <string> vecStringError;
+
+    ofTrueTypeFont font;
+    ofRectangle fontBox;
+
 
     OverHeating();
 private:

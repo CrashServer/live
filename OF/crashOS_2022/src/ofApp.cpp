@@ -101,7 +101,7 @@ void ofApp::setup(){
         /* Toon */             false
     );
     //postKali.gKaleiSegments = 2;
-    postKali.kali->setSegments(2);
+
 
 
     // GENERIC FILTER / ACES LUT VIDEO PLAYER
@@ -137,10 +137,11 @@ void ofApp::setup(){
     parameters.add(procBackground.parameters);
     parameters.add(audioThresh.set("audio Threshold", 1.0, 0.0, 10.0));
     parameters.add(colorPicker.set("Color Ui", uiColor, ofColor(0,0,0), ofColor(255,255,255)));
-    parameters.add(scene.set("scene", 0, 0, 10));
+    parameters.add(scene.set("scene", 0, 0, 12));
 
     colorPicker.addListener(this, &ofApp::changeColorUi);
     defaultParam.addListener(this, &ofApp::loadDefaultParam);
+    scene.addListener(this, &ofApp::setScene);
 
     gui.setup(parameters, "xml/mysettings.xml");
     gui.setPosition(50,50);
@@ -164,41 +165,35 @@ void ofApp::update(){
     case 0:
         scene0Update();
         break;
-
-    case 1: // Video player + webcam + windows
+    case 1:
         scene1Update();
         break;
-
-    case 2: // videoplayer + webcam + windows + glitcher logo
+    case 2:
         scene2Update();
         break;
-
-    case 3: // Video player 3d + windows + webcam
+    case 3:
         scene3Update();
         break;
-
-    case 4: // glitch video & webcam  + code
+    case 4:
         scene4Update();
         break;
-
     case 5:
         scene5Update();
         break;
-
     case 6:
         scene6Update();
         break;
-
     case 7:
         scene7Update();
         break;
-
     case 8:
         scene8Update();
         break;
-
     case 9:
         scene9Update();
+        break;
+    case 10:
+        scene10Update();
         break;
 
     default:
@@ -228,23 +223,18 @@ void ofApp::draw(){
     case 0:
         scene0Draw();
         break;
-
-    case 1: // Video player + webcam + windows
+    case 1:
         scene1Draw();
         break;
-
-    case 2: // videoplayer + webcam + windows + glitcher logo
+    case 2:
         scene2Draw();
         break;
-
-    case 3: // Video player 3d + windows + webcam
+    case 3:
         scene3Draw();
         break;
-
-    case 4: // glitch video & webcam & logo + code
+    case 4:
         scene4Draw();
         break;
-
     case 5:
         scene5Draw();
         break;
@@ -259,6 +249,9 @@ void ofApp::draw(){
         break;
     case 9:
         scene9Draw();
+        break;
+    case 10:
+        scene10Draw();
         break;
 
 	default:
@@ -301,7 +294,7 @@ void ofApp::bangUpdate(char playerID)
         break;
     case 'c':
         // Cpu bang receive
-        winCpu.noiseCount ++;
+        winCpu.noiseCount++;
         data.bang = '0';
         break;
     case '#':
@@ -371,6 +364,9 @@ void ofApp::bang(char playerID){
     case 9:
         scene9Bang(playerID);
         break;
+    case 10:
+        scene10Bang(playerID);
+        break;
 
     default:
         sceneDefaultBang(playerID);
@@ -411,6 +407,9 @@ void ofApp::bigBang()
     case 9:
         scene9BigBang();
         break;
+    case 10:
+        scene10BigBang();
+        break;
 
     default:
         sceneDefaultBigBang();
@@ -436,6 +435,10 @@ void ofApp::changeColorUi(ofColor &){
 
 void ofApp::loadDefaultParam(bool &){
     gui.loadFromFile("xml/default_settings.xml");
+}
+
+void ofApp::setScene(int&){
+    data.scene = scene;
 }
 
 //--------------------------------------------------------------

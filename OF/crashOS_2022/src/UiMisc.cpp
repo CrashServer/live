@@ -169,7 +169,15 @@ void UiMisc::changeLogo(int index){
         logoHeight = logo.mSequence.getHeight();
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
+    case 10:
+        logo.loadSequence("ui/crashos10/", 24.0f);
+        logo.setShouldLoop(true);
+        logo.play();
 
+        logoWidth = logo.mSequence.getWidth();
+        logoHeight = logo.mSequence.getHeight();
+        uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
+        break;
 
     default:
         logo.loadSequence("ui/crashos0/", 24.0f);

@@ -11,6 +11,8 @@ Windo::Windo(){
 }
 
 OverHeating::OverHeating(){
+    font.load("ui/font/pixe.ttf", 60);
+    fontBox = font.getStringBoundingBox("CPU: 1000%",0,0);
 }
 
 //-------------------------
@@ -74,7 +76,7 @@ void WinCode::setup(int padding, ofColor uiColor){
         parameters.setName("code");
         parameters.add(nbrLineCode.set("Nbr of line of Code", 20, 1, maxLineCode));
         parameters.add(size.set("CodeBox size", glm::vec2(width / 2, 5), glm::vec2(50, 0), glm::vec2(width, 40)));
-        parameters.add(pos.set("CodeBox pos", glm::vec3(50, 90, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+        parameters.add(pos.set("CodeBox pos", glm::vec3(50, 180, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
     }
 }
 
@@ -156,7 +158,7 @@ void WinCpu::setup(int padding, ofColor uiColor){
     if (parameters.size()==0){
         parameters.setName("cpu");
         parameters.add(size.set("CPU Box size", glm::vec2(200, 200), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
-        parameters.add(pos.set("CPU Box", glm::vec3(1600, 780, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+        parameters.add(pos.set("CPU Box", glm::vec3(1600, 590, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
     }
 
 }
@@ -277,6 +279,20 @@ void OverHeating::draw(){
         vecOverWindow[i].drawWin(vecOverWindow[i].pos, vecOverWindow[i].size, vecOverWindow[i].uiColor);
         vecOverWindow[i].font.drawString(vecStringError[i],vecOverWindow[i].pos->x + 15, vecOverWindow[i].pos->y + 25);
     }
+}
+
+void OverHeating::drawEnding(int scCPU){
+    ofPushMatrix();
+    ofPushStyle();
+    ofDisableAlphaBlending();
+    ofDisableDepthTest();
+    ofTranslate(ofGetWidth()/2 - fontBox.width/2, ofGetHeight()/2 - fontBox.height/2);
+    if(ofGetFrameNum()%10==0){ofTranslate(ofRandom(-100,100), ofRandom(-100,100));}
+    ofSetColor(ofColor::red);
+    font.drawString("CPU: " + ofToString(scCPU) + " %", 0, 0);
+    font.drawString("OVERHEATING", 0, fontBox.height + 10);
+    ofPopMatrix();
+    ofPopStyle();
 }
 
 void OverHeating::clear(){

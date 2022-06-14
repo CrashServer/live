@@ -55,6 +55,7 @@ class ofApp : public ofBaseApp{
 
         void changeColorUi(ofColor&);
         void loadDefaultParam(bool&);
+        void setScene(int&);
 
         // Post processingideoplaye
 //        void postprocSetup();
@@ -126,6 +127,7 @@ class ofApp : public ofBaseApp{
         void scene7Update();
         void scene8Update();
         void scene9Update();
+        void scene10Update();
 
         void scene0Draw();
         void scene1Draw();
@@ -137,6 +139,7 @@ class ofApp : public ofBaseApp{
         void scene7Draw();
         void scene8Draw();
         void scene9Draw();
+        void scene10Draw();
 
         void scene0Bang(char playerID);
         void scene1Bang(char playerID);
@@ -148,6 +151,7 @@ class ofApp : public ofBaseApp{
         void scene7Bang(char playerID);
         void scene8Bang(char playerID);
         void scene9Bang(char playerID);
+        void scene10Bang(char playerID);
 
         void scene0BigBang();
         void scene1BigBang();
@@ -159,6 +163,7 @@ class ofApp : public ofBaseApp{
         void scene7BigBang();
         void scene8BigBang();
         void scene9BigBang();
+        void scene10BigBang();
 
         void sceneDefaultUpdate();
         void sceneDefaultDraw();

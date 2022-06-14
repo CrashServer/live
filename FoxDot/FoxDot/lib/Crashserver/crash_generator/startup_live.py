@@ -469,3 +469,18 @@ if crashPanelSending:
 ç = PWhite(-1,1)
 ç0 = PWhite(0,1)
 # ô = PGauss(0, 1)
+
+### scene OF 
+scene0 = 0
+scene1 = 0
+scene2 = 0
+scene3 = 0
+scene4 = 0
+scene5 = 0
+scene6 = 0
+scene7 = 0
+scene8 = 0
+scene9 = 0
+scene10 = 0
+scene99 = 0
+

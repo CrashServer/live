@@ -1,0 +1,2 @@
+#voiceintro
+Voice("At the dawn of an era of technological alienation, servers have taken control of almost all human data. Identities. Ways of thinking. DNA. Humanity seems at the mercy of these impalpable forces, but a duo of computer machinists are fighting an endless battle against the central meta-brain. Their specialty, overheating and abducating audio servers with chaotic and random code lines. They are known, as CRASH SERVER. This are their stories.", lang="en")

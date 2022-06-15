@@ -63,6 +63,7 @@ void Videoplayer::update(int _videoCat, int integrity){
     // load new category
     if (_videoCat != vidCat){
             vidCat = _videoCat;
+            vidID = 0;
             newSeq();
         }
 

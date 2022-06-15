@@ -74,9 +74,8 @@ void UiMisc::draw(bool blogo, bool isServerActive){
 void UiMisc::changeLogo(int index){
     if (index!=logoIndex){
         logoIndex = index;
-    if (index==0){dmx1Col = ofColor(rms);
-        dmx2Col = ofColor(rms);
-        index = ofRandom(0,11);
+    if (index==0){
+        index = ofRandom(0,10);
     }
 
     switch (index) {

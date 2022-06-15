@@ -13,6 +13,7 @@
 //#include "ofTrueTypeFont.h"
 //#include "ofxOsc.h"
 //#include "ofxNetwork.h"
+#include "easing.h"
 
 #include "Camera.h"
 #include "Videoplayer.h"
@@ -90,6 +91,10 @@ class ofApp : public ofBaseApp{
         /// game logic;
 		int integrity = 100;
 			
+        /// audio fft
+        float rms, kick, hihat, snare, initTime;
+
+
         Render render;
         ProcBackground procBackground;
         SphereMap sphereMap;

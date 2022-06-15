@@ -18,6 +18,7 @@ Project{
             "src/boot.h",
             "src/dmx.cpp",
             "src/dmx.h",
+            "src/easing.h",
             "src/ofxBeat.cpp",
             "src/ofxBeat.h",
             "src/Camera.cpp",
@@ -43,6 +44,8 @@ Project{
             "src/render.h",
             "src/fft.cpp",
             "src/fft.h",
+            "src/scene.cpp",
+            "src/scene.h",
         ]
 
         of.addons: [

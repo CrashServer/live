@@ -74,8 +74,9 @@ void UiMisc::draw(bool blogo, bool isServerActive){
 void UiMisc::changeLogo(int index){
     if (index!=logoIndex){
         logoIndex = index;
-    if (index==0){
-        index = ofRandom(0,10);
+    if (index==0){dmx1Col = ofColor(rms);
+        dmx2Col = ofColor(rms);
+        index = ofRandom(0,11);
     }
 
     switch (index) {
@@ -107,7 +108,7 @@ void UiMisc::changeLogo(int index){
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
     case 3:
-        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.loadSequence("ui/crashos3/", 24.0f);
         logo.setShouldLoop(true);
         logo.play();
 
@@ -116,7 +117,7 @@ void UiMisc::changeLogo(int index){
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
     case 4:
-        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.loadSequence("ui/crashos4/", 24.0f);
         logo.setShouldLoop(true);
         logo.play();
 
@@ -125,7 +126,7 @@ void UiMisc::changeLogo(int index){
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
     case 5:
-        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.loadSequence("ui/crashos5/", 24.0f);
         logo.setShouldLoop(true);
         logo.play();
 
@@ -134,7 +135,7 @@ void UiMisc::changeLogo(int index){
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
     case 6:
-        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.loadSequence("ui/crashos6/", 24.0f);
         logo.setShouldLoop(true);
         logo.play();
 
@@ -143,7 +144,7 @@ void UiMisc::changeLogo(int index){
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
     case 7:
-        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.loadSequence("ui/crashos7/", 24.0f);
         logo.setShouldLoop(true);
         logo.play();
 
@@ -152,7 +153,7 @@ void UiMisc::changeLogo(int index){
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
     case 8:
-        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.loadSequence("ui/crashos8/", 24.0f);
         logo.setShouldLoop(true);
         logo.play();
 
@@ -161,7 +162,7 @@ void UiMisc::changeLogo(int index){
         uiFbo.allocate(logoWidth, logoHeight, GL_RGBA);
         break;
     case 9:
-        logo.loadSequence("ui/crashos2/", 24.0f);
+        logo.loadSequence("ui/crashos9/", 24.0f);
         logo.setShouldLoop(true);
         logo.play();
 

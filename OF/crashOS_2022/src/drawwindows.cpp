@@ -12,7 +12,7 @@ Windo::Windo(){
 
 OverHeating::OverHeating(){
     font.load("ui/font/pixe.ttf", 60);
-    fontBox = font.getStringBoundingBox("CPU: 1000%",0,0);
+    fontBox = font.getStringBoundingBox("Garbage collector coming soon",0,0);
 }
 
 //-------------------------
@@ -290,7 +290,9 @@ void OverHeating::drawEnding(int scCPU){
     if(ofGetFrameNum()%10==0){ofTranslate(ofRandom(-100,100), ofRandom(-100,100));}
     ofSetColor(ofColor::red);
     font.drawString("CPU: " + ofToString(scCPU) + " %", 0, 0);
-    font.drawString("OVERHEATING", 0, fontBox.height + 10);
+    font.drawString("cp server.* /dev/null", 0, fontBox.height + 10);
+    font.drawString("Garbage collector coming soon", 0, fontBox.height*2 + 20);
+    font.drawString("Thank you everybody << end;", 0, fontBox.height*3 + 30);
     ofPopMatrix();
     ofPopStyle();
 }

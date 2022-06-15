@@ -43,8 +43,10 @@ void ofApp::scene0Update(){
    videoplayer.update(0);
    boot.update();
    // DMX White
-   dmx1Col = ofColor((audioFft.beat.getMagnitude()*audioThresh/20)*255);
-   dmx2Col = ofColor((audioFft.beat.getMagnitude()*audioThresh/20)*255);
+   float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
+   float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
+   dmx1Col = ofColor::fromHsb(36, sinCol, 5);
+   dmx2Col = ofColor::fromHsb(36, sinCol2, 5);
    dmx.update(dmx1Col, dmx2Col);
 }
 
@@ -86,8 +88,8 @@ void ofApp::scene1Update(){
     // DMX jaune oscillation
     float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
     float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
-    dmx1Col = ofColor::fromHsb(36, sinCol, 255-audioFft.beat.isKick()*55);
-    dmx2Col = ofColor::fromHsb(36, sinCol2, 255-audioFft.beat.isSnare()*55);
+    dmx1Col = ofColor::fromHsb(36, sinCol, 10-kick*10);
+    dmx2Col = ofColor::fromHsb(36, sinCol2, 10-snare*10);
     dmx.update(dmx1Col, dmx2Col);
 }
 
@@ -196,15 +198,15 @@ void ofApp::scene3Update(){
     uiMisc.update(true);
     uiMisc.changeLogo(3);
 
-    dmx1Col = ofColor(audioFft.beat.getMagnitude()*255*audioThresh/20);
-    dmx2Col = ofColor(audioFft.beat.getMagnitude()*255*audioThresh/20);
+    dmx1Col = ofColor(rms*255*audioThresh/20);
+    dmx2Col = ofColor(rms*255*audioThresh/20);
 
     dmx.update(dmx1Col, dmx2Col);
 }
 
 void ofApp::scene3Draw(){
     postTV.begin();
-    postTV.tv->setRollSpeed(audioFft.beat.getMagnitude()*0.001*audioThresh);
+    postTV.tv->setRollSpeed(kick*0.001*audioThresh);
     videoplayer.draw();
     webcam.draw();
     postTV.end();
@@ -306,8 +308,8 @@ void ofApp::scene5Update(){
 
     dmx.update(dmx1Col, dmx2Col);
 
-    glitcherLogo.update(uiMisc.uiFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-    glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
+    glitcherLogo.update(uiMisc.uiFbo, rms*audioThresh/20);
+    glitcherCam.update(webcam.camFbo, rms*audioThresh/20);
 }
 
 void ofApp::scene5Draw(){
@@ -354,7 +356,7 @@ void ofApp::scene5BigBang(){
 
 //// SCENE 6 ////////
 void ofApp::scene6Update(){
-    videoplayer3d.update3d(6, integrity, audioFft.beat.getMagnitude()*audioThresh/20);
+    videoplayer3d.update3d(6, integrity, rms*audioThresh/20);
 
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
@@ -363,8 +365,8 @@ void ofApp::scene6Update(){
     uiMisc.update(true);
     uiMisc.changeLogo(6);
 
-    dmx1Col = ofColor(audioFft.beat.getMagnitude()*audioThresh/20*255);
-    dmx2Col = ofColor(audioFft.beat.getMagnitude()*audioThresh/20*255);
+    dmx1Col = ofColor(rms*audioThresh/20*255);
+    dmx2Col = ofColor(rms*audioThresh/20*255);
 
     dmx.update(dmx1Col, dmx2Col);
 }
@@ -410,7 +412,7 @@ void ofApp::scene7Update(){
 
     dmx.update(dmx1Col, dmx2Col);
 
-    glitcherLogo.update(uiMisc.uiFbo, audioFft.beat.getMagnitude()*audioThresh/20);
+    glitcherLogo.update(uiMisc.uiFbo, rms*audioThresh/20);
 //    glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
 
 }
@@ -471,11 +473,11 @@ void ofApp::scene8Update(){
     uiMisc.update(true);
     uiMisc.changeLogo(0);
 
-    glitcherLogo.update(uiMisc.uiFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-    glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
+    glitcherLogo.update(uiMisc.uiFbo, rms*audioThresh/20);
+    glitcherCam.update(webcam.camFbo, rms*audioThresh/20);
 
-    dmx1Col = ofColor(audioFft.beat.getMagnitude()*255*audioThresh/20);
-    dmx2Col = ofColor(audioFft.beat.getMagnitude()*255*audioThresh/20);
+    dmx1Col = ofColor(rms*255*audioThresh/20);
+    dmx2Col = ofColor(rms*255*audioThresh/20);
 
     dmx.update(dmx1Col, dmx2Col);
 }
@@ -526,7 +528,7 @@ void ofApp::scene8BigBang(){
 //// SCENE 9 ////////
 void ofApp::scene9Update(){
     videoplayer.bthread = true;
-    videoplayer3d.update3d(9, integrity, audioFft.beat.getMagnitude()*audioThresh/20);
+    videoplayer3d.update3d(9, integrity, rms*audioThresh/20);
 //    glitcherVideo.update(videoplayer.videoFbo, audioFft.beat.getMagnitude()*audioThresh/20);
 
     winCode.update(data.vectorCode);
@@ -537,18 +539,18 @@ void ofApp::scene9Update(){
     uiMisc.update(true);
     uiMisc.changeLogo(0);
 
-    glitcherLogo.update(uiMisc.uiFbo, audioFft.beat.getMagnitude()*audioThresh/20);
+    glitcherLogo.update(uiMisc.uiFbo, rms*audioThresh/20);
 //    glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
 
-    dmx1Col = ofColor(audioFft.beat.getMagnitude()*255*audioThresh/20);
-    dmx2Col = ofColor(audioFft.beat.getMagnitude()*255*audioThresh/20);
+    dmx1Col = ofColor(rms*255*audioThresh/20);
+    dmx2Col = ofColor(rms*255*audioThresh/20);
 
     dmx.update(dmx1Col, dmx2Col);
 }
 
 void ofApp::scene9Draw(){
     postKali.begin();
-    postKali.kali->setSegments(audioFft.beat.getMagnitude()*audioThresh);
+    postKali.kali->setSegments(rms*audioThresh);
     videoplayer3d.draw3d();
 
     winCode.draw(data.vectorCode);
@@ -558,6 +560,7 @@ void ofApp::scene9Draw(){
     glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
 //    glitcherCam.draw(webcam.pos, webcam.size);
     postKali.end();
+    winCode.draw(data.vectorCode);
     winCpu.draw();
     winIntegrity.draw();
 }
@@ -640,8 +643,8 @@ void ofApp::scene10BigBang(){
 //// SCENE DEFAULT ////////
 void ofApp::sceneDefaultUpdate(){
     cpuStress = 1000;
-    webcam.update();
-    glitcherCam.update(webcam.camFbo);
+//    webcam.update();
+//    glitcherCam.update(webcam.camFbo);
 
 }
 
@@ -650,7 +653,8 @@ void ofApp::sceneDefaultDraw(){
     //postEdge.begin();
     //postEdge.end();
     postCode.begin();
-    glitcherCam.draw(glm::vec3 (0,0,0), glm::vec2 (ofGetWidth(), ofGetHeight()));
+    ofSetColor(0,125);
+//    glitcherCam.draw(glm::vec3 (0,0,0), glm::vec2 (ofGetWidth(), ofGetHeight()));
     postCode.bloom->setBlurXY(ofRandom(0,0.01),ofRandom(0,0.01));
     postCode.bloom->setEnabled(ofRandom(0,100)>80);
     overheating.drawEnding(data.scCPU*cpuStress);

@@ -35,6 +35,8 @@ void ofApp::setup(){
     text3d.setup();
     procBackground.setup();
 
+    /// FFT
+    initTime = 0;
 //    tunnel3d.setup();
 
     /// Windows
@@ -158,6 +160,17 @@ void ofApp::update(){
     data.update();
     bangUpdate(data.bang);
     audioFft.update();
+    auto duration = 25.f;
+    auto endTime = initTime + duration;
+    auto now = ofGetElapsedTimef();
+    rms = ofxeasing::map_clamp(now, initTime, endTime, 0,audioFft.beat.getMagnitude()*audioThresh,&ofxeasing::cubic::easeIn);
+    kick = ofxeasing::map_clamp(now, initTime, endTime, 0,audioFft.beat.kick()*audioThresh,&ofxeasing::cubic::easeIn);
+    snare = ofxeasing::map_clamp(now, initTime, endTime, 0,audioFft.beat.snare()*audioThresh,&ofxeasing::cubic::easeIn);
+    hihat = ofxeasing::map_clamp(now, initTime, endTime, 0,audioFft.beat.hihat()*audioThresh,&ofxeasing::cubic::easeIn);
+//    rms = audioFft.beat.getMagnitude()*audioThresh;
+//    kick = audioFft.beat.kick()*audioThresh;
+//    snare = audioFft.beat.snare()*audioThresh;
+
 
 //    if ((data.scCPU*cpuStress)>80){scene=3;}
 

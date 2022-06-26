@@ -236,18 +236,35 @@ def porta(self, portDelay=0.5):
 	else:
 		self.slide = 0
 
-def PRy(duration=16, div=4, restprob=0.3):
-	''' Generate a ryhtm pattern '''
-	pat = PSum(randint(1,duration), duration)
-	pat_total = []
-	for i in range(0,len(pat)):
-		pat_total.append(PSum(randint(1,div),pat[i]))
-	pat_total = PJoin(pat_total)
-	if rest !=0:
-		for i in range(0,len(pat)):
-			if randint(0,100) < restprob*100:
-				pat_total[i] = rest(pat_total[i])
-	return pat_total
+valueDict = {}
+
+def masterAll(args = "dur", value=1):
+	global valueDict
+	if args == "reset" or args == 0:
+		for k,v in valueDict.items():
+			for l, w in v.items():
+				try:
+					k.__setattr__(l, w)
+				except:
+					pass
+		valueDict = {}
+	else:
+		for p in Clock.playing:
+			if p in valueDict:
+				if args in valueDict[p]:
+					pass
+				else:
+					try:
+						valueDict[p][args] = p.__getitem__(args)
+					except:
+						valueDict[p][args] = 0
+			else:
+				valueDict[p] = {}
+				try:
+					valueDict[p][args] = p.__getitem__(args)
+				except:
+					valueDict[p][args] = 0
+			p.__setattr__(args, value)
 
 ### CrashPanel
 ### Root, scale

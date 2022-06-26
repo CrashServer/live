@@ -6,6 +6,8 @@
 from random import randint, random, sample, choices, seed
 from time import gmtime, strftime
 import threading
+# import configparser
+import os
 
 class genSeed():
 	''' return a seed for random based on actual time for multiplayer sync '''
@@ -31,7 +33,8 @@ try:
 	from .Crashserver.crash_generator.weapons import *
 	from .Crashserver.crash_generator.composition import *
 	from crash_config import *
-	#from .Crashserver.crash_generator.server_conf import *
+	# from .Settings import FOXDOT_ROOT
+	from .Crashserver.crash_generator.server_conf import *
 except Exception as e:
 	print("Error in generating weapons code", e)
 
@@ -513,12 +516,17 @@ def addFilter(player=None):
 def addKick():
 	''' Add 4 to the floor Kick player '''
 	try:
+
 		player = generate_player_name()
 		kick = choice(sorted_sample["kick_sample"]) + "."
 		sple = randint(0,99)
 		lpf = randint(40,5000)
-		sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
-		~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
+		if randint(0,100) < 70:
+			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
+			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
+		else:
+			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf}).drummer()')
+			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).drummer().sometimes("stutter")
 		addPlayerTurn()
 	except Exception as err:
 		print("addKick problem : " + err)
@@ -564,3 +572,13 @@ def soff():
 
 server.start()
 #serverActive = True
+
+# def changeConf():
+# 	cfg = configparser.RawConfigParser()
+# 	cfg.optionxform = str
+# 	pth = os.path.join(FOXDOT_ROOT, "lib", "Crashserver","crash_generator","server_conf0.cfg")
+# 	cfg.read(pth)
+# 	par=dict(cfg.items("Settings"))
+# 	for p in par:
+# 		par[p]=par[p].split("#",1)[0].strip() # To get rid of inline comments
+# 	globals().update(par)  #globally

@@ -61,11 +61,11 @@ fxdict = {
 
 sorted_sample = {
 'kick_sample': ["k","K","v","V","W","x","X"],
-'hh_sample': ["-","h","7","d"],
+'hh_sample': ["-","d"],
 'snare_sample': ["o","O","u","U","c","C","d","p","P","^","@"],
-'oh_sample': ["=",":","!"],
+'oh_sample': ["=",":"],
 'ride_sample': ["~","7","h","s","S"],
-'rim_sample': ["R","r","p","P","+","^","d"],
+'rim_sample': ["R","r","p","P","+","d"],
 'perc_sample': ["+","h","^","d","{m,M,t,T}"]}
 
 

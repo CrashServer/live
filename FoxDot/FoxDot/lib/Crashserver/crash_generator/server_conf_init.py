@@ -14,11 +14,11 @@ multDurationMax = 4
 ## Server routine orders probabilty ###
 probAddPlayer = 5  # probability to add a player (synth, drum, loop)
 probStopPlayer = 4 # probability to stop one or more running players
-probAddFx = 2 # probabilty to add a Fx
+probAddFx = 4 # probabilty to add a Fx
 probChangeDegree = 1 # probability to change a synth degree, drum char or loop position
-probAddPlayerParam = 4 # probability to add a player param (.stutter, .spread, .shuffle)
+probAddPlayerParam = 3 # probability to add a player param (.stutter, .spread, .shuffle)
 probAddPlayerAttribute = 4 # probability to a change a player attributes (dur, pan, sus)
-probAddEvent = 3 #probabilty to add a master event (change bpm, change root, master.lpf(), drop)
+probAddEvent = 2 #probabilty to add a master event (change bpm, change root, master.lpf(), drop)
 probChangeSynthAttr = 2 # probabilty to change player adsr
 probAddFxOut = 0 # probability to add an fx output
 
@@ -29,12 +29,13 @@ probChangeHumanizer = 6
 probChangeBpm = 2
 probAddLpf = 2
 probAddDrop = 1
-probAddKick = 4
+probAddKick = 5
+
 
 # Add player probability
 probAddSynth = 3
-probAddDrum = 2 #2
-probAddLoop = 1 #1
+probAddDrum = 2
+probAddLoop = 1
 
 # Stop player
 minPlayerTurn = 8 # min number of player turn before a possibility stop
@@ -56,16 +57,16 @@ probLoopChangeDegree = [4,	# probability to change loop degree
 						4,	# probability to change loop position
 						0]   # probability to change loop sample # Not working for now
 
-probSynthChangeDegree = [2, # probability to change synth degree player to PArp()
-						 5, # probabiltiy to change synth degree player to Melody()
-						 2, # probabiltiy to change synth degree player to PGauss()
-						 3] # probability to change synth degree player to PChain2(chords)
+probSynthChangeDegree = [5, # probability to change synth degree player to PArp()
+						 2, # probabiltiy to change synth degree player to Melody()
+						 3, # probabiltiy to change synth degree player to PGauss()
+						 1] # probability to change synth degree player to PChain2(chords)
 
 probChangeDrumChar = [6,2] # probability to change to [same type char (kick, snare, hh) or random char]
 
 # Change bpm parameters
 changeBpmMin = 30 # min bpm
-changeBpmMax = 132 # max bpm
+changeBpmMax = 220 # max bpm
 changeBpmTimeMin = 16  # min beats
 changeBpmTimeMax = 128 # max beats
 

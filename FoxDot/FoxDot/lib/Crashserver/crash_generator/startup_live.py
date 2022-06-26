@@ -253,234 +253,238 @@ def PRy(duration=16, div=4, restprob=0.3):
 ### Root, scale
 ### generateur de "Plat du jour"
 
-if crashPanelSending:
-	class PlatduJour():
-		def __init__(self):
-			self.choicePlat = [self.pat_du_jour, self.synth_du_jour, self.loop_du_jour, self.nombre_du_jour,
-								self.fx_du_jour, self.para_du_jour, self.pattern_du_jour, self.gen_dict_words,
-								self.scale_du_jour, self.fonction_du_jour]
+try:
+	if crashPanelSending:
+		class PlatduJour():
+			def __init__(self):
+				self.choicePlat = [self.pat_du_jour, self.synth_du_jour, self.loop_du_jour, self.nombre_du_jour,
+									self.fx_du_jour, self.para_du_jour, self.pattern_du_jour, self.gen_dict_words,
+									self.scale_du_jour, self.fonction_du_jour]
 
-		def pat_du_jour(self):
-			return ("Pattern", [name for name, obj in vars(Sequences).items() if (type(obj) == FunctionType and name.startswith("P"))])
+			def pat_du_jour(self):
+				return ("Pattern", [name for name, obj in vars(Sequences).items() if (type(obj) == FunctionType and name.startswith("P"))])
 
-		def synth_du_jour(self):
-			return ("Synth",[i for i in SynthDefs])
+			def synth_du_jour(self):
+				return ("Synth",[i for i in SynthDefs])
 
-		def loop_du_jour(self):
-			return ("Loop", loopNames)
+			def loop_du_jour(self):
+				return ("Loop", loopNames)
 
-		def nombre_du_jour(self):
-			return ("Nombre", [GENERATE_AMPLIFY(), GENERATE_LIST(), GENERATE_FLOAT_LIST(), GENERATE_TUPLE(),
-					GENERATE_NUMBER(), GENERATE_RDM(), GENERATE_VARLIST(), GENERATE_FREQLIST()])
+			def nombre_du_jour(self):
+				return ("Nombre", [GENERATE_AMPLIFY(), GENERATE_LIST(), GENERATE_FLOAT_LIST(), GENERATE_TUPLE(),
+						GENERATE_NUMBER(), GENERATE_RDM(), GENERATE_VARLIST(), GENERATE_FREQLIST()])
 
-		def fx_du_jour(self):
-			randfx = GENERATE_FX()
-			txt = []
-			for k,v in randfx.items():
-				txt.append(f"{k}={v}")
-			return ("FX", [txt])
+			def fx_du_jour(self):
+				randfx = GENERATE_FX()
+				txt = []
+				for k,v in randfx.items():
+					txt.append(f"{k}={v}")
+				return ("FX", [txt])
 
-		def para_du_jour(self):
-			para = GENERATE_PARA()
-			return ("Parametre", [f"{para}"])
+			def para_du_jour(self):
+				para = GENERATE_PARA()
+				return ("Parametre", [f"{para}"])
 
-		def pattern_du_jour(self):
-			pat = GENERATE_PATTERN()
-			return ("Pattern", [f"{pat}\n\n{eval(pat)}"])
+			def pattern_du_jour(self):
+				pat = GENERATE_PATTERN()
+				return ("Pattern", [f"{pat}\n\n{eval(pat)}"])
 
-		def gen_dict_words(self):
-			try:
-				aa33listimpp = '''
-				datetime sys pprint os time
-				codecs random glob warnings
-				token pipes re'''.split()
-				pass
-				vg33modules   = map(__import__, aa33listimpp)
-				sg33doctext   = " ".join([vxx.__doc__ for vxx in vg33modules])
-				pass
-				rgx33word4min = r'[a-zA-Z0-9]{4,}'  ## regex to find words of 4chars or more
-				aa33listword  = [str(vxx).lower() for vxx in re.findall(rgx33word4min,sg33doctext) ]
-				aa33listword  = set(aa33listword)
-				aa33listword  = sorted(aa33listword)
-				pass
-				return ("Mot", aa33listword)
-			except:
-				return ("Mot", ["composite", "occidental", "demembrer", "chimique", "fissure", "serpent", "perturbation",
-						"berserker", "plaid", "donut", "jaillissement", "citron vert", "rouille", "barbouillage", "hiver",
-						"assurance", "nerveux", "aversion", "mixeur", "innocent", "canard", "objet", "rage", "anonyme", "perturber", "meurtre", "sagesse",
-						"encore", "secteur", "horrible", "puissant"])
-
-		def scale_du_jour(self):
-			return ("Scale", Scale.names())
-
-		def fonction_du_jour(self):
-			fct = ["PMorse(text, point=1/4, tiret=3/4)", ".gtr(string=1)", "random_bpm_var()", ".unison(unison=2, detune=0.125, analog=0)",
-					 ".human(velocity=20, humanize=5, swing=0)", ".fill(mute_player=0, on=1)", "brk(multi=1, code='')",
-					 ".renv(nbr=1)", "binary(number)", "PTime()", "PTimebin()", "lininf(start=0, finish=1, time=32)", "expinf(start=0, finish=1, time=32)",
-					 "PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer='d')", "darker()", "lighter()", "PChords(chords)",
-					 "PGauss(mean, deviation)", "PLog(mean, deviation)", "PTrir(low,high,mode)", "PCoin(low, high, proba)", "PChar(case=2, alpha=2)",
-					 "PMarkov(init_value='')", "switch(other, key, bypass=1)", "clone(player)", "add(value)", "mul(value)", "drop(playTime=6, dropTime=2, nbloop=1)",
-					 "drop_bpm(duree=32, nbr=0, end=4)", "melody(scale_melody=Scale.default.name, melody_dict=melody_dict)", "PArp(seq, index=0)", "SDur(target)"]
-			return ("Fonction", fct)
-
-		def choix(self):
-			choix = choice(self.choicePlat)
-			mot, chx = choix()
-			return (mot, choice(chx))
-
-
-	class CrashPanel():
-		def __init__(self, ipZbdm="localhost", ipSvdk = None, port=2000):
-			self.ipZbdm = ipZbdm
-			self.ipSvdk = ipSvdk
-			self.port = port
-
-			self.bpmTime = 0.2  # time cycle send bpm
-			self.beatTime = 0.1 # time cycle send beat
-			self.plyTime = 0.3 # time cycle send player
-			self.pdjTime = 60 #time cycle send PlatduJour
-			self.chronoTime = 10 # time cycle send chrono
-
-			self.clientZbdm = OSCClient()
-			self.clientZbdm.connect((self.ipZbdm, 2000))
-			if self.ipSvdk:
-				self.clientSvdk = OSCClient()
-				self.clientSvdk.connect((self.ipSvdk, 2000))
-
-			self.pdj = PlatduJour()
-			self.timeInit = time()
-
-			self.threadBpm = Thread(target = self.sendBpm)
-			self.threadBpm.daemon = True
-			self.threadBeat = Thread(target = self.sendBeat)
-			self.threadBpm.daemon = True
-			self.threadPlayer = Thread(target = self.sendPlayer)
-			self.threadPlayer.daemon = True
-			self.threadPdj = Thread(target = self.sendPdj)
-			self.threadPdj.daemon = True
-			self.threadChrono = Thread(target = self.sendChrono)
-			self.threadChrono.daemon = True
-
-		def sendOscMsg(self, msg):
-			if self.ipZbdm:
+			def gen_dict_words(self):
 				try:
-					self.clientZbdm.send(msg)
+					aa33listimpp = '''
+					datetime sys pprint os time
+					codecs random glob warnings
+					token pipes re'''.split()
+					pass
+					vg33modules   = map(__import__, aa33listimpp)
+					sg33doctext   = " ".join([vxx.__doc__ for vxx in vg33modules])
+					pass
+					rgx33word4min = r'[a-zA-Z0-9]{4,}'  ## regex to find words of 4chars or more
+					aa33listword  = [str(vxx).lower() for vxx in re.findall(rgx33word4min,sg33doctext) ]
+					aa33listword  = set(aa33listword)
+					aa33listword  = sorted(aa33listword)
+					pass
+					return ("Mot", aa33listword)
+				except:
+					return ("Mot", ["composite", "occidental", "demembrer", "chimique", "fissure", "serpent", "perturbation",
+							"berserker", "plaid", "donut", "jaillissement", "citron vert", "rouille", "barbouillage", "hiver",
+							"assurance", "nerveux", "aversion", "mixeur", "innocent", "canard", "objet", "rage", "anonyme", "perturber", "meurtre", "sagesse",
+							"encore", "secteur", "horrible", "puissant"])
+
+			def scale_du_jour(self):
+				return ("Scale", Scale.names())
+
+			def fonction_du_jour(self):
+				fct = ["PMorse(text, point=1/4, tiret=3/4)", ".gtr(string=1)", "random_bpm_var()", ".unison(unison=2, detune=0.125, analog=0)",
+						 ".human(velocity=20, humanize=5, swing=0)", ".fill(mute_player=0, on=1)", "brk(multi=1, code='')",
+						 ".renv(nbr=1)", "binary(number)", "PTime()", "PTimebin()", "lininf(start=0, finish=1, time=32)", "expinf(start=0, finish=1, time=32)",
+						 "PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer='d')", "darker()", "lighter()", "PChords(chords)",
+						 "PGauss(mean, deviation)", "PLog(mean, deviation)", "PTrir(low,high,mode)", "PCoin(low, high, proba)", "PChar(case=2, alpha=2)",
+						 "PMarkov(init_value='')", "switch(other, key, bypass=1)", "clone(player)", "add(value)", "mul(value)", "drop(playTime=6, dropTime=2, nbloop=1)",
+						 "drop_bpm(duree=32, nbr=0, end=4)", "melody(scale_melody=Scale.default.name, melody_dict=melody_dict)", "PArp(seq, index=0)", "SDur(target)"]
+				return ("Fonction", fct)
+
+			def choix(self):
+				choix = choice(self.choicePlat)
+				mot, chx = choix()
+				return (mot, choice(chx))
+
+
+		class CrashPanel():
+			def __init__(self, ipZbdm="localhost", ipSvdk = None, port=2000):
+				self.ipZbdm = ipZbdm
+				self.ipSvdk = ipSvdk
+				self.port = port
+
+				self.bpmTime = 0.2  # time cycle send bpm
+				self.beatTime = 0.1 # time cycle send beat
+				self.plyTime = 0.3 # time cycle send player
+				self.pdjTime = 60 #time cycle send PlatduJour
+				self.chronoTime = 10 # time cycle send chrono
+
+				self.clientZbdm = OSCClient()
+				self.clientZbdm.connect((self.ipZbdm, 2000))
+				if self.ipSvdk:
+					self.clientSvdk = OSCClient()
+					self.clientSvdk.connect((self.ipSvdk, 2000))
+
+				self.pdj = PlatduJour()
+				self.timeInit = time()
+
+				self.threadBpm = Thread(target = self.sendBpm)
+				self.threadBpm.daemon = True
+				self.threadBeat = Thread(target = self.sendBeat)
+				self.threadBpm.daemon = True
+				self.threadPlayer = Thread(target = self.sendPlayer)
+				self.threadPlayer.daemon = True
+				self.threadPdj = Thread(target = self.sendPdj)
+				self.threadPdj.daemon = True
+				self.threadChrono = Thread(target = self.sendChrono)
+				self.threadChrono.daemon = True
+
+			def sendOscMsg(self, msg):
+				if self.ipZbdm:
+					try:
+						self.clientZbdm.send(msg)
+					except:
+						pass
+				if self.ipSvdk:
+					try:
+						self.clientSvdk.send(msg)
+					except:
+						pass
+
+			def sendBpm(self):
+				''' send Clock.bpm to OSC server '''
+				try:
+					while self.isrunning:
+						msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
+						self.sendOscMsg(msg)
+						sleep(self.bpmTime)
 				except:
 					pass
-			if self.ipSvdk:
+
+			def sendBeat(self):
+				''' send Clock.beat to OSC server '''
 				try:
-					self.clientSvdk.send(msg)
+					while self.isrunning:
+						msg = OSCMessage("/panel/beat", [Clock.beat])
+						self.sendOscMsg(msg)
+						sleep(self.beatTime)
 				except:
 					pass
 
-		def sendBpm(self):
-			''' send Clock.bpm to OSC server '''
-			try:
-				while self.isrunning:
-					msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
-					self.sendOscMsg(msg)
-					sleep(self.bpmTime)
-			except:
-				pass
+			def sendPlayer(self):
+				''' send active player to OSC server '''
+				try:
+					while self.isrunning:
+						msg = OSCMessage("/panel/player", [[str(p) for p in Clock.playing]])
+						self.sendOscMsg(msg)
+						sleep(self.plyTime)
+				except:
+					pass
 
-		def sendBeat(self):
-			''' send Clock.beat to OSC server '''
-			try:
-				while self.isrunning:
-					msg = OSCMessage("/panel/beat", [Clock.beat])
-					self.sendOscMsg(msg)
-					sleep(self.beatTime)
-			except:
-				pass
+			def sendPdj(self):
+				''' send platdujour to OSC server '''
+				try:
+					while self.isrunning:
+						intitule, plat = self.pdj.choix()
+						msg = OSCMessage("/panel/pdj", [intitule, plat])
+						self.sendOscMsg(msg)
+						sleep(self.pdjTime)
+				except:
+					pass
 
-		def sendPlayer(self):
-			''' send active player to OSC server '''
-			try:
-				while self.isrunning:
-					msg = OSCMessage("/panel/player", [[str(p) for p in Clock.playing]])
-					self.sendOscMsg(msg)
-					sleep(self.plyTime)
-			except:
-				pass
+			def sendChrono(self):
+				''' send ChronoTime to OSC server '''
+				try:
+					while self.isrunning:
+						elapsedTime = time() - self.timeInit
+						msg = OSCMessage("/panel/chrono", [elapsedTime])
+						self.sendOscMsg(msg)
+						sleep(self.chronoTime)
+				except:
+					pass
 
-		def sendPdj(self):
-			''' send platdujour to OSC server '''
-			try:
-				while self.isrunning:
-					intitule, plat = self.pdj.choix()
-					msg = OSCMessage("/panel/pdj", [intitule, plat])
-					self.sendOscMsg(msg)
-					sleep(self.pdjTime)
-			except:
-				pass
+			def sendOnce(self, txt):
+				''' send on txt msg to OSC '''
+				msg = OSCMessage("/panel/help", [txt])
+				self.sendOscMsg(msg)
 
-		def sendChrono(self):
-			''' send ChronoTime to OSC server '''
-			try:
-				while self.isrunning:
-					elapsedTime = time() - self.timeInit
-					msg = OSCMessage("/panel/chrono", [elapsedTime])
-					self.sendOscMsg(msg)
-					sleep(self.chronoTime)
-			except:
-				pass
+			def stop(self):
+				self.isrunning = False
 
-		def sendOnce(self, txt):
-			''' send on txt msg to OSC '''
-			msg = OSCMessage("/panel/help", [txt])
-			self.sendOscMsg(msg)
+			def start(self):
+				self.isrunning = True
+				self.threadBpm.start()
+				self.threadBeat.start()
+				self.threadPlayer.start()
+				self.threadPdj.start()
+				self.threadChrono.start()
 
-		def stop(self):
-			self.isrunning = False
+		def panelreset():
+			crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
+			crashpanel.start()
 
-		def start(self):
-			self.isrunning = True
-			self.threadBpm.start()
-			self.threadBeat.start()
-			self.threadPlayer.start()
-			self.threadPdj.start()
-			self.threadChrono.start()
+		def chrono():
+			crashpanel.timeInit = time()
 
-	def panelreset():
 		crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
 		crashpanel.start()
-
-	def chrono():
-		crashpanel.timeInit = time()
-
-	crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
-	crashpanel.start()
+except Exception as e:
+	print(e)
 
 ### French cut
+try:
+	é = linvar([0,1],[16,0])
+	é8 = linvar([0,1],[8,0])
+	é32 = linvar([0,1],[16,0])
+	è = linvar([1,0],[16,0])
+	è8 = linvar([1,0],[8,0])
+	è32 = linvar([1,0],[32,0])
+	ê = linvar([0,1],[16,16])
+	ê8 = linvar([0,1],[8,8])
+	ê32 = linvar([0,1],[32,32])
+	ù = PDur(var([4,PRand(8)],[6,2]), 8)
+	ù3 = PDur(var([3,PRand(8)],[6,2]), 8)
+	ù5 = PDur(var([5,PRand(8)],[6,2]), 8)
+	à = PRand(10)
+	ç = PWhite(-1,1)
+	ç0 = PWhite(0,1)
+	# ô = PGauss(0, 1)
 
-é = linvar([0,1],[16,0])
-é8 = linvar([0,1],[8,0])
-é32 = linvar([0,1],[16,0])
-è = linvar([1,0],[16,0])
-è8 = linvar([1,0],[8,0])
-è32 = linvar([1,0],[32,0])
-ê = linvar([0,1],[16,16])
-ê8 = linvar([0,1],[8,8])
-ê32 = linvar([0,1],[32,32])
-ù = PDur(var([4,PRand(8)],[6,2]), 8)
-ù3 = PDur(var([3,PRand(8)],[6,2]), 8)
-ù5 = PDur(var([5,PRand(8)],[6,2]), 8)
-à = PRand(10)
-ç = PWhite(-1,1)
-ç0 = PWhite(0,1)
-# ô = PGauss(0, 1)
-
-### scene OF 
-scene0 = 0
-scene1 = 0
-scene2 = 0
-scene3 = 0
-scene4 = 0
-scene5 = 0
-scene6 = 0
-scene7 = 0
-scene8 = 0
-scene9 = 0
-scene10 = 0
-scene99 = 0
-
+	### scene OF
+	scene0 = 0
+	scene1 = 0
+	scene2 = 0
+	scene3 = 0
+	scene4 = 0
+	scene5 = 0
+	scene6 = 0
+	scene7 = 0
+	scene8 = 0
+	scene9 = 0
+	scene10 = 0
+	scene99 = 0
+except Exception as e:
+	print(e)

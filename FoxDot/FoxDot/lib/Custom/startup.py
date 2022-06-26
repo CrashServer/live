@@ -682,7 +682,7 @@ def drummer(self, duration=32):
         drumPat = int(PRand(1,len(drumRockPattern[drumCat])))
         drumFillCat = int(PRand(1, len(drumRockFill)))
         drumFillPat = int(PRand(1, len(drumRockFill[drumFillCat])))
-        fillDur = duration/4
+        fillDur = duration/PRand([4,8,16])
         self.degree=Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [duration-fillDur, fillDur])
         self.human(30,5)
         self.every(duration, "drummer")

@@ -8,7 +8,7 @@ if __name__ != "__main__":
 		from ...Buffers import alpha, nonalpha
 		from ...Patterns.Sequences import *
 		from ...Effects.Util import FxList
-		from .server_conf import crash_path
+		from crash_config import crash_path
 		from .composition import *
 		from .synthArgs import *
 
@@ -39,7 +39,8 @@ if __name__ != "__main__":
 	#SYNTH LIST & Exclude
 	synthdefNames = [i for i in SynthDefs]
 	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin' ]
-	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 'latoo', 'pink', 'saw', 'scratch', 'viola']
+	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
+					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', 'arpy', 'orient', "noise", "rsin", "rave", "virus"]
 	#penible_synth = ['gray']
 	synthExclude += penible_synth
 	for exclude in synthExclude:
@@ -56,7 +57,13 @@ if __name__ != "__main__":
 			loopNames.remove(loopxclude)
 		except:
 			pass
-		
+	
+	fxExclude = ["coarse", "dist", "formant", "shape", "drive", "disto", "tanh", "octafuz", "krush", "drop", "triode", "squiz", "fold", "dist2", "bpf"]
+	for fxclude in fxExclude:
+		try:
+			del fxdict[fxclude]
+		except:
+			pass	
 # Generic actions	
 
 def GENERATE_PATTERN(_min=1, _max=9):

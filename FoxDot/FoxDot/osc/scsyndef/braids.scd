@@ -12,6 +12,3 @@ osc=(osc * env);
 osc = Mix(osc) * 0.5 * amp;
 osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)}).add;
-
-
-StageLimiter.activate

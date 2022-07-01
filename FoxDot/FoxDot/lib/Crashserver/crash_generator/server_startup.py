@@ -470,16 +470,15 @@ def humanizer(player=None):
 		print("humanizer problem : " + err)
 
 def masterFilter():
-	''' Add random Master().lpf, Master().bpf, Master().hpf '''
+	''' Add random Master().lpf, Master().hpf '''
 	try:
 		timef = 4*round(randint(3,32)/4)
-		filtr = choice(["lpf", "hpf", "bpf"])
+		filtr = choice(["lpf", "hpf"])
 		set_master_filter(filtr, freqs[filtr], timef)
 		sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-1},1])')
 		Clock.future(timef, lambda: set_master_filter(filtr, 0, 0))
 	except Exception as err:
 		Master().__setattr__("lpf", 0)
-		Master().__setattr__("bpf", 0)
 		Master().__setattr__("hpf", 0)
 		print("masterFilter problem : " + err)
 
@@ -521,10 +520,11 @@ def addKick():
 		kick = choice(sorted_sample["kick_sample"]) + "."
 		sple = randint(0,99)
 		lpf = randint(40,5000)
-		if randint(0,100) < 70:
+		if randint(0,100) > probAddDrummer:
 			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
 			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
 		else:
+			lpf = randint(2400,14000)
 			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf}).drummer()')
 			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).drummer().sometimes("stutter")
 		addPlayerTurn()

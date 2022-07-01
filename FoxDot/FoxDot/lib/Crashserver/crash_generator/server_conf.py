@@ -24,15 +24,15 @@ probAddFxOut = 0 # probability to add an fx output
 
 #Add Master event Probability
 probChangeScale = 1
-probChangeRoot = 2
-probChangeHumanizer = 6
+probChangeRoot = 1
+probChangeHumanizer = 2
 probChangeBpm = 2
-probAddLpf = 2
-probAddDrop = 1
+probAddLpf = 6
+probAddDrop = 3
 probAddKick = 4
 
 # Add player probability
-probAddSynth = 3
+probAddSynth = 4
 probAddDrum = 2 #2
 probAddLoop = 1 #1
 
@@ -44,8 +44,9 @@ maxPlayerTurn = 16 # max number of player turn until a stop
 probPatternDur = [30,60,10] # probability dur synth player [PDur(random,8), SDur(), Generate Pattern]
 
 # Add Drum Probabilty
-probAddStyleDrum = 3 # probability to pick a style drum pattern
+probAddStyleDrum = 8 # probability to pick a style drum pattern
 probAddRandomDrum = 1 # probability to generate random char pattern
+probAddDrummer = 30
 
 # Stop player Probability
 probStopOnePlayer = 6  # porbability to stop randomly only one player
@@ -61,13 +62,13 @@ probSynthChangeDegree = [2, # probability to change synth degree player to PArp(
 						 2, # probabiltiy to change synth degree player to PGauss()
 						 3] # probability to change synth degree player to PChain2(chords)
 
-probChangeDrumChar = [6,2] # probability to change to [same type char (kick, snare, hh) or random char]
+probChangeDrumChar = [7,2] # probability to change to [same type char (kick, snare, hh) or random char]
 
 # Change bpm parameters
 changeBpmMin = 30 # min bpm
 changeBpmMax = 132 # max bpm
-changeBpmTimeMin = 16  # min beats
-changeBpmTimeMax = 128 # max beats
+changeBpmTimeMin = 32  # min beats
+changeBpmTimeMax = 256 # max beats
 
 # Change Root parameters
 changeRootMin = -1
@@ -111,12 +112,12 @@ probDurLoopPlayer = [1,1]  # probability of this list
 # drum style generator
 probDrumStyleRate = [1,5] # probabilty to change drm style rate to: [randomRateList, 1]
 DrumStyleDur = [0.25,0.5,1]  # list of dur for drum style
-probDrumStyleDur = [1,1,1]  # probability of this list
+probDrumStyleDur = [3,1,1]  # probability of this list
 
 # gen filter player
 probLowPass = 8  # probability to add a low pass
 probHighPass = 2 # probability to add a high pass
 filterFreqMin = 400 # freq min
 filterFreqMax = 7000 # freq max
-probFilterFreq = [3,3,1] # probability to [linvar, integer, 0]
+probFilterFreq = [8,3,1] # probability to [linvar, integer, 0]
 

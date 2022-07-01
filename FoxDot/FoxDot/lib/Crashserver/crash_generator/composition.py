@@ -33,7 +33,7 @@ fxdict = {
 'formant' : {'formant': [0,4], 'formantmix': preso},
 'shape' : {'shape': preso, 'shapemix': preso},
 'drive' : {'drive': preso, 'drivemix': preso},
-'leg' : {'leg': [0.0,20.0]},
+'leg' : {'leg': [0.0,2.0]},
 'spf' : {'spf': pfreq, 'spr': preso, 'spfslide': [0.0,10.0], 'spfend': pfreq},
 'mpf' : {'mpf': pfreq, 'mpr': preso},
 'disto' : {'disto': [0,0.5], 'smooth': preso, 'distomix': preso},
@@ -55,7 +55,7 @@ fxdict = {
 'ringz' : {'ringz': preso, 'ringzfreq': [50,1000]},
 'mverb': {'mverb': preso, 'mverbmix': preso, 'mverbdamp': preso, 'mverbdiff': [0.5,0.99]},
 'clouds': {'clouds': preso, 'cpos': [0.0,1.0], 'csize': [0.0,1.0], 'cdens': [0.0,1.0], 'ctex': [0.0,1.0], 'cpitch': [-48,48], 'cgain': [1,4], 'cfb': [0.0,0.5], 'cmode': [0,3]},
-'dist2': {'dist2': [0.5,8], 'dist2mix': preso, 'dist2shape': [0.03,0.5]},
+'dist2': {'dist2': [0.2,1], 'dist2mix': preso, 'dist2shape': [0.03,0.5]},
 
 }
 

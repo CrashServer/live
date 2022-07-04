@@ -39,8 +39,8 @@ if __name__ != "__main__":
 	#SYNTH LIST & Exclude
 	synthdefNames = [i for i in SynthDefs]
 	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin' ]
-	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
-					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', 'arpy', 'orient', "noise", "rsin", "rave", "virus"]
+	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
+					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", "plaits", "braids"]
 	#penible_synth = ['gray']
 	synthExclude += penible_synth
 	for exclude in synthExclude:
@@ -58,7 +58,7 @@ if __name__ != "__main__":
 		except:
 			pass
 	
-	fxExclude = ["coarse", "dist", "formant", "shape", "drive", "disto", "tanh", "octafuz", "krush", "drop", "triode", "squiz", "fold", "dist2", "bpf"]
+	fxExclude = ["coarse", "dist", "formant", "shape", "drive", "disto", "tanh", "octafuz", "krush", "drop", "triode", "squiz", "fold", "dist2", "bpf", "ringz"]
 	for fxclude in fxExclude:
 		try:
 			del fxdict[fxclude]

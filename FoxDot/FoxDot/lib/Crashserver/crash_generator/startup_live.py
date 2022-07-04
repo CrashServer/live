@@ -201,6 +201,10 @@ def PMorse(text, point=1/4, tiret=3/4):
 	morse[-1] += rest(2*point)
 	return morse
 
+def unsolo():
+    for p in Clock.playing:
+        p.solo(0)
+
 # virus_method = ["Injecting... ", "Loading... ", "Init: ", "Dumping: ", "Hacking: ", "Run.."]
 # virus_name = ["MyDoom", "Brain", "Zeus", "Sality", "Virut", "Ramnit", "Blaster", "Conficker",\
 # "Worm", "TDSS TDL 4"]
@@ -505,3 +509,5 @@ try:
 	scene99 = 0
 except Exception as e:
 	print(e)
+
+

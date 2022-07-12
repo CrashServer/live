@@ -20,19 +20,20 @@ probAddPlayerParam = 4 # probability to add a player param (.stutter, .spread, .
 probAddPlayerAttribute = 4 # probability to a change a player attributes (dur, pan, sus)
 probAddEvent = 3 #probabilty to add a master event (change bpm, change root, master.lpf(), drop)
 probChangeSynthAttr = 2 # probabilty to change player adsr
-probAddFxOut = 0 # probability to add an fx output
 
 #Add Master event Probability
 probChangeScale = 1
 probChangeRoot = 1
-probChangeHumanizer = 2
-probChangeBpm = 3
+probChangeHumanizer = 3
+probChangeBpm = 2
 probAddLpf = 6
 probAddDrop = 3
 probAddKick = 4
+probAddAccompany = 5
+probAddFxOut = 0 # probability to add an fx output
 
 # Add player probability
-probAddSynth = 4
+probAddSynth = 3
 probAddDrum = 2 #2
 probAddLoop = 1 #1
 
@@ -66,7 +67,7 @@ probChangeDrumChar = [7,2] # probability to change to [same type char (kick, sna
 
 # Change bpm parameters
 changeBpmMin = 30 # min bpm
-changeBpmMax = 132 # max bpm
+changeBpmMax = 162 # max bpm
 changeBpmTimeMin = 32  # min beats
 changeBpmTimeMax = 256 # max beats
 
@@ -89,7 +90,7 @@ dropLoop = 4
 
 # change probability player parameters
 probPlayerAttributes = [2, #amp
-						1, #amplify
+						2, #amplify
 						7, #dur
 						1, #sus
 						4] #pan
@@ -107,7 +108,7 @@ drumRateMax = 4 # rate drum PWhite max
 
 # Loop player generator
 multDurLoopPLayer = [1,2]  # list of multiply the loop player duration
-probDurLoopPlayer = [1,1]  # probability of this list
+probDurLoopPlayer = [4,1]  # probability of this list
 
 # drum style generator
 probDrumStyleRate = [1,5] # probabilty to change drm style rate to: [randomRateList, 1]

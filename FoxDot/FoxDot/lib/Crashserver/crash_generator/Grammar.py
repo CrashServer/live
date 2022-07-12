@@ -40,7 +40,8 @@ if __name__ != "__main__":
 	synthdefNames = [i for i in SynthDefs]
 	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin' ]
 	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
-					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", "plaits", "braids"]
+					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", 
+					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce"]
 	#penible_synth = ['gray']
 	synthExclude += penible_synth
 	for exclude in synthExclude:
@@ -51,14 +52,15 @@ if __name__ != "__main__":
 
 	#LOOP LIST
 	loopNames = sorted([fn for fn in listdir(FOXDOT_LOOP)])
-	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32"]
+	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8"]
 	for loopxclude in loopExclude:
 		try:
 			loopNames.remove(loopxclude)
 		except:
 			pass
 	
-	fxExclude = ["coarse", "dist", "formant", "shape", "drive", "disto", "tanh", "octafuz", "krush", "drop", "triode", "squiz", "fold", "dist2", "bpf", "ringz"]
+	fxExclude = ["coarse", "dist", "formant", "shape", "drive", "disto", "tanh", "octafuz", "krush", 
+				"drop", "triode", "squiz", "fold", "bpf", "ringz", "shift"]
 	for fxclude in fxExclude:
 		try:
 			del fxdict[fxclude]
@@ -114,91 +116,116 @@ def GENERATE_VARLIST(_min=0, _max=1, length=6):
 
 def GENERATE_FX(fxdict=fxdict):
 	### Generate a fx LIST
-	fx_rnd = fxdict[choice([e for e in fxdict.keys()])]
-	fx_arg = {}
-	for argmt in fx_rnd.keys():
-		fx_min = fx_rnd[argmt][0]
-		fx_max = fx_rnd[argmt][1]
-		if type(fx_min) == float or type(fx_max) == float: # float fx
-			fx_arg[argmt] = GENERATE_FLOAT_LIST(fx_min,fx_max,8)
-		elif type(fx_max) == int and fx_max > 100:  # freq fx
-			fx_arg[argmt] = GENERATE_FREQLIST(fx_min, fx_max)
-		else: # int fx
-			fx_arg[argmt] = GENERATE_LIST(fx_min, fx_max,8)
-	return fx_arg
+	try:
+		fx_rnd = fxdict[choice([e for e in fxdict.keys()])]
+		fx_arg = {}
+		for argmt in fx_rnd.keys():
+			fx_min = fx_rnd[argmt][0]
+			fx_max = fx_rnd[argmt][1]
+			if type(fx_min) == float or type(fx_max) == float: # float fx
+				fx_arg[argmt] = GENERATE_FLOAT_LIST(fx_min,fx_max,8)
+			elif type(fx_max) == int and fx_max > 100:  # freq fx
+				fx_arg[argmt] = GENERATE_FREQLIST(fx_min, fx_max)
+			else: # int fx
+				fx_arg[argmt] = GENERATE_LIST(fx_min, fx_max,8)
+		return fx_arg
+	except Exception as e:
+		print("generate FX : " + e)
+
 
 def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
 	### Generate synth arguments
-	synth_arg = {}
-	if synthName in synthArgsDict.keys():
-		synthParam = synthArgsDict[synthName]
-		if len(synthParam) > 0:
-			randArgs = sample(list(synthParam), randint(1,len(synthParam)))
-			for argmt in randArgs:
-				if argmt not in ["atk", "decay", "rel"]:
-					para_min = synthParam[argmt][0]
-					para_max = synthParam[argmt][1]	
-					if random() < 0.2:
-						synth_arg[argmt] = GENERATE_VARLIST(para_min, para_max, 8)
-					else:
-						if type(para_min) == float or type(para_max) == float:
-							synth_arg[argmt] = GENERATE_FLOAT_LIST(para_min,para_max,8)
-						elif type(para_max) == int and para_min > 100:  # freq args
-							synth_arg[argmt] = GENERATE_FREQLIST(para_min, para_max)
-						else: # int args
-							synth_arg[argmt] = GENERATE_LIST(para_min, para_max,8)
-	else:
-		print(synthName, "not found in dictionnay")
-	return synth_arg
+	try:
+		synth_arg = {}
+		if synthName in synthArgsDict.keys():
+			synthParam = synthArgsDict[synthName]
+			if len(synthParam) > 0:
+				randArgs = sample(list(synthParam), randint(1,len(synthParam)))
+				for argmt in randArgs:
+					if argmt not in ["atk", "decay", "rel"]:
+						para_min = synthParam[argmt][0]
+						para_max = synthParam[argmt][1]	
+						if random() < 0.2:
+							synth_arg[argmt] = GENERATE_VARLIST(para_min, para_max, 8)
+						else:
+							if type(para_min) == float or type(para_max) == float:
+								synth_arg[argmt] = GENERATE_FLOAT_LIST(para_min,para_max,8)
+							elif type(para_max) == int and para_min > 100:  # freq args
+								synth_arg[argmt] = GENERATE_FREQLIST(para_min, para_max)
+							else: # int args
+								synth_arg[argmt] = GENERATE_LIST(para_min, para_max,8)
+			return synth_arg
+		else:
+			print(synthName, "not found in dictionnay")
+			return {"vol": '1'}
+	except Exception as e:
+		print("generate synth arg : " + e)
+
 
 def GENERATE_CHAR():
 	### Generate a character LIST 
-	rnd_char_list = []
-	#clr_list = ["1","2","3","4","?","!", "\\"] 
-	clr_list = []
-	clr_nonalpha = [x for x in nonalpha.keys()]
-	for i in clr_list:
-		clr_nonalpha.remove(i)
-	for i in range(randint(3,10)):
-		if random() > 0.4:
-			if random() > 0.7:
-				rnd_char_list.append(choice(list(clr_nonalpha)))
+	try:
+		rnd_char_list = []
+		#clr_list = ["1","2","3","4","?","!", "\\"] 
+		clr_list = []
+		clr_nonalpha = [x for x in nonalpha.keys()]
+		for i in clr_list:
+			clr_nonalpha.remove(i)
+		for i in range(randint(3,10)):
+			if random() > 0.4:
+				if random() > 0.7:
+					rnd_char_list.append(choice(list(clr_nonalpha)))
+				else:
+					rnd_char_list.append(choice(list(alpha.upper())+list(alpha))) 
 			else:
-				rnd_char_list.append(choice(list(alpha.upper())+list(alpha))) 
-		else:
-			rnd_char_list.append(".")               
-	return "".join(rnd_char_list)    
+				rnd_char_list.append(".")               
+		return "".join(rnd_char_list)    
+	except Exception as e:
+		print("generate char : " + e)
+
 
 def GENERATE_PARA():
 	''' generate parameters .stutter, .shuffle, .unison'''
-	args = []
-	player_merge = {**player_para, **player_para2}
-	paraPlayer = choice([p for p in player_merge.keys()]) 
-	for i in range(len(player_merge[paraPlayer])):
-		args.append(player_merge[paraPlayer][i]())
-	return f'"{paraPlayer}"' + '{}'.format(",".join(args))
+	try:
+		args = []
+		player_merge = {**player_para, **player_para2}
+		paraPlayer = choice([p for p in player_merge.keys()]) 
+		for i in range(len(player_merge[paraPlayer])):
+			args.append(player_merge[paraPlayer][i]())
+		return f'"{paraPlayer}"' + '{}'.format(",".join(args))
+	except Exception as e:
+		print("generate para : " + e)
 
 def GENERATE_PARA2():
 	''' generate parameters not working with "after" like .amen, .bubble'''
-	args = []
-	paraPlayer = choice([p for p in player_para.keys()])
-	for i in range(len(player_para[paraPlayer])):
-		args.append(player_para[paraPlayer][i]())
-	return f'"{paraPlayer}"' + '{}'.format(",".join(args))
+	try:
+		args = []
+		paraPlayer = choice([p for p in player_para.keys()])
+		for i in range(len(player_para[paraPlayer])):
+			args.append(player_para[paraPlayer][i]())
+		return f'"{paraPlayer}"' + '{}'.format(",".join(args))
+	except Exception as e:
+		print("generate para2 : " + e)
 
 def GENERATE_DUR(dur=None):
 	''' Generate a random dur pattern '''
-	if dur == None:
-		dur = choice([1,2,4])
-	if type(dur) == str:
-		dur = f"{dur}.sus" 
-	return f'(PChain(krhytm)[:16]*{str(dur)}).limit(sum,16).limit(len,20)'
+	try:
+		if dur == None:
+			dur = choice([1,2,4])
+		if type(dur) == str:
+			dur = f"{dur}.sus" 
+		return f'(PChain(krhytm)[:16]*{str(dur)}).limit(sum,16).limit(len,20)'
+	except Exception as e:
+		print("generate dur : " + e)
 
 def GENERATE_AMPLIFY(_min=0, _max=1):
 	''' Generate a random amplify pattern [0,1,0,1,0,1]'''
-	rndList = sorted([randint(1,16) for i in range(2)])
-	pat = [GENERATE_LIST(0,1), P10(rndList[1]), PBern(rndList[1]), PEuclid(rndList[0],rndList[1])]
-	return f'{str(choice(pat))}'
+	try:
+		rndList = sorted([randint(1,16) for i in range(2)])
+		pat = [GENERATE_LIST(0,1), P10(rndList[1]), PBern(rndList[1]), PEuclid(rndList[0],rndList[1])]
+		return f'{str(choice(pat))}'
+	except Exception as e:
+		print("generate amplify : " + e)
 
 def GENERATE_PAN(_min=-1, _max=1):
 	''' Generate a random pan pattern [-1,0.2,-0.3,1] or PSine(64) '''
@@ -206,14 +233,17 @@ def GENERATE_PAN(_min=-1, _max=1):
 	return pan
 
 def GENERATE_ADSR(synthName='', sustain=1):
-	adsrArg = sample(['atk', 'decay', 'rel'], randint(1,3))
-	adsrDict = {}
-	for argm in adsrArg:
-		if argm in synthArgs[synthName]:
-			argMin = synthArgs[synthName][argm][0]
-			argMax = (synthArgs[synthName][argm][1])*float(sustain/3)
-			adsrDict[argm] = GENERATE_FLOAT_LIST(_min=argMin, _max=argMax, length=6, digits=5)
-	return adsrDict
+	try:
+		adsrArg = sample(['atk', 'decay', 'rel'], randint(1,3))
+		adsrDict = {}
+		for argm in adsrArg:
+			if argm in synthArgs[synthName]:
+				argMin = synthArgs[synthName][argm][0]
+				argMax = (synthArgs[synthName][argm][1])*float(sustain/3)
+				adsrDict[argm] = GENERATE_FLOAT_LIST(_min=argMin, _max=argMax, length=6, digits=5)
+		return adsrDict
+	except Exception as e:
+		print("generate adsr : " + e)
 
 # Patterns that take patterns as input
 
@@ -252,7 +282,7 @@ player_time_para = {
 	"after": [_int, _para_player2]}
 
 player_para = {
-	"stutter": [_null, _int],
+	"stutter": [_null, _null],
 	"jump": [_null, _int],
 	"spread": [_null],
 	"unison": [_null],
@@ -274,24 +304,30 @@ player_para2 = {
 
 def remap_pattern(pat, oMin, oMax):
 	''' remap a pattern, keep original range ''' 
-	pmin = min(pat)
-	pmax = max(pat)
-	#print(f'remap {pat, pmin, pmax}')
-	pat = [remap(p,pmin,pmax,oMin,oMax) for p in pat]
-	return f'{pat}'
+	try:
+		pmin = min(pat)
+		pmax = max(pat)
+		#print(f'remap {pat, pmin, pmax}')
+		pat = [remap(p,pmin,pmax,oMin,oMax) for p in pat]
+		return f'{pat}'
+	except Exception as e:
+		print("remap pattern : " + e)
 
 def remap(x, oMin, oMax, nMin, nMax):
 	''' remap value '''
-	oldRange = (oMax - oMin)
-	if oldRange == 0:
-		newValue = nMin
-	else:
-		newRange = (nMax - nMin)  
-		newValue = (((x - oMin) * newRange) / oldRange) + nMin
-	if type(nMin) == int:
-		return int(newValue)
-	else:
-		return newValue
+	try:
+		oldRange = (oMax - oMin)
+		if oldRange == 0:
+			newValue = nMin
+		else:
+			newRange = (nMax - nMin)  
+			newValue = (((x - oMin) * newRange) / oldRange) + nMin
+		if type(nMin) == int:
+			return int(newValue)
+		else:
+			return newValue
+	except Exception as e:
+		print("remap : " + e)
 
 def checkPattern(pat =""):
 	''' limit a pattern len output < 20, avoid P[1,1,1,1,...,1,1,1,1] error ''' 
@@ -300,24 +336,3 @@ def checkPattern(pat =""):
 		if patlen > 20:
 			pat += ".limit(len, 20)" 
 	return pat
-
-########## en cours
-
-# synthArgs = {}
-
-# def get_arg_synth(synth=""):
-# 	''' Show the name and the args of a synth '''
-# 	path = realpath(FOXDOT_ROOT + "/osc/scsyndef/" + synth + ".scd")
-# 	default_args = ["bus", "amp", "level", "peak", "gate", "pan","freq","blur","beat_dur",'atk',"decay","sus","rel","rate", "wide", "mul", "dec"]
-# 	sArgs = {}
-# 	with open(str(path), "r") as synth:
-# 		synth = synth.readlines()
-# 	synth_txt = [line.strip() for line in synth if line != "\n"]
-# 	txt = str(''.join(synth_txt))
-# 	synthname = findall('SynthDef[.new]*[(\\\]*(.+?),',txt)
-# 	synthargs = findall('\{\|(.*)\|', txt)
-# 	for a in str(synthargs[0]).split(","):
-# 		a = a.split("=")
-# 		if a[0].strip() not in default_args:
-# 			sArgs[a[0].strip()] = a[1]
-# 	return sArgs

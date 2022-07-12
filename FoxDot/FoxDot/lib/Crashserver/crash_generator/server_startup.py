@@ -77,7 +77,7 @@ class runServer():
 				genSeed.add()
 				genSeed.set()
 		except Exception as e:
-			print(e)
+			print("start genseed " + e)
 		if self.loop:
 			try:
 				if serverActive:
@@ -85,7 +85,7 @@ class runServer():
 				duration = self.time*randint(multDurationMin,multDurationMax)
 				Clock.future(duration, lambda: self.start())
 			except Exception as e:
-				print(e)
+				print("start server : " + e)
 
 server = runServer()
 playerCount = {}
@@ -266,9 +266,10 @@ def add_player_param():
 	''' add player parameters (like .spread, .offbeat, .jump, ...) '''
 	try:
 		player = choice(Clock.playing)
-		param = gen_player_param()
-		sendOut(f'{player}.{param}')
-		eval(f'{player.name}.{param}')
+		if (player_type(player)!="loop"):
+			param = gen_player_param()
+			sendOut(f'{player}.{param}')
+			eval(f'{player.name}.{param}')
 	except Exception as err:
 		print("add_player_param problem : " + err)
 
@@ -339,19 +340,20 @@ def change_synth_attr(player=None):
 				player.__setattr__(k, eval(v))
 				sendOut(f"{player}.{k}={eval(v)}")
 		else:
-			genAtk = GENERATE_FLOAT_LIST(0.0,0.2)
-			genSus = GENERATE_FLOAT_LIST(0.8,1.0)
-			player.__setattr__('sample_atk',eval(genAtk))
-			sendOut(f"{player}.sample_atk={genAtk}")
-			player.__setattr__('sample_sus',eval(genSus))
-			sendOut(f"{player}.sample_sus={genSus}")
+			pass
+			# genAtk = GENERATE_FLOAT_LIST(0.0,0.2)
+			# genSus = GENERATE_FLOAT_LIST(0.8,1.0)
+			# player.__setattr__('sample_atk',eval(genAtk))
+			# sendOut(f"{player}.sample_atk={genAtk}")
+			# player.__setattr__('sample_sus',eval(genSus))
+			# sendOut(f"{player}.sample_sus={genSus}")
 	except Exception as err:
 		print(f"change_synth_attr problem : {err}")
 
 def add_event():
 	try:
-		rnd_event = choices([change_scale, change_root, humanizer, change_bpm, masterFilter, dropevent, addKick, addFxOut],
-							[probChangeScale, probChangeRoot, probChangeHumanizer, probChangeBpm, probAddLpf, probAddDrop, probAddKick,probAddFxOut])[0]
+		rnd_event = choices([change_scale, change_root, humanizer, change_bpm, masterFilter, dropevent, addKick, addAccompany, addFxOut],
+							[probChangeScale, probChangeRoot, probChangeHumanizer, probChangeBpm, probAddLpf, probAddDrop, probAddKick, probAddAccompany, probAddFxOut])[0]
 		rnd_event()
 	except Exception as err:
 		print("add_event problem : " + err)
@@ -541,6 +543,16 @@ def generate_rytm(length=16, mult=1):
 	except Exception as err:
 		print("generate_rytm problem : " + err)
 
+def addAccompany():
+	try:
+		synthPlayer = [p for p in Clock.playing if p.synthdef not in ["loop", "play1", "play2"]]
+		if len(synthPlayer) > 2:
+			choosenPlayer = sample(synthPlayer,2)
+			choosenPlayer[0].accompany(choosenPlayer[1])    
+			sendOut(f'{choosenPlayer[0]}.accompany{choosenPlayer[1]}')
+	except:
+		print("addAccompany problem : " + err)
+
 def addFxOut():
 	''' add fxOut to player '''
 	try:
@@ -559,9 +571,13 @@ def shutup():
 		sendOut(f"{ply}.stop()")
 		ply.stop()
 
-def son():
+def son(s=999, d=999, l=999):
 	print("Server On")
-	global serverActive
+	global serverActive, probAddSynth, probAddDrum, probAddLoop
+	if s!=999:	
+		probAddSynth = s
+		probAddDrum = d
+		probAddLoop = l
 	server.start()
 	serverActive = True
 

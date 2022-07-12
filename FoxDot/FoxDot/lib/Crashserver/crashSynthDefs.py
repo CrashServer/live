@@ -14,8 +14,8 @@ angst.add()
 alva = FileSynthDef("alva")
 alva.add()
 
-arpy = FileSynthDef("arpymod")
-arpy.add()
+arpymod = FileSynthDef("arpymod")
+arpymod.add()
 
 bbass = FileSynthDef("bbass")
 bbass.add()
@@ -126,8 +126,8 @@ lfnoise.add()
 mpluck = FileSynthDef("mpluck")
 mpluck.add()
 
-orient = FileSynthDef("orientmod")
-orient.add()
+orientmod = FileSynthDef("orientmod")
+orientmod.add()
 
 organ = FileSynthDef("organ")
 organ.add()

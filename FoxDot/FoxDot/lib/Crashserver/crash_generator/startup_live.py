@@ -202,8 +202,8 @@ def PMorse(text, point=1/4, tiret=3/4):
 	return morse
 
 def unsolo():
-    for p in Clock.playing:
-        p.solo(0)
+	for p in Clock.playing:
+		p.solo(0)
 
 # virus_method = ["Injecting... ", "Loading... ", "Init: ", "Dumping: ", "Hacking: ", "Run.."]
 # virus_name = ["MyDoom", "Brain", "Zeus", "Sality", "Virut", "Ramnit", "Blaster", "Conficker",\
@@ -239,6 +239,35 @@ def porta(self, portDelay=0.5):
 		self.slidedelay = portDelay
 	else:
 		self.slide = 0
+
+@player_method
+def morph(self, other, prob=50):
+	''' morph randomly some attrinute between 2 players, prob = amount of probability (100: full target player)'''
+	for k in self.attr.keys():
+		try:
+			if k in other.attr.keys():
+				try:  ### pattern comparaison is buggy, need this hack
+					if other[k] != P[0]:
+						test = True
+					else:
+						test = False     
+				except:
+					test = True
+				if test:
+					sattr = self.__getitem__(k)
+					oattr = other.__getitem__(k)
+					item = [p if randint(0,100)>prob else oattr[i] for i,p in enumerate(sattr)]
+					setattr(self, k, item)
+		except Exception as e:
+			print(e)
+	return self 
+
+def genArp(nbrseq=4, lengthseq=8):
+	''' Generate arpeggiato based on markov Chords progression '''
+	seq = PMarkov()[:nbrseq]
+	arp = PRand(P[0:18] | P[20:24] | P[30] | P[40:45] | P[50:55])[:nbrseq]
+	genseq = [PArp(seq[i], arp[i]) for i in range(nbrseq)]
+	return Pvar(genseq, lengthseq)
 
 valueDict = {}
 
@@ -338,7 +367,7 @@ try:
 			def fonction_du_jour(self):
 				fct = ["PMorse(text, point=1/4, tiret=3/4)", ".gtr(string=1)", "random_bpm_var()", ".unison(unison=2, detune=0.125, analog=0)",
 						 ".human(velocity=20, humanize=5, swing=0)", ".fill(mute_player=0, on=1)", "brk(multi=1, code='')",
-						 ".renv(nbr=1)", "binary(number)", "PTime()", "PTimebin()", "lininf(start=0, finish=1, time=32)", "expinf(start=0, finish=1, time=32)",
+						 ".renv(nbr=1)", "PBin(number)", "PTime()", "PTimebin()", "lininf(start=0, finish=1, time=32)", "expinf(start=0, finish=1, time=32)",
 						 "PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer='d')", "darker()", "lighter()", "PChords(chords)",
 						 "PGauss(mean, deviation)", "PLog(mean, deviation)", "PTrir(low,high,mode)", "PCoin(low, high, proba)", "PChar(case=2, alpha=2)",
 						 "PMarkov(init_value='')", "switch(other, key, bypass=1)", "clone(player)", "add(value)", "mul(value)", "drop(playTime=6, dropTime=2, nbloop=1)",

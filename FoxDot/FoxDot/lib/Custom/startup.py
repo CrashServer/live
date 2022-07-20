@@ -287,21 +287,33 @@ if __name__ != "__main__":
 	###########################
 
 	try:
-		def binary(number):
-			"""return a list converted to binary from a number"""
-			binlist = [int(i) for i in str(bin(number)[2:])]
-			return binlist
+		@loop_pattern_func
+		def PBin(number=0):
+			if number==0:
+				number = randint(10,1000000)
+			return [int(i) for i in str(bin(number)[2:])]
 
-		def duree():
-			''' print the duration of the show from init() to now '''
-			global time_init
-			duree = time.time()- time_init
-			print("Durée de la tentative de Crash :", time.strftime('%H:%M:%S', time.gmtime(duree)))
+		@loop_pattern_func
+		def PSaw(n=16, inverse = 0):
+			""" Returns values of one cycle of Saw wave split into 'n' parts """
+			i = 1 / (n-1)
+			if not inverse:
+				return Pattern([i * j for j in range(0,int(n))])
+			else:
+				return Pattern([i * j for j in range(0,int(n))]).reverse()
 
+		# def duree():
+		# 	''' print the duration of the show from init() to now '''
+		# 	global time_init
+		# 	duree = time.time()- time_init
+		# 	print("Durée de la tentative de Crash :", time.strftime('%H:%M:%S', time.gmtime(duree)))
+
+		@loop_pattern_func
 		def PTime():
 			"""Generate a pattern from the local machine time"""
 			return [int(t) for t in str(Clock.get_time_at_beat(int(Clock.now()))) if t != '.']
 
+		@loop_pattern_func
 		def PTimebin():
 			"""Generate a pattern of actual time converted to binary"""
 			return binary(int(Clock.get_time_at_beat(int(Clock.now()))))
@@ -666,6 +678,14 @@ if __name__ != "__main__":
 						pat_total[i] = rest(pat_total[i])
 			return pat_total
 
+		@player_method
+		def once(self):
+			''' play a player once and stop it '''
+			self.dur=1/32
+			self.amplify=var([1,0],[1/32,inf], start=now)
+			self.after(32, "stop")
+
+
 	except Exception as e:
 		print(f"useful function problem : {e}")
 
@@ -675,7 +695,7 @@ if __name__ != "__main__":
 try:
 		from .Crashserver.drumRockPattern import * ### Crash Drum rock pattern
 		@player_method
-		def drummer(self, duration=32):
+		def drummer(self, duration=16):
 			if duration!=0:
 				drumCat = int(PRand(1, len(drumRockPattern)))
 				drumPat = int(PRand(1,len(drumRockPattern[drumCat])))
@@ -684,6 +704,7 @@ try:
 				fillDur = duration/PRand([4,8,16])
 				self.degree=Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [duration-fillDur, fillDur])
 				self.human(30,5)
+				self.comp=0.8
 				self.every(duration, "drummer")
 except:
 		print("Error importing drumRockPattern", sys.exc_info()[0])

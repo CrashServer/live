@@ -403,6 +403,10 @@ try:
 
 				self.threadBpm = Thread(target = self.sendBpm)
 				self.threadBpm.daemon = True
+				self.threadScale = Thread(target = self.sendScale)
+				self.threadScale.daemon = True
+				self.threadRoot = Thread(target = self.sendRoot)
+				self.threadRoot.daemon = True
 				self.threadBeat = Thread(target = self.sendBeat)
 				self.threadBpm.daemon = True
 				self.threadPlayer = Thread(target = self.sendPlayer)
@@ -431,6 +435,26 @@ try:
 						msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
 						self.sendOscMsg(msg)
 						sleep(self.bpmTime)
+				except:
+					pass
+				
+			def sendScale(self):
+				''' send Scale to OSC server '''
+				try: 
+					while self.isrunning:
+						msg = OSCMessage("/panel/scale", [str(Scale.default.name)])
+						self.sendOscMsg(msg)
+						sleep(self.bpmTime*10)
+				except:
+					pass
+
+			def sendRoot(self):
+				''' send Root to OSC server '''
+				try: 
+					while self.isrunning:
+						msg = OSCMessage("/panel/root", [str(Root.default)])
+						self.sendOscMsg(msg)
+						sleep(self.bpmTime*10)
 				except:
 					pass
 
@@ -487,6 +511,8 @@ try:
 			def start(self):
 				self.isrunning = True
 				self.threadBpm.start()
+				self.threadScale.start()
+				self.threadRoot.start()
 				self.threadBeat.start()
 				self.threadPlayer.start()
 				self.threadPdj.start()

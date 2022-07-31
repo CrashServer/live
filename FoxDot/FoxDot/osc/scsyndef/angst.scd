@@ -9,7 +9,7 @@ SynthDef.new(\angst,
 		y = freq;
 		osc = GVerb.ar(z.ar(y+z.kr([freq / 4,freq / 2],0,y*LFDNoise1.kr(0.4,1.4).abs))*0.05+GVerb.ar(PinkNoise.ar(Decay2.kr(Dust.kr(1!2))*0.02)));
 
-		env=EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);
+		env=EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 2);
 		osc = BLowPass4.ar(osc,(cutoff*(env.squared))+200+freq,1-rq);
 
 		osc = Mix(osc*env) * 1.6;

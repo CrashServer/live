@@ -5,11 +5,17 @@ from ..SCLang.SynthDef import FileSynthDef
 abass = FileSynthDef("abass")
 abass.add()
 
+acidbass = FileSynthDef("acidbass")
+acidbass.add()
+
 angst = FileSynthDef("angst")
 angst.add()
 
 alva = FileSynthDef("alva")
 alva.add()
+
+arpymod = FileSynthDef("arpymod")
+arpymod.add()
 
 bbass = FileSynthDef("bbass")
 bbass.add()
@@ -35,14 +41,27 @@ braids.add()
 click = FileSynthDef("click")
 click.add()
 
+combs = FileSynthDef("combs")
+combs.add()
+
 cluster = FileSynthDef("cluster")
 cluster.add()
 
 crackle = FileSynthDef("crackle")
 crackle.add()
 
+cs80 = FileSynthDef("cs80")
+cs80.add()
+
 dafbass = FileSynthDef("dafbass")
 dafbass.add()
+
+dblbass = FileSynthDef("dblbass")
+dblbass.add()
+
+donorgan = FileSynthDef("donorgan")
+donorgan.add()
+
 
 dopple = FileSynthDef("dopple")
 dopple.add()
@@ -106,6 +125,9 @@ lfnoise.add()
 
 mpluck = FileSynthDef("mpluck")
 mpluck.add()
+
+orientmod = FileSynthDef("orientmod")
+orientmod.add()
 
 organ = FileSynthDef("organ")
 organ.add()

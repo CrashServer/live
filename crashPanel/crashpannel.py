@@ -12,13 +12,26 @@ class ServerGui(Tk):
 		self.geometry(f"{self.width}x{self.height}")
 		self.title("CrashServer Panel")
 		
-		self.labelcs = Label(self, text="// CrashServer //")
+		self.labelcs = Label(self, text="// CrashPanel //")
 		self.labelcs.pack(fill="both", expand="yes")
 		
-		self.frameBpm = LabelFrame(self, text="Bpm : ", padx=10, pady=0)
-		self.frameBpm.pack(fill="both", expand="yes")
-		self.labelBpm = Label(self.frameBpm, text ="000", font=("Inconsolatas", 17))
+		self.serverInfo = LabelFrame(self, text="Server Info", padx=10, pady=5)
+		self.serverInfo.pack()
+
+		self.frameBpm = LabelFrame(self.serverInfo, text="Bpm: ", padx=5, pady=0)
+		self.frameBpm.pack(side=LEFT, fill="both", expand="no")
+		self.labelBpm = Label(self.frameBpm, text ="000", font=("Inconsolatas", 15))
 		self.labelBpm.pack()
+		
+		self.frameScale = LabelFrame(self.serverInfo, text="Scale: ", padx=5, pady=0)
+		self.frameScale.pack(side=LEFT, fill="both", expand="no")
+		self.labelScale = Label(self.frameScale, text ="Major", font=("Inconsolatas", 15))
+		self.labelScale.pack()
+
+		self.frameRoot = LabelFrame(self.serverInfo, text="Root: ", padx=5, pady=0)
+		self.frameRoot.pack(side=LEFT, fill="both", expand="no")
+		self.labelRoot = Label(self.frameRoot, text ="4", font=("Inconsolatas", 15))
+		self.labelRoot.pack()
 		
 		self.frameChrono = LabelFrame(self, text="Crashometre : ", padx=10, pady=0)
 		self.frameChrono.pack(fill="both", expand="yes")
@@ -27,8 +40,6 @@ class ServerGui(Tk):
 
 		self.frameBeat = LabelFrame(self, text="Beat : ", padx=10, pady=5)
 		self.frameBeat.pack(fill="both", expand="yes")
-		self.labelBeat4 = Label(self.frameBeat, text ="0/4", padx=10, pady=0, font=("Inconsolatas", 15), relief=SUNKEN)
-		self.labelBeat4.pack(fill="both", expand="yes") ### Joke Aahahahah
 		self.labelBeat8 = Label(self.frameBeat, text ="0/8", padx=10, pady=0, font=("Inconsolatas", 15), relief=SUNKEN)
 		self.labelBeat8.pack(fill="both", expand="yes") ### Joke Aahahahah
 		self.labelBeat16 = Label(self.frameBeat, text ="0/16", padx=10, pady=0, font=("Inconsolatas", 15), relief=SUNKEN)
@@ -37,8 +48,6 @@ class ServerGui(Tk):
 		self.labelBeat32.pack(fill="both", expand="yes") ### Joke Aahahahah
 		self.labelBeat64 = Label(self.frameBeat, text ="0/64", padx=10, pady=0, font=("Inconsolatas", 15), relief=SUNKEN)
 		self.labelBeat64.pack(fill="both", expand="yes") ### Joke Aahahahah
-		self.labelBeat128 = Label(self.frameBeat, text ="0/128", padx=10, pady=0, font=("Inconsolatas", 15), relief=SUNKEN)
-		self.labelBeat128.pack(fill="both", expand="yes") ### Joke Aahahahah
 		
 		self.framePdj = LabelFrame(self, text="Le Plat du jour est :", padx=10, pady=0,  font=("Inconsolatas", 12))
 		self.framePdj.pack(fill="both", expand="yes")
@@ -60,6 +69,8 @@ class ServerGui(Tk):
 
 		self.oscserver = OSCServer((self.ipPanel,2000))
 		self.oscBpm = 0
+		self.oscScale = "Major"
+		self.oscRoot = 0
 		self.oscBeat = 0
 		self.oscPlayer = []
 		
@@ -70,15 +81,21 @@ class ServerGui(Tk):
 	def receiveBpm(self, address, tags, contents, source):
 		self.oscBpm = contents[0]
 		self.labelBpm.config(text=f"{self.oscBpm}")
+	
+	def receiveScale(self, address, tags, contents, source):
+		self.oscScale = contents[0]
+		self.labelScale.config(text=f"{self.oscScale}")
+
+	def receiveRoot(self, address, tags, contents, source):
+		self.oscRoot = contents[0]
+		self.labelRoot.config(text=f"{self.oscRoot}")
 
 	def receiveBeat(self, address, tags, contents, source):
 		self.oscBeat = contents[0]
-		self.labelBeat4.config(text=f"{int(self.oscBeat%4)+1}/4")
 		self.labelBeat8.config(text=f"{int(self.oscBeat%8)+1}/8")
 		self.labelBeat16.config(text=f"{int(self.oscBeat%16)+1}/16")
 		self.labelBeat32.config(text=f"{int(self.oscBeat%32)+1}/32")
 		self.labelBeat64.config(text=f"{int(self.oscBeat%64)+1}/64")
-		self.labelBeat128.config(text=f"{int(self.oscBeat%128)+1}/128")
 
 	def receivePlayer(self, address, tags, contents, source):
 		self.oscPlayer = contents
@@ -109,6 +126,8 @@ class ServerGui(Tk):
 	def start(self):
 		print("Server listening...")
 		self.oscserver.addMsgHandler("/panel/bpm", self.receiveBpm)
+		self.oscserver.addMsgHandler("/panel/scale", self.receiveScale)
+		self.oscserver.addMsgHandler("/panel/root", self.receiveRoot)
 		self.oscserver.addMsgHandler("/panel/beat", self.receiveBeat)
 		self.oscserver.addMsgHandler("/panel/player", self.receivePlayer)
 		self.oscserver.addMsgHandler("/panel/help", self.receiveHelp)

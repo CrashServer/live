@@ -14,28 +14,28 @@ multDurationMax = 4
 ## Server routine orders probabilty ###
 probAddPlayer = 5  # probability to add a player (synth, drum, loop)
 probStopPlayer = 4 # probability to stop one or more running players
-probAddFx = 2 # probabilty to add a Fx
+probAddFx = 4 # probabilty to add a Fx
 probChangeDegree = 1 # probability to change a synth degree, drum char or loop position
-probAddPlayerParam = 4 # probability to add a player param (.stutter, .spread, .shuffle)
+probAddPlayerParam = 3 # probability to add a player param (.stutter, .spread, .shuffle)
 probAddPlayerAttribute = 4 # probability to a change a player attributes (dur, pan, sus)
-probAddEvent = 3 #probabilty to add a master event (change bpm, change root, master.lpf(), drop)
+probAddEvent = 2 #probabilty to add a master event (change bpm, change root, master.lpf(), drop)
 probChangeSynthAttr = 2 # probabilty to change player adsr
+probAddFxOut = 0 # probability to add an fx output
 
 #Add Master event Probability
 probChangeScale = 1
-probChangeRoot = 1
-probChangeHumanizer = 3
+probChangeRoot = 2
+probChangeHumanizer = 6
 probChangeBpm = 2
-probAddLpf = 6
-probAddDrop = 3
-probAddKick = 4
-probAddAccompany = 5
-probAddFxOut = 0 # probability to add an fx output
+probAddLpf = 2
+probAddDrop = 1
+probAddKick = 5
+
 
 # Add player probability
 probAddSynth = 3
-probAddDrum = 2 #2
-probAddLoop = 1 #1
+probAddDrum = 2
+probAddLoop = 1
 
 # Stop player
 minPlayerTurn = 8 # min number of player turn before a possibility stop
@@ -45,9 +45,8 @@ maxPlayerTurn = 16 # max number of player turn until a stop
 probPatternDur = [30,60,10] # probability dur synth player [PDur(random,8), SDur(), Generate Pattern]
 
 # Add Drum Probabilty
-probAddStyleDrum = 8 # probability to pick a style drum pattern
+probAddStyleDrum = 3 # probability to pick a style drum pattern
 probAddRandomDrum = 1 # probability to generate random char pattern
-probAddDrummer = 30
 
 # Stop player Probability
 probStopOnePlayer = 6  # porbability to stop randomly only one player
@@ -58,18 +57,18 @@ probLoopChangeDegree = [4,	# probability to change loop degree
 						4,	# probability to change loop position
 						0]   # probability to change loop sample # Not working for now
 
-probSynthChangeDegree = [2, # probability to change synth degree player to PArp()
-						 5, # probabiltiy to change synth degree player to Melody()
-						 2, # probabiltiy to change synth degree player to PGauss()
-						 3] # probability to change synth degree player to PChain2(chords)
+probSynthChangeDegree = [5, # probability to change synth degree player to PArp()
+						 2, # probabiltiy to change synth degree player to Melody()
+						 3, # probabiltiy to change synth degree player to PGauss()
+						 1] # probability to change synth degree player to PChain2(chords)
 
-probChangeDrumChar = [7,2] # probability to change to [same type char (kick, snare, hh) or random char]
+probChangeDrumChar = [6,2] # probability to change to [same type char (kick, snare, hh) or random char]
 
 # Change bpm parameters
 changeBpmMin = 30 # min bpm
-changeBpmMax = 162 # max bpm
-changeBpmTimeMin = 32  # min beats
-changeBpmTimeMax = 256 # max beats
+changeBpmMax = 220 # max bpm
+changeBpmTimeMin = 16  # min beats
+changeBpmTimeMax = 128 # max beats
 
 # Change Root parameters
 changeRootMin = -1
@@ -90,7 +89,7 @@ dropLoop = 4
 
 # change probability player parameters
 probPlayerAttributes = [2, #amp
-						2, #amplify
+						1, #amplify
 						7, #dur
 						1, #sus
 						4] #pan
@@ -108,17 +107,17 @@ drumRateMax = 4 # rate drum PWhite max
 
 # Loop player generator
 multDurLoopPLayer = [1,2]  # list of multiply the loop player duration
-probDurLoopPlayer = [4,1]  # probability of this list
+probDurLoopPlayer = [1,1]  # probability of this list
 
 # drum style generator
 probDrumStyleRate = [1,5] # probabilty to change drm style rate to: [randomRateList, 1]
 DrumStyleDur = [0.25,0.5,1]  # list of dur for drum style
-probDrumStyleDur = [3,1,1]  # probability of this list
+probDrumStyleDur = [1,1,1]  # probability of this list
 
 # gen filter player
 probLowPass = 8  # probability to add a low pass
 probHighPass = 2 # probability to add a high pass
 filterFreqMin = 400 # freq min
 filterFreqMax = 7000 # freq max
-probFilterFreq = [8,3,1] # probability to [linvar, integer, 0]
+probFilterFreq = [3,3,1] # probability to [linvar, integer, 0]
 

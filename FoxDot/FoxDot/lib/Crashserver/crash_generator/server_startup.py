@@ -6,6 +6,8 @@
 from random import randint, random, sample, choices, seed
 from time import gmtime, strftime
 import threading
+# import configparser
+import os
 
 class genSeed():
 	''' return a seed for random based on actual time for multiplayer sync '''
@@ -31,7 +33,8 @@ try:
 	from .Crashserver.crash_generator.weapons import *
 	from .Crashserver.crash_generator.composition import *
 	from crash_config import *
-	#from .Crashserver.crash_generator.server_conf import *
+	# from .Settings import FOXDOT_ROOT
+	from .Crashserver.crash_generator.server_conf import *
 except Exception as e:
 	print("Error in generating weapons code", e)
 
@@ -74,7 +77,7 @@ class runServer():
 				genSeed.add()
 				genSeed.set()
 		except Exception as e:
-			print(e)
+			print("start genseed " + e)
 		if self.loop:
 			try:
 				if serverActive:
@@ -82,7 +85,7 @@ class runServer():
 				duration = self.time*randint(multDurationMin,multDurationMax)
 				Clock.future(duration, lambda: self.start())
 			except Exception as e:
-				print(e)
+				print("start server : " + e)
 
 server = runServer()
 playerCount = {}
@@ -263,9 +266,10 @@ def add_player_param():
 	''' add player parameters (like .spread, .offbeat, .jump, ...) '''
 	try:
 		player = choice(Clock.playing)
-		param = gen_player_param()
-		sendOut(f'{player}.{param}')
-		eval(f'{player.name}.{param}')
+		if (player_type(player)!="loop"):
+			param = gen_player_param()
+			sendOut(f'{player}.{param}')
+			eval(f'{player.name}.{param}')
 	except Exception as err:
 		print("add_player_param problem : " + err)
 
@@ -336,19 +340,20 @@ def change_synth_attr(player=None):
 				player.__setattr__(k, eval(v))
 				sendOut(f"{player}.{k}={eval(v)}")
 		else:
-			genAtk = GENERATE_FLOAT_LIST(0.0,0.2)
-			genSus = GENERATE_FLOAT_LIST(0.8,1.0)
-			player.__setattr__('sample_atk',eval(genAtk))
-			sendOut(f"{player}.sample_atk={genAtk}")
-			player.__setattr__('sample_sus',eval(genSus))
-			sendOut(f"{player}.sample_sus={genSus}")
+			pass
+			# genAtk = GENERATE_FLOAT_LIST(0.0,0.2)
+			# genSus = GENERATE_FLOAT_LIST(0.8,1.0)
+			# player.__setattr__('sample_atk',eval(genAtk))
+			# sendOut(f"{player}.sample_atk={genAtk}")
+			# player.__setattr__('sample_sus',eval(genSus))
+			# sendOut(f"{player}.sample_sus={genSus}")
 	except Exception as err:
 		print(f"change_synth_attr problem : {err}")
 
 def add_event():
 	try:
-		rnd_event = choices([change_scale, change_root, humanizer, change_bpm, masterFilter, dropevent, addKick, addFxOut],
-							[probChangeScale, probChangeRoot, probChangeHumanizer, probChangeBpm, probAddLpf, probAddDrop, probAddKick,probAddFxOut])[0]
+		rnd_event = choices([change_scale, change_root, humanizer, change_bpm, masterFilter, dropevent, addKick, addAccompany, addFxOut],
+							[probChangeScale, probChangeRoot, probChangeHumanizer, probChangeBpm, probAddLpf, probAddDrop, probAddKick, probAddAccompany, probAddFxOut])[0]
 		rnd_event()
 	except Exception as err:
 		print("add_event problem : " + err)
@@ -467,16 +472,15 @@ def humanizer(player=None):
 		print("humanizer problem : " + err)
 
 def masterFilter():
-	''' Add random Master().lpf, Master().bpf, Master().hpf '''
+	''' Add random Master().lpf, Master().hpf '''
 	try:
 		timef = 4*round(randint(3,32)/4)
-		filtr = choice(["lpf", "hpf", "bpf"])
+		filtr = choice(["lpf", "hpf"])
 		set_master_filter(filtr, freqs[filtr], timef)
 		sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-1},1])')
 		Clock.future(timef, lambda: set_master_filter(filtr, 0, 0))
 	except Exception as err:
 		Master().__setattr__("lpf", 0)
-		Master().__setattr__("bpf", 0)
 		Master().__setattr__("hpf", 0)
 		print("masterFilter problem : " + err)
 
@@ -513,12 +517,18 @@ def addFilter(player=None):
 def addKick():
 	''' Add 4 to the floor Kick player '''
 	try:
+
 		player = generate_player_name()
 		kick = choice(sorted_sample["kick_sample"]) + "."
 		sple = randint(0,99)
 		lpf = randint(40,5000)
-		sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
-		~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
+		if randint(0,100) > probAddDrummer:
+			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
+			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
+		else:
+			lpf = randint(2400,14000)
+			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf}).drummer()')
+			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).drummer().sometimes("stutter")
 		addPlayerTurn()
 	except Exception as err:
 		print("addKick problem : " + err)
@@ -532,6 +542,16 @@ def generate_rytm(length=16, mult=1):
 		return str(rytm).replace("'","")
 	except Exception as err:
 		print("generate_rytm problem : " + err)
+
+def addAccompany():
+	try:
+		synthPlayer = [p for p in Clock.playing if p.synthdef not in ["loop", "play1", "play2"]]
+		if len(synthPlayer) > 2:
+			choosenPlayer = sample(synthPlayer,2)
+			choosenPlayer[0].accompany(choosenPlayer[1])    
+			sendOut(f'{choosenPlayer[0]}.accompany{choosenPlayer[1]}')
+	except:
+		print("addAccompany problem : " + err)
 
 def addFxOut():
 	''' add fxOut to player '''
@@ -551,9 +571,13 @@ def shutup():
 		sendOut(f"{ply}.stop()")
 		ply.stop()
 
-def son():
+def son(s=999, d=999, l=999):
 	print("Server On")
-	global serverActive
+	global serverActive, probAddSynth, probAddDrum, probAddLoop
+	if s!=999:	
+		probAddSynth = s
+		probAddDrum = d
+		probAddLoop = l
 	server.start()
 	serverActive = True
 
@@ -564,3 +588,13 @@ def soff():
 
 server.start()
 #serverActive = True
+
+# def changeConf():
+# 	cfg = configparser.RawConfigParser()
+# 	cfg.optionxform = str
+# 	pth = os.path.join(FOXDOT_ROOT, "lib", "Crashserver","crash_generator","server_conf0.cfg")
+# 	cfg.read(pth)
+# 	par=dict(cfg.items("Settings"))
+# 	for p in par:
+# 		par[p]=par[p].split("#",1)[0].strip() # To get rid of inline comments
+# 	globals().update(par)  #globally

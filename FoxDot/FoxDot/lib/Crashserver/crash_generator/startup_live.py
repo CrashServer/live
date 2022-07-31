@@ -201,6 +201,10 @@ def PMorse(text, point=1/4, tiret=3/4):
 	morse[-1] += rest(2*point)
 	return morse
 
+def unsolo():
+	for p in Clock.playing:
+		p.solo(0)
+
 # virus_method = ["Injecting... ", "Loading... ", "Init: ", "Dumping: ", "Hacking: ", "Run.."]
 # virus_name = ["MyDoom", "Brain", "Zeus", "Sality", "Virut", "Ramnit", "Blaster", "Conficker",\
 # "Worm", "TDSS TDL 4"]
@@ -236,18 +240,64 @@ def porta(self, portDelay=0.5):
 	else:
 		self.slide = 0
 
-def PRy(duration=16, div=4, restprob=0.3):
-	''' Generate a ryhtm pattern '''
-	pat = PSum(randint(1,duration), duration)
-	pat_total = []
-	for i in range(0,len(pat)):
-		pat_total.append(PSum(randint(1,div),pat[i]))
-	pat_total = PJoin(pat_total)
-	if rest !=0:
-		for i in range(0,len(pat)):
-			if randint(0,100) < restprob*100:
-				pat_total[i] = rest(pat_total[i])
-	return pat_total
+@player_method
+def morph(self, other, prob=50):
+	''' morph randomly some attrinute between 2 players, prob = amount of probability (100: full target player)'''
+	for k in self.attr.keys():
+		try:
+			if k in other.attr.keys():
+				try:  ### pattern comparaison is buggy, need this hack
+					if other[k] != P[0]:
+						test = True
+					else:
+						test = False     
+				except:
+					test = True
+				if test:
+					sattr = self.__getitem__(k)
+					oattr = other.__getitem__(k)
+					item = [p if randint(0,100)>prob else oattr[i] for i,p in enumerate(sattr)]
+					setattr(self, k, item)
+		except Exception as e:
+			print(e)
+	return self 
+
+def genArp(nbrseq=4, lengthseq=8):
+	''' Generate arpeggiato based on markov Chords progression '''
+	seq = PMarkov()[:nbrseq]
+	arp = PRand(P[0:18] | P[20:24] | P[30] | P[40:45] | P[50:55])[:nbrseq]
+	genseq = [PArp(seq[i], arp[i]) for i in range(nbrseq)]
+	return Pvar(genseq, lengthseq)
+
+valueDict = {}
+
+def masterAll(args = "dur", value=1):
+	global valueDict
+	if args == "reset" or args == 0:
+		for k,v in valueDict.items():
+			for l, w in v.items():
+				try:
+					k.__setattr__(l, w)
+				except:
+					pass
+		valueDict = {}
+	else:
+		for p in Clock.playing:
+			if p in valueDict:
+				if args in valueDict[p]:
+					pass
+				else:
+					try:
+						valueDict[p][args] = p.__getitem__(args)
+					except:
+						valueDict[p][args] = 0
+			else:
+				valueDict[p] = {}
+				try:
+					valueDict[p][args] = p.__getitem__(args)
+				except:
+					valueDict[p][args] = 0
+			p.__setattr__(args, value)
 
 ### CrashPanel
 ### Root, scale
@@ -317,7 +367,7 @@ try:
 			def fonction_du_jour(self):
 				fct = ["PMorse(text, point=1/4, tiret=3/4)", ".gtr(string=1)", "random_bpm_var()", ".unison(unison=2, detune=0.125, analog=0)",
 						 ".human(velocity=20, humanize=5, swing=0)", ".fill(mute_player=0, on=1)", "brk(multi=1, code='')",
-						 ".renv(nbr=1)", "binary(number)", "PTime()", "PTimebin()", "lininf(start=0, finish=1, time=32)", "expinf(start=0, finish=1, time=32)",
+						 ".renv(nbr=1)", "PBin(number)", "PTime()", "PTimebin()", "lininf(start=0, finish=1, time=32)", "expinf(start=0, finish=1, time=32)",
 						 "PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer='d')", "darker()", "lighter()", "PChords(chords)",
 						 "PGauss(mean, deviation)", "PLog(mean, deviation)", "PTrir(low,high,mode)", "PCoin(low, high, proba)", "PChar(case=2, alpha=2)",
 						 "PMarkov(init_value='')", "switch(other, key, bypass=1)", "clone(player)", "add(value)", "mul(value)", "drop(playTime=6, dropTime=2, nbloop=1)",
@@ -353,6 +403,10 @@ try:
 
 				self.threadBpm = Thread(target = self.sendBpm)
 				self.threadBpm.daemon = True
+				self.threadScale = Thread(target = self.sendScale)
+				self.threadScale.daemon = True
+				self.threadRoot = Thread(target = self.sendRoot)
+				self.threadRoot.daemon = True
 				self.threadBeat = Thread(target = self.sendBeat)
 				self.threadBpm.daemon = True
 				self.threadPlayer = Thread(target = self.sendPlayer)
@@ -381,6 +435,26 @@ try:
 						msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
 						self.sendOscMsg(msg)
 						sleep(self.bpmTime)
+				except:
+					pass
+				
+			def sendScale(self):
+				''' send Scale to OSC server '''
+				try: 
+					while self.isrunning:
+						msg = OSCMessage("/panel/scale", [str(Scale.default.name)])
+						self.sendOscMsg(msg)
+						sleep(self.bpmTime*10)
+				except:
+					pass
+
+			def sendRoot(self):
+				''' send Root to OSC server '''
+				try: 
+					while self.isrunning:
+						msg = OSCMessage("/panel/root", [str(Root.default)])
+						self.sendOscMsg(msg)
+						sleep(self.bpmTime*10)
 				except:
 					pass
 
@@ -437,6 +511,8 @@ try:
 			def start(self):
 				self.isrunning = True
 				self.threadBpm.start()
+				self.threadScale.start()
+				self.threadRoot.start()
 				self.threadBeat.start()
 				self.threadPlayer.start()
 				self.threadPdj.start()
@@ -488,3 +564,5 @@ try:
 	scene99 = 0
 except Exception as e:
 	print(e)
+
+

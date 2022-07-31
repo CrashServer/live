@@ -6,7 +6,7 @@ SynthDef(\waves,
 	freq = In.kr(bus, 1);
 	freq = [freq, freq+fmod];
 
-	env=EnvGen.ar(Env(times: (sus * 2),levels: [0, amp, 0],curve: 'lin'), doneAction: 0);
+	env=EnvGen.ar(Env(times: (sus),levels: [0, amp, 0],curve: 'lin'), doneAction: 2);
 	sig =  SinOsc.ar(freq * (fmod + 1), 0, freq * (rate + 4) * LFNoise1.kr(10.reciprocal).abs);
 	sig2 = SinOsc.ar((freq * fmod) + sig, 0, 0.5);
 	sig = SinOscFB.ar(sig2, Gendy5.ar(0.1, 0.4, 0.1, mul:0.2)) + sig2;

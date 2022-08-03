@@ -31,9 +31,9 @@ import json
 class ThreadSafeText(Text, OTClient):
     is_refreshing = False
     def __init__(self, root, **options):
-        
+
         # Inheret  from Tk.Text and OT client
-        
+
         Text.__init__(self, root.root, **options)
         OTClient.__init__(self, revision=0)
 
@@ -81,7 +81,7 @@ class ThreadSafeText(Text, OTClient):
 
         self.marker     = None
         self.local_peer = None
-        
+
         self.scroll_view  = None
         self.scroll_index = None
 
@@ -170,6 +170,12 @@ class ThreadSafeText(Text, OTClient):
             self.refresh()
 
         return
+
+    #Crashmod
+    def crashInfo(self):
+        ''' return the name, line content & marker pos '''
+        msg = [str(self.marker), self.get_line_contents(self.marker.row), int(self.marker.col)]
+        return msg
 
     def apply_local_operation(self, ops, shift_amount, index=None, undo=False, redo=False):
         """ Applies the operation directly after a keypress """
@@ -437,9 +443,9 @@ class ThreadSafeText(Text, OTClient):
             if not (constraint_id == 0 and self.constraint.rule is None):
 
                 print("New rule received! Setting mode to '{}'".format(str(self.constraint.get_name(constraint_id)).title()))
-            
+
             self.constraint.set_constraint(constraint_id, dictator_peer)
-        
+
         return
 
     def handle_console_message(self, message):
@@ -523,7 +529,7 @@ class ThreadSafeText(Text, OTClient):
                 # If the other peer is *in* this peer's selection, move it
 
                 if peer.has_selection() and peer.select_contains( other_index ):
-        
+
                     other.move(peer.select_start())
 
                 # Adjust the index if it comes after the operating peer index
@@ -653,9 +659,9 @@ class ThreadSafeText(Text, OTClient):
                 except Exception as e:
 
                     func = self.handles.get(msg.type)
-                    
+
                     if func:
-                    
+
                         func = func.__name__
 
                     else:
@@ -683,10 +689,10 @@ class ThreadSafeText(Text, OTClient):
         """ Clears the text box and loads the current document state, called after an operation """
 
         self.is_refreshing = True
-        
+
         # Store the current "view" to re-apply later
         self.store_view()
-        
+
         # Remove all the text and insert new text
         self.clear()
         self.insert("1.0", self.document)
@@ -696,16 +702,16 @@ class ThreadSafeText(Text, OTClient):
         self.apply_language_formatting()
 
         self.is_refreshing = False
-        
+
         return
 
     def refresh_peer_labels(self):
         ''' Updates the locations of the peers to their marks. Called from line_numbers on repeat '''
-        
+
         for peer_id, peer in self.peers.items():
-             
+
              peer.redraw()
-        
+
         return
 
     # handling key events
@@ -774,7 +780,7 @@ class ThreadSafeText(Text, OTClient):
     # ============
 
     def store_view(self):
-        """ Store the location of the interface view, i.e. scroll, such that the 
+        """ Store the location of the interface view, i.e. scroll, such that the
             self.marker.bbox will be the same when self.reset_view() is called """
 
         # If we are at the top of the screen, and the marker is less than 2/3 down the page, keep at top
@@ -790,7 +796,7 @@ class ThreadSafeText(Text, OTClient):
                 self.scroll_distance = self.get_num_lines() * -1
 
                 return
-    
+
         # Store the current distance between top row and marker.mark
 
         self.scroll_distance = top_row - marker_row
@@ -803,7 +809,7 @@ class ThreadSafeText(Text, OTClient):
         # Move to top
 
         self.yview('move', 0.0)
-        
+
         # Scroll until the scroll-distance is the same as previous (or the end)
 
         for n in range(self.get_num_lines()):

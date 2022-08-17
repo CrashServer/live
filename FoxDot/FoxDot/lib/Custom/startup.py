@@ -275,8 +275,8 @@ if __name__ != "__main__":
 			""" Chord Inversion """
 			sorted_chord = sorted(self)
 			if nbr > 0:
-				for i in range(0,nbr+1):
-					sorted_chord[0] += 7
+				for i in range(nbr):
+					sorted_chord[-1] -= 7
 					sorted_chord = sorted(sorted_chord)
 			return PGroup(sorted_chord)
 	except Exception as e:
@@ -317,6 +317,18 @@ if __name__ != "__main__":
 		def PTimebin():
 			"""Generate a pattern of actual time converted to binary"""
 			return binary(int(Clock.get_time_at_beat(int(Clock.now()))))
+
+		@loop_pattern_func
+		def PFrac(a=0.63,b=0.0, size=16):
+			''' return a Pattern with fractional step, 
+				not sure what it is but sounds cool try with:  
+					a = 0.63, b = 0.00
+					a = 0.66, b = 0.08
+					a = 0.42, b = 0.10
+					a = 0.60, b = 0.68
+					a = 0.62, b = 0.67
+				'''
+			return Pattern([(a*i + b )%1 for i in range(size)])
 
 		def lininf(start=0, finish=1, time=32):
 			''' linvar from start to finish but stay at finish after time '''
@@ -702,14 +714,27 @@ try:
 				drumFillCat = int(PRand(1, len(drumRockFill)))
 				drumFillPat = int(PRand(1, len(drumRockFill[drumFillCat])))
 				fillDur = duration/PRand([4,8,16])
+				durPlayer = PwRand([1/2,1],[80,20])[:1]
 				self.degree=Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [duration-fillDur, fillDur])
-				self.human(30,5)
+				self.human(30,PWhite(-5,5))
 				self.comp=0.8
-				self.every(duration, "drummer")
+				self.dur = durPlayer
+				self.every(duration, "drummer", duration)
 except:
 		print("Error importing drumRockPattern", sys.exc_info()[0])
 
 
-
-
+@player_method
+def basser(self, duration=64, markdur=2):
+	if duration!=0:
+		durChoice = choice([P[6,1,1], P[1], PDur(var([4,PRand(7)],[6,2]), 8), PDur(var([5,PRand(7)],[6,2]), 8), PDur(var([3,PRand(7)],[6,2]), 8)])
+		sequence = PMarkov()[:markdur]
+		print(durChoice)
+		print(sequence)
+		var.seq = var(sequence,8)
+		degreeChoice = choice([var.seq[0], var([var.seq[0], P*[var.seq[1], _, var.seq[2]], P*[var.seq[2], var.seq[2] -7, var.seq[1] - 7]], [6,1,1])])
+		self.degree = degreeChoice
+		self.dur = durChoice
+		self.rarely("stutter", oct=self.oct+1, cut=0.5) 
+		self.every(duration, "basser", duration, markdur) 
 

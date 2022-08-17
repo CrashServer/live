@@ -561,6 +561,8 @@ try:
 	scene8 = 0
 	scene9 = 0
 	scene10 = 0
+	scene11 = 0
+	scene12 = 0
 	scene99 = 0
 except Exception as e:
 	print(e)

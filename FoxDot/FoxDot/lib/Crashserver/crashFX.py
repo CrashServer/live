@@ -30,6 +30,19 @@ fx.doc("DFM1 filter")
 fx.add('osc = DFM1.ar(osc, dfm, dfmr, dfmd,0.0)')
 fx.save()
 
+# VALadder filter
+fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.5, 'valadd': 0.5, 'valadt': 0}, order=2)
+fx.doc("VALadder filter")
+fx.add('osc = VALadder.ar(osc, valad, valadr, valadd,valadt)')
+fx.save()
+
+# VADiode filter
+fx = FxList.new('vadiod', 'VADiodeFilter', {'vadiod': 500, 'vadiodr': 0.5, 'vadiodd': 0.5}, order=2)
+fx.doc("VADiode filter")
+fx.add('osc = VADiodeFilter.ar(osc, vadiod, vadiodr, vadiodd)')
+fx.save()
+
+
 fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0)
 fx.add("osc = osc + (fm_sin_i * SinOsc.kr(osc * fm_sin))")
 fx.save()

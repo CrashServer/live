@@ -1,5 +1,5 @@
 SynthDef.new(\ebass,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, blur=1, beat_dur=1, atk=0.001, decay=0.01, rel=0.01, pick=0.414, rq = 0.5, cutoff = 250|
+{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, blur=1, beat_dur=1, atk=0.001, decay=0.01, rel=0.01, pick=0.414, rq = 0.5, cutoff = 250, glide=1, glidedur=0|
 
 	var exciter, freqArray, ampArray, decArray, constant, mute, snd, openFreq, pickupPos, pickupWidth, decayCoef, dampCoef;
 	openFreq = 82.5;
@@ -11,6 +11,7 @@ SynthDef.new(\ebass,
 	sus = sus*blur;
 	freq = In.kr(bus, 1);
 	freq = freq/4;
+		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 	freq = [freq, freq+fmod];
 	// Make a Constant from pickupWidth for ampArray
 	constant = pickupWidth/25.5; // The scale length is set to 25.5 inches

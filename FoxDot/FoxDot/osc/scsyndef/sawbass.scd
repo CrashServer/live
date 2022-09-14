@@ -1,8 +1,9 @@
 SynthDef(\sawbass,
-	{|amp=1, sus=0.2, pan=0, bus=0, freq=440, cutoff=1000, rq=0.5, fmod=0, rate|
+	{|amp=1, sus=0.2, pan=0, bus=0, freq=440, cutoff=1000, rq=0.5, fmod=0, rate, glide=1, glidedur=0|
 		var osc1, osc2, filter, filter2, env, filterenv, ab;
 		amp = amp * 0.25;
 		freq = (In.kr(bus) / 4) + fmod;
+		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 		osc1 = Saw.ar(freq);
 		osc2 = Mix(Saw.ar(freq * [0.25,1,1.5], [0.5,0.4,0.1]));
 		filterenv = EnvGen.ar(Env.adsr(0.0, 0.5, 0.2, sus), 1, doneAction: 2);

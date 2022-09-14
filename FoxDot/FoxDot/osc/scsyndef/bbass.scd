@@ -1,9 +1,10 @@
 SynthDef(\bbass,
-	{|bus=0, freq = 440, amp=1, gate=1, pan=0, sus=1, blur=1, fmod=0, wide=0|
+	{|bus=0, freq = 440, amp=1, gate=1, pan=0, sus=1, blur=1, fmod=0, wide=0, glide=1, glidedur=0|
 	var snd, env, oscfreq, output, osc, envout;
 	var lfo;
 	sus = sus * blur;
 	freq = In.kr(bus, 1);
+	freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 	freq = [freq, freq+fmod];
 	oscfreq = {freq * LFNoise2.kr(Rand(0.0001,0.5)).range(0.98, 1.02)}!5;
 	lfo = { SinOsc.kr({ 1/Rand(2,52) }!5) };

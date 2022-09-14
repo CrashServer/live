@@ -1,8 +1,11 @@
 (
 SynthDef("prof",
-	{|amp=0.3, pan=0, freq=0, vib=0, fmod=0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, sus=1, rel=0.01, peak=1, level=0.8, gate = 1, rate = 0.1, phase = 0.5, cutoff = 1500, rq = 0.5|
+	{|amp=0.3, pan=0, freq=0, vib=0, fmod=0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, sus=1, rel=0.01, peak=1, level=0.8, gate = 1, rate = 0.1, phase = 0.5, cutoff = 1500, rq = 0.5, glide=1, glidedur=0|
 
 	var lfo, pulse, filter, env;
+	freq = In.kr(bus, 1);
+	freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
+  freq = [freq, freq+fmod];
 	lfo = LFTri.kr(rate * [1, 1.01], Rand(0, 2.0) ! 2);
 	pulse = Pulse.ar(freq * [1, 1.01], lfo * phase + 0.5);
 	filter = RLPF.ar(pulse, cutoff, rq);

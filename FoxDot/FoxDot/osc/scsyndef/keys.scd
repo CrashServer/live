@@ -1,10 +1,11 @@
 (
 SynthDef.new(\keys,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, cutoff=400|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, cutoff=400, glide=1, glidedur=0|
 
 		var osc, env;
 
 		freq = In.kr(bus, 1);
+		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 		freq = [freq, freq+fmod];
 		freq = freq * [1, 1.005];
 

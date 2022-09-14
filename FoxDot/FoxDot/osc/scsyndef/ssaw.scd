@@ -1,7 +1,8 @@
 SynthDef.new(\ssaw,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, sawmix=0.75, sawtune=0.75, sawtype=0|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, sawmix=0.75, sawtune=0.75, sawtype=0, glide=1, glidedur=0|
 		var osc, osc1, osc2, osc3, env, detuneCurve, centerGain, sideGain, center, freqs, side;
 		freq = In.kr(bus, 1);
+		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 		freq = [freq, freq+fmod] * Line.ar(Rand(0.5,1.5),1,0.02);
 		freq=(freq / 2);
 		amp=(amp * 0.4);

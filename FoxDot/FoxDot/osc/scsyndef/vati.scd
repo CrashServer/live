@@ -1,8 +1,9 @@
 SynthDef.new(\vati,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=12, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=0.0, off=7|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=12, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=0.0, off=7, glide=1, glidedur=0|
 var osc, env, sig1, sig2, sig3, sig4, tracking, ringmod;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 freq = [freq, freq+fmod];
 amp=(amp / 4);
 sig1 = Pulse.ar(freq, 0.17);

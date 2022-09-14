@@ -1,8 +1,8 @@
 (
 SynthDef(\alva,
-	{|bus=0, amp=1, freq=240, pan=0, gate=1, dur, fmod=0, vib=0, sus=1, blur=1, wide|
+	{|bus=0, amp=1, freq=240, pan=0, gate=1, dur, fmod=0, vib=0, sus=1, blur=1, glidedur=0, glide=1|
 	var osc, env, freqenv, freqenv2, line;
-
+	freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 	freqenv  = EnvGen.ar(Env.new([freq, freq, 40], [0.01, 0.4, dur]));
 	freqenv2 = EnvGen.ar(Env.new([freq*1.2, 10, 10], [0.05,  0.25, dur]));
 	sus = sus * blur;

@@ -1,9 +1,10 @@
 SynthDef.new(\elmbass,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=1, bus=0, blur=1, beat_dur=1, atk=0.001, decay=0.01, rel=0.1, peak=1, level=0.8, emallet=0.5, etimbre=0.3, ebright=0.5, edamp=0.5, ewide=0.5, emodel=1, eamp=0.8, epos=0.5, bow=0, blow=0, bowtimbre=0.8, blowtimbre=0.8, gate=1|
+{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=1, bus=0, blur=1, beat_dur=1, atk=0.001, decay=0.01, rel=0.1, peak=1, level=0.8, emallet=0.5, etimbre=0.3, ebright=0.5, edamp=0.5, ewide=0.5, emodel=1, eamp=0.8, epos=0.5, bow=0, blow=0, bowtimbre=0.8, blowtimbre=0.8, gate=1, glide=1, glidedur=0|
 var osc, env, susDiv;
 sus = sus * blur;
 		susDiv = sus*0.25;
 		freq = In.kr(bus, 1);
+		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 freq = [freq, freq+fmod];
 freq = freq/4;
 osc = MiElements.ar(

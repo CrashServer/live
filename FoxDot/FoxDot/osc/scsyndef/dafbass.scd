@@ -1,7 +1,8 @@
 SynthDef.new(\dafbass,
-	{|amp=1 pan=0, freq=0, vib=0, fmod=1, rate=0, bus=0,atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1|
+	{|amp=1 pan=0, freq=0, vib=0, fmod=1, rate=0, bus=0,atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, glide=1, glidedur=0|
 		var osc, env, harm;
 		freq = In.kr(bus, 1);
+		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
 		freq = [freq, freq] * Line.ar(Rand(0.5,1.5),1,0.02);
 		freq=(freq / 4);
 		amp=(amp * 0.3);

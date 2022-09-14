@@ -316,7 +316,7 @@ if __name__ != "__main__":
 		@loop_pattern_func
 		def PTimebin():
 			"""Generate a pattern of actual time converted to binary"""
-			return binary(int(Clock.get_time_at_beat(int(Clock.now()))))
+			return PBin(int(Clock.get_time_at_beat(int(Clock.now()))))
 
 		@loop_pattern_func
 		def PFrac(a=0.63,b=0.0, size=16):
@@ -697,6 +697,21 @@ if __name__ != "__main__":
 			self.amplify=var([1,0],[1/32,inf], start=now)
 			self.after(32, "stop")
 
+		@PatternMethod
+		def norm(self, mult=1):
+			""" Returns the pattern with all values between 0 and 1*mult """
+			pos = self - min(self)
+			return (pos / max(pos))*mult
+
+		@PatternMethod
+		def clamp(self, mini, maxi):
+			""" Returns the pattern with all values clamped to min – max """
+			return self.transform(lambda n: max( min(maxi, n), mini))
+
+		@PatternMethod
+		def lmap(self, oMin, oMax):
+			""" Retruns the pattern mapped to min and max values """
+			return ((self - min(self)) / (max(self)-min(self)) * (oMax - oMin) + oMin)
 
 	except Exception as e:
 		print(f"useful function problem : {e}")

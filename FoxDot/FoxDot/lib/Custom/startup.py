@@ -578,6 +578,39 @@ if __name__ != "__main__":
 						self.turn = 0
 					return self.active_value
 
+		class PZero(GeneratorPattern):
+			''' Generate a Pattern with '1' and size-1 '0' 
+				eg: PZero(5) -> P[1,0,0,0,0] 
+				the '1' position can be offset 
+				'''
+			def __init__(self, size=2, offset=0):
+				GeneratorPattern.__init__(self)
+				self.size = size
+				self.offset = offset
+			def func(self, index):
+				if ((index-self.offset)%int(self.size) == 0):
+					return 1
+				else:
+					return 0			
+
+		class PBool(GeneratorPattern):
+			''' Binery operation between 2 Pattern, you can select the operator:
+				0 -> and
+				1 -> or
+				2 -> xor   '''
+			def __init__(self, pat1=P[0], pat2=P[0], operator=0):
+				GeneratorPattern.__init__(self)
+				self.pat1 = pat1
+				self.pat2 = pat2
+				self.operator = operator
+			def func(self, index):
+				if self.operator == 0:
+					return self.pat1[index] and self.pat2[index]
+				elif self.operator == 1:
+					return self.pat1[index] or self.pat2[index]
+				elif self.operator == 2:
+					return self.pat1[index] ^ self.pat2[index]
+
 		@player_method
 		def switch(self, other, key, bypass=1):
 			""" Switch the attr of a player

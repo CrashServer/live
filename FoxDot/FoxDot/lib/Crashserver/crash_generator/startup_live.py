@@ -532,21 +532,22 @@ except Exception as e:
 
 ### French cut
 try:
-	é = linvar([0,1],[16,0])
-	é8 = linvar([0,1],[8,0])
-	é32 = linvar([0,1],[16,0])
-	è = linvar([1,0],[16,0])
-	è8 = linvar([1,0],[8,0])
-	è32 = linvar([1,0],[32,0])
-	ê = linvar([0,1],[16,16])
-	ê8 = linvar([0,1],[8,8])
-	ê32 = linvar([0,1],[32,32])
-	ù = PDur(var([4,PRand(8)],[6,2]), 8)
-	ù3 = PDur(var([3,PRand(8)],[6,2]), 8)
-	ù5 = PDur(var([5,PRand(8)],[6,2]), 8)
-	à = PRand(10)
-	ç = PWhite(-1,1)
-	ç0 = PWhite(0,1)
+	if os.name != "nt":
+		é = linvar([0,1],[16,0])
+		é8 = linvar([0,1],[8,0])
+		é32 = linvar([0,1],[32,0])
+		è = linvar([1,0],[16,0])
+		è8 = linvar([1,0],[8,0])
+		è32 = linvar([1,0],[32,0])
+		ê = linvar([0,1],[16,16])
+		ê8 = linvar([0,1],[8,8])
+		ê32 = linvar([0,1],[32,32])
+		ù = PDur(var([4,PRand(8)],[6,2]), 8)
+		ù3 = PDur(var([3,PRand(8)],[6,2]), 8)
+		ù5 = PDur(var([5,PRand(8)],[6,2]), 8)
+		à = PRand(10)
+		ç = PWhite(-1,1)
+		ç0 = PWhite(0,1)
 	# ô = PGauss(0, 1)
 
 	### scene OF
@@ -563,6 +564,8 @@ try:
 	scene10 = 0
 	scene11 = 0
 	scene12 = 0
+	scene13 = 0
+	scene14 = 0
 	scene99 = 0
 except Exception as e:
 	print(e)

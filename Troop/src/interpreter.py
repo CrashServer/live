@@ -49,7 +49,7 @@ except Exception as e:
 
 
 #from .crashconfig import *
-if crashOsEnable:
+if crashOsEnable or crashInstantCode:
     # Osc/udp sender
     try:
         if crashSendMode == "udp":

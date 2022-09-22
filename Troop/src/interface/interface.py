@@ -710,12 +710,13 @@ class Interface(BasicInterface):
 
             ### Crashmod
             try:
-                crashData = self.text.crashInfo()
-                if crashData[0] == "Zbdm":
-                    byte_message = OSC.OSCMessage("/zbdmTypeCode", crashData)
-                elif crashData[0] == "Svdk":
-                    byte_message = OSC.OSCMessage("/svdkTypeCode", crashData)
-                crashTroop_socket.send(byte_message)
+                if crashInstantCode:
+                    crashData = self.text.crashInfo()
+                    if crashData[0] == "Zbdm":
+                        byte_message = OSC.OSCMessage("/zbdmTypeCode", crashData)
+                    elif crashData[0] == "Svdk":
+                        byte_message = OSC.OSCMessage("/svdkTypeCode", crashData)
+                    crashTroop_socket.send(byte_message)
             except Exception as e:
                 print(e)
 

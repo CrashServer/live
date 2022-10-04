@@ -295,8 +295,7 @@ class metaPattern(object):
         stop  = stop if stop != None else len(self)
         step  = step if step != None else 1
 
-        if stop < start:
-
+        if (stop < start) and (step > 0):
             stop = (len(self.data) +  stop)
 
         return Pattern([self[i] for i in range(start, stop, step) ])

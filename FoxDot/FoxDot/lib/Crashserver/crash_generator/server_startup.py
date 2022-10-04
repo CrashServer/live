@@ -572,6 +572,7 @@ def shutup():
 		ply.stop()
 
 def son(s=999, d=999, l=999):
+	''' activate the server, probability (Synth, drums, Loops) '''
 	print("Server On")
 	global serverActive, probAddSynth, probAddDrum, probAddLoop
 	if s!=999:	

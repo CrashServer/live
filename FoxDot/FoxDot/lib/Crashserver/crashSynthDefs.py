@@ -135,6 +135,9 @@ organ.add()
 plaits = FileSynthDef("plaits")
 plaits.add()
 
+pluck2 = FileSynthDef("pluck2")
+pluck2.add()
+
 pianovel = FileSynthDef("pianovel")
 pianovel.add()
 

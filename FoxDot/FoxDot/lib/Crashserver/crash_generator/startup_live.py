@@ -567,6 +567,19 @@ try:
 	scene13 = 0
 	scene14 = 0
 	scene99 = 0
+
+	# define chords and circle of fifth
+	circ5 = (P[0:12]*7)%12
+	circ5m = circ5.rotate(3)
+	Maj = P(0,4,7)
+	Min = P(0,3,7)
+	Sus2 = P(0,2,7)
+	Sus4 = P(0,5,7)
+	Dim = P(0,3,6)
+	Maj7 = P(0,4,7,11)
+	Aug = P(0,4,8)
+	Six = P(0,4,7,9)
+
 except Exception as e:
 	print(e)
 

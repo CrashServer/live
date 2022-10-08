@@ -101,8 +101,6 @@ class SynthDefBaseClass(object):
                             "rel"       : 0.01,
                             "peak"      : 1,
                             "level"     : 0.8,
-                            "glide"      : 1.0,
-                            "glidedur"   : 0.0,
                             "wide"      : 0.0}
 
         # The amp is multiplied by this before being sent to SC
@@ -327,7 +325,6 @@ class SynthDef(SynthDefBaseClass):
         """ Defines the initial setup for every SynthDef """
         SynthDefBaseClass.add_base_class_behaviour(self)
         self.base.append("freq = In.kr(bus, 1);")
-        self.base.append("freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);")
         self.base.append("freq = [freq, freq+fmod];")
         return
 

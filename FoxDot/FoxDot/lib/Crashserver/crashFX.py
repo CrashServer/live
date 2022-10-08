@@ -5,6 +5,15 @@ fx = FxList.new("leg", "leg", {"leg":0, "sus":1 }, order = 0)
 fx.add("osc = osc * XLine.ar(Rand(0.5,1.5)*leg,1,0.05*sus)")
 fx.save()
 
+fx = FxList.new("glide", "glide", {"glide": 0, "glidedur": 0.05}, order=0)
+fx.add("osc = Line.kr(start: (osc * glide).clip(-50,22000), end: osc, dur: glidedur)")
+fx.save()
+
+# fx = FxList.new("glide", "glissando", {"glide": 0, "glidedelay": 0.5, "sus": 1}, order=0)
+# fx.add("osc = osc * EnvGen.ar(Env([1, 1, (1.059463**glide)], [sus*glidedelay, sus*(1-glidedelay)]))")
+# fx.save()
+
+
 # Lpf slide
 fx = FxList.new('spf','SLPF', {'spf': 0, 'spr': 1, 'spfslide':1, 'spfend':15000}, order=2)
 fx.add_var("spfenv")

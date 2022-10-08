@@ -1,10 +1,10 @@
 //  based on a tweet I can't find anymore :(
 SynthDef(\cluster,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=4.0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=0.0, para1=4, glide=1, glidedur=0|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=4.0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=0.0, para1=4|
 	var env, snd;
 
 	freq = In.kr(bus, 1);
-	freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
+	
 	sus = sus * blur;
 
 	freq = [freq, freq+fmod];

@@ -1,8 +1,8 @@
 SynthDef.new(\dblbass, {
-	|bus = 0, amp = 1, freq = 440, fmod=0, atk = 0.001, sus=0, rel = 1.0, crv = \lin, vel = 1.0, freqdev = 4, op1mul = 0.5, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, pan=0, cutoff=3000, rq=0.5, glide=1, glidedur=0|
+	|bus = 0, amp = 1, freq = 440, fmod=0, atk = 0.001, sus=0, rel = 1.0, crv = \lin, vel = 1.0, freqdev = 4, op1mul = 0.5, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, pan=0, cutoff=3000, rq=0.5|
 	var env, op1, op2, op3, op4, osc, sub;
 	freq = In.kr(bus, 1);
-	freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
+	
 	freq = [freq, freq+fmod];
 	freq = (freq / 4);
 	env = Env.linen(attackTime: atk, sustainTime: sus, releaseTime: rel, curve: crv).kr(doneAction: 0);

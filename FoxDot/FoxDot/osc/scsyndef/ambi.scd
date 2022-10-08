@@ -1,9 +1,9 @@
 (
 SynthDef.new(\ambi,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, glide=1.0, glidedur=0|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0|
 		var osc, env, filter;
 		freq = In.kr(bus, 1);
-		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
+		
 		freq = [freq, freq+fmod];
 		freq = freq + ( (XLine.kr(freq * rate, freq + LFNoise2.ar(4, mul:1), sus))  * SinOsc.ar(freq + LFNoise2.ar(4, mul:2)));
 		osc=SinOsc.ar(freq + Rand(0.99,1.01), phase:Rand(0,2));

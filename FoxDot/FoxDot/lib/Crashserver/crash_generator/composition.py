@@ -14,7 +14,7 @@ fxdict = {
 'vib' : {'vib': pint, 'vibdepth': preso},
 'slide' : {'slide': pdeg, 'slidedelay': preso},
 'slidefrom' : {'slidefrom': pdeg, 'slidedelay': preso},
-'glide' : {'glide': pdeg, 'glidedelay': preso},
+#'glide' : {'glide': pdeg, 'glidedelay': preso},
 'bend' : {'bend': pdeg, 'benddelay': preso},
 'coarse' : {'coarse': preso},
 'pshift' : {'pshift': pdeg},

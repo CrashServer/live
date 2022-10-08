@@ -1,8 +1,8 @@
 SynthDef.new(\combs,
-	{|bus=0, pan=0, amp=1, freq=440, gate=1, fmod=0, atk=0.01, sus=1, rel=0.3, decay=0.01, level=0.8, peak=1, vibrate=2, depth=0.8, regen= -3, sweep=8, rq=0.9, nharm=2, glide=1, glidedur=0|
+	{|bus=0, pan=0, amp=1, freq=440, gate=1, fmod=0, atk=0.01, sus=1, rel=0.3, decay=0.01, level=0.8, peak=1, vibrate=2, depth=0.8, regen= -3, sweep=8, rq=0.9, nharm=2|
 	var max, min, vibrato, osc, env, filterenv;
 	freq = In.kr(bus, 1);
-		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
+		
 	freq = [freq, freq+fmod];
 	//Setting some values for the filters:
 	min = ((1 + depth) / freq);

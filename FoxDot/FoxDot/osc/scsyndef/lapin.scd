@@ -1,6 +1,6 @@
 (
 SynthDef(\lapin,
-	{|bus=0, amp=1, atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, rate=1, blur=1, beat_dur=1, glide=1, glidedur=0|
+	{|bus=0, amp=1, atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, rate=1, blur=1, beat_dur=1|
 		var osc, env, string;
 		sus = sus*blur;
 		string = { |freq|
@@ -10,7 +10,7 @@ SynthDef(\lapin,
 		};
 
 		freq = In.kr(bus, 1);
-		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
+		
 		freq = [freq, freq+fmod];
 		osc = string.(freq) + string.(freq) + string.(freq * 0.5);
 		osc = osc + (HPF.ar(LocalIn.ar(2), 3000) * -50.dbamp);

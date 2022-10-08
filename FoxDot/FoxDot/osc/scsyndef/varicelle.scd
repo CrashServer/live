@@ -1,9 +1,9 @@
 SynthDef.new(\varicelle,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=1, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, cutoff=5300, rel=0.01, peak=1, level=0.8, glide=1, glidedur=0|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=1, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, cutoff=5300, rel=0.01, peak=1, level=0.8|
 var osc, oscl, oscr, sigA, sigB, sigC, env, modul;
 sus = sus * blur;
 freq = In.kr(bus, 1);
-freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
+
 	modul = fmod * SinOsc.kr(rate, mul:0.5, add:0.5) * Line.kr(0, 1, 7);
 		sigA = Pulse.ar(freq + modul, LFNoise2.kr(1).range(0.2, 0.8) );
 		sigB = VarSaw.ar(freq + modul);

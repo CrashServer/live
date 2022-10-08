@@ -1,9 +1,9 @@
 (
 SynthDef.new(\four,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, glide=1, glidedur=0|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0|
 		var osc, env;
 		freq = In.kr(bus, 1);
-		freq = Line.kr(start: (freq * glide).clip(-50,22000), end: freq, dur: glidedur);
+		
 		freq = [freq, freq+fmod];
 
 		osc = SinOsc.ar([1,2,4,8],mul:0.5) * LFSaw.ar([freq,freq*1.02,freq*(fmod + 0.99),freq*1.01]);

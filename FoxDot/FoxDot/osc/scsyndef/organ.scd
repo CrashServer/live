@@ -1,6 +1,6 @@
 (
 SynthDef(\organ,
-	{|f=440, width = 0.5, pan = 0.0, bus = 0, amp = 1, sus=1, freq=440, fmod=0,rate = 0.5.015|
+	{|f=440, width = 0.5, pan = 0.0, bus = 0, amp = 1, sus=1, freq=440, fmod=0,rate = 0.5|
 
 	var signal, tapPhase, tap, tapPhaseL, tapPhaseR, tapL, tapR;
 	var timeMod, eqMod, bufferL, bufferR;
@@ -32,7 +32,7 @@ SynthDef(\organ,
 
 	freq = In.kr(bus, 1);
 	freq = [freq, freq+fmod];
-	
+
 	output = 0.01*LeakDC.ar(output, 0.9995);
 
 	output = MoogFF.ar(output.tanh*20.0, (f*12)+LFNoise2.ar(1, 400, 1), LFNoise2.ar(0,3.5, 0));

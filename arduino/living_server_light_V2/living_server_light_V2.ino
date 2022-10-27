@@ -5,8 +5,8 @@ FASTLED_USING_NAMESPACE
 #define DATA_PIN 3
 #define LED_TYPE WS2812B
 #define COLOR_ORDER GRB
-#define NUM_LEDS 150
-#define PLY_LENGTH 30  // define the length of the players position
+#define NUM_LEDS 300
+#define PLY_LENGTH 80  // define the length of the players position
 
 //CRGB leds[NUM_LEDS];
 CRGBArray<NUM_LEDS> leds;
@@ -80,7 +80,7 @@ void loop() {
     }
     //// SERVER ////
     else if (val == 's') {
-      for (int i = 0; i < nbrPulseMax; i++) {
+      for (int i = 0; i < nbrPulseMax+1; i++) {
         if (!activePulse[i]) {
           activePulse[i] = true;
           activePulse[i + 1] = true;
@@ -118,7 +118,7 @@ void loop() {
 
   if (val != -1) {
     //if (val == 'g'|| val == 'o' || val == 'r'){
-    for (int i = 0; i < nbrPulseMax; i++) {
+    for (int i = 0; i < nbrPulseMax+1; i++) {
       if (activePulse[i]) {
         leds[pos[i]] = color[i];
         if (ply[i] == 1) {

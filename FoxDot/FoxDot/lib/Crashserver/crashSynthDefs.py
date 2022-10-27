@@ -132,6 +132,9 @@ orientmod.add()
 organ = FileSynthDef("organ")
 organ.add()
 
+pad2 = FileSynthDef("pad2")
+pad2.add()
+
 plaits = FileSynthDef("plaits")
 plaits.add()
 
@@ -179,6 +182,9 @@ supersaw.add()
 
 ssaw = FileSynthDef("ssaw")
 ssaw.add()
+
+swiss = FileSynthDef("swiss")
+swiss.add()
 
 tb303 = FileSynthDef("tb303")
 tb303.add()

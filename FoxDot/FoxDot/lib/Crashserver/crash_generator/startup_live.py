@@ -7,6 +7,7 @@ try:
 	from random import choice
 	from threading import Thread
 	from pathlib import Path
+	import socket
 except Exception as e:
 	print(e)
 
@@ -391,9 +392,19 @@ try:
 				self.plyTime = 0.3 # time cycle send player
 				self.pdjTime = 60 #time cycle send PlatduJour
 				self.chronoTime = 10 # time cycle send chrono
-
-				self.clientZbdm = OSCClient()
-				self.clientZbdm.connect((self.ipZbdm, 2000))
+				
+				try:
+					socket.gethostbyaddr(self.ipSvdk)
+				except:
+					self.ipSvdk = False
+				try:
+					socket.gethostbyaddr(self.ipZbdm)
+				except:
+					self.ipZbdm = False
+				
+				if self.ipZbdm:	
+					self.clientZbdm = OSCClient()
+					self.clientZbdm.connect((self.ipZbdm, 2000))
 				if self.ipSvdk:
 					self.clientSvdk = OSCClient()
 					self.clientSvdk.connect((self.ipSvdk, 2000))
@@ -583,4 +594,46 @@ try:
 except Exception as e:
 	print(e)
 
+### Mixer
+try: 
+	class Mixer():
+		def __init__(self):
+			self.client = OSCClient()
+			self.client.connect((ipZbdm, 7788))
+			self.strip = ["foxdot", "fx1", "fx2", "voice", "reverb", "master"]
+			self.audio = ["foxdot", "fx1", "fx2", "voice"]
+		
+		def gain(self, strip, gain):
+			if strip in self.strip:
+				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(gain))
+				self.client.send(msg)
+		
+		def mute(self, strip):
+			if strip in self.strip:
+				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(-70.0))
+				self.client.send(msg)
+				
+		def solo(self, strip):
+			for s in [st for st in self.audio if st != strip]:
+				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(-70.0))
+				self.client.send(msg)
+
+		def unsolo(self):
+			for s in self.audio:
+				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(0.0))
+				self.client.send(msg)
+
+		def reverb(self, strip, gain):
+			if strip in self.audio:
+				msg = OSCMessage(f"/strip/{strip}/Aux%20(A)/Gain%20(dB)/unscaled", float(gain))
+				self.client.send(msg)
+
+		def feed(self, strip, gain):
+			if strip in ["fx1", "fx2"]:
+				msg = OSCMessage(f"/strip/{strip}/Aux%20/Gain%20(dB)/unscaled", float(gain))
+				self.client.send(msg)
+
+	mixer = Mixer()
+except Exception as e:
+	print(e)
 

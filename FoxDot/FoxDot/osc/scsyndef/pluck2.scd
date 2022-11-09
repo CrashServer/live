@@ -11,5 +11,5 @@ env=Env([0, peak, level, 0], [atk, decay, max((atk + decay + rel), sus)], [5,-5,
 		inp = velo * LFDClipNoise.ar(1000*rate) * EnvGen.ar(env, gate, doneAction:2);
 		osc = DWGPlucked.ar(freq, velo, gate,0.14, c1+0.01,c3+0.01,inp);
 osc = Mix(osc*amp);
-osc = Pan2.ar(osc*0.05, pan);
+osc = Pan2.ar(osc*0.03, pan);
 	ReplaceOut.ar(bus, osc)}).add;

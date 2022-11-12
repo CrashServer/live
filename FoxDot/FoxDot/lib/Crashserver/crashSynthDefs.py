@@ -138,6 +138,9 @@ pad2.add()
 plaits = FileSynthDef("plaits")
 plaits.add()
 
+plaitsX = FileSynthDef("plaitsX")
+plaitsX.add()
+
 pluck2 = FileSynthDef("pluck2")
 pluck2.add()
 

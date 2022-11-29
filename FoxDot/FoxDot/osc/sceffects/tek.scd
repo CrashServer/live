@@ -13,5 +13,5 @@ osc_high = HPF.ar(osc, 4000 + SinOsc.ar(4, mul: 24));
 osc = osc_low + osc_med + osc_high;
 osc = DFM1.ar(osc, [400, 600], 0.99, tekd, 0) + osc;
 osc = RHPF.ar(Gammatone.ar(osc, tekr), tekr, mul:2) + osc;
-osc = LinXFade2.ar(osc_base, osc, tek);
+osc = SelectX.ar(tek, [osc_base, osc]);
 ReplaceOut.ar(bus, osc)}).add;

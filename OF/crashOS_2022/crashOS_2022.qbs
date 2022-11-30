@@ -19,6 +19,8 @@ Project{
             "src/dmx.cpp",
             "src/dmx.h",
             "src/easing.h",
+            "src/imageplayer.cpp",
+            "src/imageplayer.h",
             "src/ofxBeat.cpp",
             "src/ofxBeat.h",
             "src/Camera.cpp",
@@ -46,6 +48,8 @@ Project{
             "src/fft.h",
             "src/scene.cpp",
             "src/scene.h",
+            "src/textris.cpp",
+            "src/textris.h",
         ]
 
         of.addons: [
@@ -56,7 +60,8 @@ Project{
             'ofxOsc',
             'ofxXmlSettings',
             'ofxPostProcessing',
-            'ofxGenericDmx'
+            'ofxGenericDmx',
+            'ofxBox2d'
         ]
 
         // additional flags for the project. the of module sets some
@@ -93,7 +98,7 @@ Project{
         }
     }
 
-    property bool makeOF: true  // use makfiles to compile the OF library
+    property bool makeOF: false  // use makfiles to compile the OF library
                                 // will compile OF only once for all your projects
                                 // otherwise compiled per project with qbs
     

@@ -27,7 +27,8 @@
 #include "postproc.h"
 #include "dmx.h"
 #include "scene.h"
-
+#include "imageplayer.h"
+#include "textris.h"
 
 class ofApp : public ofBaseApp{
 
@@ -77,10 +78,11 @@ class ofApp : public ofBaseApp{
 		/// UI
 		int height, width;
         ofColor uiColor;
+        vector <ofColor> playerColor;
 
         /// Settings
         ofxXmlSettings settings;
-        bool barduino;
+        bool barduino, bdmx;
 
 
         /// CAMERA
@@ -90,7 +92,8 @@ class ofApp : public ofBaseApp{
 
         /// game logic;
 		int integrity = 100;
-			
+        int zbdmScore, svdkScore, serverScore;
+
         /// audio fft
         float rms, kick, hihat, snare, initTime;
 
@@ -105,17 +108,21 @@ class ofApp : public ofBaseApp{
         WinCode winCode;
         WinCpu winCpu;
         WinIntegrity winIntegrity;
+        WinScore winScore;
         AudioFft audioFft;
         Videoplayer videoplayer;
         Videoplayer3d videoplayer3d;
+        VideoplayerAscii videoplayerAscii;
         Camera webcam;
         UiMisc uiMisc;
         Glitcher glitcherCam, glitcherLogo, glitcherVideo;
+        Imageplayer imageplayer;
+        Textris textris;
 
         OverHeating overheating;
         Boot boot;
 
-        PostProc postCode, postPixel, postProc, postShift, postEdge, postTV, postKali;
+        PostProc postCode, postPixel, postProc, postGlitch, postShift, postEdge, postTV, postKali, postToon;
         Dmx dmx;
 
         ofColor dmx1Col;
@@ -133,6 +140,12 @@ class ofApp : public ofBaseApp{
         void scene8Update();
         void scene9Update();
         void scene10Update();
+        void scene11Update();
+        void scene12Update();
+        void scene13Update();
+        void scene14Update();
+        void scene15Update();
+        void scene16Update();
 
         void scene0Draw();
         void scene1Draw();
@@ -145,6 +158,12 @@ class ofApp : public ofBaseApp{
         void scene8Draw();
         void scene9Draw();
         void scene10Draw();
+        void scene11Draw();
+        void scene12Draw();
+        void scene13Draw();
+        void scene14Draw();
+        void scene15Draw();
+        void scene16Draw();
 
         void scene0Bang(char playerID);
         void scene1Bang(char playerID);
@@ -157,6 +176,12 @@ class ofApp : public ofBaseApp{
         void scene8Bang(char playerID);
         void scene9Bang(char playerID);
         void scene10Bang(char playerID);
+        void scene11Bang(char playerID);
+        void scene12Bang(char playerID);
+        void scene13Bang(char playerID);
+        void scene14Bang(char playerID);
+        void scene15Bang(char playerID);
+        void scene16Bang(char playerID);
 
         void scene0BigBang();
         void scene1BigBang();
@@ -169,6 +194,12 @@ class ofApp : public ofBaseApp{
         void scene8BigBang();
         void scene9BigBang();
         void scene10BigBang();
+        void scene11BigBang();
+        void scene12BigBang();
+        void scene13BigBang();
+        void scene14BigBang();
+        void scene15BigBang();
+        void scene16BigBang();
 
         void sceneDefaultUpdate();
         void sceneDefaultDraw();

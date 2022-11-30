@@ -39,16 +39,18 @@ private:
 
 class WinCode : public Windo{
 public:
-    void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
+    void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue, vector<ofColor> playerColor=vector<ofColor>{ofColor::paleTurquoise, ofColor::greenYellow, ofColor::red});
     void update(vector<CodeLine> &vectorCode);
-    void draw(vector<CodeLine>& vectorCode);
+    void draw(vector<CodeLine>& vectorCode, vector<CodeInstant>& vectorInstant, bool showCode=true);
 
 
     ofParameter<int> nbrLineCode;
 
-
+    ofColor zbdmColor, svdkColor, serverColor;
+    int evalZbdm, evalSvdk;
     //int nbrLineCode;
     int codeTotalHeight, codeTotalWidth;
+    int codeInstantHeight, codeInstantWidth;
     int maxLineCode, maxCodeWidth;
 
 //    ofFbo codeFbo;
@@ -56,6 +58,7 @@ public:
 private:
 
 };
+
 
 class WinCpu : public Windo{
 public:
@@ -78,13 +81,26 @@ public:
     void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
     void update(int integrity, string nameModel=" ");
     void draw();
-
+    void newText();
 
     int integrity;
-    string nameModel;
+    string nameModel, targetText;
     ofFbo integrityFbo;
 
 private:
+};
+
+class WinScore : public Windo{
+public:
+    void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue, vector<ofColor> playerColor=vector<ofColor>{ofColor::paleTurquoise, ofColor::greenYellow, ofColor::red});
+    void update(int svdkScore, int zbdmScore, int serverScore);
+    void draw();
+
+    ofColor zbdmColor, svdkColor, serverColor;
+    int svdkScore, zbdmScore, serverScore;
+private:
+
+
 };
 
 class OverHeating{

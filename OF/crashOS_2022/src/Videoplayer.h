@@ -12,7 +12,7 @@ public:
     void update(int _videoCat=0, int integrity=100);
     void draw();
     void newSeq();
-    void videoSrcub();
+    void videoSrcub(float audioRms=0);
     void resize();
 
 
@@ -60,6 +60,15 @@ private:
     int meshSize = 20;
 };
 
+class VideoplayerAscii : public Videoplayer {
+public:
+    void setupAscii();
+    void updateAscii(int _videoCat, int integrity);
+    void drawAscii();
+
+    string asciiCharacters;
+    ofTrueTypeFont font;
+};
 
 
 #endif // VIDEOPLAYER_H

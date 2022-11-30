@@ -51,8 +51,8 @@ void PostProc::setup(bool bBloom, bool bPixel, bool bBleach, bool bShift, bool b
     glitch->setEnabled(bGlitch);
 
     //13-FilmGrainLines
-    film = post.createPass<FilmGrainLinesPass>();
-    film->setEnabled(bFilm);
+//    film = post.createPass<FilmGrainLinesPass>();
+//    film->setEnabled(bFilm);
 
     //14-Toon
     toon = post.createPass<ToonPass>();

@@ -14,10 +14,12 @@ void ofApp::setup(){
     width = settings.getValue("config:width", 1920);
     height = settings.getValue("config:height", 1080);
     barduino = settings.getValue("config:arduino", false);
+    bdmx = settings.getValue("config:dmxActive", false);
     string textPres = settings.getValue("config:textPres", "");
     glm::vec2 textPresPos = glm::vec2(settings.getValue("config:textPosX", 80), settings.getValue("config:textPosY", 1060));
     int dmxAddr1 = settings.getValue("config:dmxAddr1", 1);
     int dmxAddr2 = settings.getValue("config:dmxAddr2", 8);
+
 
 	/// SETUP 
     ofSetFrameRate(30);
@@ -25,25 +27,41 @@ void ofApp::setup(){
     uiColor = ofColor(0,20,20);
     ofSetBackgroundColor(0);
 
+    /// Player Color
+    ofColor zbdmColor=ofColor::paleTurquoise;
+    ofColor svdkColor=ofColor::greenYellow;
+    ofColor serverColor=ofColor::red;
+    playerColor.push_back(zbdmColor);
+    playerColor.push_back(svdkColor);
+    playerColor.push_back(serverColor);
+
+    /// GAME LOGIC
+    integrity = 100;
+    zbdmScore = 0;
+    svdkScore = 0;
+    serverScore = 0;
+
 	/// NETWORK
     data.setup(barduino);
 
 	/// 3D MODELS
 //    postprocSetup();
-    render.setup();
-    sphereMap.setup();
-    text3d.setup();
-    procBackground.setup();
+//    render.setup();
+//    sphereMap.setup();
+//    text3d.setup();
+//    procBackground.setup();
 
     /// FFT
     initTime = 0;
 //    tunnel3d.setup();
 
     /// Windows
-    winCode.setup(10, uiColor);
+    winCode.setup(10, uiColor, playerColor);
     winCpu.setup(10, uiColor);
     winIntegrity.setup(10, uiColor);
     uiMisc.setup(textPres, textPresPos);
+    winScore.setup(10, uiColor);
+    textris.setup(playerColor);
 
     boot.setup();
 
@@ -51,8 +69,9 @@ void ofApp::setup(){
     webcam.setup(uiColor);
     videoplayer.setup();
     videoplayer3d.setup3d();
+    videoplayerAscii.setupAscii();
     audioFft.setup();
-    dmx.setup(dmxAddr1, dmxAddr2);
+    if(bdmx){dmx.setup(dmxAddr1, dmxAddr2);}
 
     // Post processing
     postCode.setup(
@@ -122,6 +141,36 @@ void ofApp::setup(){
         /* Toon */             false
     );
 
+    postPixel.setup(
+                /* Bloom */            false,
+                /* pixelate */         true,
+                /* Bleach */           false,
+                /* shift */            false,
+                /* Edge*/              false,
+                /* Kali */             false,
+                /* Aces */             false,
+                /* Noise */            false,
+                /* TV */               false,
+                /* Glitch */           false,
+                /* filmGrain*/         false,
+                /* Toon */             false
+    );
+
+    postGlitch.setup(
+                /* Bloom */            false,
+                /* pixelate */         false,
+                /* Bleach */           false,
+                /* shift */            false,
+                /* Edge*/              false,
+                /* Kali */             false,
+                /* Aces */             false,
+                /* Noise */            false,
+                /* TV */               false,
+                /* Glitch */           true,
+                /* filmGrain*/         false,
+                /* Toon */             false
+                );
+
     // Glitcher
     glitcherCam.setup(webcam.camFbo);
     glitcherLogo.setup(uiMisc.uiFbo);
@@ -132,6 +181,7 @@ void ofApp::setup(){
     parameters.add(winCode.parameters);
     parameters.add(winCpu.parameters);
     parameters.add(winIntegrity.parameters);
+    parameters.add(winScore.parameters);
     parameters.add(webcam.parameters);
     parameters.add(integrityIncr.set("Integrity increment", 5, 0, 100));
     parameters.add(cpuStress.set("CPU stress", 1, 0, 100));
@@ -150,6 +200,8 @@ void ofApp::setup(){
     gui.minimizeAll();
     gui.loadFromFile("xml/mysettings.xml");
     showGui = true;
+
+    imageplayer.setup(integrityIncr);
 }
 
 //--------------------------------------------------------------
@@ -167,12 +219,6 @@ void ofApp::update(){
     kick = ofxeasing::map_clamp(now, initTime, endTime, 0,audioFft.beat.kick()*audioThresh,&ofxeasing::cubic::easeIn);
     snare = ofxeasing::map_clamp(now, initTime, endTime, 0,audioFft.beat.snare()*audioThresh,&ofxeasing::cubic::easeIn);
     hihat = ofxeasing::map_clamp(now, initTime, endTime, 0,audioFft.beat.hihat()*audioThresh,&ofxeasing::cubic::easeIn);
-//    rms = audioFft.beat.getMagnitude()*audioThresh;
-//    kick = audioFft.beat.kick()*audioThresh;
-//    snare = audioFft.beat.snare()*audioThresh;
-
-
-//    if ((data.scCPU*cpuStress)>80){scene=3;}
 
     switch (scene) {
     case 0:
@@ -208,6 +254,24 @@ void ofApp::update(){
     case 10:
         scene10Update();
         break;
+    case 11:
+        scene11Update();
+        break;
+    case 12:
+        scene12Update();
+        break;
+//    case 13:
+//        scene13Update();
+//        break;
+//    case 14:
+//        scene14Update();
+//        break;
+//    case 15:
+//        scene15Update();
+//        break;
+//    case 16:
+//        scene16Update();
+//        break;
 
     default:
         sceneDefaultUpdate();
@@ -266,6 +330,24 @@ void ofApp::draw(){
     case 10:
         scene10Draw();
         break;
+    case 11:
+        scene11Draw();
+        break;
+    case 12:
+        scene12Draw();
+        break;
+//    case 13:
+//        scene13Draw();
+//        break;
+//    case 14:
+//        scene14Draw();
+//        break;
+//    case 15:
+//        scene15Draw();
+//        break;
+//    case 16:
+//        scene16Draw();
+//        break;
 
 	default:
         sceneDefaultDraw();
@@ -295,7 +377,7 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::exit(){
-    dmx.exit();
+    if(bdmx){dmx.exit();}
 }
 
 
@@ -313,17 +395,22 @@ void ofApp::bangUpdate(char playerID)
     case '#':
         // SVDK bang
         bang('#');
+        winCode.evalSvdk = 255;
         data.bang = '0';
+        svdkScore += 1;
         break;
     case '!':
         // ZBDM bang
         bang('!');
         data.bang = '0';
+        winCode.evalZbdm = 255;
+        zbdmScore += 1;
         break;
     case '@':
         // Server bang
         bang('@');
         data.bang = '0';
+        serverScore += 1;
         break;
     default:
         break;
@@ -336,6 +423,7 @@ void ofApp::bang(char playerID){
 
     if (integrity <= 1 or integrity >= 4000) { // 4000 is for edgecase missed the [0/1] > doesn't generate -inf +inf numbers
         bigBang();
+        winIntegrity.newText();
     }
 
     // Test overheating
@@ -380,6 +468,24 @@ void ofApp::bang(char playerID){
     case 10:
         scene10Bang(playerID);
         break;
+    case 11:
+        scene11Bang(playerID);
+        break;
+    case 12:
+        scene12Bang(playerID);
+        break;
+//    case 13:
+//        scene13Bang(playerID);
+//        break;
+//    case 14:
+//        scene14Bang(playerID);
+//        break;
+//    case 15:
+//        scene15Bang(playerID);
+//        break;
+//    case 16:
+//        scene16Bang(playerID);
+//        break;
 
     default:
         sceneDefaultBang(playerID);
@@ -423,6 +529,24 @@ void ofApp::bigBang()
     case 10:
         scene10BigBang();
         break;
+    case 11:
+        scene11BigBang();
+        break;
+    case 12:
+        scene12BigBang();
+        break;
+//    case 13:
+//        scene13BigBang();
+//        break;
+//    case 14:
+//        scene14BigBang();
+//        break;
+//    case 15:
+//        scene15BigBang();
+//        break;
+//    case 16:
+//        scene16BigBang();
+//        break;
 
     default:
         sceneDefaultBigBang();

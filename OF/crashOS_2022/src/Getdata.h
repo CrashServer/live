@@ -19,6 +19,16 @@ public:
 private:
 };
 
+class CodeInstant {
+public:
+    string name;
+    string code;
+    int posMark;
+
+    CodeInstant();
+private:
+};
+
 
 class Data {
 public:
@@ -40,6 +50,7 @@ public:
     ofxOscReceiver oscReceiver;
     float scCPU;
     vector<CodeLine> vectorCode;
+    vector<CodeInstant> vectorInstant; // containt instant code [0] zbdm [1] svdk
 //    vector<char> vectorSymbol;
     char bang;
 

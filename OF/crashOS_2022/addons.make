@@ -2,4 +2,7 @@ ofxAssimpModelLoader
 ofxGui
 ofxNetwork
 ofxOsc
-ofxPosProcessing
+ofxPostProcessing
+ofxImageSequence
+ofxXmlSettings
+ofxGenericDmx

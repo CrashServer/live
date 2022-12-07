@@ -319,7 +319,7 @@ if __name__ != "__main__":
 			return PBin(int(Clock.get_time_at_beat(int(Clock.now()))))
 
 		@loop_pattern_func
-		def PFrac(a=0.63,b=0.0, size=16):
+		def PFrac(a=0.63,b=0.0, size=16, mapl=0, maph=1):
 			''' return a Pattern with fractional step, 
 				not sure what it is but sounds cool try with:  
 					a = 0.63, b = 0.00
@@ -328,7 +328,7 @@ if __name__ != "__main__":
 					a = 0.60, b = 0.68
 					a = 0.62, b = 0.67
 				'''
-			return Pattern([(a*i + b )%1 for i in range(size)])
+			return Pattern([(a*i + b )%1 for i in range(size)]).lmap(mapl, maph)
 
 		def lininf(start=0, finish=1, time=32):
 			''' linvar from start to finish but stay at finish after time '''

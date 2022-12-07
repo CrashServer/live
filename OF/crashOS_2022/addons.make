@@ -6,3 +6,4 @@ ofxPostProcessing
 ofxImageSequence
 ofxXmlSettings
 ofxGenericDmx
+ofxBox2d

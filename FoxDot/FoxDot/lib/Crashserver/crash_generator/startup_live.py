@@ -393,14 +393,14 @@ try:
 				self.pdjTime = 60 #time cycle send PlatduJour
 				self.chronoTime = 10 # time cycle send chrono
 				
-				try:
-					socket.gethostbyaddr(self.ipSvdk)
-				except:
-					self.ipSvdk = False
-				try:
-					socket.gethostbyaddr(self.ipZbdm)
-				except:
-					self.ipZbdm = False
+				# try:
+				# 	socket.gethostbyaddr(self.ipSvdk)
+				# except:
+				# 	self.ipSvdk = False
+				# try:
+				# 	socket.gethostbyaddr(self.ipZbdm)
+				# except:
+				# 	self.ipZbdm = False
 				
 				if self.ipZbdm:	
 					self.clientZbdm = OSCClient()

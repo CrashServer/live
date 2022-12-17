@@ -20,8 +20,7 @@ try:
 	fig_font = FigletFont()
 	fig_fonts_list = fig_font.getFonts()
 	fig_skip = ['fbr12___', 'mshebrew210', 'term', 'runic', 'pyramid', 'eftifont', 'DANC4', 'dietcola']
-	fig_skip += ['emboss', 'emboss2', 'future', 'letter', 'pagga',
-					  'smblock', 'smbraille', 'wideterm']
+	fig_skip += ['emboss', 'emboss2', 'future', 'letter', 'pagga', 'smblock', 'smbraille', 'wideterm']
 	fig_skip += ['dosrebel', 'konto', 'kontoslant']
 	font_list = [x for x in fig_fonts_list if x not in fig_skip]
 	asciiEnable = True
@@ -251,7 +250,7 @@ def morph(self, other, prob=50):
 					if other[k] != P[0]:
 						test = True
 					else:
-						test = False     
+						test = False
 				except:
 					test = True
 				if test:
@@ -261,7 +260,7 @@ def morph(self, other, prob=50):
 					setattr(self, k, item)
 		except Exception as e:
 			print(e)
-	return self 
+	return self
 
 def genArp(nbrseq=4, lengthseq=8):
 	''' Generate arpeggiato based on markov Chords progression '''
@@ -392,7 +391,7 @@ try:
 				self.plyTime = 0.3 # time cycle send player
 				self.pdjTime = 60 #time cycle send PlatduJour
 				self.chronoTime = 10 # time cycle send chrono
-				
+
 				# try:
 				# 	socket.gethostbyaddr(self.ipSvdk)
 				# except:
@@ -401,8 +400,8 @@ try:
 				# 	socket.gethostbyaddr(self.ipZbdm)
 				# except:
 				# 	self.ipZbdm = False
-				
-				if self.ipZbdm:	
+
+				if self.ipZbdm:
 					self.clientZbdm = OSCClient()
 					self.clientZbdm.connect((self.ipZbdm, 2000))
 				if self.ipSvdk:
@@ -448,10 +447,10 @@ try:
 						sleep(self.bpmTime)
 				except:
 					pass
-				
+
 			def sendScale(self):
 				''' send Scale to OSC server '''
-				try: 
+				try:
 					while self.isrunning:
 						msg = OSCMessage("/panel/scale", [str(Scale.default.name)])
 						self.sendOscMsg(msg)
@@ -461,7 +460,7 @@ try:
 
 			def sendRoot(self):
 				''' send Root to OSC server '''
-				try: 
+				try:
 					while self.isrunning:
 						msg = OSCMessage("/panel/root", [str(Root.default)])
 						self.sendOscMsg(msg)
@@ -595,24 +594,24 @@ except Exception as e:
 	print(e)
 
 ### Mixer
-try: 
+try:
 	class Mixer():
 		def __init__(self):
 			self.client = OSCClient()
 			self.client.connect((ipZbdm, 7788))
 			self.strip = ["foxdot", "fx1", "fx2", "voice", "reverb", "master"]
 			self.audio = ["foxdot", "fx1", "fx2", "voice"]
-		
+
 		def gain(self, strip, gain):
 			if strip in self.strip:
 				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(gain))
 				self.client.send(msg)
-		
+
 		def mute(self, strip):
 			if strip in self.strip:
 				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(-70.0))
 				self.client.send(msg)
-				
+
 		def solo(self, strip):
 			for s in [st for st in self.audio if st != strip]:
 				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(-70.0))
@@ -636,4 +635,3 @@ try:
 	mixer = Mixer()
 except Exception as e:
 	print(e)
-

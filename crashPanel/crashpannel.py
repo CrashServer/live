@@ -56,7 +56,7 @@ class ServerGui(Tk):
 		
 		self.framePlayer = LabelFrame(self, text="Players : ", padx=10, pady=5,  font=("Inconsolatas", 12))
 		self.framePlayer.pack(fill="both", expand="yes")
-		self.labelPlayer = Label(self.framePlayer, text ="none")
+		self.labelPlayer = Listbox(self.framePlayer)
 		self.labelPlayer.pack(fill="both", expand="yes")
 		
 		self.frameHelp = LabelFrame(self, text="Help : ", padx=0, pady=0,  font=("Inconsolatas", 12))
@@ -74,6 +74,8 @@ class ServerGui(Tk):
 		self.oscBeat = 0
 		self.oscPlayer = []
 		
+		self.regMinute = re.compile(r'>\s*(\d+)\s*:\s*') ## find minutes in active player
+
 		self.thread = Thread(target = self.start)
 		self.thread.daemon = True
 		self.thread.start()
@@ -98,9 +100,27 @@ class ServerGui(Tk):
 		self.labelBeat64.config(text=f"{int(self.oscBeat%64)+1}/64")
 
 	def receivePlayer(self, address, tags, contents, source):
-		self.oscPlayer = contents
-		oscString = str('\n'.join(self.oscPlayer))
-		self.labelPlayer.config(text=oscString)
+		# self.oscPlayer = contents
+		self.labelPlayer.delete(0, END)
+		if (len(contents) > 0):
+			for i in range(len(contents)):
+				match = int(self.regMinute.search(contents[i]).group(1))
+				if (match >= 3): ### color if player > 3 minutes
+					fg = "white"
+					bg = "firebrick2"
+				elif (match >= 2): ### color if player > 1 minutes
+					fg = "black"
+					bg = "yellow3"
+				elif (match >= 1): ### color if player > 1 minutes
+					fg = "black"
+					bg = "PaleGreen1"
+				else: 
+					fg = None
+					bg = None 
+				self.labelPlayer.insert(END, contents[i])
+				self.labelPlayer.itemconfig(i, foreground = fg, background = bg)
+		#oscString = str('\n'.join(self.oscPlayer))
+		#self.labelPlayer.config(text=oscString)
 
 	def receiveHelp(self, address, tags, contents, source):
 		oscHelp = str(contents[0])

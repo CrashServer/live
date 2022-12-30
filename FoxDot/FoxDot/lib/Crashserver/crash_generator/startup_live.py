@@ -388,18 +388,11 @@ try:
 
 				self.bpmTime = 0.2  # time cycle send bpm
 				self.beatTime = 0.1 # time cycle send beat
-				self.plyTime = 0.3 # time cycle send player
+				self.plyTime = 1.0 # time cycle send player
 				self.pdjTime = 60 #time cycle send PlatduJour
-				self.chronoTime = 10 # time cycle send chrono
+				self.chronoTime = 1.0 # time cycle send chrono
 
-				# try:
-				# 	socket.gethostbyaddr(self.ipSvdk)
-				# except:
-				# 	self.ipSvdk = False
-				# try:
-				# 	socket.gethostbyaddr(self.ipZbdm)
-				# except:
-				# 	self.ipZbdm = False
+				self.playerCounter = {}
 
 				if self.ipZbdm:
 					self.clientZbdm = OSCClient()
@@ -482,7 +475,9 @@ try:
 				''' send active player to OSC server '''
 				try:
 					while self.isrunning:
-						msg = OSCMessage("/panel/player", [[str(p) for p in Clock.playing]])
+						self.addPlayerTurn()
+						playerListCount = [f'{k} {divmod(v,60)[0]:02d}:{divmod(v,60)[1]:02d}' for k,v in self.playerCounter.items()]
+						msg = OSCMessage("/panel/player", [playerListCount])
 						self.sendOscMsg(msg)
 						sleep(self.plyTime)
 				except:
@@ -509,6 +504,22 @@ try:
 						sleep(self.chronoTime)
 				except:
 					pass
+
+			def addPlayerTurn(self):
+				''' add one to player dictionnary turn '''
+				try:
+					playerList = Clock.playing
+					for p in playerList:
+						if p in self.playerCounter.keys():
+							self.playerCounter[p] += 1
+						else:
+							self.playerCounter[p] = 1
+					# Clean non playing player
+					delplayer = [k for k in self.playerCounter.keys() if k not in playerList]
+					for d in delplayer:
+						self.playerCounter.pop(d, None)
+				except Exception as err:
+					print("addPlayerTurn problem : " + err)
 
 			def sendOnce(self, txt):
 				''' send on txt msg to OSC '''

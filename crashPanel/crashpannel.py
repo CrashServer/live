@@ -105,18 +105,24 @@ class ServerGui(Tk):
 		if (len(contents) > 0):
 			for i in range(len(contents)):
 				match = int(self.regMinute.search(contents[i]).group(1))
+				if (match >= 5): ### color if player > 3 minutes
+					fg = "white"
+					bg = "black"
+				if (match >= 4): ### color if player > 3 minutes
+					fg = "white"
+					bg = "red3"
 				if (match >= 3): ### color if player > 3 minutes
 					fg = "white"
 					bg = "firebrick2"
 				elif (match >= 2): ### color if player > 1 minutes
 					fg = "black"
-					bg = "yellow3"
+					bg = "gold"
 				elif (match >= 1): ### color if player > 1 minutes
 					fg = "black"
-					bg = "PaleGreen1"
+					bg = "spring green"
 				else: 
-					fg = None
-					bg = None 
+					fg = "black"
+					bg = "PaleGreen1" 
 				self.labelPlayer.insert(END, contents[i])
 				self.labelPlayer.itemconfig(i, foreground = fg, background = bg)
 		#oscString = str('\n'.join(self.oscPlayer))

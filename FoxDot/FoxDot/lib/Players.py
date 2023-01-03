@@ -1874,7 +1874,8 @@ class Player(Repeatable):
 
         if N > 0:
 
-            self.stop_point = self.metro.next_bar() + ((N-1) * self.metro.bar_length())
+            #self.stop_point = self.metro.next_bar() + ((N-1) * self.metro.bar_length())
+            self.stop_point = self.metro.mod(N)
 
         else:
 
@@ -1963,11 +1964,14 @@ class Player(Repeatable):
 
         return self
 
-    def only(self):
+    def only(self, action=0):
         """ Stops all players except this one """
-        for player in list(self.metro.playing):
-            if player is not self:
-                player.stop()
+        if action > 0:
+            self.metro.schedule(self.only, self.metro.mod(action))
+        else:
+            for player in list(self.metro.playing):
+                if player is not self:
+                    player.stop()
         return self
 
     def solo(self, action=1):
@@ -1976,7 +1980,10 @@ class Player(Repeatable):
 
         action=int(action)
 
-        if action == 0:
+        if action < 0:
+            self.metro.schedule(self.solo, self.metro.mod(abs(action)))
+
+        elif action == 0:
 
             self.metro.solo.reset()
 
@@ -1984,10 +1991,10 @@ class Player(Repeatable):
 
             self.metro.solo.set(self)
 
-        elif action == 2:
-
-            pass
-
+        elif action > 1:
+            self.metro.solo.set(self)
+            self.metro.schedule(self.metro.solo.reset, self.metro.mod(action))
+              
         return self
 
     def versus_old(self, other, key = lambda x: x.freq, f=max):

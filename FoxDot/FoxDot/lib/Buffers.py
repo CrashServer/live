@@ -481,10 +481,13 @@ class LoopSynthDef(SampleSynthDef):
         self.osc = self.osc * self.amp
         self.add()
     def __call__(self, filename, pos=0, sample=0, **kwargs):
-        kwargs["buf"] = Samples.loadBuffer(filename, sample)
+        #kwargs["buf"] = Samples.loadBuffer(filename, sample)
         kwargs["filename"] = filename
-        #self.filename = filename
-        return SampleSynthDef.__call__(self, pos, **kwargs)
+        kwargs["sample"] = sample
+        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
+        proxy.kwargs["filename"] = filename
+        self.filename = filename
+        return proxy
 
 class StretchSynthDef(SampleSynthDef):
     def __init__(self):
@@ -567,36 +570,37 @@ class SplitterSynthDef(SampleSynthDef):
         proxy.kwargs["filename"] = filename
         return proxy
 
-# class SplafferSynthDef(SampleSynthDef):
-#     def __init__(self):
-#         SampleSynthDef.__init__(self, "splaffer")
-#         self.pos = self.new_attr_instance("pos")
-#         self.sample = self.new_attr_instance("sample")
-#         self.beat_stretch = self.new_attr_instance("beat_stretch")
-#         self.fmod = self.new_attr_instance("fmod")
-#         self.defaults['pos']   = 0
-#         self.defaults['sample']   = 0
-#         self.defaults['fmod']   = 0
-#         self.defaults['beat_stretch'] = 0
-#         self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
-#         self.base.append("posses = (pos + ((0..2)/5)).wrap(0.0, 1.0);")
-#         self.base.append("pitches = (0.2 * 2.0.pow(posses *rate) + SinOsc.kr(fmod, mul: fmod));")
-#         self.base.append("osc = PlayBuf.ar(2, buf, pitches, startPos: BufSampleRate.kr(buf) * pos, loop: 1.0);")
-#         self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
-#         self.osc = self.osc * self.amp
-#         self.add()
-#     def __call__(self, filename, pos=0, sample=0, **kwargs):
-#         kwargs["buf"] = Samples.loadBuffer(filename, sample)
-#         proxy = SampleSynthDef.__call__(self, pos, **kwargs)
-#         proxy.kwargs["filename"] = filename
-#         return proxy
-
 class SplafferSynthDef(SampleSynthDef):
     def __init__(self):
         SampleSynthDef.__init__(self, "splaffer")
         self.pos = self.new_attr_instance("pos")
         self.sample = self.new_attr_instance("sample")
         self.beat_stretch = self.new_attr_instance("beat_stretch")
+        self.fmod = self.new_attr_instance("fmod")
+        self.defaults['pos']   = 0
+        self.defaults['sample']   = 0
+        self.defaults['fmod']   = 0
+        self.defaults['beat_stretch'] = 0
+        self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
+        self.base.append("posses = (pos + ((0..2)/5)).wrap(0.0, 1.0);")
+        self.base.append("pitches = (0.2 * 2.0.pow(posses *rate) + SinOsc.kr(fmod, mul: fmod));")
+        self.base.append("osc = PlayBuf.ar(2, buf, pitches, startPos: BufSampleRate.kr(buf) * pos, loop: 1.0);")
+        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
+        self.osc = self.osc * self.amp
+        self.add()
+    def __call__(self, filename, pos=0, sample=0, **kwargs):
+        kwargs["buf"] = Samples.loadBuffer(filename, sample)
+        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
+        proxy.kwargs["filename"] = filename
+        return proxy
+
+class OnsetSynthDef(SampleSynthDef):
+    def __init__(self):
+        SampleSynthDef.__init__(self, "onset")
+        self.pos = self.new_attr_instance("pos")
+        self.sample = self.new_attr_instance("sample")
+        self.beat_stretch = self.new_attr_instance("beat_stretch")
+        self.filename = self.new_attr_instance("filename")
         self.onsetCut = self.new_attr_instance("onsetCut")
         self.onset = self.new_attr_instance("onset")
         self.defaults['pos']   = 0
@@ -606,22 +610,25 @@ class SplafferSynthDef(SampleSynthDef):
         self.defaults["onset"] = 0
         self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
         self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, startPos: BufSampleRate.kr(buf) * pos, loop: 1.0);")
-        self.base.append("osc = osc * EnvGen.ar(Env([1,1,0.01],[onsetCut, 0.01]));")
+        self.base.append("osc = osc * EnvGen.ar(Env([1,1,0.0001],[onsetCut, 0.01]));")
         self.osc = self.osc * self.amp
         self.add()
     def __call__(self, filename, pos=0, sample=0, onset=0, **kwargs):
-        kwargs["buf"] = Samples.loadBuffer(filename, sample)
-        pth = Samples._findSample(filename,sample).split("/")[-1:][0]
-        onsetList = Samples.onsetDict[pth]
-        pos = onsetList[0][onset%len(onsetList[0])]
-        onsetCut = onsetList[1][onset%len(onsetList[1])]
-        kwargs["pos"] = pos
-        kwargs["onsetCut"] = onsetCut
+        #kwargs["buf"] = Samples.loadBuffer(filename, sample)
+        # pth = Samples._findSample(filename,sample).split("/")[-1:][0]
+        # onsetList = Samples.onsetDict[pth]
+        # pos = onsetList[0][int(onset%len(onsetList[0]))]
+        # onsetCut = onsetList[1][int(onset%len(onsetList[1]))]
+        kwargs["onset"] = onset
+        kwargs["filename"] = filename
+        kwargs["sample"] = sample 
+        #kwargs["onsetCut"] = onsetCut
         proxy = SampleSynthDef.__call__(self, pos, **kwargs)
         proxy.kwargs["filename"] = filename
         proxy.kwargs["pos"] = pos
         proxy.kwargs["onset"] = onset
-        proxy.kwargs["onsetCut"] = onsetCut
+        #proxy.kwargs["onsetCut"] = onsetCut
+        self.filename = filename
         return proxy
 
 
@@ -652,3 +659,4 @@ gsynth = GranularSynthDef()
 breakcore = BreakcoreSynthDef()
 splitter = SplitterSynthDef()
 splaffer = SplafferSynthDef()
+onset = OnsetSynthDef()

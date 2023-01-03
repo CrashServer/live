@@ -331,7 +331,7 @@ class SCLangServerManager(ServerManager):
 
         max_sus = float(packet["sus"] * 8) # might be able to get rid of this
 
-        key = "rate" if synthdef.name in (SamplePlayer, LoopPlayer) else "freq"
+        key = "rate" if synthdef.name in (SamplePlayer, LoopPlayer, OnsetPlayer) else "freq"
 
         if key in packet:
 

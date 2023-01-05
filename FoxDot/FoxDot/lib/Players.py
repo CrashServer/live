@@ -1981,8 +1981,8 @@ class Player(Repeatable):
         action=int(action)
 
         if action < 0:
-            self.metro.schedule(self.solo, self.metro.mod(abs(action)))
-
+            self.metro.solo.set(self)
+            self.metro.schedule(self.metro.solo.reset, self.metro.mod(abs(action)))
         elif action == 0:
 
             self.metro.solo.reset()
@@ -1992,8 +1992,8 @@ class Player(Repeatable):
             self.metro.solo.set(self)
 
         elif action > 1:
-            self.metro.solo.set(self)
-            self.metro.schedule(self.metro.solo.reset, self.metro.mod(action))
+            self.metro.schedule(self.solo, self.metro.mod(action))
+            
               
         return self
 

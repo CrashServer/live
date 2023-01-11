@@ -56,7 +56,7 @@ probStopMorePlayers = 1 # probabilty to stop 1 to (all-1) players
 # Change degree
 probLoopChangeDegree = [4,	# probability to change loop degree
 						4,	# probability to change loop position
-						0]   # probability to change loop sample # Not working for now
+						4]   # probability to change loop sample
 
 probSynthChangeDegree = [2, # probability to change synth degree player to PArp()
 						 5, # probabiltiy to change synth degree player to Melody()

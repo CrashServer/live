@@ -262,7 +262,7 @@ patternInputs = {
 	'PStutter' : [_pat, _int],
 	'PShuf'    : [_pat],
 	'PAlt'     : [_pat, _pat, _pat],
-	'PStep'    : [_int, _num, _num],
+	'PStep'    : [_int, _num, _num, _pat],
 	'PSum'     : [_int, _num, _null],
 	'PStretch'  : [_pat, _int],
 	'PZip'     : [_pat, _pat, _pat],

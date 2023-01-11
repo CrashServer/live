@@ -115,7 +115,7 @@ def gen_player_param():
 def gen_player_attributes(playerType=None):
 	''' Generate player attribute: sus, dur, amp, pan,... '''
 	try:
-		attr = 	choices(['amp','amplify','dur','sus','pan'],probPlayerAttributes)[0]		
+		attr = choices(['amp','amplify','dur','sus','pan'],probPlayerAttributes)[0]
 		if attr in ["amp", "amplify"]:
 			value = GENERATE_AMPLIFY()
 		elif attr in ["dur"]:

@@ -12,8 +12,11 @@
   - `darker()` : change scale to more darker
   - `lighter()` : change scale to more lighter
   - chord dictionnary : I, II, III, IV, V, VI, VII
+  - `drop(playtime=14, droptime=2, nbloop=1)` : make a drop every 'playtime', during 'droptime', 'nbloop' times.
+  - `drop_bpm(duree=32, nbr=0, end=4)` : create a drop bpm effect. duree: how long total, nbr: how many parts, end: drop duration to the end.
 
-### var
+
+### Var
   - `lininf(start=0, finish=1, time=32)` : linvar but stay at finish
   - `expinf(start=0, finish=1, time=32)` : same but exponential 
   - `linbpm(endBpm=170, durBpm=128)` : linvar from actual bpm to endBpm in durBpm beats, use with `Clock.bpm = linbpm(220, 32)` 
@@ -26,12 +29,15 @@
     The `on` argument is the way 0: off, 1: random (dur & amp), 2: random dur & amp=1, 3: random amplify & dur=1/2
   - `.brk(multi=1, code="")` , break beat a loop by adding a second player called z* . multiply the duration with multi, you can also add parameters to the second player (the z*) with code="shape=.4, echo=[0,0.5]). Stop with `.brk(0)`
   - `switch(other, key, bypass)` : swith(exchange)  the attr of a player, ex: `b2 >> blip(-2, amp=1).switch(b1, "degree")`
-  - clone(player) : clone a player , all his attributes
+  - `clone(player)` : clone a player , all his attributes
   - 
   
 
 ### Pattern Method
   - `renv(nbr=1)` : chord inversion, ex `P(0,2,4).renv(1)`
+  - `add(value)` : like '+', but can be used with .sometimes("degree.add", 2)
+  - `mul(value)` : like 'x', but can be used with .sometimes("degree.mul", 2)
+ 
   
 ### Pattern Generator
   - `.rnd()` : Round generator pattern to the nearest value with `.rnd(0.5)` , ex: `PWhite(0,4).rnd(0.25)` [Pattern/Main.py modification]
@@ -49,7 +55,7 @@
   - `PMarkov()` : generate chords with a Markov chain 3rd order dictionnary based on most popular chords progression. 
   - `Pzero(size, offset)` : generate a pattern starting with 1 and (size-1) zero, the 1 can be offseted
   - `PBool(pat1, pat2, operator)` : binary operation between two patterns, operator{0: and, 1: or, 2: xor}
-  -  
+  - `melody(scale_melody, melody_dict): generate melody based on a markov chain dict of popular melodies
 
 ## FX
 

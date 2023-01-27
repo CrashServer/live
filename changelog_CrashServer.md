@@ -22,7 +22,7 @@
   - `print_fx(fx="")` : print the argument of the fx or list of fx if no name
   - `print_sample(sample="")` : print the description of the sample or find the letter
   - `print_loops(loop="")` : print the all available loop or list of loop for directory name
-  - unsolo() : remove all solo on players
+  - `unsolo()` : remove all solo on players
   
   - 
 
@@ -44,6 +44,9 @@
   - `basser(duration=64, markdur=2)`: turn a synth player to a bass player. 'duration' is the time for a new pattern, markdur is the length of the pattern
   -  `.gtr(string=1)` : set player to match guitar tabs
   -  `.chroma()` : set player to chromatic scale
+  -  `.solo(-8)` : mod the solo method, if the number>0: solo after the next n %beats, if the number<0: solo now and unsolo after the next n %beats. 
+  -  `stop(8)` : mod stop method to stop after the next n %beats.
+  -  `only()` : mod to only after the next n % beats.
   -  
 
 ### Pattern Method
@@ -75,9 +78,11 @@
   - `PRy(duration=16, div=4, restprob=0.3)` : generate rythmique duration for a total time of 'duration' in 'div' parts with a probability to have a rest of 'restprob'.
   - `PArp(pattern, index)` : turn the pattern to arppegiator, index select the type of arp
   - `PMorse(text, point=1/4, tiret=3/4)` : convert a string to Morse code with values of point and tiret.
-  - 
+  - `PStep(8,1,0,4)` : mod PStep, the 4th parameter offset all the patern 
 
 ## FX
 
 ## Synth
-
+  - `onset("dirname", sample=1, onset=4, dur=1/4)` : select the onset based on the onset dictionnary (in the loop dir, must be regenerated if new samples (with regenonset.py, but must be tweak maybe before)
+  -  'loop' : now accept sample list, `sample=[0,1,2,3]`
+  -  

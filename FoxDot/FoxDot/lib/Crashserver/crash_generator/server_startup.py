@@ -39,17 +39,55 @@ except Exception as e:
 	print("Error in generating weapons code", e)
 
 serverActive = False
-# osc receive state
+
 if crashOsEnable:
 	# Osc/udp sender
 	try:
 		if crashSendMode == "udp":
-			crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
+			crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		if crashSendMode == "osc":
 			crashFoxDot_socket = OSCClient()
 			crashFoxDot_socket.connect((crashOSIp, crashOSPort))
+
+		#osc receive state
+		class OSCReceiver():
+			''' OSC Receiver for evaluate command from CrashOS'''
+			def __init__(self, crashOSIp):
+				self.ip = crashOSIp
+				self.oscserver = ThreadingOSCServer((self.ip,2887))
+				self.oscserver.addDefaultHandlers()
+				self.oscserver.addMsgHandler("/cmd/serverState", self.receiveState)
+				self.oscserver.addMsgHandler("/cmd/Video", self.receiveVideo)
+				self.videoGrp = 99
+				self.videoIndex = 99
+				self.videoTotal = 99
+				self.videoIntegrity = 99
+				self.thread = Thread(target = self.oscserver.serve_forever)
+				self.thread.daemon = True
+				self.thread.start()
+
+			def receiveState(self, address, tags, contents, source):
+				state = int(contents[0])
+				if state == 0:
+					soff()
+				elif state == 1:
+					son(1,3,9)
+				else:
+					print("error receiving osc from CrashOs")
+
+			def receiveVideo(self, address, tags, contents, source):
+				self.videoGrp = int(contents[0])
+				self.videoIndex = int(contents[1]) + 1
+				self.videoTotal = int(contents[2])
+				self.videoIntegrity = int(contents[3])
+
+		oscReceiver = OSCReceiver(crashOSIp)
+
 	except Exception as err:
 		print(f"config UDP or OSC problem : {err}")
+
+
+
 
 class runServer():
 	''' Run the server with runserver.start() and generate randomly players'''

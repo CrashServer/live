@@ -342,6 +342,10 @@ if __name__ != "__main__":
 			''' use with Clock.bpm = linbpm(220, 12) to change bpm from current bpm to target in x beats'''
 			Clock.bpm = linvar([int(Clock.bpm),endBpm],[durBpm,inf], start=now)
 
+		def linmod(start, end, duration, default=0):
+			''' linvar from start to end during duration at next mod(duration) and switch back to default'''
+			return linvar([start, end, default], [duration, 0, inf], start=Clock.mod(duration))
+
 		def PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer="d") :
 			''' Generate a drum pattern style '''
 			ppat = ""
@@ -785,4 +789,6 @@ def basser(self, duration=64, markdur=2):
 		self.dur = durChoice
 		self.rarely("stutter", oct=self.oct+1, cut=0.5) 
 		self.every(duration, "basser", duration, markdur) 
+
+
 

@@ -391,6 +391,7 @@ try:
 				self.plyTime = 1.0 # time cycle send player
 				self.pdjTime = 60 #time cycle send PlatduJour
 				self.chronoTime = 1.0 # time cycle send chrono
+				self.videoTime = 1.0 # time cycle send video index
 
 				self.playerCounter = {}
 
@@ -418,6 +419,9 @@ try:
 				self.threadPdj.daemon = True
 				self.threadChrono = Thread(target = self.sendChrono)
 				self.threadChrono.daemon = True
+				self.threadVideoIndex = Thread(target = self.sendVideoIndex)
+				self.threadVideoIndex.daemon = True
+
 
 			def sendOscMsg(self, msg):
 				if self.ipZbdm:
@@ -521,6 +525,15 @@ try:
 				except Exception as err:
 					print("addPlayerTurn problem : " + err)
 
+			def sendVideoIndex(self):
+				try:
+					while self.isrunning:
+						msg = OSCMessage("/panel/video", [oscReceiver.videoGrp, oscReceiver.videoIndex, oscReceiver.videoTotal, oscReceiver.videoIntegrity])
+						self.sendOscMsg(msg)
+						sleep(self.videoTime)
+				except:
+					pass
+
 			def sendOnce(self, txt):
 				''' send on txt msg to OSC '''
 				msg = OSCMessage("/panel/help", [txt])
@@ -538,6 +551,7 @@ try:
 				self.threadPlayer.start()
 				self.threadPdj.start()
 				self.threadChrono.start()
+				self.threadVideoIndex.start()
 
 		def panelreset():
 			crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
@@ -605,44 +619,44 @@ except Exception as e:
 	print(e)
 
 ### Mixer
-try:
-	class Mixer():
-		def __init__(self):
-			self.client = OSCClient()
-			self.client.connect((ipZbdm, 7788))
-			self.strip = ["foxdot", "fx1", "fx2", "voice", "reverb", "master"]
-			self.audio = ["foxdot", "fx1", "fx2", "voice"]
-
-		def gain(self, strip, gain):
-			if strip in self.strip:
-				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(gain))
-				self.client.send(msg)
-
-		def mute(self, strip):
-			if strip in self.strip:
-				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(-70.0))
-				self.client.send(msg)
-
-		def solo(self, strip):
-			for s in [st for st in self.audio if st != strip]:
-				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(-70.0))
-				self.client.send(msg)
-
-		def unsolo(self):
-			for s in self.audio:
-				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(0.0))
-				self.client.send(msg)
-
-		def reverb(self, strip, gain):
-			if strip in self.audio:
-				msg = OSCMessage(f"/strip/{strip}/Aux%20(A)/Gain%20(dB)/unscaled", float(gain))
-				self.client.send(msg)
-
-		def feed(self, strip, gain):
-			if strip in ["fx1", "fx2"]:
-				msg = OSCMessage(f"/strip/{strip}/Aux%20/Gain%20(dB)/unscaled", float(gain))
-				self.client.send(msg)
-
-	mixer = Mixer()
-except Exception as e:
-	print(e)
+# try:
+# 	class Mixer():
+# 		def __init__(self):
+# 			self.client = OSCClient()
+# 			self.client.connect((ipZbdm, 7788))
+# 			self.strip = ["foxdot", "fx1", "fx2", "voice", "reverb", "master"]
+# 			self.audio = ["foxdot", "fx1", "fx2", "voice"]
+#
+# 		def gain(self, strip, gain):
+# 			if strip in self.strip:
+# 				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(gain))
+# 				self.client.send(msg)
+#
+# 		def mute(self, strip):
+# 			if strip in self.strip:
+# 				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(-70.0))
+# 				self.client.send(msg)
+#
+# 		def solo(self, strip):
+# 			for s in [st for st in self.audio if st != strip]:
+# 				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(-70.0))
+# 				self.client.send(msg)
+#
+# 		def unsolo(self):
+# 			for s in self.audio:
+# 				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(0.0))
+# 				self.client.send(msg)
+#
+# 		def reverb(self, strip, gain):
+# 			if strip in self.audio:
+# 				msg = OSCMessage(f"/strip/{strip}/Aux%20(A)/Gain%20(dB)/unscaled", float(gain))
+# 				self.client.send(msg)
+#
+# 		def feed(self, strip, gain):
+# 			if strip in ["fx1", "fx2"]:
+# 				msg = OSCMessage(f"/strip/{strip}/Aux%20/Gain%20(dB)/unscaled", float(gain))
+# 				self.client.send(msg)
+#
+# 	mixer = Mixer()
+# except Exception as e:
+# 	print(e)

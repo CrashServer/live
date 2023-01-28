@@ -38,7 +38,7 @@ if __name__ != "__main__":
 	
 	#SYNTH LIST & Exclude
 	synthdefNames = [i for i in SynthDefs]
-	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin' ]
+	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin', 'onset']
 	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
 					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", 
 					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce"]

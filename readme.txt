@@ -19,3 +19,9 @@ UDP message send (string) to port 20000, start with  :
 	- '!' for 'Server' payer name code
 	- '@' for server generated code
 	- '_' for state, _0 for activate the server.  
+
+
+OSC & UDP PORT in use:
+2000 : crashPanel
+2887 : Foxdot osc receiver from crashOS
+20000 : crashOS

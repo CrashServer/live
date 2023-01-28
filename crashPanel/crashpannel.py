@@ -38,6 +38,11 @@ class ServerGui(Tk):
 		self.labelChrono = Label(self.frameChrono, text ="00:00", font=("Inconsolatas", 15))
 		self.labelChrono.pack()
 
+		self.frameVideo = LabelFrame(self, text="Video : ", padx=10, pady=0)
+		self.frameVideo.pack(fill="both", expand="yes")
+		self.labelVideo = Label(self.frameVideo, text ="Grp 00 || 00/00 - 100%", font=("Inconsolatas", 12))
+		self.labelVideo.pack()
+
 		self.frameBeat = LabelFrame(self, text="Beat : ", padx=10, pady=5)
 		self.frameBeat.pack(fill="both", expand="yes")
 		self.labelBeat8 = Label(self.frameBeat, text ="0/8", padx=10, pady=0, font=("Inconsolatas", 15), relief=SUNKEN)
@@ -105,10 +110,10 @@ class ServerGui(Tk):
 		if (len(contents) > 0):
 			for i in range(len(contents)):
 				match = int(self.regMinute.search(contents[i]).group(1))
-				if (match >= 5): ### color if player > 3 minutes
+				if (match >= 5): ### color if player > 5 minutes
 					fg = "white"
 					bg = "black"
-				if (match >= 4): ### color if player > 3 minutes
+				if (match >= 4): ### color if player > 4 minutes
 					fg = "white"
 					bg = "red3"
 				if (match >= 3): ### color if player > 3 minutes
@@ -149,6 +154,17 @@ class ServerGui(Tk):
 		mins = mins % 60
 		self.labelChrono.config(text=f"{int(hours):02d}:{int(mins):02d}:{int(sec):02d}")		
 		
+	def receiveVideo(self, address, tags, contents, source):
+		group = int(contents[0])
+		video = int(contents[1])
+		total = int(contents[2])
+		integrity = 100-int(contents[3])
+		if (video == total):
+			self.labelVideo.config(bg="red3", fg="white")
+		else:
+			self.labelVideo.config(bg="#d9d9d9", fg="black")
+		self.labelVideo.config(text=f"Grp {group} || {video}/{total} - {integrity}%")
+
 	def start(self):
 		print("Server listening...")
 		self.oscserver.addMsgHandler("/panel/bpm", self.receiveBpm)
@@ -159,6 +175,7 @@ class ServerGui(Tk):
 		self.oscserver.addMsgHandler("/panel/help", self.receiveHelp)
 		self.oscserver.addMsgHandler("/panel/pdj", self.receivePdj)
 		self.oscserver.addMsgHandler("/panel/chrono", self.receiveChrono)
+		self.oscserver.addMsgHandler("/panel/video", self.receiveVideo)
 		self.oscserver.serve_forever()
 
 if __name__ == "__main__":

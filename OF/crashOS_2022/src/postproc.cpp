@@ -1,5 +1,5 @@
 #include "postproc.h"
-#include "ofApp.h"
+//#include "ofApp.h"
 
 PostProc::PostProc() {
 

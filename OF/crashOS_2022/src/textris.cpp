@@ -1,4 +1,4 @@
-#include "ofApp.h"
+//#include "ofApp.h"
 #include "textris.h"
 
 
@@ -16,9 +16,13 @@ void Textris::setup(vector<ofColor> playerColor){
     this->zbdmColor = playerColor[0];
     this->svdkColor = playerColor[1];
     this->serverColor = playerColor[2];
+
+    for (int i=0; i<FFT_BANDS; i++){
+        groundLine.addVertex(i*ofGetWidth()/FFT_BANDS,0);
+    }
 }
 
-void Textris::update(){
+void Textris::update(vector<float> fftSubbands){
     for (std::vector<int>::size_type i=0; i != particles.size(); i++){
         particles[i].update();
     }
@@ -26,6 +30,12 @@ void Textris::update(){
         particles.clear();
     }
     box2d.update();
+    fftBand = fftSubbands;
+
+    ground.clear();
+    ground.addVertices(groundLine);
+    //ground.addVertexes(groundLine);
+    ground.create(box2d.getWorld());
 }
 
 void Textris::clear(){
@@ -81,7 +91,21 @@ void Textris::draw(){
     for (std::vector<int>::size_type i=0; i != particles.size(); i++){
         particles[i].draw();
     }
+
+    if (ofGetFrameNum()%4==0){
+    for (int i=groundLine.size(); i>=1; i--){
+        groundLine[i].y = ofGetHeight()-(fftBand[i]*ofGetHeight()/4);
+    }
+    }
+    ofSetColor(ofColor::white);
+    ground.updateShape();
+
+    ground.draw();
+//    for (int i=0; i<16; i++){
+//        ofDrawRectangle(i*(ofGetWidth()/16), ofGetHeight(), ofGetWidth()/16, fftSubbands[i]*(ofGetHeight()/8)*-1);
+//        }
 }
+
 
 // return a text with a new line every x
 string Textris::insertNewlines(string in, const size_t every_n)
@@ -117,7 +141,8 @@ void particle::update(){
     float hue = particleColor.getHue();
 
     if (brightness > 20){
-        particleColor.setHue(hue -= 0.5);
+        hue -=0.5;
+        particleColor.setHue(hue);
     }
 }
 

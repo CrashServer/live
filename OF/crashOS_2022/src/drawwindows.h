@@ -29,9 +29,6 @@ public:
     int paddingWindow;
     ofRectangle fontCharBox;
 
-//    glm::vec3 pos;
-//    glm::vec2 size;
-
     Windo();
 
 private:

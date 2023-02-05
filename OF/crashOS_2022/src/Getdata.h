@@ -33,13 +33,14 @@ private:
 class Data {
 public:
     // methods
-    void setup(bool barduino=false);
+    void setup(string troopIp="127.0.0.1", int troopPort=2887);
     void update();
     void draw();
     void detectServerActivity();
     bool isNumber(const string& s);
+    void sendOSC(string adress, vector<string> param);
     int setScene(string sceneMsg);
-
+    void setCodeWidth(string code);
 //    string insertNewlines(string in, const size_t every_n);
 
     // variables
@@ -48,6 +49,7 @@ public:
     int scene=0;
 
     ofxOscReceiver oscReceiver;
+    ofxOscSender oscSender;
     float scCPU;
     vector<CodeLine> vectorCode;
     vector<CodeInstant> vectorInstant; // containt instant code [0] zbdm [1] svdk
@@ -57,6 +59,7 @@ public:
     ofSerial serial;
     bool barduino;
     bool isServerActive;
+    char prevButton = 'c';
 
     int delayServerActivity= 0;
     int serverInitTimer = 300;

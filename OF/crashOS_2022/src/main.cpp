@@ -10,7 +10,7 @@ int main() {
     settings.glesVersion = 2;
 #else
     ofGLWindowSettings settings;
-//    settings.setGLVersion(4, 5);
+    //settings.setGLVersion(4, 1);
 #endif
     settings.setSize(1920, 1080);
     ofCreateWindow(settings);

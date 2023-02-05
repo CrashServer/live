@@ -94,21 +94,24 @@ void WinCode::update(vector<CodeLine>& vectorCode){
     maxCodeWidth = (int)(size->x) / fontCharBox.width; // max code text char witdh
     codeTotalHeight = 0;
     codeTotalWidth = 0;
-    if (evalSvdk > 0){evalSvdk -= 10;}
-    if (evalZbdm > 0){evalZbdm -= 10;}
+    if (evalSvdk > 0){evalSvdk -= 10;} // fade in eval color
+    if (evalZbdm > 0){evalZbdm -= 10;} // fade in eval color
 
     for (int i = vectorCode.size() - 1; i >= (maxLineCode - this->nbrLineCode); --i) {
         string codeString = insertNewlines(vectorCode[i].code, maxCodeWidth);
         ofRectangle rectString = font.getStringBoundingBox(codeString, 0, 0);
         codeTotalHeight += rectString.height + size->y;
         if (rectString.width > codeTotalWidth) {
-            codeTotalWidth = rectString.width;
+            codeTotalWidth = ofClamp(rectString.width, 0, size->x);
         }
+
     }
+    //cout << "code with : " << ofToString(codeTotalWidth) << endl;
 }
 
 //--------------------------------------------------------------
 void WinCode::draw(vector<CodeLine>& vectorCode, vector<CodeInstant> &vectorInstant, bool showCode) {
+    ofEnableAlphaBlending();
 
     /// Instant Code
     ofPushStyle();
@@ -118,8 +121,8 @@ void WinCode::draw(vector<CodeLine>& vectorCode, vector<CodeInstant> &vectorInst
         ofRectangle codeBoxZbdm = font.getStringBoundingBox(codeZbdm,0,0);
         ofRectangle codeBoxSvdk = font.getStringBoundingBox(codeSvdk,0,0);
 
-        if (codeBoxSvdk.width > codeTotalWidth){codeTotalWidth = codeBoxSvdk.width;}
-        if (codeBoxZbdm.width > codeTotalWidth){codeTotalWidth = codeBoxZbdm.width;}
+        if (codeBoxSvdk.width > codeTotalWidth){codeTotalWidth = ofClamp(codeBoxSvdk.width, 0, size->x);}
+        if (codeBoxZbdm.width > codeTotalWidth){codeTotalWidth = ofClamp(codeBoxZbdm.width, 0, size->x);}
 
         Windo::drawWin(this->pos, glm::vec2(codeTotalWidth + 4 * this->padding, (codeBoxZbdm.height + codeBoxSvdk.height) + this->padding*3), this->uiColor);
         ofTranslate(pos->x + this->padding, pos->y + font.getLineHeight() + this->padding, pos->z);
@@ -127,10 +130,10 @@ void WinCode::draw(vector<CodeLine>& vectorCode, vector<CodeInstant> &vectorInst
         // draw Zbdm
 
         // eval highlight
-        ofEnableAlphaBlending();
+        //ofEnableAlphaBlending();
         ofSetColor(svdkColor, evalZbdm);
         ofDrawRectangle(codeBoxZbdm);
-        ofDisableAlphaBlending();
+        //ofDisableAlphaBlending();
 
         // draw string
         ofSetColor(zbdmColor);
@@ -153,10 +156,9 @@ void WinCode::draw(vector<CodeLine>& vectorCode, vector<CodeInstant> &vectorInst
         ofTranslate(0, codeBoxZbdm.height + this->padding);
 
         // eval highlight
-        ofEnableAlphaBlending();
+        //ofEnableAlphaBlending();
         ofSetColor(svdkColor, evalSvdk);
         ofDrawRectangle(codeBoxSvdk);
-        ofDisableAlphaBlending();
 
         // draw string
         ofSetColor(svdkColor);
@@ -215,6 +217,7 @@ void WinCode::draw(vector<CodeLine>& vectorCode, vector<CodeInstant> &vectorInst
             }
     ofPopMatrix();
     ofPopStyle();
+    ofDisableAlphaBlending();
     }
 }
 

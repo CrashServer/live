@@ -1,4 +1,4 @@
-#include "scene.h"
+//#include "scene.h"
 #include "ofApp.h"
 
 ////// HELP //////////
@@ -61,6 +61,9 @@ void ofApp::scene0Draw(){
 
 void ofApp::scene0Bang(char playerID){
     integrity -= integrityIncr;
+
+    vector<string> vect{ofToString(videoplayer.vidCat), ofToString(videoplayer.vidId), ofToString(videoplayer.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene0BigBang(){
@@ -80,8 +83,11 @@ void ofApp::scene0BigBang(){
 /// SCAN DU RESEAU
 ///
 void ofApp::scene1Update(){
-    videoplayer.bthread = false;
-    videoplayer.update(1, integrity);
+    // hapmod
+    //videoplayer.bthread = false;
+    //videoplayer.update(1, integrity);
+
+
     //webcam.update();
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
@@ -100,14 +106,14 @@ void ofApp::scene1Update(){
 }
 
 void ofApp::scene1Draw(){
+    ofEnableAlphaBlending();
     postCode.begin();
-
     // pixelate FX video
     postPixel.begin();
-        postPixel.pixel->resolution = ofVec2f(ofMap(integrity,100,0,1280, 50),ofMap(integrity,100,0,720,50));
-        videoplayer.draw();
+    postPixel.pixel->resolution = ofVec2f(ofMap(integrity,100,0,1280, 50),ofMap(integrity,100,0,720,50));
+    videoplayerHap.draw();
+//        videoplayer.draw();
     postPixel.end();
-
 //    postCode.glitch->setAmount(ofMap(integrity,100,0,0,0.01));
 //    postCode.glitch->setDistortionX(ofMap(integrity,100,0,0,0.01));
 //    postCode.glitch->setDistortionY(ofMap(integrity,100,0,0,0.01));
@@ -122,16 +128,19 @@ void ofApp::scene1Draw(){
 }
 
 void ofApp::scene1Bang(char playerID){
-
-    videoplayer.videoSrcub();
+    //videoplayer.videoSrcub();
     integrity -= integrityIncr;
+    videoplayerHap.videoScrub(0);
+    vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene1BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    //videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+    //videoplayer.videoFbo.begin();
+    //    ofClear(0,0,0, 0);
+    //videoplayer.videoFbo.end();
+    videoplayerHap.newSeq();
     scene = data.scene;
 }
 /////////////////////
@@ -195,6 +204,9 @@ void ofApp::scene2Bang(char playerID){
             dmx2Col = ofColor(255,0,0);
         }
     }
+
+    vector<string> vect{ofToString(videoplayer.vidCat), ofToString(videoplayer.vidId), ofToString(videoplayer.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene2BigBang(){
@@ -266,6 +278,8 @@ void ofApp::scene3Bang(char playerID){
     }
     videoplayer.videoSrcub();
     integrity -= integrityIncr;
+    vector<string> vect{ofToString(videoplayerAscii.vidCat), ofToString(videoplayerAscii.vidId), ofToString(videoplayerAscii.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene3BigBang(){
@@ -318,6 +332,8 @@ void ofApp::scene4Draw(){
 void ofApp::scene4Bang(char playerID){
     //videoplayer.videoSrcub(rms*audioThresh);
     integrity -= integrityIncr;
+    vector<string> vect{ofToString(videoplayer.vidCat), ofToString(videoplayer.vidId), ofToString(videoplayer.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene4BigBang(){
@@ -386,6 +402,8 @@ void ofApp::scene5Bang(char playerID){
             dmx2Col = ofColor(255,0,0);
         }
     }
+    vector<string> vect{ofToString(videoplayer.vidCat), ofToString(videoplayer.vidId), ofToString(videoplayer.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene5BigBang(){
@@ -431,7 +449,8 @@ void ofApp::scene6Draw(){
 void ofApp::scene6Bang(char playerID){
     videoplayer.videoSrcub();
     integrity -= integrityIncr;
-
+    vector<string> vect{ofToString(videoplayer3d.vidCat), ofToString(videoplayer3d.vidId), ofToString(videoplayer3d.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene6BigBang(){
@@ -502,6 +521,8 @@ void ofApp::scene7Bang(char playerID){
             dmx2Col = ofColor(255,0,0);
         }
     }
+    vector<string> vect{ofToString(videoplayer.vidCat), ofToString(videoplayer.vidId), ofToString(videoplayer.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene7BigBang(){
@@ -572,6 +593,8 @@ void ofApp::scene8Bang(char playerID){
             dmx2Col = ofColor(255,0,0);
         }
     }
+    vector<string> vect{ofToString(videoplayer.vidCat), ofToString(videoplayer.vidId), ofToString(videoplayer.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene8BigBang(){
@@ -644,6 +667,8 @@ void ofApp::scene9Bang(char playerID){
             dmx2Col = ofColor(255,0,0);
         }
      }
+    vector<string> vect{ofToString(videoplayer3d.vidCat), ofToString(videoplayer3d.vidId), ofToString(videoplayer3d.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene9BigBang(){
@@ -760,7 +785,7 @@ void ofApp::scene12Update(){
     winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.changeLogo(12);
     uiMisc.update(true);
-    textris.update();
+    textris.update(audioFft.beat.getFft());
 }
 
 void ofApp::scene12Draw(){

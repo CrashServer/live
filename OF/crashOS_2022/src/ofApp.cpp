@@ -9,17 +9,18 @@ void ofApp::setup(){
 	/// rules : a mesh in obj has 5 submeshes to be destroyed (not more)
 	/// at some point the will be safeguard for errors, not yet 
 
-    settings.loadFile("xml/config.xml");
+    settings.load("xml/config.xml");
 
     width = settings.getValue("config:width", 1920);
     height = settings.getValue("config:height", 1080);
-    barduino = settings.getValue("config:arduino", false);
+//    barduino = settings.getValue("config:arduino", false);
     bdmx = settings.getValue("config:dmxActive", false);
     string textPres = settings.getValue("config:textPres", "");
     glm::vec2 textPresPos = glm::vec2(settings.getValue("config:textPosX", 80), settings.getValue("config:textPosY", 1060));
     int dmxAddr1 = settings.getValue("config:dmxAddr1", 1);
     int dmxAddr2 = settings.getValue("config:dmxAddr2", 8);
-
+    string troopIp = settings.getValue("config:troopIp", "127.0.0.1");
+    int troopPort = settings.getValue("config:troopPort", 2887);
 
 	/// SETUP 
     ofSetFrameRate(30);
@@ -41,8 +42,8 @@ void ofApp::setup(){
     svdkScore = 0;
     serverScore = 0;
 
-	/// NETWORK
-    data.setup(barduino);
+    /// NETWORK & arduino
+    data.setup(troopIp, troopPort);
 
 	/// 3D MODELS
 //    postprocSetup();
@@ -70,6 +71,7 @@ void ofApp::setup(){
     videoplayer.setup();
     videoplayer3d.setup3d();
     videoplayerAscii.setupAscii();
+    videoplayerHap.setup();
     audioFft.setup();
     if(bdmx){dmx.setup(dmxAddr1, dmxAddr2);}
 
@@ -185,8 +187,8 @@ void ofApp::setup(){
     parameters.add(webcam.parameters);
     parameters.add(integrityIncr.set("Integrity increment", 5, 0, 100));
     parameters.add(cpuStress.set("CPU stress", 1, 0, 100));
-    parameters.add(render.parameters);
-    parameters.add(procBackground.parameters);
+    //parameters.add(render.parameters);
+    //parameters.add(procBackground.parameters);
     parameters.add(audioThresh.set("audio Threshold", 1.0, 0.0, 10.0));
     parameters.add(colorPicker.set("Color Ui", uiColor, ofColor(0,0,0), ofColor(255,255,255)));
     parameters.add(scene.set("scene", 0, 0, 12));
@@ -202,6 +204,18 @@ void ofApp::setup(){
     showGui = true;
 
     imageplayer.setup(integrityIncr);
+
+    // backup infos for serverCorruption
+    serverBackup.uiColor = uiColor;
+    serverBackup.codePos = winCode.pos;
+    serverBackup.cpuPos = winCpu.pos;
+    serverBackup.integrityPos = winIntegrity.pos;
+    serverBackup.scorePos = winScore.pos;
+    serverBackup.codeSize = winCode.size;
+    serverBackup.cpuSize = winCpu.size;
+    serverBackup.integritySize = winIntegrity.size;
+    serverBackup.scoreSize = winScore.size;
+    serverBackup.isRestored = false;
 }
 
 //--------------------------------------------------------------
@@ -211,6 +225,8 @@ void ofApp::update(){
     // update obligatoire
     data.update();
     bangUpdate(data.bang);
+
+    /// audio update
     audioFft.update();
     auto duration = 25.f;
     auto endTime = initTime + duration;
@@ -369,8 +385,8 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key) {
 
 	if (key == 'b') bang('#');
-	if (key == 's') bigBang();
-	if (key == 'c') superBang();
+    if (key == 's') data.isServerActive = !data.isServerActive;
+    // if (key == 'c') superBang();
 	if (key == 'f') ofToggleFullscreen();
 	if (key == 'g') showGui = !showGui;
 }
@@ -433,6 +449,15 @@ void ofApp::bang(char playerID){
     else {
         overheating.clear();
     }
+
+    // corruption if server active
+    if (data.isServerActive){
+        serverCorruptionBang();
+    }
+    else if (!data.isServerActive && !serverBackup.isRestored){
+        serverCorruptionRestore();
+    }
+
 
     switch (scene) {
     case 0:
@@ -577,6 +602,54 @@ void ofApp::loadDefaultParam(bool &){
 void ofApp::setScene(int&){
     data.scene = scene;
 }
+
+void ofApp::serverCorruptionBang(){
+    float speed = 0.001;
+    winCpu.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*9*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winCpu.size->x),
+                            ofMap(ofNoise(ofGetFrameNum()*7*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winCpu.size->y),0);
+    winCode.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*8*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winCode.size->x),
+                            ofMap(ofNoise(ofGetFrameNum()*6*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winCode.size->y),0);
+    winIntegrity.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*9*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winIntegrity.size->x),
+                            ofMap(ofNoise(ofGetFrameNum()*6.5*speed + 150, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winIntegrity.size->y),0);
+    winScore.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*7.5*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winScore.size->x),
+                            ofMap(ofNoise(ofGetFrameNum()*9.9*speed + 100, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winScore.size->y),0);
+    uiMisc.posAlert = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*7.5*speed + 1500, ofGetElapsedTimef()*speed + 180), 0,1,0,ofGetWidth() - uiMisc.sizeAlert.x),
+                            ofMap(ofNoise(ofGetFrameNum()*9.9*speed + 9500, ofGetElapsedTimef()*speed + 250), 0,1,0,ofGetHeight() - uiMisc.sizeAlert.y),0);
+
+
+    //    winCpu.pos = glm::clamp(winCpu.pos + glm::vec3(ofRandom(-20,20),ofRandom(-20,20),ofRandom(-25,25)),
+//                                glm::vec3(0,0,-250), glm::vec3(ofGetWidth() - winCpu.size->x, ofGetHeight() - winCpu.size->y,50));
+//    winCode.pos = glm::clamp(winCode.pos + glm::vec3(ofRandom(-20,20),ofRandom(-20,20),ofRandom(-25,25)),
+//                                 glm::vec3(0,0,-250), glm::vec3(ofGetWidth() - winCode.size->x, ofGetHeight() - winCode.size->y,50));
+//    winIntegrity.pos = glm::clamp(winIntegrity.pos + glm::vec3(ofRandom(-20,20),ofRandom(-20,20),ofRandom(-25,25)),
+//                                 glm::vec3(0,0,-250), glm::vec3(ofGetWidth() - winCode.size->x, ofGetHeight() - winIntegrity.size->y,50));
+//    winScore.pos = glm::clamp(winScore.pos + glm::vec3(ofRandom(-20,20),ofRandom(-200,20),ofRandom(-25,25)),
+//                                 glm::vec3(0,0,-250), glm::vec3(ofGetWidth() - winCode.size->x, ofGetHeight() - winScore.size->y,50));
+    winCpu.uiColor = ofColor (ofMap(ofNoise(ofGetFrameNum()), 0,1, 255,serverBackup.uiColor.r, true),
+                              serverBackup.uiColor.g, serverBackup.uiColor.b);
+
+//            ofColor(ofNoise(ofGetFrameNum())*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef())*255);
+    winCode.uiColor = ofColor(ofNoise(ofGetFrameNum()+800)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+20)*255);
+    winIntegrity.uiColor = ofColor(ofNoise(ofGetFrameNum() + 100)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+480)*255);
+    winScore.uiColor = ofColor(ofNoise(ofGetFrameNum() + 300)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+855)*255);
+    serverBackup.isRestored = false;
+}
+
+void ofApp::serverCorruptionRestore(){
+        winCode.uiColor = serverBackup.uiColor;
+        winCpu.uiColor = serverBackup.uiColor;
+        winIntegrity.uiColor = serverBackup.uiColor;
+        winScore.uiColor = serverBackup.uiColor;
+        winCode.pos = serverBackup.codePos;
+        winCpu.pos = serverBackup.cpuPos;
+        winIntegrity.pos = serverBackup.integrityPos;
+        winScore.pos = serverBackup.scorePos;
+        winCode.size = serverBackup.codeSize;
+        winCpu.size = serverBackup.cpuSize;
+        winIntegrity.size = serverBackup.integritySize;
+        winScore.size = serverBackup.scoreSize;
+        serverBackup.isRestored = true;
+    }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){

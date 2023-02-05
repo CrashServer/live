@@ -1,5 +1,4 @@
 #include "ofApp.h"
-//#include "Getdata.h"
 
 Data::Data(){}
 CodeLine::CodeLine(){
@@ -15,8 +14,9 @@ CodeInstant::CodeInstant(){
 }
 
 
-void Data::setup(bool barduino){
+void Data::setup(string troopIp, int troopPort){
     oscReceiver.setup(PORTOSC);
+    oscSender.setup(troopIp, troopPort);
     maxLineCode = 40;
     for (int i=0; i<maxLineCode; i++){
         CodeLine lineC;
@@ -29,11 +29,17 @@ void Data::setup(bool barduino){
     //    vectorCode.assign(maxLineCode + 1, CodeLine);
     bang = '0';
 
-    if (barduino){
-        serial.setup(0, 115200);
-        this->barduino = barduino;
+    serial.setup(0, 115200);
+    int testByte = 0;
+    testByte = serial.readByte();
+    if (testByte == OF_SERIAL_ERROR){
+        this->barduino = false;
+        cout << "no arduino found, sorry no push button :-(" << endl;
     }
-    else {barduino = false;}
+    else {
+        this->barduino = true;
+        cout << "arduino ready to get pushed !" << endl;
+        }
     isServerActive = false;
 }
 
@@ -50,7 +56,7 @@ void Data::update() {
             scCPU = messageOsc.getArgAsFloat(0);
             bang = 'c';
             // send arduino cpu state
-            if (barduino){
+            if (this->barduino){
                 if (scCPU < 20.0){
                     serial.writeByte('a');
                     serial.flush();
@@ -93,7 +99,7 @@ void Data::update() {
             codeLine.symbol = '#';
             vectorCode.push_back(codeLine);
             bang ='#';
-            if (barduino){
+            if (this->barduino){
                 serial.writeByte('v'); // send arduino
                 serial.flush();
             }
@@ -113,7 +119,7 @@ void Data::update() {
             codeLine.symbol = '!';
             vectorCode.push_back(codeLine);
             bang='!';
-            if (barduino){
+            if (this->barduino){
                 serial.writeByte('z'); // send arduino
                 serial.flush();
             }
@@ -128,12 +134,12 @@ void Data::update() {
             codeLine.symbol = '@';
             vectorCode.push_back(codeLine);
             bang='@';
-            if (barduino){
+            if (this->barduino){
                 serial.writeByte('s'); // send arduino
                 serial.flush();
             }
-            delayServerActivity = serverInitTimer;
-            isServerActive = true;
+            else {delayServerActivity = serverInitTimer;
+                isServerActive = true;}
         }
 
         else if (oscAdress == "/zbdmTypeCode"){
@@ -150,10 +156,43 @@ void Data::update() {
         }
 
     }
-    if (delayServerActivity > 0) {
-        delayServerActivity--;
+    if (!this->barduino){
+        if (delayServerActivity > 0) {
+            delayServerActivity--;
+            }
+        else {isServerActive = false;}
     }
-    else {isServerActive = false;}
+    //// read button state
+    if (this->barduino){
+        char button = serial.readByte();
+        if (button == 's' && prevButton == 'c' && isServerActive == false){ // activate server
+            isServerActive = true;
+            vector<string> param;
+            param.push_back("1");
+            sendOSC("/cmd/serverState", param);
+            prevButton = button;
+        }
+        else if (button == 'c' && prevButton == 's' && isServerActive == true){ // shutdown server
+            isServerActive = false;
+            vector<string> param;
+            param.push_back("0");
+            sendOSC("/cmd/serverState", param);
+            prevButton = button;
+        }
+    }
+}
+
+void Data::sendOSC(string address, vector<string> param){
+    ofxOscMessage m;
+    m.setAddress(address);
+    for (int i=0; i<param.size(); i++){
+        m.addStringArg(param[i]);
+    }
+    oscSender.sendMessage(m, false);
+}
+
+void Data::setCodeWidth(string code){
+
 }
 
 bool Data::isNumber(const string &s){

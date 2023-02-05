@@ -5,6 +5,8 @@
 #include "ofTrueTypeFont.h"
 #include "ofxBox2d.h"
 
+#define FFT_BANDS 16
+
 class CustomBox : public ofxBox2dRect {
 //string oscText;
 ofColor color;
@@ -20,7 +22,7 @@ public:
         //setPhysics(ofRandom(0.1,5.0), ofRandom(0.1,1), 0.3);
         setPhysics(3.0, 0.53, 0.1);
         setup(world, x, y, boxWidth, boxHeight);
-        setVelocity(ofMap(textVect.size(), 1,30,30,-30, true), ofMap(textVect.size(), 1,30,30,-30, true));
+        setVelocity(ofRandom(-30,30), ofMap(textVect.size(), 1,120,3000,-3000, true));
         color.set(textColor);
     }
 
@@ -63,8 +65,9 @@ public:
 class Textris{
   public:
     ofxBox2d box2d;
-    vector <shared_ptr<CustomBox> > rectangles;
-    ofRectangle rect;
+    vector <shared_ptr<CustomBox> > rectangles, fftRectangle;
+    ofRectangle rect, fftrect;
+
     const int maxBox = 40; // nbr of maximum osc message box
     const int padding = 10; // box padding-
     int boxErase = 0;
@@ -76,11 +79,15 @@ class Textris{
     ofTrueTypeFont font;
 
     vector<particle> particles;
+    vector<float> fftBand;
+
+    ofPolyline groundLine;
+    ofxBox2dEdge ground;
 
     string insertNewlines(string in, const size_t every_n);
 
     void setup(vector<ofColor> playerColor=vector<ofColor>{ofColor::paleTurquoise, ofColor::greenYellow, ofColor::red});
-    void update();
+    void update(vector<float> fftSubbands);
     void draw();
     void addText(string textrisText, char player);
     void clear();

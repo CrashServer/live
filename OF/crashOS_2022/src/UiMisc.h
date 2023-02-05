@@ -18,8 +18,8 @@ public:
     int width, height;
     int logoWidth, logoHeight;
 
-    glm::vec3 pos;
-    glm::vec2 size;
+    glm::vec3 pos, posAlert;
+    glm::vec2 size, sizeAlert;
 
     ofxImageSequencePlayback logo;
     ofFbo uiFbo;

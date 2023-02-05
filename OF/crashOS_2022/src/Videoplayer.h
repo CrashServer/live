@@ -23,8 +23,9 @@ public:
     ofDirectory videoCat; // dir of category
     ofDirectory videoDir; // dir of video
 
-    int vidCat;
-    int vidId;
+    int vidCat; // category
+    int vidId; // index video
+    int vidTotal; // total video
     float vidFps;
     ofFbo videoFbo, fxFbo;
     int width, height;

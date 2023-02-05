@@ -1,4 +1,4 @@
-#include "ofApp.h"
+//#include "ofApp.h"
 #include "UiMisc.h"
 #include "ofTrueTypeFont.h"
 
@@ -19,7 +19,8 @@ void UiMisc::setup(string textPres, glm::vec2 textPresPos){
     alert.loadSequence("ui/alert/", 24.0f);
     alert.setShouldLoop(true);
     alert.play();
-
+    posAlert = glm::vec3(ofGetWidth()/2, ofGetHeight()/2,0);
+    sizeAlert = glm::vec2(alert.mSequence.getWidth(), alert.mSequence.getHeight());
     size = glm::vec2(logo.mSequence.getWidth(),logo.mSequence.getHeight());
     pos = glm::vec3(width / 2 - size.x/2, 0,0);
     uiFbo.allocate(size.x, size.y, GL_RGBA);
@@ -54,7 +55,7 @@ void UiMisc::draw(bool blogo, bool isServerActive){
         ofPushMatrix();
         ofPushStyle();
         ofEnableBlendMode(OF_BLENDMODE_SCREEN);
-            ofTranslate(width/2, height/2);
+            ofTranslate(posAlert);
             alert.update();
             alert.draw();
         ofDisableBlendMode();

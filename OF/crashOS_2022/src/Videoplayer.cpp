@@ -1,4 +1,4 @@
-#include "ofApp.h"
+//#include "ofApp.h"
 #include "Videoplayer.h"
 
 Videoplayer::Videoplayer(){
@@ -32,6 +32,7 @@ void Videoplayer::setup(){
     videoDir.listDir(videoCat.getPath(vidCat));
     videoDir.sort();
     vidId = 0;
+    vidTotal = videoDir.size();
 
     // load and play video
     mySequence.mSequence.enableThreadedLoad(bthread);
@@ -141,6 +142,7 @@ void Videoplayer::newSeq(){
     videoDir.listDir(videoCat.getPath(ofClamp(vidCat,0,videoCat.size()-1)));
     videoDir.sort();
     vidId = ofClamp(vidId, 0,videoDir.size()-1);
+    vidTotal = videoDir.size();
     mySequence.mSequence.enableThreadedLoad(bthread);
     mySequence.loadSequence(videoDir.getPath(vidId), vidFps);
     bnewSeq = false;
@@ -200,6 +202,7 @@ void Videoplayer3d::setup3d(){
     videoDir.listDir(videoCat.getPath(vidCat));
     videoDir.sort();
     vidId = 0;
+    vidTotal = videoDir.size();
 
     // load and play video
     mySequence.mSequence.enableThreadedLoad(bthread);
@@ -359,6 +362,7 @@ void VideoplayerAscii::setupAscii(){
     videoDir.listDir(videoCat.getPath(vidCat));
     videoDir.sort();
     vidId = 0;
+    vidTotal = videoDir.size();
 
     // load and play video
     mySequence.mSequence.enableThreadedLoad(bthread);

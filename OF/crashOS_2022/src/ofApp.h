@@ -22,13 +22,14 @@
 #include "Getdata.h"
 #include "glitcher.h"
 #include "drawwindows.h"
-#include "render.h"
+//#include "render.h"
 #include "boot.h"
 #include "postproc.h"
 #include "dmx.h"
 #include "scene.h"
 #include "imageplayer.h"
 #include "textris.h"
+#include "VideoplayerHap.h"
 
 class ofApp : public ofBaseApp{
 
@@ -58,9 +59,9 @@ class ofApp : public ofBaseApp{
         void changeColorUi(ofColor&);
         void loadDefaultParam(bool&);
         void setScene(int&);
-
-        // Post processingideoplaye
-//        void postprocSetup();
+        // server corruption
+        void serverCorruptionBang();
+        void serverCorruptionRestore();
 
         // PANEL GUI
 		ofxPanel gui;
@@ -97,11 +98,11 @@ class ofApp : public ofBaseApp{
         /// audio fft
         float rms, kick, hihat, snare, initTime;
 
-
-        Render render;
-        ProcBackground procBackground;
-        SphereMap sphereMap;
-        Text3d text3d;
+        // 3D stuff
+        // Render render;
+        // ProcBackground procBackground;
+        // SphereMap sphereMap;
+        // Text3d text3d;
 
         /// Win win;
         Data data;
@@ -113,6 +114,7 @@ class ofApp : public ofBaseApp{
         Videoplayer videoplayer;
         Videoplayer3d videoplayer3d;
         VideoplayerAscii videoplayerAscii;
+        VideoPlayerHap videoplayerHap;
         Camera webcam;
         UiMisc uiMisc;
         Glitcher glitcherCam, glitcherLogo, glitcherVideo;
@@ -207,6 +209,14 @@ class ofApp : public ofBaseApp{
         void sceneDefaultBigBang();
 
 //        Tunnel3d tunnel3d;
-
+        // Backup info for serverCorruption
+        class ServerBackup {
+        public:
+            ofColor uiColor;
+            glm::vec3 codePos, cpuPos, integrityPos, scorePos ;
+            glm::vec2 codeSize, cpuSize, integritySize, scoreSize;
+            bool isRestored;
+        };
+        ServerBackup serverBackup;
 };
 #endif // OFAPP_H

@@ -759,19 +759,19 @@ if __name__ != "__main__":
 try:
 		from .Crashserver.drumRockPattern import * ### Crash Drum rock pattern
 		@player_method
-		def drummer(self, duration=16, dur=1/2):
-			if duration!=0:
+		def drummer(self, durloop=16, durPlyr=1/2):
+			if durloop!=0:
 				drumCat = int(PRand(1, len(drumRockPattern)))
 				drumPat = int(PRand(1,len(drumRockPattern[drumCat])))
 				drumFillCat = int(PRand(1, len(drumRockFill)))
 				drumFillPat = int(PRand(1, len(drumRockFill[drumFillCat])))
-				fillDur = duration/PRand([4,8,16])
-				durPlayer = PwRand([dur,dur*2],[80,20])[:1]
-				self.degree=Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [duration-fillDur, fillDur])
+				fillDur = durloop/PRand([4,8,16])
+				durPlayer = PwRand([durPlyr,durPlyr*2],[80,20])[:1]
+				self.degree=Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [durloop-fillDur, fillDur])
 				self.human(30,PWhite(-5,5))
 				self.comp=0.8
 				self.dur = durPlayer
-				self.every(duration, "drummer", duration, dur)
+				self.every(durloop, "drummer", durloop, durPlyr)
 except:
 		print("Error importing drumRockPattern", sys.exc_info()[0])
 

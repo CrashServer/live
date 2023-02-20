@@ -512,10 +512,11 @@ def humanizer(player=None):
 def masterFilter():
 	''' Add random Master().lpf, Master().hpf '''
 	try:
-		timef = 4*round(randint(3,32)/4)
+		#timef = 4*round(randint(3,32)/4)
+		timef = choice([4,8,16,32])
 		filtr = choice(["lpf", "hpf"])
 		set_master_filter(filtr, freqs[filtr], timef)
-		sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-1},1])')
+		sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-0.25},0.25])')
 		Clock.future(timef, lambda: set_master_filter(filtr, 0, 0))
 	except Exception as err:
 		Master().__setattr__("lpf", 0)
@@ -528,7 +529,7 @@ def set_master_filter(filtr, freqf, timef):
 		if timef == 0:
 			Master().__setattr__(filtr, 0)
 		else:
-			Master().__setattr__(filtr, linvar(freqf, [timef-1, 1], start=now))
+			Master().__setattr__(filtr, linvar(freqf, [timef-0.25, 0.25], start=now))
 	except Exception as err:
 		print("set_master_filter problem : " + err)
 

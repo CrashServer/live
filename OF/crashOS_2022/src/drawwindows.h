@@ -2,7 +2,7 @@
 #ifndef DRAWWINDOWS_H
 #define DRAWWINDOWS_H
 
-//#include "ofMain.h"
+#include "ofMain.h"
 #include "ofTrueTypeFont.h"
 #include "ofxGui.h"
 #include "Getdata.h"
@@ -12,6 +12,7 @@ public:
     void drawWin(glm::vec3 winPos, glm::vec2 winSize, ofColor uiColor);
     void resize();
     string insertNewlines(string in, const size_t every_n);
+    string textInjection(string textIn);
 
     int width, height;
     int padding;
@@ -45,12 +46,9 @@ public:
 
     ofColor zbdmColor, svdkColor, serverColor;
     int evalZbdm, evalSvdk;
-    //int nbrLineCode;
     int codeTotalHeight, codeTotalWidth;
     int codeInstantHeight, codeInstantWidth;
     int maxLineCode, maxCodeWidth;
-
-//    ofFbo codeFbo;
 
 private:
 
@@ -102,8 +100,6 @@ private:
 
 class OverHeating{
 public:
-    //void setup();
-    //void update();
     void draw();
     void add();
     void clear();

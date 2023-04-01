@@ -84,13 +84,11 @@ void WinCode::setup(int padding, ofColor uiColor, vector<ofColor> playerColor){
 void Windo::resize(){
     width = ofGetWidth();
     height = ofGetHeight();
-    //size.setMax(glm::vec2(width, height));
     pos.setMax(glm::vec3(width, height, 500));
 }
 
 //-------------------------
 void WinCode::update(vector<CodeLine>& vectorCode){
-//    this->vecCode = vectorCode;
     maxCodeWidth = (int)(size->x) / fontCharBox.width; // max code text char witdh
     codeTotalHeight = 0;
     codeTotalWidth = 0;
@@ -106,7 +104,6 @@ void WinCode::update(vector<CodeLine>& vectorCode){
         }
 
     }
-    //cout << "code with : " << ofToString(codeTotalWidth) << endl;
 }
 
 //--------------------------------------------------------------
@@ -478,6 +475,12 @@ string OverHeating::insertNewlines(string in, const size_t every_n)
     return out;
 }
 
+
+string Windo::textInjection(string textIn){
+    char ch = ofRandom(33,126);
+    textIn[ofRandom(0, textIn.length())] = ch;
+    return textIn;
+}
 
 //void ofApp::windowImageDraw(glm::vec3 windowPos, glm::vec2 windowSize, ofColor winColor){
 //    ofPushStyle();

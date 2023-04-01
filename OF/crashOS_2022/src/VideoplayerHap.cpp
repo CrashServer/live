@@ -4,17 +4,19 @@
 VideoPlayerHap::VideoPlayerHap(){
 }
 
-void VideoPlayerHap::setup(){
+void VideoPlayerHap::setup(string path){
+    this->videoPath = path;
     width = ofGetWidth();
     height = ofGetHeight();
     pos = glm::vec3(0,0,0);
     size = glm::vec2(width, height);
+    vidDirIndex = 0;
 
     // list all directories
     videoDir.listDir(videoPath);
     videoDir.sort();
 
-    videoList.listDir(videoDir.getPath(0));
+    videoList.listDir(videoDir.getPath(vidDirIndex));
     videoList.sort();
     vidIndex = 0;
     vidTotal = videoList.size();
@@ -28,10 +30,6 @@ void VideoPlayerHap::setup(){
     hapPlayer.setSpeed(1);
     hapPlayer.setPaused(false);
 
-    hapPlayer2.load("videoHap/1/fire1.mov");
-    hapPlayer2.setLoopState(OF_LOOP_NORMAL);
-    hapPlayer2.setSpeed(1);
-    hapPlayer2.setPaused(false);
 }
 
 void VideoPlayerHap::update(){
@@ -40,16 +38,13 @@ void VideoPlayerHap::update(){
 
 
 void VideoPlayerHap::draw(){
-    ofEnableAlphaBlending();
+    //ofEnableAlphaBlending();
 
     if (hapPlayer.isLoaded()){
-        ofSetColor(255, 255, 255);
         ofRectangle videoRect(0, 0, hapPlayer.getWidth(), hapPlayer.getHeight());
         videoRect.scaleTo(ofGetWindowRect());
-        ofRectangle videoRect2(0, 0, hapPlayer2.getWidth(), hapPlayer2.getHeight());
-        videoRect2.scaleTo(ofGetWindowRect());
-        hapPlayer.draw(videoRect.x, videoRect.y, videoRect.width, videoRect.height);
-        hapPlayer2.draw(videoRect2.x, videoRect2.y, videoRect2.width, videoRect2.height);
+        hapPlayer.draw(this->pos.x, this->pos.y, this->size.x, this->size.y);
+
     }
     else
     {
@@ -65,7 +60,23 @@ void VideoPlayerHap::draw(){
 
 }
 
+void VideoPlayerHap::newCat(int index){
+    // change video category (folder) based on index
+    if (index != (vidDirIndex%(videoDir.size()-1))){
+        vidDirIndex = index;
+        videoDir.listDir(videoPath);
+        videoDir.sort();
+        //cout << "index : " << ofToString(vidDirIndex%(videoDir.size())) << endl;
+        videoList.listDir(videoDir.getPath(vidDirIndex%(videoDir.size())));
+        videoList.sort();
+        vidTotal = videoList.size();
+        vidIndex = -1;
+        this->newSeq();
+    }
+}
+
 void VideoPlayerHap::newSeq(){
+    // load a new video sequence from current directory
     vidIndex++;
     vidIndex = ofClamp(vidIndex, 0, vidTotal-1);
     string videoActual = videoList.getPath(vidIndex);

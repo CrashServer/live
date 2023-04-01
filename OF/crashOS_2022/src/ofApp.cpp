@@ -13,13 +13,12 @@ void ofApp::setup(){
 
     width = settings.getValue("config:width", 1920);
     height = settings.getValue("config:height", 1080);
-//    barduino = settings.getValue("config:arduino", false);
     bdmx = settings.getValue("config:dmxActive", false);
     string textPres = settings.getValue("config:textPres", "");
     glm::vec2 textPresPos = glm::vec2(settings.getValue("config:textPosX", 80), settings.getValue("config:textPosY", 1060));
     int dmxAddr1 = settings.getValue("config:dmxAddr1", 1);
     int dmxAddr2 = settings.getValue("config:dmxAddr2", 8);
-    string troopIp = settings.getValue("config:troopIp", "127.0.0.1");
+    string troopIp = settings.getValue("config:troopIp", "192.168.0.42");
     int troopPort = settings.getValue("config:troopPort", 2887);
 
 	/// SETUP 
@@ -45,16 +44,8 @@ void ofApp::setup(){
     /// NETWORK & arduino
     data.setup(troopIp, troopPort);
 
-	/// 3D MODELS
-//    postprocSetup();
-//    render.setup();
-//    sphereMap.setup();
-//    text3d.setup();
-//    procBackground.setup();
-
     /// FFT
     initTime = 0;
-//    tunnel3d.setup();
 
     /// Windows
     winCode.setup(10, uiColor, playerColor);
@@ -69,9 +60,11 @@ void ofApp::setup(){
     /// audio video
     webcam.setup(uiColor);
     videoplayer.setup();
-    videoplayer3d.setup3d();
-    videoplayerAscii.setupAscii();
-    videoplayerHap.setup();
+    //videoplayer3d.setup3d();
+    //videoplayerAscii.setupAscii();
+    videoplayerHap.setup("videoHap/video/");
+    videoHapServer.setup("videoHap/server/");
+    // videoplayerHapInter.setup("videoHap/intervention/");
     audioFft.setup();
     if(bdmx){dmx.setup(dmxAddr1, dmxAddr2);}
 
@@ -187,15 +180,16 @@ void ofApp::setup(){
     parameters.add(webcam.parameters);
     parameters.add(integrityIncr.set("Integrity increment", 5, 0, 100));
     parameters.add(cpuStress.set("CPU stress", 1, 0, 100));
-    //parameters.add(render.parameters);
-    //parameters.add(procBackground.parameters);
     parameters.add(audioThresh.set("audio Threshold", 1.0, 0.0, 10.0));
     parameters.add(colorPicker.set("Color Ui", uiColor, ofColor(0,0,0), ofColor(255,255,255)));
     parameters.add(scene.set("scene", 0, 0, 12));
+    parameters.add(bWaitingMsg.set("enableWaitingMessage", false));
 
     colorPicker.addListener(this, &ofApp::changeColorUi);
     defaultParam.addListener(this, &ofApp::loadDefaultParam);
     scene.addListener(this, &ofApp::setScene);
+    bWaitingMsg.addListener(this, &ofApp::setWaitingMsg);
+
 
     gui.setup(parameters, "xml/mysettings.xml");
     gui.setPosition(50,50);
@@ -215,12 +209,17 @@ void ofApp::setup(){
     serverBackup.cpuSize = winCpu.size;
     serverBackup.integritySize = winIntegrity.size;
     serverBackup.scoreSize = winScore.size;
+    serverBackup.scene = scene;
     serverBackup.isRestored = false;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	ofSetWindowTitle("CRASH/OS " + (ofToString((int) ofGetFrameRate())));
+
+    /// test server active for switching scene
+    if (data.isServerActive){scene = 404;}
+    else if (!data.isServerActive && scene != 404){serverBackup.scene = scene;}
 
     // update obligatoire
     data.update();
@@ -288,24 +287,14 @@ void ofApp::update(){
 //    case 16:
 //        scene16Update();
 //        break;
+    case 404:
+        sceneServerUpdate();
+        break;
 
     default:
         sceneDefaultUpdate();
         break;
     }
-
-//	if (camShake) {
-//		cam.setFov(60 + sin(ofGetElapsedTimef()) / ofRandom(0.2, 8));
-//        cam.rollDeg(ofRandom(-0.05, 0.05));
-//        cam.panDeg(ofRandom(-0.05, 0.05));
-//		camShakeTime--;
-//		if (camShakeTime <= 0) {
-//			camShake = false;
-//			camShakeTime = 60;
-//		}
-//	}
-//	else
-//		cam.setFov(60 + sin(ofGetElapsedTimef()) / 2);
 }
 
 //--------------------------------------------------------------
@@ -364,6 +353,9 @@ void ofApp::draw(){
 //    case 16:
 //        scene16Draw();
 //        break;
+    case 404:
+        sceneServerDraw();
+        break;
 
 	default:
         sceneDefaultDraw();
@@ -385,8 +377,8 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key) {
 
 	if (key == 'b') bang('#');
-    if (key == 's') data.isServerActive = !data.isServerActive;
-    // if (key == 'c') superBang();
+    if (key == 's') {data.isServerActive = !data.isServerActive;
+                    data.delayServerActivity = 4000;}
 	if (key == 'f') ofToggleFullscreen();
 	if (key == 'g') showGui = !showGui;
 }
@@ -511,6 +503,8 @@ void ofApp::bang(char playerID){
 //    case 16:
 //        scene16Bang(playerID);
 //        break;
+    case 404:
+        sceneServerBang(playerID);
 
     default:
         sceneDefaultBang(playerID);
@@ -572,6 +566,8 @@ void ofApp::bigBang()
 //    case 16:
 //        scene16BigBang();
 //        break;
+    case 404:
+        sceneServerBigBang();
 
     default:
         sceneDefaultBigBang();
@@ -593,6 +589,7 @@ void ofApp::changeColorUi(ofColor &){
     winCpu.uiColor = colorPicker;
     winIntegrity.uiColor = colorPicker;
     webcam.uiColor = colorPicker;
+    winScore.uiColor = colorPicker;
 }
 
 void ofApp::loadDefaultParam(bool &){
@@ -603,32 +600,27 @@ void ofApp::setScene(int&){
     data.scene = scene;
 }
 
+void ofApp::setWaitingMsg(bool&){
+    settings.load("xml/config.xml");
+    boot.waitingMsg = settings.getValue("waitingMsg" , "");
+    boot.bShowMsg = bWaitingMsg;
+}
+
 void ofApp::serverCorruptionBang(){
     float speed = 0.001;
-    winCpu.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*9*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winCpu.size->x),
-                            ofMap(ofNoise(ofGetFrameNum()*7*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winCpu.size->y),0);
-    winCode.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*8*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winCode.size->x),
-                            ofMap(ofNoise(ofGetFrameNum()*6*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winCode.size->y),0);
-    winIntegrity.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*9*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winIntegrity.size->x),
-                            ofMap(ofNoise(ofGetFrameNum()*6.5*speed + 150, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winIntegrity.size->y),0);
-    winScore.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*7.5*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winScore.size->x),
-                            ofMap(ofNoise(ofGetFrameNum()*9.9*speed + 100, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winScore.size->y),0);
-    uiMisc.posAlert = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*7.5*speed + 1500, ofGetElapsedTimef()*speed + 180), 0,1,0,ofGetWidth() - uiMisc.sizeAlert.x),
-                            ofMap(ofNoise(ofGetFrameNum()*9.9*speed + 9500, ofGetElapsedTimef()*speed + 250), 0,1,0,ofGetHeight() - uiMisc.sizeAlert.y),0);
+//    winCpu.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*9*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winCpu.size->x),
+//                            ofMap(ofNoise(ofGetFrameNum()*7*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winCpu.size->y),0);
+//    winCode.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*8*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winCode.size->x),
+//                            ofMap(ofNoise(ofGetFrameNum()*6*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winCode.size->y),0);
+//    winIntegrity.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*9*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winIntegrity.size->x),
+//                            ofMap(ofNoise(ofGetFrameNum()*6.5*speed + 150, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winIntegrity.size->y),0);
+//    winScore.pos = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*7.5*speed, ofGetElapsedTimef()*speed), 0,1,0,ofGetWidth() - winScore.size->x),
+//                            ofMap(ofNoise(ofGetFrameNum()*9.9*speed + 100, ofGetElapsedTimef()*speed), 0,1,0,ofGetHeight() - winScore.size->y),0);
+//    uiMisc.posAlert = glm::vec3 (ofMap(ofNoise(ofGetFrameNum()*7.5*speed + 1500, ofGetElapsedTimef()*speed + 180), 0,1,0,ofGetWidth() - uiMisc.sizeAlert.x),
+//                            ofMap(ofNoise(ofGetFrameNum()*9.9*speed + 9500, ofGetElapsedTimef()*speed + 250), 0,1,0,ofGetHeight() - uiMisc.sizeAlert.y),0);
 
-
-    //    winCpu.pos = glm::clamp(winCpu.pos + glm::vec3(ofRandom(-20,20),ofRandom(-20,20),ofRandom(-25,25)),
-//                                glm::vec3(0,0,-250), glm::vec3(ofGetWidth() - winCpu.size->x, ofGetHeight() - winCpu.size->y,50));
-//    winCode.pos = glm::clamp(winCode.pos + glm::vec3(ofRandom(-20,20),ofRandom(-20,20),ofRandom(-25,25)),
-//                                 glm::vec3(0,0,-250), glm::vec3(ofGetWidth() - winCode.size->x, ofGetHeight() - winCode.size->y,50));
-//    winIntegrity.pos = glm::clamp(winIntegrity.pos + glm::vec3(ofRandom(-20,20),ofRandom(-20,20),ofRandom(-25,25)),
-//                                 glm::vec3(0,0,-250), glm::vec3(ofGetWidth() - winCode.size->x, ofGetHeight() - winIntegrity.size->y,50));
-//    winScore.pos = glm::clamp(winScore.pos + glm::vec3(ofRandom(-20,20),ofRandom(-200,20),ofRandom(-25,25)),
-//                                 glm::vec3(0,0,-250), glm::vec3(ofGetWidth() - winCode.size->x, ofGetHeight() - winScore.size->y,50));
     winCpu.uiColor = ofColor (ofMap(ofNoise(ofGetFrameNum()), 0,1, 255,serverBackup.uiColor.r, true),
                               serverBackup.uiColor.g, serverBackup.uiColor.b);
-
-//            ofColor(ofNoise(ofGetFrameNum())*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef())*255);
     winCode.uiColor = ofColor(ofNoise(ofGetFrameNum()+800)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+20)*255);
     winIntegrity.uiColor = ofColor(ofNoise(ofGetFrameNum() + 100)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+480)*255);
     winScore.uiColor = ofColor(ofNoise(ofGetFrameNum() + 300)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+855)*255);
@@ -648,6 +640,8 @@ void ofApp::serverCorruptionRestore(){
         winCpu.size = serverBackup.cpuSize;
         winIntegrity.size = serverBackup.integritySize;
         winScore.size = serverBackup.scoreSize;
+        scene = serverBackup.scene;
+        data.scene = serverBackup.scene;
         serverBackup.isRestored = true;
     }
 

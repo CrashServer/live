@@ -6,14 +6,15 @@
 
 class VideoPlayerHap {
 public:
-    void setup();
+    void setup(string path="videoHap/");
     void update();
     void draw();
     void newSeq();
+    void newCat(int index);
     void videoScrub(float audioRms=0);
 
-    ofxHapPlayer hapPlayer, hapPlayer2;
-    string videoPath="videoHap/";
+    ofxHapPlayer hapPlayer;
+    string videoPath;
     ofDirectory videoDir, videoList; // list all directory - list all video
 
     int vidIndex; // index of the actual video

@@ -53,8 +53,7 @@ if crashOsEnable:
 		class OSCReceiver():
 			''' OSC Receiver for evaluate command from CrashOS'''
 			def __init__(self, crashOSIp):
-				self.ip = crashOSIp
-				self.oscserver = ThreadingOSCServer((self.ip,2887))
+				self.oscserver = ThreadingOSCServer(("0.0.0.0",2887))
 				self.oscserver.addDefaultHandlers()
 				self.oscserver.addMsgHandler("/cmd/serverState", self.receiveState)
 				self.oscserver.addMsgHandler("/cmd/Video", self.receiveVideo)

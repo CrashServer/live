@@ -375,7 +375,8 @@ class Interface(BasicInterface):
         x = int((ws/2) - (w / 2))
         y = int((hs/2) - (h / 2))
 
-        self.root.geometry('{}x{}+{}+{}'.format(w, h, x, y))
+        #self.root.geometry('{}x{}+{}+{}'.format(w, h, x, y))
+        self.root.geometry('{}x{}+{}+{}'.format(1715, 1023, 200, 50))
 
         # Try and start full screen (issues on Linux)
 

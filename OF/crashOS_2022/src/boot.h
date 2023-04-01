@@ -27,6 +27,9 @@ public:
 
     vector<string> bootLine, cBoot;
 
+    string waitingMsg = "defaultMsg";
+    bool bShowMsg = false;
+
     Boot();
 private:
 

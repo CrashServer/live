@@ -10,9 +10,6 @@
 #include "ofEasyCam.h" 
 #include "ofxGui.h"
 #include "ofxXmlSettings.h"
-//#include "ofTrueTypeFont.h"
-//#include "ofxOsc.h"
-//#include "ofxNetwork.h"
 #include "easing.h"
 
 #include "Camera.h"
@@ -22,7 +19,6 @@
 #include "Getdata.h"
 #include "glitcher.h"
 #include "drawwindows.h"
-//#include "render.h"
 #include "boot.h"
 #include "postproc.h"
 #include "dmx.h"
@@ -30,6 +26,8 @@
 #include "imageplayer.h"
 #include "textris.h"
 #include "VideoplayerHap.h"
+#include "ofxBloom.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -59,6 +57,7 @@ class ofApp : public ofBaseApp{
         void changeColorUi(ofColor&);
         void loadDefaultParam(bool&);
         void setScene(int&);
+        void setWaitingMsg(bool&);
         // server corruption
         void serverCorruptionBang();
         void serverCorruptionRestore();
@@ -71,7 +70,7 @@ class ofApp : public ofBaseApp{
         ofParameter<int> integrityIncr;
         ofParameter<float> audioThresh;
         ofParameter<ofColor> colorPicker;
-
+        ofParameter<bool> bWaitingMsg;
         bool showGui;
 
         ofParameterGroup parameters;
@@ -112,9 +111,9 @@ class ofApp : public ofBaseApp{
         WinScore winScore;
         AudioFft audioFft;
         Videoplayer videoplayer;
-        Videoplayer3d videoplayer3d;
-        VideoplayerAscii videoplayerAscii;
-        VideoPlayerHap videoplayerHap;
+        //Videoplayer3d videoplayer3d;
+        //VideoplayerAscii videoplayerAscii;
+        VideoPlayerHap videoplayerHap, videoHapServer; //, videoplayerHapInter;
         Camera webcam;
         UiMisc uiMisc;
         Glitcher glitcherCam, glitcherLogo, glitcherVideo;
@@ -203,10 +202,18 @@ class ofApp : public ofBaseApp{
         void scene15BigBang();
         void scene16BigBang();
 
+        /// Server Scene
+        void sceneServerUpdate();
+        void sceneServerDraw();
+        void sceneServerBang(char playerID);
+        void sceneServerBigBang();
+
         void sceneDefaultUpdate();
         void sceneDefaultDraw();
         void sceneDefaultBang(char playerID);
         void sceneDefaultBigBang();
+
+
 
 //        Tunnel3d tunnel3d;
         // Backup info for serverCorruption
@@ -216,6 +223,7 @@ class ofApp : public ofBaseApp{
             glm::vec3 codePos, cpuPos, integrityPos, scorePos ;
             glm::vec2 codeSize, cpuSize, integritySize, scoreSize;
             bool isRestored;
+            int scene;
         };
         ServerBackup serverBackup;
 };

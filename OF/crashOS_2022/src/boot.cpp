@@ -11,7 +11,7 @@ void Boot::setup(){
 
     font.load("ui/font/pixe.ttf", 36);
     fontCharBox = font.getStringBoundingBox("P", 0, 0);
-    xml.loadFile("xml/boot.xml");
+    xml.load("xml/boot.xml");
     string xmlString = xml.getValue("logText", "bootServer");
 
     maxLine = (int) (height-300) /  (fontCharBox.height+15);
@@ -62,13 +62,22 @@ void Boot::draw(int integrity){
                 }
             }
 
-    ofPopMatrix();
-    ofTranslate(posIntegrity.x, posIntegrity.y);
-    int integrityDiv = integrity/10;
-    for (int i=integrityDiv; i>0; i--){
-        font.drawString("*", (fontCharBox.width)*i, 0);
-        }
     ofPushMatrix();
+            ofTranslate(posIntegrity.x, posIntegrity.y);
+            int integrityDiv = integrity/10;
+            for (int i=integrityDiv; i>0; i--){
+            font.drawString("*", (fontCharBox.width)*i, 0);
+        }
+    ofPopMatrix();
+
+
+    if (bShowMsg) {
+        ofPushMatrix();
+        ofSetColor(255, 0, 0, ofMap(sin(ofGetFrameNum()*0.1),-1,1,0,255));
+        ofTranslate(width * 2/3, height * 1/3);
+        font.drawString(waitingMsg, 0, 0);
+        ofPopMatrix();
+    }
 }
 
 

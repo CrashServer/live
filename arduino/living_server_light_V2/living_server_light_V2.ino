@@ -6,7 +6,9 @@ FASTLED_USING_NAMESPACE
 #define LED_TYPE WS2812B
 #define COLOR_ORDER GRB
 #define NUM_LEDS 300
-#define PLY_LENGTH 80  // define the length of the players position
+#define PLY_LENGTH 50  // define the length of the players position
+#define BUTTON 2
+#define LEDOUT 13
 
 //CRGB leds[NUM_LEDS];
 CRGBArray<NUM_LEDS> leds;
@@ -22,7 +24,11 @@ int pos[nbrPulseMax];
 bool activePulse[nbrPulseMax];
 CRGB color[nbrPulseMax];
 uint8_t ply[nbrPulseMax];
+uint8_t prevButtonState = 0;
+uint8_t switchTimer = 0;
+uint8_t buttonState = 0;
 char val = 'g';
+
 
 /// Color & ply index ///
 /// ZBDM -> 1
@@ -32,6 +38,9 @@ char val = 'g';
 void setup() {
   delay(3000);  // 3 second delay for recovery
   Serial.begin(115200);
+  pinMode(BUTTON, INPUT);
+  pinMode(LEDOUT, OUTPUT);
+  
   FastLED.setBrightness(96);
   FastLED.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   for (int i = 0; i < nbrPulseMax; i++) {
@@ -43,7 +52,26 @@ void setup() {
 }
 
 void loop() {
-
+  buttonState = digitalRead(BUTTON);
+  if (buttonState != prevButtonState){
+    switchTimer =0;
+    prevButtonState = buttonState;
+  }
+  if(buttonState == 1){
+    digitalWrite(LEDOUT, HIGH);
+    if (switchTimer < 10) {
+      Serial.write('s');
+      switchTimer ++;
+    }
+  }
+  else {
+    digitalWrite(LEDOUT, LOW);
+    if (switchTimer < 10) {
+      Serial.write('c');
+      switchTimer++;  
+    }
+  }
+ 
   FastLED.show();
   // insert a delay to keep the framerate modest
   FastLED.delay(1000 / 120);
@@ -55,24 +83,24 @@ void loop() {
   if (Serial.available() > 0) {
     val = Serial.read();
     //// ZBDM /////
-    if (val == 'z') {  ///
+    if (val == 'v') {  ///
       for (int i = 0; i < nbrPulseMax; i++) {
         if (!activePulse[i]) {
           activePulse[i] = true;
           pos[i] = 0;
-          color[i] = plyColor[1];  // GREEN  0xFFA500 // CRGB(0x37B5F0); // Blue //
+          color[i] = plyColor[2];  // GREEN  0xFFA500 // CRGB(0x37B5F0); // Blue //
           ply[i] = 1;
           break;
         }
       }
     }
     //// SVDK ////
-    else if (val == 'v') {
+    else if (val == 'z') {
       for (int i = 0; i < nbrPulseMax; i++) {
         if (!activePulse[i]) {
           activePulse[i] = true;
           pos[i] = NUM_LEDS;
-          color[i] = plyColor[2];  // ORANGE CRGB(0xE027F5); // Viiolet //
+          color[i] = plyColor[1];  // ORANGE CRGB(0xE027F5); // Viiolet //
           ply[i] = 2;
           break;
         }

@@ -25,6 +25,6 @@ freq = In.kr(bus, 1);
 osc=(osc * env);
 		osc = RLPF.ar(osc, cutoff, rq);
 		osc = Select.ar(aux, [osc, osc[0]!2, osc[1]!2]);
-		osc = Mix(osc*amp) * 0.5;
+		osc = Mix(osc*amp) * 0.2;
 osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)}).add;

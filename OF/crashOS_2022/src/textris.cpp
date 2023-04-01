@@ -17,9 +17,9 @@ void Textris::setup(vector<ofColor> playerColor){
     this->svdkColor = playerColor[1];
     this->serverColor = playerColor[2];
 
-    for (int i=0; i<FFT_BANDS; i++){
-        groundLine.addVertex(i*ofGetWidth()/FFT_BANDS,0);
-    }
+//    for (int i=0; i<FFT_BANDS; i++){
+//        groundLine.addVertex(i*ofGetWidth()/FFT_BANDS,0);
+//}
 }
 
 void Textris::update(vector<float> fftSubbands){
@@ -30,12 +30,12 @@ void Textris::update(vector<float> fftSubbands){
         particles.clear();
     }
     box2d.update();
-    fftBand = fftSubbands;
+//    fftBand = fftSubbands;
 
-    ground.clear();
-    ground.addVertices(groundLine);
+//    ground.clear();
+//    ground.addVertices(groundLine);
     //ground.addVertexes(groundLine);
-    ground.create(box2d.getWorld());
+//    ground.create(box2d.getWorld());
 }
 
 void Textris::clear(){
@@ -92,15 +92,15 @@ void Textris::draw(){
         particles[i].draw();
     }
 
-    if (ofGetFrameNum()%4==0){
-    for (int i=groundLine.size(); i>=1; i--){
-        groundLine[i].y = ofGetHeight()-(fftBand[i]*ofGetHeight()/4);
-    }
-    }
-    ofSetColor(ofColor::white);
-    ground.updateShape();
+//    if (ofGetFrameNum()%4==0){
+//    for (int i=groundLine.size(); i>=1; i--){
+//        groundLine[i].y = ofGetHeight()-(fftBand[i]*ofGetHeight()/4);
+//    }
+//    }
+//    ofSetColor(ofColor::white);
+//    ground.updateShape();
 
-    ground.draw();
+//    ground.draw();
 //    for (int i=0; i<16; i++){
 //        ofDrawRectangle(i*(ofGetWidth()/16), ofGetHeight(), ofGetWidth()/16, fftSubbands[i]*(ofGetHeight()/8)*-1);
 //        }
@@ -126,7 +126,7 @@ particle::particle(int startx, int starty){
     force = glm::vec2(0,-0.2);
     direction = glm::vec2(ofRandom(-2.0,2.0), ofRandom(-10.0,10.0));
     size = 10;
-    particleColor.setHsb(120, 255, 255, 200);
+    particleColor.setHsb(120, ofRandom(0,255), 255, 200);
 }
 
 particle::~particle(){}

@@ -91,6 +91,11 @@ def ascii_gen(text="", font=""):
 ###     CRASH SERVER LIVE FUNCTIONS    ###
 ##########################################
 
+def voiceserver(voice_txt=""):
+    masterAll("lpf", 80)
+    Voice(voice_txt, rate=1, amp=1, pitch=1 + randint(-10,50), lang="fr", voice=0)
+    Clock.future(calc_dur_voice(voice_txt), lambda: masterAll("reset"))
+
 def connect():
 	''' Full reset and set bpm, root, sos & video player '''
 	Master().reset()

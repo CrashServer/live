@@ -337,7 +337,7 @@ class SampleSynthDef(SynthDefBaseClass):
         self.defaults['pos']   = 0
         self.defaults['room']  = 0.1
         self.defaults['rate']  = 1.0
-        self.defaults['wide']  = 0.0
+        self.defaults['wide']  = 1.0
         self.base.append("rate = In.kr(bus, 1);")
 
 

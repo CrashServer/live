@@ -276,7 +276,7 @@ def genArp(nbrseq=4, lengthseq=8):
 
 valueDict = {}
 
-def masterAll(args = "dur", value=1):
+def masterAll(args = 0, value=1, *argsall):
 	global valueDict
 	if args == "reset" or args == 0:
 		for k,v in valueDict.items():
@@ -305,8 +305,6 @@ def masterAll(args = "dur", value=1):
 			p.__setattr__(args, value)
 
 ### CrashPanel
-### Root, scale
-### generateur de "Plat du jour"
 
 try:
 	if crashPanelSending:

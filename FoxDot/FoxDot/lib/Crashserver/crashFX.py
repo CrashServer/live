@@ -258,17 +258,26 @@ fx.add("out = osc + Fb({\
 	},0.5,0.125)")
 fx.save()
 
-fx = FxList.new("sample_atk", "sample_atk", {"sample_atk":0, "sample_sus":1}, order=2)
+# fx = FxList.new("sample_atk", "sample_atk", {"sample_atk":0, "sample_sus":1}, order=2)
+# fx.add_var("env")
+# fx.add("env = EnvGen.ar(Env.new(levels: [0,1,0], times:[sample_atk, sample_sus], curve: 'lin'))")
+# fx.add("osc = osc*env")
+# fx.save()
+
+fx = FxList.new("a", "attack", {"a":0, "sus": 1, "ac": 0}, order=2)
+fx.doc("attack envelope")
 fx.add_var("env")
-fx.add("env = EnvGen.ar(Env.new(levels: [0,1,0], times:[sample_atk, sample_sus], curve: 'lin'))")
+fx.add("env = EnvGen.ar(Env.new(levels: [0,1,1], times:[a*sus, sus - a*sus], curve:[ac,0]))")
 fx.add("osc = osc*env")
 fx.save()
 
-fx = FxList.new("a", "adsr", {"a":0, "r":1, "sus": 1, "ac": 0, "rc": 0}, order=2)
+fx = FxList.new("r", "releas", {"r":0, "sus": 1, "rc": 0}, order=2)
+fx.doc("release envelope")
 fx.add_var("env")
-fx.add("env = EnvGen.ar(Env.new(levels: [0,1,1,0], times:[a*sus, max((a*sus + r*sus), sus - (a*sus + r*sus)), r*sus], curve:[ac,0,rc]))")
+fx.add("env = EnvGen.ar(Env.new(levels: [1,0,0], times:[r*sus, sus - r*sus], curve:[rc,0]))")
 fx.add("osc = osc*env")
 fx.save()
+
 
 fx = FxList.new('ehpf','envHPF', {'ehpf': 0, 'ehpr': 0.7, 'ehpa':0.001, 'ehps':0.01, 'ehpc':-3, 'sus':1}, order=2)
 fx.doc("ehpf")

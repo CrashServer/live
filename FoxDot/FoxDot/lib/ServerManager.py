@@ -314,9 +314,11 @@ class SCLangServerManager(ServerManager):
         vel     = min(127, (packet.get("amp", 1) * 128) - 1)
         sus     = packet.get("sus", 0.5)
         channel = packet.get("channel", 0)
+        cc      = packet.get("cc", 0)  # crash mod
+        value   = packet.get("value", 0) # crash mod
         nudge   = self.midi_nudge
 
-        msg.append( [synthdef, note, vel, sus, channel, nudge] )
+        msg.append( [synthdef, note, vel, sus, channel, nudge, cc, value] ) # crash mod
 
         bundle.append(msg)
 

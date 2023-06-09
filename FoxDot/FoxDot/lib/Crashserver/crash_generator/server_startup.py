@@ -70,7 +70,8 @@ if crashOsEnable:
 				if state == 0:
 					soff()
 				elif state == 1:
-					son(1,3,9)
+					activateServer()
+					#son(1,3,9)
 				else:
 					print("error receiving osc from CrashOs")
 
@@ -426,28 +427,6 @@ def sendOsc(msg=""):
 	except:
 		pass
 
-# def video(msg=""):
-#   ''' Send osc message for video '''
-#   try:
-#       oscMsg = OSCMessage("/video")
-#       oscMsg.append(msg)
-#       myclient.send(oscMsg)
-#   except:
-#       pass
-
-def state(msg=1):
-	''' Send osc message for server status '''
-	global serverActive
-	if msg == 0:
-		serverActive = True
-	else:
-		serverActive = False
-	try:
-		byte_message = bytes("_" + str(msg), "utf-8")
-		crashFoxDot_socket.sendto(byte_message, (crashOSIp, crashOSPort))
-	except:
-		pass
-
 def player_type(player):
 	''' return player type '''
 	try:
@@ -625,8 +604,17 @@ def soff():
 	global serverActive
 	serverActive = False
 
+def activateServer():
+	Clock.bpm=92
+	eval('se >> loop("serverVoice", dur=16, beat_stretch=0, looping=0, mverb=0.1, amp=0.5).unison(3).only()')
+	Server.freeAllNodes()
+	Clock.future(32, lambda: son())
+
+
 server.start()
-#serverActive = True
+
+
+##### GARBAGE FOR ARCH ######
 
 # def changeConf():
 # 	cfg = configparser.RawConfigParser()
@@ -637,3 +625,25 @@ server.start()
 # 	for p in par:
 # 		par[p]=par[p].split("#",1)[0].strip() # To get rid of inline comments
 # 	globals().update(par)  #globally
+
+# def state(msg=1):
+# 	''' Send osc message for server status '''
+# 	global serverActive
+# 	if msg == 0:
+# 		serverActive = True
+# 	else:
+# 		serverActive = False
+# 	try:
+# 		byte_message = bytes("_" + str(msg), "utf-8")
+# 		crashFoxDot_socket.sendto(byte_message, (crashOSIp, crashOSPort))
+# 	except:
+# 		pass
+
+# def video(msg=""):
+#   ''' Send osc message for video '''
+#   try:
+#       oscMsg = OSCMessage("/video")
+#       oscMsg.append(msg)
+#       myclient.send(oscMsg)
+#   except:
+#       pass

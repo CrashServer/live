@@ -734,6 +734,15 @@ if __name__ != "__main__":
 			self.amplify=var([1,0],[1/32,inf], start=now)
 			self.after(32, "stop")
 
+		@player_method
+		def start(self, startBeat=8):
+			""" Start a player at a specific beat"""
+			if (startBeat==0):
+				beatStart = now
+			else:
+				beatStart = Clock.mod(startBeat)
+			self.amplify=linvar([0,1],[0,inf], start=beatStart)
+
 		@PatternMethod
 		def norm(self, mult=1):
 			""" Returns the pattern with all values between 0 and 1*mult """

@@ -270,17 +270,18 @@ class SCLangServerManager(ServerManager):
     def sendOSC(self, osc_message):
         """ Sends an OSC message to the server. Checks for midi messages """
 
-        if osc_message.address == OSC_MIDI_ADDRESS:
+        if osc_message.address != "/video":
+            if osc_message.address == OSC_MIDI_ADDRESS:
 
-            self.sclang.send( osc_message )
+                self.sclang.send( osc_message )
 
-        else:
+            else:
 
-            self.client.send( osc_message )
+                self.client.send( osc_message )
 
         # If we are sending other messages as well
 
-        if self.forward is not None:
+        elif self.forward is not None:
 
             self.forward.send(osc_message)
 
@@ -324,6 +325,30 @@ class SCLangServerManager(ServerManager):
 
         return bundle
 
+    ### Crash Mod Video OSC
+    def get_video_message(self, synthdef, packet, timestamp):
+        """ Prepares an OSC message to trigger video """
+
+        bundle = OSCBundle(time=timestamp)
+        bundle.setAddress("/video") # these need to be variable names at least
+
+        msg     = OSCMessage("/video")
+
+        vidpos1  = float(packet.get("pos1", 0.0))
+        vidpos2  = float(packet.get("pos2", 0.0))
+
+        vidid1   = int(packet.get("vid1", 0))
+        vidid2   = int(packet.get("vid2", 0))
+
+        blend1   = float(packet.get("blend1", 0.0))
+        blend2   = float(packet.get("blend2", 0.0))
+        scene   = int(packet.get("scene", 0))
+
+        msg.append( [synthdef, vidpos1, vidid1, vidpos2, vidid2, blend1, blend2, scene] ) # crash mod
+
+        bundle.append(msg)
+
+        return bundle
 
     def get_init_node(self, node, bus, group_id, synthdef, packet):
 
@@ -513,6 +538,11 @@ class SCLangServerManager(ServerManager):
         if synthdef == "MidiOut": # this should be in a dict of synthdef to functions maybe? we need a "nudge to sync"
 
             return self.get_midi_message(synthdef, packet, timestamp)
+
+        elif synthdef == "video": # this should be in a dict of synthdef to functions maybe? we need a "nudge to sync"
+
+            return self.get_video_message(synthdef, packet, timestamp)
+
 
         # Create a bundle
 

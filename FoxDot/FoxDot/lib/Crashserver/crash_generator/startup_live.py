@@ -621,6 +621,95 @@ try:
 except Exception as e:
 	print(e)
 
+
+dwarfDict = {
+    "chorus": {
+        "phase": 10,
+        "depth": 11,
+        "delay": 12,
+        "contour": 13,
+        "wet": 14,
+        "freq": 15},
+    "whammy": {
+        "first": 16,
+        "last": 17,
+        "gain": 18,
+        "clean": 19
+        },
+    "drive": {
+        "attack": 20,
+        "bright": 21,
+        "gate": 22,
+        "level": 23
+        },
+    "master": {
+        "bass": 24,
+        "treble": 25,
+        },
+    "shimmer": {
+        "predelay": 27,
+        "early": 28,
+        "shimmer": 29
+        }
+    }
+
+def dwarf(fx="", param="", value="", duree=1):
+    def findName():
+        playerList = [f'm{p}' for p in list(string.ascii_lowercase)]
+        playerFiltred = [ply for ply in playerList if ply not in [p.name for p in Clock.playing]]
+        if len(playerFiltred) >= 1:
+            return playerFiltred[0]
+        else:
+            return None
+    if fx == "":
+        print(dwarfDict.keys())
+    else:
+        if param == "":
+            print(dwarfDict[fx].keys())
+        else:
+            if value != "" and fx in dwarfDict.keys() and param in dwarfDict[fx].keys():
+                para = dwarfDict[fx][param]
+                playerName = findName()
+                if playerName is not None:
+                    clip.copy(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree}) # {fx}/{param}")
+                    eval(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree})")
+                else:
+                    print("No more player left...")
+            else:
+                print("Wrong name or give me a value")
+
+try:
+	class FilterOSCClient(OSCClient):
+		def send(self, message, *args):
+			if "video" in str(message.message):
+				OSCClient.send(self, message, *args)
+	def OSCVideo(video_adress):
+		my_client = FilterOSCClient()
+		my_client.connect((video_adress, 20000))
+		Server.forward = my_client
+	OSCVideo(crashOSIp)
+	print("Video Connected")
+except Exception as e:
+	print(e)
+
+# def reboot():
+#     Clock.clear()
+#     import signal
+#     carla = subprocess.Popen(["pgrep", "carla"], stdout=subprocess.PIPE, shell=False)
+#     for pid in carla.stdout:
+#         os.kill(int(pid),signal.SIGTERM)
+#     scsynth = subprocess.Popen(["pgrep", "scsynth"], stdout=subprocess.PIPE, shell=False)
+#     for pid in scsynth.stdout:
+#         os.kill(int(pid),signal.SIGTERM)
+#     scide = subprocess.Popen(["pgrep", "scide"], stdout=subprocess.PIPE, shell=False)
+#     for pid in scide.stdout:
+#         os.kill(int(pid),signal.SIGTERM)
+#     sleep(1)
+#     os.system('scide %F &')
+#     sleep(10)
+#     os.system('carla /home/zbdm/crashserver/config/carla_live.carxp &')
+#     FoxDot.reload()
+
 ### Mixer
 # try:
 # 	class Mixer():

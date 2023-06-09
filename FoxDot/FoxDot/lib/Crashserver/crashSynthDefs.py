@@ -108,6 +108,10 @@ gray.add()
 hnoise = FileSynthDef("hnoise")
 hnoise.add()
 
+ikea = FileSynthDef("ikea")
+ikea.add()
+
+
 latoo = FileSynthDef("latoo")
 latoo.add()
 
@@ -182,6 +186,9 @@ tritri.add()
 
 supersaw = FileSynthDef("supersaw")
 supersaw.add()
+
+superbass = FileSynthDef("superbass")
+superbass.add()
 
 ssaw = FileSynthDef("ssaw")
 ssaw.add()

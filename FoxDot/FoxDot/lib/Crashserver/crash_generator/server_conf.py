@@ -29,8 +29,8 @@ probChangeBpm = 2
 probAddLpf = 6
 probAddDrop = 3
 probAddKick = 4
-probAddAccompany = 5
-probAddFxOut = 0 # probability to add an fx output
+probAddAccompany = 3
+probAddFxOut = 1 # probability to add an fx output
 
 # Add player probability
 probAddSynth = 1

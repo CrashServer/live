@@ -52,7 +52,7 @@ if __name__ != "__main__":
 
 	#LOOP LIST
 	loopNames = sorted([fn for fn in listdir(FOXDOT_LOOP)])
-	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8", "__init__.py"]
+	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8", "__init__.py", "serverVoice", "onsetDict.py", "slaap"]
 	for loopxclude in loopExclude:
 		try:
 			loopNames.remove(loopxclude)

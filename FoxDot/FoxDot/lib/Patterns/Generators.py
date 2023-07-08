@@ -72,6 +72,55 @@ class RandomGenerator(GeneratorPattern):
     def triangular(self, *args, **kwargs):
         return self.random.triangular(*args, **kwargs)
 
+
+# class PRand(RandomGenerator):
+#     ''' Returns a random integer between start and stop. If start is a container-type it returns
+#         a random item for that container. '''
+#     def __init__(self, start, stop=None, **kwargs):
+#         # If we're given a list, choose from that list -- TODO always use a list and use range
+#         RandomGenerator.__init__(self, **kwargs)
+#
+#         self.args = (start, stop)
+#         self.kwargs = kwargs
+#
+#         # Choosing from a list
+#         if hasattr(start, "__iter__"):
+#             self.data = Pattern(start)
+#             try:
+#                 assert(len(self.data)>0)
+#             except AssertionError:
+#                 raise AssertionError("{}: Argument size must be greater than 0".format(self.name))
+#             self.choosing = True
+#             self.low = self.high = None
+#
+#         else:
+#             # Choosing from a range
+#             self.choosing = False
+#             self.low  = start if stop is not None else 0
+#             self.high = stop  if stop is not None else start
+#             try:
+#                 assert((self.high - self.low)>=1)
+#             except AssertionError:
+#                 raise AssertionError("{}: Range size must be greater than 1".format(self.name))
+#             self.data = "{}, {}".format(self.low, self.high)
+#
+#         self.init_random(**kwargs)
+#
+#     def choose(self):
+#         return self.data[self.choice(range(self.MAX_SIZE))]
+#
+#     def func(self, index):
+#         if self.choosing:
+#             # value = self.choice(self.data)
+#             value = self.choose()
+#         else:
+#             value = self.randint(self.low, self.high)
+#         return value
+#
+#     def string(self):
+#         """ Used in PlayString to show a PRand in curly braces """
+#         return "{" + self.data.string() + "}"
+
 class PRand(RandomGenerator):
     ''' Returns a random integer between start and stop. If start is a container-type it returns
         a random item for that container. '''
@@ -81,7 +130,7 @@ class PRand(RandomGenerator):
 
         self.args = (start, stop)
         self.kwargs = kwargs
-        
+
         # Choosing from a list
         if hasattr(start, "__iter__"):
             self.data = Pattern(start)
@@ -91,23 +140,23 @@ class PRand(RandomGenerator):
                 raise AssertionError("{}: Argument size must be greater than 0".format(self.name))
             self.choosing = True
             self.low = self.high = None
-        
+
         else:
             # Choosing from a range
             self.choosing = False
-            self.low  = start if stop is not None else 0
-            self.high = stop  if stop is not None else start
-            try:
-                assert((self.high - self.low)>=1)
-            except AssertionError:
-                raise AssertionError("{}: Range size must be greater than 1".format(self.name))
+            self.low  = min([start, stop]) if stop is not None else 0
+            self.high = max([start, stop]) if stop is not None else start
+            # try:
+            #     assert((self.high - self.low)>=1)
+            # except AssertionError:
+            #     raise AssertionError("{}: Range size must be greater than 1".format(self.name))
             self.data = "{}, {}".format(self.low, self.high)
 
         self.init_random(**kwargs)
 
     def choose(self):
         return self.data[self.choice(range(self.MAX_SIZE))]
-            
+
     def func(self, index):
         if self.choosing:
             # value = self.choice(self.data)
@@ -119,6 +168,7 @@ class PRand(RandomGenerator):
     def string(self):
         """ Used in PlayString to show a PRand in curly braces """
         return "{" + self.data.string() + "}"
+
 
 class PWhite(RandomGenerator):
     ''' Returns random floating point values between 'lo' and 'hi' '''

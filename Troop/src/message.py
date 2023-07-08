@@ -181,7 +181,7 @@ class MESSAGE(object):
     def header(cls):
         # args = inspect.getargspec(cls.__init__).args
         # args[0] = 'type'
-        args = ['type', 'msg_id'] + inspect.getargspec(cls.__init__).args[1:]
+        args = ['type', 'msg_id'] + inspect.getfullargspec(cls.__init__).args[1:]
         return args
 
 # Define types of message

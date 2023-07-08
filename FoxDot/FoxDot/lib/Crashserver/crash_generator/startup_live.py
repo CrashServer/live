@@ -267,6 +267,27 @@ def morph(self, other, prob=50):
 			print(e)
 	return self
 
+@player_method
+def trim(self, length):
+	'''Trim to length evey pattern of player'''
+	if length !=0:
+		if length >= 1:
+			for attr in self.attr:
+				try:
+					self.attr[attr] = self.attr[attr].trim(length)
+				except AttributeError:
+					pass
+		else:
+			for attr in self.attr:
+				try:
+					self.attr[attr] = self.attr[attr].trim(1)
+				except AttributeError:
+					pass
+			self.attr["dur"] = self.attr["dur"] * length
+		return self
+	# else:
+	# 	self.dur = 0.5 if self.synthdef == SamplePlayer else 1
+
 def genArp(nbrseq=4, lengthseq=8):
 	''' Generate arpeggiato based on markov Chords progression '''
 	seq = PMarkov()[:nbrseq]

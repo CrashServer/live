@@ -340,11 +340,12 @@ class SCLangServerManager(ServerManager):
         vidid1   = int(packet.get("vid1", 0))
         vidid2   = int(packet.get("vid2", 0))
 
-        blend1   = float(packet.get("blend1", 0.0))
-        blend2   = float(packet.get("blend2", 0.0))
+        blend1   = int(min(255,(packet.get("blend1", 0.5))*255))
+        blend2   = int(min(255,(packet.get("blend2", 0.5))*255))
         scene   = int(packet.get("scene", 0))
+        blendtype = int(packet.get("blendtype", 0))
 
-        msg.append( [synthdef, vidpos1, vidid1, vidpos2, vidid2, blend1, blend2, scene] ) # crash mod
+        msg.append( [synthdef, vidpos1, vidid1, vidpos2, vidid2, blend1, blend2, scene, blendtype] ) # crash mod
 
         bundle.append(msg)
 

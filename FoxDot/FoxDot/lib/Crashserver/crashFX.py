@@ -434,6 +434,31 @@ fx.add("wet = ~stutter.(osc, reset, stutlen)")
 fx.add("osc = SelectX.ar(stut, [dry, wet], wrap:1)")
 fx.save()
 
+fx = FxList.new('sbrk', 'stutbreak', {'sbrk': 0.5, 't_reset': 0, 'sbreakdur': 4, 'sus': 1}, order=2)
+fx.add_var("dry")
+fx.add_var("reset")
+fx.add_var("wet")
+fx.add_var("stuti")
+fx.add_var("stutlen")
+fx.add_var("stutrate")
+fx.add("stutrate=Rand(0.01, 1.0)")
+fx.add("stutlen=Rand(0.01,0.08)")
+fx.add("~stutter = { |snd, reset, stutlen, maxdelay = 1| var phase, fragment, del; phase = Sweep.ar(reset); fragment = { |ph| (ph - Delay1.ar(ph)) < 0 + Impulse.ar(0) }.value(phase / stutlen % 1); del = Latch.ar(phase, fragment) + ((stutlen - Sweep.ar(fragment)) * (stutrate - 1)); DelayC.ar(snd, maxdelay, del); }")
+fx.add("dry = osc")
+fx.add("stuti = IRand(1,sus*sbreakdur).round(2)")
+fx.add("reset = Onsets.kr(FFT(LocalBuf(1024), osc), t_reset)")
+fx.add("wet = ~stutter.(osc, reset, stutlen)")
+fx.add("wet = wet * LFPulse.kr(stuti/16, 0.5, mul:0.8)")
+fx.add("dry = dry * LFPulse.kr(stuti/16, 0)")
+fx.add("osc = SelectX.ar(sbrk, [dry, wet], wrap:1)")
+fx.save()
+
+
+
+
+
+
+
 fx = FxList.new('clouds','clouds', {'clouds': 0, 'cpos':0.5, 'csize':0.25, 'cdens': 0.4, 'ctex': 0.5, 'cpitch': 0, 'cgain':2, 'cfb': 0, 'cmode': 0}, order=2)
 fx.doc("Clouds granulator")
 fx.add("osc = MiClouds.ar(osc, pit: cpitch, pos: cpos, size:csize, dens: cdens, tex: ctex, drywet: clouds, in_gain: cgain, fb: cfb, mode:cmode)")

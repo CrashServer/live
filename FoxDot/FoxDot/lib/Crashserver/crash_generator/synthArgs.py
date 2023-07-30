@@ -89,6 +89,7 @@ synthArgs = {
 	'plaits': {'atk': patk, 'decay': pdec, 'rel': prel, 'engine': [0,15], 'harm': [0.0,1.0], 'timbre': [0.0,0.6], 'morph': [0.0,1.0], 'cutoff': pfreq, 'rq': prq},
 	'plaitsX': {'atk': patk, 'decay': pdec, 'rel': prel, 'preset': [0,13], 'cutoff': pfreq, 'rq': prq},
 	'pluck': {},
+	'pluck2': {},
 	'prof': {'atk': patk, 'decay': pdec, 'rel': prel, 'rate': [0.0,10.0], 'phase': [0.0,1.0], 'cutoff': [400, 9000], 'rq': [0.1,0.9]},
 	'prophet': {'rate': [0.0,10.0], 'phase': [0.0,1.0], 'cutoff': [400,8000], 'rq': [0.1,0.9]},
 	'pulse': {'rate': [0.0,1.0]},

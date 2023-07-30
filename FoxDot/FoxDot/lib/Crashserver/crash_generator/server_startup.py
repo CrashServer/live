@@ -576,7 +576,7 @@ def addFxOut():
 		player = choice(Clock.playing)
 		fxout = choice(["fx1", "fx2"])
 		sendOut(f'{player}.{fxout}=1')
-		player.__setattr__(fxout, 1)
+		player.__setattr__(fxout, 0.3)
 	except Exception as err:
 		print("addFxOut problem : " + err)
 

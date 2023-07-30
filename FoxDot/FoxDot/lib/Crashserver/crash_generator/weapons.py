@@ -122,12 +122,12 @@ def gen_player_attributes(playerType=None):
 			if playerType != "loop": 
 				value = f'SDur({choice([8,16,32])})'
 			else:
-				attr = "blur"
-				value = GENERATE_LIST(1,4) 	
+				attr = "sbrk"
+				value = GENERATE_FLOAT_LIST(0.2,0.8)
 		elif attr in ["sus"]:
 			if playerType == "loop":
-				attr = "blur"
-				value = GENERATE_LIST(1,4)
+				attr = "sbrk"
+				value = GENERATE_FLOAT_LIST(0.2,0.8)
 			else:
 				value = GENERATE_FLOAT_LIST(0.2,2)
 		elif attr in ["pan"]:

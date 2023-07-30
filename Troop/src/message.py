@@ -179,7 +179,7 @@ class MESSAGE(object):
 
     @classmethod
     def header(cls):
-        # args = inspect.getargspec(cls.__init__).args
+        # args = inspect.getfullargspec(cls.__init__).args
         # args[0] = 'type'
         args = ['type', 'msg_id'] + inspect.getfullargspec(cls.__init__).args[1:]
         return args

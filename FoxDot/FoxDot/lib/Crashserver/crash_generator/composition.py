@@ -50,6 +50,7 @@ fxdict = {
 'position' : {'position': preso},
 'ring' : {'ring': preso, 'ringl': [0,15000], 'ringh': [0,15000]},
 'shift' : {'shift': [0.0,5.0], 'shiftsize': [0.0,0.5]},
+'sbrk' : {'sbrk': [0.1, 0.8],  'sbrkdur': [1, 8]},
 'fold' : {'fold': [0.0,0.5], 'symetry': preso, 'smooth': preso},
 'phaser' : {'phaser': preso, 'phaserdepth': preso},
 'ringz' : {'ringz': preso, 'ringzfreq': [50,1000]},

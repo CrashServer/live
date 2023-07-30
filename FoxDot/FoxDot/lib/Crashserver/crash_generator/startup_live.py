@@ -177,6 +177,14 @@ def print_loops(loop=""):
 		if crashPanelSending:
 			crashpanel.sendOnce(str(listloops))
 
+def print_video():
+	'''Helper for video player'''
+	txt = "v1 >> video(pos1=0.3, pos2=0.5, vid1=3, vid2=4, blend1=0.7, blend2=0.3, scene=4, blendtype=3) \n pos* = scrub video* \n vid* = index of video* \n blend* = opacity of video* \n scene = index of scene \n blendtype = choose blend type between vid1 et vid2"
+	print(txt)
+	clip.copy("v1 >> video(pos1=0.0, pos2=0.0, vid1=0, vid2=0, blend1=0.5, blend2=0.5, scene=1, blendtype=0)")
+	if crashPanelSending:
+		crashpanel.sendOnce(str(txt))
+
 def PMorse(text, point=1/4, tiret=3/4):
 	""" Convert a string to the value of point & tiret """
 	MORSE_DICT = { 'A':'.-', 'B':'-...',

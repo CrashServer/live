@@ -465,9 +465,15 @@ fx.add("osc = MiClouds.ar(osc, pit: cpitch, pos: cpos, size:csize, dens: cdens, 
 #fx.add("ReplaceOut.ar(bus, osc)")
 fx.save()
 
-fx = FxList.new('mring','MiRings', {'mring': 0, 'rstruct':0.1, 'rbright': 0.8, 'rpos': 0, 'rmodel': 0, 'rpoly': 0, 'regg': 0}, order=2)
+fx = FxList.new('mring','MiRings', {'mring': 0, 'rstruct':0.1, 'rbright': 0.8, 'rdamp': 0.7, 'rpos': 0, 'rmodel': 1, 'rpoly': 4, 'regg': 0, 'sus':0, 'rsus': 2}, order=2)
 fx.doc("Mi Rings resonator")
-fx.add("osc = MiRings.ar(osc,osc,osc, rstruct, rbright, mring, rpos, rmodel, rpoly, regg)")
+fx.add_var("dry")
+fx.add_var("pitch")
+fx.add("pitch = In.kr(bus, 1)")
+fx.add("dry = osc")
+fx.add("osc = MiRings.ar(in: osc,trig:1,pit: abs(pitch.cpsmidi),struct: rstruct, bright: rbright, damp: rdamp, pos: rpos, model: rmodel, poly: rpoly, intern_exciter: 1, easteregg: regg, mul: 1)")
+fx.add("osc = osc * EnvGen.kr(Env([1,1,0], [sus*rsus, 0.01]), doneAction: 2)")
+fx.add("osc = SelectX.ar(mring, [dry, osc], wrap:1)")
 fx.save()
 
 fx = FxList.new('panR','panR', {'panR': 1}, order=2)

@@ -6,7 +6,6 @@
 
 #include "ofMain.h"
 
-#include "ofxAssimpModelLoader.h"
 #include "ofEasyCam.h" 
 #include "ofxGui.h"
 #include "ofxXmlSettings.h"
@@ -20,14 +19,11 @@
 #include "glitcher.h"
 #include "drawwindows.h"
 #include "boot.h"
-#include "postproc.h"
 #include "dmx.h"
 #include "scene.h"
 #include "imageplayer.h"
 #include "textris.h"
 #include "VideoplayerHap.h"
-#include "ofxBloom.h"
-
 
 class ofApp : public ofBaseApp{
 
@@ -58,9 +54,12 @@ class ofApp : public ofBaseApp{
         void loadDefaultParam(bool&);
         void setScene(int&);
         void setWaitingMsg(bool&);
+        void runTest();
         // server corruption
         void serverCorruptionBang();
         void serverCorruptionRestore();
+
+
 
         // PANEL GUI
 		ofxPanel gui;
@@ -82,13 +81,12 @@ class ofApp : public ofBaseApp{
 
         /// Settings
         ofxXmlSettings settings;
-        bool barduino, bdmx;
-
+        bool barduino, bdmx, bvideoFox;
 
         /// CAMERA
-		ofEasyCam cam;
-        bool camShake;
-        float camShakeTime;
+//		ofEasyCam cam;
+//        bool camShake;
+//        float camShakeTime;
 
         /// game logic;
 		int integrity = 100;
@@ -96,12 +94,6 @@ class ofApp : public ofBaseApp{
 
         /// audio fft
         float rms, kick, hihat, snare, initTime;
-
-        // 3D stuff
-        // Render render;
-        // ProcBackground procBackground;
-        // SphereMap sphereMap;
-        // Text3d text3d;
 
         /// Win win;
         Data data;
@@ -111,9 +103,7 @@ class ofApp : public ofBaseApp{
         WinScore winScore;
         AudioFft audioFft;
         Videoplayer videoplayer;
-        //Videoplayer3d videoplayer3d;
-        //VideoplayerAscii videoplayerAscii;
-        VideoPlayerHap videoplayerHap, videoHapServer; //, videoplayerHapInter;
+        VideoPlayerHap videoplayerHap, videoplayerHap2, videoHapServer; //, videoplayerHapInter;
         Camera webcam;
         UiMisc uiMisc;
         Glitcher glitcherCam, glitcherLogo, glitcherVideo;
@@ -123,11 +113,14 @@ class ofApp : public ofBaseApp{
         OverHeating overheating;
         Boot boot;
 
-        PostProc postCode, postPixel, postProc, postGlitch, postShift, postEdge, postTV, postKali, postToon;
         Dmx dmx;
 
         ofColor dmx1Col;
         ofColor dmx2Col;
+
+        int serverFade=1;
+
+//        ofFbo vidFbo1, vidFbo2;
 
         /// SCENES
         void scene0Update();

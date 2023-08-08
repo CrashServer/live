@@ -47,6 +47,7 @@ void Boot::update(){
 }
 
 void Boot::draw(int integrity){
+    ofPushStyle();
     ofSetColor(ofColor::greenYellow);
     for (unsigned int i=0; i< (cBoot.size()); i++){
 //        if (ofRandom(0,100)>90){
@@ -69,6 +70,7 @@ void Boot::draw(int integrity){
             font.drawString("*", (fontCharBox.width)*i, 0);
         }
     ofPopMatrix();
+        ofPopStyle();
 
 
     if (bShowMsg) {

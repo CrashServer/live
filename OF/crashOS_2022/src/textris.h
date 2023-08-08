@@ -81,13 +81,13 @@ class Textris{
     vector<particle> particles;
     vector<float> fftBand;
 
-    ofPolyline groundLine;
+//    ofPolyline groundLine;
     ofxBox2dEdge ground;
 
     string insertNewlines(string in, const size_t every_n);
 
     void setup(vector<ofColor> playerColor=vector<ofColor>{ofColor::paleTurquoise, ofColor::greenYellow, ofColor::red});
-    void update(vector<float> fftSubbands);
+    void update();
     void draw();
     void addText(string textrisText, char player);
     void clear();

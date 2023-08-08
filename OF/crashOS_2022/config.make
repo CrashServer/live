@@ -8,7 +8,7 @@
 #   The location of your root openFrameworks installation
 #       (default) OF_ROOT = ../../.. 
 ################################################################################
-OF_ROOT = /home/zbdm/program/openFrameworks
+# OF_ROOT = ../../..
 
 ################################################################################
 # PROJECT ROOT
@@ -70,13 +70,18 @@ OF_ROOT = /home/zbdm/program/openFrameworks
 #		(default) PROJECT_LDFLAGS = -Wl,-rpath=./libs
 #
 #   Note: Leave a leading space when adding list items with the += operator
-#
+################################################################################
+
 # Currently, shared libraries that are needed are copied to the 
 # $(PROJECT_ROOT)/bin/libs directory.  The following LDFLAGS tell the linker to
 # add a runtime path to search for those shared libraries, since they aren't 
 # incorporated directly into the final executable application binary.
-################################################################################
+# TODO: should this be a default setting?
 # PROJECT_LDFLAGS=-Wl,-rpath=./libs
+PROJECT_LDFLAGS=-Wl,-rpath=./libs
+PROJECT_LDFLAGS+=-lftdi
+
+
 
 ################################################################################
 # PROJECT DEFINES
@@ -104,7 +109,7 @@ OF_ROOT = /home/zbdm/program/openFrameworks
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-# PROJECT_CFLAGS = 
+# PROJECT_CFLAGS =
 
 ################################################################################
 # PROJECT OPTIMIZATION CFLAGS
@@ -137,5 +142,7 @@ OF_ROOT = /home/zbdm/program/openFrameworks
 #		(default) PROJECT_CC = (blank)
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
+PROJECT_CXX += clang++
+PROJECT_CXX += -std=c++17
 # PROJECT_CXX = 
 # PROJECT_CC = 

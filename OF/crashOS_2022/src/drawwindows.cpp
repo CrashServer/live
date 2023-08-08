@@ -127,10 +127,8 @@ void WinCode::draw(vector<CodeLine>& vectorCode, vector<CodeInstant> &vectorInst
         // draw Zbdm
 
         // eval highlight
-        //ofEnableAlphaBlending();
         ofSetColor(svdkColor, evalZbdm);
         ofDrawRectangle(codeBoxZbdm);
-        //ofDisableAlphaBlending();
 
         // draw string
         ofSetColor(zbdmColor);
@@ -153,7 +151,6 @@ void WinCode::draw(vector<CodeLine>& vectorCode, vector<CodeInstant> &vectorInst
         ofTranslate(0, codeBoxZbdm.height + this->padding);
 
         // eval highlight
-        //ofEnableAlphaBlending();
         ofSetColor(svdkColor, evalSvdk);
         ofDrawRectangle(codeBoxSvdk);
 
@@ -298,7 +295,7 @@ void WinIntegrity::setup(int padding, ofColor uiColor){
         parameters.add(pos.set("Integrity Box", glm::vec3(1480, 100, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
         parameters.add(size.set("Integrity size", glm::vec2(320, 100), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
     }
-    newText();
+    newText("");
 }
 
 void WinIntegrity::update(int integrity, string nameModel){
@@ -321,7 +318,7 @@ void WinIntegrity::draw()
     ofPopStyle();
 }
 
-void WinIntegrity::newText(){
+void WinIntegrity::newText(string target){
     vector<string> textAction{
         "compiling", "destroying", "uploading", "sequencing", "generating", "revoking", "sending", "splicing", "abording",
         "accessing","refusing", "reseting", "removing", "cleaning", "recovering", "requesting", "seeking", "probing", "opening",
@@ -341,8 +338,8 @@ void WinIntegrity::newText(){
         "rootkit", "worm",
 };
     ofRandomize(textAction);
-    ofRandomize(textTarget);
-    this->targetText = ofToUpper(textAction[0]) + "\n" + ofToUpper(textTarget[0]);
+    //ofRandomize(textTarget);
+    this->targetText = ofToUpper(textAction[0]) + "\n" + ofToUpper(target);
 }
 
 ////-------------------------------------------------------------
@@ -481,77 +478,4 @@ string Windo::textInjection(string textIn){
     textIn[ofRandom(0, textIn.length())] = ch;
     return textIn;
 }
-
-//void ofApp::windowImageDraw(glm::vec3 windowPos, glm::vec2 windowSize, ofColor winColor){
-//    ofPushStyle();
-//    ofPushMatrix();
-//    ofDisableDepthTest();
-//    ofEnableAlphaBlending();
-//        ofTranslate(windowPos.x, windowPos.y, windowPos.z);
-//        ofScale(windowSize.x/windows.getWidth(), windowSize.y/windows.getHeight());
-//        windows.draw(0,0);
-//    ofDisableAlphaBlending();
-//    ofPopMatrix();
-//    ofPopStyle();
-//}
-
-// Draw cpu
-
-
-
-//--------------------------------------------------------------
-//void ofApp::drawLog(){
-//    ofPushStyle();
-//    ofPushMatrix();
-//
-//    drawWindow(logPos, logSize, uiColor);
-//    ofTranslate(logPos->x, logPos->y+30, logPos->z);
-//    ofSetColor(255);
-//    string logTextI= logString[logStringIndex];
-//    int maxLogWidth = (int) (logSize->x - 70) / fontCharBox.width; // max log text char witdh
-//    logTextI = insertNewlines(logTextI, maxLogWidth);
-//    ofRectangle logBox = font.getStringBoundingBox(logTextI,0,0);
-//    logSize = glm::vec2(logSize->x, logBox.height+40);
-//    font.drawString(logTextI, 10, 0);
-//    ofPopMatrix();
-//    ofPopStyle();
-//}
-
-/*
-//-------------------------
-void ofApp::drawScore(){
-    drawWindow(scorePos, scoreSize, stateColor[stateSlider]);
-
-    ofPushStyle();
-    ofPushMatrix();
-
-    ofTranslate(scorePos + glm::vec3(10,30,0));
-    ofSetColor(ofColor(255, 150));
-    font.drawString("CrashServer : +" + ofToString(csScore),0,0);
-    font.drawString("Server : " + ofToString(serverScore),0,30);
-    font.drawString("Total : " + ofToString(totalScore),0,60);
-
-    ofPopMatrix();
-    ofPopStyle();
-}
-*/
-/*//-------------------------
-void ofApp::drawTargetWindow(){
-    ofPushStyle();
-    drawWindow(targetWindowPos, targetWindowSize, stateColor[stateSlider]);
-    ofSetColor(ofColor(255, 150));
-    ofPushMatrix();
-    ofTranslate(targetWindowPos + glm::vec3(10,30,0));
-    font.drawString("Attack Node [" + ofToString(shapeComplexity-2) +"]",0,0);
-    ofTranslate(0,30);
-    font.drawString("Cells left : " + ofToString(restCell) + "/" + ofToString(totalCell), 0,0);
-    if (restFireWall > 0){
-        ofTranslate(0,30);
-        font.drawString("FireWall left : " + ofToString(restFireWall) + "/" + ofToString(totalFireWall), 0,0);
-        }
-    ofPopMatrix();
-    ofPopStyle();
-}
-
-*/
 

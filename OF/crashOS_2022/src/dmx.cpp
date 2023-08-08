@@ -8,7 +8,7 @@ void Dmx::setup(int dmxAddr1, int dmxAddr2){
     this->dmxAddr2 = dmxAddr2;
     memset( dmxData_, 0, DMX_DATA_LENGTH );
     dmxInterface_ = ofxGenericDmx::createDevice(DmxDevice::DMX_DEVICE_RAW);
-    bool opened = dmxInterface_->open();
+    opened = dmxInterface_->open();
     if ( dmxInterface_ == 0 || !opened ) printf( "No FTDI Device Found\n" );
     else printf( "isOpen: %i\n", dmxInterface_->isOpen() );
 }

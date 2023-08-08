@@ -76,7 +76,7 @@ public:
     void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
     void update(int integrity, string nameModel=" ");
     void draw();
-    void newText();
+    void newText(string target);
 
     int integrity;
     string nameModel, targetText;

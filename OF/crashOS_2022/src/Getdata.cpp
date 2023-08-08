@@ -14,7 +14,7 @@ CodeInstant::CodeInstant(){
 }
 
 
-void Data::setup(string troopIp, int troopPort){
+void Data::setup(string troopIp, int troopPort, int arduinoPort, bool bvideoFox){
     oscReceiver.setup(PORTOSC);
     oscSender.setup(troopIp, troopPort);
     maxLineCode = 40;
@@ -28,19 +28,21 @@ void Data::setup(string troopIp, int troopPort){
 
     //    vectorCode.assign(maxLineCode + 1, CodeLine);
     bang = '0';
-
-    serial.setup(0, 115200);
-    int testByte = 0;
-    testByte = serial.readByte();
-    if (testByte == OF_SERIAL_ERROR){
-        this->barduino = false;
-        cout << "no arduino found, sorry no push button :-(" << endl;
-    }
-    else {
-        this->barduino = true;
-        cout << "arduino ready to get pushed !" << endl;
-        }
+    this->arduinoPort = arduinoPort;
+    this->bvideoFox = bvideoFox;
+    testArduino();
     isServerActive = false;
+
+    if (parameters.size()==0){
+        parameters.setName("Test");
+        parameters.add(cpuTest.set("Cpu", false));
+        parameters.add(arduinoTest.set("Arduino", false));
+        parameters.add(oscTestZbdm.set("Osc ZBDM", false));
+        parameters.add(oscTestSvdk.set("Osc Svdk", false));
+        parameters.add(dmxTest.set("Dmx", false));
+        parameters.add(buttonTest.set("Button", false));
+        parameters.add(button.set("Test"));
+    }
 }
 
 void Data::update() {
@@ -125,10 +127,6 @@ void Data::update() {
             }
         }
         else if (oscAdress == "/serverCode") {
-//            string txt = messageOsc.getArgAsString(0);
-//            txt = insertNewlines(txt, maxCodeWidth);
-//            vectorCode.push_back(txt);
-//            vectorSymbol.push_back('@');
             CodeLine codeLine;
             codeLine.code = messageOsc.getArgAsString(0);
             codeLine.symbol = '@';
@@ -146,7 +144,6 @@ void Data::update() {
             vectorInstant[0].name = messageOsc.getArgAsString(0);
             vectorInstant[0].code = messageOsc.getArgAsString(1);
             vectorInstant[0].posMark = messageOsc.getArgAsInt(2);
-            //vectorInstant[0].code.insert(vectorInstant[0].posMark, "_");
         }
 
         else if (oscAdress == "/svdkTypeCode"){
@@ -155,6 +152,15 @@ void Data::update() {
             vectorInstant[1].posMark = messageOsc.getArgAsInt(2);
         }
 
+        else if (oscAdress == "/video" && this->bvideoFox){
+            vidpos1 = messageOsc.getArgAsFloat(1);
+            vidid1 = messageOsc.getArgAsInt(2);
+            vidpos2 = messageOsc.getArgAsFloat(3);
+            vidid2 = messageOsc.getArgAsInt(4);
+            vidblend1 = messageOsc.getArgAsInt(5);
+            vidblend2 = messageOsc.getArgAsInt(6);
+            scene = messageOsc.getArgAsInt(7);
+        }
     }
     if (!this->barduino){
         if (delayServerActivity > 0) {
@@ -165,12 +171,15 @@ void Data::update() {
     //// read button state
     if (this->barduino){
         char button = serial.readByte();
-        if (button == 's' && prevButton == 'c' && isServerActive == false){ // activate server
+        if (button == 's' && prevButton == 'c' && isServerActive == false && scene!=0){ // activate server
             isServerActive = true;
             vector<string> param;
             param.push_back("1");
             sendOSC("/cmd/serverState", param);
             prevButton = button;
+        }
+        else if (button == 's' && prevButton == 'c' && isServerActive == false && scene==0){
+            testButton = true;
         }
         else if (button == 'c' && prevButton == 's' && isServerActive == true){ // shutdown server
             isServerActive = false;
@@ -178,6 +187,7 @@ void Data::update() {
             param.push_back("0");
             sendOSC("/cmd/serverState", param);
             prevButton = button;
+            testButton = false;
         }
     }
 }
@@ -201,6 +211,41 @@ bool Data::isNumber(const string &s){
                 return false;
         }
         return true;
+}
+
+void Data::testArduino(){
+        //serial.listDevices();
+        if (!serial.isInitialized()) {
+            vector<ofSerialDeviceInfo> devices = serial.getDeviceList();
+
+        for (auto& device : devices) {
+            string portName = device.getDeviceName();
+                if (portName.compare(3, 3, "ACM") == 0) {
+                serial.setup(portName, 115200);  // Adjust the baud rate if needed
+
+                if (serial.isInitialized()) {
+                    cout << "Arduino connected on port: " << device.getDeviceName() << endl;
+                    this->barduino = true;
+                    break;
+                    }
+                else {
+                    this->barduino = false;
+                    }
+            }
+        }
+        }
+    /*
+        serial.setup(this->arduinoPort, 115200);
+        int testByte = 0;
+        testByte = serial.readByte();
+        if (testByte == OF_SERIAL_ERROR){
+            this->barduino = false;
+            cout << "no arduino found, sorry no push button :-(" << endl;
+        }
+        else {
+            this->barduino = true;
+            cout << "arduino ready to get pushed !" << endl;
+        }*/
 }
 
 // return a text with a new line every x

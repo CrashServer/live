@@ -21,6 +21,7 @@ void VideoPlayerHap::setup(string path){
     vidIndex = 0;
     vidTotal = videoList.size();
     string videoActual = videoList.getPath(0);
+    filename = ofFilePath::removeExt(ofFilePath::getFileName(videoActual));
 
     ofSetVerticalSync(true);
     ofBackground(0,0,0);
@@ -30,10 +31,18 @@ void VideoPlayerHap::setup(string path){
     hapPlayer.setSpeed(1);
     hapPlayer.setPaused(false);
 
+    vidpos = 0.0;
 }
 
-void VideoPlayerHap::update(){
-
+void VideoPlayerHap::update(float vidpos, int vidid){
+    if (vidpos != this->vidpos){
+        hapPlayer.setPosition(vidpos);
+        this->vidpos = vidpos;
+    }
+    if (vidid != vidIndex){
+        vidIndex = vidid - 1;
+        //newSeq();
+    }
 }
 
 
@@ -41,8 +50,8 @@ void VideoPlayerHap::draw(){
     //ofEnableAlphaBlending();
 
     if (hapPlayer.isLoaded()){
-        ofRectangle videoRect(0, 0, hapPlayer.getWidth(), hapPlayer.getHeight());
-        videoRect.scaleTo(ofGetWindowRect());
+        //ofRectangle videoRect(0, 0, hapPlayer.getWidth(), hapPlayer.getHeight());
+        //videoRect.scaleTo(ofGetWindowRect());
         hapPlayer.draw(this->pos.x, this->pos.y, this->size.x, this->size.y);
 
     }
@@ -80,6 +89,7 @@ void VideoPlayerHap::newSeq(){
     vidIndex++;
     vidIndex = ofClamp(vidIndex, 0, vidTotal-1);
     string videoActual = videoList.getPath(vidIndex);
+    filename = ofFilePath::removeExt(ofFilePath::getFileName(videoActual));
     hapPlayer.load(videoActual);
 }
 

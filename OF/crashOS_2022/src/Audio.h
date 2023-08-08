@@ -6,7 +6,7 @@
 #include "fft.h"
 #include "ofxBeat.h"
 
-#define BUFFER_SIZE 256 //1024
+#define BUFFER_SIZE 1024 //1024
 #define NUM_WINDOWS 4
 
 class AudioFft : public ofBaseApp {

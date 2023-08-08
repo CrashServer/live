@@ -14,6 +14,8 @@ void ofApp::setup(){
     width = settings.getValue("config:width", 1920);
     height = settings.getValue("config:height", 1080);
     bdmx = settings.getValue("config:dmxActive", false);
+    int arduinoPort = settings.getValue("config:arduinoPort", 0);
+    bvideoFox = settings.getValue("config:videoFox", false);
     string textPres = settings.getValue("config:textPres", "");
     glm::vec2 textPresPos = glm::vec2(settings.getValue("config:textPosX", 80), settings.getValue("config:textPosY", 1060));
     int dmxAddr1 = settings.getValue("config:dmxAddr1", 1);
@@ -42,7 +44,7 @@ void ofApp::setup(){
     serverScore = 0;
 
     /// NETWORK & arduino
-    data.setup(troopIp, troopPort);
+    data.setup(troopIp, troopPort, arduinoPort, bvideoFox);
 
     /// FFT
     initTime = 0;
@@ -63,108 +65,12 @@ void ofApp::setup(){
     //videoplayer3d.setup3d();
     //videoplayerAscii.setupAscii();
     videoplayerHap.setup("videoHap/video/");
+    videoplayerHap2.setup("videoHap/video/");
     videoHapServer.setup("videoHap/server/");
     // videoplayerHapInter.setup("videoHap/intervention/");
     audioFft.setup();
     if(bdmx){dmx.setup(dmxAddr1, dmxAddr2);}
 
-    // Post processing
-    postCode.setup(
-        /* Bloom */            true,
-        /* pixelate */         false,
-        /* Bleach */           false,
-        /* shift */            false,
-        /* Edge*/              false,
-        /* Kali */             false,
-        /* Aces */             false,
-        /* Noise */            false,
-        /* TV */               false,
-        /* Glitch */           false,
-        /* filmGrain*/         false,
-        /* Toon */             false
-    );
-
-    // TV GLITCH VIDEO PLAYER
-    postTV.setup(
-        /* Bloom */            true,
-        /* pixelate */         false,
-        /* Bleach */           false,
-        /* shift */            false,
-        /* Edge*/              false,
-        /* Kali */             false,
-        /* Aces */             true,
-        /* Noise */            false,
-        /* TV */               true,
-        /* Glitch */           false,
-        /* filmGrain*/         false,
-        /* Toon */             false
-
-    );
-
-    // AUDIO REACTIVE POST-FX KALI
-    postKali.setup(
-        /* Bloom */            false,
-        /* pixelate */         false,
-        /* Bleach */           false,
-        /* shift */            false,
-        /* Edge*/              false,
-        /* Kali */             true,
-        /* Aces */             false,
-        /* Noise */            false,
-        /* TV */               false,
-        /* Glitch */           false,
-        /* filmGrain*/         false,
-        /* Toon */             false
-    );
-    //postKali.gKaleiSegments = 2;
-
-
-
-    // GENERIC FILTER / ACES LUT VIDEO PLAYER
-    postProc.setup(
-        /* Bloom */            true,
-        /* pixelate */         false,
-        /* Bleach */           false,
-        /* shift */            false,
-        /* Edge*/              false,
-        /* Kali */             false,
-        /* Aces */             true,
-        /* Noise */            false,
-        /* TV */               false,
-        /* Glitch */           false,
-        /* filmGrain*/         false,
-        /* Toon */             false
-    );
-
-    postPixel.setup(
-                /* Bloom */            false,
-                /* pixelate */         true,
-                /* Bleach */           false,
-                /* shift */            false,
-                /* Edge*/              false,
-                /* Kali */             false,
-                /* Aces */             false,
-                /* Noise */            false,
-                /* TV */               false,
-                /* Glitch */           false,
-                /* filmGrain*/         false,
-                /* Toon */             false
-    );
-
-    postGlitch.setup(
-                /* Bloom */            false,
-                /* pixelate */         false,
-                /* Bleach */           false,
-                /* shift */            false,
-                /* Edge*/              false,
-                /* Kali */             false,
-                /* Aces */             false,
-                /* Noise */            false,
-                /* TV */               false,
-                /* Glitch */           true,
-                /* filmGrain*/         false,
-                /* Toon */             false
-                );
 
     // Glitcher
     glitcherCam.setup(webcam.camFbo);
@@ -184,12 +90,15 @@ void ofApp::setup(){
     parameters.add(colorPicker.set("Color Ui", uiColor, ofColor(0,0,0), ofColor(255,255,255)));
     parameters.add(scene.set("scene", 0, 0, 12));
     parameters.add(bWaitingMsg.set("enableWaitingMessage", false));
+    parameters.add(data.parameters);
+
+
 
     colorPicker.addListener(this, &ofApp::changeColorUi);
     defaultParam.addListener(this, &ofApp::loadDefaultParam);
     scene.addListener(this, &ofApp::setScene);
     bWaitingMsg.addListener(this, &ofApp::setWaitingMsg);
-
+    data.button.addListener(this, &ofApp::runTest);
 
     gui.setup(parameters, "xml/mysettings.xml");
     gui.setPosition(50,50);
@@ -198,6 +107,9 @@ void ofApp::setup(){
     showGui = true;
 
     imageplayer.setup(integrityIncr);
+
+//    vidFbo1.allocate(width, height, GL_RGBA);
+//    vidFbo2.allocate(width, height, GL_RGBA);
 
     // backup infos for serverCorruption
     serverBackup.uiColor = uiColor;
@@ -431,7 +343,7 @@ void ofApp::bang(char playerID){
 
     if (integrity <= 1 or integrity >= 4000) { // 4000 is for edgecase missed the [0/1] > doesn't generate -inf +inf numbers
         bigBang();
-        winIntegrity.newText();
+        winIntegrity.newText(videoplayerHap.filename);
     }
 
     // Test overheating
@@ -642,6 +554,7 @@ void ofApp::serverCorruptionRestore(){
         winScore.size = serverBackup.scoreSize;
         scene = serverBackup.scene;
         data.scene = serverBackup.scene;
+        serverFade = 1;
         serverBackup.isRestored = true;
     }
 
@@ -666,6 +579,36 @@ void ofApp::windowResized(int w, int h){
     glitcherVideo.setup(videoplayer.videoFbo);
 
     boot.resize();
+}
+
+void ofApp::runTest(){
+    /// Arduino
+    if (!data.barduino){data.testArduino();}
+    else{data.arduinoTest.set("Arduino OK", true);}
+    /// CPU
+    if (data.scCPU>0.2){data.cpuTest.set("Cpu OK", true);}
+    /// DMX
+    if ( dmx.dmxInterface_ == 0 || !dmx.opened) {;}
+    else {data.dmxTest.set("Dmx OK", true);}
+    // Light
+    data.serial.writeByte('v'); // send arduino svdk
+    data.serial.flush();
+    data.serial.writeByte('z'); // send arduino zbdm
+    data.serial.flush();
+    data.serial.writeByte('s'); // send arduino server
+    data.serial.flush();
+    // button
+    if (data.testButton){data.buttonTest.set("Button OK", true);}
+    else {data.buttonTest.set("Button NOT", false);}
+    // OSC
+    if (data.vectorInstant[0].code.size()>0){
+        data.oscTestZbdm.set("OSC ZBDM OK", true);
+    }
+    else {data.oscTestZbdm.set("OSC ZBDM NOT", false);}
+    if (data.vectorInstant[1].code.size()>0){
+        data.oscTestSvdk.set("OSC SVDK OK", true);
+    }
+    else {data.oscTestSvdk.set("OSC SVDK NOT", false);}
 }
 
 //--------------------------------------------------------------

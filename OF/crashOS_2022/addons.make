@@ -1,9 +1,9 @@
 ofxAssimpModelLoader
 ofxGui
+ofxImageSequence
 ofxNetwork
 ofxOsc
-ofxPostProcessing
-ofxImageSequence
 ofxXmlSettings
 ofxGenericDmx
 ofxBox2d
+ofxHapPlayer

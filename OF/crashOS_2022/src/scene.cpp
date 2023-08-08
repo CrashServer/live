@@ -41,7 +41,6 @@
 /// BOOT SEQUENCE
 ///
 void ofApp::scene0Update(){
-//   videoplayer.update(0);
    boot.update();
    if (bdmx){
        // DMX White
@@ -54,27 +53,17 @@ void ofApp::scene0Update(){
 }
 
 void ofApp::scene0Draw(){
-    postCode.begin();
-//        videoplayer.draw();
-        boot.draw(integrity);
-    postCode.end();
+    boot.draw(integrity);
 }
 
 void ofApp::scene0Bang(char playerID){
     integrity -= integrityIncr;
-
-//    vector<string> vect{ofToString(videoplayer.vidCat), ofToString(videoplayer.vidId), ofToString(videoplayer.vidTotal), ofToString(integrity)};
-//    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene0BigBang(){
-//    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-//    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-//    videoplayer.videoFbo.end();
+    ofClear(0,0,0, 0);
     scene = data.scene;
     uiMisc.changeLogo(1);
-//    videoplayer.bthread = true;
 }
 
 /////////////////
@@ -85,6 +74,10 @@ void ofApp::scene0BigBang(){
 ///44
 void ofApp::scene1Update(){
     videoplayerHap.newCat(1);
+    videoplayerHap2.newCat(1);
+    videoplayerHap.update(data.vidpos1, data.vidid1);
+    videoplayerHap2.update(data.vidpos2, data.vidid2);
+
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
@@ -103,10 +96,17 @@ void ofApp::scene1Update(){
 
 void ofApp::scene1Draw(){
     ofEnableAlphaBlending();
-    postPixel.begin();
-    postPixel.pixel->resolution = ofVec2f(ofMap(integrity,100,0,1920, 50),ofMap(integrity,100,0,1080,50));
+    //ofDisableAlphaBlending();
+
+    ofSetColor(255, 255, 255,data.vidblend1);
     videoplayerHap.draw();
-    postPixel.end();
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(255, 255, 255, data.vidblend2);
+    videoplayerHap2.draw();
+    //ofDisableAlphaBlending();
+    ofDisableBlendMode();
+
+
     winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
@@ -117,12 +117,14 @@ void ofApp::scene1Draw(){
 void ofApp::scene1Bang(char playerID){
     integrity -= integrityIncr;
     videoplayerHap.videoScrub(0);
+    videoplayerHap2.videoScrub(0);
     vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
     data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene1BigBang(){
     videoplayerHap.newSeq();
+    videoplayerHap2.newSeq();
     scene = data.scene;
 }
 /////////////////////
@@ -500,11 +502,8 @@ void ofApp::scene9Update(){
         }
 }
 void ofApp::scene9Draw(){
-    postKali.begin();
-    postKali.kali->setSegments(rms*audioThresh);
     winCode.draw(data.vectorCode, data.vectorInstant);
     glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
-    postKali.end();
     winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
@@ -551,8 +550,6 @@ void ofApp::scene10Update(){
 void ofApp::scene10Draw(){
     ofPushMatrix();
     ofPushStyle();
-        postCode.begin();
-        postCode.bloom->setBlurXY(sin(ofGetElapsedTimef()*0.01)*0.01, sin(ofGetElapsedTimef()*0.005)*0.01);
         ofEnableAntiAliasing();
         ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
         ofRotateDeg(ofGetElapsedTimef()*0.1, 1,1,1);
@@ -560,7 +557,6 @@ void ofApp::scene10Draw(){
         ofSetColor(ofColor::blueSteel);
         ofSetLineWidth(4);
         ofDrawSphere(width*4);
-        postCode.end();
     ofPopMatrix();
     ofPopStyle();
 
@@ -607,9 +603,7 @@ void ofApp::scene11Update(){
 void ofApp::scene11Draw(){
     ofPushMatrix();
     ofPushStyle();
-//        postCode.begin();
-        imageplayer.draw();
-//        postCode.end();
+    imageplayer.draw();
     ofPopMatrix();
     ofPopStyle();
     winCode.draw(data.vectorCode, data.vectorInstant);
@@ -640,18 +634,16 @@ void ofApp::scene12Update(){
     winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.changeLogo(12);
     uiMisc.update(true);
-    textris.update(audioFft.beat.getFft());
+    textris.update();
 }
 
 void ofApp::scene12Draw(){
-    postProc.begin();
     winCode.draw(data.vectorCode, data.vectorInstant, false);
     winCpu.draw();
     winIntegrity.draw();
     winScore.draw();
     uiMisc.draw(true, data.isServerActive);
     textris.draw();
-    postProc.end();
 }
 
 void ofApp::scene12Bang(char playerID){
@@ -675,16 +667,35 @@ void ofApp::sceneServerUpdate(){
     winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.changeLogo(4);
     uiMisc.update(true);
+
+    if (bdmx){
+       // DMX Red alert
+       float sinCol = (abs(sin(ofGetElapsedTimef()*1)))*255;
+       float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*1)))*255;
+       dmx1Col = ofColor::fromHsb(0, sinCol, 255);
+       dmx2Col = ofColor::fromHsb(0, sinCol2, 255);
+       dmx.update(dmx1Col, dmx2Col);
+    }
+
 }
 
 void ofApp::sceneServerDraw(){
-    videoHapServer.draw();
-    winCode.draw(data.vectorCode, data.vectorInstant);
-    winCpu.draw();
-    winIntegrity.draw();
-    winScore.draw();
-
-    uiMisc.draw(true, false);
+    if(serverFade < 400){
+       videoHapServer.pos = glm::vec3(width/2 - width*0.5/serverFade , height/2 - height*0.5/serverFade,0);
+       videoHapServer.size = glm::vec2(width/serverFade,height/serverFade);
+       videoHapServer.draw();
+       serverFade +=1;
+    }
+    else {
+       videoHapServer.pos= glm::vec3(0,0,0);
+       videoHapServer.size = glm::vec2(width, height);
+       videoHapServer.draw();
+       winCode.draw(data.vectorCode, data.vectorInstant);
+       winCpu.draw();
+       winIntegrity.draw();
+       winScore.draw();
+       uiMisc.draw(true, false);
+    }
 
 }
 
@@ -697,8 +708,8 @@ void ofApp::sceneServerBang(char playerID){
     winIntegrity.targetText = winIntegrity.textInjection(winIntegrity.targetText);
 
     //videoplayerHap.videoScrub(0);
-    //vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
-    //data.sendOSC("/cmd/Video", vect);
+    vector<string> vect{ofToString(videoHapServer.vidDirIndex), ofToString(videoHapServer.vidIndex), ofToString(videoHapServer.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
     integrity -= integrityIncr;
 }
 
@@ -717,12 +728,8 @@ void ofApp::sceneDefaultUpdate(){
 }
 
 void ofApp::sceneDefaultDraw(){
-    postCode.begin();
     ofSetColor(0,125);
-    postCode.bloom->setBlurXY(ofRandom(0,0.01),ofRandom(0,0.01));
-    postCode.bloom->setEnabled(ofRandom(0,100)>80);
     overheating.drawEnding(data.scCPU*cpuStress);
-    postCode.end();
 }
 
 void ofApp::sceneDefaultBang(char playerID){

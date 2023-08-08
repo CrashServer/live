@@ -17,6 +17,7 @@ public:
     unsigned char dmxData_[DMX_DATA_LENGTH];
 
     int dmxAddr1, dmxAddr2;
+    bool opened;
 
     Dmx();
 

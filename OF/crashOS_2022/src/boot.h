@@ -5,7 +5,6 @@
 //#include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "ofTrueTypeFont.h"
-#include "ofxPostProcessing.h"
 
 class Boot{
 public:
@@ -22,8 +21,6 @@ public:
     ofxXmlSettings xml;
     ofTrueTypeFont font;
     ofRectangle fontCharBox;
-
-    ofxPostProcessing post;
 
     vector<string> bootLine, cBoot;
 

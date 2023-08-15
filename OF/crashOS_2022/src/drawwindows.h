@@ -71,6 +71,20 @@ public:
 private:
 };
 
+class WinBpm : public Windo{
+public:
+    void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
+    void update(int bpm);
+    void draw();
+
+
+    ofRectangle bpmStringBox;
+    int bpm;
+
+private:
+};
+
+
 class WinIntegrity : public Windo{
 public:
     void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);

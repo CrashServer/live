@@ -48,7 +48,7 @@ public:
 
     // Gui Test
     ofParameterGroup parameters;
-    ofParameter<bool> lightTest, cpuTest, arduinoTest, oscTestZbdm, oscTestSvdk, dmxTest, buttonTest;
+    ofParameter<bool> lightTest, bpmTest, cpuTest, arduinoTest, oscTestZbdm, oscTestSvdk, dmxTest, buttonTest;
     ofParameter<void> button;
 
     // variables
@@ -80,6 +80,8 @@ public:
 
     int delayServerActivity= 0;
     int serverInitTimer = 300;
+
+    int bpm = 0;
 
     // constructor
     Data();

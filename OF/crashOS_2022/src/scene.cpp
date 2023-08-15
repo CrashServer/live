@@ -80,6 +80,7 @@ void ofApp::scene1Update(){
 
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
+    winBpm.update(data.bpm);
     winIntegrity.update(integrity);
     winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.update(true);
@@ -109,6 +110,7 @@ void ofApp::scene1Draw(){
 
     winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
+    winBpm.draw();
     winIntegrity.draw();
     winScore.draw();
     uiMisc.draw(true, data.isServerActive);
@@ -642,7 +644,7 @@ void ofApp::scene12Draw(){
     winCpu.draw();
     winIntegrity.draw();
     winScore.draw();
-    uiMisc.draw(true, data.isServerActive);
+    uiMisc.draw(true, (data.isServerActive && bserverScene));
     textris.draw();
 }
 
@@ -707,7 +709,7 @@ void ofApp::sceneServerBang(char playerID){
     }
     winIntegrity.targetText = winIntegrity.textInjection(winIntegrity.targetText);
 
-    //videoplayerHap.videoScrub(0);
+    videoHapServer.videoScrub(0);
     vector<string> vect{ofToString(videoHapServer.vidDirIndex), ofToString(videoHapServer.vidIndex), ofToString(videoHapServer.vidTotal), ofToString(integrity)};
     data.sendOSC("/cmd/Video", vect);
     integrity -= integrityIncr;

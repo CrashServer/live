@@ -22,6 +22,7 @@ void ofApp::setup(){
     int dmxAddr2 = settings.getValue("config:dmxAddr2", 8);
     string troopIp = settings.getValue("config:troopIp", "192.168.0.42");
     int troopPort = settings.getValue("config:troopPort", 2887);
+    bserverScene = settings.getValue("config:serverScene", true);
 
 	/// SETUP 
     ofSetFrameRate(30);
@@ -52,6 +53,7 @@ void ofApp::setup(){
     /// Windows
     winCode.setup(10, uiColor, playerColor);
     winCpu.setup(10, uiColor);
+    winBpm.setup(10, uiColor);
     winIntegrity.setup(10, uiColor);
     uiMisc.setup(textPres, textPresPos);
     winScore.setup(10, uiColor);
@@ -81,6 +83,7 @@ void ofApp::setup(){
     parameters.add(defaultParam.set("Reset default parameters", false));
     parameters.add(winCode.parameters);
     parameters.add(winCpu.parameters);
+    parameters.add(winBpm.parameters);
     parameters.add(winIntegrity.parameters);
     parameters.add(winScore.parameters);
     parameters.add(webcam.parameters);
@@ -115,10 +118,12 @@ void ofApp::setup(){
     serverBackup.uiColor = uiColor;
     serverBackup.codePos = winCode.pos;
     serverBackup.cpuPos = winCpu.pos;
+    serverBackup.bpmPos = winBpm.pos;
     serverBackup.integrityPos = winIntegrity.pos;
     serverBackup.scorePos = winScore.pos;
     serverBackup.codeSize = winCode.size;
     serverBackup.cpuSize = winCpu.size;
+    serverBackup.bpmSize = winBpm.size;
     serverBackup.integritySize = winIntegrity.size;
     serverBackup.scoreSize = winScore.size;
     serverBackup.scene = scene;
@@ -130,7 +135,7 @@ void ofApp::update(){
 	ofSetWindowTitle("CRASH/OS " + (ofToString((int) ofGetFrameRate())));
 
     /// test server active for switching scene
-    if (data.isServerActive){scene = 404;}
+    if (data.isServerActive && bserverScene){scene = 404;}
     else if (!data.isServerActive && scene != 404){serverBackup.scene = scene;}
 
     // update obligatoire
@@ -499,6 +504,7 @@ void ofApp::superBang()
 void ofApp::changeColorUi(ofColor &){
     winCode.uiColor = colorPicker;
     winCpu.uiColor = colorPicker;
+    winBpm.uiColor = colorPicker;
     winIntegrity.uiColor = colorPicker;
     webcam.uiColor = colorPicker;
     winScore.uiColor = colorPicker;
@@ -536,20 +542,24 @@ void ofApp::serverCorruptionBang(){
     winCode.uiColor = ofColor(ofNoise(ofGetFrameNum()+800)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+20)*255);
     winIntegrity.uiColor = ofColor(ofNoise(ofGetFrameNum() + 100)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+480)*255);
     winScore.uiColor = ofColor(ofNoise(ofGetFrameNum() + 300)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+855)*255);
+    winBpm.uiColor = ofColor(ofNoise(ofGetFrameNum() + 300)*255,0,0,ofNoise(ofGetFrameNum(), ofGetElapsedTimef()+855)*255);
     serverBackup.isRestored = false;
 }
 
 void ofApp::serverCorruptionRestore(){
         winCode.uiColor = serverBackup.uiColor;
         winCpu.uiColor = serverBackup.uiColor;
+        winBpm.uiColor = serverBackup.uiColor;
         winIntegrity.uiColor = serverBackup.uiColor;
         winScore.uiColor = serverBackup.uiColor;
         winCode.pos = serverBackup.codePos;
         winCpu.pos = serverBackup.cpuPos;
+        winBpm.pos = serverBackup.bpmPos;
         winIntegrity.pos = serverBackup.integrityPos;
         winScore.pos = serverBackup.scorePos;
         winCode.size = serverBackup.codeSize;
         winCpu.size = serverBackup.cpuSize;
+        winBpm.size = serverBackup.bpmSize;
         winIntegrity.size = serverBackup.integritySize;
         winScore.size = serverBackup.scoreSize;
         scene = serverBackup.scene;
@@ -566,6 +576,7 @@ void ofApp::windowResized(int w, int h){
 
     winCode.resize();
     winCpu.resize();
+    winBpm.resize();
     winIntegrity.resize();
     uiMisc.resize();
 
@@ -587,6 +598,8 @@ void ofApp::runTest(){
     else{data.arduinoTest.set("Arduino OK", true);}
     /// CPU
     if (data.scCPU>0.2){data.cpuTest.set("Cpu OK", true);}
+    /// BPM
+    if (data.bpm>0){data.bpmTest.set("Bpm OK", true);}
     /// DMX
     if ( dmx.dmxInterface_ == 0 || !dmx.opened) {;}
     else {data.dmxTest.set("Dmx OK", true);}

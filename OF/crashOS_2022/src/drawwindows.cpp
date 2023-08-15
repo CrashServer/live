@@ -230,7 +230,7 @@ void WinCpu::setup(int padding, ofColor uiColor){
     if (parameters.size()==0){
         parameters.setName("cpu");
         parameters.add(size.set("CPU Box size", glm::vec2(200, 200), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
-        parameters.add(pos.set("CPU Box", glm::vec3(1600, 590, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+        parameters.add(pos.set("CPU Box", glm::vec3(1480, 596, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
     }
 
 }
@@ -277,6 +277,53 @@ void WinCpu::draw() {
     ofPopStyle();
     ofDisableAlphaBlending();
 }
+
+//--------------------------------------------------------------
+//-----------  BPM ---------------------------------------------
+//--------------------------------------------------------------
+void WinBpm::setup(int padding, ofColor uiColor){
+    this->uiColor = uiColor;
+    this->padding = padding;
+    bpmStringBox = font.getStringBoundingBox("BPM: 1000%", 0, 0); // size BPM string
+    
+    if (parameters.size()==0){
+        parameters.setName("Bpm");
+        parameters.add(size.set("BPM Box size", glm::vec2(200, 200), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
+        parameters.add(pos.set("BPM Box", glm::vec3(1480, 354, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+    }
+
+}
+
+void WinBpm::update(int bpm){
+//    this->pos = cpuPos;
+//    this->size = cpuSize;
+    this->bpm = bpm;
+}
+
+void WinBpm::draw() {
+    ofEnableAlphaBlending();
+    int shadowLetter = 3;
+    ofPushStyle();
+    ofPushMatrix();
+
+        Windo::drawWin(this->pos, this->size, this->uiColor);
+        ofTranslate(this->pos);
+
+        ofTranslate(ofClamp(size->x / 2 - bpmStringBox.width / 2, 0, size->x / 2), ofClamp(size->y / 2 + bpmStringBox.height / 2, 0, size->y / 2));//;
+        ofSetColor(255, 190);
+
+        ofSetColor(0, 120);
+        font.drawString("BPM: " + ofToString(bpm), 0, 0); // CPU text
+        ofSetColor(255);
+        font.drawString("BPM: " + ofToString(bpm), 0 - shadowLetter, 0 - shadowLetter);
+
+    ofPopMatrix();
+    ofPopStyle();
+    ofDisableAlphaBlending();
+}
+
+
+
 
 ////-------------------------------------------------------------
 //// Txt Integrity
@@ -355,7 +402,7 @@ void WinScore::setup(int padding, ofColor uiColor, vector<ofColor> playerColor){
 
     if (parameters.size()==0){
         parameters.setName("HighScore");
-        parameters.add(pos.set("Score Box", glm::vec3(1480, 480, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
+        parameters.add(pos.set("Score Box", glm::vec3(1480, 230, 0), glm::vec3(0, 0, -500), glm::vec3(width, height, 500)));
         parameters.add(size.set("Score size", glm::vec2(320, 85), glm::vec2(0, 0), glm::vec2(width / 2, height / 2)));
     }
 }

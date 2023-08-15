@@ -6,7 +6,7 @@ Textris::Textris(){
 }
 
 void Textris::setup(vector<ofColor> playerColor){
-    font.load("PressStart2P_Regular.ttf", 16, true, false);
+    font.load("PressStart2P_Regular.ttf", 20, true, false);
     box2d.init();
     box2d.setGravity(0,30);
     box2d.createBounds();
@@ -44,17 +44,18 @@ void Textris::clear(){
 void Textris::addText(string textrisText, char player){
     this->msgTxt = textrisText;
 
-    msgTxt = insertNewlines(msgTxt, (int) ofRandom(5,35));
+    msgTxt = insertNewlines(msgTxt, (int) ofRandom(15,35));
     textVect = ofSplitString(msgTxt, "\n");
     for (auto& l : textVect){
         l = ofTrim(l);
     }
 
     // get the size of the msg text
-    rect = font.getStringBoundingBox(msgTxt, 0,0);
+    rect = font.getStringBoundingBox(textVect[0], 0,0);
     rect.width += padding*2;
-    rect.height += padding*3;
-
+    rect.height *= (textVect.size() + 1);
+    rect.height += padding*2;
+   
     ofColor playerColor;
     if (player=='!'){
         playerColor = zbdmColor;}

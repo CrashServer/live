@@ -36,6 +36,7 @@ void Data::setup(string troopIp, int troopPort, int arduinoPort, bool bvideoFox)
     if (parameters.size()==0){
         parameters.setName("Test");
         parameters.add(cpuTest.set("Cpu", false));
+        parameters.add(bpmTest.set("Bpm", false));
         parameters.add(arduinoTest.set("Arduino", false));
         parameters.add(oscTestZbdm.set("Osc ZBDM", false));
         parameters.add(oscTestSvdk.set("Osc Svdk", false));
@@ -160,6 +161,9 @@ void Data::update() {
             vidblend1 = messageOsc.getArgAsInt(5);
             vidblend2 = messageOsc.getArgAsInt(6);
             scene = messageOsc.getArgAsInt(7);
+        }
+        else if (oscAdress == "/OSbpm") {
+            bpm = messageOsc.getArgAsInt(0);
         }
     }
     if (!this->barduino){

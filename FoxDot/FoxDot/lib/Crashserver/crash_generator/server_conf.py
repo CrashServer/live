@@ -4,7 +4,7 @@
 ##### Server configurator #####
 
 # Global
-maxPlayer = 8 # Number of max players playing together
+maxPlayer = 16 # Number of max players playing together
 
 timeChange = 8 # Time in beats for a new event
 multDurationMin = 1 #

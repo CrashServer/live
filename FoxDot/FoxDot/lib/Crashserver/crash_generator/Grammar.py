@@ -130,7 +130,7 @@ def GENERATE_FX(fxdict=fxdict):
 				fx_arg[argmt] = GENERATE_LIST(fx_min, fx_max,8)
 		return fx_arg
 	except Exception as e:
-		print("generate FX : " + e)
+		print("generate FX : ", e)
 
 
 def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
@@ -159,7 +159,7 @@ def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
 			print(synthName, "not found in dictionnay")
 			return {"vol": '1'}
 	except Exception as e:
-		print("generate synth arg : " + e)
+		print("generate synth arg : ", e)
 
 
 def GENERATE_CHAR():
@@ -181,7 +181,7 @@ def GENERATE_CHAR():
 				rnd_char_list.append(".")               
 		return "".join(rnd_char_list)    
 	except Exception as e:
-		print("generate char : " + e)
+		print("generate char : ", e)
 
 
 def GENERATE_PARA():
@@ -194,7 +194,7 @@ def GENERATE_PARA():
 			args.append(player_merge[paraPlayer][i]())
 		return f'"{paraPlayer}"' + '{}'.format(",".join(args))
 	except Exception as e:
-		print("generate para : " + e)
+		print("generate para : ", e)
 
 def GENERATE_PARA2():
 	''' generate parameters not working with "after" like .amen, .bubble'''
@@ -205,7 +205,7 @@ def GENERATE_PARA2():
 			args.append(player_para[paraPlayer][i]())
 		return f'"{paraPlayer}"' + '{}'.format(",".join(args))
 	except Exception as e:
-		print("generate para2 : " + e)
+		print("generate para2 : ", e)
 
 def GENERATE_DUR(dur=None):
 	''' Generate a random dur pattern '''
@@ -216,7 +216,7 @@ def GENERATE_DUR(dur=None):
 			dur = f"{dur}.sus" 
 		return f'(PChain(krhytm)[:16]*{str(dur)}).limit(sum,16).limit(len,20)'
 	except Exception as e:
-		print("generate dur : " + e)
+		print("generate dur : ", e)
 
 def GENERATE_AMPLIFY(_min=0, _max=1):
 	''' Generate a random amplify pattern [0,1,0,1,0,1]'''
@@ -225,7 +225,7 @@ def GENERATE_AMPLIFY(_min=0, _max=1):
 		pat = [GENERATE_LIST(0,1), P10(rndList[1]), PBern(rndList[1]), PEuclid(rndList[0],rndList[1])]
 		return f'{str(choice(pat))}'
 	except Exception as e:
-		print("generate amplify : " + e)
+		print("generate amplify : ", e)
 
 def GENERATE_PAN(_min=-1, _max=1):
 	''' Generate a random pan pattern [-1,0.2,-0.3,1] or PSine(64) '''
@@ -243,7 +243,7 @@ def GENERATE_ADSR(synthName='', sustain=1):
 				adsrDict[argm] = GENERATE_FLOAT_LIST(_min=argMin, _max=argMax, length=6, digits=5)
 		return adsrDict
 	except Exception as e:
-		print("generate adsr : " + e)
+		print("generate adsr : ", e)
 
 # Patterns that take patterns as input
 
@@ -311,7 +311,7 @@ def remap_pattern(pat, oMin, oMax):
 		pat = [remap(p,pmin,pmax,oMin,oMax) for p in pat]
 		return f'{pat}'
 	except Exception as e:
-		print("remap pattern : " + e)
+		print("remap pattern : ", e)
 
 def remap(x, oMin, oMax, nMin, nMax):
 	''' remap value '''
@@ -327,7 +327,7 @@ def remap(x, oMin, oMax, nMin, nMax):
 		else:
 			return newValue
 	except Exception as e:
-		print("remap : " + e)
+		print("remap : ", e)
 
 def checkPattern(pat =""):
 	''' limit a pattern len output < 20, avoid P[1,1,1,1,...,1,1,1,1] error ''' 

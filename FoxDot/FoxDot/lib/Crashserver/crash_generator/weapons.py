@@ -27,7 +27,7 @@ def generate_random_synth_player():
 		oct = GENERATE_LIST(synthOctMin,synthOctMax)
 		return {"player": player, "synth": synth, "degree": degree, "dur": dur, "oct": oct}
 	except Exception as e:
-		print("random synth error :" + e)
+		print("random synth error :", e)
 
 def generate_random_drum_player():
 	''' Generate a random Play pattern '''
@@ -40,7 +40,7 @@ def generate_random_drum_player():
 		rate = str(GENERATE_LIST(drumRateMin,drumRateMax))
 		return {"player":player, "synth":synth, "degree":degree, "dur":dur, "sample": sample, "rate": rate}
 	except Exception as e:
-		print("random drum player : " + e)
+		print("random drum player : ", e)
 
 def generate_random_loop_player():
 	''' Generate loop player, random dur '''
@@ -60,7 +60,7 @@ def generate_random_loop_player():
 			dur="4"
 		return {"player":player, "synth": synth, "degree": degree, "sample": sample, "dur": dur}
 	except Exception as e:
-		print("random loop player : " + e)
+		print("random loop player : ", e)
 		
 def generate_drum_style_player():
 	''' return a drum style pattern, according to the DrumsPattern2 dict, 
@@ -79,7 +79,7 @@ def generate_drum_style_player():
 		drumpat = change_drum_char(drumpat)
 		return {"player":player, "synth": synth, "degree": drumpat, "sample": sample, "dur": dur, "rate": rate}
 	except Exception as e:
-		print("drum style : " + e)
+		print("drum style : ", e)
 
 def generate_player_name():
 	try:
@@ -88,7 +88,7 @@ def generate_player_name():
 			player = ''.join(choice(string.ascii_lowercase) for x in range(2))
 		return player
 	except Exception as e:
-		print("player name : " + e)
+		print("player name : ", e)
 
 def change_drum_char(pattern=None):
 	'''Replace drum char'''
@@ -99,7 +99,7 @@ def change_drum_char(pattern=None):
 					pattern = pattern.replace(letter, choices([choice(list_sample),choice(list(GENERATE_CHAR()))],probChangeDrumChar)[0])
 		return pattern
 	except Exception as e:
-		print("change drum char : " + e)
+		print("change drum char : ", e)
 
 def gen_player_param():
 	''' Generate player parameter (unison, jump, stutter)'''
@@ -110,7 +110,7 @@ def gen_player_param():
 			args.append(player_time_para[timePlayer][i]())
 		return str(timePlayer) + "({})".format(", ".join(args))
 	except Exception as e:
-		print("gen player param : " + e)
+		print("gen player param : ", e)
 
 def gen_player_attributes(playerType=None):
 	''' Generate player attribute: sus, dur, amp, pan,... '''
@@ -136,7 +136,7 @@ def gen_player_attributes(playerType=None):
 			pass
 		return (attr, value)
 	except Exception as e:
-		print("gen player attribut : " + e)
+		print("gen player attribut : ", e)
 
 
 def gen_arp():
@@ -146,7 +146,7 @@ def gen_arp():
 		arp_rnd = choice(['I','II','III','IV','V','VI','VII'])
 		return f'PArp({arp_rnd},{choice(arpindex)})'
 	except Exception as e:
-		print("gen arp : " + e)
+		print("gen arp : ", e)
 
 def gen_filter():
 	''' generate a lpf or hpf, linvar or int '''
@@ -158,7 +158,7 @@ def gen_filter():
 			filfreq = choices([GENERATE_FREQLIST(filterFreqMin,filterFreqMax,5), GENERATE_INTEGER(filterFreqMin,filterFreqMax), "0"],probFilterFreq)[0]
 		return (filType,filfreq)
 	except Exception as e:
-		print("gen filter : " + e)
+		print("gen filter : ", e)
 
 def gen_synth_degree():
 	''' generate degree for synth '''
@@ -166,4 +166,4 @@ def gen_synth_degree():
 		melody_length = choice([4,8,16])
 		return f'melody()[:{melody_length}]'
 	except Exception as e:
-		print("gen synth degree : " + e)
+		print("gen synth degree : ", e)

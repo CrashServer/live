@@ -39,7 +39,7 @@ void draw(ofTrueTypeFont * fontref) {
     ofTranslate(-boxWidth/2, -boxHeight/2 + fontref->getLineHeight() +5);
     float y = 0;
         for (auto& l : textVect){
-            fontref->drawString(l, 5, y);
+            fontref->drawString(l, 10, y);
             y += fontref->getLineHeight();
         }
 

@@ -2,8 +2,6 @@
 #ifndef OFAPP_H
 #define OFAPP_H
 
-
-
 #include "ofMain.h"
 
 #include "ofEasyCam.h" 
@@ -81,7 +79,7 @@ class ofApp : public ofBaseApp{
 
         /// Settings
         ofxXmlSettings settings;
-        bool barduino, bdmx, bvideoFox;
+        bool barduino, bdmx, bvideoFox, bserverScene;
 
         /// CAMERA
 //		ofEasyCam cam;
@@ -99,6 +97,7 @@ class ofApp : public ofBaseApp{
         Data data;
         WinCode winCode;
         WinCpu winCpu;
+        WinBpm winBpm;
         WinIntegrity winIntegrity;
         WinScore winScore;
         AudioFft audioFft;
@@ -213,8 +212,8 @@ class ofApp : public ofBaseApp{
         class ServerBackup {
         public:
             ofColor uiColor;
-            glm::vec3 codePos, cpuPos, integrityPos, scorePos ;
-            glm::vec2 codeSize, cpuSize, integritySize, scoreSize;
+            glm::vec3 codePos, cpuPos, bpmPos, integrityPos, scorePos ;
+            glm::vec2 codeSize, cpuSize, bpmSize, integritySize, scoreSize;
             bool isRestored;
             int scene;
         };

@@ -23,7 +23,7 @@ def generate_random_synth_player():
 		player = generate_player_name()
 		synth = choice(synthdefNames)
 		degree = gen_synth_degree()
-		dur = choices([f"PDur({randint(2,8)},8)",f'SDur({choice([8,16,32])})',checkPattern(GENERATE_PATTERN())],probPatternDur)[0]
+		dur = choices([f"PDur({randint(2,8)},8)",f'SDur({choice([8,16,32])})',checkPattern(GENERATE_PATTERN()), f"PRy(16,{choice([2,3,4]) },0)"],probPatternDur)[0]
 		oct = GENERATE_LIST(synthOctMin,synthOctMax)
 		return {"player": player, "synth": synth, "degree": degree, "dur": dur, "oct": oct}
 	except Exception as e:
@@ -120,7 +120,7 @@ def gen_player_attributes(playerType=None):
 			value = GENERATE_AMPLIFY()
 		elif attr in ["dur"]:
 			if playerType != "loop": 
-				value = f'SDur({choice([8,16,32])})'
+				value = f'PRy(16,{choice([2,3,4])}, {GENERATE_WHITE(0.01,0.1)})'
 			else:
 				attr = "sbrk"
 				value = GENERATE_FLOAT_LIST(0.2,0.8)

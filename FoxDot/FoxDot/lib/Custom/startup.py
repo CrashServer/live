@@ -7,7 +7,7 @@ if __name__ != "__main__":
 		import sys
 		import pickle
 		import time
-		from random import *
+		from random import randint, sample
 		
 		from .Settings import FOXDOT_ROOT
 		from .Buffers import alpha, nonalpha
@@ -126,17 +126,18 @@ if __name__ != "__main__":
 
 	def random_bpm_var():
 		'''Change the clock randomly with random var'''
-		bpm_rand = [(randint(38,220)) for n in range(randint(2,9))]
-		var_rand = [randint(1,16) for n in range(randint(2,9))]
+		bpm_rand = [PRand(38,220)[0] for n in range(PRand(2,9)[0])]
+		var_rand = [PRand(1,16)[0] for n in range(PRand(2,9)[0])]
 		Clock.bpm = var(bpm_rand,var_rand)
 		print("Clock.bpm = var({},{})".format(bpm_rand, var_rand))
 
 	def random_bpm():
 		''' Change Clock to a random number'''
-		bpm_rand = [(randint(38,220)) for n in range(randint(2,9))]
-		var_rand = [randint(1,16) for n in range(randint(2,9))]
-		Clock.bpm = randint(38,220)
+		Clock.bpm = PRand(38,220)[0]
 		print("Clock.bpm = ", Clock.bpm)
+
+	def setseed(seed=None):
+		RandomGenerator.set_override_seed(seed)
 
 
 	###############################################################################################
@@ -240,14 +241,16 @@ if __name__ != "__main__":
 			else:
 				print("only with loop")
 
-
 		@player_method
 		class PChain2(RandomGenerator):
 			""" PChain Mod Markov Chain generator pattern with probability."""
 			def __init__(self, mapping, **kwargs):
 				assert isinstance(mapping, dict)
+
 				RandomGenerator.__init__(self, **kwargs)
-				self.args = (mapping)
+
+				self.args = (mapping,)
+
 				self.last_value = 0
 				self.mapping = {}
 				i = 0
@@ -257,10 +260,14 @@ if __name__ != "__main__":
 						self.last_value = key
 						i += 1
 				self.init_random(**kwargs)
-			def func(self, index):
-				key = list(self.mapping[self.last_value][0])
-				prob = list(self.mapping[self.last_value][1])
-				self.last_value = choices(key, prob)[0]
+
+			def func(self, *args, **kwargs):
+				# key = list(self.mapping[self.last_value][0])
+				# prob = list(self.mapping[self.last_value][1])
+				# self.last_value = self.choices(key, prob)[0]
+				index = self.last_value
+				if index in self.mapping:
+					self.last_value = self.choices(self.mapping[index][0], self.mapping[index][1])[0]
 				return self.last_value
 	except Exception as e:
 		print(f'Player method problem : {e}')
@@ -290,7 +297,7 @@ if __name__ != "__main__":
 		@loop_pattern_func
 		def PBin(number=0):
 			if number==0:
-				number = randint(10,1000000)
+				number = PRand(10,1000000)[0]
 			return [int(i) for i in str(bin(number)[2:])]
 
 		@loop_pattern_func
@@ -410,25 +417,26 @@ if __name__ != "__main__":
 				actual = Scale.default.name
 				Scale.default = gamme[gamme.index(actual) + 1]
 
-		class PChords(GeneratorPattern):
+		class PChords(RandomGenerator):
 			''' Chords generator '''
 			def __init__(self, chord=None, **kwargs):
-				GeneratorPattern.__init__(self, **kwargs)
+				RandomGenerator.__init__(self, **kwargs)
 				self.list_chords = {"I": I, "II": II, "III": III, "IV": IV, "V": V, "VI": VI, "VII":VII}
 				self.last_value = None
 				self.chord = None
 				self.list_of_choice = []
+				self.init_random(**kwargs)
 			def func(self, index, list_of_choice=[]):
 				self.list_of_choice = []
 				if self.chord == None:
-					self.chord = tuple(self.list_chords[choice(list(self.list_chords))])
+					self.chord = tuple(self.list_chords[self.choice(list(self.list_chords))])
 				for keys, values in self.list_chords.items():
 					for note in values:
 						if note in list(self.chord):
 							if values not in self.list_of_choice:
 								self.list_of_choice.append(values)
 				self.list_of_choice.remove(self.chord)
-				self.last_value = choice(self.list_of_choice)
+				self.last_value = self.choice(self.list_of_choice)
 				self.chord = self.last_value
 				return self.last_value
 
@@ -442,9 +450,9 @@ if __name__ != "__main__":
 				self.init_random(**kwargs)
 			def func(self, index):
 				if isinstance(self.mean, float):
-					return gauss(self.mean, self.deviation)
+					return self.gauss(self.mean, self.deviation)
 				elif isinstance(self.mean, int):
-					return int(round(gauss(self.mean, self.deviation)))
+					return int(round(self.gauss(self.mean, self.deviation)))
 
 		class PLog(RandomGenerator):
 			''' Returns random floating point values using logarithmic distribution '''
@@ -456,9 +464,9 @@ if __name__ != "__main__":
 				self.init_random(**kwargs)
 			def func(self, index):
 				if isinstance(self.mean, float):
-					return lognormvariate(self.mean, self.deviation)
+					return self.lognormvariate(self.mean, self.deviation)
 				elif isinstance(self.mean, int):
-					return int(round(lognormvariate(self.mean, self.deviation)))
+					return int(round(self.lognormvariate(self.mean, self.deviation)))
 
 		class PTrir(RandomGenerator):
 			''' Returns random floating or int point values using triangular distribution '''
@@ -474,22 +482,22 @@ if __name__ != "__main__":
 				self.init_random(**kwargs)
 			def func(self, index):
 				if isinstance(self.low, float) or isinstance(self.high, float):
-					return triangular(self.low, self.high, self.mode)
+					return self.triangular(self.low, self.high, self.mode)
 				else:
-					return int(round(triangular(self.low, self.high, self.mode)))
+					return int(round(self.triangular(self.low, self.high, self.mode)))
 
 		class PCoin(RandomGenerator):
 			''' Choose between 2 values with probability, eg : PCoin(0.25,2,0.2)'''
 			def __init__(self, low=0, high=1, proba=0.5, **kwargs):
 				RandomGenerator.__init__(self, **kwargs)
-				self.init_random(**kwargs)
 				self.low = low
 				self.high = high
 				self.proba = proba
 				if self.proba > 1:
 					self.proba /= 100
+				self.init_random(**kwargs)
 			def func(self, index):
-				return choices([self.low, self.high], [1-self.proba, self.proba])[0]
+				return self.choices([self.low, self.high], [1-self.proba, self.proba])[0]
 
 		class PChar(RandomGenerator):
 			''' Generate characters randomly, PChar(case, alpha)
@@ -501,9 +509,9 @@ if __name__ != "__main__":
 				alpha = 2, alpha + nonalpha'''
 			def __init__(self, case=2, alpha=2, **kwargs):
 				RandomGenerator.__init__(self, **kwargs)
-				self.init_random(**kwargs)
 				self.case = case
 				self.alpha = alpha
+				self.init_random(**kwargs)
 			def func(self, index):
 				if self.alpha == 0:
 					charList = alpha
@@ -512,11 +520,11 @@ if __name__ != "__main__":
 				else:
 					charList = ''.join([x for x in nonalpha.keys()]) + alpha
 				if self.case == 0:
-					char = choice(charList)
+					char = self.choice(charList)
 				elif self.case == 1:
-					char = choice(charList).upper()
+					char = self.choice(charList).upper()
 				else:
-					char = choice([choice(charList), choice(charList).upper()])
+					char = self.choice([self.choice(charList), self.choice(charList).upper()])
 				return char
 
 		from .Crashserver.chords_dict import *
@@ -534,8 +542,8 @@ if __name__ != "__main__":
 				self.second_value = 0
 				self.third_value = 0
 				self.mapping = {}
-				self.init_random(**kwargs)
 				self.turn = 0
+				self.init_random(**kwargs)
 			def stream_value(self, active_dict):
 				""" Return mapping dict with a list of keys and probability"""
 				for key, value in active_dict.items():
@@ -550,11 +558,11 @@ if __name__ != "__main__":
 			def value_choice(self, active_dict):
 				""" Return a key from probabilty of active dictionnary """
 				key, prob = self.key_prob(active_dict)
-				return choices(key, prob)[0]
+				return self.choices(key, prob)[0]
 			def func(self, index):
 				if self.turn == 0:
 					if self.init_value == "":
-						self.init_value = choice(list(cho1.keys()))
+						self.init_value = self.choice(list(cho1.keys()))
 					self.active_value = self.init_value
 					self.turn += 1
 					return self.active_value
@@ -574,7 +582,7 @@ if __name__ != "__main__":
 						except:
 							list_cho = list(cho1.keys())
 							list_cho.remove(self.init_value)
-							self.third_value = choice(list_cho)
+							self.third_value = self.choice(list_cho)
 							self.active_value = self.third_value
 
 					self.turn += 1
@@ -698,14 +706,17 @@ if __name__ != "__main__":
 				Clock.bpm = var([bpm_list], [duree_list], start=Clock.mod(8))
 				print('var({}, {})'.format([bpm_list], [duree_list]))
 
-		def melody(scale_melody=Scale.default.name, melody_dict=melody_dict):
-			''' Generate melody with a Markov chain dict of melody '''
-			scale_melody_dict = {key: melody_dict[key] for key in melody_dict.keys() if key in Scale[scale_melody]}
-			for keys, values in scale_melody_dict.items():
-				note, prob = values
-				fnote, fprob = zip(*((key, pro) for key, pro in zip(note, prob) if key in Scale[scale_melody]))
-				scale_melody_dict[keys] = [list(fnote), list(fprob)]
-			return PChain2(scale_melody_dict)
+		# def melody(scale_melody=Scale.default.name, melody_dict=melody_dict):
+		# 	''' Generate melody with a Markov chain dict of melody '''
+		# 	scale_melody_dict = {key: melody_dict[key] for key in melody_dict.keys() if key in Scale[scale_melody]}
+		# 	for keys, values in scale_melody_dict.items():
+		# 		note, prob = values
+		# 		fnote, fprob = zip(*((key, pro) for key, pro in zip(note, prob) if key in Scale[scale_melody]))
+		# 		scale_melody_dict[keys] = [list(fnote), list(fprob)]
+		# 		return PChain2(scale_melody_dict)
+
+		def melody():
+			return PChain2(melody_dict)
 
 		def chaos(chaosInt=1):
 			chaosText = ""
@@ -714,18 +725,19 @@ if __name__ != "__main__":
 				chaosText += "\n"
 			clip.copy(chaosText)
 
-		def PRy(duration=16, div=4, restprob=0.3):
+		def PRy(total=16, div=4, restProb=0):
 			''' Generate a ryhtm pattern '''
-			pat = PSum(randint(1,duration), duration)
-			pat_total = []
-			for i in range(0,len(pat)):
-				pat_total.append(PSum(randint(1,div),pat[i]))
-			pat_total = PJoin(pat_total)
-			if rest !=0:
-				for i in range(0,len(pat)):
-					if randint(0,100) < restprob*100:
-						pat_total[i] = rest(pat_total[i])
-			return pat_total
+			pat = PSum(div, total)
+			patTotal = []
+			for i in range(0, len(pat)):
+				patTotal.append(PSum(PRand(1, div)[i], pat[i]))
+			patTotal = PJoin(patTotal)
+			#patTotal = PShuf(patTotal)
+			if restProb !=0:
+				for i in range(1,len(patTotal)):
+					if PRand(0,100)[0] < restProb*100:
+						patTotal[i] = rest(patTotal[i])
+			return patTotal
 
 		@player_method
 		def once(self):
@@ -785,19 +797,19 @@ except:
 		print("Error importing drumRockPattern", sys.exc_info()[0])
 
 
-@player_method
-def basser(self, duration=64, markdur=2):
-	if duration!=0:
-		durChoice = choice([P[6,1,1], P[1], PDur(var([4,PRand(7)],[6,2]), 8), PDur(var([5,PRand(7)],[6,2]), 8), PDur(var([3,PRand(7)],[6,2]), 8)])
-		sequence = PMarkov()[:markdur]
-		print(durChoice)
-		print(sequence)
-		var.seq = var(sequence,8)
-		degreeChoice = choice([var.seq[0], var([var.seq[0], P*[var.seq[1], _, var.seq[2]], P*[var.seq[2], var.seq[2] -7, var.seq[1] - 7]], [6,1,1])])
-		self.degree = degreeChoice
-		self.dur = durChoice
-		self.rarely("stutter", oct=self.oct+1, cut=0.5) 
-		self.every(duration, "basser", duration, markdur) 
+# @player_method
+# def basser(self, duration=64, markdur=2):
+# 	if duration!=0:
+# 		durChoice = choice([P[6,1,1], P[1], PDur(var([4,PRand(7)],[6,2]), 8), PDur(var([5,PRand(7)],[6,2]), 8), PDur(var([3,PRand(7)],[6,2]), 8)])
+# 		sequence = PMarkov()[:markdur]
+# 		print(durChoice)
+# 		print(sequence)
+# 		var.seq = var(sequence,8)
+# 		degreeChoice = choice([var.seq[0], var([var.seq[0], P*[var.seq[1], _, var.seq[2]], P*[var.seq[2], var.seq[2] -7, var.seq[1] - 7]], [6,1,1])])
+# 		self.degree = degreeChoice
+# 		self.dur = durChoice
+# 		self.rarely("stutter", oct=self.oct+1, cut=0.5)
+# 		self.every(duration, "basser", duration, markdur)
 
 
 

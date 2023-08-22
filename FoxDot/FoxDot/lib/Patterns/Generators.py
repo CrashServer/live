@@ -50,7 +50,7 @@ class RandomGenerator(GeneratorPattern):
             self.random = self.random.Random()
             self.random.seed(RandomGenerator.__seed)
 
-            pattern = self[:5000]
+            pattern = self[:1000]
 
             self.__class__ = Pattern
             self.data = pattern.data
@@ -66,12 +66,23 @@ class RandomGenerator(GeneratorPattern):
     def choice(self, *args, **kwargs):
         return self.random.choice(*args, **kwargs)
 
+    def choices(self, *args, **kwargs):
+        return self.random.choices(*args, **kwargs)
+
     def randint(self, *args, **kwargs):
         return self.random.randint(*args, **kwargs)
 
     def triangular(self, *args, **kwargs):
         return self.random.triangular(*args, **kwargs)
 
+    def gauss(self, *args, **kwargs):
+        return self.random.gauss(*args, **kwargs)
+
+    def lognormvariate(self, *args, **kwargs):
+        return self.random.lognormvariate(*args, **kwargs)
+
+    def gauss(self, *args, **kwargs):
+        return self.random.gauss(*args, **kwargs)
 
 # class PRand(RandomGenerator):
 #     ''' Returns a random integer between start and stop. If start is a container-type it returns
@@ -359,6 +370,7 @@ class PIndex(GeneratorPattern):
     ''' Returns the index being accessed '''
     def func(self, index):
         return index
+
 
 class PFibMod(GeneratorPattern):
     """ Returns the fibonacci sequence -- maybe a bad idea"""

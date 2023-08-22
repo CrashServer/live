@@ -226,13 +226,13 @@ def run_player_synth(copyText=False, **kwargs):
 		if max(degree) > 10:
 			degree = remap_pattern(degree, 0,7)
 		if not copyText:
-			~eval(player) >> eval(synth)(eval(str(degree)), dur=eval(dur), oct=eval(oct))
+			~eval(player) >> eval(synth)(eval(str(degree)), dur=eval(dur), oct=eval(oct)).unison(2)
 			for argm, value in params.items():
 				eval(player).__setattr__(str(argm), eval(str(value)))
-			sendOut(f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText})')
+			sendOut(f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText}).unison(2)')
 			addFilter(eval(player))
 		else:
-			return f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText})'
+			return f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText}).unison(2)'
 	except Exception as err:
 		print("run_player_synth problem : ", err)
 
@@ -337,7 +337,7 @@ def change_degree(player=None):
 			sendOut(f'{player}.degree = {deg}')
 			player.__setattr__("degree", eval(str(deg)))
 		else:
-			deg = choices([gen_arp(), 'melody()', 'PGauss()','PChain2(chords)'],probSynthChangeDegree)[0]
+			deg = choices([gen_arp(), 'melody()[:8]', 'PGauss()','PChain2(chords)'],probSynthChangeDegree)[0]
 			sendOut(f'{player}.degree = {deg}')
 			player.__setattr__("degree", eval(deg))
 	except Exception as err:

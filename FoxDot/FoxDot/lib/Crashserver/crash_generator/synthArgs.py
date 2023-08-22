@@ -80,7 +80,7 @@ synthArgs = {
 	'nylon': {'rate': [0.0,5.0], 'cutoff': pfreq, 'rq': prq},
 	'orientmod': {'cutoff': pfreq, 'rq': prq, 'rate': [0.0,1.0]},
 	'organ': {'fmod': [0.0,5.0], 'rate': [-4,4]},
-	'pads': {'rate': [0.0,8.0]},
+	'pad2': {'rate': [0.0,8.0]},
 	'pasha': {'rate': [0.0,10.0], 'cutoff': pfreq, 'rq': prq},
 	'pbass': {'rate': [0,10]},	
 	'piano' : {},

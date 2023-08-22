@@ -4,7 +4,7 @@
 ##### Server configurator #####
 
 # Global
-maxPlayer = 16 # Number of max players playing together
+maxPlayer = 8 # Number of max players playing together
 
 timeChange = 8 # Time in beats for a new event
 multDurationMin = 1 #
@@ -42,7 +42,7 @@ minPlayerTurn = 8 # min number of player turn before a possibility stop
 maxPlayerTurn = 16 # max number of player turn until a stop
 
 # Add Player Probability
-probPatternDur = [30,60,10] # probability dur synth player [PDur(random,8), SDur(), Generate Pattern]
+probPatternDur = [10,20,10,60] # probability dur synth player [PDur(random,8), SDur(), Generate Pattern, PRy]
 
 # Add Drum Probabilty
 probAddStyleDrum = 8 # probability to pick a style drum pattern

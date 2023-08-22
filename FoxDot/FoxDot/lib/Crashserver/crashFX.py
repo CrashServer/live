@@ -2,7 +2,7 @@ from ..Effects import *
 
 # Legato slide
 fx = FxList.new("leg", "leg", {"leg":0, "sus":1 }, order = 0)
-fx.add("osc = osc * XLine.ar(Rand(0.5,1.5)*leg,1,0.05*sus)")
+fx.add("osc = osc * XLine.ar(Rand(0.5,1.5)*abs(leg),1,0.05*sus)")
 fx.save()
 
 fx = FxList.new("glide", "glide", {"glide": 0, "glidedur": 0.05}, order=0)

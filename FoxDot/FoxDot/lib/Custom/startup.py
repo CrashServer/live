@@ -782,10 +782,10 @@ try:
 		@player_method
 		def drummer(self, durloop=16, durPlyr=1/2):
 			if durloop!=0:
-				drumCat = int(PRand(1, len(drumRockPattern)))
-				drumPat = int(PRand(1,len(drumRockPattern[drumCat])))
-				drumFillCat = int(PRand(1, len(drumRockFill)))
-				drumFillPat = int(PRand(1, len(drumRockFill[drumFillCat])))
+				drumCat = PRand(1, len(drumRockPattern))[0]
+				drumPat = PRand(1,len(drumRockPattern[drumCat]))[0]
+				drumFillCat = PRand(1, len(drumRockFill))[0]
+				drumFillPat = PRand(1, len(drumRockFill[drumFillCat]))[0]
 				fillDur = durloop/PRand([4,8,16])
 				durPlayer = PwRand([durPlyr,durPlyr*2],[80,20])[:1]
 				self.degree=Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [durloop-fillDur, fillDur])

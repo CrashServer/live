@@ -114,6 +114,11 @@ def GENERATE_VARLIST(_min=0, _max=1, length=6):
 	''' Generate a linvar float list '''
 	return 'linvar([{},{}],{})'.format(GENERATE_FLOAT_LIST(_min,_max, randint(2,length)),GENERATE_FLOAT_LIST(_min,_max, randint(2,length)),GENERATE_FLOAT_LIST(1,32,randint(2,length)))
 
+def GENERATE_VARINT(_min=0, _max=1, length=6):
+	''' Generate a var list of int'''
+	return 'var([{}],{})'.format(GENERATE_LIST(_min,_max, randint(2,length)),GENERATE_LIST(_min,_max,randint(2,length)))
+
+
 def GENERATE_FX(fxdict=fxdict):
 	### Generate a fx LIST
 	try:

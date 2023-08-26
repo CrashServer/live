@@ -493,6 +493,8 @@ def masterFilter():
 		set_master_filter(filtr, freqs[filtr], timef)
 		sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-0.25},0.25])')
 		Clock.future(timef, lambda: set_master_filter(filtr, 0, 0))
+		if timef>8:
+			Clock.future(timef, lambda: addKick())
 	except Exception as err:
 		Master().__setattr__("lpf", 0)
 		Master().__setattr__("hpf", 0)
@@ -538,11 +540,11 @@ def addKick():
 		lpf = randint(40,5000)
 		if randint(0,100) > probAddDrummer:
 			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
-			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
+			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).start(16).sometimes("stutter")
 		else:
 			lpf = randint(2400,14000)
 			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf}).drummer()')
-			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).drummer().sometimes("stutter")
+			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).drummer().start(16).sometimes("stutter")
 		addPlayerTurn()
 	except Exception as err:
 		print("addKick problem : ", err)

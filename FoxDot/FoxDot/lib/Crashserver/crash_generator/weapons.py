@@ -122,12 +122,20 @@ def gen_player_attributes(playerType=None):
 			if playerType != "loop": 
 				value = f'PRy(16,{choice([2,3,4])}, {GENERATE_WHITE(0.01,0.1)})'
 			else:
-				attr = "sbrk"
-				value = GENERATE_FLOAT_LIST(0.2,0.8)
+				if randint(0,100) > 90:
+					attr = "sbrk"
+					value = GENERATE_FLOAT_LIST(0.2,0.8)
+				else:
+					attr = "sample"
+					value = GENERATE_VARINT(10,100)
 		elif attr in ["sus"]:
 			if playerType == "loop":
-				attr = "sbrk"
-				value = GENERATE_FLOAT_LIST(0.2,0.8)
+				if randint(0,100) > 90:
+					attr = "sbrk"
+					value = GENERATE_FLOAT_LIST(0.2,0.8)
+				else:
+					attr = "sample"
+					value = GENERATE_VARINT(10,100)
 			else:
 				value = GENERATE_FLOAT_LIST(0.2,2)
 		elif attr in ["pan"]:

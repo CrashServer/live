@@ -1,4 +1,4 @@
-######################### ################ #####################
+# A1_48A
 Clock.bpm = 48;
 a1 >> bass([(0, 4, 2), [V, III, II, III, II]], dur=4, scale=Scale.minor, a=2, oct=var([5, 7, [5,4, 3]]))
 a2 >> lbass((0, 4, 2) + var([2, 4]), dur=var([1/2, PDur(3, 8)]), scale=Scale.minor, a=var([0.5, 1, 0], [8, 4, 2]))

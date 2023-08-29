@@ -1,3 +1,4 @@
+# A4_135
 Clock.bpm = 135;
 Scale.default = Scale.minorPentatonic
 Root.default = "G"

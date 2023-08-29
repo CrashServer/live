@@ -1,4 +1,4 @@
-#A6
+# A6_170
 Clock.bpm = 170
 
 a1 >> play("[--]. ", hpf=4000 + PRand(-400, 400), mpf=8000, delay=(0, [0,0.25], 1.25), echo=(0.5, 0.25), sample=(3, var([0, (5, 2)]), 5)).sometimes("stutter", degree="[--.:]", sample=1, a=0.1, rate=(1,2))

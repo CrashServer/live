@@ -1,5 +1,4 @@
 # A2
-#annihilation intro
 Scale.default = "minorPentatonic"
 Root.default=4
 Clock.bpm = 120;

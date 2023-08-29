@@ -1,3 +1,4 @@
+# B2_96
 Clock.bpm = 96;
 
 setseed(42)

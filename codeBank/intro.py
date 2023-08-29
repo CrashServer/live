@@ -1,4 +1,4 @@
-#intro
+# intro
 scene0
 Clock.bpm=48
 a1 >> play("{yYnNFlL}", sample=PRand(99), dur=PDur(3,8)*PRand([2,4,8,16]), pan=PWhite(-1,1), amp=linvar([0,0.5],[PRand(16,32),PRand(16,64)]), amplify=P*[0,1], rate=P*[1,PWhite(-1,4)], mverb=P*[0,PWhite(0.2,0.1)])

@@ -1,3 +1,4 @@
+# B3_120B
 Clock.bpm = 120;
 b1 >> bass([(0, 4, 2), V], dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), scale=Scale.minor, oct=var([5, var([PRand([4, 5, 6, 7])])]))
 b1.slider()

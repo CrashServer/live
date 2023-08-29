@@ -1,4 +1,4 @@
-#scan
+# scan
 scene1
 Clock.bpm = 70;
 

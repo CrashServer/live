@@ -1,3 +1,4 @@
+# D3_125
 Clock.bpm = 135;
 d1 >> dbass(PDur([3, 5, 7], 11), dur=PDur([3, 7, 5], 11), shift=(var([0, 0.5, 1, 1]), 0), leg=128, fmod=0, spr=0.1,spf=(10, (2500, 12)), spfslide=(0.1, 1), spfend=(10000, (10, 12500)), echo=var([0.25, 0.5, 0.75, 1]), hpf=(200, 1200)).unison(4)
 d1.hpf=0

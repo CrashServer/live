@@ -1,3 +1,4 @@
+# C3_135B
 Clock.bpm = 135;
 c1 >> loop("xtech8", dur=8, sample=8, hpf=var([0, 200], [6, 2]), hpr=linvar([0.1, 0.9],8))
 c0 >> loop("xtech8", dur=8, sample=8, lpf=var([10000, 200], [2, 6]), lpr=linvar([0.1, 0.9],32))

@@ -491,6 +491,29 @@ class LoopSynthDef(SampleSynthDef):
         self.filename = filename
         return proxy
 
+class NoLoopSynthDef(SampleSynthDef):
+    def __init__(self):
+        SampleSynthDef.__init__(self, "noloop")
+        self.pos = self.new_attr_instance("start")
+        self.sample = self.new_attr_instance("sample")
+        self.filename = self.new_attr_instance("filename")
+        self.trig = self.new_attr_instance("trig")
+        self.defaults['start']   = 0
+        self.defaults['sample']   = 0
+        self.defaults['trig'] = 0
+        # self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
+        self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, trigger: Impulse.kr(trig*sus), startPos: start * BufFrames.kr(buf), loop: 0);")
+        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
+        self.osc = self.osc * self.amp
+        self.add()
+    def __call__(self, filename, pos=0, sample=0, **kwargs):
+        kwargs["filename"] = filename
+        kwargs["sample"] = sample
+        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
+        proxy.kwargs["filename"] = filename
+        self.filename = filename
+        return proxy
+
 class StretchSynthDef(SampleSynthDef):
     def __init__(self):
         SampleSynthDef.__init__(self, "stretch")
@@ -655,7 +678,9 @@ class OnsetSynthDef(SampleSynthDef):
 #         #self.filename = filename
 #         return SampleSynthDef.__call__(self, pos, **kwargs)
 
+
 loop = LoopSynthDef()
+noloop = NoLoopSynthDef()
 stretch = StretchSynthDef()
 gsynth = GranularSynthDef()
 breakcore = BreakcoreSynthDef()

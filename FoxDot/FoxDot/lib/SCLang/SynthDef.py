@@ -129,7 +129,7 @@ class SynthDefBaseClass(object):
         Def += "{}\n".format(self.get_base_class_variables())
         Def += "{}\n".format(self.get_base_class_behaviour())
         Def += "{}".format(self.get_custom_behaviour())
-        stereo_synth = ["play2", "loop"]
+        stereo_synth = ["play2", "loop", "noloop"]
         if self.name in stereo_synth:
             Def += "osc = Splay.ar(osc, level:1,spread:wide, center:pan, levelComp: true);\n"
         else:

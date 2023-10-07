@@ -34,8 +34,8 @@ probAddFxOut = 1 # probability to add an fx output
 
 # Add player probability
 probAddSynth = 1
-probAddDrum = 4 #2
-probAddLoop = 8 #1
+probAddDrum = 2 #2
+probAddLoop = 4 #1
 
 # Stop player
 minPlayerTurn = 8 # min number of player turn before a possibility stop

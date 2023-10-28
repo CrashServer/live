@@ -1,7 +1,7 @@
 
 ''' Global config '''
 crash_path = "/home/zbdm/crashserver/UltimateSamples/"
-ipZbdm = "localhost"
+ipZbdm = "192.168.0.42"
 ipSvdk = "192.168.0.40" #"192.168.0.40"
 
 # Who is Troop Server & what is your name
@@ -9,12 +9,12 @@ crashTroopHost=ipZbdm # Troop server IP
 crashTroopName="Zbdm"    # your name
 
  # Who host CrashOS
-crashOSIp = ipZbdm   # Crash OS IP
+crashOSIp = ipSvdk   # Crash OS IP
 
 ''' CrashOS & osc out & CrashPanel '''
 crashPanelSending = True  # enable output to CrashPanel
 
-crashOsEnable = True  # enable history code crashos (!!! True for only 1 of the 2 players)
+crashOsEnable = False  # enable history code crashos (!!! True for only 1 of the 2 players)
 crashInstantCode = True # enable instant code display (both player can be True)
 
 crashSendMode = "osc" # enable "osc" or "udp" sending

@@ -1,5 +1,4 @@
 # scan
-scene1
 Clock.bpm = 70;
 
 c0 >> play("v", dur=1/2, lpf=PGauss(2000, 200), hpf=100, hpr=var([0.5, 0.2], 4),mverb=0.5, mverbdamp=0.1, mverbdiff=0.8, bpf=(1000, 1500), bpr=0.8, dist2=0.5, dist2mix=linvar([0.2, 1], [4, 2, 8]), dist2shape=1)

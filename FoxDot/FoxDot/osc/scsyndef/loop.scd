@@ -8,4 +8,4 @@ osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, startPos: BufSampleRate.kr
 osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));
 osc=(osc * amp);
 osc = Splay.ar(osc, level:1,spread:wide, center:pan, levelComp: true);
-ReplaceOut.ar(bus, osc)}).add;
+	ReplaceOut.ar(bus, osc)}).add;

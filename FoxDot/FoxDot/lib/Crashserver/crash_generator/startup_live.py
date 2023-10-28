@@ -56,6 +56,9 @@ class StorageAttack:
 	def getAttack(self, attackName, printOut=0):
 		exten = ''.join(choice(string.ascii_lowercase) for x in range(3))
 		prompt = f"##### attack@{attackName}.{exten}:~$ #####"
+		if isinstance(attackName, int):
+			attackName = list(self.attackDict.keys())[attackName]
+			print(attackName)
 		if printOut != 0:
 			print(prompt)
 			print(self.attackDict[attackName])
@@ -315,7 +318,7 @@ def masterAll(args = 0, value=1, *argsall):
 				except:
 					pass
 		valueDict = {}
-	else:
+	elif isinstance(args, str):
 		for p in Clock.playing:
 			if p in valueDict:
 				if args in valueDict[p]:
@@ -332,6 +335,8 @@ def masterAll(args = 0, value=1, *argsall):
 				except:
 					valueDict[p][args] = 0
 			p.__setattr__(args, value)
+	else:
+		pass
 
 ### CrashPanel
 

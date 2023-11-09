@@ -753,6 +753,23 @@ class SendOsBpm():
 osBpm = SendOsBpm(crashOSIp, crashOSPort)
 osBpm.start()
 
+class voice_count():
+    def __init__(self):
+        self.loop = True
+    def stop(self):
+        if self.loop:
+            self.loop = False
+        else:
+            self.loop = True
+    def start(self, lang="fr", voice=2):
+        self.lang=lang
+        self.voice=voice
+        Voice(str(random.randint(0,1000)), voice=self.voice, lang=self.lang)
+        if self.loop:
+            nextBar(Clock.future(8, lambda: self.start(self.lang, self.voice)))
+
+voicecount = voice_count()
+
 
 # def reboot():
 #     Clock.clear()

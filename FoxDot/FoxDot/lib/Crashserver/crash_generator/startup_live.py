@@ -764,7 +764,7 @@ class voice_count():
     def start(self, lang="fr", voice=2):
         self.lang=lang
         self.voice=voice
-        Voice(str(random.randint(0,1000)), voice=self.voice, lang=self.lang)
+        Voice(str(randint(0,1000)), voice=self.voice, lang=self.lang)
         if self.loop:
             nextBar(Clock.future(8, lambda: self.start(self.lang, self.voice)))
 

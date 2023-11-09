@@ -49,6 +49,7 @@ fx.save()
 fx = FxList.new('vadiod', 'VADiodeFilter', {'vadiod': 500, 'vadiodr': 0.5, 'vadiodd': 0.5}, order=2)
 fx.doc("VADiode filter")
 fx.add('osc = VADiodeFilter.ar(osc, vadiod, vadiodr, vadiodd)')
+fx.add('osc = osc*0.5')
 fx.save()
 
 

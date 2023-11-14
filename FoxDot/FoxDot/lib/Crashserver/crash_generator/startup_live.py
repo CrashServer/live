@@ -170,15 +170,25 @@ def print_sample(sample=""):
 
 def print_loops(loop=""):
 	''' print all available loops samples '''
-	if loop=="":
+	if isinstance(loop, int):
+		randomLoops = sample(loops, loop)
+		print(randomLoops)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(randomLoops))
+	elif loop=="":
 		print(loops)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(loops))
-	else:
+	elif (loop in loops):
 		listloops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_LOOP, loop))])
 		print(listloops)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(listloops))
+	else:
+		filteredList = [s for s in loops if loop in s]
+		print(filteredList)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(filteredList))
 
 def print_video():
 	'''Helper for video player'''

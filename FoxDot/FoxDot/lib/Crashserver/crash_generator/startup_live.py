@@ -764,22 +764,29 @@ osBpm = SendOsBpm(crashOSIp, crashOSPort)
 osBpm.start()
 
 class voice_count():
-    def __init__(self):
-        self.loop = True
-    def stop(self):
-        if self.loop:
-            self.loop = False
-        else:
-            self.loop = True
-    def start(self, lang="fr", voice=2):
-        self.lang=lang
-        self.voice=voice
-        Voice(str(randint(0,1000)), voice=self.voice, lang=self.lang)
-        if self.loop:
-            nextBar(Clock.future(8, lambda: self.start(self.lang, self.voice)))
+	''' random count recursively every 8 bars.
+		voicecount.start(lang="fr", voice=2, dur=8, amp=1.0, pitch=0.0)
+		voicecount.help() to show all available voices'''
+	def __init__(self):
+		self.loop = True
+	def stop(self):
+		if self.loop:
+			self.loop = False
+		else:
+			self.loop = True
+	def start(self, lang="fr", voice=2, dur=8, amp=1.0, pitch=0):
+		self.lang=lang
+		self.voice=voice
+		self.dur = dur
+		self.amp = amp
+		self.pitch = pitch
+		Voice(str(randint(0,1000)), voice=self.voice, lang=self.lang, amp=self.amp, pitch=self.pitch)
+		if self.loop:
+			nextBar(Clock.future(self.dur, lambda: self.start(lang=self.lang, voice=self.voice, dur=self.dur, amp=self.amp, pitch=self.pitch)))
+	def help(self):
+		print(Voice().get_voices())
 
 voicecount = voice_count()
-
 
 # def reboot():
 #     Clock.clear()

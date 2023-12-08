@@ -616,12 +616,15 @@ except Exception as e:
 try:
 	if os.name != "nt":
 		é = linvar([0,1],[16,0])
+		é4 = linvar([0,1], [4,0])
 		é8 = linvar([0,1],[8,0])
 		é32 = linvar([0,1],[32,0])
 		è = linvar([1,0],[16,0])
+		è4 = linvar([1,0],[4,0])
 		è8 = linvar([1,0],[8,0])
 		è32 = linvar([1,0],[32,0])
 		ê = linvar([0,1],[16,16])
+		ê4 = linvar([0,1],[4,4])
 		ê8 = linvar([0,1],[8,8])
 		ê32 = linvar([0,1],[32,32])
 		ù = PDur(var([4,PRand(8)],[6,2]), 8)
@@ -736,32 +739,6 @@ try:
 except Exception as e:
 	print(e)
 
-class SendOsBpm():
-	''' Send current Bpm to crashOS'''
-	def __init__(self, ipCrashOS="localhost", port=20000):
-		self.ipCrashOS = ipCrashOS
-		self.port = port
-		self.clientBpm = OSCClient()
-		self.clientBpm.connect((self.ipCrashOS, self.port))
-		self.threadOsBpm = Thread(target = self.sendOsBpm)
-		self.threadOsBpm.daemon = True
-	def sendOsBpm(self):
-		try:
-			while self.isrunning:
-				msg = OSCMessage("/OSbpm", [int(Clock.get_bpm())])
-				self.clientBpm.send(msg)
-				sleep(0.5)
-		except:
-			pass
-	def start(self):
-		self.isrunning = True
-		self.threadOsBpm.start()
-	def stop(self):
-		self.isrunning = False
-
-## start sending Bpm to crashOS
-osBpm = SendOsBpm(crashOSIp, crashOSPort)
-osBpm.start()
 
 class voice_count():
 	''' random count recursively every 8 bars.

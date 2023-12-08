@@ -70,6 +70,8 @@ if __name__ != "__main__":
 		FoxDotCode.use_sample_directory(FOXDOT_SND)
 		Samples.addPath(FOXDOT_LOOP)
 		loops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(FOXDOT_LOOP)])
+		loops.remove('')
+		loops.remove('__init__')
 	except:
 		print("Error importing Custom Sound", sys.exc_info()[0])
 
@@ -795,6 +797,36 @@ try:
 				self.every(durloop, "drummer", durloop, durPlyr)
 except:
 		print("Error importing drumRockPattern", sys.exc_info()[0])
+
+if crashPanelSending:
+	class SendOsBpm():
+		''' Send current Bpm to crashOS'''
+		def __init__(self, ipCrashOS="localhost", port=20000):
+			self.ipCrashOS = ipCrashOS
+			self.port = port
+			self.clientBpm = OSCClient()
+			self.clientBpm.connect((self.ipCrashOS, self.port))
+			self.threadOsBpm = Thread(target = self.sendOsBpm)
+			self.threadOsBpm.daemon = True
+		def sendOsBpm(self):
+			try:
+				while self.isrunning:
+					msg = OSCMessage("/OSbpm", [int(Clock.get_bpm())])
+					self.clientBpm.send(msg)
+					sleep(0.5)
+			except:
+				pass
+		def start(self):
+			self.isrunning = True
+			self.threadOsBpm.start()
+		def stop(self):
+			self.isrunning = False
+
+	## start sending Bpm to crashOS
+	osBpm = SendOsBpm(crashOSIp, crashOSPort)
+	osBpm.start()
+
+
 
 
 # @player_method

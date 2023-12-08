@@ -52,6 +52,16 @@ fx.add('osc = VADiodeFilter.ar(osc, vadiod, vadiodr, vadiodd)')
 fx.add('osc = osc*0.5')
 fx.save()
 
+# daFunk filter
+fx = FxList.new('dafilter', 'DafunkFilter', {'dafilter': 1200, 'dastart': 250, 'darel': 0.2, 'darq': 0.5, 'datype': 0, 'sus': 1}, order=2)
+fx.doc("Dafunk Filter")
+fx.add_var("env");
+fx.add_var("filGen");
+fx.add("env = EnvGen.ar(Env.adsr(0.3, 0.2, sus, darel);, Line.kr(1.0, 0.0, sus/2), doneAction:2)")
+fx.add("filGen = EnvGen.ar(Env.adsr(0.4, 0.5, 0.2, 0.5);, Line.kr(1.0, 0.0, sus/2), levelScale: dafilter)")
+fx.add("osc = SelectX.ar(datype, [BPF.ar(osc, dastart + filGen, darq), BRF.ar(osc, dastart + filGen, darq)])")
+fx.add("osc = (osc.clip2(0.007) * 24).distort()")
+fx.save()
 
 fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0)
 fx.add("osc = osc + (fm_sin_i * SinOsc.kr(osc * fm_sin))")

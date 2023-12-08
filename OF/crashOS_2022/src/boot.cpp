@@ -14,7 +14,7 @@ void Boot::setup(){
     xml.load("xml/boot.xml");
     string xmlString = xml.getValue("logText", "bootServer");
 
-    maxLine = (int) (height-300) /  (fontCharBox.height+15);
+    maxLine = (int) (height+25) /  (fontCharBox.height+15);
 
     posIntegrity = glm::vec2((width - (fontCharBox.width*10) - 10),
                              height- fontCharBox.height - 10);
@@ -30,10 +30,13 @@ void Boot::setup(){
     cBoot.assign(maxLine, " ");
     rtime = ofRandom(20,142);
     incr=0;
+    _integrity = 100;
 
+    logoCrash.load("ui/crashlogo.svg");   
 }
 
-void Boot::update(){
+void Boot::update(int integrity){
+    this->_integrity = integrity; 
     incr++;
     if (incr >= rtime){
         if (cBoot.size() >= maxLine) {
@@ -42,18 +45,14 @@ void Boot::update(){
         string selectLine = bootLine[ofRandom(0, bootLine.size())];
         cBoot.push_back(selectLine);
         incr=0;
-        rtime = ofRandom(20,142);
+        rtime = ofRandom(ofMap(_integrity,100,5,20,0.1,true), ofMap(_integrity, 100,5,140,0.2,true));
     }
 }
 
-void Boot::draw(int integrity){
+void Boot::draw(){
     ofPushStyle();
     ofSetColor(ofColor::greenYellow);
     for (unsigned int i=0; i< (cBoot.size()); i++){
-//        if (ofRandom(0,100)>90){
-//            font.drawString(" ", 100, 100+ (i*(fontCharBox.height+15)));
-//        }
-//        else {
             if (i == (cBoot.size()-1)){
                 string subString = cBoot[i].substr(0,ofMap(incr,0,rtime,0,cBoot[i].size()-1));
                 font.drawString(subString, 50, 50+(i*(fontCharBox.height+15)));
@@ -65,7 +64,7 @@ void Boot::draw(int integrity){
 
     ofPushMatrix();
             ofTranslate(posIntegrity.x, posIntegrity.y);
-            int integrityDiv = integrity/10;
+            int integrityDiv = _integrity/10;
             for (int i=integrityDiv; i>0; i--){
             font.drawString("*", (fontCharBox.width)*i, 0);
         }
@@ -80,13 +79,22 @@ void Boot::draw(int integrity){
         font.drawString(waitingMsg, 0, 0);
         ofPopMatrix();
     }
+
+    ofPushMatrix();
+    ofPushStyle();
+    ofTranslate((ofMap(_integrity, 100, 5, width/2 - logoCrash.getWidth()/2, 50)), ofMap(_integrity, 100, 5, height, height/2 - logoCrash.getHeight()*0.55));
+    ofScale(ofMap(_integrity, 100,5, 0, 1, true));
+    logoCrash.draw();
+    ofPopStyle();
+    ofPopMatrix();
+
 }
 
 
 void Boot::resize(){
     this->width = ofGetWidth();
     this->height = ofGetHeight();
-    maxLine = (int) (height-300) /  (fontCharBox.height+15);
+    maxLine = (int) (height-25) /  (fontCharBox.height+15);
     cBoot.resize(maxLine);
     posIntegrity = glm::vec2((this->width - (fontCharBox.width*10) - 50),
                              this->height - fontCharBox.height - 50);

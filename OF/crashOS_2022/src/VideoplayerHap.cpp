@@ -11,7 +11,6 @@ void VideoPlayerHap::setup(string path){
     pos = glm::vec3(0,0,0);
     size = glm::vec2(width, height);
     vidDirIndex = 0;
-
     // list all directories
     videoDir.listDir(videoPath);
     videoDir.sort();
@@ -31,17 +30,14 @@ void VideoPlayerHap::setup(string path){
     hapPlayer.setSpeed(1);
     hapPlayer.setPaused(false);
 
+    vidid = 0;
     vidpos = 0.0;
 }
 
-void VideoPlayerHap::update(float vidpos, int vidid){
+void VideoPlayerHap::update(float vidpos){
     if (vidpos != this->vidpos){
         hapPlayer.setPosition(vidpos);
         this->vidpos = vidpos;
-    }
-    if (vidid != vidIndex){
-        vidIndex = vidid - 1;
-        //newSeq();
     }
 }
 
@@ -75,15 +71,16 @@ void VideoPlayerHap::newCat(int index){
         vidDirIndex = index;
         videoDir.listDir(videoPath);
         videoDir.sort();
-        //cout << "index : " << ofToString(vidDirIndex%(videoDir.size())) << endl;
         videoList.listDir(videoDir.getPath(vidDirIndex%(videoDir.size())));
         videoList.sort();
         vidTotal = videoList.size();
         vidIndex = -1;
         this->newSeq();
     }
+
 }
 
+/* version of newSeq with no int, if there is an int, takes next one. */
 void VideoPlayerHap::newSeq(){
     // load a new video sequence from current directory
     vidIndex++;
@@ -93,6 +90,17 @@ void VideoPlayerHap::newSeq(){
     hapPlayer.load(videoActual);
 }
 
+/* version of newSeq with an int from FoxDot */
+void VideoPlayerHap::newSeq(int vidId){
+    if (vidId != vidIndex){
+        vidIndex = ofClamp(vidId, 0, vidTotal-1);
+        string videoActual = videoList.getPath(vidIndex);
+        filename = ofFilePath::removeExt(ofFilePath::getFileName(videoActual));
+        hapPlayer.load(videoActual);
+    }
+}
+
+/** Scrub the video according to audio */
 void VideoPlayerHap::videoScrub(float audioRms){
     if (audioRms==0){
         hapPlayer.setPosition(ofRandom(0,1));

@@ -1,6 +1,7 @@
 //#include "scene.h"
 #include "ofApp.h"
 
+
 ////// HELP //////////
 ////// UPDATE GRAMMAR
 /// videoplayer.update("Category", integrity)
@@ -36,12 +37,47 @@
 
 //////////////////////////////////
 
+/* TEMPLATE SCENE
+Void ofApp::scene0Update(){
+
+    // DMX
+       if (bdmx){
+       // DMX White
+       float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
+       float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
+       dmx1Col = ofColor::fromHsb(36, sinCol, 5);
+       dmx2Col = ofColor::fromHsb(36, sinCol2, 5);
+       dmx.update(dmx1Col, dmx2Col);
+       }
+    
+    // VideoPlayer
+    
+    videoplayerHap.newCat(1);
+    videoplayerHap.update(data.vidpos1);
+    winCode.update(data.vectorCode);
+    winCpu.update(data.scCPU*cpuStress);
+    //winBpm.update(data.bpm);
+    winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
+    uiMisc.update(true);
+
+
+
+Void ofApp::scene0Draw(){
+
+    }
+
+
+}
+
+*/
+
 
 ///// SCENE 0/////
 /// BOOT SEQUENCE
 ///
 void ofApp::scene0Update(){
-   boot.update();
+   boot.update(integrity);
    if (bdmx){
        // DMX White
        float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
@@ -53,7 +89,7 @@ void ofApp::scene0Update(){
 }
 
 void ofApp::scene0Draw(){
-    boot.draw(integrity);
+    boot.draw();
 }
 
 void ofApp::scene0Bang(char playerID){
@@ -75,9 +111,8 @@ void ofApp::scene0BigBang(){
 void ofApp::scene1Update(){
     videoplayerHap.newCat(1);
     videoplayerHap2.newCat(1);
-    videoplayerHap.update(data.vidpos1, data.vidid1);
-    videoplayerHap2.update(data.vidpos2, data.vidid2);
-
+    videoplayerHap.update(data.vidpos1);
+    videoplayerHap2.update(data.vidpos2);
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winBpm.update(data.bpm);
@@ -98,7 +133,6 @@ void ofApp::scene1Update(){
 void ofApp::scene1Draw(){
     ofEnableAlphaBlending();
     //ofDisableAlphaBlending();
-
     ofSetColor(255, 255, 255,data.vidblend1);
     videoplayerHap.draw();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
@@ -106,8 +140,6 @@ void ofApp::scene1Draw(){
     videoplayerHap2.draw();
     //ofDisableAlphaBlending();
     ofDisableBlendMode();
-
-
     winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winBpm.draw();
@@ -125,14 +157,19 @@ void ofApp::scene1Bang(char playerID){
 }
 
 void ofApp::scene1BigBang(){
-    videoplayerHap.newSeq();
-    videoplayerHap2.newSeq();
+    if (bvideoFox)
+        {videoplayerHap.newSeq(data.vidid1);
+        videoplayerHap2.newSeq(data.vidid2);
+        }
+    else {videoplayerHap.newSeq();
+        videoplayerHap2.newSeq();
+    }
     scene = data.scene;
 }
 /////////////////////
 
 //// SCENE 2 ////////
-//// BIRTHSOMETHING
+//// complete  
 
 void ofApp::scene2Update(){
     videoplayerHap.newCat(2);
@@ -181,21 +218,23 @@ void ofApp::scene2Bang(char playerID){
 
 void ofApp::scene2BigBang(){
     videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ///////////////////////
+//// SCENE 3 //////// Clean scene
+// pure video scene
 
-//// SCENE 3 ////////
 void ofApp::scene3Update(){
     videoplayerHap.newCat(3);
-    webcam.update();
-    winCode.update(data.vectorCode);
-    winCpu.update(data.scCPU*cpuStress);
-    winIntegrity.update(integrity);
-    winScore.update(svdkScore, zbdmScore, serverScore);
-    glitcherLogo.update(uiMisc.uiFbo);
-    uiMisc.update(true);
-    uiMisc.changeLogo(3);
+    // webcam.update();
+    // winCode.update(data.vectorCode);
+    // winCpu.update(data.scCPU*cpuStress);
+    // winIntegrity.update(integrity);
+    // winScore.update(svdkScore, zbdmScore, serverScore);
+    // glitcherLogo.update(uiMisc.uiFbo);
+    // uiMisc.update(true);
+    // uiMisc.changeLogo(3);
 
     if (bdmx){
         dmx1Col = ofColor(rms*255*audioThresh/20);
@@ -205,21 +244,24 @@ void ofApp::scene3Update(){
 }
 
 void ofApp::scene3Draw(){
+
     videoplayerHap.draw();
-    webcam.draw();
-    winCode.draw(data.vectorCode, data.vectorInstant);
-    winCpu.draw();
-    winIntegrity.draw();
-    winScore.draw();
-    uiMisc.draw(true, data.isServerActive);
-    glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
+//    webcam.draw();
+//    winCode.draw(data.vectorCode, data.vectorInstant);
+//    winCpu.draw();
+//    winIntegrity.draw();
+//    winScore.draw();
+//    uiMisc.draw(true, data.isServerActive);
+    // glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
 }
 
 void ofApp::scene3Bang(char playerID){
+    integrity -= integrityIncr;
+    
     videoplayerHap.videoScrub(0);
+    
     vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
     data.sendOSC("/cmd/Video", vect);
-    integrity -= integrityIncr;
 
     if(bdmx){
     // DMX reagit au code
@@ -241,6 +283,7 @@ void ofApp::scene3Bang(char playerID){
 
 void ofApp::scene3BigBang(){
     videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 
@@ -284,6 +327,7 @@ void ofApp::scene4Bang(char playerID){
 
 void ofApp::scene4BigBang(){
     videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ////////////////////////
@@ -338,6 +382,7 @@ void ofApp::scene5Bang(char playerID){
 
 void ofApp::scene5BigBang(){
     videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ////////////////////////
@@ -376,6 +421,7 @@ void ofApp::scene6Bang(char playerID){
 
 void ofApp::scene6BigBang(){
     videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ////////////////////////
@@ -424,6 +470,7 @@ void ofApp::scene7Bang(char playerID){
 
 void ofApp::scene7BigBang(){
     videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ////////////////////////
@@ -483,6 +530,7 @@ void ofApp::scene8Bang(char playerID){
 
 void ofApp::scene8BigBang(){
     videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 
@@ -716,7 +764,7 @@ void ofApp::sceneServerBang(char playerID){
 }
 
 void ofApp::sceneServerBigBang(){
-    videoHapServer.newSeq();
+    videoplayerHap.newSeq();
     scene = data.scene;
 }
 

@@ -7,9 +7,10 @@
 class VideoPlayerHap {
 public:
     void setup(string path="videoHap/");
-    void update(float vidpos, int vidid);
+    void update(float vidpos);
     void draw();
     void newSeq();
+    void newSeq(int vidId);
     void newCat(int index);
     void videoScrub(float audioRms=0);
 
@@ -19,7 +20,7 @@ public:
 
     int vidIndex; // index of the actual video
     int vidDirIndex; // index of the actual folder
-    int vidTotal;
+    int vidTotal; // total amount of videos in directory 
 
     int width, height;
     glm::vec3 pos;

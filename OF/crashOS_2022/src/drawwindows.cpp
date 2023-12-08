@@ -6,7 +6,7 @@ Windo::Windo(){
 //    // Parametre
     width = ofGetWidth();
     height = ofGetHeight();
-    font.load("ui/font/press.ttf", 16);
+    font.load("ui/font/Xolonium-Bold.otf", 20);
     fontCharBox = font.getStringBoundingBox("Q", 0, 0); // size of a char
 }
 
@@ -29,7 +29,7 @@ void Windo::drawWin(glm::vec3 windowPos, glm::vec2 windowSize, ofColor uiColor) 
 
     // the transparent background
     ofColor backCol = uiColor;
-    backCol.a = 180;
+    backCol.a = 0;
     ofSetColor(backCol);
     path.moveTo(0, 0);
     path.lineTo(0, windowSize.y - bvl.y);
@@ -43,17 +43,17 @@ void Windo::drawWin(glm::vec3 windowPos, glm::vec2 windowSize, ofColor uiColor) 
     ofSetLineWidth(4.0);
     ofSetColor(uiColor);
 
-    // the L
-    ofDrawLine(0, 0, 0, (int)(windowSize.y - bvl.y));
-    ofDrawLine(0, (int)(windowSize.y - bvl.y), bvl.y, windowSize.y);
-    ofDrawLine(bvl.x, windowSize.y, bvl.x, windowSize.y);
-    ofDrawLine(bvl.x, windowSize.y, windowSize.x, windowSize.y);
-
-    // the outside
-    ofDrawLine(-bvl.x, windowSize.y - bvl.y, -bvl.x, -bvl.y);
-    ofDrawLine(-bvl.x, -bvl.y, windowSize.x, -bvl.y);
-    ofDrawLine(windowSize.x, -bvl.y, windowSize.x + bvl.x, 0);
-    ofDrawLine(windowSize.x + bvl.x, 0, windowSize.x + bvl.x, windowSize.y + bvl.y);
+    // // the L
+    // ofDrawLine(0, 0, 0, (int)(windowSize.y - bvl.y));
+    // ofDrawLine(0, (int)(windowSize.y - bvl.y), bvl.y, windowSize.y);
+    // ofDrawLine(bvl.x, windowSize.y, bvl.x, windowSize.y);
+    // ofDrawLine(bvl.x, windowSize.y, windowSize.x, windowSize.y);
+    //
+    // // the outside
+    // ofDrawLine(-bvl.x, windowSize.y - bvl.y, -bvl.x, -bvl.y);
+    // ofDrawLine(-bvl.x, -bvl.y, windowSize.x, -bvl.y);
+    // ofDrawLine(windowSize.x, -bvl.y, windowSize.x + bvl.x, 0);
+    // ofDrawLine(windowSize.x + bvl.x, 0, windowSize.x + bvl.x, windowSize.y + bvl.y);
 
     ofPopMatrix();
     ofPopStyle();
@@ -358,7 +358,7 @@ void WinIntegrity::draw()
         ofTranslate(pos->x + this->padding, pos->y + size->y/2 - fontCharBox.height, pos->z);
         ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
         ofSetColor(ofMap(integrity,100,0,0,255), ofMap(integrity,100,0,255,0),0);
-        font.drawString(targetText + "\n\n" + "COMPLETE: " + ofToString(100- this->integrity) + "%"
+        font.drawString(targetText + "" + "COMPLETE: " + ofToString(100- this->integrity) + "%"
                 + "\n" + nameModel, 0,0);
         ofEnableBlendMode(OF_BLENDMODE_DISABLED);
     ofPopMatrix();

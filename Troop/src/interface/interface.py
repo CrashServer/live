@@ -375,7 +375,8 @@ class Interface(BasicInterface):
         x = int((ws/2) - (w / 2))
         y = int((hs/2) - (h / 2))
 
-        self.root.geometry('{}x{}+{}+{}'.format(w, h, x, y))
+        #self.root.geometry('{}x{}+{}+{}'.format(w, h, x, y))
+        self.root.geometry('{}x{}+{}+{}'.format(1715, 1023, 200, 50))
 
         # Try and start full screen (issues on Linux)
 
@@ -707,6 +708,18 @@ class Interface(BasicInterface):
             if char in self.text.right_brackets:
 
                 self.text.highlight_brackets(char)
+
+            ### Crashmod
+            try:
+                if crashInstantCode:
+                    crashData = self.text.crashInfo()
+                    if crashData[0] == "Zbdm":
+                        byte_message = OSC.OSCMessage("/zbdmTypeCode", crashData)
+                    elif crashData[0] == "Svdk":
+                        byte_message = OSC.OSCMessage("/svdkTypeCode", crashData)
+                    crashTroop_socket.send(byte_message)
+            except Exception as e:
+                print(e)
 
         # Remove any selected text
 

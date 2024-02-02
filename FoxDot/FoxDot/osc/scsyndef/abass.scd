@@ -4,6 +4,7 @@ SynthDef.new(\abass,
 
 	sus = sus * blur;
 	freq = In.kr(bus, 1);
+	
 	freq = [freq, freq+fmod];
 
 	freq = SinOsc.ar(freq*\fmfreq.kr(1).lag(0.3)) * \fmrange.kr(0.5).lag(0.3) * LFNoise1.kr(4).range(0.9,1.1) + 1 * freq;

@@ -4,6 +4,7 @@ SynthDef(\bbass,
 	var lfo;
 	sus = sus * blur;
 	freq = In.kr(bus, 1);
+	
 	freq = [freq, freq+fmod];
 	oscfreq = {freq * LFNoise2.kr(Rand(0.0001,0.5)).range(0.98, 1.02)}!5;
 	lfo = { SinOsc.kr({ 1/Rand(2,52) }!5) };

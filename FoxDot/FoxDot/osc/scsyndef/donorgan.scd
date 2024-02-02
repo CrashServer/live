@@ -2,6 +2,7 @@ SynthDef.new(\donorgan,{
 	|bus=0, pan=0, freq=440, amp=1, gate=1, rate=1, fmod=0, atk=0.01, dec=0.5, sus=1, rel=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5|
 	var vibrato, env, osc;
 	freq = In.kr(bus, 1);
+	
 	freq = [freq, freq+fmod];
 	freq = freq/2;
 	vibrato = SinOsc.kr(lforate, Rand(0, 2.0));

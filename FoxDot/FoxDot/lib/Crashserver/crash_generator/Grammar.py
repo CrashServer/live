@@ -38,10 +38,10 @@ if __name__ != "__main__":
 	
 	#SYNTH LIST & Exclude
 	synthdefNames = [i for i in SynthDefs]
-	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin' ]
+	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin', 'onset']
 	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
 					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", 
-					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce"]
+					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce", 'quin']
 	#penible_synth = ['gray']
 	synthExclude += penible_synth
 	for exclude in synthExclude:
@@ -52,7 +52,7 @@ if __name__ != "__main__":
 
 	#LOOP LIST
 	loopNames = sorted([fn for fn in listdir(FOXDOT_LOOP)])
-	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8"]
+	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8", "__init__.py", "serverVoice", "onsetDict.py", "slaap"]
 	for loopxclude in loopExclude:
 		try:
 			loopNames.remove(loopxclude)
@@ -114,6 +114,11 @@ def GENERATE_VARLIST(_min=0, _max=1, length=6):
 	''' Generate a linvar float list '''
 	return 'linvar([{},{}],{})'.format(GENERATE_FLOAT_LIST(_min,_max, randint(2,length)),GENERATE_FLOAT_LIST(_min,_max, randint(2,length)),GENERATE_FLOAT_LIST(1,32,randint(2,length)))
 
+def GENERATE_VARINT(_min=0, _max=1, length=6):
+	''' Generate a var list of int'''
+	return 'var([{}],{})'.format(GENERATE_LIST(_min,_max, randint(2,length)),GENERATE_LIST(_min,_max,randint(2,length)))
+
+
 def GENERATE_FX(fxdict=fxdict):
 	### Generate a fx LIST
 	try:
@@ -130,7 +135,7 @@ def GENERATE_FX(fxdict=fxdict):
 				fx_arg[argmt] = GENERATE_LIST(fx_min, fx_max,8)
 		return fx_arg
 	except Exception as e:
-		print("generate FX : " + e)
+		print("generate FX : ", e)
 
 
 def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
@@ -159,7 +164,7 @@ def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
 			print(synthName, "not found in dictionnay")
 			return {"vol": '1'}
 	except Exception as e:
-		print("generate synth arg : " + e)
+		print("generate synth arg : ", e)
 
 
 def GENERATE_CHAR():
@@ -181,7 +186,7 @@ def GENERATE_CHAR():
 				rnd_char_list.append(".")               
 		return "".join(rnd_char_list)    
 	except Exception as e:
-		print("generate char : " + e)
+		print("generate char : ", e)
 
 
 def GENERATE_PARA():
@@ -194,7 +199,7 @@ def GENERATE_PARA():
 			args.append(player_merge[paraPlayer][i]())
 		return f'"{paraPlayer}"' + '{}'.format(",".join(args))
 	except Exception as e:
-		print("generate para : " + e)
+		print("generate para : ", e)
 
 def GENERATE_PARA2():
 	''' generate parameters not working with "after" like .amen, .bubble'''
@@ -205,7 +210,7 @@ def GENERATE_PARA2():
 			args.append(player_para[paraPlayer][i]())
 		return f'"{paraPlayer}"' + '{}'.format(",".join(args))
 	except Exception as e:
-		print("generate para2 : " + e)
+		print("generate para2 : ", e)
 
 def GENERATE_DUR(dur=None):
 	''' Generate a random dur pattern '''
@@ -216,7 +221,7 @@ def GENERATE_DUR(dur=None):
 			dur = f"{dur}.sus" 
 		return f'(PChain(krhytm)[:16]*{str(dur)}).limit(sum,16).limit(len,20)'
 	except Exception as e:
-		print("generate dur : " + e)
+		print("generate dur : ", e)
 
 def GENERATE_AMPLIFY(_min=0, _max=1):
 	''' Generate a random amplify pattern [0,1,0,1,0,1]'''
@@ -225,7 +230,7 @@ def GENERATE_AMPLIFY(_min=0, _max=1):
 		pat = [GENERATE_LIST(0,1), P10(rndList[1]), PBern(rndList[1]), PEuclid(rndList[0],rndList[1])]
 		return f'{str(choice(pat))}'
 	except Exception as e:
-		print("generate amplify : " + e)
+		print("generate amplify : ", e)
 
 def GENERATE_PAN(_min=-1, _max=1):
 	''' Generate a random pan pattern [-1,0.2,-0.3,1] or PSine(64) '''
@@ -243,7 +248,7 @@ def GENERATE_ADSR(synthName='', sustain=1):
 				adsrDict[argm] = GENERATE_FLOAT_LIST(_min=argMin, _max=argMax, length=6, digits=5)
 		return adsrDict
 	except Exception as e:
-		print("generate adsr : " + e)
+		print("generate adsr : ", e)
 
 # Patterns that take patterns as input
 
@@ -262,7 +267,7 @@ patternInputs = {
 	'PStutter' : [_pat, _int],
 	'PShuf'    : [_pat],
 	'PAlt'     : [_pat, _pat, _pat],
-	'PStep'    : [_int, _num, _num],
+	'PStep'    : [_int, _num, _num, _pat],
 	'PSum'     : [_int, _num, _null],
 	'PStretch'  : [_pat, _int],
 	'PZip'     : [_pat, _pat, _pat],
@@ -311,7 +316,7 @@ def remap_pattern(pat, oMin, oMax):
 		pat = [remap(p,pmin,pmax,oMin,oMax) for p in pat]
 		return f'{pat}'
 	except Exception as e:
-		print("remap pattern : " + e)
+		print("remap pattern : ", e)
 
 def remap(x, oMin, oMax, nMin, nMax):
 	''' remap value '''
@@ -327,7 +332,7 @@ def remap(x, oMin, oMax, nMin, nMax):
 		else:
 			return newValue
 	except Exception as e:
-		print("remap : " + e)
+		print("remap : ", e)
 
 def checkPattern(pat =""):
 	''' limit a pattern len output < 20, avoid P[1,1,1,1,...,1,1,1,1] error ''' 

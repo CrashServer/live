@@ -2,6 +2,7 @@ SynthDef.new(\glitchbass,
 	{|amp=1, sus=1, gate=1, pan=0, modfreq=5 freq=0, vib=0, fmod=0, rate=4.85, phase=0.5, cutoff=2000, rq=0.5, mul=1, bus=0, atk=0.0001, decay=0.01, rel=0.01, level=0.8, peak=1|
 var osc, pulse, filter,env,clip;
 freq = In.kr(bus, 1);
+
 freq = freq/2;
 amp = amp*0.5;
 clip = LinLin.kr(vib, 0, 1, 2e-12, 2e-1);

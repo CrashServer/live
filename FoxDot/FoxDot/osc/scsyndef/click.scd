@@ -3,6 +3,7 @@ SynthDef(\click,
 	var sig;
 	freq = In.kr(bus, 1);
 	sus = sus * blur;
+		
 	freq = [freq, freq+fmod];
 		sig = BLowPass.ar(Impulse.ar(vib,0,4), freq*(rate+0.01), 0.2);
 	sig = sig + LFPar.ar(

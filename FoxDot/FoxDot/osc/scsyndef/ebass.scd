@@ -11,6 +11,7 @@ SynthDef.new(\ebass,
 	sus = sus*blur;
 	freq = In.kr(bus, 1);
 	freq = freq/4;
+		
 	freq = [freq, freq+fmod];
 	// Make a Constant from pickupWidth for ampArray
 	constant = pickupWidth/25.5; // The scale length is set to 25.5 inches

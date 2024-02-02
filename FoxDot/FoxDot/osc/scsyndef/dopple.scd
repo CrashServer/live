@@ -1,10 +1,11 @@
 SynthDef.new(\dopple,
-{|amp=1, sus=1, pan=0, freq=440, vib=0, fmod=0, bus=0, blur=1, gate=1, rate=1|
+	{|amp=1, sus=1, pan=0, freq=440, vib=0, fmod=0, bus=0, blur=1, gate=1, rate=1|
 var osc, env, osc1, osc2, osc3, ffreq, sig1;
 var buf = LocalBuf(2*s.sampleRate, 2);
 var choosetrig;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+
 freq = [freq, freq+fmod];
 ffreq = Sweep.kr(Impulse.kr(1/rate), 1/rate) * 10000;
 osc1 = LFSaw.ar(freq * 1 + (0.04 * [1,-1]));

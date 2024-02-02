@@ -12,7 +12,7 @@ public:
     void update(int _videoCat=0, int integrity=100);
     void draw();
     void newSeq();
-    void videoSrcub();
+    void videoSrcub(float audioRms=0);
     void resize();
 
 
@@ -23,8 +23,9 @@ public:
     ofDirectory videoCat; // dir of category
     ofDirectory videoDir; // dir of video
 
-    int vidCat;
-    int vidId;
+    int vidCat; // category
+    int vidId; // index video
+    int vidTotal; // total video
     float vidFps;
     ofFbo videoFbo, fxFbo;
     int width, height;
@@ -60,6 +61,15 @@ private:
     int meshSize = 20;
 };
 
+class VideoplayerAscii : public Videoplayer {
+public:
+    void setupAscii();
+    void updateAscii(int _videoCat, int integrity);
+    void drawAscii();
+
+    string asciiCharacters;
+    ofTrueTypeFont font;
+};
 
 
 #endif // VIDEOPLAYER_H

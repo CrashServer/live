@@ -39,15 +39,50 @@ except Exception as e:
 	print("Error in generating weapons code", e)
 
 serverActive = False
-# osc receive state
+
 if crashOsEnable:
 	# Osc/udp sender
 	try:
 		if crashSendMode == "udp":
-			crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
+			crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		if crashSendMode == "osc":
 			crashFoxDot_socket = OSCClient()
 			crashFoxDot_socket.connect((crashOSIp, crashOSPort))
+
+		#osc receive state
+		class OSCReceiver():
+			''' OSC Receiver for evaluate command from CrashOS'''
+			def __init__(self, crashOSIp):
+				self.oscserver = ThreadingOSCServer(("0.0.0.0",2887))
+				self.oscserver.addDefaultHandlers()
+				self.oscserver.addMsgHandler("/cmd/serverState", self.receiveState)
+				self.oscserver.addMsgHandler("/cmd/Video", self.receiveVideo)
+				self.videoGrp = 99
+				self.videoIndex = 99
+				self.videoTotal = 99
+				self.videoIntegrity = 99
+				self.thread = Thread(target = self.oscserver.serve_forever)
+				self.thread.daemon = True
+				self.thread.start()
+
+			def receiveState(self, address, tags, contents, source):
+				state = int(contents[0])
+				if state == 0:
+					soff()
+				elif state == 1:
+					activateServer()
+					#son(1,3,9)
+				else:
+					print("error receiving osc from CrashOs")
+
+			def receiveVideo(self, address, tags, contents, source):
+				self.videoGrp = int(contents[0])
+				self.videoIndex = int(contents[1]) + 1
+				self.videoTotal = int(contents[2])
+				self.videoIntegrity = int(contents[3])
+
+		oscReceiver = OSCReceiver(crashOSIp)
+
 	except Exception as err:
 		print(f"config UDP or OSC problem : {err}")
 
@@ -77,7 +112,7 @@ class runServer():
 				genSeed.add()
 				genSeed.set()
 		except Exception as e:
-			print("start genseed " + e)
+			print("start genseed ", e)
 		if self.loop:
 			try:
 				if serverActive:
@@ -85,7 +120,7 @@ class runServer():
 				duration = self.time*randint(multDurationMin,multDurationMax)
 				Clock.future(duration, lambda: self.start())
 			except Exception as e:
-				print("start server : " + e)
+				print("start server : ", e)
 
 server = runServer()
 playerCount = {}
@@ -111,7 +146,7 @@ def server_order():
 		order[0]()  # evaluate order
 		addPlayerTurn()  # add 1 turn to each playing players
 	except Exception as err:
-		print("server_order problem : " + err)
+		print("server_order problem : ", err)
 
 def add_player(copyText=False, playerType=None):
 	''' add a random synth, drum, loop player  '''
@@ -143,7 +178,7 @@ def add_player(copyText=False, playerType=None):
 				textGenerated = run_player_loop(copyText, **para_dict)
 				return textGenerated
 	except Exception as err:
-		print("add_player problem : " + err)
+		print("add_player problem : ", err)
 
 
 def stop_player():
@@ -163,7 +198,7 @@ def stop_player():
 			add_player()
 			addPlayerTurn()
 	except Exception as err:
-		print("stop_player problem : " + err)
+		print("stop_player problem : ", err)
 
 def add_fx():
 	''' add fx parameters '''
@@ -174,7 +209,7 @@ def add_fx():
 			sendOut(f'{player}.{name}={argm}')
 			player.__setattr__(name, eval(argm))
 	except Exception as err:
-		print("add_fx problem : " + err)
+		print("add_fx problem : ", err)
 
 def run_player_synth(copyText=False, **kwargs):
 	''' Play synth player'''
@@ -191,15 +226,15 @@ def run_player_synth(copyText=False, **kwargs):
 		if max(degree) > 10:
 			degree = remap_pattern(degree, 0,7)
 		if not copyText:
-			~eval(player) >> eval(synth)(eval(str(degree)), dur=eval(dur), oct=eval(oct))
+			~eval(player) >> eval(synth)(eval(str(degree)), dur=eval(dur), oct=eval(oct)).unison(2)
 			for argm, value in params.items():
 				eval(player).__setattr__(str(argm), eval(str(value)))
-			sendOut(f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText})')
+			sendOut(f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText}).unison(2)')
 			addFilter(eval(player))
 		else:
-			return f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText})'
+			return f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText}).unison(2)'
 	except Exception as err:
-		print("run_player_synth problem : " + err)
+		print("run_player_synth problem : ", err)
 
 def synthArgsToText(params=''):
 	''' Add synth parameters '''
@@ -209,7 +244,7 @@ def synthArgsToText(params=''):
 			paratxt += f'{argm} = {value}, '    
 		return paratxt
 	except Exception as err:
-		print("synthArgsToText problem : " + err)
+		print("synthArgsToText problem : ", err)
 
 def run_player_drum(copyText=False, **kwargs):
 	''' Play drum player'''
@@ -227,7 +262,7 @@ def run_player_drum(copyText=False, **kwargs):
 		else:
 			return f'{player} >> {synth}("{degree}", dur={dur}, sample={sample}, rate={rate})'
 	except Exception as err:
-		print("run_player_drum problem : " + err)
+		print("run_player_drum problem : ", err)
 
 def run_player_loop(copyText=False, **kwargs):
 	''' Play loop player'''
@@ -244,7 +279,7 @@ def run_player_loop(copyText=False, **kwargs):
 		else:
 			return f'{player} >> {synth}("{degree}", dur={dur}, sample={sample})'
 	except Exception as err:
-		print("run_player_loop problem : " + err)
+		print("run_player_loop problem : ", err)
 
 def addPlayerTurn():
 	''' add one to player dictionnary turn '''
@@ -260,7 +295,7 @@ def addPlayerTurn():
 		for d in delplayer:
 			playerCount.pop(d, None)
 	except Exception as err:
-		print("addPlayerTurn problem : " + err)
+		print("addPlayerTurn problem : ", err)
 
 def add_player_param():
 	''' add player parameters (like .spread, .offbeat, .jump, ...) '''
@@ -271,7 +306,7 @@ def add_player_param():
 			sendOut(f'{player}.{param}')
 			eval(f'{player.name}.{param}')
 	except Exception as err:
-		print("add_player_param problem : " + err)
+		print("add_player_param problem : ", err)
 
 def add_player_attribute():
 	''' add or change player attribute (sus, pan, ) '''
@@ -281,7 +316,7 @@ def add_player_attribute():
 		sendOut(f'{player}.{attr[0]}={attr[1]}')
 		player.__setattr__(attr[0], eval(str(attr[1])))
 	except Exception as err:
-		print("add_player_attribute problem : " + err)
+		print("add_player_attribute problem : ", err)
 
 def change_degree(player=None):
 	''' According to player type change degree(synth), char(drum), sample(loop)'''
@@ -302,11 +337,11 @@ def change_degree(player=None):
 			sendOut(f'{player}.degree = {deg}')
 			player.__setattr__("degree", eval(str(deg)))
 		else:
-			deg = choices([gen_arp(), 'melody()', 'PGauss()','PChain2(chords)'],probSynthChangeDegree)[0]
+			deg = choices([gen_arp(), 'melody()[:8]', 'PGauss()','PChain2(chords)'],probSynthChangeDegree)[0]
 			sendOut(f'{player}.degree = {deg}')
 			player.__setattr__("degree", eval(deg))
 	except Exception as err:
-		print("change_degree problem : " + err)
+		print("change_degree problem : ", err)
 
 # def change_adsr(player=None):
 #   try:
@@ -356,7 +391,7 @@ def add_event():
 							[probChangeScale, probChangeRoot, probChangeHumanizer, probChangeBpm, probAddLpf, probAddDrop, probAddKick, probAddAccompany, probAddFxOut])[0]
 		rnd_event()
 	except Exception as err:
-		print("add_event problem : " + err)
+		print("add_event problem : ", err)
 
 def sendOut(msg=""):
 	''' send all generated text to output : console, osc '''
@@ -371,7 +406,7 @@ def sendOut(msg=""):
 				msg = 'SERVER: ' + msg
 			print(msg)
 	except Exception as err:
-		print("sendOut problem : " + err)
+		print("sendOut problem : ", err)
 
 def sendUdp(msg=""):
 	''' Send osc text to osc ip '''
@@ -389,28 +424,6 @@ def sendOsc(msg=""):
 	except:
 		pass
 
-# def video(msg=""):
-#   ''' Send osc message for video '''
-#   try:
-#       oscMsg = OSCMessage("/video")
-#       oscMsg.append(msg)
-#       myclient.send(oscMsg)
-#   except:
-#       pass
-
-def state(msg=1):
-	''' Send osc message for server status '''
-	global serverActive
-	if msg == 0:
-		serverActive = True
-	else:
-		serverActive = False
-	try:
-		byte_message = bytes("_" + str(msg), "utf-8")
-		crashFoxDot_socket.sendto(byte_message, (crashOSIp, crashOSPort))
-	except:
-		pass
-
 def player_type(player):
 	''' return player type '''
 	try:
@@ -421,7 +434,7 @@ def player_type(player):
 		else:
 			return "synth"
 	except Exception as err:
-		print("player_type problem : " + err)
+		print("player_type problem : ", err)
 
 def change_bpm():
 	''' Change randomly and lineary the bpm'''
@@ -432,7 +445,7 @@ def change_bpm():
 		sendOut(f'Clock.bpm = lininf({bpmNow}, {bpmTarget},{randTime})')
 		Clock.bpm = lininf(bpmNow, bpmTarget,randTime)
 	except Exception as err:
-		print("change_bpm problem : " + err)
+		print("change_bpm problem : ", err)
 
 def change_scale():
 	''' set a random scale '''
@@ -443,7 +456,7 @@ def change_scale():
 		Scale.__setattr__("default", Scale.get_scale(scale_name))
 		sendOut(f'Scale.default={scale_name}')
 	except Exception as err:
-		print("change_scale problem : " + err)
+		print("change_scale problem : ", err)
 
 def change_root():
 	''' up or down root '''
@@ -458,7 +471,7 @@ def change_root():
 		sendOut(f'Root.default+={updown}')
 		Root.default=Root.default + updown
 	except Exception as err:
-		print("change_root problem : " + err)
+		print("change_root problem : ", err)
 
 def humanizer(player=None):
 	''' humanize a drum pattern '''
@@ -469,20 +482,23 @@ def humanizer(player=None):
 		sendOut(f'{player}.humanize({hum[0]}, {hum[1]}, {hum[2]})')
 		player.human(hum[0], hum[1], hum[2])
 	except Exception as err:
-		print("humanizer problem : " + err)
+		print("humanizer problem : ", err)
 
 def masterFilter():
 	''' Add random Master().lpf, Master().hpf '''
 	try:
-		timef = 4*round(randint(3,32)/4)
+		#timef = 4*round(randint(3,32)/4)
+		timef = choice([4,8,16,32])
 		filtr = choice(["lpf", "hpf"])
 		set_master_filter(filtr, freqs[filtr], timef)
-		sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-1},1])')
+		sendOut(f'Master().{filtr}=linvar({freqs[filtr]},[{timef-0.25},0.25])')
 		Clock.future(timef, lambda: set_master_filter(filtr, 0, 0))
+		if timef>8:
+			Clock.future(timef, lambda: addKick())
 	except Exception as err:
 		Master().__setattr__("lpf", 0)
 		Master().__setattr__("hpf", 0)
-		print("masterFilter problem : " + err)
+		print("masterFilter problem : ", err)
 
 def set_master_filter(filtr, freqf, timef):
 	''' set the master filter, use with clock.future '''
@@ -490,9 +506,9 @@ def set_master_filter(filtr, freqf, timef):
 		if timef == 0:
 			Master().__setattr__(filtr, 0)
 		else:
-			Master().__setattr__(filtr, linvar(freqf, [timef-1, 1], start=now))
+			Master().__setattr__(filtr, linvar(freqf, [timef-0.25, 0.25], start=now))
 	except Exception as err:
-		print("set_master_filter problem : " + err)
+		print("set_master_filter problem : ", err)
 
 def dropevent():
 	''' Add random drop() '''
@@ -500,7 +516,7 @@ def dropevent():
 		time = randint(dropTimeMin,dropTimeMax)
 		drop(time, dropTimeMax-time,dropLoop)
 	except Exception as err:
-		print("dropevent problem : " + err)
+		print("dropevent problem : ", err)
 
 def addFilter(player=None):
 	''' add lpf or hpf to player '''
@@ -512,7 +528,7 @@ def addFilter(player=None):
 			sendOut(f'{player}.{filType}={filFreq}')
 		player.__setattr__(filType, eval(filFreq))
 	except Exception as err:
-		print("addFilter problem : " + err)
+		print("addFilter problem : ", err)
 
 def addKick():
 	''' Add 4 to the floor Kick player '''
@@ -524,14 +540,14 @@ def addKick():
 		lpf = randint(40,5000)
 		if randint(0,100) > probAddDrummer:
 			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf})')
-			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).sometimes("stutter")
+			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).start(16).sometimes("stutter")
 		else:
 			lpf = randint(2400,14000)
 			sendOut(f'{eval(player)} >> play({kick}, dur=1/2, sample={sple}, lpf={lpf}).drummer()')
-			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).drummer().sometimes("stutter")
+			~eval(player) >> play(kick, dur=1/2, sample=sple, lpf=lpf, amp=randint(1,3)).drummer().start(16).sometimes("stutter")
 		addPlayerTurn()
 	except Exception as err:
-		print("addKick problem : " + err)
+		print("addKick problem : ", err)
 
 def generate_rytm(length=16, mult=1):
 	try:
@@ -541,7 +557,7 @@ def generate_rytm(length=16, mult=1):
 				rytm[i] = f'rest({0.5*mult})'
 		return str(rytm).replace("'","")
 	except Exception as err:
-		print("generate_rytm problem : " + err)
+		print("generate_rytm problem : ", err)
 
 def addAccompany():
 	try:
@@ -551,7 +567,7 @@ def addAccompany():
 			choosenPlayer[0].accompany(choosenPlayer[1])    
 			sendOut(f'{choosenPlayer[0]}.accompany{choosenPlayer[1]}')
 	except:
-		print("addAccompany problem : " + err)
+		print("addAccompany problem : ", err)
 
 def addFxOut():
 	''' add fxOut to player '''
@@ -559,9 +575,9 @@ def addFxOut():
 		player = choice(Clock.playing)
 		fxout = choice(["fx1", "fx2"])
 		sendOut(f'{player}.{fxout}=1')
-		player.__setattr__(fxout, 1)
+		player.__setattr__(fxout, 0.3)
 	except Exception as err:
-		print("addFxOut problem : " + err)
+		print("addFxOut problem : ", err)
 
 def shutup():
 	''' stop all server's players, preserve numeric end players (d1, s3, e8)'''
@@ -572,6 +588,7 @@ def shutup():
 		ply.stop()
 
 def son(s=999, d=999, l=999):
+	''' activate the server, probability (Synth, drums, Loops) '''
 	print("Server On")
 	global serverActive, probAddSynth, probAddDrum, probAddLoop
 	if s!=999:	
@@ -586,8 +603,16 @@ def soff():
 	global serverActive
 	serverActive = False
 
+def activateServer():
+	Clock.bpm=92
+	eval('se >> loop("serverVoice", dur=16, beat_stretch=0, looping=0, mverb=0.1, amp=0.5).unison(3).only()')
+	Server.freeAllNodes()
+	Clock.future(32, lambda: son())
+
+### start the server
 server.start()
-#serverActive = True
+
+##### GARBAGE FOR ARCH ######
 
 # def changeConf():
 # 	cfg = configparser.RawConfigParser()
@@ -598,3 +623,25 @@ server.start()
 # 	for p in par:
 # 		par[p]=par[p].split("#",1)[0].strip() # To get rid of inline comments
 # 	globals().update(par)  #globally
+
+# def state(msg=1):
+# 	''' Send osc message for server status '''
+# 	global serverActive
+# 	if msg == 0:
+# 		serverActive = True
+# 	else:
+# 		serverActive = False
+# 	try:
+# 		byte_message = bytes("_" + str(msg), "utf-8")
+# 		crashFoxDot_socket.sendto(byte_message, (crashOSIp, crashOSPort))
+# 	except:
+# 		pass
+
+# def video(msg=""):
+#   ''' Send osc message for video '''
+#   try:
+#       oscMsg = OSCMessage("/video")
+#       oscMsg.append(msg)
+#       myclient.send(oscMsg)
+#   except:
+#       pass

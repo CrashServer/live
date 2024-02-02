@@ -5,6 +5,7 @@ SynthDef("subbass",
 	sus = sus*blur;
 	freq = In.kr(bus, 1);
 	freq = freq/4;
+		
 	freq = [freq, freq+fmod];
 
 	env = Env.perc(atk, sus*2, amp, [8, -1 * 8]).kr(doneAction: 0);

@@ -131,7 +131,7 @@ from os.path import dirname
 from random import shuffle, choice
 from copy import copy, deepcopy
 
-from .Settings import SamplePlayer, LoopPlayer
+from .Settings import SamplePlayer, LoopPlayer, OnsetPlayer
 from .Code import WarningMsg, debug_stdout
 from .SCLang.SynthDef import SynthDefProxy, SynthDef, SynthDefs
 from .Effects import FxList
@@ -1693,7 +1693,9 @@ class Player(Repeatable):
         elif self.synthdef == LoopPlayer:
 
             pos = kwargs.get("degree", event["degree"])
-            buf = kwargs.get("buf", event["buf"])
+            sample = kwargs.get("sample", event["sample"])
+            #buf = kwargs.get("buf", event["buf"])
+            buf = self.samples.loadBuffer(self.filename, sample)
 
             # Get a user-specified tempo
 
@@ -1730,6 +1732,57 @@ class Player(Repeatable):
                 pos += self.metro.beat_dur(sus)
 
             message.update( {'pos': pos, 'buf': buf, 'rate': rate} )
+
+        # CrashMod
+        elif self.synthdef == OnsetPlayer:
+            #pos = kwargs.get("degree", event["degree"])
+            onset = kwargs.get("onset", event["onset"])
+            sample = kwargs.get("sample", event["sample"])
+            #filename = kwargs.get("filename", event["filename"])
+            #buf = kwargs.get("buf", event["buf"])
+            buf = self.samples.loadBuffer(self.filename, sample)
+            pth = self.samples._findSample(self.filename,sample).split("/")[-1:][0]
+            onsetList = self.samples.onsetDict[pth]
+            pos = onsetList[0][int(onset%len(onsetList[0]))]
+            #pos = 0
+            #onsetCut = 1
+            onsetCut = onsetList[1][int(onset%len(onsetList[1]))]
+            # Get a user-specified tempo
+
+            given_tempo = kwargs.get("tempo", self.event.get("tempo", self.metro.bpm))
+
+            if given_tempo in (None, 0):
+
+                tempo = 1
+
+            else:
+
+                tempo = self.metro.bpm / given_tempo
+
+            # Set the position in "beats"
+
+            pos = pos * tempo * self.metro.beat_dur(1)
+
+            # If there is a negative rate, move the pos forward
+
+            rate = kwargs.get("rate", event["rate"])
+
+            if rate == 0:
+
+                rate = 1
+
+            # Adjust the rate to a given tempo
+
+            rate = float(tempo * rate)
+
+            if rate < 0:
+
+                sus = kwargs.get("sus", event["sus"])
+
+                pos += self.metro.beat_dur(sus)
+
+            message.update( {'pos': pos, 'buf': buf, 'rate': rate, 'onsetCut': onsetCut} )
+
 
         else:
 
@@ -1821,7 +1874,8 @@ class Player(Repeatable):
 
         if N > 0:
 
-            self.stop_point = self.metro.next_bar() + ((N-1) * self.metro.bar_length())
+            #self.stop_point = self.metro.next_bar() + ((N-1) * self.metro.bar_length())
+            self.stop_point = self.metro.mod(N)
 
         else:
 
@@ -1910,11 +1964,14 @@ class Player(Repeatable):
 
         return self
 
-    def only(self):
+    def only(self, action=0):
         """ Stops all players except this one """
-        for player in list(self.metro.playing):
-            if player is not self:
-                player.stop()
+        if action > 0:
+            self.metro.schedule(self.only, self.metro.mod(action))
+        else:
+            for player in list(self.metro.playing):
+                if player is not self:
+                    player.stop()
         return self
 
     def solo(self, action=1):
@@ -1923,7 +1980,10 @@ class Player(Repeatable):
 
         action=int(action)
 
-        if action == 0:
+        if action < 0:
+            self.metro.solo.set(self)
+            self.metro.schedule(self.metro.solo.reset, self.metro.mod(abs(action)))
+        elif action == 0:
 
             self.metro.solo.reset()
 
@@ -1931,10 +1991,10 @@ class Player(Repeatable):
 
             self.metro.solo.set(self)
 
-        elif action == 2:
-
-            pass
-
+        elif action > 1:
+            self.metro.schedule(self.solo, self.metro.mod(action))
+            
+              
         return self
 
     def versus_old(self, other, key = lambda x: x.freq, f=max):

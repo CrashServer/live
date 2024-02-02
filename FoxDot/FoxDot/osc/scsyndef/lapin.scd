@@ -10,8 +10,8 @@ SynthDef(\lapin,
 		};
 
 		freq = In.kr(bus, 1);
+		
 		freq = [freq, freq+fmod];
-
 		osc = string.(freq) + string.(freq) + string.(freq * 0.5);
 		osc = osc + (HPF.ar(LocalIn.ar(2), 3000) * -50.dbamp);
 		osc = osc + HPF.ar(osc, 3000);

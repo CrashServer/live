@@ -7,6 +7,7 @@ try:
 	from random import choice
 	from threading import Thread
 	from pathlib import Path
+	import socket
 except Exception as e:
 	print(e)
 
@@ -19,8 +20,7 @@ try:
 	fig_font = FigletFont()
 	fig_fonts_list = fig_font.getFonts()
 	fig_skip = ['fbr12___', 'mshebrew210', 'term', 'runic', 'pyramid', 'eftifont', 'DANC4', 'dietcola']
-	fig_skip += ['emboss', 'emboss2', 'future', 'letter', 'pagga',
-					  'smblock', 'smbraille', 'wideterm']
+	fig_skip += ['emboss', 'emboss2', 'future', 'letter', 'pagga', 'smblock', 'smbraille', 'wideterm']
 	fig_skip += ['dosrebel', 'konto', 'kontoslant']
 	font_list = [x for x in fig_fonts_list if x not in fig_skip]
 	asciiEnable = True
@@ -56,6 +56,9 @@ class StorageAttack:
 	def getAttack(self, attackName, printOut=0):
 		exten = ''.join(choice(string.ascii_lowercase) for x in range(3))
 		prompt = f"##### attack@{attackName}.{exten}:~$ #####"
+		if isinstance(attackName, int):
+			attackName = list(self.attackDict.keys())[attackName]
+			print(attackName)
 		if printOut != 0:
 			print(prompt)
 			print(self.attackDict[attackName])
@@ -90,6 +93,11 @@ def ascii_gen(text="", font=""):
 ##########################################
 ###     CRASH SERVER LIVE FUNCTIONS    ###
 ##########################################
+
+def voiceserver(voice_txt=""):
+    masterAll("lpf", 80)
+    Voice(voice_txt, rate=1, amp=1, pitch=1 + randint(-10,50), lang="fr", voice=0)
+    Clock.future(calc_dur_voice(voice_txt), lambda: masterAll("reset"))
 
 def connect():
 	''' Full reset and set bpm, root, sos & video player '''
@@ -162,15 +170,33 @@ def print_sample(sample=""):
 
 def print_loops(loop=""):
 	''' print all available loops samples '''
-	if loop=="":
+	if isinstance(loop, int):
+		randomLoops = sample(loops, loop)
+		print(randomLoops)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(randomLoops))
+	elif loop=="":
 		print(loops)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(loops))
-	else:
+	elif (loop in loops):
 		listloops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_LOOP, loop))])
 		print(listloops)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(listloops))
+	else:
+		filteredList = [s for s in loops if loop in s]
+		print(filteredList)
+		if crashPanelSending:
+			crashpanel.sendOnce(str(filteredList))
+
+def print_video():
+	'''Helper for video player'''
+	txt = "v1 >> video(pos1=0.3, pos2=0.5, vid1=3, vid2=4, blend1=0.7, blend2=0.3, scene=4, blendtype=3) \n pos* = scrub video* \n vid* = index of video* \n blend* = opacity of video* \n scene = index of scene \n blendtype = choose blend type between vid1 et vid2"
+	print(txt)
+	clip.copy("v1 >> video(pos1=0.0, pos2=0.0, vid1=0, vid2=0, blend1=0.5, blend2=0.5, scene=1, blendtype=0)")
+	if crashPanelSending:
+		crashpanel.sendOnce(str(txt))
 
 def PMorse(text, point=1/4, tiret=3/4):
 	""" Convert a string to the value of point & tiret """
@@ -250,7 +276,7 @@ def morph(self, other, prob=50):
 					if other[k] != P[0]:
 						test = True
 					else:
-						test = False     
+						test = False
 				except:
 					test = True
 				if test:
@@ -260,7 +286,28 @@ def morph(self, other, prob=50):
 					setattr(self, k, item)
 		except Exception as e:
 			print(e)
-	return self 
+	return self
+
+@player_method
+def trim(self, length):
+	'''Trim to length evey pattern of player'''
+	if length !=0:
+		if length >= 1:
+			for attr in self.attr:
+				try:
+					self.attr[attr] = self.attr[attr].trim(length)
+				except AttributeError:
+					pass
+		else:
+			for attr in self.attr:
+				try:
+					self.attr[attr] = self.attr[attr].trim(1)
+				except AttributeError:
+					pass
+			self.attr["dur"] = self.attr["dur"] * length
+		return self
+	# else:
+	# 	self.dur = 0.5 if self.synthdef == SamplePlayer else 1
 
 def genArp(nbrseq=4, lengthseq=8):
 	''' Generate arpeggiato based on markov Chords progression '''
@@ -271,7 +318,7 @@ def genArp(nbrseq=4, lengthseq=8):
 
 valueDict = {}
 
-def masterAll(args = "dur", value=1):
+def masterAll(args = 0, value=1, *argsall):
 	global valueDict
 	if args == "reset" or args == 0:
 		for k,v in valueDict.items():
@@ -281,7 +328,7 @@ def masterAll(args = "dur", value=1):
 				except:
 					pass
 		valueDict = {}
-	else:
+	elif isinstance(args, str):
 		for p in Clock.playing:
 			if p in valueDict:
 				if args in valueDict[p]:
@@ -298,10 +345,10 @@ def masterAll(args = "dur", value=1):
 				except:
 					valueDict[p][args] = 0
 			p.__setattr__(args, value)
+	else:
+		pass
 
 ### CrashPanel
-### Root, scale
-### generateur de "Plat du jour"
 
 try:
 	if crashPanelSending:
@@ -371,7 +418,7 @@ try:
 						 "PDrum(style=None, pat='', listen=False, khsor='', duree=1/2, spl = 0, charPlayer='d')", "darker()", "lighter()", "PChords(chords)",
 						 "PGauss(mean, deviation)", "PLog(mean, deviation)", "PTrir(low,high,mode)", "PCoin(low, high, proba)", "PChar(case=2, alpha=2)",
 						 "PMarkov(init_value='')", "switch(other, key, bypass=1)", "clone(player)", "add(value)", "mul(value)", "drop(playTime=6, dropTime=2, nbloop=1)",
-						 "drop_bpm(duree=32, nbr=0, end=4)", "melody(scale_melody=Scale.default.name, melody_dict=melody_dict)", "PArp(seq, index=0)", "SDur(target)"]
+						 "drop_bpm(duree=32, nbr=0, end=4)", "melody()", "PArp(seq, index=0)", "SDur(target)"]
 				return ("Fonction", fct)
 
 			def choix(self):
@@ -388,12 +435,16 @@ try:
 
 				self.bpmTime = 0.2  # time cycle send bpm
 				self.beatTime = 0.1 # time cycle send beat
-				self.plyTime = 0.3 # time cycle send player
+				self.plyTime = 1.0 # time cycle send player
 				self.pdjTime = 60 #time cycle send PlatduJour
-				self.chronoTime = 10 # time cycle send chrono
+				self.chronoTime = 1.0 # time cycle send chrono
+				self.videoTime = 1.0 # time cycle send video index
 
-				self.clientZbdm = OSCClient()
-				self.clientZbdm.connect((self.ipZbdm, 2000))
+				self.playerCounter = {}
+
+				if self.ipZbdm:
+					self.clientZbdm = OSCClient()
+					self.clientZbdm.connect((self.ipZbdm, 2000))
 				if self.ipSvdk:
 					self.clientSvdk = OSCClient()
 					self.clientSvdk.connect((self.ipSvdk, 2000))
@@ -415,6 +466,9 @@ try:
 				self.threadPdj.daemon = True
 				self.threadChrono = Thread(target = self.sendChrono)
 				self.threadChrono.daemon = True
+				self.threadVideoIndex = Thread(target = self.sendVideoIndex)
+				self.threadVideoIndex.daemon = True
+
 
 			def sendOscMsg(self, msg):
 				if self.ipZbdm:
@@ -437,10 +491,10 @@ try:
 						sleep(self.bpmTime)
 				except:
 					pass
-				
+
 			def sendScale(self):
 				''' send Scale to OSC server '''
-				try: 
+				try:
 					while self.isrunning:
 						msg = OSCMessage("/panel/scale", [str(Scale.default.name)])
 						self.sendOscMsg(msg)
@@ -450,7 +504,7 @@ try:
 
 			def sendRoot(self):
 				''' send Root to OSC server '''
-				try: 
+				try:
 					while self.isrunning:
 						msg = OSCMessage("/panel/root", [str(Root.default)])
 						self.sendOscMsg(msg)
@@ -472,7 +526,9 @@ try:
 				''' send active player to OSC server '''
 				try:
 					while self.isrunning:
-						msg = OSCMessage("/panel/player", [[str(p) for p in Clock.playing]])
+						self.addPlayerTurn()
+						playerListCount = [f'{k} {divmod(v,60)[0]:02d}:{divmod(v,60)[1]:02d}' for k,v in self.playerCounter.items()]
+						msg = OSCMessage("/panel/player", [playerListCount])
 						self.sendOscMsg(msg)
 						sleep(self.plyTime)
 				except:
@@ -500,6 +556,31 @@ try:
 				except:
 					pass
 
+			def addPlayerTurn(self):
+				''' add one to player dictionnary turn '''
+				try:
+					playerList = Clock.playing
+					for p in playerList:
+						if p in self.playerCounter.keys():
+							self.playerCounter[p] += 1
+						else:
+							self.playerCounter[p] = 1
+					# Clean non playing player
+					delplayer = [k for k in self.playerCounter.keys() if k not in playerList]
+					for d in delplayer:
+						self.playerCounter.pop(d, None)
+				except Exception as err:
+					print("addPlayerTurn problem : ", err)
+
+			def sendVideoIndex(self):
+				try:
+					while self.isrunning:
+						msg = OSCMessage("/panel/video", [oscReceiver.videoGrp, oscReceiver.videoIndex, oscReceiver.videoTotal, oscReceiver.videoIntegrity])
+						self.sendOscMsg(msg)
+						sleep(self.videoTime)
+				except:
+					pass
+
 			def sendOnce(self, txt):
 				''' send on txt msg to OSC '''
 				msg = OSCMessage("/panel/help", [txt])
@@ -517,6 +598,7 @@ try:
 				self.threadPlayer.start()
 				self.threadPdj.start()
 				self.threadChrono.start()
+				self.threadVideoIndex.start()
 
 		def panelreset():
 			crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
@@ -532,21 +614,25 @@ except Exception as e:
 
 ### French cut
 try:
-	é = linvar([0,1],[16,0])
-	é8 = linvar([0,1],[8,0])
-	é32 = linvar([0,1],[16,0])
-	è = linvar([1,0],[16,0])
-	è8 = linvar([1,0],[8,0])
-	è32 = linvar([1,0],[32,0])
-	ê = linvar([0,1],[16,16])
-	ê8 = linvar([0,1],[8,8])
-	ê32 = linvar([0,1],[32,32])
-	ù = PDur(var([4,PRand(8)],[6,2]), 8)
-	ù3 = PDur(var([3,PRand(8)],[6,2]), 8)
-	ù5 = PDur(var([5,PRand(8)],[6,2]), 8)
-	à = PRand(10)
-	ç = PWhite(-1,1)
-	ç0 = PWhite(0,1)
+	if os.name != "nt":
+		é = linvar([0,1],[16,0])
+		é4 = linvar([0,1], [4,0])
+		é8 = linvar([0,1],[8,0])
+		é32 = linvar([0,1],[32,0])
+		è = linvar([1,0],[16,0])
+		è4 = linvar([1,0],[4,0])
+		è8 = linvar([1,0],[8,0])
+		è32 = linvar([1,0],[32,0])
+		ê = linvar([0,1],[16,16])
+		ê4 = linvar([0,1],[4,4])
+		ê8 = linvar([0,1],[8,8])
+		ê32 = linvar([0,1],[32,32])
+		ù = PDur(var([4,PRand(8)],[6,2]), 8)
+		ù3 = PDur(var([3,PRand(8)],[6,2]), 8)
+		ù5 = PDur(var([5,PRand(8)],[6,2]), 8)
+		à = PRand(10)
+		ç = PWhite(-1,1)
+		ç0 = PWhite(0,1)
 	# ô = PGauss(0, 1)
 
 	### scene OF
@@ -561,8 +647,181 @@ try:
 	scene8 = 0
 	scene9 = 0
 	scene10 = 0
+	scene11 = 0
+	scene12 = 0
+	scene13 = 0
+	scene14 = 0
 	scene99 = 0
+
+	# define chords and circle of fifth
+	circ5 = (P[0:12]*7)%12
+	circ5m = circ5.rotate(3)
+	Maj = P(0,4,7)
+	Min = P(0,3,7)
+	Sus2 = P(0,2,7)
+	Sus4 = P(0,5,7)
+	Dim = P(0,3,6)
+	Maj7 = P(0,4,7,11)
+	Aug = P(0,4,8)
+	Six = P(0,4,7,9)
+
 except Exception as e:
 	print(e)
 
 
+dwarfDict = {
+    "chorus": {
+        "phase": 10,
+        "depth": 11,
+        "delay": 12,
+        "contour": 13,
+        "wet": 14,
+        "freq": 15},
+    "whammy": {
+        "first": 16,
+        "last": 17,
+        "gain": 18,
+        "clean": 19
+        },
+    "drive": {
+        "attack": 20,
+        "bright": 21,
+        "gate": 22,
+        "level": 23
+        },
+    "master": {
+        "bass": 24,
+        "treble": 25,
+        },
+    "shimmer": {
+        "predelay": 27,
+        "early": 28,
+        "shimmer": 29
+        }
+    }
+
+def dwarf(fx="", param="", value="", duree=1):
+    def findName():
+        playerList = [f'm{p}' for p in list(string.ascii_lowercase)]
+        playerFiltred = [ply for ply in playerList if ply not in [p.name for p in Clock.playing]]
+        if len(playerFiltred) >= 1:
+            return playerFiltred[0]
+        else:
+            return None
+    if fx == "":
+        print(dwarfDict.keys())
+    else:
+        if param == "":
+            print(dwarfDict[fx].keys())
+        else:
+            if value != "" and fx in dwarfDict.keys() and param in dwarfDict[fx].keys():
+                para = dwarfDict[fx][param]
+                playerName = findName()
+                if playerName is not None:
+                    clip.copy(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree}) # {fx}/{param}")
+                    eval(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree})")
+                else:
+                    print("No more player left...")
+            else:
+                print("Wrong name or give me a value")
+
+try:
+	class FilterOSCClient(OSCClient):
+		def send(self, message, *args):
+			if "video" in str(message.message):
+				OSCClient.send(self, message, *args)
+	def OSCVideo(video_adress):
+		my_client = FilterOSCClient()
+		my_client.connect((video_adress, 20000))
+		Server.forward = my_client
+	OSCVideo(crashOSIp)
+	print("Video Connected")
+except Exception as e:
+	print(e)
+
+
+class voice_count():
+	''' random count recursively every 8 bars.
+		voicecount.start(lang="fr", voice=2, dur=8, amp=1.0, pitch=0.0)
+		voicecount.help() to show all available voices'''
+	def __init__(self):
+		self.loop = True
+	def stop(self):
+		if self.loop:
+			self.loop = False
+		else:
+			self.loop = True
+	def start(self, lang="fr", voice=2, dur=8, amp=1.0, pitch=0):
+		self.lang=lang
+		self.voice=voice
+		self.dur = dur
+		self.amp = amp
+		self.pitch = pitch
+		Voice(str(randint(0,1000)), voice=self.voice, lang=self.lang, amp=self.amp, pitch=self.pitch)
+		if self.loop:
+			nextBar(Clock.future(self.dur, lambda: self.start(lang=self.lang, voice=self.voice, dur=self.dur, amp=self.amp, pitch=self.pitch)))
+	def help(self):
+		print(Voice().get_voices())
+
+voicecount = voice_count()
+
+# def reboot():
+#     Clock.clear()
+#     import signal
+#     carla = subprocess.Popen(["pgrep", "carla"], stdout=subprocess.PIPE, shell=False)
+#     for pid in carla.stdout:
+#         os.kill(int(pid),signal.SIGTERM)
+#     scsynth = subprocess.Popen(["pgrep", "scsynth"], stdout=subprocess.PIPE, shell=False)
+#     for pid in scsynth.stdout:
+#         os.kill(int(pid),signal.SIGTERM)
+#     scide = subprocess.Popen(["pgrep", "scide"], stdout=subprocess.PIPE, shell=False)
+#     for pid in scide.stdout:
+#         os.kill(int(pid),signal.SIGTERM)
+#     sleep(1)
+#     os.system('scide %F &')
+#     sleep(10)
+#     os.system('carla /home/zbdm/crashserver/config/carla_live.carxp &')
+#     FoxDot.reload()
+
+### Mixer
+# try:
+# 	class Mixer():
+# 		def __init__(self):
+# 			self.client = OSCClient()
+# 			self.client.connect((ipZbdm, 7788))
+# 			self.strip = ["foxdot", "fx1", "fx2", "voice", "reverb", "master"]
+# 			self.audio = ["foxdot", "fx1", "fx2", "voice"]
+#
+# 		def gain(self, strip, gain):
+# 			if strip in self.strip:
+# 				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(gain))
+# 				self.client.send(msg)
+#
+# 		def mute(self, strip):
+# 			if strip in self.strip:
+# 				msg = OSCMessage(f"/strip/{strip}/Gain/Gain%20(dB)/unscaled", float(-70.0))
+# 				self.client.send(msg)
+#
+# 		def solo(self, strip):
+# 			for s in [st for st in self.audio if st != strip]:
+# 				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(-70.0))
+# 				self.client.send(msg)
+#
+# 		def unsolo(self):
+# 			for s in self.audio:
+# 				msg = OSCMessage(f"/strip/{s}/Gain/Gain%20(dB)/unscaled", float(0.0))
+# 				self.client.send(msg)
+#
+# 		def reverb(self, strip, gain):
+# 			if strip in self.audio:
+# 				msg = OSCMessage(f"/strip/{strip}/Aux%20(A)/Gain%20(dB)/unscaled", float(gain))
+# 				self.client.send(msg)
+#
+# 		def feed(self, strip, gain):
+# 			if strip in ["fx1", "fx2"]:
+# 				msg = OSCMessage(f"/strip/{strip}/Aux%20/Gain%20(dB)/unscaled", float(gain))
+# 				self.client.send(msg)
+#
+# 	mixer = Mixer()
+# except Exception as e:
+# 	print(e)

@@ -36,8 +36,11 @@ class Voice(Thread):
 
 	def say(self, text, record=""):
 		""" Say the text and possibility to record """
+		#self.text = text
 		espeak_cmd = self.create_cmd()
-		subprocess.call(espeak_cmd)	
+		subprocess.call(espeak_cmd)
+		#self.thread = Thread(target=subprocess.call, args=(espeak_cmd,))
+		#self.thread.start()
 		#subprocess.call(["espeak", "-a", f"{self.amp}", "-g", f"{self.gap}" ,"-v", f"{self.mbrola_voice}", "-s", f"{self.rate}", "-p",f"{self.pitch}", f"{self.text}", "-w", f"{record_path}"])
 		
 	def create_cmd(self):

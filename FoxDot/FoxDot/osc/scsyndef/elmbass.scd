@@ -4,6 +4,7 @@ var osc, env, susDiv;
 sus = sus * blur;
 		susDiv = sus*0.25;
 		freq = In.kr(bus, 1);
+		
 freq = [freq, freq+fmod];
 freq = freq/4;
 osc = MiElements.ar(

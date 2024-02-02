@@ -5,13 +5,13 @@
 //#include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "ofTrueTypeFont.h"
-#include "ofxPostProcessing.h"
+#include "ofxSvg.h"
 
 class Boot{
 public:
     void setup();
-    void update();
-    void draw(int integrity);
+    void update(int integrity);
+    void draw();
     void resize();
 
     int width, height;
@@ -23,16 +23,17 @@ public:
     ofTrueTypeFont font;
     ofRectangle fontCharBox;
 
-    ofxPostProcessing post;
-
     vector<string> bootLine, cBoot;
+
+    string waitingMsg = "defaultMsg";
+    bool bShowMsg = false;
+
+    ofxSvg logoCrash;
+    int _integrity;
 
     Boot();
 private:
 
 };
-
-
-
 
 #endif // BOOT_H

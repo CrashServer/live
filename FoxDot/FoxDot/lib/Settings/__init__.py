@@ -136,7 +136,14 @@ class _SamplePlayer:
         return other not in self.names
 
 class _LoopPlayer:
-    names = ("loop", "gsynth", 'stretch', 'breakcore', 'splitter', 'splaffer')
+    names = ("loop", "gsynth", 'stretch', 'breakcore', 'splitter', 'splaffer', 'noloop')
+    def __eq__(self, other):
+        return other in self.names
+    def __ne__(self, other):
+        return other not in self.names
+
+class _OnsetPlayer:
+    names = ("onset")
     def __eq__(self, other):
         return other in self.names
     def __ne__(self, other):
@@ -151,6 +158,7 @@ class _MidiPlayer:
 
 SamplePlayer = _SamplePlayer()
 LoopPlayer   = _LoopPlayer()
+OnsetPlayer   = _OnsetPlayer()
 MidiPlayer   = _MidiPlayer()
 
 

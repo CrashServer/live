@@ -14,11 +14,15 @@ Project{
         files: [
             "src/Audio.cpp",
             "src/Audio.h",
+            "src/VideoplayerHap.cpp",
+            "src/VideoplayerHap.h",
             "src/boot.cpp",
             "src/boot.h",
             "src/dmx.cpp",
             "src/dmx.h",
             "src/easing.h",
+            "src/imageplayer.cpp",
+            "src/imageplayer.h",
             "src/ofxBeat.cpp",
             "src/ofxBeat.h",
             "src/Camera.cpp",
@@ -38,25 +42,23 @@ Project{
             "src/ofApp.h",
             "src/ofxImageSequencePlayback.h",
             "src/ofxImageSequencePlayback.cpp",
-            "src/postproc.cpp",
-            "src/postproc.h",
-            "src/render.cpp",
-            "src/render.h",
             "src/fft.cpp",
             "src/fft.h",
             "src/scene.cpp",
             "src/scene.h",
+            "src/textris.cpp",
+            "src/textris.h",
         ]
 
         of.addons: [
-            'ofxAssimpModelLoader',
             'ofxGui',
             'ofxImageSequence',
             'ofxNetwork',
             'ofxOsc',
             'ofxXmlSettings',
-            'ofxPostProcessing',
-            'ofxGenericDmx'
+            'ofxGenericDmx',
+            'ofxBox2d',
+            'ofxHapPlayer'
         ]
 
         // additional flags for the project. the of module sets some
@@ -65,7 +67,7 @@ Project{
         of.pkgConfigs: []       // list of additional system pkgs to include
         of.includePaths: []     // include search paths
         of.cFlags: []           // flags passed to the c compiler
-        of.cxxFlags: []         // flags passed to the c++ compiler
+        of.cxxFlags: ['-std=c++17']         // flags passed to the c++ compiler
         of.linkerFlags: []      // flags passed to the linker
         of.defines: []          // defines are passed as -D to the compiler
                                 // and can be checked with #ifdef or #if in the code

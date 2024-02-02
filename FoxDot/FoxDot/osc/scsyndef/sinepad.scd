@@ -3,6 +3,7 @@ SynthDef.new(\sinepad,
 var osc, env;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+
 freq = [freq, freq+fmod];
 amp=(amp * 0.6);
 freq=(freq + [0, 2]);

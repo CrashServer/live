@@ -108,6 +108,10 @@ gray.add()
 hnoise = FileSynthDef("hnoise")
 hnoise.add()
 
+ikea = FileSynthDef("ikea")
+ikea.add()
+
+
 latoo = FileSynthDef("latoo")
 latoo.add()
 
@@ -132,8 +136,17 @@ orientmod.add()
 organ = FileSynthDef("organ")
 organ.add()
 
+pad2 = FileSynthDef("pad2")
+pad2.add()
+
 plaits = FileSynthDef("plaits")
 plaits.add()
+
+plaitsX = FileSynthDef("plaitsX")
+plaitsX.add()
+
+pluck2 = FileSynthDef("pluck2")
+pluck2.add()
 
 pianovel = FileSynthDef("pianovel")
 pianovel.add()
@@ -174,8 +187,14 @@ tritri.add()
 supersaw = FileSynthDef("supersaw")
 supersaw.add()
 
+superbass = FileSynthDef("superbass")
+superbass.add()
+
 ssaw = FileSynthDef("ssaw")
 ssaw.add()
+
+swiss = FileSynthDef("swiss")
+swiss.add()
 
 tb303 = FileSynthDef("tb303")
 tb303.add()

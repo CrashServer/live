@@ -3,6 +3,7 @@ SynthDef(\wobble, {
 var rev, osc, env, son;
 env=EnvGen.ar(Env([0,peak,level,level,0], [atk, decay, sus/2, sus/2]), doneAction: 2);
 	freq = In.kr(bus, 1);
+	
 freq = [freq, freq+fmod];
 son = MoogVCF.ar(
 in: (

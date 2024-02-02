@@ -6,8 +6,8 @@ env=EnvGen.ar(Env.perc(attackTime: atk,releaseTime: sus,level: amp,curve: 'lin')
 
 sus = sus * blur;
 freq = In.kr(bus, 1);
-freq = [freq, freq+fmod];
 
+freq = [freq, freq+fmod];
 
 sig1=(Klank.ar(`[[0.501, 1, 0.7, 2.002, 3, 9.6, 2.49, 11, 2.571, 3.05, 6.242, 12.49, 13, 16, 24], [0.002, 0.1, 0.001, 0.008, 0.02, 0.004, 0.02, 0.04, 0.02, 0.005, 0.05, 0.05, 0.02, 0.03, 0.04], [1.2, 1.2, 1.2, 0.9, 0.9, 0.9, 0.25, 0.25, 0.25, 0.14, 0.14, 0.14, 0.07, 0.07, 0.07]], Impulse.ar(0.01), freq, 0, (4 * rate)) * amp);
 sig1 = Mix(sig1 * env) * 4;

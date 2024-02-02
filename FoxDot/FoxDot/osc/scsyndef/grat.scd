@@ -9,8 +9,8 @@ Pluck.ar(SinOsc.ar(Line.ar(freq, cutoff, 0.01)) * Env.perc([0.004, 0.002], 0.01)
 };
 
 freq = In.kr(bus, 1);
-freq = [freq, freq+fmod];
 
+freq = [freq, freq+fmod];
 osc = string.(freq) + string.(freq) + string.(freq * 0.5);
 osc = osc + (HPF.ar(LocalIn.ar(2), 3000) * -50.dbamp);
 osc = osc + HPF.ar(osc, [2000, 3200]);

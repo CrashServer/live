@@ -3,6 +3,7 @@ SynthDef.new(\dbass,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0|
 		var osc, env;
 		freq = In.kr(bus, 1);
+		
 		freq = [freq, freq+fmod] * Line.ar(Rand(0.5,1.5),1,0.02);
 		freq=(freq / 4);
 		amp=(amp * 0.4);

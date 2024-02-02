@@ -3,11 +3,12 @@ SynthDef(\sawbass,
 		var osc1, osc2, filter, filter2, env, filterenv, ab;
 		amp = amp * 0.25;
 		freq = (In.kr(bus) / 4) + fmod;
+
 		osc1 = Saw.ar(freq);
 		osc2 = Mix(Saw.ar(freq * [0.25,1,1.5], [0.5,0.4,0.1]));
 		filterenv = EnvGen.ar(Env.adsr(0.0, 0.5, 0.2, sus), 1, doneAction: 2);
 		filter =  RLPF.ar(osc1 + osc2, cutoff * filterenv + 100, rq);
-		ab = abs(filter);
+		ab = filter;
 		filter2 = (filter * (ab + 2) / (filter ** 2 + 1 * ab + 1));
 		filter2 = BLowShelf.ar(filter2, 300, 1.0, -12);
 		filter2 = BPeakEQ.ar(filter2, 1600, 1.0, -6);

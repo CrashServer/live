@@ -34,7 +34,7 @@ def loop_pattern_func(f):
         for i in range(LCM(*[len(arg) for arg in args if (hasattr(arg, '__len__') and not isinstance(arg, PGroup))])):
             pat |= f(*[(arg[i] if isinstance(arg, Pattern) else arg) for arg in args])
         return pat
-    new_function.argspec = inspect.getargspec(f)
+    new_function.argspec = inspect.getfullargspec(f)
     return new_function
 
 # TODO -- if it isn't looped, return the original if it is a group
@@ -58,7 +58,7 @@ def loop_pattern_method(f):
             pat |= f(self, *[(modi(arg, i) if not isinstance(arg, PGroup) else arg) for arg in args])
         return pat
 
-    new_function.argspec = inspect.getargspec(f)
+    new_function.argspec = inspect.getfullargspec(f)
     return new_function
 
 def PatternMethod(f):
@@ -295,8 +295,7 @@ class metaPattern(object):
         stop  = stop if stop != None else len(self)
         step  = step if step != None else 1
 
-        if stop < start:
-
+        if (stop < start) and (step > 0):
             stop = (len(self.data) +  stop)
 
         return Pattern([self[i] for i in range(start, stop, step) ])

@@ -5,7 +5,7 @@ SynthDef.new(\prophet,
 		amp = amp * 0.5;
 
 		freq = In.kr(bus) + [0, fmod];
-
+		
 		lfo = LFTri.kr(rate * [1, 1.01], Rand(0, 2.0)!2);
 
 		pulse = Pulse.ar(freq * [1, 1.01], lfo * phase + 0.5);

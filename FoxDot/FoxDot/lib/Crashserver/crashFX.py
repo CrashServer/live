@@ -2,8 +2,17 @@ from ..Effects import *
 
 # Legato slide
 fx = FxList.new("leg", "leg", {"leg":0, "sus":1 }, order = 0)
-fx.add("osc = osc * XLine.ar(Rand(0.5,1.5)*leg,1,0.05*sus)")
+fx.add("osc = osc * XLine.ar(Rand(0.5,1.5)*abs(leg),1,0.05*sus)")
 fx.save()
+
+fx = FxList.new("glide", "glide", {"glide": 0, "glidedur": 0.05}, order=0)
+fx.add("osc = Line.kr(start: (osc * glide).clip(-50,22000), end: osc, dur: glidedur)")
+fx.save()
+
+# fx = FxList.new("glide", "glissando", {"glide": 0, "glidedelay": 0.5, "sus": 1}, order=0)
+# fx.add("osc = osc * EnvGen.ar(Env([1, 1, (1.059463**glide)], [sus*glidedelay, sus*(1-glidedelay)]))")
+# fx.save()
+
 
 # Lpf slide
 fx = FxList.new('spf','SLPF', {'spf': 0, 'spr': 1, 'spfslide':1, 'spfend':15000}, order=2)
@@ -30,6 +39,30 @@ fx.doc("DFM1 filter")
 fx.add('osc = DFM1.ar(osc, dfm, dfmr, dfmd,0.0)')
 fx.save()
 
+# VALadder filter
+fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.5, 'valadd': 0.5, 'valadt': 0}, order=2)
+fx.doc("VALadder filter")
+fx.add('osc = VALadder.ar(osc*0.4, valad, valadr, valadd,valadt)')
+fx.save()
+
+# VADiode filter
+fx = FxList.new('vadiod', 'VADiodeFilter', {'vadiod': 500, 'vadiodr': 0.5, 'vadiodd': 0.5}, order=2)
+fx.doc("VADiode filter")
+fx.add('osc = VADiodeFilter.ar(osc, vadiod, vadiodr, vadiodd)')
+fx.add('osc = osc*0.5')
+fx.save()
+
+# daFunk filter
+fx = FxList.new('dafilter', 'DafunkFilter', {'dafilter': 1200, 'dastart': 250, 'darel': 0.2, 'darq': 0.5, 'datype': 0, 'sus': 1}, order=2)
+fx.doc("Dafunk Filter")
+fx.add_var("env");
+fx.add_var("filGen");
+fx.add("env = EnvGen.ar(Env.adsr(0.3, 0.2, sus, darel);, Line.kr(1.0, 0.0, sus/2), doneAction:2)")
+fx.add("filGen = EnvGen.ar(Env.adsr(0.4, 0.5, 0.2, 0.5);, Line.kr(1.0, 0.0, sus/2), levelScale: dafilter)")
+fx.add("osc = SelectX.ar(datype, [BPF.ar(osc, dastart + filGen, darq), BRF.ar(osc, dastart + filGen, darq)])")
+fx.add("osc = (osc.clip2(0.007) * 24).distort()")
+fx.save()
+
 fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0)
 fx.add("osc = osc + (fm_sin_i * SinOsc.kr(osc * fm_sin))")
 fx.save()
@@ -52,16 +85,16 @@ if SC3_PLUGINS:
 #chopwave = (0: Pulse, 1: Tri, 2: Saw, 3: Sin, 4: Parabolic )
 # and chopi = oscillator phase
 fx = FxList.new('chop', 'chop', {'chop': 0, 'sus': 1, 'chopmix': 1, 'chopwave': 0, 'chopi': 0}, order=2)
-fx.add("osc = LinXFade2.ar(osc * SelectX.kr(chopwave, [LFPulse.kr(chop / sus, iphase:chopi, add: 0.01), LFTri.kr(chop / sus, iphase:chopi, add: 0.01), LFSaw.kr(chop / sus, iphase:chopi, add: 0.01), FSinOsc.kr(chop / sus, iphase:chopi, add: 0.01), LFPar.kr(chop / sus, iphase:chopi, add: 0.01)]), osc, 1-chopmix)")
+fx.add("osc = SelectX.ar(chopmix, [osc, osc * SelectX.kr(chopwave, [LFPulse.kr(chop / sus, iphase:chopi, add: 0.01), LFTri.kr(chop / sus, iphase:chopi, add: 0.01), LFSaw.kr(chop / sus, iphase:chopi, add: 0.01), FSinOsc.kr(chop / sus, iphase:chopi, add: 0.01), LFPar.kr(chop / sus, iphase:chopi, add: 0.01)])])")
 fx.save()
 
 
 fx = FxList.new('tremolo', 'tremolo', {'tremolo': 0, 'beat_dur': 1, 'tremolomix': 1}, order=2)
-fx.add("osc = LinXFade2.ar(osc * SinOsc.ar( tremolo / beat_dur, mul:0.5, add:0.5), osc, 1-tremolomix)")
+fx.add("osc = SelectX.ar(tremolomix, [osc, osc * SinOsc.ar( tremolo / beat_dur, mul:0.5, add:0.5)])")
 fx.save()
 
-fx = FxList.new('echo', 'combDelay', {'echo': 0, 'echomix' : 1, 'beat_dur': 1, 'echotime': 1}, order=2)
-fx.add('osc = LinXFade2.ar(osc + CombL.ar(osc, delaytime: echo * beat_dur, maxdelaytime: 2 * beat_dur, decaytime: echotime * beat_dur), osc, 1-echomix)')
+fx = FxList.new('echo', 'combDelay', {'echo': 0, 'echomix' : 0.5, 'beat_dur': 1, 'echotime': 1}, order=2)
+fx.add('osc = SelectX.ar(echomix, [osc, osc + CombL.ar(osc, delaytime: echo * beat_dur, maxdelaytime: 2 * beat_dur, decaytime: echotime * beat_dur)])')
 fx.save()
 
 fx = FxList.new('pong', 'pingpong', {'pong': 0, 'beat_dur': 1, 'pongtime': 1}, order=2)
@@ -79,25 +112,25 @@ fx.add("osc= osc + [left, right]")
 fx.save()
 
 
-fx = FxList.new('flanger', 'flanger', {'flanger': 0, 'fdecay': 0, 'flangermix':1}, order=2)
-fx.add("osc = LinXFade2.ar(CombC.ar(osc, 0.01, SinOsc.ar(flanger, 0, (0.01 * 0.5) - 0.001, (0.01 * 0.5) + 0.001), fdecay, 1),  osc, 1-flangermix)")
+fx = FxList.new('flanger', 'flanger', {'flanger': 0, 'fdecay': 0, 'flangermix':0.5}, order=2)
+fx.add("osc = SelectX.ar(flangermix, [osc, CombC.ar(osc, 0.01, SinOsc.ar(flanger, 0, (0.01 * 0.5) - 0.001, (0.01 * 0.5) + 0.001), fdecay, 1)])")
 fx.save()
 
-fx = FxList.new("formant", "formantFilter", {"formant": 0, 'formantmix': 1}, order=2)
+fx = FxList.new("formant", "formantFilter", {"formant": 0, 'formantmix': 0.5}, order=2)
 fx.add("formant = (formant % 8) + 1")
-fx.add("osc = LinXFade2.ar(Formlet.ar(osc, formant * 200, ((formant % 5 + 1)) / 1000, (formant * 1.5) / 600).tanh, osc, 1-formantmix)")
+fx.add("osc = SelectX.ar(formantmix, [osc, Formlet.ar(osc, formant * 200, ((formant % 5 + 1)) / 1000, (formant * 1.5) / 600).tanh])")
 fx.save()
 
-fx = FxList.new("shape", "wavesShapeDistortion", {"shape":0, "shapemix":1}, order=2)
-fx.add("osc = LinXFade2.ar((osc * (shape * 50)).fold2(1).distort / 5, osc, 1-shapemix)")
+fx = FxList.new("shape", "wavesShapeDistortion", {"shape":0, "shapemix":0.5}, order=2)
+fx.add("osc = SelectX.ar(shapemix, [osc, (osc * (shape * 50)).fold2(1).distort / 5])")
 fx.save()
 
-fx = FxList.new("drive", "overdriveDistortion", {"drive":0, "drivemix":1}, order=2)
-fx.add("osc = LinXFade2.ar((osc * (drive * 50)).clip(0,0.2).fold2(2), osc, 1-drivemix)")
+fx = FxList.new("drive", "overdriveDistortion", {"drive":0, "drivemix":0.5}, order=2)
+fx.add("osc = SelectX.ar(drivemix, [osc, (osc * (drive * 50)).clip(0,0.2).fold2(2)])")
 fx.save()
 
-fx = FxList.new("tanh", "tanhDisto", {"tanh":0}, order=2)
-fx.add("osc = osc + (osc*tanh).tanh.sqrt()")
+fx = FxList.new("tanh", "tanhDisto", {"tanh":0, "tanhmix":0.5}, order=2)
+fx.add("osc = SelectX.ar(tanhmix, [osc, osc + (osc*tanh).tanh.sqrt()])")
 fx.save()
 
 fx = FxList.new("dist2", "dist2", {"dist2":0, "dist2mix": 1, "dist2shape": 0.1}, order=2)
@@ -106,7 +139,7 @@ fx.add("tmp = Fold.ar(osc, -1*dist2shape,dist2shape)")
 fx.add("tmp = (tmp * 16.dbamp * dist2).tanh")
 fx.add("tmp = BHiShelf.ar(tmp, 9000, 0.8, -12)")
 fx.add("tmp = LPF.ar(tmp, 9000)")
-fx.add("osc = LinXFade2.ar(tmp, osc, 1-dist2mix)")
+fx.add("osc = SelectX.ar(dist2mix, [osc, tmp])")
 fx.save()
 
 
@@ -157,15 +190,15 @@ fx.add("osc = osc + Fb({ |feedback| var left, right; var magic = LeakDC.ar(feedb
 fx.add("osc = SelectX.ar(dubd, [dry, osc])")
 fx.save()
 
-fx = FxList.new('octafuz', 'octafuz', {'octafuz': 0, 'octamix': 1}, order=2)
+fx = FxList.new('octafuz', 'octafuz', {'octafuz': 0, 'octamix': 0.5}, order=2)
 fx.add_var("dis")
 fx.add_var("osc_base")
 fx.add("osc_base = osc")
 fx.add("dis = [1,1.01,2,2.02,4.5,6.01,7.501]")
 fx.add("dis = dis ++ (dis*6)")
 fx.add("osc = ((osc * dis*octafuz).sum.distort)")
-fx.add("osc = (osc * 1/16)!2")
-fx.add("osc = LinXFade2.ar(osc_base, osc, octamix)")
+fx.add("osc = (osc * 1/6)!2")
+fx.add("osc = SelectX.ar(octamix, [osc_base, osc])")
 fx.save()
 
 fx = FxList.new('tek', 'tek', {'tek': 0, 'tekr':500, 'tekd':8}, order=2)
@@ -185,18 +218,18 @@ fx.add("osc_high = HPF.ar(osc, 4000 + SinOsc.ar(4, mul: 24))")
 fx.add("osc = osc_low + osc_med + osc_high")
 fx.add("osc = DFM1.ar(osc, [400, 600], 0.99, tekd, 0) + osc")
 fx.add("osc = RHPF.ar(Gammatone.ar(osc, tekr), tekr, mul:2) + osc")
-fx.add("osc = LinXFade2.ar(osc_base, osc, tek)")
+fx.add("osc = SelectX.ar(tek, [osc_base, osc])")
 fx.save()
 
 
 ### TIDAL FX ####
-fx = FxList.new("krush", "dirt_krush", {"krush":0, "kutoff":15000}, order=2)
+fx = FxList.new("krush", "dirt_krush", {"krush":0, "kutoff":15000, "krushmix": 0.5}, order=2)
 fx.add_var("signal")
 fx.add_var("freq")
 fx.add("freq = Select.kr(kutoff > 0, [DC.kr(4000), kutoff])")
 fx.add("signal = (osc.squared + (krush * osc)) / (osc.squared + (osc.abs * (krush-1.0)) + 1.0)")
 fx.add("signal = RLPF.ar(signal, clip(freq, 20, 10000), 1)")
-fx.add("osc = SelectX.ar(krush * 2.0, [osc, signal])")
+fx.add("osc = SelectX.ar(krushmix, [osc, signal])")
 fx.save()
 
 fx = FxList.new("drop", "waveloss", {"drop":0, "dropof": 100}, order=2)
@@ -236,17 +269,26 @@ fx.add("out = osc + Fb({\
 	},0.5,0.125)")
 fx.save()
 
-fx = FxList.new("sample_atk", "sample_atk", {"sample_atk":0, "sample_sus":1}, order=2)
+# fx = FxList.new("sample_atk", "sample_atk", {"sample_atk":0, "sample_sus":1}, order=2)
+# fx.add_var("env")
+# fx.add("env = EnvGen.ar(Env.new(levels: [0,1,0], times:[sample_atk, sample_sus], curve: 'lin'))")
+# fx.add("osc = osc*env")
+# fx.save()
+
+fx = FxList.new("a", "attack", {"a":0, "sus": 1, "ac": 0}, order=2)
+fx.doc("attack envelope")
 fx.add_var("env")
-fx.add("env = EnvGen.ar(Env.new(levels: [0,1,0], times:[sample_atk, sample_sus], curve: 'lin'))")
+fx.add("env = EnvGen.ar(Env.new(levels: [0,1,1], times:[a*sus, sus - a*sus], curve:[ac,0]))")
 fx.add("osc = osc*env")
 fx.save()
 
-fx = FxList.new("a", "adsr", {"a":0, "r":1, "sus": 1, "ac": 0, "rc": 0}, order=2)
+fx = FxList.new("r", "releas", {"r":0, "sus": 1, "rc": 0}, order=2)
+fx.doc("release envelope")
 fx.add_var("env")
-fx.add("env = EnvGen.ar(Env.new(levels: [0,1,1,0], times:[a*sus, max((a*sus + r*sus), sus - (a*sus + r*sus)), r*sus], curve:[ac,0,rc]))")
+fx.add("env = EnvGen.ar(Env.new(levels: [1,0,0], times:[r*sus, sus - r*sus], curve:[rc,0]))")
 fx.add("osc = osc*env")
 fx.save()
+
 
 fx = FxList.new('ehpf','envHPF', {'ehpf': 0, 'ehpr': 0.7, 'ehpa':0.001, 'ehps':0.01, 'ehpc':-3, 'sus':1}, order=2)
 fx.doc("ehpf")
@@ -403,11 +445,68 @@ fx.add("wet = ~stutter.(osc, reset, stutlen)")
 fx.add("osc = SelectX.ar(stut, [dry, wet], wrap:1)")
 fx.save()
 
+fx = FxList.new('sbrk', 'stutbreak', {'sbrk': 0.5, 't_reset': 0, 'sbrkdur': 4, 'sus': 1}, order=2)
+fx.add_var("dry")
+fx.add_var("reset")
+fx.add_var("wet")
+fx.add_var("stuti")
+fx.add_var("stutlen")
+fx.add_var("stutrate")
+fx.add("stutrate=Rand(0.01, 1.0)")
+fx.add("stutlen=Rand(0.01,0.08)")
+fx.add("~stutter = { |snd, reset, stutlen, maxdelay = 1| var phase, fragment, del; phase = Sweep.ar(reset); fragment = { |ph| (ph - Delay1.ar(ph)) < 0 + Impulse.ar(0) }.value(phase / stutlen % 1); del = Latch.ar(phase, fragment) + ((stutlen - Sweep.ar(fragment)) * (stutrate - 1)); DelayC.ar(snd, maxdelay, del); }")
+fx.add("dry = osc")
+fx.add("stuti = IRand(1,sus*sbrkdur).round(2)")
+fx.add("reset = Onsets.kr(FFT(LocalBuf(1024), osc), t_reset)")
+fx.add("wet = ~stutter.(osc, reset, stutlen)")
+fx.add("wet = wet * LFPulse.kr(stuti/sus, 0.5, mul:1.0)")
+fx.add("dry = dry * LFPulse.kr(stuti/sus, mul:1.5)")
+fx.add("osc = SelectX.ar(sbrk, [dry, wet], wrap:1)")
+fx.save()
+
+
+
+
+
+
+
 fx = FxList.new('clouds','clouds', {'clouds': 0, 'cpos':0.5, 'csize':0.25, 'cdens': 0.4, 'ctex': 0.5, 'cpitch': 0, 'cgain':2, 'cfb': 0, 'cmode': 0}, order=2)
 fx.doc("Clouds granulator")
 fx.add("osc = MiClouds.ar(osc, pit: cpitch, pos: cpos, size:csize, dens: cdens, tex: ctex, drywet: clouds, in_gain: cgain, fb: cfb, mode:cmode)")
-fx.add("ReplaceOut.ar(bus, osc)")
+#fx.add("ReplaceOut.ar(bus, osc)")
 fx.save()
+
+fx = FxList.new('mring','MiRings', {'mring': 0, 'rstruct':0.1, 'rbright': 0.8, 'rdamp': 0.7, 'rpos': 0, 'rmodel': 1, 'rpoly': 4, 'regg': 0, 'sus':0, 'rsus': 2}, order=2)
+fx.doc("Mi Rings resonator")
+fx.add_var("dry")
+fx.add_var("pitch")
+fx.add("pitch = In.kr(bus, 1)")
+fx.add("dry = osc")
+fx.add("osc = MiRings.ar(in: osc,trig:1,pit: pitch.cpsmidi.clip(1,80),struct: rstruct, bright: rbright, damp: rdamp, pos: rpos, model: rmodel, poly: rpoly, intern_exciter: 1, easteregg: regg, mul: 1)")
+fx.add("osc = osc * EnvGen.kr(Env([1,1,0], [sus*rsus, 0.01]), doneAction: 2)")
+fx.add("osc = SelectX.ar(mring, [dry, osc], wrap:1)")
+fx.save()
+
+fx = FxList.new('blow','MiBlow', {'blow': 0, 'bflow': 0.3, 'bmodel': 0, 'bpos': 0.2, 'sus':0}, order=2)
+fx.doc("Mi Blow resonator")
+fx.add_var("dry")
+fx.add_var("pitch")
+fx.add("pitch = In.kr(bus, 1)")
+fx.add("dry = osc")
+fx.add("osc = MiElements.ar(osc, 0, 1, pitch.cpsmidi.clip(1,70), blow_level:1, space:0.8, contour: 0.8, flow: bflow, damp:0.7, model:bmodel, pos:bpos)")
+fx.add("osc = osc * EnvGen.kr(Env([1,1,0], [sus, 0.5]), doneAction: 2)")
+fx.add("osc = LPF.ar(osc, 18000)")
+fx.add("osc = Splay.ar(osc)")
+fx.add("osc = SelectX.ar(blow, [dry, osc*0.5], wrap:1)")
+fx.save()
+
+
+fx = FxList.new('panR','panR', {'panR': 1}, order=2)
+fx.doc("Pan rear")
+fx.add("osc = Pan4.ar(osc, 0, panR)")
+fx.save()
+
+
 
 fx = FxList.new('vol','volume', {'vol': 1}, order=2)
 fx.doc("Volume")
@@ -416,26 +515,44 @@ fx.save()
 
 
 # Fx LOOP
-fx = FxList.new('fx1','fxout', {'fx1': 0, 'lpfx1':22000, 'hpfx1':0}, order=2)
+fx = FxList.new('fx1','fx1out', {'fx1': 0, 'lpfx1':22000, 'hpfx1':0, 'fx1mix': 1}, order=2)
 fx.doc("FX1 Bus")
 fx.add_var("fxsig")
 fx.add("fxsig = LPF.ar(osc, lpfx1)")
 fx.add("fxsig = HPF.ar(fxsig, hpfx1)")
-fx.add("Out.ar(2, Mix.ar(fxsig*fx1))")
+fx.add("Out.ar(4, Mix.ar(fxsig*fx1))")
+fx.add("osc = osc * fx1mix")
 fx.save()
 
-fx = FxList.new('fx2','fx2out', {'fx2': 0, 'lpfx2':22000, 'hpfx2':0}, order=2)
+fx = FxList.new('fx2','fx2out', {'fx2': 0, 'lpfx2':22000, 'hpfx2':0, 'fx2mix': 1}, order=2)
 fx.doc("FX2 Bus")
 fx.add_var("fxsig")
 fx.add("fxsig = LPF.ar(osc, lpfx2)")
 fx.add("fxsig = HPF.ar(fxsig, hpfx2)")
-fx.add("Out.ar(3, Mix.ar(fxsig*fx2))")
+fx.add("Out.ar(5, Mix.ar(fxsig*fx2))")
+fx.add("osc = osc * fx2mix")
+fx.save()
+
+fx = FxList.new('fx','fxout', {'fx': 0, 'lpfx':22000, 'hpfx':0, "fxout": 6, "fxmix": 1}, order=2)
+fx.doc("FX Bus")
+fx.add_var("fxsig")
+fx.add("fxsig = LPF.ar(osc, lpfx)")
+fx.add("fxsig = HPF.ar(fxsig, hpfx)")
+fx.add("Out.ar([fxout, fxout+1], Mix.ar(fxsig*fx))")
+fx.add("osc = osc * fxmix")
 fx.save()
 
 fx = FxList.new('output','output', {'output': 0}, order=2)
 fx.doc("Output select Bus")
 fx.add("Out.ar(output, osc)")
 fx.save()
+
+fx = FxList.new('mon','monitoring', {'mon': 0}, order=2)
+fx.doc("Monitoring Bus")
+fx.add("Out.ar([mon, mon+1], osc)")
+fx.add("osc = osc*0")
+fx.save()
+
 
 ###########
 

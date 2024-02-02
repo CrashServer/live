@@ -29,20 +29,20 @@ probChangeBpm = 2
 probAddLpf = 6
 probAddDrop = 3
 probAddKick = 4
-probAddAccompany = 5
-probAddFxOut = 0 # probability to add an fx output
+probAddAccompany = 3
+probAddFxOut = 1 # probability to add an fx output
 
 # Add player probability
-probAddSynth = 3
+probAddSynth = 1
 probAddDrum = 2 #2
-probAddLoop = 1 #1
+probAddLoop = 4 #1
 
 # Stop player
 minPlayerTurn = 8 # min number of player turn before a possibility stop
 maxPlayerTurn = 16 # max number of player turn until a stop
 
 # Add Player Probability
-probPatternDur = [30,60,10] # probability dur synth player [PDur(random,8), SDur(), Generate Pattern]
+probPatternDur = [10,20,10,60] # probability dur synth player [PDur(random,8), SDur(), Generate Pattern, PRy]
 
 # Add Drum Probabilty
 probAddStyleDrum = 8 # probability to pick a style drum pattern
@@ -56,7 +56,7 @@ probStopMorePlayers = 1 # probabilty to stop 1 to (all-1) players
 # Change degree
 probLoopChangeDegree = [4,	# probability to change loop degree
 						4,	# probability to change loop position
-						0]   # probability to change loop sample # Not working for now
+						4]   # probability to change loop sample
 
 probSynthChangeDegree = [2, # probability to change synth degree player to PArp()
 						 5, # probabiltiy to change synth degree player to Melody()

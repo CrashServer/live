@@ -1,10 +1,8 @@
-SynthDef.new(\combs, {
-	//Standard Arguments
-	|bus=0, pan=0, amp=1, freq=440, gate=1, fmod=0, atk=0.01, sus=1, rel=0.3,
-	//Other Controls
-	vibrate=2, depth=0.8, regen= -3, sweep=8, rq=0.9, nharm=2|
+SynthDef.new(\combs,
+	{|bus=0, pan=0, amp=1, freq=440, gate=1, fmod=0, atk=0.01, sus=1, rel=0.3, decay=0.01, level=0.8, peak=1, vibrate=2, depth=0.8, regen= -3, sweep=8, rq=0.9, nharm=2|
 	var max, min, vibrato, osc, env, filterenv;
 	freq = In.kr(bus, 1);
+		
 	freq = [freq, freq+fmod];
 	//Setting some values for the filters:
 	min = ((1 + depth) / freq);
@@ -23,6 +21,7 @@ SynthDef.new(\combs, {
 	osc = RLPF.ar(osc, filterenv, rq, amp);
 	osc = Limiter.ar(osc, amp);
 	osc = Mix(osc) * 0.2;
+	osc = osc*EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);
 	osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)
 },

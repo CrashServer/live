@@ -270,17 +270,18 @@ class SCLangServerManager(ServerManager):
     def sendOSC(self, osc_message):
         """ Sends an OSC message to the server. Checks for midi messages """
 
-        if osc_message.address == OSC_MIDI_ADDRESS:
+        if osc_message.address != "/video":
+            if osc_message.address == OSC_MIDI_ADDRESS:
 
-            self.sclang.send( osc_message )
+                self.sclang.send( osc_message )
 
-        else:
+            else:
 
-            self.client.send( osc_message )
+                self.client.send( osc_message )
 
         # If we are sending other messages as well
 
-        if self.forward is not None:
+        elif self.forward is not None:
 
             self.forward.send(osc_message)
 
@@ -314,14 +315,41 @@ class SCLangServerManager(ServerManager):
         vel     = min(127, (packet.get("amp", 1) * 128) - 1)
         sus     = packet.get("sus", 0.5)
         channel = packet.get("channel", 0)
+        cc      = packet.get("cc", 0)  # crash mod
+        value   = packet.get("value", 0) # crash mod
         nudge   = self.midi_nudge
 
-        msg.append( [synthdef, note, vel, sus, channel, nudge] )
+        msg.append( [synthdef, note, vel, sus, channel, nudge, cc, value] ) # crash mod
 
         bundle.append(msg)
 
         return bundle
 
+    ### Crash Mod Video OSC
+    def get_video_message(self, synthdef, packet, timestamp):
+        """ Prepares an OSC message to trigger video """
+
+        bundle = OSCBundle(time=timestamp)
+        bundle.setAddress("/video") # these need to be variable names at least
+
+        msg     = OSCMessage("/video")
+
+        vidpos1  = float(packet.get("pos1", 0.0))
+        vidpos2  = float(packet.get("pos2", 0.0))
+
+        vidid1   = int(packet.get("vid1", 0))
+        vidid2   = int(packet.get("vid2", 0))
+
+        blend1   = int(min(255,(packet.get("blend1", 0.5))*255))
+        blend2   = int(min(255,(packet.get("blend2", 0.5))*255))
+        scene   = int(packet.get("scene", 0))
+        blendtype = int(packet.get("blendtype", 0))
+
+        msg.append( [synthdef, vidpos1, vidid1, vidpos2, vidid2, blend1, blend2, scene, blendtype] ) # crash mod
+
+        bundle.append(msg)
+
+        return bundle
 
     def get_init_node(self, node, bus, group_id, synthdef, packet):
 
@@ -331,7 +359,7 @@ class SCLangServerManager(ServerManager):
 
         max_sus = float(packet["sus"] * 8) # might be able to get rid of this
 
-        key = "rate" if synthdef.name in (SamplePlayer, LoopPlayer) else "freq"
+        key = "rate" if synthdef.name in (SamplePlayer, LoopPlayer, OnsetPlayer) else "freq"
 
         if key in packet:
 
@@ -511,6 +539,11 @@ class SCLangServerManager(ServerManager):
         if synthdef == "MidiOut": # this should be in a dict of synthdef to functions maybe? we need a "nudge to sync"
 
             return self.get_midi_message(synthdef, packet, timestamp)
+
+        elif synthdef == "video": # this should be in a dict of synthdef to functions maybe? we need a "nudge to sync"
+
+            return self.get_video_message(synthdef, packet, timestamp)
+
 
         # Create a bundle
 

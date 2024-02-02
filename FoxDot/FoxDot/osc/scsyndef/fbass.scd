@@ -4,6 +4,7 @@ SynthDef("fbass",
 	var total, exciter, snd, env, sub;
 	sus = sus*blur;
 	freq = In.kr(bus, 1);
+		
 	freq = [freq, freq+fmod];
 	freq = freq /4;
 	total = (atk + sus + decay + rel) * freq;

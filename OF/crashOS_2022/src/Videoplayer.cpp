@@ -1,4 +1,4 @@
-#include "ofApp.h"
+//#include "ofApp.h"
 #include "Videoplayer.h"
 
 Videoplayer::Videoplayer(){
@@ -32,6 +32,7 @@ void Videoplayer::setup(){
     videoDir.listDir(videoCat.getPath(vidCat));
     videoDir.sort();
     vidId = 0;
+    vidTotal = videoDir.size();
 
     // load and play video
     mySequence.mSequence.enableThreadedLoad(bthread);
@@ -63,7 +64,7 @@ void Videoplayer::update(int _videoCat, int integrity){
     // load new category
     if (_videoCat != vidCat){
             vidCat = _videoCat;
-            vidID = 0;
+            vidId = 0;
             newSeq();
         }
 
@@ -73,7 +74,7 @@ void Videoplayer::update(int _videoCat, int integrity){
 
         videoFbo.begin();
             ofEnableAlphaBlending();
-            ofSetColor(255, 255, 255, ofMap(integrity, 0,100,30,255, true)); // feedback video
+            ofSetColor(255, 255, 255); //ofMap(integrity, 0,100,30,255, true)); // feedback video
             ofScale(size.x / 1280.0, size.y / 720.0);
             mySequence.draw();
             ofDisableAlphaBlending();
@@ -98,7 +99,10 @@ void Videoplayer::update(int _videoCat, int integrity){
             fxFbo.draw(ofRandom(0,width),ofRandom(0,height));
             ofSetColor(ofColor(ofRandom(0,255)));
             ofDrawRectangle(ofRandom(0,width), ofRandom(0,height), ofRandom(1,100), ofRandom(1,100));
+            ofPushStyle();
+            ofScale(1.2);
             ofDrawBitmapString("Loading " + ofToString(loading*100) + " %", ofRandom(0,width*loading), ofRandom(0,height*loading));
+            ofPopStyle();
             videoFbo.end();
         }
        else{
@@ -138,13 +142,21 @@ void Videoplayer::newSeq(){
     videoDir.listDir(videoCat.getPath(ofClamp(vidCat,0,videoCat.size()-1)));
     videoDir.sort();
     vidId = ofClamp(vidId, 0,videoDir.size()-1);
+    vidTotal = videoDir.size();
     mySequence.mSequence.enableThreadedLoad(bthread);
     mySequence.loadSequence(videoDir.getPath(vidId), vidFps);
     bnewSeq = false;
 }
 
-void Videoplayer::videoSrcub(){
-    mySequence.mSequence.getTextureForPercent(ofRandom(1,99));
+void Videoplayer::videoSrcub(float audioRms){
+    if (audioRms==0){
+        mySequence.mSequence.getTextureForPercent(ofRandom(1,99));}
+    else{
+        if (audioRms>0.1){
+            mySequence.mSequence.getTextureForPercent(ofMap(audioRms,0,4,0,100));
+            }
+    }
+
 }
 
 void Videoplayer::resize(){
@@ -190,6 +202,7 @@ void Videoplayer3d::setup3d(){
     videoDir.listDir(videoCat.getPath(vidCat));
     videoDir.sort();
     vidId = 0;
+    vidTotal = videoDir.size();
 
     // load and play video
     mySequence.mSequence.enableThreadedLoad(bthread);
@@ -321,3 +334,136 @@ void Videoplayer3d::draw3d(){
     ofPopMatrix();
     ofPopStyle();
 }
+
+
+void VideoplayerAscii::setupAscii(){
+    // Don't forget in ofxImageSequencePlayback.h to change mSequence to public and not private.
+    // and add mSequence.enableThreadedLoad(true); in ofxImageSequencePlayback::newSequenceSetup()
+
+    width = ofGetWidth();
+    height = ofGetHeight();
+    pos = glm::vec3(0,0,0);
+    size = glm::vec2(width, height);
+    bthread = true;
+    vidFps = 60.0f;
+
+    // Fbo init
+    videoFbo.allocate(width, height, GL_RGBA);
+    videoFbo.begin();
+        ofClear(0,0,0, 0);
+    videoFbo.end();
+
+    // video category directory
+    videoCat.listDir(videoPath);
+    videoCat.sort();
+
+    // list all video from category 0 and random select a video
+    vidCat = 1;
+    videoDir.listDir(videoCat.getPath(vidCat));
+    videoDir.sort();
+    vidId = 0;
+    vidTotal = videoDir.size();
+
+    // load and play video
+    mySequence.mSequence.enableThreadedLoad(bthread);
+    mySequence.loadSequence(videoDir.getPath(vidId), vidFps);
+    mySequence.setShouldLoop(true);
+    mySequence.play();
+
+    // ascii setup
+    font.load("ui/font/press.ttf", 12);
+    asciiCharacters =  string("  ..,,,'''``--_:;^^**""=+<>iv%&xclrs)/){}I?!][1taeo7zjLunT#@JCwfy325Fp6mqSghVd4EgXPGZbYkOA8U$KHDBWNMR0Q");
+
+}
+
+
+void VideoplayerAscii::updateAscii(int _videoCat, int integrity){
+
+    this->integrity = integrity;
+    // reset vector glitch order at new video
+    if (integrity<=0 && bnewSeq){
+        vidId++;
+        newSeq();
+        }
+    if (integrity>0){bnewSeq=true;}
+
+    // load new category
+    if (_videoCat != vidCat){
+            vidCat = _videoCat;
+            vidId = 0;
+            newSeq();
+        }
+
+     if (!mySequence.mSequence.isLoading() && integrity>0){
+        // draw video and glitch squares
+        mySequence.update();
+
+        videoFbo.begin();
+            ofEnableAlphaBlending();
+            ofSetColor(255, 255, 255); //ofMap(integrity, 0,100,30,255, true)); // feedback video
+            ofScale(size.x / 1280.0, size.y / 720.0);
+            mySequence.draw();
+            ofDisableAlphaBlending();
+        videoFbo.end();
+
+    }
+    else {
+        // loading screen glitch random
+        ofPushStyle();
+        float loading = mySequence.mSequence.percentLoaded();
+        if (loading<1.98){ // test if glitch in main video (0.98)
+            videoFbo.allocate((int) ofMap(width*loading+ofRandom(1,30), 0,width+30,1,width, true),
+                              (int) ofMap(height*loading+ofRandom(1,30), 0,height+30,1,height, true) , GL_RGBA);
+            videoFbo.begin();
+            fxFbo.draw(ofRandom(0,width),ofRandom(0,height));
+            ofSetColor(ofColor(ofRandom(0,255)));
+            ofDrawRectangle(ofRandom(0,width), ofRandom(0,height), ofRandom(1,100), ofRandom(1,100));
+            ofDrawBitmapString("Loading " + ofToString(loading*100) + " %", ofRandom(0,width*loading), ofRandom(0,height*loading));
+            videoFbo.end();
+        }
+       else{
+            videoFbo.allocate(width, height, GL_RGBA);
+            videoFbo.begin();
+                ofClear(0,0,0, 0);
+            videoFbo.end();
+        }
+        ofPopStyle();
+    }
+
+}
+
+void VideoplayerAscii::drawAscii(){
+    ofEnableAlphaBlending();
+
+    ofSetColor(255,255,255,ofMap(integrity, 100,0,255,0));
+    videoFbo.draw(0,0);
+
+    ofPixels pixels;
+    videoFbo.getTexture().readToPixels(pixels);
+    //ofPixelsRef pixelsRef = videoFbo.readToPixels(pixels);
+
+    ofSetColor(255,255,255,ofMap(integrity, 100,0,0,255));
+
+    for (int i = 0; i < width; i+= 16){
+            for (int j = 0; j < height; j+= 16){
+                // get the pixel and its lightness (lightness is the average of its RGB values)
+                float lightness = pixels.getColor(i,j).getLightness();
+
+                // calculate the index of the character from our asciiCharacters array
+                int character = powf( ofMap(lightness, 0, 255, 0, 1), 2.5) * asciiCharacters.size();
+
+                // draw the character at the correct location
+                font.drawString(ofToString(asciiCharacters[character]), i, j);
+            }
+        }
+    ofDisableAlphaBlending();
+
+//    ofPushMatrix();
+//    ofPushStyle();
+//        ofSetColor(ofColor::white);
+//        videoFbo.draw(0, 0, size.x, size.y);
+//    ofPopStyle();
+//    ofPopMatrix();
+    }
+
+

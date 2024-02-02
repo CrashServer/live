@@ -2,17 +2,17 @@
     Clock management for scheduling notes and functions. Anything 'callable', such as a function
     or instance with a `__call__` method, can be scheduled. An instance of `TempoClock` is created
     when FoxDot started up called `Clock`, which is used by `Player` instances to schedule musical
-    events. 
+    events.
 
     The `TempoClock` is also responsible for sending the osc messages to SuperCollider. It contains
     a queue of event blocks, instances of the `QueueBlock` class, which themselves contain queue
     items, instances of the `QueueObj` class, which themseles contain the actual object or function
-    to be called. The `TempoClock` is continually running and checks if any queue block should 
+    to be called. The `TempoClock` is continually running and checks if any queue block should
     be activated. A queue block has a "beat" value for which its contents should be activated. To make
     sure that events happen on time, the `TempoClock` will begin processing the contents 0.25
-    seconds before it is *actually* meant to happen in case there is a large amount to process.  When 
+    seconds before it is *actually* meant to happen in case there is a large amount to process.  When
     a queue block is activated, a new thread is created to process all of the callable objects it
-    contains. If it calls a `Player` object, the queue block keeps track of the OSC messages generated 
+    contains. If it calls a `Player` object, the queue block keeps track of the OSC messages generated
     until all `Player` objects in the block have been called. At this point the thread is told to
     sleep until the remainder of the 0.25 seconds has passed. This value is stored in `Clock.latency`
     and is adjustable. If you find that there is a noticeable jitter between events, i.e. irregular
@@ -24,7 +24,7 @@
     bound to the shortcut key, `Ctrl+.`. You can schedule non-player objects in the clock by
     using `Clock.schedule(func, beat, args, kwargs)`. By default `beat` is set to the next
     bar in the clock, but you use `Clock.now() + n` or `Clock.next_bar() + n` to schedule a function
-    in the future at a specific time. 
+    in the future at a specific time.
 
     To change the tempo of the clock, just set the bpm attribute using `Clock.bpm=val`. The change
     in tempo will occur at the start of the next bar so be careful if you schedule this action within
@@ -83,14 +83,14 @@ class TempoClock(object):
         self.largest_sleep_time = 0
         self.last_block_dur = 0.0
 
-        # Storing time as a float 
+        # Storing time as a float
 
         self.dtype=float
-        
+
         self.beat       = self.dtype(0) # Beats elapsed
         self.last_now_call = self.dtype(0)
 
-        self.ticking = True #?? 
+        self.ticking = True #??
 
         # Player Objects stored here
         self.playing = []
@@ -108,12 +108,13 @@ class TempoClock(object):
         # Create the queue
         self.queue = Queue(self)
         self.current_block = None
-        
+
         # Midi Clock In
         self.midi_clock = None
 
-        # EspGrid sync
+        # EspGrid sync & Abelton
         self.espgrid = None
+        self.alink = None
 
         # Flag for next_bar wrapper
         self.now_flag  = False
@@ -141,6 +142,41 @@ class TempoClock(object):
 
         self.thread = threading.Thread(target=self.run)
 
+    def link(self, carabiner_path="~/program/Carabiner/Carabiner_Linux_x64"):
+        """ Establish a link with Carabiner """
+        if self.alink is None:
+            try:
+                from LinkToPy import LinkInterface
+                self.alink = LinkInterface(path_to_carabiner=carabiner_path)
+
+                # New instance of LinkInterface
+                def align():
+                    self.alink.set_bpm(bpm=self.bpm) # align on FoxDot BPM
+                    self.alink.bpm_ = float(self.bpm) # override
+                    self.alink.force_beat_at_time(beat=int(self.beat), time_in_ms = 0, quantum=4)
+
+                self.schedule(obj= lambda:align())
+
+                # self.set_time(beat=float(abs(round(self.alink.beat_, 4))))
+            except ImportError as err:
+                raise ImportError("LinkToPy not found... Please install from GitHub repository.")
+        else:
+            print("Link already established...")
+
+    def unlink(self):
+        """ Kill the connexion to Carabiner """
+        if self.alink is not None:
+            del self.alink
+            self.alink = None
+
+    def report_time(self):
+        """ Report time between Carabiner and FoxDot """
+        if self.alink is None:
+            return
+        print(f"TEMPO : {self.alink.bpm_} (L) | {self.bpm} (F)")
+        print(f"BEAT:   {self.alink.beat_} (L) | {self.beat} (F)")
+
+
     def sync_to_espgrid(self, host="localhost", port=5510):
         """ Connects to an EspGrid instance """
         from .EspGrid import EspGrid
@@ -150,7 +186,7 @@ class TempoClock(object):
         except RequestTimeout:
             err = "Unable to reach EspGrid. Make sure the application is running and try again."
             raise RequestTimeout(err)
-        
+
         self.espgrid.set_clock_mode(2)
         self.schedule(lambda: self._espgrid_update_tempo(True))
         # self._espgrid_update_tempo(True) # could schedule this for next bar?
@@ -162,11 +198,11 @@ class TempoClock(object):
         data = self.espgrid.get_tempo()
 
         # If the tempo hasn't been started, start it here and get updated data
-        
+
         if data[0] == 0:
             self.espgrid.start_tempo()
             data = self.espgrid.get_tempo()
-        
+
         if force or (data[1] != self.bpm):
             self.bpm_start_time = float("{}.{}".format(data[2], data[3]))
             self.bpm_start_beat = data[4]
@@ -174,7 +210,7 @@ class TempoClock(object):
 
         # self.schedule(self._espgrid_update_tempo)
         self.schedule(self._espgrid_update_tempo, int(self.now() + 1))
-        
+
         return
 
     def reset(self):
@@ -270,16 +306,21 @@ class TempoClock(object):
         bpm_start_beat = next_bar
 
         def func():
-            
+
             if self.espgrid is not None:
 
                 self.espgrid.set_tempo(bpm)
 
             else:
-
-                object.__setattr__(self, "bpm", self._convert_json_bpm(bpm))
-                self.last_now_call = self.bpm_start_time = bpm_start_time
-                self.bpm_start_beat = bpm_start_beat
+                if self.alink is not None:
+                    self.alink.set_bpm(bpm=bpm)
+                    object.__setattr__(self, "bpm", bpm)
+                    self.last_now_call = self.bpm_start_time = bpm_start_time
+                    self.bpm_start_beat = bpm_start_beat
+                else:
+                    object.__setattr__(self, "bpm", self._convert_json_bpm(bpm))
+                    self.last_now_call = self.bpm_start_time = bpm_start_time
+                    self.bpm_start_beat = bpm_start_beat
 
         # Give next bar value to bpm_start_beat
         self.schedule(func, next_bar, is_priority=True)
@@ -293,17 +334,17 @@ class TempoClock(object):
             self.last_now_call = self.bpm_start_time = self.get_time_at_beat(bpm_start_beat)
             self.bpm_start_beat = bpm_start_beat
             object.__setattr__(self, "bpm", self._convert_json_bpm(bpm))
-        
+
         # Might be changing immediately
         if schedule_now:
-        
+
             func()
-        
+
         else:
-        
+
             self.schedule(func, is_priority=True)
-        
-        return 
+
+        return
 
     def update_network_tempo(self, bpm, start_beat, start_time):
         """ Updates connected FoxDot instances (client or servers) tempi """
@@ -313,13 +354,13 @@ class TempoClock(object):
         # If this is a client, send info to server
 
         if self.tempo_client is not None:
-        
+
             self.tempo_client.update_tempo(json_value, start_beat, start_time)
 
         # If this is a server, send info to clients
-        
+
         if self.tempo_server is not None:
-        
+
             self.tempo_server.update_tempo(None, json_value, start_beat, start_time)
 
         return
@@ -376,7 +417,7 @@ class TempoClock(object):
             self.server.set_midi_nudge(value)
 
             object.__setattr__(self, "midi_nudge", value)
-                
+
         else:
 
             self.__dict__[attr] = value
@@ -432,9 +473,9 @@ class TempoClock(object):
     def get_time_at_beat(self, beat):
         """ Returns the time that the local computer's clock will be at 'beat' value """
         if isinstance(self.bpm, TimeVar):
-            t = self.get_time() + self.beat_dur(beat - self.now())        
+            t = self.get_time() + self.beat_dur(beat - self.now())
         else:
-            t = self.bpm_start_time + self.beat_dur(beat - self.bpm_start_beat) 
+            t = self.bpm_start_time + self.beat_dur(beat - self.bpm_start_beat)
         return t
 
     def sync_to_midi(self, port=0, sync=True):
@@ -455,8 +496,22 @@ class TempoClock(object):
         self.debugging = bool(on)
         return
 
-    def set_time(self, beat):
-        """ Set the clock time to 'beat' and update players in the clock """
+    def set_time_alink(self, beat):
+        """ Variant of set_time function to be used when sync with Carabiner
+        is established. """
+        cbeat = round(abs(float(self.alink.beat_)))
+        self.start_time = self.alink.now()
+        self.queue.clear()
+        self.beat = cbeat
+        self.bpm_start_beat = cbeat
+        self.bpm_start_time = self.alink.now()
+        for player in self.playing:
+            player(count=True)
+        return
+
+    def _set_time(self, beat):
+        """ Vanilla mechanism for setting time. New version of the classic
+        set_time() method, unchanged. """
         self.start_time = time.time()
         self.queue.clear()
         self.beat = beat
@@ -466,6 +521,25 @@ class TempoClock(object):
         for player in self.playing:
             player(count=True)
         return
+
+    def set_time(self, beat):
+        """ Set the clock time to 'beat' and update players in the clock """
+        # TODO: note to self. It should be the right place to update everything
+        # for synchronisation with Ableton Link. The rest of the logic is fine.
+        # I should just be extra careful with this.
+        self.set_time_alink(beat) if self.alink is not None else self._set_time(beat)
+
+    # def set_time(self, beat):
+    #     """ Set the clock time to 'beat' and update players in the clock """
+    #     self.start_time = time.time()
+    #     self.queue.clear()
+    #     self.beat = beat
+    #     self.bpm_start_beat = beat
+    #     self.bpm_start_time = self.start_time
+    #     # self.time = time() - self.start_time
+    #     for player in self.playing:
+    #         player(count=True)
+    #     return
 
     def calculate_nudge(self, time1, time2, latency):
         """ Approximates the nudge value of this TempoClock based on the machine time.time()
@@ -485,7 +559,7 @@ class TempoClock(object):
         return self._convert_bpm_json(self.bpm)
 
     def get_sync_info(self):
-        """ Returns information for synchronisation across multiple FoxDot instances. To be 
+        """ Returns information for synchronisation across multiple FoxDot instances. To be
             stored as a JSON object with a "sync" header """
 
         data = {
@@ -499,7 +573,7 @@ class TempoClock(object):
         return data
 
     def _now(self):
-        """ If the bpm is an int or float, use time since the last bpm change to calculate what the current beat is. 
+        """ If the bpm is an int or float, use time since the last bpm change to calculate what the current beat is.
             If the bpm is a TimeVar, increase the beat counter by time since last call to _now()"""
         if isinstance(self.bpm, (int, float)):
             self.beat = self.bpm_start_beat + self.get_elapsed_beats_from_last_bpm_change()
@@ -518,14 +592,14 @@ class TempoClock(object):
     def mod(self, beat, t=0):
         """ Returns the next time at which `Clock.now() % beat` will equal `t` """
         n = self.now() // beat
-        return (n + 1) * beat + t 
+        return (n + 1) * beat + t
 
     def osc_message_time(self):
         """ Returns the true time that an osc message should be run i.e. now + latency """
         return time.time() + self.latency
-        
+
     def start(self):
-        """ Starts the clock thread """ 
+        """ Starts the clock thread """
         self.thread.daemon = True
         self.thread.start()
         return
@@ -533,7 +607,7 @@ class TempoClock(object):
     def _adjust_hard_nudge(self):
         """ Checks for any drift between the current beat value and the value
             expected based on time elapsed and adjusts the hard_nudge value accordingly """
-        
+
         beats_elapsed = int(self.now()) - self.bpm_start_beat
         expected_beat = self.get_elapsed_beats_from_last_bpm_change()
 
@@ -601,7 +675,7 @@ class TempoClock(object):
 
     def run(self):
         """ Main loop """
-        
+
         self.ticking = True
 
         self.polled = False
@@ -737,13 +811,13 @@ class TempoClock(object):
         #     if hasattr(item, 'stop'):
 
         #         item.stop()
-        
+
         self.playing = []
 
         if self.espgrid is not None:
 
             self.schedule(self._espgrid_update_tempo)
-        
+
         return
 
 #####
@@ -760,20 +834,20 @@ class Queue(object):
         """ Adds a callable object to the queue at a specified beat, args and kwargs for the
             callable object must be in a list and dict.
         """
-        
+
         # item must be callable to be schedule, so check args and kwargs are appropriate for it
 
         try:
 
-            function = inspect.getargspec(item)
+            function = inspect.getfullargspec(item)
 
         except TypeError:
 
-            function = inspect.getargspec(item.__call__)
+            function = inspect.getfullargspec(item.__call__)
 
         # If the item can't take arbitrary keywords, check any kwargs are valid
 
-        if function.keywords is None: 
+        if function.varkw is None:
 
             for key in list(kwargs.keys()):
 
@@ -796,7 +870,7 @@ class Queue(object):
             # out its position in the queue
 
             # need to be careful in case self.data changes size
-            
+
             for block in self.data:
 
                 # If another event is happening at the same time, schedule together
@@ -867,7 +941,7 @@ class Queue(object):
 
     def get_clock(self):
         return self.parent
-            
+
 from types import FunctionType
 class QueueBlock(object):
     priority_levels = [
@@ -876,7 +950,7 @@ class QueueBlock(object):
                         lambda x: isinstance(x, Player),     # Then players themselves
                         lambda x: True                       # And anything else
                       ]
-                       
+
     def __init__(self, parent, obj, t, args=(), kwargs={}, is_priority=False): # Why am I forcing an obj?
 
         self.events         = [ [] for lvl in self.priority_levels ]
@@ -901,10 +975,10 @@ class QueueBlock(object):
     def start_server(self, serv):
         self.tempo_server = serv(self)
         return
-        
+
     def __repr__(self):
         return "{}: {}".format(self.beat, self.players())
-    
+
     def add(self, obj, args=(), kwargs={}, is_priority=False):
         """ Adds a callable object to the QueueBlock """
 
@@ -963,7 +1037,7 @@ class QueueBlock(object):
 
     def objects(self):
         return [item.obj for level in self.events for item in level]
-        
+
 
 class QueueObj(object):
     """ Class representing each item in a `QueueBlock` instance """
@@ -997,7 +1071,7 @@ class History(object):
 from . import Code
 
 class Wrapper(Code.LiveObject):
-    
+
     def __init__(self, metro, obj, dur, args=()):
         self.args  = asStream(args)
         self.obj   = obj
@@ -1033,14 +1107,14 @@ class SoloPlayer:
             return repr(self.data[0])
         else:
             return repr(self.data)
-        
+
     def add(self, player):
         if player not in self.data:
             self.data.append(player)
 
     def set(self, player):
         self.data = [player]
-    
+
     def reset(self):
         self.data = []
 

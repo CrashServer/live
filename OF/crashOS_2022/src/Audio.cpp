@@ -10,7 +10,7 @@ void AudioFft::setup(){
 
     ofSoundStreamSettings settings;
 #ifdef TARGET_LINUX
-    settings.setApi(ofSoundDevice::Api::PULSE);
+    settings.setApi(ofSoundDevice::Api::JACK);
 #endif
 
 #ifdef TARGET_WIN32

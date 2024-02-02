@@ -3,6 +3,7 @@ SynthDef.new(\arpymod,
 var osc, env, sub;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+
 freq = [freq, freq+fmod];
 amp=(amp * 2);
 osc=Impulse.ar(freq, phase: rate);

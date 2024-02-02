@@ -3,6 +3,7 @@ SynthDef.new(\supersaw,
 var osc, env;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+
 freq = {freq * LFNoise2.kr(0.5).range(0.98, 1.02)}!3;
 freq = [freq, freq+fmod];
 amp=(amp / 4);

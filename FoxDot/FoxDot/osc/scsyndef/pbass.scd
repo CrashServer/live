@@ -3,6 +3,7 @@ SynthDef.new(\pbass,
   var subfreq, subenv, env, pluck, tri, sin, sub, click, sig, osc;
   sus = sus*blur;
   freq = In.kr(bus, 1);
+		
   freq = [freq, freq+fmod];
   subfreq = freq / 2;
 

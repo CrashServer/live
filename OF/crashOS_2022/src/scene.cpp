@@ -1,5 +1,6 @@
-#include "scene.h"
+//#include "scene.h"
 #include "ofApp.h"
+
 
 ////// HELP //////////
 ////// UPDATE GRAMMAR
@@ -36,25 +37,59 @@
 
 //////////////////////////////////
 
+/* TEMPLATE SCENE
+Void ofApp::scene0Update(){
+
+    // DMX
+       if (bdmx){
+       // DMX White
+       float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
+       float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
+       dmx1Col = ofColor::fromHsb(36, sinCol, 5);
+       dmx2Col = ofColor::fromHsb(36, sinCol2, 5);
+       dmx.update(dmx1Col, dmx2Col);
+       }
+    
+    // VideoPlayer
+    
+    videoplayerHap.newCat(1);
+    videoplayerHap.update(data.vidpos1);
+    winCode.update(data.vectorCode);
+    winCpu.update(data.scCPU*cpuStress);
+    //winBpm.update(data.bpm);
+    winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
+    uiMisc.update(true);
+
+
+
+Void ofApp::scene0Draw(){
+
+    }
+
+
+}
+
+*/
+
+
 ///// SCENE 0/////
 /// BOOT SEQUENCE
 ///
 void ofApp::scene0Update(){
-   videoplayer.update(0);
-   boot.update();
-   // DMX White
-   float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
-   float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
-   dmx1Col = ofColor::fromHsb(36, sinCol, 5);
-   dmx2Col = ofColor::fromHsb(36, sinCol2, 5);
-   dmx.update(dmx1Col, dmx2Col);
+   boot.update(integrity);
+   if (bdmx){
+       // DMX White
+       float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
+       float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
+       dmx1Col = ofColor::fromHsb(36, sinCol, 5);
+       dmx2Col = ofColor::fromHsb(36, sinCol2, 5);
+       dmx.update(dmx1Col, dmx2Col);
+       }
 }
 
 void ofApp::scene0Draw(){
-    postCode.begin();
-        videoplayer.draw();
-        boot.draw(integrity);
-    postCode.end();
+    boot.draw();
 }
 
 void ofApp::scene0Bang(char playerID){
@@ -62,164 +97,173 @@ void ofApp::scene0Bang(char playerID){
 }
 
 void ofApp::scene0BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    ofClear(0,0,0, 0);
     scene = data.scene;
     uiMisc.changeLogo(1);
-    videoplayer.bthread = true;
 }
 
 /////////////////
 
 
 //// SCENE 1 /////////
-/// SCAN DU RESEAU
-///
+/// HARDWARE/SCANDURESEAU/DEMARRAGE///
+///44
 void ofApp::scene1Update(){
-    videoplayer.update(1, integrity);
-    //webcam.update();
+    videoplayerHap.newCat(1);
+    videoplayerHap2.newCat(1);
+    videoplayerHap.update(data.vidpos1);
+    videoplayerHap2.update(data.vidpos2);
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
+    winBpm.update(data.bpm);
     winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.update(true);
-
-    // DMX jaune oscillation
-    float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
-    float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
-    dmx1Col = ofColor::fromHsb(36, sinCol, 10-kick*10);
-    dmx2Col = ofColor::fromHsb(36, sinCol2, 10-snare*10);
-    dmx.update(dmx1Col, dmx2Col);
+    if(bdmx){
+        // DMX jaune oscillation
+        float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
+        float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
+        dmx1Col = ofColor::fromHsb(36, sinCol, 10-kick*10);
+        dmx2Col = ofColor::fromHsb(36, sinCol2, 10-snare*10);
+        dmx.update(dmx1Col, dmx2Col);
+ //       dmx1Col = ofColor::fromHsb(36, sinCol, euroCent(kick, 0.2);
+    }
 }
 
 void ofApp::scene1Draw(){
-    postCode.begin();
-    videoplayer.draw();
-    //webcam.draw();
-    winCode.draw(data.vectorCode);
+    ofEnableAlphaBlending();
+    //ofDisableAlphaBlending();
+    ofSetColor(255, 255, 255,data.vidblend1);
+    videoplayerHap.draw();
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(255, 255, 255, data.vidblend2);
+    videoplayerHap2.draw();
+    //ofDisableAlphaBlending();
+    ofDisableBlendMode();
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
+    winBpm.draw();
     winIntegrity.draw();
-    postCode.end();
+    winScore.draw();
     uiMisc.draw(true, data.isServerActive);
 }
 
 void ofApp::scene1Bang(char playerID){
-
-    videoplayer.videoSrcub();
     integrity -= integrityIncr;
+    videoplayerHap.videoScrub(0);
+    videoplayerHap2.videoScrub(0);
+    vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
 }
 
 void ofApp::scene1BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    if (bvideoFox)
+        {videoplayerHap.newSeq(data.vidid1);
+        videoplayerHap2.newSeq(data.vidid2);
+        }
+    else {videoplayerHap.newSeq();
+        videoplayerHap2.newSeq();
+    }
     scene = data.scene;
 }
 /////////////////////
 
 //// SCENE 2 ////////
-//// target selected
+//// complete  
 
 void ofApp::scene2Update(){
-//    glitcherLogo.update(uiMisc.uiFbo);
-    videoplayer.bthread = false;
-    videoplayer.update(2, integrity);
-
+    videoplayerHap.newCat(2);
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
-
+    winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.update(true);
     webcam.update();
-
     uiMisc.changeLogo(2);
-    dmx.update(dmx1Col, dmx2Col);
+    if(bdmx){dmx.update(dmx1Col, dmx2Col);}
 }
 
 void ofApp::scene2Draw(){
-    postProc.begin();
-    videoplayer.draw();
-
-
-    winCode.draw(data.vectorCode);
+    videoplayerHap.draw();
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
-
+    winScore.draw();
     uiMisc.draw(true, data.isServerActive);
     webcam.draw();
-    postProc.end();
-
-//    glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
 }
 
 void ofApp::scene2Bang(char playerID){
-    videoplayer.videoSrcub();
+    videoplayerHap.videoScrub(0);
+    vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
     integrity -= integrityIncr;
-    // DMX reagit au code
-    if (playerID =='!'){
-        dmx1Col = ofColor::paleTurquoise;
-        dmx2Col = ofColor(0,0,0);
-    }
-    else if (playerID =='#'){
-        dmx1Col = ofColor(0,0,0);
-        dmx2Col = ofColor::greenYellow;
-    }
-    else if (playerID =='@'){
-        dmx1Col = ofColor(255,0,0);
-        dmx2Col = ofColor(255,0,0);
+
+    if (bdmx){
+        // DMX reagit au code
+        if (playerID =='!'){
+            dmx1Col = ofColor::paleTurquoise;
+            dmx2Col = ofColor(0,0,0);
+        }
+        else if (playerID =='#'){
+            dmx1Col = ofColor(0,0,0);
+            dmx2Col = ofColor::greenYellow;
+        }
+        else if (playerID =='@'){
+            dmx1Col = ofColor(255,0,0);
+            dmx2Col = ofColor(255,0,0);
+        }
     }
 }
 
 void ofApp::scene2BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ///////////////////////
+//// SCENE 3 //////// Clean scene
+// pure video scene
 
-//// SCENE 3 ////////
 void ofApp::scene3Update(){
-//    videoplayer3d.update3d(3, integrity, audioFft.beat.getMagnitude()*audioThresh/20);
-    videoplayer.bthread = true;
-    videoplayer.update(3, integrity);
+    videoplayerHap.newCat(3);
+    // webcam.update();
+    // winCode.update(data.vectorCode);
+    // winCpu.update(data.scCPU*cpuStress);
+    // winIntegrity.update(integrity);
+    // winScore.update(svdkScore, zbdmScore, serverScore);
+    // glitcherLogo.update(uiMisc.uiFbo);
+    // uiMisc.update(true);
+    // uiMisc.changeLogo(3);
 
-    webcam.update();
-
-    winCode.update(data.vectorCode);
-    winCpu.update(data.scCPU*cpuStress);
-    winIntegrity.update(integrity);
-
-    glitcherLogo.update(uiMisc.uiFbo);
-
-    uiMisc.update(true);
-    uiMisc.changeLogo(3);
-
-    dmx1Col = ofColor(rms*255*audioThresh/20);
-    dmx2Col = ofColor(rms*255*audioThresh/20);
-
-    dmx.update(dmx1Col, dmx2Col);
+    if (bdmx){
+        dmx1Col = ofColor(rms*255*audioThresh/20);
+        dmx2Col = ofColor(rms*255*audioThresh/20);
+        dmx.update(dmx1Col, dmx2Col);
+        }
 }
 
 void ofApp::scene3Draw(){
-    postTV.begin();
-    postTV.tv->setRollSpeed(kick*0.001*audioThresh);
-    videoplayer.draw();
-    webcam.draw();
-    postTV.end();
 
-    winCode.draw(data.vectorCode);
-    winCpu.draw();
-    winIntegrity.draw();
-
-    uiMisc.draw(true, data.isServerActive);
-    glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
+    videoplayerHap.draw();
+//    webcam.draw();
+//    winCode.draw(data.vectorCode, data.vectorInstant);
+//    winCpu.draw();
+//    winIntegrity.draw();
+//    winScore.draw();
+//    uiMisc.draw(true, data.isServerActive);
+    // glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
 }
 
 void ofApp::scene3Bang(char playerID){
+    integrity -= integrityIncr;
+    
+    videoplayerHap.videoScrub(0);
+    
+    vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
+
+    if(bdmx){
     // DMX reagit au code
         if (playerID =='!'){
             dmx1Col = ofColor::paleTurquoise;
@@ -233,16 +277,13 @@ void ofApp::scene3Bang(char playerID){
             dmx1Col = ofColor(255,0,0);
             dmx2Col = ofColor(255,0,0);
         }
+    }
 
-    videoplayer.videoSrcub();
-    integrity -= integrityIncr;
 }
 
 void ofApp::scene3BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 
@@ -250,276 +291,246 @@ void ofApp::scene3BigBang(){
 
 //// SCENE 4 ////////
 void ofApp::scene4Update(){
-    videoplayer.update(4, integrity);
-//    glitcherVideo.update(videoplayer.videoFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-
+    videoplayerHap.newCat(4);
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
+//    videoplayerHap.videoScrub(rms*audioThresh*0.135*0.2);
 
-    // DMX blue oscillation
-    float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
-    float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
-    dmx1Col = ofColor::fromHsb(207, sinCol, 67);
-    dmx2Col = ofColor::fromHsb(207, sinCol2, 67);
-    dmx.update(dmx1Col, dmx2Col);
 
+    if (bdmx){
+        // DMX blue oscillation
+        float sinCol = (abs(sin(ofGetElapsedTimef()*0.1)))*255;
+        float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*0.1)))*255;
+        dmx1Col = ofColor::fromHsb(207, sinCol, 67);
+        dmx2Col = ofColor::fromHsb(207, sinCol2, 67);
+        dmx.update(dmx1Col, dmx2Col);
+    }
 
 }
 
 void ofApp::scene4Draw(){
-//    glitcherVideo.draw(videoplayer.pos, videoplayer.size);
-    videoplayer.draw();
-
-    winCode.draw(data.vectorCode);
+    videoplayerHap.draw();
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
-
-//    glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
-//    glitcherCam.draw(webcam.pos, webcam.size);
+    winScore.draw();
 }
 
 void ofApp::scene4Bang(char playerID){
-    videoplayer.videoSrcub();
+//    videoplayerHap.videoScrub(0);
+    vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
     integrity -= integrityIncr;
 }
 
 void ofApp::scene4BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ////////////////////////
 
 //// SCENE 5 ////////
 void ofApp::scene5Update(){
-    videoplayer.update(5, integrity);
-//    glitcherVideo.update(videoplayer.videoFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-
+    videoplayerHap.newCat(5);
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
     webcam.update();
-
     uiMisc.update(true);
     uiMisc.changeLogo(5);
-
-    dmx.update(dmx1Col, dmx2Col);
-
+    if(bdmx){dmx.update(dmx1Col, dmx2Col);}
     glitcherLogo.update(uiMisc.uiFbo, rms*audioThresh/20);
     glitcherCam.update(webcam.camFbo, rms*audioThresh/20);
 }
 
 void ofApp::scene5Draw(){
-    postKali.begin();
-        postKali.kali->setSegments(2);
-    videoplayer.draw();
-    postKali.end();
-
-    winCode.draw(data.vectorCode);
+    videoplayerHap.draw();
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
-
+    winScore.draw();
     uiMisc.draw(false, data.isServerActive);
     glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
     glitcherCam.draw(webcam.pos, webcam.size);
 }
 
 void ofApp::scene5Bang(char playerID){
-    videoplayer.videoSrcub();
-    integrity -= integrityIncr;
-    // DMX reagit au code
-    if (playerID =='!'){
-        dmx1Col = ofColor::paleTurquoise;
-        dmx2Col = ofColor(0,0,0);
+    if (bdmx){
+        // DMX reagit au code
+        if (playerID =='!'){
+            dmx1Col = ofColor::paleTurquoise;
+            dmx2Col = ofColor(0,0,0);
+        }
+        else if (playerID =='#'){
+            dmx1Col = ofColor(0,0,0);
+            dmx2Col = ofColor::greenYellow;
+        }
+        else if (playerID =='@'){
+            dmx1Col = ofColor(255,0,0);
+            dmx2Col = ofColor(255,0,0);
+        }
     }
-    else if (playerID =='#'){
-        dmx1Col = ofColor(0,0,0);
-        dmx2Col = ofColor::greenYellow;
-    }
-    else if (playerID =='@'){
-        dmx1Col = ofColor(255,0,0);
-        dmx2Col = ofColor(255,0,0);
-    }
+        videoplayerHap.videoScrub(0);
+        vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+        data.sendOSC("/cmd/Video", vect);
+        integrity -= integrityIncr;
 }
 
 void ofApp::scene5BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ////////////////////////
 
 //// SCENE 6 ////////
 void ofApp::scene6Update(){
-    videoplayer3d.update3d(6, integrity, rms*audioThresh/20);
-
+    videoplayerHap.newCat(6);
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
-
+    winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.update(true);
     uiMisc.changeLogo(6);
 
-    dmx1Col = ofColor(rms*audioThresh/20*255);
-    dmx2Col = ofColor(rms*audioThresh/20*255);
-
-    dmx.update(dmx1Col, dmx2Col);
+    if (bdmx){
+        dmx1Col = ofColor(rms*audioThresh/20*255);
+        dmx2Col = ofColor(rms*audioThresh/20*255);
+        dmx.update(dmx1Col, dmx2Col);
+    }
 }
-
 void ofApp::scene6Draw(){
-    videoplayer3d.draw3d();
-
-    winCode.draw(data.vectorCode);
+    videoplayerHap.draw();
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
-
+    winScore.draw();
     uiMisc.draw(true, data.isServerActive);
 }
 
 void ofApp::scene6Bang(char playerID){
-    videoplayer.videoSrcub();
+    videoplayerHap.videoScrub(0);
+    vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
     integrity -= integrityIncr;
-
 }
 
 void ofApp::scene6BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ////////////////////////
-
 //// SCENE 7 ////////
 void ofApp::scene7Update(){
-    videoplayer.bthread = false;
-    videoplayer.update(7, integrity);
-//    glitcherVideo.update(videoplayer.videoFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-
+    videoplayerHap.newCat(7);
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
-    webcam.update();
-
+    winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.update(true);
     uiMisc.changeLogo(7);
-
-    dmx.update(dmx1Col, dmx2Col);
-
+    if(bdmx){dmx.update(dmx1Col, dmx2Col);}
     glitcherLogo.update(uiMisc.uiFbo, rms*audioThresh/20);
-//    glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-
 }
-
 void ofApp::scene7Draw(){
-    postProc.begin();
-    videoplayer.draw();
-
-    winCode.draw(data.vectorCode);
+    videoplayerHap.draw();
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
-
-    webcam.draw();
-
+    winScore.draw();
     glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
-//    glitcherCam.draw(webcam.pos, webcam.size);
-    postProc.end();
 }
 
 void ofApp::scene7Bang(char playerID){
-    videoplayer.videoSrcub();
+    if (bdmx){
+        // DMX reagit au code
+        if (playerID =='!'){
+            dmx1Col = ofColor::paleTurquoise;
+            dmx2Col = ofColor(0,0,0);
+        }
+        else if (playerID =='#'){
+            dmx1Col = ofColor(0,0,0);
+            dmx2Col = ofColor::greenYellow;
+        }
+        else if (playerID =='@'){
+            dmx1Col = ofColor(255,0,0);
+            dmx2Col = ofColor(255,0,0);
+        }
+    }
+    videoplayerHap.videoScrub(0);
+    vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
     integrity -= integrityIncr;
-    // DMX reagit au code
-    if (playerID =='!'){
-        dmx1Col = ofColor::paleTurquoise;
-        dmx2Col = ofColor(0,0,0);
-    }
-    else if (playerID =='#'){
-        dmx1Col = ofColor(0,0,0);
-        dmx2Col = ofColor::greenYellow;
-    }
-    else if (playerID =='@'){
-        dmx1Col = ofColor(255,0,0);
-        dmx2Col = ofColor(255,0,0);
-    }
 }
 
 void ofApp::scene7BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 ////////////////////////
 
 //// SCENE 8 ////////
 void ofApp::scene8Update(){
-    videoplayer.bthread = true;
-    videoplayer.update(8, integrity);
-//    glitcherVideo.update(videoplayer.videoFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-
+    videoplayerHap.newCat(8);
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
     webcam.update();
-
     uiMisc.update(true);
     uiMisc.changeLogo(0);
-
     glitcherLogo.update(uiMisc.uiFbo, rms*audioThresh/20);
     glitcherCam.update(webcam.camFbo, rms*audioThresh/20);
-
-    dmx1Col = ofColor(rms*255*audioThresh/20);
-    dmx2Col = ofColor(rms*255*audioThresh/20);
-
-    dmx.update(dmx1Col, dmx2Col);
+    if (bdmx){
+        dmx1Col = ofColor(rms*255*audioThresh/20);
+        dmx2Col = ofColor(rms*255*audioThresh/20);
+        dmx.update(dmx1Col, dmx2Col);
+    }
 }
 
 void ofApp::scene8Draw(){
-    postProc.begin();
-    videoplayer.draw();
-
-    winCode.draw(data.vectorCode);
+    videoplayerHap.draw();
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
-
-//    webcam.draw();
-
+    winScore.draw();
     glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
     glitcherCam.draw(webcam.pos, webcam.size);
-    postProc.end();
 }
 
 void ofApp::scene8Bang(char playerID){
-    videoplayer.videoSrcub();
+    if (bdmx){
+
+        // DMX reagit au code
+        if (playerID =='!'){
+            dmx1Col = ofColor::paleTurquoise;
+            dmx2Col = ofColor(0,0,0);
+        }
+        else if (playerID =='#'){
+            dmx1Col = ofColor(0,0,0);
+            dmx2Col = ofColor::greenYellow;
+        }
+        else if (playerID =='@'){
+            dmx1Col = ofColor(255,0,0);
+            dmx2Col = ofColor(255,0,0);
+        }
+
+    }
+    videoplayerHap.videoScrub(0);
+    vector<string> vect{ofToString(videoplayerHap.vidDirIndex), ofToString(videoplayerHap.vidIndex), ofToString(videoplayerHap.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
     integrity -= integrityIncr;
-    // DMX reagit au code
-    if (playerID =='!'){
-        dmx1Col = ofColor::paleTurquoise;
-        dmx2Col = ofColor(0,0,0);
-    }
-    else if (playerID =='#'){
-        dmx1Col = ofColor(0,0,0);
-        dmx2Col = ofColor::greenYellow;
-    }
-    else if (playerID =='@'){
-        dmx1Col = ofColor(255,0,0);
-        dmx2Col = ofColor(255,0,0);
-    }
-}
+ }
 
 void ofApp::scene8BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
+    videoplayerHap.newSeq();
+
     scene = data.scene;
 }
 
@@ -527,67 +538,48 @@ void ofApp::scene8BigBang(){
 
 //// SCENE 9 ////////
 void ofApp::scene9Update(){
-    videoplayer.bthread = true;
-    videoplayer3d.update3d(9, integrity, rms*audioThresh/20);
-//    glitcherVideo.update(videoplayer.videoFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
-//    webcam.update();
-
+    winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.update(true);
     uiMisc.changeLogo(0);
-
     glitcherLogo.update(uiMisc.uiFbo, rms*audioThresh/20);
-//    glitcherCam.update(webcam.camFbo, audioFft.beat.getMagnitude()*audioThresh/20);
-
-    dmx1Col = ofColor(rms*255*audioThresh/20);
-    dmx2Col = ofColor(rms*255*audioThresh/20);
-
-    dmx.update(dmx1Col, dmx2Col);
+    if (bdmx){
+        dmx1Col = ofColor(rms*255*audioThresh/20);
+        dmx2Col = ofColor(rms*255*audioThresh/20);
+        dmx.update(dmx1Col, dmx2Col);
+        }
 }
-
 void ofApp::scene9Draw(){
-    postKali.begin();
-    postKali.kali->setSegments(rms*audioThresh);
-    videoplayer3d.draw3d();
-
-    winCode.draw(data.vectorCode);
-
-//    webcam.draw();
-
+    winCode.draw(data.vectorCode, data.vectorInstant);
     glitcherLogo.draw(uiMisc.pos, uiMisc.size, true);
-//    glitcherCam.draw(webcam.pos, webcam.size);
-    postKali.end();
-    winCode.draw(data.vectorCode);
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
+    winScore.draw();
 }
 
 void ofApp::scene9Bang(char playerID){
-    videoplayer.videoSrcub();
     integrity -= integrityIncr;
-    // DMX reagit au code
-    if (playerID =='!'){
-        dmx1Col = ofColor::paleTurquoise;
-        dmx2Col = ofColor(0,0,0);
-    }
-    else if (playerID =='#'){
-        dmx1Col = ofColor(0,0,0);
-        dmx2Col = ofColor::greenYellow;
-    }
-    else if (playerID =='@'){
-        dmx1Col = ofColor(255,0,0);
-        dmx2Col = ofColor(255,0,0);
-    }
+    if (bdmx){
+        // DMX reagit au code
+        if (playerID =='!'){
+            dmx1Col = ofColor::paleTurquoise;
+            dmx2Col = ofColor(0,0,0);
+        }
+        else if (playerID =='#'){
+            dmx1Col = ofColor(0,0,0);
+            dmx2Col = ofColor::greenYellow;
+        }
+        else if (playerID =='@'){
+            dmx1Col = ofColor(255,0,0);
+            dmx2Col = ofColor(255,0,0);
+        }
+     }
 }
 
 void ofApp::scene9BigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
     scene = data.scene;
 }
 ////////////////////////
@@ -600,6 +592,7 @@ void ofApp::scene10Update(){
     winCode.update(data.vectorCode);
     winCpu.update(data.scCPU*cpuStress);
     winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
     uiMisc.changeLogo(10);
     uiMisc.update(true);
 }
@@ -607,8 +600,6 @@ void ofApp::scene10Update(){
 void ofApp::scene10Draw(){
     ofPushMatrix();
     ofPushStyle();
-        postCode.begin();
-        postCode.bloom->setBlurXY(sin(ofGetElapsedTimef()*0.01)*0.01, sin(ofGetElapsedTimef()*0.005)*0.01);
         ofEnableAntiAliasing();
         ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
         ofRotateDeg(ofGetElapsedTimef()*0.1, 1,1,1);
@@ -616,12 +607,13 @@ void ofApp::scene10Draw(){
         ofSetColor(ofColor::blueSteel);
         ofSetLineWidth(4);
         ofDrawSphere(width*4);
-        postCode.end();
     ofPopMatrix();
     ofPopStyle();
-    winCode.draw(data.vectorCode);
+
+    winCode.draw(data.vectorCode, data.vectorInstant);
     winCpu.draw();
     winIntegrity.draw();
+    winScore.draw();
     uiMisc.draw(true, data.isServerActive);
 }
 
@@ -635,7 +627,145 @@ void ofApp::scene10BigBang(){
     winCpu.cpuFbo.begin();
         ofClear(255,255,255, 0);
     winCpu.cpuFbo.end();
+    uiMisc.changeLogo(1);
     winCpu.noiseCount = 0;
+    svdkScore = 0;
+    zbdmScore = 0;
+    serverScore = 0;
+}
+
+
+////////////////////////
+/// Scene 11
+/// Image Player
+/////////////////////////
+
+void ofApp::scene11Update(){
+    imageplayer.update(integrity);
+    winCode.update(data.vectorCode);
+    winCpu.update(data.scCPU*cpuStress);
+    winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
+    //uiMisc.changeLogo(11);
+    uiMisc.update(true);
+}
+
+void ofApp::scene11Draw(){
+    ofPushMatrix();
+    ofPushStyle();
+    imageplayer.draw();
+    ofPopMatrix();
+    ofPopStyle();
+    winCode.draw(data.vectorCode, data.vectorInstant);
+    winCpu.draw();
+    winIntegrity.draw();
+    winScore.draw();
+    uiMisc.draw(false, data.isServerActive);
+}
+
+void ofApp::scene11Bang(char playerID){
+    integrity -= integrityIncr;
+    imageplayer.destroy();
+}
+
+void ofApp::scene11BigBang(){
+    scene = data.scene;
+    imageplayer.newImage();
+}
+
+////////////////////////
+/// Scene 12
+/// Textris
+/////////////////////////
+void ofApp::scene12Update(){
+    winCode.update(data.vectorCode);
+    winCpu.update(data.scCPU*cpuStress);
+    winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
+    uiMisc.changeLogo(12);
+    uiMisc.update(true);
+    textris.update();
+}
+
+void ofApp::scene12Draw(){
+    winCode.draw(data.vectorCode, data.vectorInstant, false);
+    winCpu.draw();
+    winIntegrity.draw();
+    winScore.draw();
+    uiMisc.draw(true, (data.isServerActive && bserverScene));
+    textris.draw();
+}
+
+void ofApp::scene12Bang(char playerID){
+    integrity -= integrityIncr;
+    if (!data.vectorCode.empty())
+       textris.addText(data.vectorCode.back().code, data.vectorCode.back().symbol);
+}
+
+void ofApp::scene12BigBang(){
+    scene = data.scene;
+    textris.clear();
+}
+
+////   SCENE 404  //////
+//// SCENE SERVER /////
+void ofApp::sceneServerUpdate(){
+    videoHapServer.newCat(0);
+    winCode.update(data.vectorCode);
+    winCpu.update(data.scCPU*cpuStress);
+    winIntegrity.update(integrity);
+    winScore.update(svdkScore, zbdmScore, serverScore);
+    uiMisc.changeLogo(4);
+    uiMisc.update(true);
+
+    if (bdmx){
+       // DMX Red alert
+       float sinCol = (abs(sin(ofGetElapsedTimef()*1)))*255;
+       float sinCol2 = (abs(sin((ofGetElapsedTimef()+50)*1)))*255;
+       dmx1Col = ofColor::fromHsb(0, sinCol, 255);
+       dmx2Col = ofColor::fromHsb(0, sinCol2, 255);
+       dmx.update(dmx1Col, dmx2Col);
+    }
+
+}
+
+void ofApp::sceneServerDraw(){
+    if(serverFade < 400){
+       videoHapServer.pos = glm::vec3(width/2 - width*0.5/serverFade , height/2 - height*0.5/serverFade,0);
+       videoHapServer.size = glm::vec2(width/serverFade,height/serverFade);
+       videoHapServer.draw();
+       serverFade +=1;
+    }
+    else {
+       videoHapServer.pos= glm::vec3(0,0,0);
+       videoHapServer.size = glm::vec2(width, height);
+       videoHapServer.draw();
+       winCode.draw(data.vectorCode, data.vectorInstant);
+       winCpu.draw();
+       winIntegrity.draw();
+       winScore.draw();
+       uiMisc.draw(true, false);
+    }
+
+}
+
+void ofApp::sceneServerBang(char playerID){
+    scene = data.scene;
+    /// server code injection virus
+    for (int i=0; i<data.vectorCode.size(); i++){
+        data.vectorCode[i].code = winCode.textInjection(data.vectorCode[i].code);
+    }
+    winIntegrity.targetText = winIntegrity.textInjection(winIntegrity.targetText);
+
+    videoHapServer.videoScrub(0);
+    vector<string> vect{ofToString(videoHapServer.vidDirIndex), ofToString(videoHapServer.vidIndex), ofToString(videoHapServer.vidTotal), ofToString(integrity)};
+    data.sendOSC("/cmd/Video", vect);
+    integrity -= integrityIncr;
+}
+
+void ofApp::sceneServerBigBang(){
+    videoplayerHap.newSeq();
+    scene = data.scene;
 }
 
 
@@ -643,22 +773,13 @@ void ofApp::scene10BigBang(){
 //// SCENE DEFAULT ////////
 void ofApp::sceneDefaultUpdate(){
     cpuStress = 1000;
-//    webcam.update();
-//    glitcherCam.update(webcam.camFbo);
-
+    data.serial.writeByte('f');
+    data.serial.flush();
 }
 
 void ofApp::sceneDefaultDraw(){
-//    webcam.draw();
-    //postEdge.begin();
-    //postEdge.end();
-    postCode.begin();
     ofSetColor(0,125);
-//    glitcherCam.draw(glm::vec3 (0,0,0), glm::vec2 (ofGetWidth(), ofGetHeight()));
-    postCode.bloom->setBlurXY(ofRandom(0,0.01),ofRandom(0,0.01));
-    postCode.bloom->setEnabled(ofRandom(0,100)>80);
     overheating.drawEnding(data.scCPU*cpuStress);
-    postCode.end();
 }
 
 void ofApp::sceneDefaultBang(char playerID){
@@ -666,10 +787,6 @@ void ofApp::sceneDefaultBang(char playerID){
 }
 
 void ofApp::sceneDefaultBigBang(){
-    videoplayer.videoFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    videoplayer.videoFbo.begin();
-        ofClear(0,0,0, 0);
-    videoplayer.videoFbo.end();
     scene = data.scene;
     cpuStress = 1;
 }

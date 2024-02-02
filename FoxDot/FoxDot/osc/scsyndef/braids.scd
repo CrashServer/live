@@ -3,6 +3,7 @@ SynthDef.new(\braids,
 var osc, env;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+
 freq = [freq, freq+fmod];
 		freq = [freq.cpsmidi + detune, freq.cpsmidi - detune];
 		osc = MiBraids.ar(freq, timbre, color, model.clip(0,47), 0, 2, decim, bbits, ws)!2;

@@ -6,6 +6,7 @@ SynthDef(\faim,
 	var env1, env2, env3, env4, env5, env6, env7, env8;
 	sus = sus*blur;
 	freq = In.kr(bus, 1);
+		
 	freq = [freq, freq+fmod];
 	freq = freq / 2;
 	freq = freq * ((0..1)/1 - 0.5 * 0.0007 + 1);

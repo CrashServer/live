@@ -3,8 +3,8 @@ SynthDef(\rsin,
 	var sig1, env, sig,sig2;
 
 	freq = In.kr(bus, 1);
+	
 	freq = [freq, freq+fmod];
-
     sig1 = VarSaw;
 
 	env = EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);

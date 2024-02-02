@@ -3,7 +3,7 @@ Root.default ="C"
 Scale.default="minor"
 Clock.bpm = linvar([131, 134],[32,0]);
 
-s1 >> dab((0,-2), dur=32,fx1=1, amp=0.9, fx2=1, lpf=PRand(800,8000), fmod=PRand(8).rnd(2), oct=PStep(3,6,5), cut=0).every(4, "rotate").unison(3,0.25,99)
+s1 >> dab((0,-2), dur=32,fx1=0, amp=0.9, fx2=0, lpf=PRand(800,8000), fmod=PRand(8).rnd(2), oct=PStep(3,6,5), cut=0).every(4, "rotate").unison(3,0.25,99)
 b8 >> fbass(oct=(4,5,6), echo=0, lpf=PRand(800,10800), hpf=40, drive=linvar([0,0.7],[16,0]), dur=PDur(var([8,P*[5,7,6]],[6,2]),8), sus=1/6, vol=1)
 v1 >> play("K", amp=[1,0,0,0], dur=1/4, output=8, sample=0, cut=0)
 v3 >> play("@", amp=[[0,1,0,0],0,0,0], dur=1/4)

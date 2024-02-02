@@ -1,22 +1,15 @@
 SynthDef.new(\cs80, {
-	//Standard Values
-	|bus = 0, freq = 440, amp = 1, gate = 1.0, pan = 0, fmod = 0,
-	//Amplitude Controls
-	atk = 0.3, sus = 0.8, rel = 1.0, dec = 0.8,
-	//Filter Controls
-	fatk = 0.75, fdec = 0.5, fsus = 0.8, frel = 1.0, cutoff = 2200,
-	//Pitch Controls
-	detune = 0.002, vibspeed = 4, vibdepth = 0.015, ratio = 0.8, glide = 0.15|
-	var env, fenv, vib, ffreq, osc;
+	|bus = 0, freq = 440, amp = 1, gate = 1.0, pan = 0, fmod = 0, atk = 0.3, sus = 0.8, rel = 1.0, dec = 0.8, fatk = 0.75, fdec = 0.5, fsus = 0.8, frel = 1.0, cutoff = 2200, detune = 0.002, vibspeed = 4, vibdepth = 0.015, glide = 0.8, glidedur = 0.015|
+	var env, fenv, vibr, ffreq, osc;
 	freq = In.kr(bus, 1);
+	
 	freq = [freq, freq+fmod];
 	//Envelopes for amplitude and frequency:
 	env = Env.linen(atk, sus, rel, curve: \sin).kr(gate: gate, doneAction: 0);
 	fenv = Env.adsr(fatk, fdec, fsus, frel, curve: 2).kr(gate: gate, doneAction: 0);
 	//Giving the input freq vibrato:
-	vib = SinOsc.kr(vibspeed).range(1 / (1 + vibdepth), (1 + vibdepth));
-	freq = Line.kr(start: freq * ratio, end: freq, dur: glide);
-	freq = freq * vib;
+	vibr = SinOsc.kr(vibspeed).range(1 / (1 + vibdepth), (1 + vibdepth));
+	freq = freq * vibr;
 	//See beatings.scd for help with dtune
 	osc = Saw.ar([freq, freq * (1 + detune)], mul: env * amp * 0.25);
 	osc = Mix.ar(osc);

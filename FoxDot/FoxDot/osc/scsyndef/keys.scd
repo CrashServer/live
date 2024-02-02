@@ -5,6 +5,7 @@ SynthDef.new(\keys,
 		var osc, env;
 
 		freq = In.kr(bus, 1);
+		
 		freq = [freq, freq+fmod];
 		freq = freq * [1, 1.005];
 

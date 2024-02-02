@@ -3,6 +3,7 @@ SynthDef.new(\orientmod,
 var osc, env;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+		
 freq = [freq, freq+fmod];
 		osc=(LFPulse.ar(freq, LFNoise1.ar(rate,1), 0.25, 0.25) + LFPulse.ar(freq, LFNoise2.ar(rate,1), 0.1, 0.25));
 env=EnvGen.ar(Env.perc(attackTime: 0.001,releaseTime: sus,level: amp,curve: 4), doneAction: 0);

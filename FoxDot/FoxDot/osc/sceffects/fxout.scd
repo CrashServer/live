@@ -1,8 +1,9 @@
 SynthDef.new(\fxout,
-{|bus, fx1, lpfx1, hpfx1|
+{|bus, fx, lpfx, hpfx, fxout, fxmix|
 var osc,fxsig;
 osc = In.ar(bus, 2);
-fxsig = LPF.ar(osc, lpfx1);
-fxsig = HPF.ar(fxsig, hpfx1);
-Out.ar(2, Mix.ar(fxsig*fx1));
+fxsig = LPF.ar(osc, lpfx);
+fxsig = HPF.ar(fxsig, hpfx);
+Out.ar([fxout, fxout+1], Mix.ar(fxsig*fx));
+osc = osc * fxmix;
 ReplaceOut.ar(bus, osc)}).add;

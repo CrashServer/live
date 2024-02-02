@@ -184,10 +184,16 @@ def P10(n):
     ''' Returns an n-length Pattern of a randomly generated series of 1's and 0's '''
     return Pattern([random.choice((0,1)) for i in range(int(n))])
 
+# @loop_pattern_func
+# def PStep(n, value, default=0):
+#     ''' Returns a Pattern that every n-term is 'value' otherwise 'default' '''
+#     return Pattern([default] * (n-1) + [value])
+
+# Crash Mod
 @loop_pattern_func
-def PStep(n, value, default=0):
+def PStep(n, value, default=0, offset=0):
     ''' Returns a Pattern that every n-term is 'value' otherwise 'default' '''
-    return Pattern([default] * (n-1) + [value])
+    return Pattern([default] * (n-1-(offset%n)) + [value] + [default] * (offset%n))
 
 @loop_pattern_func
 def PSum(n, total, **kwargs):

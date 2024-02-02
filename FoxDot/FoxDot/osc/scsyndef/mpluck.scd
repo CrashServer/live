@@ -4,6 +4,7 @@ SynthDef(\mpluck,
 var osc, osc_pluck, osc_moog,env;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+		
 freq = [freq, freq+fmod];
 amp=(amp + 1e-05);
 freq=(freq + [0, LFNoise2.ar(50).range(-2, 2)]);

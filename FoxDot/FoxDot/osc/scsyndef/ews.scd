@@ -3,6 +3,7 @@ var osc, env;
 var maxNoOfTones = 15;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+	
 freq = [freq, freq+fmod];
 sus=(sus * 1.75);
 amp=(amp / 2);

@@ -2,17 +2,11 @@
 #ifndef OFAPP_H
 #define OFAPP_H
 
-
-
 #include "ofMain.h"
 
-#include "ofxAssimpModelLoader.h"
 #include "ofEasyCam.h" 
 #include "ofxGui.h"
 #include "ofxXmlSettings.h"
-//#include "ofTrueTypeFont.h"
-//#include "ofxOsc.h"
-//#include "ofxNetwork.h"
 #include "easing.h"
 
 #include "Camera.h"
@@ -22,12 +16,12 @@
 #include "Getdata.h"
 #include "glitcher.h"
 #include "drawwindows.h"
-#include "render.h"
 #include "boot.h"
-#include "postproc.h"
 #include "dmx.h"
 #include "scene.h"
-
+#include "imageplayer.h"
+#include "textris.h"
+#include "VideoplayerHap.h"
 
 class ofApp : public ofBaseApp{
 
@@ -57,9 +51,13 @@ class ofApp : public ofBaseApp{
         void changeColorUi(ofColor&);
         void loadDefaultParam(bool&);
         void setScene(int&);
+        void setWaitingMsg(bool&);
+        void runTest();
+        // server corruption
+        void serverCorruptionBang();
+        void serverCorruptionRestore();
 
-        // Post processingideoplaye
-//        void postprocSetup();
+
 
         // PANEL GUI
 		ofxPanel gui;
@@ -69,7 +67,7 @@ class ofApp : public ofBaseApp{
         ofParameter<int> integrityIncr;
         ofParameter<float> audioThresh;
         ofParameter<ofColor> colorPicker;
-
+        ofParameter<bool> bWaitingMsg;
         bool showGui;
 
         ofParameterGroup parameters;
@@ -77,49 +75,51 @@ class ofApp : public ofBaseApp{
 		/// UI
 		int height, width;
         ofColor uiColor;
+        vector <ofColor> playerColor;
 
         /// Settings
         ofxXmlSettings settings;
-        bool barduino;
-
+        bool barduino, bdmx, bvideoFox, bserverScene;
 
         /// CAMERA
-		ofEasyCam cam;
-        bool camShake;
-        float camShakeTime;
+//		ofEasyCam cam;
+//        bool camShake;
+//        float camShakeTime;
 
         /// game logic;
 		int integrity = 100;
-			
+        int zbdmScore, svdkScore, serverScore;
+
         /// audio fft
         float rms, kick, hihat, snare, initTime;
-
-
-        Render render;
-        ProcBackground procBackground;
-        SphereMap sphereMap;
-        Text3d text3d;
 
         /// Win win;
         Data data;
         WinCode winCode;
         WinCpu winCpu;
+        WinBpm winBpm;
         WinIntegrity winIntegrity;
+        WinScore winScore;
         AudioFft audioFft;
         Videoplayer videoplayer;
-        Videoplayer3d videoplayer3d;
+        VideoPlayerHap videoplayerHap, videoplayerHap2, videoHapServer; //, videoplayerHapInter;
         Camera webcam;
         UiMisc uiMisc;
         Glitcher glitcherCam, glitcherLogo, glitcherVideo;
+        Imageplayer imageplayer;
+        Textris textris;
 
         OverHeating overheating;
         Boot boot;
 
-        PostProc postCode, postPixel, postProc, postShift, postEdge, postTV, postKali;
         Dmx dmx;
 
         ofColor dmx1Col;
         ofColor dmx2Col;
+
+        int serverFade=1;
+
+//        ofFbo vidFbo1, vidFbo2;
 
         /// SCENES
         void scene0Update();
@@ -133,6 +133,12 @@ class ofApp : public ofBaseApp{
         void scene8Update();
         void scene9Update();
         void scene10Update();
+        void scene11Update();
+        void scene12Update();
+        void scene13Update();
+        void scene14Update();
+        void scene15Update();
+        void scene16Update();
 
         void scene0Draw();
         void scene1Draw();
@@ -145,6 +151,12 @@ class ofApp : public ofBaseApp{
         void scene8Draw();
         void scene9Draw();
         void scene10Draw();
+        void scene11Draw();
+        void scene12Draw();
+        void scene13Draw();
+        void scene14Draw();
+        void scene15Draw();
+        void scene16Draw();
 
         void scene0Bang(char playerID);
         void scene1Bang(char playerID);
@@ -157,6 +169,12 @@ class ofApp : public ofBaseApp{
         void scene8Bang(char playerID);
         void scene9Bang(char playerID);
         void scene10Bang(char playerID);
+        void scene11Bang(char playerID);
+        void scene12Bang(char playerID);
+        void scene13Bang(char playerID);
+        void scene14Bang(char playerID);
+        void scene15Bang(char playerID);
+        void scene16Bang(char playerID);
 
         void scene0BigBang();
         void scene1BigBang();
@@ -169,13 +187,36 @@ class ofApp : public ofBaseApp{
         void scene8BigBang();
         void scene9BigBang();
         void scene10BigBang();
+        void scene11BigBang();
+        void scene12BigBang();
+        void scene13BigBang();
+        void scene14BigBang();
+        void scene15BigBang();
+        void scene16BigBang();
+
+        /// Server Scene
+        void sceneServerUpdate();
+        void sceneServerDraw();
+        void sceneServerBang(char playerID);
+        void sceneServerBigBang();
 
         void sceneDefaultUpdate();
         void sceneDefaultDraw();
         void sceneDefaultBang(char playerID);
         void sceneDefaultBigBang();
 
-//        Tunnel3d tunnel3d;
 
+
+//        Tunnel3d tunnel3d;
+        // Backup info for serverCorruption
+        class ServerBackup {
+        public:
+            ofColor uiColor;
+            glm::vec3 codePos, cpuPos, bpmPos, integrityPos, scorePos ;
+            glm::vec2 codeSize, cpuSize, bpmSize, integritySize, scoreSize;
+            bool isRestored;
+            int scene;
+        };
+        ServerBackup serverBackup;
 };
 #endif // OFAPP_H

@@ -1710,6 +1710,8 @@ class workspace:
         ### crash mod
         try: 
             execute("crashpanel.stop()")
+            execute("sendOsBpm.stop()")
+            execute("Clock.unlink()")
         except:
             pass
         return

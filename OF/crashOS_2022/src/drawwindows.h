@@ -2,7 +2,7 @@
 #ifndef DRAWWINDOWS_H
 #define DRAWWINDOWS_H
 
-//#include "ofMain.h"
+#include "ofMain.h"
 #include "ofTrueTypeFont.h"
 #include "ofxGui.h"
 #include "Getdata.h"
@@ -12,6 +12,7 @@ public:
     void drawWin(glm::vec3 winPos, glm::vec2 winSize, ofColor uiColor);
     void resize();
     string insertNewlines(string in, const size_t every_n);
+    string textInjection(string textIn);
 
     int width, height;
     int padding;
@@ -29,9 +30,6 @@ public:
     int paddingWindow;
     ofRectangle fontCharBox;
 
-//    glm::vec3 pos;
-//    glm::vec2 size;
-
     Windo();
 
 private:
@@ -39,23 +37,23 @@ private:
 
 class WinCode : public Windo{
 public:
-    void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
+    void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue, vector<ofColor> playerColor=vector<ofColor>{ofColor::paleTurquoise, ofColor::greenYellow, ofColor::red});
     void update(vector<CodeLine> &vectorCode);
-    void draw(vector<CodeLine>& vectorCode);
+    void draw(vector<CodeLine>& vectorCode, vector<CodeInstant>& vectorInstant, bool showCode=true);
 
 
     ofParameter<int> nbrLineCode;
 
-
-    //int nbrLineCode;
+    ofColor zbdmColor, svdkColor, serverColor;
+    int evalZbdm, evalSvdk;
     int codeTotalHeight, codeTotalWidth;
+    int codeInstantHeight, codeInstantWidth;
     int maxLineCode, maxCodeWidth;
-
-//    ofFbo codeFbo;
 
 private:
 
 };
+
 
 class WinCpu : public Windo{
 public:
@@ -73,24 +71,49 @@ public:
 private:
 };
 
+class WinBpm : public Windo{
+public:
+    void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
+    void update(int bpm);
+    void draw();
+
+
+    ofRectangle bpmStringBox;
+    int bpm;
+
+private:
+};
+
+
 class WinIntegrity : public Windo{
 public:
     void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue);
     void update(int integrity, string nameModel=" ");
     void draw();
-
+    void newText(string target);
 
     int integrity;
-    string nameModel;
+    string nameModel, targetText;
     ofFbo integrityFbo;
 
 private:
 };
 
+class WinScore : public Windo{
+public:
+    void setup(int padding = 10, ofColor uiColor=ofFloatColor::blue, vector<ofColor> playerColor=vector<ofColor>{ofColor::paleTurquoise, ofColor::greenYellow, ofColor::red});
+    void update(int svdkScore, int zbdmScore, int serverScore);
+    void draw();
+
+    ofColor zbdmColor, svdkColor, serverColor;
+    int svdkScore, zbdmScore, serverScore;
+private:
+
+
+};
+
 class OverHeating{
 public:
-    //void setup();
-    //void update();
     void draw();
     void add();
     void clear();

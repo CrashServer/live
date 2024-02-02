@@ -3,6 +3,7 @@ SynthDef.new(\lbass,
 var osc, osc1, osc2, sub, oscf, env, envf;
 sus = sus * blur;
 freq = In.kr(bus, 1);
+		
 freq = [freq, freq+fmod];
 freq=(freq/2);
 		osc1 = LFTri.ar([freq + detune, freq-detune], LFNoise0.ar(2,4));

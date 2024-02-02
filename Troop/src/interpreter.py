@@ -49,11 +49,11 @@ except Exception as e:
 
 
 #from .crashconfig import *
-if crashOsEnable:
+if crashOsEnable or crashInstantCode:
     # Osc/udp sender
     try:
         if crashSendMode == "udp":
-            crashTroop_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)   
+            crashTroop_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         if crashSendMode == "osc":
             crashTroop_socket = OSC.OSCClient()
             crashTroop_socket.connect((crashOSIp, crashOSPort))
@@ -94,7 +94,7 @@ class DummyInterpreter:
         else:
 
             self.syntax_lang = None
-    
+
 
     def __repr__(self):
         return self.name if self.name is not None else repr(self.__class__.__name__)
@@ -151,7 +151,7 @@ class DummyInterpreter:
         if len(string) > 0 and name is not None:
             name = str(name)
             print(colour_format(name, colour) + _ + string[0])
-            
+
             # crash mod
             try:
                 for i in range(0,len(string)):

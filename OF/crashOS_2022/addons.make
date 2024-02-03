@@ -7,3 +7,5 @@ ofxXmlSettings
 ofxGenericDmx
 ofxBox2d
 ofxHapPlayer
+ofxSvg
+

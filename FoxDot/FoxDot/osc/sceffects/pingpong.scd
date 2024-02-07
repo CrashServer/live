@@ -1,7 +1,10 @@
 SynthDef.new(\pingpong,
-{|bus, pong, beat_dur, pongtime|
+{|bus, pong, beat_dur, pongtime, pong_, beat_dur_, pongtime_, sus|
 var osc,left,right;
 osc = In.ar(bus, 2);
+pong = pong+Line.kr(0, pong_, sus);
+beat_dur = beat_dur+Line.kr(0, beat_dur_, sus);
+pongtime = pongtime+Line.kr(0, pongtime_, sus);
 left = CombN.ar(osc, delaytime: pong * beat_dur, maxdelaytime: 2 * beat_dur, decaytime: pongtime * beat_dur);
 left = left*2.distort.tanh;
 left = LPF.ar(left,12000);

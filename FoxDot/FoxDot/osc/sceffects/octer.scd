@@ -1,7 +1,10 @@
 SynthDef.new(\octer,
-{|bus, octer, octersub, octersubsub|
+{|bus, octer, octersub, octersubsub, octer_, octersub_, octersubsub_, sus|
 var osc,oct1,oct2,oct3,sub;
 osc = In.ar(bus, 2);
+octer = octer+Line.kr(0, octer_, sus);
+octersub = octersub+Line.kr(0, octersub_, sus);
+octersubsub = octersubsub+Line.kr(0, octersubsub_, sus);
 oct1 = 2.0 * LeakDC.ar(abs(osc));
 sub = LPF.ar(osc, 440);
 oct2 = ToggleFF.ar(sub);

@@ -2,6 +2,7 @@ SynthDef.new(\lofi,
 {|bus, lofi, lofiwow, lofiamp|
 var osc,minWowRate,wowRate,maxDepth,maxLfoDepth,depth,depthLfoAmount,wowMul,maxDelay,ratio,threshold,gain;
 osc = In.ar(bus, 2);
+
 osc = HPF.ar(osc, 25);
 ratio = LinExp.kr(lofiamp, 0, 1, 0.15, 0.01);
 threshold = LinLin.kr(lofiamp, 0, 1, 0.8, 0.33);

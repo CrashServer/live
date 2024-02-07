@@ -67,14 +67,15 @@ from ..ServerManager import Server
 
 class Effect:
     server=Server
-    def __init__(self, foxdot_name, synthdef, args={}, control=False):
-
+    def __init__(self, foxdot_name, synthdef, args={}, control=False, useControl=True):
         self.name      = foxdot_name
         self.synthdef  = synthdef
         self.filename  = EFFECTS_DIR + "/{}.scd".format(self.synthdef)
-        self.args      = args.keys()
         self.vars      = ["osc"]
-        self.defaults  = args
+        self.useControl = useControl
+        self.ctrlArgs  = self.setControlArgs(args) if self.useControl else ""
+        self.args      = self.ctrlArgs.keys() if self.useControl else args.keys()
+        self.defaults  = self.ctrlArgs if self.useControl else args
         self.effects   = []
         self.control   = control
 
@@ -96,9 +97,10 @@ class Effect:
 
     def __str__(self):
         s  = "SynthDef.new(\{},\n".format(self.synthdef)
-        s += "{" + "|bus, {}|\n".format(", ".join(self.args))
+        s += "{" + f"|bus, {', '.join(self.args)}|" + "\n"
         s += "var {};\n".format(",".join(self.vars))
         s += self.input
+        s += self.add_control() if self.useControl else "\n"
         s += self.list_effects()
         s += self.output
         s += "(bus, osc)}).add;"
@@ -116,6 +118,20 @@ class Effect:
         s = ""
         for p in self.effects:
             s += p + ";\n"
+        return s
+
+    def setControlArgs(self, args={}):
+        for arg in args.copy().keys():
+            if arg not in ["sus"]:
+                args.update({str(arg + "_"): 0})
+        args.update({"sus": 1})
+        return args
+
+    def add_control(self):
+        s = ""
+        for a in self.args:
+            if a not in ["sus"] and a[-1] != "_":
+                s += f"{a} = {a}+Line.kr(0, {a}_, sus);" + "\n"
         return s
 
     def add_var(self, name):
@@ -211,7 +227,38 @@ class EffectManager(dict):
         return sorted(self.keys(), key=lambda effect: getattr(self[effect], attr))
 
     def new(self, foxdot_arg_name, synthdef, args, order=2):
-        self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0)
+        self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0, True)
+
+        if order in self.order:
+
+            self.order[order].append(foxdot_arg_name)
+
+        else:
+
+            self.order[order] = [foxdot_arg_name]
+
+        # Store the main keywords together
+
+        self.kw.append(foxdot_arg_name)
+
+        # Store other sub-keys
+
+        for arg in args:
+            if arg not in self.all_kw:
+                self.all_kw.append(arg)
+                if arg not in ["sus"]:
+                    self.all_kw.append(arg + "_")
+
+            # Store the default value
+            
+            self.defaults[arg] = args[arg]
+            if arg not in ["sus"]:
+                self.defaults[arg + "_"] = 0
+
+        return self[foxdot_arg_name]
+    
+    def newNoControl(self, foxdot_arg_name, synthdef, args, order=2):
+        self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0, False)
 
         if order in self.order:
 
@@ -236,7 +283,7 @@ class EffectManager(dict):
             self.defaults[arg] = args[arg]
 
         return self[foxdot_arg_name]
-    
+
     def kwargs(self):
         """ Returns the title keywords for each effect """
         return tuple(self.kw)
@@ -398,4 +445,4 @@ fx.add("osc = (osc * (drive * 50)).clip(0,0.2).fold2(2)")
 fx.save()
 
 In(); Out()
-Effect.server.setFx(FxList)
+#Effect.server.setFx(FxList)

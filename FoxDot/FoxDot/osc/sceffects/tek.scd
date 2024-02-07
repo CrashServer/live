@@ -1,7 +1,10 @@
 SynthDef.new(\tek,
-{|bus, tek, tekr, tekd|
+{|bus, tek, tekr, tekd, tek_, tekr_, tekd_, sus|
 var osc,osc_low,osc_med,osc_high,osc_base,lfo;
 osc = In.ar(bus, 2);
+tek = tek+Line.kr(0, tek_, sus);
+tekr = tekr+Line.kr(0, tekr_, sus);
+tekd = tekd+Line.kr(0, tekd_, sus);
 lfo = SinOsc.ar(0.5, phase: 0, mul: 50, add: 800);
 osc = In.ar(bus, 2);
 osc_base = osc;

@@ -1,7 +1,11 @@
 SynthDef.new(\MiBlow,
-{|bus, blow, bflow, bmodel, bpos, sus|
+{|bus, blow, bflow, bmodel, bpos, sus, blow_, bflow_, bmodel_, bpos_|
 var osc,dry,pitch;
 osc = In.ar(bus, 2);
+blow = blow+Line.kr(0, blow_, sus);
+bflow = bflow+Line.kr(0, bflow_, sus);
+bmodel = bmodel+Line.kr(0, bmodel_, sus);
+bpos = bpos+Line.kr(0, bpos_, sus);
 pitch = In.kr(bus, 1);
 dry = osc;
 osc = MiElements.ar(osc, 0, 1, pitch.cpsmidi.clip(1,70), blow_level:1, space:0.8, contour: 0.8, flow: bflow, damp:0.7, model:bmodel, pos:bpos);

@@ -1,7 +1,9 @@
 SynthDef.new(\fdist,
-{|bus, fdist, fdistfreq|
+{|bus, fdist, fdistfreq, fdist_, fdistfreq_, sus|
 var osc;
 osc = In.ar(bus, 2);
+fdist = fdist+Line.kr(0, fdist_, sus);
+fdistfreq = fdistfreq+Line.kr(0, fdistfreq_, sus);
 osc = LPF.ar(osc, fdistfreq);
 osc = (osc * 1.1 * fdist).tanh;
 osc = LPF.ar(osc, fdistfreq);

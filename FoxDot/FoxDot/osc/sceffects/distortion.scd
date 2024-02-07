@@ -1,7 +1,9 @@
 SynthDef.new(\distortion,
-{|bus, dist, tmp|
+{|bus, dist, tmp, dist_, tmp_, sus|
 var osc;
 osc = In.ar(bus, 2);
+dist = dist+Line.kr(0, dist_, sus);
+tmp = tmp+Line.kr(0, tmp_, sus);
 tmp = osc;
 osc = CrossoverDistortion.ar(osc, amp:0.2, smooth:0.01);
 osc = osc + (0.1 * dist * DynKlank.ar(`[[60,61,240,3000 + SinOsc.ar(62,mul:100)],nil,[0.1, 0.1, 0.05, 0.01]], osc));

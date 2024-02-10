@@ -1,7 +1,7 @@
 SynthDef.new(\leg,
-{|bus, leg, sus, leg_|
+{|bus, leg, sus, leg_, leg_d|
 var osc;
 osc = In.kr(bus, 1);
-leg = leg+Line.kr(0, leg_, sus);
+leg = if(leg_<=0, leg, Line.kr(leg, leg_, sus*leg_d));
 osc = osc * XLine.ar(Rand(0.5,1.5)*abs(leg),1,0.05*sus);
 ReplaceOut.kr(bus, osc)}).add;

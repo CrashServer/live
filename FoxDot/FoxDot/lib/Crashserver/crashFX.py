@@ -167,7 +167,7 @@ fx.add("osc = (osc * fdistcm4 * fdistc).tanh")
 fx.save()
 
 #based on Derek Kwan chorus
-fx = FxList.newNoControl("chorus", "chorus", {"chorus":0, "chorusrate":0.5}, order=2)
+fx = FxList.new("chorus", "chorus", {"chorus":0, "chorusrate":0.5}, order=2)
 fx.add_var("lfos")
 fx.add_var("numDelays = 4")
 fx.add_var("chrate")
@@ -269,14 +269,14 @@ fx.add("out = osc + Fb({\
 	},0.5,0.125)")
 fx.save()
 
-fx = FxList.newNoControl("a", "attack", {"a":0, "sus": 1, "ac": 0}, order=2)
+fx = FxList.new("a", "attack", {"a":0, "sus": 1, "ac": 0}, order=2)
 fx.doc("attack envelope")
 fx.add_var("env")
 fx.add("env = EnvGen.ar(Env.new(levels: [0,1,1], times:[a*sus, sus - a*sus], curve:[ac,0]))")
 fx.add("osc = osc*env")
 fx.save()
 
-fx = FxList.newNoControl("r", "releas", {"r":0, "sus": 1, "rc": 0}, order=2)
+fx = FxList.new("r", "releas", {"r":0, "sus": 1, "rc": 0}, order=2)
 fx.doc("release envelope")
 fx.add_var("env")
 fx.add("env = EnvGen.ar(Env.new(levels: [1,0,0], times:[r*sus, sus - r*sus], curve:[rc,0]))")
@@ -326,7 +326,7 @@ fx.add("schain = In.ar(sidechain,1)")
 fx.add("osc = Compander.ar(osc, schain, thresh: thresh, slopeAbove: 0.1, slopeBelow: 1, clampTime: sidechain_atk, relaxTime: sidechain_rel, mul: 1)")
 fx.save()
 
-fx = FxList.newNoControl("lofi", "lofi", {"lofi": 0, "lofiwow": 0.5, "lofiamp":0.5}, order=2)
+fx = FxList.new("lofi", "lofi", {"lofi": 0, "lofiwow": 0.5, "lofiamp":0.5}, order=2)
 fx.add_var("minWowRate")
 fx.add_var("wowRate")
 fx.add_var("maxDepth")
@@ -396,7 +396,7 @@ fx.add('hpfCutoffFreq = djf.linexp(0.5, 1, 50, 15000)')
 fx.add('osc = RHPF.ar(RLPF.ar(osc,lpfCutoffFreq, djfq),hpfCutoffFreq, djfq)')
 fx.save()
 
-fx = FxList.newNoControl('phaser', 'phaser', {'phaser': 0, 'phaserdepth': 0.5}, order=2)
+fx = FxList.new('phaser', 'phaser', {'phaser': 0, 'phaserdepth': 0.5}, order=2)
 fx.add_var("delayedSignal")
 fx.add("delayedSignal = osc")
 fx.add("for(1, 4, {|i| delayedSignal = AllpassL.ar(delayedSignal, 0.01 * 4.reciprocal, LFPar.kr(LinExp.kr(phaser, 0, 1, 0.275, 16), i + 0.5.rand, LinExp.kr(phaserdepth*4.reciprocal, 0, 1, 0.0005, 0.01 * 0.5), LinExp.kr(phaserdepth*4.reciprocal, 0, 1, 0.0005, 0.01 * 0.5)), 0)})")
@@ -457,16 +457,9 @@ fx.add("dry = dry * LFPulse.kr(stuti/sus, mul:1.5)")
 fx.add("osc = SelectX.ar(sbrk, [dry, wet], wrap:1)")
 fx.save()
 
-
-
-
-
-
-
 fx = FxList.new('clouds','clouds', {'clouds': 0, 'cpos':0.5, 'csize':0.25, 'cdens': 0.4, 'ctex': 0.5, 'cpitch': 0, 'cgain':2, 'cfb': 0, 'cmode': 0}, order=2)
 fx.doc("Clouds granulator")
 fx.add("osc = MiClouds.ar(osc, pit: cpitch, pos: cpos, size:csize, dens: cdens, tex: ctex, drywet: clouds, in_gain: cgain, fb: cfb, mode:cmode)")
-#fx.add("ReplaceOut.ar(bus, osc)")
 fx.save()
 
 fx = FxList.new('mring','MiRings', {'mring': 0, 'rstruct':0.1, 'rbright': 0.8, 'rdamp': 0.7, 'rpos': 0, 'rmodel': 1, 'rpoly': 4, 'regg': 0, 'sus':0, 'rsus': 2}, order=2)
@@ -498,7 +491,6 @@ fx = FxList.new('panR','panR', {'panR': 1}, order=2)
 fx.doc("Pan rear")
 fx.add("osc = Pan4.ar(osc, 0, panR)")
 fx.save()
-
 
 
 fx = FxList.new('vol','volume', {'vol': 1}, order=2)

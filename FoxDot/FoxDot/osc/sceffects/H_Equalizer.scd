@@ -1,8 +1,8 @@
 SynthDef.new(\H_Equalizer,
-{|bus, high, highfreq, high_, highfreq_, sus|
+{|bus, high, highfreq, high_, high_d, highfreq_, highfreq_d, sus|
 var osc;
 osc = In.ar(bus, 2);
-high = high+Line.kr(0, high_, sus);
-highfreq = highfreq+Line.kr(0, highfreq_, sus);
+high = if(high_<=0, high, Line.kr(high, high_, sus*high_d));
+highfreq = if(highfreq_<=0, highfreq, Line.kr(highfreq, highfreq_, sus*highfreq_d));
 osc = BHiShelf.ar(osc, freq: highfreq, db: abs(high).ampdb);
 ReplaceOut.ar(bus, osc)}).add;

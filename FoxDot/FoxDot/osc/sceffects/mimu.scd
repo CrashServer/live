@@ -1,7 +1,7 @@
 SynthDef.new(\mimu,
-{|bus, mu, mu_, sus|
+{|bus, mu, mu_, mu_d, sus|
 var osc;
 osc = In.ar(bus, 2);
-mu = mu+Line.kr(0, mu_, sus);
+mu = if(mu_<=0, mu, Line.kr(mu, mu_, sus*mu_d));
 osc = MiMu.ar(osc, mu);
 ReplaceOut.ar(bus, osc)}).add;

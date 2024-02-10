@@ -1,10 +1,9 @@
 SynthDef.new(\stutbreak,
-{|bus, sbrk, t_reset, sbrkdur, sus, sbrk_, t_reset_, sbrkdur_|
+{|bus, sbrk, t_reset, sbrkdur, sus, sbrk_, sbrk_d, t_reset_, t_reset_d, sbrkdur_, sbrkdur_d|
 var osc,dry,reset,wet,stuti,stutlen,stutrate;
 osc = In.ar(bus, 2);
-sbrk = sbrk+Line.kr(0, sbrk_, sus);
-t_reset = t_reset+Line.kr(0, t_reset_, sus);
-sbrkdur = sbrkdur+Line.kr(0, sbrkdur_, sus);
+sbrk = if(sbrk_<=0, sbrk, Line.kr(sbrk, sbrk_, sus*sbrk_d));
+sbrkdur = if(sbrkdur_<=0, sbrkdur, Line.kr(sbrkdur, sbrkdur_, sus*sbrkdur_d));
 stutrate=Rand(0.01, 1.0);
 stutlen=Rand(0.01,0.08);
 ~stutter = { |snd, reset, stutlen, maxdelay = 1| var phase, fragment, del; phase = Sweep.ar(reset); fragment = { |ph| (ph - Delay1.ar(ph)) < 0 + Impulse.ar(0) }.value(phase / stutlen % 1); del = Latch.ar(phase, fragment) + ((stutlen - Sweep.ar(fragment)) * (stutrate - 1)); DelayC.ar(snd, maxdelay, del); };

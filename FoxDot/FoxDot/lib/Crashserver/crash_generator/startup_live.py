@@ -669,61 +669,119 @@ except Exception as e:
 	print(e)
 
 
-dwarfDict = {
-    "chorus": {
-        "phase": 10,
-        "depth": 11,
-        "delay": 12,
-        "contour": 13,
-        "wet": 14,
-        "freq": 15},
-    "whammy": {
-        "first": 16,
-        "last": 17,
-        "gain": 18,
-        "clean": 19
-        },
-    "drive": {
-        "attack": 20,
-        "bright": 21,
-        "gate": 22,
-        "level": 23
-        },
-    "master": {
-        "bass": 24,
-        "treble": 25,
-        },
-    "shimmer": {
-        "predelay": 27,
-        "early": 28,
-        "shimmer": 29
-        }
-    }
+# dwarfDict = {
+#     "chorus": {
+#         "phase": 10,
+#         "depth": 11,
+#         "delay": 12,
+#         "contour": 13,
+#         "wet": 14,
+#         "freq": 15},
+#     "whammy": {
+#         "first": 16,
+#         "last": 17,
+#         "gain": 18,
+#         "clean": 19
+#         },
+#     "drive": {
+#         "attack": 20,
+#         "bright": 21,
+#         "gate": 22,
+#         "level": 23
+#         },
+#     "master": {
+#         "bass": 24,
+#         "treble": 25,
+#         },
+#     "shimmer": {
+#         "predelay": 27,
+#         "early": 28,
+#         "shimmer": 29
+#         }
+#     }
+#
+# def dwarf(fx="", param="", value="", duree=1):
+#     def findName():
+#         playerList = [f'm{p}' for p in list(string.ascii_lowercase)]
+#         playerFiltred = [ply for ply in playerList if ply not in [p.name for p in Clock.playing]]
+#         if len(playerFiltred) >= 1:
+#             return playerFiltred[0]
+#         else:
+#             return None
+#     if fx == "":
+#         print(dwarfDict.keys())
+#     else:
+#         if param == "":
+#             print(dwarfDict[fx].keys())
+#         else:
+#             if value != "" and fx in dwarfDict.keys() and param in dwarfDict[fx].keys():
+#                 para = dwarfDict[fx][param]
+#                 playerName = findName()
+#                 if playerName is not None:
+#                     clip.copy(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree}) # {fx}/{param}")
+#                     eval(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree})")
+#                 else:
+#                     print("No more player left...")
+#             else:
+#                 print("Wrong name or give me a value")
 
-def dwarf(fx="", param="", value="", duree=1):
-    def findName():
-        playerList = [f'm{p}' for p in list(string.ascii_lowercase)]
-        playerFiltred = [ply for ply in playerList if ply not in [p.name for p in Clock.playing]]
-        if len(playerFiltred) >= 1:
-            return playerFiltred[0]
+from rtmidi.midiconstants import CONTROL_CHANGE
+
+class MidiDwarf:
+    def __init__(self, ch=12):
+        midiout = rtmidi.MidiOut()
+        available_ports = midiout.get_ports()
+        midiout.open_port(0)
+        print(f"Dwarf connected to {available_ports[0]}")
+        self.channel = ch
+        self._midi = midiout
+        self.length = 16
+        self.channelTrack = 1
+        self.recordStatus = ""
+    def send_channel_message(self, status, data1=None, data2=None, ch=None):
+        """Send a MIDI channel mode message."""
+        msg = [(status & 0xF0) | ((ch if ch else self.channel) - 1 & 0xF)]
+        if data1 is not None:
+            msg.append(data1 & 0x7F)
+            if data2 is not None:
+                msg.append(data2 & 0x7F)
+        self._midi.send_message(msg)
+    def send_control_change(self, cc=0, value=0, ch=None):
+        """Send a 'Control Change' message."""
+        self.send_channel_message(CONTROL_CHANGE, cc, value, ch=ch)
+    def send_record(self):
+        print(f"{self.recordStatus} Recording: {str(self.length)} bars at channel {self.channelTrack}")
+        self.send_control_change(1, 0)
+        if (self.recordStatus == "Start"):
+            self.recordStatus = "Stop"
         else:
-            return None
-    if fx == "":
-        print(dwarfDict.keys())
-    else:
-        if param == "":
-            print(dwarfDict[fx].keys())
+            self.recordStatus = "Start"
+    def record(self, length=16):
+        self.length=length
+        self.recordStatus = "Start"
+        Clock.schedule(self.send_record, Clock.mod(self.length))
+        Clock.schedule(self.send_record, Clock.mod(self.length) + self.length)
+    def send_start(self):
+        self.send_control_change(2,0)
+    def undo(self):
+        self.send_control_change(4,0)
+    def start(self):
+        Clock.schedule(self.send_start, Clock.mod(self.length))
+    def stop(self, duration=0):
+        if (duration != 0):
+            Clock.schedule(self.send_start, Clock.mod(duration))
         else:
-            if value != "" and fx in dwarfDict.keys() and param in dwarfDict[fx].keys():
-                para = dwarfDict[fx][param]
-                playerName = findName()
-                if playerName is not None:
-                    clip.copy(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree}) # {fx}/{param}")
-                    eval(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree})")
-                else:
-                    print("No more player left...")
-            else:
-                print("Wrong name or give me a value")
+            send_start()
+        print(f"Stop {self.channelTrack} channel")
+    def clear(self):
+        self.send_control_change(3,0)
+    def track(self, channelTrack=1):
+        self.channelTrack = channelTrack
+        if(channelTrack>1):
+            channelTrack=127
+        self.send_control_change(5,channelTrack)
+
+dwarf = MidiDwarf()
 
 try:
 	class FilterOSCClient(OSCClient):

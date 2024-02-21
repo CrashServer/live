@@ -756,8 +756,10 @@ class MidiDwarf:
             self.recordStatus = "Stop"
         else:
             self.recordStatus = "Start"
-    def record(self, length=16):
+    def record(self, length=16, track=None):
         self.length=length
+        if track is not None:
+			self.track(track)
         self.recordStatus = "Start"
         Clock.schedule(self.send_record, Clock.mod(self.length))
         Clock.schedule(self.send_record, Clock.mod(self.length) + self.length)
@@ -767,12 +769,15 @@ class MidiDwarf:
         self.send_control_change(4,0)
     def start(self):
         Clock.schedule(self.send_start, Clock.mod(self.length))
-    def stop(self, duration=0):
+    def stop(self, duration=0, track=None):
         if (duration != 0):
             Clock.schedule(self.send_start, Clock.mod(duration))
+			print(f"Stop {self.channelTrack} channel")
         else:
-            send_start()
-        print(f"Stop {self.channelTrack} channel")
+			if track is not None:
+				self.track(track)
+				print(f"Stop {track} channel")
+            self.send_start()
     def clear(self):
         self.send_control_change(3,0)
     def track(self, channelTrack=1):

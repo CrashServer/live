@@ -774,10 +774,10 @@ class MidiDwarf:
             Clock.schedule(self.send_start, Clock.mod(duration))
             print(f"Stop {self.channelTrack} channel")
         else:
-            if track is not None:
-                self.track(track)
-                print(f"Stop {track} channel")
-        self.send_start()
+			if track is not None:
+				self.track(track)
+				print(f"Stop {track} channel")
+				self.send_start()
     def clear(self):
         self.send_control_change(3,0)
     def track(self, channelTrack=1):

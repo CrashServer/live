@@ -828,24 +828,6 @@ class voice_count():
 
 voicecount = voice_count()
 
-# def reboot():
-#     Clock.clear()
-#     import signal
-#     carla = subprocess.Popen(["pgrep", "carla"], stdout=subprocess.PIPE, shell=False)
-#     for pid in carla.stdout:
-#         os.kill(int(pid),signal.SIGTERM)
-#     scsynth = subprocess.Popen(["pgrep", "scsynth"], stdout=subprocess.PIPE, shell=False)
-#     for pid in scsynth.stdout:
-#         os.kill(int(pid),signal.SIGTERM)
-#     scide = subprocess.Popen(["pgrep", "scide"], stdout=subprocess.PIPE, shell=False)
-#     for pid in scide.stdout:
-#         os.kill(int(pid),signal.SIGTERM)
-#     sleep(1)
-#     os.system('scide %F &')
-#     sleep(10)
-#     os.system('carla /home/zbdm/crashserver/config/carla_live.carxp &')
-#     FoxDot.reload()
-
 ### Mixer
 # try:
 # 	class Mixer():

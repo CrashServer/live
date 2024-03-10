@@ -17,20 +17,23 @@
   - `chaos(n=1)` : generate n random player lines and copy to clipboard
   - `ascii_gen(text="", font=0)` : generate ascii text
   - `lost()` : return all attacks available
-  - `attack("name", printOut=0) : copy to clipboard the attack "name", print the attack if printOut != 0
+  - `attack("name", printOut=0)` : copy to clipboard the attack "name", print the attack if printOut != 0
   - `print_synth(synth="")` : print the argument of the synth or list of synth if no name
   - `print_fx(fx="")` : print the argument of the fx or list of fx if no name
-  - `print_sample(sample="")` : print the description of the sample or find the letter
+  - `print_sample(sample="")` : print the description of the sample or find the letter, or find all letters according to the keyword
   - `print_loops(loop="")` : print the all available loop or list of loop for directory name
+  - `print_video()` : helper for the video player
   - `unsolo()` : remove all solo on players
-  
-  - 
+  - [é, è, ê, ù, à, ç] are shortcut to some linvar, prand & Pdur
+  - crashPanel: to have a nice gui with usefull stuff
+  - `masterAll("lpf", 400)` : set all players to args=value, can be reset with `masterAll(0)` . It keep track of the previous values.
+  - `setseed(seed)`: set the seed of all random generator
 
 ### Var
   - `lininf(start=0, finish=1, time=32)` : linvar but stay at finish
   - `expinf(start=0, finish=1, time=32)` : same but exponential 
   - `linbpm(endBpm=170, durBpm=128)` : linvar from actual bpm to endBpm in durBpm beats, use with `Clock.bpm = linbpm(220, 32)` 
-  - 
+  - `linmod(start, end, duration, default)` : linvar from start to end during duration at next mod(duration) and switch back to default
 
 ### Player Method
   - `.unison(voices, detune, analog)` , analog to add more random detuning
@@ -42,12 +45,13 @@
   - `.once()` : play a player only once. 
   - `.drummer(duration=16, dur=1/2)` : turn a sample player to a human drummer. 'duration' is the time for a new drum pattern, `dur` is the duration of the player.
   - `basser(duration=64, markdur=2)`: turn a synth player to a bass player. 'duration' is the time for a new pattern, markdur is the length of the pattern
-  -  `.gtr(string=1)` : set player to match guitar tabs
-  -  `.chroma()` : set player to chromatic scale
-  -  `.solo(-8)` : mod the solo method, if the number>0: solo after the next n %beats, if the number<0: solo now and unsolo after the next n %beats. 
-  -  `stop(8)` : mod stop method to stop after the next n %beats.
-  -  `only()` : mod to only after the next n % beats.
-  -  
+  - `.gtr(string=1)` : set player to match guitar tabs
+  - `.chroma()` : set player to chromatic scale
+  - `.solo(-8)` : mod the solo method, if the number>0: solo after the next n %beats, if the number<0: solo now and unsolo after the next n %beats. 
+  - `stop(8)` : mod stop method to stop after the next n %beats.
+  - `only()` : mod to only after the next n % beats.
+  - `trim(length)` : trim every players pattern length
+  - `morph(other, probability)` : morph randomly some attributes of 2 player (self and other)  
 
 ### Pattern Method
   - `.renv(nbr=1)` : chord inversion, ex `P(0,2,4).renv(1)`
@@ -72,17 +76,25 @@
   - `PCoin(low=0, high=1, proba=0.5)` : generate values low or high with proba (more proba = more high)
   - `PChar(case=2, alpha=2)` : generate random characters, case{0: lowercase, 1: uppercase, 2: both}, alpha{0: alpha, 1: nonalpha, 2: both}
   - `PMarkov()` : generate chords with a Markov chain 3rd order dictionnary based on most popular chords progression. 
-  - `Pzero(size, offset)` : generate a pattern starting with 1 and (size-1) zero, the 1 can be offseted
+  - `PZero(size, offset)` : generate a pattern starting with 1 and (size-1) zero, the 1 can be offseted
   - `PBool(pat1, pat2, operator)` : binary operation between two patterns, operator{0: and, 1: or, 2: xor}
   - `melody(scale_melody, melody_dict)` : generate melody based on a markov chain dict of popular melodies
   - `PRy(duration=16, div=4, restprob=0.3)` : generate rythmique duration for a total time of 'duration' in 'div' parts with a probability to have a rest of 'restprob'.
   - `PArp(pattern, index)` : turn the pattern to arppegiator, index select the type of arp
   - `PMorse(text, point=1/4, tiret=3/4)` : convert a string to Morse code with values of point and tiret.
   - `PStep(8,1,0,4)` : mod PStep, the 4th parameter offset all the patern 
+  - `genArp(numberOfSequence, sequenceLength)` : generate arpeggiato based on markov chords progression
+
 
 ## FX
+  - to all Fx: add a parameter to slide from the `value` to the `value_` during the `sus*value_d` duration 
 
 ## Synth
   - `onset("dirname", sample=1, onset=4, dur=1/4)` : select the onset based on the onset dictionnary (in the loop dir, must be regenerated if new samples (with regenonset.py, but must be tweak maybe before)
   -  'loop' : now accept sample list, `sample=[0,1,2,3]`
-  -  
+  
+## MIDI / OSC
+  - send midi CC message with `MidiOut(channel=8, cc=11, value=127)`
+
+## external: software & hardware
+  - control the fxpedal Mod Dwarf with midi CC. 

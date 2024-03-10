@@ -269,12 +269,6 @@ fx.add("out = osc + Fb({\
 	},0.5,0.125)")
 fx.save()
 
-# fx = FxList.new("sample_atk", "sample_atk", {"sample_atk":0, "sample_sus":1}, order=2)
-# fx.add_var("env")
-# fx.add("env = EnvGen.ar(Env.new(levels: [0,1,0], times:[sample_atk, sample_sus], curve: 'lin'))")
-# fx.add("osc = osc*env")
-# fx.save()
-
 fx = FxList.new("a", "attack", {"a":0, "sus": 1, "ac": 0}, order=2)
 fx.doc("attack envelope")
 fx.add_var("env")
@@ -288,7 +282,6 @@ fx.add_var("env")
 fx.add("env = EnvGen.ar(Env.new(levels: [1,0,0], times:[r*sus, sus - r*sus], curve:[rc,0]))")
 fx.add("osc = osc*env")
 fx.save()
-
 
 fx = FxList.new('ehpf','envHPF', {'ehpf': 0, 'ehpr': 0.7, 'ehpa':0.001, 'ehps':0.01, 'ehpc':-3, 'sus':1}, order=2)
 fx.doc("ehpf")
@@ -464,16 +457,9 @@ fx.add("dry = dry * LFPulse.kr(stuti/sus, mul:1.5)")
 fx.add("osc = SelectX.ar(sbrk, [dry, wet], wrap:1)")
 fx.save()
 
-
-
-
-
-
-
 fx = FxList.new('clouds','clouds', {'clouds': 0, 'cpos':0.5, 'csize':0.25, 'cdens': 0.4, 'ctex': 0.5, 'cpitch': 0, 'cgain':2, 'cfb': 0, 'cmode': 0}, order=2)
 fx.doc("Clouds granulator")
 fx.add("osc = MiClouds.ar(osc, pit: cpitch, pos: cpos, size:csize, dens: cdens, tex: ctex, drywet: clouds, in_gain: cgain, fb: cfb, mode:cmode)")
-#fx.add("ReplaceOut.ar(bus, osc)")
 fx.save()
 
 fx = FxList.new('mring','MiRings', {'mring': 0, 'rstruct':0.1, 'rbright': 0.8, 'rdamp': 0.7, 'rpos': 0, 'rmodel': 1, 'rpoly': 4, 'regg': 0, 'sus':0, 'rsus': 2}, order=2)
@@ -505,7 +491,6 @@ fx = FxList.new('panR','panR', {'panR': 1}, order=2)
 fx.doc("Pan rear")
 fx.add("osc = Pan4.ar(osc, 0, panR)")
 fx.save()
-
 
 
 fx = FxList.new('vol','volume', {'vol': 1}, order=2)

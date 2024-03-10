@@ -67,14 +67,15 @@ from ..ServerManager import Server
 
 class Effect:
     server=Server
-    def __init__(self, foxdot_name, synthdef, args={}, control=False):
-
+    def __init__(self, foxdot_name, synthdef, args={}, control=False, useControl=True):
         self.name      = foxdot_name
         self.synthdef  = synthdef
         self.filename  = EFFECTS_DIR + "/{}.scd".format(self.synthdef)
-        self.args      = args.keys()
         self.vars      = ["osc"]
-        self.defaults  = args
+        self.useControl = useControl
+        self.ctrlArgs  = self.setControlArgs(args) if self.useControl else ""
+        self.args      = self.ctrlArgs.keys() if self.useControl else args.keys()
+        self.defaults  = self.ctrlArgs if self.useControl else args
         self.effects   = []
         self.control   = control
 
@@ -96,9 +97,10 @@ class Effect:
 
     def __str__(self):
         s  = "SynthDef.new(\{},\n".format(self.synthdef)
-        s += "{" + "|bus, {}|\n".format(", ".join(self.args))
+        s += "{" + f"|bus, {', '.join(self.args)}|" + "\n"
         s += "var {};\n".format(",".join(self.vars))
         s += self.input
+        s += self.add_control() if self.useControl else "\n"
         s += self.list_effects()
         s += self.output
         s += "(bus, osc)}).add;"
@@ -116,6 +118,21 @@ class Effect:
         s = ""
         for p in self.effects:
             s += p + ";\n"
+        return s
+
+    def setControlArgs(self, args={}):
+        for arg in args.copy().keys():
+            if arg not in ["sus"]:
+                args.update({str(arg + "_"): 0})
+                args.update({str(arg + "_d"): 1})
+        args.update({"sus": 1})
+        return args
+
+    def add_control(self):
+        s = ""
+        for a in self.args:
+            if a not in ["sus"] and a.find("_") == -1:
+                s += f"{a} = if({a}_<=0, {a}, Line.kr({a}, {a}_, sus*{a}_d));" + "\n"
         return s
 
     def add_var(self, name):
@@ -210,8 +227,8 @@ class EffectManager(dict):
         """ Returns the keys sorted by attribute name"""
         return sorted(self.keys(), key=lambda effect: getattr(self[effect], attr))
 
-    def new(self, foxdot_arg_name, synthdef, args, order=2):
-        self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0)
+    def new(self, foxdot_arg_name, synthdef, args, order=2, useControl=True):
+        self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0, useControl)
 
         if order in self.order:
 
@@ -230,13 +247,47 @@ class EffectManager(dict):
         for arg in args:
             if arg not in self.all_kw:
                 self.all_kw.append(arg)
+                if arg not in ["sus"] and useControl:
+                    self.all_kw.append(arg + "_")
+                    self.all_kw.append(arg + "_d")
 
             # Store the default value
             
             self.defaults[arg] = args[arg]
 
+            if arg not in ["sus"] and useControl:
+                self.defaults[arg + "_"] = 0
+                self.defaults[arg + "_d"] = 1
+
         return self[foxdot_arg_name]
     
+    # def newNoControl(self, foxdot_arg_name, synthdef, args, order=2):
+    #     self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0, False)
+
+    #     if order in self.order:
+
+    #         self.order[order].append(foxdot_arg_name)
+
+    #     else:
+
+    #         self.order[order] = [foxdot_arg_name]
+
+    #     # Store the main keywords together
+
+    #     self.kw.append(foxdot_arg_name)
+
+    #     # Store other sub-keys
+
+    #     for arg in args:
+    #         if arg not in self.all_kw:
+    #             self.all_kw.append(arg)
+
+    #         # Store the default value
+            
+    #         self.defaults[arg] = args[arg]
+
+    #     return self[foxdot_arg_name]
+
     def kwargs(self):
         """ Returns the title keywords for each effect """
         return tuple(self.kw)
@@ -360,17 +411,17 @@ if SC3_PLUGINS:
 
 # Post envelope effects    
 
-fx = FxList.new('chop', 'chop', {'chop': 0, 'sus': 1}, order=2)
-fx.add("osc = osc * LFPulse.kr(chop / sus, add: 0.01)")
-fx.save()
+# fx = FxList.new('chop', 'chop', {'chop': 0, 'sus': 1}, order=2)
+# fx.add("osc = osc * LFPulse.kr(chop / sus, add: 0.01)")
+# fx.save()
 
-fx = FxList.new('tremolo', 'tremolo', {'tremolo': 0, 'beat_dur': 1}, order=2)
-fx.add("osc = osc * SinOsc.ar( tremolo / beat_dur, mul:0.5, add:0.5)")
-fx.save()
+# fx = FxList.new('tremolo', 'tremolo', {'tremolo': 0, 'beat_dur': 1}, order=2)
+# fx.add("osc = osc * SinOsc.ar( tremolo / beat_dur, mul:0.5, add:0.5)")
+# fx.save()
 
-fx = FxList.new('echo', 'combDelay', {'echo': 0, 'beat_dur': 1, 'echotime': 1}, order=2)
-fx.add('osc = osc + CombL.ar(osc, delaytime: echo * beat_dur, maxdelaytime: 2 * beat_dur, decaytime: echotime * beat_dur)')
-fx.save()
+# fx = FxList.new('echo', 'combDelay', {'echo': 0, 'beat_dur': 1, 'echotime': 1}, order=2)
+# fx.add('osc = osc + CombL.ar(osc, delaytime: echo * beat_dur, maxdelaytime: 2 * beat_dur, decaytime: echotime * beat_dur)')
+# fx.save()
 
 fx = FxList.new('spin', 'spinPan', {'spin': 0,'sus': 1}, order=2)
 fx.add('osc = osc * [FSinOsc.ar(spin / 2, iphase: 1, mul: 0.5, add: 0.5), FSinOsc.ar(spin / 2, iphase: 3, mul: 0.5, add: 0.5)]')
@@ -384,18 +435,18 @@ fx = FxList.new('room', 'reverb', {'room': 0, 'mix': 0.1}, order=2)
 fx.add("osc = FreeVerb.ar(osc, mix, room)")
 fx.save()
 
-fx = FxList.new("formant", "formantFilter", {"formant": 0}, order=2)
-fx.add("formant = (formant % 8) + 1")
-fx.add("osc = Formlet.ar(osc, formant * 200, ((formant % 5 + 1)) / 1000, (formant * 1.5) / 600).tanh")
-fx.save()
+# fx = FxList.new("formant", "formantFilter", {"formant": 0}, order=2)
+# fx.add("formant = (formant % 8) + 1")
+# fx.add("osc = Formlet.ar(osc, formant * 200, ((formant % 5 + 1)) / 1000, (formant * 1.5) / 600).tanh")
+# fx.save()
 
-fx = FxList.new("shape", "wavesShapeDistortion", {"shape":0}, order=2)
-fx.add("osc = (osc * (shape * 50)).fold2(1).distort / 5")
-fx.save()
+# fx = FxList.new("shape", "wavesShapeDistortion", {"shape":0}, order=2)
+# fx.add("osc = (osc * (shape * 50)).fold2(1).distort / 5")
+# fx.save()
 
-fx = FxList.new("drive", "overdriveDistortion", {"drive":0}, order=2)
-fx.add("osc = (osc * (drive * 50)).clip(0,0.2).fold2(2)")
-fx.save()
+# fx = FxList.new("drive", "overdriveDistortion", {"drive":0}, order=2)
+# fx.add("osc = (osc * (drive * 50)).clip(0,0.2).fold2(2)")
+# fx.save()
 
 In(); Out()
-Effect.server.setFx(FxList)
+#Effect.server.setFx(FxList)

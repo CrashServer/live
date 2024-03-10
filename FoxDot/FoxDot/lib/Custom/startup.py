@@ -789,11 +789,11 @@ try:
 				drumFillCat = PRand(1, len(drumRockFill))[0]
 				drumFillPat = PRand(1, len(drumRockFill[drumFillCat]))[0]
 				fillDur = durloop/PRand([4,8,16])
-				durPlayer = PwRand([durPlyr,durPlyr*2],[80,20])[:1]
+				# durPlayer = PwRand([durPlyr,durPlyr*2],[80,20])[:1]
 				self.degree=Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [durloop-fillDur, fillDur])
 				self.human(30,PWhite(-5,5))
 				self.comp=0.8
-				self.dur = durPlayer
+				self.dur = durPlyr
 				self.every(durloop, "drummer", durloop, durPlyr)
 except:
 		print("Error importing drumRockPattern", sys.exc_info()[0])

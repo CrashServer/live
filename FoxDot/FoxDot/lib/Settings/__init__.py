@@ -117,9 +117,9 @@ CPU_USAGE                 = conf.CPU_USAGE
 CLOCK_LATENCY             = conf.CLOCK_LATENCY
 FORWARD_ADDRESS           = conf.FORWARD_ADDRESS
 FORWARD_PORT              = conf.FORWARD_PORT
+SAMPLES_BANK              = conf.SAMPLES_BANK
 
 if conf.SAMPLES_DIR is not None and conf.SAMPLES_DIR != "":
-
     FOXDOT_SND = os.path.realpath(conf.SAMPLES_DIR)
 
 def get_timestamp():

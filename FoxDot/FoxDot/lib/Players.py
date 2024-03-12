@@ -136,7 +136,7 @@ from .Code import WarningMsg, debug_stdout
 from .SCLang.SynthDef import SynthDefProxy, SynthDef, SynthDefs
 from .Effects import FxList
 from .Utils import stdout
-from .Buffers import Samples
+from .Buffers import Samples, SAMPLES_BANK
 
 from .Key import *
 from .Repeat import *
@@ -221,7 +221,7 @@ class Player(Repeatable):
     # Really need to tidy this up
 
     keywords   = ('degree', 'oct', 'freq', 'dur', 'delay', 'buf',
-                  'blur', 'amplify', 'scale', 'bpm', 'sample', "env")
+                  'blur', 'amplify', 'scale', 'bpm', 'sample', "bank", "env")
 
     envelope_keywords = ("atk", "decay", "rel", "legato", "curve", "gain")
 
@@ -473,7 +473,7 @@ class Player(Repeatable):
 
                 # keep track of what values we change with +-
 
-                if (self.synthdef == SamplePlayer and name == "sample") or (self.synthdef != SamplePlayer and name == "degree"):
+                if (self.synthdef == SamplePlayer and name == "sample") or (name == "bank") or (self.synthdef != SamplePlayer and name == "degree"):
 
                     self.modifier = value
 
@@ -612,6 +612,9 @@ class Player(Repeatable):
         # Octave of the note
         self.oct     = 5
         
+        # sample bank
+        self.bank = SAMPLES_BANK
+
         # Tempo
         self.bpm     = None
 
@@ -1668,19 +1671,17 @@ class Player(Repeatable):
 
             degree = kwargs.get("degree", event['degree'])
             sample = kwargs.get("sample", event["sample"])
+            bank = kwargs.get("bank", event["bank"])
             rate   = kwargs.get("rate", event["rate"])
 
             if rate < 0:
-
                 sus = kwargs.get("sus", event["sus"])
-
                 pos = self.metro.beat_dur(sus)
 
             else:
-
                 pos = 0 
  
-            buf  = self.samples.getBufferFromSymbol(str(degree), sample).bufnum
+            buf  = self.samples.getBufferFromSymbol(str(degree), bank, sample).bufnum
             
             message.update( {'buf': buf,'pos': pos} )
 
@@ -1691,9 +1692,9 @@ class Player(Repeatable):
                 self.buf = buf
 
         elif self.synthdef == LoopPlayer:
-
             pos = kwargs.get("degree", event["degree"])
             sample = kwargs.get("sample", event["sample"])
+            bank = kwargs.get("bank", event["bank"])
             #buf = kwargs.get("buf", event["buf"])
             buf = self.samples.loadBuffer(self.filename, sample)
 
@@ -1731,21 +1732,17 @@ class Player(Repeatable):
 
                 pos += self.metro.beat_dur(sus)
 
-            message.update( {'pos': pos, 'buf': buf, 'rate': rate} )
+            message.update( {'pos': pos, 'buf': buf, 'rate': rate, 'bank': bank} )
 
         # CrashMod
         elif self.synthdef == OnsetPlayer:
-            #pos = kwargs.get("degree", event["degree"])
             onset = kwargs.get("onset", event["onset"])
             sample = kwargs.get("sample", event["sample"])
-            #filename = kwargs.get("filename", event["filename"])
-            #buf = kwargs.get("buf", event["buf"])
+            bank = kwargs.get("bank", event["bank"])
             buf = self.samples.loadBuffer(self.filename, sample)
             pth = self.samples._findSample(self.filename,sample).split("/")[-1:][0]
             onsetList = self.samples.onsetDict[pth]
             pos = onsetList[0][int(onset%len(onsetList[0]))]
-            #pos = 0
-            #onsetCut = 1
             onsetCut = onsetList[1][int(onset%len(onsetList[1]))]
             # Get a user-specified tempo
 
@@ -1781,7 +1778,7 @@ class Player(Repeatable):
 
                 pos += self.metro.beat_dur(sus)
 
-            message.update( {'pos': pos, 'buf': buf, 'rate': rate, 'onsetCut': onsetCut} )
+            message.update( {'pos': pos, 'buf': buf, 'rate': rate, 'onsetCut': onsetCut, 'bank': bank} )
 
 
         else:

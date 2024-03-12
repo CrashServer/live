@@ -22,7 +22,7 @@ if __name__ != "__main__":
 	except Exception as e:
 		print(e)
 
-	FOXDOT_LOOP  = join(crash_path, "_loop_")
+	FOXDOT_LOOP  = join(crash_path, str(0), "_loop_")
 	if not isdir(FOXDOT_LOOP):
 		print("Could not find _loop_ in crash_path : ", crash_path)
 	

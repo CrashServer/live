@@ -9,7 +9,7 @@ if __name__ != "__main__":
 		import time
 		from random import randint, sample
 		
-		from .Settings import FOXDOT_ROOT
+		from .Settings import FOXDOT_ROOT, SAMPLES_BANK
 		from .Buffers import alpha, nonalpha
 
 		from pathlib import Path
@@ -67,9 +67,12 @@ if __name__ != "__main__":
 	try:
 		FOXDOT_SND   = crash_path
 		FOXDOT_LOOP  = os.path.join(crash_path, "_loop_")
+		BANK_LEN = [item for item in os.listdir(FOXDOT_SND) if not (item.startswith("."))]
 		FoxDotCode.use_sample_directory(FOXDOT_SND)
-		Samples.addPath(FOXDOT_LOOP)
-		loops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(FOXDOT_LOOP)])
+		loops = []
+		for bankNbr in BANK_LEN:
+			Samples.addPath(os.path.join(FOXDOT_SND, str(bankNbr), "_loop_"))
+			loops += sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
 		loops.remove('')
 		loops.remove('__init__')
 	except:
@@ -118,7 +121,7 @@ if __name__ != "__main__":
 
 	def clear_voice_dir():
 		''' delete all voice sample in _loop_/voicetxt dir '''
-		voicetxt_path = os.path.join(crash_path, "_loop_", "voicetxt")
+		voicetxt_path = os.path.join(crash_path, str(SAMPLES_BANK), "_loop_", "voicetxt")
 		voices_files = os.listdir(voicetxt_path)
 		for f in voices_files:
 			os.remove(os.path.join(voicetxt_path, f))
@@ -220,18 +223,6 @@ if __name__ != "__main__":
 				self.dur = 1/2
 				self.amplify = 1
 
-		# @player_method
-		# def brk(self, multi=1):
-		# 	""" turn loop into break beat (only with splitter player """
-		# 	if self.synthdef == "splitter":
-		# 		self.dur = P*[1/4,1/2,1]*multi
-		# 		self.pos = PWhite(0,1).rnd(1/8)
-		# 		self.rate = PwRand([1,0.5,-1,-0.5],[60,10,10,10])
-		# 		self.often("stutter", PRand(1,8))
-		# 		self.beat_stretch=0
-		# 	else:
-		# 		print("only with splitter")
-
 		@player_method
 		def brk(self, multi=1, code=""):
 			""" turn loop into break beat (only with splitter player """
@@ -310,12 +301,6 @@ if __name__ != "__main__":
 				return Pattern([i * j for j in range(0,int(n))])
 			else:
 				return Pattern([i * j for j in range(0,int(n))]).reverse()
-
-		# def duree():
-		# 	''' print the duration of the show from init() to now '''
-		# 	global time_init
-		# 	duree = time.time()- time_init
-		# 	print("Durée de la tentative de Crash :", time.strftime('%H:%M:%S', time.gmtime(duree)))
 
 		@loop_pattern_func
 		def PTime():

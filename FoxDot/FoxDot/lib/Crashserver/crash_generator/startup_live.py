@@ -231,6 +231,12 @@ def unsolo():
 	for p in Clock.playing:
 		p.solo(0)
 
+def soloRnd(time=8, soloPlayer=None):
+    if  not soloPlayer:
+        soloPlayer = sample(Clock.playing,1)[0]
+    Clock.schedule(soloPlayer.solo, Clock.mod(time))
+    Clock.schedule(unsolo, Clock.mod(time) + time)
+
 # virus_method = ["Injecting... ", "Loading... ", "Init: ", "Dumping: ", "Hacking: ", "Run.."]
 # virus_name = ["MyDoom", "Brain", "Zeus", "Sality", "Virut", "Ramnit", "Blaster", "Conficker",\
 # "Worm", "TDSS TDL 4"]

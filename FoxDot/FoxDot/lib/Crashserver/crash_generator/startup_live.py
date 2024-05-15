@@ -73,10 +73,12 @@ class StorageAttack:
 storageAttack = StorageAttack()
 
 ### sample description ###
-sample_description_path = os.path.join(crash_path, "description.cs")
+sample_description_path = os.path.join(crash_path, str(bank), "description.cs")
 if os.path.isfile(sample_description_path):
 	with open(sample_description_path, "rb") as file:
 		sample_description = pickle.load(file)
+else:
+	print("No sample description found")
 
 def ascii_gen(text="", font=""):
 	''' Generate ASCII art from text '''
@@ -189,6 +191,11 @@ def print_loops(loop=""):
 		print(filteredList)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(filteredList))
+
+ploop = print_loops
+psample = print_sample
+pfx = print_fx
+psynth = print_synth
 
 def print_video():
 	'''Helper for video player'''

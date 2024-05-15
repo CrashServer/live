@@ -324,6 +324,13 @@ if __name__ != "__main__":
 				'''
 			return Pattern([(a*i + b )%1 for i in range(size)]).lmap(mapl, maph)
 
+		@loop_pattern_func
+		def PFr(mapl=0, maph=1, seedFr=1664, size=16):
+			''' Simpliest version of PFrac '''
+			a=PWhite(0,0.99, seed=seedFr)[0]
+			b=PWhite(0,0.99, seed=seedFr)[0]
+			return Pattern([(a*i + b )%1 for i in range(size)]).lmap(mapl, maph)
+
 		def lininf(start=0, finish=1, time=32):
 			''' linvar from start to finish but stay at finish after time '''
 			return linvar([start,finish],[time,inf], start=now)

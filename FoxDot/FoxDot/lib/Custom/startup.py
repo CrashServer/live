@@ -272,7 +272,7 @@ if __name__ != "__main__":
 	try: 
 		@PatternMethod
 		def renv(self, nbr=1):
-			""" Chord Inversion """
+			""" Pattern Chord Inversion """
 			sorted_chord = sorted(self)
 			if nbr > 0:
 				for i in range(nbr):
@@ -289,6 +289,7 @@ if __name__ != "__main__":
 	try:
 		@loop_pattern_func
 		def PBin(number=0):
+			""" Returns a random binary pattern or convert number to bin pattern """
 			if number==0:
 				number = PRand(10,1000000)[0]
 			return [int(i) for i in str(bin(number)[2:])]
@@ -600,7 +601,7 @@ if __name__ != "__main__":
 					return 0			
 
 		class PBool(GeneratorPattern):
-			''' Binery operation between 2 Pattern, you can select the operator:
+			''' Binary operation between 2 Pattern, you can select the operator:
 				0 -> and
 				1 -> or
 				2 -> xor   '''
@@ -710,9 +711,11 @@ if __name__ != "__main__":
 		# 		return PChain2(scale_melody_dict)
 
 		def melody():
+			''' Generate a melody based on Markov chain dict of melody '''
 			return PChain2(melody_dict)
 
 		def chaos(chaosInt=1):
+			''' Generate some random players '''
 			chaosText = ""
 			for i in range(chaosInt):
 				chaosText += add_player(True)
@@ -775,6 +778,7 @@ try:
 		from .Crashserver.drumRockPattern import * ### Crash Drum rock pattern
 		@player_method
 		def drummer(self, durloop=16, durPlyr=1/2):
+			''' Transform the player into an automatic drummer '''
 			if durloop!=0:
 				drumCat = PRand(1, len(drumRockPattern))[0]
 				drumPat = PRand(1,len(drumRockPattern[drumCat]))[0]

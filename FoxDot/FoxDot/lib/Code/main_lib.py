@@ -122,7 +122,7 @@ class FoxDotCode:
     def load_startup_file(self): 
         """ Must be initialised first """
         code = self.namespace["FOXDOT_STARTUP"].load()
-        return self.__call__(code, verbose=False)
+        return self.__call__(code, verbose=False, verbose_error=True)
                  
     def __call__(self, code, verbose=True, verbose_error=None):
         """ Takes a string of FoxDot code and executes as Python """

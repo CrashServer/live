@@ -1,4 +1,5 @@
 try:
+	from rtmidi.midiconstants import CONTROL_CHANGE
 	import pickle
 	import os
 	import sys
@@ -11,16 +12,19 @@ try:
 except Exception as e:
 	print(e)
 
-#### ASCII
+# ASCII
 asciiEnable = False
 clipcopyEnable = False
 try:
-	from pyfiglet import figlet_format, FigletFont # ASCII GENERATOR
-	cool_ascii = [1,6,8,11,13,15,17,18,19,21,22,24,26,30,31,32,33,34,35,37,38,43,44,45,46,47,48,50,59,62,64,65,68,69,77,79,81,82,83,84,85,88,89,96,98,103,104,105,107,111,113,114,117,119,123,124,131,135,143,150,151,152,159,187,190,193,19,201,203,217,225,227,230,240,243,244,245,251,273,275,280,308,325,329,347,363,385,410]
+	from pyfiglet import figlet_format, FigletFont  # ASCII GENERATOR
+	cool_ascii = [1, 6, 8, 11, 13, 15, 17, 18, 19, 21, 22, 24, 26, 30, 31, 32, 33, 34, 35, 37, 38, 43, 44, 45, 46, 47, 48, 50, 59, 62, 64, 65, 68, 69, 77, 79, 81, 82, 83, 84, 85, 88, 89, 96, 98, 103, 104,
+		105, 107, 111, 113, 114, 117, 119, 123, 124, 131, 135, 143, 150, 151, 152, 159, 187, 190, 193, 19, 201, 203, 217, 225, 227, 230, 240, 243, 244, 245, 251, 273, 275, 280, 308, 325, 329, 347, 363, 385, 410]
 	fig_font = FigletFont()
 	fig_fonts_list = fig_font.getFonts()
-	fig_skip = ['fbr12___', 'mshebrew210', 'term', 'runic', 'pyramid', 'eftifont', 'DANC4', 'dietcola']
-	fig_skip += ['emboss', 'emboss2', 'future', 'letter', 'pagga', 'smblock', 'smbraille', 'wideterm']
+	fig_skip = ['fbr12___', 'mshebrew210', 'term', 'runic',
+		'pyramid', 'eftifont', 'DANC4', 'dietcola']
+	fig_skip += ['emboss', 'emboss2', 'future', 'letter',
+		'pagga', 'smblock', 'smbraille', 'wideterm']
 	fig_skip += ['dosrebel', 'konto', 'kontoslant']
 	font_list = [x for x in fig_fonts_list if x not in fig_skip]
 	asciiEnable = True
@@ -28,7 +32,7 @@ except:
 	asciiEnable = False
 	print("Please install pyfiglet")
 
-#### copy to clipboard
+# copy to clipboard
 try:
 	import pyperclip as clip
 	clipcopyEnable = True
@@ -40,12 +44,15 @@ except:
 ### SERVER CONFIG     ###
 #########################
 
+
 class StorageAttack:
 	''' get attack from files and put in a dict, print / clipboardcopy'''
+
 	def __init__(self):
 		self.codepath = os.path.join(Path('.').absolute().parent, 'codeBank')
 		self.attackDict = {}
 		self.compileAttack()
+
 	def compileAttack(self):
 		for filename in os.listdir(self.codepath):
 			if filename.endswith(('.py')):
@@ -53,6 +60,7 @@ class StorageAttack:
 					content = f.readlines()
 					attackName = content[0].replace("#", "").replace("\n", "").strip()
 					self.attackDict[attackName] = ''.join(content[1:])
+
 	def getAttack(self, attackName, printOut=0):
 		exten = ''.join(choice(string.ascii_lowercase) for x in range(3))
 		prompt = f"##### attack@{attackName}.{exten}:~$ #####"
@@ -64,11 +72,13 @@ class StorageAttack:
 			print(self.attackDict[attackName])
 		if clipcopyEnable:
 			clip.copy(prompt + '\n' + self.attackDict[attackName])
+
 	def lost(self):
 		attackKeys = list(sorted(self.attackDict.keys()))
 		print(attackKeys)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(attackKeys))
+
 
 storageAttack = StorageAttack()
 
@@ -80,11 +90,12 @@ if os.path.isfile(sample_description_path):
 else:
 	print("No sample description found")
 
+
 def ascii_gen(text="", font=""):
 	''' Generate ASCII art from text '''
 	if clipcopyEnable and asciiEnable:
 		if font == "":
-			font = randint(0,len(cool_ascii))
+			font = randint(0, len(cool_ascii))
 		if type(font) != str:
 			font = fig_fonts_list[cool_ascii[int(font)]]
 		if text != None:
@@ -96,10 +107,13 @@ def ascii_gen(text="", font=""):
 ###     CRASH SERVER LIVE FUNCTIONS    ###
 ##########################################
 
+
 def voiceserver(voice_txt=""):
-    masterAll("lpf", 80)
-    Voice(voice_txt, rate=1, amp=1, pitch=1 + randint(-10,50), lang="fr", voice=0)
-    Clock.future(calc_dur_voice(voice_txt), lambda: masterAll("reset"))
+	masterAll("lpf", 80)
+	Voice(voice_txt, rate=1, amp=1, pitch=1 +
+		  randint(-10, 50), lang="fr", voice=0)
+	Clock.future(calc_dur_voice(voice_txt), lambda: masterAll("reset"))
+
 
 def connect():
 	''' Full reset and set bpm, root, sos & video player '''
@@ -109,15 +123,22 @@ def connect():
 	Clock.bpm = 48
 	Scale.default = "minor"
 	Root.default = "E"
-	i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)
+	i3 >> sos(dur=8, lpf=linvar([60, 4800], [16*PWhite(1, 4), 16*PWhite(1, 5)]),
+			  hpf=expvar([0, 500], [16*PWhite(1, 8), 16*PWhite(1, 8)]), amplify=0.5)
 	if clipcopyEnable:
-		clip.copy("i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)")
+		clip.copy(
+			"i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)")
+
 
 def attack(attackName, prntOut=0):
+	''' Get the attack code '''
 	storageAttack.getAttack(attackName, prntOut)
 
+
 def lost():
+	''' List of all attacks '''
 	storageAttack.lost()
+
 
 def print_synth(synth=""):
 	''' Show the name and the args of a synth '''
@@ -126,7 +147,7 @@ def print_synth(synth=""):
 		dir_list = os.listdir(path)
 		synth_list = []
 		for p in dir_list:
-			files,sep,ext = p.partition('.')
+			files, sep, ext = p.partition('.')
 			synth_list.append(files)
 		print(sorted(synth_list))
 		if crashPanelSending:
@@ -137,11 +158,12 @@ def print_synth(synth=""):
 			synth = synth.readlines()
 		synth_txt = [line.strip() for line in synth if line != "\n"]
 		txt = str(''.join(synth_txt))
-		synthname = re.findall('SynthDef[.new]*[(\\\]*(.+?),',txt)
+		synthname = re.findall('SynthDef[.new]*[(\\\]*(.+?),', txt)
 		synthargs = re.findall('\{\|(.*)\|', txt)
 		print(str(synthname[0]), " : ", str(synthargs[0]))
 		if crashPanelSending:
 			crashpanel.sendOnce(str(synthname[0]) + " : " + str(synthargs[0]))
+
 
 def print_fx(fx=""):
 	''' Show the name and the args of a fx '''
@@ -154,11 +176,12 @@ def print_fx(fx=""):
 		if crashPanelSending:
 			crashpanel.sendOnce(str(FxList[fx]))
 
+
 def print_sample(sample=""):
 	''' print description of samples or find the corresponding letter '''
-	if sample=="":
+	if sample == "":
 		print("")
-		for k, v in sorted(sample_description.items(), key= lambda x: x[0].casefold()):
+		for k, v in sorted(sample_description.items(), key=lambda x: x[0].casefold()):
 			print(k.ljust(2, " ") + ': ' + v.ljust(40), end="")
 		print("")
 	else:
@@ -170,6 +193,7 @@ def print_sample(sample=""):
 				if sample.lower() in value.lower():
 					print(f'{key}: {value}')
 
+
 def print_loops(loop=""):
 	''' print all available loops samples '''
 	if isinstance(loop, int):
@@ -177,12 +201,13 @@ def print_loops(loop=""):
 		print(randomLoops)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(randomLoops))
-	elif loop=="":
+	elif loop == "":
 		print(loops)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(loops))
 	elif (loop in loops):
-		listloops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_LOOP, loop))])
+		listloops = sorted([fn.rsplit(".", 1)[0]
+						   for fn in os.listdir(os.path.join(FOXDOT_LOOP, loop))])
 		print(listloops)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(listloops))
@@ -192,10 +217,51 @@ def print_loops(loop=""):
 		if crashPanelSending:
 			crashpanel.sendOnce(str(filteredList))
 
-ploop = print_loops
-psample = print_sample
-pfx = print_fx
-psynth = print_synth
+
+def pfonk(fonk=""):
+	fonktion = [
+		"ascii_gen", "connect", "attack", "lost", "psynth", "ploop", "psample",
+		"pfx", "pshort", "PMorse", "unsolo", "soloRnd", "gtr", "chroma", "porta", "morph",
+		"trim", "genArp", "masterAll", "voice_count", "random_bpm_var", "random_bpm", "setseed",
+		"unison", "human", "fill", "brk", "renv", "PBin", "PSaw", "PTime", "PTimebin", "PFrac",
+		"PFr", "lininf", "expinf", "linbpm", "linmod", "PDrum", "darker", "lighter", "PChords", "PGauss",
+		"PLog", "PTrir", "PCoin", "PChar", "PMarkov", "PZero", "PBool", "switch", "clone", "drop", "drop_bpm",
+		"melody", "chaos", "PRy", "once", "start", "norm", "clamp", "lmap", "drummer",
+	]
+	if fonk == "":
+		print(sorted(fonktion))
+	else:
+		print(str(fonk.__name__) + ": " + str(inspect.signature(fonk)))
+		print(fonk.__doc__)
+
+
+def pshort(short=""):
+	''' helper to shortcut '''
+	shorts = {
+		"é": "linvar([0,1],[16,0])",
+		"é4": "linvar([0,1], [4,0])",
+		"é8": "linvar([0,1],[8,0])",
+		"é32": "linvar([0,1],[32,0])",
+		"è": "linvar([1,0],[16,0])",
+		"è4": "linvar([1,0],[4,0])",
+		"è8": "linvar([1,0],[8,0])",
+		"è32": "linvar([1,0],[32,0])",
+		"ê": "linvar([0,1],[16,16])",
+		"ê4": "linvar([0,1],[4,4])",
+		"ê8": "linvar([0,1],[8,8])",
+		"ê32": "linvar([0,1],[32,32])",
+		"ù": "PDur(var([4,PRand(8)],[6,2]), 8)",
+		"ù3": "PDur(var([3,PRand(8)],[6,2]), 8)",
+		"ù5": "PDur(var([5,PRand(8)],[6,2]), 8)",
+		"à": "PRand(10)",
+		"ç": "PWhite(-1,1)",
+		"ç0": "PWhite(0,1)"
+	}
+	if short == "":
+		print(shorts.keys())
+	else:
+		print(shorts[short])
+
 
 def print_video():
 	'''Helper for video player'''
@@ -205,23 +271,31 @@ def print_video():
 	if crashPanelSending:
 		crashpanel.sendOnce(str(txt))
 
+
+ploop = print_loops
+psample = print_sample
+pfx = print_fx
+psynth = print_synth
+pvideo = print_video
+
+
 def PMorse(text, point=1/4, tiret=3/4):
 	""" Convert a string to the value of point & tiret """
-	MORSE_DICT = { 'A':'.-', 'B':'-...',
-					'C':'-.-.', 'D':'-..', 'E':'.',
-					'F':'..-.', 'G':'--.', 'H':'....',
-					'I':'..', 'J':'.---', 'K':'-.-',
-					'L':'.-..', 'M':'--', 'N':'-.',
-					'O':'---', 'P':'.--.', 'Q':'--.-',
-					'R':'.-.', 'S':'...', 'T':'-',
-					'U':'..-', 'V':'...-', 'W':'.--',
-					'X':'-..-', 'Y':'-.--', 'Z':'--..',
-					'1':'.----', '2':'..---', '3':'...--',
-					'4':'....-', '5':'.....', '6':'-....',
-					'7':'--...', '8':'---..', '9':'----.',
-					'0':'-----', ', ':'--..--', '.':'.-.-.-',
-					'?':'..--..', '/':'-..-.', '-':'-....-',
-					'(':'-.--.', ')':'-.--.-'}
+	MORSE_DICT = {'A': '.-', 'B': '-...',
+					'C': '-.-.', 'D': '-..', 'E': '.',
+					'F': '..-.', 'G': '--.', 'H': '....',
+					'I': '..', 'J': '.---', 'K': '-.-',
+					'L': '.-..', 'M': '--', 'N': '-.',
+					'O': '---', 'P': '.--.', 'Q': '--.-',
+					'R': '.-.', 'S': '...', 'T': '-',
+					'U': '..-', 'V': '...-', 'W': '.--',
+					'X': '-..-', 'Y': '-.--', 'Z': '--..',
+					'1': '.----', '2': '..---', '3': '...--',
+					'4': '....-', '5': '.....', '6': '-....',
+					'7': '--...', '8': '---..', '9': '----.',
+					'0': '-----', ', ': '--..--', '.': '.-.-.-',
+					'?': '..--..', '/': '-..-.', '-': '-....-',
+					'(': '-.--.', ')': '-.--.-'}
 	morse = []
 	for l in text.split(" "):
 		for w in l:
@@ -234,40 +308,35 @@ def PMorse(text, point=1/4, tiret=3/4):
 	morse[-1] += rest(2*point)
 	return morse
 
+
 def unsolo():
+	''' Unsolo all solo players'''
 	for p in Clock.playing:
 		p.solo(0)
 
+
 def soloRnd(time=8, soloPlayer=None):
-    if  not soloPlayer:
-        soloPlayer = sample(Clock.playing,1)[0]
-    Clock.schedule(soloPlayer.solo, Clock.mod(time))
-    Clock.schedule(unsolo, Clock.mod(time) + time)
+	''' solo a random player at time modulo '''
+	if not soloPlayer:
+		soloPlayer = sample(Clock.playing, 1)[0]
+	Clock.schedule(soloPlayer.solo, Clock.mod(time))
+	Clock.schedule(unsolo, Clock.mod(time) + time)
 
-# virus_method = ["Injecting... ", "Loading... ", "Init: ", "Dumping: ", "Hacking: ", "Run.."]
-# virus_name = ["MyDoom", "Brain", "Zeus", "Sality", "Virut", "Ramnit", "Blaster", "Conficker",\
-# "Worm", "TDSS TDL 4"]
-# virus_access = ["Kernel", "MBR", "Kernel", "bsdriver.sys", "Hardware", "Security", ]
-# virus_protocole = ["Spambot", "PWS", "Stealer", "Proxy", "BackDoor", "KeyLogger", "InfoStealer", "Cryto",\
-# "Autoruns", "Rootkit", "Trojan", "Rogue", "Scareware", "Script", "D.O.S." ]
-# virus_status = [" | [###.......] % Completed | ###",  "- Lost: 78% - ###", " @@88@@", " /Please Wait...", " |***--------| ", " , ping=3ms", "!WARNING BUFFER(#4F,5E) - VIOLATION ACCESS"]
-
-# def define_virus():
-# 	### Generate a random virus text
-# 	virus = "###" + choice(virus_method) + choice(virus_name) + "." + choice(virus_access) + "." + choice(virus_protocole) + choice(virus_status)
-# 	return virus
 
 @player_method
 def gtr(self, strings=1):
 	''' set player to match guitar string'''
-	self.root = Pattern(strings).submap({0:-10, 1:-8, 2:-3, 3:2, 4:7, 5:11, 6:16})
+	self.root = Pattern(strings).submap(
+		{0: -10, 1: -8, 2: -3, 3: 2, 4: 7, 5: 11, 6: 16})
 	self.scale = Scale.chromatic
 	return self
+
 
 @player_method
 def chroma(self):
 	''' Set player to chromatic scale '''
 	self.scale = Scale.chromatic
+
 
 @player_method
 def porta(self, portDelay=0.5):
@@ -279,13 +348,14 @@ def porta(self, portDelay=0.5):
 	else:
 		self.slide = 0
 
+
 @player_method
 def morph(self, other, prob=50):
 	''' morph randomly some attrinute between 2 players, prob = amount of probability (100: full target player)'''
 	for k in self.attr.keys():
 		try:
 			if k in other.attr.keys():
-				try:  ### pattern comparaison is buggy, need this hack
+				try:  # pattern comparaison is buggy, need this hack
 					if other[k] != P[0]:
 						test = True
 					else:
@@ -295,16 +365,18 @@ def morph(self, other, prob=50):
 				if test:
 					sattr = self.__getitem__(k)
 					oattr = other.__getitem__(k)
-					item = [p if randint(0,100)>prob else oattr[i] for i,p in enumerate(sattr)]
+					item = [p if randint(0, 100) > prob else oattr[i]
+										 for i, p in enumerate(sattr)]
 					setattr(self, k, item)
 		except Exception as e:
 			print(e)
 	return self
 
+
 @player_method
 def trim(self, length):
 	'''Trim to length evey pattern of player'''
-	if length !=0:
+	if length != 0:
 		if length >= 1:
 			for attr in self.attr:
 				try:
@@ -322,6 +394,7 @@ def trim(self, length):
 	# else:
 	# 	self.dur = 0.5 if self.synthdef == SamplePlayer else 1
 
+
 def genArp(nbrseq=4, lengthseq=8):
 	''' Generate arpeggiato based on markov Chords progression '''
 	seq = PMarkov()[:nbrseq]
@@ -329,12 +402,15 @@ def genArp(nbrseq=4, lengthseq=8):
 	genseq = [PArp(seq[i], arp[i]) for i in range(nbrseq)]
 	return Pvar(genseq, lengthseq)
 
+
 valueDict = {}
 
-def masterAll(args = 0, value=1, *argsall):
+
+def masterAll(args=0, value=1, *argsall):
+	''' set temporary a master FX, reset with 0 '''
 	global valueDict
 	if args == "reset" or args == 0:
-		for k,v in valueDict.items():
+		for k, v in valueDict.items():
 			for l, w in v.items():
 				try:
 					k.__setattr__(l, w)
@@ -361,7 +437,8 @@ def masterAll(args = 0, value=1, *argsall):
 	else:
 		pass
 
-### CrashPanel
+# CrashPanel
+
 
 try:
 	if crashPanelSending:
@@ -375,7 +452,7 @@ try:
 				return ("Pattern", [name for name, obj in vars(Sequences).items() if (type(obj) == FunctionType and name.startswith("P"))])
 
 			def synth_du_jour(self):
-				return ("Synth",[i for i in SynthDefs])
+				return ("Synth", [i for i in SynthDefs])
 
 			def loop_du_jour(self):
 				return ("Loop", loopNames)
@@ -387,7 +464,7 @@ try:
 			def fx_du_jour(self):
 				randfx = GENERATE_FX()
 				txt = []
-				for k,v in randfx.items():
+				for k, v in randfx.items():
 					txt.append(f"{k}={v}")
 				return ("FX", [txt])
 
@@ -406,13 +483,15 @@ try:
 					codecs random glob warnings
 					token pipes re'''.split()
 					pass
-					vg33modules   = map(__import__, aa33listimpp)
-					sg33doctext   = " ".join([vxx.__doc__ for vxx in vg33modules])
+					vg33modules = map(__import__, aa33listimpp)
+					sg33doctext = " ".join([vxx.__doc__ for vxx in vg33modules])
 					pass
-					rgx33word4min = r'[a-zA-Z0-9]{4,}'  ## regex to find words of 4chars or more
-					aa33listword  = [str(vxx).lower() for vxx in re.findall(rgx33word4min,sg33doctext) ]
-					aa33listword  = set(aa33listword)
-					aa33listword  = sorted(aa33listword)
+					# regex to find words of 4chars or more
+					rgx33word4min = r'[a-zA-Z0-9]{4,}'
+					aa33listword = [str(vxx).lower()
+										for vxx in re.findall(rgx33word4min, sg33doctext)]
+					aa33listword = set(aa33listword)
+					aa33listword = sorted(aa33listword)
 					pass
 					return ("Mot", aa33listword)
 				except:
@@ -439,19 +518,18 @@ try:
 				mot, chx = choix()
 				return (mot, choice(chx))
 
-
 		class CrashPanel():
-			def __init__(self, ipZbdm="localhost", ipSvdk = None, port=2000):
+			def __init__(self, ipZbdm="localhost", ipSvdk=None, port=2000):
 				self.ipZbdm = ipZbdm
 				self.ipSvdk = ipSvdk
 				self.port = port
 
 				self.bpmTime = 0.2  # time cycle send bpm
-				self.beatTime = 0.1 # time cycle send beat
-				self.plyTime = 1.0 # time cycle send player
-				self.pdjTime = 60 #time cycle send PlatduJour
-				self.chronoTime = 1.0 # time cycle send chrono
-				self.videoTime = 1.0 # time cycle send video index
+				self.beatTime = 0.1  # time cycle send beat
+				self.plyTime = 1.0  # time cycle send player
+				self.pdjTime = 60  # time cycle send PlatduJour
+				self.chronoTime = 1.0  # time cycle send chrono
+				self.videoTime = 1.0  # time cycle send video index
 
 				self.playerCounter = {}
 
@@ -465,23 +543,22 @@ try:
 				self.pdj = PlatduJour()
 				self.timeInit = time()
 
-				self.threadBpm = Thread(target = self.sendBpm)
+				self.threadBpm = Thread(target=self.sendBpm)
 				self.threadBpm.daemon = True
-				self.threadScale = Thread(target = self.sendScale)
+				self.threadScale = Thread(target=self.sendScale)
 				self.threadScale.daemon = True
-				self.threadRoot = Thread(target = self.sendRoot)
+				self.threadRoot = Thread(target=self.sendRoot)
 				self.threadRoot.daemon = True
-				self.threadBeat = Thread(target = self.sendBeat)
+				self.threadBeat = Thread(target=self.sendBeat)
 				self.threadBpm.daemon = True
-				self.threadPlayer = Thread(target = self.sendPlayer)
+				self.threadPlayer = Thread(target=self.sendPlayer)
 				self.threadPlayer.daemon = True
-				self.threadPdj = Thread(target = self.sendPdj)
+				self.threadPdj = Thread(target=self.sendPdj)
 				self.threadPdj.daemon = True
-				self.threadChrono = Thread(target = self.sendChrono)
+				self.threadChrono = Thread(target=self.sendChrono)
 				self.threadChrono.daemon = True
-				self.threadVideoIndex = Thread(target = self.sendVideoIndex)
+				self.threadVideoIndex = Thread(target=self.sendVideoIndex)
 				self.threadVideoIndex.daemon = True
-
 
 			def sendOscMsg(self, msg):
 				if self.ipZbdm:
@@ -540,7 +617,8 @@ try:
 				try:
 					while self.isrunning:
 						self.addPlayerTurn()
-						playerListCount = [f'{k} {divmod(v,60)[0]:02d}:{divmod(v,60)[1]:02d}' for k,v in self.playerCounter.items()]
+						playerListCount = [
+							f'{k} {divmod(v,60)[0]:02d}:{divmod(v,60)[1]:02d}' for k, v in self.playerCounter.items()]
 						msg = OSCMessage("/panel/player", [playerListCount])
 						self.sendOscMsg(msg)
 						sleep(self.plyTime)
@@ -588,7 +666,8 @@ try:
 			def sendVideoIndex(self):
 				try:
 					while self.isrunning:
-						msg = OSCMessage("/panel/video", [oscReceiver.videoGrp, oscReceiver.videoIndex, oscReceiver.videoTotal, oscReceiver.videoIntegrity])
+						msg = OSCMessage("/panel/video", [oscReceiver.videoGrp, oscReceiver.videoIndex,
+										 oscReceiver.videoTotal, oscReceiver.videoIntegrity])
 						self.sendOscMsg(msg)
 						sleep(self.videoTime)
 				except:
@@ -625,30 +704,30 @@ try:
 except Exception as e:
 	print(e)
 
-### French cut
+# French cut
 try:
 	if os.name != "nt":
-		é = linvar([0,1],[16,0])
-		é4 = linvar([0,1], [4,0])
-		é8 = linvar([0,1],[8,0])
-		é32 = linvar([0,1],[32,0])
-		è = linvar([1,0],[16,0])
-		è4 = linvar([1,0],[4,0])
-		è8 = linvar([1,0],[8,0])
-		è32 = linvar([1,0],[32,0])
-		ê = linvar([0,1],[16,16])
-		ê4 = linvar([0,1],[4,4])
-		ê8 = linvar([0,1],[8,8])
-		ê32 = linvar([0,1],[32,32])
-		ù = PDur(var([4,PRand(8)],[6,2]), 8)
-		ù3 = PDur(var([3,PRand(8)],[6,2]), 8)
-		ù5 = PDur(var([5,PRand(8)],[6,2]), 8)
+		é = linvar([0, 1], [16, 0])
+		é4 = linvar([0, 1], [4, 0])
+		é8 = linvar([0, 1], [8, 0])
+		é32 = linvar([0, 1], [32, 0])
+		è = linvar([1, 0], [16, 0])
+		è4 = linvar([1, 0], [4, 0])
+		è8 = linvar([1, 0], [8, 0])
+		è32 = linvar([1, 0], [32, 0])
+		ê = linvar([0, 1], [16, 16])
+		ê4 = linvar([0, 1], [4, 4])
+		ê8 = linvar([0, 1], [8, 8])
+		ê32 = linvar([0, 1], [32, 32])
+		ù = PDur(var([4, PRand(8)], [6, 2]), 8)
+		ù3 = PDur(var([3, PRand(8)], [6, 2]), 8)
+		ù5 = PDur(var([5, PRand(8)], [6, 2]), 8)
 		à = PRand(10)
-		ç = PWhite(-1,1)
-		ç0 = PWhite(0,1)
-	# ô = PGauss(0, 1)
+		ç = PWhite(-1, 1)
+		ç0 = PWhite(0, 1)
+		# ô = PGauss(0, 1)
 
-	### scene OF
+	# scene OF
 	scene0 = 0
 	scene1 = 0
 	scene2 = 0
@@ -667,16 +746,16 @@ try:
 	scene99 = 0
 
 	# define chords and circle of fifth
-	circ5 = (P[0:12]*7)%12
+	circ5 = (P[0:12]*7) % 12
 	circ5m = circ5.rotate(3)
-	Maj = P(0,4,7)
-	Min = P(0,3,7)
-	Sus2 = P(0,2,7)
-	Sus4 = P(0,5,7)
-	Dim = P(0,3,6)
-	Maj7 = P(0,4,7,11)
-	Aug = P(0,4,8)
-	Six = P(0,4,7,9)
+	Maj = P(0, 4, 7)
+	Min = P(0, 3, 7)
+	Sus2 = P(0, 2, 7)
+	Sus4 = P(0, 5, 7)
+	Dim = P(0, 3, 6)
+	Maj7 = P(0, 4, 7, 11)
+	Aug = P(0, 4, 8)
+	Six = P(0, 4, 7, 9)
 
 except Exception as e:
 	print(e)
@@ -738,66 +817,74 @@ except Exception as e:
 #             else:
 #                 print("Wrong name or give me a value")
 
-from rtmidi.midiconstants import CONTROL_CHANGE
 
 class MidiDwarf:
-    def __init__(self, ch=12):
-        midiout = rtmidi.MidiOut()
-        available_ports = midiout.get_ports()
-        midiout.open_port(0)
-        print(f"Dwarf connected to {available_ports[0]}")
-        self.channel = ch
-        self._midi = midiout
-        self.length = 16
-        self.channelTrack = 1
-        self.recordStatus = ""
-    def send_channel_message(self, status, data1=None, data2=None, ch=None):
-        """Send a MIDI channel mode message."""
-        msg = [(status & 0xF0) | ((ch if ch else self.channel) - 1 & 0xF)]
-        if data1 is not None:
-            msg.append(data1 & 0x7F)
-            if data2 is not None:
-                msg.append(data2 & 0x7F)
-        self._midi.send_message(msg)
-    def send_control_change(self, cc=0, value=0, ch=None):
-        """Send a 'Control Change' message."""
-        self.send_channel_message(CONTROL_CHANGE, cc, value, ch=ch)
-    def send_record(self):
-        print(f"{self.recordStatus} Recording: {str(self.length)} bars at channel {self.channelTrack}")
-        self.send_control_change(1, 0)
-        if (self.recordStatus == "Start"):
-            self.recordStatus = "Stop"
-        else:
-            self.recordStatus = "Start"
-    def record(self, length=16, track=None):
-        self.length=length
-        if track is not None:
-            self.track(track)
-        self.recordStatus = "Start"
-        Clock.schedule(self.send_record, Clock.mod(self.length))
-        Clock.schedule(self.send_record, Clock.mod(self.length) + self.length)
-    def send_start(self):
-        self.send_control_change(2,0)
-    def undo(self):
-        self.send_control_change(4,0)
-    def start(self):
-        Clock.schedule(self.send_start, Clock.mod(self.length))
-    def stop(self, duration=0, track=None):
-        if (duration != 0):
-            Clock.schedule(self.send_start, Clock.mod(duration))
-            print(f"Stop {self.channelTrack} channel")
-        else:
-            if track is not None:
-                self.track(track)
-                print(f"Stop {track} channel")
-                self.send_start()
-    def clear(self):
-        self.send_control_change(3,0)
-    def track(self, channelTrack=1):
-        self.channelTrack = channelTrack
-        if(channelTrack>1):
-            channelTrack=127
-        self.send_control_change(5,channelTrack)
+	"""Control the dawrf recording with:
+	dwarf.record(dur, channel),
+	dwarf.start(),
+	dwarf.stop(dur, channel),
+	dwarf.undo(),
+	dwarf.clear(),
+	dwarf.track(channel)
+	"""
+
+	def __init__(self, ch=12):
+		midiout = rtmidi.MidiOut()
+		available_ports = midiout.get_ports()
+		midiout.open_port(0)
+		print(f"Dwarf connected to {available_ports[0]}")
+		self.channel = ch
+		self._midi = midiout
+		self.length = 16
+		self.channelTrack = 1
+		self.recordStatus = ""
+	def send_channel_message(self, status, data1=None, data2=None, ch=None):
+		"""Send a MIDI channel mode message."""
+		msg = [(status & 0xF0) | ((ch if ch else self.channel) - 1 & 0xF)]
+		if data1 is not None:
+			msg.append(data1 & 0x7F)
+			if data2 is not None:
+				msg.append(data2 & 0x7F)
+		self._midi.send_message(msg)
+	def send_control_change(self, cc=0, value=0, ch=None):
+		"""Send a 'Control Change' message."""
+		self.send_channel_message(CONTROL_CHANGE, cc, value, ch=ch)
+	def send_record(self):
+		print(f"{self.recordStatus} Recording: {str(self.length)} bars at channel {self.channelTrack}")
+		self.send_control_change(1, 0)
+		if (self.recordStatus == "Start"):
+			self.recordStatus = "Stop"
+		else:
+			self.recordStatus = "Start"
+	def record(self, length=16, track=None):
+		self.length=length
+		if track is not None:
+			self.track(track)
+		self.recordStatus = "Start"
+		Clock.schedule(self.send_record, Clock.mod(self.length))
+		Clock.schedule(self.send_record, Clock.mod(self.length) + self.length)
+	def send_start(self):
+		self.send_control_change(2,0)
+	def undo(self):
+		self.send_control_change(4,0)
+	def start(self):
+		Clock.schedule(self.send_start, Clock.mod(self.length))
+	def stop(self, duration=0, track=None):
+		if (duration != 0):
+			Clock.schedule(self.send_start, Clock.mod(duration))
+			print(f"Stop {self.channelTrack} channel")
+		else:
+			if track is not None:
+				self.track(track)
+				print(f"Stop {track} channel")
+				self.send_start()
+	def clear(self):
+		self.send_control_change(3,0)
+	def track(self, channelTrack=1):
+		self.channelTrack = channelTrack
+		if(channelTrack>1):
+			channelTrack=127
+		self.send_control_change(5,channelTrack)
 
 dwarf = MidiDwarf()
 
@@ -817,9 +904,9 @@ except Exception as e:
 
 
 class voice_count():
-	''' random count recursively every 8 bars.
+	""" random count recursively every 8 bars.
 		voicecount.start(lang="fr", voice=2, dur=8, amp=1.0, pitch=0.0)
-		voicecount.help() to show all available voices'''
+		voicecount.help() to show all available voices """
 	def __init__(self):
 		self.loop = True
 	def stop(self):

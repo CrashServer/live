@@ -11,6 +11,8 @@ class ServerGui(Tk):
 		self.height=1000
 		self.geometry(f"{self.width}x{self.height}")
 		self.title("CrashServer Panel")
+		img = PhotoImage(file="crashpanel.png")
+		self.iconphoto(True, img)
 		
 		self.labelcs = Label(self, text="// CrashPanel //")
 		self.labelcs.pack(fill="both", expand="yes")

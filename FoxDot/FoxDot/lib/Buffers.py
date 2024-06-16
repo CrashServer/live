@@ -25,7 +25,7 @@ from .Code import WarningMsg
 from .Logging import Timing
 from .SCLang import SampleSynthDef
 from .ServerManager import Server
-from .Settings import FOXDOT_SND, FOXDOT_LOOP
+from .Settings import FOXDOT_SND, FOXDOT_LOOP, SAMPLES_BANK
 
 import json
 
@@ -96,6 +96,8 @@ DESCRIPTIONS = { 'a' : "Gameboy hihat",      'A' : "Gameboy kick drum",
                  '3' : 'Vocals (Three)',
                  '4' : 'Vocals (Four)'}
 
+bank = SAMPLES_BANK
+
 # Function-like class for searching directory for sample based on symbol
 
 class _symbolToDir:
@@ -115,17 +117,18 @@ class _symbolToDir:
             raise OSError("{!r} is not a valid directory".format(root))
         return
 
-    def __call__(self, symbol):
+    def __call__(self, symbol, bank):
         """ Return the sample search directory for a symbol """
         if symbol.isalpha():
             return join(
                 self.root,
+                str(bank),
                 symbol.lower(),
                 'upper' if symbol.isupper() else 'lower'
             )
         elif symbol in nonalpha:
             longname = nonalpha[symbol]
-            return join(self.root, '_', longname)
+            return join(self.root, str(bank), '_', longname)
         else:
             return None
 
@@ -164,10 +167,10 @@ class BufferManager(object):
         self._nextbuf = 1
         self._buffers = [None for _ in range(self._max_buffers)]
         self._fn_to_buf = {}
-        self._paths = [FOXDOT_LOOP] + list(paths)
+        self._paths = [join(FOXDOT_SND, str(bank), FOXDOT_LOOP)] + list(paths)
         self._ext = ['wav', 'wave', 'aif', 'aiff', 'flac']
 
-        self.loops = [fn.rsplit(".",1)[0] for fn in os.listdir(FOXDOT_LOOP)]
+        self.loops = [fn.rsplit(".",1)[0] for fn in os.listdir(join(FOXDOT_SND, str(bank), FOXDOT_LOOP))]
 
         # Crashmod
         self.onsetDict = {}
@@ -246,11 +249,11 @@ class BufferManager(object):
         self._max_buffers = max_buffers
         self._nextbuf = self._nextbuf % max_buffers
 
-    def getBufferFromSymbol(self, symbol, index=0):
+    def getBufferFromSymbol(self, symbol, bank, index=0):
         """ Get buffer information from a symbol """
         if symbol.isspace():
             return nil
-        dirname = symbolToDir(symbol)
+        dirname = symbolToDir(symbol, bank)
         if dirname is None:
             return nil
         samplepath = self._findSample(dirname, index)
@@ -639,20 +642,13 @@ class OnsetSynthDef(SampleSynthDef):
         self.osc = self.osc * self.amp
         self.add()
     def __call__(self, filename, pos=0, sample=0, onset=0, **kwargs):
-        #kwargs["buf"] = Samples.loadBuffer(filename, sample)
-        # pth = Samples._findSample(filename,sample).split("/")[-1:][0]
-        # onsetList = Samples.onsetDict[pth]
-        # pos = onsetList[0][int(onset%len(onsetList[0]))]
-        # onsetCut = onsetList[1][int(onset%len(onsetList[1]))]
         kwargs["onset"] = onset
         kwargs["filename"] = filename
         kwargs["sample"] = sample 
-        #kwargs["onsetCut"] = onsetCut
         proxy = SampleSynthDef.__call__(self, pos, **kwargs)
         proxy.kwargs["filename"] = filename
         proxy.kwargs["pos"] = pos
         proxy.kwargs["onset"] = onset
-        #proxy.kwargs["onsetCut"] = onsetCut
         self.filename = filename
         return proxy
 

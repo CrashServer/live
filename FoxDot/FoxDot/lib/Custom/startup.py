@@ -9,7 +9,7 @@ if __name__ != "__main__":
 		import time
 		from random import randint, sample
 		
-		from .Settings import FOXDOT_ROOT
+		from .Settings import FOXDOT_ROOT, SAMPLES_BANK
 		from .Buffers import alpha, nonalpha
 
 		from pathlib import Path
@@ -67,9 +67,12 @@ if __name__ != "__main__":
 	try:
 		FOXDOT_SND   = crash_path
 		FOXDOT_LOOP  = os.path.join(crash_path, "_loop_")
+		BANK_LEN = [item for item in os.listdir(FOXDOT_SND) if not (item.startswith("."))]
 		FoxDotCode.use_sample_directory(FOXDOT_SND)
-		Samples.addPath(FOXDOT_LOOP)
-		loops = sorted([fn.rsplit(".",1)[0] for fn in os.listdir(FOXDOT_LOOP)])
+		loops = []
+		for bankNbr in BANK_LEN:
+			Samples.addPath(os.path.join(FOXDOT_SND, str(bankNbr), "_loop_"))
+			loops += sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
 		loops.remove('')
 		loops.remove('__init__')
 	except:
@@ -118,7 +121,7 @@ if __name__ != "__main__":
 
 	def clear_voice_dir():
 		''' delete all voice sample in _loop_/voicetxt dir '''
-		voicetxt_path = os.path.join(crash_path, "_loop_", "voicetxt")
+		voicetxt_path = os.path.join(crash_path, str(SAMPLES_BANK), "_loop_", "voicetxt")
 		voices_files = os.listdir(voicetxt_path)
 		for f in voices_files:
 			os.remove(os.path.join(voicetxt_path, f))
@@ -220,18 +223,6 @@ if __name__ != "__main__":
 				self.dur = 1/2
 				self.amplify = 1
 
-		# @player_method
-		# def brk(self, multi=1):
-		# 	""" turn loop into break beat (only with splitter player """
-		# 	if self.synthdef == "splitter":
-		# 		self.dur = P*[1/4,1/2,1]*multi
-		# 		self.pos = PWhite(0,1).rnd(1/8)
-		# 		self.rate = PwRand([1,0.5,-1,-0.5],[60,10,10,10])
-		# 		self.often("stutter", PRand(1,8))
-		# 		self.beat_stretch=0
-		# 	else:
-		# 		print("only with splitter")
-
 		@player_method
 		def brk(self, multi=1, code=""):
 			""" turn loop into break beat (only with splitter player """
@@ -281,7 +272,7 @@ if __name__ != "__main__":
 	try: 
 		@PatternMethod
 		def renv(self, nbr=1):
-			""" Chord Inversion """
+			""" Pattern Chord Inversion """
 			sorted_chord = sorted(self)
 			if nbr > 0:
 				for i in range(nbr):
@@ -298,6 +289,7 @@ if __name__ != "__main__":
 	try:
 		@loop_pattern_func
 		def PBin(number=0):
+			""" Returns a random binary pattern or convert number to bin pattern """
 			if number==0:
 				number = PRand(10,1000000)[0]
 			return [int(i) for i in str(bin(number)[2:])]
@@ -310,12 +302,6 @@ if __name__ != "__main__":
 				return Pattern([i * j for j in range(0,int(n))])
 			else:
 				return Pattern([i * j for j in range(0,int(n))]).reverse()
-
-		# def duree():
-		# 	''' print the duration of the show from init() to now '''
-		# 	global time_init
-		# 	duree = time.time()- time_init
-		# 	print("Durée de la tentative de Crash :", time.strftime('%H:%M:%S', time.gmtime(duree)))
 
 		@loop_pattern_func
 		def PTime():
@@ -337,6 +323,13 @@ if __name__ != "__main__":
 					a = 0.60, b = 0.68
 					a = 0.62, b = 0.67
 				'''
+			return Pattern([(a*i + b )%1 for i in range(size)]).lmap(mapl, maph)
+
+		@loop_pattern_func
+		def PFr(mapl=0, maph=1, seedFr=1664, size=16):
+			''' Simpliest version of PFrac '''
+			a=PWhite(0,0.99, seed=seedFr)[0]
+			b=PWhite(0,0.99, seed=seedFr)[0]
 			return Pattern([(a*i + b )%1 for i in range(size)]).lmap(mapl, maph)
 
 		def lininf(start=0, finish=1, time=32):
@@ -608,7 +601,7 @@ if __name__ != "__main__":
 					return 0			
 
 		class PBool(GeneratorPattern):
-			''' Binery operation between 2 Pattern, you can select the operator:
+			''' Binary operation between 2 Pattern, you can select the operator:
 				0 -> and
 				1 -> or
 				2 -> xor   '''
@@ -718,9 +711,11 @@ if __name__ != "__main__":
 		# 		return PChain2(scale_melody_dict)
 
 		def melody():
+			''' Generate a melody based on Markov chain dict of melody '''
 			return PChain2(melody_dict)
 
 		def chaos(chaosInt=1):
+			''' Generate some random players '''
 			chaosText = ""
 			for i in range(chaosInt):
 				chaosText += add_player(True)
@@ -783,6 +778,7 @@ try:
 		from .Crashserver.drumRockPattern import * ### Crash Drum rock pattern
 		@player_method
 		def drummer(self, durloop=16, durPlyr=1/2):
+			''' Transform the player into an automatic drummer '''
 			if durloop!=0:
 				drumCat = PRand(1, len(drumRockPattern))[0]
 				drumPat = PRand(1,len(drumRockPattern[drumCat]))[0]

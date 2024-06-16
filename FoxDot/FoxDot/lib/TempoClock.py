@@ -66,6 +66,7 @@ from traceback import format_exc as error_stack
 import sys
 import threading
 import inspect
+import os
 
 class TempoClock(object):
 
@@ -142,7 +143,7 @@ class TempoClock(object):
 
         self.thread = threading.Thread(target=self.run)
 
-    def link(self, carabiner_path="~/program/Carabiner/Carabiner_Linux_x64"):
+    def link(self, carabiner_path= os.getcwd() + "/FoxDot/lib/Extensions/Carabiner_Linux_x64"):
         """ Establish a link with Carabiner """
         if self.alink is None:
             try:

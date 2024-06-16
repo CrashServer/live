@@ -5,7 +5,7 @@
 For a better foxdot modules management, use a python virtual environment.  
 Here are the steps to create and activate it.  
 
-### Create, activate and install modules
+### Create, activate and install packages
 
 ```bash
 cd /path/to/FoxDot
@@ -21,7 +21,7 @@ To leave the virtual environment, just type `deactivate` in the terminal.
 pip freeze
 ```
 
-### Update `requirements.txt` file if new modules
+### Update `requirements.txt` file if new installed modules
 ```bash
 pip freeze > requirements.txt
 ```

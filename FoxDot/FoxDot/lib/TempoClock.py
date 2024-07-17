@@ -57,7 +57,7 @@ from .TimeVar import TimeVar
 from .Midi import MidiIn, MIDIDeviceNotFound
 from .Utils import modi
 from .ServerManager import TempoClient, ServerManager, RequestTimeout
-from .Settings import CPU_USAGE, CLOCK_LATENCY
+from .Settings import CPU_USAGE, CLOCK_LATENCY, FOXDOT_ROOT
 
 import time
 from fractions import Fraction
@@ -143,7 +143,7 @@ class TempoClock(object):
 
         self.thread = threading.Thread(target=self.run)
 
-    def link(self, carabiner_path= os.getcwd() + "/FoxDot/lib/Extensions/Carabiner_Linux_x64"):
+    def link(self, carabiner_path= FOXDOT_ROOT + "/lib/Extensions/Carabiner_Linux_x64"):
         """ Establish a link with Carabiner """
         if self.alink is None:
             try:

@@ -1,7 +1,7 @@
 ### 10 AOUT 2024
 
 
-## O1 #organ
+## O0 #organ
 print(à)
 
 
@@ -65,3 +65,10 @@ r1 >> varsaw(mverb=0, dur=PDur(var([4,[5,3,8]],[6,2]),8), oct=3)
 r2 >> donk(mverb=0, dur=PDur(var([4,[5,3,8]],[6,2]),8), oct=4)
 
 r4 >> dbass(dur=var([1/2, 1/4, 2]), amp=2, shape=[0.2, 0.5])
+
+## O1 
+r1 >> dbass(dafilter=PWhite(0.1, 0.1)[:32], lpf=var([400, linvar([400, 3200], 64)], [16, 8]), lpr=0.1, dur=var([1/2, 1/4], [6, 2]), oct=var([ 6, 7, (3, 4, 5), (3, 4, 6), (4, 5, 6, 7), 3]), mpf=linvar([200, 3200],PRand(8)))
+
+r2 >> donk()
+r3 >> donk()
+

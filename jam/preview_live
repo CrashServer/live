@@ -72,3 +72,8 @@ r1 >> dbass(dafilter=PWhite(0.1, 0.1)[:32], lpf=var([400, linvar([400, 3200], 64
 r2 >> donk()
 r3 >> donk()
 
+## X8
+a1 >> play("B", dur=[1/2, 2, 1/2], rate=(PWhite(-1, 1),PWhite(-1, 1)) * 2, sample=PRand(8)[:4], leg=2, shape=PWhite(0, 1))
+a2 >> play("{xxxxc}", dur=[1/2, 1/4, 1/2], rate=(PWhite(-1, 1),PWhite(-1, 1)) * 4, sample=PRand(8)[:4], leg=1)
+
+

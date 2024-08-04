@@ -1,0 +1,5 @@
+h1 >> ebass(linvar([2, [5, 6]], [4, 0]), shape=linvar([0.01, 0.1], [4, 0]), room2=1, damp2=0.5, scale=Scale.chromatic,dur=1/2, sus=var([1, 2], [28, 4]), fmod=var([8, 32], [60, 4]), oct=5).unison(0)
+h2 >> ebass(linvar([2, [5, 6]], [4, 0]), shape=linvar([0.01, 0.3], [14, 2]),scale=Scale.chromatic,dur=1/4, sus=var([1/2, 1/4], [28, 4]), fmod=var([8, 64], [60, 4]), oct=5).unison(0)
+h3 >> ebass(linvar([2, [5, 6]], [4, 0]), shape=linvar([0.1, 1], [24, 8]),scale=Scale.chromatic,dur=1/4, sus=var([1/2, 1/4], [28, 4]), fmod=var([8, 64], [60, 4]), oct=6).unison(2)
+b3 >> faim( var([ var([ P*[-5, -7, 1, [8, -5, 1, 1, 1], -5], -5], [1, 2]), 12], [12, 4]), oct=var( [ PStep(4, [5, 5, 6], [6, 7]), 5], [8, 4, 2]), dist2=b3.degree/128, hpf=linvar([50, (1000, 50)], [4, 2, 1, 2, 4]), echo=var([0, 0.25, 0.5, 1], [15, 1]), amp=linvar([0.1, 0.5], 16), hpr=linvar([0.1, 0.5], 32), leg=PWhite(0.1, 0.2), beef=var([4, 1], 8), fdist=linvar([1, 0.5, 1], [30, 2]), fdistfreq=linvar([12200, 3200], [30, 2]), slide=[b3.degree/120], dur=P[1/2, 1/4,1/4, [1/4, 1/4,  1/2], [1/2, 1/4, 1/4 ]].stutter(2) | 0.5, sus=[1/2, 1/4, 1, 2]).gtr(1).unison(2)
+# more dist on b3

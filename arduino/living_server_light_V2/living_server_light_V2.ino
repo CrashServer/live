@@ -8,7 +8,7 @@ FASTLED_USING_NAMESPACE
 #define NUM_LEDS 300
 #define PLY_LENGTH 50  // define the length of the players position
 #define BUTTON 2
-#define LEDOUT 13
+// #define LEDOUT 13
 
 //CRGB leds[NUM_LEDS];
 CRGBArray<NUM_LEDS> leds;
@@ -39,11 +39,11 @@ void setup() {
   delay(3000);  // 3 second delay for recovery
   Serial.begin(115200);
   pinMode(BUTTON, INPUT);
-  pinMode(LEDOUT, OUTPUT);
+  // pinMode(LEDOUT, OUTPUT);
   
   FastLED.setBrightness(96);
   FastLED.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
-  for (int i = 0; i < nbrPulseMax; i++) {
+  for (uint8_t i = 0; i < nbrPulseMax; i++) {
     pos[i] = 0;
     activePulse[i] = false;
     ply[i] = 4;
@@ -52,20 +52,21 @@ void setup() {
 }
 
 void loop() {
+  // READ the button state and send 's' 10 times if activate and 'c' 10 times to clear
   buttonState = digitalRead(BUTTON);
   if (buttonState != prevButtonState){
-    switchTimer =0;
+    switchTimer = 0;
     prevButtonState = buttonState;
   }
   if(buttonState == 1){
-    digitalWrite(LEDOUT, HIGH);
+    // digitalWrite(LEDOUT, HIGH);
     if (switchTimer < 10) {
       Serial.write('s');
       switchTimer ++;
     }
   }
   else {
-    digitalWrite(LEDOUT, LOW);
+    // digitalWrite(LEDOUT, LOW);
     if (switchTimer < 10) {
       Serial.write('c');
       switchTimer++;  
@@ -77,14 +78,16 @@ void loop() {
   FastLED.delay(1000 / 120);
   fadeToBlackBy(leds, NUM_LEDS, 20);
 
+  // sever pulsation
   metaBrain = metaColor[metaIndex];
   metaColor[metaIndex].v = (beatsin16(metaSpeed[metaIndex], 0, 255));
-  
+
+  // check if a 'v', 'z' or 's' is send and trigger the light chase accordingly
   if (Serial.available() > 0) {
     val = Serial.read();
     //// ZBDM /////
     if (val == 'v') {  ///
-      for (int i = 0; i < nbrPulseMax; i++) {
+      for (uint8_t i = 0; i < nbrPulseMax; i++) {
         if (!activePulse[i]) {
           activePulse[i] = true;
           pos[i] = 0;
@@ -96,7 +99,7 @@ void loop() {
     }
     //// SVDK ////
     else if (val == 'z') {
-      for (int i = 0; i < nbrPulseMax; i++) {
+      for (uint8_t i = 0; i < nbrPulseMax; i++) {
         if (!activePulse[i]) {
           activePulse[i] = true;
           pos[i] = NUM_LEDS;
@@ -108,7 +111,7 @@ void loop() {
     }
     //// SERVER ////
     else if (val == 's') {
-      for (int i = 0; i < nbrPulseMax+1; i++) {
+      for (uint8_t i = 0; i < nbrPulseMax+1; i++) {
         if (!activePulse[i]) {
           activePulse[i] = true;
           activePulse[i + 1] = true;
@@ -123,7 +126,7 @@ void loop() {
         }
       }
     }
-    // ////  SERVER STATE ////
+    // ////  SERVER STATE, pulsation strength ////
     else if (val == 'a') {  // 0 -> 20%
       metaIndex = 0;
     }
@@ -145,9 +148,8 @@ void loop() {
     }
 
   if (val != -1) {
-    //if (val == 'g'|| val == 'o' || val == 'r'){
-    for (int i = 0; i < nbrPulseMax+1; i++) {
-      if (activePulse[i]) {
+    for (uint8_t i = 0; i < nbrPulseMax+1; i++) {
+      if (activePulse[i] == true    ) {
         leds[pos[i]] = color[i];
         if (ply[i] == 1) {
           pos[i]++;
@@ -173,13 +175,5 @@ void loop() {
         }
       }
     }
-    //}
   }
-
-
-  //  metaBrain = metaColor;
-  //  metaColor.v = (beatsin16(10,0,255));
-  /*
-  for (int i=PLY_LENGTH+1; i<NUM_LEDS-PLY_LENGTH+1; i++){
-    leds[i] = CRGB(0xFFD076);*/
 }

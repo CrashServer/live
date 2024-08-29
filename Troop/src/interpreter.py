@@ -80,6 +80,7 @@ class DummyInterpreter:
     name = None
     def __init__(self, *args, **kwargs):
         self.re={}
+        self.log_path = ""
 
         self.syntax_lang = langtypes[kwargs.get("syntax", -1)]
 
@@ -94,6 +95,7 @@ class DummyInterpreter:
         else:
 
             self.syntax_lang = None
+
 
 
     def __repr__(self):
@@ -173,6 +175,7 @@ class DummyInterpreter:
                             else:
                                 byte_message = ""
                             crashTroop_socket.send(byte_message)
+                    self.writeHistoryFile(name, string[i])
             except Exception as err:
                 print("Send udp error : ", err)
             #
@@ -200,6 +203,30 @@ class DummyInterpreter:
     def format(string):
         """ Method to be overloaded in sub-classes for formatting strings to be evaluated """
         return str(string) + "\n"
+    
+    def createHistoryFile(self):
+        """ Create a history file for the archiving of code """
+        # Create a history file if it doesn't exist
+        log_folder = os.path.join(ROOT_DIR, "logs")
+        if not os.path.exists(log_folder):
+            os.makedirs(log_folder)
+        
+        log_filename = time.strftime("Session-%d%b%Y_%H%M%S.txt", time.localtime())
+        self.log_path = os.path.join(log_folder, log_filename)
+
+        if not os.path.exists(self.log_path):
+            with open(self.log_path, "w") as f:
+                f.write("")
+        return
+
+    def writeHistoryFile(self, player_name, string):
+        """ Write to the history file """
+        if self.log_path is None:
+            raise ValueError("History file has not been created. Call createHistoryFile() first.")
+        with open(self.log_path, "a") as f:
+            f.write(f"{player_name}: {string}\n")
+        return
+
 
 class Interpreter(DummyInterpreter):
     id       = 99
@@ -386,6 +413,8 @@ class FoxDotInterpreter(BuiltinInterpreter):
     def setup(cls):
         cls.keywords = ["Clock", "Scale", "Root", "var", "linvar", '>>', 'print']
         cls.keyword_regex = compile_regex(cls.keywords)
+        cls.log_path = None  # Initialize log_path in the constructor
+        cls.createHistoryFile(cls)
 
     @staticmethod
     def format(string):
@@ -422,6 +451,7 @@ class FoxDotInterpreter(BuiltinInterpreter):
     def stop_sound(cls):
         return "Clock.clear()"
 
+    
 class TidalInterpreter(BuiltinInterpreter):
     path = 'ghci'
     filetype = ".tidal"
@@ -472,7 +502,7 @@ class TidalInterpreter(BuiltinInterpreter):
 
     @classmethod
     def setup(cls):
-        cls.keywords  = ["d{}".format(n) for n in range(1,17)] + ["\$", "#", "hush", "solo", "silence"]
+        cls.keywords  = ["d{}".format(n) for n in range(1,17)] + ["\\$", "#", "hush", "solo", "silence"]
         cls.keyword_regex = compile_regex(cls.keywords)
         return
 

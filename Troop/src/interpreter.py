@@ -152,6 +152,10 @@ class DummyInterpreter:
         string = [line.replace("\n", "") for line in string.split("\n") if len(line.strip()) > 0]
         if len(string) > 0 and name is not None:
             name = str(name)
+            if (name == "Zbdm"):
+                colour = "pale violet red"
+            elif (name == "Svdk"):
+                colour = "LightBlue1"
             print(colour_format(name, colour) + _ + string[0])
 
             # crash mod

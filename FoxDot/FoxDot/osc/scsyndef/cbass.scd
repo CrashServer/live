@@ -9,6 +9,7 @@ SynthDef.new(\cBass,
     osc2 = Pulse.ar(freq * [0.5 - detune, 0.5 + detune], 0.13);
 
     subOsc = SinOsc.ar(freq * 0.25);
+		  subOsc = RHPF.ar(subOsc*0.5, 40, 0.48);
 
     mod = SinOsc.kr(vib).range(0.9, 1.1);
     osc1 = osc1 * mod;
@@ -27,7 +28,7 @@ SynthDef.new(\cBass,
     filt = RLPF.ar(dist, dynamicCutoff, rq);
     filt = Compander.ar(filt, filt, thresh: 0.2, slopeAbove: 0.5, slopeBelow: 1, clampTime: 0.01, relaxTime: 0.1);
 
-    filt = Mix(filt) * env * amp;
+    filt = Mix(filt) * env * amp * 0.5;
     filt = Pan2.ar(filt, pan);
 
     ReplaceOut.ar(bus, filt);

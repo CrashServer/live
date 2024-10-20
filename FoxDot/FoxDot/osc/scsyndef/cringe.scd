@@ -16,6 +16,7 @@ freq = [freq, freq+fmod];
 				LocalOut.ar(snd.sum);
 				snd = Splay.ar(snd);
 				snd = snd * Env.linen(0.001, sus, 0.4, curve: \sin).ar(Done.freeSelf);
+		snd=HPF.ar(snd, 40);
 				snd = snd *0.5;
 //osc = Mix(osc) * 0.5;
 //osc = Pan2.ar(osc, pan);

@@ -144,11 +144,9 @@ def print_synth(synth=""):
 	''' Show the name and the args of a synth '''
 	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
 	if synth == "":
-		dir_list = os.listdir(path)
-		synth_list = []
-		for p in dir_list:
-			files, sep, ext = p.partition('.')
-			synth_list.append(files)
+		# list only the .scd files
+		dir_list = [fn for fn in os.listdir(path) if fn.endswith('.scd')]
+		synth_list = [fn.rsplit('.', 1)[0] for fn in dir_list]
 		print(sorted(synth_list))
 		if crashPanelSending:
 			crashpanel.sendOnce(str(sorted(synth_list)))
@@ -158,12 +156,15 @@ def print_synth(synth=""):
 			synth = synth.readlines()
 		synth_txt = [line.strip() for line in synth if line != "\n"]
 		txt = str(''.join(synth_txt))
-		synthname = re.findall('SynthDef[.new]*[(\\\]*(.+?),', txt)
-		synthargs = re.findall('\{\|(.*)\|', txt)
-		print(str(synthname[0]), " : ", str(synthargs[0]))
-		if crashPanelSending:
-			crashpanel.sendOnce(str(synthname[0]) + " : " + str(synthargs[0]))
-
+		
+		synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+		synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			
+		if (len(synthname) != 0 and len(synthargs) != 0):					
+			print(f"{synthname[0]} : {synthargs[0]}")
+			if crashPanelSending:
+				crashpanel.sendOnce(f"{synthname[0]} : {synthargs[0]}")		
+		
 
 def print_fx(fx=""):
 	''' Show the name and the args of a fx '''
@@ -172,7 +173,7 @@ def print_fx(fx=""):
 		if crashPanelSending:
 			crashpanel.sendOnce(str(sorted(FxList.keys())))
 	else:
-		print(FxList[fx])
+		print(FxList[fx].defaults)
 		if crashPanelSending:
 			crashpanel.sendOnce(str(FxList[fx]))
 

@@ -1,0 +1,36 @@
+Zbdm: ##### attack@gruve.jbv:~$ #####
+Zbdm: s1 >> play(".s", dur=1/2, echo=0.23, high=2)
+Zbdm: d1 >> play("x.", sample=(4,0), amp=1)
+Svdk: ##### attack@gruve.jbv:~$ #####
+Svdk: s1 >> play(".s", dur=1/2, echo=0.23, high=2)
+Svdk: d1 >> play("x.", sample=(4,0), amp=1)
+Svdk: Clock.bpm=92
+Svdk: h3 >> play("-", dur=1/4, high=2).human(60,6,3)
+Svdk: h4 >> play("d", dur=PDur(3,12,0,1/3))
+Svdk: # hmanize hihat
+Svdk: h3 >> play("-", dur=1/4, high=2).human(60,6,3)
+Svdk: h4 >> play("d", dur=PDur(3,12,0,1/3))
+Svdk: n1 >> play("<..o.><..*.>", bank=0, rate=1, delay=PWhite(-0.05,.05)*1, sample=3)
+Svdk: n2 >> play("r", sample=4, dur=PDur(5,16,0,1/2), delay=0, dist2=PFr(0.5,1)).sometimes("stutter")
+Svdk: n1 >> play("<..o.><..*.>", bank=0, rate=1, delay=PWhite(-0.05,.05)*1, sample=3)
+Svdk: n2 >> play("r", sample=4, dur=PDur(5,16,0,1/2), delay=0, dist2=PFr(0.5,1)).sometimes("stutter")
+Svdk: Clock.clear()
+Zbdm: lost()
+Zbdm: attack("trone")
+Zbdm: a1 >> angst((var([0,-2,-4,2],8),2,PRand(8)), dur=PDur(5,8)*8, oct=(3,4,[5,[6,2,6]]), room2=0.7, mix2=0.5, damp2=PWhite(0.1,0.8), revatk=PWhite(-3,3), revsus=a1.revatk + PRand(3), drive=0, rate=PWhite(0,16), high=2, mid=0.5, hpf=PStep(8,1400,40), lpf=PRand(500,12000)).slider()
+Zbdm: a1.revatk=0
+Zbdm: a1 >> angst((var([0,-2,-4,2],8),2,PRand(8)), dur=PDur(5,8)*8, oct=(3,4,[5,[6,2,6]]), room2=0.7, mix2=0.5, damp2=PWhite(0.1,0.8), revatk=PWhite(-3,3), revsus=a1.revatk + PRand(3), drive=0, rate=PWhite(0,16), high=2, mid=0.5, hpf=PStep(8,1400,40), lpf=PRand(500,12000)).slider()
+Zbdm: a1 >> angst((var([0,-2,-4,2],8),2,PRand(8)), dur=PDur(5,8)*8, oct=(3,4,[5,[6,2,6]]), room2=0.7, mix2=0.5, damp2=PWhite(0.1,0.8), revatk=PWhite(-3,3), revsus=a1.revatk + PRand(3), drive=0, rate=PWhite(0,16), high=2, mid=0.5, hpf=PStep(8,1400,40), lpf=PRand(500,12000)).slider(0)
+Zbdm: a1 >> angst((var([0,-2,-4,2],8),2,PRand(8)), dur=PDur(5,8)*8, oct=(3,4,[5,[6,2,6]]), room2=0.7, mix2=0.5, damp2=PWhite(0.1,0.8), revatk=PWhite(-3,3), revsus=a1.revatk + PRand(3), drive=0, rate=PWhite(0,16), high=2, mid=0.5, hpf=PStep(8,1400,40), lpf=PRand(500,12000)).slider(on=0)
+Zbdm: b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=0.8, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+Zbdm: d1 >> play("<(xxx(x.))(...(.x))..><.(---.)><..o.><..(...*).><...{---[--]:=[.x][-o]}><|(XXX(X[.X]))0|.>",sample=((7,6),7,(7,2),7), dur=1/2, amp=0.5, room2=P(0,0.3,0.2,0.3,0.5,0), mix2=0.2, revatk=0.2, revsus=PWhite(0.2,1.7), lpf=0).sometimes("stutter", PRand(4).rnd(2)).rarely("trim",3, cycle=8)
+Zbdm: d1.lpf=180
+Zbdm: ~d1 >> play("<(xxx(x.))(...(.x))..><.(---.)><..o.><..(...*).><...{---[--]:=[.x][-o]}><|(XXX(X[.X]))0|.>",sample=((7,6),7,(7,2),7), dur=1/2, amp=0.5, room2=P(0,0.3,0.2,0.3,0.5,0), mix2=0.2, revatk=0.2, revsus=PWhite(0.2,1.7), lpf=0).sometimes("stutter", PRand(4).rnd(2)).rarely("trim",3, cycle=8)
+Zbdm: b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=0.8, oct=(4,PStep(32,6,5)), rate=4).follow(a1, 8) + var([0,PGauss()],[7,1])
+Svdk: a0 >> ikea(dur=8)à
+Svdk: a0 >> ikea(dur=8)
+Svdk: a0 >> ikea(dur=8).stop()
+Zbdm: Clock.clear()
+Svdk: r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur(5,8)]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+Zbdm: lost()
+Svdk: r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur(5,8)]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4).stop()

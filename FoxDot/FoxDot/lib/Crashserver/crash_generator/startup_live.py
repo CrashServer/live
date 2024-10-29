@@ -229,12 +229,17 @@ def pfonk(fonk=""):
 		"PLog", "PTrir", "PCoin", "PChar", "PMarkov", "PZero", "PBool", "switch", "clone", "drop", "drop_bpm",
 		"melody", "chaos", "PRy", "once", "start", "norm", "clamp", "lmap", "drummer",
 	]
-	if fonk == "":
+	if fonk is None:
+		print("!!! Not found: Try with pfonk(Pattern.theFunktion)")
+	elif fonk == "":
 		print(sorted(fonktion))
+	elif isinstance(fonk, str):
+		# print a list of function containing the string
+		filteredList = [s for s in fonktion if fonk in s]
+		print(filteredList)
 	else:
 		print(str(fonk.__name__) + ": " + str(inspect.signature(fonk)))
 		print(fonk.__doc__)
-
 
 def pshort(short=""):
 	''' helper to shortcut '''

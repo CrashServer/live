@@ -593,12 +593,16 @@ if __name__ != "__main__":
 			def __init__(self, size=2, offset=0):
 				GeneratorPattern.__init__(self)
 				self.size = size
-				self.offset = offset
+				self.offset = Pattern(offset)
 			def func(self, index):
-				if ((index-self.offset)%int(self.size) == 0):
+        		# Get the current offset value based on the index
+				current_offset = self.offset[index]
+
+				# Calculate if we should return 1 or 0
+				if ((index - current_offset) % int(self.size) == 0):
 					return 1
 				else:
-					return 0			
+					return 0
 
 		class PBool(GeneratorPattern):
 			''' Binary operation between 2 Pattern, you can select the operator:
@@ -767,6 +771,13 @@ if __name__ != "__main__":
 		def lmap(self, oMin, oMax):
 			""" Retruns the pattern mapped to min and max values """
 			return ((self - min(self)) / (max(self)-min(self)) * (oMax - oMin) + oMin)
+
+		def reset():
+			''' Emergency reset of everything '''
+			FoxDot.reassign_clock()
+			Clock.clear()
+			Master().reset()
+			FoxDot.reload()
 
 	except Exception as e:
 		print(f"useful function problem : {e}")

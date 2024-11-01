@@ -3,11 +3,15 @@
 ##############################################################################################
 #####              CRASH GENERATOR        #############
 #########################################
+import json
 from random import randint, random, sample, choices, seed
 from time import gmtime, strftime
 import threading
-# import configparser
 import os
+import asyncio
+import websockets
+#from websockets.server import serve
+
 
 class genSeed():
 	''' return a seed for random based on actual time for multiplayer sync '''
@@ -33,7 +37,6 @@ try:
 	from .Crashserver.crash_generator.weapons import *
 	from .Crashserver.crash_generator.composition import *
 	from crash_config import *
-	# from .Settings import FOXDOT_ROOT
 	from .Crashserver.crash_generator.server_conf import *
 except Exception as e:
 	print("Error in generating weapons code", e)
@@ -41,50 +44,142 @@ except Exception as e:
 serverActive = False
 
 if crashOsEnable:
+	class WebSocketHandler:
+		def __init__(self, uri):
+			self.uri = uri
+		async def connect(self):
+			self.connection = await websockets.connect(self.uri)
+		async def send_message(self, message):
+			await self.connection.send(message)
+		async def receive_message(self):
+			msg = await self.connection.recv()
+			print(msg)
+			return msg
+	
 	# Osc/udp sender
 	try:
 		if crashSendMode == "udp":
 			crashFoxDot_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-		if crashSendMode == "osc":
+		elif crashSendMode == "osc":
 			crashFoxDot_socket = OSCClient()
 			crashFoxDot_socket.connect((crashOSIp, crashOSPort))
 
-		#osc receive state
-		class OSCReceiver():
-			''' OSC Receiver for evaluate command from CrashOS'''
-			def __init__(self, crashOSIp):
-				self.oscserver = ThreadingOSCServer(("0.0.0.0",2887))
-				self.oscserver.addDefaultHandlers()
-				self.oscserver.addMsgHandler("/cmd/serverState", self.receiveState)
-				self.oscserver.addMsgHandler("/cmd/Video", self.receiveVideo)
-				self.videoGrp = 99
-				self.videoIndex = 99
-				self.videoTotal = 99
-				self.videoIntegrity = 99
-				self.thread = Thread(target = self.oscserver.serve_forever)
-				self.thread.daemon = True
-				self.thread.start()
+			#osc receive state
+			class OSCReceiver():
+				''' OSC Receiver for evaluate command from CrashOS'''
+				def __init__(self, crashOSIp):
+					self.oscserver = ThreadingOSCServer(("0.0.0.0",2887))
+					self.oscserver.addDefaultHandlers()
+					self.oscserver.addMsgHandler("/cmd/serverState", self.receiveState)
+					self.oscserver.addMsgHandler("/cmd/Video", self.receiveVideo)
+					self.videoGrp = 99
+					self.videoIndex = 99
+					self.videoTotal = 99
+					self.videoIntegrity = 99
+					self.thread = Thread(target = self.oscserver.serve_forever)
+					self.thread.daemon = True
+					self.thread.start()
 
-			def receiveState(self, address, tags, contents, source):
-				state = int(contents[0])
-				if state == 0:
-					soff()
-				elif state == 1:
-					activateServer()
-					#son(1,3,9)
-				else:
-					print("error receiving osc from CrashOs")
+				def receiveState(self, address, tags, contents, source):
+					state = int(contents[0])
+					if state == 0:
+						soff()
+					elif state == 1:
+						activateServer()
+						#son(1,3,9)
+					else:
+						print("error receiving osc from CrashOs")
 
-			def receiveVideo(self, address, tags, contents, source):
-				self.videoGrp = int(contents[0])
-				self.videoIndex = int(contents[1]) + 1
-				self.videoTotal = int(contents[2])
-				self.videoIntegrity = int(contents[3])
+				def receiveVideo(self, address, tags, contents, source):
+					self.videoGrp = int(contents[0])
+					self.videoIndex = int(contents[1]) + 1
+					self.videoTotal = int(contents[2])
+					self.videoIntegrity = int(contents[3])
 
-		oscReceiver = OSCReceiver(crashOSIp)
+			oscReceiver = OSCReceiver(crashOSIp)
+
+		elif crashSendMode == "websocket":
+			# start the websocket server
+			websocket_connection = None
+
+			# WebSocket server logic
+			async def sendWsServer(websocket):
+				global websocket_connection
+				websocket_connection = websocket
+				try:
+					async for message in websocket:
+						print(f"<<<Receive: {message}")
+						await websocket.send(message)
+				except websockets.ConnectionClosed:
+					print("Ws connection closed")
+
+			# websocket server
+			async def mainWebsocket():
+				global websocket_connection
+				async with websockets.serve(sendWsServer, "localhost", 20000):
+					await asyncio.Future() # run forever
+
+			# for using threading
+			def start_websocket_server():
+				print("Start WebSocket server at ws://localhost:20000")
+				asyncio.run(mainWebsocket())
+			
+			# threading
+			websocket_thread = threading.Thread(target=start_websocket_server)
+			websocket_thread.start()
+
+			# ws_handler = WebSocketHandler(f'ws://localhost:20000')
+			## TODO finish him !!!! 
+
 
 	except Exception as err:
-		print(f"config UDP or OSC problem : {err}")
+		print(f"config UDP,OSC, Websocket problem : {err}")
+
+def sendOut(msg=""):
+	''' send all generated text to output : console, osc '''
+	try:
+		if crashOsEnable:
+			if crashSendMode == "udp":
+				sendUdp(msg)
+			elif crashSendMode == "osc":
+				sendOsc(msg)
+			elif crashSendMode == "websocket":
+				asyncio.run(sendWebsocket(msg))
+		if printOut:
+			if startupLive:
+				msg = 'SERVER: ' + msg
+			print(msg)
+	except Exception as err:
+		print("sendOut problem : ", err)
+
+def sendUdp(msg=""):
+	''' Send osc text to osc ip '''
+	try:
+		byte_message = bytes("@" + msg, "utf-8")
+		crashFoxDot_socket.sendto(byte_message, (crashOSIp, crashOSPort))
+	except:
+		pass
+
+def sendOsc(msg=""):
+	''' Send osc text to osc ip '''
+	try:
+		byte_message = OSCMessage("/serverCode", msg)
+		crashFoxDot_socket.send(byte_message)
+	except:
+		pass
+
+async def sendWebsocket(msg=""):
+	''' Send websocket msg to websocket server '''
+	global websocket_connection
+	if websocket_connection is not None:
+		try:
+			# send message as json format
+			msg = json.dumps({"serverCode": msg})
+			await websocket_connection.send(msg)
+		except Exception as e:
+			print(f"Error sending websocket message: {e}")
+	else:
+		print("No websocket connection")
 
 class runServer():
 	''' Run the server with runserver.start() and generate randomly players'''
@@ -393,36 +488,7 @@ def add_event():
 	except Exception as err:
 		print("add_event problem : ", err)
 
-def sendOut(msg=""):
-	''' send all generated text to output : console, osc '''
-	try:
-		if crashOsEnable:
-			if crashSendMode == "udp":
-				sendUdp(msg)
-			if crashSendMode == "osc":
-				sendOsc(msg)
-		if printOut:
-			if startupLive:
-				msg = 'SERVER: ' + msg
-			print(msg)
-	except Exception as err:
-		print("sendOut problem : ", err)
 
-def sendUdp(msg=""):
-	''' Send osc text to osc ip '''
-	try:
-		byte_message = bytes("@" + msg, "utf-8")
-		crashFoxDot_socket.sendto(byte_message, (crashOSIp, crashOSPort))
-	except:
-		pass
-
-def sendOsc(msg=""):
-	''' Send osc text to osc ip '''
-	try:
-		byte_message = OSCMessage("/serverCode", msg)
-		crashFoxDot_socket.send(byte_message)
-	except:
-		pass
 
 def player_type(player):
 	''' return player type '''

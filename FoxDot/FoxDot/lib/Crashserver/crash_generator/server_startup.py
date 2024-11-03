@@ -5,7 +5,9 @@
 #########################################
 import json
 from random import randint, random, sample, choices, seed
-from time import gmtime, strftime
+import signal
+import sys
+from time import gmtime, strftime, sleep
 import threading
 import os
 import asyncio
@@ -97,47 +99,88 @@ if crashOsEnable:
             oscReceiver = OSCReceiver(crashOSIp)
 
         elif crashSendMode == "websocket":
+            # TODO enregistrer les différentes connexion websocket (CPU, serverCode) et maintenir la connexion active et verifier la connexion (reconnecter le cas échéant)
+
+            class OSCReceiver():
+                ''' OSC Receiver for convert OSC message to websocket message (like cpu from SC)'''
+
+                def __init__(self, crashOSIp):
+                    self.oscserver = ThreadingOSCServer((crashOSIp, 2887))
+                    self.oscserver.addDefaultHandlers()
+                    self.oscserver.addMsgHandler(
+                        "/CPU", self.receiveCpu)
+                    self.thread = Thread(target=self.oscserver.serve_forever)
+                    self.thread.daemon = True
+                    self.thread.start()
+
+                def receiveCpu(self, address, tags, contents, source):
+                    cpu = round(float(contents[0]), 2)
+                    if cpu:
+                        asyncio.run(sendWebsocket(
+                            json.dumps({"type": "cpu", "cpu": cpu})))
+
             # start the websocket server
             wsClients = set()
+            websocket_started_event = threading.Event()
 
-            # WebSocket server logic
             async def sendWsServer(websocket):
-                global wsClients
                 wsClients.add(websocket)
-
                 try:
                     async for message in websocket:
-                        print(f"<<<Receive: {message}")
-
-                        try:
-                            data = json.loads(message)
-                            await asyncio.gather(*[client.send(message) for client in wsClients])
-                            if "serverState" in data:
-                                if data["serverState"] == 1:
-                                    print("Activate server")
-                                    activateServer()
-                                elif data["serverState"] == 0:
-                                    print("Deactivate server")
-                                    soff()
-                        except json.JSONDecodeError as e:
-                            print(f"Erreur de décodage JSON: {e}")
+                        data = json.loads(message)
+                        await asyncio.gather(*[client.send(message) for client in wsClients])
+                        if "serverState" in data:
+                            if data["serverState"] == 1:
+                                print("Activate server")
+                                activateServer()
+                            elif data["serverState"] == 0:
+                                print("Deactivate server")
+                                soff()
                 except websockets.ConnectionClosed:
-                    print("Ws connection closed")
+                    pass
+                finally:
+                    wsClients.remove(websocket)
 
             # websocket server
             async def mainWebsocket():
-                # global websocket_connection
-                async with websockets.serve(sendWsServer, "localhost", 20000):
+                async with websockets.serve(sendWsServer, crashOSIp, crashOSPort):
+                    websocket_started_event.set()
                     await asyncio.Future()  # run forever
 
             # for using threading
             def start_websocket_server():
-                print("Start WebSocket server at ws://localhost:20000")
+                print(
+                    f"Start WebSocket server at ws://{crashOSIp}:{crashOSPort}")
                 asyncio.run(mainWebsocket())
 
-            # threading
-            websocket_thread = threading.Thread(target=start_websocket_server)
+            websocket_thread = threading.Thread(
+                target=start_websocket_server, daemon=True)
             websocket_thread.start()
+
+            async def sendBpm(bpm):
+                ''' Send bpm to websocket server '''
+                try:
+                    uri = f"ws://{crashOSIp}:{crashOSPort}"
+                    async with websockets.connect(uri) as websocket:
+                        await websocket.send(json.dumps({"type": "bpm", "bpm": bpm}))
+                except Exception as e:
+                    print(f"Error sending bpm to websocket server: {e}")
+
+            def send_bpm_periodically():
+                ''' Send bpm to websocket server every second '''
+                while True:
+                    bpm = int(Clock.get_bpm())
+                    asyncio.run(sendBpm(bpm))
+                    sleep(60/bpm)
+                    # Clock.future(1, lambda: send_bpm_periodically())
+
+            # threading
+            websocket_started_event.wait()
+            sendBpm_thread = threading.Thread(
+                target=send_bpm_periodically, daemon=True)
+            sendBpm_thread.start()
+
+            oscReceiver = OSCReceiver(crashOSIp)
 
     except Exception as err:
         print(f"config UDP,OSC, Websocket problem : {err}")
@@ -152,7 +195,8 @@ def sendOut(msg=""):
             elif crashSendMode == "osc":
                 sendOsc(msg)
             elif crashSendMode == "websocket":
-                asyncio.run(sendWebsocket(msg))
+                asyncio.run(sendWebsocket(json.dumps(
+                    {"type": "serverCode", "code": msg})))
         if printOut:
             if startupLive:
                 msg = 'SERVER: ' + msg
@@ -181,16 +225,13 @@ def sendOsc(msg=""):
 
 async def sendWebsocket(msg=""):
     ''' Send websocket msg to websocket server '''
-    global wsClients
-    if wsClients:
-        try:
-            # send message as json format
-            msg = json.dumps({"serverCode": msg})
-            await asyncio.gather(*[client.send(msg) for client in wsClients])
-        except Exception as e:
-            print(f"Error sending websocket message: {e}")
-    else:
-        print("No websocket connection")
+    try:
+        # send message as json format
+        uri = f"ws://{crashOSIp}:{crashOSPort}"
+        async with websockets.connect(uri) as websocket:
+            await websocket.send(msg)
+    except Exception as e:
+        print(f"Error sending websocket message: {e}")
 
 
 class runServer():
@@ -270,7 +311,7 @@ def add_player(copyText=False, playerType=None):
         textGenerated = ""
         if playerType == None:
             playerType = choices(["synth", "drum", "loop"], [
-                                 probAddSynth, probAddDrum, probAddLoop])[0]
+                probAddSynth, probAddDrum, probAddLoop])[0]
         # generate parameter
         if playerType == "synth":
             para_dict = generate_random_synth_player()
@@ -281,7 +322,7 @@ def add_player(copyText=False, playerType=None):
                 return textGenerated
         if playerType == "drum":
             para_dict = choices([generate_drum_style_player(), generate_random_drum_player()], [
-                                probAddStyleDrum, probAddRandomDrum])[0]
+                probAddStyleDrum, probAddRandomDrum])[0]
             if not copyText:
                 run_player_drum(copyText, **para_dict)
             else:
@@ -473,7 +514,7 @@ def change_degree(player=None):
             player.__setattr__("degree", eval(str(deg)))
         else:
             deg = choices([gen_arp(), 'melody()[:8]', 'PGauss()',
-                          'PChain2(chords)'], probSynthChangeDegree)[0]
+                           'PChain2(chords)'], probSynthChangeDegree)[0]
             sendOut(f'{player}.degree = {deg}')
             player.__setattr__("degree", eval(deg))
     except Exception as err:
@@ -744,6 +785,7 @@ def activateServer():
 
 # start the server
 server.start()
+
 
 ##### GARBAGE FOR ARCH ######
 

@@ -50,8 +50,6 @@ try:
 except Exception as e:
     print(e)
 
-
-# from .crashconfig import *
 if crashOsEnable or crashInstantCode:
     # Osc/udp sender
     try:
@@ -61,53 +59,6 @@ if crashOsEnable or crashInstantCode:
         elif crashSendMode == "osc":
             crashTroop_socket = OSC.OSCClient()
             crashTroop_socket.connect((crashOSIp, crashOSPort))
-        elif crashSendMode == "websocket":
-            websocket_connection = None
-            event_loop = None
-
-            async def connectWebsocketTroop():
-                ''' Connect to websocket server '''
-                global websocket_connection
-                while websocket_connection is None:
-                    try:
-                        websocket_connection = await websockets.connect(f"ws://localhost:20000")
-                        print("Troop connected to CrashOS WebSocket")
-                    except Exception as err:
-                        print(
-                            f"Erreur lors de la connexion au serveur WebSocket : {err}")
-                        print("Nouvel essai dans 5s")
-                        await asyncio.sleep(5)
-
-            async def sendWebsocketTroop(msg=""):
-                ''' Send websocket msg to websocket server '''
-                global websocket_connection
-                if websocket_connection is not None:
-                    try:
-                        await websocket_connection.send(msg)
-                    except Exception as err:
-                        print(
-                            f"Erreur lors de l'envoi du message WebSocket : {err}")
-                else:
-                    print("Aucune connexion WebSocket établie")
-
-            def start_event_loop(loop):
-                asyncio.set_event_loop(loop)
-                loop.run_until_complete(connectWebsocketTroop())
-                loop.run_forever()
-
-            event_loop = asyncio.new_event_loop()
-            threading.Thread(target=start_event_loop, args=(
-                event_loop,), daemon=True).start()
-
-            # for using threading
-            # def start_connectWebsocket():
-            #     print("Start WebSocket server at ws://localhost:20000")
-            #     asyncio.run(connectWebsocket())
-
-            # threading
-            # websocket_thread = threading.Thread(target=start_connectWebsocket)
-            # websocket_thread.start()
-            # asyncio.run(connectWebsocket())
 
     except Exception as e:
         print(f"config {crashSendMode} problem : {e}")
@@ -200,6 +151,15 @@ class DummyInterpreter:
     def kill(self, *args, **kwargs):
         pass
 
+    async def sendWebsocketTroop(self, msg=""):
+        ''' Send websocket msg to websocket server '''
+        try:
+            uri = f"ws://{crashOSIp}:{crashOSPort}"
+            async with websockets.connect(uri) as websocket:
+                await websocket.send(msg)
+        except Exception as e:
+            print(f"Error sending websocket message: {e}")
+
     def print_stdin(self, string, name=None, colour="White"):
         """ Handles the printing of the execute code to screen with coloured
             names and formatting """
@@ -217,7 +177,7 @@ class DummyInterpreter:
             # crash mod
             try:
                 for i in range(0, len(string)):
-                    if crashOsEnable:
+                    if crashOsEnable or crashInstantCode:
                         # if string[0][0].isalpha() and string[0][1].isdigit():
                         if crashSendMode == "udp":
                             if name == "Svdk":
@@ -240,13 +200,14 @@ class DummyInterpreter:
                             crashTroop_socket.send(byte_message)
                         elif crashSendMode == "websocket":
                             if name == "Svdk":
-                                msg = json.dumps({"svdkCode": string[i]})
+                                msg = json.dumps(
+                                    {"type": "svdkCode", "code": string[i]})
                             elif name == "Zbdm":
-                                msg = json.dumps({"zbdmCode": string[i]})
+                                msg = json.dumps(
+                                    {"type": "zbdmCode", "code": string[i]})
                             else:
                                 msg = ""
-                            asyncio.run_coroutine_threadsafe(
-                                sendWebsocketTroop(msg), event_loop)
+                            asyncio.run(self.sendWebsocketTroop(msg))
 
                     self.writeHistoryFile(name, string[i])
             except Exception as err:

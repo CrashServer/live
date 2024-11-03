@@ -754,7 +754,7 @@ class Interface(BasicInterface):
 
             # Crashmod
             try:
-                if crashInstantCode and crashOsEnable:
+                if crashInstantCode:
                     crashData = self.text.crashInfo()
                     if crashSendMode == "osc":
                         if crashData[0] == "Zbdm":

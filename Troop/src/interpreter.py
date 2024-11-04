@@ -177,7 +177,7 @@ class DummyInterpreter:
             # crash mod
             try:
                 for i in range(0, len(string)):
-                    if crashOsEnable or crashInstantCode:
+                    if crashOsEnable:
                         # if string[0][0].isalpha() and string[0][1].isdigit():
                         if crashSendMode == "udp":
                             if name == "Svdk":

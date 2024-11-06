@@ -38,6 +38,9 @@ bellmod.add()
 braids = FileSynthDef("braids")
 braids.add()
 
+cbass = FileSynthDef("cbass")
+cbass.add()
+
 click = FileSynthDef("click")
 click.add()
 
@@ -49,6 +52,9 @@ cluster.add()
 
 crackle = FileSynthDef("crackle")
 crackle.add()
+
+cringe = FileSynthDef("cringe")
+cringe.add()
 
 cs80 = FileSynthDef("cs80")
 cs80.add()

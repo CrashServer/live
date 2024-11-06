@@ -629,22 +629,26 @@ if __name__ != "__main__":
                         self.turn = 0
                     return self.active_value
 
-        class PZero(GeneratorPattern):
-            ''' Generate a Pattern with '1' and size-1 '0' 
-                    eg: PZero(5) -> P[1,0,0,0,0] 
-                    the '1' position can be offset 
-                    '''
+                class PZero(GeneratorPattern):
+                    ''' Generate a Pattern with '1' and size-1 '0' 
+                            eg: PZero(5) -> P[1,0,0,0,0] 
+                            the '1' position can be offset 
+                            '''
 
-            def __init__(self, size=2, offset=0):
-                GeneratorPattern.__init__(self)
-                self.size = size
-                self.offset = offset
+                    def __init__(self, size=2, offset=0):
+                        GeneratorPattern.__init__(self)
+                        self.size = size
+                        self.offset = Pattern(offset)
 
-            def func(self, index):
-                if ((index-self.offset) % int(self.size) == 0):
-                    return 1
-                else:
-                    return 0
+                    def func(self, index):
+                        # Get the current offset value based on the index
+                        current_offset = self.offset[index]
+
+                        # Calculate if we should return 1 or 0
+                        if ((index - current_offset) % int(self.size) == 0):
+                            return 1
+                        else:
+                            return 0
 
         class PBool(GeneratorPattern):
             ''' Binary operation between 2 Pattern, you can select the operator:
@@ -820,8 +824,15 @@ if __name__ != "__main__":
             """ Retruns the pattern mapped to min and max values """
             return ((self - min(self)) / (max(self)-min(self)) * (oMax - oMin) + oMin)
 
-    except Exception as e:
-        print(f"useful function problem : {e}")
+            def reset():
+                ''' Emergency reset of everything '''
+                FoxDot.reassign_clock()
+                Clock.clear()
+                Master().reset()
+                FoxDot.reload()
+
+        except Exception as e:
+            print(f"useful function problem : {e}")
 
 ####
 # Rock Pattern Generator

@@ -831,8 +831,8 @@ if __name__ != "__main__":
                 Master().reset()
                 FoxDot.reload()
 
-        except Exception as e:
-            print(f"useful function problem : {e}")
+    except Exception as e:
+        print(f"useful function problem : {e}")
 
 ####
 # Rock Pattern Generator
@@ -891,6 +891,34 @@ if crashPanelSending:
     # osBpm = SendOsBpm(crashOSIp, crashOSPort)
     # osBpm.start()
 
+
+try:
+    import os
+    from .Custom.freesound import *
+
+    class FreesoundDownloader:
+        def __init__(self, api_key):
+            self.client = FreesoundClient()
+            self.client.set_token(api_key)
+            self.save_directory = os.path.join(FOXDOT_SND, '2', 'a', 'lower')
+
+        def download_sounds(self, query, fields="id,name,previews"):
+            results = self.client.text_search(query=query, fields=fields)
+            for sound in results:
+                sound.retrieve_preview(
+                    self.save_directory, sound.name + '.wav')
+                print(f"Downloaded: {sound.name}")
+
+        def getSound(self, id):
+            sound = self.client.get_sound(id)
+            sound.retrieve(self.save_directory, sound.name + '.wav')
+            print(f"Downloaded: {sound.name}")
+
+        def printDirectory(self):
+            print(self.save_directory)
+
+except Exception as e:
+    print(f"Error : {e}")
 
 # @player_method
 # def basser(self, duration=64, markdur=2):

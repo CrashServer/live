@@ -831,8 +831,8 @@ if __name__ != "__main__":
                 Master().reset()
                 FoxDot.reload()
 
-        except Exception as e:
-            print(f"useful function problem : {e}")
+    except Exception as e:
+        print(f"useful function problem : {e}")
 
 ####
 # Rock Pattern Generator

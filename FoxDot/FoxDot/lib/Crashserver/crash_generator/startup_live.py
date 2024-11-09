@@ -546,7 +546,7 @@ try:
                 self.plyTime = 1.0  # time cycle send player
                 self.pdjTime = 60  # time cycle send PlatduJour
                 self.chronoTime = 1.0  # time cycle send chrono
-                self.videoTime = 1.0  # time cycle send video index
+                # self.videoTime = 1.0  # time cycle send video index
 
                 self.playerCounter = {}
 
@@ -574,8 +574,8 @@ try:
                 self.threadPdj.daemon = True
                 self.threadChrono = Thread(target=self.sendChrono)
                 self.threadChrono.daemon = True
-                self.threadVideoIndex = Thread(target=self.sendVideoIndex)
-                self.threadVideoIndex.daemon = True
+                # self.threadVideoIndex = Thread(target=self.sendVideoIndex)
+                # self.threadVideoIndex.daemon = True
 
             def sendOscMsg(self, msg):
                 if self.ipZbdm:
@@ -682,15 +682,15 @@ try:
                 except Exception as err:
                     print("addPlayerTurn problem : ", err)
 
-            def sendVideoIndex(self):
-                try:
-                    while self.isrunning:
-                        msg = OSCMessage("/panel/video", [oscReceiver.videoGrp, oscReceiver.videoIndex,
-                                                          oscReceiver.videoTotal, oscReceiver.videoIntegrity])
-                        self.sendOscMsg(msg)
-                        sleep(self.videoTime)
-                except:
-                    pass
+            # def sendVideoIndex(self):
+            #     try:
+            #         while self.isrunning:
+            #             msg = OSCMessage("/panel/video", [oscReceiver.videoGrp, oscReceiver.videoIndex,
+            #                                               oscReceiver.videoTotal, oscReceiver.videoIntegrity])
+            #             self.sendOscMsg(msg)
+            #             sleep(self.videoTime)
+            #     except:
+            #         pass
 
             def sendOnce(self, txt):
                 ''' send on txt msg to OSC '''
@@ -709,7 +709,7 @@ try:
                 self.threadPlayer.start()
                 self.threadPdj.start()
                 self.threadChrono.start()
-                self.threadVideoIndex.start()
+                # self.threadVideoIndex.start()
 
         def panelreset():
             crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
@@ -919,20 +919,20 @@ class MidiDwarf:
 
 dwarf = MidiDwarf()
 
-try:
-    class FilterOSCClient(OSCClient):
-        def send(self, message, *args):
-            if "video" in str(message.message):
-                OSCClient.send(self, message, *args)
+# try:
+#     class FilterOSCClient(OSCClient):
+#         def send(self, message, *args):
+#             if "video" in str(message.message):
+#                 OSCClient.send(self, message, *args)
 
-    def OSCVideo(video_adress):
-        my_client = FilterOSCClient()
-        my_client.connect((video_adress, 20000))
-        Server.forward = my_client
-    OSCVideo(crashOSIp)
-    print("Video Connected")
-except Exception as e:
-    print(e)
+#     def OSCVideo(video_adress):
+#         my_client = FilterOSCClient()
+#         my_client.connect((video_adress, 20000))
+#         Server.forward = my_client
+#     OSCVideo(crashOSIp)
+#     print("Video Connected")
+# except Exception as e:
+#     print(e)
 
 
 class voice_count():
@@ -967,8 +967,8 @@ class voice_count():
 
 voicecount = voice_count()
 
-if (freesoundApiKey):
-    try:
+try:
+    if (freesoundApiKey):
         import os
         from .Custom.freesound import *
 
@@ -994,8 +994,8 @@ if (freesoundApiKey):
 
         freesound = FreesoundDownloader()
 
-    except Exception as e:
-        print(f"Error Freesound: {e}")
+except Exception as e:
+    print(f"Error Freesound: {e}")
 
 
 # Mixer

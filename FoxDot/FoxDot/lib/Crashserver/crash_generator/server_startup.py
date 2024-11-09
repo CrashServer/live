@@ -180,7 +180,10 @@ if crashOsEnable:
                 target=send_bpm_periodically, daemon=True)
             sendBpm_thread.start()
 
-            oscReceiver = OSCReceiver(crashOSIp)
+            try:
+                oscReceiver = OSCReceiver(crashOSIp)
+            except Exception as e:
+                print(f"Error initializing OSCReceiver: {e}")
 
     except Exception as err:
         print(f"config UDP,OSC, Websocket problem : {err}")

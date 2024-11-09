@@ -5,7 +5,7 @@ FASTLED_USING_NAMESPACE
 #define DATA_PIN 3
 #define LED_TYPE WS2812B
 #define COLOR_ORDER GRB
-#define NUM_LEDS 300
+#define NUM_LEDS 450
 #define PLY_LENGTH 50  // define the length of the players position
 #define BUTTON 2
 // #define LEDOUT 13

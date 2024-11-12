@@ -976,21 +976,69 @@ try:
             def __init__(self):
                 self.client = FreesoundClient()
                 self.client.set_token(freesoundApiKey)
-                self.save_directory = os.path.join(
-                    FOXDOT_SND, '2', 'a', 'lower')
+                self.sampleBank = '2'
+                self.save_directory = None
 
-            def getSounds(self, query, fields="id,name,previews"):
-                results = self.client.text_search(query=query, fields=fields)
-                for sound in results:
+            def help(self):
+                print(''' Download samples from Freesound
+                      - freesound.dl("atmo", "c") : download 'atmo' sounds in the "c" directory
+                      - freesound.dl("drum break hard", "drmbrk") : download 'drum break hard' sounds in the "drmbrk" directory
+                      - freesound.sampleBank(3) : set the default sample bank directory to 3
+                      ''')
+
+            def dl(self, query, target=None, fields="id,name,previews"):
+                if not target:
+                    print(
+                        "Please provide a target directory, ex: freesound.dl('atmo', 'c')")
+                    return
+                if len(target) > 1:
+                    filters = "tag:loop"
+                else:
+                    filters = "duration:[0.0 TO 4.0]"
+                self.setOrCreateDirectory(target)
+                results = self.client.text_search(
+                    query=query, filter=filters, sort="rating_desc", fields=fields)
+
+                # index the sound name
+
+                for i, sound in enumerate(results):
+                    if len(target) == 1:
+                        target = query
                     sound.retrieve_preview(
-                        self.save_directory, name=sound.name, quality='hq', file_format='ogg')
+                        self.save_directory, name=f"{i}-{target}.ogg", quality='hq', file_format='ogg')
+                    print(f"Downloaded: {sound.name}")
                     # convert to wav
                     os.system(
-                        f"ffmpeg -i {self.save_directory}/{sound.name}.ogg {self.save_directory}/{sound.name}.wav")
-                    print(f"Downloaded: {sound.name}")
+                        f"ffmpeg -i {self.save_directory}/{i}-{target}.ogg {self.save_directory}/{i}-{target}.wav")
+                    # remove ogg
+                    os.remove(f"{self.save_directory}/{i}-{target}.ogg")
+                    if crashPanelSending:
+                        crashpanel.sendOnce(f"Downloaded: {sound.name}")
 
             def printDirectory(self):
                 print(self.save_directory)
+
+            def sampleBank(self, bank):
+                self.sampleBank = bank
+
+            def search(self, query):
+                return self.client.text_search(query=query)
+
+            def setOrCreateDirectory(self, target=""):
+                ''' set or create the directory with the first letter of the char + upper/lower or loop'''
+                if len(target) == 1:
+                    if target.islower():
+                        subdir = 'lower'
+                    else:
+                        subdir = 'upper'
+                    target = target.lower()
+                else:
+                    subdir = target
+                    target = '_loop_'
+                self.save_directory = os.path.join(
+                    FOXDOT_SND, str(self.sampleBank), target, subdir)
+                if not os.path.exists(self.save_directory):
+                    os.makedirs(self.save_directory)
 
         freesound = FreesoundDownloader()
 

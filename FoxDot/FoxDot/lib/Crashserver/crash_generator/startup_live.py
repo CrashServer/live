@@ -149,8 +149,9 @@ def print_synth(synth=""):
     path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
     if synth == "":
         # list only the .scd files
-        dir_list = [fn for fn in os.listdir(path) if fn.endswith('.scd')]
-        synth_list = [fn.rsplit('.', 1)[0] for fn in dir_list]
+        # dir_list = [fn for fn in os.listdir(path) if fn.endswith('.scd')]
+        # synth_list = [fn.rsplit('.', 1)[0] for fn in dir_list]
+        synth_list = sorted([f for f in SynthDefs])
         print(sorted(synth_list))
         if crashPanelSending:
             crashpanel.sendOnce(str(sorted(synth_list)))

@@ -713,6 +713,8 @@ try:
                 # self.threadVideoIndex.start()
 
         def panelreset():
+            global crashpanel
+            crashpanel.stop()
             crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
             crashpanel.start()
 

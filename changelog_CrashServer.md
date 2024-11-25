@@ -1,5 +1,21 @@
 # Changelog CrashServer 
 
+## 01-nov-2024
+- add reset() : emergency function to reset clock, all players, fx, synths, etc.
+
+## 27-oct-2024
+- add cbass, cringe synths
+
+## 29-aug-2024
+- change Troop color for our name
+- add a History code to log Troop session into separate files
+
+## 15-aug-2024
+- add Carabiner lib in /Extensions for Link with Ableton Live 
+
+## 17-jul-2024
+- add midi CC 
+
 ## Functions
 
 
@@ -28,6 +44,7 @@
   - crashPanel: to have a nice gui with usefull stuff
   - `masterAll("lpf", 400)` : set all players to args=value, can be reset with `masterAll(0)` . It keep track of the previous values.
   - `setseed(seed)`: set the seed of all random generator
+  - `reset()` : emergency function to reset clock, all players, fx, synths, etc.
 
 ### Var
   - `lininf(start=0, finish=1, time=32)` : linvar but stay at finish
@@ -44,12 +61,12 @@
   - `.clone(player)` : clone a player , all his attributes
   - `.once()` : play a player only once. 
   - `.drummer(duration=16, dur=1/2)` : turn a sample player to a human drummer. 'duration' is the time for a new drum pattern, `dur` is the duration of the player.
-  - `basser(duration=64, markdur=2)`: turn a synth player to a bass player. 'duration' is the time for a new pattern, markdur is the length of the pattern
+  - `.basser(duration=64, markdur=2)`: turn a synth player to a bass player. 'duration' is the time for a new pattern, markdur is the length of the pattern
   - `.gtr(string=1)` : set player to match guitar tabs
   - `.chroma()` : set player to chromatic scale
   - `.solo(-8)` : mod the solo method, if the number>0: solo after the next n %beats, if the number<0: solo now and unsolo after the next n %beats. 
   - `stop(8)` : mod stop method to stop after the next n %beats.
-  - `only()` : mod to only after the next n % beats.
+  - `only(16)` : mod to only after the next n % beats.
   - `trim(length)` : trim every players pattern length
   - `morph(other, probability)` : morph randomly some attributes of 2 player (self and other)  
 

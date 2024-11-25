@@ -1,5 +1,5 @@
 SynthDef.new(\virus,
-	{|len = 2, freq = 420, fmod = 0.1, vib = 0.25, rate = 1, gate = 1, bus=0, amp=1, sus=1, blur=1, cutoff=1400|
+	{|len = 2, freq = 420, fmod = 0.1, vib = 0.25, rate = 1, gate = 1, bus=0, amp=1, sus=1, blur=1, cutoff=5400|
 	var osc, mainEnv, speed, freqs, pulse, a, bass, tone1, tone2, tone3, noise, impulse;
 	sus = sus * blur;
 	freq = In.kr(bus, 1);

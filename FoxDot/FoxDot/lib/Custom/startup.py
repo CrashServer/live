@@ -824,12 +824,13 @@ if __name__ != "__main__":
             """ Retruns the pattern mapped to min and max values """
             return ((self - min(self)) / (max(self)-min(self)) * (oMax - oMin) + oMin)
 
-            def reset():
-                ''' Emergency reset of everything '''
-                FoxDot.reassign_clock()
-                Clock.clear()
-                Master().reset()
-                FoxDot.reload()
+        def reset():
+            ''' Emergency reset of everything '''
+            FoxDot.reassign_clock()
+            Clock.clear()
+            Master().reset()
+            FoxDot.reload()
+            panelreset()
 
     except Exception as e:
         print(f"useful function problem : {e}")

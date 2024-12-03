@@ -10,5 +10,5 @@ fxmix = if(fxmix_<=0, fxmix, Line.kr(fxmix, fxmix_, sus*fxmix_d));
 fxsig = LPF.ar(osc, lpfx);
 fxsig = HPF.ar(fxsig, hpfx);
 Out.ar([fxout, fxout+1], Mix.ar(fxsig*fx));
-osc = osc * fxmix;
+osc = osc * 0;
 ReplaceOut.ar(bus, osc)}).add;

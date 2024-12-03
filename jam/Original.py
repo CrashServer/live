@@ -1,4 +1,5 @@
-Clock.bpm = 122/2;
+# original
+Clock.bpm = 122/2
 Scale.default = Scale.minor
 Root.default = 6
 b1 >> bass(melody() + var([7, 3, [4, 0]]),dur=var([1/4, 1/2]), drive=0, vol=0.5, mverb=0.1).unison(0)

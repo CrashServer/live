@@ -7,6 +7,19 @@ for other language communication
 
 """
 from __future__ import absolute_import
+import asyncio
+import os.path
+import os
+from pathlib import Path
+import socket
+import tempfile
+import shlex
+import threading
+import time
+import re
+import sys
+
+import websockets
 from .config import *
 from .message import MSG_CONSOLE
 
@@ -28,18 +41,8 @@ except NameError:  # Python 2
 
 CREATE_NO_WINDOW = 0x08000000 if SYSTEM == WINDOWS else 0
 
-import sys
-import re
-import time
-import threading
-import shlex
-import tempfile
-import os, os.path
-import socket
 
 # Crashmod
-import sys
-from pathlib import Path
 sys.path.append(str(Path('.').absolute().parent))
 
 try:
@@ -47,39 +50,43 @@ try:
 except Exception as e:
     print(e)
 
-
-#from .crashconfig import *
 if crashOsEnable or crashInstantCode:
     # Osc/udp sender
     try:
         if crashSendMode == "udp":
-            crashTroop_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        if crashSendMode == "osc":
+            crashTroop_socket = socket.socket(
+                socket.AF_INET, socket.SOCK_DGRAM)
+        elif crashSendMode == "osc":
             crashTroop_socket = OSC.OSCClient()
             crashTroop_socket.connect((crashOSIp, crashOSPort))
+
     except Exception as e:
-        print(f"config UDP or OSC problem : {e}")
+        print(f"config {crashSendMode} problem : {e}")
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
+
 
 def compile_regex(kw):
     """ Takes a list of strings and returns a regex that
         matches each one """
     return re.compile(r"(?<![a-zA-Z.])(" + "|".join(kw) + ")(?![a-zA-Z])")
 
-SEPARATOR = ":"; _ = " %s " % SEPARATOR
 
+SEPARATOR = ":"
+_ = " %s " % SEPARATOR
 
 
 def colour_format(text, colour):
     return '<colour="{}">{}</colour>'.format(colour, text)
 
-## dummy interpreter
+# dummy interpreter
+
 
 class DummyInterpreter:
     name = None
+
     def __init__(self, *args, **kwargs):
-        self.re={}
+        self.re = {}
         self.log_path = ""
 
         self.syntax_lang = langtypes[kwargs.get("syntax", -1)]
@@ -88,15 +95,14 @@ class DummyInterpreter:
 
         if self.syntax_lang != self.__class__:
 
-            self.re = {"tag_bold": self.syntax_lang.find_keyword, "tag_italic": self.syntax_lang.find_comment}
+            self.re = {"tag_bold": self.syntax_lang.find_keyword,
+                       "tag_italic": self.syntax_lang.find_comment}
 
             self.syntax_lang.setup()
 
         else:
 
             self.syntax_lang = None
-
-
 
     def __repr__(self):
         return self.name if self.name is not None else repr(self.__class__.__name__)
@@ -106,10 +112,10 @@ class DummyInterpreter:
 
         # Get start and end of the buffer
         start, end = "1.0", text.index("end")
-        lastline   = int(end.split('.')[0]) + 1
+        lastline = int(end.split('.')[0]) + 1
 
         # Indicies of block to execute
-        block = [0,0]
+        block = [0, 0]
 
         # 1. Get position of cursor
         cur_x, cur_y = index.split(".")
@@ -145,11 +151,21 @@ class DummyInterpreter:
     def kill(self, *args, **kwargs):
         pass
 
+    async def sendWebsocketTroop(self, msg=""):
+        ''' Send websocket msg to websocket server '''
+        try:
+            uri = f"ws://{crashOSIp}:{crashOSPort}"
+            async with websockets.connect(uri) as websocket:
+                await websocket.send(msg)
+        except Exception as e:
+            print(f"Error sending websocket message: {e}")
+
     def print_stdin(self, string, name=None, colour="White"):
         """ Handles the printing of the execute code to screen with coloured
             names and formatting """
         # Split on newlines
-        string = [line.replace("\n", "") for line in string.split("\n") if len(line.strip()) > 0]
+        string = [line.replace("\n", "") for line in string.split(
+            "\n") if len(line.strip()) > 0]
         if len(string) > 0 and name is not None:
             name = str(name)
             if (name == "Zbdm"):
@@ -160,9 +176,9 @@ class DummyInterpreter:
 
             # crash mod
             try:
-                for i in range(0,len(string)):
+                for i in range(0, len(string)):
                     if crashOsEnable:
-                        #if string[0][0].isalpha() and string[0][1].isdigit():
+                        # if string[0][0].isalpha() and string[0][1].isdigit():
                         if crashSendMode == "udp":
                             if name == "Svdk":
                                 byte_message = bytes("#" + string[i], "utf-8")
@@ -170,15 +186,29 @@ class DummyInterpreter:
                                 byte_message = bytes("!" + string[i], "utf-8")
                             else:
                                 byte_message = ""
-                            crashTroop_socket.sendto(byte_message, (crashOSIp, crashOSPort))
-                        if crashSendMode == "osc":
+                            crashTroop_socket.sendto(
+                                byte_message, (crashOSIp, crashOSPort))
+                        elif crashSendMode == "osc":
                             if name == "Svdk":
-                                byte_message = OSC.OSCMessage("/svdkCode", string[i])
+                                byte_message = OSC.OSCMessage(
+                                    "/svdkCode", string[i])
                             elif name == "Zbdm":
-                                byte_message = OSC.OSCMessage("/zbdmCode", string[i])
+                                byte_message = OSC.OSCMessage(
+                                    "/zbdmCode", string[i])
                             else:
                                 byte_message = ""
                             crashTroop_socket.send(byte_message)
+                        elif crashSendMode == "websocket":
+                            if name == "Svdk":
+                                msg = json.dumps(
+                                    {"type": "svdkCode", "code": string[i]})
+                            elif name == "Zbdm":
+                                msg = json.dumps(
+                                    {"type": "zbdmCode", "code": string[i]})
+                            else:
+                                msg = ""
+                            asyncio.run(self.sendWebsocketTroop(msg))
+
                     self.writeHistoryFile(name, string[i])
             except Exception as err:
                 print("Send udp error : ", err)
@@ -186,8 +216,9 @@ class DummyInterpreter:
 
             # Use ... for the remainder  of the  lines
             n = len(name)
-            for i in range(1,len(string)):
-                sys.stdout.write(colour_format("." * n, colour) + _ + string[i])
+            for i in range(1, len(string)):
+                sys.stdout.write(colour_format(
+                    "." * n, colour) + _ + string[i])
                 sys.stdout.flush()
         return
 
@@ -207,15 +238,16 @@ class DummyInterpreter:
     def format(string):
         """ Method to be overloaded in sub-classes for formatting strings to be evaluated """
         return str(string) + "\n"
-    
+
     def createHistoryFile(self):
         """ Create a history file for the archiving of code """
         # Create a history file if it doesn't exist
         log_folder = os.path.join(ROOT_DIR, "logs")
         if not os.path.exists(log_folder):
             os.makedirs(log_folder)
-        
-        log_filename = time.strftime("Session-%d%b%Y_%H%M%S.txt", time.localtime())
+
+        log_filename = time.strftime(
+            "Session-%d%b%Y_%H%M%S.txt", time.localtime())
         self.log_path = os.path.join(log_folder, log_filename)
 
         if not os.path.exists(self.log_path):
@@ -226,35 +258,37 @@ class DummyInterpreter:
     def writeHistoryFile(self, player_name, string):
         """ Write to the history file """
         if self.log_path is None:
-            raise ValueError("History file has not been created. Call createHistoryFile() first.")
+            raise ValueError(
+                "History file has not been created. Call createHistoryFile() first.")
         with open(self.log_path, "a") as f:
             f.write(f"{player_name}: {string}\n")
         return
 
 
 class Interpreter(DummyInterpreter):
-    id       = 99
-    lang     = None
-    clock    = None
+    id = 99
+    lang = None
+    clock = None
     boot_file = None
     keyword_regex = compile_regex([])
     comment_regex = compile_regex([])
-    stdout   = None
+    stdout = None
     stdout_thread = None
     filetype = ".txt"
-    client   = None
+    client = None
 
     def __init__(self, client, path, args=""):
 
         self.client = client
 
-        self.re = {"tag_bold": self.find_keyword, "tag_italic": self.find_comment}
+        self.re = {"tag_bold": self.find_keyword,
+                   "tag_italic": self.find_comment}
 
         self.path = self._get_path(path)
 
         self.args = self._get_args(args)
 
-        self.f_out = tempfile.TemporaryFile("w+", 1) # buffering = 1
+        self.f_out = tempfile.TemporaryFile("w+", 1)  # buffering = 1
         self.is_alive = True
 
         self.setup()
@@ -295,7 +329,7 @@ class Interpreter(DummyInterpreter):
                               stdin=PIPE,
                               stdout=self.f_out,
                               stderr=self.f_out,
-    						  creationflags=CREATE_NO_WINDOW)
+                              creationflags=CREATE_NO_WINDOW)
 
             self.stdout_thread = threading.Thread(target=self.stdout)
             self.stdout_thread.start()
@@ -382,7 +416,8 @@ class Interpreter(DummyInterpreter):
 
                 if len(message) > 0 and self.client.is_master():
 
-                    self.client.send(MSG_CONSOLE(self.client.id, "\n".join(message)))
+                    self.client.send(MSG_CONSOLE(
+                        self.client.id, "\n".join(message)))
 
                 time.sleep(0.05)
             except ValueError as e:
@@ -397,25 +432,30 @@ class Interpreter(DummyInterpreter):
         if self.lang.poll() is None:
             self.lang.communicate()
 
+
 class CustomInterpreter:
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
+
     def __call__(self):
         return Interpreter(*self.args, **self.kwargs)
+
 
 class BuiltinInterpreter(Interpreter):
     def __init__(self, client, args):
         Interpreter.__init__(self, client, self.path, args)
 
+
 class FoxDotInterpreter(BuiltinInterpreter):
-    filetype=".py"
+    filetype = ".py"
     path = "{} -u -m FoxDot --pipe".format(PYTHON_EXECUTABLE)
     name = "FoxDot"
 
     @classmethod
     def setup(cls):
-        cls.keywords = ["Clock", "Scale", "Root", "var", "linvar", '>>', 'print']
+        cls.keywords = ["Clock", "Scale", "Root",
+                        "var", "linvar", '>>', 'print']
         cls.keyword_regex = compile_regex(cls.keywords)
         cls.log_path = None  # Initialize log_path in the constructor
         cls.createHistoryFile(cls)
@@ -437,13 +477,13 @@ class FoxDotInterpreter(BuiltinInterpreter):
                     instring = True
                     instring_char = char
             elif char == "#":
-              if not instring:
-                  return [(i, len(string))]
+                if not instring:
+                    return [(i, len(string))]
         return []
 
     def kill(self):
         self.evaluate(self.stop_sound())
-        ## crash mod
+        # crash mod
         try:
             self.evaluate("crashpanel.stop()")
         except:
@@ -455,7 +495,7 @@ class FoxDotInterpreter(BuiltinInterpreter):
     def stop_sound(cls):
         return "Clock.clear()"
 
-    
+
 class TidalInterpreter(BuiltinInterpreter):
     path = 'ghci'
     filetype = ".tidal"
@@ -467,7 +507,8 @@ class TidalInterpreter(BuiltinInterpreter):
 
         try:
 
-            process = Popen(["ghc-pkg", "field", "tidal", "data-dir"], stdout=PIPE, universal_newlines=True)
+            process = Popen(["ghc-pkg", "field", "tidal", "data-dir"],
+                            stdout=PIPE, universal_newlines=True)
 
             output = process.communicate()[0]
 
@@ -499,14 +540,16 @@ class TidalInterpreter(BuiltinInterpreter):
 
         else:
 
-            err = "Could not find BootTidal.hs! You can specify the path in your Troop boot config file: {}".format(BOOT_CONFIG_FILE)
-            raise(FileNotFoundError(err))
+            err = "Could not find BootTidal.hs! You can specify the path in your Troop boot config file: {}".format(
+                BOOT_CONFIG_FILE)
+            raise (FileNotFoundError(err))
 
         return
 
     @classmethod
     def setup(cls):
-        cls.keywords  = ["d{}".format(n) for n in range(1,17)] + ["\\$", "#", "hush", "solo", "silence"]
+        cls.keywords = ["d{}".format(n) for n in range(
+            1, 17)] + ["\\$", "#", "hush", "solo", "silence"]
         cls.keyword_regex = compile_regex(cls.keywords)
         return
 
@@ -540,10 +583,13 @@ class TidalInterpreter(BuiltinInterpreter):
 # Interpreters over OSC (e.g. Sonic Pi)
 # -------------------------------------
 
+
 class OSCInterpreter(Interpreter):
     """ Class for sending messages via OSC instead of using a subprocess """
+
     def __init__(self, *args, **kwargs):
-        self.re = {"tag_bold": self.find_keyword, "tag_italic": self.find_comment}
+        self.re = {"tag_bold": self.find_keyword,
+                   "tag_italic": self.find_comment}
         self.lang = OSC.OSCClient()
         self.lang.connect((self.host, self.port))
         self._osc_error = False
@@ -562,7 +608,8 @@ class OSCInterpreter(Interpreter):
         return
 
     def print_osc_warning_message(self):
-        print("Warning: No connection made to local {} OSC server instance.".format(self.__repr__()))
+        print("Warning: No connection made to local {} OSC server instance.".format(
+            self.__repr__()))
         return
 
     def evaluate(self, string, *args, **kwargs):
@@ -577,6 +624,7 @@ class OSCInterpreter(Interpreter):
                 self.print_osc_warning_message()
             self._osc_error = True
         return
+
 
 class SuperColliderInterpreter(OSCInterpreter):
     filetype = ".scd"
@@ -613,24 +661,26 @@ class SuperColliderInterpreter(OSCInterpreter):
 
         # Get start and end of the buffer
         start, end = "1.0", text.index("end")
-        lastline   = int(end.split('.')[0]) + 1
+        lastline = int(end.split('.')[0]) + 1
 
         # Indicies of block to execute
-        block = [0,0]
+        block = [0, 0]
 
         # 1. Get position of cursor
         cur_y, cur_x = index.split(".")
         cur_y, cur_x = int(cur_y), int(cur_x)
 
-        left_cur_y, left_cur_x   = cur_y, cur_x
+        left_cur_y, left_cur_x = cur_y, cur_x
         right_cur_y, right_cur_x = cur_y, cur_x
 
         # Go back to find a left bracket
 
         while True:
 
-            new_left_cur_y,  new_left_cur_x  = cls.get_left_bracket(text, left_cur_y, left_cur_x)
-            new_right_cur_y, new_right_cur_x = cls.get_right_bracket(text, right_cur_y, right_cur_x)
+            new_left_cur_y,  new_left_cur_x = cls.get_left_bracket(
+                text, left_cur_y, left_cur_x)
+            new_right_cur_y, new_right_cur_x = cls.get_right_bracket(
+                text, right_cur_y, right_cur_x)
 
             if new_left_cur_y is None or new_right_cur_y is None:
 
@@ -640,7 +690,7 @@ class SuperColliderInterpreter(OSCInterpreter):
 
             else:
 
-                left_cur_y,  left_cur_x  = new_left_cur_y,  new_left_cur_x
+                left_cur_y,  left_cur_x = new_left_cur_y,  new_left_cur_x
                 right_cur_y, right_cur_x = new_right_cur_y, new_right_cur_x
 
         return block
@@ -648,7 +698,8 @@ class SuperColliderInterpreter(OSCInterpreter):
     @classmethod
     def get_left_bracket(cls, text, cur_y, cur_x):
         count = 0
-        line_text = text.get("{}.{}".format(cur_y, 0), "{}.{}".format(cur_y, "end"))
+        line_text = text.get("{}.{}".format(cur_y, 0),
+                             "{}.{}".format(cur_y, "end"))
         for line_num in range(cur_y, 0, -1):
             # Only check line if it has text
             if len(line_text) > 0:
@@ -657,8 +708,9 @@ class SuperColliderInterpreter(OSCInterpreter):
                     try:
                         char = line_text[char_num]
                     except IndexError as e:
-                        print("left bracket, string is {}, index is {}".format(line_text, char_num))
-                        raise(e)
+                        print("left bracket, string is {}, index is {}".format(
+                            line_text, char_num))
+                        raise (e)
 
                     if char == ")":
                         count += 1
@@ -667,8 +719,9 @@ class SuperColliderInterpreter(OSCInterpreter):
                             return line_num, char_num
                         else:
                             count -= 1
-            line_text = text.get("{}.{}".format(line_num - 1, 0), "{}.{}".format(line_num - 1, "end"))
-            cur_x     = len(line_text)
+            line_text = text.get("{}.{}".format(
+                line_num - 1, 0), "{}.{}".format(line_num - 1, "end"))
+            cur_x = len(line_text)
         return None, None
 
     @classmethod
@@ -676,7 +729,8 @@ class SuperColliderInterpreter(OSCInterpreter):
         num_lines = int(text.index("end").split(".")[0]) + 1
         count = 0
         for line_num in range(cur_y, num_lines):
-            line_text = text.get("{}.{}".format(line_num, 0), "{}.{}".format(line_num, "end"))
+            line_text = text.get("{}.{}".format(
+                line_num, 0), "{}.{}".format(line_num, "end"))
             # Only check line if it has text
             if len(line_text) > 0:
                 for char_num in range(cur_x, len(line_text)):
@@ -684,8 +738,9 @@ class SuperColliderInterpreter(OSCInterpreter):
                     try:
                         char = line_text[char_num]
                     except IndexError as e:
-                        print("right bracket, string is {}, index is {}".format(line_text, char_num))
-                        raise(e)
+                        print("right bracket, string is {}, index is {}".format(
+                            line_text, char_num))
+                        raise (e)
 
                     if char == "(":
                         count += 1
@@ -724,7 +779,6 @@ class SonicPiInterpreter(OSCInterpreter):
         except FileNotFoundError:
             return 4557
 
-
     def new_osc_message(self, string):
         """ Returns OSC message for Sonic Pi """
         msg = OSC.OSCMessage("/run-code")
@@ -744,8 +798,8 @@ class SonicPiInterpreter(OSCInterpreter):
                     instring = True
                     instring_char = char
             elif char == "#":
-              if not instring:
-                  return [(i, len(string))]
+                if not instring:
+                    return [(i, len(string))]
         return []
 
     @classmethod
@@ -760,11 +814,11 @@ class SonicPiInterpreter(OSCInterpreter):
 
 # Set up ID system
 
-langtypes = { FOXDOT        : FoxDotInterpreter,
-              TIDAL         : TidalInterpreter,
-              SUPERCOLLIDER : SuperColliderInterpreter,
-              SONICPI       : SonicPiInterpreter,
-              DUMMY         : DummyInterpreter }
+langtypes = {FOXDOT: FoxDotInterpreter,
+             TIDAL: TidalInterpreter,
+             SUPERCOLLIDER: SuperColliderInterpreter,
+             SONICPI: SonicPiInterpreter,
+             DUMMY: DummyInterpreter}
 
 for lang_id, lang_cls in langtypes.items():
     lang_cls.id = lang_id

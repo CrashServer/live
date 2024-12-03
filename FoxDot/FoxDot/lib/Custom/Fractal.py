@@ -6,13 +6,14 @@
 
 from random import randint
 
-import Tkinter as Tk
+import tkinter as Tk
 
 colour = ["red", "blue", "black", "green", "purple", "pink", "yellow"]
 
+
 class Fractal:
     def __init__(self, w=500, h=500):
-        self.root=Tk.Tk()
+        self.root = Tk.Tk()
         self.canvas = Tk.Canvas(self.root, width=w, height=h,
                                 background="black")
         self.canvas.pack()
@@ -21,7 +22,7 @@ class Fractal:
         self.pad = 10
 
         self.v_x = [self.pad, w-self.pad, w / 2.0]
-        self.v_y = [self.pad, self.pad , h-self.pad]
+        self.v_y = [self.pad, self.pad, h-self.pad]
 
         self.len = len(self.v_x)
 
@@ -29,7 +30,6 @@ class Fractal:
         self.y = [40]
 
         self.r = 0.5
-        
 
     def __call__(self, player):
         """ Takes information  about the current state of the player
@@ -37,7 +37,7 @@ class Fractal:
         # Add new player
 
         if player.id not in self.players:
-            
+
             self.players.append(player.id)
 
         p = randint(0, self.len-1)
@@ -60,12 +60,7 @@ class Fractal:
 
     def draw(self, x, y, fill="black"):
 
-        self.canvas.create_oval(x - 3, y - 3, x + 3, y + 3, fill=fill, outline=fill)
+        self.canvas.create_oval(x - 3, y - 3, x + 3,
+                                y + 3, fill=fill, outline=fill)
 
         return
-
-
-
-
-
-        

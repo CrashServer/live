@@ -1048,6 +1048,73 @@ except Exception as e:
     print(f"Error Freesound: {e}")
 
 
+class Variation():
+    ''' Create Master variation continuously, durTotal is total duration of the part durBreak is the duration of the variation, ex: variation= Variation(16, 4) the last 4 bars of a 16 bars will be different '''
+
+    def __init__(self, durTotal, durBreak):
+        self.durTotal = durTotal
+        self.durBreak = durBreak
+        self.start()
+        
+    def stop(self):
+        self.isPlaying=False
+    
+    def start(self):
+        self.isPlaying = True
+        Clock.schedule(lambda: self.chooseEvent(), Clock.mod(self.durTotal) + self.durTotal-self.durBreak)
+
+    def help(self):
+        print('''Variation class
+        - variation = Variation(16, 4) : create a variation every 16 bars for 4 bars
+        - variation.stop() : stop the variation
+        - variation.start() : start the variation
+        - variation.help() : show this help''')
+    
+    def chooseEvent(self):
+        ''' choose a random event to be planned '''
+        rnd_event = choice([self.eventFilter, self.eventSoloRnd, self.eventRate])
+        rnd_event()
+        if self.isPlaying:
+            Clock.schedule(lambda: self.chooseEvent(), Clock.mod(self.durTotal) + self.durTotal-self.durBreak)
+    
+    def eventFilter(self):
+        ''' set a random filter on master '''
+        filtr = choice(["lpf", "hpf"])
+        self.setMasterFilter(filtr, self.durBreak)
+        # reset filter after durTotal
+        Clock.schedule(lambda: self.setMasterFilter(filtr, 0), Clock.mod(self.durTotal))
+
+    def setMasterFilter(self, filtr="hpf", durBreak=4):
+        ''' function to be called by setFilter '''
+        if durBreak == 0:
+            Master().__setattr__(filtr, 0)
+        else:
+            if filtr == "lpf":
+                lowFilter=PRand(500, 8000)
+                highFilter=PRand(40, 400)
+            elif filtr == "hpf":
+                lowFilter=PRand(0, 200)
+                highFilter=PRand(400, 8000)
+            Master().__setattr__(filtr, linvar([lowFilter,highFilter], [durBreak,0]))
+
+    def eventSoloRnd(self):
+        ''' solo a random player '''
+        self.soloRnd()
+        Clock.schedule(unsolo, Clock.mod(self.durTotal))
+
+    def soloRnd(self):
+        ''' function to be called by setSoloRnd '''
+        soloPlayer = sample(Clock.playing, 1)[0]
+        soloPlayer.solo()
+        
+    def eventRate(self):
+        ''' set a random rate on master '''
+        masterRate = PWhite(-1, 6)
+        masterAll("rate", masterRate)
+        Clock.schedule(lambda: masterAll(0), Clock.mod(self.durTotal))
+
+
+
 # Mixer
 # try:
 # 	class Mixer():

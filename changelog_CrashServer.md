@@ -1,5 +1,8 @@
 # Changelog CrashServer 
 
+ ## 05-dec-2024
+ - add Variation(durTotal, durBreak) to add master variation, like DJ style. durTotal is the total duration of the sequence, durBreak is the duration of the variation. ex: variation = Variation(16, 4) 
+
 ## 01-nov-2024
 - add reset() : emergency function to reset clock, all players, fx, synths, etc.
 

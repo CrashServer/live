@@ -387,7 +387,6 @@ def run_player_synth(copyText=False, **kwargs):
         degree = eval(degree)
         params = GENERATE_SYNTH_ARGS(synth)
         paramsText = synthArgsToText(params)
-        dur = kwargs.get("dur")
         if max(degree) > 10:
             degree = remap_pattern(degree, 0, 7)
         if not copyText:
@@ -401,7 +400,7 @@ def run_player_synth(copyText=False, **kwargs):
         else:
             return f'{player} >> {synth}({degree}, dur={dur}, oct={oct}, {paramsText}).unison(2)'
     except Exception as err:
-        print("run_player_synth problem : ", err)
+        print(f'run_player_synth problem : {err}\nSynth={synth}, degree={degree}, dur={dur}, oct={oct}, params={paramsText}')
 
 
 def synthArgsToText(params=''):
@@ -764,26 +763,71 @@ def shutup():
 def son(s=999, d=999, l=999):
     ''' activate the server, probability (Synth, drums, Loops) '''
     print("Server On")
-    global serverActive, probAddSynth, probAddDrum, probAddLoop
+    global serverActive, probAddSynth, probAddDrum, probAddLoop, variation
     if s != 999:
         probAddSynth = s
         probAddDrum = d
         probAddLoop = l
     server.start()
     serverActive = True
-
+    playRandomLog(5)
+    variation = Variation(16,4)
 
 def soff():
+    ''' Deactivate the server '''
     print("Server Off")
     global serverActive
     serverActive = False
 
 
 def activateServer():
+    ''' Automatic activate server, voice and generate 5 random jam/log lines '''
     Clock.bpm = 92
-    eval('se >> loop("serverVoice", dur=16, beat_stretch=0, looping=0, mverb=0.1, amp=0.5).unison(3).only()')
     Server.freeAllNodes()
-    Clock.future(32, lambda: son())
+    eval('se >> loop("serverVoice", dur=16, beat_stretch=0, looping=0, mverb=0.1, amp=0.5).unison(3).only()')
+    Clock.schedule(lambda: son(), Clock.mod(32))
+    
+def playRandomLog(num_lines=5):
+    ''' Play 5 random jam/log lines '''
+    lines = scan_and_extract_lines(num_lines)
+    for line in lines:
+        print(f'SERVER: {line}')
+        try:
+            eval(line)
+        except:
+            pass
+
+def scan_and_extract_lines(num_lines):
+    ''' Scan the logs directory for valid lines and extract a random selection '''
+    log_dir = os.path.join(os.path.dirname(Path('.').absolute()), 'Troop', 'logs')
+    valid_lines = []
+
+    # Regex pattern to match lines starting with 'Svdk: ' or 'Zbdm: ', followed by a letter, a digit, then '>>'
+    playerPattern = re.compile(r'^(Svdk: |Zbdm: )([a-zA-Z]\d\s*>>.*)')
+
+    # Scan the directory for .txt files
+    for filename in os.listdir(log_dir):
+        if filename.endswith('.txt'):
+            filepath = os.path.join(log_dir, filename)
+            with open(filepath, 'r') as file:
+                for line in file:
+                    match = playerPattern.match(line.strip())
+                    if match:
+                        # Append the matched group without the prefix
+                        valid_lines.append(match.group(2))
+
+    # Select random lines
+    if len(valid_lines) < num_lines:
+        raise ValueError("Not enough valid lines found.")
+    
+    selected_lines = sample(valid_lines, num_lines)
+
+    # Replace the identifier with s* incrementing
+    for i in range(len(selected_lines)):
+        selected_lines[i] = re.sub(r'^[a-zA-Z]\d', f's{i+1}', selected_lines[i])
+        selected_lines[i] = re.sub(r'\.(solo|stop|only|unison)\(.*?\)', '', selected_lines[i])
+
+    return selected_lines
 
 
 # start the server

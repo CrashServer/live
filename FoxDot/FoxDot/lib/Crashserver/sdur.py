@@ -3,21 +3,22 @@ import random
 
 ##### SDur by Quantuum #####
 def SDur(target):
-	sr = random.SystemRandom()
-	indexes = random.randint(1,target+4)
-	dividers = [1,1,1,2,2,2,2,4,8] # 1/4 and 1/8-typed notes get more scarce
-	list=[]
-	for i in range(0,indexes):
-			if target%2 == 0:
-					a = random.randint(1,target/2)/sr.choice(dividers)
-			else:
-					a = random.randint(1,(target-1)/2)/sr.choice(dividers)
-			if sum(list)+a < target/2:
-					list.append(a)
-			if sum(list)+a < target:
-					list.append(a)
-	list.append(target-sum(list))
-	return P[list].shuffle() # always return a list of durations with total duration equals target
+    sr = random.SystemRandom()
+    indexes = random.randint(1, target + 4)
+    dividers = [1, 1, 1, 2, 2, 2, 2, 4, 8]  # 1/4 and 1/8-typed notes get more scarce
+    list = []
+    for i in range(0, indexes):
+        if target % 2 == 0:
+            a = random.randint(1, int(target / 2)) / sr.choice(dividers)
+        else:
+            a = random.randint(1, int((target - 1) / 2)) / sr.choice(dividers)
+        if sum(list) + a < target / 2:
+            list.append(a)
+        if sum(list) + a < target:
+            list.append(a)
+    list.append(target - sum(list))
+    return P[list].shuffle()  # always return a list of durations with total duration equals target
+
 
 # variation giving shorter durations
 def SmDur(target):
@@ -27,9 +28,9 @@ def SmDur(target):
 	list=[]
 	for i in range(0,indexes):
 			if target%2 == 0:
-					a = random.randint(1,target/2)/sr.choice(dividers)
+					a = random.randint(1,int(target/2))/sr.choice(dividers)
 			else:
-					a = random.randint(1,(target-1)/2)/sr.choice(dividers)
+					a = random.randint(1,int((target-1)/2))/sr.choice(dividers)
 			if sum(list)+a < target/2:
 					list.append(a)
 			if sum(list)+a/2 < target:
@@ -46,9 +47,9 @@ def ScDur(target):
 	list=[]
 	for i in range(0,indexes):
 			if target%2 == 0:
-					a = random.randint(1,target/2)/sr.choice(dividers)
+					a = random.randint(1,int(target/2))/sr.choice(dividers)
 			else:
-					a = random.randint(1,(target-1)/2)/sr.choice(dividers)
+					a = random.randint(1,int((target-1)/2))/sr.choice(dividers)
 			if sum(list)+a < target/4:
 					list.append(a)
 			if sum(list)+a/2 < target/2:

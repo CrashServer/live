@@ -27,6 +27,7 @@ synthArgs = {
 	'braids': {'atk': patk, 'decay': pdec, 'rel': prel, 'model': [0,47], 'timbre': [0.0,0.6], 'color': [0.0,1.0], 'decim': [1,32], 'bbits': [0,6], 'ws': [0.0,1.0], 'cutoff': pfreq, 'rq': prq},
 	'brown': {'cutoff': pfreq, 'rq': prq},
 	'bug': {'rate': [0.0,16.0], 'cutoff': pfreq, 'rq': prq},
+    'cbass': {'cutoff': [10,100], 'follow': [1,10] },
 	'charm': {'rate': [0.0,16.0]},
 	'click': {'rate': [0,12.0], 'vib': [0.0,12.0], 'fmod': [0.0,12.0]},
 	'cluster': {'atk': patk, 'decay': pdec, 'rel': prel, 'para1': [0.0,20.0], 'rate': [0.0,4.0]}, # mod
@@ -81,6 +82,7 @@ synthArgs = {
 	'orientmod': {'cutoff': pfreq, 'rq': prq, 'rate': [0.0,1.0]},
 	'organ': {'fmod': [0.0,5.0], 'rate': [-4,4]},
 	'pad2': {'rate': [0.0,8.0]},
+    'pads': {'rate': [0.0,8.0]},
 	'pasha': {'rate': [0.0,10.0], 'cutoff': pfreq, 'rq': prq},
 	'pbass': {'rate': [0,10]},	
 	'piano' : {},

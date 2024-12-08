@@ -41,7 +41,7 @@ if __name__ != "__main__":
 	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin', 'onset']
 	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
 					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", 
-					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce", 'quin']
+					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce", 'quin', 'cringe', 'swiss']
 	#penible_synth = ['gray']
 	synthExclude += penible_synth
 	for exclude in synthExclude:

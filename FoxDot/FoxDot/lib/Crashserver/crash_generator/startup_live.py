@@ -5,7 +5,7 @@ try:
     # import sys
     from time import *
     import re
-    from random import choice
+    from random import choice, choices
     from threading import Thread
     from pathlib import Path
     # import socket
@@ -452,6 +452,13 @@ def masterAll(args=0, value=1, *argsall):
             p.__setattr__(args, value)
     else:
         pass
+
+def masterPlayer(method_name, *args, **kwargs):
+    """ Applique une méthode spécifique à tous les joueurs actifs ou réinitialise les attributs spécifiques """
+    for player in Clock.playing:
+        method = getattr(player, method_name, None)
+        if callable(method):
+            method(*args, **kwargs)
 
 # CrashPanel
 
@@ -1054,6 +1061,26 @@ class Variation():
     def __init__(self, durTotal, durBreak):
         self.durTotal = durTotal
         self.durBreak = durBreak
+        self.event = [self.eventFilter, 
+                      self.eventSoloRnd,  
+                      self.eventMasterAll]
+        self.randomFx = {
+            "bend": PWhite(-1, 4),
+            "chop": PRand([2, 4, 8]),
+            "crush": PRand([2,4,8,16]),
+            "dur": self.durBreak/2,
+            "cut": PWhite(0, 1),
+            "rate": PWhite(-1, 6),
+            "dafilter": linvar([20,PRand(200,4000)],[self.durBreak,0]),
+            "djf": PWhite(0.1,0.99),
+            "flanger": PWhite(0.2,4),
+            "slide": PWhite(0.2,2),
+            "formant": PRand([1,2,3]),
+            "tremolo": PWhite(0.5,6),
+            "leg": PRand(0,12),
+            "lofi": PWhite(0.1,0.9),
+
+        }
         self.start()
         
     def stop(self):
@@ -1072,7 +1099,7 @@ class Variation():
     
     def chooseEvent(self):
         ''' choose a random event to be planned '''
-        rnd_event = choice([self.eventFilter, self.eventSoloRnd, self.eventRate])
+        rnd_event = choices(self.event, [1, 1, len(list(self.randomFx.keys()))])[0] # adjust the probability to number of masterAll events
         rnd_event()
         if self.isPlaying:
             Clock.schedule(lambda: self.chooseEvent(), Clock.mod(self.durTotal) + self.durTotal-self.durBreak)
@@ -1099,22 +1126,17 @@ class Variation():
 
     def eventSoloRnd(self):
         ''' solo a random player '''
-        self.soloRnd()
-        Clock.schedule(unsolo, Clock.mod(self.durTotal))
-
-    def soloRnd(self):
-        ''' function to be called by setSoloRnd '''
         soloPlayer = sample(Clock.playing, 1)[0]
         soloPlayer.solo()
-        
-    def eventRate(self):
-        ''' set a random rate on master '''
-        masterRate = PWhite(-1, 6)
-        masterAll("rate", masterRate)
+        Clock.schedule(unsolo, Clock.mod(self.durTotal))
+
+    def eventMasterAll(self):
+        ''' set a random masterAll Fx '''
+        fx = choice(list(self.randomFx.keys()))
+        masterAll(fx, self.randomFx[fx])
         Clock.schedule(lambda: masterAll(0), Clock.mod(self.durTotal))
 
-
-
+    
 # Mixer
 # try:
 # 	class Mixer():

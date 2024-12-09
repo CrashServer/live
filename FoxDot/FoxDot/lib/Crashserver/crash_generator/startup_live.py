@@ -122,7 +122,7 @@ def voiceserver(voice_txt=""):
 def connect():
     ''' Full reset and set bpm, root, sos & video player '''
     Master().reset()
-    Clock.set_time(0)
+    # Clock.set_time(0)
     storageAttack.lost()
     Clock.bpm = 48
     Scale.default = "minor"

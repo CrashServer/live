@@ -51,7 +51,7 @@ except Exception as e:
 
 serverActive = False
 
-if crashOsEnable:
+if crashOsEnable == 42:
     # Osc/udp sender
     try:
         if crashSendMode == "udp":
@@ -198,7 +198,7 @@ def sendOut(msg=""):
             elif crashSendMode == "osc":
                 sendOsc(msg)
             elif crashSendMode == "websocket":
-                asyncio.run(sendWebsocket(json.dumps(
+                asyncio.run(wsServer.sendWebsocket(json.dumps(
                     {"type": "serverCode", "code": msg})))
         if printOut:
             if startupLive:
@@ -226,15 +226,15 @@ def sendOsc(msg=""):
         pass
 
 
-async def sendWebsocket(msg=""):
-    ''' Send websocket msg to websocket server '''
-    try:
-        # send message as json format
-        uri = f"ws://{crashOSIp}:{crashOSPort}"
-        async with websockets.connect(uri) as websocket:
-            await websocket.send(msg)
-    except Exception as e:
-        print(f"Error sending websocket message: {e}")
+# async def sendWebsocket(msg=""):
+#     ''' Send websocket msg to websocket server '''
+#     try:
+#         # send message as json format
+#         uri = f"ws://{crashOSIp}:{crashOSPort}"
+#         async with websockets.connect(uri) as websocket:
+#             await websocket.send(msg)
+#     except Exception as e:
+#         print(f"Error sending websocket message: {e}")
 
 
 class runServer():

@@ -1,3 +1,10 @@
+import asyncio
+import json
+import threading
+
+import websockets
+
+
 try:
     from rtmidi.midiconstants import CONTROL_CHANGE
     import pickle
@@ -421,7 +428,6 @@ def genArp(nbrseq=4, lengthseq=8):
 
 valueDict = {}
 
-
 def masterAll(args=0, value=1, *argsall):
     ''' set temporary a master FX, reset with 0 '''
     global valueDict
@@ -542,77 +548,223 @@ try:
                 mot, chx = choix()
                 return (mot, choice(chx))
 
-        class CrashPanel():
-            def __init__(self, ipZbdm="localhost", ipSvdk=None, port=2000):
-                self.ipZbdm = ipZbdm
-                self.ipSvdk = ipSvdk
-                self.port = port
+        # class CrashPanel():
+        #     def __init__(self, ipZbdm="localhost", ipSvdk=None, port=2000):
+        #         self.ipZbdm = ipZbdm
+        #         self.ipSvdk = ipSvdk
+        #         self.port = port
 
+        #         self.bpmTime = 0.2  # time cycle send bpm
+        #         self.beatTime = 0.1  # time cycle send beat
+        #         self.plyTime = 1.0  # time cycle send player
+        #         self.pdjTime = 60  # time cycle send PlatduJour
+        #         self.chronoTime = 1.0  # time cycle send chrono
+        #         # self.videoTime = 1.0  # time cycle send video index
+
+        #         self.playerCounter = {}
+
+        #         if self.ipZbdm:
+        #             self.clientZbdm = OSCClient()
+        #             self.clientZbdm.connect((self.ipZbdm, 2000))
+        #         if self.ipSvdk:
+        #             self.clientSvdk = OSCClient()
+        #             self.clientSvdk.connect((self.ipSvdk, 2000))
+
+        #         self.pdj = PlatduJour()
+        #         self.timeInit = time()
+
+        #         self.threadBpm = Thread(target=self.sendBpm)
+        #         self.threadBpm.daemon = True
+        #         self.threadScale = Thread(target=self.sendScale)
+        #         self.threadScale.daemon = True
+        #         self.threadRoot = Thread(target=self.sendRoot)
+        #         self.threadRoot.daemon = True
+        #         self.threadBeat = Thread(target=self.sendBeat)
+        #         self.threadBpm.daemon = True
+        #         self.threadPlayer = Thread(target=self.sendPlayer)
+        #         self.threadPlayer.daemon = True
+        #         self.threadPdj = Thread(target=self.sendPdj)
+        #         self.threadPdj.daemon = True
+        #         self.threadChrono = Thread(target=self.sendChrono)
+        #         self.threadChrono.daemon = True
+        #         # self.threadVideoIndex = Thread(target=self.sendVideoIndex)
+        #         # self.threadVideoIndex.daemon = True
+
+        #     def sendOscMsg(self, msg):
+        #         if self.ipZbdm:
+        #             try:
+        #                 self.clientZbdm.send(msg)
+        #             except:
+        #                 pass
+        #         if self.ipSvdk:
+        #             try:
+        #                 self.clientSvdk.send(msg)
+        #             except:
+        #                 pass
+
+        #     def sendBpm(self):
+        #         ''' send Clock.bpm to OSC server '''
+        #         try:
+        #             while self.isrunning:
+        #                 msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
+        #                 self.sendOscMsg(msg)
+        #                 sleep(self.bpmTime)
+        #         except:
+        #             pass
+
+        #     def sendScale(self):
+        #         ''' send Scale to OSC server '''
+        #         try:
+        #             while self.isrunning:
+        #                 msg = OSCMessage(
+        #                     "/panel/scale", [str(Scale.default.name)])
+        #                 self.sendOscMsg(msg)
+        #                 sleep(self.bpmTime*10)
+        #         except:
+        #             pass
+
+        #     def sendRoot(self):
+        #         ''' send Root to OSC server '''
+        #         try:
+        #             while self.isrunning:
+        #                 msg = OSCMessage("/panel/root", [str(Root.default)])
+        #                 self.sendOscMsg(msg)
+        #                 sleep(self.bpmTime*10)
+        #         except:
+        #             pass
+
+        #     def sendBeat(self):
+        #         ''' send Clock.beat to OSC server '''
+        #         try:
+        #             while self.isrunning:
+        #                 msg = OSCMessage("/panel/beat", [Clock.beat])
+        #                 self.sendOscMsg(msg)
+        #                 sleep(self.beatTime)
+        #         except:
+        #             pass
+
+        #     def sendPlayer(self):
+        #         ''' send active player to OSC server '''
+        #         try:
+        #             while self.isrunning:
+        #                 self.addPlayerTurn()
+        #                 playerListCount = [
+        #                     f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
+        #                 msg = OSCMessage("/panel/player", [playerListCount])
+        #                 self.sendOscMsg(msg)
+        #                 sleep(self.plyTime)
+        #         except:
+        #             pass
+
+        #     def sendPdj(self):
+        #         ''' send platdujour to OSC server '''
+        #         try:
+        #             while self.isrunning:
+        #                 intitule, plat = self.pdj.choix()
+        #                 msg = OSCMessage("/panel/pdj", [intitule, plat])
+        #                 self.sendOscMsg(msg)
+        #                 sleep(self.pdjTime)
+        #         except:
+        #             pass
+
+        #     def sendChrono(self):
+        #         ''' send ChronoTime to OSC server '''
+        #         try:
+        #             while self.isrunning:
+        #                 elapsedTime = time() - self.timeInit
+        #                 msg = OSCMessage("/panel/chrono", [elapsedTime])
+        #                 self.sendOscMsg(msg)
+        #                 sleep(self.chronoTime)
+        #         except:
+        #             pass
+
+        #     def addPlayerTurn(self):
+        #         ''' add one to player dictionnary turn '''
+        #         try:
+        #             playerList = Clock.playing
+        #             for p in playerList:
+        #                 if p in self.playerCounter.keys():
+        #                     self.playerCounter[p] += 1
+        #                 else:
+        #                     self.playerCounter[p] = 1
+        #             # Clean non playing player
+        #             delplayer = [
+        #                 k for k in self.playerCounter.keys() if k not in playerList]
+        #             for d in delplayer:
+        #                 self.playerCounter.pop(d, None)
+        #         except Exception as err:
+        #             print("addPlayerTurn problem : ", err)
+
+        #     # def sendVideoIndex(self):
+        #     #     try:
+        #     #         while self.isrunning:
+        #     #             msg = OSCMessage("/panel/video", [oscReceiver.videoGrp, oscReceiver.videoIndex,
+        #     #                                               oscReceiver.videoTotal, oscReceiver.videoIntegrity])
+        #     #             self.sendOscMsg(msg)
+        #     #             sleep(self.videoTime)
+        #     #     except:
+        #     #         pass
+
+        #     def sendOnce(self, txt):
+        #         ''' send on txt msg to OSC '''
+        #         msg = OSCMessage("/panel/help", [txt])
+        #         self.sendOscMsg(msg)
+
+        #     def stop(self):
+        #         self.isrunning = False
+
+        #     def start(self):
+        #         self.isrunning = True
+        #         self.threadBpm.start()
+        #         self.threadScale.start()
+        #         self.threadRoot.start()
+        #         self.threadBeat.start()
+        #         self.threadPlayer.start()
+        #         self.threadPdj.start()
+        #         self.threadChrono.start()
+        #         # self.threadVideoIndex.start()
+
+        # def panelreset():
+        #     global crashpanel
+        #     crashpanel.stop()
+        #     crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
+        #     crashpanel.start()
+
+        # def chrono():
+        #     crashpanel.timeInit = time()
+
+        # crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
+        # crashpanel.start()
+
+        class CrashPanelWs():
+            def __init__(self):
                 self.bpmTime = 0.2  # time cycle send bpm
                 self.beatTime = 0.1  # time cycle send beat
                 self.plyTime = 1.0  # time cycle send player
                 self.pdjTime = 60  # time cycle send PlatduJour
                 self.chronoTime = 1.0  # time cycle send chrono
-                # self.videoTime = 1.0  # time cycle send video index
 
                 self.playerCounter = {}
-
-                if self.ipZbdm:
-                    self.clientZbdm = OSCClient()
-                    self.clientZbdm.connect((self.ipZbdm, 2000))
-                if self.ipSvdk:
-                    self.clientSvdk = OSCClient()
-                    self.clientSvdk.connect((self.ipSvdk, 2000))
 
                 self.pdj = PlatduJour()
                 self.timeInit = time()
 
-                self.threadBpm = Thread(target=self.sendBpm)
-                self.threadBpm.daemon = True
-                self.threadScale = Thread(target=self.sendScale)
-                self.threadScale.daemon = True
-                self.threadRoot = Thread(target=self.sendRoot)
-                self.threadRoot.daemon = True
-                self.threadBeat = Thread(target=self.sendBeat)
-                self.threadBpm.daemon = True
-                self.threadPlayer = Thread(target=self.sendPlayer)
-                self.threadPlayer.daemon = True
-                self.threadPdj = Thread(target=self.sendPdj)
-                self.threadPdj.daemon = True
-                self.threadChrono = Thread(target=self.sendChrono)
-                self.threadChrono.daemon = True
+                self.threadScale = Thread(target=self.sendScale, daemon=True)
+                self.threadRoot = Thread(target=self.sendRoot, daemon=True)
+                self.threadBeat = Thread(target=self.sendBeat, daemon=True)
+                self.threadPlayer = Thread(target=self.sendPlayer, daemon=True)
+                self.threadPdj = Thread(target=self.sendPdj, daemon=True)
+                self.threadChrono = Thread(target=self.sendChrono, daemon=True)
                 # self.threadVideoIndex = Thread(target=self.sendVideoIndex)
                 # self.threadVideoIndex.daemon = True
-
-            def sendOscMsg(self, msg):
-                if self.ipZbdm:
-                    try:
-                        self.clientZbdm.send(msg)
-                    except:
-                        pass
-                if self.ipSvdk:
-                    try:
-                        self.clientSvdk.send(msg)
-                    except:
-                        pass
-
-            def sendBpm(self):
-                ''' send Clock.bpm to OSC server '''
-                try:
-                    while self.isrunning:
-                        msg = OSCMessage("/panel/bpm", [int(Clock.get_bpm())])
-                        self.sendOscMsg(msg)
-                        sleep(self.bpmTime)
-                except:
-                    pass
 
             def sendScale(self):
                 ''' send Scale to OSC server '''
                 try:
                     while self.isrunning:
-                        msg = OSCMessage(
-                            "/panel/scale", [str(Scale.default.name)])
-                        self.sendOscMsg(msg)
+                        msg = json.dumps(
+                    {"type": "scale", "scale": str(Scale.default.name)})
+                        asyncio.run(wsServer.sendWebsocket(msg))
                         sleep(self.bpmTime*10)
                 except:
                     pass
@@ -621,8 +773,8 @@ try:
                 ''' send Root to OSC server '''
                 try:
                     while self.isrunning:
-                        msg = OSCMessage("/panel/root", [str(Root.default)])
-                        self.sendOscMsg(msg)
+                        msg = json.dumps({"type": "root", "root": str(Root.default)})
+                        asyncio.run(wsServer.sendWebsocket(msg))
                         sleep(self.bpmTime*10)
                 except:
                     pass
@@ -631,8 +783,8 @@ try:
                 ''' send Clock.beat to OSC server '''
                 try:
                     while self.isrunning:
-                        msg = OSCMessage("/panel/beat", [Clock.beat])
-                        self.sendOscMsg(msg)
+                        msg = json.dumps({"type": "beat", "beat": Clock.beat})
+                        asyncio.run(wsServer.sendWebsocket(msg))
                         sleep(self.beatTime)
                 except:
                     pass
@@ -644,8 +796,8 @@ try:
                         self.addPlayerTurn()
                         playerListCount = [
                             f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
-                        msg = OSCMessage("/panel/player", [playerListCount])
-                        self.sendOscMsg(msg)
+                        msg = json.dumps({"type": "players", "players": playerListCount})
+                        asyncio.run(wsServer.sendWebsocket(msg))
                         sleep(self.plyTime)
                 except:
                     pass
@@ -655,8 +807,8 @@ try:
                 try:
                     while self.isrunning:
                         intitule, plat = self.pdj.choix()
-                        msg = OSCMessage("/panel/pdj", [intitule, plat])
-                        self.sendOscMsg(msg)
+                        msg = json.dumps({"type": "pdj", "intitule": intitule, "plat": plat})
+                        asyncio.run(wsServer.sendWebsocket(msg))
                         sleep(self.pdjTime)
                 except:
                     pass
@@ -666,8 +818,8 @@ try:
                 try:
                     while self.isrunning:
                         elapsedTime = time() - self.timeInit
-                        msg = OSCMessage("/panel/chrono", [elapsedTime])
-                        self.sendOscMsg(msg)
+                        msg = json.dumps({"type": "chrono", "chrono": elapsedTime})
+                        asyncio.run(wsServer.sendWebsocket(msg))
                         sleep(self.chronoTime)
                 except:
                     pass
@@ -689,27 +841,17 @@ try:
                 except Exception as err:
                     print("addPlayerTurn problem : ", err)
 
-            # def sendVideoIndex(self):
-            #     try:
-            #         while self.isrunning:
-            #             msg = OSCMessage("/panel/video", [oscReceiver.videoGrp, oscReceiver.videoIndex,
-            #                                               oscReceiver.videoTotal, oscReceiver.videoIntegrity])
-            #             self.sendOscMsg(msg)
-            #             sleep(self.videoTime)
-            #     except:
-            #         pass
-
             def sendOnce(self, txt):
                 ''' send on txt msg to OSC '''
-                msg = OSCMessage("/panel/help", [txt])
-                self.sendOscMsg(msg)
-
+                msg = json.dumps({"type": "help", "help": txt})
+                asyncio.run(wsServer.sendWebsocket(msg))
+                
             def stop(self):
                 self.isrunning = False
 
             def start(self):
                 self.isrunning = True
-                self.threadBpm.start()
+                # self.threadBpm.start()
                 self.threadScale.start()
                 self.threadRoot.start()
                 self.threadBeat.start()
@@ -718,19 +860,93 @@ try:
                 self.threadChrono.start()
                 # self.threadVideoIndex.start()
 
-        def panelreset():
-            global crashpanel
-            crashpanel.stop()
-            crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
-            crashpanel.start()
-
-        def chrono():
-            crashpanel.timeInit = time()
-
-        crashpanel = CrashPanel(ipZbdm, ipSvdk, 2000)
-        crashpanel.start()
 except Exception as e:
     print(e)
+
+## Websocket server for crashpanel & CableGl
+
+class WebsocketServer():
+    def __init__(self, ip="localhost", port=20000):
+        self.ip = ip
+        self.port = port
+        # OSC Server
+        self.oscServer = ThreadingOSCServer((self.ip, 2887))
+        self.oscServer.addDefaultHandlers()
+        self.oscServer.addMsgHandler(
+            "/CPU", self.receiveCpu)
+        self.oscThread = Thread(target=self.oscServer.serve_forever)
+        self.oscThread.daemon = True
+        self.oscThread.start()
+        # websocker server
+        self.wsClients = set()
+        self.websocket_started_event = threading.Event()
+        self.websocket_thread = threading.Thread(target=self.start_websocket_server, daemon=True)
+        self.websocket_thread.start()
+        self.websocket_started_event.wait()
+        # bpm send
+        self.sendBpm_thread = threading.Thread(target=self.send_bpm_periodically, daemon=True)
+        self.sendBpm_thread.start()
+
+    def receiveCpu(self, address, tags, contents, source):
+        ''' reveive CPU usage from SC by OSC and send it to websocket '''
+        cpu = round(float(contents[0]), 2)
+        if cpu:
+            asyncio.run(self.sendWebsocket(
+                json.dumps({"type": "cpu", "cpu": cpu})))
+
+    async def sendWsServer(self, websocket):
+        self.wsClients.add(websocket)
+        try:
+            async for message in websocket:
+                data = json.loads(message)
+                await asyncio.gather(*[client.send(message) for client in self.wsClients])
+                if "serverState" in data:
+                    if data["serverState"] == 1:
+                        self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 1}))
+                        print("Activate server")
+                        activateServer()
+                    elif data["serverState"] == 0:
+                        self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 1}))
+                        print("Deactivate server")
+                        soff()
+        except websockets.ConnectionClosed:
+            pass
+        finally:
+            self.wsClients.remove(websocket)
+
+    async def mainWebsocket(self):
+        ''' The websocket server '''
+        async with websockets.serve(self.sendWsServer, self.ip, self.port):
+            self.websocket_started_event.set()
+            await asyncio.Future()  # run forever
+
+    def start_websocket_server(self):
+        ''' For using threading '''
+        print(
+            f"Start WebSocket server at ws://{self.ip}:{self.port}")
+        asyncio.run(self.mainWebsocket())
+
+    async def sendWebsocket(self, msg=""):
+        ''' Send websocket msg to websocket server '''
+        try:
+            # send message as json format
+            uri = f"ws://{self.ip}:{self.port}"
+            async with websockets.connect(uri) as websocket:
+                await websocket.send(msg)
+        except Exception as e:
+            print(f"Error sending websocket message: {e}")
+
+    def send_bpm_periodically(self):
+        ''' Send bpm to websocket server every second '''
+        while True:
+            bpm = int(Clock.get_bpm())
+            asyncio.run(self.sendWebsocket(json.dumps({"type": "bpm", "bpm": bpm})))
+            sleep(60/bpm)
+
+if crashOsEnable:
+    wsServer = WebsocketServer(crashOSIp, crashOSPort)
+    crashpanel = CrashPanelWs()
+    crashpanel.start()
 
 # French cut
 try:
@@ -787,64 +1003,6 @@ try:
 
 except Exception as e:
     print(e)
-
-
-# dwarfDict = {
-#     "chorus": {
-#         "phase": 10,
-#         "depth": 11,
-#         "delay": 12,
-#         "contour": 13,
-#         "wet": 14,
-#         "freq": 15},
-#     "whammy": {
-#         "first": 16,
-#         "last": 17,
-#         "gain": 18,
-#         "clean": 19
-#         },
-#     "drive": {
-#         "attack": 20,
-#         "bright": 21,
-#         "gate": 22,
-#         "level": 23
-#         },
-#     "master": {
-#         "bass": 24,
-#         "treble": 25,
-#         },
-#     "shimmer": {
-#         "predelay": 27,
-#         "early": 28,
-#         "shimmer": 29
-#         }
-#     }
-#
-# def dwarf(fx="", param="", value="", duree=1):
-#     def findName():
-#         playerList = [f'm{p}' for p in list(string.ascii_lowercase)]
-#         playerFiltred = [ply for ply in playerList if ply not in [p.name for p in Clock.playing]]
-#         if len(playerFiltred) >= 1:
-#             return playerFiltred[0]
-#         else:
-#             return None
-#     if fx == "":
-#         print(dwarfDict.keys())
-#     else:
-#         if param == "":
-#             print(dwarfDict[fx].keys())
-#         else:
-#             if value != "" and fx in dwarfDict.keys() and param in dwarfDict[fx].keys():
-#                 para = dwarfDict[fx][param]
-#                 playerName = findName()
-#                 if playerName is not None:
-#                     clip.copy(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree}) # {fx}/{param}")
-#                     eval(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree})")
-#                 else:
-#                     print("No more player left...")
-#             else:
-#                 print("Wrong name or give me a value")
-
 
 class MidiDwarf:
     """Control the dawrf recording with:
@@ -925,24 +1083,7 @@ class MidiDwarf:
             channelTrack = 127
         self.send_control_change(5, channelTrack)
 
-
 dwarf = MidiDwarf()
-
-# try:
-#     class FilterOSCClient(OSCClient):
-#         def send(self, message, *args):
-#             if "video" in str(message.message):
-#                 OSCClient.send(self, message, *args)
-
-#     def OSCVideo(video_adress):
-#         my_client = FilterOSCClient()
-#         my_client.connect((video_adress, 20000))
-#         Server.forward = my_client
-#     OSCVideo(crashOSIp)
-#     print("Video Connected")
-# except Exception as e:
-#     print(e)
-
 
 class voice_count():
     """ random count recursively every 8 bars.
@@ -972,7 +1113,6 @@ class voice_count():
 
     def help(self):
         print(Voice().get_voices())
-
 
 voicecount = voice_count()
 
@@ -1136,7 +1276,8 @@ class Variation():
         masterAll(fx, self.randomFx[fx])
         Clock.schedule(lambda: masterAll(0), Clock.mod(self.durTotal))
 
-    
+# Archive of old function 
+
 # Mixer
 # try:
 # 	class Mixer():
@@ -1179,3 +1320,74 @@ class Variation():
 # 	mixer = Mixer()
 # except Exception as e:
 # 	print(e)
+
+# try:
+#     class FilterOSCClient(OSCClient):
+#         def send(self, message, *args):
+#             if "video" in str(message.message):
+#                 OSCClient.send(self, message, *args)
+
+#     def OSCVideo(video_adress):
+#         my_client = FilterOSCClient()
+#         my_client.connect((video_adress, 20000))
+#         Server.forward = my_client
+#     OSCVideo(crashOSIp)
+#     print("Video Connected")
+# except Exception as e:
+#     print(e)
+
+# dwarfDict = {
+#     "chorus": {
+#         "phase": 10,
+#         "depth": 11,
+#         "delay": 12,
+#         "contour": 13,
+#         "wet": 14,
+#         "freq": 15},
+#     "whammy": {
+#         "first": 16,
+#         "last": 17,
+#         "gain": 18,
+#         "clean": 19
+#         },
+#     "drive": {
+#         "attack": 20,
+#         "bright": 21,
+#         "gate": 22,
+#         "level": 23
+#         },
+#     "master": {
+#         "bass": 24,
+#         "treble": 25,
+#         },
+#     "shimmer": {
+#         "predelay": 27,
+#         "early": 28,
+#         "shimmer": 29
+#         }
+#     }
+#
+# def dwarf(fx="", param="", value="", duree=1):
+#     def findName():
+#         playerList = [f'm{p}' for p in list(string.ascii_lowercase)]
+#         playerFiltred = [ply for ply in playerList if ply not in [p.name for p in Clock.playing]]
+#         if len(playerFiltred) >= 1:
+#             return playerFiltred[0]
+#         else:
+#             return None
+#     if fx == "":
+#         print(dwarfDict.keys())
+#     else:
+#         if param == "":
+#             print(dwarfDict[fx].keys())
+#         else:
+#             if value != "" and fx in dwarfDict.keys() and param in dwarfDict[fx].keys():
+#                 para = dwarfDict[fx][param]
+#                 playerName = findName()
+#                 if playerName is not None:
+#                     clip.copy(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree}) # {fx}/{param}")
+#                     eval(f"{playerName} >> MidiOut(channel=8, cc={para}, value={value}, dur={duree})")
+#                 else:
+#                     print("No more player left...")
+#             else:
+#                 print("Wrong name or give me a value")

@@ -12,12 +12,15 @@
 - [X] Flasher lors de l'évaluation d'une ligne
 - [ ] ctrl + shift + enter : Evalation d'un block
 - [ ] player actif dans le gutter
+- [ ] flasher chez les 2 joueurs
+- [ ] coloration des erreurs dans la console
 
 ### Serveur
 - [X] Envoie des messages 
-- [ ] fix bug deconnection, envoie de message
-- [ ] utillisation webrtc pour les messages avec Yjs
-- [ ] persistance des messages
+- [X] fix bug deconnection, envoie de message
+- [X] utillisation webrtc pour les messages avec Yjs
+- [ ] persistance des messages (voir indexeddbProvider)
+- [ ] gestion du out de foxdot
 
 ### Interface
 - [ ] Panneau de configuration

@@ -1,13 +1,19 @@
-import * as Y from 'yjs'
-import { WebsocketProvider } from 'y-websocket'
-import { Awareness } from 'y-protocols/awareness' 
+
+// @ts-ignore
 import CodeMirror from 'codemirror'
+import * as Y from 'yjs'
+import { WebrtcProvider } from 'y-webrtc'
 import { CodemirrorBinding } from 'y-codemirror'
+import { Awareness } from 'y-protocols/awareness'
+// import { IndexeddbPersistence } from 'y-indexeddb' 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/python/python.js' // Importer le mode Python
 import '../css/style.css'
 
 document.addEventListener('DOMContentLoaded', () => {
+  const ws = new WebSocket('ws://localhost:1234');
+
+  // Panneau de configuration
   const configButton = document.getElementById('configButton');
   const configPanel = document.getElementById('configPanel');
 
@@ -27,6 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialisation de YJS
   const ydoc = new Y.Doc();
   const awareness = new Awareness(ydoc);
+  // const indexeddbProvider = new IndexeddbPersistence('webtroop', ydoc);
+
+  const provider = new WebrtcProvider('webtroop', ydoc, {
+    awareness: awareness,
+    signaling: ['ws://localhost:4444']
+  });
 
   // Gestion de l'état utilisateur
   const userNameInput = document.getElementById('userName');
@@ -63,31 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   userColorInput.addEventListener('input', updateUserInfo);
 
-  const provider = new WebsocketProvider('ws://localhost:1234', 'webtroop', ydoc, {
-    connect: true,
-    awareness: awareness
-  });
-
-  // logs for debugging
-  provider.on('status', event => {
-    console.log('Statut connexion:', event.status);
-  });
-
-  provider.on('sync', (isSynced) => {
-    console.log('Synchronisation:', isSynced ? 'complète' : 'en cours');
-  });
-
-  // Ajouter un gestionnaire d'erreurs WebSocket
-  provider.ws.onerror = (error) => {
-    console.error('Erreur WebSocket:', error);
-  };
-
-  // Vérifier la connexion WebSocket
-  provider.ws.onopen = () => {
-    console.log('WebSocket connecté');
-  };
-
-  provider.ws.onmessage = (event) => {    
+  //Gestion des logs FoxDot pour la console
+  ws.onmessage = (event) => {    
     try {
       const message = JSON.parse(event.data);
 
@@ -108,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     logs.scrollTop = logs.scrollHeight;
   }
   
-  const ytext = ydoc.getText('codemirror');
+  const ytext = ydoc.getText('webtroop');
   
   // Configuration de CodeMirror
   const editor = CodeMirror(document.getElementById('editor'), {
@@ -122,11 +111,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // Binding YJS avec CodeMirror
   const binding = new CodemirrorBinding(ytext, editor, provider.awareness);
   
+  const themeSelect = document.getElementById('themeSelect');
+  themeSelect.addEventListener('change', (e) => {
+    const theme = e.target.value;
+    editor.setOption('theme', theme);
+    // Sauvegarder la préférence
+    localStorage.setItem('preferredTheme', theme);
+    });
+
+  // Restaurer le thème au chargement
+  const savedTheme = localStorage.getItem('preferredTheme');
+  if (savedTheme) {
+    editor.setOption('theme', savedTheme);
+    themeSelect.value = savedTheme;
+  }
 
   // Gestion de CTRL+ENTER
   editor.setOption('extraKeys', {
     'Ctrl-;': (cm) => {
-      provider.ws.send(JSON.stringify({
+      ws.send(JSON.stringify({
         type: 'evaluate_code',
         code: 'Clock.clear()\n'
       }))
@@ -152,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (codeToEvaluate.trim()) {
         // Envoyer le code
-        provider.ws.send(JSON.stringify({
+        ws.send(JSON.stringify({
           type: 'evaluate_code',
           code: codeToEvaluate
         }));

@@ -1,0 +1,120 @@
+:root {
+    --bg-col-1: #2b2b2b;
+    --bg-col-2: #333;
+    --border-col-1 : #666;
+    --border-col-2 : #555;
+    --text-col-1 : #ECDFCC;
+    --text-col-2 : #e0e0e0;
+    --beat-col-1 : #3c3c3c;
+    --beat-col-2 : #FFAA4478;
+  }
+  
+.crash-panel { 
+  height: 100%;
+  background-color: var(--bg-col-1);
+  border: 1px solid var(--border-col-1);
+  color: var(--text-col-1);
+  width: 280px;
+  padding: 2px;
+  resize:horizontal;
+  overflow: auto;
+  max-width: 100%;
+  line-height: 1;
+  z-index: 1000;
+}
+
+.crash-panel.open {
+  left: 0px;
+}
+
+.crash-panel.close {
+  left: -500px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+header, section, footer {
+    margin-bottom: 10px;
+  }
+  
+header h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.foxdot-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 5px;
+  gap: 0.2rem
+}
+
+.info-row {
+  background-color: var(--bg-col-2);
+  border: 1px solid var(--border-col-2);
+  transition: border-color 0.5s ease; 
+  border-radius: 0.1rem;
+}
+
+.info-row legend {
+  font-size: 1rem;
+}
+
+.info-text {
+  color: var(--text-col-2);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.simple-text {
+  color: var(--text-col-2);
+  font-size: 0.8rem;
+}
+
+.beat-steps {
+  background-color: var(--bg-col-2);
+  color: var(--text-col-2);
+  padding: 2px;
+  text-align: center;
+  border: 1px solid var(--border-col-2);
+  margin-bottom: 2px;
+  background: linear-gradient(to right, var(--beat-col-2) 0%, var(--beat-col-1) 0%);
+}
+
+
+textarea {
+  width: 100%;
+  max-width: calc(100% - 10px);
+  height: auto;
+  background-color: var(--bg-col-2);
+  color: var(--text-col-2);
+  border: 1px solid var(--border-col-2);
+  padding: 5px;
+  max-height: 33%;
+}
+
+.player-line {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 0.5rem; */
+  padding: 2px 0;
+}
+.player-id {
+  color: var(--text-col-2);
+}
+.player-synth {
+  color: var(--text-col-1);
+}
+.player-duration {
+  color: #4caf50;
+}

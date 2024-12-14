@@ -1,0 +1,169 @@
+const ws = new WebSocket('ws://192.168.1.7:20000');
+
+ws.onopen = function() {
+    console.log('WebSocket connection opened');
+};
+
+ws.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    
+    switch(data.type) {
+        case 'scale':
+            document.getElementById('scale').textContent = data.scale;
+            break;
+        case 'root':
+            document.getElementById('root').textContent = data.root;
+            break;
+        case 'cpu':
+            updateCpu(data.cpu);
+            break;
+        case 'bpm':
+            document.getElementById('bpm').textContent = data.bpm;
+            break;
+        // case 'serverState':
+        //     document.getElementById('serverState').textContent = data.serverState == 1 ? "Actif" : "Inactif";
+        //     break;
+        case 'beat':
+            updateBeat(data.beat);
+            break;
+        case 'chrono':
+            document.getElementById('chrono').textContent = formatTime(data.chrono);
+            break;
+        case 'players':
+            formatPlayers(data.players)
+            // playersContainer.style.height = playersContainer.scrollHeight + 'px';
+            break;
+        case 'pdj':
+            const pdjContainer = document.getElementById('pdj')
+            pdjContainer.textContent = data.intitule + " - " + data.plat;
+            pdjContainer.style.height = pdjContainer.scrollHeight + 'px';
+            break;
+        case 'help':
+            const helpContainer = document.getElementById('help')
+            helpContainer.textContent = data.help;
+            helpContainer.style.height = helpContainer.scrollHeight + 'px';
+            break;
+        default:
+            break;    
+            // console.log('Unknown message type:', data.type);
+    }
+};
+
+ws.onclose = function() {
+    console.log('WebSocket Crashpanel connection closed');
+};
+
+ws.onerror = function(error) {
+    console.error('WebSocket CrashPanel error:', error);
+};
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const remainingSeconds = Math.floor(seconds % 60).toString().padStart(2, '0');
+    return `${minutes}:${remainingSeconds}`;
+}
+
+function updateBeat(actualbeat) {
+    const beatInterval = [8,16,32,64]
+    beatInterval.forEach(beatInter => {
+        const beat = Math.ceil(actualbeat % beatInter);
+        const beatDiv = document.getElementById(`beat-${beatInter}`)
+        const progressPercent = (beat / beatInter) * 100
+        beatDiv.style.background = `linear-gradient(to right, var(--beat-col-2) ${progressPercent}%, var(--beat-col-1) ${progressPercent}%)`;
+        beatDiv.textContent = `${beat}/${beatInter}`;
+
+    });
+}
+
+function updateCpu(usagePercent){
+    const cpuDiv = document.getElementById("cpu")
+    const cpuSection = document.querySelector(".cpu-info > fieldset")
+    // Définir les couleurs de la plage
+    const green = "#515b54";
+    const orange = "#FFAA44";
+    const redWarm = "#FF5544";
+    const redBright = "#FF0000"
+
+    let borderColor;
+
+    // Interpolation basée sur les plages
+    if (usagePercent <= 30) {
+        // Entre vert et orange
+        borderColor = interpolateColor(green, orange, usagePercent / 30);
+    } else if (usagePercent <= 50) {
+        // Entre orange et rouge
+        borderColor = interpolateColor(orange, redWarm, (usagePercent - 30) / 20);
+    } else {
+        // Au-delà de 50%, rouge fixe
+        borderColor = interpolateColor(redWarm, redBright, (usagePercent - 50) / 50);
+    }
+
+    // Mettre à jour la bordure et le texte
+    // cpuSection.style.borderColor = borderColor;
+    document.documentElement.style.setProperty('--border-col-2', borderColor);
+    cpuDiv.textContent = `${usagePercent}%`;
+}
+
+function interpolateColor(color1, color2, factor) {
+    const c1 = parseInt(color1.slice(1), 16);
+    const c2 = parseInt(color2.slice(1), 16);
+  
+    const r1 = (c1 >> 16) & 0xff, g1 = (c1 >> 8) & 0xff, b1 = c1 & 0xff;
+    const r2 = (c2 >> 16) & 0xff, g2 = (c2 >> 8) & 0xff, b2 = c2 & 0xff;
+  
+    const r = Math.round(r1 + factor * (r2 - r1));
+    const g = Math.round(g1 + factor * (g2 - g1));
+    const b = Math.round(b1 + factor * (b2 - b1));
+  
+    return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
+  }
+
+function formatPlayers(message) {
+    // Séparer chaque player (split sur ', ')
+    const players = message.map(player => {
+    // Extraire les infos avec regex
+    const match = player.match(/<([a-z]\d+)\s*-\s*(\w+)>\s*(\d{2}:\d{2})/);
+    if (!match) return null;
+
+    const [_, id, synth, duration] = match;
+    const durationColor = getDurationColor(duration);
+
+    return {
+    id,
+    synth,
+    duration,
+    durationColor
+    };
+    }).filter(p => p !== null);
+
+    // Créer le HTML formaté
+    const playersDiv = document.getElementById('players');
+    playersDiv.innerHTML = players.map(p => `
+        <div class="player-line">
+        <span class="player-id">${p.id}</span>
+        <span class="player-synth">${p.synth}</span>
+        <span class="player-duration" style="color: ${p.durationColor}">${p.duration}</span>
+        </div>
+    `).join('');
+}
+
+function getDurationColor(duration) {
+    // Convertir "MM:SS" en minutes
+    const [minutes, seconds] = duration.split(':').map(Number);
+    const totalMinutes = minutes + seconds/60;
+    
+    // Définir les seuils et couleurs
+    const green = '#4caf50';
+    const orange = '#ff9800';
+    const red = '#f44336';
+    
+    // Calculer la couleur
+    if (totalMinutes <= 1) {
+        return green;
+    } else if (totalMinutes <= 5) {
+        // Interpoler entre 1-5 minutes
+        const factor = (totalMinutes - 1) / 4; // 4 = (5-1)
+        return interpolateColor(green, red, factor);
+    }
+    return red;
+}

@@ -6,29 +6,124 @@
     <title>WebTroop</title>
   </head>
   <body>
-    <div id="container">
-      <div id="editor"></div>
-      <div id="logs"></div>
-      <button id="configButton">⚙️</button>
-      <div id="configPanel" class="config-panel">
-        <h3>Configuration</h3>
-        <div class="config-group">
-          <div class="input-group">
-            <input type="color" id="userColor" value="#2196f3">
-            <input type="text" id="userName" placeholder="Entrez votre nom">
-          </div>
-          <div class="input-group">
-            <label for="themeSelect">Thème:</label>
-            <select id="themeSelect">
-              <option value="monokai">Monokai</option>
-              <option value="dracula">Dracula</option>
-              <option value="material">Material</option>
-              <option value="solarized">Solarized</option>
-            </select>
-          </div>
+    <div id="main-container">
+        <div class="crash-panel" id="crashPanel">
+            <header>
+                <h1>CrashPanel</h1>
+            </header>
+            <section class="foxdot-info">
+                
+                    <fieldset class="info-row">
+                        <legend>Bpm</legend>
+                        <div class="info-text" id="bpm">000</div>
+                    </fieldset>
+                    <fieldset class="info-row">
+                        <legend>Scale</legend>
+                        <div class="info-text" id="scale">Major</div>
+                    </fieldset>
+                    <fieldset class="info-row">
+                        <legend>Root</legend>
+                        <div class="info-text" id="root">0</div>
+                    </fieldset>
+                
+            </section>
+            <section class="cpu-info">
+                <fieldset class="info-row">
+                    <legend>CPU</legend>
+                    <div class="info-text" id="cpu">00 %</div>
+                </fieldset>
+            </section>
+        
+            <section class="crashometre">
+                <fieldset class="info-row">
+                    <legend>Chrono</legend>
+                    <div class="info-text" id="chrono">00:00</div>
+                </fieldset>
+            </section>
+  
+            <section class="beat">
+                <fieldset class="info-row">
+                    <legend>Beat</legend>
+                    <div>
+                        <div class="beat-steps" id="beat-8">0/8</div>
+                        <div class="beat-steps" id="beat-16">0/16</div>
+                        <div class="beat-steps" id="beat-32">0/32</div>
+                        <div class="beat-steps" id="beat-64">0/64</div>
+                    </div>
+                </fieldset>
+            </section>
+  
+            <section class="plat-du-jour">
+                <fieldset class="info-row">
+                    <legend>Plat du Jour</legend>
+                    <div id="pdj" class="simple-text" >Lorem ipsum dolor sit amet.</div>
+                </fieldset>
+            </section>
+                
+            <section class="players">
+                <fieldset class="info-row">
+                    <legend>Players</legend>
+                    <div id="players" class="simple-text">
+                        
+                    </div>
+                </fieldset>
+            </section>
+                
+            <section class="help">
+                <fieldset class="info-row">
+                    <legend>Help</legend>
+                    <div id="help" class="simple-text"></div>
+                </fieldset>
+            </section>
+        </div>
+        <div id="editor-container">
+            <div id="editor"></div>
+            <div id="logs"></div>
+            <button id="configButton"><img src="/src/images/gear.svg"></button>
+            <div id="configPanel" class="config-panel">
+                <h3>Crash Config</h3>
+                <div class="config-group">
+                    <div class="input-group">
+                        <input type="color" id="userColor" value="#2196f3">
+                        <input type="text" id="userName" placeholder="Nom du joueur">
+                    </div>
+                </div>    
+                <div class="input-group">
+                    <label for="themeSelect">Theme:</label>
+                    <select id="themeSelect">
+                        <option value="monokai">Monokai</option>
+                        <option value="dracula">Dracula</option>
+                        <option value="material">Material</option>
+                        <option value="solarized">Solarized</option>
+                    </select>
+                </div>
+                <div class="toggle-group">
+                    
+                        <label for="fontSizeSelect">Font Size: <span id="fontSizeValue">16</span></label>
+                        <input type="range" min="8" max="32" value="16" step="1" id="fontSizeSlider">
+                   
+                </div>
+
+                <div class="toggle-group">
+                    <div class="toggle-item">
+                        <label>Toggle Crash Panel</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="crashPanelToggle" checked/>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <label>Toggle Autocomplete</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autocompleteToggle"/>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
+    <script type="module" src="/src/js/crashpanel.js"></script>
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>

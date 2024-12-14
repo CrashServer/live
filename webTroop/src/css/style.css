@@ -6,16 +6,23 @@
 
 body {
   margin: 0;
-  padding: 20px;
   background: #1e1e1e;
+  height: 100vh;
 }
 
-#container {
+#main-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+#editor-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   margin: 0;
   background: #1e1e1e;
+  width: 100%;
 }
 
 #editor {
@@ -54,19 +61,35 @@ body {
   animation: blink 1s step-end infinite;
 }
 
+.CodeMirror-matchingbracket {
+  color: #00ff00 !important; /* Vert vif */
+  background-color: rgba(0, 255, 0, 0.2); /* Fond vert transparent */
+  font-weight: bold;
+  border-bottom: 1px solid #00ff00;
+}
+
+/* Style des parenthèses/crochets non correspondants */
+.CodeMirror-nonmatchingbracket {
+  color: #ff0000 !important; /* Rouge */
+  background-color: rgba(255, 0, 0, 0.2); /* Fond rouge transparent */
+  font-weight: bold;
+}
+
 /* Panneau de Configuration*/
 #configButton {
   position: fixed;
   top: 10px;
   right: 10px;
   z-index: 1000;
-  padding: 8px;
+  /* padding: 8px; */
   border-radius: 50%;
   border: none;
   background: #3d3d3d;
   color: #fff;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .config-panel {
@@ -184,4 +207,59 @@ body {
   0% { opacity: 1; }
   50% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+/* Toggle switch */
+.toggle-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin-bottom: 1rem;
+}
+
+/* Container for the toggle */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+/* Hide default checkbox */
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The track */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.3s;
+}
+
+/* The circular slider */
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+/* Toggled state */
+.toggle-switch input:checked+.slider {
+  background-color: #FFAA4478;
+}
+
+.toggle-switch input:checked+.slider::before {
+  transform: translateX(26px);
 }

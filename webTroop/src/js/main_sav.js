@@ -9,10 +9,6 @@ import { Awareness } from 'y-protocols/awareness'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/python/python.js' // Importer le mode Python
 import '../css/style.css'
-import '../css/crashpanel.css'
-import 'codemirror/addon/edit/matchbrackets'
-import 'codemirror/addon/edit/closebrackets'
-import 'codemirror/addon/comment/comment'
 
 document.addEventListener('DOMContentLoaded', () => {
   const ws = new WebSocket('ws://localhost:1234');
@@ -33,19 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
           configPanel.classList.remove('open');
       }
   });
-
-  // Toggle Crash Panel
-  const crashPanel = document.getElementById('crashPanel')
-  const crashPanelToggle = document.getElementById('crashPanelToggle');
-  
-  crashPanelToggle.addEventListener('change', () => {
-    if (crashPanelToggle.checked) {
-      crashPanel.style.display = 'block';
-    }
-    else {
-      crashPanel.style.display = 'none';
-    }
-  })
 
   // Initialisation de YJS
   const ydoc = new Y.Doc();
@@ -122,15 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
     theme: 'monokai',
     lineNumbers: true,
     indentUnit: 4,
-    autofocus: true,
-    matchBrackets: true,
-    autoCloseBrackets: true,
+    autofocus: true
   });
 
   // Binding YJS avec CodeMirror
   const binding = new CodemirrorBinding(ytext, editor, provider.awareness);
   
-  // sélection du thème
   const themeSelect = document.getElementById('themeSelect');
   themeSelect.addEventListener('change', (e) => {
     const theme = e.target.value;
@@ -148,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Gestion de CTRL+ENTER
   editor.setOption('extraKeys', {
-    'Ctrl-/': 'toggleComment',
     'Ctrl-;': (cm) => {
       ws.send(JSON.stringify({
         type: 'evaluate_code',

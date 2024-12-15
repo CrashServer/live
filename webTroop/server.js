@@ -17,8 +17,9 @@ wss.on('connection', (ws, req) => {
   ws.on('message', (message) => {
     try {
       const data = JSON.parse(message.toString());
-
+      console.log('Message reçu:', data);
       if (data.type === 'evaluate_code') {
+        broadcastLog(`>> ${data.code}\n`);
         foxdot.stdin.write(data.code + '\n' + '\n');
       }
     } catch (e) {
@@ -34,21 +35,25 @@ wss.on('connection', (ws, req) => {
 foxdot.stdout.on('data', (data) => {
   try { 
     const logMessage = data.toString();
-    const messageObj = {
-      type: 'foxdot_log',
-      data: logMessage
-    };
-
-    console.log(logMessage);
-    // Envoyer les logs à tous les clients connectés
-    wss.clients.forEach(client => {
-        if (client.readyState === 1) {
-            client.send(JSON.stringify(messageObj));
-        }
-    });
+    broadcastLog(logMessage);
   } catch (e) {
     console.error('Erreur lors de l\'envoi des logs:', e);
   }
 });
+
+// Logs de console de FoxDot
+function broadcastLog(message) {
+  console.log('Log:', message);
+  const messageObj = {
+    type: 'foxdot_log',
+    data: message
+  };
+
+  wss.clients.forEach(client => {
+    if (client.readyState === 1) {
+      client.send(JSON.stringify(messageObj));
+    }
+  });
+}
 
 console.log('Serveur démarré sur le port 1234');

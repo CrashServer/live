@@ -1,3 +1,18 @@
+import { EventEmitter } from './eventBus.js';
+
+// Toggle Crash Panel
+const crashPanel = document.getElementById('crashPanel')
+const crashPanelToggle = document.getElementById('crashPanelToggle');
+
+crashPanelToggle.addEventListener('change', () => {
+  if (crashPanelToggle.checked) {
+    crashPanel.style.display = 'block';
+  }
+  else {
+    crashPanel.style.display = 'none';
+  }
+})
+
 const ws = new WebSocket('ws://192.168.1.7:20000');
 
 ws.onopen = function() {
@@ -139,12 +154,20 @@ function formatPlayers(message) {
     // Créer le HTML formaté
     const playersDiv = document.getElementById('players');
     playersDiv.innerHTML = players.map(p => `
-        <div class="player-line">
-        <span class="player-id">${p.id}</span>
-        <span class="player-synth">${p.synth}</span>
-        <span class="player-duration" style="color: ${p.durationColor}">${p.duration}</span>
+        <div class="player-line" data-player-id="${p.id}">
+            <span class="player-id">${p.id}</span>
+            <span class="player-synth">${p.synth}</span>
+            <span class="player-duration" style="color: ${p.durationColor}">${p.duration}</span>
         </div>
     `).join('');
+
+    document.querySelectorAll('.player-line').forEach(line => {
+        line.addEventListener('click', (e) => {
+            const playerId = e.currentTarget.dataset.playerId;
+            EventEmitter.emit('send_foxdot', `${playerId}.stop()`);
+        });
+        line.style.cursor = 'pointer';
+    });
 }
 
 function getDurationColor(duration) {

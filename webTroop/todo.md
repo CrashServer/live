@@ -14,13 +14,15 @@
 - [ ] player actif dans le gutter
 - [ ] flasher chez les 2 joueurs
 - [ ] coloration des erreurs dans la console
+- [X] liste des evaluations dans console
+- [ ] ajout de tabs pour plusieurs editeurs
 
 ### Serveur
 - [X] Envoie des messages 
 - [X] fix bug deconnection, envoie de message
 - [X] utillisation webrtc pour les messages avec Yjs
 - [ ] persistance des messages (voir indexeddbProvider)
-- [ ] gestion du out de foxdot
+- [X] gestion du out de foxdot
 
 ### Interface
 - [ ] Panneau de configuration
@@ -42,3 +44,5 @@
 - [ ] intégrer précédentes modifications
 - [ ] tests envoie de message websockets vers cable
 - [ ] raz chrono
+- [X] stop player en cliquant sur le joueur
+- [ ] affichage du nom de la loop dans la liste des players actif

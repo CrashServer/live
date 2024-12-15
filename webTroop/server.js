@@ -1,9 +1,10 @@
 import { WebSocketServer } from 'ws';
 import { spawn } from 'child_process';
+import { CONFIG} from './config.js';
 
 // Lancer FoxDot
 const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
-  cwd: '/home/zbdm/CrashServer/live/FoxDot'
+  cwd: CONFIG.FOXDOT_PATH,
 });
 
 console.log('FoxDot démarré', foxdot.pid);

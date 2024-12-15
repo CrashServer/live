@@ -1,5 +1,6 @@
 
 // @ts-ignore
+import { CONFIG} from '../../config.js';
 import CodeMirror from 'codemirror'
 import * as Y from 'yjs'
 import { WebrtcProvider } from 'y-webrtc'
@@ -10,14 +11,18 @@ import { setupConfigPanel } from './configPanel.js'
 // import { IndexeddbPersistence } from 'y-indexeddb' 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/python/python.js' // Importer le mode Python
-import '../css/style.css'
-import '../css/crashpanel.css'
+import 'codemirror/keymap/sublime'
 import 'codemirror/addon/edit/matchbrackets'
 import 'codemirror/addon/edit/closebrackets'
 import 'codemirror/addon/comment/comment'
+import 'codemirror/addon/hint/show-hint'
+import 'codemirror/addon/hint/show-hint.css'
+import '../css/style.css'
+import '../css/crashpanel.css'
+import '../css/configPanel.css'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const ws = new WebSocket('ws://localhost:1234');
+const ws = new WebSocket(CONFIG.FOXDOT_SERVER);
 
   // Initialisation de YJS
   const ydoc = new Y.Doc();
@@ -25,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // const indexeddbProvider = new IndexeddbPersistence('webtroop', ydoc);
   const provider = new WebrtcProvider('webtroop', ydoc, {
     awareness: awareness,
-    signaling: ['ws://localhost:4444']
+    signaling: [CONFIG.SIGNALING_SERVER]
   });
 
   const ytext = ydoc.getText('webtroop');
@@ -39,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     autofocus: true,
     matchBrackets: true,
     autoCloseBrackets: true,
+    lineWrapping: true,
+    cursorScrollMargin: 50,
+    keyMap: 'sublime',
   });
 
   // Binding YJS avec CodeMirror
@@ -87,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   editor.setOption('extraKeys', {
     // 'Ctrl-ù': console.log("Ctrl-/"),
     'Ctrl-;': stopClock,
+    'Ctrl-Space': 'autocomplete',
     'Ctrl-Enter': (cm) => {
       // Obtenir la position exacte du curseur
       const cursor = cm.getCursor();
@@ -160,6 +169,33 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   });
 
+  editor.setOption('hintOptions', {
+    hint: function(editor) {
+        const cursor = editor.getCursor();
+        const line = editor.getLine(cursor.line);
+        const cursorPosition = cursor.ch;
+        
+        // Regex pour détecter un player suivi de '>>'
+        const playerPattern = /([a-zA-Z]\d+)\s*>>\s*$/;
+        const beforeCursor = line.slice(0, cursorPosition);
+        const match = beforeCursor.match(playerPattern);
+
+        if (match) {
+            const suggestions = [
+                { text: 'play()', displayText: 'play' },
+                { text: 'loop()', displayText: 'loop' },
+                { text: 'blip()', displayText: 'blip' }
+            ];
+
+            return {
+                list: suggestions,
+                from: CodeMirror.Pos(cursor.line, match[0].length),
+                to: cursor
+            };
+        }
+    }
+});
+
   // Ajouter l'écouteur d'awareness
   awareness.on('change', () => {
     const states = awareness.getStates();
@@ -195,13 +231,13 @@ document.addEventListener('DOMContentLoaded', () => {
         this.ws = new WebSocket(this.url);
         
         this.ws.onopen = () => {
-            console.log('WebSocket connecté');
+            // console.log('WebSocket connecté');
             this.reconnectAttempts = 0;
             this.startHeartbeat();
         };
 
         this.ws.onclose = () => {
-            console.log('WebSocket fermé, tentative de reconnexion...');
+            // console.log('WebSocket fermé, tentative de reconnexion...');
             this.reconnect();
         };
 
@@ -215,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.reconnectAttempts++;
         
         setTimeout(() => {
-            console.log(`Tentative de reconnexion ${this.reconnectAttempts}...`);
+            // console.log(`Tentative de reconnexion ${this.reconnectAttempts}...`);
             this.connect();
         }, delay);
     }
@@ -235,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  const crashOsWs = new PersistentWebSocket('ws://192.168.1.7:20000');
+  const crashOsWs = new PersistentWebSocket(CONFIG.CRASHOS_SERVER);
   editor.on('cursorActivity', (cm) => {
     // Récupérer les infos utilisateur depuis awareness
     const userState = awareness.getLocalState();

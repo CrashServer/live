@@ -1,4 +1,5 @@
 import { EventEmitter } from './eventBus.js';
+import { CONFIG} from '../../config.js';
 
 // Toggle Crash Panel
 const crashPanel = document.getElementById('crashPanel')
@@ -13,7 +14,7 @@ crashPanelToggle.addEventListener('change', () => {
   }
 })
 
-const ws = new WebSocket('ws://192.168.1.7:20000');
+const ws = new WebSocket(CONFIG.CRASHOS_SERVER);
 
 ws.onopen = function() {
     console.log('WebSocket connection opened');
@@ -46,7 +47,6 @@ ws.onmessage = function(event) {
             break;
         case 'players':
             formatPlayers(data.players)
-            // playersContainer.style.height = playersContainer.scrollHeight + 'px';
             break;
         case 'pdj':
             const pdjContainer = document.getElementById('pdj')

@@ -67,6 +67,36 @@ export function setupConfigPanel(awareness, editor) {
         themeSelect.value = savedTheme;
     }
 
+    const fontSizeSlider = document.getElementById('fontSizeSlider');
+    const fontSizeValue = document.getElementById('fontSizeValue');
+
+    // Restaurer la taille sauvegardée
+    const savedSize = localStorage.getItem('preferredFontSize');
+    if (savedSize) {
+        fontSizeSlider.value = savedSize;
+        updateFontSize(savedSize);
+    }
+
+    // Mettre à jour lors du changement
+    fontSizeSlider.addEventListener('input', (e) => {
+        const size = e.target.value;
+        updateFontSize(size);
+});
+
+    function updateFontSize(size) {
+        // Mettre à jour l'affichage
+        fontSizeValue.textContent = size;
+        
+        // Mettre à jour l'éditeur
+        editor.getWrapperElement().style.fontSize = size + 'px';
+        
+        // Forcer le rafraîchissement
+        editor.refresh();
+        
+        // Sauvegarder la préférence
+        localStorage.setItem('preferredFontSize', size);
+    }
+
     return {
         updateUserInfo() {
             const userInfo = {

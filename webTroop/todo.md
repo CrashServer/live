@@ -16,6 +16,7 @@
 - [ ] coloration des erreurs dans la console
 - [X] liste des evaluations dans console
 - [ ] ajout de tabs pour plusieurs editeurs
+- [ ] flash message pour changement de nom de joueur
 
 ### Serveur
 - [X] Envoie des messages 
@@ -39,6 +40,7 @@
 - [ ] changement de la couleur de fond
 - [X] Nom du joueur
 - [X] Sauvegarder l'état de l'interface en localstorage
+- [ ] liste des shortcuts
 
 ### CrashPanel
 - [ ] intégrer précédentes modifications
@@ -46,3 +48,12 @@
 - [ ] raz chrono
 - [X] stop player en cliquant sur le joueur
 - [ ] affichage du nom de la loop dans la liste des players actif
+- [ ] ajout d'un bouton pour activer le server
+- [ ] ajout d'un bouton pour changer le theme dark/light
+
+### Shortcut
+- ctrl + ; pour arreter Foxdot
+- ctrl + c pour copier la ligne courante
+- ctrl + d pour tout selectionner
+- ctrl-shift-d pour dupliquer
+- ctrl-shift-up pour monter la ligne

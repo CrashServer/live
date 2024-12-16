@@ -9,7 +9,7 @@
     <div id="main-container">
         <div class="crash-panel" id="crashPanel">
             <header>
-                <h1>CrashPanel</h1>
+                <h1 id="crashPanelTitle">CrashPanel</h1>
             </header>
             <section class="foxdot-info">
                 
@@ -56,14 +56,14 @@
             <section class="plat-du-jour">
                 <fieldset class="info-row">
                     <legend>Plat du Jour</legend>
-                    <div id="pdj" class="simple-text" ></div>
+                    <div id="pdj" class="simple-text h10" ></div>
                 </fieldset>
             </section>
                 
             <section class="players">
                 <fieldset class="info-row">
                     <legend>Players</legend>
-                    <div id="players" class="simple-text">
+                    <div id="players" class="simple-text h20">
                         
                     </div>
                 </fieldset>
@@ -72,7 +72,7 @@
             <section class="help">
                 <fieldset class="info-row">
                     <legend>Help</legend>
-                    <div id="help" class="simple-text"></div>
+                    <div id="help" class="simple-text h40"></div>
                 </fieldset>
             </section>
         </div>
@@ -94,13 +94,26 @@
                         <option value="monokai">Monokai</option>
                         <option value="dracula">Dracula</option>
                         <option value="material">Material</option>
-                        <option value="solarized">Solarized</option>
+                        <option value="solarized dark">Solarized</option>
+                        <option value="eclipse">Eclipse</option>
+                        <option value="hopscotch">Hopscotch</option>
+                    </select>
+                </div>
+                <!-- Dans index.html -->
+                <div class="input-group">
+                    <label for="fontSelect">Police:</label>
+                    <select id="fontSelect">
+                        <option value="monospace">Monospace</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Consolas">Consolas</option>
+                        <option value="Fira Code">Fira Code</option>
+                        <option value="Source Code Pro">Source Code Pro</option>
                     </select>
                 </div>
                 <div class="toggle-group">
                     
                         <label for="fontSizeSelect">Font Size: <span id="fontSizeValue">16</span></label>
-                        <input type="range" min="8" max="64" value="16" step="1" id="fontSizeSlider">
+                        <input type="range" min="12" max="64" value="16" step="1" id="fontSizeSlider">
                    
                 </div>
 

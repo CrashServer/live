@@ -4,6 +4,7 @@ export function setupConfigPanel(awareness, editor) {
     const configPanel = document.getElementById('configPanel');
     const userNameInput = document.getElementById('userName');
     const userColorInput = document.getElementById('userColor');
+    const fontSelect = document.getElementById('fontSelect');
 
     // Restaurer les données utilisateur
     const savedUser = localStorage.getItem('webtroop-user');
@@ -37,6 +38,20 @@ export function setupConfigPanel(awareness, editor) {
     });
     
     userColorInput.addEventListener('input', updateUserInfo);
+
+    // Gestion du changement de police
+    fontSelect.addEventListener('change', (e) => {
+        const font = e.target.value;
+        editor.getWrapperElement().style.fontFamily = font;
+        localStorage.setItem('preferredFont', font);
+    });
+
+    // Restaurer la police sauvegardée
+    const savedFont = localStorage.getItem('preferredFont');
+    if (savedFont) {
+        fontSelect.value = savedFont;
+        editor.getWrapperElement().style.fontFamily = savedFont;
+    }
 
     // Gestion ouverture/fermeture du panneau
     configButton.addEventListener('click', () => {

@@ -5,6 +5,7 @@ import { CONFIG} from './config.js';
 // Lancer FoxDot
 const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
   cwd: CONFIG.FOXDOT_PATH,
+  env: {...process.env, PYTHONUNBUFFERED: '1'}
 });
 
 console.log('FoxDot démarré', foxdot.pid);
@@ -18,7 +19,7 @@ wss.on('connection', (ws, req) => {
   ws.on('message', (message) => {
     try {
       const data = JSON.parse(message.toString());
-      console.log('Message reçu:', data);
+      // console.log('Message reçu:', data);
       if (data.type === 'evaluate_code') {
         broadcastLog(`>> ${data.code}\n`);
         foxdot.stdin.write(data.code + '\n' + '\n');
@@ -36,6 +37,7 @@ wss.on('connection', (ws, req) => {
 foxdot.stdout.on('data', (data) => {
   try { 
     const logMessage = data.toString();
+    // console.log('Log:', logMessage);
     broadcastLog(logMessage);
   } catch (e) {
     console.error('Erreur lors de l\'envoi des logs:', e);
@@ -44,7 +46,6 @@ foxdot.stdout.on('data', (data) => {
 
 // Logs de console de FoxDot
 function broadcastLog(message) {
-  console.log('Log:', message);
   const messageObj = {
     type: 'foxdot_log',
     data: message
@@ -52,6 +53,7 @@ function broadcastLog(message) {
 
   wss.clients.forEach(client => {
     if (client.readyState === 1) {
+      // console.log('Envoi de log à un client', messageObj);
       client.send(JSON.stringify(messageObj));
     }
   });

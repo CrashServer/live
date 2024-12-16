@@ -7,10 +7,10 @@
 - [ ] améliorer coloration syntaxique pour foxdot
 - [X] ctrl + . pour arreter Foxdot
 - [ ] ctrl + / pour envoyer commenter une ligne
-- [ ] ctrl + D pour dupliquer une ligne
+- [X] ctrl + shift + D pour dupliquer une ligne
 - [ ] Amélioration du rendu des joueurs
 - [X] Flasher lors de l'évaluation d'une ligne
-- [ ] ctrl + shift + enter : Evalation d'un block
+- [X] ctrl + shift + enter : Evalation d'un block
 - [ ] player actif dans le gutter
 - [ ] flasher chez les 2 joueurs
 - [ ] coloration des erreurs dans la console
@@ -24,31 +24,27 @@
 - [X] utillisation webrtc pour les messages avec Yjs
 - [ ] persistance des messages (voir indexeddbProvider)
 - [X] gestion du out de foxdot
+- [X] envoie des message du serveur
 
-### Interface
-- [ ] Panneau de configuration
-- [ ] Panneau de chat
-- [ ] Panneau de joueurs
 
 ### Evolution
 - [ ] Ajouter un chat
 
 ### Panneau de configuration
-- [ ] changement police
+- [X] changement police
 - [X] changement couleur
-- [ ] changement taille
-- [ ] changement de la couleur de fond
+- [X] changement taille
 - [X] Nom du joueur
 - [X] Sauvegarder l'état de l'interface en localstorage
 - [ ] liste des shortcuts
 
 ### CrashPanel
-- [ ] intégrer précédentes modifications
-- [ ] tests envoie de message websockets vers cable
+- [X] intégrer précédentes modifications
+- [X] tests envoie de message websockets vers cable
 - [ ] raz chrono
 - [X] stop player en cliquant sur le joueur
 - [ ] affichage du nom de la loop dans la liste des players actif
-- [ ] ajout d'un bouton pour activer le server
+- [X] ajout d'un bouton pour activer le server (click title)
 - [ ] ajout d'un bouton pour changer le theme dark/light
 
 ### Shortcut

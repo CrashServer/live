@@ -1,4 +1,4 @@
-const SERVER_IP = '192.168.1.7';
+const SERVER_IP = '192.168.0.42';
 
 export const CONFIG = {
     SERVER_IP, // adresse IP du serveur

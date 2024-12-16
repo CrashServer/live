@@ -1,14 +1,13 @@
-
 // @ts-ignore
 import { CONFIG} from '../../config.js';
 import CodeMirror from 'codemirror'
-import * as Y from 'yjs'
-import { WebrtcProvider } from 'y-webrtc'
 import { CodemirrorBinding } from 'y-codemirror'
-import { Awareness } from 'y-protocols/awareness'
 import { EventEmitter } from './eventBus.js';
 import { setupConfigPanel } from './configPanel.js'
-// import { IndexeddbPersistence } from 'y-indexeddb' 
+import * as Y from 'yjs'
+import { WebrtcProvider } from 'y-webrtc'
+// import { IndexeddbPersistence } from 'y-indexeddb'
+import { Awareness } from 'y-protocols/awareness'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/python/python.js' // Importer le mode Python
 import 'codemirror/keymap/sublime'
@@ -22,23 +21,25 @@ import '../css/crashpanel.css'
 import '../css/configPanel.css'
 
 document.addEventListener('DOMContentLoaded', () => {
-const ws = new WebSocket(CONFIG.FOXDOT_SERVER);
-
+  const ws = new WebSocket(CONFIG.FOXDOT_SERVER);
+  
   // Initialisation de YJS
   const ydoc = new Y.Doc();
   const awareness = new Awareness(ydoc);
-  // const indexeddbProvider = new IndexeddbPersistence('webtroop', ydoc);
+  
+  // const indexeddbProvider = new IndexeddbPersistence('webtroop', ydoc)
+  
   const provider = new WebrtcProvider('webtroop', ydoc, {
     awareness: awareness,
     signaling: [CONFIG.SIGNALING_SERVER]
   });
-
+  
   const ytext = ydoc.getText('webtroop');
   
   // Configuration de CodeMirror
   const editor = CodeMirror(document.getElementById('editor'), {
     mode: 'python',
-    theme: 'monokai',
+    theme: 'eclipse',
     lineNumbers: true,
     indentUnit: 4,
     autofocus: true,
@@ -116,6 +117,15 @@ const ws = new WebSocket(CONFIG.FOXDOT_SERVER);
       }
 
       if (codeToEvaluate.trim()) {
+        // Vérifier s'il faut stopper un player
+        const playerPattern = /_([a-zA-Z]\d+|[a-zA-Z]{2})/;;
+        const match = codeToEvaluate.trim().match(playerPattern);
+        console.log(match);
+
+        if (match) {
+          const player = match[1];
+          codeToEvaluate = `${player}.stop()`;
+        }  
         // Envoyer le code
         ws.send(JSON.stringify({
           type: 'evaluate_code',
@@ -270,8 +280,9 @@ const ws = new WebSocket(CONFIG.FOXDOT_SERVER);
         }
     }
   }
-
   const crashOsWs = new PersistentWebSocket(CONFIG.CRASHOS_SERVER);
+
+
   editor.on('cursorActivity', (cm) => {
     // Récupérer les infos utilisateur depuis awareness
     const userState = awareness.getLocalState();
@@ -290,4 +301,11 @@ const ws = new WebSocket(CONFIG.FOXDOT_SERVER);
 
     crashOsWs.send(JSON.stringify(message));
   });
+
+  // Activation du server en cliquant sur le titre de crashpanel
+  const crashPanelTitle = document.getElementById('crashPanelTitle')
+  crashPanelTitle.addEventListener('click', () => {
+    const message = { serverState: 1 }
+    crashOsWs.send(JSON.stringify(message))
+  })
 });

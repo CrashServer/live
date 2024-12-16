@@ -1208,7 +1208,7 @@ class Variation():
             "bend": PWhite(-1, 4),
             "chop": PRand([2, 4, 8]),
             "crush": PRand([2,4,8,16]),
-            "dur": self.durBreak/2,
+            # "dur": self.durBreak/2,
             "cut": PWhite(0, 1),
             "rate": PWhite(-1, 6),
             "dafilter": linvar([20,PRand(200,4000)],[self.durBreak,0]),

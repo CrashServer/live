@@ -137,7 +137,7 @@ function formatPlayers(message) {
     // Séparer chaque player (split sur ', ')
     const players = message.map(player => {
     // Extraire les infos avec regex
-    const match = player.match(/<([a-z]\d+)\s*-\s*(\w+)>\s*(\d{2}:\d{2})/);
+    const match = player.match(/<([a-z]{1,2}\d?)\s*-\s*(\w+)>\s*(\d{2}:\d{2})/);
     if (!match) return null;
 
     const [_, id, synth, duration] = match;

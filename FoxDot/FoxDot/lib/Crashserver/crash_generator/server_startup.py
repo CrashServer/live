@@ -99,8 +99,6 @@ if crashOsEnable == 42:
             oscReceiver = OSCReceiver(crashOSIp)
 
         elif crashSendMode == "websocket":
-            # TODO enregistrer les différentes connexion websocket (CPU, serverCode) et maintenir la connexion active et verifier la connexion (reconnecter le cas échéant)
-
             class OSCReceiver():
                 ''' OSC Receiver for convert OSC message to websocket message (like cpu from SC)'''
 
@@ -118,67 +116,6 @@ if crashOsEnable == 42:
                     if cpu:
                         asyncio.run(sendWebsocket(
                             json.dumps({"type": "cpu", "cpu": cpu})))
-
-            # start the websocket server
-            wsClients = set()
-            websocket_started_event = threading.Event()
-
-            async def sendWsServer(websocket):
-                wsClients.add(websocket)
-                try:
-                    async for message in websocket:
-                        data = json.loads(message)
-                        await asyncio.gather(*[client.send(message) for client in wsClients])
-                        if "serverState" in data:
-                            if data["serverState"] == 1:
-                                print("Activate server")
-                                activateServer()
-                            elif data["serverState"] == 0:
-                                print("Deactivate server")
-                                soff()
-                except websockets.ConnectionClosed:
-                    pass
-                finally:
-                    wsClients.remove(websocket)
-
-            # websocket server
-            async def mainWebsocket():
-                async with websockets.serve(sendWsServer, crashOSIp, crashOSPort):
-                    websocket_started_event.set()
-                    await asyncio.Future()  # run forever
-
-            # for using threading
-            def start_websocket_server():
-                print(
-                    f"Start WebSocket server at ws://{crashOSIp}:{crashOSPort}")
-                asyncio.run(mainWebsocket())
-
-            websocket_thread = threading.Thread(
-                target=start_websocket_server, daemon=True)
-            websocket_thread.start()
-
-            async def sendBpm(bpm):
-                ''' Send bpm to websocket server '''
-                try:
-                    uri = f"ws://{crashOSIp}:{crashOSPort}"
-                    async with websockets.connect(uri) as websocket:
-                        await websocket.send(json.dumps({"type": "bpm", "bpm": bpm}))
-                except Exception as e:
-                    print(f"Error sending bpm to websocket server: {e}")
-
-            def send_bpm_periodically():
-                ''' Send bpm to websocket server every second '''
-                while True:
-                    bpm = int(Clock.get_bpm())
-                    asyncio.run(sendBpm(bpm))
-                    sleep(60/bpm)
-                    # Clock.future(1, lambda: send_bpm_periodically())
-
-            # threading
-            websocket_started_event.wait()
-            sendBpm_thread = threading.Thread(
-                target=send_bpm_periodically, daemon=True)
-            sendBpm_thread.start()
 
             try:
                 oscReceiver = OSCReceiver(crashOSIp)
@@ -776,6 +713,7 @@ def son(s=999, d=999, l=999):
 def soff():
     ''' Deactivate the server '''
     print("Server Off")
+    variation.stop()
     global serverActive
     serverActive = False
 

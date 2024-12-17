@@ -8,12 +8,12 @@
 - [X] ctrl + . pour arreter Foxdot
 - [ ] ctrl + / pour envoyer commenter une ligne
 - [X] ctrl + shift + D pour dupliquer une ligne
-- [ ] Amélioration du rendu des joueurs
+- [X] Amélioration du rendu des joueurs
 - [X] Flasher lors de l'évaluation d'une ligne
 - [X] ctrl + shift + enter : Evalation d'un block
 - [ ] player actif dans le gutter
-- [ ] flasher chez les 2 joueurs
-- [ ] coloration des erreurs dans la console
+- [X] flasher chez les 2 joueurs
+- [X] coloration des erreurs dans la console
 - [X] liste des evaluations dans console
 - [ ] ajout de tabs pour plusieurs editeurs
 - [ ] flash message pour changement de nom de joueur

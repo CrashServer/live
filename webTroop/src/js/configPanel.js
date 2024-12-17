@@ -96,7 +96,7 @@ export function setupConfigPanel(awareness, editor) {
     fontSizeSlider.addEventListener('input', (e) => {
         const size = e.target.value;
         updateFontSize(size);
-});
+        });
 
     function updateFontSize(size) {
         // Mettre à jour l'affichage

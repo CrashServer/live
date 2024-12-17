@@ -80,9 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (message.includes('Traceback')) {
       entry.classList.add('error-log');
     }
+    else if (!message.includes('>>')) {
+      entry.classList.add('help');
+    }
     entry.textContent = message;
-    logs.appendChild(entry);
-    logs.scrollTop = logs.scrollHeight;
+    logs.insertBefore(entry, logs.firstChild);
+    logs.scrollTop = 0;
   }
 
   function stopClock(cm) {
@@ -120,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Vérifier s'il faut stopper un player
         const playerPattern = /_([a-zA-Z]\d+|[a-zA-Z]{2})/;;
         const match = codeToEvaluate.trim().match(playerPattern);
-        console.log(match);
 
         if (match) {
           const player = match[1];
@@ -302,10 +304,56 @@ document.addEventListener('DOMContentLoaded', () => {
     crashOsWs.send(JSON.stringify(message));
   });
 
-  // Activation du server en cliquant sur le titre de crashpanel
-  const crashPanelTitle = document.getElementById('crashPanelTitle')
+  // Toggle de l'activation du server en cliquant sur le titre de crashpanel
+  // Change le titre en fonction de l'état du serveur
+  // Change la couleur du titre en fonction de l'état du serveur
+  let serverActive = false;
+
+  const updateCrashPanelTitle = () => {
+    if (serverActive) {
+      crashPanelTitle.textContent = 'Server Activated';
+      crashPanelTitle.classList.add('server-active');
+    } else {
+      crashPanelTitle.textContent = 'CrashPanel';
+      crashPanelTitle.classList.remove('server-active');
+    }
+  };
+
   crashPanelTitle.addEventListener('click', () => {
-    const message = { serverState: 1 }
-    crashOsWs.send(JSON.stringify(message))
+    serverActive = !serverActive;
+    const message = { "type": "serverState", serverState: serverActive ? 1 : 0 };
+    crashOsWs.send(JSON.stringify(message));
+    updateCrashPanelTitle();
+  });
+
+  updateCrashPanelTitle();
+
+  // Redimensionner le panneau de logs
+  const separator = document.getElementById('separator')
+  const logs = document.getElementById('logs')
+  const editorContainer = document.getElementById('editor-container')
+
+  let isResizing = false
+
+  separator.addEventListener('mousedown', (e) => {
+    isResizing = true
+    document.addEventListener('mousemove', resize)
+    document.addEventListener('mouseup', stopResize)
   })
+
+  function resize(e) {
+    if (isResizing) {
+      const containerHeight = editorContainer.clientHeight
+      const newLogsHeight = containerHeight - e.clientY
+      logs.style.height = `${newLogsHeight}px`
+      editor.getWrapperElement().style.height = `${containerHeight - newLogsHeight - separator.clientHeight}px`
+      editor.refresh()
+    }
+  }
+
+  function stopResize() {
+    isResizing = false
+    document.removeEventListener('mousemove', resize)
+    document.removeEventListener('mouseup', stopResize)
+  }
 });

@@ -16,6 +16,7 @@ import 'codemirror/addon/edit/closebrackets'
 import 'codemirror/addon/comment/comment'
 import 'codemirror/addon/hint/show-hint'
 import 'codemirror/addon/hint/show-hint.css'
+import 'codemirror/addon/hint/anyword-hint'
 import '../css/style.css'
 import '../css/crashpanel.css'
 import '../css/configPanel.css'
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     autoCloseBrackets: true,
     lineWrapping: true,
     cursorScrollMargin: 50,
+    singleCursorHeightPerLine: false,
     keyMap: 'sublime',
   });
 
@@ -67,16 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const message = JSON.parse(event.data);
       if (message.type === 'foxdot_log') {
-        appendLog(message.data);
+        appendLog(message.data, message.color);
       }
     } catch (error) {
     }
   };
 
-  function appendLog(message) {
+  function appendLog(message, color) {
     const logs = document.getElementById('logs');
     const entry = document.createElement('pre');
     entry.className = 'log-entry';
+    if (color){
+      entry.style.color = color;
+    }
     if (message.includes('Traceback')) {
       entry.classList.add('error-log');
     }
@@ -131,9 +136,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Envoyer le code
         ws.send(JSON.stringify({
           type: 'evaluate_code',
-          code: codeToEvaluate
+          code: codeToEvaluate,
+          userName: awareness.getLocalState().user.name,
+          userColor: awareness.getLocalState().user.color 
         }));
-
+        
+        crashOsWs.send(JSON.stringify({
+          type: (awareness.getLocalState().user.name).toLowerCase() + "Code",
+          code: codeToEvaluate,
+        }));
+      
         // Envoyer l'information de flash via awareness
         awareness.setLocalStateField('flash', {
           lineStart,
@@ -181,8 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   });
 
+  // Gestion de l'autocomplétion
   editor.setOption('hintOptions', {
     hint: function(editor) {
+        
         const cursor = editor.getCursor();
         const line = editor.getLine(cursor.line);
         const cursorPosition = cursor.ch;
@@ -204,9 +218,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 from: CodeMirror.Pos(cursor.line, match[0].length),
                 to: cursor
             };
+        } else {
+              const suggestions = [
+                { text: 'linvar([],[])', displayText: 'linvar' },
+                { text: 'var([],[])', displayText: 'var' },
+            ];
+
+            return {
+                list: suggestions,
+                from: CodeMirror.Pos(cursor.line, cursorPosition),
+                to: cursor
+            };
         }
     }
-});
+  });
+
+  // var WORD = /[\w$]+/, RANGE = 500;
+
+  // CodeMirror.registerHelper("hint", "anyword", function(editor, options) {
+  //     var word = options && options.word || WORD;
+  //     var range = options && options.range || RANGE;
+  //     var cur = editor.getCursor(), curLine = editor.getLine(cur.line);
+  //     var end = cur.ch, start = end;
+  //     while (start && word.test(curLine.charAt(start - 1))) --start;
+  //     var curWord = start != end && curLine.slice(start, end);
+
+  //     var list = options && options.list || [], seen = {};
+  //     var re = new RegExp(word.source, "g");
+  //     for (var dir = -1; dir <= 1; dir += 2) {
+  //       var line = cur.line, endLine = Math.min(Math.max(line + dir * range, editor.firstLine()), editor.lastLine()) + dir;
+  //       for (; line != endLine; line += dir) {
+  //         var text = editor.getLine(line), m;
+  //         while (m = re.exec(text)) {
+  //           if (line == cur.line && m[0] === curWord) continue;
+  //           if ((!curWord || m[0].lastIndexOf(curWord, 0) == 0) && !Object.prototype.hasOwnProperty.call(seen, m[0])) {
+  //             seen[m[0]] = true;
+  //             list.push(m[0]);
+  //           }
+  //         }
+  //       }
+  //     }
+  //     return {list: list, from: CodeMirror.Pos(cur.line, start), to: CodeMirror.Pos(cur.line, end)};
+  //   });
 
   // Ajouter l'écouteur d'awareness
   awareness.on('change', () => {

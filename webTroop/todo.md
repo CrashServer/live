@@ -2,6 +2,11 @@
 
 ## Todo
 
+## Bug
+- [ ] copy paste
+- [ ] couper son pour svdk
+- [ ] etat du serveur 
+
 ### Editeur
 - [ ] autocompletion foxdot
 - [ ] améliorer coloration syntaxique pour foxdot
@@ -17,6 +22,13 @@
 - [X] liste des evaluations dans console
 - [ ] ajout de tabs pour plusieurs editeurs
 - [ ] flash message pour changement de nom de joueur
+- [ ] position des joueurs dans le gutter
+- [ ] affichage de l'instant code entre le log et l'editeur + no de ligne 
+- [ ] ping sur une ligne pour laisser des marques 
+- [ ] flash message pour envoie de message
+
+### logs
+- [ ] coloration en fonction du joueur et affichage du nom du joueur
 
 ### Serveur
 - [X] Envoie des messages 
@@ -46,6 +58,7 @@
 - [ ] affichage du nom de la loop dans la liste des players actif
 - [X] ajout d'un bouton pour activer le server (click title)
 - [ ] ajout d'un bouton pour changer le theme dark/light
+- [ ] ajout des loops au click
 
 ### Shortcut
 - ctrl + ; pour arreter Foxdot

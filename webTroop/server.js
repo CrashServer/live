@@ -21,7 +21,8 @@ wss.on('connection', (ws, req) => {
       const data = JSON.parse(message.toString());
       // console.log('Message reçu:', data);
       if (data.type === 'evaluate_code') {
-        broadcastLog(`>> ${data.code}\n`);
+        const {code, userName, userColor} = data;
+        broadcastLog(`>> ${userName}: ${code}\n`, userColor);
         foxdot.stdin.write(data.code + '\n' + '\n');
       }
     } catch (e) {
@@ -37,7 +38,6 @@ wss.on('connection', (ws, req) => {
 foxdot.stdout.on('data', (data) => {
   try { 
     const logMessage = data.toString();
-    // console.log('Log:', logMessage);
     broadcastLog(logMessage);
   } catch (e) {
     console.error('Erreur lors de l\'envoi des logs:', e);
@@ -45,10 +45,11 @@ foxdot.stdout.on('data', (data) => {
 });
 
 // Logs de console de FoxDot
-function broadcastLog(message) {
+function broadcastLog(message, color=null) {
   const messageObj = {
     type: 'foxdot_log',
-    data: message
+    data: message,
+    color: color
   };
 
   wss.clients.forEach(client => {

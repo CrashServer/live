@@ -5,6 +5,10 @@
 @import 'codemirror/theme/solarized.css';
 @import 'codemirror/theme/eclipse.css';
 @import 'codemirror/theme/hopscotch.css';
+@font-face {
+  font-family: 'Fira Code';
+  src: url('../fonts/FiraCode-Regular.woff2');
+}
 
 body {
   margin: 0;
@@ -73,14 +77,27 @@ body {
   color: #d4d4d4;
 }
 
+.CodeMirror pre.CodeMirror-line {
+  padding-bottom: 0.8rem;
+}
+
 .CodeMirror-cursor {
   border-left: 2px solid #fff !important; /* Curseur blanc */
   /* animation: blink 1s step-end infinite; */
 }
 
-.CodeMirror-gutter {
-  border-right: 1px solid #6e6e6e;
+/* .CodeMirror-gutter {
+border-right: 1px solid #6e6e6e; 
+} */
+
+.CodeMirror-lines {
+  padding-left: 0.5rem;
 }
+
+.CodeMirror-linenumber {
+  left: -0.5rem !important; 
+}
+
 
 .CodeMirror-matchingbracket {
   color: #00ff00 !important; /* Vert vif */

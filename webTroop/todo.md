@@ -3,8 +3,8 @@
 ## Todo
 
 ## Bug
-- [ ] copy paste
-- [ ] couper son pour svdk
+- [X] copy paste
+- [ ] corriger bug ctrl + ; pour chrome
 - [ ] etat du serveur 
 
 ### Editeur

@@ -4,6 +4,8 @@ import { CONFIG} from '../../config.js';
 // Toggle Crash Panel
 const crashPanel = document.getElementById('crashPanel')
 const crashPanelToggle = document.getElementById('crashPanelToggle');
+const crashPanelTitle = document.getElementById('crashPanelTitle');
+var serverState = false;
 
 crashPanelToggle.addEventListener('change', () => {
   if (crashPanelToggle.checked) {
@@ -36,9 +38,12 @@ ws.onmessage = function(event) {
         case 'bpm':
             document.getElementById('bpm').textContent = data.bpm;
             break;
-        // case 'serverState':
-        //     document.getElementById('serverState').textContent = data.serverState == 1 ? "Actif" : "Inactif";
-        //     break;
+        case 'serverState':
+            // document.getElementById('serverState').textContent = data.serverState == 1 ? "Actif" : "Inactif";
+            console.log(data.serverState);
+            serverState = data.serverState;
+            // updateCrashPanelTitle(serverState);
+            break;
         case 'beat':
             updateBeat(data.beat);
             break;
@@ -190,3 +195,20 @@ function getDurationColor(duration) {
     }
     return red;
 }
+
+crashPanelTitle.addEventListener('click', ()=>{
+    serverState = updateCrashPanelTitle(serverState)
+    });
+
+function updateCrashPanelTitle (serverState) {
+    if (!serverState) {
+      crashPanelTitle.textContent = 'Server Activated';
+      crashPanelTitle.classList.add('server-active');
+      EventEmitter.emit('serverState', serverState);
+    } else {
+        crashPanelTitle.textContent = 'CrashPanel';
+        crashPanelTitle.classList.remove('server-active');
+        EventEmitter.emit('serverState', serverState);
+    }
+    // inverse serverState
+  };

@@ -52,6 +52,14 @@ except:
 #########################
 
 
+def sendAttack(msg=""):
+    ''' send attack to webTroop '''
+    message = {
+        "type": "attack",
+        "content": msg
+    }
+    asyncio.run(wsServer.sendWebsocket(json.dumps(message)))
+
 class StorageAttack:
     ''' get attack from files and put in a dict, print / clipboardcopy'''
 
@@ -79,7 +87,8 @@ class StorageAttack:
             print(prompt)
             print(self.attackDict[attackName])
         if clipcopyEnable:
-            clip.copy(prompt + '\n' + self.attackDict[attackName])
+            # clip.copy(prompt + '\n' + self.attackDict[attackName])
+            sendAttack(prompt + '\n' + self.attackDict[attackName])
 
     def lost(self, attack=None):
         if attack is not None:
@@ -110,7 +119,7 @@ def ascii_gen(text="", font=""):
         if type(font) != str:
             font = fig_fonts_list[cool_ascii[int(font)]]
         if text != None:
-            clip.copy(figlet_format(text, font=font))
+            sendAttack(figlet_format(text, font=font))
     else:
         print("No pyperclip or ascii pyfiglet")
 
@@ -137,7 +146,7 @@ def connect():
     i3 >> sos(dur=8, lpf=linvar([60, 4800], [16*PWhite(1, 4), 16*PWhite(1, 5)]),
               hpf=expvar([0, 500], [16*PWhite(1, 8), 16*PWhite(1, 8)]), amplify=0.5)
     if clipcopyEnable:
-        clip.copy(
+        sendAttack(
             "i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)")
 
 
@@ -289,7 +298,7 @@ def print_video():
     '''Helper for video player'''
     txt = "v1 >> video(pos1=0.3, pos2=0.5, vid1=3, vid2=4, blend1=0.7, blend2=0.3, scene=4, blendtype=3) \n pos* = scrub video* \n vid* = index of video* \n blend* = opacity of video* \n scene = index of scene \n blendtype = choose blend type between vid1 et vid2"
     print(txt)
-    clip.copy(
+    sendAttack(
         "v1 >> video(pos1=0.0, pos2=0.0, vid1=0, vid2=0, blend1=0.5, blend2=0.5, scene=1, blendtype=0)")
     if crashPanelSending:
         crashpanel.sendOnce(str(txt))
@@ -762,8 +771,7 @@ try:
                 ''' send Scale to OSC server '''
                 try:
                     while self.isrunning:
-                        msg = json.dumps(
-                    {"type": "scale", "scale": str(Scale.default.name)})
+                        msg = json.dumps({"type": "scale", "scale": str(Scale.default.name)})
                         asyncio.run(wsServer.sendWebsocket(msg))
                         sleep(self.bpmTime*10)
                 except:

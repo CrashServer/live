@@ -23,6 +23,7 @@ import '../css/configPanel.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   const ws = new WebSocket(CONFIG.FOXDOT_SERVER);
+  const foxdoxWs = new WebSocket(CONFIG.CRASHOS_SERVER)
   
   // Initialisation de YJS
   const ydoc = new Y.Doc();
@@ -75,6 +76,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  foxdoxWs.onmessage = (event) => {
+    try {
+      const message = JSON.parse(event.data);
+      if (message.type === 'attack') {
+        insertAttackContent(message.content);
+      }
+    } catch (error) {
+    }
+  };
+
   function appendLog(message, color) {
     const logs = document.getElementById('logs');
     const entry = document.createElement('pre');
@@ -98,6 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'evaluate_code',
         code: 'Clock.clear()\n'
     }));
+  }
+
+  function insertAttackContent(content) {
+    const cursor = editor.getCursor();
+    const line = cursor.line + 1; // Insérer en dessous de la ligne actuelle
+    editor.replaceRange(content, { line: line, ch: 0 });
   }
 
   // Gestion de CTRL+ENTER
@@ -357,29 +374,11 @@ document.addEventListener('DOMContentLoaded', () => {
     crashOsWs.send(JSON.stringify(message));
   });
 
-  // Toggle de l'activation du server en cliquant sur le titre de crashpanel
-  // Change le titre en fonction de l'état du serveur
-  // Change la couleur du titre en fonction de l'état du serveur
-  let serverActive = false;
-
-  const updateCrashPanelTitle = () => {
-    if (serverActive) {
-      crashPanelTitle.textContent = 'Server Activated';
-      crashPanelTitle.classList.add('server-active');
-    } else {
-      crashPanelTitle.textContent = 'CrashPanel';
-      crashPanelTitle.classList.remove('server-active');
-    }
-  };
-
-  crashPanelTitle.addEventListener('click', () => {
-    serverActive = !serverActive;
-    const message = { "type": "serverState", serverState: serverActive ? 1 : 0 };
+  // Envoie de l'état du serveur lors de l'activation par CrashPanel
+  EventEmitter.on('serverState', (serverState) => {
+    const message = { "type": "serverState", serverState: serverState };
     crashOsWs.send(JSON.stringify(message));
-    updateCrashPanelTitle();
   });
-
-  updateCrashPanelTitle();
 
   // Redimensionner le panneau de logs
   const separator = document.getElementById('separator')

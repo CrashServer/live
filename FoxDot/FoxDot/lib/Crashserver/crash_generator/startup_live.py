@@ -914,7 +914,7 @@ class WebsocketServer():
                         print("Activate server")
                         activateServer()
                     elif data["serverState"] == 0:
-                        self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 1}))
+                        self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 0}))
                         print("Deactivate server")
                         soff()
         except websockets.ConnectionClosed:

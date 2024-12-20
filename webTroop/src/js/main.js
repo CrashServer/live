@@ -22,9 +22,12 @@ import '../css/crashpanel.css'
 import '../css/configPanel.css'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const ws = new WebSocket(CONFIG.FOXDOT_SERVER);
+  const wsServer = new WebSocket(CONFIG.FOXDOT_SERVER);
   const foxdoxWs = new WebSocket(CONFIG.CRASHOS_SERVER)
-  
+  let serverActive = false;
+
+  const otherUserDisplay = document.getElementById('other-user-display');
+
   // Initialisation de YJS
   const ydoc = new Y.Doc();
   const awareness = new Awareness(ydoc);
@@ -59,14 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
   setupConfigPanel(awareness, editor);
 
   EventEmitter.on('send_foxdot', (command) => {
-    ws.send(JSON.stringify({
+    wsServer.send(JSON.stringify({
         type: 'evaluate_code',
         code: command
     }));
   });
 
   //Gestion des logs FoxDot pour la console
-  ws.onmessage = (event) => {    
+  wsServer.onmessage = (event) => {    
     try {
       const message = JSON.parse(event.data);
       if (message.type === 'foxdot_log') {
@@ -105,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function stopClock(cm) {
-    ws.send(JSON.stringify({
+    wsServer.send(JSON.stringify({
         type: 'evaluate_code',
         code: 'Clock.clear()\n'
     }));
@@ -151,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
           codeToEvaluate = `${player}.stop()`;
         }  
         // Envoyer le code
-        ws.send(JSON.stringify({
+        wsServer.send(JSON.stringify({
           type: 'evaluate_code',
           code: codeToEvaluate,
           userName: awareness.getLocalState().user.name,
@@ -195,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (blockCode.trim()) {
             // Envoyer le code
-            ws.send(JSON.stringify({
+            wsServer.send(JSON.stringify({
                 type: 'evaluate_code',
                 code: blockCode
             }));
@@ -250,34 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // var WORD = /[\w$]+/, RANGE = 500;
-
-  // CodeMirror.registerHelper("hint", "anyword", function(editor, options) {
-  //     var word = options && options.word || WORD;
-  //     var range = options && options.range || RANGE;
-  //     var cur = editor.getCursor(), curLine = editor.getLine(cur.line);
-  //     var end = cur.ch, start = end;
-  //     while (start && word.test(curLine.charAt(start - 1))) --start;
-  //     var curWord = start != end && curLine.slice(start, end);
-
-  //     var list = options && options.list || [], seen = {};
-  //     var re = new RegExp(word.source, "g");
-  //     for (var dir = -1; dir <= 1; dir += 2) {
-  //       var line = cur.line, endLine = Math.min(Math.max(line + dir * range, editor.firstLine()), editor.lastLine()) + dir;
-  //       for (; line != endLine; line += dir) {
-  //         var text = editor.getLine(line), m;
-  //         while (m = re.exec(text)) {
-  //           if (line == cur.line && m[0] === curWord) continue;
-  //           if ((!curWord || m[0].lastIndexOf(curWord, 0) == 0) && !Object.prototype.hasOwnProperty.call(seen, m[0])) {
-  //             seen[m[0]] = true;
-  //             list.push(m[0]);
-  //           }
-  //         }
-  //       }
-  //     }
-  //     return {list: list, from: CodeMirror.Pos(cur.line, start), to: CodeMirror.Pos(cur.line, end)};
-  //   });
-
   // Ajouter l'écouteur d'awareness
   awareness.on('change', () => {
     const states = awareness.getStates();
@@ -296,6 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => mark.clear(), 200);
                 }
             }
+        }
+        if (state.otherInstantCode) {
+          const { user, code, position, line } = state.otherInstantCode;
+          if (user !== awareness.getLocalState().user.name){
+            const updatedCode = code.slice(0, position) + '<span class="otherLive-cursor-marker">|</span>' + code.slice(position);
+            otherUserDisplay.innerHTML = `${line}: ${updatedCode}`;
+          }
         }
     });
   });
@@ -354,7 +336,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const crashOsWs = new PersistentWebSocket(CONFIG.CRASHOS_SERVER);
 
-
   editor.on('cursorActivity', (cm) => {
     // Récupérer les infos utilisateur depuis awareness
     const userState = awareness.getLocalState();
@@ -371,20 +352,34 @@ document.addEventListener('DOMContentLoaded', () => {
         code: currentLine
     };
 
+    // envoyer le message dans le live other player display
+    try {
+        awareness.setLocalStateField('otherInstantCode', {
+          user: userName,
+          code: currentLine,
+          position: cursor.ch,
+          line: cursor.line + 1,
+        });
+      } 
+    catch (error) {
+      // console.error('Error setting local state field:', error);
+    }
+    
     crashOsWs.send(JSON.stringify(message));
   });
 
-  // Envoie de l'état du serveur lors de l'activation par CrashPanel
-  EventEmitter.on('serverState', (serverState) => {
-    const message = { "type": "serverState", serverState: serverState };
+  crashPanelTitle.addEventListener('click', () => {
+    serverActive = !serverActive;
+    const message = { "type": "serverState", serverState: serverActive ? 1 : 0 };
     crashOsWs.send(JSON.stringify(message));
   });
+
 
   // Redimensionner le panneau de logs
   const separator = document.getElementById('separator')
   const logs = document.getElementById('logs')
   const editorContainer = document.getElementById('editor-container')
-
+  
   let isResizing = false
 
   separator.addEventListener('mousedown', (e) => {

@@ -23,7 +23,7 @@
 - [ ] ajout de tabs pour plusieurs editeurs
 - [ ] flash message pour changement de nom de joueur
 - [ ] position des joueurs dans le gutter
-- [ ] affichage de l'instant code entre le log et l'editeur + no de ligne 
+- [X] affichage de l'instant code entre le log et l'editeur + no de ligne 
 - [ ] ping sur une ligne pour laisser des marques 
 - [ ] flash message pour envoie de message
 

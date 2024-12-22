@@ -4,8 +4,11 @@
 
 ## Bug
 - [X] copy paste
-- [ ] corriger bug ctrl + ; pour chrome
-- [ ] etat du serveur 
+- [ ] etat du serveur
+- [ ] unifier les fichiers de configuration
+- [ ] fix le ascii_gen 
+- [X] fix des ligatures 
+- [ ] fix plats du jour length
 
 ### Editeur
 - [ ] autocompletion foxdot
@@ -27,8 +30,14 @@
 - [ ] ping sur une ligne pour laisser des marques 
 - [ ] flash message pour envoie de message
 
+### Autocomplete 
+- [ ] autocompletion foxdot
+- [ ] ajout des fonctions
+- [ ] ajout des players
+- [ ] ajout des loops
+
 ### logs
-- [ ] coloration en fonction du joueur et affichage du nom du joueur
+- [X] coloration en fonction du joueur et affichage du nom du joueur
 
 ### Serveur
 - [X] Envoie des messages 
@@ -53,7 +62,7 @@
 ### CrashPanel
 - [X] intégrer précédentes modifications
 - [X] tests envoie de message websockets vers cable
-- [ ] raz chrono
+- [X] raz chrono
 - [X] stop player en cliquant sur le joueur
 - [ ] affichage du nom de la loop dans la liste des players actif
 - [X] ajout d'un bouton pour activer le server (click title)

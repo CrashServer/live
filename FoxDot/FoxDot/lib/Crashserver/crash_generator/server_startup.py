@@ -11,172 +11,54 @@ from time import gmtime, strftime, sleep
 import threading
 import os
 import asyncio
-import websockets
 
 
-class genSeed():
-    ''' return a seed for random based on actual time for multiplayer sync '''
+# class genSeed():
+#     ''' return a seed for random based on actual time for multiplayer sync '''
+#     def __init__(self):
+#         self.seedR = int(
+#             ''.join(map(str, map(ord, strftime("%a, %d %b %Y %H:%M", gmtime())))))
+#         self.seedOrigin = self.seedR
 
-    def __init__(self):
-        self.seedR = int(
-            ''.join(map(str, map(ord, strftime("%a, %d %b %Y %H:%M", gmtime())))))
-        self.seedOrigin = self.seedR
+#     def txt(self, seedTxt):
+#         self.seedR = int(sum([ord(c) for c in str(seedTxt)]))
 
-    def txt(self, seedTxt):
-        self.seedR = int(sum([ord(c) for c in str(seedTxt)]))
+#     def add(self):
+#         self.seedR += 1
 
-    def add(self):
-        self.seedR += 1
+#     def set(self):
+#         seed(int(self.seedR))
 
-    def set(self):
-        seed(int(self.seedR))
-
-    def get(self):
-        return self.seedOrigin
+#     def get(self):
+#         return self.seedOrigin
 
 
-try:
-    genSeed = genSeed()
-    genSeed.set()
-except Exception as e:
-    print("Failed to init random seed", e)
+# try:
+#     genSeed = genSeed()
+#     genSeed.set()
+# except Exception as e:
+#     print("Failed to init random seed", e)
 
 try:
     from .Crashserver.crash_generator.weapons import *
     from .Crashserver.crash_generator.composition import *
-    from crash_config import *
+    # from crash_config import *
     from .Crashserver.crash_generator.server_conf import *
 except Exception as e:
     print("Error in generating weapons code", e)
 
 serverActive = False
 
-if crashOsEnable == 42:
-    # Osc/udp sender
-    try:
-        if crashSendMode == "udp":
-            crashFoxDot_socket = socket.socket(
-                socket.AF_INET, socket.SOCK_DGRAM)
-        elif crashSendMode == "osc":
-            crashFoxDot_socket = OSCClient()
-            crashFoxDot_socket.connect((crashOSIp, crashOSPort))
-
-            # osc receive state
-            class OSCReceiver():
-                ''' OSC Receiver for evaluate command from CrashOS'''
-
-                def __init__(self, crashOSIp):
-                    self.oscserver = ThreadingOSCServer(("0.0.0.0", 2887))
-                    self.oscserver.addDefaultHandlers()
-                    self.oscserver.addMsgHandler(
-                        "/cmd/serverState", self.receiveState)
-                    self.oscserver.addMsgHandler(
-                        "/cmd/Video", self.receiveVideo)
-                    self.videoGrp = 99
-                    self.videoIndex = 99
-                    self.videoTotal = 99
-                    self.videoIntegrity = 99
-                    self.thread = Thread(target=self.oscserver.serve_forever)
-                    self.thread.daemon = True
-                    self.thread.start()
-
-                def receiveState(self, address, tags, contents, source):
-                    state = int(contents[0])
-                    if state == 0:
-                        soff()
-                    elif state == 1:
-                        activateServer()
-                        # son(1,3,9)
-                    else:
-                        print("error receiving osc from CrashOs")
-
-                def receiveVideo(self, address, tags, contents, source):
-                    self.videoGrp = int(contents[0])
-                    self.videoIndex = int(contents[1]) + 1
-                    self.videoTotal = int(contents[2])
-                    self.videoIntegrity = int(contents[3])
-
-            oscReceiver = OSCReceiver(crashOSIp)
-
-        elif crashSendMode == "websocket":
-            class OSCReceiver():
-                ''' OSC Receiver for convert OSC message to websocket message (like cpu from SC)'''
-
-                def __init__(self, crashOSIp):
-                    self.oscserver = ThreadingOSCServer((crashOSIp, 2887))
-                    self.oscserver.addDefaultHandlers()
-                    self.oscserver.addMsgHandler(
-                        "/CPU", self.receiveCpu)
-                    self.thread = Thread(target=self.oscserver.serve_forever)
-                    self.thread.daemon = True
-                    self.thread.start()
-
-                def receiveCpu(self, address, tags, contents, source):
-                    cpu = round(float(contents[0]), 2)
-                    if cpu:
-                        asyncio.run(sendWebsocket(
-                            json.dumps({"type": "cpu", "cpu": cpu})))
-
-            try:
-                oscReceiver = OSCReceiver(crashOSIp)
-            except Exception as e:
-                print(f"Error initializing OSCReceiver: {e}")
-
-    except Exception as err:
-        print(f"config UDP,OSC, Websocket problem : {err}")
-
-
 def sendOut(msg=""):
     ''' send all generated text to output : console, osc '''
     try:
-        if crashOsEnable:
-            if crashSendMode == "udp":
-                sendUdp(msg)
-            elif crashSendMode == "osc":
-                sendOsc(msg)
-            elif crashSendMode == "websocket":
-                asyncio.run(wsServer.sendWebsocket(json.dumps(
-                    {"type": "serverCode", "code": msg})))
-        if printOut:
-            if startupLive:
-                msg = 'SERVER: ' + msg
-            print(msg)
+        asyncio.run(wsServer.sendWebsocket(json.dumps({"type": "serverCode", "code": msg})))
+        print('SERVER: ' + msg)
     except Exception as err:
         print("sendOut problem : ", err)
 
-
-def sendUdp(msg=""):
-    ''' Send osc text to osc ip '''
-    try:
-        byte_message = bytes("@" + msg, "utf-8")
-        crashFoxDot_socket.sendto(byte_message, (crashOSIp, crashOSPort))
-    except:
-        pass
-
-
-def sendOsc(msg=""):
-    ''' Send osc text to osc ip '''
-    try:
-        byte_message = OSCMessage("/serverCode", msg)
-        crashFoxDot_socket.send(byte_message)
-    except:
-        pass
-
-
-# async def sendWebsocket(msg=""):
-#     ''' Send websocket msg to websocket server '''
-#     try:
-#         # send message as json format
-#         uri = f"ws://{crashOSIp}:{crashOSPort}"
-#         async with websockets.connect(uri) as websocket:
-#             await websocket.send(msg)
-#     except Exception as e:
-#         print(f"Error sending websocket message: {e}")
-
-
 class runServer():
     ''' Run the server with runserver.start() and generate randomly players'''
-
     def __init__(self, time=timeChange):
         self.loop = True
         self.time = time
@@ -196,15 +78,7 @@ class runServer():
         self.loop = False
         sendOut("Stop Server")
 
-    def start(self, seedTxt=False):
-        try:
-            if seedTxt != False:
-                genSeed.txt(seedTxt)
-            else:
-                genSeed.add()
-                genSeed.set()
-        except Exception as e:
-            print("start genseed ", e)
+    def start(self):
         if self.loop:
             try:
                 if serverActive:
@@ -214,10 +88,8 @@ class runServer():
             except Exception as e:
                 print("start server : ", e)
 
-
 server = runServer()
 playerCount = {}
-
 
 def server_order():
     ''' Server routine, choose [add/stop player, change param, add fx, add function,...'''
@@ -381,16 +253,13 @@ def run_player_loop(copyText=False, **kwargs):
         dur = kwargs.get("dur")
         sample = kwargs.get("sample")
         if not copyText:
-            sendOut(f'{player} >> {
-                    synth}("{degree}", dur={dur}, sample={sample})')
-            ~eval(player) >> eval(synth)(
-                degree, dur=eval(dur), sample=eval(sample))
+            sendOut(f'{player} >> {synth}("{degree}", dur={dur}, sample={sample})')
+            ~eval(player) >> eval(synth)(degree, dur=eval(dur), sample=eval(sample))
             addFilter(eval(player))
         else:
             return f'{player} >> {synth}("{degree}", dur={dur}, sample={sample})'
     except Exception as err:
         print("run_player_loop problem : ", err)
-
 
 def addPlayerTurn():
     ''' add one to player dictionnary turn '''
@@ -408,7 +277,6 @@ def addPlayerTurn():
     except Exception as err:
         print("addPlayerTurn problem : ", err)
 
-
 def add_player_param():
     ''' add player parameters (like .spread, .offbeat, .jump, ...) '''
     try:
@@ -420,7 +288,6 @@ def add_player_param():
     except Exception as err:
         print("add_player_param problem : ", err)
 
-
 def add_player_attribute():
     ''' add or change player attribute (sus, pan, ) '''
     try:
@@ -430,7 +297,6 @@ def add_player_attribute():
         player.__setattr__(attr[0], eval(str(attr[1])))
     except Exception as err:
         print("add_player_attribute problem : ", err)
-
 
 def change_degree(player=None):
     ''' According to player type change degree(synth), char(drum), sample(loop)'''
@@ -459,27 +325,6 @@ def change_degree(player=None):
     except Exception as err:
         print("change_degree problem : ", err)
 
-# def change_adsr(player=None):
-#   try:
-#       if player == None:
-#           player = choice(Clock.playing)
-#       playerType = player_type(player)
-#       if playerType == "loop" or playerType == "drum":
-#           genAtk = GENERATE_FLOAT_LIST(0.0,1.0)
-#           genSus = GENERATE_FLOAT_LIST(0.0,1.0)
-#           player.__setattr__('sample_atk',eval(genAtk))
-#           sendOut(f"{player}.sample_atk={genAtk}")
-#           player.__setattr__('sample_sus',eval(genSus))
-#           sendOut(f"{player}.sample_sus={genSus}")
-#       else:
-#           adsr = GENERATE_ADSR(player.synthdef, float(player.sus))
-#           for argm, value in adsr.items():
-#               player.__setattr__(argm,eval(value))
-#               sendOut(f"{player}.{argm}={value}")
-#   except Exception as err:
-#       print("change_adsr problem : " + err)
-
-
 def change_synth_attr(player=None):
     ''' add or change the synth attr or loop/play adsr '''
     try:
@@ -493,15 +338,8 @@ def change_synth_attr(player=None):
                 sendOut(f"{player}.{k}={eval(v)}")
         else:
             pass
-            # genAtk = GENERATE_FLOAT_LIST(0.0,0.2)
-            # genSus = GENERATE_FLOAT_LIST(0.8,1.0)
-            # player.__setattr__('sample_atk',eval(genAtk))
-            # sendOut(f"{player}.sample_atk={genAtk}")
-            # player.__setattr__('sample_sus',eval(genSus))
-            # sendOut(f"{player}.sample_sus={genSus}")
     except Exception as err:
         print(f"change_synth_attr problem : {err}")
-
 
 def add_event():
     try:
@@ -511,11 +349,10 @@ def add_event():
     except Exception as err:
         print("add_event problem : ", err)
 
-
 def player_type(player):
     ''' return player type '''
     try:
-        if player.synthdef in ["loop"]:
+        if player.synthdef in ["loop", "noloop", "stretch", "gsynth", "breakcore", "splitter", "splaffer", "onset"]:
             return "loop"
         elif player.synthdef in ["play", "play2"]:
             return "drum"
@@ -523,7 +360,6 @@ def player_type(player):
             return "synth"
     except Exception as err:
         print("player_type problem : ", err)
-
 
 def change_bpm():
     ''' Change randomly and lineary the bpm'''
@@ -536,7 +372,6 @@ def change_bpm():
     except Exception as err:
         print("change_bpm problem : ", err)
 
-
 def change_scale():
     ''' set a random scale '''
     try:
@@ -547,7 +382,6 @@ def change_scale():
         sendOut(f'Scale.default={scale_name}')
     except Exception as err:
         print("change_scale problem : ", err)
-
 
 def change_root():
     ''' up or down root '''
@@ -564,7 +398,6 @@ def change_root():
     except Exception as err:
         print("change_root problem : ", err)
 
-
 def humanizer(player=None):
     ''' humanize a drum pattern '''
     try:
@@ -576,7 +409,6 @@ def humanizer(player=None):
         player.human(hum[0], hum[1], hum[2])
     except Exception as err:
         print("humanizer problem : ", err)
-
 
 def masterFilter():
     ''' Add random Master().lpf, Master().hpf '''
@@ -594,7 +426,6 @@ def masterFilter():
         Master().__setattr__("hpf", 0)
         print("masterFilter problem : ", err)
 
-
 def set_master_filter(filtr, freqf, timef):
     ''' set the master filter, use with clock.future '''
     try:
@@ -606,7 +437,6 @@ def set_master_filter(filtr, freqf, timef):
     except Exception as err:
         print("set_master_filter problem : ", err)
 
-
 def dropevent():
     ''' Add random drop() '''
     try:
@@ -614,7 +444,6 @@ def dropevent():
         drop(time, dropTimeMax-time, dropLoop)
     except Exception as err:
         print("dropevent problem : ", err)
-
 
 def addFilter(player=None):
     ''' add lpf or hpf to player '''
@@ -627,7 +456,6 @@ def addFilter(player=None):
         player.__setattr__(filType, eval(filFreq))
     except Exception as err:
         print("addFilter problem : ", err)
-
 
 def addKick():
     ''' Add 4 to the floor Kick player '''
@@ -652,7 +480,6 @@ def addKick():
     except Exception as err:
         print("addKick problem : ", err)
 
-
 def generate_rytm(length=16, mult=1):
     try:
         rytm = PChain2(rythmMarkov)[:length]*mult
@@ -662,7 +489,6 @@ def generate_rytm(length=16, mult=1):
         return str(rytm).replace("'", "")
     except Exception as err:
         print("generate_rytm problem : ", err)
-
 
 def addAccompany():
     try:
@@ -675,17 +501,15 @@ def addAccompany():
     except:
         print("addAccompany problem : ", err)
 
-
 def addFxOut():
     ''' add fxOut to player '''
     try:
         player = choice(Clock.playing)
-        fxout = choice(["fx1", "fx2"])
+        fxout = choice(["fx1", "fx2", "fx"])
         sendOut(f'{player}.{fxout}=1')
         player.__setattr__(fxout, 0.3)
     except Exception as err:
         print("addFxOut problem : ", err)
-
 
 def shutup():
     ''' stop all server's players, preserve numeric end players (d1, s3, e8)'''
@@ -695,7 +519,6 @@ def shutup():
     for ply in stopPlayer:
         sendOut(f"{ply}.stop()")
         ply.stop()
-
 
 def son(s=999, d=999, l=999):
     ''' activate the server, probability (Synth, drums, Loops) '''
@@ -716,7 +539,6 @@ def soff():
     variation.stop()
     global serverActive
     serverActive = False
-
 
 def activateServer():
     ''' Automatic activate server, voice and generate 5 random jam/log lines '''
@@ -772,7 +594,7 @@ def scan_and_extract_lines(num_lines):
 server.start()
 
 
-##### GARBAGE FOR ARCH ######
+##### GARBAGE FOR ARCHIVE ######
 
 # def changeConf():
 # 	cfg = configparser.RawConfigParser()

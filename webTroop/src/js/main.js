@@ -1,44 +1,49 @@
 // @ts-ignore
-import { CONFIG} from '../../config.js';
+// import { CONFIG} from '../../config.js';
 import CodeMirror from 'codemirror'
 import { CodemirrorBinding } from 'y-codemirror'
 import { EventEmitter } from './eventBus.js';
 import { setupConfigPanel } from './configPanel.js'
 import * as Y from 'yjs'
-import { WebrtcProvider } from 'y-webrtc'
-// import { IndexeddbPersistence } from 'y-indexeddb'
+import { WebsocketProvider } from 'y-websocket';
 import { Awareness } from 'y-protocols/awareness'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/mode/python/python.js' // Importer le mode Python
+// import 'codemirror/mode/python/python.js' // Importer le mode Python
+import './foxdot_mode.js'
 import 'codemirror/keymap/sublime'
 import 'codemirror/addon/edit/matchbrackets'
 import 'codemirror/addon/edit/closebrackets'
 import 'codemirror/addon/comment/comment'
 import 'codemirror/addon/hint/show-hint'
 import 'codemirror/addon/hint/show-hint.css'
-import 'codemirror/addon/hint/anyword-hint'
+// import 'codemirror/addon/hint/anyword-hint'
 import '../css/style.css'
 import '../css/crashpanel.css'
 import '../css/configPanel.css'
 
-document.addEventListener('DOMContentLoaded', () => {
-  const wsServer = new WebSocket(CONFIG.FOXDOT_SERVER);
-  const foxdoxWs = new WebSocket(CONFIG.CRASHOS_SERVER)
+document.addEventListener('DOMContentLoaded', async () => {
+  const configRequest = await fetch('../../crash_config.json' );
+  if (!configRequest.ok) {
+    throw new Error(`HTTP error! status: ${configRequest.status}`);
+  }
+  const config = await configRequest.json();
+  
+  const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
+  const foxdoxWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
   let serverActive = false;
 
   const otherUserDisplay = document.getElementById('other-user-display');
+  const chrono = document.getElementById('chrono');
+  const logs = document.getElementById('logs');
+  const separator = document.getElementById('separator')
+  const editorContainer = document.getElementById('editor-container')
 
   // Initialisation de YJS
   const ydoc = new Y.Doc();
   const awareness = new Awareness(ydoc);
-  
-  // const indexeddbProvider = new IndexeddbPersistence('webtroop', ydoc)
-  
-  const provider = new WebrtcProvider('webtroop', ydoc, {
+  const provider = new WebsocketProvider(`ws://localhost:4444`, 'webtroop', ydoc, {
     awareness: awareness,
-    signaling: [CONFIG.SIGNALING_SERVER]
   });
-  
   const ytext = ydoc.getText('webtroop');
   
   // Configuration de CodeMirror
@@ -79,18 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  foxdoxWs.onmessage = (event) => {
-    try {
-      const message = JSON.parse(event.data);
-      if (message.type === 'attack') {
-        insertAttackContent(message.content);
-      }
-    } catch (error) {
-    }
-  };
-
+  // Affichage des logs FoxDot
   function appendLog(message, color) {
-    const logs = document.getElementById('logs');
     const entry = document.createElement('pre');
     entry.className = 'log-entry';
     if (color){
@@ -107,6 +102,25 @@ document.addEventListener('DOMContentLoaded', () => {
     logs.scrollTop = 0;
   }
 
+  // Gestion du copy/paste venant de FOXDOT
+  foxdoxWs.onmessage = (event) => {
+    try {
+      const message = JSON.parse(event.data);
+      if (message.type === 'attack') {
+        insertAttackContent(message.content);
+      }
+    } catch (error) {
+    }
+  };
+
+  // Insertion des attacks 
+  function insertAttackContent(content) {
+    const cursor = editor.getCursor();
+    const line = cursor.line + 1; // Insérer en dessous de la ligne actuelle
+    editor.replaceRange(content, { line: line, ch: 0 });
+  }
+
+  // Gestion du Clock clear
   function stopClock(cm) {
     wsServer.send(JSON.stringify({
         type: 'evaluate_code',
@@ -114,15 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   }
 
-  function insertAttackContent(content) {
-    const cursor = editor.getCursor();
-    const line = cursor.line + 1; // Insérer en dessous de la ligne actuelle
-    editor.replaceRange(content, { line: line, ch: 0 });
+  // Gestion du reset chrono
+  function resetChrono() {
+    wsServer.send(JSON.stringify({
+      type: 'evaluate_code',
+      code: 'crashpanel.timeInit = time()\n'
+    }));
   }
+  chrono.addEventListener('click', resetChrono);
 
   // Gestion de CTRL+ENTER
   editor.setOption('extraKeys', {
-    // 'Ctrl-ù': console.log("Ctrl-/"),
     'Ctrl-;': stopClock,
     'Ctrl-Space': 'autocomplete',
     'Ctrl-Enter': (cm) => {
@@ -214,71 +230,73 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Gestion de l'autocomplétion
-  editor.setOption('hintOptions', {
-    hint: function(editor) {
+  // editor.setOption('hintOptions', {
+  //   hint: function(editor) {
         
-        const cursor = editor.getCursor();
-        const line = editor.getLine(cursor.line);
-        const cursorPosition = cursor.ch;
+  //       const cursor = editor.getCursor();
+  //       const line = editor.getLine(cursor.line);
+  //       const cursorPosition = cursor.ch;
         
-        // Regex pour détecter un player suivi de '>>'
-        const playerPattern = /([a-zA-Z]\d+)\s*>>\s*$/;
-        const beforeCursor = line.slice(0, cursorPosition);
-        const match = beforeCursor.match(playerPattern);
+  //       // Regex pour détecter un player suivi de '>>'
+  //       const playerPattern = /([a-zA-Z]\d+)\s*>>\s*$/;
+  //       const beforeCursor = line.slice(0, cursorPosition);
+  //       const match = beforeCursor.match(playerPattern);
 
-        if (match) {
-            const suggestions = [
-                { text: 'play()', displayText: 'play' },
-                { text: 'loop()', displayText: 'loop' },
-                { text: 'blip()', displayText: 'blip' }
-            ];
+  //       if (match) {
+  //           const suggestions = [
+  //               { text: 'play()', displayText: 'play' },
+  //               { text: 'loop()', displayText: 'loop' },
+  //               { text: 'blip()', displayText: 'blip' }
+  //           ];
 
-            return {
-                list: suggestions,
-                from: CodeMirror.Pos(cursor.line, match[0].length),
-                to: cursor
-            };
-        } else {
-              const suggestions = [
-                { text: 'linvar([],[])', displayText: 'linvar' },
-                { text: 'var([],[])', displayText: 'var' },
-            ];
+  //           return {
+  //               list: suggestions,
+  //               from: CodeMirror.Pos(cursor.line, match[0].length),
+  //               to: cursor
+  //           };
+  //       } else {
+  //             const suggestions = [
+  //               { text: 'linvar([],[])', displayText: 'linvar' },
+  //               { text: 'var([],[])', displayText: 'var' },
+  //           ];
 
-            return {
-                list: suggestions,
-                from: CodeMirror.Pos(cursor.line, cursorPosition),
-                to: cursor
-            };
-        }
-    }
-  });
+  //           return {
+  //               list: suggestions,
+  //               from: CodeMirror.Pos(cursor.line, cursorPosition),
+  //               to: cursor
+  //           };
+  //       }
+  //   }
+  // });
 
   // Ajouter l'écouteur d'awareness
   awareness.on('change', () => {
     const states = awareness.getStates();
     states.forEach((state) => {
-        if (state.flash) {
-            const { lineStart, lineEnd, timestamp } = state.flash;
-            // Vérifier si le flash est récent (moins de 100ms)
-            if (Date.now() - timestamp < 100) {
-                // Créer l'effet flash
-                for (let i = lineStart; i <= lineEnd; i++) {
-                    const mark = editor.markText(
-                        {line: i, ch: 0},
-                        {line: i, ch: editor.getLine(i).length},
-                        {className: 'flash-highlight'}
-                    );
-                    setTimeout(() => mark.clear(), 200);
-                }
-            }
-        }
-        if (state.otherInstantCode) {
-          const { user, code, position, line } = state.otherInstantCode;
-          if (user !== awareness.getLocalState().user.name){
-            const updatedCode = code.slice(0, position) + '<span class="otherLive-cursor-marker">|</span>' + code.slice(position);
-            otherUserDisplay.innerHTML = `${line}: ${updatedCode}`;
+      // Gestion de l'effet flash
+      if (state.flash) {
+          const { lineStart, lineEnd, timestamp } = state.flash;
+          // Vérifier si le flash est récent (moins de 100ms)
+          if (Date.now() - timestamp < 100) {
+              // Créer l'effet flash
+              for (let i = lineStart; i <= lineEnd; i++) {
+                  const mark = editor.markText(
+                      {line: i, ch: 0},
+                      {line: i, ch: editor.getLine(i).length},
+                      {className: 'flash-highlight'}
+                  );
+                  setTimeout(() => mark.clear(), 200);
+              }
           }
+      }
+      // Gestion de l'affichage du code en temps réel des autres utilisateurs
+      if (state.otherInstantCode) { 
+        const { user, code, position, line } = state.otherInstantCode;
+        if (user !== awareness.getLocalState().user.name){
+          const updatedCode = code.slice(0, position) + '<span class="otherLive-cursor-marker">|</span>' + code.slice(position);
+          otherUserDisplay.innerHTML = `${line}: ${updatedCode}`;
         }
+      }
     });
   });
 
@@ -334,8 +352,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
   }
-  const crashOsWs = new PersistentWebSocket(CONFIG.CRASHOS_SERVER);
+  const crashOsWs = new PersistentWebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
 
+  // Gestion de l'envoi de code en temps réel
   editor.on('cursorActivity', (cm) => {
     // Récupérer les infos utilisateur depuis awareness
     const userState = awareness.getLocalState();
@@ -362,12 +381,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       } 
     catch (error) {
-      // console.error('Error setting local state field:', error);
     }
     
     crashOsWs.send(JSON.stringify(message));
   });
 
+  // Gestion de l'activation/désactivation du serveur dans CrashPanel
   crashPanelTitle.addEventListener('click', () => {
     serverActive = !serverActive;
     const message = { "type": "serverState", serverState: serverActive ? 1 : 0 };
@@ -376,12 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // Redimensionner le panneau de logs
-  const separator = document.getElementById('separator')
-  const logs = document.getElementById('logs')
-  const editorContainer = document.getElementById('editor-container')
-  
   let isResizing = false
-
   separator.addEventListener('mousedown', (e) => {
     isResizing = true
     document.addEventListener('mousemove', resize)

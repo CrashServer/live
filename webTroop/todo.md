@@ -5,10 +5,10 @@
 ## Bug
 - [X] copy paste
 - [ ] etat du serveur
-- [ ] unifier les fichiers de configuration
-- [ ] fix le ascii_gen 
+- [X] unifier les fichiers de configuration
+- [X] fix le ascii_gen 
 - [X] fix des ligatures 
-- [ ] fix plats du jour length
+- [X] fix plats du jour length
 
 ### Editeur
 - [ ] autocompletion foxdot
@@ -43,7 +43,7 @@
 - [X] Envoie des messages 
 - [X] fix bug deconnection, envoie de message
 - [X] utillisation webrtc pour les messages avec Yjs
-- [ ] persistance des messages (voir indexeddbProvider)
+- [X] persistance des messages (voir indexeddbProvider)
 - [X] gestion du out de foxdot
 - [X] envoie des message du serveur
 

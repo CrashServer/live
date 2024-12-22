@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       if (codeToEvaluate.trim()) {
         // Vérifier s'il faut stopper un player
-        const playerPattern = /_([a-zA-Z]\d+|[a-zA-Z]{2})/;;
+        const playerPattern = /^_([a-zA-Z]\d+|[a-zA-Z]{2})/;
         const match = codeToEvaluate.trim().match(playerPattern);
 
         if (match) {

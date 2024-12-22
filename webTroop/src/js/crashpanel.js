@@ -1,5 +1,10 @@
 import { EventEmitter } from './eventBus.js';
-import { CONFIG} from '../../config.js';
+
+const configRequest = await fetch('../../crash_config.json' );
+  if (!configRequest.ok) {
+    throw new Error(`HTTP error! status: ${configRequest.status}`);
+  }
+const config = await configRequest.json();
 
 // Toggle Crash Panel
 const crashPanel = document.getElementById('crashPanel')
@@ -15,10 +20,10 @@ crashPanelToggle.addEventListener('change', () => {
   }
 })
 
-const ws = new WebSocket(CONFIG.CRASHOS_SERVER);
+const ws = new WebSocket(`ws://${config.HOST_IP}:20000`);
 
 ws.onopen = function() {
-    console.log('WebSocket connection opened');
+    console.log('CrashPanel WebSocket connection opened');
 };
 
 ws.onmessage = function(event) {
@@ -191,11 +196,6 @@ function getDurationColor(duration) {
     }
     return red;
 }
-
-// crashPanelTitle.addEventListener('click', ()=>{
-//     EventEmitter.emit('serverState');
-//     // serverState = updateCrashPanelTitle(serverState)
-//     });
 
 function updateCrashPanelTitle (serverState) {
     if (serverState) {

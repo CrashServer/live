@@ -51,7 +51,7 @@ export function setupConfigPanel(awareness, editor) {
     if (savedFont) {
         fontSelect.value = savedFont;
         editor.getWrapperElement().style.fontFamily = savedFont;
-    }
+        }
 
     // Gestion ouverture/fermeture du panneau
     configButton.addEventListener('click', () => {

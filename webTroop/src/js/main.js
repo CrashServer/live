@@ -7,36 +7,43 @@ import { setupConfigPanel } from './configPanel.js'
 import * as Y from 'yjs'
 import { WebsocketProvider } from 'y-websocket';
 import { Awareness } from 'y-protocols/awareness'
-import 'codemirror/lib/codemirror.css'
-// import 'codemirror/mode/python/python.js' // Importer le mode Python
+
+import 'codemirror/addon/dialog/dialog.js'
 import './foxdot_mode.js'
 import 'codemirror/keymap/sublime'
 import 'codemirror/addon/edit/matchbrackets'
 import 'codemirror/addon/edit/closebrackets'
 import 'codemirror/addon/comment/comment'
 import 'codemirror/addon/hint/show-hint'
+import 'codemirror/addon/selection/active-line.js'
+
+import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
-// import 'codemirror/addon/hint/anyword-hint'
+import 'codemirror/addon/dialog/dialog.css'
 import '../css/style.css'
 import '../css/crashpanel.css'
 import '../css/configPanel.css'
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Récupération de la configuration
   const configRequest = await fetch('../../crash_config.json' );
   if (!configRequest.ok) {
     throw new Error(`HTTP error! status: ${configRequest.status}`);
   }
   const config = await configRequest.json();
   
+  // Connexion aux serveurs
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
   const foxdoxWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
   let serverActive = false;
 
+  // Récupération des éléments du DOM
   const otherUserDisplay = document.getElementById('other-user-display');
   const chrono = document.getElementById('chrono');
   const logs = document.getElementById('logs');
   const separator = document.getElementById('separator')
   const editorContainer = document.getElementById('editor-container')
+  const chatPanel = document.getElementById('chat');
 
   // Initialisation de YJS
   const ydoc = new Y.Doc();
@@ -51,13 +58,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     mode: 'python',
     theme: 'eclipse',
     lineNumbers: true,
-    indentUnit: 4,
     autofocus: true,
     matchBrackets: true,
     autoCloseBrackets: true,
     lineWrapping: true,
     cursorScrollMargin: 50,
     singleCursorHeightPerLine: false,
+    styleActiveLine: true,
     keyMap: 'sublime',
   });
 
@@ -137,28 +144,88 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   chrono.addEventListener('click', resetChrono);
 
+  // Gestion du chat input
+  function makePrompt(msg) {
+    var fragment = document.createDocumentFragment();
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.style.width = "10rem";
+    fragment.appendChild(document.createTextNode(msg + ">> "));
+    fragment.appendChild(input);
+    return fragment;
+  }
+
+  function getChat(cm, msg, f) {
+    if (cm.openDialog) {
+      cm.openDialog(makePrompt(msg), f, {bottom: true})
+    } else {
+      f(prompt(msg, ""));
+    }
+  }
+
+  function flashChatPanel() {
+    chatPanel.classList.add("flash")
+    setTimeout(() => chatPanel.classList.remove("flash"), 500);
+  }
+
+  // Gestion des markers
+  function setMarker(cm, color="", txt="") {
+    const line = cm.getCursor().line
+    const info = cm.lineInfo(line);
+    if (info.handle.gutterClass != null && info.handle.gutterClass.includes(`line${color}`)){
+      cm.removeLineClass(line, "gutter")
+      cm.removeLineClass(line, "background")
+    }
+    else {
+      cm.removeLineClass(line, "gutter")
+      cm.removeLineClass(line, "background")
+      cm.addLineClass(line, "gutter", `line${color}`)
+      cm.addLineClass(line, "background", `line${color}`)
+      const chatMessage = document.createElement("div")
+      chatMessage.textContent += `${line+1}| ${awareness.getLocalState().user.name}: ${txt}`
+      chatPanel.insertBefore(chatMessage, chatPanel.firstChild);
+      flashChatPanel();
+    }
+  }
+
+  // Trouve où se trouve l'autre joueur et mettre son curseur à cet endroit
+  function jumpToOtherPlayer(cm) {
+    const states = awareness.getStates();
+    states.forEach((state) => {
+      if (state.otherInstantCode) { 
+        const { user, code, position, line } = state.otherInstantCode;
+        if (user !== awareness.getLocalState().user.name){
+          console.log("jump to position: " + line + " " + position);
+          cm.setCursor({line: line-1, ch: position});
+        }
+      }
+    }
+    );
+  }
+
   // Gestion de CTRL+ENTER
   editor.setOption('extraKeys', {
     'Ctrl-;': stopClock,
     'Ctrl-Space': 'autocomplete',
+    'Ctrl-Alt-C': 'toggleComment',
+    'Alt-J': (cm) => {jumpToOtherPlayer(cm)},
+    'Alt-1': (cm) => setMarker(cm, "Red", "[[ Attention à un truc ]]"),
+    'Alt-2': (cm) => setMarker(cm, "Green", "[[ taggué ]]"),
+    'Alt-3': (cm) => setMarker(cm, "Blue", "[[ ça c'est cool ]]"),
+    'Alt-C': (cm) => {
+      getChat(cm, "", function(text){
+        const line = cm.getCursor().line
+        const chatMessage = document.createElement("div")
+        chatMessage.textContent += `${line+1}| ${awareness.getLocalState().user.name}: ${text}`
+        chatPanel.insertBefore(chatMessage, chatPanel.firstChild);
+        flashChatPanel();
+      } )
+    }, 
     'Ctrl-Enter': (cm) => {
       // Obtenir la position exacte du curseur
       const cursor = cm.getCursor();
-      const selection = cm.getSelection();
-      let codeToEvaluate;
-      let lineStart, lineEnd;
-
-      if (selection && selection.length > 0) {
-        const selections = cm.listSelections();
-        const range = selections[0];
-        lineStart = Math.min(range.anchor.line, range.head.line);
-        lineEnd = Math.max(range.anchor.line, range.head.line);
-        codeToEvaluate = selection;
-      } else {
-        lineStart = cursor.line;
-        lineEnd = cursor.line;
-        codeToEvaluate = cm.getLine(lineStart);
-      }
+      const line = cursor.line;
+      const codeToEvaluate = cm.getLine(line);
 
       if (codeToEvaluate.trim()) {
         // Vérifier s'il faut stopper un player
@@ -184,8 +251,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       
         // Envoyer l'information de flash via awareness
         awareness.setLocalStateField('flash', {
-          lineStart,
-          lineEnd,
+          lineStart: line,
+          lineEnd: line,
           timestamp: Date.now()
         });
 
@@ -404,7 +471,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function resize(e) {
     if (isResizing) {
-      const containerHeight = editorContainer.clientHeight
+      const containerHeight = editorContainer.clientHeight - 42
       const newLogsHeight = containerHeight - e.clientY
       logs.style.height = `${newLogsHeight}px`
       editor.getWrapperElement().style.height = `${containerHeight - newLogsHeight - separator.clientHeight}px`

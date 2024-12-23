@@ -1,10 +1,4 @@
 /* src/css/style.css */
-/* @import 'codemirror/theme/monokai.css';
-@import 'codemirror/theme/material.css';
-@import 'codemirror/theme/dracula.css';
-@import 'codemirror/theme/solarized.css';
-@import 'codemirror/theme/eclipse.css';
-@import 'codemirror/theme/hopscotch.css'; */
 @import 'codemirror/theme/3024-day.css';
 @import 'codemirror/theme/3024-night.css';
 @import 'codemirror/theme/abbott.css';
@@ -167,12 +161,7 @@ body {
 
 .CodeMirror-cursor {
   border-left: 2px solid #fff !important; /* Curseur blanc */
-  /* animation: blink 1s step-end infinite; */
 }
-
-/* .CodeMirror-gutter {
-border-right: 1px solid #6e6e6e; 
-} */
 
 .CodeMirror-lines {
   padding-left: 0.5rem;
@@ -195,6 +184,44 @@ border-right: 1px solid #6e6e6e;
   color: #ff0000 !important; /* Rouge */
   background-color: rgba(255, 0, 0, 0.2); /* Fond rouge transparent */
   font-weight: bold;
+}
+
+.CodeMirror-dialog-bottom {
+  bottom: 0.2rem;
+  left: 2rem;
+  width: 40%;
+  border-bottom: 1px solid #333;
+  border-radius: 4px;
+  background-color: #fff8dcb5;
+  color: black;
+  height: 2rem;
+}
+
+.chat {
+  height: 36px;
+  border-bottom: 1px solid #666;
+  background-color: #333;
+  color: #f2f2f2;
+  padding: 0.5rem 0 0.2rem 2rem;
+  overflow-y: scroll;
+}
+
+.chat.flash  {
+  background-color: #e7d428c5;
+  color: black;
+  transition: background-color 0.5s ease-out;
+}
+
+.lineRed {
+  background-color: rgba(155, 41, 41, 0.45);
+}
+
+.lineGreen {
+  background-color: rgba(71, 155, 41, 0.45);
+}
+
+.lineBlue {
+  background-color: rgba(41, 96, 155, 0.57);
 }
 
 /* Info-bulle nom utilisateur */

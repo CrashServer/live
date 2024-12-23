@@ -14,7 +14,7 @@ npm install
 ```
 
 ## Configuration
-modifier le fichier `crash_config_sample.json` en `crash_config.json` et modifier les paramètres en fonction de votre configuration
+Copier le fichier `crash_config_sample.json` en `crash_config.json` et modifier les paramètres en fonction de votre configuration
 Les ports n'ont pas besoin d'être modifiés si vous n'avez pas de conflit.
 
 

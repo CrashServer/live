@@ -78,6 +78,7 @@
             </section>
         </div>
         <div id="editor-container">
+            <div id="chat" class="chat"> </div>
             <div id="editor"></div>
             <div id="separator">
                 <div id="other-user-display"></div>
@@ -162,7 +163,7 @@
                         <option>zenburn</option>
                     </select>
                 </div>
-                <!-- Dans index.html -->
+                
                 <div class="input-group">
                     <label for="fontSelect">Police:</label>
                     <select id="fontSelect">
@@ -174,10 +175,8 @@
                     </select>
                 </div>
                 <div class="toggle-group">
-                    
                         <label for="fontSizeSelect">Font Size: <span id="fontSizeValue">16</span></label>
                         <input type="range" min="12" max="64" value="16" step="1" id="fontSizeSlider">
-                   
                 </div>
 
                 <div class="toggle-group">
@@ -196,6 +195,65 @@
                         </label>
                     </div>
                 </div>
+                <button id="openModalBtn">Afficher les raccourcis clavier</button>
+            </div>
+        </div>
+    </div>
+        <!-- Modal -->
+    <div id="shortcutsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Raccourcis Clavier</h2>
+            <div class="shortcuts-grid">
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + ;</strong></div>
+                    <div class="shortcut-desc">Stopper FoxDot</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + C</strong></div>
+                    <div class="shortcut-desc">Copier la ligne courante</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + D</strong></div>
+                    <div class="shortcut-desc">Sélectionner la ligne courante</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + Shift + D</strong></div>
+                    <div class="shortcut-desc">Dupliquer la ligne courante</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + Shift + Up/Down</strong></div>
+                    <div class="shortcut-desc">Déplacer la ligne en haut/bas</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + Space</strong></div>
+                    <div class="shortcut-desc">Auto complete</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + Alt + C</strong></div>
+                    <div class="shortcut-desc">Commente la ligne et si player le stop</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Alt + J</strong></div>
+                    <div class="shortcut-desc">Jump à l'autre joueur</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + Enter</strong></div>
+                    <div class="shortcut-desc">Évalue la ligne</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Ctrl + Alt + Enter</strong></div>
+                    <div class="shortcut-desc">Évalue le bloc</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Alt + 1/2/3</strong></div>
+                    <div class="shortcut-desc">Place un marker sur la ligne de différente couleur</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-key"><strong>Alt + C</strong></div>
+                    <div class="shortcut-desc">Ouvre le Chat</div>
+                </div>
+
             </div>
         </div>
     </div>

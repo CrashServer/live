@@ -5,6 +5,9 @@ export function setupConfigPanel(awareness, editor) {
     const userNameInput = document.getElementById('userName');
     const userColorInput = document.getElementById('userColor');
     const fontSelect = document.getElementById('fontSelect');
+    const modal = document.getElementById("shortcutsModal");
+    const modalbtn = document.getElementById("openModalBtn");
+    const closeModal = document.getElementById("closeModal");
 
     // Restaurer les données utilisateur
     const savedUser = localStorage.getItem('webtroop-user');
@@ -110,6 +113,23 @@ export function setupConfigPanel(awareness, editor) {
         
         // Sauvegarder la préférence
         localStorage.setItem('preferredFontSize', size);
+    }
+
+    // Ouvrir la modal
+    modalbtn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Fermer la modal
+    closeModal.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Fermer la modal en cliquant en dehors de celle-ci
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        }
     }
 
     return {

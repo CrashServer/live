@@ -20,6 +20,7 @@ import 'codemirror/addon/selection/active-line.js'
 import { chatUtils } from './chatUtils.js';
 import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
+import { markerUtils } from './markerUtils.js';
 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
@@ -51,7 +52,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     awareness: awareness,
   });
   const ytext = ydoc.getText('webtroop');
-  
+  const ychat = ydoc.getArray('chat');
+  const ymarkers = ydoc.getArray('markers');
+
   // Configuration de CodeMirror
   const editor = CodeMirror(document.getElementById('editor'), {
     mode: 'python',
@@ -109,12 +112,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   chrono.addEventListener('click', ()=> functionUtils.resetChrono(wsServer));
 
   // Gestion des markers
-  function setMarker(cm, colorMarker, txtMarker) {
-    const isMarker = functionUtils.setMarker(cm, colorMarker, txtMarker)
-    if (isMarker){
-      chatUtils.insertChatMessage(cm, txtMarker, awareness.getLocalState().user.name, colorMarker);
-    }
-  }
+  // function setMarker(cm, colorMarker, txtMarker) {
+  //   const isMarker = functionUtils.setMarker(cm, colorMarker, txtMarker)
+  //   if (isMarker){
+  //     chatUtils.insertChatMessage(cm, txtMarker, awareness.getLocalState().user.name, colorMarker);
+  //   }
+  // }
 
   function evaluateCode(cm, multi){
     const [blockCode, startLine, endLine] = functionUtils.getCodeAndCheckStop(cm, multi);
@@ -122,7 +125,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Envoyer le code
     wsServer.send(JSON.stringify({
         type: 'evaluate_code',
-        code: blockCode
+        code: blockCode,
+        userColor: awareness.getLocalState().user.color,
+        userName: awareness.getLocalState().user.name,
     }));
 
     // Flash effect
@@ -133,6 +138,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
   
+  // Écouter les changements dans le Y.Array des messages de chat
+  ychat.observe(event => {
+    event.changes.added.forEach(item => {
+      const message = item.content.getContent()[0];
+      chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor);
+    });
+  });
+
+  // Écouter les changements dans le Y.Array des marqueurs
+  ymarkers.observe(event => {
+    event.changes.added.forEach(item => {
+      const marker = item.content.getContent()[0];
+      markerUtils.applyMarker(editor, marker.line, marker.color, marker.text);
+      ychat.push([{ text: marker.text, userName: marker.userName, userColor: marker.color }]);
+    });
+  });
 
   // Gestion de CTRL+ENTER
   editor.setOption('extraKeys', {
@@ -140,11 +161,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Ctrl-Space': 'autocomplete',
     'Ctrl-Alt-C': 'toggleComment',
     'Alt-J': (cm) => {functionUtils.jumpToOtherPlayer(cm, awareness)},
-    'Alt-1': (cm) => setMarker(cm, "Red", "Attention à un truc"),
-    'Alt-2': (cm) => setMarker(cm, "Green", "[[ taggué ]]"),
-    'Alt-3': (cm) => setMarker(cm, "Blue", "[[ ça c'est cool ]]"),
+    'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "Attention à un truc", awareness, ymarkers, ychat),
+    'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
+    'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
     'Alt-C': (cm) => {
-      chatUtils.getChat(cm, "", (text) => chatUtils.insertChatMessage(cm, text, awareness.getLocalState().user.name));
+      chatUtils.getChat(cm, "", (text) => {
+        const userState = awareness.getLocalState();
+        const userName = userState?.user?.name || 'Anonymous';
+        const userColor = userState?.user?.color || '#000000';
+        ychat.push([{ text, userName, userColor }]); // Ajouter le message au Y.Array
+      });
     }, 
     'Ctrl-Enter': (cm) => {evaluateCode(cm, false)},
     'Ctrl-Alt-Enter': (cm) => {evaluateCode(cm, true)},

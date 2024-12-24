@@ -17,6 +17,10 @@ import 'codemirror/addon/comment/comment'
 import 'codemirror/addon/hint/show-hint'
 import 'codemirror/addon/selection/active-line.js'
 
+import { chatUtils } from './chatUtils.js';
+import { logsUtils } from './logs.js';
+import { functionUtils } from './functionUtils.js';
+
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
 import 'codemirror/addon/dialog/dialog.css'
@@ -38,13 +42,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   let serverActive = false;
 
   // Récupération des éléments du DOM
-  const otherUserDisplay = document.getElementById('other-user-display');
   const chrono = document.getElementById('chrono');
-  const logs = document.getElementById('logs');
-  const separator = document.getElementById('separator')
-  const editorContainer = document.getElementById('editor-container')
-  const chatPanel = document.getElementById('chat');
-
+  
   // Initialisation de YJS
   const ydoc = new Y.Doc();
   const awareness = new Awareness(ydoc);
@@ -71,7 +70,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Binding YJS avec CodeMirror
   const binding = new CodemirrorBinding(ytext, editor, provider.awareness);
   
+  // Configuration du panneau de configuration
   setupConfigPanel(awareness, editor);
+  
+  // Configuration des logs
+  logsUtils.initResize(editor);
 
   EventEmitter.on('send_foxdot', (command) => {
     wsServer.send(JSON.stringify({
@@ -85,215 +88,66 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const message = JSON.parse(event.data);
       if (message.type === 'foxdot_log') {
-        appendLog(message.data, message.color);
+        logsUtils.appendLog(message.data, message.color);
       }
     } catch (error) {
     }
   };
-
-  // Affichage des logs FoxDot
-  function appendLog(message, color) {
-    const entry = document.createElement('pre');
-    entry.className = 'log-entry';
-    if (color){
-      entry.style.color = color;
-    }
-    if (message.includes('Traceback')) {
-      entry.classList.add('error-log');
-    }
-    else if (!message.includes('>>')) {
-      entry.classList.add('help');
-    }
-    entry.textContent = message;
-    logs.insertBefore(entry, logs.firstChild);
-    logs.scrollTop = 0;
-  }
 
   // Gestion du copy/paste venant de FOXDOT
   foxdoxWs.onmessage = (event) => {
     try {
       const message = JSON.parse(event.data);
       if (message.type === 'attack') {
-        insertAttackContent(message.content);
+        functionUtils.insertAttackContent(editor, message.content);
       }
     } catch (error) {
     }
   };
 
-  // Insertion des attacks 
-  function insertAttackContent(content) {
-    const cursor = editor.getCursor();
-    const line = cursor.line + 1; // Insérer en dessous de la ligne actuelle
-    editor.replaceRange(content, { line: line, ch: 0 });
-  }
-
-  // Gestion du Clock clear
-  function stopClock(cm) {
-    wsServer.send(JSON.stringify({
-        type: 'evaluate_code',
-        code: 'Clock.clear()\n'
-    }));
-  }
-
-  // Gestion du reset chrono
-  function resetChrono() {
-    wsServer.send(JSON.stringify({
-      type: 'evaluate_code',
-      code: 'crashpanel.timeInit = time()\n'
-    }));
-  }
-  chrono.addEventListener('click', resetChrono);
-
-  // Gestion du chat input
-  function makePrompt(msg) {
-    var fragment = document.createDocumentFragment();
-    var input = document.createElement("input");
-    input.setAttribute("type", "text");
-    input.style.width = "10rem";
-    fragment.appendChild(document.createTextNode(msg + ">> "));
-    fragment.appendChild(input);
-    return fragment;
-  }
-
-  function getChat(cm, msg, f) {
-    if (cm.openDialog) {
-      cm.openDialog(makePrompt(msg), f, {bottom: true})
-    } else {
-      f(prompt(msg, ""));
-    }
-  }
-
-  function flashChatPanel() {
-    chatPanel.classList.add("flash")
-    setTimeout(() => chatPanel.classList.remove("flash"), 500);
-  }
+  // Reset du chrono lors du clic sur le chrono
+  chrono.addEventListener('click', ()=> functionUtils.resetChrono(wsServer));
 
   // Gestion des markers
-  function setMarker(cm, color="", txt="") {
-    const line = cm.getCursor().line
-    const info = cm.lineInfo(line);
-    if (info.handle.gutterClass != null && info.handle.gutterClass.includes(`line${color}`)){
-      cm.removeLineClass(line, "gutter")
-      cm.removeLineClass(line, "background")
-    }
-    else {
-      cm.removeLineClass(line, "gutter")
-      cm.removeLineClass(line, "background")
-      cm.addLineClass(line, "gutter", `line${color}`)
-      cm.addLineClass(line, "background", `line${color}`)
-      const chatMessage = document.createElement("div")
-      chatMessage.textContent += `${line+1}| ${awareness.getLocalState().user.name}: ${txt}`
-      chatPanel.insertBefore(chatMessage, chatPanel.firstChild);
-      flashChatPanel();
+  function setMarker(cm, colorMarker, txtMarker) {
+    const isMarker = functionUtils.setMarker(cm, colorMarker, txtMarker)
+    if (isMarker){
+      chatUtils.insertChatMessage(cm, txtMarker, awareness.getLocalState().user.name, colorMarker);
     }
   }
 
-  // Trouve où se trouve l'autre joueur et mettre son curseur à cet endroit
-  function jumpToOtherPlayer(cm) {
-    const states = awareness.getStates();
-    states.forEach((state) => {
-      if (state.otherInstantCode) { 
-        const { user, code, position, line } = state.otherInstantCode;
-        if (user !== awareness.getLocalState().user.name){
-          console.log("jump to position: " + line + " " + position);
-          cm.setCursor({line: line-1, ch: position});
-        }
-      }
-    }
-    );
+  function evaluateCode(cm, multi){
+    const [blockCode, startLine, endLine] = functionUtils.getCodeAndCheckStop(cm, multi);
+
+    // Envoyer le code
+    wsServer.send(JSON.stringify({
+        type: 'evaluate_code',
+        code: blockCode
+    }));
+
+    // Flash effect
+    awareness.setLocalStateField('flash', {
+        lineStart: startLine,
+        lineEnd: endLine,
+        timestamp: Date.now()
+    });
   }
+  
 
   // Gestion de CTRL+ENTER
   editor.setOption('extraKeys', {
-    'Ctrl-;': stopClock,
+    'Ctrl-;': ()=> functionUtils.stopClock(wsServer),
     'Ctrl-Space': 'autocomplete',
     'Ctrl-Alt-C': 'toggleComment',
-    'Alt-J': (cm) => {jumpToOtherPlayer(cm)},
-    'Alt-1': (cm) => setMarker(cm, "Red", "[[ Attention à un truc ]]"),
+    'Alt-J': (cm) => {functionUtils.jumpToOtherPlayer(cm, awareness)},
+    'Alt-1': (cm) => setMarker(cm, "Red", "Attention à un truc"),
     'Alt-2': (cm) => setMarker(cm, "Green", "[[ taggué ]]"),
     'Alt-3': (cm) => setMarker(cm, "Blue", "[[ ça c'est cool ]]"),
     'Alt-C': (cm) => {
-      getChat(cm, "", function(text){
-        const line = cm.getCursor().line
-        const chatMessage = document.createElement("div")
-        chatMessage.textContent += `${line+1}| ${awareness.getLocalState().user.name}: ${text}`
-        chatPanel.insertBefore(chatMessage, chatPanel.firstChild);
-        flashChatPanel();
-      } )
+      chatUtils.getChat(cm, "", (text) => chatUtils.insertChatMessage(cm, text, awareness.getLocalState().user.name));
     }, 
-    'Ctrl-Enter': (cm) => {
-      // Obtenir la position exacte du curseur
-      const cursor = cm.getCursor();
-      const line = cursor.line;
-      const codeToEvaluate = cm.getLine(line);
-
-      if (codeToEvaluate.trim()) {
-        // Vérifier s'il faut stopper un player
-        const playerPattern = /^_([a-zA-Z]\d+|[a-zA-Z]{2})/;
-        const match = codeToEvaluate.trim().match(playerPattern);
-
-        if (match) {
-          const player = match[1];
-          codeToEvaluate = `${player}.stop()`;
-        }  
-        // Envoyer le code
-        wsServer.send(JSON.stringify({
-          type: 'evaluate_code',
-          code: codeToEvaluate,
-          userName: awareness.getLocalState().user.name,
-          userColor: awareness.getLocalState().user.color 
-        }));
-        
-        crashOsWs.send(JSON.stringify({
-          type: (awareness.getLocalState().user.name).toLowerCase() + "Code",
-          code: codeToEvaluate,
-        }));
-      
-        // Envoyer l'information de flash via awareness
-        awareness.setLocalStateField('flash', {
-          lineStart: line,
-          lineEnd: line,
-          timestamp: Date.now()
-        });
-
-      }
-    },
-    'Ctrl-Alt-Enter': (cm) => {
-        const cursor = cm.getCursor();
-        let startLine = cursor.line;
-        let endLine = cursor.line;
-
-        // Recherche début du bloc (vers le haut)
-        while (startLine > 0 && cm.getLine(startLine - 1).trim() !== '') {
-            startLine--;
-        }
-
-        // Recherche fin du bloc (vers le bas)
-        while (endLine < cm.lineCount() - 1 && cm.getLine(endLine + 1).trim() !== '') {
-            endLine++;
-        }
-
-        // Extraire le bloc
-        const blockCode = cm.getRange(
-            {line: startLine, ch: 0},
-            {line: endLine, ch: cm.getLine(endLine).length}
-        );
-
-        if (blockCode.trim()) {
-            // Envoyer le code
-            wsServer.send(JSON.stringify({
-                type: 'evaluate_code',
-                code: blockCode
-            }));
-
-            // Flash effect
-            awareness.setLocalStateField('flash', {
-                lineStart: startLine,
-                lineEnd: endLine,
-                timestamp: Date.now()
-            });
-        }
-    },
+    'Ctrl-Enter': (cm) => {evaluateCode(cm, false)},
+    'Ctrl-Alt-Enter': (cm) => {evaluateCode(cm, true)},
   });
 
   // Gestion de l'autocomplétion
@@ -361,7 +215,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { user, code, position, line } = state.otherInstantCode;
         if (user !== awareness.getLocalState().user.name){
           const updatedCode = code.slice(0, position) + '<span class="otherLive-cursor-marker">|</span>' + code.slice(position);
-          otherUserDisplay.innerHTML = `${line}: ${updatedCode}`;
+          logsUtils.insertOtherUserCode(line, updatedCode);
         }
       }
     });
@@ -459,29 +313,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     const message = { "type": "serverState", serverState: serverActive ? 1 : 0 };
     crashOsWs.send(JSON.stringify(message));
   });
-
-
-  // Redimensionner le panneau de logs
-  let isResizing = false
-  separator.addEventListener('mousedown', (e) => {
-    isResizing = true
-    document.addEventListener('mousemove', resize)
-    document.addEventListener('mouseup', stopResize)
-  })
-
-  function resize(e) {
-    if (isResizing) {
-      const containerHeight = editorContainer.clientHeight - 42
-      const newLogsHeight = containerHeight - e.clientY
-      logs.style.height = `${newLogsHeight}px`
-      editor.getWrapperElement().style.height = `${containerHeight - newLogsHeight - separator.clientHeight}px`
-      editor.refresh()
-    }
-  }
-
-  function stopResize() {
-    isResizing = false
-    document.removeEventListener('mousemove', resize)
-    document.removeEventListener('mouseup', stopResize)
-  }
 });

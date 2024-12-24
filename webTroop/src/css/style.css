@@ -95,16 +95,17 @@ body {
   min-height: 0;
 }
 
-#separator {
+/* #separator {
   height: 20px;
   background: #444;
-  cursor: row-resize; 
   z-index: 1000;
-}
+} */
 
 #other-user-display {
   height: 30px; /* Ajuster la hauteur selon les besoins */
+  min-height: 30px;
   background: #053b08;
+  cursor: row-resize; 
   color: #fff;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -120,9 +121,25 @@ body {
   color:#6461dd;
 }
 
-#logs {
-  padding-top: 30px;
+#logPanel {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background: #1e1e1e;
+  width: 100%;
+  /* flex-grow: 1; */
   height: 20%;
+  /* padding-top: 30px; */
+}
+
+#logAndChat {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+#logs {
   background: #2d2d2d;
   color: #fff;
   white-space: pre-wrap;
@@ -130,6 +147,7 @@ body {
   font-family: monospace;
   overflow-y: auto;
   border-top: 1px solid #3d3d3d;
+  width: 70%;
 }
 
 .log-entry {
@@ -198,12 +216,13 @@ body {
 }
 
 .chat {
-  height: 36px;
+  /* height: 100%; */
   border-bottom: 1px solid #666;
   background-color: #333;
-  color: #f2f2f2;
+  /* color: #f2f2f2; */
   padding: 0.5rem 0 0.2rem 2rem;
   overflow-y: scroll;
+  width: 30%;
 }
 
 .chat.flash  {

@@ -24,12 +24,11 @@ export const chatUtils = {
       setTimeout(() => this.chatPanel.classList.remove("flash"), 500);
     },
 
-    insertChatMessage: function(cm, text, userName, color) {
+    insertChatMessage: function(cm, text, userName, userColor) {
         const line = cm.getCursor().line
         const chatMessage = document.createElement("div")
-        console.log(color)
         chatMessage.textContent += `${line+1}| ${userName}: ${text}`
-        chatMessage.style.color = color
+        chatMessage.style.color = userColor
         this.chatPanel.insertBefore(chatMessage, this.chatPanel.firstChild);
         this.flashChatPanel();
     }

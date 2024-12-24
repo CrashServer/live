@@ -32,22 +32,22 @@ export const functionUtils = {
         editor.replaceRange(attackContent, { line: line, ch: 0 });
     },
 
-    setMarker(cm, color="", txt="") {
-        const line = cm.getCursor().line
-        const info = cm.lineInfo(line);
-        if (info.handle.gutterClass != null && info.handle.gutterClass.includes(`line${color}`)){
-          cm.removeLineClass(line, "gutter")
-          cm.removeLineClass(line, "background")
-        }
-        else {
-          cm.removeLineClass(line, "gutter")
-          cm.removeLineClass(line, "background")
-          cm.addLineClass(line, "gutter", `line${color}`)
-          cm.addLineClass(line, "background", `line${color}`)
-          return true;
+    // setMarker(cm, color="", txt="") {
+    //     const line = cm.getCursor().line
+    //     const info = cm.lineInfo(line);
+    //     if (info.handle.gutterClass != null && info.handle.gutterClass.includes(`line${color}`)){
+    //       cm.removeLineClass(line, "gutter")
+    //       cm.removeLineClass(line, "background")
+    //     }
+    //     else {
+    //       cm.removeLineClass(line, "gutter")
+    //       cm.removeLineClass(line, "background")
+    //       cm.addLineClass(line, "gutter", `line${color}`)
+    //       cm.addLineClass(line, "background", `line${color}`)
+    //       return true;
           
-        }
-    },
+    //     }
+    // },
 
     ifPlayerStop(codeToEvaluate) {
         const playerPattern = /^_([a-zA-Z]\d+|[a-zA-Z]{2})/;

@@ -5,24 +5,30 @@ export const markerUtils = {
     const line = cm.getCursor().line;
     const info = cm.lineInfo(line);
     if (info.handle.gutterClass != null && info.handle.gutterClass.includes(`line${color}`)) {
-      cm.removeLineClass(line, "gutter");
-      cm.removeLineClass(line, "background");
+      // find the marker in the Y.Array and remove it
+      const markerArray = ymarkers.toArray();
+      if (markerArray.length === 0) {
+        return;
+      }
+      const markerToremove = markerArray.findIndex((i) => i.line === line);
+      ymarkers.delete(markerToremove, 1);
     } else {
-      cm.removeLineClass(line, "gutter");
-      cm.removeLineClass(line, "background");
-      cm.addLineClass(line, "gutter", `line${color}`);
-      cm.addLineClass(line, "background", `line${color}`);
       const userState = awareness.getLocalState();
       const userName = userState?.user?.name || 'Anonymous';
-    //   chatUtils.insertChatMessage(cm, txt, userName, color);
       ymarkers.push([{ line, color, text: txt, userName: userName }]); // Ajouter le marqueur au Y.Array
-    //   ychat.push([{ txt, userName, color }]);
+      ychat.push([{ text: txt, userName: userName, userColor: color }]);
     }
   },
 
-  applyMarker: function(cm, line, color, text) {
+  applyMarker: function(cm, line, color) {    
+    cm.removeLineClass(line, "gutter");
+    cm.removeLineClass(line, "background");
     cm.addLineClass(line, "gutter", `line${color}`);
     cm.addLineClass(line, "background", `line${color}`);
-    // chatUtils.insertChatMessage(cm, text, "System", color);
+  },
+
+  removeMarker: function(cm, line) {
+    cm.removeLineClass(line, "gutter");
+    cm.removeLineClass(line, "background");
   }
 };

@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Ctrl-Space': 'autocomplete',
     'Ctrl-Alt-C': 'toggleComment',
     'Alt-J': (cm) => {functionUtils.jumpToOtherPlayer(cm, awareness)},
-    'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "Attention à un truc", awareness, ymarkers, ychat),
+    'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "[[ Attention à un truc ]]", awareness, ymarkers, ychat),
     'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
     'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
     'Alt-C': (cm) => {

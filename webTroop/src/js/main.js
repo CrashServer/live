@@ -111,14 +111,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Reset du chrono lors du clic sur le chrono
   chrono.addEventListener('click', ()=> functionUtils.resetChrono(wsServer));
 
-  // Gestion des markers
-  // function setMarker(cm, colorMarker, txtMarker) {
-  //   const isMarker = functionUtils.setMarker(cm, colorMarker, txtMarker)
-  //   if (isMarker){
-  //     chatUtils.insertChatMessage(cm, txtMarker, awareness.getLocalState().user.name, colorMarker);
-  //   }
-  // }
-
   function evaluateCode(cm, multi){
     const [blockCode, startLine, endLine] = functionUtils.getCodeAndCheckStop(cm, multi);
 
@@ -150,8 +142,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   ymarkers.observe(event => {
     event.changes.added.forEach(item => {
       const marker = item.content.getContent()[0];
-      markerUtils.applyMarker(editor, marker.line, marker.color, marker.text);
-      ychat.push([{ text: marker.text, userName: marker.userName, userColor: marker.color }]);
+      markerUtils.applyMarker(editor, marker.line, marker.color);
+    });
+
+    event.changes.deleted.forEach(item => {
+      const marker = item.content.getContent()[0];
+      markerUtils.removeMarker(editor, marker.line);
     });
   });
 

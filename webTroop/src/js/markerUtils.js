@@ -1,5 +1,3 @@
-import { chatUtils } from './chatUtils.js';
-
 export const markerUtils = {
   setMarker: function(cm, color = "", txt = "", awareness, ymarkers, ychat) {
     const line = cm.getCursor().line;
@@ -16,6 +14,19 @@ export const markerUtils = {
       const userState = awareness.getLocalState();
       const userName = userState?.user?.name || 'Anonymous';
       ymarkers.push([{ line, color, text: txt, userName: userName }]); // Ajouter le marqueur au Y.Array
+      switch (color.toLowerCase()) {
+        case "red":
+          color = "var(--col-red)";
+          break;
+        case "green":
+          color = "var(--col-green)";
+          break;
+        case "blue":
+          color = "var(--col-blue)";
+          break;
+        default:
+          break;
+      }
       ychat.push([{ text: txt, userName: userName, userColor: color }]);
     }
   },

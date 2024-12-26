@@ -8,6 +8,7 @@ export function setupConfigPanel(awareness, editor) {
     const modal = document.getElementById("shortcutsModal");
     const modalbtn = document.getElementById("openModalBtn");
     const closeModal = document.getElementById("closeModal");
+    const themeInterface = document.getElementById('themeInterface');
 
     // Restaurer les données utilisateur
     const savedUser = localStorage.getItem('webtroop-user');
@@ -131,6 +132,14 @@ export function setupConfigPanel(awareness, editor) {
         modal.style.display = "none";
         }
     }
+
+    themeInterface.addEventListener('change', (event) => {
+        if (event.target.checked) {
+            document.documentElement.classList.remove('light-theme');
+        } else {
+            document.documentElement.classList.add('light-theme');
+        }
+      });
 
     return {
         updateUserInfo() {

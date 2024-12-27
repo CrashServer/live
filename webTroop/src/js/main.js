@@ -21,6 +21,7 @@ import { chatUtils } from './chatUtils.js';
 import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
 import { markerUtils } from './markerUtils.js';
+import { foxdotAutocomplete } from './foxdotAutocomplete.js';
 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
@@ -40,7 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Connexion aux serveurs
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
   const foxdoxWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
-  let serverActive = false;
 
   // Récupération des éléments du DOM
   const chrono = document.getElementById('chrono');
@@ -136,6 +136,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       const message = item.content.getContent()[0];
       chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor);
     });
+    // Supprimer les anciens messages pour ne garder que les 20 plus récents
+    if (ychat.length > 15) {
+      ychat.delete(0, ychat.length - 15);
+    }
   });
 
   // Écouter les changements dans le Y.Array des marqueurs
@@ -170,47 +174,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, 
     'Ctrl-Enter': (cm) => {evaluateCode(cm, false)},
     'Ctrl-Alt-Enter': (cm) => {evaluateCode(cm, true)},
+
   });
 
   // Gestion de l'autocomplétion
-  // editor.setOption('hintOptions', {
-  //   hint: function(editor) {
-        
-  //       const cursor = editor.getCursor();
-  //       const line = editor.getLine(cursor.line);
-  //       const cursorPosition = cursor.ch;
-        
-  //       // Regex pour détecter un player suivi de '>>'
-  //       const playerPattern = /([a-zA-Z]\d+)\s*>>\s*$/;
-  //       const beforeCursor = line.slice(0, cursorPosition);
-  //       const match = beforeCursor.match(playerPattern);
-
-  //       if (match) {
-  //           const suggestions = [
-  //               { text: 'play()', displayText: 'play' },
-  //               { text: 'loop()', displayText: 'loop' },
-  //               { text: 'blip()', displayText: 'blip' }
-  //           ];
-
-  //           return {
-  //               list: suggestions,
-  //               from: CodeMirror.Pos(cursor.line, match[0].length),
-  //               to: cursor
-  //           };
-  //       } else {
-  //             const suggestions = [
-  //               { text: 'linvar([],[])', displayText: 'linvar' },
-  //               { text: 'var([],[])', displayText: 'var' },
-  //           ];
-
-  //           return {
-  //               list: suggestions,
-  //               from: CodeMirror.Pos(cursor.line, cursorPosition),
-  //               to: cursor
-  //           };
-  //       }
-  //   }
-  // });
+  editor.setOption('hintOptions', {
+    hint: (cm) => foxdotAutocomplete.hint(cm, CodeMirror),
+  });
 
   // Ajouter l'écouteur d'awareness
   awareness.on('change', () => {
@@ -256,13 +226,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         this.ws = new WebSocket(this.url);
         
         this.ws.onopen = () => {
-            // console.log('WebSocket connecté');
             this.reconnectAttempts = 0;
             this.startHeartbeat();
         };
 
         this.ws.onclose = () => {
-            // console.log('WebSocket fermé, tentative de reconnexion...');
             this.reconnect();
         };
 
@@ -276,7 +244,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         this.reconnectAttempts++;
         
         setTimeout(() => {
-            // console.log(`Tentative de reconnexion ${this.reconnectAttempts}...`);
             this.connect();
         }, delay);
     }
@@ -331,8 +298,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Gestion de l'activation/désactivation du serveur dans CrashPanel
   crashPanelTitle.addEventListener('click', () => {
-    serverActive = !serverActive;
-    const message = { "type": "serverState", serverState: serverActive ? 1 : 0 };
-    crashOsWs.send(JSON.stringify(message));
+    crashOsWs.send(JSON.stringify({ type: "serverToggle"}));
+    crashPanelTitle.classList.toggle('loading');
+    setTimeout(() => {
+      crashPanelTitle.classList.toggle('loading');
+    }, 4000);
   });
 });

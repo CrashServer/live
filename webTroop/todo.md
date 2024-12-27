@@ -4,19 +4,19 @@
 
 ## Bug
 - [X] copy paste
-- [ ] etat du serveur
+- [X] etat du serveur
 - [X] unifier les fichiers de configuration
 - [X] fix le ascii_gen 
 - [X] fix des ligatures 
 - [X] fix plats du jour length
-- [ ] fix undefined dans les logs
-- [ ] unifier les variables css pour tous les composants
+- [X] fix undefined dans les logs
+- [X] unifier les variables css pour tous les composants
 
 ### Editeur
 - [ ] autocompletion foxdot
 - [ ] améliorer coloration syntaxique pour foxdot
 - [X] ctrl + . pour arreter Foxdot
-- [ ] ctrl + / pour envoyer commenter une ligne
+- [X] ctrl + alt + C pour envoyer commenter une ligne
 - [X] ctrl + shift + D pour dupliquer une ligne
 - [X] Amélioration du rendu des joueurs
 - [X] Flasher lors de l'évaluation d'une ligne
@@ -29,8 +29,8 @@
 - [ ] flash message pour changement de nom de joueur
 - [ ] position des joueurs dans le gutter
 - [X] affichage de l'instant code entre le log et l'editeur + no de ligne 
-- [ ] ping sur une ligne pour laisser des marques 
-- [ ] flash message pour envoie de message
+- [X] ping sur une ligne pour laisser des marques 
+- [X] flash message pour envoie de message
 
 ### Autocomplete 
 - [ ] autocompletion foxdot
@@ -48,12 +48,12 @@
 - [X] persistance des messages (voir indexeddbProvider)
 - [X] gestion du out de foxdot
 - [X] envoie des message du serveur
-- [ ] envoie des markers aux joueurs
+- [X] envoie des markers aux joueurs
 
 
 ### Chat
 - [X] Ajouter un chat
-- [ ] propager le chat aux autres joueurs
+- [X] propager le chat aux autres joueurs
 
 ### Panneau de configuration
 - [X] changement police
@@ -62,7 +62,7 @@
 - [X] Nom du joueur
 - [X] Sauvegarder l'état de l'interface en localstorage
 - [X] liste des shortcuts
-- [ ] changement du theme de l'interface
+- [X] changement du theme de l'interface
 
 ### CrashPanel
 - [X] intégrer précédentes modifications
@@ -71,7 +71,7 @@
 - [X] stop player en cliquant sur le joueur
 - [ ] affichage du nom de la loop dans la liste des players actif
 - [X] ajout d'un bouton pour activer le server (click title)
-- [ ] ajout d'un bouton pour changer le theme dark/light
+- [X] ajout d'un bouton pour changer le theme dark/light
 - [ ] ajout des loops au click
 
 ### Shortcut

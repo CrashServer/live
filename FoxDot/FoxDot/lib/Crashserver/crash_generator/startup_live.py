@@ -651,6 +651,8 @@ class WebsocketServer():
         # bpm send
         self.sendBpm_thread = threading.Thread(target=self.send_bpm_periodically, daemon=True)
         self.sendBpm_thread.start()
+        self.sendServerState_thread = threading.Thread(target=self.sendServerState, daemon=True)
+        self.sendServerState_thread.start()
 
     def receiveCpu(self, address, tags, contents, source):
         ''' reveive CPU usage from SC by OSC and send it to websocket '''
@@ -666,15 +668,14 @@ class WebsocketServer():
                 data = json.loads(message)
                 await asyncio.gather(*[client.send(message) for client in self.wsClients])
                 # Send to WebSocket server the server State
-                if "serverState" in data:
-                    if data["serverState"] == 1:
-                        self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 1}))
+                if data["type"] == "serverToggle":
+                    if not serverActive:
                         print("Activate server")
                         activateServer()
-                    elif data["serverState"] == 0:
-                        self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 0}))
+                    else:
                         print("Deactivate server")
                         soff()
+                    
         except websockets.ConnectionClosed:
             pass
         finally:
@@ -688,8 +689,7 @@ class WebsocketServer():
 
     def start_websocket_server(self):
         ''' For using threading '''
-        print(
-            f"Start FoxDot WebSocket server at ws://{self.ip}:{self.port}")
+        print(f"Start FoxDot WebSocket server at ws://{self.ip}:{self.port}")
         asyncio.run(self.mainWebsocket())
 
     async def sendWebsocket(self, msg=""):
@@ -708,6 +708,12 @@ class WebsocketServer():
             bpm = int(Clock.get_bpm())
             asyncio.run(self.sendWebsocket(json.dumps({"type": "bpm", "bpm": bpm})))
             sleep(60/bpm)
+    
+    def sendServerState(self):
+        ''' Send server state to websocket server '''
+        while True:
+            asyncio.run(self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 1 if serverActive else 0})))
+            sleep(1.1)
 
 wsServer = WebsocketServer(config["HOST_IP"], config["FOXDOT_WS_PORT"])
 crashpanel = CrashPanelWs()

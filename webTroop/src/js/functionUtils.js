@@ -12,7 +12,6 @@ export const functionUtils = {
           if (state.otherInstantCode) { 
             const { user, code, position, line } = state.otherInstantCode;
             if (user !== awareness.getLocalState().user.name){
-              console.log("jump to position: " + line + " " + position);
               cm.setCursor({line: line-1, ch: position});
             }
           }
@@ -91,7 +90,6 @@ export const functionUtils = {
             blockCodeArray[index] = functionUtils.ifPlayerStop(code);
             });
             const blockCodeJoin = blockCodeArray.join('\n');
-            console.log(blockCodeJoin);
             return [blockCodeJoin, startLine, endLine];
         }
         return [blockCode, startLine, endLine];

@@ -560,8 +560,17 @@ try:
             try:
                 while self.isrunning:
                     self.addPlayerTurn()
-                    playerListCount = [
-                        f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
+                    playerListCount = []
+                    for k,v in self.playerCounter.items():
+                        duration = f'{divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}'
+                        player = k.name
+                        if (k.synthdef in ["loop", "noloop", "stretch", "gsynth", "splaffer", "splitter"]):
+                            name = k.filename
+                        else:
+                            name = k.synthdef
+                        playerListCount.append(json.dumps({"player": player, "name": name, "duration": duration}))
+                    # playerListCount = [
+                    #     f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
                     msg = json.dumps({"type": "players", "players": playerListCount})
                     asyncio.run(wsServer.sendWebsocket(msg))
                     sleep(self.plyTime)
@@ -675,11 +684,7 @@ class WebsocketServer():
                         print("Deactivate server")
                         soff()
                 if data["type"] == "get_loops":
-                    print("Get loops")
                     await self.sendLoopList()
-                    
-                # Send to WebSocket server the server State
-                    # asyncio.run(self.sendWebsocket(json.dumps({"type": "loopsList", "loops": loops})))
                     
         except websockets.ConnectionClosed:
             pass

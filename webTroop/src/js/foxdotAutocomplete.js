@@ -178,9 +178,7 @@ export const foxdotAutocomplete = {
     ],
     
     loopList: [
-        { text: '"break4", dur=4', displayText: 'break4' },
-        { text: '"cindrum8", dur=8', displayText: 'cindrum8' },
-        { text: '"amen4", dur=4', displayText: 'amen4' },
+        { text: '"break4", dur=4,', displayText: 'break4' },
     ],
 
     hint: function(cm, CodeMirror) {
@@ -188,11 +186,11 @@ export const foxdotAutocomplete = {
         const token = cm.getTokenAt(cursor);
         const line = cm.getLine(cursor.line);
         const cursorPosition = cursor.ch;
+        const beforeCursor = line.slice(0, cursorPosition);
+        const afterCursor = line.slice(cursorPosition);
 
         // Regex pour détecter un player suivi de '>>'
         const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*/;
-        
-        const beforeCursor = line.slice(0, cursorPosition);
         const matchPlayer = beforeCursor.match(playerPattern);
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;
 
@@ -200,16 +198,26 @@ export const foxdotAutocomplete = {
         const afterLastClosingParenthesis = /.*\)\s*\.\s*$/;
         const isAfterLastClosingParenthesis = afterLastClosingParenthesis.test(beforeCursor);
 
-        if (beforeCursor.includes('loop(')) {
-            const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
-            const filteredLoops = this.loopList.filter(loop => loop.displayText.startsWith(prefix));
-            return {
-                list: filteredLoops.length > 0 ? filteredLoops.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.loopList.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                from: CodeMirror.Pos(cursor.line, token.start+1),
-                to: CodeMirror.Pos(cursor.line, cursorPosition),
-            };
-        }
+        const loopPattern = /loop\(([^,)]*)$/;
 
+        // if (beforeCursor.slice(-5) === 'loop(') {
+        //     const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
+        //     const filteredLoops = this.loopList.filter(loop => loop.displayText.startsWith(prefix));
+        //     return {
+        //     list: filteredLoops.length > 0 ? filteredLoops.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.loopList.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+        //     from: CodeMirror.Pos(cursor.line, token.start+1),
+        //     to: CodeMirror.Pos(cursor.line, cursorPosition),
+        //     };
+        // }
+        if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
+            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
+            const filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
+            return {
+              list: filteredLoops.length > 0 ? filteredLoops.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.loopList.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+              from: CodeMirror.Pos(cursor.line, token.start),
+              to: CodeMirror.Pos(cursor.line, cursorPosition),
+            }
+        }
         else if (beforeCursor.includes('Scale.default=')) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
             const filteredScales = this.scales.filter(scale => scale.displayText.startsWith(prefix));
@@ -223,7 +231,7 @@ export const foxdotAutocomplete = {
         else if (isInsideParentheses) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
 
-            const foxdotKeyword = this.foxKeyword.filter(f => f.displayText.startsWith(prefix));
+            const foxdotKeyword = this.foxKeyword.filter(f => f.displayText.toLowerCase().includes(prefix.toLowerCase()));
             return {
                 list: foxdotKeyword.length > 0 ? foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)) : foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)),
                 from: CodeMirror.Pos(cursor.line, token.start),
@@ -232,7 +240,7 @@ export const foxdotAutocomplete = {
         }
         else if (isAfterLastClosingParenthesis) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
-            const filteredPlayerFunction = this.playerFunction.filter(f => f.displayText.startsWith(prefix));
+            const filteredPlayerFunction = this.playerFunction.filter(f => f.displayText.includes(prefix));
             return {
                 list: filteredPlayerFunction.length > 0 ? filteredPlayerFunction.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.playerFunction.sort((a, b) => a.displayText.localeCompare(b.displayText)),
                 from: CodeMirror.Pos(cursor.line, token.start+1),
@@ -241,7 +249,7 @@ export const foxdotAutocomplete = {
         }
         else if (matchPlayer) {
             const prefix = line.slice(matchPlayer.index + matchPlayer[0].length).trim();
-            const filteredSynths = this.synths.filter(synth => synth.displayText.startsWith(prefix));
+            const filteredSynths = this.synths.filter(synth => synth.displayText.includes(prefix));
             return {
                 list: filteredSynths.length > 0 ? filteredSynths.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
             from: CodeMirror.Pos(cursor.line, matchPlayer.index + matchPlayer[0].length),

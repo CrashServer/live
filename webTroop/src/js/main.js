@@ -22,6 +22,7 @@ import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
 import { markerUtils } from './markerUtils.js';
 import { foxdotAutocomplete } from './foxdotAutocomplete.js';
+import { showDefinition } from './foxdotDefinitions.js';
 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
@@ -99,13 +100,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Gestion du copy/paste venant de FOXDOT
   foxdoxWs.onmessage = (event) => {
+    // console.log(event.data);
     try {
       const message = JSON.parse(event.data);
       if (message.type === 'attack') {
         functionUtils.insertAttackContent(editor, message.content);
       }
+      else if (message.type === 'loopsList') {
+        // console.log(message.loops);
+        const formattedLoops = message.loops.map(loop => {
+          const match = loop.match(/\d+/);
+          const dur = match ? `dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
+          return { text: `"${loop}", ${dur}`, displayText: loop };
+        });
+        foxdotAutocomplete.loopList = formattedLoops;
+      }
     } catch (error) {
+      console.error('Erreur lors de la réception de message FoxDot:', error);
     }
+  };
+
+  // recupération de la liste des loops de foxdot
+  foxdoxWs.onopen = () => {
+    foxdoxWs.send(JSON.stringify({ type: 'get_loops' }));
   };
 
   // Reset du chrono lors du clic sur le chrono
@@ -174,7 +191,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, 
     'Ctrl-Enter': (cm) => {evaluateCode(cm, false)},
     'Ctrl-Alt-Enter': (cm) => {evaluateCode(cm, true)},
-
+    'Alt-I': (cm) => showDefinition(cm),
   });
 
   // Gestion de l'autocomplétion
@@ -304,4 +321,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       crashPanelTitle.classList.toggle('loading');
     }, 4000);
   });
+
+  // crashOsWs.onmessage = (event) => {
+  //   try {
+  //     const message = JSON.parse(event.data);
+  //     if (message.type === 'attack') {
+  //       functionUtils.insertAttackContent(editor, message.content);
+  //     }
+  //     else if (message.type === 'loopsList') {
+  //       console.log(message.loops);
+  //       foxdotAutocomplete.loopList = message.loops;
+  //     }
+  //   } catch (error) {
+  //   }
+  // };
+
 });

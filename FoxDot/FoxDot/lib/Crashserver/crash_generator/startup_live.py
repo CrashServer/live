@@ -665,9 +665,8 @@ class WebsocketServer():
         self.wsClients.add(websocket)
         try:
             async for message in websocket:
-                data = json.loads(message)
                 await asyncio.gather(*[client.send(message) for client in self.wsClients])
-                # Send to WebSocket server the server State
+                data = json.loads(message)
                 if data["type"] == "serverToggle":
                     if not serverActive:
                         print("Activate server")
@@ -675,6 +674,12 @@ class WebsocketServer():
                     else:
                         print("Deactivate server")
                         soff()
+                if data["type"] == "get_loops":
+                    print("Get loops")
+                    await self.sendLoopList()
+                    
+                # Send to WebSocket server the server State
+                    # asyncio.run(self.sendWebsocket(json.dumps({"type": "loopsList", "loops": loops})))
                     
         except websockets.ConnectionClosed:
             pass
@@ -709,6 +714,11 @@ class WebsocketServer():
             asyncio.run(self.sendWebsocket(json.dumps({"type": "bpm", "bpm": bpm})))
             sleep(60/bpm)
     
+    async def sendLoopList(self):
+        ''' Send loop list to websocket server '''
+        message = json.dumps({"type": "loopsList", "loops": loops})
+        await self.sendWebsocket(message)
+
     def sendServerState(self):
         ''' Send server state to websocket server '''
         while True:

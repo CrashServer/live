@@ -86,8 +86,9 @@ if __name__ != "__main__":
             Samples.addPath(os.path.join(FOXDOT_SND, str(bankNbr), "_loop_"))
             loops += sorted([fn.rsplit(".", 1)[0]
                             for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
-        loops.remove('')
-        loops.remove('__init__')
+        loops = [loop for loop in loops if loop not in ['', '__init__']]
+        # loops.remove('')
+        # loops.remove('__init__')
     except:
         print("Error importing Custom Sound", sys.exc_info()[0])
 
@@ -598,26 +599,26 @@ if __name__ != "__main__":
                         self.turn = 0
                     return self.active_value
 
-                class PZero(GeneratorPattern):
-                    ''' Generate a Pattern with '1' and size-1 '0' 
-                            eg: PZero(5) -> P[1,0,0,0,0] 
-                            the '1' position can be offset 
-                            '''
+        class PZero(GeneratorPattern):
+            ''' Generate a Pattern with '1' and size-1 '0' 
+                    eg: PZero(5) -> P[1,0,0,0,0] 
+                    the '1' position can be offset 
+                    '''
 
-                    def __init__(self, size=2, offset=0):
-                        GeneratorPattern.__init__(self)
-                        self.size = size
-                        self.offset = Pattern(offset)
+            def __init__(self, size=2, offset=0):
+                GeneratorPattern.__init__(self)
+                self.size = size
+                self.offset = Pattern(offset)
 
-                    def func(self, index):
-                        # Get the current offset value based on the index
-                        current_offset = self.offset[index]
+            def func(self, index):
+                # Get the current offset value based on the index
+                current_offset = self.offset[index]
 
-                        # Calculate if we should return 1 or 0
-                        if ((index - current_offset) % int(self.size) == 0):
-                            return 1
-                        else:
-                            return 0
+                # Calculate if we should return 1 or 0
+                if ((index - current_offset) % int(self.size) == 0):
+                    return 1
+                else:
+                    return 0
 
         class PBool(GeneratorPattern):
             ''' Binary operation between 2 Pattern, you can select the operator:

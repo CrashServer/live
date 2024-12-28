@@ -13,8 +13,8 @@
 - [X] unifier les variables css pour tous les composants
 
 ### Editeur
-- [ ] autocompletion foxdot
-- [ ] améliorer coloration syntaxique pour foxdot
+- [X] autocompletion foxdot
+- [X] améliorer coloration syntaxique pour foxdot
 - [X] ctrl + . pour arreter Foxdot
 - [X] ctrl + alt + C pour envoyer commenter une ligne
 - [X] ctrl + shift + D pour dupliquer une ligne
@@ -33,10 +33,10 @@
 - [X] flash message pour envoie de message
 
 ### Autocomplete 
-- [ ] autocompletion foxdot
-- [ ] ajout des fonctions
-- [ ] ajout des players
-- [ ] ajout des loops
+- [X] autocompletion foxdot
+- [X] ajout des fonctions
+- [X] ajout des players
+- [ ] ajout des loops (récupéré depuis foxdot)
 
 ### logs
 - [X] coloration en fonction du joueur et affichage du nom du joueur

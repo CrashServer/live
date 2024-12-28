@@ -36,7 +36,7 @@
 - [X] autocompletion foxdot
 - [X] ajout des fonctions
 - [X] ajout des players
-- [ ] ajout des loops (récupéré depuis foxdot)
+- [X] ajout des loops (récupéré depuis foxdot)
 
 ### logs
 - [X] coloration en fonction du joueur et affichage du nom du joueur
@@ -69,7 +69,7 @@
 - [X] tests envoie de message websockets vers cable
 - [X] raz chrono
 - [X] stop player en cliquant sur le joueur
-- [ ] affichage du nom de la loop dans la liste des players actif
+- [X] affichage du nom de la loop dans la liste des players actif
 - [X] ajout d'un bouton pour activer le server (click title)
 - [X] ajout d'un bouton pour changer le theme dark/light
 - [ ] ajout des loops au click

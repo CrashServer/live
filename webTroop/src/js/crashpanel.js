@@ -140,13 +140,9 @@ function interpolateColor(color1, color2, factor) {
   }
 
 function formatPlayers(message) {
-    // Séparer chaque player (split sur ', ')
-    const players = message.map(player => {
-    // Extraire les infos avec regex
-    const match = player.match(/<([a-z]{1,2}\d?)\s*-\s*(\w+)>\s*(\d{2}:\d{2})/);
-    if (!match) return null;
+    const players = message.map(ply => {
+    const { player: id, name: synth, duration: duration } = JSON.parse(ply);
 
-    const [_, id, synth, duration] = match;
     const durationColor = getDurationColor(duration);
 
     return {

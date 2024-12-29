@@ -33,7 +33,7 @@ import '../css/configPanel.css'
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Récupération de la configuration
-  const configRequest = await fetch('../../crash_config.json' );
+  const configRequest = await fetch('../../crash_config.json');
   if (!configRequest.ok) {
     throw new Error(`HTTP error! status: ${configRequest.status}`);
   }

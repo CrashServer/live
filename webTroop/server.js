@@ -35,8 +35,9 @@ wss.on('connection', (ws, req) => {
 
 // Logs FoxDot
 foxdot.stdout.on('data', (data) => {
-  try { 
+  try {
     const logMessage = data.toString();
+    console.log(logMessage);
     broadcastLog(logMessage);
   } catch (e) {
     console.error('Erreur lors de l\'envoi des logs:', e);

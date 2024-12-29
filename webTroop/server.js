@@ -1,12 +1,27 @@
 import { WebSocketServer } from 'ws';
 import { spawn } from 'child_process';
-import { CONFIG} from './config.js';
+import fetch from 'node-fetch';
+import path from 'path';
+import { promises as fs } from 'fs';
 
-// Lancer FoxDot
-const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
-  cwd: CONFIG.FOXDOT_PATH,
-  env: {...process.env, PYTHONUNBUFFERED: '1'}
-});
+async function loadConfig(){
+  try {
+    const configPath = path.resolve('./crash_config.json');
+    const configFile = await fs.readFile(configPath, 'utf-8');
+    return JSON.parse(configFile);
+    // return config
+  } catch(error) {
+    throw new Error("Erreur dans la récupération du fichier de config", error.message)
+  }
+}
+
+(async () => {
+  const config = await loadConfig();
+  // Lancer FoxDot
+  const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
+    cwd: config.FOXDOT_PATH,
+    env: {...process.env, PYTHONUNBUFFERED: '1'}
+  });
 
 console.log('FoxDot démarré', foxdot.pid);
 
@@ -60,3 +75,4 @@ function broadcastLog(message, color=null) {
 }
 
 console.log('Serveur démarré sur le port 1234');
+})();

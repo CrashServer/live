@@ -12,10 +12,13 @@ export const chatUtils = {
     },
   
     getChat: function(cm, msg, f) {
+      const cursor = cm.getCursor();
+      const line = cursor.line + 1;
       if (cm.openDialog) {
-        cm.openDialog(this.makePrompt(msg), f, {bottom: true});
+        cm.openDialog(this.makePrompt(msg), (input) => f(input, line), {bottom: true});
       } else {
-        f(prompt(msg, ""));
+        const input = prompt(msg, "");
+        f(input, line);
       }
     },
   
@@ -24,10 +27,13 @@ export const chatUtils = {
       setTimeout(() => this.chatPanel.classList.remove("flash"), 500);
     },
 
-    insertChatMessage: function(cm, text, userName, userColor) {
-        const line = cm.getCursor().line
+    insertChatMessage: function(cm, text, userName, userColor, line) {
+        // const line = cm.getCursor().line
         const chatMessage = document.createElement("div")
-        chatMessage.textContent += `${line+1}| ${userName}: ${text}`
+        if (!line){
+            line = 0;
+        }
+        chatMessage.textContent += `${line.toString().padStart(3, '0')}| ${userName}: ${text}`
         chatMessage.style.color = userColor
         this.chatPanel.insertBefore(chatMessage, this.chatPanel.firstChild);
         this.flashChatPanel();

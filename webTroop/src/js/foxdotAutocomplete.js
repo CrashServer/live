@@ -249,7 +249,7 @@ export const foxdotAutocomplete = {
         }
         else if (matchPlayer) {
             const prefix = line.slice(matchPlayer.index + matchPlayer[0].length).trim();
-            const filteredSynths = this.synths.filter(synth => synth.displayText.includes(prefix));
+            const filteredSynths = this.synths.filter(synth => synth.displayText.startsWith(prefix));
             return {
                 list: filteredSynths.length > 0 ? filteredSynths.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
             from: CodeMirror.Pos(cursor.line, matchPlayer.index + matchPlayer[0].length),

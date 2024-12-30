@@ -70,6 +70,20 @@
   src: url('../fonts/FiraCode-Regular.woff2');
 }
 
+@font-face {
+  font-family: Cascadia;
+  src: url("../fonts/CascadiaMono.woff2");
+
+}
+@font-face {
+  font-family: JetBrainsMono;
+  src: url("../fonts/JetBrainsMono-Regular.woff2");
+}
+@font-face {
+  font-family: UbuntuMono;
+  src: url("../fonts/UbuntuMono-Regular.ttf");
+}
+
 body {
   margin: 0;
   background: var(--bg-col-1);
@@ -105,7 +119,7 @@ body {
   color: var(--text-col-1);
   white-space: pre-wrap;
   word-wrap: break-word;
-  font-family: monospace;
+  font-family: inherit;
   padding: 0.2rem;
   overflow-y: auto;
   border-top: 1px solid var(--border-col-2);
@@ -141,7 +155,7 @@ body {
   color: var(--text-col-1);
   white-space: pre-wrap;
   word-wrap: break-word;
-  font-family: monospace;
+  font-family: inherit;
   overflow-y: auto;
   border-top: 1px solid #3d3d3d;
   width: 70%;
@@ -265,7 +279,7 @@ body {
   top: -1.05em;
   left: -2px;
   font-size: 13px;
-  font-family: sans-serif;
+  font-family: inherit;
   padding: 2px 6px;
   border-radius: 3px;
   white-space: nowrap;
@@ -292,7 +306,7 @@ body {
 .CodeMirror-hints {
   background: var(--bg-col-2);
   border: 1px solid var(--border-col-2);
-  font-family: monospace;
+  font-family: inherit;
   padding: 2px;
   font-size: inherit;
 }

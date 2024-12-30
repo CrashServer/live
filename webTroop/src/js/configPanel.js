@@ -5,6 +5,10 @@ export function setupConfigPanel(awareness, editor) {
     const userNameInput = document.getElementById('userName');
     const userColorInput = document.getElementById('userColor');
     const fontSelect = document.getElementById('fontSelect');
+    const fontSizeSlider = document.getElementById('fontSizeSlider');
+    const fontSizeValue = document.getElementById('fontSizeValue');
+    const fontInterfaceSizeSlider = document.getElementById('fontInterfaceSizeSlider');
+    const fontInterfaceSizeValue = document.getElementById('fontInterfaceSizeValue');
     const modal = document.getElementById("shortcutsModal");
     const modalbtn = document.getElementById("openModalBtn");
     const closeModal = document.getElementById("closeModal");
@@ -47,6 +51,7 @@ export function setupConfigPanel(awareness, editor) {
     fontSelect.addEventListener('change', (e) => {
         const font = e.target.value;
         editor.getWrapperElement().style.fontFamily = font;
+        document.body.style.fontFamily = font;
         localStorage.setItem('preferredFont', font);
     });
 
@@ -86,14 +91,19 @@ export function setupConfigPanel(awareness, editor) {
         themeSelect.value = savedTheme;
     }
 
-    const fontSizeSlider = document.getElementById('fontSizeSlider');
-    const fontSizeValue = document.getElementById('fontSizeValue');
+    
 
     // Restaurer la taille sauvegardée
     const savedSize = localStorage.getItem('preferredFontSize');
     if (savedSize) {
         fontSizeSlider.value = savedSize;
         updateFontSize(savedSize);
+    }
+
+    const savedInterfaceSize = localStorage.getItem('preferredInterfaceFontSize');
+    if (savedInterfaceSize) {
+        fontInterfaceSizeSlider.value = savedInterfaceSize;
+        updateInterfaceFontSize(savedInterfaceSize);
     }
 
     // Mettre à jour lors du changement
@@ -115,6 +125,22 @@ export function setupConfigPanel(awareness, editor) {
         // Sauvegarder la préférence
         localStorage.setItem('preferredFontSize', size);
     }
+
+    fontInterfaceSizeSlider.addEventListener('input', (e) => {
+        const size = e.target.value;
+        updateInterfaceFontSize(size);
+        });
+    
+    function updateInterfaceFontSize(size) {
+        // Mettre à jour l'affichage
+        fontInterfaceSizeValue.textContent = size;
+        
+        // Mettre à jour l'interface
+        document.documentElement.style.fontSize = size + 'px';
+        
+        // Sauvegarder la préférence
+        localStorage.setItem('preferredInterfaceFontSize', size);
+    };
 
     // Ouvrir la modal
     modalbtn.onclick = function() {

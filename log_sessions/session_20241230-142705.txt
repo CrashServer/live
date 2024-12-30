@@ -1,0 +1,370 @@
+l2 >> loop("ambi8", dur=8)
+
+b2 >> play("X.")
+
+l4 >> loop("bass16", dur=16)
+
+l2 >> loop("ambi8", dur=8)
+l4 >> loop("bass16", dur=16)
+# b2 >> play("X.")
+
+b2 >> play("X.")
+
+# b2 >> play("X.")
+
+b2 >> play("X.")
+
+# b2 >> play("X.")
+
+b2 >> play("X.")
+
+# b2 >> play("X.")
+
+# b2 >> play("X.")
+
+#b2.stop()
+
+# b2 >> play("X.")
+
+# b2.stop()
+
+b2 >> play("X.")
+
+# b2.stop()
+
+l2 >> loop("ambi8", dur=8)
+# l4.stop()
+
+l2 >> loop("ambi8", dur=8)
+l4 >> loop("bass16", dur=16)
+
+l2 >> loop("ambi8", dur=8)
+
+l2.stop()
+
+l2.stop()
+
+l2.stop()
+
+# l2 >> loop("ambi8", dur=8)
+
+l2.lpf=400
+
+l2.stop()
+
+l2.stop()
+
+l2.stop()
+
+l2.stop()
+
+l2.stop()
+l4 >> loop("bass16", dur=16)
+
+l2 >> loop("ambi8", dur=8)
+
+l2.stop()
+l4 >> loop("bass16", dur=16)
+
+l2.stop()
+l4.stop()
+
+l2.stop()
+
+l2 >> loop("ambi8", dur=8)
+l4 >> loop("bass16", dur=16)
+
+l2.stop()
+l4.stop()
+
+b2.stop()
+
+l2 >> loop("ambi8", dur=8)
+l4 >> loop("bass16", dur=16)
+
+l2.stop()
+l4.stop()
+
+l2.stop()
+l4 >> loop("bass16", dur=16)
+
+l2.stop()
+l4.stop()
+
+l2.stop()
+l4 >> loop("bass16", dur=16)
+
+l4.stop()
+
+l4 >> loop("bass16", dur=16)
+
+l4.stop()
+
+l4 >> loop("bass16", dur=16)
+
+l2.stop()
+
+l2 >> loop("ambi8", dur=8)
+
+l4 >> loop("bass16", dur=16)
+
+l2.stop()
+
+l4.stop()
+
+x5 >> play("X", bank=0)
+
+Clock.clear()
+
+l1 >> loop("atmo8", dur=8)
+
+b3 >> plaitsX(preset=13).gtr((5,6))
+
+b3 >> plaitsX((0,3), preset=13).gtr((5,6))
+
+b3 >> plaitsX((0,var([3, 2],8)), preset=13).gtr((5,6))
+
+b3 >> plaitsX((0,var([3, 2,5,2],8)), preset=13).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13).gtr((5,6))
+
+b4 >> dblbass(var([3, 0], 8), dur=1/2).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,5]], 8), dur=1/2).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2).gtr(1)
+
+d2 >> play("x.", sample=7)
+
+d2 >> play("<x.><..o.>", sample=7)
+
+psynth("dblbass")
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=2).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=2, op1mul=1).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/4, fmod=2, op1mul=1).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=2, op1mul=1).gtr(1)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=1).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, dist2=1).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, dist2=0).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=0.2).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=0.2).gtr((5,6)) + var([0,-1],[7,1])
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=0.2).gtr((5,6)) + var([0,1],[7,1])
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=0.2).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=PFr(0.2,0.4)).gtr((5,6))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=PFr(0.02,0.4)).gtr((5,6))
+
+d2 >> play("<x.><..o.><->", sample=7)
+
+d2 >> play("<x.><..o.><->", sample=7, comp=1)
+
+d2 >> play("<x.><..o.><---:>", sample=7, comp=1)
+
+d2 >> play("<x.><..o.><---(-:)>", sample=7, comp=1)
+
+d2 >> play("<x.><..o.><---(-:)><..*.>", sample=7, comp=1)
+
+d2 >> play("<x.><..o.><---(-:)><..*.><X.>", sample=7, comp=1)
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X2|.>", sample=7, comp=1)
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=PFr(0.02,0.4)).gtr((5,6)).human(20,0.4)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=PFr(0.02,0.4)).gtr((5,6)).human(20,4)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=2, drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=2, op1mul=PFr(0.2,1)).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=2, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=4, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1), dist2=1).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1), dist2=0).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1), shape=0.2).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1), shape=0.4).gtr(1)
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1), shape=0.4).gtr(1).solo()
+
+b4 >> dblbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1), shape=0).gtr(1).solo()
+
+b4 >> lbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1).solo()
+
+b4 >> lbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1).solo(0)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/2, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3, 2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,5],[7,1]))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,[-1,5]],[7,1]))
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+b4.stop()
+
+b3.stop()
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+
+b4 >> lbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+l1.stop()
+
+b4.stop()
+
+l1 >> loop("atmo8", dur=8)
+
+b3.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+l4 >> noloop("bass16", dur=16)
+
+l1 >> loop("atmo8", dur=8, sample=3)
+
+l1 >> loop("atmo8", dur=8, sample=3, mverb=1)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+
+b3.stop()
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+
+b3.stop()
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+
+b3.stop()
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+
+b3.stop()
+
+b4 >> lbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1)
+
+l4.stop()
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+d2.stop()
+
+d2 >> play("<x.><..o.><---(-:)><..*.><|X1|.>", sample=7, comp=1)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+
+l1.stop()
+
+d2.stop()
+
+b4.stop()
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+b4.stop()
+
+b4 >> lbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1)
+
+b4 >> lbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1)
+
+b3 >> plaitsX((var([0,3,2],[16]),var([3,2,5,2],8)), preset=13 ,dur=1/4, fdecay=[2,PFr(1,2)], drive=PFr(0.02,0.4)).gtr((5,6)).human(20,-4) + (0,var([0,P*[-1,5]],[7,1]))
+b4 >> lbass(var([3, [0,0,0,[5,8]]], 8), dur=1/2, fmod=0, op1mul=PFr(0.2,1), op2mul=PFr(0.2,1)).gtr(1)
+
+Clock.clear()
+

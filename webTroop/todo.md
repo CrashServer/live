@@ -13,6 +13,7 @@
 - [X] unifier les variables css pour tous les composants
 - [X] stop/start sur comment
 - [ ] stop/start sur multi block
+- [ ] fix comment sur une ligne sans player reconnu
 - [X] voir config signaling
 - [X] anti-jump
 - [X] search
@@ -40,7 +41,7 @@
 - [X] affichage de l'instant code entre le log et l'editeur + no de ligne 
 - [X] ping sur une ligne pour laisser des marques 
 - [X] flash message pour envoie de message
-- [ ] save code
+- [X] save code
 
 ### Autocomplete 
 - [X] autocompletion foxdot

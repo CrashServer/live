@@ -181,6 +181,93 @@ export const foxdotAutocomplete = {
         { text: '"break4", dur=4,', displayText: 'break4' },
     ],
 
+    fxList: [
+        { text: 'vib=', displayText: 'vib' },
+        { text: 'slide=', displayText: 'slide' },
+        { text: 'slidefrom=', displayText: 'slidefrom' },
+        { text: 'bend=', displayText: 'bend' },
+        { text: 'coarse=', displayText: 'coarse' },
+        { text: 'striate=', displayText: 'striate' },
+        { text: 'pshift=', displayText: 'pshift' },
+        { text: 'hpf=', displayText: 'hpf' },
+        { text: 'lpf=', displayText: 'lpf' },
+        { text: 'swell=', displayText: 'swell' },
+        { text: 'bpf=', displayText: 'bpf' },
+        { text: 'crush=', displayText: 'crush' },
+        { text: 'dist=', displayText: 'dist' },
+        { text: 'spin=', displayText: 'spin' },
+        { text: 'cut=', displayText: 'cut' },
+        { text: 'room=', displayText: 'room' },
+        { text: 'leg=', displayText: 'leg' },
+        { text: 'glide=', displayText: 'glide' },
+        { text: 'spf=', displayText: 'spf' },
+        { text: 'test=', displayText: 'test' },
+        { text: 'mpf=', displayText: 'mpf' },
+        { text: 'dfm=', displayText: 'dfm' },
+        { text: 'valad=', displayText: 'valad' },
+        { text: 'vadiod=', displayText: 'vadiod' },
+        { text: 'dafilter=', displayText: 'dafilter' },
+        { text: 'fm_sin=', displayText: 'fm_sin' },
+        { text: 'fm_saw=', displayText: 'fm_saw' },
+        { text: 'fm_pulse=', displayText: 'fm_pulse' },
+        { text: 'disto=', displayText: 'disto' },
+        { text: 'chop=', displayText: 'chop' },
+        { text: 'tremolo=', displayText: 'tremolo' },
+        { text: 'echo=', displayText: 'echo' },
+        { text: 'pong=', displayText: 'pong' },
+        { text: 'flanger=', displayText: 'flanger' },
+        { text: 'formant=', displayText: 'formant' },
+        { text: 'shape=', displayText: 'shape' },
+        { text: 'drive=', displayText: 'drive' },
+        { text: 'tanh=', displayText: 'tanh' },
+        { text: 'dist2=', displayText: 'dist2' },
+        { text: 'fdist=', displayText: 'fdist' },
+        { text: 'fdistc=', displayText: 'fdistc' },
+        { text: 'chorus=', displayText: 'chorus' },
+        { text: 'dubd=', displayText: 'dubd' },
+        { text: 'octafuz=', displayText: 'octafuz' },
+        { text: 'tek=', displayText: 'tek' },
+        { text: 'krush=', displayText: 'krush' },
+        { text: 'drop=', displayText: 'drop' },
+        { text: 'squiz=', displayText: 'squiz' },
+        { text: 'triode=', displayText: 'triode' },
+        { text: 'octer=', displayText: 'octer' },
+        { text: 'feed=', displayText: 'feed' },
+        { text: 'a=', displayText: 'a' },
+        { text: 'r=', displayText: 'r' },
+        { text: 'ehpf=', displayText: 'ehpf' },
+        { text: 'elpf=', displayText: 'elpf' },
+        { text: 'position=', displayText: 'position' },
+        { text: 'ring=', displayText: 'ring' },
+        { text: 'shift=', displayText: 'shift' },
+        { text: 'comp=', displayText: 'comp' },
+        { text: 'mu=', displayText: 'mu' },
+        { text: 'sidechain=', displayText: 'sidechain' },
+        { text: 'lofi=', displayText: 'lofi' },
+        { text: 'fold=', displayText: 'fold' },
+        { text: 'low=', displayText: 'low' },
+        { text: 'mid=', displayText: 'mid' },
+        { text: 'high=', displayText: 'high' },
+        { text: 'djf=', displayText: 'djf' },
+        { text: 'phaser=', displayText: 'phaser' },
+        { text: 'ringz=', displayText: 'ringz' },
+        { text: 'resonz=', displayText: 'resonz' },
+        { text: 'room2=', displayText: 'room2' },
+        { text: 'mverb=', displayText: 'mverb' },
+        { text: 'stut=', displayText: 'stut' },
+        { text: 'sbrk=', displayText: 'sbrk' },
+        { text: 'clouds=', displayText: 'clouds' },
+        { text: 'mring=', displayText: 'mring' },
+        { text: 'blow=', displayText: 'blow' },
+        { text: 'panR=', displayText: 'panR' },
+        { text: 'vol=', displayText: 'vol' },
+        { text: 'fx1=', displayText: 'fx1' },
+        { text: 'fx2=', displayText: 'fx2' },
+        { text: 'fx=', displayText: 'fx' },
+        { text: 'output=', displayText: 'output' },
+        { text: 'mon=', displayText: 'mon' }
+    ],
+
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
         const token = cm.getTokenAt(cursor);
@@ -229,9 +316,15 @@ export const foxdotAutocomplete = {
         }
 
         else if (isInsideParentheses) {
-            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
-
-            const foxdotKeyword = this.foxKeyword.filter(f => f.displayText.toLowerCase().includes(prefix.toLowerCase()));
+            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z:]/g, "");
+            let foxdotKeyword = [];
+            if (prefix.startsWith('x')) {
+                foxdotKeyword = this.fxList.filter(f => f.displayText.toLowerCase().includes(prefix.slice(1,).toLowerCase()));;
+            }
+            else {
+                foxdotKeyword = this.foxKeyword.filter(f => f.displayText.toLowerCase().includes(prefix.toLowerCase()));;
+            }
+            // const foxdotKeyword = filterKeyword.filter(f => f.displayText.toLowerCase().includes(prefix.toLowerCase()));
             return {
                 list: foxdotKeyword.length > 0 ? foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)) : foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)),
                 from: CodeMirror.Pos(cursor.line, token.start),

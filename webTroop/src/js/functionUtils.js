@@ -109,4 +109,16 @@ export const functionUtils = {
         }
         return [blockCode, startLine, endLine];
     },
+
+    // Save the content of the editor into a .py file
+    saveEditorContent(cm) {
+        const content = cm.getValue();
+        const blob = new Blob([content], {type: 'text/plain'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'code.py';
+        a.click();
+        
+    }
 };

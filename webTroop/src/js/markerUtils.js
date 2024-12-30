@@ -16,18 +16,18 @@ export const markerUtils = {
       ymarkers.push([{ line, color, text: txt, userName: userName }]); // Ajouter le marqueur au Y.Array
       switch (color.toLowerCase()) {
         case "red":
-          color = "var(--col-red)";
+          color = "var(--col-full-red)";
           break;
         case "green":
-          color = "var(--col-green)";
+          color = "var(--col-full-green)";
           break;
         case "blue":
-          color = "var(--col-blue)";
+          color = "var(--col-full-blue)";
           break;
         default:
           break;
       }
-      ychat.push([{ text: txt, userName: userName, userColor: color }]);
+      ychat.push([{ text: txt, userName: userName, userColor: color, line: line+1 }]); // Ajouter le message
     }
   },
 
@@ -41,5 +41,12 @@ export const markerUtils = {
   removeMarker: function(cm, line) {
     cm.removeLineClass(line, "gutter");
     cm.removeLineClass(line, "background");
-  }
+  },
+
+  // reset the ymarkers
+  resetMarkers: function(ymarkers) {
+    ymarkers.delete(0, ymarkers.length);
+  },
+
+
 };

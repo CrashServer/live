@@ -1,4 +1,6 @@
 export const functionUtils = {
+    previousPosition: null,
+
     stopClock(wsServer) {
         wsServer.send(JSON.stringify({
             type: 'evaluate_code',
@@ -6,18 +8,29 @@ export const functionUtils = {
         }));
     },
 
+    // jump^ to the other player's position
     jumpToOtherPlayer(cm, awareness) {
         const states = awareness.getStates();
         states.forEach((state) => {
           if (state.otherInstantCode) { 
             const { user, code, position, line } = state.otherInstantCode;
             if (user !== awareness.getLocalState().user.name){
+                this.previousPosition = cm.getCursor();
               cm.setCursor({line: line-1, ch: position});
             }
           }
         }
     )},
 
+    // jump to previous position before jump
+    previousJump(cm) {
+        if (this.previousPosition) {
+          cm.setCursor(this.previousPosition);
+          this.previousPosition = null;
+        }
+    },
+
+    // reset the chrono
     resetChrono(wsServer) {
         wsServer.send(JSON.stringify({
           type: 'evaluate_code',
@@ -25,6 +38,7 @@ export const functionUtils = {
         }));
     },
 
+    // insert attack code at the cursor position
     insertAttackContent(editor, attackContent) {
         const cursor = editor.getCursor();
         const line = cursor.line + 1; // Insérer en dessous de la ligne actuelle
@@ -48,12 +62,13 @@ export const functionUtils = {
     //     }
     // },
 
+    // Check if the code to evaluate is a player and if it is, stop it
     ifPlayerStop(codeToEvaluate) {
-        const playerPattern = /^_([a-zA-Z]\d+|[a-zA-Z]{2})/;
+        const playerPattern = /^([#_]\s?[a-zA-Z]\d+|[#_]\s?[a-zA-Z]{2})/;
         const match = codeToEvaluate.trim().match(playerPattern);
 
         if (match) {
-          const player = match[1];
+          const player = match[1].replace(/^[_#]\s?/, '')
           return `${player}.stop()`;
         }
         return codeToEvaluate;

@@ -16,6 +16,11 @@ import 'codemirror/addon/edit/closebrackets'
 import 'codemirror/addon/comment/comment'
 import 'codemirror/addon/hint/show-hint'
 import 'codemirror/addon/selection/active-line.js'
+import 'codemirror/addon/scroll/annotatescrollbar.js'
+import 'codemirror/addon/search/searchcursor.js'
+import 'codemirror/addon/search/search.js'
+import 'codemirror/addon/search/jump-to-line.js'
+import 'codemirror/addon/search/matchesonscrollbar.js'
 
 import { chatUtils } from './chatUtils.js';
 import { logsUtils } from './logs.js';
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Initialisation de YJS
   const ydoc = new Y.Doc();
   const awareness = new Awareness(ydoc);
-  const provider = new WebsocketProvider(`ws://localhost:4444`, 'webtroop', ydoc, {
+  const provider = new WebsocketProvider(`ws://${config.HOST_IP}:4444`, 'webtroop', ydoc, {
     awareness: awareness,
   });
   const ytext = ydoc.getText('webtroop');
@@ -151,7 +156,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   ychat.observe(event => {
     event.changes.added.forEach(item => {
       const message = item.content.getContent()[0];
-      chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor);
+      chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor, message.line);
     });
     // Supprimer les anciens messages pour ne garder que les 20 plus récents
     if (ychat.length > 15) {
@@ -176,22 +181,29 @@ document.addEventListener('DOMContentLoaded', async () => {
   editor.setOption('extraKeys', {
     'Ctrl-;': ()=> functionUtils.stopClock(wsServer),
     'Ctrl-Space': 'autocomplete',
-    'Ctrl-Alt-C': 'toggleComment',
+    'Ctrl-Alt-C': (cm) => {
+      cm.toggleComment();
+      evaluateCode(cm, false);
+    },
     'Alt-J': (cm) => {functionUtils.jumpToOtherPlayer(cm, awareness)},
+    'Ctrl-Alt-J': (cm) => {functionUtils.previousJump(cm)},
     'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "[[ Attention à un truc ]]", awareness, ymarkers, ychat),
     'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
     'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
+    'Alt-4': () => markerUtils.resetMarkers(ymarkers),
     'Alt-C': (cm) => {
-      chatUtils.getChat(cm, "", (text) => {
+      chatUtils.getChat(cm, "", (text, line) => {
         const userState = awareness.getLocalState();
         const userName = userState?.user?.name || 'Anonymous';
         const userColor = userState?.user?.color || '#000000';
-        ychat.push([{ text, userName, userColor }]); // Ajouter le message au Y.Array
+        ychat.push([{ text, userName, userColor, line }]); // Ajouter le message au Y.Array
       });
     }, 
     'Ctrl-Enter': (cm) => {evaluateCode(cm, false)},
     'Ctrl-Alt-Enter': (cm) => {evaluateCode(cm, true)},
     'Alt-I': (cm) => showDefinition(cm),
+    'Alt-F': "findPersistent",
+    'Ctrl-G': "findNext",
   });
 
   // Gestion de l'autocomplétion

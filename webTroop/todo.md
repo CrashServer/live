@@ -11,6 +11,15 @@
 - [X] fix plats du jour length
 - [X] fix undefined dans les logs
 - [X] unifier les variables css pour tous les composants
+- [X] stop/start sur comment
+- [ ] stop/start sur multi block
+- [X] voir config signaling
+- [X] anti-jump
+- [X] search
+- [X] font interface
+- [ ] undo for user (compliqué)
+- [X] fix ping au ligne bon numéro
+- [X] visibilité du ping
 
 ### Editeur
 - [X] autocompletion foxdot
@@ -31,6 +40,7 @@
 - [X] affichage de l'instant code entre le log et l'editeur + no de ligne 
 - [X] ping sur une ligne pour laisser des marques 
 - [X] flash message pour envoie de message
+- [ ] save code
 
 ### Autocomplete 
 - [X] autocompletion foxdot
@@ -49,7 +59,8 @@
 - [X] gestion du out de foxdot
 - [X] envoie des message du serveur
 - [X] envoie des markers aux joueurs
-- [ ] enregistrement des sessions de code
+- [ ] enregistrement des sessions de code / modifier pour utilisation dans foxdot server
+- [ ] ajout time stamp
 
 ### Chat
 - [X] Ajouter un chat

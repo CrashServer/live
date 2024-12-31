@@ -1009,6 +1009,7 @@ class Variation():
         self.start()
         
     def stop(self):
+        masterAll(0)
         self.isPlaying=False
     
     def start(self):

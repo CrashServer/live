@@ -182,9 +182,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Ctrl-;': ()=> functionUtils.stopClock(wsServer),
     'Ctrl-Space': 'autocomplete',
     'Ctrl-S': (cm)=> {functionUtils.saveEditorContent(cm)},
-    'Ctrl-Alt-C': (cm) => {
+    'Alt-X': (cm) => {
       cm.toggleComment();
       evaluateCode(cm, false);
+    },
+    'Ctrl-Alt-X': (cm) => {
+      const {startLine, endLine} = functionUtils.getBlock(cm, cm.getCursor().line);
+      cm.setSelection({line: startLine, ch: 0}, {line: endLine, ch: cm.getLine(endLine).length});
+      cm.toggleComment();
+      evaluateCode(cm, true);
     },
     'Alt-J': (cm) => {functionUtils.jumpToOtherPlayer(cm, awareness)},
     'Ctrl-Alt-J': (cm) => {functionUtils.previousJump(cm)},

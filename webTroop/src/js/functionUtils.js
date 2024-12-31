@@ -45,26 +45,12 @@ export const functionUtils = {
         editor.replaceRange(attackContent, { line: line, ch: 0 });
     },
 
-    // setMarker(cm, color="", txt="") {
-    //     const line = cm.getCursor().line
-    //     const info = cm.lineInfo(line);
-    //     if (info.handle.gutterClass != null && info.handle.gutterClass.includes(`line${color}`)){
-    //       cm.removeLineClass(line, "gutter")
-    //       cm.removeLineClass(line, "background")
-    //     }
-    //     else {
-    //       cm.removeLineClass(line, "gutter")
-    //       cm.removeLineClass(line, "background")
-    //       cm.addLineClass(line, "gutter", `line${color}`)
-    //       cm.addLineClass(line, "background", `line${color}`)
-    //       return true;
-          
-    //     }
-    // },
-
     // Check if the code to evaluate is a player and if it is, stop it
     ifPlayerStop(codeToEvaluate) {
-        const playerPattern = /^([#_]\s?[a-zA-Z]\d+|[#_]\s?[a-zA-Z]{2})/;
+        const playerPattern = /^[#_]\s*([a-zA-Z]\d+|[a-zA-Z]{2})\s*>>|^#\s*[a-zA-Z]\d+\s*\.\w+\s*=\s*\d+/;
+       
+        // const playerPattern = /^([#_]\s*[a-zA-Z][a-zA-Z0-9])/;
+        // const playerPattern = /^([#_]\s?[a-zA-Z]\d+|[#_]\s?[a-zA-Z]{2})/;
         const match = codeToEvaluate.trim().match(playerPattern);
 
         if (match) {
@@ -81,15 +67,7 @@ export const functionUtils = {
 
         // Si multi-lignes
         if (multi) {
-            // Recherche début du bloc (vers le haut)
-            while (startLine > 0 && cm.getLine(startLine - 1).trim() !== '') {
-                startLine--;
-            }
-
-            // Recherche fin du bloc (vers le bas)
-            while (endLine < cm.lineCount() - 1 && cm.getLine(endLine + 1).trim() !== '') {
-                endLine++;
-            }
+            ({startLine, endLine} = this.getBlock(cm, cursor.line));
         }
 
         // Extraire le bloc
@@ -110,6 +88,7 @@ export const functionUtils = {
         return [blockCode, startLine, endLine];
     },
 
+
     // Save the content of the editor into a .py file
     saveEditorContent(cm) {
         const content = cm.getValue();
@@ -118,7 +97,24 @@ export const functionUtils = {
         const a = document.createElement('a');
         a.href = url;
         a.download = 'code.py';
-        a.click();
-        
-    }
+        a.click();   
+    },
+
+    // Get the content and the position of a block
+    getBlock(cm, line) {
+        let startLine = line;
+        let endLine = line;
+
+        // Recherche début du bloc (vers le haut)
+        while (startLine > 0 && cm.getLine(startLine - 1).trim() !== '') {
+            startLine--;
+        }
+
+        // Recherche fin du bloc (vers le bas)
+        while (endLine < cm.lineCount() - 1 && cm.getLine(endLine + 1).trim() !== '') {
+            endLine++;
+        }
+
+        return { startLine, endLine };
+    },
 };

@@ -559,11 +559,12 @@ def playRandomLog(num_lines=5):
 
 def scan_and_extract_lines(num_lines):
     ''' Scan the logs directory for valid lines and extract a random selection '''
-    log_dir = os.path.join(os.path.dirname(Path('.').absolute()), 'Troop', 'logs')
+    log_dir = os.path.join(os.path.dirname(Path('.').absolute()), 'log_sessions')
     valid_lines = []
 
     # Regex pattern to match lines starting with 'Svdk: ' or 'Zbdm: ', followed by a letter, a digit, then '>>'
-    playerPattern = re.compile(r'^(Svdk: |Zbdm: )([a-zA-Z]\d\s*>>.*)')
+    playerPattern = re.compile(r'^([a-zA-Z]\d\s*>>.*)')
+    # playerPattern = re.compile(r'^(Svdk: |Zbdm: )([a-zA-Z]\d\s*>>.*)')
 
     # Scan the directory for .txt files
     for filename in os.listdir(log_dir):
@@ -574,7 +575,7 @@ def scan_and_extract_lines(num_lines):
                     match = playerPattern.match(line.strip())
                     if match:
                         # Append the matched group without the prefix
-                        valid_lines.append(match.group(2))
+                        valid_lines.append(match.group(1))
 
     # Select random lines
     if len(valid_lines) < num_lines:
@@ -583,9 +584,11 @@ def scan_and_extract_lines(num_lines):
     selected_lines = sample(valid_lines, num_lines)
 
     # Replace the identifier with s* incrementing
+    selected_lines = [re.sub(r'bank=\d+', 'bank=0', line) for line in selected_lines]
     for i in range(len(selected_lines)):
         selected_lines[i] = re.sub(r'^[a-zA-Z]\d', f's{i+1}', selected_lines[i])
         selected_lines[i] = re.sub(r'\.(solo|stop|only|unison)\(.*?\)', '', selected_lines[i])
+        selected_lines[i] = re.sub(r'bank=\d+', 'bank=0', selected_lines[i])
 
     return selected_lines
 

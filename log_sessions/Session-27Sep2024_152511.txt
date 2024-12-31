@@ -1,0 +1,17 @@
+a1 >> play("x.")
+Clock.clear()
+ploop()
+print(Samples)
+print(Samples.loop)
+print(Samples.loops)
+print(loops)
+print(FOXDOT_LOOP)
+print(BANK_LEN)
+print(loops)
+for bankNbr in BANK_LEN:
+    Samples.addPath(os.path.join(FOXDOT_SND, str(bankNbr), "_loop_"))
+    loops += sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
+for bankNbr in BANK_LEN:
+    Samples.addPath(os.path.join(FOXDOT_SND, str(bankNbr), "_loop_"))
+    loops += sorted([fn.rsplit(".",1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
+print(loops)

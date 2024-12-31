@@ -48,6 +48,7 @@ except Exception as e:
     print("Error in generating weapons code", e)
 
 serverActive = False
+variation = None
 
 def sendOut(msg=""):
     ''' send all generated text to output : console, osc '''
@@ -531,12 +532,15 @@ def son(s=999, d=999, l=999):
     server.start()
     serverActive = True
     playRandomLog(5)
+    global variation
     variation = Variation(16,4)
 
 def soff():
     ''' Deactivate the server '''
     print("Server Off")
-    variation.stop()
+    global variation
+    if variation:
+        variation.stop()
     global serverActive
     serverActive = False
 

@@ -60,7 +60,7 @@
 - [X] gestion du out de foxdot
 - [X] envoie des message du serveur
 - [X] envoie des markers aux joueurs
-- [ ] enregistrement des sessions de code / modifier pour utilisation dans foxdot server
+- [X] enregistrement des sessions de code / modifier pour utilisation dans foxdot server
 - [ ] ajout time stamp
 
 ### Chat

@@ -211,8 +211,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Alt-I': (cm) => showDefinition(cm),
     'Alt-F': "findPersistent",
     'Ctrl-G': "findNext",
-    'Ctrl-Left': "goLineStart",
-    'Ctrl-Right': "goLineEnd",
+    'Ctrl-Alt-Left': "goLineStart",
+    'Ctrl-Alt-Right': "goLineEnd",
   });
 
   // Gestion de l'autocomplétion

@@ -95,7 +95,9 @@ const func = {
     melody: '()\r\n Generate a melody based on Markov chain dict of melody ', chaos: '(chaosInt=1)\r\n Generate some random players ', 
     once: '(self)\r\n play a player once and stop it ', 
     start: '(self, startBeat=8)\r\n Start a player at a specific beat', 
-    drummer: '(self, durloop=16, durPlyr=0.5)\r\n Transform the player into an automatic drummer '
+    drummer: '(self, durloop=16, durPlyr=0.5)\r\n Transform the player into an automatic drummer ',
+    amen : '(self, size=2)\r\nMerges and laces the first and last two items such that a drum pattern "x-o-" would become "(x[xo])-o([-o]-)"',
+    bubble: '(self, size=2)\r\nMerges and laces the first and last two items such that a drum pattern "x-o-" would become "(x[xo])-o([-o]-)"',
 };
 
 const fxList = {

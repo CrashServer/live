@@ -1,5 +1,6 @@
 export const functionUtils = {
     previousPosition: null,
+    playersList: [],
 
     stopClock(wsServer) {
         wsServer.send(JSON.stringify({
@@ -118,3 +119,9 @@ export const functionUtils = {
         return { startLine, endLine };
     },
 };
+
+export let playersList = [];
+
+export function updatePlayersList(newPlayersList) {
+    playersList = newPlayersList;
+}

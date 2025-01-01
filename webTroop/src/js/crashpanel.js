@@ -1,4 +1,5 @@
 import { EventEmitter } from './eventBus.js';
+import { playersList, updatePlayersList } from './functionUtils.js';
 
 const configRequest = await fetch('../../crash_config.json' );
   if (!configRequest.ok) {
@@ -152,6 +153,8 @@ function formatPlayers(message) {
     durationColor
     };
     }).filter(p => p !== null);
+
+    updatePlayersList(players.map(p => p.id));
 
     // Créer le HTML formaté
     const playersDiv = document.getElementById('players');

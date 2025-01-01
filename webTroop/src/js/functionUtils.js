@@ -9,6 +9,34 @@ export const functionUtils = {
         }));
     },
 
+    unSoloPlayers(wsServer) {
+        wsServer.send(JSON.stringify({
+            type: 'evaluate_code',
+            code: 'unsolo()\n'
+        }));
+    },
+
+    soloPlayer(cm, wsServer) {
+        const cursor = cm.getCursor();
+        let startLine = cursor.line;
+        let endLine = cursor.line;
+
+        // Extraire le bloc
+        const blockCode = cm.getRange(
+            {line: startLine, ch: 0},
+            {line: endLine, ch: cm.getLine(endLine).length}
+        );
+
+        const playerName = this.getPlayer(blockCode);
+    
+        if (playerName) {
+            wsServer.send(JSON.stringify({
+                type: 'evaluate_code',
+                code: `${playerName}.solo()\n`
+            }));
+        }
+    },
+
     // jump^ to the other player's position
     jumpToOtherPlayer(cm, awareness) {
         const states = awareness.getStates();
@@ -49,9 +77,6 @@ export const functionUtils = {
     // Check if the code to evaluate is a player and if it is, stop it
     ifPlayerStop(codeToEvaluate) {
         const playerPattern = /^[#_]\s*([a-zA-Z]\d+|[a-zA-Z]{2})\s*>>|^#\s*[a-zA-Z]\d+\s*\.\w+\s*=\s*\d+/;
-       
-        // const playerPattern = /^([#_]\s*[a-zA-Z][a-zA-Z0-9])/;
-        // const playerPattern = /^([#_]\s?[a-zA-Z]\d+|[#_]\s?[a-zA-Z]{2})/;
         const match = codeToEvaluate.trim().match(playerPattern);
 
         if (match) {
@@ -59,6 +84,15 @@ export const functionUtils = {
           return `${player}.stop()`;
         }
         return codeToEvaluate;
+    },
+
+    getPlayer(code) {
+        const playerPattern = /^[a-zA-Z][a-zA-Z0-9]/;
+        const match = code.trim().match(playerPattern);
+        if (match) {
+            return match[0];
+        }
+        return null;
     },
 
     getCodeAndCheckStop(cm, multi=false) {

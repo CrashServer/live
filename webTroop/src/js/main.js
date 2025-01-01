@@ -192,6 +192,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       cm.toggleComment();
       evaluateCode(cm, true);
     },
+    'Alt-S': (cm) => {functionUtils.soloPlayer(cm, wsServer)},
+    'Ctrl-Alt-S': () => {functionUtils.unSoloPlayers(wsServer)},
     'Alt-J': (cm) => {functionUtils.jumpToOtherPlayer(cm, awareness)},
     'Ctrl-Alt-J': (cm) => {functionUtils.previousJump(cm)},
     'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "[[ Attention à un truc ]]", awareness, ymarkers, ychat),

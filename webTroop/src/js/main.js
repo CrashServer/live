@@ -21,6 +21,8 @@ import 'codemirror/addon/search/searchcursor.js'
 import 'codemirror/addon/search/search.js'
 import 'codemirror/addon/search/jump-to-line.js'
 import 'codemirror/addon/search/matchesonscrollbar.js'
+import 'codemirror/addon/fold/foldcode.js'
+import 'codemirror/addon/fold/foldgutter.js'
 
 import { chatUtils } from './chatUtils.js';
 import { logsUtils } from './logs.js';
@@ -32,6 +34,7 @@ import { showDefinition } from './foxdotDefinitions.js';
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
 import 'codemirror/addon/dialog/dialog.css'
+import 'codemirror/addon/fold/foldgutter.css'
 import '../css/style.css'
 import '../css/crashpanel.css'
 import '../css/configPanel.css'
@@ -73,6 +76,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     cursorScrollMargin: 50,
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
+    foldGutter: true,
+    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
     keyMap: 'sublime',
   });
 
@@ -215,6 +220,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Ctrl-G': "findNext",
     'Ctrl-Alt-Left': "goLineStart",
     'Ctrl-Alt-Right': "goLineEnd",
+    'Alt-Q': (cm) => cm.foldCode(cm.getCursor(), 
+      {rangeFinder: (cm,start) => {
+        if(!start){return null;}
+        let startLine = start.line;
+        let endLine = start.line + 1;
+        while (startLine > 0 && !cm.getLine(startLine).trim().startsWith("#")){
+          startLine--;
+        }
+     
+        while (endLine < cm.lineCount() -1  && !cm.getLine(endLine).trim().startsWith("#")){
+          endLine++;
+        }
+
+        if (startLine === endLine){
+          return null;
+        }
+
+        return {
+            from: CodeMirror.Pos(startLine+1, 0),
+            to: CodeMirror.Pos(endLine, cm.getLine(endLine).length),
+        };
+      }})
   });
 
   // Gestion de l'autocomplétion

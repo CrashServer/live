@@ -1,0 +1,398 @@
+y3 >> play("x.")
+
+y3 >> play("x.", dcomp=4)
+
+y3 >> play("x.", dcomp=90)
+
+y3 >> play("x.", dcomp=PRand(90))
+
+y3 >> play("<x.><-->", dcomp=PRand(90))
+
+y3 >> play("<x.><[--]>", dcomp=PRand(90))
+
+y3 >> play("<x.><[--]><..O.>", dcomp=PRand(90))
+
+y3 >> play("<x.><[--]><..u.>", dcomp=PRand(90))
+
+y3 >> play("<x.><[--]><..u.>", comp=PRand(90))
+
+y3 >> play("<x.><[--]><..u.>", comp=0, dcomp=PRand(90))
+
+y3 >> play("<x.><[--]><..u.>", comp=0, dcomp=44)
+
+y3 >> play("<x.><[--]><..u.>", comp=0, dcomp=0)
+
+y3 >> play("<x.><[--]><..u.>", comp=0, dcomp=PBin())
+
+Clock.clear()
+soff()
+
+k0 >> tb303(melody(), dur=1/4, oct=(3), valad=PFr(20,700), valadr=0.48, sus=1/8, valadd=30,vol=0.4, dcomp=[PRand(70)])
+
+k0 >> tb303(melody(), dur=1/4, oct=(3), valad=PFr(20,700), valadr=0.48, sus=1/8, valadd=30,vol=0.4, dcomp=[1])
+
+k0 >> tb303(melody(), dur=1/4, oct=(3), valad=PFr(20,700), valadr=0.48, sus=1/8, valadd=30,vol=0.4, dcomp=[0])
+
+k0 >> tb303(melody(), dur=1/4, oct=(3), valad=PFr(20,700), valadr=0.48, sus=1/8, valadd=30,vol=0.4, dcomp=[1])
+
+Clock.clear()
+soff()
+
+y3 >> play("<x.><[--]><..u.>", comp=0, dcomp=PBin())
+
+y3 >> play("<x.><[--]><..u.>", comp=0, dcomp=40)
+
+y3 >> play("<x.><[--]><..u.>", comp=0, dcomp=0)
+
+y3 >> play("<x.><[--]><..u.>", comp=0, dcomp=40)
+
+Clock.clear()
+soff()
+
+y3 >> play("<x.><[--]><..u.>", comp=4, dcomp=0)
+
+y3 >> play("<x.><[--]><..u.>", comp=8, dcomp=0)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, dcomp=0)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=400, valadd=400)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=400, valadd=400, valadr=0.8)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=430, valadd=400, valadr=0.8)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=400, valadr=0.8)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=600, valadr=0.8)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8, vadiod=200)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8, vadiod=450)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8, vadiod=450, vadiodd=200)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8, vadiod=450, vadiodd=20)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8, vadiod=450, vadiodd=20, vadiodr=0.9)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8, vadiod=450, vadiodd=20, vadiodr=0.69)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8, vadiod=450, vadiodd=20, vadiodr=0.89)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=450, valadd=1600, valadr=0.8, vadiod=PFr(450,500), vadiodd=20, vadiodr=0.89)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=PFr(450,455), valadd=1600, valadr=0.8, vadiod=PFr(450,500), vadiodd=20, vadiodr=0.89)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=PFr(450,455, 445, 19), valadd=1600, valadr=0.8, vadiod=PFr(450,500), vadiodd=20, vadiodr=0.89)
+
+h1 >> play("<x.>", amp=5, sample=4).sometimes("stutter" ,PRand(5))
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=PFr(450,455, 445, 19), valadd=1600, valadr=0.8, vadiod=PFr(450,500), vadiodd=20, vadiodr=0.79)
+
+y3 >> play("<x.><[--]><..u.>", comp=18, valad=PFr(450,455, 445, 19), valadd=1600, valadr=0.8, vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89))
+
+y3 >> play("<x.><[--]><..u.>", comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=0.8, vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89))
+
+y3 >> play("<x.><[--]><..u.>", comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=0.9, vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89))
+
+y3 >> play("<x.><[--]><..u.>", comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89))
+
+y3 >> play("<x.><[--]><..u.>", comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=1400)
+
+y3 >> play("<x.><[--]><..u.>", comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=51400)
+
+y3 >> play("<x.><[--]><..u.>", comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=5400)
+
+y3 >> play("<x.><[--]><..u.>", sample=6, comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=5400)
+
+y3 >> play("<x.><[--]><..u.>", sample=4, comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=5400)
+
+y3 >> play("<x.><[--]><..u.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=5400)
+
+variation = Variation(16,4)
+
+y3 >> play("<x.><[--]><..u.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=1600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=5400)
+
+y3 >> play("<x.><[--]><..u.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=5400)
+
+y3 >> play("<x.><[--]><..u.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=120, vadiodr=PFr(0.8,0.89), mpf=5400)
+
+y3 >> play("<x.><[--]><..u.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=5400)
+
+y3 >> play("<x.><[--]><..u.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+
+y3 >> play("<..><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+
+y3 >> play("<X.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+h1 >> play("<X.>", amp=1, sample=4).sometimes("stutter" ,PRand(5))
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+h1 >> play("<X.>", amp=6, sample=0).sometimes("stutter" ,PRand(5))
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0.6, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0.5, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0.4, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0.2, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=3400)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=8, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0.2, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0.2, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=0)
+
+h1 >> play("<X+>", amp=6, sample=0).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X->", amp=6, sample=0).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X-><..|c3|.>", amp=6, sample=0).sometimes("stutter" ,PRand(5))
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0.2, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,2500, 33, 15), mverb=0.2, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,1500, 33, 15), mverb=0.2, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,1500, 33, 15), mverb=0, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,1100, 33, 15), mverb=0, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=600, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=20, vadiodr=PFr(0.8,0.89), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.89), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", dur=1/4, sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", dur=1/4,cut=1/2, sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", dur=1/4,cut=PFr(1/2,3/4), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", dur=1/4,cut=PFr(1/2,1), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", dur=1/4,cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+h1.stop()
+
+h1 >> play("<X-><..|c3|.>", amp=16, sample=0).sometimes("stutter" ,PRand(5))
+
+y3.stop()
+
+y3 >> play("<x.><[--]><..u.><..C.>", dur=1/4,cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=400, dur=1/4,cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=400, dur=1,cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=0, dur=1,cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+h1 >> play("<X-><..|c4|.>", amp=16, sample=0).sometimes("stutter" ,PRand(5))
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=0, dur=4, cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0)
+
+d9 >> lbass(oct=4, dur=1/2, cutoff=400)
+
+d9 >> lbass(oct=4, dur=1/2, cutoff=400, amp=3)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=0, dur=4, cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0, vol=0.8)
+
+h1 >> play("<X-><..|c4|.>", amp=14, sample=0).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X-><..|c4|.>", amp=12, sample=0).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X-><..|c4|.>", amp=10, sample=0).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X-><..|c4|.>", amp=6, sample=0).sometimes("stutter" ,PRand(5))
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=0, dur=4, cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0, vol=0.6)
+
+d9 >> lbass(oct=4, dur=1/2, cutoff=600, amp=3)
+
+d9 >> lbass(oct=4, dur=1/2, cutoff=800, amp=3)
+
+d9 >> lbass(oct=4, dur=1/2, cutoff=PFr(1800,2200), amp=3)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/2, cutoff=PFr(1800,2200), amp=3)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/2, cutoff=PFr(1800,3200), amp=3)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=0, dur=var([4,1/2], [24,8]), cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0, vol=0.6)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/2, cutoff=PFr(1800,7200), amp=3)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=0, dur=var([4,1/2], [12,4]), cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0, vol=0.6)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=140, dur=var([4,1/2], [12,4]), cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0, vol=0.6)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/2, cutoff=PFr(1800,7200), tone=PFr(0.14, 0.7), amp=3)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/2, cutoff=PFr(1800,7200), tone=PFr(0.14, 0.7), amp=3, tanh=0.4)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/2, cutoff=PFr(1800,7200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/2, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=1400, dur=var([4,1/2], [12,4]), cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=0, vol=0.6)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=1400, dur=var([4,1/2], [12,4]), cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=4000, vol=0.6)
+
+y3 >> play("<x.><[--]><..u.><..C.>", hpf=1400, dur=var([4,1/2], [12,4]), cut=PFr(1/2,2), sample=0, comp=28, valad=PFr(450,1455, 445, 19), valadd=60, valadr=PFr(0.8, 0.9), vadiod=PFr(450,500, 33, 15), mverb=0, vadiodd=200, vadiodr=PFr(0.8,0.99), mpf=400, vol=0.6)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.7)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.8)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.9)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.49)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.39)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.29)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.29)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.19)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=0.99)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=1.29)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0.8, rq=1.49)
+
+d9 >> lbass(oct=PStep(8,5,4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=1.8, rq=1.49)
+
+d9 >> lbass(oct=PStep(8,[5,6],4), dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=1.8, rq=1.49)
+
+d9 >> lbass(oct=PStep(8,[5,6],4), detune=0.5, dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=1.8, rq=1.49)
+
+d9 >> lbass(oct=PStep(8,[5,6],4), detune=0.5, dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=1.8, rq=1.49).unison(3)
+
+h1 >> play("<X-><..|c4|.>", amp=4, sample=0).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X-><..|c4|.>", amp=4, sample=0, dcomp=4).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X-><..|c4|.>", amp=4, sample=0, dcomp=40).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X-><..|c4|.>", amp=4, sample=0, comp=4).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<X-><..|c4|.>", amp=4, sample=0, comp=14).sometimes("stutter" ,PRand(5))
+
+d9 >> lbass(oct=PStep(8,[5,6],4), detune=0.5, dur=1/4, cutoff=PFr(1800,8200), tone=PFr(0.14, 0.7), amp=3, tanh=0, rq=1.49).unison(3)
+
+d9 >> lbass(oct=PStep(8,[5,6],4), detune=0.5, dur=1/4, cutoff=PFr(180,4200), tone=PFr(0.14, 0.7), amp=3, tanh=0, rq=1.49).unison(3)
+
+d9 >> lbass(oct=PStep(8,[5,6],4), detune=0.5, dur=1/4, cutoff=PFr(180,4200), tone=PFr(0.14, 0.4), amp=3, tanh=0, rq=1.49).unison(3)
+
+y3.stop()
+
+h1.stop()
+
+d9.stop()
+
+k1 >> plaitsX(preset=4, dur=8, oct=4)
+
+k1 >> plaitsX(preset=6, dur=8, oct=4)
+
+k1 >> plaitsX(preset=6, dur=8, oct=4).unison(3)
+
+k1 >> plaitsX(preset=6, dur=8, oct=4, phaser=0.5).unison(3)
+
+k1 >> plaitsX(preset=(6,8), dur=8, oct=4, phaser=0.5).unison(3)
+
+k1 >> plaitsX(preset=(6,8), dur=8, oct=(4,5), phaser=0.5).unison(3)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(4,5), phaser=0.5).unison(3)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(4,5), phaser=0.5).unison(2)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(4,3), phaser=0.5).unison(2)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(4,3), phaser=0.5).unison(3)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(4,3), phaser=0).unison(3)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(4,3), phaser=1).unison(3)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(4,3), phaser=0).unison(3)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(4,3), phaser=1).unison(3)
+
+k1 >> plaitsX(preset=(6,12), dur=8, oct=(2,4,3), phaser=1).unison(3)
+
+k1 >> plaitsX(preset=(4,6,12), dur=8, oct=(2,4,3), phaser=1).unison(3)
+
+k1 >> plaitsX(preset=(4,6,12), dur=8, oct=(4,3), phaser=1).unison(3)
+
+k1 >> plaitsX(var([0,-2],8), preset=(4,6,12), dur=8, oct=(4,3), phaser=1).unison(3)
+
+Clock.clear()
+soff()
+
+w7 >> blip()
+
+w7 >> blip(oct=3)
+
+w7 >> blip(oct=3, dur=2)
+
+w7 >> blip(oct=3, dur=2, rate=0.5)
+
+w7 >> blip(oct=3, dur=2, rate=0.15)
+
+w7 >> blip(oct=3, dur=2, rate=0.45)
+
+w7 >> blip(oct=5, dur=2, rate=0.45)
+
+w7 >> blip(0, oct=5, dur=2, rate=0.45)
+
+w7 >> blip(0, oct=3, dur=2, rate=0.45)
+
+w7 >> blip(0, oct=2, dur=2, rate=0.45)
+
+w7 >> blip(0, oct=2, dur=4, rate=0.45)
+
+w7 >> blip(0, oct=2, dur=4, rate=0.25)
+
+w7 >> blip(0, oct=1, dur=4, rate=0.25)
+
+w7 >> blip(0, oct=4, dur=4, rate=0.25)
+
+w7 >> blip(0, oct=4, dur=1, rate=0.25)
+
+w7 >> blip([0,4], oct=4, dur=1, rate=0.25)
+
+w7 >> blip([0,4], oct=5, dur=1, rate=0.25)
+
+w7 >> blip([0,4], oct=5, dur=1, sus=2, rate=0.25)
+
+Clock.clear()
+soff()
+
+x2 >> plaitsX(dur=1/3)
+
+x2 >> plaitsX(dur=1/3, formant=4)
+
+x2 >> plaitsX(dur=1/3, formant=400)
+
+x2 >> plaitsX(dur=1, formant=400)
+
+x2 >> plaitsX(dur=1, formant=2400)
+
+x2 >> plaitsX(dur=1, formant=400)
+
+x2 >> plaitsX(dur=1, formant=200)
+
+x2 >> plaitsX(dur=1, formant=20)
+
+Clock.clear()
+soff()
+

@@ -171,7 +171,7 @@ function formatPlayers(message) {
             const playerId = e.currentTarget.dataset.playerId;
             EventEmitter.emit('send_foxdot', `${playerId}.stop()`);
         });
-        line.style.cursor = 'pointer';
+        // line.style.cursor = 'pointer';
     });
 }
 

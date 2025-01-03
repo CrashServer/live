@@ -127,7 +127,14 @@ export const foxdotAutocomplete = {
         { text: 'clone()', displayText: 'clone' }, 
         { text: 'once()', displayText: 'once' }, 
         { text: 'start()', displayText: 'start' }, 
-        { text: 'drummer()', displayText: 'drummer' }, 
+        { text: 'drummer()', displayText: 'drummer' },
+        { text: 'sometimes()', displayText: 'sometimes'},
+        { text: 'often()', displayText: 'often'},
+        { text: 'rarely()', displayText: 'rarely'},
+        { text: 'never()', displayText: 'never'},
+        { text: 'solo()', displayText: 'solo'},
+        { text: 'stop()', displayText: 'stop'},
+        { text: 'only()', displayText: 'only'},
     ],
 
     patternFunction: [
@@ -293,8 +300,9 @@ export const foxdotAutocomplete = {
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;
 
         
-        const afterLastClosingParenthesis = /.*\)\s*\.\s*$/;
-        const isAfterLastClosingParenthesis = afterLastClosingParenthesis.test(beforeCursor);
+        const afterLastClosingParenthesis = /.*\)\s*\./;
+        // const isAfterLastClosingParenthesis = afterLastClosingParenthesis.test(beforeCursor);
+        // const afterLastClosingParenthesis = /.*\)\s\.\s*$/;
 
         const loopPattern = /loop\(([^,)]*)$/;
 
@@ -310,7 +318,7 @@ export const foxdotAutocomplete = {
             };
         }
 
-        if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
+        else if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             const filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
             return {
@@ -346,12 +354,12 @@ export const foxdotAutocomplete = {
                 to: CodeMirror.Pos(cursor.line, cursorPosition),
                 };
         }
-        else if (isAfterLastClosingParenthesis) {
-            const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
+        else if (afterLastClosingParenthesis.test(beforeCursor)) {
+            const prefix = token.string;
             const filteredPlayerFunction = this.playerFunction.filter(f => f.displayText.startsWith(prefix));
             return {
                 list: filteredPlayerFunction.length > 0 ? filteredPlayerFunction.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.playerFunction.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                from: CodeMirror.Pos(cursor.line, token.start+1),
+                from: CodeMirror.Pos(cursor.line, token.start),
                 to: CodeMirror.Pos(cursor.line, cursorPosition),
             };
         }

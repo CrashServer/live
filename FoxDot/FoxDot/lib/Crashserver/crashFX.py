@@ -63,6 +63,8 @@ fx.add("osc = SelectX.ar(datype, [BPF.ar(osc, dastart + filGen, darq), BRF.ar(os
 fx.add("osc = (osc.clip2(0.007) * 24).distort()")
 fx.save()
 
+
+
 fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0)
 fx.add("osc = osc + (fm_sin_i * SinOsc.kr(osc * fm_sin))")
 fx.save()
@@ -313,6 +315,10 @@ fx.save()
 
 fx = FxList.new("comp", "comp", {"comp": 0, "comp_down": 1, "comp_up": 0.8}, order=2)
 fx.add("osc = Compander.ar(osc, osc, thresh: comp, slopeAbove: comp_down, slopeBelow: comp_up, clampTime: 0.01, relaxTime: 0.01, mul: 1)")
+fx.save()
+
+fx = FxList.new("dcomp", "dcomp", {"dcomp": 0}, order=2)
+fx.add("osc = DCompressor.ar(osc, ratio: dcomp)")
 fx.save()
 
 fx = FxList.new("mu", "mimu", {"mu": 0}, order=2)

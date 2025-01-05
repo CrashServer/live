@@ -241,7 +241,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             from: CodeMirror.Pos(startLine+1, 0),
             to: CodeMirror.Pos(endLine, cm.getLine(endLine).length),
         };
-      }})
+      }}),
+      'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
   });
 
   // Gestion de l'autocomplétion
@@ -371,6 +372,25 @@ document.addEventListener('DOMContentLoaded', async () => {
       crashPanelTitle.classList.toggle('loading');
     }, 4000);
   });
+
+  // piano insert at cursor
+  document.querySelectorAll('#piano-roll .piano-key li').forEach(key => {
+    key.addEventListener('click', (event) => {
+        const index = event.currentTarget.dataset.index;
+        if (index !== undefined) {
+            insertAtCursor(index);
+        }
+    });
+  });
+
+  function insertAtCursor(index) {
+      // insert index text at cursor position
+      const cursor = editor.getCursor();
+      const line = cursor.line;
+      const ch = cursor.ch;
+      editor.replaceRange(index+',', {line, ch}, {line, ch});
+  }
+
 
   // crashOsWs.onmessage = (event) => {
   //   try {

@@ -33,9 +33,11 @@ ws.onmessage = function(event) {
     switch(data.type) {
         case 'scale':
             document.getElementById('scale').textContent = data.scale;
+            updatePianoKeys(data.scale, document.getElementById('root').textContent);
             break;
         case 'root':
             document.getElementById('root').textContent = data.root;
+            updatePianoKeys(document.getElementById('scale').textContent, data.root);
             break;
         case 'cpu':
             updateCpu(data.cpu);
@@ -78,6 +80,12 @@ ws.onclose = function() {
 ws.onerror = function(error) {
     console.error('WebSocket CrashPanel error:', error);
 };
+
+document.getElementById('root').addEventListener('click', () => {
+    const pianoRoll = document.getElementById('piano-roll');
+    pianoRoll.classList.toggle('hidden');
+});
+
 
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -205,3 +213,75 @@ function updateCrashPanelTitle (serverState) {
         crashPanelTitle.classList.remove('server-active');
     }
   };
+
+// piano stuff
+const scales = {
+    chromatic: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    major: [0, 2, 4, 5, 7, 9, 11],
+    majorPentatonic: [0, 2, 4, 7, 9],
+    minor: [0, 2, 3, 5, 7, 8, 10],
+    aeolian: [0, 2, 3, 5, 7, 8, 10],
+    minorPentatonic: [0, 3, 5, 7, 10],
+    mixolydian: [0, 2, 4, 5, 7, 9, 10],
+    melodicMinor: [0, 2, 3, 5, 7, 9, 11],
+    melodicMajor: [0, 2, 4, 5, 7, 8, 11],
+    harmonicMinor: [0, 2, 3, 5, 7, 8, 11],
+    harmonicMajor: [0, 2, 4, 5, 7, 8, 11],
+    justMajor: [0, 2, 4, 5, 7, 9, 11],
+    justMinor: [0, 2, 3, 5, 7, 8, 10],
+    dorian: [0, 2, 3, 5, 7, 9, 10],
+    dorian2: [0, 1, 3, 5, 6, 8, 9, 11],
+    diminished: [0, 1, 3, 4, 6, 7, 9, 10],
+    egyptian: [0, 2, 5, 7, 10],
+    yu: [0, 3, 5, 7, 10],
+    zhi: [0, 2, 5, 7, 9],
+    phrygian: [0, 1, 3, 5, 7, 8, 10],
+    prometheus: [0, 2, 4, 6, 11],
+    indian: [0, 4, 5, 7, 10],
+    locrian: [0, 1, 3, 5, 6, 8, 10],
+    locrianMajor: [0, 2, 4, 5, 6, 8, 10],
+    lydian: [0, 2, 4, 6, 7, 9, 11],
+    lydianMinor: [0, 2, 4, 6, 7, 8, 10],
+    custom: [0, 2, 3, 5, 6, 9, 10],
+    hungarianMinor: [0, 2, 3, 6, 7, 8, 11],
+    romanianMinor: [0, 2, 3, 6, 7, 9, 10],
+    chinese: [0, 4, 6, 7, 11],
+    wholeTone: [0, 2, 4, 6, 8, 10],
+    halfWhole: [0, 1, 3, 4, 6, 7, 9, 10],
+    wholeHalf: [0, 2, 3, 5, 6, 8, 9, 11],
+    bebopMaj: [0, 2, 4, 5, 7, 8, 9, 11],
+    bebopDorian: [0, 2, 3, 4, 5, 9, 10],
+    bebopDom: [0, 2, 4, 5, 7, 9, 10, 11],
+    bebopMelMin: [0, 2, 3, 5, 7, 8, 9, 11],
+    blues: [0, 3, 5, 6, 7, 10],
+    minMaj: [0, 2, 3, 5, 7, 9, 11],
+    susb9: [0, 1, 3, 5, 7, 9, 10],
+    lydianAug: [0, 2, 4, 6, 8, 9, 11],
+    lydianDom: [0, 2, 4, 6, 7, 9, 10],
+    melMin5th: [0, 2, 4, 5, 7, 8, 10],
+    halfDim: [0, 2, 3, 5, 6, 8, 10],
+    altered: [0, 1, 3, 4, 6, 8, 10]
+};
+
+function updatePianoKeys(scale, root) {
+    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const scalePattern = scales[scale.toLowerCase()];
+    const rootIndex = parseInt(root, 10);
+
+    // Clear previous notes
+    document.querySelectorAll('#piano-roll .piano-key li').forEach(key => {
+        key.textContent = '';
+    });
+
+    // Update keys with scale notes
+    scalePattern.forEach((interval, index) => {
+        const noteIndex = (rootIndex + interval) % 12;
+        const note = notes[noteIndex];
+        const key = document.querySelector(`#piano-roll .piano-key li[data-note="${note}"]`);
+        if (key) {
+            key.innerHTML = `${note}<br>${index}`;
+            key.dataset.index = index;
+        }
+    });
+
+}

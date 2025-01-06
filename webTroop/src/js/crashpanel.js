@@ -107,7 +107,6 @@ function updateBeat(actualbeat) {
 
 function updateCpu(usagePercent){
     const cpuDiv = document.getElementById("cpu")
-    const cpuSection = document.querySelector(".cpu-info > fieldset")
     // Définir les couleurs de la plage
     const green = "#515b54";
     const orange = "#FFAA44";
@@ -129,7 +128,6 @@ function updateCpu(usagePercent){
     }
 
     // Mettre à jour la bordure et le texte
-    // cpuSection.style.borderColor = borderColor;
     document.documentElement.style.setProperty('--border-col-2', borderColor);
     cpuDiv.textContent = `${usagePercent}%`;
 }
@@ -265,7 +263,7 @@ const scales = {
 
 function updatePianoKeys(scale, root) {
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    const scalePattern = scales[scale.toLowerCase()];
+    const scalePattern = scales[scale];
     const rootIndex = parseInt(root, 10);
 
     // Clear previous notes
@@ -274,6 +272,9 @@ function updatePianoKeys(scale, root) {
     });
 
     // Update keys with scale notes
+    if (!scalePattern) {
+        return;
+    }
     scalePattern.forEach((interval, index) => {
         const noteIndex = (rootIndex + interval) % 12;
         const note = notes[noteIndex];

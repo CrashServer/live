@@ -52,6 +52,11 @@ fx.add('osc = VADiodeFilter.ar(osc, vadiod, vadiodr, vadiodd)')
 fx.add('osc = osc*0.5')
 fx.save()
 
+fx = FxList.new('vakorg', 'VAKorg', {'vakorg': 500, 'vakorgr': 0.5, 'vakorgd': 0.5, 'vakorgt': 0}, order=2)
+fx.doc("VAKorg filter")
+fx.add('osc = VAKorg35.ar(osc*0.4, vakorg, vakorgr, vakorgd,vakorgt)')
+fx.save()
+
 # daFunk filter
 fx = FxList.new('dafilter', 'DafunkFilter', {'dafilter': 1200, 'dastart': 250, 'darel': 0.2, 'darq': 0.5, 'datype': 0, 'sus': 1}, order=2)
 fx.doc("Dafunk Filter")
@@ -388,6 +393,12 @@ fx = FxList.new('high','H_Equalizer', {'high': 1, 'highfreq': 8000}, order=2)
 fx.doc("High shelf Equalizer")
 fx.add('osc = BHiShelf.ar(osc, freq: highfreq, db: abs(high).ampdb)')
 fx.save()
+
+fx = FxList.new('bell','Bell_Filter', {'bell': 0.5, 'bellf': 3000, 'bellq': 0.9}, order=2)
+fx.doc("Bell Filter")
+fx.add('osc = NonlinearFilter.ar(osc, freq: bellf, shape:0, gain:bell, q:bellq, saturation: 1)')
+fx.save()
+
 
 fx = FxList.new('djf','djFilter', {'djf': 0, 'djfq': 0.3}, order=2)
 fx.doc("DJ Filter")

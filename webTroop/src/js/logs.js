@@ -3,6 +3,8 @@ export const logsUtils = {
   editorContainer: document.getElementById('editor-container'),
   logPanel: document.getElementById('logPanel'),
   otherDisplay: document.getElementById('other-user-display'),
+  otherDisplayCode: document.getElementById('other-user-code'),
+  otherDisplayPosition: document.getElementById('other-user-position'),
   logs: document.getElementById('logs'),
 
   initResize: function(editor) {
@@ -33,7 +35,12 @@ export const logsUtils = {
 
   // Affichage du code de l'autre joueur
   insertOtherUserCode: function(line, code) {
-    this.otherDisplay.innerHTML = `${line}: ${code}`;
+    this.otherDisplayCode.innerHTML = `${line}: ${code}`;
+  },
+
+  // Affichage de la position de l'autre joueur
+  insertOtherUserPosition: function(positionIndicator) {
+    this.otherDisplayPosition.innerHTML = positionIndicator;
   },
 
   // Ajout des logs dans la console

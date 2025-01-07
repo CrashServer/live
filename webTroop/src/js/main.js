@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // Connexion aux serveurs
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
-  const foxdoxWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
+  let foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
 
   // Récupération des éléments du DOM
   const chrono = document.getElementById('chrono');
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   // Gestion du copy/paste venant de FOXDOT
-  foxdoxWs.onmessage = (event) => {
+  foxdotWs.onmessage = (event) => {
     // console.log(event.data);
     try {
       const message = JSON.parse(event.data);
@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   // recupération de la liste des loops de foxdot
-  foxdoxWs.onopen = () => {
-    foxdoxWs.send(JSON.stringify({ type: 'get_loops' }));
+  foxdotWs.onopen = () => {
+    foxdotWs.send(JSON.stringify({ type: 'get_loops' }));
   };
 
   // Reset du chrono lors du clic sur le chrono
@@ -275,62 +275,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { user, code, position, line } = state.otherInstantCode;
         if (user !== awareness.getLocalState().user.name){
           const updatedCode = code.slice(0, position) + '<span class="otherLive-cursor-marker">|</span>' + code.slice(position);
+          const positionIndicator = (line < editor.getCursor().line +1) ? '▲' : '▼';
           logsUtils.insertOtherUserCode(line, updatedCode);
+          logsUtils.insertOtherUserPosition(positionIndicator);
         }
       }
     });
   });
-
-  class PersistentWebSocket {
-    constructor(url) {
-        this.url = url;
-        this.reconnectAttempts = 0;
-        this.maxReconnectDelay = 5000;
-        this.ws = null;
-        this.connect();
-    }
-
-    connect() {
-        this.ws = new WebSocket(this.url);
-        
-        this.ws.onopen = () => {
-            this.reconnectAttempts = 0;
-            this.startHeartbeat();
-        };
-
-        this.ws.onclose = () => {
-            this.reconnect();
-        };
-
-        this.ws.onerror = (error) => {
-            console.error('Erreur WebSocket:', error);
-        };
-    }
-
-    reconnect() {
-        const delay = Math.min(1000 * Math.pow(2, this.reconnectAttempts), this.maxReconnectDelay);
-        this.reconnectAttempts++;
-        
-        setTimeout(() => {
-            this.connect();
-        }, delay);
-    }
-
-    startHeartbeat() {
-        this.heartbeatInterval = setInterval(() => {
-            if (this.ws.readyState === WebSocket.OPEN) {
-                this.ws.send(JSON.stringify({ type: 'ping' }));
-            }
-        }, 30000); // Ping toutes les 30 secondes
-    }
-
-    send(data) {
-        if (this.ws.readyState === WebSocket.OPEN) {
-            this.ws.send(data);
-        }
-    }
-  }
-  const crashOsWs = new PersistentWebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
 
   // Gestion de l'envoi de code en temps réel
   editor.on('cursorActivity', (cm) => {
@@ -361,12 +312,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     catch (error) {
     }
     
-    crashOsWs.send(JSON.stringify(message));
+    if(foxdotWs.readyState === WebSocket.OPEN) {
+      foxdotWs.send(JSON.stringify(message));
+    }
+    else {
+      foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
+    }
   });
 
   // Gestion de l'activation/désactivation du serveur dans CrashPanel
   crashPanelTitle.addEventListener('click', () => {
-    crashOsWs.send(JSON.stringify({ type: "serverToggle"}));
+    if (foxdotWs.readyState === WebSocket.OPEN) {
+      foxdotWs.send(JSON.stringify({ type: "serverToggle"}));
+    }
+    else {
+      foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
+      foxdotWs.send(JSON.stringify({ type: "serverToggle"}));
+    }
+    
     crashPanelTitle.classList.toggle('loading');
     setTimeout(() => {
       crashPanelTitle.classList.toggle('loading');
@@ -390,20 +353,5 @@ document.addEventListener('DOMContentLoaded', async () => {
       const ch = cursor.ch;
       editor.replaceRange(index+',', {line, ch}, {line, ch});
   }
-
-
-  // crashOsWs.onmessage = (event) => {
-  //   try {
-  //     const message = JSON.parse(event.data);
-  //     if (message.type === 'attack') {
-  //       functionUtils.insertAttackContent(editor, message.content);
-  //     }
-  //     else if (message.type === 'loopsList') {
-  //       console.log(message.loops);
-  //       foxdotAutocomplete.loopList = message.loops;
-  //     }
-  //   } catch (error) {
-  //   }
-  // };
 
 });

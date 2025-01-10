@@ -18,9 +18,10 @@
 - [X] anti-jump
 - [X] search
 - [X] font interface
-- [ ] undo for user (compliqué)
+- [X] undo for user (compliqué)
 - [X] fix ping au ligne bon numéro
 - [X] visibilité du ping
+- [ ] chaos bug et attack de temps à autre. 
 
 ### Editeur
 - [X] autocompletion foxdot
@@ -37,11 +38,12 @@
 - [X] liste des evaluations dans console
 - [ ] ajout de tabs pour plusieurs editeurs
 - [ ] flash message pour changement de nom de joueur
-- [ ] position des joueurs dans le gutter
+- [X] position des joueurs dans le gutter
 - [X] affichage de l'instant code entre le log et l'editeur + no de ligne 
 - [X] ping sur une ligne pour laisser des marques 
 - [X] flash message pour envoie de message
 - [X] save code
+- [ ] opacité de l'editeur
 
 ### Autocomplete 
 - [X] autocompletion foxdot

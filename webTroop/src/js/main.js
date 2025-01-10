@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     lineNumbers: true,
     autofocus: true,
     matchBrackets: true,
-    autoCloseBrackets: true,
+    autoCloseBrackets: {pairs: "()[]{}<>''\"\"", override: true},
     lineWrapping: true,
     cursorScrollMargin: 50,
     singleCursorHeightPerLine: false,
@@ -81,9 +81,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     keyMap: 'sublime',
   });
 
+  // undo Manager
+  const yUndoManager = new Y.UndoManager(ytext, { trackedOrigins: new Set([]) });
   // Binding YJS avec CodeMirror
-  const binding = new CodemirrorBinding(ytext, editor, provider.awareness);
-  
+  const binding = new CodemirrorBinding(ytext, editor, provider.awareness, {yUndoManager});
+
   // Configuration du panneau de configuration
   setupConfigPanel(awareness, editor);
   
@@ -133,6 +135,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   // recupération de la liste des loops de foxdot
   foxdotWs.onopen = () => {
     foxdotWs.send(JSON.stringify({ type: 'get_loops' }));
+  };
+
+  foxdotWs.onclose = () => {
+    foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
   };
 
   // Reset du chrono lors du clic sur le chrono
@@ -243,6 +249,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
       }}),
       'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
+      'Ctrl-W': () => {console.log('Ctrl-W')}
   });
 
   // Gestion de l'autocomplétion

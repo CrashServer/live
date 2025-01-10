@@ -724,6 +724,17 @@ class WebsocketServer():
         message = json.dumps({"type": "loopsList", "loops": loops})
         await self.sendWebsocket(message)
 
+    async def sendFxDict(self):
+        ''' Send fx list to websocket server '''
+        fx_json_list = []
+        for fx_name in FxList.keys():
+            fxDefault = FxList[fx_name].defaults
+            filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+            fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+            fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+        fxDict = json.dumps({"type": "fxList", "fx": fx_json_list})
+        await self.sendWebsocket(fxDict)
+
     def sendServerState(self):
         ''' Send server state to websocket server '''
         while True:
@@ -1061,6 +1072,9 @@ class Variation():
         fx = choice(list(self.randomFx.keys()))
         masterAll(fx, self.randomFx[fx])
         Clock.schedule(lambda: masterAll(0), Clock.mod(self.durTotal))
+
+Clock.link()
+
 
 # Archive of old function 
 

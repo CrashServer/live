@@ -293,7 +293,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           foxdotAutocomplete.loopList = formattedLoops;
         }
         else if (message.type === 'fxList') {
-          foxdotAutocomplete.fxList = message.fx;
+          const updatedFxList = message.fx.map(fx => {
+            const fxName = fx.displayText.replace(/_$/, ''); // Retirer le suffixe '_'
+            return { text: `${fxName}=`, displayText: fxName };
+          });
+          foxdotAutocomplete.fxList = [...message.fx, ...updatedFxList];
         }
       } catch (error) {
         console.error('Erreur lors de la réception de message FoxDot:', error);

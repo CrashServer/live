@@ -21,7 +21,7 @@
 - [X] undo for user (compliqué)
 - [X] fix ping au ligne bon numéro
 - [X] visibilité du ping
-- [ ] chaos bug et attack de temps à autre. 
+- [X] chaos bug et attack de temps à autre. 
 
 ### Editeur
 - [X] autocompletion foxdot

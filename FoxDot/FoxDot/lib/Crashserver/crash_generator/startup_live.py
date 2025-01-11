@@ -739,7 +739,7 @@ class WebsocketServer():
             fxDefault = FxList[fx_name].defaults
             filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
             fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
-            fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+            fx_json_list.append({'text': fx_text, 'displayText': fx_name + '_'})
         fxDict = json.dumps({"type": "fxList", "fx": fx_json_list})
         await self.sendWebsocket(fxDict)
 

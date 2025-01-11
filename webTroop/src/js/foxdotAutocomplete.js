@@ -321,10 +321,14 @@ export const foxdotAutocomplete = {
         else if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             const filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
+            const loopMatch = line.match(/loop\("([^"]*)"/);
+            const durMatch = line.match(/dur=(\d+)/);
+            const loopStart = loopMatch ? token.start : token.start;
+            const loopEnd = durMatch ? durMatch.index + durMatch[0].length : cursorPosition;
             return {
               list: filteredLoops.length > 0 ? filteredLoops.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.loopList.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-              from: CodeMirror.Pos(cursor.line, token.start + (prefix.length === 0 ? 1 : 0)),
-              to: CodeMirror.Pos(cursor.line, cursorPosition),
+              from: CodeMirror.Pos(cursor.line, loopStart + (prefix.length === 0 ? 1 : 0)),
+              to: CodeMirror.Pos(cursor.line, loopEnd),
             }
         }
         else if (beforeCursor.includes('Scale.default=')) {

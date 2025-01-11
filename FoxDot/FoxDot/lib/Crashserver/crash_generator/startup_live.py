@@ -683,8 +683,16 @@ class WebsocketServer():
                     else:
                         print("Deactivate server")
                         soff()
-                if data["type"] == "get_loops":
+                elif data["type"] == "activateServer":
+                    print("Activate server")
+                    activateServer()
+                elif data["type"] == "deactivateServer":
+                    print("Deactivate server")
+                    soff()
+                elif data["type"] == "get_loops":
                     await self.sendLoopList()
+                elif data["type"] == "get_fx":
+                    await self.sendFxDict()
                     
         except websockets.ConnectionClosed:
             pass

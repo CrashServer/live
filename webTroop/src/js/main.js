@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // Connexion aux serveurs
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
-  let foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
+  let foxdotWs = null;
+  // let foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
 
   // Récupération des éléments du DOM
   const chrono = document.getElementById('chrono');
@@ -110,49 +111,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
-  // Gestion du copy/paste venant de FOXDOT
-  foxdotWs.onmessage = (event) => {
-    // console.log(event.data);
-    try {
-      const message = JSON.parse(event.data);
-      if (message.type === 'attack') {
-        functionUtils.insertAttackContent(editor, message.content);
-      }
-      else if (message.type === 'loopsList') {
-        // console.log(message.loops);
-        const formattedLoops = message.loops.map(loop => {
-          const match = loop.match(/\d+/);
-          const dur = match ? `dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
-          return { text: `"${loop}", ${dur}`, displayText: loop };
-        });
-        foxdotAutocomplete.loopList = formattedLoops;
-      }
-    } catch (error) {
-      console.error('Erreur lors de la réception de message FoxDot:', error);
-    }
-  };
-
-  // recupération de la liste des loops de foxdot
-  foxdotWs.onopen = () => {
-    foxdotWs.send(JSON.stringify({ type: 'get_loops' }));
-  };
-
-  foxdotWs.onclose = () => {
-    foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
-  };
-
   // Reset du chrono lors du clic sur le chrono
   chrono.addEventListener('click', ()=> functionUtils.resetChrono(wsServer));
 
   function evaluateCode(cm, multi){
     const [blockCode, startLine, endLine] = functionUtils.getCodeAndCheckStop(cm, multi);
 
+    const userState = awareness.getLocalState();
+    const userName = userState.user.name;
+    const userColor = userState.user.color;
     // Envoyer le code
     wsServer.send(JSON.stringify({
         type: 'evaluate_code',
         code: blockCode,
-        userColor: awareness.getLocalState().user.color,
-        userName: awareness.getLocalState().user.name,
+        userColor: userColor,
+        userName: userName,
+    }));
+
+    foxdotWs.send(JSON.stringify({
+      type: `${userName}Code`,
+      code: blockCode,
     }));
 
     // Flash effect
@@ -290,6 +268,51 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
+  
+  
+  function foxDotWs(){
+    foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
+    foxdotWs.onopen = () => {
+      foxdotWs.send(JSON.stringify({ type: 'get_loops' }));
+    setTimeout(() => {
+        foxdotWs.send(JSON.stringify({ type: 'get_fx' }));
+    }, 100); // Délai de 100 ms
+    };
+    foxdotWs.onmessage = (event) => {
+      try {
+        const message = JSON.parse(event.data);
+        if (message.type === 'attack') {
+                functionUtils.insertAttackContent(editor, message.content);
+              }
+        else if (message.type === 'loopsList') {
+          const formattedLoops = message.loops.map(loop => {
+            const match = loop.match(/\d+/);
+            const dur = match ? `dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
+            return { text: `"${loop}", ${dur}`, displayText: loop };
+          });
+          foxdotAutocomplete.loopList = formattedLoops;
+        }
+        else if (message.type === 'fxList') {
+          foxdotAutocomplete.fxList = message.fx;
+        }
+      } catch (error) {
+        console.error('Erreur lors de la réception de message FoxDot:', error);
+      }
+    };
+    foxdotWs.onclose = (e) => {
+      console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+      setTimeout(function() {
+      foxDotWs();
+      }, 1000);
+    };
+    foxdotWs.onerror = (err) => {
+      console.error('Socket encountered error: ', err.message, 'Closing socket');
+      foxdotWs.close();
+    };
+  }
+
+  foxDotWs();
+
   // Gestion de l'envoi de code en temps réel
   editor.on('cursorActivity', (cm) => {
     // Récupérer les infos utilisateur depuis awareness
@@ -322,18 +345,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     if(foxdotWs.readyState === WebSocket.OPEN) {
       foxdotWs.send(JSON.stringify(message));
     }
-    else {
-      foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
-    }
   });
 
   // Gestion de l'activation/désactivation du serveur dans CrashPanel
   crashPanelTitle.addEventListener('click', () => {
     if (foxdotWs.readyState === WebSocket.OPEN) {
-      foxdotWs.send(JSON.stringify({ type: "serverToggle"}));
-    }
-    else {
-      foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
       foxdotWs.send(JSON.stringify({ type: "serverToggle"}));
     }
     
@@ -342,6 +358,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       crashPanelTitle.classList.toggle('loading');
     }, 4000);
   });
+
+  
 
   // piano insert at cursor
   document.querySelectorAll('#piano-roll .piano-key li').forEach(key => {

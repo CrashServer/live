@@ -21,9 +21,12 @@
 - [X] undo for user (compliqué)
 - [X] fix ping au ligne bon numéro
 - [X] visibilité du ping
-- [X] chaos bug et attack de temps à autre. 
+- [X] chaos bug et attack de temps à autre.
+- [X] trim erreurs dans la console  
 
 ### Editeur
+- [X] alt + + pour augmenter une valeur
+- [ ] dialog box pour envoie messages video
 - [X] autocompletion foxdot
 - [X] améliorer coloration syntaxique pour foxdot
 - [X] ctrl + . pour arreter Foxdot
@@ -50,6 +53,7 @@
 - [X] ajout des fonctions
 - [X] ajout des players
 - [X] ajout des loops (récupéré depuis foxdot)
+- [ ] autocomplete synth
 
 ### logs
 - [X] coloration en fonction du joueur et affichage du nom du joueur

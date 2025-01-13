@@ -152,6 +152,15 @@ export const functionUtils = {
 
         return { startLine, endLine };
     },
+
+    incrementValue(cm, value){
+        const cursor = cm.getCursor();
+        let text = cm.getRange({line: cursor.line, ch: cursor.ch}, {line: cursor.line, ch: cursor.ch +1});
+        if (parseInt(text) || parseInt(text) === 0) {
+            cm.replaceRange((parseInt(text) + value).toString(), {line: cursor.line, ch: cursor.ch}, {line: cursor.line, ch: cursor.ch +1});
+            cm.setCursor({line: cursor.line, ch: cursor.ch});
+        }
+    }
 };
 
 export let playersList = [];

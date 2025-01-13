@@ -1,0 +1,1141 @@
+nz >> play("<b...b...b...b...><....r..r.r....r.><V.V.......V.....>", dur=1, sample=91, rate=1, fx1=1)
+
+nz >> play("<b...b...b...b...><....r..r.r....r.><V.V.......V.....>", dur=1, sample=91, rate=1, fx1=1, pan=-1)
+
+nz >> play("<b...b...b...b...><....r..r.r....r.><V.V.......V.....>", dur=1, sample=91, rate=1, fx1=1, pan=-1, wide=0)
+
+ch >> lbass([1, 0, 7, 5, 4, 3, 1, 0, 0, 2, 3, 2, 1, 2, 4, 0], dur=PRy(16,3,0), oct=[3, 5, 3, 3, 5, 5], cutoff = linvar([[1111, 3492, 8414, 10745, 2968, 7662],[9032, 8242, 12461]],[12, 31, 17, 21]), ).unison(2)
+
+ch.stop()
+
+ch >> lbass([1, 0, 7, 5, 4, 3, 1, 0, 0, 2, 3, 2, 1, 2, 4, 0], dur=PRy(16,3,0), oct=[3, 5, 3, 3, 5, 5], cutoff = linvar([[1111, 3492, 8414, 10745, 2968, 7662],[9032, 8242, 12461]],[12, 31, 17, 21]), ).unison(2)
+
+ch.stop()
+
+gx >> loop("atmobis8", dur=8, sample=4)
+
+gx >> loop("atmobis8", dur=8, sample=2)
+
+gx >> loop("atmobis8", dur=8, sample=2, valad=500, valadr=0.5, valadd=0.5, valadt=0)
+
+gx.stop()
+
+nz >> play("<b...b...b...b...><....r..r.r....r.><V.V.......V.....>", dur=1, sample=91, rate=1, fx1=0, pan=-1, wide=0)
+
+Clock.clear()
+soff()
+
+m0 >> play("-")
+
+m0 >> play("-", pan=-1)
+
+m0 >> play("-", pan=-1, wide=0)
+
+f9 >> superbass(pan=-1)
+
+lost()
+
+attack("zip2")
+
+nz >> play("<b...b...b...b...><....r..r.r....r.><V.V.......V.....>", dur=1, sample=91, rate=1)
+
+gn >> loop("hiphop16", dur=16, sample=8)
+
+gn >> loop("hiphop8", dur=8, sample=8)
+
+f9 >> play(':', amp=2)
+
+pu >> noloop("electrodrum16", dur=16, sample=7)
+
+pu >> noloop("electrodrum16", dur=16, sample=7).stop()
+
+f9.stop()
+
+nz.stop()
+
+gn.stop()
+
+m0.stop()
+
+m0.stop()
+
+attack("zip2")
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0.3, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+e1 >> plaits(melody(), dur=var([1/2, (1/2, 2)]), drive=0, mverb=0.8, engine=var([11, 5], [3, 1]), oct=5).unison(0)
+
+e1 >> plaits(melody(), dur=var([1/2, (1/2, 2)]), drive=0, mverb=0.8, engine=var([11, 5], [3, 1]), oct=5).unison(0).stop()
+
+ea >> play("<x.x....x..x.....><....G.......G..G>", dur=1, sample=70, rate=1, disto=0, smooth=0.3, distomix=1)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0.3, vakorg=PFr(500, 700), vakorgr=0.5, vakorgd=0.5, vol=0.2, vakorgt=0)
+
+ea >> play("<x.x....x..x.....><....x.......X..x>", dur=1, sample=70, rate=1, disto=0, smooth=0.3, distomix=1)
+
+ea >> play("<x.x....x..x.....><....x.......x..x>", dur=1, sample=70, rate=1, disto=0, smooth=0.3, distomix=1)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0.3, vakorg=PFr(500, 700), vakorgr=0.5, vakorgd=5.5, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0.3, vakorg=PFr(500, 700), vakorgr=0.5, vakorgd=15.5, vol=0.2, vakorgt=0)
+
+ea >> play("<x.x....x..x.....><....x.......x..x>", dur=1, sample=70, rate=1, disto=0, smooth=0.3, distomix=1).stop()
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0.3, vakorg=PFr(500, 700), vakorgr=0.5, vakorgd=150, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0.3, vakorg=PFr(500, 800), vakorgr=0.5, vakorgd=150, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0.3, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=150, vol=0.2, vakorgt=0)
+
+Root.default = "F#"
+
+Root.default = "C#"
+
+Root.default = "F#"
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=150, vol=0.2, vakorgt=0)
+
+e3.dur=PDur(5, 8)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 3])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=150, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 3])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=150, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=150, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=10, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=12, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4]), drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=21, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=2, vol=0.2, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=linvar([10,80], 64), vol=0.2, vakorgt=0)
+
+f8 >> play("[--]", amp=1, hpf=1200)
+
+f8 >> play("[--]", amp=1, hpf=1200, a=0.1)
+
+f8 >> play("[--]", amp=1, hpf=1200, a=linvar([0.1, 0.2], 8))
+
+i2 >> play("w...", fx2=1, dur=4) 
+
+chaos(8)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1) 
+
+no >> loop("nssub8", dur=8, sample=6)
+
+no >> loop("nssub8", dur=8, sample=6).stop()
+
+ef >> loop("auto8", dur=8, sample=4)
+
+ef >> loop("auto8", dur=8, sample=4).stop()
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1, sample=(0,2))
+
+i2.stop()
+
+f8.stop()
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1, sample=(0,2), rate=(1, PWhite(0.25, 1.4)))
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1, sample=(0,2),clouds=(0,0.5), cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), ap=0.2, hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1))
+
+j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), amp=0.2, hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1))
+
+j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), amp=0.1, hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1))
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1, sample=(0,2), clouds=(0.2,0.5), cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), amp=0.4, hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1))
+
+j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), amp=0.5, hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1))
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1, sample=(0,2), clouds=(0.9,0.9), cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), amp=0.7, hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1))
+
+j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), amp=0.2, hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1))
+
+j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), amp=0.3, hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1))
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1, sample=(0,2), clouds=(0.9,0.9), cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.7, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.7, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=linvar([10,80], 64), vol=0.3, vakorgt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=1, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.7, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.5, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.7, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.4, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=0.3, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.5, echomix=0.85, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.7, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:8], drive=0, vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.5, echomix=0.85, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.7, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.85, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.7, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.7, cmode=0 ,rate=(1, PWhite(0.25, 1.4)))
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 4])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+j1.stop()
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.7, cmode=3 ,rate=(1, PWhite(0.25, 1.4)))
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0, vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)))
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=0.25, echomix=0.5, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+x1 >> play(":", dur=4, hpf=1200)
+
+x1 >> play(":", dur=4, hpf=1200, echo=0.25)
+
+x1 >> play(":", dur=4, hpf=1200, echo=0.25, valad=500, valadr=0.5, valadd=0.5, valadt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=PWhite(0.25,0.5), echomix=0.5, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+x1 >> play(":", dur=4, hpf=1200, echo=0.25, valad=500, valadr=0.1, valadd=0.5, valadt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=PWhite(0.25,0.5), echomix=0.8, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.6,0.5), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+x1 >> play(":", dur=4, hpf=1200, echo=0.25, valad=1200, valadr=0.1, valadd=0.5, valadt=0)
+
+x1 >> play(":", dur=4, hpf=1200, echo=0.25, valad=1200, valadr=0.1, valadd=1, valadt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=PWhite(0.25,0.5), echomix=0.8, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.36,0.35), cpos=0.5, csize=0.85, cdens=0.4, ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+x1 >> play(":", dur=4, hpf=1200, echo=0.25, valad=1200, valadr=0.5, valadd=1, valadt=0)
+
+x1 >> play(":", dur=4, hpf=1200, echo=[0.25, 0.5], valad=1200, valadr=0.5, valadd=1, valadt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=PWhite(0.25,0.5), echomix=0.8, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.36,0.35), cpos=0.5, csize=0.85, cdens=PWhite(0.4,0.6), ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+x1 >> play(":", dur=4, hpf=1200, echo=[0.25, 0.5, 0.125], valad=1200, valadr=0.5, valadd=1, valadt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=PWhite(0.25,0.5), echomix=0.8, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.36,0.35), cpos=0.5, csize=0.5, cdens=PWhite(0.4,0.6), ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+x1 >> play(":", dur=4, hpf=1200, echo=([0.25, 0.5, 0.125], 0.125), valad=1200, valadr=0.5, valadd=1, valadt=0)
+
+x1 >> play(":", dur=2, hpf=1200, echo=([0.25, 0.5, 0.125], 0.125), valad=1200, valadr=0.5, valadd=1, valadt=0)
+
+i2 >> play("w...", fx2=1, dur=4, fx1=1, echo=PWhite(0.25,0.5), echomix=0.8, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.36,0.35), cpos=0.5, csize=PWhite(0.3,0.8), cdens=PWhite(0.4,0.6), ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+i2 >> play("w..(...~)", fx2=1, dur=4, fx1=1, echo=PWhite(0.25,0.5), echomix=0.8, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.36,0.35), cpos=0.5, csize=PWhite(0.3,0.8), cdens=PWhite(0.4,0.6), ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+k4 >> play("x ", lpf=400, sample=7)
+
+k1 >> cs80(dur=[3, 1/2, 1/2], formant=0, a=0.7, amp=0.2, detune=0.1, vibdepth=0.02, oct=3, vibspeed=var([6, 12, 16], [12, 4]), lpf=linvar([400, 3200], 128), lpr=0.2, cutoff=4000, fdec=0.9, leg=0)
+
+k1 >> cs80(dur=[3, 1/2, 1/2], formant=0, a=0.7, amp=0.3, detune=0.1, vibdepth=0.02, oct=3, vibspeed=var([6, 12, 16], [12, 4]), lpf=linvar([400, 3200], 128), lpr=0.2, cutoff=4000, fdec=0.9, leg=0)
+
+k1 >> cs80(dur=[3, 1/2, 1/2], formant=0, a=0.7, amp=0.4, detune=0.1, vibdepth=0.02, oct=3, vibspeed=var([6, 12, 16], [12, 4]), lpf=linvar([400, 3200], 128), lpr=0.2, cutoff=4000, fdec=0.9, leg=0)
+
+k1 >> cs80(dur=[3, 1/2, 1/2], formant=0, a=0.7, amp=0.7, detune=0.1, vibdepth=0.02, oct=3, vibspeed=var([6, 12, 16], [12, 4]), lpf=linvar([400, 3200], 128), lpr=0.2, cutoff=4000, fdec=0.9, leg=0)
+
+k1 >> cs80(dur=[3, 1/2, 1/2], formant=0, a=0.7, amp=0.9, detune=0.1, vibdepth=0.02, oct=3, vibspeed=var([6, 12, 16], [12, 4]), lpf=linvar([400, 3200], 128), lpr=0.2, cutoff=4000, fdec=0.9, leg=0)
+
+k1 >> cs80(dur=[3, 1/2, 1/2], formant=0, a=0.7, amp=1, detune=0.1, vibdepth=0.02, oct=3, vibspeed=var([6, 12, 16], [12, 4]), lpf=linvar([400, 3200], 128), lpr=0.2, cutoff=4000, fdec=0.9, leg=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0, fdecay=2, vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+k1 >> cs80(dur=[3, 1/2, 1/2], formant=0, a=0.7, amp=2, detune=0.1, vibdepth=0.02, oct=3, vibspeed=var([6, 12, 16], [12, 4]), lpf=linvar([400, 3200], 128), lpr=0.2, cutoff=4000, fdec=0.9, leg=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6])[:4], drive=0, fdecay=3, vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+k1 >> cs80(dur=[3, 1/2, 1/2], formant=0, a=0.7, amp=0, detune=0.1, vibdepth=0.02, oct=3, vibspeed=var([6, 12, 16], [12, 4]), lpf=linvar([400, 3200], 128), lpr=0.2, cutoff=4000, fdec=0.9, leg=0)
+
+x1.stop()
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6], seed=444)[:4], drive=0, fdecay=3, vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6], seed=444)[:4], drive=0, fdecay=PWhite(1,4), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6], seed=444)[:4], drive=0, tone=PWhite(1,4), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6], seed=444)[:4], drive=0, tone=PWhite(1,4), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+~e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6], seed=444)[:4], drive=0, tone=PWhite(0.1,2), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6], seed=444)[:4], drive=0, tone=PWhite(0.1,1), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, 6], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4, 5]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3.stop()
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0)
+
+k1.stop()
+
+lr >> loop("gcindrum16", dur=16, sample=8)
+
+lr >> loop("gcindrum16", dur=16, sample=8, comp=1)
+
+wl >> loop("synth4", dur=4, sample=1)
+
+wl.stop()
+
+lr >> loop("gcindrum16", dur=16, sample=8, comp=1, fx=1)
+
+i2.stop()
+
+i2 >> play("w..(...~)", fx2=1, dur=4, fx1=1, echo=PWhite(0.25,0.5), hpf=400, echomix=0.8, beat_dur=1, echotime=8, sample=(0,2), clouds=(0.36,0.35), cpos=0.5, csize=PWhite(0.3,0.8), cdens=PWhite(0.4,0.6), ctex=0.5, cpitch=(12,-12), cgain=2, cfb=0.6, cmode=3 ,rate=(1, PWhite(0.25, 1.4)), vol=0.6)
+
+i2.stop()
+
+k4.stop()
+
+lr >> loop("gcindrum16", dur=16, sample=6, comp=1, fx=1)
+
+lr >> loop("gcindrum16", dur=16, sample=6, comp=1, fx=[0.2, 0.54,1])
+
+lr >> loop("gcindrum16", dur=16, sample=6, comp=1, fx=1)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.2)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.23)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.3)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.4)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.5)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.6)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.7)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.8)
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.3, vakorgt=0, cut=0.9)
+
+l1 >> loop("cinambi16", dur=16, a=0.3, mverb=0.3).unison()
+
+a2 >> play("x.", lpf=400)
+
+a2 >> play("x.", lpf=400, amp=1.2)
+
+a2 >> play("x.", lpf=400, amp=1.3)
+
+ascii_gen("hello")
+
+a2 >> play("x.", lpf=400, amp=1.4)
+
+a2 >> play("x.", lpf=400, amp=1.5)
+
+a2 >> play("x.", lpf=1400, amp=1.5)
+
+l1 >> loop("cinambi16", dur=16, a=0.3, mverb=0.6).unison()
+
+a2 >> play("x.", lpf=1400, amp=1.5).sometimes("stutter")
+
+a2 >> play("x.", lpf=1400, amp=2.5).sometimes("stutter")
+
+a2 >> play("x.", lpf=1400, amp=4.5).sometimes("stutter")
+
+l1 >> loop("cinambi16", dur=16, a=0.1, shift=2, mverb=0.3).unison()
+
+e3 >> lbass(dur=1/4, oct=PRand([4, 5, [4]], seed=444)[:4], drive=0, tone=PWhite(0.1,1), cutoff=PRand(400, 4000), vakorg=PFr(500, 1800), vakorgr=linvar([0.2, 0.7], 128), sus=e3.dur, vakorgd=linvar([10,120], 64), vol=0.2, vakorgt=0, cut=0.9)
+
+l1 >> loop("cinambi16", dur=16, a=0.1, shift=[1, 0], mverb=0.3).unison()
+
+a2 >> play("<x.><..o.>", lpf=1400, amp=(4.5, 0.4)).sometimes("stutter")
+
+a2 >> play("<x.><..o.>", lpf=2400, amp=(4.5, 0.4)).sometimes("stutter")
+
+a2 >> play("<x.><..o.>", lpf=(2400,PRand(1220, 3000)), amp=(4.5, 0.4)).sometimes("stutter")
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=0.2, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+a2 >> play("<x.><..o.>", lpf=(2400,PRand(1220, 6000)), amp=(4.5, 0.4)).sometimes("stutter")
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=0.3, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+a2 >> play("<x.><..o.>", lpf=(2400,PRand(1220, 16000)), amp=(4.5, 0.4)).sometimes("stutter")
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=0.3, beef=0.5, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+a2 >> play("<x.><..o.>", lpf=(2400,PRand(1220, 16000)), amp=(4.5, 0.8)).sometimes("stutter")
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=0.5, beef=0.5, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=0.7, beef=0.5, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=2, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=1, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+a2 >> play("<x.><..o.><(~...)...>", lpf=(2400,PRand(1220, 16000)), amp=(4.5, 0.8)).sometimes("stutter")
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=0.5, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=0.0, vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+a2 >> play("<x.><..o.><(~...)...><->", lpf=(2400,PRand(1220, 16000)), amp=(4.5, 0.8)).sometimes("stutter")
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.2], 16), vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+variation = Variation(16,4)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+unsolo()
+
+a2 >> play("<x.><..o.><(~...)...><[--]>", lpf=(2400,PRand(1220, 16000)), amp=(4.5, 0.8)).sometimes("stutter")
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+a2 >> play("<x.><..o.><(~...)...><[--]>", lpf=(6400,PRand(1220, 16000)), amp=(4.5, 0.8)).sometimes("stutter")
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.1, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0.5, vakorgt=0)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0.5, vakorgt=20)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0.5, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0.1, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=1, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.5, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+lr.stop()
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+e3.chop=4
+
+e3.chop=16
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=250, darel=0.2, darq=0.5, datype=0, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=0, darel=0.2, darq=0.5, datype=0, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=40, darel=0.2, darq=0.5, datype=0, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=40, darel=0.56, darq=0.5, datype=0, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=40, darel=0.16, darq=0.5, datype=0, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+e3.cut=0.2
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=40, darel=0.16, darq=0.5, datype=1, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+e3.cut=0.1
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=400, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=2400, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.7, dafilter=3600, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.01, oct=7, feed=0.5,  valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(1, 0.25), mverb=0.2, hpf=linvar([50, 58], 32))
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2).solo(8)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2).solo(-1)
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.01, oct=7, feed=0.5, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(1, 0.25), mverb=0.2, hpf=linvar([150, 158], 32))
+
+e3.stop()
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2).stop()
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.01, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(1, 0.25), mverb=0.2, hpf=linvar([150, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.01, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(1, 0.25), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=24, hpr=0.01, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(1, 0.25), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.01, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(1, 0.25), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.01, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(4, 0.25), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.02, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(4, 0.25), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.02, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(4, 12), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.02, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.5,  phaser=var([0.5, 1], 8), rate=(4, 12), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.02, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(4, 12), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.02, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=12,  phaser=var([0.5, 1], 8), rate=(4, 12), mverb=0.2, hpf=linvar([50, 158], 32))
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.02, oct=7, feed=0.5, feedfreq=200, valad=P*[20, 200, 400], dubd=1, fold=1,  phaser=var([0.5, 1], 8), rate=(4, 12), mverb=0.2, hpf=linvar([50, 158], 32))
+
+a2.stop()
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=500, vadiodr=0.5, vadiodd=0.5)
+
+x2 >> play("..x...x.", sample=4, dur=1/4).every(4, "stutter", drive=4)
+
+x1 >> play("<Xs><->", sample=(15, 1), amp=4)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=2500, vadiodr=0.5, vadiodd=0.5)
+
+k1 >> rsin(lpf=400, dur=4, cut=1/2, sus=2, high=12, hpr=0.01, oct=7, feed=0.5,  valad=P *          [20, 200, 400], dubd=1, fold=0.1,  phaser=var([0.5, 1], 8), rate=(1, 0.25), mverb=0.2, hpf=linvar([50, 58], 32))
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), amp=[0,1], vadiodr=0.5, vadiodd=0.5)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), amp=[0,1], vadiodr=0.9, vadiodd=0.5)
+
+j3 >> play("x[--]")
+
+l1.stop()
+
+j3.stop()
+
+x1.stop()
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=0.2, amp=[0,1], vadiodr=0.9, vadiodd=0.5)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=0.3, amp=[0,1], vadiodr=0.9, vadiodd=0.5)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2).stop()
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=0.3, amp=[0,1], vadiodr=0.9, vadiodd=0.5, trig=0.8)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=0.4, amp=[0,1], vadiodr=0.9, vadiodd=0.5, trig=0.8)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, a=0.2, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, a=0.2, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, a=0.3, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, a=0.5, dastart=40, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, a=0.5, dastart=40, chop=12, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=0.8, dafilter=3600, a=0.5, dastart=40, chop=4, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=2, dafilter=3600, a=0.5, dastart=40, chop=4, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=2, dafilter=3600, a=0.5, dastart=40, chop=4, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=0.4, amp=[0,1], vadiodr=0.9, vadiodd=0.5, trig=PRand([0, PWhite(0.2,1.8)]))
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=2, dafilter=3600, a=0.5, dastart=40, chop=4, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600, 0, 0], vakorgr=0.4, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=2, dafilter=3600, a=0.5, dastart=40, chop=4, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600, 0, 0], vakorgr=0.1, vakorgd=0, vakorgt=2)
+
+d1 >> faim(e3.dur,  oct=e3.oct, amp=1, beef=2, dafilter=3600, a=0.5, dastart=40, chop=4, darel=0.16, darq=0.5, datype=2, bend=var([0.0, 0.1, 0], 16), vakorg=[500, 1200, 2400, 3600, 0, 0], vakorgr=0.1, vakorgd=0, vakorgt=2).stop()
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=0.4, amp=[0,1], vadiodr=0.9, vadiodd=0.5, trig=PRand([0,0, PWhite(0.2,1.8)]))
+
+f4.dist2 = 0.1
+
+f4 >> faim(0.1, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=3, leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=0.4, amp=[0,1], vadiodr=0.9, vadiodd=0.5, trig=PRand([0,0, PWhite(0.2,1.8)]), fx2=1)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=0.4, amp=[0,1], vadiodr=0.9, vadiodd=0.5, trig=0, fx2=1)
+
+f4 >> faim(0.1, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+f4.dist2 = 0.3
+
+f4.dist2 = 0.4
+
+f4.dist2 = 0.6
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], vadiodr=0.9, vadiodd=0.5, trig=0, fx2=1)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1)
+
+Clock.bpm = lininf(120, 124, 1024)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=8, bits=4, vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1)
+
+f4 >> lbass(0.1, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=8, bits=4, vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.25, beat_dur=1, pongtime=1)
+
+f4 >> bass(0.1, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+f4 >> rsin(0.1, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=8, vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.25, beat_dur=1, pongtime=1)
+
+f4 >> donk(0.1, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.25, beat_dur=1, pongtime=1)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.25, beat_dur=1, pongtime=8)
+
+f4 >> supersaw(0.1, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.5, beat_dur=1, pongtime=8)
+
+f4 >> supersaw(0.5, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+f4 >> supersaw(1, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=2.5, beat_dur=1, pongtime=8)
+
+f4 >> supersaw(0, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=2.5, beat_dur=1, pongtime=16)
+
+f4 >> karp(0, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=2.5, pongtime=16)
+
+f4 >> saw(0, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.5, pongtime=16)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.75, pongtime=16)
+
+f4 >> pulse(0, dur=var([PDur(4, 8),  2], [12, 2]), mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=8, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.75, pongtime=4)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=12, vadiod=PFr(2500,5000), start=PWhite(0.4,0.6), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.75, pongtime=4)
+
+f4 >> pulse(0, dur=var([PDur(4, 8),  2], [12, 2]), width=0.1, mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+f4 >> pulse(0, dur=var([PDur(4, 8),  2], [12, 2]), width=0.6, mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=400)
+
+u2 >> noloop("vocalcrash8", dur=8, sample=12, vadiod=PFr(2500,5000), start=PWhite(0.2,0.8), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.75, pongtime=4)
+
+f4 >> pulse(0, dur=var([PDur(4, 8),  2], [12, 2]), width=0.6, mpf=2100, oct=(3, 4), leg=12, lpr=linvar([0.1, 0.5], 32), dist2=var([0, [1.2, 0.5, 2]], [12, 2]), echo=( f4.dist2 == 1.2)/2, shift=(f4.dist2 == 1.2) * P[1.0, 1.12], beef=0, mverb=(f4.dist2 == 0.5)/0.5, vol=1, hpf=(f4.dist2 == 1.2)*200).every(4, "stutter") + var([0, (-0.1, 0.1)], hpf=1200)
+
+f4.stop()
+
+u2 >> noloop("vocalcrash8", dur=8, sample=12, vadiod=PFr(2500,5000), start=PWhite(0.2,0.8), amp=[0,1], crush=1, bits=PRand(8,16), vadiodr=0.9, vadiodd=2.5, trig=0, fx2=1, pong=0.75, pongtime=4, rate=0.2)
+
+Clock.clear()
+soff()
+
+chaos(8)
+
+mm >> soprano(P[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 6, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], ).unison(2)
+
+tp >> loop("bass16", dur=32, sample=9)
+
+mm >> soprano(P[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 34, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], ).unison(2)
+
+mm >> soprano(P[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 33, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], ).unison(2)
+
+mm >> soprano(P[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 334, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], ).unison(2)
+
+mm >> soprano(P[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], ).unison(2)
+
+ll >> play("<k..k....k.....k.><.O..O.....O..O..>", dur=0.25, sample=57, rate=0.2)
+
+mm >> soprano(P[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], mverb=0.5 ).unison(2)
+
+mm >> soprano(P[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], mverb=0.5).unison(2)
+
+mm >> soprano(P*[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], mverb=0.5).unison(2)
+
+ll >> play("<k..k....k.....k.><.O..O.....O..O..>", dur=0.25, sample=57, rate=0.2, valad=500, valadr=0.5, valadd=0.5, valadt=0)
+
+mm >> dbass(P*[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], mverb=0.5).unison(2)
+
+ll >> play("<k..k....k.....k.><.O..O.....O..O..>", dur=0.25, sample=57, rate=0.2, valad=PFr(500,600), valadr=0.5, valadd=0.5, valadt=0)
+
+mm >> dbass(P*[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], amp=2, dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], mverb=0.5).unison(2)
+
+ll >> play("<k..k....k.....k.><.O..O.....O..O..>", dur=0.25, sample=57, rate=0.2, valad=PFr(500,1600), valadr=0.5, valadd=0.5, valadt=0)
+
+mm >> dbass(P*[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], amp=2, leg=12, dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = [13.61, 10.55, 17.23, 12.92, 19.21, 13.47], mverb=0.5).unison(2)
+
+mm >> dbass(P*[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], amp=2, leg=12, dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = 4, mverb=0.5).unison(2)
+
+mm >> dbass(P*[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], amp=2, leg=12, dur=PRy(16,4,0), oct=[3, 5, 3, 5], rate = 0.5, mverb=0.5).unison(2)
+
+ll >> play("<k..k....k.....k.><.O..O.....O..O..>", dur=0.25, sample=57, rate=0.2, valad=PFr(500,1600), valadr=0.5, valadd=1, valadt=0)
+
+mm >> dbass(P*[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], amp=2, leg=12, dur=1/2, oct=[3, 5, 3, 5], rate = 0.5, mverb=0.5).unison(2)
+
+ll >> play("<k..k....k.....k.><.O..O.....O..O..>", dur=0.25, sample=57, rate=0.2, valad=PFr(500,1600), valadr=0.8, valadd=1, valadt=0)
+
+ll >> play("<k..k....k.....k.><.O..O.....O..O..>", dur=0.25, sample=57, rate=0.2, valad=PFr(500,1600), valadr=0.6, valadd=1, valadt=0)
+
+mm >> dbass(P*[0, 9, 7, 0, 0, 4, 4, 9, 7, 5, 4, 4, 7, 2, 2, 7], amp=2, leg=12, dur=1/2, oct=[3, 5, 3, 5], rate = 0.5, mverb=0.5).unison(2).stop()
+
+ll.stop()
+
+wo >> loop("nsmid16", dur=16, sample=6)
+
+wo >> loop("nsmid16", dur=16, sample=7)
+
+we >> loop("nsmid16", dur=16, sample=7)
+
+we >> loop("nsmid16", dur=16, sample=7, shift=(1, 2))
+
+ascii_gen("chaos")
+
+tp >> loop("bass16", dur=32, sample=9)
+
+nh >> ews(P[9, 9, 7, 7, 5, 7, 5, 5, 5, 9, 9, 7, 4, 4, 2, 0], dur=PDur(3,8), oct=[6, 4, 3], cutoff = linvar([[5957.19, 4097.43, 3541.53],[2132.42, 4805.83, 809.87, 6026.96]],[31.45, 26.57]), rate = [320, 327, 357, 184, 47, 218], hpf=500).unison(2)
+
+Clock.bpm = 122;
+
+nh >> ews(P[9, 9, 7, 7, 5, 7, 5, 5, 5, 9, 9, 7, 4, 4, 2, 0], dur=PDur(3,8)*8, oct=[6, 4, 3], cutoff = linvar([[5957.19, 4097.43, 3541.53],[2132.42, 4805.83, 809.87, 6026.96]],[31.45, 26.57]), rate = [320, 327, 357, 184, 47, 218], hpf=500).unison(2)
+
+nh >> ews(P[9, 9, 7, 7, 5, 7, 5, 5, 5, 9, 9, 7, 4, 4, 2, 0], dur=PDur(3,8)*8, oct=[5, 4, 3], cutoff = linvar([[5957.19, 4097.43, 3541.53],[2132.42, 4805.83, 809.87, 6026.96]],[31.45, 26.57]), rate = [320, 327, 357, 184, 47, 218], hpf=500).unison(2)
+
+nh.stop()
+
+c1 >> ikea(dur=4)
+
+c1 >> ikea(dur=4, amp=2)
+
+psynth("ikea")
+
+s9 >> noloop("ambi32", dur=32, sample=6, rate=0.25, mverb=0.9)
+
+c1 >> ikea(dur=4, amp=2,pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=0.6, sn=0.1, harm=0)
+
+c1 >> ikea(dur=4, amp=2,pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=1, sn=0.1, harm=0)
+
+s9 >> noloop("ambi32", dur=32, sample=6, rate=0.25, mverb=0.9, fx2=1)
+
+c1 >> ikea(dur=4, amp=2,pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=0.1, harm=0)
+
+c1 >> ikea(dur=4, amp=2,pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=0.5, harm=0)
+
+s9 >> noloop("ambi32", dur=32, sample=(4,6), rate=0.25, mverb=0.9, fx2=1, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0, cmode=0)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=0.5, harm=0)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=12, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=0.5, harm=0)
+
+s9 >> noloop("ambi32", dur=32, sample=(4,6), rate=0.25, mverb=0.9, fx2=1, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0, cmode=3)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=0.5, harm=0)
+
+s9 >> noloop("ambi32", dur=32, sample=(4,6), rate=0.25, mverb=0.9, fx2=1, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.6, cmode=3)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=1, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=0.5, harm=0)
+
+s9 >> noloop("ambi32", dur=32, sample=(4,6), rate=0.25, mverb=0.9, fx2=1, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.5, cmode=3)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=2, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=0.5, harm=0)
+
+s9 >> noloop("ambi32", dur=32, sample=(4,6), rate=0.25, mverb=0.9, fx2=1, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=1, cfb=0.5, cmode=3)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=2, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=1, harm=0)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=2, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=2, harm=0)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=2, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=2, harm=10)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=2, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=2, harm=1)
+
+s9 >> noloop("ambi32", dur=32, sample=(4,6), rate=0.25, mverb=0.9, fx2=1, clouds=0.5, cpos=0.5, csize=PWhite(0.25,0.8), cdens=0.4, ctex=0.5, cpitch=0, cgain=1, cfb=0.5, cmode=3)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=2, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=2, harm=2)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, freq=0, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2)
+
+s9 >> noloop("ambi32", dur=32, sample=(4,PRand(33)), rate=0.25, mverb=0.9, fx2=1, clouds=0.5, cpos=0.5, csize=PWhite(0.25,0.8), cdens=0.4, ctex=0.5, cpitch=0, cgain=1, cfb=0.5, cmode=3)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=4, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=500, vadiodr=0.5, vadiodd=0.5)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=0.5, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=500, vadiodr=0.5, vadiodd=0.5)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=500, vadiodr=0.5, vadiodd=0.5)
+
+j7 >> loop("hihat16", dur=16, hpf=400, lofi=0.9)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=500, vadiodr=0.5, vadiodd=4)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=500, vadiodr=0.1, vadiodd=4)
+
+c2 >> ikea(dur=8, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=1200, vadiodr=0.1, vadiodd=4)
+
+j7 >> loop("hihat16", dur=16, hpf=400, lofi=0.9, mverb=0.1)
+
+c1 >> ikea(dur=4, amp=2,pan=0, shift=2, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=0.5, harm=0)
+
+j7 >> loop("hihat16", dur=16, hpf=200, lofi=0.9, mverb=0.1)
+
+c1 >> ikea(dur=4, amp=2,pan=0, shift=2, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=4, harm=0)
+
+c1 >> ikea(dur=4, amp=2,pan=0, shift=2, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=4, harm=0)
+
+c1 >> ikea(dur=4, amp=2,pan=0, shift=2, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=4, harm=12)
+
+c2 >> ikea(dur=12, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=1200, vadiodr=0.1, vadiodd=4)
+
+j7 >> loop("hihat16", dur=16, hpf=200, lofi=0, mverb=0.1)
+
+c1 >> ikea(dur=4, chop=12, amp=2, delay=0,pan=0, shift=2, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=4, harm=12)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=1200, vadiodr=0.1, vadiodd=4)
+
+c1 >> ikea(dur=4, chop=12, amp=2, delay=0,pan=0, shift=2, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=[1, 0, 1, 2], sn=4, harm=12).stop()
+
+c1.stop()
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, shift=1, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=1200, oct=6, vadiodr=0.1, vadiodd=4)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, shift=0, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=1200, oct=6, vadiodr=0.1, vadiodd=4)
+
+p0 >> loop("nsbreak16", dur=16, fx=1)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, shift=0, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=1200, oct=6, vadiodr=0.2, vadiodd=4)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, shift=0, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=4)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, shift=0, leg=12, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, shift=0, leg=0, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.2,shift=0, leg=0, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34,shift=0, leg=0, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34,shift=0, leg=0, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=1/2,shift=0, leg=0, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+p0 >> loop("nsbreak16", dur=16, fx=1, comp=1)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=2, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+p0 >> loop("nsbreak16", dur=16, fx=1, comp=1)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=2, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=0, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=0, feed=0.5, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+j7 >> loop("hihat16", dur=16, hpf=0, lofi=0, mverb=0.1)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=0, feed=0.8, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=0, feed=0.6, vadiod=2100, oct=6, vadiodr=0.2, vadiodd=8)
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=0, feed=0.5, vadiod=0, oct=6, vadiodr=0.2, vadiodd=8)
+
+s9 >> noloop("ambi32", dur=32, sample=(4,PRand(33)), rate=0.25, mverb=0.9, fx2=1, clouds=0.5, cpos=0.5, csize=PWhite(0.25,0.8), cdens=0.4, ctex=0.5, cpitch=0, cgain=1, cfb=0.5, cmode=P*[0,1,3])
+
+c2 >> ikea(dur=12, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=0, feed=0.5, vadiod=0, oct=6, vadiodr=0.1, vadiodd=8)
+
+c2 >> ikea(dur=4, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=0, feed=0.5, vadiod=0, oct=6, vadiodr=0.1, vadiodd=8)
+
+c2 >> ikea(dur=4, chop=2, amp=4,pan=0, delay=0.34, cut=0.125,shift=0, leg=0, vib=0, fmod=0, rate=4, bus=0,instr=1, hhat=[1, 0, 1, 2], sn=2, harm=0, feed=0.5, vadiod=0, oct=6, vadiodr=0.1, vadiodd=1)
+
+c2.stop()
+
+chaos(8)
+
+tu >> loop("gfilla4", dur=8, sample=1)
+
+p0 >> loop("cindrum16", dur=16, fx=1, comp=1)
+
+tu >> loop("gfilla4", dur=8, sample=2)
+
+p0 >> loop("nsbreak16", dur=16, fx=1, comp=1)
+
+p2 >> loop("cindrum16", dur=16, fx=1, comp=1,)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+p2 >> loop("cindrum16", dur=16, fx=1, comp=1, sample=4)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0).stop()
+
+tu.stop()
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+p2 >> loop("cindrum16", dur=16, fx=1, comp=0, sample=4)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=100, vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=200, vakorgr=0.5, vakorgd=0.5, vakorgt=0)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, mverb=0.2)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=0, vakorgr=0.5, vakorgd=0.5, vakorgt=0, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=0, vakorgr=0.3, vakorgd=0.5, vakorgt=0, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=0, vakorgr=0.3, vakorgd=0.5, vakorgt=0, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=1)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=0, vakorgr=0.3, vakorgd=0.5, vakorgt=0, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+tu >> loop("gfilla4", dur=8, sample=2, vakorg=0, vakorgr=0.3, vakorgd=0.5, vakorgt=0, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=4, cutoff=4000)
+
+tp.stop()
+
+wo.stop()
+
+we.stop()
+
+s9.stop()
+
+j7.stop()
+
+p0.stop()
+
+tu.stop()
+
+j7 >> loop("hihat16", dur=16, hpf=0, lofi=0, mverb=0.1)
+
+p0 >> loop("nsbreak16", dur=16, fx=1, comp=1)
+
+nh >> ews(P[9, 9, 7, 7, 5, 7, 5, 5, 5, 9, 9, 7, 4, 4, 2, 0], dur=PDur(3,8), oct=[6, 4, 3], cutoff = linvar([[5957.19, 4097.43, 3541.53],[2132.42, 4805.83, 809.87, 6026.96]],[31.45, 26.57]), rate = [320, 327, 357, 184, 47, 218], ).unison(2)
+
+nh >> ews(P[9, 9, 7, 7, 5, 7, 5, 5, 5, 9, 9, 7, 4, 4, 2, 0], dur=PDur(3,8), oct=[6, 4, 3], cutoff = linvar([[5957.19, 4097.43, 3541.53],[2132.42, 4805.83, 809.87, 6026.96]],[31.45, 26.57]), rate = [320, 327, 357, 184, 47, 218], ).unison(2).stop()
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=4, cutoff=4000, vol=0.2, valad=500, valadr=0.5, valadd=1.5, valadt=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=4, cutoff=4000, vol=0.2, valad=500, valadr=0.5, valadd=2.5, valadt=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=4, cutoff=4000, vol=0.2, valad=500, valadr=0.5, valadd=3.5, valadt=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=4, cutoff=4000, vol=0.2, valad=500, valadr=0.5, valadd=13.5, valadt=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=4, cutoff=4000, vol=0.2, valad=800, valadr=0.5, valadd=13.5, valadt=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=4, cutoff=4000, vol=0.3, valad=800, valadr=0.5, valadd=13.5, valadt=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=4, cutoff=4000, vol=0.6, valad=800, valadr=0.5, valadd=13.5, valadt=0)
+
+j7 >> loop("hihat16", dur=16, hpf=0, lofi=0, mverb=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=16, hpf=0, lofi=0, mverb=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=4000, vol=0.6, valad=800, valadr=0.5, valadd=13.5, valadt=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0, mverb=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0, mverb=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=800, valadr=0.5, valadd=13.5, valadt=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.5, valadd=13.5, valadt=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0, mverb=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0/1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0, mverb=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.5, valadd=33.5, valadt=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.5, mverb=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.6, valadd=33.5, valadt=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.5, mverb=0.1, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.7, valadd=33.5, valadt=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.8, valadd=33.5, valadt=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.5, mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.5, datype=0, mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.9, valadd=33.5, valadt=0)
+
+variation = Variation(16, 4)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.5, mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.5, datype=[1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.5, mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.5, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.5, mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.8, mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.3, mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+t0 >> dblbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.9, valadd=33.5, valadt=0).sometimes("trim", 4)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.0, mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+x4 >> play("K ", dur=4)
+
+p2 >> loop("cindrum16", dur=16, fx=1, comp=0, sample=var([PRand(88)],[64]))
+
+x4 >> play("K ", dur=4, amp=4, vadiod=500, vadiodr=0.5, vadiodd=0.5)
+
+x4 >> play("K ", dur=4, amp=4, vadiod=500, vadiodr=0.5, vadiodd=0.5, echo=1)
+
+t0 >> dbass(dur=1/2, amp=PBin(15), oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.9, valadd=33.5, valadt=0).sometimes("trim", 4)
+
+x4 >> play("K ", dur=4, amp=4, vadiod=240, vadiodr=0.5, vadiodd=0.5, echo=1)
+
+x4 >> play("K ", dur=4, amp=4, vadiod=240, vadiodr=0.1, vadiodd=0.5, echo=1)
+
+x4 >> play("K ", dur=4, amp=12, vadiod=240, vadiodr=0.1, vadiodd=0.5, echo=1)
+
+x4 >> play("K ", dur=4, amp=12, vadiod=250, vadiodr=0.1, vadiodd=0.5, echo=1)
+
+t0 >> dbass(dur=1/2, amp=1, oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.9, valadd=33.5, valadt=0).sometimes("trim", 4)
+
+x4 >> play("K ", dur=4, amp=12, vadiod=250, vadiodr=0.1, vadiodd=0.5, echo=0.5)
+
+x4 >> play("K ", dur=4, amp=12, vadiod=250, vadiodr=0.1, vadiodd=0.5, echo=[0.5, 1, 2])
+
+x4 >> play("K ", dur=4, amp=12, vadiod=250, vadiodr=0.3, vadiodd=0.5, echo=[0.5, 1, 2])
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], formant=0.2, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+t0 >> dbass(dur=1/2, amp=1, oct=PStep(8,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.9, valadd=33.5, valadt=0).never("trim")
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], formant=0.3, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], formant=0.6, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], formant=1, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("hihat16", sample=PRand(8), dur=[16, (16, 8)], formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+c4 >> play("..C.", dur=2, shift=é)
+
+c4 >> play("..C.", dur=2, shift=2)
+
+c4 >> play("..C.", dur=2, shift=2, amp=4)
+
+t0 >> dbass(dur=1/4, amp=1, oct=PStep(16,5,4), cutoff=PFr(4000,8000), vol=0.6, valad=1800, valadr=0.9, valadd=33.5, valadt=0, rate=linvar([4,0.2],[32,0]))
+
+c4 >> play("..C.", dur=2, shift=2, amp=4)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+j7 >> loop("nshits16", sample=PRand(8), dur=[16, (16, 8)], formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.1, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=[16, (16, 8)], formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.2, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=[16, (16, 8)], formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.6, mverbdamp=0.8, mverbdiff=0.1625, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=[16, (16, 8)], formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=2400, dastart=250, darel=0.2, darq=0.3, datype=[0, 1, 2], mverbmix=0.6, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=[16, (16, 8)], formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=2400, dastart=250, darel=0.2, darq=0.1, datype=[0, 1, 2], mverbmix=0.6, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=[16, (16, 8)], formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1400, dastart=250, darel=0.2, darq=0.1, datype=[0, 1, 2], mverbmix=0.6, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1400, dastart=250, darel=0.2, darq=0.1, datype=[0, 1, 2], mverbmix=0.6, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1400, dastart=250, darel=0.2, darq=0.1, datype=[0, 1, 2], mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1400, dastart=250, darel=0.2, darq=0.1, datype=[0, 1, 2], mverbmix=0.8, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1400, dastart=250, darel=0.2, darq=0.1, datype=[0, 1, 2], mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1400, dastart=250, darel=0.2, darq=0.4, datype=[0, 1, 2], mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1400, dastart=250, darel=0.1, darq=0.4, datype=[0, 1, 2], mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=400, dastart=250, darel=0.1, darq=0.4, datype=[0, 1, 2], mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1200, dastart=250, darel=0.1, darq=0.4, datype=[0, 1, 2], mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1200, dastart=12250, darel=0.1, darq=0.4, datype=[0, 1, 2], mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1200, dastart=12250, darel=0.4, darq=0.4, datype=[0, 1, 2], mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1200, dastart=12250, darel=0.4, darq=0.4, datype=1, mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=[0, 0, 1, 2], mverb=0.6, dafilter=1200, dastart=10, darel=0.4, darq=0.4, datype=1, mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=0, mverb=0.6, dafilter=1200, dastart=10, darel=0.4, darq=0.4, datype=1, mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=0, mverb=0.6, dafilter=1200, dastart=10, darel=0.4, darq=0.4, datype=2, mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=0, mverb=0.6, dafilter=1200, dastart=10, darel=0.4, darq=0.4, datype=3, mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=0, mverb=0.6, dafilter=1200, dastart=10, darel=0.4, darq=0.4, datype=0, mverbmix=0.4, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=0, mverb=0.6, dafilter=1200, dastart=10, darel=0.4, darq=0.4, datype=0, mverbmix=0.0, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=0, mverb=0.6, dafilter=1200, dastart=10, darel=0.4, darq=0.1, datype=0, mverbmix=0.0, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=0, mverb=0.6, dafilter=1200, dastart=10, darel=0.4, darq=0.3, datype=0, mverbmix=0.0, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+p0 >> loop("nsbreak16", dur=16, fx=1, comp=1, bell=0.5, bellf=3000, bellq=0.9)
+
+j7 >> loop("nshits16", sample=PRand(8), dur=2, formant=0, hpf=0, lofi=0,dist2=0.0, shift=0, mverb=0.6, dafilter=1200, dastart=10, darel=0.1, darq=0.3, datype=0, mverbmix=0.0, mverbdamp=0.8, mverbdiff=0.5, mverbfreeze=0)
+
+attack("organ")
+
+~r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur([5,3,6],8)], [5,7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+r2 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [7, 5]), amp=0.8, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+p0 >> loop("nsbreak16", dur=16, fx=1, comp=1, bell=0.5, bellf=1000, bellq=0.9)
+
+Root.default = "G"
+
+p0 >> loop("nsbreak16", dur=16, fx=1, comp=1, bell=0.05, bellf=1000, bellq=0.9)
+
+Root.default = "F#"
+
+r2 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [7, 5]), amp=0.8, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+

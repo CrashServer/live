@@ -689,10 +689,12 @@ class WebsocketServer():
                 elif data["type"] == "deactivateServer":
                     print("Deactivate server")
                     soff()
-                elif data["type"] == "get_loops":
-                    await self.sendLoopList()
-                elif data["type"] == "get_fx":
-                    await self.sendFxDict()
+                elif data["type"] == "get_autocomplete":
+                    await self.sendFoxdotAutocomplete()
+                # elif data["type"] == "get_loops":
+                #     await self.sendLoopList()
+                # elif data["type"] == "get_fx":
+                #     await self.sendFxDict()
                     
         except websockets.ConnectionClosed:
             pass
@@ -727,6 +729,13 @@ class WebsocketServer():
             asyncio.run(self.sendWebsocket(json.dumps({"type": "bpm", "bpm": bpm})))
             sleep(60/bpm)
     
+    async def sendFoxdotAutocomplete(self):
+        ''' Send FoxDot autocomplete data to websocket server '''
+        fxList = await self.sendFxDict()
+        synthList = await self.sendSynthList()
+        combined_message = json.dumps({"type": "autocomplete", "autocomplete": {"loopList": loops, "fxList": fxList, "synthList": synthList}})
+        await self.sendWebsocket(combined_message) 
+
     async def sendLoopList(self):
         ''' Send loop list to websocket server '''
         message = json.dumps({"type": "loopsList", "loops": loops})
@@ -741,7 +750,28 @@ class WebsocketServer():
             fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
             fx_json_list.append({'text': fx_text, 'displayText': fx_name + '_'})
         fxDict = json.dumps({"type": "fxList", "fx": fx_json_list})
-        await self.sendWebsocket(fxDict)
+        return fx_json_list
+        # await self.sendWebsocket(fxDict)
+
+    async def sendSynthList(self):
+        args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', ]
+        synthList = []
+        path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+        synth_list = sorted([f for f in SynthDefs])
+        for syn in synth_list:
+            if syn != "":
+                path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+                with open(str(path), "r") as synth:
+                    synth = synth.readlines()
+                synth_txt = [line.strip() for line in synth if line != "\n"]
+                txt = str(''.join(synth_txt))
+                synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+                synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+                if (len(synthname) != 0 and len(synthargs) != 0):
+                    filtered_args = ', '.join([arg.strip() for arg in synthargs[0].split(', ') if arg.split('=')[0].strip() not in args_to_remove])
+                    synthList.append({'text': filtered_args, 'displayText': synthname[0]})	
+        return synthList
+        # return json.dumps({"type": "synthList", "synth": synthList})
 
     def sendServerState(self):
         ''' Send server state to websocket server '''

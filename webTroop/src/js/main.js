@@ -227,7 +227,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
       }}),
       'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
-      'Ctrl-W': () => {console.log('Ctrl-W')}
+      'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
+      'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)}
   });
 
   // Gestion de l'autocomplétion
@@ -273,10 +274,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   function foxDotWs(){
     foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
     foxdotWs.onopen = () => {
-      foxdotWs.send(JSON.stringify({ type: 'get_loops' }));
-    setTimeout(() => {
-        foxdotWs.send(JSON.stringify({ type: 'get_fx' }));
-    }, 100); // Délai de 100 ms
+      foxdotWs.send(JSON.stringify({ type: 'get_autocomplete' }));
+    //   foxdotWs.send(JSON.stringify({ type: 'get_loops' }));
+    // setTimeout(() => {
+    //     foxdotWs.send(JSON.stringify({ type: 'get_fx' }));
+    // }, 100); // Délai de 100 ms
     };
     foxdotWs.onmessage = (event) => {
       try {
@@ -284,20 +286,33 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (message.type === 'attack') {
                 functionUtils.insertAttackContent(editor, message.content);
               }
-        else if (message.type === 'loopsList') {
-          const formattedLoops = message.loops.map(loop => {
+        else if (message.type === 'autocomplete') {
+          // Get loop List
+          const loopList = message.autocomplete.loopList
+          const formattedLoops = loopList.map(loop => {
             const match = loop.match(/\d+/);
             const dur = match ? `dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
             return { text: `"${loop}", ${dur}`, displayText: loop };
           });
           foxdotAutocomplete.loopList = formattedLoops;
-        }
-        else if (message.type === 'fxList') {
-          const updatedFxList = message.fx.map(fx => {
+        
+          // Get FxList
+          const fxList = message.autocomplete.fxList;
+          const updatedFxList = fxList.map(fx => {
             const fxName = fx.displayText.replace(/_$/, ''); // Retirer le suffixe '_'
             return { text: `${fxName}=`, displayText: fxName };
           });
-          foxdotAutocomplete.fxList = [...message.fx, ...updatedFxList];
+          foxdotAutocomplete.fxList = [...fxList, ...updatedFxList];
+
+          // Get SynthDefs
+          const synthDefs = message.autocomplete.synthList;
+          const formattedSynthDefs = synthDefs.map(synth => {
+            return { text: synth.displayText + "()", displayText: synth.displayText };
+          });
+          const argsSynth = synthDefs.map(synth => {
+            return { text: synth.displayText + "(" + synth.text + ")", displayText: synth.displayText + "_" };
+          });
+          foxdotAutocomplete.synths= [...formattedSynthDefs, ...argsSynth];
         }
       } catch (error) {
         console.error('Erreur lors de la réception de message FoxDot:', error);

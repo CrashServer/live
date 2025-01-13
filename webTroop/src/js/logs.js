@@ -51,6 +51,7 @@ export const logsUtils = {
       entry.style.color = color;
     }
     if (message.includes('Traceback')) {
+      message = this.formatErrorMessage(message);
       entry.classList.add('error-log');
     }
     else if (!message.includes('>>')) {
@@ -59,5 +60,15 @@ export const logsUtils = {
     entry.textContent = message;
     this.logs.insertBefore(entry, logs.firstChild);
     this.logs.scrollTop = 0;
+  },
+
+  formatErrorMessage(errorMessage) {
+    const lines = errorMessage.split('\n');
+    const caretIndex = lines.findIndex(line => line.includes('File "FoxDot", line 1'));
+    if (caretIndex) {
+        return lines.slice(caretIndex + 1).join('\n');
+    } else {
+        return errorMessage;
+    }
   }
 };

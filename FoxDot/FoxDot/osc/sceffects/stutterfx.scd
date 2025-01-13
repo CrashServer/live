@@ -1,5 +1,5 @@
 SynthDef.new(\stutterfx,
-{|bus, t_reset, stut, stutrate, stutlen, t_reset_, t_reset_d, stut_, stut_d, stutrate_, stutrate_d, stutlen_, stutlen_d, sus|
+{|bus, stut, stutrate, stutlen, t_reset, stut_, stut_d, stutrate_, stutrate_d, stutlen_, stutlen_d, t_reset_, t_reset_d, sus|
 var osc,dry,reset,wet;
 osc = In.ar(bus, 2);
 stut = if(stut_<=0, stut, Line.kr(stut, stut_, sus*stut_d));

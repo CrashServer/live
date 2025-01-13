@@ -1,10 +1,10 @@
-SynthDef("fbass",
+SynthDef.new(\fbass,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, blur=1, beat_dur=1, atk=0.001, decay=1, rel=0.2, cutoff = 250, rq = 0.35|
 
 	var total, exciter, snd, env, sub;
 	sus = sus*blur;
 	freq = In.kr(bus, 1);
-		
+
 	freq = [freq, freq+fmod];
 	freq = freq /4;
 	total = (atk + sus + decay + rel) * freq;

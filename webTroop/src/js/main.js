@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }}),
       'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
       'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
-      'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)}
+      'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},
   });
 
   // Gestion de l'autocomplétion

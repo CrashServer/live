@@ -37,6 +37,16 @@ export const functionUtils = {
         }
     },
 
+    sendSceneName(cm, foxdotWs){
+        const cursor = cm.getCursor();
+        const line = cursor.line;
+        const sceneName = cm.getLine(line).trim();
+        foxdotWs.send(JSON.stringify({
+            type: 'sceneName',
+            sceneName: sceneName
+        }));        
+    },
+
     // jump^ to the other player's position
     jumpToOtherPlayer(cm, awareness) {
         const states = awareness.getStates();
@@ -84,6 +94,17 @@ export const functionUtils = {
           return `${player}.stop()`;
         }
         return codeToEvaluate;
+    },
+
+    isVideoCode(cm) {
+        const cursor = cm.getCursor();
+        const line = cursor.line;
+        const code = cm.getLine(cursor.line).trim();
+        const videoPattern = /^!/;
+        if (videoPattern.test(code)) {
+            return [code.substring(1).trim(), line];
+        }
+        return false
     },
 
     getPlayer(code) {

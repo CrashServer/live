@@ -115,24 +115,35 @@ document.addEventListener('DOMContentLoaded', async () => {
   chrono.addEventListener('click', ()=> functionUtils.resetChrono(wsServer));
 
   function evaluateCode(cm, multi){
-    const [blockCode, startLine, endLine] = functionUtils.getCodeAndCheckStop(cm, multi);
+    const videoCodeResult = functionUtils.isVideoCode(cm);
+    if (videoCodeResult){
+      var [videoCode, startLine] = videoCodeResult;
+      var endLine = startLine;
+      foxdotWs.send(JSON.stringify({
+        type: 'sceneName',
+        sceneName: videoCode
+      }))
+      }
+    else {
+      var [blockCode, startLine, endLine] = functionUtils.getCodeAndCheckStop(cm, multi);
 
-    const userState = awareness.getLocalState();
-    const userName = userState.user.name;
-    const userColor = userState.user.color;
-    // Envoyer le code
-    wsServer.send(JSON.stringify({
-        type: 'evaluate_code',
+      const userState = awareness.getLocalState();
+      const userName = userState.user.name;
+      const userColor = userState.user.color;
+      // Envoyer le code
+      wsServer.send(JSON.stringify({
+          type: 'evaluate_code',
+          code: blockCode,
+          userColor: userColor,
+          userName: userName,
+      }));
+
+      foxdotWs.send(JSON.stringify({
+        type: `${userName}Code`,
         code: blockCode,
-        userColor: userColor,
-        userName: userName,
-    }));
-
-    foxdotWs.send(JSON.stringify({
-      type: `${userName}Code`,
-      code: blockCode,
-    }));
-
+      }));
+    }   
+    
     // Flash effect
     awareness.setLocalStateField('flash', {
         lineStart: startLine,
@@ -229,6 +240,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
       'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
       'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},
+      // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });
 
   // Gestion de l'autocomplétion
@@ -275,10 +287,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
     foxdotWs.onopen = () => {
       foxdotWs.send(JSON.stringify({ type: 'get_autocomplete' }));
-    //   foxdotWs.send(JSON.stringify({ type: 'get_loops' }));
-    // setTimeout(() => {
-    //     foxdotWs.send(JSON.stringify({ type: 'get_fx' }));
-    // }, 100); // Délai de 100 ms
     };
     foxdotWs.onmessage = (event) => {
       try {

@@ -501,27 +501,27 @@ try:
             mot, chx = choix()
             return (mot, choice(chx))
 
-        def chrono():
-            crashpanel.timeInit = time()
+    def chrono():
+        crashpanel.timeInit = time()
 
     class CrashPanelWs():
         def __init__(self):
             self.bpmTime = 0.2  # time cycle send bpm
             self.beatTime = 0.1  # time cycle send beat
             self.plyTime = 1.0  # time cycle send player
-            self.pdjTime = 60  # time cycle send PlatduJour
+            # self.pdjTime = 60  # time cycle send PlatduJour
             self.chronoTime = 1.0  # time cycle send chrono
 
             self.playerCounter = {}
 
-            self.pdj = PlatduJour()
+            # self.pdj = PlatduJour()
             self.timeInit = time()
 
             self.threadScale = Thread(target=self.sendScale, daemon=True)
             self.threadRoot = Thread(target=self.sendRoot, daemon=True)
             self.threadBeat = Thread(target=self.sendBeat, daemon=True)
             self.threadPlayer = Thread(target=self.sendPlayer, daemon=True)
-            self.threadPdj = Thread(target=self.sendPdj, daemon=True)
+            # self.threadPdj = Thread(target=self.sendPdj, daemon=True)
             self.threadChrono = Thread(target=self.sendChrono, daemon=True)
             # self.threadVideoIndex = Thread(target=self.sendVideoIndex, daemon=True)
 
@@ -630,7 +630,7 @@ try:
             self.threadRoot.start()
             self.threadBeat.start()
             self.threadPlayer.start()
-            self.threadPdj.start()
+            # self.threadPdj.start()
             self.threadChrono.start()
             # self.threadVideoIndex.start()
 
@@ -691,6 +691,10 @@ class WebsocketServer():
                     soff()
                 elif data["type"] == "get_autocomplete":
                     await self.sendFoxdotAutocomplete()
+                elif data["type"] == "sceneName":
+                    print("Wandering into the territory of " + data["sceneName"])
+                    msg = json.dumps({"type": "sceneName", "scenName": data["sceneName"]})
+                    asyncio.run(self.sendWebsocket(msg))
                 # elif data["type"] == "get_loops":
                 #     await self.sendLoopList()
                 # elif data["type"] == "get_fx":

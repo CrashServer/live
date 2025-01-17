@@ -40,21 +40,23 @@ fx.add('osc = DFM1.ar(osc, dfm, dfmr, dfmd,0.0)')
 fx.save()
 
 # VALadder filter
-fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.5, 'valadd': 0.5, 'valadt': 0}, order=2)
+fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.5, 'valadd': 0.5, 'valadt': 0, 'valadc': 0.3}, order=2)
 fx.doc("VALadder filter")
 fx.add('osc = VALadder.ar(osc*0.4, valad, valadr, valadd,valadt)')
+fx.add('osc = Compander.ar(osc, osc, valadc, 1, 0.1, 0.01, 0.1 )')
 fx.save()
 
 # VADiode filter
-fx = FxList.new('vadiod', 'VADiodeFilter', {'vadiod': 500, 'vadiodr': 0.5, 'vadiodd': 0.5}, order=2)
+fx = FxList.new('vadiod', 'VADiodeFilter', {'vadiod': 500, 'vadiodr': 0.5, 'vadiodd': 0.5, 'vadiodc': 0.3}, order=2)
 fx.doc("VADiode filter")
-fx.add('osc = VADiodeFilter.ar(osc, vadiod, vadiodr, vadiodd)')
-fx.add('osc = osc*0.5')
+fx.add('osc = VADiodeFilter.ar(osc*0.5, vadiod, vadiodr, vadiodd)')
+fx.add('osc = Compander.ar(osc, osc, vadiodc, 1, 0.1, 0.01, 0.1 )')
 fx.save()
 
-fx = FxList.new('vakorg', 'VAKorg', {'vakorg': 500, 'vakorgr': 0.5, 'vakorgd': 0.5, 'vakorgt': 0}, order=2)
+fx = FxList.new('vakorg', 'VAKorg', {'vakorg': 500, 'vakorgr': 0.5, 'vakorgd': 0.5, 'vakorgt': 0, 'vakorgc': 0.3}, order=2)
 fx.doc("VAKorg filter")
 fx.add('osc = VAKorg35.ar(osc*0.4, vakorg, vakorgr, vakorgd,vakorgt)')
+fx.add('osc = Compander.ar(osc, osc, vakorgc, 1, 0.1, 0.01, 0.1 )')
 fx.save()
 
 # daFunk filter

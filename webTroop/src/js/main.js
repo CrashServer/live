@@ -237,6 +237,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             to: CodeMirror.Pos(endLine, cm.getLine(endLine).length),
         };
       }}),
+      'Ctrl-Left': (cm) => {functionUtils.goToPreviousComma(cm)},
+      'Ctrl-Right': (cm) => {functionUtils.goToNextComma(cm)},
       'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
       'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
       'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},

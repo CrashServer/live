@@ -181,7 +181,32 @@ export const functionUtils = {
             cm.replaceRange((parseInt(text) + value).toString(), {line: cursor.line, ch: cursor.ch}, {line: cursor.line, ch: cursor.ch +1});
             cm.setCursor({line: cursor.line, ch: cursor.ch});
         }
-    }
+    },
+
+    // Fonction pour aller à la prochaine occurrence de virgule
+    goToNextComma(cm) {
+        const cursor = cm.getCursor();
+        const line = cm.getLine(cursor.line);
+        const nextCommaIndex = line.indexOf(',', cursor.ch + 1);
+        if (nextCommaIndex !== -1) {
+        cm.setCursor({ line: cursor.line, ch: nextCommaIndex + 1 });
+        }
+        else {
+            cm.execCommand("goWordRight");
+        }
+    },
+  
+    // Fonction pour aller à la précédente occurrence de virgule
+    goToPreviousComma(cm) {
+        const cursor = cm.getCursor();
+        const line = cm.getLine(cursor.line);
+        const previousCommaIndex = line.lastIndexOf(',', cursor.ch - 1);
+        if (previousCommaIndex !== -1) {
+        cm.setCursor({ line: cursor.line, ch: previousCommaIndex });
+        } else {
+            cm.execCommand("goWordLeft");
+        }
+    },
 };
 
 export let playersList = [];

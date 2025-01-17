@@ -263,6 +263,23 @@ def print_video():
         "v1 >> video(pos1=0.0, pos2=0.0, vid1=0, vid2=0, blend1=0.5, blend2=0.5, scene=1, blendtype=0)")
     crashpanel.sendOnce(str(txt))
 
+def pgroup(pgroup=""):
+    ''' Helper for PGroup '''
+    txt = {
+  		"*()": "Stutters the values over the length of and event's dur",
+  		"+()": "Stutters the values over the length of and event's sus",
+  		"**()": "Stutters a shuffled version the values over the length of and event's dur",
+  		"/()": "Stutter every other request",
+  		"^()": "The delay of this PGroup is specified by the last value (not included in the data)",
+      }
+    if pgroup == "":
+        for k, v in txt.items():
+            print(f"{k} : {v}")
+        crashpanel.sendOnce([f"{k}: {v}" for k, v in txt.items()])
+    else:
+        print(f"{pgroup}: {txt[pgroup]}")
+        crashpanel.sendOnce(f"{pgroup}: {txt[pgroup]}")
+
 ploop = print_loops
 psample = print_sample
 pfx = print_fx
@@ -692,7 +709,7 @@ class WebsocketServer():
                 elif data["type"] == "get_autocomplete":
                     await self.sendFoxdotAutocomplete()
                 elif data["type"] == "sceneName":
-                    print("Wandering into the territory of " + data["sceneName"])
+                    print("! Wandering into the territory of " + data["sceneName"])
                     msg = json.dumps({"type": "sceneName", "scenName": data["sceneName"]})
                     asyncio.run(self.sendWebsocket(msg))
                 # elif data["type"] == "get_loops":

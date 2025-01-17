@@ -1,0 +1,560 @@
+pgroup()
+
+txt = {
+  		"*()": "Stutters the values over the length of and event's dur",
+  		"+()": "Stutters the values over the length of and event's sus",
+  		"**()": "Stutters a shuffled version the values over the length of and event's dur",
+  		"/()": "Stutter every other request",
+  		"^()": "The delay of this PGroup is specified by the last value (not included in the data)",
+      }
+crashpanel.sendOnce([])
+
+crashpanel.sendOnce([f"{k}: {v}" for k, v in txt.items()])
+
+crashpanel.sendOnce([f"{k}: {v}\n" for k, v in txt.items()])
+
+pgroup("+()")
+
+p9 >> saw(valad=500, valadr=0.5, valadd=0.5, valadt=0)
+
+p9 >> saw(valad=500, valadr=0.5, valadd=0.5, valadt=0, oct=3)
+
+p9 >> saw(valad=500, valadr=0.5, valadd=19.5, valadt=0, oct=3)
+
+p9 >> supersaw(valad=500, valadr=0.5, valadd=19.5, valadt=0, oct=3)
+
+Clock.clear()
+soff()
+
+p9 >> supersaw(valad=500, valadr=0.5, valadd=19.5, valadt=0, oct=3)
+
+p9 >> tb303(valad=500, valadr=0.5, valadd=19.5, valadt=0, oct=3)
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=19.5, valadt=0, oct=3)
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=200, valadt=0, oct=3)
+
+p9 >> tb303(melody(), dur=1/2, valad=0, valadr=0.5, valadd=200, valadt=0, oct=3)
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=200, valadt=0, oct=3)
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=200, valadt=0, oct=4)
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=200, valadt=0, oct=(3,4))
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=20, valadt=0, oct=(3,4))
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=0.20, valadt=0, oct=(3,4))
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=20, valadt=0, oct=(3,4))
+
+p9 >> tb303(melody(), dur=1/2, valad=0, valadr=0.5, valadd=20, valadt=0, oct=(3,4))
+
+p9 >> tb303(melody(), dur=1/2, valad=500, valadr=0.5, valadd=20, valadt=0, oct=(3,4))
+
+p9 >> tb303(melody(), dur=1/2, valad=200, valadr=0.5, valadd=20, valadt=0, oct=(3,4))
+
+p9 >> tb303(melody(), dur=1/2, valad=200, valadr=0.5, valadd=20, valadt=0, oct=(3,4), amp=3)
+
+p9 >> tb303(melody(), dur=1/2, valad=200, valadr=0.5, valadd=20, valadt=0, oct=(3,4), amp=1)
+
+p9 >> tb303(melody(), dur=1/2, valad=100, valadr=0.5, valadd=20, valadt=0, oct=(3,4), amp=1)
+
+s3 >> play("<k..(k.)><..o(..o)><->", room=0.6).human(40)
+
+p9 >> tb303(melody(), dur=1/2, valad=0, valadr=0.5, valadd=20, valadt=0, oct=(3,4), amp=1)
+
+p9 >> tb303(melody(), dur=1/2, valad=200, valadr=0.5, valadd=20, valadt=0, oct=(3,4), amp=1)
+
+p9 >> tb303(melody(), dur=1/2, valad=200, valadr=0.5, valadd=200, valadt=0, oct=(3,4), amp=1)
+
+p9 >> tb303(melody(), dur=1/2, valad=200, valadr=0.5, valadd=20, valadt=0, oct=(3,4), amp=1)
+
+p9 >> tb303(melody(), dur=1/2, valad=600, valadr=0.5, valadd=20, valadt=0, oct=(3,4), amp=1)
+
+p9.stop()
+
+s3 >> play("<k..(k.)><..o(..o)><->", room=0.6, valad=500, valadr=0.5, valadd=0.5, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><->", room=0.6, valad=500, valadr=0.5, valadd=10.5, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><->", room=0.6, valad=500, valadr=0.5, valadd=20.5, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><->", room=0.6, valad=500, valadr=0.5, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0.6, valad=500, valadr=0.5, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0.6, valad=1500, valadr=0.5, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=1500, valadr=0.5, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=2500, valadr=0.5, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=3500, valadr=0.5, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=4500, valadr=0.5, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=5500, valadr=0.5, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=5500, valadr=0.905, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=5500, valadr=0.95, valadd=205, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=5500, valadr=0.95, valadd=25, valadt=0).human(40)
+
+r2 >> faim(oct=4, dur=1/2)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=0, valadr=0.95, valadd=25, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=400, valadr=0.95, valadd=25, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=400, valadr=0.45, valadd=25, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:>", room=0, valad=400, valadr=0.45, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><X.>", room=0, valad=400, valadr=0.45, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><x.>", room=0, valad=400, valadr=0.45, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><x[xx]>", room=0, valad=400, valadr=0.45, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><X[xx]>", room=0, valad=400, valadr=0.45, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.45, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.55, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.65, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.75, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.85, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.95, valadd=125, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.95, valadd=225, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.95, valadd=325, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.95, valadd=425, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.95, valadd=525, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.95, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.9, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=400, valadr=0.8, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=500, valadr=0.8, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=600, valadr=0.8, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=600, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=610, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=620, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=630, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=730, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=830, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=930, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1030, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1130, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1230, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1330, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1430, valadr=0.7, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1430, valadr=0.5, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1430, valadr=0.5, valadd=625, valadt=1).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1430, valadr=0.5, valadd=625, valadt=2).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1430, valadr=0.5, valadd=625, valadt=1).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=1430, valadr=0.15, valadd=625, valadt=1).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=2430, valadr=0.15, valadd=625, valadt=1).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=4430, valadr=0.15, valadd=625, valadt=1).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=440, valadr=0.15, valadd=625, valadt=1).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=440, valadr=0.15, valadd=625, valadt=0).human(40)
+
+s3 >> play("<k..(k.)><..o(..o)><-:><|X2|[xx]>", room=0, valad=440, valadr=0.15, valadd=625, valadt=0).human(40).sometimes("stutter", PRand(5))
+
+variation=Variation(16,4)
+
+s3 >> play("<k..(k.)><..o(..o)><[--]><|X2|[xx]>", room=0, valad=440, valadr=0.15, valadd=625, valadt=0).human(40).sometimes("stutter", PRand(5))
+
+z7 >> play("x.", sample=4, amp=6)
+
+s3 >> play("<k..(k.)><..o(..o)><[--]><|X2|[xx]>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0).human(40).sometimes("stutter", PRand(5))
+
+z7 >> play("x.", sample=4, amp=6).sometimes(PRand(6))
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2)
+
+s3 >> play("<k..(k.)><..o(..o)>p<[--]><|X2|[xx]>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><..o(..o)><[--]><|X2|[xx]>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><..o(..o)><[--]><|.2|[xx]>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><..o(..o)><[--]><|.2|[xx]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><..o(..o)><[--]><|X2|[xx]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0).human(40).sometimes("stutter", PRand(5))
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2, shape=0.4)
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2, shape=0.4, comp=1)
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2, shape=0.4, comp=0.8)
+
+s3 >> play("<k..(k.)><..o(..o)><[--]><|X2|[xx]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2, shape=0.2, comp=0.8)
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2, shape=0.2, comp=0.8).unison(3)
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2, shape=0.2, comp=0.8, beef=2).unison(3)
+
+s3 >> play("<k..(k.)>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[-]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+unsolo()
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=625, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=725, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=1725, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=1725, valadt=3, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=1725, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=1725, valadt=2, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=725, valadt=2, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=225, valadt=2, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.15, valadd=8225, valadt=2, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.05, valadd=8225, valadt=2, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.05, valadd=8225, valadt=2, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.05, valadd=8225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.05, valadd=6225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.05, valadd=4225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.05, valadd=2225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.05, valadd=1225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.1, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.2, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.3, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.4, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.5, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.6, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.7, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.8, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.7, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..*.>", room=0, valad=PStep(7,2000,440), valadr=0.6, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+unsolo()
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2,rate=2, shape=0.2, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2,rate=4, shape=0.2, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2,rate=4, shape=0.12, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,5,4), dur=1/2,rate=4, shape=0.12, crush=8, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,5,4), dur=ù,rate=4, shape=0.12, crush=8, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,5,4), dur=ù,rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.6, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.6, valadd=1225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.6, valadd=2225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.6, valadd=3225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.9, valadd=3225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.8, valadd=3225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.7, valadd=3225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+z7 >> play("x+", sample=4, amp=6).sometimes(PRand(6))
+
+z7 >> play("x+", sample=(4,3), amp=6).sometimes(PRand(6))
+
+z7 >> play("x+", sample=(4,3), amp=(6,2)).sometimes(PRand(6))
+
+z7 >> play("x+", sample=(4,2), amp=(6,2)).sometimes(PRand(6))
+
+z7 >> play("x+", sample=(4,2), amp=(6,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("x+", sample=(4,1), amp=(6,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("x+", sample=(4,0), amp=(6,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("x=", sample=(4,0), amp=(6,2)).sometimes("stutter", PRand(6))
+
+Clock.bpm=60
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.7, valadd=2225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0.3, valad=PStep(7,2000,440), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+soloRnd()
+
+Clock.bpm=120
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0.1, valad=PStep(7,2000,440), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+r2.stop()
+
+r2 >> faim(oct=PStep(8,5,4), dur=8,rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,3,4), dur=8,rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,4,3), dur=8,rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+z7 >> play("x(=...)", sample=(4,0), amp=(6,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("x(=...)", sample=(4,PRand(99)), amp=(6,2)).sometimes("stutter", PRand(6))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0.1, valad=PStep(7,2000,440), valadr=0.7, valadd=125, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0.1, valad=PStep(7,2000,440), valadr=0.7, valadd=25, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,2000,440), valadr=0.7, valadd=25, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+unsolo()
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,8000,1440), valadr=0.7, valadd=25, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+z7 >> play("x(s...)", sample=(4,PRand(99)), amp=(6,2)).sometimes("stutter", PRand(6))
+
+r2 >> faim(oct=PStep(8,4,3), dur=4,rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+q0 >> play("b...", sample=1, lpf=400)
+
+q0 >> play("b...", sample=2, lpf=400)
+
+q0 >> play("b...", sample=2, lpf=2400)
+
+q0 >> play("B...", sample=2, lpf=2400)
+
+q0 >> play("B...", sample=2, lpf=5400)
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,8000,440), valadr=0.7, valadd=125, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+z7 >> play("x(s...)", sample=(4,PRand(99)), amp=(6,2)).sometimes("stutter", PRand(6))
+r2 >> faim(oct=PStep(8,4,3), dur=1/2, rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,8000,440), valadr=0.7, valadd=125, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+z7 >> play("x(s...)", sample=(4,PRand(99)), amp=(6,2)).sometimes("stutter", PRand(6))
+r2 >> faim(oct=PStep(8,5,4), dur=1/2, rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+q0 >> play("B...", sample=2, lpf=0)
+
+q0 >> play("B.", sample=2, lpf=0)
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,8000,440), valadr=0.7, valadd=125, valadt=0, vol=0.6).human(40).sometimes("stutter", PRand(5))
+
+z7 >> play("x(s...)", sample=(4,PRand(99)), amp=(5,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("x(s...)", sample=(4,PRand(99)), amp=(4,2)).sometimes("stutter", PRand(6))
+
+q0 >> play("B.", sample=0, lpf=0)
+
+q0.solo()
+
+unsolo()
+
+q0 >> play(".B", sample=0, lpf=0)
+
+q0 >> play(".B", sample=0, lpf=0, dist2=1)
+
+q0 >> play(".(.B)", sample=0, lpf=0, dist2=1)
+
+q0 >> play(".(.B)", sample=0, lpf=0, dist2=1, shape=0.2)
+
+q0 >> play(".(.B)", sample=1, lpf=0, dist2=1, shape=0.2)
+
+q0 >> play(".(.B)", sample=2, lpf=0, dist2=1, shape=0.2)
+
+q0 >> play(".(.b)", sample=2, lpf=0, dist2=1, shape=0.2)
+
+q0 >> play(".(.b)", sample=3, lpf=0, dist2=1, shape=0.2)
+
+q0 >> play(".(.b)", sample=3, lpf=0, dist2=1, shape=0.12)
+
+s3.solo()
+
+s3 >> play("<k..(k.)><[--]><..C.>", room=0, valad=PStep(7,8000,440), valadr=0.7, valadd=125, valadt=1, vol=0.6).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X4|.>", room=0, valad=PStep(7,8000,440), valadr=0.7, valadd=125, valadt=1, vol=0.6).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.>", room=0, valad=PStep(7,8000,440), valadr=0.7, valadd=125, valadt=1, vol=0.6).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.>", room=0, valad=PStep(7,4000,240), valadr=0.7, valadd=125, valadt=1, vol=0.6).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.>", room=0, valad=PStep(7,4000,240), valadr=0.7, valadd=125, valadt=0, vol=0.6).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.>", room=0, valad=PStep(7,4000,240), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.>", room=0, valad=PStep(5,4000,240), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,4000,240), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+unsolo()
+
+z7 >> play("xs", sample=(4,PRand(99)), amp=(4,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("xs", sample=(4,0), amp=(4,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("xs", sample=(4,1), amp=(4,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("xS", sample=(4,1), amp=(4,2)).sometimes("stutter", PRand(6))
+
+q0.stop()
+
+variation=Variation(32,4)
+
+variation.stop()
+
+variation.stop()
+
+variation.stop()
+
+variation.stop()
+
+variation.stop()
+
+print(variation)
+
+print(variation.isPlaying)
+
+variation=Variation(32,4)
+
+z7 >> play("xS", sample=(4,2), amp=(4,2)).sometimes("stutter", PRand(6))
+
+z7 >> play("x.", sample=(4,2), amp=(4,2)).sometimes("stutter", PRand(6))
+
+r2 >> faim(oct=PStep(8,3,4), dur=1/2, rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,3,4), dur=1/2, vol=[0,1], rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,3,4), dur=1/2, vol=[0,1], rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+unsolo()
+
+r2 >> faim(oct=PStep(8,3,4), dur=1/2, vol=[0,1], amp=[0,1], rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,3,4), dur=1/4, vol=[0,1], amp=[0,1], rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,3,4), dur=1/4, vol=[0,0,1,1], amp=[0,0,1,1], rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,3,4), dur=1/4, vol=[0,0,1], amp=[0,0,1,1], rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+r2 >> faim(oct=PStep(8,3,4), dur=1/4, vol=[0,[0,0,1],1], amp=[0,0,1,1], rate=4, shape=0.12, crush=0, bits=8, comp=0.8, beef=2).unison(3)
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,240), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,340), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,440), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,450), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,460), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,470), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,480), valadr=0.7, valadd=125, valadt=0, vol=0.7).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,480), valadr=0.7, valadd=125, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,480), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,580), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,680), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,780), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,880), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,980), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,1080), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,2000,1180), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,5000,1180), valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,5000,1180)*0, valadr=0.7, valadd=225, valadt=0, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,5000,1180), valadr=0.7, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+unsolo()
+
+s3 >> play("<k..(k.)><[--]><..C.><|X3|.><..o(..o)>", room=0, valad=PStep(5,5000,480), valadr=0.7, valadd=225, valadt=1, vol=0.8).human(40).sometimes("stutter", PRand(5))
+
+b0 >> loop("gbreak16", dur=16, sample=4)
+
+b0 >> loop("gbreak16", dur=16, sample=4, fx=1)
+
+b0 >> loop("gbreak16", dur=16, sample=3, fx=1)
+
+b0 >> loop("gbreak16", dur=16, sample=3, fx=1, comp=1)
+
+b0 >> loop("gbreak16", dur=16, sample=2, fx=1, comp=1)
+
+b0 >> loop("gbreak16", dur=16, sample=2, fx=1, comp=1, lofi=PWhite(0,1))
+
+r2.stop()
+
+s3.stop()
+
+z7.stop()
+
+b0.stop()
+

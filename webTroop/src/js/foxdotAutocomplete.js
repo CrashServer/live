@@ -212,7 +212,6 @@ export const foxdotAutocomplete = {
         { text: 'PRhythm()', displayText: 'PRhythm' },
         { text: 'PJoin()', displayText: 'PJoin' },
     ],
-
     coolFunction: [
         { text: 'ascii_gen()', displayText: 'ascii_gen' },
         { text: 'connect()', displayText: 'connect' },  
@@ -241,7 +240,6 @@ export const foxdotAutocomplete = {
         { text: 'Root.default=', displayText: 'Root' },
 
     ],
-
     playerFunction: [
         { text: 'gtr()', displayText: 'gtr' }, 
         { text: 'chroma()', displayText: 'chroma' }, 
@@ -266,7 +264,6 @@ export const foxdotAutocomplete = {
         { text: 'stop()', displayText: 'stop'},
         { text: 'only()', displayText: 'only'},
     ],
-
     patternFunction: [
         { text: 'renv()', displayText: 'renv' },
         { text: 'offadd()', displayText: 'offadd' },
@@ -274,7 +271,6 @@ export const foxdotAutocomplete = {
         { text: 'amen()', displayText: 'amen' },
         { text: 'bubble()', displayText: 'bubble' }, 
     ],
-
     scales: [
         { text: '"aeolian"', displayText: 'aeolian' },
         { text: '"altered"', displayText: 'altered' },
@@ -324,11 +320,9 @@ export const foxdotAutocomplete = {
         { text: '"yu"', displayText: 'yu' },
         { text: '"zhi"', displayText: 'zhi' }
     ],
-    
     loopList: [
         { text: '"break4", dur=4,', displayText: 'break4' },
     ],
-
     fxList: [
         { text: 'vib=', displayText: 'vib' },
         { text: 'slide=', displayText: 'slide' },
@@ -415,7 +409,10 @@ export const foxdotAutocomplete = {
         { text: 'output=', displayText: 'output' },
         { text: 'mon=', displayText: 'mon' }
     ],
-      
+    attackList: [
+        { text: 'attackTest', displayText: 'attackTest' },
+    ],
+
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
         const token = cm.getTokenAt(cursor);
@@ -427,14 +424,10 @@ export const foxdotAutocomplete = {
         // Regex pour détecter un player suivi de '>>'
         const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*/;
         const matchPlayer = beforeCursor.match(playerPattern);
-        const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;
-
-        
+        const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;        
         const afterLastClosingParenthesis = /.*\)\s*\./;
-        // const isAfterLastClosingParenthesis = afterLastClosingParenthesis.test(beforeCursor);
-        // const afterLastClosingParenthesis = /.*\)\s\.\s*$/;
-
         const loopPattern = /loop\(([^,)]*)$/;
+        const lostPattern =/(lost|attack)\(([^,)]*)$/
 
         if (beforeCursor.trim() === '' && afterCursor.trim() === '') {
             let randomPlayer;
@@ -459,6 +452,19 @@ export const foxdotAutocomplete = {
               list: filteredLoops.length > 0 ? filteredLoops.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.loopList.sort((a, b) => a.displayText.localeCompare(b.displayText)),
               from: CodeMirror.Pos(cursor.line, loopStart + (prefix.length === 0 ? 1 : 0)),
               to: CodeMirror.Pos(cursor.line, loopEnd),
+            }
+        }
+        else if (/lost\([^)]*$/.test(beforeCursor) || /attack\([^)]*$/.test(beforeCursor)) {
+            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
+            const filteredLost = this.attackList.filter(lost => lost.displayText.includes(prefix));
+            const match = line.match(/(lost|attack)\(([^)]*)\)$/);
+            const start = match.index + match[0].indexOf('(') + 1;
+            const endMatch = line.match(/\)/);
+            const end = endMatch ? endMatch.index : cursorPosition;
+            return {
+              list: filteredLost.length > 0 ? filteredLost.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.attackList.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+              from: CodeMirror.Pos(cursor.line, start),
+              to: CodeMirror.Pos(cursor.line, end),
             }
         }
         else if (beforeCursor.includes('Scale.default=')) {

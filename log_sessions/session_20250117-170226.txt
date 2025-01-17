@@ -558,3 +558,58 @@ z7.stop()
 
 b0.stop()
 
+lost("fakezip")
+
+Clock.bpm = 122/2;
+
+Scale.default = Scale.minor
+
+Root.default = "F#"
+
+e0 >> plaits(melody(),dur=(1/2, P[1/2, 1/4, 1], 4, 2, 1/2, 1/2), engine=var([5, 7, 3], 8), drive=0, mverb=0.1, oct=3, amp=0.1, vol=0.5, pan=PWhite(linvar([-0.5, 0.5])))
+
+e0 >> plaits(melody(),dur=(1/2, 1/4), engine=(1, 4), drive=0, mverb=0.8, oct=5)
+
+e1 >> bass(melody()[:8],dur=var([1/4, 2],[13, 3]), a=PWhite(0, 1), drive=0, amp=0.7, mverb=0.8).unison(2).every(13, "offmul", 2)
+
+e1 >> bass(melody(),dur=1/4, oct=5, drive=0, mverb=0.8).unison(0)
+
+e1 >> bass(melody(),dur=1/4, drive=linvar([0, 0.02], 32), mverb=0.8).unison(0)
+
+g2 >> bass(melody() + var([7, 3, [4, 0]]),dur=var([1/4, 1/2]), drive=0, vol=0.5, mverb=0.1).unison(0)
+
+Root.default = "E"
+
+~r1 >> organ(P[var([0,-2,-3,-4],16), 2, PStep(8,5,4), 2], dur=PDur(6,8),amp=0.7,    crush=0.5,bits=8,fmod=0.5, lpf=2000,  lpr=0.3, reverb=0.2).spread(2)
+
+Clock.clear()
+soff()
+
+lost("depths")
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+Clock.clear()
+soff()
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6, valad=400) + var([0,7],8)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6, valad=400, valadd=20) + var([0,7],8)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6, valad=0, valadd=20) + var([0,7],8)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6, valad=400, valadd=20) + var([0,7],8)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6, valad=400, valadd=200) + var([0,7],8)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6, valad=1400, valadd=200) + var([0,7],8)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6, valad=0, valadd=200) + var([0,7],8)
+
+Clock.clear()
+soff()
+

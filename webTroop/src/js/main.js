@@ -321,6 +321,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             return { text: synth.displayText + "(" + synth.text + ")", displayText: synth.displayText + "_" };
           });
           foxdotAutocomplete.synths= [...formattedSynthDefs, ...argsSynth];
+
+          // Get AttackList
+          const attackList = message.autocomplete.attackList;
+          foxdotAutocomplete.attackList = attackList;
         }
       } catch (error) {
         console.error('Erreur lors de la réception de message FoxDot:', error);

@@ -754,13 +754,22 @@ class WebsocketServer():
         ''' Send FoxDot autocomplete data to websocket server '''
         fxList = await self.sendFxDict()
         synthList = await self.sendSynthList()
-        combined_message = json.dumps({"type": "autocomplete", "autocomplete": {"loopList": loops, "fxList": fxList, "synthList": synthList}})
+        attackList = await self.sendAttackList()
+        combined_message = json.dumps({"type": "autocomplete", "autocomplete": {"loopList": loops, "fxList": fxList, "synthList": synthList, "attackList": attackList}})
         await self.sendWebsocket(combined_message) 
 
     async def sendLoopList(self):
         ''' Send loop list to websocket server '''
         message = json.dumps({"type": "loopsList", "loops": loops})
         await self.sendWebsocket(message)
+
+    async def sendAttackList(self):
+        ''' Send attack list to websocket server '''
+        attackList = [ k for k in storageAttack.attackDict.keys()]
+        attackJsonList = []
+        for attack in attackList:
+            attackJsonList.append({"text": f"\"{attack}\"", "displayText": attack})
+        return attackJsonList
 
     async def sendFxDict(self):
         ''' Send fx list to websocket server '''

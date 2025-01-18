@@ -1,4 +1,4 @@
-#summer
+# summer
 Clock.bpm = 132
 Scale.default = "chromatic"
 b2 >> click([(-9, 6),6,6,6,6,4, 5, 6], oct=PStep(12, 3, 4), hpf=PRand(2000),  sus=b2.dur, dur=[1/4, 1/2, 1/2, 1/2, var([1/2, 1/4]),1/2, 1/4], mverb=0.0, shape=0.0,cut=linvar([[2, 4], 1/4], 128), echo=var([ 0.025, 0.05], 16), octer=1, leg=0,  octersub=2, octersubsub=var([2, PRand(15,2222)], [15, 1])).unison(4).sometimes("stutter", 9).slider() + var([0, 0.5])

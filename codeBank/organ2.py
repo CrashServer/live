@@ -1,4 +1,4 @@
-#organ 2
+# organ 2
 Root.default = "E"
 Scale.default = Scale.minor;
 e0 >> bell(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=1/4, rate=([0.125, 1, 1, 0.5], 0.1), lpf=0, hpf=600, mpf=400, mpr=0.3, lpr=0.1, amp=Pvar([1, 0.25, 0.5]))

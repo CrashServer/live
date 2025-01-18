@@ -1,4 +1,4 @@
-#zip 
+# zip 
 Clock.bpm = 122/2;
 Scale.default = Scale.minor
 Root.default = 6

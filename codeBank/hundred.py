@@ -1,4 +1,4 @@
-#gabbermayem
+# gabbermayem
 Clock.bpm = 150;
 x1 >> play("W ", bank=var([1, 3], [24, [4, 2, 1, 1]]), lpf=1200, sample=6, lpr=[0.2, 0.4, 0.5, 0.1]).sometimes("stutter", 4)
 x2 >> play("W ", bank=3, lpf=1200, dur=4, delay=0.5, sample=1, hpf=1600, echo=0.5, dafilter=0)

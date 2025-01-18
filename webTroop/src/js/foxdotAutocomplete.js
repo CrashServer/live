@@ -412,6 +412,17 @@ export const foxdotAutocomplete = {
     attackList: [
         { text: 'attackTest', displayText: 'attackTest' },
     ],
+    sceneNames: [
+        { text: 'init', displayText: 'init' },
+        { text: 'screensaver', displayText: 'screensaver' },
+        { text: 'home', displayText: 'home' },
+        { text: 'boot', displayText: 'boot' },
+        { text: 'scan', displayText: 'scan' },
+        { text: 'warp', displayText: 'warp' },
+        { text: 'scene', displayText: 'scene' },
+        { text: 'shutdown', displayText: 'shutdown' },
+        { text: 'target', displayText: 'target' },
+    ],
 
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
@@ -427,7 +438,8 @@ export const foxdotAutocomplete = {
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;        
         const afterLastClosingParenthesis = /.*\)\s*\./;
         const loopPattern = /loop\(([^,)]*)$/;
-        const lostPattern =/(lost|attack)\(([^,)]*)$/
+        const lostPattern =/(lost|attack)\([^)]*$/
+        const scenePattern = /!/;
 
         if (beforeCursor.trim() === '' && afterCursor.trim() === '') {
             let randomPlayer;
@@ -454,7 +466,7 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, loopEnd),
             }
         }
-        else if (/lost\([^)]*$/.test(beforeCursor) || /attack\([^)]*$/.test(beforeCursor)) {
+        else if (lostPattern.test(beforeCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             const filteredLost = this.attackList.filter(lost => lost.displayText.includes(prefix));
             const match = line.match(/(lost|attack)\(([^)]*)\)$/);
@@ -466,6 +478,16 @@ export const foxdotAutocomplete = {
               from: CodeMirror.Pos(cursor.line, start),
               to: CodeMirror.Pos(cursor.line, end),
             }
+        }
+        else if (scenePattern.test(beforeCursor)) {
+            const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
+            const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
+            const end = line.match(/\s./)
+            return {
+                list: filteredScenes.length > 0 ? filteredScenes.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.sceneNames.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+                from: CodeMirror.Pos(cursor.line, token.start +1),
+                to: CodeMirror.Pos(cursor.line, cursorPosition),
+            };
         }
         else if (beforeCursor.includes('Scale.default=')) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");

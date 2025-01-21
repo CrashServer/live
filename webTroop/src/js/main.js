@@ -283,8 +283,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  
-  
   function foxDotWs(){
     foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
     foxdotWs.onopen = () => {
@@ -297,36 +295,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                 functionUtils.insertAttackContent(editor, message.content);
               }
         else if (message.type === 'autocomplete') {
-          // Get loop List
-          const loopList = message.autocomplete.loopList
-          const formattedLoops = loopList.map(loop => {
-            const match = loop.match(/\d+/);
-            const dur = match ? `dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
-            return { text: `"${loop}", ${dur}`, displayText: loop };
-          });
-          foxdotAutocomplete.loopList = formattedLoops;
-        
-          // Get FxList
-          const fxList = message.autocomplete.fxList;
-          const updatedFxList = fxList.map(fx => {
-            const fxName = fx.displayText.replace(/_$/, ''); // Retirer le suffixe '_'
-            return { text: `${fxName}=`, displayText: fxName };
-          });
-          foxdotAutocomplete.fxList = [...fxList, ...updatedFxList];
+          const { loops, fxList, synthList, attackList } = functionUtils.formatFoxDotAutocomplete(message);
 
-          // Get SynthDefs
-          const synthDefs = message.autocomplete.synthList;
-          const formattedSynthDefs = synthDefs.map(synth => {
-            return { text: synth.displayText + "()", displayText: synth.displayText };
-          });
-          const argsSynth = synthDefs.map(synth => {
-            return { text: synth.displayText + "(" + synth.text + ")", displayText: synth.displayText + "_" };
-          });
-          foxdotAutocomplete.synths= [...formattedSynthDefs, ...argsSynth];
-
-          // Get AttackList
-          const attackList = message.autocomplete.attackList;
+          foxdotAutocomplete.loopList = loops;
+          foxdotAutocomplete.fxList = fxList;
+          foxdotAutocomplete.synths= synthList;
           foxdotAutocomplete.attackList = attackList;
+
+          if (loops.length == 0 || fxList.length == 0 || synthList.length == 0 || attackList.length == 0) {
+            console.error(`Erreur lors de la récupération de la liste des boucles (${loops.length}), effets (${fxList.length}), synthés (${synthList.length}) ou attaques (${attackList.length})`);
+          }
         }
       } catch (error) {
         console.error('Erreur lors de la réception de message FoxDot:', error);
@@ -391,8 +369,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       crashPanelTitle.classList.toggle('loading');
     }, 4000);
   });
-
-  
 
   // piano insert at cursor
   document.querySelectorAll('#piano-roll .piano-key li').forEach(key => {

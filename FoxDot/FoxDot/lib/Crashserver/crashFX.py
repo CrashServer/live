@@ -40,7 +40,7 @@ fx.add('osc = DFM1.ar(osc, dfm, dfmr, dfmd,0.0)')
 fx.save()
 
 # VALadder filter
-fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.5, 'valadd': 0.5, 'valadt': 0, 'valadc': 0.3}, order=2)
+fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.3, 'valadd': 5, 'valadt': 0, 'valadc': 0.3}, order=2)
 fx.doc("VALadder filter")
 fx.add('osc = VALadder.ar(osc*0.4, valad, valadr, valadd,valadt)')
 fx.add('osc = Compander.ar(osc, osc, valadc, 1, 0.1, 0.01, 0.1 )')
@@ -84,11 +84,15 @@ fx = FxList.new("fm_pulse", "FrequencyModulationPulse", {"fm_pulse":0, "fm_pulse
 fx.add("osc = osc + (fm_pulse_i * Pulse.kr(osc * fm_pulse))")
 fx.save()
 
-if SC3_PLUGINS:
-    #Dist mod
-    fx = FxList.new('disto', 'disto_mod', {'disto': 0, 'smooth': 0.3, 'distomix': 1}, order=1)
-    fx.add("osc = LinXFade2.ar(CrossoverDistortion.ar(osc, amp:0.5*disto, smooth:smooth),  osc, 1-distomix)")
-    fx.save()
+#Dist mod
+fx = FxList.new('disto', 'disto_mod', {'disto': 0, 'smooth': 0.3, 'distomix': 1}, order=1)
+fx.add("osc = LinXFade2.ar(CrossoverDistortion.ar(osc, amp:0.5*disto, smooth:smooth),  osc, 1-distomix)")
+fx.save()
+
+fx = FxList.new('idist', 'idist', {'idist': 0}, order=1)
+fx.add("osc = LinXFade2.ar(InsideOut.ar(osc,0.4), osc, 1-idist)")
+fx.add("osc = LeakDC.ar(osc)")
+fx.save()
 
 #New Chop, with wave select :
 #chopwave = (0: Pulse, 1: Tri, 2: Saw, 3: Sin, 4: Parabolic )

@@ -26,7 +26,7 @@
 
 ### Editeur
 - [X] alt + + pour augmenter une valeur
-- [ ] dialog box pour envoie messages video
+- [X] dialog box pour envoie messages video
 - [X] autocompletion foxdot
 - [X] améliorer coloration syntaxique pour foxdot
 - [X] ctrl + . pour arreter Foxdot
@@ -53,7 +53,7 @@
 - [X] ajout des fonctions
 - [X] ajout des players
 - [X] ajout des loops (récupéré depuis foxdot)
-- [ ] autocomplete synth
+- [X] autocomplete synth
 
 ### logs
 - [X] coloration en fonction du joueur et affichage du nom du joueur

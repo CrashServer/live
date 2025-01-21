@@ -1,4 +1,4 @@
-#unprobable
+# unprobable
 Clock.bpm = 125;
 x_all.hpf=40
 f5 >> sinepad(PArp([0,2,5],4), output=20, oct=7,dur=1/4, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=-1).unison(4)

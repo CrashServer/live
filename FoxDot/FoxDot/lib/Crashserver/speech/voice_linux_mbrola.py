@@ -9,12 +9,12 @@ import subprocess
 from threading import Thread 
 
 from ...Settings import FOXDOT_ROOT
-from crash_config import crash_path
+# from crash_config import crash_path
 
 class Voice(Thread):
 	""" Text 2 Speech Linux Mbrola Mod
 	"""
-	def __init__(self, text="", rate=100, amp=1.0, lang="fr", voice=0, pitch=0, octave=0, gap=0, record = ""):
+	def __init__(self, text="", rate=100, amp=1.0, lang="fr", voice=0, pitch=0, octave=0, gap=0):
 		Thread.__init__(self)
 		self.text = str(text)
 		if self.text=="":
@@ -26,7 +26,7 @@ class Voice(Thread):
 		self.pitch = pitch
 		self.octave = octave
 		self.gap = gap
-		self.record = record
+		# self.record = record
 		self.mbrola_voice = self.set_voice()
 		self.thread = Thread(target=self.say, kwargs={'text': self.text})
 		self.thread.start()
@@ -34,8 +34,8 @@ class Voice(Thread):
 	def help():
 		print("text='', rate=100, amp=1.0, lang='fr', voice=0, pitch=0, octave=0, gap=0, record = ''")
 
-	def say(self, text, record=""):
-		""" Say the text and possibility to record """
+	def say(self, text):
+		""" Say the text """
 		#self.text = text
 		espeak_cmd = self.create_cmd()
 		subprocess.call(espeak_cmd)
@@ -45,25 +45,25 @@ class Voice(Thread):
 		
 	def create_cmd(self):
 		""" Configure the espeak comd line """
-		cmd = ["espeak"]
+		cmd = ["espeak-ng"]
 		cmd.extend(["-a", f"{self.amp}"]) # amp
 		cmd.extend(["-g", f"{self.gap}"]) # gap
 		cmd.extend(["-v", f"{self.mbrola_voice}"]) # voice (lang + voice + octave)
 		cmd.extend(["-s", f"{self.rate}"]) # speed
 		cmd.extend(["-p",f"{self.pitch}"]) # pitch
 		cmd.extend([f"{self.text}"]) # text
-		if self.record != "":
-			record_cmd = self.record_cmd()
-			cmd.extend(record_cmd) # enable record
+		# if self.record != "":
+		# 	record_cmd = self.record_cmd()
+		# 	cmd.extend(record_cmd) # enable record
 		return cmd	
 
-	def record_cmd(self):
-		record_dir_path = os.path.join(crash_path, "_loop_", "voicetxt")
-		record_idx = len(os.listdir(record_dir_path))
-		record_path = os.path.join(record_dir_path, f"{record_idx:02d}-{self.record}.wav")
-		print(f"voicetxt no: {record_idx}")
-		record_cmd = ["-w", f"{record_path}"]
-		return record_cmd
+	# def record_cmd(self):
+	# 	record_dir_path = os.path.join(crash_path, "_loop_", "voicetxt")
+	# 	record_idx = len(os.listdir(record_dir_path))
+	# 	record_path = os.path.join(record_dir_path, f"{record_idx:02d}-{self.record}.wav")
+	# 	print(f"voicetxt no: {record_idx}")
+	# 	record_cmd = ["-w", f"{record_path}"]
+	# 	return record_cmd
 
 	def stop(self):
 		if self.thread.isAlive():
@@ -71,7 +71,7 @@ class Voice(Thread):
 
 	def get_voices(self):
 		"""Get a list of voices"""
-		proc = subprocess.Popen('espeak --voices=mbrola', shell=True, stdout=subprocess.PIPE)
+		proc = subprocess.Popen('espeak-ng --voices=mb', shell=True, stdout=subprocess.PIPE)
 		voices_list = proc.stdout.read()
 		voices_list = voices_list.decode().splitlines()
 
@@ -94,7 +94,7 @@ class Voice(Thread):
 			print([v for v in voices_list.keys()])	
 		else:
 			if self.lang not in voices_list:
-				self.lang = "fr"	
+				self.lang = "en"	
 			if self.octave == 0:
 				self.octave = ""
 			else:

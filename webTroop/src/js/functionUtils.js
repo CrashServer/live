@@ -207,6 +207,38 @@ export const functionUtils = {
             cm.execCommand("goWordLeft");
         }
     },
+
+    formatFoxDotAutocomplete(message) {
+        // Get loop List
+        const loopList = message.autocomplete.loopList
+        const formattedLoops = loopList.map(loop => {
+            const match = loop.match(/\d+/);
+            const dur = match ? `dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
+            return { text: `"${loop}", ${dur}`, displayText: loop };
+        });
+       
+        const fxList = message.autocomplete.fxList;
+        const updatedFxList = fxList.map(fx => {
+        const fxName = fx.displayText.replace(/_$/, ''); // Retirer le suffixe '_'
+        return { text: `${fxName}=`, displayText: fxName };
+        });
+        const allFx = [...fxList, ...updatedFxList];
+
+        // Get SynthDefs
+        const synthDefs = message.autocomplete.synthList;
+        const formattedSynthDefs = synthDefs.map(synth => {
+          return { text: synth.displayText + "()", displayText: synth.displayText };
+        });
+        const argsSynth = synthDefs.map(synth => {
+          return { text: synth.displayText + "(" + synth.text + ")", displayText: synth.displayText + "_" };
+        });
+        const allSynthDefs = [...formattedSynthDefs, ...argsSynth];
+
+        // Get AttackList
+        const attackList = message.autocomplete.attackList;
+
+        return { loops: formattedLoops, fxList: allFx, synthList: allSynthDefs, attackList: attackList };
+    }
 };
 
 export let playersList = [];

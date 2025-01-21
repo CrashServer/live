@@ -256,7 +256,7 @@ export const foxdotAutocomplete = {
         { text: 'once()', displayText: 'once' }, 
         { text: 'start()', displayText: 'start' }, 
         { text: 'drummer()', displayText: 'drummer' },
-        { text: 'sometimes()', displayText: 'sometimes'},
+        { text: 'sometimes("stutter")', displayText: 'sometimes'},
         { text: 'often()', displayText: 'often'},
         { text: 'rarely()', displayText: 'rarely'},
         { text: 'never()', displayText: 'never'},

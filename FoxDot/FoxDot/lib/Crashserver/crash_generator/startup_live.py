@@ -1083,7 +1083,17 @@ class Variation():
             "tremolo": PWhite(0.5,6),
             "leg": PRand(0,12),
             "lofi": PWhite(0.1,0.9),
-
+            "a": PWhite(0.1,0.9),
+            "coarse": PRand(1,8),
+            "drop": PRand(30,80),
+            "flanger": PWhite(0.2,4),
+            "glide": PWhite(0.1,2.5),
+            "position": PWhite(0,1),
+            "r": PWhite(0,0.9),
+            "striate": PWhite(0.1,0.9),
+            "swell": PWhite(0.1,0.9),
+            "vib": PRand(0,12),
+            "amp": PBin(),
         }
         self.start()
         

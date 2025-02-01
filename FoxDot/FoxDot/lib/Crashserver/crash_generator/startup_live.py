@@ -578,6 +578,7 @@ try:
                 while self.isrunning:
                     self.addPlayerTurn()
                     playerListCount = []
+                    soloPlayers = [p.name for p in Clock.solo.data]
                     for k,v in self.playerCounter.items():
                         duration = f'{divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}'
                         player = k.name
@@ -585,7 +586,7 @@ try:
                             name = k.filename
                         else:
                             name = k.synthdef
-                        playerListCount.append(json.dumps({"player": player, "name": name, "duration": duration}))
+                        playerListCount.append(json.dumps({"player": player, "name": name, "duration": duration, "solo": player in soloPlayers}))
                     # playerListCount = [
                     #     f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
                     msg = json.dumps({"type": "players", "players": playerListCount})
@@ -1084,13 +1085,11 @@ class Variation():
             "leg": PRand(0,12),
             "lofi": PWhite(0.1,0.9),
             "a": PWhite(0.1,0.9),
-            "coarse": PRand(1,8),
-            "drop": PRand(30,80),
+            "coarse": PWhite(0.2,8),
             "flanger": PWhite(0.2,4),
             "glide": PWhite(0.1,2.5),
             "position": PWhite(0,1),
-            "r": PWhite(0,0.9),
-            "striate": PWhite(0.1,0.9),
+            "r": PWhite(0.2,0.9),
             "swell": PWhite(0.1,0.9),
             "vib": PRand(0,12),
             "amp": PBin(),
@@ -1148,6 +1147,7 @@ class Variation():
     def eventMasterAll(self):
         ''' set a random masterAll Fx '''
         fx = choice(list(self.randomFx.keys()))
+        print(f"variation: {fx}")
         masterAll(fx, self.randomFx[fx])
         Clock.schedule(lambda: masterAll(0), Clock.mod(self.durTotal))
 

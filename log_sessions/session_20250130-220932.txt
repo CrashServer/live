@@ -1,0 +1,75 @@
+son()
+
+s3.stop()
+
+s1.stop()
+
+ke.stop()
+
+g7 >> loop("dance16", dur=16)
+
+lw.mverb=0.9
+
+lw.hpf=400
+
+ag.stop()
+
+lw.stop()
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend = 450, idist=PFr(0,.3))
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend = 450, idist=PFr(0,.3)).unison(3)
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend = 1450, idist=PFr(0,.3)).unison(3)
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend=1450, idist=PFr(0,.3)).unison(3)
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend=1450, idist=PFr(0,.3), comp=1).unison(3)
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend=1450, idist=PFr(0,.1), comp=1).unison(3)
+
+mo.hpf=500
+
+mo.lofi=0.9
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend=1450, idist=PFr(0,.1), comp=1, pong=0.4).unison(3)
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend=1450, idist=PFr(0,.1), comp=1, pong=0.2).unison(3)
+
+n4 >> subbass(var([0,-2],8), dur=1/4, blend=1450, idist=PFr(0,.1), comp=1, pong=0.2).unison(3, 0.5)
+
+mf.stop()
+
+nn.stop()
+
+ef.stop()
+
+rz.stop()
+
+vari2 = Variation(64, 8)
+
+um.stop()
+
+dv.stop()
+
+ga.dur=32
+
+xu.stop(16)
+
+chaos(8)
+
+bh >> klank(P[2, 0, 0, 2, 2, 0, 4, 4, 5, 4, 2, 4, 4, 4, 5, 5], dur=PRy(16,3,0), oct=[4, 6, 6, 5], rate = [17, 12, 16, 12, 11, 15, 12], ).unison(2)
+
+iw >> loop("ambi8", dur=8, sample=8)
+
+masterAll(0)
+
+unsolo()
+
+bx.stop()
+
+masterAll(0)
+
+Clock.clear()
+soff()
+

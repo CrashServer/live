@@ -17,6 +17,7 @@ async function loadConfig(){
 
 (async () => {
   const config = await loadConfig();
+  const PROJECT_ROOT = path.resolve(config.FOXDOT_PATH, '..');
   // Lancer FoxDot
   const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
     cwd: config.FOXDOT_PATH,
@@ -31,13 +32,20 @@ const wss = new WebSocketServer({ port: 1234 });
 wss.on('connection', (ws, req) => {
   console.log('Nouveau client connecté');
   // Gérer les messages pour FoxDot
-  ws.on('message', (message) => {
+  ws.on('message', async (message) => {
     try {
       const data = JSON.parse(message.toString());
       if (data.type === 'evaluate_code') {
         const {code, userName, userColor} = data;
         broadcastLog(`>> ${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor);
         foxdot.stdin.write(data.code + '\n' + '\n');
+      } else if (data.type === 'save_file') {
+        console.log('Sauvegarde du fichier:', data.filename);
+        const {filename, content} = data;
+        const filePath = path.join(PROJECT_ROOT, 'codeBank', filename);
+        await fs.mkdir(path.dirname(filePath), { recursive: true });
+        await fs.writeFile(filePath, content, 'utf-8');
+        console.log(`File saved: ${filePath}`);
       }
     } catch (e) {
       // Ignorer les messages non-JSON (messages Y.js)

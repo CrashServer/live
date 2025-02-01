@@ -1,0 +1,192 @@
+xz >> loop("noizebeat16", dur=16, sample=4)
+ji >> play("<k......kk.k.....><....o.......o...><~...............><P.P.P.P.P.P.P.P.>", dur=0.25, sample=25, rate=1)
+uw >> loop("futur8", dur=16, sample=3)
+kg >> loop("break32", dur=32, sample=6)
+nb >> loop("electrodrum8", dur=8, sample=5)
+vo >> plaitsX([7, 7, 0, 0], dur=PRy(16,3,0), oct=[6, 6, 5, 4, 4, 3], preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], ).unison(2)
+ct >> loop("synth32", dur=32, sample=6)
+vk.stop()
+
+variation = Variation(16,4)
+
+variation = Variation(16,4)
+
+c1.solo()
+
+vo >> plaitsX([7, 7, 0, 0], dur=PRy(16,3,0), oct=[6, 6, 5, 4, 4, 3], preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], ).unison(2)
+
+ji >> play("<k......kk.k.....><....o.......o...><~...............><P.P.P.P.P.P.P.P.>", dur=0.25, sample=25, rate=1)
+
+d1 >> play("X ")
+
+d1 >> play("X ").unison(4)
+
+p4 >> play("n ", dur=1/2, hpf=1200)
+
+p4 >> play("n ", dur=1/2, hpf=1200, sample=PRand(16))
+
+soloRnd()
+
+m4 >> dbass(dur=1/2, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.1)
+
+m4 >> dbass(dur=1/2, shape=.5, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.1)
+
+m4 >> dbass(dur=1/2,shape=1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.1)
+
+d1 >> play("X ").unison(4).sometimes("stutter")
+
+xz.stop()
+
+ji.stop()
+
+p4 >> play("n ", dur=1/2, hpf=1200, sample=PRand(16)).unison(4)
+
+p4 >> play("n ", dur=1/2, hpf=1200, sbkr=0.5, sample=PRand(16)).unison(4)
+
+d1 >> play("X[xx]").unison(4).sometimes("stutter")
+
+p4 >> play("(Nn) ", dur=1/2, hpf=1200, sbkr=0.5, sample=PRand(16)).unison(4)
+
+p4 >> play("{Nn} ", dur=1/2, hpf=1200, sbkr=0.5, sample=PRand(16)).unison(4)
+
+p4 >> play("{NnTn} ", dur=1/2, hpf=1200, sbkr=0.5, sample=PRand(16)).unison(4)
+
+d1 >> play("X[xx]", rate=4).unison(4).sometimes("stutter")
+
+p4 >> play("{NnTn} ", dur=1/2, hpf=1200, sbkr=0.5, sample=PRand(16)).unison(4)
+
+d1 >> play("X[xx]", rate=3).unison(4).sometimes("stutter")
+
+drop()
+
+d1 >> play("X[xx]", rate=2).unison(4).sometimes("stutter")
+
+p4.stop()
+
+d1 >> play("X[xx]", rate=1).unison(4).sometimes("stutter")
+
+m4 >> dbass(dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.1)
+
+m4 >> dbass(dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.4)
+
+d1 >> play("<X[xx]><->").unison(4).sometimes("stutter")
+
+m4 >> dbass(dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.1)
+
+d1 >> play("<X[xx]><->").unison(4, .5).sometimes("stutter")
+
+m4 >> dbass(dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=linvar([0.1, 0.5], 128))
+
+d1 >> play("<X[xx]><->").unison(4, .75).sometimes("stutter")
+
+m4 >> dbass(dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=linvar([0.1, 0.5], 128))
+
+m4 >> dbass(amp=PBin(16),dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=linvar([0.1, 0.5], 128))
+
+d1 >> play("<X[xx]><->").unison(4, .05).sometimes("stutter")
+
+m4 >> dbass(amp=PBin(16),dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=linvar([0.1, 0.5], 128), swell=0.5)
+
+m4 >> dbass(amp=PBin(16),dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=linvar([0.1, 0.5], 128), swell=2)
+
+d1 >> play("<X[xx]><->", stut=0.25).unison(4, .05).sometimes("stutter")
+
+d1.stop()
+
+d1 >> play("<X[xx]><->").unison(4, .05).sometimes("stutter")
+
+uw.stop()
+
+kg.stop()
+
+m4 >> dbass(amp=PBin(16),dur=1/2,shape=1, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=linvar([0.1, 0.5], 128), swell=2, mverb=0.5)
+
+m4 >> dbass(amp=PBin(16),dur=1/2,shape=2, vakorg=1200, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=linvar([0.1, 0.5], 128), swell=2, mverb=0.5)
+
+d1 >> play("<X[xx]><(-[--])>").unison(4, .05).sometimes("stutter")
+
+nb.stop()
+
+vo >> plaitsX([7, 7, 0, 0], dur=PRy(16,3,0), oct=[6, 6, 5, 4, 4, 3], preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.5).unison(2)
+
+d1 >> play("<X[xx]><(-([--][---]))>").unison(4, .05).sometimes("stutter")
+
+vo >> plaitsX([7, 7, 0, 0], dur=PRy(16,3,0), oct=[6, 6, 5, 4, 4, 3], preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+d1.lpf=200
+
+d1.lpf=400
+
+d1.lpf=600
+
+d1.lpf=800
+
+d1.lpf=1200
+
+d1.lpf=1600
+
+d1.lpf=2100
+
+d1.lpf=0
+
+d1 >> play("<X[xx]><(-([--][---]))>", rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+ul >> loop("xfadebass16", dur=16, sample=7)
+
+ul >> loop("xfadebass16", dur=16, sample=7).stop()
+
+masterAll("position", PWhite(0.1, 1))
+
+d1 >> play("<X[xx]><(-([--][---]))>".replace("-", "."), rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+d1 >> play("<X[xx]><(-([--][---]))>".replace("-", "b"), rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+d1 >> play("<X[xx]><(-([--][---]))>".replace("-", "."), rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+masterAll(0, "position", PWhite(0.1, 1))
+
+d1 >> play("<X[xx]><(-([--][---]))>".replace("-", ":"), rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+d1 >> play("<X[xx]><(-([--][---]))>".replace("-", "[--]"), rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+d1 >> play("<X[xx]><(-([--][---]))>".replace("-", "[--].[---]"), rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+d1 >> play("<X[xx]><(-([--][---]))>".replace("-", "[---------].[---]"), rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+vo >> plaitsX([7, 7, 0, 0], dur=PRy(16,3,0), oct=[6, 6, 5, 4, 4, 3], valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.1, preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+d1 >> play("<.[v]><(-([--][---]))>".replace("-", "[---------].[---]"), rate=[1,PWhite(1,4)]).unison(4, .05).sometimes("stutter")
+
+vo >> plaitsX([7, 7, 0, 0], dur=PRy(16,3,0), oct=[6, 6, 5, 4, 4, 3], valad=500, valadr=0.13, valadd=5, valadt=0, valadc=0.1, preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+vo >> plaitsX([7, 7, 0, 0], dur=PRy(16,3,0), oct=[6, 6, 5, 4, 4, 3], valad=500, valadr=0.13, valadd=50, valadt=0, valadc=0.1, preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+d1 >> play("<.[v]><(-([--][---]))>".replace("-", "[---------].[---]"), rate=[1,PWhite(1,4)], lpf=1200).unison(4, .05).sometimes("stutter")
+
+d1 >> play("<.[v]><(-([--][---]))>".replace("-", "[---------].[---]"), rate=[1,PWhite(1,4)], lpf=1600).unison(4, .05).sometimes("stutter")
+
+d1 >> play("<.[v]><(-([--][---]))>".replace("-", "[---------].[---]"), rate=[1,PWhite(1,4)], lpf=1600, bell=0.5, bellf=3000, bellq=0.9).unison(4, .05).sometimes("stutter")
+
+vo >> plaitsX([7, 7, 0, 0], dur=1/2, oct=[6, 6, 5, 4, 4, 3], valad=500, valadr=0.13, valadd=50, valadt=0, valadc=0.1, preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+vo >> plaitsX([7, 7, 0, 0], dur=1/2, oct=[6, 6, 5, 4, 4, 3], valad=500, valadr=0.83, valadd=50, valadt=0, valadc=0.1, preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+vo >> plaitsX([7, 7, 0, 0], dur=1/2, oct=[6, 6, 5, 4, 4, 3], valad=PFr(500,600), valadr=0.83, valadd=50, valadt=0, valadc=0.1, preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+d1 >> play("<.[v]><(-([--][---]))>", rate=[1,PWhite(1,4)], lpf=0, bell=0.5, bellf=3000, bellq=0.9).unison(4, .05).sometimes("stutter")
+
+vo >> plaitsX([7, 7, 0, 0], dur=1/2, oct=[6, 6, 5, 4, 4, 3], valad=PFr(500,600), valadr=0.63, valadd=50, valadt=0, valadc=0.1, preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+d1.stop()
+
+vo >> plaitsX([7, 7, 0, 0], dur=8, oct=[6, 6, 5, 4, 4, 3], valad=PFr(500,600), valadr=0.63, valadd=50, valadt=0, valadc=0.1, preset = linvar([[4.82, 6.06, 10.8, 0.45, 1.35, 10.18],[10.68, 2.5, 3.44, 6.75, 4.27, 6.77, 11.85]],[8.55, 23.24, 25.46]), rq = [0.25, 0.15, 0.22, 0.19], mverb=0.7).unison(2)
+
+nb >> loop("electrodrum8", dur=8, sample=5)
+
+ya >> loop("xtech8", dur=8, sample=9)
+
+ya >> loop("xtech8", dur=8, sample=8)
+
+Clock.clear()
+soff()
+

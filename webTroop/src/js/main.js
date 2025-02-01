@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   editor.setOption('extraKeys', {
     'Ctrl-;': ()=> functionUtils.stopClock(wsServer),
     'Ctrl-Space': 'autocomplete',
-    'Ctrl-S': (cm)=> {functionUtils.saveEditorContent(cm)},
+    'Ctrl-S': (cm)=> {functionUtils.saveEditorContent(cm,wsServer)},
     'Alt-X': (cm) => {
       cm.toggleComment();
       evaluateCode(cm, false);

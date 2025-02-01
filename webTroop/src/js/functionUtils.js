@@ -146,14 +146,44 @@ export const functionUtils = {
 
 
     // Save the content of the editor into a .py file
-    saveEditorContent(cm) {
-        const content = cm.getValue();
-        const blob = new Blob([content], {type: 'text/plain'});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'code.py';
-        a.click();   
+    saveEditorContent(cm, wsServer) {
+        let content = cm.getValue();
+        let filename = '';
+
+        // Vérifier si une partie du texte est sélectionnée
+        const selection = cm.getSelection();
+        if (selection) {
+            content = selection;
+            const lines = selection.split('\n');
+            // Vérifier si le texte commence par un '#'
+            if (lines[0].trim().startsWith('#')) {
+                // Extraire le nom du fichier de la première ligne après le '#'
+                filename = lines[0].trim().substring(1).trim() + '.py';
+            }
+        }
+
+        // Si aucun nom de fichier n'a été trouvé, utiliser un timestamp
+        if (!filename) {
+            const timestamp = new Date().toISOString().replace(/[:.-]/g, '');
+            filename = `code_${timestamp}.py`;
+        }
+
+        if (selection) {
+            const message = {
+                type: 'save_file',
+                filename: filename,
+                content: content
+            };
+            wsServer.send(JSON.stringify(message));
+        } else {
+            // sauvegarder le fichier en demandant le chemin
+            const blob = new Blob([content], {type: 'text/plain'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+        }
     },
 
     // Get the content and the position of a block

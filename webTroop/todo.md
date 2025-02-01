@@ -47,6 +47,8 @@
 - [X] flash message pour envoie de message
 - [X] save code
 - [ ] opacité de l'editeur
+- [X] affichage des player solo
+- [X] sauvegarde attack 
 
 ### Autocomplete 
 - [X] autocompletion foxdot

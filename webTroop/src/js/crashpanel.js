@@ -157,27 +157,33 @@ function interpolateColor(color1, color2, factor) {
 
 function formatPlayers(message) {
     const players = message.map(ply => {
-    const { player: id, name: synth, duration: duration } = JSON.parse(ply);
+    const { player: id, name: synth, duration: duration, solo: solo } = JSON.parse(ply);
 
     // Convertir "MM:SS" en minutes
     const [minutes, seconds] = duration.split(':').map(Number);
     const totalMinutes = minutes + seconds/60;
     const durationColor = getDurationColor(totalMinutes);
+    // console.log(solo);
+    // const isSolo = (solo == "True") ? "soloed" : "";
 
     return {
     id,
     synth,
     duration,
-    durationColor
+    durationColor,
+    solo
     };
     }).filter(p => p !== null);
 
     updatePlayersList(players.map(p => p.id));
 
+    // Vérifier si un ou plusieurs joueurs ont `solo` à `true`
+    const hasSolo = players.some(p => p.solo);
+
     // Créer le HTML formaté
     const playersDiv = document.getElementById('players');
     playersDiv.innerHTML = players.map(p => `
-        <div class="player-line" data-player-id="${p.id}">
+        <div class="player-line ${hasSolo && !p.solo ? 'player-solo' : ''}" data-player-id="${p.id}">
             <span class="player-id">${p.id}</span>
             <span class="player-synth">${p.synth}</span>
             <span class="player-duration" style="color: ${p.durationColor}">${p.duration}</span>

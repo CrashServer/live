@@ -238,7 +238,7 @@ export const foxdotAutocomplete = {
         { text: 'Clock', displayText: 'Clock' },
         { text: 'Scale.default=', displayText: 'Scale' },
         { text: 'Root.default=', displayText: 'Root' },
-
+        { text: 'variation = Variation(16,4)', displayText: 'variation' },
     ],
     playerFunction: [
         { text: 'gtr()', displayText: 'gtr' }, 

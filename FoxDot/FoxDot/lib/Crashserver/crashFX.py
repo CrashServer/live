@@ -192,7 +192,7 @@ fx.add("minDelayTime = LinLin.kr(chorus, 0.0, 1.0, 0.012, 0.022)")
 fx.add("osc = osc * numDelays.reciprocal")
 fx.add("lfos = Array.fill(numDelays, {|i| LFPar.kr(chrate * {rrand(0.95, 1.05)},0.9 * i,(maxDelayTime - minDelayTime) * 0.5,(maxDelayTime + minDelayTime) * 0.5,)})")
 fx.add("osc = DelayC.ar(osc, (maxDelayTime * 2), lfos).sum")
-fx.add("osc = Mix(osc)")
+fx.add("osc = Splay.ar(osc*3)")
 fx.save()
 
 # dub delay based on «Dub Echo» by Bjorn Westergard [sccode https://sccode.org/1-h]

@@ -45,7 +45,8 @@ wss.on('connection', (ws, req) => {
         const filePath = path.join(PROJECT_ROOT, 'codeBank', filename);
         await fs.mkdir(path.dirname(filePath), { recursive: true });
         await fs.writeFile(filePath, content, 'utf-8');
-        console.log(`File saved: ${filePath}`);
+        broadcastLog(`Fichier sauvegardé: ${filename}\n`, 'green');
+        // console.log(`File saved: ${filePath}`);
       }
     } catch (e) {
       // Ignorer les messages non-JSON (messages Y.js)

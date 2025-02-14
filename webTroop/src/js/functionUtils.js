@@ -257,7 +257,7 @@ export const functionUtils = {
         // Get SynthDefs
         const synthDefs = message.autocomplete.synthList;
         const formattedSynthDefs = synthDefs.map(synth => {
-          return { text: synth.displayText + "()", displayText: synth.displayText };
+          return { text: synth.displayText, displayText: synth.displayText };
         });
         const argsSynth = synthDefs.map(synth => {
           return { text: synth.displayText + "(" + synth.text + ")", displayText: synth.displayText + "_" };

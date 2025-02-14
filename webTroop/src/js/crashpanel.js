@@ -73,9 +73,9 @@ ws.onmessage = function(event) {
         case 'nameScene':
             formatSceneName(data.nameScene);
             break;
-        case 'gameData':
-            createGameTable(data.gameData);
-            break;
+        // case 'gameData':
+        //     createGameTable(data.gameData);
+        //     break;
         default:
             break;    
             // console.log('Unknown message type:', data.type);

@@ -433,7 +433,9 @@ export const foxdotAutocomplete = {
         const afterCursor = line.slice(cursorPosition);
 
         // Regex pour détecter un player suivi de '>>'
-        const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*/;
+        // const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*/;
+        const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*(\w*\(?)/;
+
         const matchPlayer = beforeCursor.match(playerPattern);
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;        
         const afterLastClosingParenthesis = /.*\)\s*\./;
@@ -526,13 +528,23 @@ export const foxdotAutocomplete = {
             };
         }
         else if (matchPlayer) {
-            const prefix = line.slice(matchPlayer.index + matchPlayer[0].length).trim();
-            const filteredSynths = this.synths.filter(synth => synth.displayText.includes(prefix));
-            return {
-                list: filteredSynths.length > 0 ? filteredSynths.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                from: CodeMirror.Pos(cursor.line, matchPlayer.index + matchPlayer[0].length),
-                to: cursor,             
-            };
+            // const prefix = line.slice(matchPlayer.index + matchPlayer[0].length).trim();
+            const filteredSynths = this.synths.filter(synth => synth.displayText.includes(token.string));
+            const synthMatch = line.match(/>>\s*([a-zA-Z0-9_]+)\(/);
+            if (synthMatch) {
+                const synthWithoutUndescore = filteredSynths.filter(synth => !synth.displayText.endsWith("_"));
+                return {
+                    list: synthWithoutUndescore.length > 0 ? synthWithoutUndescore.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+                    from: CodeMirror.Pos(cursor.line, token.start),
+                    to: CodeMirror.Pos(cursor.line, token.end),
+                };
+            } else {
+                return {
+                    list: filteredSynths.length > 0 ? filteredSynths.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+                    from: CodeMirror.Pos(cursor.line, (token.string.trim() == "") ? token.start +1 : token.start ),
+                    to: cursor,
+                };
+            }
         }
         else {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");

@@ -12,8 +12,30 @@ const crashPanel = document.getElementById('crashPanel')
 const crashPanelToggle = document.getElementById('crashPanelToggle');
 const crashPanelTitle = document.getElementById('crashPanelTitle');
 
+let isResizing = false;
+let startX;
+let startWidth;
 let sceneName = "";
 let sceneIntervalId = null;
+
+crashPanel.addEventListener('mousedown', function(e) {
+    const rect = crashPanel.getBoundingClientRect();
+    if (e.clientX > rect.right - 10 && e.clientX < rect.right) {
+        isResizing = true;
+        startX = e.clientX;
+        startWidth = rect.width;
+    }
+});
+
+document.addEventListener('mousemove', function(e) {
+    if (!isResizing) return;
+    const width = startWidth + (e.clientX - startX);
+    crashPanel.style.width = `${width}px`;
+});
+
+document.addEventListener('mouseup', function() {
+    isResizing = false;
+});
 
 crashPanelToggle.addEventListener('change', () => {
   if (crashPanelToggle.checked) {

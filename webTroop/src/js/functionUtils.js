@@ -256,10 +256,19 @@ export const functionUtils = {
 
         // Get SynthDefs
         const synthDefs = message.autocomplete.synthList;
-        const formattedSynthDefs = synthDefs.map(synth => {
+        const updatedSynthDefs = synthDefs
+            .filter(synth => synth.displayText !== 'play2')
+            .map(synth => {
+            if (synth.displayText === 'play1') {
+                return { ...synth, displayText: 'play'};
+            }
+            return synth;
+        });
+
+        const formattedSynthDefs = updatedSynthDefs.map(synth => {
           return { text: synth.displayText, displayText: synth.displayText };
         });
-        const argsSynth = synthDefs.map(synth => {
+        const argsSynth = updatedSynthDefs.map(synth => {
           return { text: synth.displayText + "(" + synth.text + ")", displayText: synth.displayText + "_" };
         });
         const allSynthDefs = [...formattedSynthDefs, ...argsSynth];

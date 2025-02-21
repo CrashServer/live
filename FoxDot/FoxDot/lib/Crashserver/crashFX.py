@@ -94,6 +94,16 @@ fx.add("osc = LinXFade2.ar(InsideOut.ar(osc,0.4), osc, 1-idist)")
 fx.add("osc = LeakDC.ar(osc)")
 fx.save()
 
+fx = FxList.new('noiz','noiz', {'noiz': 0, 'noizr': 1, 'noizt': 0, 'sus': 1}, order=1)
+fx.doc("Noize Fx")
+fx.add_var("noizType")
+fx.add_var("env")
+fx.add('env=EnvGen.ar(Env.perc(attackTime: 0,releaseTime: noizr*sus, level: noiz,curve: \linear), doneAction: 0)')
+fx.add('noizType = Select.ar(noizt, [BrownNoise.ar(0.1), WhiteNoise.ar(0.1), ClipNoise.ar(0.1),	GrayNoise.ar(0.1), PinkNoise.ar(0.1)])')
+fx.add('osc = osc + (noizType * env)')
+fx.save()
+
+
 #New Chop, with wave select :
 #chopwave = (0: Pulse, 1: Tri, 2: Saw, 3: Sin, 4: Parabolic )
 # and chopi = oscillator phase

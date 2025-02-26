@@ -35,6 +35,7 @@ ServerInfo = namedtuple(
      'num_input_bus_channels', 'num_output_bus_channels', 'num_buffers',
      'max_nodes', 'max_synth_defs'))
 
+CpuInfo = namedtuple('CpuInfo', ('peak'))
 
 class OSCClientWrapper(OSCClient):
     error_printed=False
@@ -238,6 +239,7 @@ class SCLangServerManager(ServerManager):
         # Load recorder OSCFunc
 
         self.loadRecorder() # move to the quark?
+        self.loadCpuMonitors() # crashServer send CPU usage
 
         # Toggle debug in SuperCollider
 
@@ -679,6 +681,11 @@ class SCLangServerManager(ServerManager):
         self._is_recording = False
         return
 
+    def loadCpuMonitors(self):
+        """ Loads an OSCFunc that sends CPU usage information to the server """
+        self.loadSynthDef(FOXDOT_CPU_FILE)
+        return
+
     def record(self, fn=None):
         """ Starts recording audio from SuperCollider """
 
@@ -737,6 +744,14 @@ class SCLangServerManager(ServerManager):
         self.sclang.send(msg)
         info = ServerInfo(*self.sclang.receive('/foxdot/info'))
         return info
+
+    def getCpuUsage(self):
+        """ Fetch the CPU usage of the SCLang server """
+        msg = OSCMessage()
+        msg.setAddress('/foxdot/cpu')
+        self.sclang.send(msg)
+        cpu = CpuInfo(*self.sclang.receive('/foxdot/cpu'))
+        return cpu
 
     def start(self):
         """ Boots SuperCollider using `subprocess`"""

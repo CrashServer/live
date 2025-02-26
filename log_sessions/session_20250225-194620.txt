@@ -1,0 +1,337 @@
+x4 >> loop("mulholland8", dur=8)
+
+m2 >> play("<k.><..><.><..C.>", amp=1,comp=1)
+
+m2 >> play("<k.><..><-><..C.>", amp=1,comp=1)
+
+x4 >> loop("mulholland8", dur=8, chop=4)
+
+x4 >> loop("mulholland8", dur=8, chop=2)
+
+x4 >> loop("mulholland8", dur=8, chop=2, chopwave=1)
+
+x4 >> loop("mulholland8", dur=8, chop=4, chopwave=1)
+
+x4 >> loop("mulholland8", dur=8, chop=4, chopwave=2)
+
+x4 >> loop("mulholland8", dur=8, chop=4, chopwave=3)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=1)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=1, idist=.1)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=1, idist=.2)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=1, idist=.3)
+
+p8 >> dbass(dur=1/2)
+
+p8 >> dbass(var([0,-2], 8), dur=1/2)
+
+p8 >> dbass(var([0,-2], 16), dur=1/2)
+
+p8 >> dbass(var([0,-2], 16), dur=1/2, rate=.2)
+
+p8 >> dbass(var([0,-2], 16), dur=1/2, rate=.3)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=1, idist=.3, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=1, idist=.2, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=.1, idist=.2, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+p8 >> dbass(var([0,-2], 16), dur=1/2, rate=.3, dist2=1)
+
+p8 >> dbass(var([0,-2], 16), dur=1/2, rate=.3, dist2=.4)
+
+p8 >> dbass(var([0,-2], 16), dur=1/2, rate=.3, dist2=.6)
+
+p8 >> dbass(var([0,-2], 16), dur=1/2, rate=.6, dist2=.6)
+
+p8 >> dbass(var([0,-2], 16), dur=1/2, rate=.9, dist2=.6)
+
+p8 >> dblbass(var([0,-2], 16), dur=1/2, rate=.9, dist2=.6)
+
+p8 >> dblbass(var([0,-2], 16), dur=1/2, rate=.9, dist2=0)
+
+p8 >> dblbass(var([0,-2], 16), dur=1/2, rate=.1, dist2=0)
+
+p8 >> dblbass(var([0,-2], 16), dur=1/2, rate=4, dist2=0)
+
+p8 >> superbass(var([0,-2], 16), dur=1/2, rate=4, dist2=0)
+
+p8 >> superbass(var([0,-4], 16), dur=1/2, rate=4, dist2=0)
+
+Scale.default="minor"
+
+p8 >> bass(var([0,-4], 16), dur=1/2, rate=4, dist2=0)
+
+p8 >> bass(var([0,-4], 16), dur=1/2, rate=2, dist2=0)
+
+p8 >> bass(var([0,-4], 16), dur=1/2, rate=2, dist2=0.2)
+
+p8 >> bass(var([0,-4], 16), dur=1/2, rate=2, dist2=0.3)
+
+p8 >> bass(var([0,-4], 16), dur=1/2, rate=2, dist2=0.5)
+
+p8 >> bass(var([0,-4], 16), dur=1/2, rate=2, dist2=0.6)
+
+p8 >> bass(var([0,-4], 16), dur=1/2, rate=2, dist2=0.7)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=.1, idist=.2, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=.1, idist=.2, valad=1500, valadr=0.3, valadd=50, valadt=0, valadc=0.3)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=.1, idist=0, valad=1500, valadr=0.3, valadd=50, valadt=0, valadc=0.3)
+
+x4 >> loop("mulholland8", dur=8, chop=8, chopwave=3, mverb=.1, idist=0, valad=1500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+p8 >> bass(var([0,-4], 16), dur=1/4, rate=2, dist2=0.7)
+
+m2 >> play("<k.><..><-><..u.>", amp=1,comp=1)
+
+m2 >> play("<k.><..><-><..O.>", amp=1,comp=1)
+
+m2 >> play("<k.><..><-><..O.>", amp=1,comp=1)
+
+m2 >> play("<k.><..><-><..o.>", amp=1,comp=1)
+
+m2 >> play("<X.><..><-><..o.>", amp=1,comp=1)
+
+m2 >> play("<X.><..><-><..o.>", amp=1,comp=0)
+
+m2 >> play("<X.><..><-><....>", amp=1,comp=0)
+
+Clock.clear()
+soff()
+
+u2 >> loop("mulholland8", dur=8, sample=1)
+
+m2 >> play("<X.><..><-><....>", amp=1,comp=0)
+
+m2 >> play("<X..><..><-><....>", amp=1,comp=0)
+
+m2 >> play("<X.><..><-><....>", amp=1,comp=0)
+
+m2 >> play("<k.><..><-><....>", amp=1,comp=0)
+
+Clock.bpm=102
+
+Clock.clear()
+soff()
+
+u2 >> loop("mulholland8", dur=8, sample=1)
+
+m2 >> play("<k.><..><-><....>", amp=1,comp=0)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+u2 >> loop("mulholland8", dur=8, sample=1)
+
+m2 >> play("<k.><..><-><....>", amp=1,comp=0)
+
+Clock.bpm=132
+
+m2 >> play("<k.><..><-><..u.>", amp=1,comp=0)
+
+m2 >> play("<k.><..><-><..u(.u)>", amp=1,comp=0)
+
+m2 >> play("<k.><..><-><..u(.u)>", amp=1,comp=1)
+
+m2 >> play("<k.><..><-><..u(...u)>", amp=1,comp=1)
+
+m2 >> play("<k.><..><-><..u(...u)><X.>", amp=1,comp=1)
+
+u2 >> loop("mulholland8", dur=8, sample=1, chop=4)
+
+u2 >> loop("mulholland8", dur=8, sample=1, chop=4, sbrk=1)
+
+u2 >> loop("mulholland8", dur=8, sample=1, chop=4, sbrk=1, sbrkdur=.5)
+
+u2 >> loop("mulholland8", dur=8, sample=1, chop=4, sbrk=.5, sbrkdur=.5)
+
+u2 >> loop("mulholland8", dur=8, sample=1, chop=2, sbrk=.5, sbrkdur=.5)
+
+u2 >> loop("mulholland8", dur=8, sample=1, chop=0, sbrk=.5, sbrkdur=.5)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=0, sbrk=.5, sbrkdur=.5)
+
+u2 >> loop("mulholland8", dur=8, sample=1, chop=0, sbrk=.5, sbrkdur=.5)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=0, sbrk=.5, sbrkdur=.5)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, sbrk=.5, sbrkdur=.5)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=4, sbrk=.5, sbrkdur=.5)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, sbrk=.1, sbrkdur=.5)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, sbrk=0, sbrkdur=.5)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0, sbrkdur=.5)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=4, sbrk=.5, sbrkdur=.5, mverb=1)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=8, sbrk=.5, sbrkdur=.5, mverb=1)
+
+p8 >> bass(var([0,-4], 16), dur=1/4, rate=2, dist2=0.7)
+
+p8 >> bass(0, dur=1/4, rate=2, dist2=0.7)
+
+p8 >> bass(0, dur=1/2, rate=2, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=2, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.2, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.3, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.4, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.5, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.6, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.7, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.8, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.9, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=.10, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=0, dist2=0.7)
+
+p8 >> dbass(0, dur=1/2, rate=0, dist2=0.9)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=16, sbrk=.5, sbrkdur=.5, mverb=1)
+
+u2.stop()
+
+m2.stop()
+
+p8.stop()
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0, sbrkdur=.5, dist=.2)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0, sbrkdur=.5, dist=0)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0, sbrkdur=.5, vadiod=500, vadiodr=0.5, vadiodd=10.5, vadiodc=0.3)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0, sbrkdur=.5, vadiod=500, vadiodr=0.5, vadiodd=10.5, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0, sbrkdur=.5, vadiod=500, vadiodr=0.5, vadiodd=100.5, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0, sbrkdur=.5, vadiod=1500, vadiodr=0.5, vadiodd=100.5, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0.2, sbrkdur=.5, vadiod=1500, vadiodr=0.5, vadiodd=100.5, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=à, sbrk=0.2, sbrkdur=.5, vadiod=1500, vadiodr=0.5, vadiodd=100.5, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0.2, sbrkdur=.5, vadiod=1500, vadiodr=0.5, vadiodd=100.5, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0.4, sbrkdur=.5, vadiod=1500, vadiodr=0.5, vadiodd=100.5, vadiodc=0.1)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=16, sbrk=.5, sbrkdur=.5, mverb=1)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=2, sbrk=.5, sbrkdur=.5, mverb=1)
+
+m2 >> play("<k.><..><-><..u(...u)><X.>", amp=1,comp=1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0.4, sbrkdur=.5, vadiod=150, vadiodr=0.5, vadiodd=100.5, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0.4, sbrkdur=.5, vadiod=150, vadiodr=0.5, vadiodd=10.5, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=150, vadiodr=0.5, vadiodd=10, vadiodc=0.1)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=150, vadiodr=0.5, vadiodd=10, vadiodc=0.2)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=150, vadiodr=0.5, vadiodd=10, vadiodc=0.2)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=150, vadiodr=0.5, vadiodd=10, vadiodc=0.3)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=250, vadiodr=0.5, vadiodd=10, vadiodc=0.3)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=450, vadiodr=0.5, vadiodd=10, vadiodc=0.3)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=1450, vadiodr=0.5, vadiodd=10, vadiodc=0.3)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=2450, vadiodr=0.5, vadiodd=10, vadiodc=0.3)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=3450, vadiodr=0.5, vadiodd=10, vadiodc=0.3)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=0, sbrk=0, sbrkdur=.5, vadiod=0, vadiodr=0.5, vadiodd=10, vadiodc=0.3)
+
+u3 >> loop("mulholland8", dur=8, sample=1, chop=0, comp=1, sbrk=0, sbrkdur=.5, vadiod=0, vadiodr=0.5, vadiodd=10, vadiodc=0.3)
+
+u2.stop()
+
+Clock.clear()
+soff()
+
+x5 >> loop("mulholland8", dur=8, sample=2)
+
+x5 >> loop("mulholland8", dur=16, sample=2)
+
+x5 >> loop("mulholland8", dur=8, sample=2)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=2, sbrk=.5, sbrkdur=.5, mverb=1)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=0, sbrk=0, sbrkdur=.5, mverb=1)
+
+u2.stop()
+
+m2 >> play("<k.><..><-><..u(...u)><X.>", amp=1,comp=1)
+
+x5 >> loop("mulholland8", dur=8, sample=2, delay=2)
+
+x5 >> loop("mulholland8", dur=8, sample=2, delay=0)
+
+x5 >> loop("mulholland8", dur=16, sample=2, delay=0)
+
+Clock.clear()
+soff()
+
+x5 >> loop("mulholland8", dur=4, sample=2, delay=0)
+
+m2 >> play("<k.><..><-><..u(...u)><X.>", amp=1,comp=1)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+x5 >> loop("mulholland8", dur=8, sample=2, delay=0)
+
+m2 >> play("<k.><..><-><..u(...u)><X.>", amp=1,comp=1)
+
+x5 >> loop("mulholland8", dur=16, sample=2, delay=0)
+
+Clock.bpm=88
+
+x5 >> loop("mulholland8", dur=8, sample=2, delay=0)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=0, sbrk=0, sbrkdur=.5, mverb=1)
+
+u2.stop()
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=0, sbrk=0, sbrkdur=.5, mverb=1, hpf=400)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=0, sbrk=0, sbrkdur=.5, mverb=1, hpf=1400)
+
+u2 >> loop("mulholland8", dur=8, sample=0, chop=0, sbrk=0, sbrkdur=.5, mverb=1, hpf=2400)
+
+Clock.bpm=170
+
+u2.stop()
+
+x5 >> loop("mulholland8", dur=16, sample=2, delay=0)
+
+Clock.clear()
+soff()
+

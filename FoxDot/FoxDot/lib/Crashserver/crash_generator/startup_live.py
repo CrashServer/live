@@ -538,6 +538,7 @@ try:
             self.threadRoot = Thread(target=self.sendRoot, daemon=True)
             self.threadBeat = Thread(target=self.sendBeat, daemon=True)
             self.threadPlayer = Thread(target=self.sendPlayer, daemon=True)
+            self.threadCpu = Thread(target=self.sendCpu, daemon=True)
             # self.threadPdj = Thread(target=self.sendPdj, daemon=True)
             self.threadChrono = Thread(target=self.sendChrono, daemon=True)
             # self.threadVideoIndex = Thread(target=self.sendVideoIndex, daemon=True)
@@ -559,6 +560,18 @@ try:
                     msg = json.dumps({"type": "root", "root": str(Root.default)})
                     asyncio.run(wsServer.sendWebsocket(msg))
                     sleep(self.bpmTime*10)
+            except:
+                pass
+
+        def sendCpu(self):
+            print("startCPu")
+            ''' send CPU usage to OSC server '''
+            try:
+                while self.isrunning:
+                    cpu = Server.getCpuUsage().peak
+                    msg = json.dumps({"type": "cpu", "cpu": cpu})
+                    asyncio.run(wsServer.sendWebsocket(msg))
+                    sleep(self.bpmTime)
             except:
                 pass
 
@@ -648,6 +661,7 @@ try:
             self.threadRoot.start()
             self.threadBeat.start()
             self.threadPlayer.start()
+            self.threadCpu.start()
             # self.threadPdj.start()
             self.threadChrono.start()
             # self.threadVideoIndex.start()
@@ -662,13 +676,13 @@ class WebsocketServer():
         self.ip = ip
         self.port = port
         # OSC Server
-        self.oscServer = ThreadingOSCServer((self.ip, config["SC_CPU_PORT"]))
-        self.oscServer.addDefaultHandlers()
-        self.oscServer.addMsgHandler(
-            "/CPU", self.receiveCpu)
-        self.oscThread = Thread(target=self.oscServer.serve_forever)
-        self.oscThread.daemon = True
-        self.oscThread.start()
+        # self.oscServer = ThreadingOSCServer((self.ip, config["SC_CPU_PORT"]))
+        # self.oscServer.addDefaultHandlers()
+        # self.oscServer.addMsgHandler(
+        #     "/CPU", self.receiveCpu)
+        # self.oscThread = Thread(target=self.oscServer.serve_forever)
+        # self.oscThread.daemon = True
+        # self.oscThread.start()
         # websocker server
         self.wsClients = set()
         self.websocket_started_event = threading.Event()
@@ -678,15 +692,16 @@ class WebsocketServer():
         # bpm send
         self.sendBpm_thread = threading.Thread(target=self.send_bpm_periodically, daemon=True)
         self.sendBpm_thread.start()
+        # send server state
         self.sendServerState_thread = threading.Thread(target=self.sendServerState, daemon=True)
         self.sendServerState_thread.start()
 
-    def receiveCpu(self, address, tags, contents, source):
-        ''' reveive CPU usage from SC by OSC and send it to websocket '''
-        cpu = round(float(contents[0]), 2)
-        if cpu:
-            asyncio.run(self.sendWebsocket(
-                json.dumps({"type": "cpu", "cpu": cpu})))
+    # def receiveCpu(self, address, tags, contents, source):
+    #     ''' reveive CPU usage from SC by OSC and send it to websocket '''
+    #     cpu = round(float(contents[0]), 2)
+    #     if cpu:
+    #         asyncio.run(self.sendWebsocket(
+    #             json.dumps({"type": "cpu", "cpu": cpu})))
 
     async def sendWsServer(self, websocket):
         self.wsClients.add(websocket)

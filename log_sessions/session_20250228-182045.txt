@@ -1,0 +1,472 @@
+d0 >> play("<x|-4|><..o.>", amp=3, sample=2)
+
+Clock.clear()
+soff()
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.4, cutoff=PFr(1220,6000,555), rq=0.2, fb=.19, fmrate=20, tanh=0.5).unison(5)
+
+d0 >> play("<x.>", amp=3, sample=4)
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.4, cutoff=PFr(1220,6000,555), rq=0.2, fb=.19, fmrate=20, tanh=0.5, glide=0.1).unison(5)
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.4, cutoff=PFr(1220,2000,555), rq=0.2, fb=.19, fmrate=20, tanh=0.5, glide=0.1).unison(5)
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.4, cutoff=PFr(1220,2000,555), rq=0.2, fb=.09, fmrate=20, tanh=0.5, glide=0.1).unison(5)
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.4, cutoff=PFr(1220,2000,555), rq=0.2, fb=.09, fmrate=20, tanh=0.5, glide=0.01).unison(5)
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.4, cutoff=PFr(1220,2000,555), rq=0.2, fb=.09, fmrate=20, tanh=0.5, glide=0.0).unison(5)
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.2, cutoff=PFr(1220,2000,555), rq=0.2, fb=.09, fmrate=20, tanh=0.5, glide=0.0).unison(5)
+
+Scale.default="minor"
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.2, cutoff=PFr(1220,2000,555), rq=0.2, fb=.09, fmrate=220, tanh=linvar([0.1, 0.5], [4,0]), glide=0.0).unison(5)
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.2, cutoff=PFr(1220,2000,555), rq=0.2, fb=.09, fmrate=220, tanh=linvar([0.1, 0.7], [4,0]), glide=0.0).unison(5)
+
+d9 >> loop("dune8", dur=8, pos=0, room=0.1, sample=0, beat_stretch=1, looping=1.0)
+
+d9.solo()
+
+d9 >> loop("dune8", dur=8, pos=0, room=0.1, sample=0, beat_stretch=1, looping=1.0, chop=4)
+
+d9 >> loop("dune8", dur=8, pos=0, room=0.1, sample=1, beat_stretch=1, looping=1.0, chop=4, chopmix=0.5)
+
+d9 >> loop("dune8", dur=8, pos=0, room=0.1, sample=1, beat_stretch=1, looping=1.0, chop=0, chopmix=0.5)
+
+d9 >> loop("dune8", dur=8, pos=0, room=0.1, sample=1, beat_stretch=1, looping=1.0, chop=0, chopmix=0)
+
+d9 >> loop("dune8", dur=8, pos=0, room=0.1, sample=2, beat_stretch=1, looping=1.0, chop=0, chopmix=0)
+
+d9 >> loop("dune8", dur=8, pos=0, room=0.1, sample=0, beat_stretch=1, looping=1.0, chop=0, chopmix=0)
+
+ploop("dune")
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+a0 >> loop("dune32", dur=32)
+
+a0 >> loop("dune32", dur=32, sample=1)
+
+a0 >> loop("dune32", dur=32, sample=23)
+
+a0 >> loop("dune32", dur=32, sample=2)
+
+a0 >> loop("dune32", dur=32, sample=3, delay=16)
+
+a3 >> loop("dune32", dur=32, sample=3, delay=16)
+
+a2 >> loop("dune32", dur=32, sample=2)
+
+a1 >> loop("dune32", dur=32, sample=1)
+
+a0 >> loop("dune32", dur=32)
+
+e3 >> loop("losthighway8", dur=8, sample=0)
+
+d0 >> play("<x.>", amp=3, sample=4)
+
+d0.stop()
+
+a4 >> loop("dune32", dur=32)
+
+e3 >> loop("losthighway8", dur=8, sample=0)
+
+e3 >> loop("losthighway8", dur=8, sample=1)
+
+e3 >> loop("losthighway8", dur=8, sample=2)
+
+p4 >> loop("dune8", sample=1)
+
+p4 >> loop("dune8", sample=1, dur=8)
+
+e3 >> loop("losthighway8", dur=16, sample=2)
+
+p4 >> loop("dune8", sample=3, dur=8)
+
+p4 >> loop("dune8", sample=6, dur=8)
+
+Clock.clear()
+soff()
+
+e3 >> loop("losthighway8", dur=16, sample=2)
+
+d0 >> play("<x.>", amp=3, sample=4)
+
+d0 >> play("<x.>", amp=1, sample=4)
+
+d0 >> play("<k.>", amp=1, sample=4)
+
+d0 >> play("<k.>", amp=1, sample=0)
+
+d0 >> play("<k->", amp=1, sample=0)
+
+e3 >> loop("losthighway8", dur=16, sample=3)
+
+e3 >> loop("losthighway8", dur=8, sample=3)
+
+d0 >> play("<k-><..u.>", amp=1, sample=0)
+
+d0 >> play("<k-><..u.>", amp=4, sample=0)
+
+e3 >> loop("losthighway8", dur=8, sample=3, fx=1)
+
+d0.stop()
+
+e3 >> loop("losthighway8", dur=8, sample=3, fx=0)
+
+e3 >> loop("losthighway8", dur=8, sample=3, fx=1)
+
+a1 >> loop("dune32", dur=32, sample=1, shift=1.12)
+
+e3 >> loop("losthighway8", dur=8, sample=3, fx=1, chop=4)
+
+d0 >> play("<k-><..u.>", amp=4, sample=0)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0)
+
+e3 >> loop("losthighway8", dur=8, sample=3, fx=1, chop=8)
+
+a1 >> loop("dune32", dur=32, sample=1, shift=1.24)
+
+e3 >> loop("losthighway8", dur=8, sample=3, fx=0, chop=8)
+
+d8 >> omi(0, dur=1/4, oct=(3,4,5), xfb=.2, cutoff=PFr(1220,2000,555), rq=0.2, fb=.09, fmrate=220, tanh=linvar([0.1, 0.7], [4,0]), glide=0.0).unison(5)
+
+d8.stop()
+
+e3 >> loop("losthighway8", dur=8, sample=3, fx=0, chop=4)
+
+a1.stop()
+
+e3.stop()
+
+FoxDot.reload()
+
+e1 >> loop("dune_8", dur=8)
+
+e1 >> loop("dune_8", dur=8, sample=1)
+
+e2 >> loop("dune_8", dur=8, sample=2)
+
+e1 >> loop("dune_8", dur=8, sample=1, amp=2)
+
+e1 >> loop("dune_8", dur=8, sample=1, amp=1)
+
+e3 >> loop("dune_8", dur=8, sample=3)
+
+e3 >> loop("dune_8", dur=8, sample=3, amp=2)
+
+e3 >> loop("dune_8", dur=8, sample=3, amp=1.5)
+
+a2 >> loop("dune32", dur=32, sample=2, fx=1)
+
+d0 >> play("<k-><..u.>", amp=4, sample=0, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=4, sample=0, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=4, sample=0, valad=2500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=2500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=2500, valadr=0.3, valadd=50, valadt=0, valadc=0.2)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=2500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+e4 >> loop("dune_8", dur=8, sample=5, amp=1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=2500, valadr=0.9, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=2500, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+e4 >> loop("dune_8", dur=8, sample=5, amp=1.5)
+
+e4 >> loop("dune_8", dur=8, sample=6, amp=1.5)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=2500, valadr=0.1, valadd=50, valadt=4, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=2500, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=3500, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+a2.stop()
+
+e4 >> loop("dune_8", dur=8, sample=4, amp=1.5)
+
+d0 >> play("<k-><..u.>", amp=2, sample=4, valad=3500, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=3500, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+e4 >> loop("dune_8", dur=8, sample=5, amp=1.5)
+
+e4 >> loop("dune_8", dur=8, sample=3, amp=1.5)
+
+e3.stop()
+
+e2.stop()
+
+e1.stop()
+
+d0.stop()
+
+w1 >> loop("mulholland8", dur=8, sample=0)
+
+w1 >> loop("mulholland8", dur=8, sample=0, mverb=0.9)
+
+w1 >> loop("mulholland8", dur=8, sample=0, mverb=0.9, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+w1 >> loop("mulholland8", dur=8, sample=0, mverb=0.9, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.12)
+
+w1 >> loop("mulholland8", dur=8, sample=0, mverb=0.9, valad=500, valadr=0.3, valadd=5, valadt=4, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=0, mverb=0.9, valad=1500, valadr=0.3, valadd=5, valadt=4, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=3500, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=0, mverb=0.9, valad=500, valadr=0.3, valadd=5, valadt=4, valadc=0.1)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0, valad=0, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=0, mverb=0.9, valad=500, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=0, mverb=0.9, chop=4, valad=500, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+e4.stop()
+
+w1 >> loop("mulholland8", dur=8, sample=1, mverb=0.9, chop=4, valad=500, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=1, mverb=0.9, chop=4, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=1, mverb=0.9, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=1, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+d0 >> play("<k-><..c.>", amp=2, sample=0, valad=0, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..c.>", amp=2, sample=0, valad=400, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..c.>", amp=2, sample=0, valad=0, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+w2 >> loop("mulholland8", dur=8, sample=0, mverb=0, chop=4, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w2 >> loop("mulholland8", dur=8, sample=0, mverb=0, delay=2, chop=4, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w2 >> loop("mulholland8", dur=8, sample=0, mverb=0, delay=4, chop=4, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+ploop()
+
+Clock.clear()
+soff()
+
+w1 >> loop("mulholland8", dur=8, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=16, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+Clock.bpm=99
+
+d0 >> play("<k-><..c.>", amp=2, sample=0, valad=0, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k-><..c.>", amp=1, sample=0, valad=0, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+d0 >> play("<k.><..c.>", amp=1, sample=0, valad=0, valadr=0.1, valadd=50, valadt=0, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=2, mverb=0, chop=4, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=8, pos=.5, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=4, pos=.5, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=4, sus=8, pos=.5, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=4, sus=8, pos=.1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=.1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+m4 >> loop("shepard", dur=8, pos=0, room=0.1, sample=0, beat_stretch=1, looping=1.0)
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=.1, cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+m4.stop()
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=.2, cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=PWhite(.3, 0.5)[:4], cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=PWhite(.3, 0.8)[:4], cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=PWhite(.3, 0.01)[:4], cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=PWhite(.02, 0.01)[:4], cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=PWhite(1, 8)[:4], cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=8, pos=0.5, cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=1/2, pos=0.5, cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=2, pos=0.5, cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=4, pos=0.5, cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w1 >> loop("mulholland8", dur=2, sus=16, pos=0.3, cut=1, sample=2, mverb=0, chop=0, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+d0 >> play("<k.><..c.>", amp=1, sample=0, valad=0, valadr=0.2, valadd=50, valadt=0, valadc=0.1)
+
+w1.stop()
+
+w8.solo()
+
+w8 >> loop("twinpeaks16", dur=16, sample=0)
+
+Clock.bpm=132
+
+lost()
+
+attack("Twin Peaks Theme")
+
+Scale.default="chromatic"
+
+Clock.bpm=72
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(1)
+
+Clock.bpm=132
+
+s1.stop()
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+w8 >> loop("twinpeaks16", dur=16, sample=1)
+
+a2 >> loop("dune32", dur=32, sample=2, fx=1)
+
+w8 >> loop("twinpeaks16", dur=16, sample=2)
+
+w8 >> loop("twinpeaks16", dur=16, sample=3)
+
+s3.stop()
+
+w8 >> loop("twinpeaks16", dur=16, sample=4)
+
+a2 >> loop("dune_32", dur=32, sample=2, fx=1)
+
+w8 >> loop("twinpeaks16", dur=16, sample=5)
+
+d0 >> play("<k.><..c.>", amp=1, sample=0, valad=0, valadr=0.2, valadd=50, valadt=0, valadc=0.1)
+
+m8 >> loop("gbreak16", dur=16, fx=1)
+
+m8 >> loop("gbreak16", dur=16, fx=1, chop=4)
+
+attack("for my people")
+
+m8 >> loop("gbreak16", dur=16, fx=1, chop=P*[0,4,8,2])
+
+p2 >> pianovel(var([(2,4,7),(2,4,7), (1,3,7),(1,3,6.5)], [4]),dur=1, amp=1, hard=PWhite(0.6,0.8), velhard=0.6, oct=4, velocity=[60 | PRand(40,53)[:7]], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+Clock.clear()
+soff()
+
+w8 >> loop("twinpeaks16", dur=16, sample=6)
+
+b7 >> loop("gab16", dur=16)
+
+b7.stop()
+
+b7 >> loop("gab16", dur=16)
+
+b7.stop()
+
+w2 >> loop("mulholland8", dur=8, sample=0, mverb=0, delay=4, chop=4, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+w8 >> loop("twinpeaks16", dur=16, sample=7)
+
+w2 >> loop("mulholland8", dur=8, sample=0, mverb=0, delay=4, chop=4, valad=0, valadr=0.3, valadd=5, valadt=2, valadc=0.1)
+
+d4 >> play("<[vv]...|U1|...>")
+
+g6 >> loop("losthighway4", dur=4)
+
+g6 >> loop("losthighway4", dur=4, sample=1)
+
+g6 >> loop("losthighway4", dur=4, sample=1, comp=1)
+
+q9 >> loop("hiphop16", dur=16, room=0.1, sample=0)
+
+r9 >> loop("losthighway8", dur=8)
+
+q9 >> loop("hiphop16", dur=16, room=0.1, sample=1)
+
+g6.stop()
+
+w8.stop()
+
+w2.stop()
+
+r9 >> loop("losthighway8", dur=8, sample=1, comp=1)
+
+d4.stop()
+
+q9 >> loop("hiphop16", dur=16, room=0.1, sample=0)
+
+r9 >> loop("losthighway8", dur=8, sample=2, comp=1)
+
+r9 >> loop("losthighway8", dur=8, sample=3, comp=1)
+
+r9 >> loop("losthighway8", dur=8, sample=4, comp=1)
+
+r9 >> loop("losthighway8", dur=8, sample=5, comp=1)
+
+x4 >> play("K ", amp=4)
+
+e4 >> play("-")
+
+r9 >> loop("losthighway8", dur=8, sample=6, comp=1)
+
+r9 >> loop("losthighway8", dur=16, sample=6, comp=1)
+
+r9.solo()
+
+r9 >> loop("losthighway8", dur=16, sample=6, comp=0)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+r9 >> loop("losthighway8", dur=16, sample=5, comp=0)
+
+s3.stop()
+
+attack("depths")
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1)
+
+r9 >> loop("losthighway8", dur=16, sample=5, comp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1).slider()
+
+d4 >> play("<[vv]...|U1|...>")
+
+r9 >> loop("losthighway8", dur=16, sample=5, comp=1, tanh=.2)
+
+w8 >> loop("twinpeaks16", dur=16, sample=7)
+
+w8 >> loop("twinpeaks16", dur=16, sample=9)
+
+w8 >> loop("twinpeaks16", dur=16, sample=10)
+
+r9.stop()
+
+y1.stop()
+
+x4 >> play("K ")
+
+Clock.clear()
+soff()
+

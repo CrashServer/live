@@ -37,7 +37,10 @@ wss.on('connection', (ws, req) => {
       const data = JSON.parse(message.toString());
       if (data.type === 'evaluate_code') {
         const {code, userName, userColor} = data;
-        broadcastLog(`>> ${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor);
+        // console.log('Code évalué:', (code.trim().startsWith('lost') || code.trim().startsWith("attack")) ? 'attack' : "pas attack");
+        const attackRequest = (code.trim().startsWith('lost') || code.trim().startsWith("attack")) ? userName : "";
+        console.log('attackRequest:' + attackRequest) 
+        broadcastLog(`>> ${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor, attackRequest);
         foxdot.stdin.write(data.code + '\n' + '\n');
       } else if (data.type === 'save_file') {
         console.log('Sauvegarde du fichier:', data.filename);
@@ -61,7 +64,7 @@ wss.on('connection', (ws, req) => {
 foxdot.stdout.on('data', (data) => {
   try {
     const logMessage = data.toString();
-    console.log(logMessage);
+    // console.log(logMessage);
     broadcastLog(logMessage);
   } catch (e) {
     console.error('Erreur lors de l\'envoi des logs:', e);
@@ -69,11 +72,12 @@ foxdot.stdout.on('data', (data) => {
 });
 
 // Logs de console de FoxDot
-function broadcastLog(message, color=null) {
+function broadcastLog(message, color=null, attackRequest="") {
   const messageObj = {
     type: 'foxdot_log',
     data: message,
-    color: color
+    color: color,
+    attackRequestName: attackRequest
   };
 
   wss.clients.forEach(client => {

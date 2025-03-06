@@ -1,0 +1,535 @@
+b3 >> MidiOut(channel=4, cc=0, value=[0,127/2,127])
+
+b3 >> MidiOut(channel=1, cc=0, value=[0,127/2,127])
+
+b3 >> MidiOut(channel=1, cc=10, value=[0,127/2,127])
+
+b3 >> MidiOut(channel=0, cc=10, value=[0,127/2,127])
+
+b3 >> MidiOut(channel=0, cc=10, value=[0,.5,1])
+
+b3 >> MidiOut(channel=0, cc=10, value=40)
+
+b3 >> MidiOut(channel=0, cc=10, value=66)
+
+b3 >> MidiOut(channel=0, cc=10, value=67)
+
+b3 >> MidiOut(channel=0, cc=10, value=70)
+
+b3 >> MidiOut(channel=0, cc=10, value=0)
+
+b3 >> MidiOut(channel=0, cc=10, value=66)
+
+b3 >> MidiOut(channel=0, cc=10, value=127)
+
+b3 >> MidiOut(channel=0, cc=10, value=[0,1,127])
+
+b3 >> MidiOut(channel=0, cc=10, value=[0,77,127])
+
+Clock.clear()
+soff()
+
+z1 >> loop("mulholland8", dur=8, hpf=100, mverb=.5, tremolo=8, chorus=.6)
+
+Clock.clear()
+soff()
+
+print(loopNames)
+
+b3 >> MidiOut(channel=0, cc=10, value=0)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=(0,1), chop=(0,8), mverb=(.9,0))
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1, chop=(0,8), mverb=(.9,0))
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1, chop=0, mverb=(.9,0))
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1, chop=0, mverb=0)
+
+b3 >> MidiOut(channel=0, cc=10, value=77)
+
+b3 >> MidiOut(channel=0, cc=10, value=127)
+
+r9 >> play("<|x4|.><[--]><..u.><.:>", sample=2, comp=1, amp=(4,1,3,1)).sometimes("stutter")
+
+b3 >> MidiOut(channel=0, cc=10, value=0)
+
+Clock.clear()
+soff()
+
+s7 >> loop("break4", dur=4)
+
+s7 >> loop("break4", dur=4, fx=1)
+
+b3 >> MidiOut(channel=0, cc=10, value=77)
+
+b3 >> MidiOut(channel=0, cc=10, value=127)
+
+b3 >> MidiOut(channel=0, cc=10, value=0.5*127)
+
+b3 >> MidiOut(channel=0, cc=10, value=0*127)
+
+b3 >> MidiOut(channel=0, cc=10, value=0.4*127)
+
+b3 >> MidiOut(channel=0, cc=10, value=0.2*127)
+
+b3 >> MidiOut(channel=0, cc=10, value=0.5*127)
+
+b3 >> MidiOut(channel=0, cc=10, value=1*127)
+
+b3 >> MidiOut(channel=0, cc=10, value=1*127)
+
+b3 >> MidiOut(channel=0, cc=10, value=0)
+
+b3 >> MidiOut(channel=0, cc=10, value=0.6)
+
+b3 >> MidiOut(channel=0, cc=10, value=127)
+
+s7 >> loop("break4", dur=4, fx=0)
+
+s7 >> loop("break4", dur=4, fx=0, a=.4, ac=0)
+
+s7 >> loop("break4", dur=4, fx=0, a=.4, ac=4)
+
+s7 >> loop("break4", dur=4, fx=0, a=.1, ac=4)
+
+s7 >> loop("break4", dur=4, fx=0, a=0, ac=4)
+
+s7 >> loop("break4", dur=1/2, sus=4, fx=0, a=0, ac=4)
+
+s7 >> loop("break4", dur=1/2, cut=1, sus=4, fx=0, a=0, ac=4)
+
+s7 >> loop("break4", dur=1, cut=1, sus=4, fx=0, a=0, ac=4)
+
+s7 >> loop("break4", .5, dur=1, cut=1, sus=4, fx=0, a=0, ac=4)
+
+s7 >> loop("break4", .25, dur=1, cut=1, sus=4, fx=0, a=0, ac=4)
+
+s7 >> loop("break4", .25, dur=2, cut=1, sus=4, fx=0, a=0, ac=4)
+
+s7 >> loop("break4", .25, dur=2, cut=.5, sus=4, fx=0, a=0, ac=4)
+
+s7 >> loop("break4", .25, dur=2, cut=.5, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", .5, dur=2, cut=.5, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", .75, dur=2, cut=.5, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", PRand([0,.25,.5,.75]), dur=2, cut=.5, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", PRand([0,.25,.5,.75]), dur=1, cut=.25, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", PWhite(0,1).rnd(.125), dur=1, cut=.25, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", PWhite(0,1).rnd(.125), dur=1, cut=.5, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", PWhite(0,1).rnd(.125), dur=1, cut=.25, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", PWhite(0,1).rnd(.125), dur=1/2, cut=.25, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7 >> loop("break4", PWhite(0,1).rnd(.125), dur=1/2, cut=1/8, sus=4, fx=0, a=0, ac=4, comp=1)
+
+s7.stop()
+
+u7 >> loop("lynchcrazy32", PWhite(0,1).rnd(.5), dur=2, cut=2/32, sus=32, comp=1)
+
+u7 >> loop("lynchcrazy32", PWhite(0,32).rnd(.5), dur=2, cut=2/32, sus=32, comp=1)
+
+u7 >> loop("lynchcrazy32", PWhite(0,32).rnd(.5), sample=1, dur=2, cut=2/32, sus=32, comp=1)
+
+Clock.clear()
+soff()
+
+u7 >> loop("lynchcrazy32", PWhite(0,32).rnd(.5), sample=1, dur=2, cut=2/32, sus=32, comp=1)
+
+b3.stop()
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.5), sample=1, dur=2, cut=2/16, sus=16, comp=1)
+
+r9 >> play("<x.>", sample=4, comp=1, amp=1).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.5), sample=1, dur=1, cut=1/16, sus=16, comp=1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.5), sample=2, dur=1, cut=1/16, sus=16, comp=1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25), sample=3, dur=1, cut=1/16, sus=16, comp=1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:8], sample=3, dur=1, cut=1/16, sus=16, comp=1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25), sample=3, dur=1, cut=1/16, sus=16, comp=1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:4], sample=3, dur=1, cut=1/16, sus=16, comp=1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:2], sample=3, dur=1, cut=1/16, sus=16, comp=1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:1], sample=3, dur=1, cut=1/16, sus=16, comp=1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:1], sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:1], sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:1], sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:1], sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16", PWhite(0,16).rnd(.25)[:1], sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+note= PWhite(0,16).rnd(.25)[:1]
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=600, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=700, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=900, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1000, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1100, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1200, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1300, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+r9 >> play("<x->", sample=4, comp=1, amp=1).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/8, sus=16, comp=1, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/32, sus=16, comp=1, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/32, sus=16, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+note= PWhite(0,16).rnd(.25)[:1]
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:1]
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+r9 >> play("<x->", sample=4, comp=1, amp=1).sometimes("stutter")
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:1]
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+r9 >> play("<x->", sample=4, comp=1, amp=1).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=4, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=3, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=2, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+r9 >> play("<x->", sample=4, comp=1, amp=2).sometimes("stutter")
+
+r9 >> play("<x->", sample=4, comp=1, amp=3).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, r=.9, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, r=.6, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=.6, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=.3, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=.2, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.4, rc=0, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.4, rc=4, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.1, rc=4, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.01, rc=4, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.1, rc=4, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.06, rc=4, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.06, rc=3, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.06, rc=2, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.06, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.06, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=.1)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.06, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=.2)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.06, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.26, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0.56, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.01, r=0, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.2, r=0, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.3, r=0, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.4, r=0, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0.6, r=0, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:1]
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=1400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=400, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=200, valadr=0.3, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=200, valadr=0.9, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=200, valadr=0.8, valadd=35, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=200, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+r9 >> play("<x-><..o.>", sample=4, comp=1, amp=3).sometimes("stutter")
+
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3).sometimes("stutter")
+
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/32, sus=16, a=0, r=0, rc=5, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, rc=5, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=400, rc=5, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=600, rc=5, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=1600, rc=5, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:1]
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:2]
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, pshift=1)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, pshift=1.2)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, pshift=1.3)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, pshift=1.4)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, pshift=1.6)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, pshift=2)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, pshift=12)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, shift=1.2)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, shift=1)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, shift=1.1)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, shift=1.0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, shift=1)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0, shift=0)
+
+u7 >> loop("lynchcrazy16",note, sample=3, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0.2)
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0.2)
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=1500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:4]
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=1500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:8]
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=1500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:8]
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=1500, valadr=0.6, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=1500, valadr=0.7, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=1500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:4]
+u7 >> loop("lynchcrazy16",note, sample=4, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=.5, cut=0.5/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:4]
+
+u7 >> loop("lynchcrazy16",note, sample=4, dur=.5, cut=0.5/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:4]
+u7 >> loop("lynchcrazy16",note, sample=5, dur=.5, cut=0.5/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+r9 >> play("<X-><..o.><...x.x..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+r9 >> play("<X-><..o.><...x.(x.)..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+r9 >> play("<X-><..o.><...(x.x.).(x.)..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:4]
+u7 >> loop("lynchcrazy16",note, sample=5, dur=.5, cut=0.5/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.><...(x.x.).(x.)..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:4]
+u7 >> loop("lynchcrazy16",note, sample=6, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.><...(x.x.).(x.)..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+u7 >> loop("lynchcrazy16",note, sample=6, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("lynchcrazy16",note, sample=6, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=2500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:4]
+u7 >> loop("lynchcrazy16",note, sample=6, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=2500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.><...(x.x.).(x.)..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+r9 >> play("<X-><..o.><...(x.x.).(x.)..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter").every(13, "trim", [0,1])
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:4]
+u7 >> loop("lynchcrazy16",note, sample=6, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=2500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.><...(x.x.).(x.)..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter").every(13, "trim", cycle=[0,1])
+
+s7.stop()
+note= PWhite(0,16).rnd(.25)[:4]
+u7 >> loop("lynchcrazy16",note, sample=6, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=2500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<X-><..o.><...(x.x.).(x.)..x.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter").every(13, "trim", 0, cycle=[0,1])
+
+u7 >> loop("lynchcrazy16",note, sample=7, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=2500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+r9 >> play("<X-><..o.>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter").every(13, "trim", 0, cycle=[0,1])
+
+note= PWhite(0,16).rnd(.25)[:8]
+
+u7 >> loop("lynchcrazy16",note, sample=7, dur=1, cut=1/16, sus=16, a=0, r=0, hpf=0, comp=1, valad=2500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+r9 >> play("<X-><....>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter").every(13, "trim", 0, cycle=[0,1])
+
+r9 >> play("<x.><....>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter").every(13, "trim", 0, cycle=[0,1])
+
+u7 >> loop("losthighway8", dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=2500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:8]
+
+u7 >> loop("losthighway8", dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+r9 >> play("<x.><....>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+note= PWhite(0,16).rnd(.25)[:8]
+
+u7 >> loop("losthighway8", note, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=1, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:8]
+
+u7 >> loop("losthighway8", note, sample=1, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=2, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=3, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:2]
+
+u7 >> loop("losthighway8", note, sample=3, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=3, dur=.5, cut=.5/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:2]
+
+u7 >> loop("losthighway8", note, sample=3, dur=.5, cut=.5/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=3, dur=2, cut=2/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:2]
+
+u7 >> loop("losthighway8", note, sample=3, dur=2, cut=2/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:4]
+
+u7 >> loop("losthighway8", note, sample=3, dur=2, cut=2/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=3, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=4, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=5, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:4]
+
+u7 >> loop("losthighway8", note, sample=5, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,16).rnd(.25)[:4]
+
+u7 >> loop("losthighway8", note, sample=5, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=5, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=5, dur=1, cut=1/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=5, dur=2, cut=2/8, sus=8, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,8).rnd(.25)[:4]
+
+mydur = 8
+
+note= PWhite(0,mydur).rnd(.25)[:4]
+
+u7 >> loop("losthighway8", note, sample=5, dur=2, cut=2/mydur, sus=mydur, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+note= PWhite(0,mydur).rnd(.25)[:4]
+
+note= PWhite(0,mydur).rnd(.25)[:4]
+u7 >> loop("losthighway8", note, sample=5, dur=2, cut=2/mydur, sus=mydur, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+r9 >> play("<x.><....>", sample=4, comp=1, amp=3, cut=1).sometimes("stutter")
+
+u7 >> loop("losthighway8", note, sample=6, dur=2, cut=2/mydur, sus=mydur, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+u7 >> loop("losthighway8", note, sample=7, dur=2, cut=2/mydur, sus=mydur, a=0, r=0, hpf=0, comp=1, valad=3500, valadr=0.8, valadd=15, valadt=0, valadc=0.3, mverb=0)
+
+Clock.clear()
+soff()
+

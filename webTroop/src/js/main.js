@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     matchBrackets: true,
     autoCloseBrackets: {pairs: "()[]{}<>''\"\"", override: true},
     lineWrapping: true,
-    cursorScrollMargin: 50,
+    //cursorScrollMargin: 50,
+    fixedGutter: false,
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
     foldGutter: true,
@@ -106,6 +107,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       const message = JSON.parse(event.data);
       if (message.type === 'foxdot_log') {
         logsUtils.appendLog(message.data, message.color);
+        if (message.attackRequestName != ""){
+          awareness.setLocalStateField('attackRequest', {"attackRequestName": message.attackRequestName});
+        }
       }
     } catch (error) {
     }
@@ -292,8 +296,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       try {
         const message = JSON.parse(event.data);
         if (message.type === 'attack') {
-                functionUtils.insertAttackContent(editor, message.content);
-              }
+          if (awareness.getLocalState().attackRequest.attackRequestName === awareness.getLocalState().user.name){
+            functionUtils.insertAttackContent(editor, message.content);
+          }
+        }
         else if (message.type === 'autocomplete') {
           const { loops, fxList, synthList, attackList } = functionUtils.formatFoxDotAutocomplete(message);
 

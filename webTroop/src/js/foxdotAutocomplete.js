@@ -450,11 +450,22 @@ export const foxdotAutocomplete = {
             } while (playersList.includes(randomPlayer));
             return {
                 list: [{ text: randomPlayer, displayText: randomPlayer }],
-                from: CodeMirror.Pos(cursor.line, cursor.ch),
+                from: CodeMirror.Pos(cursor.line, 0),
                 to: CodeMirror.Pos(cursor.line, cursor.ch),
             };
         }
-
+        else if (beforeCursor.trim().toLowerCase() === 'dr' && line.trim().toLowerCase() === 'dr') {
+            let randomPlayer;
+            do {
+                randomPlayer = String.fromCharCode(97 + Math.floor(Math.random() * 26)) + Math.floor(Math.random() * 10) + ' >> ';
+            } while (playersList.includes(randomPlayer));
+            const drumPattern = `${randomPlayer}play("<x.><.><....>", sample=0, amp=1)`;
+            return {
+                list: [{ text: drumPattern, displayText: 'Basic drum pattern' }],
+                from: CodeMirror.Pos(cursor.line, 0),
+                to: CodeMirror.Pos(cursor.line, line.length)
+            };
+        }
         else if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             const filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));

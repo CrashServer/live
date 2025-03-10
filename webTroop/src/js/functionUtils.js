@@ -37,6 +37,18 @@ export const functionUtils = {
         }
     },
 
+    resetPlayer(cm, wsServer) {
+        const cursor = cm.getCursor();
+        const line = cursor.line;
+        const code = cm.getLine(line).trim();
+        if (code) {
+            wsServer.send(JSON.stringify({
+                type: 'evaluate_code',
+                code: `~${code}\n`
+            }));
+        }
+    },
+
     sendSceneName(cm, foxdotWs){
         const cursor = cm.getCursor();
         const line = cursor.line;
@@ -90,8 +102,8 @@ export const functionUtils = {
         const match = codeToEvaluate.trim().match(playerPattern);
 
         if (match) {
-          const player = match[1].replace(/^[_#]\s?/, '')
-          return `${player}.stop()`;
+            const player = match[1].replace(/^[_#]\s?/, '')
+            return `${player}.stop()`;
         }
         return codeToEvaluate;
     },

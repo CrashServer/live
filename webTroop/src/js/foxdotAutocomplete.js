@@ -459,7 +459,7 @@ export const foxdotAutocomplete = {
             do {
                 randomPlayer = String.fromCharCode(97 + Math.floor(Math.random() * 26)) + Math.floor(Math.random() * 10) + ' >> ';
             } while (playersList.includes(randomPlayer));
-            const drumPattern = `${randomPlayer}play("<x.><.><....>", sample=0, amp=1)`;
+            const drumPattern = `${randomPlayer}play("<x.><.><....>", sample=0, amp=1).sometimes("stutter")`;
             return {
                 list: [{ text: drumPattern, displayText: 'Basic drum pattern' }],
                 from: CodeMirror.Pos(cursor.line, 0),

@@ -246,6 +246,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
       'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
       'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},
+      'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
       // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });
 

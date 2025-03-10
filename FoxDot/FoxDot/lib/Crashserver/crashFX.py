@@ -467,7 +467,7 @@ fx.add("wet = ~stutter.(osc, reset, stutlen)")
 fx.add("osc = SelectX.ar(stut, [dry, wet], wrap:1)")
 fx.save()
 
-fx = FxList.new('sbrk', 'stutbreak', {'sbrk': 0.5, 't_reset': 0, 'sbrkdur': 4, 'sus': 1}, order=2)
+fx = FxList.new('sbrk', 'stutbreak', {'sbrk': 0.5, 't_reset': 0, 'sbrkdur': 0.5, 'sus': 1}, order=2)
 fx.add_var("dry")
 fx.add_var("reset")
 fx.add_var("wet")

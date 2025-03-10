@@ -39,7 +39,6 @@ wss.on('connection', (ws, req) => {
         const {code, userName, userColor} = data;
         // console.log('Code évalué:', (code.trim().startsWith('lost') || code.trim().startsWith("attack")) ? 'attack' : "pas attack");
         const attackRequest = (code.trim().startsWith('lost') || code.trim().startsWith("attack")) ? userName : "";
-        console.log('attackRequest:' + attackRequest) 
         broadcastLog(`>> ${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor, attackRequest);
         foxdot.stdin.write(data.code + '\n' + '\n');
       } else if (data.type === 'save_file') {

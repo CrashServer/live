@@ -183,22 +183,25 @@ def print_sample(sample=""):
                     print(f'{key}: {value}')
 
 
-def print_loops(loop=""):
+def print_loops(loopName=""):
     ''' print all available loops samples '''
-    if isinstance(loop, int):
-        randomLoops = sample(loops, loop)
+    if isinstance(loopName, int):
+        randomLoops = sample(loops, loopName)
         print(randomLoops)
         crashpanel.sendOnce(str(randomLoops), "loopList")
-    elif loop == "":
+    elif loopName == "":
         print(loops)
         crashpanel.sendOnce(str(loops), "loopList")
-    elif (loop in loops):
-        listloops = sorted([fn.rsplit(".", 1)[0]
-                            for fn in os.listdir(os.path.join(FOXDOT_LOOP, loop))])
+    elif (loopName in loops):
+        listloops = []
+        for bankNbr in BANK_LEN:
+            loopPath = os.path.join(FOXDOT_SND, str(bankNbr), '_loop_', loopName)
+            if os.path.exists(loopPath):
+                listloops = sorted([fn.rsplit(".", 1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_', loopName))])
         print(listloops)
         crashpanel.sendOnce(str(listloops))
     else:
-        filteredList = [s for s in loops if loop in s]
+        filteredList = [s for s in loops if loopName in s]
         print(filteredList)
         crashpanel.sendOnce(str(filteredList), "loopList")
 
@@ -998,7 +1001,7 @@ try:
                 print(''' Download samples from Freesound
                       - freesound.dl("atmo", "c") : download 'atmo' sounds in the "c" directory
                       - freesound.dl("drum break hard", "drmbrk") : download 'drum break hard' sounds in the "drmbrk" directory
-                      - freesound.sampleBank(3) : set the default sample bank directory to 3
+                      - freesound.setBank(3) : set the default sample bank directory to 3
                       ''')
 
             def dl(self, query, target=None, fields="id,name,previews"):
@@ -1032,8 +1035,8 @@ try:
             def printDirectory(self):
                 print(self.save_directory)
 
-            def sampleBank(self, bank):
-                self.sampleBank = bank
+            def setBank(self, bank):
+                self.sampleBank = str(bank)
 
             def search(self, query):
                 return self.client.text_search(query=query)
@@ -1062,40 +1065,52 @@ except Exception as e:
 
 class Variation():
     ''' Create Master variation continuously, durTotal is total duration of the part durBreak is the duration of the variation, ex: variation= Variation(16, 4) the last 4 bars of a 16 bars will be different '''
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        else:
+            print("Une instance de Variation existe déjà")
+            cls._instance.info()
+        return cls._instance   
 
     def __init__(self, durTotal, durBreak):
-        self.durTotal = durTotal
-        self.durBreak = durBreak
-        self.event = [self.eventFilter, 
-                      self.eventSoloRnd,  
-                      self.eventMasterAll]
-        self.randomFx = {
-            "bend": PWhite(-1, 4),
-            "chop": PRand([2, 4, 8]),
-            "crush": PRand([2,4,8,16]),
-            # "dur": self.durBreak/2,
-            "cut": PWhite(0, 1),
-            "rate": PWhite(-1, 6),
-            "dafilter": linvar([20,PRand(200,4000)],[self.durBreak,0]),
-            "djf": PWhite(0.1,0.99),
-            "flanger": PWhite(0.2,4),
-            "slide": PWhite(0.2,2),
-            "formant": PRand([1,2,3]),
-            "tremolo": PWhite(0.5,6),
-            "leg": PRand(0,12),
-            "lofi": PWhite(0.1,0.9),
-            "a": PWhite(0.1,0.9),
-            "coarse": PWhite(0.2,8),
-            "flanger": PWhite(0.2,4),
-            "glide": PWhite(0.1,2.5),
-            "position": PWhite(0,1),
-            "r": PWhite(0.2,0.9),
-            "swell": PWhite(0.1,0.9),
-            "vib": PRand(0,12),
-            "amp": PBin(),
-        }
-        self.start()
-        
+        if not hasattr(self, 'initialized'):
+            self.durTotal = durTotal
+            self.durBreak = durBreak
+            self.event = [self.eventFilter, 
+                        self.eventSoloRnd,  
+                        self.eventMasterAll]
+            self.randomFx = {
+                "bend": PWhite(-1, 4),
+                "chop": PRand([2, 4, 8]),
+                "crush": PRand([2,4,8,16]),
+                # "dur": self.durBreak/2,
+                "cut": PWhite(0, 1),
+                "rate": PWhite(-1, 6),
+                "dafilter": linvar([20,PRand(200,4000)],[self.durBreak,0]),
+                "djf": PWhite(0.1,0.99),
+                "flanger": PWhite(0.2,4),
+                "slide": PWhite(0.2,2),
+                "formant": PRand([1,2,3]),
+                "tremolo": PWhite(0.5,6),
+                "leg": PRand(0,12),
+                "lofi": PWhite(0.1,0.9),
+                "a": PWhite(0.1,0.9),
+                "coarse": PWhite(0.2,8),
+                "flanger": PWhite(0.2,4),
+                "glide": PWhite(0.1,2.5),
+                "position": PWhite(0,1),
+                "r": PWhite(0.2,0.9),
+                "swell": PWhite(0.1,0.9),
+                "vib": PRand(0,12),
+                "amp": PBin(),
+            }
+            self.isPlaying = False
+            self.initialized = True
+            self.start()
+
     def stop(self):
         masterAll(0)
         self.isPlaying=False
@@ -1111,9 +1126,19 @@ class Variation():
         - variation.start() : start the variation
         - variation.help() : show this help''')
     
+    def info(self):
+        estActive = "active" if self.isPlaying else "inactive"
+        print(f"Variation est {estActive} sur {self.durTotal} bars avec une variation sur les {self.durBreak} dernieres bars")
+
+    def set(self, durTotal, durBreak):
+        ''' set the duration of the variation '''
+        self.durTotal = durTotal
+        self.durBreak = durBreak
+
     def chooseEvent(self):
         ''' choose a random event to be planned '''
-        rnd_event = choices(self.event, [1, 1, len(list(self.randomFx.keys()))])[0] # adjust the probability to number of masterAll events
+        # randomSolo is disable for now
+        rnd_event = choices(self.event, [1, 0, len(list(self.randomFx.keys()))])[0] # adjust the probability to number of masterAll events
         rnd_event()
         if self.isPlaying:
             Clock.schedule(lambda: self.chooseEvent(), Clock.mod(self.durTotal) + self.durTotal-self.durBreak)

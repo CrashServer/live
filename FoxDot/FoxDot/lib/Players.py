@@ -150,6 +150,7 @@ from .Scale import midi, miditofreq, get_freq_and_midi
 from .Bang import Bang
 
 from .TimeVar import TimeVar, Pvar
+from .OSC3 import *
 
 class EmptyPlayer(object):
     """ Place holder for Player objects created at run-time to reduce load time.
@@ -1839,10 +1840,54 @@ class Player(Repeatable):
             synthdef = str(self.synthdef)
         return synthdef
 
+    # def addfx(self, **kwargs):
+    #     """ Not implemented - add an effect to the SynthDef bus on SuperCollider
+    #         after it has been triggered. """
+    #     return self
+
     def addfx(self, **kwargs):
-        """ Not implemented - add an effect to the SynthDef bus on SuperCollider
-            after it has been triggered. """
+        """ Ajoute des effets à un Player en cours d'exécution.
+        Les effets sont ajoutés via des arguments nommés.
+        
+        Arguments:
+            **kwargs: Paires clé-valeur des effets à ajouter
+                ex: chop=4, slide=1, etc.
+        
+        Exemple:
+            p1.addfx(chop=4, echo=0.5)
+        """
+        # Vérifier que le Player est en cours d'exécution
+        if not self.isplaying:
+            return self
+            
+        # Créer le message OSC pour ajouter les effets
+        bundle = [] 
+        
+        # Récupérer l'ID du nœud SuperCollider
+        node = self.metro.server.node
+
+        print(kwargs)
+        # Pour chaque effet
+        for fx, value in kwargs.items():
+            if fx in self.fx_attributes:
+                # Convertir en nombre si nécessaire
+                value = float(value) if isinstance(value, (int, float)) else value
+                
+                # Créer le message OSC
+                msg = OSCMessage("/n_set")
+                msg.append([node, fx, value])
+                print(msg)
+                bundle.append(msg)
+                
+                # Mettre à jour l'attribut localement
+                setattr(self, fx, value)
+        
+        # Envoyer le bundle OSC au serveur
+        if bundle:
+            self.metro.server.sendOSC(bundle)
+            
         return self
+
 
     #: Methods for stop/starting players
 

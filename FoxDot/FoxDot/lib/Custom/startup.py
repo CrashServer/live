@@ -86,7 +86,7 @@ if __name__ != "__main__":
             Samples.addPath(os.path.join(FOXDOT_SND, str(bankNbr), "_loop_"))
             loops += sorted([fn.rsplit(".", 1)[0]
                             for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
-        loops = [loop for loop in loops if loop not in ['', '__init__']]
+        loops = [loop for loop in loops if loop not in ['', '__init__','onsetDict']]
         # loops.remove('')
         # loops.remove('__init__')
     except:

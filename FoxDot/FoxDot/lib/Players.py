@@ -335,6 +335,8 @@ class Player(Repeatable):
         self.__vars = list(self.__dict__.keys())
         self.__init = True
 
+        self.node = None
+
         self.reset()
 
     # Class methods
@@ -1639,24 +1641,34 @@ class Player(Repeatable):
 
         message = self.new_message_header(packet, **kwargs)
 
+        # Add a reference to self (the Player) in the message
+        message['player'] = self
+
         # Only send if amp > 0 etc
 
         if verbose and (message["amp"] > 0) and ((self.synthdef != SamplePlayer and message["freq"] != None) or (self.synthdef == SamplePlayer and message["buf"] > 0)):
-
             # Need to send delay and synthdef separately
-
             delay = self.metro.beat_dur(message.get("delay", 0))
-
             synthdef = self.get_synth_name(message.get("buf", 0)) # to send to play1 or play2
-
             compiled_msg = self.metro.server.get_bundle(synthdef, message, timestamp = timestamp + delay)
 
+            # Extraire et stocker l'ID du nœud du message compilé si disponible
+            try:
+                # L'ID de nœud est généralement la première valeur après "/s_new"
+                if compiled_msg and hasattr(compiled_msg, 'address') and compiled_msg.address == '/s_new':
+                    if len(compiled_msg.values) >= 2:
+                        self.node = compiled_msg.values[1]
+                elif isinstance(compiled_msg, list) and len(compiled_msg) > 0:
+                    for msg in compiled_msg:
+                        if hasattr(msg, 'address') and msg.address == '/s_new' and len(msg.values) >= 2:
+                            self.node = msg.values[1]
+                            break
+            except Exception as e:
+                print(f"Erreur lors de la récupération de l'ID du nœud: {e}")
+
             # We can set a condition to only send messages
-
             self.queue_block.append_osc_message(compiled_msg)
-
             # self.do_bang = True
-
         return
 
     def new_message_header(self, event, **kwargs):
@@ -1856,36 +1868,41 @@ class Player(Repeatable):
         Exemple:
             p1.addfx(chop=4, echo=0.5)
         """
-        # Vérifier que le Player est en cours d'exécution
+        #  Vérifier que le Player est en cours d'exécution
         if not self.isplaying:
+            print("Impossible d'ajouter des effets: le Player n'est pas en cours d'exécution")
             return self
-            
-        # Créer le message OSC pour ajouter les effets
-        bundle = [] 
         
-        # Récupérer l'ID du nœud SuperCollider
-        node = self.metro.server.node
-
-        print(kwargs)
         # Pour chaque effet
-        for fx, value in kwargs.items():
-            if fx in self.fx_attributes:
-                # Convertir en nombre si nécessaire
-                value = float(value) if isinstance(value, (int, float)) else value
-                
-                # Créer le message OSC
-                msg = OSCMessage("/n_set")
-                msg.append([node, fx, value])
-                print(msg)
-                bundle.append(msg)
-                
-                # Mettre à jour l'attribut localement
-                setattr(self, fx, value)
-        
-        # Envoyer le bundle OSC au serveur
-        if bundle:
-            self.metro.server.sendOSC(bundle)
-            
+        for fx_name, value in kwargs.items():
+            if fx_name:
+                # Vérifier si l'effet est actif (si l'attribut existe et n'est pas 0)
+                if hasattr(self, fx_name) and getattr(self, fx_name) != 0:
+                    # Convertir en nombre si nécessaire
+                    value = float(value) if isinstance(value, (int, float)) else value
+                    
+                    # Mettre à jour l'attribut localement
+                    setattr(self, fx_name, value)
+                    
+                    # Récupérer l'ID du nœud associé à l'effet (en utilisant le numéro de joueur)
+                    if hasattr(self, 'node'):
+                        node_id = getattr(self, 'node')
+                    else:
+                        # Si le joueur n'a pas d'ID de nœud enregistré, on ne peut pas modifier l'effet
+                        print(f"Impossible de modifier l'effet '{fx_name}': ID de nœud inconnu")
+                        continue
+                    
+                    # Créer et envoyer le message OSC pour modifier la valeur de l'effet
+                    msg = OSCMessage("/n_set")
+                    msg.append(int(node_id))           # nodeID du joueur
+                    msg.append(str(fx_name))           # nom du paramètre 
+                    msg.append(float(value))           # valeur
+                    
+                    self.metro.server.sendOSC(msg)
+                    print(f"Effet '{fx_name}' modifié: {value}")
+                else:
+                    print(f"Effet '{fx_name}' non actif ou non reconnu. Activez d'abord cet effet.")
+                    
         return self
 
 

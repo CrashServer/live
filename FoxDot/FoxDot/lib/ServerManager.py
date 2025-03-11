@@ -498,6 +498,10 @@ class SCLangServerManager(ServerManager):
 
         pkg = []
 
+         # Si le player n'a pas de dictionnaire pour stocker les IDs des nœuds d'effets
+        if not hasattr(packet['self'], '_fx_nodes'):
+            packet['self']._fx_nodes = {}
+
         for fx in self.fxlist.order[2]:
 
             if fx in packet and packet[fx] != 0:
@@ -510,6 +514,9 @@ class SCLangServerManager(ServerManager):
                 osc_packet = [self.fx_names[fx], node, 1, group_id, 'bus', bus] + this_effect
                 msg.append( osc_packet )
                 pkg.append(msg)
+
+                # Stocker l'ID du nœud dans le player
+                packet['self']._fx_nodes[fx] = node
 
         return pkg, node
 
@@ -533,6 +540,12 @@ class SCLangServerManager(ServerManager):
 
     def get_bundle(self, synthdef, packet, timestamp=0):
         """ Returns the OSC Bundle for a notew based on a Player's SynthDef, and event and effects dictionaries """
+
+            # Store a reference to the Player object if it exists
+        if 'self' not in packet and hasattr(packet, 'get') and callable(packet.get):
+            if hasattr(packet.get('player', None), 'id'):
+                packet['self'] = packet.get('player')
+
 
         # Create a specific message for midi
 

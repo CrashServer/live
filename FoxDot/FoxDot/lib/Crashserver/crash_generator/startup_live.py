@@ -1124,11 +1124,14 @@ class Variation():
         - variation = Variation(16, 4) : create a variation every 16 bars for 4 bars
         - variation.stop() : stop the variation
         - variation.start() : start the variation
-        - variation.help() : show this help''')
+        - variation.help() : show this help
+        - variation.set(total, break) : set the duration of the variation      
+              ''')
     
     def info(self):
         estActive = "active" if self.isPlaying else "inactive"
         print(f"Variation est {estActive} sur {self.durTotal} bars avec une variation sur les {self.durBreak} dernieres bars")
+        print("pour modifier les durées faire variation.set(total, break)")
 
     def set(self, durTotal, durBreak):
         ''' set the duration of the variation '''

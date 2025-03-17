@@ -17,6 +17,9 @@ let startX;
 let startWidth;
 let sceneName = "";
 let sceneIntervalId = null;
+let tapTimes = [];
+let calculatedBPM = 0;
+let tapTimeout = null;
 
 crashPanel.addEventListener('mousedown', function(e) {
     const rect = crashPanel.getBoundingClientRect();
@@ -367,3 +370,110 @@ function updatePianoKeys(scale, root) {
     });
 
 }
+
+function initTapTempo() {
+    const bpmElement = document.getElementById('bpm');
+    
+    // Créer un élément tooltip pour afficher le BPM calculé
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tap-tempo-tooltip';
+    tooltip.style.display = 'none';
+    tooltip.style.position = 'absolute';
+    tooltip.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    tooltip.style.color = 'white';
+    tooltip.style.padding = '5px 10px';
+    tooltip.style.borderRadius = '4px';
+    tooltip.style.zIndex = '1000';
+    tooltip.style.fontSize = '14px';
+    document.body.appendChild(tooltip);
+    
+    // Écouter les clics sur l'élément BPM
+    bpmElement.addEventListener('click', function(e) {
+        e.preventDefault();
+        const now = Date.now();
+        
+        // Réinitialiser si plus de 2 secondes depuis le dernier tap
+        if (tapTimes.length > 0 && now - tapTimes[tapTimes.length - 1] > 2000) {
+            tapTimes = [];
+        }
+        
+        // Ajouter le timestamp actuel
+        tapTimes.push(now);
+        
+        // Garder seulement les 8 derniers taps pour un calcul plus précis et réactif
+        if (tapTimes.length > 8) {
+            tapTimes.shift();
+        }
+        
+        // Calculer le BPM si nous avons au moins 2 taps
+        if (tapTimes.length > 1) {
+            // Calculer les intervalles entre les taps
+            let intervals = [];
+            for (let i = 1; i < tapTimes.length; i++) {
+                intervals.push(tapTimes[i] - tapTimes[i - 1]);
+            }
+            
+            // Calculer l'intervalle moyen en millisecondes
+            const avgInterval = intervals.reduce((sum, val) => sum + val, 0) / intervals.length;
+            
+            // Convertir en BPM : (60 secondes * 1000 ms) / intervalle en ms
+            calculatedBPM = Math.round(60000 / avgInterval);
+            
+            // Ajouter un effet visuel de feedback
+            bpmElement.classList.add('tapped');
+            setTimeout(() => {
+                bpmElement.classList.remove('tapped');
+            }, 100);
+            
+            // Afficher temporairement le BPM calculé
+            bpmElement.setAttribute('data-tapped-bpm', calculatedBPM);
+            
+            // Effacer le tableau de taps après 3 secondes d'inactivité
+            clearTimeout(tapTimeout);
+            tapTimeout = setTimeout(() => {
+                tapTimes = [];
+            }, 3000);
+        }
+    });
+    
+    // Gérer l'affichage du tooltip au survol
+    bpmElement.addEventListener('mousemove', function(e) {
+        if (calculatedBPM > 0) {
+            tooltip.textContent = `Tap BPM: ${calculatedBPM}`;
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${e.pageX + 10}px`;
+            tooltip.style.top = `${e.pageY + 10}px`;
+        }
+    });
+    
+    bpmElement.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+    });
+    
+    // Ajouter un curseur de type "pointer" pour indiquer que l'élément est cliquable
+    bpmElement.style.cursor = 'pointer';
+    
+    // Ajouter une petite indication visuelle pour montrer que c'est cliquable
+    bpmElement.setAttribute('title', 'Cliquez pour le tap tempo');
+}
+
+function addTapTempoStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        #bpm.tapped {
+            background-color: var(--border-col-2);
+            transition: background-color 0.1s;
+        }
+        
+        #bpm:hover::after {
+            content: "⏱️";
+            margin-left: 5px;
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+initTapTempo();
+addTapTempoStyles();

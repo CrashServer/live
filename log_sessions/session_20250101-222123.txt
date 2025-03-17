@@ -1,0 +1,405 @@
+m8 >> play("w...")
+
+m8 >> play("w...", dur=1)
+
+y3 >> play(".o..o.O..u", dur=1)
+
+y3 >> play(".o..o.O..u", dur=1, sample=2)
+
+y3 >> play("..o..o.O..u", dur=1, sample=2)
+
+y3 >> play("..o..o.O..u", dur=1, sample=2, mverb=0.4)
+
+y3 >> play("..o..o.O..u", dur=1, sample=2, mverb=0.8, tanh=0.9)
+
+k3 >> loop("cinambi8", dur=8)
+
+k3 >> loop("cinambi8", dur=8, crush=8)
+
+y3 >> play("..o..o.O..u", dur=1, sample=2, mverb=0.8, tanh=0.9, valad=400)
+
+k3 >> loop("cinambi8", dur=8, crush=8, bits=4)
+
+k3 >> loop("cinambi8", dur=8, crush=8, bits=4, comp=1)
+
+k3 >> loop("cinambi8", dur=8, crush=8, bits=4, comp=1, sample=(0,1))
+
+k3 >> loop("cinambi8", dur=8, crush=8, bits=(PRand(4,16), PRand(4,16)), comp=1, sample=(0,1))
+
+y3 >> play("..o.", dur=1/2, sample=2, mverb=0.8, tanh=0.9, valad=400)
+
+y3 >> play("..o.", dur=1/2, sample=2, mverb=0.8, tanh=0.9, valad=1400)
+
+y3 >> play("..o.", dur=1/2, sample=2, mverb=0.8, tanh=0.9, valad=PFr(400, 6000))
+
+y3 >> play("..o.", dur=1/2, sample=2, mverb=0.8, tanh=0.9, valad=PFr(2400, 6000))
+
+u5 >> play("x.")
+
+u5 >> play("x.", amp=2)
+
+u5 >> play("x.", amp=3)
+
+u5 >> play("<x.><->", amp=3)
+
+u5 >> play("<x.><->", amp=3).human(30)
+
+u5 >> play("<x.><->", amp=3).human(30, -4)
+
+m8 >> play("w...", dur=1, hpf=40)
+
+m8 >> play("w...", dur=1, hpf=140)
+
+t0 >> lbass(dur=1/2, cutoff=PFr(400,6000))
+
+m8 >> play("w...", dur=1, hpf=1330)
+
+m8 >> play("w...", dur=1, hpf=1330)
+
+m8 >> play("w...", dur=1, hpf=2330)
+
+m8 >> play("w...", dur=1, hpf=1330)
+
+t0 >> lbass(dur=1/2, cutoff=PFr(400,6000), tone=PFr(0.1,0.4))
+
+t0 >> lbass(dur=1/2, cutoff=PFr(400,6000), tone=PFr(0.1,0.4), tanh=0.5)
+
+t0 >> lbass(dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=0.5)
+
+variation = Variation(32,4)
+
+t0 >> lbass(dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.2, 0.5))
+
+t0 >> lbass(dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5))
+
+m8.stop()
+
+k3 >> loop("cinambi8", dur=8, crush=8, bits=(PRand(4,8), PRand(4,8)), comp=1, sample=(0,var(PRand(66),64)))
+
+u5 >> play("<x.><[--]>", amp=3).human(30, -4)
+
+u5 >> play("<x.><[--]>", amp=3).human(30, -4).sometimes("stutter")
+
+t0 >> lbass(dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100)
+
+u5 >> play("<x.><[--]>", amp=(5,3)).human(30, -4).sometimes("stutter")
+
+u5 >> play("<X.><[--]>", amp=(5,3)).human(30, -4).sometimes("stutter")
+
+t0 >> lbass(dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100).unison(3)
+
+t0 >> lbass(dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9).unison(3)
+
+t0 >> lbass(dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=0.5).unison(3)
+
+t0 >> lbass(dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5).unison(3)
+
+t0 >> lbass([0,0,0,0.25], dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5).unison(3)
+
+u5 >> play("<X.><[--]><.:>", amp=(5,3)).human(30, -4).sometimes("stutter")
+
+k3.stop()
+
+y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.8, tanh=0.9, valad=PFr(2400, 6000))
+
+masterAll("mverb", 1)
+
+masterAll("mverb", 1)
+
+masterAll(0, "mverb", 1)
+
+t0 >> lbass([0,0,0,0.25], dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5, cut=0.5).unison(3)
+
+t0 >> lbass([0,0,0,0.25], dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5, cut=0.25).unison(3)
+
+masterAll(0)
+
+t0 >> lbass([0,0,0,0.25], dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5, cut=0.25).unison(3).solo()
+
+masterAll(0)
+
+masterAll(0)
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5, cut=0.25).unison(3).solo()
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5, cut=PFr(0.25,0.75)).unison(3).solo()
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(3400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5, cut=PFr(0.25,0.5)).unison(3).solo()
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(400,16000), tone=PFr(0.3,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5, cut=PFr(0.25,0.5)).unison(3).solo()
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(400,16000), tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.5), hpf=100, detune=0.9, rate=2.5, cut=PFr(0.25,0.5)).unison(3).solo()
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(400,16000), tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=PFr(0.25,0.5)).unison(3).solo()
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(400,16000), tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=PFr(0.25,0.5)).unison(3).solo(-32)
+
+masterAll(0)
+
+~y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.8, tanh=0.9, valad=PFr(2400, 6000))
+
+~u5 >> play("<X.><[--]><.:>", amp=(5,3)).human(30, -4).sometimes("stutter")
+
+y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.8, tanh=0.9, valad=PFr(2400, 6000)).solo()
+
+y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.18, tanh=0.9, valad=PFr(2400, 6000)).solo(-16)
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(400,16000), tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0).unison(3).start(32)
+
+t0 >> lbass(P[0,0,0,0.25]*[1,2,3], dur=1/4, cutoff=PFr(400,16000), tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000), tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 444), tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 444), rq=0.5, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 444), rq=0.6, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 444), rq=0.8, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 444), rq=0.9, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 444), rq=1.9, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 444), rq=1.99, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+u5 >> play("<X.><[--]><.:>", amp=(3,3)).human(30, -4).sometimes("stutter")
+
+u5 >> play("<X.><[--]><.:>", amp=(0.1,3)).human(30, -4).sometimes("stutter")
+
+y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.18, tanh=0.9, valad=PFr(2400, 6000))
+k3.stop()
+u5 >> play("<X.><[--]><.:>", amp=(1,3)).human(30, -4).sometimes("stutter")
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 484), rq=1.99, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.18, tanh=0.9, valad=PFr(2400, 6000))
+k3.stop()
+u5 >> play("<X.><[--]><.:>", amp=(16,3)).human(30, -4).sometimes("stutter")
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 484), rq=1.99, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=100, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+u5 >> play("<X.><[--]><.:>", cut=0.25, amp=(16,3)).human(30, -4).sometimes("stutter")
+
+u5 >> play("<X.><[--]><.:>", cut=0.125, amp=(16,3)).human(30, -4).sometimes("stutter")
+
+u5 >> play("<X.><[--]><.:>", cut=0.5, amp=(16,3)).human(30, -4).sometimes("stutter")
+
+u5 >> play("<X.><[--]><.:>", cut=0, amp=(16,3)).human(30, -4).sometimes("stutter")
+
+u5 >> play("<X.><[--]><.:>", cut=0, amp=(5,3)).human(30, -4).sometimes("stutter")
+
+y3.stop()
+
+y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.18, tanh=0.9, valad=PFr(2400, 6000))
+
+y3.stop()
+
+y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.18, tanh=0.9, valad=PFr(2400, 6000))
+
+variation = Variation(16,4)
+
+r6 >> loop("gbreak16", dur=16)
+
+Master().vol=0.7
+
+Master.vol=0.7
+
+Master.vol=0.17
+
+Master().vol=0.17
+
+Master().vol=0.3
+
+r6 >> loop("gbreak16", dur=16, vol=1)
+
+r6 >> loop("gbreak16", dur=16, vol=1).solo()
+
+r6 >> loop("gbreak16", dur=16, vol=1, sample=1)
+
+Clock.link()
+
+r6 >> loop("gbreak16", dur=16, vol=1, sample=1, fx=1)
+
+unsolo()
+
+u5 >> play("<x.><[--]><.:>", cut=0, amp=(5,3)).human(30, -4).sometimes("stutter")
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 484), rq=1.99, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=500, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+u5 >> play("<x.><[--]><.:>", cut=0, amp=(5,3),sample=1).human(30, -4).sometimes("stutter")
+
+t0.stop()
+
+r6 >> loop("gbreak16", dur=16, vol=1, sample=1, fx=1, comp=1)
+
+u5 >> play("<x.><[--]><..>", cut=0, amp=(5,3),sample=1).human(30, -4).sometimes("stutter")
+
+u5 >> play("<x.><.><..>", cut=0, amp=(5,3),sample=1).human(30, -4).sometimes("stutter")
+
+r6 >> loop("gbreak16", dur=16, vol=1, sample=2, fx=1, comp=1)
+
+y7 >> plaitsX(preset=13, dur=1/4).unison(3)
+
+y7 >> plaitsX(preset=13, dur=1/4).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=2).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=3).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=3, mverb=0.9).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=3, mverb=0.5).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=3, mverb=0.5, krush=1).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=3, mverb=0.5, krush=2).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=3, mverb=0.5, krush=3).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=3, mverb=0.5, krush=3, kutoff=300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,3), preset=13, dur=1/4, fdecay=3, mverb=0.5, krush=3, kutoff=4300).unison(3).gtr((5,6))
+
+r6.stop()
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, fdecay=3, mverb=0.5, krush=3, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, fdecay=3, mverb=0.5, krush=3, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.3, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.03, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.01, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.02, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.03, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.04, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.05, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6))
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.05, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6)) + var([0,3], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.05, fdecay=3, mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.05, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.05, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=1, dist2shape= 0.05, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, dist2=0, dist2shape= 0.05, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, formant=1, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, formant=2, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, formant=3, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, formant=4, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, formant=5, fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, formant=P[0:5], fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+Clock.bpm=133
+
+Clock.bpm=132
+
+Master().vol=1
+
+y3.stop()
+
+u5.stop()
+
+unsolo()
+
+u5 >> play("<x.><.><..>", cut=0, amp=(5,3),sample=1).human(30, -4).sometimes("stutter")
+
+son()
+
+unsolo()
+
+unsolo()
+
+print(Clock.bpm)
+
+ll.hpf=5000
+
+ll.mverb=0.9
+
+ll.dur=8
+
+ll.mpf=4200
+
+unsolo()
+
+u5.solo()
+
+u5 >> play("<x.><.><..>", cut=0, amp=(5,3),sample=1).human(30, -4).sometimes("stutter")
+
+u5.solo()
+
+shutup()
+
+u5.solo()
+
+soff()
+
+u5 >> play("<x.><.><..>", cut=0, amp=(5,3),sample=1).human(30, -4).sometimes("stutter")
+
+u5.solo()
+
+u5.solo()
+
+u5.solo()
+
+u5.solo()
+
+unsolo()
+
+son()
+
+y7 >> plaitsX((0,var([3,2],8)), preset=13, dur=1/4, formant=P[0:5], fdecay=PFr(2,3), mverb=0.5, krush=0, kutoff=4300, disto=0.5, smooth=0.7).unison(3).gtr((5,6)) + var([0,[2,3]], [7,1])
+
+y7.solo()
+
+unsolo()
+
+# # y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.18, tanh=0.9, valad=PFr(2400, 6000))
+# # k3 >> loop("cinambi8", dur=8, crush=8, bits=(PRand(4,8), PRand(4,8)), comp=1, sample=(0,var(PRand(66),64)))
+u5.stop()
+# # t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 484), rq=1.99, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=500, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+y3.stop()
+k3.stop()
+u5 >> play("<x.><.><..>", cut=0, amp=(5,3),sample=1).human(30, -4).sometimes("stutter")
+t0.stop()
+
+y3 >> play("<..o.><..*.><..C.>", dur=1/2, sample=2, mverb=0.18, tanh=0.9, valad=PFr(2400, 6000))
+
+t0 >> lbass(P[0,0,0,0.25]*PRand([1,2,3]), dur=1/4, cutoff=PFr(400,16000, 484), rq=1.99, tone=PFr(0.13,0.8), tanh=PFr(0.12, 0.25), hpf=500, detune=0.9, rate=2.5, cut=0, krush=2).unison(3)
+
+s2.stop()
+
+y7.stop()
+
+t0.stop()
+
+y3.stop()
+
+u5.stop()
+
+pf.stop()
+
+pm.stop()
+
+Clock.clear()
+soff()
+

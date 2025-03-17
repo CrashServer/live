@@ -1,0 +1,283 @@
+n2 >> varsaw(dur=1/2)
+
+n2 >> varsaw([0,2,3,5,4], dur=1/2)
+
+n2 >> varsaw([0,2,3,[5,6,-1],4], dur=1/2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=400)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=400, vadiodr=0.1)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=400, vadiodr=0.9)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=400, vadiodr=0.99)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=400, vadiodr=0.99, vadiodd=2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=400, vadiodr=0.93, vadiodd=2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=1400, vadiodr=0.93, vadiodd=2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=2400, vadiodr=0.93, vadiodd=2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/2, oct=4, vadiod=3400, vadiodr=0.93, vadiodd=2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=4, vadiod=3400, vadiodr=0.93, vadiodd=2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=3400, vadiodr=0.93, vadiodd=2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=linvar([200,4400],[64,0]), vadiodr=0.93, vadiodd=2)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=linvar([200,4400],[64,0]), vadiodr=0.93, vadiodd=20)
+
+h1 >> play("x.")
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.93, vadiodd=20)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.93, vadiodd=20, vol=0.4)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.93, vadiodd=20, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.93, vadiodd=2, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.93, vadiodd=2, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.93, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.99, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=20, vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=120, vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=220, vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=200, vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=250, vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,4], vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=[3,[4,5,2]], vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5)
+
+h1 >> play("x.", amp=3)
+
+h1 >> play("x.", amp=3, vadiod=200, vadiodr=0.9, vadiodd=200)
+
+h1 >> play("x-", amp=3, vadiod=200, vadiodr=0.9, vadiodd=200)
+
+h1 >> play("x-", amp=3, vadiod=1200, vadiodr=0.9, vadiodd=200)
+
+n2 >> varsaw([0,2,melody(),[5,6,-1],4], dur=1/4, oct=3, vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> superbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=3, vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=3, vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5)
+
+h1 >> play("x-", amp=3, vadiod=1200, vadiodr=0.9, vadiodd=20)
+
+h1.stop()
+
+h1 >> play("x-", amp=3, vadiod=1200, vadiodr=0.9, vadiodd=20)
+
+h1.stop()
+
+h1 >> play("x-", amp=3, vadiod=1200, vadiodr=0.9, vadiodd=20)
+
+h1 >> play("<x-><..o.>", amp=3, vadiod=1200, vadiodr=0.9, vadiodd=20)
+
+h1 >> play("<x-><..o.>", amp=3, vadiod=2200, vadiodr=0.9, vadiodd=20)
+
+h1 >> play("<x-><..o.>", amp=3, vadiod=2200, vadiodr=0.59, vadiodd=20)
+
+h1 >> play("<x-><..o.>", amp=3, vadiod=2200, vadiodr=0.59, vadiodd=200)
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=2200, vadiodr=0.59, vadiodd=200)
+
+h1.solo()
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=200, vadiodr=0.59, vadiodd=200)
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=200, vadiodr=0.59, vadiodd=2000)
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=5200, vadiodr=0.59, vadiodd=2000)
+
+Clock.clear()
+soff()
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=5200, vadiodr=0.59, vadiodd=2000)
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=5200, vadiodr=0.59, vadiodd=2000).sometimes("stutter")
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=5200, vadiodr=0.59, vadiodd=2000).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=5200, vadiodr=0.59, vadiodd=200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=200, vadiodr=0.59, vadiodd=200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=200, vadiodr=0.59, vadiodd=3200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=200, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=200, vadiodr=0.59, vadiodd=16200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=200, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=220, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=230, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=240, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=250, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=2650, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=260, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=270, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=290, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=300, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+Clock.clear()
+soff()
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2.amp=0
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=300, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+son()
+
+Clock.clear()
+soff()
+
+son()
+
+soff()
+
+Clock.clear()
+soff()
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 450), valadr=0.98, valadd=200, vol=0.5)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.98, valadd=200, vol=0.5)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.90, valadd=200, vol=0.5)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.90, valadd=20, vol=0.5)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.90, valadd=50, vol=0.5)
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=300, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=0, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=4, vadiod=0, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=10, vadiod=0, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=3, vadiod=0, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=5, vadiod=0, vadiodr=0.59, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.90, valadd=50, vol=0.5, low=0.5)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.90, valadd=50, vol=0.5, low=0.1)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.99, valadd=50, vol=0.5, low=0.1)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.90, valadd=50, vol=0.5, low=0.1)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 150), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(18, 150), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(18, 250), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(18, 350), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(18, 450), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(18, 850), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass(melody(), dur=1/4, oct=5, valad=PFr(18, 850), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass(PArp(I, 12), dur=1/4, oct=5, valad=PFr(18, 850), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass(PArp(I, 14), dur=1/4, oct=5, valad=PFr(18, 850), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(18, 850), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 850), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850), valadr=0.90, valadd=500, vol=0.5, low=0.1)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850), valadr=0.90, valadd=500, vol=0.5, low=0)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850), valadr=0.90, valadd=500, vol=0.5, low=0, crush=4, bits=8)
+
+h1 >> play("<x-><..o.>", amp=5, vadiod=0, vadiodr=0.59, sample=4, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=8, vadiod=0, vadiodr=0.59, sample=4, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850), valadr=0.90, valadd=500, vol=0.2, low=0, crush=4, bits=8)
+
+h1 >> play("<x-><..o.>", amp=2, vadiod=0, vadiodr=0.59, sample=4, vadiodd=6200).sometimes("stutter" ,PRand(5))
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850), valadr=0.90, valadd=500, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850), valadr=0.90, valadd=5, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850), valadr=0.90, valadd=50, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*0, valadr=0.90, valadd=50, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*1, valadr=0.90, valadd=50, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*1, valadr=0.90, valadd=500, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*1, valadr=0.90, valadd=5, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*0, valadr=0.90, valadd=5, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*var([0,1],8), valadr=0.90, valadd=5, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*var([0,1],8), valadr=0.90, valadd=50, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*var([0,1],4), valadr=0.90, valadd=50, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, vadiod=PFr(180, 450), vadiodr=0.98, vadiodd=200, vol=0.5).stop()
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*var([0,1],4), valadr=0.90, valadd=50, vol=1, low=0, crush=4, bits=8)
+
+n2 >> lbass([0,2,melody(),[5,6,-1],4], dur=1/4, oct=5, valad=PFr(180, 450), valadr=0.98, valadd=200, vol=0.5).stop()
+
+n2 >> lbass(PArp(I, 10), dur=1/4, oct=5, valad=PFr(48, 1850)*var([0,1],4), valadr=0.90, valadd=50, vol=1, low=0, crush=4, bits=8)
+
+h1 >> play("<x-><..o.>", amp=2, vadiod=0, valadr=0.59, sample=4, valadd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=2, vadiod=400, valadr=0.59, sample=4, valadd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=400, valadr=0.59, sample=4, valadd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=100, valadr=0.59, sample=4, valadd=6200).sometimes("stutter" ,PRand(5))
+
+h1 >> play("<x-><..o.>", amp=1, vadiod=100, valadr=0.89, sample=4, valadd=6200).sometimes("stutter" ,PRand(5))
+
+Clock.clear()
+soff()
+

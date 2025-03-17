@@ -1,0 +1,602 @@
+lost(3)
+
+# 
+
+# 
+
+o5 >> loop("rageambi32", dur=32, lofi=0.9)
+
+y3 >> play("v...v...v.v", lpf=400)
+
+y3 >> play("v...v...v.(v.)", lpf=400)
+
+y3 >> play("v...v...v.(v.)", lpf=PFr(400,600))
+
+Clock.link()
+
+q2 >> loop("nsbreak16", dur=16, sample=2, lofi=0.9, fx=1)
+
+q2 >> loop("nsbreak16", dur=16, sample=2, lofi=0.6, fx=1)
+
+variation = Variation(32,4)
+
+q2 >> loop("nsbreak16", dur=16, sample=2, lofi=0, fx=1)
+
+o5 >> loop("rageambi32", dur=32, lofi=PFr(0.3, 0.9), )
+
+o5 >> loop("rageambi32", dur=32, lofi=PFr(0.3, 0.9), clouds=0.5)
+
+v1 >> dblbass(var([0,-2], 8), dur=8, mfp=300)
+
+v1 >> dblbass(var([0,-2], 8), dur=8, mfp=PFr(300,500))
+
+v1 >> dblbass(var([0,-2], 8), dur=8, mfp=PFr(300,2500))
+
+v1 >> dblbass(var([0,-2], 8), dur=8, mfp=PFr(300,2500)).unison(3)
+
+y3 >> play("v...v...v.(v.)", lpf=PFr(400,2600))
+
+i0 >> play("-", pan=PWhite(-1,1), rate=PWhite(-1,4))
+
+i0 >> play("-", pan=PWhite(-1,1), rate=PWhite(-1,4), dur=1/4)
+
+o5 >> loop("rageambi32", dur=32, lofi=PFr(0.3, 0.9), clouds=0.5, sample=1)
+
+o5 >> loop("rageambi32", dur=32, lofi=PFr(0.3, 0.9), clouds=0.5, sample=var([PRand(555)], 64))
+
+o5 >> loop("rageambi32", dur=32, lofi=PFr(0.3, 0.9), clouds=0.5, cpos=PWhite(0,0.4), sample=var([PRand(555)], 64))
+
+q2 >> loop("nsbreak16", dur=16, sample=var(PRand(66),64), lofi=0, fx=1)
+
+r4 >> play("x.", lpf=400, amp=2)
+
+r4 >> play("x.", lpf=400, amp=3)
+
+r4 >> play("x.", lpf=2400, amp=3)
+
+r4 >> play("x.", lpf=2400, amp=4)
+
+r4 >> play("x.", lpf=2400, amp=4).sometimes("stutter")
+
+r4 >> play("x.", lpf=2400, amp=4).sometimes("stutter", PRand(4))
+
+v1 >> dblbass(var([0,-2], 8), dur=1/2, mfp=PFr(300,5500)).unison(3)
+
+v1 >> dbass(var([0,-2], 8), dur=1/2, mfp=PFr(300,5500)).unison(3)
+
+v1 >> dbass(var([0,-2], 8), dur=1/2, mfp=PFr(300,8500)).unison(3)
+
+v1 >> dbass(var([0,-2], 8), dur=1/2, mfp=PFr(300,8500), rate=linvar([0.5, 4], [32,0])).unison(3)
+
+v1 >> dbass(var([0,-2], 8), dur=1/2, mfp=PFr(300,8500), rate=linvar([0.5, 4], [32,0])).unison(3)
+
+v1 >> dbass(var([0,-2], 8), dur=1/2, mfp=PFr(300,8500), tanh=0.3, rate=linvar([0.5, 4], [32,0])).unison(3)
+
+r4 >> play("x.", lpf=0, amp=4).sometimes("stutter", PRand(4))
+
+f7 >> play("..o.", sample=7)
+
+v1 >> dbass(var([0,-2], 8), dur=1/4, mfp=PFr(300,8500), tanh=0.3, rate=linvar([0.5, 4], [32,0])).unison(3)
+
+o5 >> loop("rageambi32", dur=32, lofi=PFr(0.3, 0.9), clouds=0, cpos=PWhite(0,0.4), sample=var([PRand(555)], 64))
+
+o5.stop()
+
+q2.stop()
+
+v1 >> dbass(var([0,-2], 8), dur=1/4, mfp=PFr(300,8500), tanh=PFr(0.3,0.8), rate=linvar([0.5, 4], [32,0])).unison(3)
+
+son()
+
+r4 >> play("x.", lpf=0, amp=4).sometimes("stutter", PRand(4)).start(64)
+
+lz.hpf=444
+
+lz.hpf=1444
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,1200))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,2200))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,8200))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,8200), oct=(5,6))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,8200), oct=(5,6), rq=0.8)
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,8200), oct=(5,6), rq=0.6)
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,8200), oct=(5,6), rq=0.5)
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,8200), oct=(5,6), rq=0.5)
+
+i0 >> play("-", pan=PWhite(-1,1), rate=PWhite(-1,4), dur=1/4)
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,8200), oct=(5,6), rq=0.5)
+r4 >> play("x.", lpf=0, amp=4).sometimes("stutter", PRand(4)).start(64)
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200), oct=(5,6), rq=0.5)
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200), oct=(5,PStep(8,5,6)), rq=0.5)
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200), oct=(5,PStep(8,5,6)), rq=0.5)
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200), oct=(5,PStep(8,5,6)), rq=PFr(0.5,0.9))
+
+r4 >> play("x.", lpf=0, amp=4).sometimes("stutter", PRand(4))
+
+r4 >> play("x.", lpf=0, amp=8).sometimes("stutter", PRand(4))
+
+~r4 >> play("x.", lpf=0, amp=8).sometimes("stutter", PRand(4))
+
+r4 >> play("x.", lpf=0, amp=6).sometimes("stutter", PRand(4))
+
+f7 >> play("<..o.><..C.>", sample=7)
+
+i0 >> play("-", pan=PWhite(-1,1), rate=PWhite(-1,4), dur=1/4)
+
+y3 >> play("v...v...v.(v.)", lpf=PFr(400,2600))
+
+q2 >> loop("nsbreak16", dur=16, sample=var(PRand(66),64), lofi=0, fx=1)
+
+r4 >> play("x.", lpf=0, amp=4).sometimes("stutter", PRand(4))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200), fdecay=PFr(4,6), oct=(5,PStep(8,5,6)), rq=PFr(0.5,0.9))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200), fdecay=PFr(4,6), oct=(5,PStep(8,5,6)), rq=PFr(0.5,0.59))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200), fdecay=PFr(4,6), oct=(5,PStep(8,5,6)), rq=PFr(0.25,0.59))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,5200), fdecay=PFr(4,6), oct=(5,PStep(8,5,6)), rq=PFr(0.15,0.59))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,2200), fdecay=PFr(4,6), oct=(5,PStep(8,5,6)), rq=PFr(0.15,0.59))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,2200), fdecay=PFr(4,6), oct=(5,PStep(8,4,6)), rq=PFr(0.15,0.59))
+
+v6 >> superbass(dur=1/4, cutoff=PFr(400,2200), fdecay=PFr(4,6), oct=(5,PStep(8,4,6)), lofi=0.8, rq=PFr(0.15,0.59))
+
+zj.stop()
+
+masterAll(0)
+
+ux.lpf=0
+
+r4 >> play("x.", sample=7, lpf=0, amp=4).sometimes("stutter", PRand(4))
+
+bw.stop()
+
+fy.stop()
+
+Clock.clear()
+soff()
+
+d7 >> plaits(oct=4)
+
+d7 >> plaits(oct=4, hamr=0.5)
+
+d7 >> plaits(oct=4, harm=0.5)
+
+d7 >> plaits(oct=4, harm=0.25)
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.04)
+
+Clock.bpm=102
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.004)
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.004, fdecay=0.6)
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.004, fdecay=0.6).unison(3)
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.004, fdecay=0.6).unison(3,0.02)
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.004, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.04, fdecay=0.76).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25,timbre=0.7, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25,timbre=0.5, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25,timbre=0.55, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25,timbre=0.65, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25,timbre=0.75, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=0.25,timbre=0.7, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=PFr(0.25,0.27), timbre=0.7, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=PFr(0.22,0.27), timbre=0.7, decay=0.04, fdecay=0.6).unison(3,0.05)
+
+a0 >> play("<x.><..o.><->", sample=7)
+
+a0 >> play("<x.><..o.><[--]>", sample=7)
+
+a0 >> play("<x.><..o.><->", sample=7)
+
+a0 >> play("<x.><..o.><->", sample=7, comp=1)
+
+d7 >> plaits(oct=4, harm=PFr(0.22,0.27), timbre=0.7, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=PFr(0.22,0.27), engine=1, timbre=0.7, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=PFr(0.22,0.27), engine=1, aux=1, timbre=0.7, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=PFr(0.22,0.27), engine=1, aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=4, harm=PFr(0.22,0.37), engine=1, aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+a0 >> play("<x.><..o.><|-4|>", sample=7, comp=1)
+
+a0 >> play("<x.><..o.><|-3|>", sample=7, comp=1)
+
+a0 >> play("<x.><..o.><|-2|>", sample=7, comp=1)
+
+a0 >> play("<x.><..o.><|-6|>", sample=7, comp=1)
+
+d7 >> plaits(oct=2, harm=PFr(0.22,0.37), engine=1, aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=2, dur=1/2, harm=PFr(0.22,0.37), engine=1, aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=3, dur=1/2, harm=PFr(0.22,0.37), engine=1, aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,3), dur=1/2, harm=PFr(0.22,0.37), engine=1, aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,3,0), dur=1/2, harm=PFr(0.22,0.37), engine=1, aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,3), dur=1/2, harm=PFr(0.22,0.37), engine=(0,1), aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,0), aux=1, timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,0), aux=(0,1), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,4,3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,4,3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,0,2), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,4,3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.05)
+
+a0 >> play("<x.><..o.><|-8|>", sample=7, comp=1)
+
+a0 >> play("<x.><..o.><|-9|>", sample=7, comp=1)
+
+a0 >> play("<x.><..o.><|-1|>", sample=7, comp=1)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7)).unison(3,0.15)
+
+a0 >> play("<x.><..o.><|-1|><..C.>", sample=7, comp=1)
+
+a0 >> play("<x.><..o.><|-1|><..c.>", sample=7, comp=1)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.23).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruc=0.5).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=0.5).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=0.5, rpos=0.23).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=0.5, rpos=0.2).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=0.5, rpos=PFr(0.2, 0.3)).unison(3,0.15)
+
+j9 >> play("X.", lpf=400).start(64)
+
+variation = Variation(16,4)
+
+j9 >> play("X.", lpf=1400)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=PFr(0.2, 0.5), rpos=PFr(0.2, 0.3)).unison(3,0.15)
+
+j5 >> lbass(dur=1/2, cutoff=400, tanh=0.4)
+
+j5 >> lbass(dur=1/2, cutoff=1400, tanh=0.4)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=0.37, decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=PFr(0.2, 0.5), rpos=PFr(0.2, 0.5)).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=PFr(0.2, 0.5), rpos=PFr(0.2, 0.5)).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,0), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=PFr(0.2, 0.5), rpos=PFr(0.12, 0.5)).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,[0,4]), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=0.4, rstruct=PFr(0.2, 0.5), rpos=PFr(0.12, 0.5)).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,[0,4]), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=PFr(0,0.4), rstruct=PFr(0.2, 0.5), rpos=PFr(0.12, 0.5)).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,[0,4]), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=PFr(0,0.8), rstruct=PFr(0.2, 0.5), rpos=PFr(0.12, 0.5)).unison(3,0.15)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=-2, midfreq=400)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=-8, midfreq=400)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=-8, midfreq=600)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=-18, midfreq=600)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=-18, midq=1, midfreq=600)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=-18, midq=0.1, midfreq=600)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=-18, midq=0.1, midfreq=600).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.1, midq=0.1, midfreq=600).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.1, midq=0.1, midfreq=2600).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.1, midq=0.1, midfreq=600).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.1, midq=0.1, midfreq=400).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=1, midq=0.1, midfreq=400).solo()
+
+Clock.clear()
+soff()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=1, midq=0.1, midfreq=400).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.2, midq=0.1, midfreq=400).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.2, midq=1, midfreq=400).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.02, midq=1, midfreq=400).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.02, midq=1, midfreq=linvar([400,3000],[32])).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.02, midq=1, midfreq=linvar([40,3000],[32])).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.02, midq=0.51, midfreq=linvar([40,3000],[32])).solo()
+
+a0 >> play("<x.><..o.><|-1|><..c.>", sample=7, comp=1)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.02, midq=0.51, midfreq=1200).solo()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.02, midq=0.51, midfreq=1200).solo(-8)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.8)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.2)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=40)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=60)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j9 >> play("X.", lpf=1400)
+
+j9 >> play("X.", lpf=1400, hpf=30)
+
+j9 >> play("X.", lpf=1400, hpf=130)
+
+j9 >> play("X.", lpf=1400, hpf=50)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400)*0, tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=0, tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,1400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,4400), tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,4400), clouds=0.5, tanh=0.4, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j9 >> play("X.", lpf=1400, hpf=50, clouds=0.2)
+
+j9 >> play("X.", lpf=1400, hpf=50, clouds=0.2, cpos=0.2)
+
+j9 >> play("X.", lpf=1400, hpf=50, clouds=0.2, cpos=0.25)
+
+j9 >> play("X.", lpf=1400, hpf=50, clouds=0.2, cpos=0.25)
+
+j9 >> play("X.", lpf=1400, hpf=50, clouds=0.2, cpos=0.5)
+
+j9 >> play("X.", lpf=1400, hpf=50, clouds=0.5, cpos=0.5)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.5)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.5, csize=0.3)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.5, csize=0.8)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.5, csize=0.8, cmode=2)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.5, csize=0.8, cmode=1)
+
+unsolo()
+
+j9.solo()
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.5, csize=0.8, cmode=4)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.5, csize=0.2, cmode=4)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.15, csize=0.2, cmode=4)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.15, csize=0.2, cmode=4, cfb=0.8)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.15, csize=0.2, cmode=4, cfb=0.7)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.15, csize=0.2, cmode=4, cfb=0.6)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.15, csize=0.3, cmode=4, cfb=0.6)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.25, csize=0.3, cmode=4, cfb=0.6)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.025, csize=0.3, cmode=4, cfb=0.6)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.025, csize=0.3, cmode=4, cfb=0.5)
+
+j9 >> play("X.", lpf=0, hpf=50, clouds=0.5, cpos=0.025, csize=0.3, cmode=4, cfb=0.45)
+
+unsolo()
+
+a0.solo()
+
+unsolo()
+
+j9.stop()
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,4400), clouds=0.5, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(200,8400), clouds=0.5, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,8400), clouds=0.5, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.4, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.6, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=80)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpos=0.5, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpos=0.25, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpos=0.25, csize=0.4, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), mring=0.8, clouds=0.5, cpos=0.25, csize=0.4, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), mring=0.38, clouds=0.5, cpos=0.25, csize=0.4, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), mring=0, clouds=0.5, cpos=0.25, csize=0.4, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=12, cpos=0.25, csize=0.4, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=12, ctex=0.5, cpos=0.25, csize=0.4, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=12, ctex=0.75, cpos=0.25, csize=0.4, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=12, ctex=0.75, cpos=0.25, csize=0.24, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=12, ctex=0.75, cpos=0.25, csize=0.04, tanh=0.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=12, ctex=0.75, cpos=0.25, csize=0.04, tanh=1.8, shape=0.4, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=12, ctex=0.75, cpos=0.25, csize=0.04, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.25, csize=0.04, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.25, csize=0.4, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.25, csize=0.75, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.125, csize=0.75, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.825, csize=0.75, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.525, csize=0.75, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.0525, csize=0.75, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.0525, csize=0.075, tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.75, cpos=0.0525, csize=PFr(0.075,0.5), tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.5, cpos=0.0525, csize=PFr(0.075,0.5), tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.5, cmode=2, cpos=0.0525, csize=PFr(0.075,0.5), tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180)
+
+j9 >> play("X.", lpf=0, hpf=50)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=0.5, cmode=2, cpos=0.0525, csize=PFr(0.075,0.5), tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180, comp=1)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.5, cpitch=(12,24), ctex=PFr(0.2, 0.5), cmode=2, cpos=0.0525, csize=PFr(0.075,0.5), tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180, comp=1)
+
+u4 >> loop("circlebreak8", dur=8, sample=2, fx=1)
+
+variation = Variation(16,4)
+
+u4 >> loop("circlebreak8", dur=8, sample=4, fx=1)
+
+u4 >> loop("circlebreak8", dur=8, sample=8, fx=1)
+
+d7.stop()
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,[0,4]), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=PFr(0,0.8), rstruct=PFr(0.2, 0.5), rpos=PFr(0.12, 0.5)).unison(3,0.15)
+
+d7.stop()
+
+d7 >> plaits(oct=(2,[4,5],3), dur=1/2, harm=PFr(0.22,0.37), engine=(1,2,[0,4]), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=PFr(0,0.8), rstruct=PFr(0.2, 0.5), rpos=PFr(0.12, 0.5), vol=0.5).unison(3,0.15)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=8, harm=PFr(0.22,0.37), engine=(1,2,[0,4]), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=PFr(0,0.8), rstruct=PFr(0.2, 0.5), rpos=PFr(0.12, 0.5), vol=0.5).unison(3,0.15)
+
+j5 >> lbass(dur=1/2, cutoff=PFr(1200,18400), clouds=0.25, cpitch=(12,24), ctex=PFr(0.2, 0.5), cmode=2, cpos=0.0525, csize=PFr(0.075,0.5), tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180, comp=1)
+
+unsolo()
+
+u4 >> loop("circlebreak8", dur=8, sample=8, fx=PRand([0,1]))
+
+j9 >> play("X.", lpf=0, hpf=50, amp=2)
+
+u4 >> loop("circlebreak16", dur=16, sample=3, fx=PRand([0,1]))
+
+j9 >> play("X(.[xx])", lpf=0, hpf=50, amp=2)
+
+j5 >> lbass(dur=1/4, amp=[0,0,1,1], cutoff=PFr(1200,18400), clouds=0.25, cpitch=(12,24), ctex=PFr(0.2, 0.5), cmode=2, cpos=0.0525, csize=PFr(0.075,0.5), tanh=1.8, shape=0.8, mid=0.01, midq=0.51, midfreq=1200, low=0.5, lowfreq=180, comp=1)
+
+d7 >> plaits(oct=(2,[4,5],3), dur=16, harm=PFr(0.22,0.37), engine=(1,2,[0,4]), aux=(1,0), timbre=PFr(0.37,0.6), decay=0.04, fdecay=PFr(0.6,0.7), mring=PFr(0,0.8), rstruct=PFr(0.2, 0.5), rpos=PFr(0.12, 0.5), vol=0.5).unison(3,0.15)
+
+u4 >> loop("circledrum32", dur=32, sample=3, fx=PRand([0,1]))
+
+u4 >> loop("circledrum32", dur=32, sample=3, fx=PRand([0,0]))
+
+u4 >> loop("circledrum32", dur=32, sample=3, fx=PRand([0,0]), comp=1)
+
+u4 >> loop("circledrum32", dur=32, sample=3, fx=PRand([0,0]), comp=1, tanh=0.4)
+
+u4 >> loop("circledrum32", dur=32, sample=3, fx=PRand([0,0]), comp=1, tanh=0.4, crush=8, bits=4)
+
+u4 >> loop("circledrum32", dur=32, sample=3, fx=PRand([0,0]), comp=1, tanh=0.4, crush=8, bits=6)
+
+d7.stop()
+
+u4 >> loop("circledrum32", dur=32, sample=3, fx=PRand([0,0]), comp=1, tanh=0.4, crush=8, bits=12)
+
+u4 >> loop("circledrum32", dur=32, sample=3, fx=PRand([0,0]), comp=1, tanh=0.4, crush=2, bits=12)
+
+unsolo()
+
+j9 >> play("X(.[xx])", lpf=[400,0], hpf=50, amp=2)
+
+j9 >> play("X(.[xx])", lpf=[0,0], hpf=50, amp=2)
+
+a0 >> play("<x.><..o.><|-1|><..c.>", sample=7, comp=1).stutter()
+
+a0 >> play("<x.><..o.><|-1|><..c.>", sample=7, comp=1).stutter(PRand(4))
+
+u4.stop()
+
+j9.stop()
+
+a0.stop()
+
+Clock.clear()
+soff()
+

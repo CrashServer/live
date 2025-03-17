@@ -1,0 +1,226 @@
+lost("A3")
+
+e1 >> play("x.", sample=4, pan=PWhite(0.8,0.21))
+
+e1 >> play("x.", sample=4)
+
+e1 >> play("x.", sample=4, pan=PWhite(-1,1))
+
+e1 >> play("x.", sample=4, pan=PWhite(-4,-1))
+
+e1 >> play("x.", sample=4, pan=PWhite(-4.0,-1.0))
+
+e1 >> play("x.", sample=4, pan=PWhite(-4.0,-1.0))
+
+print_synth()
+
+print_synth("abass")
+
+print_synth("acidbass")
+
+print_synth("sawbass")
+
+#     ''' Show the name and the args of a synth '''
+
+def sendSynthList():
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for synth in synth_list:
+		print(synth)
+
+sendSynthList()
+
+def sendSynthList():
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for synth in synth_list:
+		if synth != "":
+			print(synth)
+
+sendSynthList()
+
+def sendSynthList():
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				synthList.append({'text': txt, 'displayText': syn})	
+			print(synthList)
+
+def sendSynthList():
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+			synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				synthList.append({'text': synthargs[0], 'displayText': synthname[0]})	
+			print(synthList)
+
+sendSynthList()
+
+def sendSynthList():
+	args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur']
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+			synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				filtered_args = ', '.join([arg for arg in synthargs[0].split(', ') if arg.split('=')[0] not in args_to_remove])
+				synthList.append({'text': filtered_args[0], 'displayText': synthname[0]})	
+			print(synthList)
+
+def sendSynthList():
+	args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur']
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+			synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				filtered_args = ', '.join([arg for arg in synthargs[0].split(', ') if arg.split('=')[0] not in args_to_remove])
+				print(filtered_args)
+				synthList.append({'text': filtered_args[0], 'displayText': synthname[0]})	
+			print(synthList)
+
+def sendSynthList():
+	args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur']
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+			synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				filtered_args = ', '.join([arg for arg in synthargs[0].split(', ') if arg.split('=')[0] not in args_to_remove])
+				print(filtered_args)
+				synthList.append({'text': filtered_args, 'displayText': synthname[0]})	
+			print(synthList)
+
+sendSynthList()
+
+def sendSynthList():
+	args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', ]
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+			synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				filtered_args = ', '.join([arg for arg in synthargs[0].split(', ') if arg.split('=')[0] not in args_to_remove])
+				print(filtered_args)
+				synthList.append({'text': filtered_args, 'displayText': synthname[0]})	
+			return synthList
+
+print(sendSynthList())
+
+def sendSynthList():
+	args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', ]
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+			synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				filtered_args = ', '.join([arg for arg in synthargs[0].split(', ') if arg.split('=')[0] not in args_to_remove])
+				print(filtered_args)
+				synthList.append({'text': filtered_args, 'displayText': synthname[0]})	
+	return synthList
+
+print(sendSynthList())
+
+def sendSynthList():
+	args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', ]
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+			synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				filtered_args = ', '.join([arg.strip() for arg in synthargs[0].split(', ') if arg.split('=')[0] not in args_to_remove])
+				synthList.append({'text': filtered_args, 'displayText': synthname[0]})	
+	return synthList
+
+print(sendSynthList())
+
+def sendSynthList():
+	args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', ]
+	synthList = []
+	path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
+	synth_list = sorted([f for f in SynthDefs])
+	for syn in synth_list:
+		if syn != "":
+			path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+			with open(str(path), "r") as synth:
+				synth = synth.readlines()
+			synth_txt = [line.strip() for line in synth if line != "\n"]
+			txt = str(''.join(synth_txt))
+			synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+			synthargs = re.findall(r"{\|(.{3,})\|(?:var)", txt)
+			if (len(synthname) != 0 and len(synthargs) != 0):
+				filtered_args = ', '.join([arg.strip() for arg in synthargs[0].split(', ') if arg.split('=')[0].strip() not in args_to_remove])
+				synthList.append({'text': filtered_args, 'displayText': synthname[0]})	
+	return synthList
+
+print(sendSynthList())
+
+psynth("alva")
+
+psynth("dab")
+

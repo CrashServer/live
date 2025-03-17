@@ -40,16 +40,23 @@ fx.add('osc = DFM1.ar(osc, dfm, dfmr, dfmd,0.0)')
 fx.save()
 
 # VALadder filter
-fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.5, 'valadd': 0.5, 'valadt': 0}, order=2)
+fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.3, 'valadd': 5, 'valadt': 0, 'valadc': 0.3}, order=2)
 fx.doc("VALadder filter")
 fx.add('osc = VALadder.ar(osc*0.4, valad, valadr, valadd,valadt)')
+fx.add('osc = Compander.ar(osc, osc, valadc, 1, 0.1, 0.01, 0.1 )')
 fx.save()
 
 # VADiode filter
-fx = FxList.new('vadiod', 'VADiodeFilter', {'vadiod': 500, 'vadiodr': 0.5, 'vadiodd': 0.5}, order=2)
+fx = FxList.new('vadiod', 'VADiodeFilter', {'vadiod': 500, 'vadiodr': 0.5, 'vadiodd': 0.5, 'vadiodc': 0.3}, order=2)
 fx.doc("VADiode filter")
-fx.add('osc = VADiodeFilter.ar(osc, vadiod, vadiodr, vadiodd)')
-fx.add('osc = osc*0.5')
+fx.add('osc = VADiodeFilter.ar(osc*0.5, vadiod, vadiodr, vadiodd)')
+fx.add('osc = Compander.ar(osc, osc, vadiodc, 1, 0.1, 0.01, 0.1 )')
+fx.save()
+
+fx = FxList.new('vakorg', 'VAKorg', {'vakorg': 500, 'vakorgr': 0.5, 'vakorgd': 0.5, 'vakorgt': 0, 'vakorgc': 0.3}, order=2)
+fx.doc("VAKorg filter")
+fx.add('osc = VAKorg35.ar(osc*0.4, vakorg, vakorgr, vakorgd,vakorgt)')
+fx.add('osc = Compander.ar(osc, osc, vakorgc, 1, 0.1, 0.01, 0.1 )')
 fx.save()
 
 # daFunk filter
@@ -63,6 +70,8 @@ fx.add("osc = SelectX.ar(datype, [BPF.ar(osc, dastart + filGen, darq), BRF.ar(os
 fx.add("osc = (osc.clip2(0.007) * 24).distort()")
 fx.save()
 
+
+
 fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0)
 fx.add("osc = osc + (fm_sin_i * SinOsc.kr(osc * fm_sin))")
 fx.save()
@@ -75,11 +84,25 @@ fx = FxList.new("fm_pulse", "FrequencyModulationPulse", {"fm_pulse":0, "fm_pulse
 fx.add("osc = osc + (fm_pulse_i * Pulse.kr(osc * fm_pulse))")
 fx.save()
 
-if SC3_PLUGINS:
-    #Dist mod
-    fx = FxList.new('disto', 'disto_mod', {'disto': 0, 'smooth': 0.3, 'distomix': 1}, order=1)
-    fx.add("osc = LinXFade2.ar(CrossoverDistortion.ar(osc, amp:0.5*disto, smooth:smooth),  osc, 1-distomix)")
-    fx.save()
+#Dist mod
+fx = FxList.new('disto', 'disto_mod', {'disto': 0, 'smooth': 0.3, 'distomix': 1}, order=1)
+fx.add("osc = LinXFade2.ar(CrossoverDistortion.ar(osc, amp:0.5*disto, smooth:smooth),  osc, 1-distomix)")
+fx.save()
+
+fx = FxList.new('idist', 'idist', {'idist': 0}, order=1)
+fx.add("osc = LinXFade2.ar(InsideOut.ar(osc,0.4), osc, 1-idist)")
+fx.add("osc = LeakDC.ar(osc)")
+fx.save()
+
+fx = FxList.new('noiz','noiz', {'noiz': 0, 'noizr': 1, 'noizt': 0, 'sus': 1}, order=1)
+fx.doc("Noize Fx")
+fx.add_var("noizType")
+fx.add_var("env")
+fx.add('env=EnvGen.ar(Env.perc(attackTime: 0,releaseTime: noizr*sus, level: noiz,curve: \linear), doneAction: 0)')
+fx.add('noizType = Select.ar(noizt, [BrownNoise.ar(0.1), WhiteNoise.ar(0.1), ClipNoise.ar(0.1),	GrayNoise.ar(0.1), PinkNoise.ar(0.1)])')
+fx.add('osc = osc + (noizType * env)')
+fx.save()
+
 
 #New Chop, with wave select :
 #chopwave = (0: Pulse, 1: Tri, 2: Saw, 3: Sin, 4: Parabolic )
@@ -179,7 +202,7 @@ fx.add("minDelayTime = LinLin.kr(chorus, 0.0, 1.0, 0.012, 0.022)")
 fx.add("osc = osc * numDelays.reciprocal")
 fx.add("lfos = Array.fill(numDelays, {|i| LFPar.kr(chrate * {rrand(0.95, 1.05)},0.9 * i,(maxDelayTime - minDelayTime) * 0.5,(maxDelayTime + minDelayTime) * 0.5,)})")
 fx.add("osc = DelayC.ar(osc, (maxDelayTime * 2), lfos).sum")
-fx.add("osc = Mix(osc)")
+fx.add("osc = Splay.ar(osc*3)")
 fx.save()
 
 # dub delay based on «Dub Echo» by Bjorn Westergard [sccode https://sccode.org/1-h]
@@ -387,6 +410,12 @@ fx.doc("High shelf Equalizer")
 fx.add('osc = BHiShelf.ar(osc, freq: highfreq, db: abs(high).ampdb)')
 fx.save()
 
+fx = FxList.new('bell','Bell_Filter', {'bell': 0.5, 'bellf': 3000, 'bellq': 0.9}, order=2)
+fx.doc("Bell Filter")
+fx.add('osc = NonlinearFilter.ar(osc, freq: bellf, shape:0, gain:bell, q:bellq, saturation: 1)')
+fx.save()
+
+
 fx = FxList.new('djf','djFilter', {'djf': 0, 'djfq': 0.3}, order=2)
 fx.doc("DJ Filter")
 fx.add_var('lpfCutoffFreq')
@@ -427,7 +456,7 @@ fx = FxList.new('mverb', 'miVerb', {'mverb': 0, 'mverbmix': 0.5, 'mverbdamp':0.8
 fx.add("osc = MiVerb.ar(osc, time: mverb.clip(0.0,1.0), drywet: mverbmix, damp: mverbdamp, hp: 0.1, freeze: mverbfreeze, diff: mverbdiff, mul:1.5)")
 fx.save()
 
-fx = FxList.new('stut', 'stutterfx', {'t_reset': 0, 'stut': 1, 'stutrate':1, 'stutlen':0.02}, order=2)
+fx = FxList.new('stut', 'stutterfx', { 'stut': 1, 'stutrate':1, 'stutlen':0.02, 't_reset': 0}, order=2)
 fx.add_var("dry")
 fx.add_var("reset")
 fx.add_var("wet")
@@ -438,7 +467,7 @@ fx.add("wet = ~stutter.(osc, reset, stutlen)")
 fx.add("osc = SelectX.ar(stut, [dry, wet], wrap:1)")
 fx.save()
 
-fx = FxList.new('sbrk', 'stutbreak', {'sbrk': 0.5, 't_reset': 0, 'sbrkdur': 4, 'sus': 1}, order=2)
+fx = FxList.new('sbrk', 'stutbreak', {'sbrk': 0.5, 't_reset': 0, 'sbrkdur': 0.5, 'sus': 1}, order=2)
 fx.add_var("dry")
 fx.add_var("reset")
 fx.add_var("wet")

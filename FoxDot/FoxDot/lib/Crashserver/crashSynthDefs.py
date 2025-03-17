@@ -142,6 +142,9 @@ orientmod.add()
 organ = FileSynthDef("organ")
 organ.add()
 
+omi = FileSynthDef("omi")
+omi.add()
+
 pad2 = FileSynthDef("pad2")
 pad2.add()
 

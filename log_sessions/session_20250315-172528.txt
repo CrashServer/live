@@ -1,0 +1,297 @@
+f4 >> play("<x.><.><....>", sample=0, amp=1, fx1=1).sometimes("stutter")
+
+f4 >> play("<x.><.><....>", sample=0, amp=1, fx1=1, fx2=1).sometimes("stutter")
+
+f4.stop()
+
+Clock.bpm=173
+
+f8 >> loop("beats8", dur=8, sample=5)
+
+c1 >> loop("berlin8", dur=8, sample=4)
+
+m0 >> loop("cinambi8", dur=8, sample=var([3,2],[24,8]), hpf=200)
+
+v3 >> loop("circlebreak16", dur=16, sample=7, comp=1, sbrk=.5, sbrkdur=.5)
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+f4 >> dbass(fx1=1)
+
+b4 >> loop("nbvarp16", dur=32, sample=5, hpf=120)
+
+b4.stop()
+
+variation = Variation(32,8)
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter", PRand(6))
+
+f4.solo()
+
+f4 >> dbass(fx1=1, fx2=1)
+
+unsolo()
+
+f4.stop()
+
+f4 >> dbass(fx1=1, fx2=1)
+
+f4 >> dbass(dur=1/2, fx1=1, fx2=1)
+
+i4 >> loop("gscreecha16", dur=16, sample=4, mverb=0.5, hpf=800)
+
+d5 >> play("X ", amp=8)
+
+p5 >> noloop("oldies8", dur=8, sample=var(PRand(88),32), comp=0, fx1=0, shape=.0, trig=0, mverb=0)
+
+d5 >> play("X ", amp=8).every(4, "stutter")
+
+d5 >> play("X ", amp=8).every(4, "stutter", rate=4)
+
+p5 >> noloop("oldies8", dur=8, sample=var(PRand(88),32), comp=0, fx2=1, shape=.0, trig=0, mverb=0)
+
+g2 >> play("<x.><..o.>", sample=4, lpf=PFr(400,1000), lpr=var([.5,.1],[6,2,5,1]), bank=0, vol=0.6, hpf=0)
+
+j5 >> loop("gbreak16", dur=16, sbrk=[0,.5], sbrkdur=.5, comp=0)
+
+d5.stop()
+
+masterAll("lpf", 400)
+
+masterAll("lpf", 1200)
+
+p5 >> noloop("oldies8", dur=8, sample=var(PRand(88),32), comp=0, fx2=1, shape=.0, trig=0, mverb=0, amp=PBin())
+
+masterAll("lpf", 100)
+
+masterAll(0,"lpf", 100)
+
+s2 >> loop("ragegtr8", dur=8, sample=3, chop=8, delay=2)
+
+s1 >> loop("core16", dur=16, sample=1)
+
+f8.stop()
+
+f8.stop()
+
+c1.stop()
+
+m0.stop()
+
+v3.stop()
+
+v3.stop()
+
+v3.stop()
+
+p6.stop()
+
+f4.stop()
+
+i4.stop()
+
+p5.stop()
+
+t2 >> loop("xbass16", dur=16, shape=0, sample=5)
+
+t3 >> loop("xxperc8", dur=8, sample=2)
+
+t2 >> loop("xbass16", dur=16, shape=0, sample=5, amp=4)
+
+t2 >> loop("xbass16", dur=16, shape=0, sample=5, amp=2)
+
+i4 >> loop("psybass32", dur=32,pos=0, amp=1, room=0.1, sample=8, beat_stretch=1, looping=1.0)
+
+t3 >> loop("xxperc8", dur=8, sample=2)
+
+t0 >> loop("gcindrum16", dur=16, sample=2, chop=4, hpf=400, hpr=0.1)
+
+g2.stop()
+
+j5.stop()
+
+x8 >> play("<k.><.>", hpf=0, amp=6)
+
+g2 >> play("<x.><..o.>", sample=4, lpf=PFr(400,1000), lpr=var([.5,.1],[6,2,5,1]), bank=0, vol=0.6, hpf=0)
+
+g2 >> play("<x.><..o.>", sample=4, lpf=PFr(400,1000), lpr=var([.5,.1],[6,2,5,1]), bank=1, vol=0.6, hpf=0)
+
+x8 >> play("<k.><.>", hpf=0, amp=6).sometimes("stutter")
+
+g2 >> play("<x.><..o.>", sample=4, lpf=PFr(400,1000), lpr=var([.5,.1],[6,2,5,1]), bank=0, vol=0.6, hpf=0)
+
+r9 >> loop("electrodrum16", dur=16, sample=3, comp=1)
+
+x4 >> loop("ragedrum16", dur=32, sample=5, amp=1, comp=1, fx=1)
+
+~x4 >> play("x ", sample=3, amp=9)
+
+e9 >> loop("housebass24", dur=32, sample=7, hpf=0, octer=0, shift=0, octersub=à, octersubsub=0, room=.1).unison(4)
+
+x8 >> play("<k.><.>", hpf=0, amp=6).sometimes("stutter", PRand(5))
+
+e9.solo()
+
+e9 >> loop("housebass24", dur=32, sample=8, hpf=0, octer=0, shift=0, octersub=à, octersubsub=0, room=.1).unison(4)
+
+x8 >> play("<k.><.>", hpf=500, amp=6).sometimes("stutter", PRand(7))
+
+e9 >> loop("housebass24", dur=32, sample=7, hpf=0, octer=0, shift=0, octersub=à, octersubsub=0, room=.1).unison(4)
+
+x8 >> play("<k.><.>", hpf=400, amp=6).sometimes("stutter", PRand(7))
+
+x8 >> play("<k.><.>", hpf=200, amp=6).sometimes("stutter", PRand(7))
+
+r5 >> play("<x..(...x)><.><....>", sample=0, amp=3).sometimes("stutter")
+
+x8 >> play("<k.><.>", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+p5 >> noloop("oldies8", dur=8, sample=var(PRand(88),32), comp=0, fx2=1, shape=.0, trig=0, mverb=0, amp=PBin())
+
+p4 >> loop("gbuild16", dur=16)
+
+i5 >> play("l ", bank=1, sample=1, dur=1/2, hpf=0, amp=1, cut=1)
+
+x8 >> play("<k.><->", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+i5 >> play("l ", bank=1, sample=1, dur=1/2, hpf=0, amp=4, cut=1)
+
+x8 >> play("<k.><[--]>", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+x8 >> play("<k.><[---]>", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+x8 >> play("<k.><[----]>", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+x8 >> play("<k.><[---]>", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+x8 >> play("<k.><[--]>", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+x8 >> play("<k.><[-]>", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+g2 >> loop("xtech8", dur=8, comp=1)
+
+unsolo()
+
+masterAll("fx1", 0.5)
+
+masterAll("fx1", 1)
+
+r9.lpf=499
+
+r9.lpf=499
+
+r9.lpf=299
+
+soloRnd()
+
+i4.stop()
+
+t3.stop()
+
+t2.stop()
+
+p5.stop()
+
+x4.stop()
+
+r9.stop()
+
+g2.stop()
+
+e9.lpf=299
+
+e9.lpf=199
+
+e9.sample=6
+
+p4 >> pianovel(melody()).only()
+
+e9.lpf=299
+
+p4 >> pianovel(melody(), dur=1/4).only()
+
+p4 >> pianovel(melody(), dur=1/2).only()
+
+p4 >> pianovel(melody(), dur=PDur(3, 8)).only()
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter", PRand(6))
+
+p6.solo()
+
+Clock.clear()
+soff()
+
+o5 >> loop("gapr16", dur=32, sample=3, mverb=.5)
+
+x8 >> play("<k.><[-]>", hpf=0, amp=6).sometimes("stutter", PRand(7))
+
+p6 >> lbass(dur=1/2)
+
+p6 >> lbass(dur=1/2, cutoff=PFr(400,5000))
+
+p6 >> lbass(dur=1/2, cutoff=PFr(400,5000), fx1=1)
+
+o5.stop()
+
+l4 >> play("X ", amp=12)
+
+l4 >> play("X ", amp=12, sample=7)
+
+l4 >> play("X ", amp=12, sample=6)
+
+s1 >> loop("core16", dur=16, sample=1)
+
+s1 >> loop("core16", dur=16, sample=1, amp=2)
+
+s1 >> loop("core16", dur=16, sample=2, amp=2)
+
+s1 >> loop("core16", dur=16, sample=2, amp=2, fx2=0.5)
+
+s1.solo()
+
+unsolo()
+
+g8 >> play("<k(...[--])><-:><..*.>", sample=1, amp=1, bank=1, dur=1/2, rate=1, cut=1.2).sometimes("stutter")
+
+x8.stop()
+
+l4.stop()
+
+s1.stop()
+
+se.stop()
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter", PRand(6))
+
+Clock.clear()
+soff()
+
+c5 >> loop("jazzc8", dur=8, sample=7, comp=1)
+
+Clock.clear()
+soff()
+
+j8 >> loop("jazzguitar8", dur=8, sample=4)
+
+j8 >> loop("jazzguitar8", dur=8, sample=4, fx1=0.2)
+
+g8 >> play("<k(...[--])><-:><..*.>", sample=1, amp=1, bank=0, dur=1/2, rate=1, cut=1.2).sometimes("stutter")
+
+j8 >> loop("jazzguitar8", dur=8, sample=4, fx1=0.3)
+
+j8 >> loop("jazzguitar8", dur=8, sample=4, fx1=0.4)
+
+l4 >> loop("choir16", dur=16, sample=2, coarse=1, mring=1, amp=2, chop=4, rstruct=1, rbright=4, rdamp=0.4, rpos=0.5, rmodel=2, rpoly=1, regg=0.4, rsus=2).unison(2)
+
+g8 >> play("<k(...[--])><-:><..*.>", sample=1, amp=1, bank=1, dur=1/2, rate=1, cut=1.2).sometimes("stutter")
+
+p4 >> play("f ", dur=4)
+
+p4.solo()
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+

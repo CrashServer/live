@@ -1,0 +1,78 @@
+print(FxList)
+
+print(FxList.keys())
+
+print(FxList)
+
+print(type(FxList))
+
+print(type(FxList.keys()))
+
+def create_effects_json(effects_dict):
+    result = {}
+    for effect, details in effects_dict.items():
+        keyword = details['keyword']
+        other_args = [arg for arg in details['other args'] if not arg.endswith('_') and not arg.endswith('_d')]
+        result[keyword] = ', '.join(other_args)
+    return json.dumps(result)
+
+print(FxList)
+
+print(FxList["dfm"])
+
+print(FxList["dfm"].defaults)
+
+print(FxList["dfm"].defaults.keys())
+
+print([arg for arg in FxList["dfm"].defaults.keys()])
+
+print([arg for arg in FxList["dfm"].defaults.keys() if not arg.endswith('_') and not arg.endswith('_d') ])
+
+def create_effects_json(FxList):
+    result = {}
+    for effect in FxList.keys():
+        fxargs = [arg for arg in FxList[effect].defaults.keys() if not arg.endswith('_') and not arg.endswith('_d') ]
+        result[effect] = ', '.join(fxargs)
+    return json.dumps(result)
+
+effects_json = create_effects_json(FxList)
+
+print(effects_json)
+
+print(FxList["fdist"].defaults)  
+
+#         fxargs = [arg for arg in FxList[effect].defaults.keys() if not arg.endswith('_') and not arg.endswith('_d') ]
+
+#         fxargs = [arg for arg in FxList[effect].defaults.keys() if not arg.endswith('_') and not arg.endswith('_d') ]
+
+def create_effects_json(FxList):
+    result = {}
+    for effect in FxList.keys():
+        result[effect] = FxList[effect].defaults
+    return json.dumps(result)
+
+effects_json = create_effects_json(FxList)
+
+print(effects_json)
+
+print(FxList["fdist"].defaults)  
+
+print(str(FxList["fdist"].defaults))  
+
+psynth("plaitsX")
+
+psynth("virus")
+
+print(FxList.keys())
+
+for synth in sorted([f for f in SynthDefs]):
+  print_synth(synth)
+
+psynth("lbass")
+
+ps.stop()
+
+psynth("virus")
+
+ps.stop()
+

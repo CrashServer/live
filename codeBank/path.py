@@ -1,4 +1,6 @@
 
+# path
+
 #b1 >> bass(dur=[4, 0.5], sus=4, chopmix=0.5, shape=linvar([0.2, 0.4], 32), a=0.01, leg=-12, leg_=0.1, rate=0.25, chop=(132, 200), lpf=(1200, 4000), lpf_=(3200, 200), chopmix_=1, chop_=(128, 32, 4)).sometimes("stutter", shape=0.5, mverb=1, leg=-128)
 #b2 >> dbass(dur=[1/2, 1, 1/4], sus=1/2,amp=[1, 0.5,2, 0], tanh=0.8,chopmix=0.5, chop=(132, 200))
 

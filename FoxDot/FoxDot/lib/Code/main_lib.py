@@ -2,7 +2,7 @@ from __future__ import absolute_import, division, print_function
 
 import sys
 import re
-import os.path
+import os
 import time
 from traceback import format_exc as error_stack
 from types import CodeType, FunctionType
@@ -17,6 +17,21 @@ except ImportError:
     
 from ..Utils import modi
 from ..Settings import *
+
+## CrashMod log Files
+# Créer le répertoire log_sessions s'il n'existe pas
+log_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'log_sessions')
+os.makedirs(log_dir, exist_ok=True)
+
+# Générer un nom de fichier unique avec un timestamp
+timestamp = time.strftime("%Y%m%d-%H%M%S")
+log_file_path = os.path.join(log_dir, f"session_{timestamp}.txt")
+
+def log_good_code(code):
+    with open(log_file_path, 'a') as log_file:
+        log_file.write(f"{code}\n")
+## Fin CrashMod log Files
+
 
 """
 Live Object
@@ -124,7 +139,7 @@ class FoxDotCode:
         code = self.namespace["FOXDOT_STARTUP"].load()
         return self.__call__(code, verbose=False, verbose_error=True)
                  
-    def __call__(self, code, verbose=True, verbose_error=None):
+    def __call__(self, code, verbose=True, verbose_error=None, write_to_log=False):
         """ Takes a string of FoxDot code and executes as Python """
 
         if self.namespace['_Clock'].waiting_for_sync:
@@ -153,6 +168,9 @@ class FoxDotCode:
                     print(response)
 
             exec(self._compile(code), self.namespace)
+
+            if write_to_log is True:
+                log_good_code(code)
 
         except Exception as e:
 
@@ -232,7 +250,7 @@ def handle_stdin():
 
             text = get_input()
 
-            execute(text, verbose=False, verbose_error=True)
+            execute(text, verbose=False, verbose_error=True, write_to_log=True)
 
         except(EOFError, KeyboardInterrupt):
 

@@ -1,4 +1,4 @@
-#classicshit
+# classicshit
 Clock.bpm = 78
 
 e0 >> play("m ", dur=2, rate=(0.5, 1), bank=2, sample=P[0:80], mverb=0.5, chop=0, sbrk=0, pan=PWhite(-1, 1)).unison(4)

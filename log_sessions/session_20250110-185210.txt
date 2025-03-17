@@ -1,0 +1,581 @@
+t3 >> play("x.")
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+chaos(5)
+
+lost("A3")
+
+lost("A3")
+
+lost("A2")
+
+lost("A3")
+
+chaos()
+
+chaos()
+
+chaos()
+
+chaos()
+
+FxList["crush"].defaults
+
+print(FxList["crush"].defaults)
+
+for fxName in FxList.keys():
+	print(FxList[fxName].defaults)
+
+def convert_fx_list_to_json(fx_list):
+    fx_json_list = []
+    for fx_name, fx_defaults in fx_list.items():
+        filtered_fx = {k: v for k, v in fx_defaults.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+        fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+        fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+    return json.dumps(fx_json_list)
+
+print(FxList)  
+
+for fxName, fx_defaults in FxList.items():
+	print(fxName)
+
+for fxName, fx_defaults in FxList.items():
+	print(fx_defaults)
+
+def convert_fx_list_to_json(fx_list):
+    fx_json_list = []
+    for fx_name in fx_list.items():
+        filtered_fx = {k: v for k, v in fx_list[fn_name].defaults if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+        fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+        fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+    return json.dumps(fx_json_list)
+
+def convert_fx_list_to_json(fx_list):
+    fx_json_list = []
+    for fx_name in fx_list.items():
+        filtered_fx = {k: v for k, v in fx_list[fx_name].defaults if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+        fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+        fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+    return json.dumps(fx_json_list)
+
+for fxName in FxList.keys():
+	print(FxList[fxName].defaults)
+
+for fxName in FxList.keys():
+	print(FxList[fxName].defaults)
+
+for fxName in FxList.keys():
+	print(FxList[fxName].defaults)
+
+for fxName in FxList.keys():
+	print(type(FxList[fxName].defaults))
+
+def convert_fx_list_to_json(fx_list):
+    fx_json_list = []
+    for fx_name in fx_list.keys():
+        filtered_fx = {k: v for k, v in fx_list[fx_name].defaults if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+        fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+        fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+    return json.dumps(fx_json_list)
+
+for fxName in FxList.keys():
+  fxdefault = FxList[fxName].defaults
+  print(fxdefault)
+
+for fxName in FxList.keys():
+  fxdefault = FxList[fxName].defaults
+  print({k: v for k,v in fxdefault.items()})
+
+for fxName in FxList.keys():
+  fxdefault = FxList[fxName].defaults
+  print({k: v for k,v in fxdefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')})
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in fx_list.keys():
+		fxDefault = FxList[fxName].defaults
+		filtered_fx = {k: v for k,v in fxdefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+print(fx_json)  
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in fx_list.keys():
+		fxDefault = FxList[fxName].defaults
+		filtered_fx = {k: v for k,v in fxdefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		fx_text = ', '.join([f"{k}={v}" for k, v in fxdefault.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+print(fx_json)  
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in fx_list.keys():
+		fxDefault = FxList[fxName].defaults
+		filtered_fx = {k: v for k,v in fxdefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		fx_text = ', '.join([f"{k}={v}" for k, v in fxDefault.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+print(fx_json)  
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in fx_list.keys():
+		fxDefault = FxList[fxName].defaults
+		filtered_fx = {k: v for k,v in fxdefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+print(fx_json)  
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in fx_list.keys():
+		fxDefault = FxList[fxName].defaults
+		filtered_fx = {k: v for k,v in fxdefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		print(filtered_fx)
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in fx_list.keys():
+		fxDefault = FxList[fxName].defaults
+		filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		print(filtered_fx)
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+for fxName in FxList.keys():
+  fxdefault = FxList[fxName].defaults
+  print({k: v for k,v in fxdefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')})
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in FxList.keys():
+		fxDefault = FxList[fxName].defaults
+		filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		print(filtered_fx)
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in FxList.keys():
+		print("fx: " + fx_name)
+		fxDefault = FxList[fxName].defaults
+		filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in FxList.keys():
+		fxDefault = FxList[fxName].defaults
+		print("fx: " + fxDefault)
+		filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in FxList.keys():
+		fxDefault = FxList[fxName].defaults
+		print(fxDefault)
+		filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+def convert_fx_list_to_json(fx_list):
+	fx_json_list = []
+	for fx_name in FxList.keys():
+		fxDefault = FxList[fx_name].defaults
+		print(fxDefault)
+		filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+		fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
+		fx_json_list.append({'text': fx_text, 'displayText': fx_name})
+	return json.dumps(fx_json_list)
+
+fx_json = convert_fx_list_to_json(FxList)
+
+print(fx_json)  
+

@@ -1,0 +1,854 @@
+Scale.default="chromatic"
+
+r0 >> varsaw([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=(3,4), dist2=0, vol=1.7, beef=2).chroma().unison(3)
+
+r1 >> faim([6,6,13,6,14,6,13,6,11,9,8,9,11,9,8,4],dur=1/2,amp=1, dist2=1, oct=4, vol=0.7, leg=0, beef=0, valad=2400, valadd=50, valadc=0.1, valadr=0.79).chroma()
+
+d1 >> pluck([(-7, -4), (-5, 0, 4)],dur=[4.0, 4.0],amp=[1, 1])
+
+Scale.default="chromatic"
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+r0 >> varsaw([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=(3,4), dist2=0, vol=1.7, beef=2).chroma().unison(3)
+
+r1 >> faim([6,6,13,6,14,6,13,6,11,9,8,9,11,9,8,4],dur=1/2,amp=1, dist2=1, oct=4, vol=0.7, leg=0, beef=0, valad=2400, valadd=50, valadc=0.1, valadr=0.79).chroma()
+
+d1 >> play("<k.>", dur=[0.5, 0.5, [3,1,1]], comp=1, vol=2) 
+d2 >> play("<..u.><->", dur=1/2 ,sample=0, comp=1)
+w6.stop()
+
+r0 >> faim([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=(3,4), dist2=0, vol=1.7, beef=2).chroma().unison(3)
+
+Clock.bpm=142
+
+w6 >> loop("circlebreak16", dur=16, sample=7, comp=0, vol=1, fx=1)
+
+r0 >> superbass([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=(3,4), dist2=0, vol=1.7, beef=2).chroma().unison(3)
+
+r1 >> superbass([6,6,13,6,14,6,13,6,11,9,8,9,11,9,8,4],dur=1/2,amp=1, dist2=1, oct=4, vol=0.7, leg=0, beef=0, valad=2400, valadd=50, valadc=0.1, valadr=0.79).chroma()
+
+r1 >> superbass([6,6,13,6,14,6,13,6,11,9,8,9,11,9,8,4],dur=1/2,amp=1, dist2=1, cut=0.2, oct=4, vol=0.7, leg=0, beef=0, valad=2400, valadd=50, valadc=0.1, valadr=0.79).chroma()
+
+r1 >> superbass([6,6,13,6,14,6,13,6,11,9,8,9,11,9,8,4],dur=1/2,amp=1, dist2=1, cut=0.5, oct=4, vol=0.7, leg=0, beef=0, valad=2400, valadd=50, valadc=0.1, valadr=0.79).chroma()
+
+r1 >> superbass([6,6,13,6,14,6,13,6,11,9,8,9,11,9,8,4],dur=1/2,amp=1, dist2=1, cut=0.5, oct=4, vol=0.7, leg=0, beef=0, valad=2400, valadd=50, valadc=0.1, valadr=0.79).chroma()
+
+d1 >> play("<k.>", dur=[0.5, 0.5, [3,1,1]], comp=1, vol=2) 
+d2 >> play("<..u.><->", dur=1/2 ,sample=0, comp=1)
+w6 >> loop("circlebreak16", dur=16, sample=7, comp=0, vol=1, fx=1)
+
+def find_scale(notes):
+    """print all scales which contain the notes"""
+    for name, scale in Scale.library().items():
+            try:		
+                result =  all(elem in scale for elem in notes)
+            except:
+                pass
+            if result:
+                print(name)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(1)
+
+s2 >> sinepad([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=5)
+
+Clock.clear()
+soff()
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(1)
+
+s2 >> sinepad([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=5)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+Clock.bpm=72
+
+s2 >> sinepad([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=5)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+Clock.clear()
+soff()
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(1)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=40, tremolomix=0.7, beef=2, mverb=0.2).unison(1)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(1)
+
+s2 >> sinepad([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=5)
+
+r0 >> play("<k.><..C.><->", amp=1)
+
+i1 >> lbass(var([2,-2],8), dur=1/4, rate=2, dist2=0, vol=1)
+
+r0 >> play("<k.><..C.><-><X.>", amp=1)
+
+d4 >> play("<h.><..r.>")
+
+r0 >> play("<k.><..C.><-><X>", amp=1)
+
+r0 >> play("<k.><..C.><-><[Xx]>", amp=1)
+
+r0 >> play("<k.><..C.><-><[Xxx]>", amp=1)
+
+r0 >> play("<k.><..C.><-><[Xxxx]>", amp=1)
+
+r0 >> play("<k.><..C.><-><[XxXx]>", amp=1)
+
+b8 >> play("b", dur=4, sample=4)
+
+b8 >> play("b", dur=4, sample=4).stop()
+
+r0.dur=4
+
+r0.dur=2
+
+r0.dur=1
+
+r0.dur=1/2
+
+s2 >> supersaw([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=5)
+
+x8 >> play("X ", bank=1)
+
+x8 >> play("X ", bank=1).stop()
+
+s2 >> supersaw([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5))
+
+s2 >> supersaw([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5))
+
+s1 >> lbass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(1)
+
+s2 >> supersaw([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5)).solo(8)
+
+s1 >> lbass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s2 >> supersaw([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5)).unison(4)
+
+s2 >> supersaw([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5)).solo(-1)
+
+s1 >> lbass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s1 >> lbass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1, cut=0.5, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=2, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=3, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=4, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=0, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+r0 >> play("<k.><..C.><-><[XxXx]>", amp=1, hpf=4000)
+
+masterAll("cut", [1/2, 1/4])
+
+d4 >> play("<h.><..r.>", idist=1, lpf=400)
+
+d4 >> play("<h.><..r.>", idist=1, lpf=1400)
+
+masterAll(0,"cut", [1/2, 1/4])
+
+masterAll("cut", [1/2, 1/4])
+
+masterAll(0,"cut", [1/2, 1/4])
+
+d4 >> play("<h.><..r.>", idist=1, lpf=1400, cut=0)
+
+d4 >> play("<h.><..r.>", idist=1, lpf=1400, cut=1)
+
+d4 >> play("<h.><..r.>", idist=1, lpf=1400, cut=1/2)
+
+d4 >> play("<h.><..r.>", idist=1, lpf=2400, cut=1/2)
+
+d4 >> play("<h.><..r.>", idist=1, lpf=4400, cut=1/2)
+
+masterAll(0,"cut", [1/2, 1/4])
+
+e1 >> play('k.')
+
+s1 >> ebass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1, cut=0.5, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s1 >> ebass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1, cut=0, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+r0 >> play("<k.><..C.><-><[XxXx]>", amp=1, hpf=4000)
+i1 >> lbass(var([2,-2],8), dur=1/4, rate=2, dist2=0, vol=1)
+
+s1 >> ebass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, cut=0, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s2 >> supersaw([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5)).solo(-1)
+
+s1 >> ebass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=1, blur=1.2, cut=0, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1).stop()
+
+s1.dist2=1
+
+s1.dist2=2
+
+s1.solo()
+
+Clock.clear()
+soff()
+
+s1 >> dbass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s2 >> supersaw([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5))
+
+d4 >> play("<h.><..r.>", idist=1, lpf=4400, cut=1/2)
+
+d4 >> play("<h.><..r.>", idist=0, lpf=4400, cut=1/2)
+
+d4 >> play("<t.><..r.>", idist=0, lpf=4400, cut=1/2)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+s2 >> sinepad([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5))
+
+r0 >> play("<k.><..C.><-><[XxXx]>", amp=1, hpf=4000)
+
+m9 >> loop("indus32", dur=32)
+
+m9 >> loop("indus32", dur=32, sample=1)
+
+m9.solo()
+
+m9.solo()
+
+unsolo()
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+m9 >> loop("indus32", dur=32, sample=1, hpf=1200)
+
+m9 >> loop("indus32", dur=32, sample=1, hpf=2400)
+
+masterAll("mverb", 0.5)
+
+masterAll("mverbmix", 1)
+
+masterAll("flanger", 1)
+
+masterAll("lofi", 0.5)
+
+Clock.clear()
+soff()
+
+Clock.bpm =71
+
+Scale.default="chromatic"
+
+d0 >> varsaw([(-12, 0, 3)],dur=[[6,6,6,4], [2,2,2,4] ],amp=1, oct=4, valad=0, valadr=0.3, valadd=1, valadt=0, valadc=0.3)
+
+d1 >> varsaw([_, (0, -12)],dur=4,amp=1, oct=3, valad=0, valadr=0.3, valadd=1, valadt=0, valadc=0.3)
+
+d4 >> varsaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4)
+
+d7 >> dbass([0],dur=1,amp=4, oct=4)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s1.stop()
+
+d0 >> supersaw([(-12, 0, 3), 10, 7],dur=[4.0, 2.0, 2.0],amp=1, oct=4).unison(3)
+
+d0 >> supersaw([(-12, 0, 3), 10, 7],dur=[4.0, 2.0, 2.0],amp=1, oct=4).unison(3)
+d1 >> supersaw([8, 7, (-12, 0, 3)],dur=[2.0, 2.0, 4.0],amp=1, oct=4).unison(3)
+
+d1 >> supersaw([8, 7, (-12, 0, 3)],dur=[2.0, 2.0, 4.0],amp=1, oct=5).unison(3)
+
+d1 >> supersaw([8, 7, (-12, 0, 3)],dur=[2.0, 2.0, 4.0],amp=1, oct=4).unison(3)
+
+d0 >> supersaw([(-12, 0, 3)],dur=[[6,6,6,4], [2,2,2,4] ],amp=1, oct=4, valad=0, valadr=0.3, valadd=1, valadt=0, valadc=0.3)
+d1 >> supersaw([_, (0, -12)],dur=4,amp=1, oct=3, valad=0, valadr=0.3, valadd=1, valadt=0, valadc=0.3)
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4)
+d7 >> dbass([0],dur=1,amp=4, oct=4)
+
+d0 >> pluck([(-4,), (-5,), (-60,)],dur=[2.0, 4.0, 2.0],amp=[1, 1, 0])
+
+d1 >> pluck([(-24, -12, -9), (-24, -12, -9)],dur=[2.0, 6.0],amp=[1, 1])
+
+d4 >> pluck([(-60,), (-24, -36)],dur=[4.0, 4.0],amp=[0, 1])
+
+d7 >> pluck([(-24,), (-24,), (-24,), (-24,), (-24,), (-24,), (-24,), (-24,)],dur=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],amp=[1, 1, 1, 1, 1, 1, 1, 1])
+
+def a7():
+	d0 >> pluck([(-4,), (-5,), (-24, -12, -9)],dur=[2.0, 2.0, 4.0],amp=[1, 1, 1])
+	d1 >> pluck([(-24, -12, -9), (-2,), (-5,)],dur=[4.0, 2.0, 2.0],amp=[1, 1, 1])
+	d2 >> pluck([(-60,)],dur=[8],amp=[0])
+	d3 >> pluck([(-60,)],dur=[8],amp=[0])
+	d4 >> pluck([(-60,)],dur=[8],amp=[0])
+	d5 >> pluck([(-60,)],dur=[8],amp=[0])
+	d6 >> pluck([(-60,)],dur=[8],amp=[0])
+	d7 >> pluck([(-24,), (-24,), (-24,), (-24,), (-24,), (-24,), (-24,), (-24,)],dur=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],amp=[1, 1, 1, 1, 1, 1, 1, 1])
+
+r0 >> superbass([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=(3,4), dist2=0, vol=1.7, beef=2).chroma().unison(3)
+
+a7()
+
+r1 >> superbass([6,6,13,6,14,6,13,6,11,9,8,9,11,9,8,4],dur=1/2,amp=1, dist2=1, cut=0.5, oct=4, vol=0.7, leg=0, beef=0, valad=2400, valadd=50, valadc=0.1, valadr=0.79).chroma()
+
+d1 >> play("<k.>", dur=[0.5, 0.5, [3,1,1]], comp=1, vol=2) 
+d2 >> play("<..u.><->", dur=1/2 ,sample=0, comp=1)
+w6 >> loop("circlebreak16", dur=16, sample=7, comp=0, vol=1, fx=1)
+
+Clock.bpm=142
+
+Clock.clear()
+soff()
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s2.stop()
+
+s3.stop()
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=4, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=2, mverb=0.2).unison(3)
+
+s2 >> sinepad([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, rate=1, mverb=0.5, oct=(4,5))
+
+Clock.bpm=72
+
+s2 >> sinepad([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=40, rate=1, mverb=0.5, oct=(4,5))
+
+s2 >> sinepad([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=20, rate=1, mverb=0.5, oct=(4,5))
+
+s2 >> pad2([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=20, rate=1, mverb=0.5, oct=(4,5))
+
+s2 >> pad2([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=20, rate=1, mverb=0.5, oct=(5))
+
+s4 >> organ([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=20, rate=1, mverb=0.5, oct=(5))
+
+s4 >> donorgan([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=20, rate=1, mverb=0.5, oct=(5))
+
+s4 >> donorgan([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=20, rate=1, mverb=0.5, oct=(5), cutoff=4000)
+
+s5 >> donorgan([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=1200, rate=1, mverb=0.5, oct=(4), cutoff=4000)
+
+s5 >> donorgan([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], amp=1.2, hpf=1200, rate=4, mverb=0.5, oct=(4), cutoff=4000)
+
+s5 >> donorgan([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], lforate=0.5, amp=1.2, hpf=1200, rate=1, mverb=0.5, oct=(4), cutoff=4000)
+
+s5 >> donorgan([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], lforate=12, amp=1.2, hpf=1200, rate=1, mverb=0.5, oct=(4), cutoff=4000)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=0, mverb=0.2).unison(3)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=4, mverb=0.2).unison(3)
+
+s5 >> donorgan([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], lforate=0.5, rq=0.1, amp=1.2, hpf=1200, rate=1, mverb=0.5, oct=(4), cutoff=4000)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=4, leg=0.5, mverb=0.2).unison(3)
+
+s5 >> donorgan([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], lforate=0.5, rq=0.5, amp=1.2, hpf=1200, rate=1, mverb=0.5, oct=(4), cutoff=4000)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=4, leg=0.15, mverb=0.2).unison(3)
+
+masterAll("mverb", 0.5)
+
+masterAll("mverbmix", 1)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=4, leg=0.015, mverb=0.2).unison(3)
+
+masterAll("flanger", 1)
+
+masterAll("lofi", 0.5)
+
+masterAll("reset")
+
+s5 >> organ([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], lforate=0.5, rq=0.5, amp=1.2, hpf=1200, rate=1, mverb=0.5, oct=(4), cutoff=4000)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=4, leg=10.015, mverb=0.2).unison(3)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=4, leg=100.015, mverb=0.2).unison(3)
+
+s5 >> organ([_, -3, (4, 9, 5), 2, _, 0, (12, 9, 7), 5], dur=[0.5, 0.5, 2.0, 1.0], lforate=0.5, rq=0.5, amp=1.2, hpf=1200, rate=1, mverb=0.5, oct=(4), cutoff=4000)
+
+s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=4, leg=0, mverb=0.2).unison(3)
+
+s3 >> sine([2, -7, 0, 5, 7, 9, 7, 5, 0],dur=[[4.0] + [0.5]*8],amp=1, oct=[4, 4] + [(4,5)]*7, rate=0.2, blur=1)
+
+s1 >> superbass([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), dist2=0, blur=1.2, cut=0, tremolo=2, tremolomix=0.7, beef=4, mverb=0.2).unison(3)
+
+d4 >> play("<t.><..r.>", idist=0, lpf=4400, cut=1/2)
+
+r0 >> play("<k.><..C.><-><[XxXx]>", amp=1, hpf=4000)
+
+i1 >> lbass(var([2,-2],8), dur=1/4, rate=2, dist2=0, vol=1)
+
+i1.stop()
+
+# 
+
+Clock.clear()
+soff()
+
+Clock.bpm =71
+
+Scale.default="chromatic"
+
+d0 >> supersaw([(-12, 0, 3)],dur=[[6,6,6,4], [2,2,2,4] ],amp=1, oct=4, valad=0, valadr=0.3, valadd=1, valadt=0, valadc=0.3)
+
+d1 >> supersaw([_, (0, -12)],dur=4,amp=1, oct=3, valad=0, valadr=0.3, valadd=1, valadt=0, valadc=0.3)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4)
+
+d7 >> dbass([0],dur=1,amp=4, oct=4)
+
+d1 >> supersaw([_, (0, -12)],dur=4,amp=1, oct=3, valad=0, valadr=0.3, valadd=1, glide=0.1, valadt=0, valadc=0.3)
+
+d0 >> supersaw([(-12, 0, 3)],dur=[[6,6,6,4], [2,2,2,4] ],amp=1, oct=4, valad=0, valadr=0.3, valadd=1, glide=0.1, valadt=0, valadc=0.3)
+
+d0 >> supersaw([(-12, 0, 3)],dur=[[6,6,6,4], [2,2,2,4] ],amp=1, oct=4, valad=0, valadr=0.3, valadd=1, glide=0.7, valadt=0, valadc=0.3)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4).unison(2, 0.75)
+
+d0 >> supersaw([(-12, 0, 3)],dur=[[6,6,6,4], [2,2,2,4] ],amp=1, oct=4, valad=0, valadr=0.3, valadd=1, glide=0.1, valadt=0, valadc=0.3)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4).unison(2, 0.25)
+
+d0 >> supersaw([(-12, 0, 3), 10, 7],dur=[4.0, 2.0, 2.0],amp=1, oct=4).unison(3)
+d1 >> supersaw([8, 7, (-12, 0, 3)],dur=[2.0, 2.0, 4.0],amp=1, oct=4).unison(3)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4).unison(2, 0.125)
+
+d0 >> pluck([(-4,), (-5,), (-60,)],dur=[2.0, 4.0, 2.0],amp=[1, 1, 0])
+
+d1 >> pluck([(-24, -12, -9), (-24, -12, -9)],dur=[2.0, 6.0],amp=[1, 1])
+
+d4 >> pluck([(-60,), (-24, -36)],dur=[4.0, 4.0],amp=[0, 1])
+
+d0 >> supersaw([(-12, 0, 3)],dur=[[6,6,6,4], [2,2,2,4] ],amp=1, oct=4, valad=0, valadr=0.3, valadd=1, glide=0.1, valadt=0, valadc=0.3)
+d1 >> supersaw([_, (0, -12)],dur=4,amp=1, oct=3, valad=0, valadr=0.3, valadd=1, glide=0.1, valadt=0, valadc=0.3)
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4).unison(2, 0.125)
+d7 >> dbass([0],dur=1,amp=4, oct=4)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4).unison(0, 0.125)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, chorus=0.7)
+
+d4.solo()
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, chorus=0.27)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, chorus=0.2)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, rate=4, chorus=0.2)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, rate=40, chorus=0.2)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, rate=1, chorus=0.2)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, rate=0, chorus=0.2)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, mverb=0.5, chorus=0.2)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, mverb=0.5, chorus=0.12)
+
+unsolo()
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, mverb=0.5, chorus=0)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, mverb=0.5, chorus=0, tek=0.5)
+
+d4 >> play("X ", tek=4)
+
+d4 >> supersaw([8, 7, [_,(-12,0,3)]], dur=[2, 4, 2, 2,2,4], amp=1, oct=4, mverb=0.5, chorus=0, tek=0.1)
+
+~d4 >> play("X ", tek=4)
+
+d4 >> play("X ", tek=4)
+
+d4 >> play("X ", tek=0, tekr=500, tekd=8)
+
+d4 >> play("X ", tek=1, tekr=500, tekd=8)
+
+d4 >> play("X ", tek=1, tekr=0.1, tekd=8)
+
+d4 >> play("X ", tek=1, tekr=1000, tekd=8)
+
+d4 >> play("X ", tek=1, tekr=1000, tekd=1)
+
+d4 >> play("X ", tek=1, tekr=1000, tekd=21)
+
+d4 >> play("Xx", tek=1, tekr=1000, tekd=21)
+
+d4 >> play("X-", tek=1, tekr=1000, tekd=21)
+
+d4 >> play("X[--]", tek=1, tekr=1000, tekd=21)
+
+d4 >> play("X[--]", tek=1, tekr=1000, tekd=412)
+
+d4 >> play("X[--]", tek=1, tekr=2000, tekd=1)
+
+d4 >> play("X[--]", tek=1, tekr=200, tekd=1)
+
+d4 >> play("X[--]", tek=1, tekr=1200, tekd=1)
+
+d4 >> play("X[--]", tek=1, tekr=1200, tekd=4)
+
+d4 >> play("X[--]", tek=1, tekr=1200, tekd=120)
+
+m9 >> loop("break8", dur=8, sample=1, hpf=0, fx=1)
+
+d4 >> play("X[--]", tek=1, tekr=120, tekd=120)
+
+m9 >> loop("break8", dur=8, sample=1, hpf=0, fx=1, dist2=1)
+
+d4 >> dbass( tek=1, tekr=120, tekd=120)
+
+d4 >> dbass( tek=1, tekr=40, tekd=120)
+
+d4 >> dbass( tek=1, tekr=400, tekd=120)
+
+d4 >> dbass( tek=1, tekr=400, tekd=1200)
+
+d4 >> dbass( tek=1, tekr=400, tekd=100)
+
+d4 >> dbass( tek=1, tekr=400, tekd=80)
+
+m9 >> loop("break8", dur=4, sample=4, hpf=0, fx=1, dist2=1)
+
+d4 >> dbass( tek=1, tekr=400, tekd=60)
+
+d4 >> dbass( tek=1, tekr=400, tekd=200)
+
+d4 >> dbass( tek=1, tekr=400, tekd=400)
+
+d4 >> dbass( tek=1, tekr=4120, tekd=400)
+
+d4 >> dbass(dur=1/2, tek=1, tekr=4120, tekd=400)
+
+d4 >> dbass(dur=1/2, tek=1, tekr=4120, tekd=400, fx=0.5)
+
+d4 >> dbass(dur=1/2, tek=1, tekr=4120, tekd=100, fx=0.5)
+
+d4 >> dbass(dur=1/2, tek=1, tekr=412, tekd=100, fx=0.5)
+
+d4 >> dbass(dur=1/2, tek=2, tekr=412, tekd=100, fx=0.5)
+
+d4 >> dbass(dur=1/2, tek=4, tekr=412, tekd=100, fx=0.5)
+
+d4 >> dbass(dur=1/2, tek=0.1, tekr=412, tekd=100, fx=0.5)
+
+d4 >> dbass(dur=1/2, tek=0.1, tekr=412, tekd=100, fx=2)
+
+d4 >> dbass(dur=1/2, tek=0.1, tekr=412, tekd=100, fx=1)
+
+d4 >> dbass(dur=1/2, tek=0.1, tekr=412, tekd=100, fx=0.5)
+
+d4 >> dbass(dur=1/4, tek=0.1, tekr=412, tekd=100, fx=0.5)
+
+d4 >> dbass(dur=1/4, tek=0.1, tekr=412, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/4, tek=0.1, tekr=412, med=120, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/4, tek=0.1, tekr=412, med=120, high=10, tekd=1000, fx=0.5)
+
+m9 >> loop("break8", dur=4, sample=var([4,PRand(9888)], [28,4]), hpf=0, fx=1, dist2=1)
+
+d4 >> dbass(dur=1/4, tek=0.1, tekr=412, med=120, leg=120, high=10, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/4, tek=0.1, tekr=41, med=120, leg=120, high=10, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/4, tek=0.1, tekr=41, med=1200, leg=120, high=10, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/4, tek=1, tekr=41, med=1200, leg=120, high=10, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/4, sus=1/2, tek=1, tekr=41, med=1200, leg=120, high=10, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=120, high=10, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=120, high=100, tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=120, high=[100, 4], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=120, high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4.vol=0.5
+
+d4.vol=0.2
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=[120, 4], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=[120, 4, 120], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4.vol=0.4
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=[120, 4, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4.vol=0.5
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=[120, 12, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=1200, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+r1 >> play("<k.><..C.><-><[XxXx]>", amp=1, hpf=4000)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=41, med=3200, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+r1 >> play("<k.><..C.><-><.>", amp=10, hpf=4000)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=1, med=3200, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=0, med=3200, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, med=3200, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=0, tekr=12, med=3200, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+r1 >> play("<k.><..C.><.><.>", amp=100, hpf=4000)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, med=3200, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+r1 >> play("<k.><..C.><.><.>", amp=100, hpf=4000)
+
+r1 >> play("<k.><..C.><.><.>", amp=100, hpf=0)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, med=3200, feed=0.5, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+r1 >> play("<k.><..C.><.><.>", amp=1000, hpf=0)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=1290, med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+r1 >> play("<k.><..C.><.><.>", amp=10000, hpf=0)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=400,med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=100,med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=2,med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+~r1 >> play("<k.><..C.><.><.>", amp=10000, hpf=0)
+
+r1 >> play("<k.><..C.><.><.>", amp=10000, hpf=0)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=10,med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=30,med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], high=[100, 4, 120], tekd=1000, fx=0.5)
+
+r1 >> play("<k.><..C.><.><.>", amp=10000, hpf=0, vol=50)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], dist2=10, high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], dist2=0, high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=100, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], dist2=0, high=[100, 4, 120], tekd=1000, fx=0.5)
+
+r1.stop()
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=12, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], dist2=0, high=[100, 4, 120], tekd=1000, fx=0.5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=0, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], dist2=0, high=[100, 4, 120], tekd=1000, fx=0.5)
+
+y1.solo()
+
+unsolo()
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=0, tekr=0, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], dist2=0, high=[100, 4, 120], tekd=1000, fx=0.5)
+
+y1 >> play("<k.><..C.><.><.>", amp=10000, hpf=0, vol=5)
+
+d4 >> dbass(dur=1/2, sus=1/2, tek=1, tekr=1, low=0, mid=20,med=3200, feed=0.23, leg=[120, 42, 120, 40], dist2=0, high=[100, 4, 120], tekd=1000, fx=0.5)
+
+Clock.clear()
+soff()
+
+y1 >> play("<k.><..C.><.><.>", amp=10000, hpf=0, vol=5)
+
+y1 >> play("<k.><..C.><.><.>", amp=40000, hpf=0, vol=5)
+
+y1 >> play("<k.><..C.><.><.>", amp=10000, hpf=0, vol=5)
+
+y1 >> play("<k.><..C.><.><.>", amp=1000, hpf=0, vol=1)
+
+y1 >> play("<k.><..C.><.><.>", amp=1000, hpf=0, vol=1)
+
+y1 >> play("<k.><..C.><.><.>", amp=5000, hpf=0, vol=5)
+
+y1 >> play("<k.><..C.><.><.>", amp=5000, hpf=0, vol=5)
+
+y1 >> play("<k.><..C.><.><.>", amp=5000, hpf=0, vol=5, feed=0.25)
+
+y1 >> play("<k.><..C.><-><.>", amp=5000, hpf=0, vol=5, feed=0)
+
+y1 >> play("<k.><..C.><-><.>", amp=5000, hpf=0, vol=5, feed=0)
+
+y1 >> play("<k.><..C.><-><.>", amp=5000, hpf=0, vol=5, feed=0.25)
+
+y1 >> play("<k.><..C.><-><.>", amp=5000, hpf=0, vol=5, feed=0)
+
+y1 >> play("<k.><..C.><-><.>", amp=5000, hpf=0, vol=5, feed=.25)
+
+y1 >> play("<k.><..C.><-><.>", amp=5000, hpf=0, vol=5, feed=[.25, 0, 0, ])
+
+y1 >> play("<k.><..C.><-><.b>", amp=5000, hpf=0, vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5])
+
+y1 >> play("<k.><..C.><-><.b>", amp=5000, hpf=0, vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5])
+
+y1 >> play("<k.><..C.><-><.B>", amp=5000, hpf=0, vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5])
+
+y1 >> play("<k.><..C.><-><.|B8|>", amp=5000, hpf=0, vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5])
+
+y1 >> play("<k.><..C.><-><.|B7|>", amp=5000, hpf=0, vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5])
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=0, vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5])
+
+m9 >> loop("break8", dur=4, sample=var([4,PRand(9888)], [28,4]), hpf=0, fx=1, dist2=1, amp=1200)
+
+m9 >> loop("break8", dur=4, sample=var([4,PRand(9888)], [28,4]), hpf=0, fx=1, dist2=1, amp=1200).stop()
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=0, vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=120)
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=linvar([0,0,4000],[24,8,0]), vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=[0, 0, 0])
+
+x9 >> play("X ")
+
+x9 >> play("X ", amp=12)
+
+x9 >> play("X ", amp=120)
+
+x9 >> play("X ", amp=1200)
+
+x9 >> play("X ", amp=4000)
+
+x9 >> play("X ", amp=4000, sample=7)
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=linvar([0,0,4000],[24,8,0]), vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=[0, 0, 0]).sometimes("trim", 1)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=2)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=2, flangere=4)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=2, flanger=4)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=0.5, flanger=4)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=4, flanger=4)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=12, flanger=4)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=12, echo=0.5, flanger=4)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=12, echo=[0.5, 0.25], flanger=4)
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=linvar([0,0,4000],[24,8,0]), vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=[0, 0, 0]).sometimes("trim", 1).every(16, "trim", 0)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=12, echo=[0.5, 0.25], flanger=4, mverb=0.5)
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=linvar([0,0,4000],[24,8,0]), vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=[0, 0, 0]).sometimes("trim", Cycle=[0,1,2]).every(16, "trim", 0)
+
+x9 >> play("X ", amp=4000, sample=7, shift=2, rate=12, echo=[0.5, 0.25], flanger=4, mverb=0.5)
+
+x9 >> play("X ", dur=1/4, amp=4000, sample=7, shift=2, rate=12, echo=[0.5, 0.25], flanger=4, mverb=0.5)
+
+variation = Variation(16,4)
+
+x8 >> play("X ", dur=1/8, amp=4000, sample=6, shift=2, rate=12, echo=[0.5, 0.25], flanger=4, mverb=0.5)
+
+x8 >> play("X ", dur=1/8, amp=4000, sample=5, shift=2, rate=12, echo=[0.5, 0.25], flanger=4, mverb=0.5)
+
+x8 >> play("X ", dur=1/8, amp=4000, sample=5, shift=[2, 4], rate=12, echo=[0.5, 0.25], flanger=4, mverb=0.5)
+
+m9 >> loop("break8", dur=4, sample=var([4,PRand(9888)], [28,4]), hpf=0, fx=1, dist2=1, amp=120)
+
+m9.stop()
+
+m9 >> loop("break8", dur=4, sample=var([4,PRand(9888)], [28,4]), hpf=0, fx=1, dist2=0, amp=120)
+
+m9.stop()
+
+x8 >> play("X ", dur=1/8, amp=4000, sample=5, shift=[2, 4], rate=12, echo=[0.5, 0.25, 1], flanger=4, mverb=0.5)
+
+x8 >> play("X ", dur=1/8, amp=4000, sample=5, shift=[2, 4], rate=12, echo=[0.5, 0.25, (1, 0.5)], flanger=4, mverb=0.5)
+
+j6 >> jbass(oct=4, dist2=1, dur=8)
+
+j6 >> jbass([0,-2], oct=4, dist2=1, dur=8, amp=3)
+
+o4 >> play(".C.")
+
+o4 >> play(".C.", amp=12)
+
+o4 >> play(".C.", amp=120)
+
+o4 >> play(".C.", amp=220)
+
+o4 >> play(".C.", amp=420)
+
+o4 >> play(".C.", amp=1220)
+
+o4 >> play(".C.", amp=420)
+
+o4 >> play(".C.", amp=4020)
+
+o4 >> play(".*.", amp=4020)
+
+o4 >> play("[---]", amp=4020)
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=linvar([0,0,4000],[24,8,0]), vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=[0, 0, PWhite(0,5)]).sometimes("trim", Cycle=[0,1,2]).every(16, "trim", 0)
+
+o4 >> play("[---]", amp=4020, pan=PWhite(-1, 1))
+
+o4 >> play("[---]", amp=4020, pan=PWhite(-1, 1), sample=4)
+
+o4 >> play("[---]", amp=4020, pan=PWhite(-1, 1), sample=7)
+
+o4 >> play("[---]", amp=4020, pan=PWhite(-1, 1), sample=12)
+
+o4 >> play("[---]", amp=4020, pan=PWhite(-1, 1), sample=21)
+
+o4 >> play("[------]", amp=4020, pan=PWhite(-1, 1), sample=21)
+
+o4 >> play("[----]", amp=4020, pan=PWhite(-1, 1), sample=21)
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=linvar([0,0,4000],[24,8,0]), vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=[0, 0, PWhite(0,5)], rate=(1+PBin(262)*-2)).sometimes("trim", Cycle=[0,1,2]).every(16, "trim", 0)
+
+o4 >> play("{[----][----][--------][--]......}", amp=4020, pan=PWhite(-1, 1), sample=21)
+
+o4 >> play("{[----][----][--------][--]......}", rate=PSine(64) * 0.1,amp=4020, pan=PWhite(-1, 1), sample=21)
+
+o4 >> play("{[----][----][--------][--]......}", rate=PSine(64) * 0.1 + 2,amp=4020, pan=PWhite(-1, 1), sample=21)
+
+drop()
+
+Clock.clear()
+soff()
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=linvar([0,0,4000],[24,8,0]), vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=[0, 0, PWhite(0,5)], rate=(1+PBin(262)*-2)).sometimes("trim", Cycle=[0,1,2]).every(16, "trim", 0)
+
+o4 >> play("{[----][----][--------][--]......}", rate=PSine(64) * 0.1 + 2,amp=4020, pan=PWhite(-1, 1), sample=21)
+
+x9 >> play("X ", dur=1/4, amp=4000, sample=7, shift=2, rate=12, echo=[0.5, 0.25], flanger=4, mverb=0.5)
+x8 >> play("X ", dur=1/8, amp=4000, sample=5, shift=[2, 4], rate=12, echo=[0.5, 0.25, (1, 0.5)], flanger=4, mverb=0.5)
+j6 >> jbass([0,-2], oct=4, dist2=1, dur=8, amp=3)
+
+variation = Variation(16,4)
+
+Clock.clear()
+soff()
+

@@ -1,0 +1,338 @@
+x1 >> loop("lynchcrazy8", dur=8)
+
+a7 >> dbass(dur=1/2)
+
+a7 >> dbass(-2, dur=1/2)
+
+Scale.default="minor"
+
+a7 >> dbass(var([0,-2],16), dur=1/2)
+
+d0 >> play("<k-><..u.>", amp=2, sample=0)
+
+d0 >> play("<X-><..u.>", amp=2, sample=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1)
+
+a7 >> dbass(var([0,-2],16), dur=1/2, rate=.4)
+
+a7 >> dbass(var([0,-2],16), dur=1/2, rate=.2)
+
+a7 >> dbass(var([0,-2],16), dur=1/2, rate=.1)
+
+a7 >> dbass(var([0,-2],16), dur=1/2, rate=PFr(.1,3))
+
+a7 >> dbass(var([0,-2],16), dur=1/2, rate=PFr(.1,2))
+
+a7 >> dbass(var([0,-2],16), dur=1/2, rate=PFr(.1,1))
+
+a7 >> dbass(var([0,-2],16), dur=1/4, rate=PFr(.1,1))
+
+d0 >> play("<X-><..o.>", amp=2, sample=0)
+
+d0 >> play("<X.><..o.>", amp=2, sample=0)
+
+d0.stop()
+
+a7.stop()
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=1)
+
+x1 >> loop("lynchcrazy8", dur=16, comp=1, sample=1)
+
+a7 >> dbass(var([0,-2],16), dur=1/4, rate=PFr(.1,1))
+
+a7 >> dbass(var([0,-2],16), dur=1/2, rate=PFr(.1,1))
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=PFr(.1,1))
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=PFr(.1,1), cutoff=4000)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=PFr(.1,1), cutoff=6000)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=PFr(.1,1), cutoff=77000)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=PFr(.1,1), cutoff=7000)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=PFr(.1,1), cutoff=7000, fdecay=5)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=4, cutoff=7000, fdecay=5)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=6, cutoff=7000, fdecay=5)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=6, cutoff=7000, fdecay=5, tanh=.5)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=6, cutoff=7000, fdecay=5, tanh=.2)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=6, cutoff=7000, fdecay=5, tanh=.1)
+
+x1 >> loop("lynchcrazy8", dur=16, comp=1, sample=1, chop=4)
+
+d0 >> play("<X.><..o.>", amp=2, sample=0)
+
+x1 >> loop("lynchcrazy8", dur=16, comp=1, sample=1, chop=8)
+
+x1 >> loop("lynchcrazy8", dur=16, comp=1, sample=1, chop=16)
+
+x1 >> loop("lynchcrazy8", dur=16, comp=1, sample=1, chop=0)
+
+x1 >> loop("lynchcrazy8", dur=16, comp=1, sample=0, chop=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=.2)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=.4)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=.4, tanh=.4)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=.4)
+
+d0 >> play("<X.><..o.>", amp=1, sample=0)
+
+x1.solo()
+
+a7.solo()
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=.4)
+
+unsolo()
+
+d0.stop()
+
+Clock.clear()
+soff()
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=.4)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=0)
+
+x1 >> loop("lynchcrazy16", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=0)
+
+x1 >> loop("lynchcrazy16", dur=16, comp=1, sample=0, chop=0, shape=0, tanh=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=0)
+
+x1 >> loop("lynchcrazy16", dur=16, comp=1, sample=0, chop=0, shape=0, tanh=0)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=6, cutoff=7000, fdecay=5, tanh=.1)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=6, cutoff=2000, fdecay=5, tanh=.1)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=6, cutoff=2000, fdecay=5, tanh=0)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=6, cutoff=2000, fdecay=5, tanh=.1)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=1, cutoff=2000, fdecay=5, tanh=.1)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=.1, cutoff=2000, fdecay=5, tanh=.1)
+
+d0 >> play("<X.><..o.>", amp=1, sample=0)
+
+j1 >> loop("break16", sample=5, fx=1)
+
+j1 >> loop("break16", sample=5, fx=1, dur=16)
+
+j1 >> loop("break16", sample=5, fx=1, dur=16, comp=1)
+
+j1 >> loop("break16", sample=5, fx=1, dur=16, comp=1)
+
+unsolo()
+
+j1.solo()
+
+j1 >> loop("break16", sample=5, dur=16, comp=1)
+
+j1 >> loop("break16", sample=5, fx=1, dur=16, comp=1)
+
+~j1 >> loop("break16", sample=5, fx=1, dur=16, comp=1)
+
+j1 >> loop("break16", sample=5, fx=1, dur=16, comp=1)
+
+unsolo()
+
+x1 >> loop("lynchcrazy16", dur=16, comp=1, sample=0, chop=0, shape=0, tanh=0, fx=1)
+
+Clock.clear()
+soff()
+
+j1 >> loop("break16", sample=5, fx=1, dur=16, comp=1)
+
+x1 >> loop("lynchcrazy16", dur=16, comp=1, sample=0, chop=0, shape=0, tanh=0, fx=1)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=0, fx=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=0, chop=0, shape=0, tanh=0, fx=1)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=0, sample=0, chop=0, shape=0, tanh=0, fx=1)
+
+j1.stop()
+
+d0 >> play("<X.><..o.>", amp=1, sample=0)
+
+Clock.clear()
+soff()
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=0, chop=0, shape=0, tanh=0, fx=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=1, sample=1, chop=0, shape=0, tanh=0, fx=0)
+
+d0 >> play("<X.><..o.>", amp=1, sample=0)
+
+d0 >> play("<X.><..o.>", amp=1, sample=0)
+
+d0 >> play("<x.><..o.>", amp=1, sample=0)
+
+d0 >> play("<x.><..o.>", amp=2, sample=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=0, sample=1, chop=0, shape=0, tanh=0, fx=0)
+
+d0 >> play("<x.><..o.>", amp=1, sample=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=0, sample=2, chop=0, shape=0, tanh=0, fx=0)
+
+d0.stop()
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=.1, cutoff=2000, fdecay=5, tanh=.1)
+
+a7 >> superbass(var([0,-2],16), dur=1/2, rate=.1, cutoff=2000, fdecay=5, tanh=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=0, sample=3, chop=0, shape=0, tanh=0, fx=0)
+
+x1 >> loop("lynchcrazy8", dur=8, comp=0, sample=4, chop=0, shape=0, tanh=0, fx=0)
+
+Clock.clear()
+soff()
+
+x2 >> loop("lynchcrazy16", dur=16, comp=0, sample=0, chop=0, shape=0, tanh=0, fx=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=0, sample=1, chop=0, shape=0, tanh=0, fx=0)
+
+a7 >> superbass(var([0,-2],16), dur=1, rate=.1, cutoff=2000, fdecay=5, tanh=0)
+
+v2 >> supersaw(a7 + (0,2,4), dur=8)
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, )
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.1, oct=4)
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.1, oct=4)
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.1, oct=4, mverb=.3)
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.1, oct=4, mverb=.3).unison(3)
+
+a7 >> superbass(var([0,-2],16), dur=1, rate=.1, cutoff=2000, fdecay=4, tanh=0)
+
+d0 >> play("<x.><..o.>", amp=1, dur=1, sample=0)
+
+d0 >> play("<X.><..o.>", amp=1, dur=1, sample=0)
+
+d0 >> play("<X.><..o.>", amp=1, dur=1/2, sample=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=0, sample=2, chop=0, shape=0, tanh=0, fx=0)
+
+v2.stop()
+
+a7.stop()
+
+d0.stop()
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.1, oct=4, mverb=.3).unison(3)
+
+v2.stop()
+
+x2 >> loop("lynchcrazy16", dur=16, comp=0, sample=3, chop=0, shape=0, tanh=0, fx=0)
+
+d0 >> play("<X.><..o.>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X.><....>", amp=1, dur=1/2, sample=0)
+
+j1 >> loop("break16", sample=5, fx=1, dur=16, comp=1)
+
+j1 >> loop("break16", sample=7, fx=1, dur=16, comp=1)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=0, sample=4, chop=0, shape=0, tanh=0, fx=0)
+
+unsolo()
+
+x2.solo()
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=4, chop=0, shape=0, tanh=0, fx=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=4, chop=4, shape=0, tanh=0, fx=0)
+
+d0 >> play("<X.><....>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X-><....>", amp=1, dur=1/2, sample=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=4, chop=4, chopwave=5, shape=0, tanh=0, fx=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=4, chop=8, chopwave=5, shape=0, tanh=0, fx=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=4, chop=8, chopwave=5, shape=0, tanh=0.1, fx=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=4, chop=4, chopwave=5, shape=0, tanh=0.1, fx=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=4, chop=4, chopwave=5, shape=0, tanh=0.1, fx=0,pong=0.5, beat_dur=1, pongtime=1)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=4, chop=4, chopwave=5, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=1)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=5, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=1)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=5, shape=0, tanh=0.1, fx=0,pong=0.5, beat_dur=1, pongtime=1)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=5, shape=0, tanh=0.1, fx=0,pong=2, beat_dur=1, pongtime=1)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=5, shape=0, tanh=0.1, fx=0,pong=2, beat_dur=1, pongtime=16)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=2, shape=0, tanh=0.1, fx=0,pong=2, beat_dur=1, pongtime=16)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=2, shape=0, tanh=0.1, fx=0,pong=2, beat_dur=1, pongtime=16, coarse=4)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=2, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=4)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=0, chopwave=2, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=4)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=0, chopwave=2, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=16)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=0, chopwave=2, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=32)
+
+Clock.clear()
+soff()
+
+u7 >> loop("lynchcrazy32", dur=32)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=.1)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1)
+
+d0 >> play("<X-><....>", amp=1, dur=1/2, sample=0)
+
+j1 >> loop("break16", sample=7, fx=1, dur=16, comp=1)
+
+j1 >> loop("break16", sample=7, fx=(0,1), dur=16, comp=1)
+
+j1 >> loop("break16", sample=7, fx=(0,1), hpf=(0,150), dur=16, comp=1)
+
+v2 >> supersaw(a7.degree + (0,2,4), dur=8, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.1, oct=4, mverb=.3).unison(3)
+
+v2.stop()
+
+d0 >> play("<X.><....><[--]>", amp=1, dur=1/2, sample=0)
+
+Clock.clear()
+soff()
+

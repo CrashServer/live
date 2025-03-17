@@ -1,0 +1,151 @@
+b3 >> click([],dur=Pvar([1/2, 1/4,4]), oct=(4, 5), shape=0.5, mpf=1800, mverb=0.2)
+
+b4 >> click([8, _, 4, 4, 2],dur=var([1/4, 1, 1/2], [5, 3, 2]), oct=(4, 5, PStep(5, 4, PRand([3, 5]))), shape=0.5).sometimes("offadd", 4)
+
+Clock.clear()
+soff()
+
+b1 >> bass(dur=[4, 0.5], sus=4, chopmix=0.5, shape=linvar([0.2, 0.4], 32), a=0.01, leg=-12, leg_=0.1, rate=0.25, chop=(132, 200), lpf=(1200, 4000), lpf_=(3200, 200), chopmix_=1, chop_=(128, 32, 4)).sometimes("stutter", shape=0.5, mverb=1, leg=-128)
+
+b2 >> dbass(dur=[1/2, 1, 1/4], sus=1/2,amp=[1, 0.5,2, 0], tanh=0.8,chopmix=0.5, chop=(132, 200))
+
+Clock.clear()
+soff()
+
+b1 >> click(dur=[1/2, 1/4, 1/2, (1/2, 1)], octer=0.6, oct=5, leg=0.2).every(6, "stutter", oct=3, shape=0.1, amp=1)
+
+b2 >> click(dur=P*[1/2, 1/4, 1/2, (1/2, 1)], oct=2, octer=0.2, tanh=0.1).every(6, "stutter", oct=3, shape=0.5, amp=1)
+
+b3 >> click([8, _, 4, 4, 2],dur=[4, 1/2, 1/2, 3], oct=(1, 3), shape=0.2, amp=1)
+
+b4 >> click([8, _, 4, 4, 2],dur=1, oct=(4, 5, PStep(2, 3, 6)), shape=0.2, amp=1)
+
+b5 >> dbass(dur=b1.dur, shape=0.5).unison(4).sometimes("stutter", oct=6, echo=0.5, mverb=1, amp=1).unison(4)
+
+~j1 >> alva([12, 11, 1, 0.5, 4, _, 4, _], oct=(4, 5, 6), dur=PDur(3, 8), shape=j1.degree==2,shift=j1.degree==1,dist2=j1.degree==0.5,mverb=(j1.degree==4)/4, echo=0.5, leg=12).unison(4)
+
+~j2 >> bass(dur=1/4, amp=j1.degree==4, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25]).slider()
+
+rb >> play("<(X...)(v..(.//))(...(.v))(..v.)><(.r)...><-.><.+><...(.(.:))>",dur=1/2, amp=PBern(16), amplify=var([1,0],[14,1]), sample=6,pan=(0,-0.2,(-1,1),PWhite(-1,1),0.3)).human(20,5,0).often("stutter", PRand(16).rnd(2), delay=(0, 0.25), shape=0.2, mid=0, low=1.5, high=4).every(2, "shuffle")
+
+# ~j2 >> bass(dur=1/4, amp=j1.degree==4, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25]).slider()
+
+# ~j1 >> alva([12, 11, 1, 0.5, 4, _, 4, _], oct=(4, 5, 6), dur=PDur(3, 8), shape=j1.degree==2,shift=j1.degree==1,dist2=j1.degree==0.5,mverb=(j1.degree==4)/4, echo=0.5, leg=12).unison(4)
+
+b5.stop()
+
+b4.stop()
+
+b3.stop()
+
+b2.stop()
+
+b1.stop()
+
+b2.stop()
+
+j1 >> alva([12, 11, 1, 0.5, 4, _, 4, _], oct=(4, 5, 6), dur=PDur(3, 8), shape=j1.degree==2,shift=j1.degree==1,dist2=j1.degree==0.5,mverb=(j1.degree==4)/4, echo=0.5, leg=12).unison(4)
+
+j1.stop()
+
+j2 >> bass(dur=1/4, amp=j1.degree==4, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25]).slider()
+
+j2.stop()
+
+j2 >> bass(dur=1/4, amp=j1.degree==4, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25]).slider()
+
+j1 >> alva([12, 11, 1, 0.5, 4, _, 4, _], oct=(4, 5, 6), dur=PDur(3, 8), shape=j1.degree==2,shift=j1.degree==1,dist2=j1.degree==0.5,mverb=(j1.degree==4)/4, echo=0.5, leg=12).unison(4)
+
+d1 >> play("x.")
+
+d1 >> play("x.", amp=4)
+
+d1 >> play("X.", amp=4)
+
+d1 >> play("X-", amp=4)
+
+d1 >> play("<X-><..c.>", amp=4)
+
+d1 >> play("<X-><..c(...c)>", amp=4)
+
+d1 >> play("<X-><..c(...{c[.c]})>", amp=4)
+
+d1 >> play("<X-><..c(...{c[.c][...c]})>", amp=4)
+
+j1.stop()
+
+j2 >> bass(dur=1/4, amp=j1.degree==4, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25]).slider()
+
+~j2 >> bass(dur=1/4, amp=j1.degree==4, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25]).slider()
+
+rb.stop()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25]).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=500, vakorgr=0.5, vakorgd=5, vakorgt=0, vakorgc=0.3).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=500, vakorgr=0.5, vakorgd=5, vakorgt=0, vakorgc=0.1).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=500, vakorgr=0.5, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=500, vakorgr=0.95, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=600, vakorgr=0.95, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=700, vakorgr=0.95, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=800, vakorgr=0.95, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=1, vakorg=800, vakorgr=0.5, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=800, vakorgr=0.5, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,800), vakorgr=0.5, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.5, vakorgd=5, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.5, vakorgd=5, vakorgt=2, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.5, vakorgd=5, vakorgt=3, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.5, vakorgd=5, vakorgt=4, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.5, vakorgd=5, vakorgt=1, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.5, vakorgd=50, vakorgt=1, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.95, vakorgd=50, vakorgt=1, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=50, vakorgt=1, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=50, vakorgt=2, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=50, vakorgt=0, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=50, vakorgt=10, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=50, vakorgt=1, vakorgc=0.2).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=500, vakorgt=1, vakorgc=0.2).slider()
+
+d1 >> play("<X-><..c(...{c[.c][...c]})>", amp=9)
+
+d1 >> play("<X-><..c(...{c[.c][...c]})><..o.>", amp=9)
+
+d1 >> play("<X-><..c(...{c[.c][...c]})><..o.>", amp=2)
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=500, vakorgt=1, vakorgc=0.2, vol=0.5).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=500, vakorgt=0, vakorgc=0.2, vol=0.5).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(5, 6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=500, vakorgt=0, vakorgc=0.2, vol=0.5).slider()
+
+j2 >> bass(dur=1/4, amp=1, oct=(4, 6, 7, 8), leg=40, echo=[0.5, 0.25], idist=PFr(0.1,2), vakorg=PFr(700,2800), vakorgr=0.75, vakorgd=500, vakorgt=0, vakorgc=0.2, vol=0.5).slider()
+
+Clock.clear()
+soff()
+

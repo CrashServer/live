@@ -1,0 +1,820 @@
+g4 >> loop("lynchcrazy16", dur=16, sample=4)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5)
+
+g5 >> loop("lynchcrazy16", dur=16, sample=4)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400)
+
+g5 >> loop("lynchcrazy16", dur=16, sample=2)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, rate=-1)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, rate=0)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, rate=1)
+
+d0 >> play("<X.><....><[--]>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X.><....><.>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X[kk]><....><.>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X[kkk]><....><.>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X[kkkk]><....><.>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X.><....><.>", amp=1, dur=1/2, sample=0)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, chop=4)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, chop=4, delay=2)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, chop=4, delay=2, comp=1)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, chop=4, delay=2, comp=1, pong=.5, beat_dur=1, pongtime=1)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, chop=4, delay=2, comp=1, pong=.5, beat_dur=1, pongtime=4)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, chop=P*[2,4,8], delay=2, comp=1, pong=.5, beat_dur=1, pongtime=4)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=400, chop=P*[2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4)
+
+g5 >> loop("lynchcrazy16", dur=16, sample=2, tanh=.1)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=1400, chop=P*[2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=2400, chop=P*[2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=PRand(0,2400), chop=P*[2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4)
+
+g5 >> loop("lynchcrazy16", dur=16, sample=2, tanh=.2)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=1)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1])
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=0)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=0, rate=-1)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=0, rate=.3)
+
+g4 >> loop("lynchcrazy16", dur=16, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=0, rate=1)
+
+g4 >> loop("lynchcrazy16", dur=8, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=0, rate=1)
+
+g4 >> loop("lynchcrazy16", dur=32, sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=0, rate=1)
+
+g4 >> loop("lynchcrazy16", dur=16, sus=P*[8,16,32], sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=0, rate=1)
+
+d0 >> play("<X.><..u.><.>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X.><..u.><[--]>", amp=1, dur=1/2, sample=0)
+
+d0 >> play("<X.><..u.><[--]>", amp=1, dur=1/2, sample=0, comp=1)
+
+d0 >> play("<X.><..o.><[--]>", amp=1, dur=1/2, sample=0, comp=1)
+
+g4 >> loop("lynchcrazy16", dur=16, sus=P*[8,16,32], sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=1, rate=1)
+
+g4 >> loop("lynchcrazy16", dur=16, sus=P*[8,16,32], sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=1,beat_stretch=0, rate=-1)
+
+g5 >> loop("lynchcrazy16", dur=16, sample=2, tanh=.2, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+g4 >> loop("lynchcrazy16", dur=16, sus=P*[8,16,32], sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=1,beat_stretch=1, rate=-1)
+
+g4 >> loop("lynchcrazy16", dur=16, sus=P*[8,16,32], sample=5, hpf=PRand(0,2400), chop=P*[0,2,4,8], delay=P*[0,2], comp=1, pong=.5, beat_dur=1, pongtime=4, fx=P*[0,1], looping=1,beat_stretch=1, rate=1)
+
+Clock.clear()
+soff()
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1)
+
+j1 >> loop("break16", sample=7, fx=0, hpf=0, dur=16, comp=1)
+
+j1 >> loop("break16", sample=7, fx=0, hpf=0, dur=16, comp=1, wide=0)
+
+Clock.clear()
+soff()
+
+j1 >> loop("break16", sample=1, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+Clock.clear()
+soff()
+
+j1 >> loop("break16", sample=1, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+j1 >> loop("break16", sample=2, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+j1 >> loop("break16", sample=1, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+Clock.clear()
+soff()
+
+Samples.reload("break16")
+
+j1 >> loop("break16", sample=1, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+Clock.clear()
+soff()
+
+ploop("break16")
+
+Samples.reload('01_breakh')
+
+j1 >> loop("break16", sample=1, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+Clock.clear()
+soff()
+
+Samples.reload('01_breaki')
+
+j1 >> loop("break16", sample=1, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+j1 >> loop("break16", sample=2, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+Samples.reload('01_breaki')
+
+Samples.reload('01_breaki')
+
+Samples.reload('02_breaki')
+
+Clock.clear()
+soff()
+
+j1 >> loop("break4", sample=0, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+Clock.clear()
+soff()
+
+q1 >> loop("auto8", dur=8)
+
+q1 >> loop("auto8", dur=8, sample=1)
+
+q1 >> loop("auto8", dur=16, sample=1)
+
+q1 >> loop("auto8", dur=16, sample=0)
+
+Clock.clear()
+soff()
+
+q1 >> loop("ambi8", dur=16, sample=0)
+
+q1 >> loop("atmo8", dur=16, sample=0)
+
+q1 >> loop("atmo8", dur=8, sample=0)
+
+q1 >> loop("atmo8", dur=16, sample=0)
+
+q1 >> loop("atmo8", dur=16, sample=1)
+
+q1 >> loop("atmo8", dur=16, sample=2)
+
+Clock.clear()
+soff()
+
+x1 >> loop("bass4", dur=4, sample=17)
+
+x1 >> loop("bass4", dur=8, sample=17)
+
+Clock.clear()
+soff()
+
+x1 >> loop("bass4", dur=8, sample=15)
+
+x1 >> loop("bass8", dur=8, sample=15)
+
+r9 >> play("x.", sample=4)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.1)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.1)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=800, valadr=0.3, valadd=25, valadt=0, valadc=0.1)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=1800, valadr=0.3, valadd=25, valadt=0, valadc=0.1)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=1800, valadr=0.8, valadd=25, valadt=0, valadc=0.1)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=1800, valadr=0.8, valadd=25, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=2800, valadr=0.8, valadd=25, valadt=0, valadc=0.2)
+
+r9 >> play("<x.><->", sample=4)
+
+r9 >> play("<x.><|-2|>", sample=4)
+
+r9 >> play("<x.><|-2|><..u.>", sample=4)
+
+r9 >> play("<x.><|-2|><..u.>", sample=4, comp=1)
+
+x1 >> loop("bass8", dur=8, sample=13, valad=2800, valadr=0.8, valadd=25, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=2800, valadr=0.8, valadd=25, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=2800, valadr=0.8, valadd=25, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=800, valadr=0.8, valadd=25, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=800, valadr=0.8, valadd=125, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=900, valadr=0.8, valadd=125, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=1900, valadr=0.8, valadd=125, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=13, valad=1900, valadr=0.8, valadd=125, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=15, valad=1900, valadr=0.8, valadd=125, valadt=0, valadc=0.2)
+
+r9 >> play("<x.><|-2|><..u.>", sample=4, comp=1).sometimes("stutter")
+
+r9 >> play("<x.><|-2|><..u.><.:>", sample=4, comp=1).sometimes("stutter")
+
+r9 >> play("<|x4|.><|-2|><..u.><.:>", sample=2, comp=1).sometimes("stutter")
+
+r9 >> play("<|x4|.><-><..u.><.:>", sample=2, comp=1).sometimes("stutter")
+
+r9 >> play("<|x4|.><[--]><..u.><.:>", sample=2, comp=1).sometimes("stutter")
+
+x1 >> loop("bass8", dur=8, sample=17, valad=1900, valadr=0.8, valadd=125, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=1900, valadr=0.8, valadd=125, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=125, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=105, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=10, valadt=0, valadc=0.2)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=10, valadt=0, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=10, valadt=4, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=10, valadt=3, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=100, valadt=3, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=100, valadt=0, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.8, valadd=10, valadt=0, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.2, valadd=10, valadt=0, valadc=0.3)
+
+Clock.clear()
+soff()
+
+q1 >> loop("cello8", dur=8, sample=2)
+
+q1 >> loop("cello8", dur=8, sample=0)
+
+q1 >> loop("cello8", dur=16, sample=0)
+
+Clock.clear()
+soff()
+
+q1 >> loop("garp32", dur=32, sample=0)
+
+q1 >> loop("garp32", dur=16, sample=0)
+
+q1 >> loop("garp32", dur=16, sample=0, mverb=0.2)
+
+q1 >> loop("gapr16", dur=16, sample=0, mverb=0.2)
+
+q1 >> loop("gapr16", dur=8, sample=0, mverb=0.2)
+
+q1 >> loop("gapr16", dur=16, sample=0, mverb=0.2)
+
+q1 >> loop("gapr16", dur=16, sample=0, mverb=0)
+
+q1 >> loop("gapr16", dur=16, sample=1, mverb=0)
+
+q1 >> loop("gapr16", dur=16, sample=2, mverb=0)
+
+q1 >> loop("gapr16", dur=16, sample=3, mverb=0)
+
+x1 >> loop("bass8", dur=8, sample=16, valad=2900, valadr=0.2, valadd=10, valadt=0, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=13, valad=2900, valadr=0.2, valadd=10, valadt=0, valadc=0.3)
+
+q1 >> loop("gapr16", dur=16, sample=4, mverb=0)
+
+r9 >> play("<|x4|.><[--]><..u.><.:>", sample=2, comp=1).sometimes("stutter")
+
+q1 >> loop("gapr16", dur=16, sample=5, mverb=0)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=2900, valadr=0.2, valadd=10, valadt=0, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=2900, valadr=0.2, valadd=100, valadt=0, valadc=0.3)
+
+r9 >> play("<|x4|.><[--]><..u.><.:>", sample=2, comp=1, amp=(4,1,1,1)).sometimes("stutter")
+
+q1 >> loop("gapr16", dur=16, sample=5, mverb=0, chop=4)
+
+r9 >> play("<|x4|.><[--]><..u.><.:>", sample=2, comp=1, amp=(4,1,3,1)).sometimes("stutter")
+
+q1 >> loop("gapr16", dur=16, sample=6, mverb=0, chop=4)
+
+q1 >> loop("gapr16", dur=16, sample=6, mverb=0, chop=0)
+
+q1 >> loop("gapr16", dur=16, sample=7, mverb=0, chop=0)
+
+q1 >> loop("gapr16", dur=16, sample=8, mverb=0, chop=0)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=900, valadr=0.2, valadd=100, valadt=0, valadc=0.3)
+
+x1 >> loop("bass8", dur=8, sample=11, valad=900, valadr=0.2, valadd=10, valadt=0, valadc=0.3)
+
+q1 >> loop("gapr16", dur=16, sample=9, mverb=0, chop=0)
+
+q1 >> loop("gapr16", dur=16, sample=9, mverb=0.9, chop=0)
+
+q1 >> loop("gapr16", dur=16, sample=9, mverb=0.9, chop=0, shift=(-12,0,12))
+
+q1 >> loop("gapr16", dur=16, sample=9, mverb=0.9, chop=0, shift=(-6,0,6))
+
+q1 >> loop("gapr16", dur=16, sample=9, mverb=0.9, chop=0, shift=0, pshift=(-6,0,6))
+
+q1 >> loop("gapr16", dur=16, sample=9, mverb=0.9, chop=0, shift=0, pshift=(-2,0,2))
+
+x1.stop()
+
+q1.stop()
+
+# 
+
+r9.stop()
+
+lost("B1")
+
+c7 >> loop("atmo32", dur=32, sample=2).unison(0)
+
+Clock.clear()
+soff()
+
+f7 >> play("x-", sample=4)
+
+Clock.clear()
+soff()
+
+f7 >> play("x-", sample=4)
+
+f7 >> play("x-", sample=3)
+
+f7 >> play("x-", sample=2)
+
+f7 >> play("x-", sample=1)
+
+f7 >> play("x-", sample=0)
+
+f7 >> play("x-", sample=4)
+
+f7 >> play("x:", sample=4)
+
+Clock.clear()
+soff()
+
+f7 >> play("x:", sample=4)
+
+Clock.clear()
+soff()
+
+f7 >> play("x:", sample=4)
+
+f7 >> play("x-", sample=4)
+
+f7 >> play("<x-><./>", sample=4)
+
+f7 >> play("<x-><./>", sample=4)
+
+f7 >> play("<x-><.:>", sample=4)
+
+f7 >> play("<x-><.=>", sample=4)
+
+f7 >> play("<x-><.:>", sample=4)
+
+Clock.clear()
+soff()
+
+f7 >> play("<x-><.:>", sample=1)
+
+f7 >> play("<.:>", sample=1)
+
+f7 >> play("<x-><.:>", sample=1)
+
+Clock.clear()
+soff()
+
+f7 >> play("<x-><.:><..o.>", sample=1)
+
+f7 >> play("<x-><.:><..o.>", sample=0)
+
+f7 >> play("<x-><.:><..o.>", sample=1)
+
+f7 >> play("<x-><.:><..o.>", sample=2)
+
+f7 >> play("<x-><.:><..o.>", sample=3)
+
+f7 >> play("<x-><.:><..o.>", sample=4)
+
+f7 >> play("<x-><.:><..o.>", sample=5)
+
+f7 >> play("<x-><..><..o.>", sample=5)
+
+f7 >> play("<x-><.:><..o.>", sample=5)
+
+Clock.clear()
+soff()
+
+f7 >> play("<x-><.:><..o.>", sample=5)
+
+Clock.clear()
+soff()
+
+f7 >> play("<x-><.:><..o.>", sample=5)
+
+f7 >> play("<x-><.:><..o.>", sample=4)
+
+f7 >> play("<x-><.:><..o.>", sample=5)
+
+Clock.clear()
+soff()
+
+f7 >> play("<x-><.:><..o.>", sample=3)
+
+f7 >> play("<x-><.:><..o.>", sample=1)
+
+f7 >> play("<x-><.:><..o.>", sample=2)
+
+f7 >> play("<x-><.:><..o.>", sample=3)
+
+f7 >> play("<x-><.:><..o.>", sample=4)
+
+f7 >> play("<x-><.:><..o.>", sample=5)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+f7 >> play("<x-><.:><..o.>", sample=5)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+f7 >> play("<x-><.:><..o.>", sample=0)
+
+f7 >> play("<x-><.:><..o.>", sample=1)
+
+f7 >> play("<x-><.:><..o.>", sample=2)
+
+f7 >> play("<x-><.:><..o.>", sample=3)
+
+f7 >> play("<x-><.:><..o.>", sample=4)
+
+f7 >> play("<x-><.:><..o.>", sample=5)
+
+f7 >> play("<x-><.:><..o.>", sample=6)
+
+f7 >> play("<x-><.:><..o.>", sample=7)
+
+f7 >> play("<x-><.:><..o.>", sample=8)
+
+f7 >> play("<x-><.:><..o.>", sample=9)
+
+f7 >> play("<x-><.:><..o.>", sample=10)
+
+f7 >> play("<x-><.:><..o.>", sample=11)
+
+f7 >> play("<x-><.:><..o.>", sample=12)
+
+f7 >> play("<x-><.:><..o.>", sample=13)
+
+f7 >> play("<x-><.:><..o.>", sample=14)
+
+f7 >> play("<x-><.:><..o.>", sample=15)
+
+f7 >> play("<x-><.:><..o.>", sample=16)
+
+f7 >> play("<x-><.:><..o.>", sample=8)
+
+f7 >> play("<x-><.:><..o.>", sample=7)
+
+Clock.clear()
+soff()
+
+f7 >> play("<x-><.:><..o.>", sample=7)
+
+Clock.clear()
+soff()
+
+f7 >> play("<x-><.:><..o.>", sample=7)
+
+f7 >> play("<x-><.=><..o.>", sample=7)
+
+f7 >> play("<x-><.:><..o.>", sample=7)
+
+f7 >> play("<x-><.:><..u.>", sample=7)
+
+f7 >> play("<x-><..><..u.>", sample=7)
+
+Clock.clear()
+soff()
+
+f7 >> play("<x-><..><..u.>", sample=0)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+f7 >> play("<x-><..><..u.>", sample=0)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+f7 >> play("<x-><..><..u.>", sample=1)
+
+f7 >> play("<x-><..><..u.>", sample=0)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+f7 >> play("<x-><..><..u.>", sample=5)
+
+f7 >> play("<x-><..><..o.>", sample=5)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+f7 >> play("<x-><..><..o.>", sample=5)
+
+f7 >> play("<x-><..><..o.>", sample=0)
+
+f7 >> play("<x-><..><..o.>", sample=1)
+
+f7 >> play("<x-><..><..o.>", sample=2)
+
+f7 >> play("<x-><..><..o.>", sample=3)
+
+f7 >> play("<x-><..><..o.>", sample=4)
+
+f7 >> play("<x-><..><..o.>", sample=5)
+
+f7 >> play("<x-><..><..o.>", sample=6)
+
+f7 >> play("<x-><..><..o.>", sample=7)
+
+f7 >> play("<x-><..><..o.>", sample=8)
+
+f7 >> play("<x-><..><..o.>", sample=9)
+
+f7 >> play("<x-><..><..o.>", sample=10)
+
+f7 >> play("<x-><..><..o.>", sample=11)
+
+f7 >> play("<x-><..><..o.>", sample=0)
+
+f7 >> play("<X-><..><..o.>", sample=0)
+
+f7 >> play("<X-><..><..o.>", sample=1)
+
+f7 >> play("<X-><..><..o.>", sample=2)
+
+f7 >> play("<X-><..><..o.>", sample=3)
+
+f7 >> play("<X-><..><..o.>", sample=4)
+
+f7 >> play("<X-><..><..o.>", sample=5)
+
+f7 >> play("<X-><..><..o.>", sample=6)
+
+f7 >> play("<X-><..><..o.>", sample=7)
+
+f7 >> play("<X-><..><..o.>", sample=8)
+
+f7 >> play("<X-><..><..o.>", sample=9)
+
+f7 >> play("<X-><..><..o.>", sample=10)
+
+f7 >> play("<X-><..><..o.>", sample=11)
+
+f7 >> play("<X-><..><..o.>", sample=12)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+f7 >> play("<X-><..><..o.>", sample=0)
+
+f7 >> play("<X-><..><..o.>", sample=1)
+
+f7 >> play("<X-><..><..o.>", sample=2)
+
+f7 >> play("<X-><..><..o.>", sample=3)
+
+f7 >> play("<X-><..><..o.>", sample=4)
+
+f7 >> play("<X-><..><..o.>", sample=5)
+
+f7 >> play("<X-><..><..o.>", sample=6)
+
+f7 >> play("<X-><..><..o.>", sample=7)
+
+f7 >> play("<X-><..><..o.>", sample=8)
+
+f7 >> play("<X-><..><..o.>", sample=9)
+
+f7 >> play("<X-><..><..o.>", sample=10)
+
+f7 >> play("<X-><..><..o.>", sample=11)
+
+f7 >> play("<X-><..><..o.>", sample=12)
+
+f7 >> play("<X-><..><..o.>", sample=11)
+
+f7 >> play("<X-><..><..o.>", sample=11)
+
+f7 >> play("<x-><..><..o.>", sample=11)
+
+f7 >> play("<k-><..><..o.>", sample=11)
+
+Clock.clear()
+soff()
+
+f7 >> play("<K-><..><..o.>", sample=0)
+
+f7 >> play("<K-><..><....>", sample=0)
+
+f7 >> play("<K-><..><....>", sample=1)
+
+f7 >> play("<K-><..><....>", sample=2)
+
+f7 >> play("<K-><..><....>", sample=3)
+
+f7 >> play("<K-><..><....>", sample=4)
+
+f7 >> play("<K-><..><....>", sample=5)
+
+f7 >> play("<K-><..><....>", sample=6)
+
+f7 >> play("<K-><..><....>", sample=7)
+
+f7 >> play("<K-><..><....>", sample=8)
+
+Clock.clear()
+soff()
+
+f7 >> play("<K-><..><....>", sample=7)
+
+f7 >> play("<k-><..><....>", sample=7)
+
+f7 >> play("<k-><..><..U.>", sample=7)
+
+Clock.clear()
+soff()
+
+u2 >> play("3", sample=[0,2,3,5], dur=1/2)
+
+u2 >> play("3", sample=[0,2,3,5], dur=1/2, cut=1)
+
+u2 >> play("3", sample=[0,2,3,5], dur=1/2, cut=1, pshift=-1)
+
+u2 >> play("3", sample=[0,2,3,5], dur=1/2, cut=1, pshift=-12)
+
+u2 >> play("3", sample=[0,2,3,[5,6]], dur=1/2, cut=1, pshift=-12)
+
+u2 >> play("3", sample=[0,2,3,[5,6]], dur=1/2, cut=1, pshift=-6)
+
+f7 >> play("<k-><..><..U.>", sample=7)
+
+f7 >> play("<k-><.:><..U.>", sample=7)
+
+f7 >> play("<X-><.:><..U.>", sample=7)
+
+u2 >> play("3", sample=[0,2,3,[5,6]], dur=1/2, cut=1/2, pshift=-6)
+
+u2 >> play("3", sample=[0,2,3,[5,6]], dur=1/2, cut=1, pshift=-6)
+
+Clock.clear()
+soff()
+
+x1 >> loop("lynchcrazy8", dur=8, comp=0, sample=4, chop=0, shape=0, tanh=0, fx=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=0, chopwave=2, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=32)
+
+x1.stop()
+
+j1 >> loop("break4", sample=0, fx=0, hpf=0, dur=16, comp=1, wide=1)
+
+j1 >> loop("break4", sample=0, fx=0, hpf=0, dur=4, comp=1, wide=1)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=0, chopwave=2, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=2, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=0, shape=0, tanh=0.1, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=0, shape=0, tanh=0, fx=0,pong=0, beat_dur=1, pongtime=16, coarse=0)
+
+x2 >> loop("lynchcrazy16", dur=16, comp=1, sample=5, chop=4, chopwave=0, shape=0, tanh=0, fx=0, pong=0.5, beat_dur=1, pongtime=16, coarse=0)
+
+j1 >> loop("break4", sample=0, fx=1, hpf=0, dur=4, comp=1, wide=1)
+
+j1 >> loop("break4", sample=var(PRand(88),32), fx=1, hpf=0, dur=4, comp=1, wide=1)
+
+j1 >> loop("break4", sample=var(PRand(88),32), fx=1, hpf=0, dur=4, comp=1, wide=0)
+
+j1.stop()
+
+x2.stop()
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1)
+
+c4 >> loop("hiphop8", dur=16, sample=4)
+
+c4 >> loop("hiphop8", dur=16, sample=4, comp=1)
+
+c4 >> loop("hiphop8", dur=8, sample=4, comp=1)
+
+c4 >> loop("hiphop8", dur=8, sample=2, comp=1)
+
+c4 >> loop("hiphop8", dur=8, sample=3, comp=1)
+
+c0 >> loop("nsbreak16", sample=3, dur=16)
+
+c0 >> loop("nsbreak16", sample=3, dur=16, tanh=.2)
+
+c0 >> loop("nsbreak16", sample=6, dur=16, tanh=.2)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1, chop=4)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1, chop=4, mverb=.3)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1, chop=4, mverb=.9)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=1, chop=8, mverb=.9)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=(0,1), chop=(0,8), mverb=.9)
+
+u7 >> loop("lynchcrazy32", dur=32, comp=1, tanh=0, fx=(0,1), chop=(0,8), mverb=(.9,0))
+
+f7 >> play("<x.><..><....>", sample=4, amp=4)
+
+f7 >> play("<x.><[--]><....>", sample=4, amp=4)
+
+z1 >> loop("mulholland8", dur=8, hpf=5000)
+
+z1 >> loop("mulholland8", dur=8, hpf=3000)
+
+z1 >> loop("mulholland8", dur=8, hpf=3000, mverb=.9)
+
+z1 >> loop("mulholland8", dur=8, hpf=2000, mverb=.9)
+
+z1 >> loop("mulholland8", dur=8, hpf=1000, mverb=.9)
+
+z1 >> loop("mulholland8", dur=8, hpf=1000, mverb=.9, tremolo=16)
+
+z1 >> loop("mulholland8", dur=8, hpf=1000, mverb=.9, tremolo=8)
+
+z1 >> loop("mulholland8", dur=8, hpf=100, mverb=.9, tremolo=8)
+
+z1 >> loop("mulholland8", dur=8, hpf=100, mverb=.9, tremolo=8, chorus=.6)
+
+z1 >> loop("mulholland8", dur=8, hpf=100, mverb=.5, tremolo=8, chorus=.6)
+
+f7 >> play("<x.><[--]><....>", sample=4, amp=4).human(80)
+
+f7 >> play("<X.><[--]><....>", sample=4, amp=4).human(80)
+
+Clock.clear()
+soff()
+
+print(loopNames)
+
+print(loopExclude)
+
+print(loopExclude)
+for loopxclude in loopExclude:
+		try:
+			loopNames.remove(loopxclude)
+		except:
+			print(loopxclude)
+
+print(loopNames)
+
+loopNames.remove('__init__')
+

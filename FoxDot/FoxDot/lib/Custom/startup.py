@@ -7,6 +7,7 @@ if __name__ != "__main__":
         import sys
         import pickle
         import time
+        import json
         from random import randint, sample
 
         from .Settings import FOXDOT_ROOT, SAMPLES_BANK
@@ -15,12 +16,20 @@ if __name__ != "__main__":
         from pathlib import Path
         sys.path.append(str(Path('.').absolute().parent))
 
-        try:
-            from crash_config import *
-        except Exception as e:
-            print(e)
+        # try:
+        #     from crash_config import *
+        # except Exception as e:
+        #     print(e)
 
-        # from .Crashserver.crash_generator.server_conf import *
+        config_path = os.path.abspath(os.path.join(os.getcwd(), '../webTroop/crash_config.json'))
+
+        # Charger le fichier de configuration JSON
+        try:
+            with open(config_path, 'r') as f:
+                config = json.load(f)
+        except Exception as e:
+            print(f"Error loading config file: {e}")
+
         from .Extensions.PArp import PArp
     except Exception as e:
         print("error in import modules", e)
@@ -67,8 +76,8 @@ if __name__ != "__main__":
 
     # Sample custom directory
     try:
-        FOXDOT_SND = crash_path
-        FOXDOT_LOOP = os.path.join(crash_path, "_loop_")
+        FOXDOT_SND = config["sample_path"]
+        FOXDOT_LOOP = os.path.join(config["sample_path"], str(0), "_loop_")
         BANK_LEN = [item for item in os.listdir(
             FOXDOT_SND) if not (item.startswith("."))]
         FoxDotCode.use_sample_directory(FOXDOT_SND)
@@ -77,8 +86,9 @@ if __name__ != "__main__":
             Samples.addPath(os.path.join(FOXDOT_SND, str(bankNbr), "_loop_"))
             loops += sorted([fn.rsplit(".", 1)[0]
                             for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
-        loops.remove('')
-        loops.remove('__init__')
+        loops = [loop for loop in loops if loop not in ['', '__init__','onsetDict']]
+        # loops.remove('')
+        # loops.remove('__init__')
     except:
         print("Error importing Custom Sound", sys.exc_info()[0])
 
@@ -88,51 +98,11 @@ if __name__ != "__main__":
         FOXDOT_STARTUP = _StartupFile(os.path.join(
             FOXDOT_ROOT, "lib", "Crashserver", "crash_generator", "server_startup.py"))
         execute.load_startup_file()
-        if startupLive:
-            FOXDOT_STARTUP = _StartupFile(os.path.join(
-                FOXDOT_ROOT, "lib", "Crashserver", "crash_generator", "startup_live.py"))
-            execute.load_startup_file()
+        FOXDOT_STARTUP = _StartupFile(os.path.join(
+            FOXDOT_ROOT, "lib", "Crashserver", "crash_generator", "startup_live.py"))
+        execute.load_startup_file()
     except Exception as e:
         print("fail : ", e)
-
-    ####################
-    ###    VOICE     ###
-    ####################
-    def init_voice(horodatage=False):
-        ''' Voice initalisation, windows / linux '''
-        if sys.platform.startswith("win"):
-            voix = Voice(lang=lang, rate=0.45, amp=1.0)
-            voix.initi(lieu)
-        elif sys.platform.startswith("linux"):
-            serv = init_server(lang, lieu, horodatage)
-            txt_init = serv.initi()
-            Voice(txt_init, rate=rate_voice, amp=voiceamp,
-                  pitch=pitch, lang=lang, voice=voice)
-        else:
-            print("Sorry, we crash only from windows or linux")
-
-    def voice_lpf(freq=400):
-        ''' Low pass everything during speech voice '''
-        Master().lpf = freq
-
-    def calc_dur_voice(phrase=""):
-        ''' return the voice duration in beats '''
-        phrase = len(phrase.split())
-        try:
-            if phrase or phrase > 0:
-                return (Clock.seconds_to_beats(phrase * 0.6))
-            else:
-                return 8
-        except:
-            return 8
-
-    def clear_voice_dir():
-        ''' delete all voice sample in _loop_/voicetxt dir '''
-        voicetxt_path = os.path.join(crash_path, str(
-            SAMPLES_BANK), "_loop_", "voicetxt")
-        voices_files = os.listdir(voicetxt_path)
-        for f in voices_files:
-            os.remove(os.path.join(voicetxt_path, f))
 
     ### RANDOM function ###
 
@@ -401,7 +371,7 @@ if __name__ != "__main__":
                         if listen:
                             dplayers[f"d{player_idx}"] >> play(
                                 pat, dur=duree, sus=duree, sample=spl)
-                    clip.copy(ppat)
+                    sendAttack(ppat)
                     if listen:
                         for p in stopList:
                             dplayers[p].stop()
@@ -411,7 +381,7 @@ if __name__ != "__main__":
                     for i in DrumsPattern2[style][pat]:
                         ppat += i
                         ppat += "\n"
-                    clip.copy(ppat)
+                    sendAttack(ppat)
 
         def darker():
             ''' Change Scale to a darkest one '''
@@ -629,26 +599,26 @@ if __name__ != "__main__":
                         self.turn = 0
                     return self.active_value
 
-                class PZero(GeneratorPattern):
-                    ''' Generate a Pattern with '1' and size-1 '0' 
-                            eg: PZero(5) -> P[1,0,0,0,0] 
-                            the '1' position can be offset 
-                            '''
+        class PZero(GeneratorPattern):
+            ''' Generate a Pattern with '1' and size-1 '0' 
+                    eg: PZero(5) -> P[1,0,0,0,0] 
+                    the '1' position can be offset 
+                    '''
 
-                    def __init__(self, size=2, offset=0):
-                        GeneratorPattern.__init__(self)
-                        self.size = size
-                        self.offset = Pattern(offset)
+            def __init__(self, size=2, offset=0):
+                GeneratorPattern.__init__(self)
+                self.size = size
+                self.offset = Pattern(offset)
 
-                    def func(self, index):
-                        # Get the current offset value based on the index
-                        current_offset = self.offset[index]
+            def func(self, index):
+                # Get the current offset value based on the index
+                current_offset = self.offset[index]
 
-                        # Calculate if we should return 1 or 0
-                        if ((index - current_offset) % int(self.size) == 0):
-                            return 1
-                        else:
-                            return 0
+                # Calculate if we should return 1 or 0
+                if ((index - current_offset) % int(self.size) == 0):
+                    return 1
+                else:
+                    return 0
 
         class PBool(GeneratorPattern):
             ''' Binary operation between 2 Pattern, you can select the operator:
@@ -757,15 +727,6 @@ if __name__ != "__main__":
                 Clock.bpm = var([bpm_list], [duree_list], start=Clock.mod(8))
                 print('var({}, {})'.format([bpm_list], [duree_list]))
 
-        # def melody(scale_melody=Scale.default.name, melody_dict=melody_dict):
-        # 	''' Generate melody with a Markov chain dict of melody '''
-        # 	scale_melody_dict = {key: melody_dict[key] for key in melody_dict.keys() if key in Scale[scale_melody]}
-        # 	for keys, values in scale_melody_dict.items():
-        # 		note, prob = values
-        # 		fnote, fprob = zip(*((key, pro) for key, pro in zip(note, prob) if key in Scale[scale_melody]))
-        # 		scale_melody_dict[keys] = [list(fnote), list(fprob)]
-        # 		return PChain2(scale_melody_dict)
-
         def melody():
             ''' Generate a melody based on Markov chain dict of melody '''
             return PChain2(melody_dict)
@@ -776,7 +737,7 @@ if __name__ != "__main__":
             for i in range(chaosInt):
                 chaosText += add_player(True)
                 chaosText += "\n"
-            clip.copy(chaosText)
+            sendAttack(chaosText)
 
         def PRy(total=16, div=4, restProb=0):
             ''' Generate a ryhtm pattern '''
@@ -785,7 +746,6 @@ if __name__ != "__main__":
             for i in range(0, len(pat)):
                 patTotal.append(PSum(PRand(1, div)[i], pat[i]))
             patTotal = PJoin(patTotal)
-            # patTotal = PShuf(patTotal)
             if restProb != 0:
                 for i in range(1, len(patTotal)):
                     if PRand(0, 100)[0] < restProb*100:
@@ -859,38 +819,6 @@ try:
             self.every(durloop, "drummer", durloop, durPlyr)
 except:
     print("Error importing drumRockPattern", sys.exc_info()[0])
-
-# if crashPanelSending:
-#     class SendOsBpm():
-#         ''' Send current Bpm to crashOS'''
-
-#         def __init__(self, ipCrashOS="localhost", port=20000):
-#             self.ipCrashOS = ipCrashOS
-#             self.port = port
-#             self.clientBpm = OSCClient()
-#             self.clientBpm.connect((self.ipCrashOS, self.port))
-#             self.threadOsBpm = Thread(target=self.sendOsBpm)
-#             self.threadOsBpm.daemon = True
-
-#         def sendOsBpm(self):
-#             try:
-#                 while self.isrunning:
-#                     msg = OSCMessage("/OSbpm", [int(Clock.get_bpm())])
-#                     self.clientBpm.send(msg)
-#                     sleep(0.5)
-#             except:
-#                 pass
-
-#         def start(self):
-#             self.isrunning = True
-#             self.threadOsBpm.start()
-
-#         def stop(self):
-#             self.isrunning = False
-
-    # start sending Bpm to crashOS
-    # osBpm = SendOsBpm(crashOSIp, crashOSPort)
-    # osBpm.start()
 
 # @player_method
 # def basser(self, duration=64, markdur=2):

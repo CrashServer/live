@@ -8,7 +8,8 @@ if __name__ != "__main__":
 		from ...Buffers import alpha, nonalpha
 		from ...Patterns.Sequences import *
 		from ...Effects.Util import FxList
-		from crash_config import crash_path
+		# from crash_config import crash_path
+		# from ...Custom.startup import loops
 		from .composition import *
 		from .synthArgs import *
 
@@ -19,12 +20,23 @@ if __name__ != "__main__":
 		from os.path import join, isdir
 		from inspect import signature
 		from re import findall
+		import os
+		import json
 	except Exception as e:
 		print(e)
 
-	FOXDOT_LOOP  = join(crash_path, str(0), "_loop_")
-	if not isdir(FOXDOT_LOOP):
-		print("Could not find _loop_ in crash_path : ", crash_path)
+	config_path = os.path.abspath(os.path.join(os.getcwd(), '../webTroop/crash_config.json'))
+
+        # Charger le fichier de configuration JSON
+	try:
+		with open(config_path, 'r') as f:
+			config = json.load(f)
+	except Exception as e:
+		print(f"Error loading config file: {e}")
+
+	FOXDOT_SND  = config["sample_path"]
+	if not isdir(FOXDOT_SND):
+		print("Could not find _loop_ in sample_path : ", FOXDOT_SND)
 	
 	#PATTERN LIST & Exclude
 	patternNames = {name: obj for name, obj in vars(Sequences).items() \
@@ -38,10 +50,10 @@ if __name__ != "__main__":
 	
 	#SYNTH LIST & Exclude
 	synthdefNames = [i for i in SynthDefs]
-	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin', 'onset']
+	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin', 'onset', 'noloop']
 	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
 					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", 
-					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce", 'quin']
+					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce", 'quin', 'cringe', 'swiss']
 	#penible_synth = ['gray']
 	synthExclude += penible_synth
 	for exclude in synthExclude:
@@ -51,8 +63,12 @@ if __name__ != "__main__":
 			pass
 
 	#LOOP LIST
-	loopNames = sorted([fn for fn in listdir(FOXDOT_LOOP)])
-	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8", "__init__.py", "serverVoice", "onsetDict.py", "slaap"]
+	# loopNames = sorted([fn for fn in listdir(FOXDOT_LOOP)])
+	loopNames = []
+	BANK_LEN = [item for item in os.listdir(FOXDOT_SND) if not (item.startswith("."))]
+	for bankNbr in BANK_LEN:
+		loopNames += sorted([fn.rsplit(".", 1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
+	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8", "__init__", "serverVoice", "onsetDict", "slaap", ""]
 	for loopxclude in loopExclude:
 		try:
 			loopNames.remove(loopxclude)

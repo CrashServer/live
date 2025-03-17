@@ -1,4 +1,4 @@
-SynthDef (\tb303,
+SynthDef.new(\tb303,
 	{| bus=0, freq=440, atk=0.1, wave=0, cutoff=800, rq=0.4, pan=0, sus=1, dec=1.0, top=2500, gate=0, amp=1, fmod=0|
 	 var  filEnv, volEnv, waves, osc;
 	freq = In.kr(bus, 1);

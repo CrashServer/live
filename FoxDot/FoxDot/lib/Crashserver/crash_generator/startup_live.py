@@ -1181,7 +1181,6 @@ class Variation():
 
 Clock.link()
 
-
 # Archive of old function 
 
 # Mixer

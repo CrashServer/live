@@ -476,13 +476,16 @@ class LoopSynthDef(SampleSynthDef):
         self.beat_stretch = self.new_attr_instance("beat_stretch")
         self.filename = self.new_attr_instance("filename")
         self.looping = self.new_attr_instance("looping")
+        self.clip = self.new_attr_instance("clip")
         self.defaults['pos']   = 0
         self.defaults['sample']   = 0
         self.defaults['beat_stretch'] = 1
         self.defaults['looping'] = 1.0
+        self.defaults['clip'] = 0
         self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
+        self.base.append("clip = if(clip<=0, 1, (clip/sus)*0.5);")
         self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, startPos: BufSampleRate.kr(buf) * pos, loop: looping);")
-        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
+        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, (sus*clip)-0.05, 0.05]));")
         self.osc = self.osc * self.amp
         self.add()
     def __call__(self, filename, pos=0, sample=0, **kwargs):

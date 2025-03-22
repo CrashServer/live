@@ -263,6 +263,7 @@ export const foxdotAutocomplete = {
         { text: 'solo()', displayText: 'solo'},
         { text: 'stop()', displayText: 'stop'},
         { text: 'only()', displayText: 'only'},
+        { text: 'lclip()', displayText: 'lclip'},
     ],
     patternFunction: [
         { text: 'renv()', displayText: 'renv' },

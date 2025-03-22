@@ -37,7 +37,9 @@ if __name__ != "__main__":
     ''' LOAD CUSTOM SYNTHDEFS '''
     try:
         from .Crashserver.crashSynthDefs import *  # Crash Custom SynthDefs
+        time.sleep(3)
         from .Crashserver.crashFX import *  # Crash Custom Fx
+        time.sleep(3)
     except:
         print("Error importing SynthDefs, FX or Loop player : ",
               sys.exc_info()[0])
@@ -249,6 +251,16 @@ if __name__ != "__main__":
                     self.last_value = self.choices(
                         self.mapping[index][0], self.mapping[index][1])[0]
                 return self.last_value
+        
+        @player_method
+        def lclip(self, clip=0):
+            """ Clip the loop player to a specific duration """
+            if clip != 0:
+                self.dur = clip
+                self.clip = clip
+            else:
+                self.clip = 0
+            
     except Exception as e:
         print(f'Player method problem : {e}')
 

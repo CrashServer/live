@@ -1,0 +1,345 @@
+Clock.bpm=108
+
+Scale.default="minor"
+
+r0 >> loop("dune_16", dur=16, sample=0, lofi=.7)
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1, hpf=300)
+
+r2 >> loop("dune_16", dur=16, sample=2, delay=8, a=.1, hpf=200)
+
+r0 >> loop("dune_16", dur=16, sample=0, lofi=0)
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1, hpf=0)
+
+r2 >> loop("dune_16", dur=16, sample=2, delay=8, a=.1, hpf=0)
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0).lclip(4) # robot fight
+
+r6.solo()
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2).lclip(4) # ry
+
+w1.solo()
+
+Clock.bpm=148
+
+Clock.bpm=108
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0).lclip(4.1) # robot fight
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0).lclip(4.01) # robot fight
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2).lclip(4.01) # ry
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2).lclip(4.1) # ry
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2).lclip(4) # ry
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0).lclip(4) # robot fight
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0, sus=16)
+
+unsolo()
+
+r0 >> loop("dune_16", dur=16, sample=0, lofi=.80)
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1, hpf=2000)
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1, hpf=200)
+
+r2 >> loop("dune_16", dur=16, sample=2, delay=8, a=.1, hpf=2000)
+
+r2 >> loop("dune_16", dur=16, sample=2, delay=8, a=.1, hpf=200)
+
+r2.stop()
+
+u7 >> loop("losthighway16", dur=16, sample=2, lofi=0).lclip(0) # heirate
+
+f8 >> play("<x.><.><....>", sample=0, amp=3).sometimes("stutter")
+
+r6.stop()
+
+r1.stop()
+
+r0.stop()
+
+f8.stop()
+
+s7 >> loop("lynchvoice8", dur=8, sample=8, comp=0, rate=1, chop=2, chopi=.5)
+
+v4.stop()
+
+u7.stop()
+
+w1.stop()
+
+u3 >> noloop("lynchvoice8", dur=8, sample=8,rate=-1)
+
+u3 >> noloop("lynchvoice8", dur=8, sample=8,rate=1)
+
+i1 >> loop("gbreak16", dur=16, fx=1, hpf=0, lpf=1300)
+
+i1 >> loop("gbreak16", dur=16, fx=1, hpf=0, lpf=0)
+
+u4 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+i1 >> loop("gbreak16", dur=16, fx=1, hpf=0, lpf=2200)
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16) # dark ambi laura
+
+u3.stop()
+
+s7.stop()
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).lclip(2) # intro
+
+x4.stop()
+
+u4.stop()
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(2) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(0) # intro
+
+i1.stop()
+
+c7.stop()
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(0) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # 2 INtro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+y5 >> loop("elephant16", sample=0, pos=0, dur=16, comp=0, sbrk=1, t_reset=0, sbrkdur=0.125, shape=0, output=6).lclip(2)
+
+y5 >> loop("elephant16", sample=0, pos=0, dur=16, comp=0, sbrk=1, t_reset=0, sbrkdur=0.125, shape=0, output=0).lclip(2)
+
+y5 >> loop("elephant16", sample=0, pos=0, dur=16, comp=0, sbrk=0, t_reset=0, sbrkdur=0.125, shape=0, output=0).lclip(2)
+
+v8.stop()
+
+v9.stop()
+
+Clock.bpm = 128;
+
+y5 >> loop("elephant16", sample=0, pos=0, dur=16, comp=0, sbrk=0, t_reset=0, sbrkdur=0.125, shape=0, output=0).lclip(0)
+
+z4.stop()
+
+Scale.default="major"
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=0)
+
+k3 >> bass(var([0,1], 16), hpf=0, hpr=0.3, oct=4, vakorg=500, vakorgr=0.5, vakorgd=50, vakorgt=0, vakorgc=0.3, dur=1/2, rate=.7).unison(2)
+
+k3 >> bass(var([0,1], 16), hpf=0, hpr=0.3, oct=4, vakorg=500, vakorgr=0.5, vakorgd=10, vakorgt=0, vakorgc=0.3, dur=1/2, rate=.7).unison(2)
+
+k3 >> bass(var([0,1], 16), hpf=0, hpr=0.3, oct=4, vakorg=500, vakorgr=0.5, vakorgd=10, vakorgt=0, vakorgc=0.3, dur=1/2, rate=.2).unison(2)
+
+k3 >> bass(var([0,1], 16), hpf=0, hpr=0.3, oct=4, vakorg=500, vakorgr=0.5, vakorgd=10, vakorgt=0, vakorgc=0.3, dur=1/2, rate=.3).unison(2)
+
+k3 >> bass(var([0,1], 16), hpf=0, hpr=0.3, oct=4, vakorg=500, vakorgr=0.5, vakorgd=10, vakorgt=0, vakorgc=0.4, dur=1/2, rate=.3).unison(2)
+
+e4 >> play("-")
+
+d4 >> play("<[vv]...|U1|...>", comp=1)
+
+j7 >> play("<x.><.><....>", amp=3, lpf=400, sample=4).sometimes("stutter")
+
+u4 >> loop("losthighway16", dur=16, sample=4, chop=2, chopi=P*[0,.25,.5,.75], mverb=.6, shift=1.1, tanh=.2) # sax
+
+j7.stop()
+
+d4.stop()
+
+y5.stop()
+
+i8.stop()
+
+Clock.bpm=lininf(108, 148, 128)
+
+b0 >> loop("losthighway32", dur=32) # piano sax
+
+a3 >> loop("elephant16", sample=1,dur=P[16:2:-2], chop=0, mverb=0.5, sus=16, cut=16/P[16:2:-2])
+
+a3.stop()
+
+h5 >> loop("dune_8", dur=8, sample=PRand(8), tanh=.2, amp=0.5).lclip(2)
+
+k3.stop()
+
+c7.stop()
+
+e4.stop()
+
+r4 >> loop("dune8", dur=8, sample=0, chop=0, chopwave=2, shift=(.25,.5,0,1.5,1.75), vol=.8) # ambi montee
+
+u4.stop()
+
+b0.stop()
+
+l4 >> play("X ", dur=8)
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=4, chopi=.5, mverb=0.1) # rammstein
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+r4 >> loop("dune8", dur=8, sample=0, chop=0, chopwave=2, shift=(.25,.5,0,1.5,1.75), vol=.6) # ambi montee
+
+h5.stop()
+
+e3.solo()
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=4, chopi=.5, mverb=0) # rammstein
+
+unsolo()
+
+Clock.clear()
+soff()
+
+u4 >> loop("losthighway16", dur=16, sample=3) # ambijazz
+
+c5 >> loop("jazzguitar8", dur=8)
+
+o6 >> loop("jazzb8", dur=8, sample=2)
+
+x5 >> loop("mulholland8", dur=8, sample=2, chop=2, chopi=0) # swing jazz
+
+x5.stop()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=0) # goodDay instru
+
+Clock.clear()
+soff()
+
+Clock.bpm = 128;
+
+z4 >> loop("lynchcrazy8", dur=8, sample=0) # goodDay instru
+
+z4 >> loop("lynchcrazy16", dur=16, sample=0, hpf=2000).lclip(0) # goodDay vocal
+
+u6 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=0) # goodDay instru
+
+j7 >> play("<x.><.><....>", amp=3, lpf=400, sample=4).sometimes("stutter")
+
+j7 >> play("<x.><.><....>", amp=2, lpf=400, sample=4).sometimes("stutter")
+
+u5 >> loop("lynchcrazy16", dur=16, sample=2) # low beat
+
+x3 >> loop("mulholland8", dur=8, sample=0, chop=0, amp=PBin()).lclip(2) # damdada
+
+x3 >> loop("mulholland8", dur=8, sample=0, chop=0, amp=PBin()).lclip(4) # damdada
+
+x3 >> loop("mulholland8", dur=8, sample=0, chop=0, amp=(PBin(), PBin())).lclip(4) # damdada
+
+x3 >> loop("mulholland8", dur=8, sample=0, chop=0, amp=(PBin(654), PBin(445))).lclip(4) # damdada
+
+x3 >> loop("mulholland8", dur=8, sample=0, chop=0, amp=(PBin(654), PBin(445)), blur=(1.02, 0.98)).lclip(4) # damdada
+
+Clock.clear()
+soff()
+
+z4 >> loop("dune16", dur=16, sample=1) # main
+
+x4 >> loop("twinpeaks16", dur=16, sample=4, blur=1).lclip(0) # love 2
+
+Clock.clear()
+soff()
+
+u4 >> loop("losthighway16", dur=16, sample=3) # ambijazz
+
+o6 >> loop("jazzb8", dur=8, sample=2)
+
+c5 >> loop("jazzguitar8", dur=8)
+
+x5 >> loop("mulholland8", dur=8, sample=2, chop=2, chopi=0) # swing jazz
+
+o6.stop()
+
+u4.stop()
+
+o6 >> loop("jazzb8", dur=8, sample=2)
+
+x5.stop()
+
+Clock.clear()
+soff()
+
+g4 >> loop("elephant16", dur=16, sample=1, valad=0, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+j3 >> loop("losthighway8", dur=8, sample=1) # putaSpell bass
+
+j4 >> loop("losthighway8", dur=8, sample=0) # duub
+
+Clock.clear()
+soff()
+
+j3 >> loop("losthighway8", dur=8, sample=2) # insensatez
+
+Clock.clear()
+soff()
+
+j8 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+Clock.clear()
+soff()
+
+j0 >> loop("losthighway8", dur=8, sample=2) # insensatez
+
+Clock.clear()
+soff()
+
+u4 >> loop("lynchcrazy16", dur=16, sample=3) # so glad
+
+u4 >> loop("lynchcrazy16", dur=16, sample=5) # heaven
+
+j5 >> loop("losthighway8", dur=8, sample=5, comp=1, shape=0) # perfectDrugs 
+
+u6 >> loop("lynchcrazy16", dur=16, sample=1) # i know
+
+u6.stop()
+
+Clock.clear()
+soff()
+
+x4 >> loop("twinpeaks16", dur=16, sample=6) # polar noire
+
+Clock.clear()
+soff()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0).lclip(0) # hoop
+
+Clock.bpm=148
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(2) # perfectDrugsTakem 
+
+j4.stop()
+
+u4 >> loop("lynchcrazy16", dur=16, sample=5) # in heaven
+
+u4.stop()
+
+Clock.clear()
+soff()
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+Clock.clear()
+soff()
+
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=2, trig=.2) # sus
+

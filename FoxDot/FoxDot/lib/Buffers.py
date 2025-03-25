@@ -508,7 +508,7 @@ class NoLoopSynthDef(SampleSynthDef):
         self.defaults['sample']   = 0
         self.defaults['trig'] = 0
         # self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
-        self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, trigger: Impulse.kr(trig*sus), startPos: start * BufFrames.kr(buf), loop: 0);")
+        self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, trigger: Impulse.kr(trig*sus), startPos: start * BufFrames.kr(buf), loop: 1);")
         self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
         self.osc = self.osc * self.amp
         self.add()

@@ -15,8 +15,8 @@ const crashPanelTitle = document.getElementById('crashPanelTitle');
 let isResizing = false;
 let startX;
 let startWidth;
-let sceneName = "";
-let sceneIntervalId = null;
+// let sceneName = "";
+// let sceneIntervalId = null;
 
 crashPanel.addEventListener('mousedown', function(e) {
     const rect = crashPanel.getBoundingClientRect();
@@ -92,9 +92,9 @@ ws.onmessage = function(event) {
             helpContainer.textContent = data.help;
             helpContainer.style.height = helpContainer.scrollHeight + 'px';
             break;
-        case 'nameScene':
-            formatSceneName(data.nameScene);
-            break;
+        // case 'nameScene':
+        //     formatSceneName(data.nameScene);
+        //     break;
         // case 'gameData':
         //     createGameTable(data.gameData);
         //     break;
@@ -217,7 +217,6 @@ function formatPlayers(message) {
             const playerId = e.currentTarget.dataset.playerId;
             EventEmitter.emit('send_foxdot', `${playerId}.stop()`);
         });
-        // line.style.cursor = 'pointer';
     });
 }
 
@@ -250,48 +249,85 @@ function updateCrashPanelTitle (serverState) {
     }
   };
 
-function formatSceneName(nameScene) {
-    if (nameScene !== sceneName) {
-        sceneName = nameScene;
-        document.getElementById('sceneName').textContent = nameScene;
-        if (sceneIntervalId !== null) {
-            clearInterval(sceneIntervalId);
-        }
+const checkboxes = document.querySelectorAll('.todo-checkbox');
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {        
+        // Vérifier si toutes les checkboxes sont cochées
+        checkAllTodos();
+    });
+  });
 
-        let startTime = Date.now();
-        sceneIntervalId = setInterval(() => {
-            const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-            const color = getDurationColor(elapsedTime/60);
-            const sceneTimeDiv = document.getElementById('sceneTime');
-            sceneTimeDiv.style.color = color;
-            sceneTimeDiv.textContent = formatTime(elapsedTime);
-        }, 1000);
+resetTodos();
+
+function resetTodos() {
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    })
+}
+
+document.querySelector("#todoTitle").addEventListener('click', ()=> {
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+    } )
+    checkAllTodos();
+})
+
+function checkAllTodos() {
+    const todoSection = document.querySelector('.todo-list');
+    const checkboxes = document.querySelectorAll('.todo-checkbox');
+    const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+    if (allChecked && checkboxes.length > 0) {
+        todoSection.style.display = 'none';
+    } else {
+        todoSection.style.display = 'block';
     }
 }
+
+
+
+// function formatSceneName(nameScene) {
+//     if (nameScene !== sceneName) {
+//         sceneName = nameScene;
+//         document.getElementById('sceneName').textContent = nameScene;
+//         if (sceneIntervalId !== null) {
+//             clearInterval(sceneIntervalId);
+//         }
+
+//         let startTime = Date.now();
+//         sceneIntervalId = setInterval(() => {
+//             const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+//             const color = getDurationColor(elapsedTime/60);
+//             const sceneTimeDiv = document.getElementById('sceneTime');
+//             sceneTimeDiv.style.color = color;
+//             sceneTimeDiv.textContent = formatTime(elapsedTime);
+//         }, 1000);
+//     }
+// }
+
 // Create a table to represent the game data  
-function createGameTable(gameData){
-    const gameDataContainer = document.getElementById('gameData')
-    gameDataContainer.innerHTML = ''; // Clear previous content
+// function createGameTable(gameData){
+//     const gameDataContainer = document.getElementById('gameData')
+//     gameDataContainer.innerHTML = ''; // Clear previous content
 
-    // Create a table to represent the game data
-    const table = document.createElement('table');
-    table.style.borderCollapse = 'collapse';
-    table.style.width = '100%';
+//     const table = document.createElement('table');
+//     table.style.borderCollapse = 'collapse';
+//     table.style.width = '100%';
 
-    gameData.forEach(row => {
-        const tr = document.createElement('tr');
-        row.forEach(cell => {
-            const td = document.createElement('td');
-            td.textContent = cell;
-            td.style.border = '1px solid black';
-            td.style.padding = '10px';
-            td.style.textAlign = 'center';
-            tr.appendChild(td);
-        });
-        table.appendChild(tr);
-    });
-    gameDataContainer.appendChild(table);
-}
+//     gameData.forEach(row => {
+//         const tr = document.createElement('tr');
+//         row.forEach(cell => {
+//             const td = document.createElement('td');
+//             td.textContent = cell;
+//             td.style.border = '1px solid black';
+//             td.style.padding = '10px';
+//             td.style.textAlign = 'center';
+//             tr.appendChild(td);
+//         });
+//         table.appendChild(tr);
+//     });
+//     gameDataContainer.appendChild(table);
+// }
 
 // piano stuff
 const scales = {

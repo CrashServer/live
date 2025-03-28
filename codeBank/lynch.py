@@ -95,3 +95,18 @@ j8 >> loop("losthighway8", dur=8, sample=4) # groove
 j4 >> loop("losthighway8", dur=8, sample=0) # duub
 x4 >> loop("twinpeaks16", dur=16, sample=6) # polar noire
 x5 >> loop("mulholland8", dur=8, sample=1, chop=0) # electro swing
+
+## A Test 148
+u4 >> loop("lynchcrazy16", dur=16, sample=5) # in heaven
+j5 >> loop("losthighway8", dur=8, sample=5, comp=1, shape=0) # perfectDrugs 
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=2, trig=.2) # sus  ## FIRE
+
+## A Test 148
+x4 >> loop("twinpeaks16", dur=8, sample=6, mverb=0.2, comp=1) # polar noire
+x2 >> play("l ", bank=1, sample=6, amp=.4, rate=var([1,0.9],16))
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=6.5, trig=0, comp=1, delay=3.75, amp=[0,1], hpf=800) # sus  ## FIRE
+
+## 
+u5 >> loop("lynchcrazy16", dur=16, sample=3, sbrk=0.5) # so glad
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=0, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(2) # hoop
+

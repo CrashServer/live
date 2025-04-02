@@ -655,27 +655,39 @@ class OnsetSynthDef(SampleSynthDef):
         self.filename = filename
         return proxy
 
+class WavetableSynthDef(SampleSynthDef):
+    def __init__(self):
+        SampleSynthDef.__init__(self, "wavetable")
+        self.phase = self.new_attr_instance("phase")
+        self.sample = self.new_attr_instance("sample")
+        # self.note = self.new_attr_instance("note")
+        self.filename = self.new_attr_instance("filename")
+        self.detune = self.new_attr_instance("detune")
 
-# class LoopSynthDef(SampleSynthDef):
-#     def __init__(self):
-#         SampleSynthDef.__init__(self, "loop")
-#         self.pos = self.new_attr_instance("pos")
-#         self.sample = self.new_attr_instance("sample")
-#         self.beat_stretch = self.new_attr_instance("beat_stretch")
-#         self.filename = self.new_attr_instance("filename")
-#         self.defaults['pos']   = 0
-#         self.defaults['sample']   = 0
-#         self.defaults['beat_stretch'] = 1
-#         self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
-#         self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, startPos: BufSampleRate.kr(buf) * pos, loop: 1.0);")
-#         self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
-#         self.osc = self.osc * self.amp
-#         self.add()
-#     def __call__(self, filename, pos=0, sample=0, **kwargs):
-#         kwargs["buf"] = Samples.loadBuffer(filename, sample)
-#         kwargs["filename"] = filename
-#         #self.filename = filename
-#         return SampleSynthDef.__call__(self, pos, **kwargs)
+        # Valeurs par défaut
+        self.defaults['phase'] = 0.5
+        self.defaults['sample'] = 0
+        # self.defaults['note'] = 60
+        self.defaults['detune'] = 0.2
+        
+        # self.base.append("freq= In.kr(bus, 1);")
+
+        # Code SuperCollider pour la lecture de wavetable
+        self.base.append("osc = Osc.ar(buf, rate*LFNoise1.ar(detune!4).bipolar(detune).midiratio, phase);")
+        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.1, 0.05]));")
+        self.base.append("osc = LeakDC.ar(osc);")
+
+        self.osc = self.osc * self.amp
+        self.add()
+        
+    def __call__(self, filename, pos=0, sample=0, **kwargs):
+        kwargs["buf"] = Samples.loadBuffer(filename, sample)
+        kwargs["filename"] = filename
+        kwargs["sample"] = sample
+        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
+        proxy.kwargs["filename"] = filename
+        self.filename = filename
+        return proxy
 
 
 loop = LoopSynthDef()
@@ -686,3 +698,4 @@ breakcore = BreakcoreSynthDef()
 splitter = SplitterSynthDef()
 splaffer = SplafferSynthDef()
 onset = OnsetSynthDef()
+wavetable = WavetableSynthDef()

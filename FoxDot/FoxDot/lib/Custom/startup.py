@@ -221,6 +221,11 @@ if __name__ != "__main__":
                 print("only with loop")
 
         @player_method
+        def note(self, note=0):
+            """ Set the note of the player, useful for the wavetable synth"""
+            self.degree=note
+
+        @player_method
         class PChain2(RandomGenerator):
             """ PChain Mod Markov Chain generator pattern with probability."""
 

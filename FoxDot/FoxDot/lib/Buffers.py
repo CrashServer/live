@@ -173,8 +173,8 @@ class BufferManager(object):
         self.loops = [fn.rsplit(".",1)[0] for fn in os.listdir(join(FOXDOT_SND, str(bank), FOXDOT_LOOP))]
 
         # Crashmod
-        self.onsetDict = {}
-        self.loadOnset()
+        # self.onsetDict = {}
+        # self.loadOnset()
 
     def __str__(self):
         return "\n".join(["%r: %s" % (k, v) for k, v in sorted(DESCRIPTIONS.items())])
@@ -456,9 +456,9 @@ class BufferManager(object):
             return buf.bufnum
 
     ### crashmod
-    def loadOnset(self):
-        with open(os.path.join(FOXDOT_LOOP, "onsetDict.py")) as f:
-            self.onsetDict = json.load(f)
+    # def loadOnset(self):
+    #     with open(os.path.join(FOXDOT_LOOP, "onsetDict.py")) as f:
+    #         self.onsetDict = json.load(f)
 
 
 def hasext(filename):
@@ -625,66 +625,62 @@ class SplafferSynthDef(SampleSynthDef):
         proxy.kwargs["filename"] = filename
         return proxy
 
-class OnsetSynthDef(SampleSynthDef):
-    def __init__(self):
-        SampleSynthDef.__init__(self, "onset")
-        self.pos = self.new_attr_instance("pos")
-        self.sample = self.new_attr_instance("sample")
-        self.beat_stretch = self.new_attr_instance("beat_stretch")
-        self.filename = self.new_attr_instance("filename")
-        self.onsetCut = self.new_attr_instance("onsetCut")
-        self.onset = self.new_attr_instance("onset")
-        self.defaults['pos']   = 0
-        self.defaults['sample']   = 0
-        self.defaults['beat_stretch'] = 0
-        self.defaults['onsetCut'] = 1
-        self.defaults["onset"] = 0
-        self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
-        self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, startPos: BufSampleRate.kr(buf) * pos, loop: 1.0);")
-        self.base.append("osc = osc * EnvGen.ar(Env([1,1,0.0001],[onsetCut, 0.01]));")
-        self.osc = self.osc * self.amp
-        self.add()
-    def __call__(self, filename, pos=0, sample=0, onset=0, **kwargs):
-        kwargs["onset"] = onset
-        kwargs["filename"] = filename
-        kwargs["sample"] = sample 
-        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
-        proxy.kwargs["filename"] = filename
-        proxy.kwargs["pos"] = pos
-        proxy.kwargs["onset"] = onset
-        self.filename = filename
-        return proxy
+# class OnsetSynthDef(SampleSynthDef):
+#     def __init__(self):
+#         SampleSynthDef.__init__(self, "onset")
+#         self.pos = self.new_attr_instance("pos")
+#         self.sample = self.new_attr_instance("sample")
+#         self.beat_stretch = self.new_attr_instance("beat_stretch")
+#         self.filename = self.new_attr_instance("filename")
+#         self.onsetCut = self.new_attr_instance("onsetCut")
+#         self.onset = self.new_attr_instance("onset")
+#         self.defaults['pos']   = 0
+#         self.defaults['sample']   = 0
+#         self.defaults['beat_stretch'] = 0
+#         self.defaults['onsetCut'] = 1
+#         self.defaults["onset"] = 0
+#         self.base.append("rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
+#         self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, startPos: BufSampleRate.kr(buf) * pos, loop: 1.0);")
+#         self.base.append("osc = osc * EnvGen.ar(Env([1,1,0.0001],[onsetCut, 0.01]));")
+#         self.osc = self.osc * self.amp
+#         self.add()
+#     def __call__(self, filename, pos=0, sample=0, onset=0, **kwargs):
+#         kwargs["onset"] = onset
+#         kwargs["filename"] = filename
+#         kwargs["sample"] = sample 
+#         proxy = SampleSynthDef.__call__(self, pos, **kwargs)
+#         proxy.kwargs["filename"] = filename
+#         proxy.kwargs["pos"] = pos
+#         proxy.kwargs["onset"] = onset
+#         self.filename = filename
+#         return proxy
 
 class WavetableSynthDef(SampleSynthDef):
     def __init__(self):
         SampleSynthDef.__init__(self, "wavetable")
         self.phase = self.new_attr_instance("phase")
         self.sample = self.new_attr_instance("sample")
-        # self.note = self.new_attr_instance("note")
         self.filename = self.new_attr_instance("filename")
         self.detune = self.new_attr_instance("detune")
 
-        # Valeurs par défaut
-        self.defaults['phase'] = 0.5
+        self.defaults['phase']   = 0
         self.defaults['sample'] = 0
-        # self.defaults['note'] = 60
         self.defaults['detune'] = 0.2
         
-        # self.base.append("freq= In.kr(bus, 1);")
-
-        # Code SuperCollider pour la lecture de wavetable
-        self.base.append("osc = Osc.ar(buf, rate*LFNoise1.ar(detune!4).bipolar(detune).midiratio, phase);")
+        self.base.append("osc = Osc.ar(buf, rate*LFNoise1.ar(detune!4).bipolar(detune).midiratio, phase.range(0,2pi));")
         self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.1, 0.05]));")
+        self.base.append("osc = HPF.ar(osc, 20);")
+        self.base.append("osc = LPF.ar(osc, 8000);")
         self.base.append("osc = LeakDC.ar(osc);")
 
         self.osc = self.osc * self.amp
         self.add()
         
-    def __call__(self, filename, pos=0, sample=0, **kwargs):
+    def __call__(self, filename, sample=0, **kwargs):
         kwargs["buf"] = Samples.loadBuffer(filename, sample)
         kwargs["filename"] = filename
         kwargs["sample"] = sample
-        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
+        proxy = SampleSynthDef.__call__(self, **kwargs)
         proxy.kwargs["filename"] = filename
         self.filename = filename
         return proxy
@@ -697,5 +693,5 @@ gsynth = GranularSynthDef()
 breakcore = BreakcoreSynthDef()
 splitter = SplitterSynthDef()
 splaffer = SplafferSynthDef()
-onset = OnsetSynthDef()
+# onset = OnsetSynthDef()
 wavetable = WavetableSynthDef()

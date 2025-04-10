@@ -255,8 +255,14 @@ export const functionUtils = {
         const loopList = message.autocomplete.loopList
         const formattedLoops = loopList.map(loop => {
             const match = loop.match(/\d+/);
-            const dur = match ? `dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
-            return { text: `"${loop}", ${dur}`, displayText: loop };
+            let dur= "";
+            if  (loop.startsWith("AKWF")) {
+                dur = ``; 
+            }
+            else {
+                dur = match ? `, dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
+            }
+            return { text: `"${loop}"${dur}`, displayText: loop };
         });
        
         const fxList = message.autocomplete.fxList;

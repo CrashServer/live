@@ -1,10 +1,13 @@
 SynthDef.new(\lofi,
-{|bus, lofi, lofiwow, lofiamp, lofi_, lofi_d, lofiwow_, lofiwow_d, lofiamp_, lofiamp_d, sus|
+{|bus, lofi, lofiwow, lofiamp, lofi_, lofi_d, lofilfo, lofiwow_, lofiwow_d, lofiwowlfo, lofiamp_, lofiamp_d, lofiamplfo, sus|
 var osc,minWowRate,wowRate,maxDepth,maxLfoDepth,depth,depthLfoAmount,wowMul,maxDelay,ratio,threshold,gain;
 osc = In.ar(bus, 2);
 lofi = if(lofi_<=0, lofi, Line.kr(lofi, lofi_, sus*lofi_d));
+lofi = if(lofilfo<=0, lofi, lofi * SinOsc.kr(lofilfo, 0, 1, 1));
 lofiwow = if(lofiwow_<=0, lofiwow, Line.kr(lofiwow, lofiwow_, sus*lofiwow_d));
+lofiwow = if(lofiwowlfo<=0, lofiwow, lofiwow * SinOsc.kr(lofiwowlfo, 0, 1, 1));
 lofiamp = if(lofiamp_<=0, lofiamp, Line.kr(lofiamp, lofiamp_, sus*lofiamp_d));
+lofiamp = if(lofiamplfo<=0, lofiamp, lofiamp * SinOsc.kr(lofiamplfo, 0, 1, 1));
 osc = HPF.ar(osc, 25);
 ratio = LinExp.kr(lofiamp, 0, 1, 0.15, 0.01);
 threshold = LinLin.kr(lofiamp, 0, 1, 0.8, 0.33);

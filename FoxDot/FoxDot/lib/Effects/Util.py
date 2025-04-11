@@ -122,19 +122,21 @@ class Effect:
 
     def setControlArgs(self, args={}):
         for arg in args.copy().keys():
-            if arg not in ["sus"] and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo"):
+            if arg not in ["sus"] and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo") and not arg.endswith("lfomul") and not arg.endswith("lfoadd"):
                 args.update({str(arg + "_"): 0})
                 args.update({str(arg + "_d"): 1})
                 args.update({str(arg + "lfo"): 0})
+                args.update({str(arg + "lfomul"): 1})
+                args.update({str(arg + "lfoadd"): 1})
         args.update({"sus": 1})
         return args
 
     def add_control(self):
         s = ""
         for a in self.args:
-            if a not in ["sus"] and not a.endswith("_") and not a.endswith("_d") and not a.endswith("lfo"):
+            if a not in ["sus"] and not a.endswith("_") and not a.endswith("_d") and not a.endswith("lfo") and not a.endswith("lfomul") and not a.endswith("lfoadd"):
                 s += f"{a} = if({a}_<=0, {a}, Line.kr({a}, {a}_, sus*{a}_d));" + "\n"
-                s += f"{a} = if({a}lfo<=0, {a}, {a} * SinOsc.kr({a}lfo, 0, 1, 1));" + "\n"
+                s += f"{a} = if({a}lfo<=0, {a}, {a} * SinOsc.kr({a}lfo, 0, {a}lfomul, {a}lfoadd));" + "\n"
         return s
 
     def add_var(self, name):
@@ -249,19 +251,23 @@ class EffectManager(dict):
         for arg in args:
             if arg not in self.all_kw:
                 self.all_kw.append(arg)
-                if arg not in ["sus"] and useControl and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo"):
+                if arg not in ["sus"] and useControl and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo") and not arg.endswith("lfomul") and not arg.endswith("lfoadd"):
                     self.all_kw.append(arg + "_")
                     self.all_kw.append(arg + "_d")
                     self.all_kw.append(arg + "lfo")
+                    self.all_kw.append(arg + "lfomul")
+                    self.all_kw.append(arg + "lfoadd")
 
             # Store the default value
             
             self.defaults[arg] = args[arg]
 
-            if arg not in ["sus"] and useControl and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo"):
+            if arg not in ["sus"] and useControl and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo") and not arg.endswith("lfomul") and not arg.endswith("lfoadd"):
                 self.defaults[arg + "_"] = 0
                 self.defaults[arg + "_d"] = 1
                 self.defaults[arg + "lfo"] = 0
+                self.defaults[arg + "lfomul"] = 1
+                self.defaults[arg + "lfoadd"] = 1
 
         return self[foxdot_arg_name]
     

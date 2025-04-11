@@ -1,0 +1,56 @@
+d2 >> play("x.")
+
+d2 >> play("x.", fx1=1)
+
+d2 >> play("x-", fx1=1)
+
+a0 >> dbass(dur=4)
+
+a0 >> dbass(dur=4, fx1=1)
+
+d2 >> play("x-", fx1=0)
+
+Clock.clear()
+soff()
+
+w7 >> MidiOut([0,3,5])
+
+w7 >> MidiOut([0,3,5], channel=1)
+
+w7 >> MidiOut([0,3,5], channel=0)
+
+w7 >> MidiOut([0,3,5], channel=10)
+
+w7 >> MidiOut([0,3,5], channel=0)
+
+w7 >> MidiOut(1, channel=0)
+
+w7 >> MidiOut([1, 2], channel=0)
+
+w7 >> MidiOut([0, 2], channel=0)
+
+w7 >> MidiOut([1, 2], channel=0)
+
+w7 >> MidiOut([1, 3], channel=0)
+
+w7 >> MidiOut(1, dur=1/2, channel=0)
+
+w7 >> MidiOut(2, dur=1/2, channel=0)
+
+w7 >> MidiOut(3, dur=1/2, channel=0)
+
+w7 >> MidiOut(4, dur=1/2, channel=0)
+
+w7 >> MidiOut(5, dur=1/2, channel=0)
+
+w7 >> MidiOut(0, dur=1/2, channel=0)
+
+w7 >> MidiOut(1, dur=1/2, channel=0)
+
+w7 >> MidiOut(2, dur=1/2, channel=0)
+
+w7 >> MidiOut(PGauss(), dur=1/2, channel=0)
+
+Clock.clear()
+soff()
+

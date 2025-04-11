@@ -1,20 +1,33 @@
 SynthDef.new(\fdistc,
-{|bus, fdistc, fdistcfreq1, fdistcfreq2, fdistcfreq3, fdistcfreq4, fdistcm1, fdistcm2, fdistcm3, fdistcm4, fdistcq1, fdistcq2, fdistcq3, fdistcq4, fdistc_, fdistc_d, fdistcfreq1_, fdistcfreq1_d, fdistcfreq2_, fdistcfreq2_d, fdistcfreq3_, fdistcfreq3_d, fdistcfreq4_, fdistcfreq4_d, fdistcm1_, fdistcm1_d, fdistcm2_, fdistcm2_d, fdistcm3_, fdistcm3_d, fdistcm4_, fdistcm4_d, fdistcq1_, fdistcq1_d, fdistcq2_, fdistcq2_d, fdistcq3_, fdistcq3_d, fdistcq4_, fdistcq4_d, sus|
+{|bus, fdistc, fdistcfreq1, fdistcfreq2, fdistcfreq3, fdistcfreq4, fdistcm1, fdistcm2, fdistcm3, fdistcm4, fdistcq1, fdistcq2, fdistcq3, fdistcq4, fdistc_, fdistc_d, fdistclfo, fdistcfreq1_, fdistcfreq1_d, fdistcfreq1lfo, fdistcfreq2_, fdistcfreq2_d, fdistcfreq2lfo, fdistcfreq3_, fdistcfreq3_d, fdistcfreq3lfo, fdistcfreq4_, fdistcfreq4_d, fdistcfreq4lfo, fdistcm1_, fdistcm1_d, fdistcm1lfo, fdistcm2_, fdistcm2_d, fdistcm2lfo, fdistcm3_, fdistcm3_d, fdistcm3lfo, fdistcm4_, fdistcm4_d, fdistcm4lfo, fdistcq1_, fdistcq1_d, fdistcq1lfo, fdistcq2_, fdistcq2_d, fdistcq2lfo, fdistcq3_, fdistcq3_d, fdistcq3lfo, fdistcq4_, fdistcq4_d, fdistcq4lfo, sus|
 var osc;
 osc = In.ar(bus, 2);
 fdistc = if(fdistc_<=0, fdistc, Line.kr(fdistc, fdistc_, sus*fdistc_d));
+fdistc = if(fdistclfo<=0, fdistc, fdistc * SinOsc.kr(fdistclfo, 0, 1, 1));
 fdistcfreq1 = if(fdistcfreq1_<=0, fdistcfreq1, Line.kr(fdistcfreq1, fdistcfreq1_, sus*fdistcfreq1_d));
+fdistcfreq1 = if(fdistcfreq1lfo<=0, fdistcfreq1, fdistcfreq1 * SinOsc.kr(fdistcfreq1lfo, 0, 1, 1));
 fdistcfreq2 = if(fdistcfreq2_<=0, fdistcfreq2, Line.kr(fdistcfreq2, fdistcfreq2_, sus*fdistcfreq2_d));
+fdistcfreq2 = if(fdistcfreq2lfo<=0, fdistcfreq2, fdistcfreq2 * SinOsc.kr(fdistcfreq2lfo, 0, 1, 1));
 fdistcfreq3 = if(fdistcfreq3_<=0, fdistcfreq3, Line.kr(fdistcfreq3, fdistcfreq3_, sus*fdistcfreq3_d));
+fdistcfreq3 = if(fdistcfreq3lfo<=0, fdistcfreq3, fdistcfreq3 * SinOsc.kr(fdistcfreq3lfo, 0, 1, 1));
 fdistcfreq4 = if(fdistcfreq4_<=0, fdistcfreq4, Line.kr(fdistcfreq4, fdistcfreq4_, sus*fdistcfreq4_d));
+fdistcfreq4 = if(fdistcfreq4lfo<=0, fdistcfreq4, fdistcfreq4 * SinOsc.kr(fdistcfreq4lfo, 0, 1, 1));
 fdistcm1 = if(fdistcm1_<=0, fdistcm1, Line.kr(fdistcm1, fdistcm1_, sus*fdistcm1_d));
+fdistcm1 = if(fdistcm1lfo<=0, fdistcm1, fdistcm1 * SinOsc.kr(fdistcm1lfo, 0, 1, 1));
 fdistcm2 = if(fdistcm2_<=0, fdistcm2, Line.kr(fdistcm2, fdistcm2_, sus*fdistcm2_d));
+fdistcm2 = if(fdistcm2lfo<=0, fdistcm2, fdistcm2 * SinOsc.kr(fdistcm2lfo, 0, 1, 1));
 fdistcm3 = if(fdistcm3_<=0, fdistcm3, Line.kr(fdistcm3, fdistcm3_, sus*fdistcm3_d));
+fdistcm3 = if(fdistcm3lfo<=0, fdistcm3, fdistcm3 * SinOsc.kr(fdistcm3lfo, 0, 1, 1));
 fdistcm4 = if(fdistcm4_<=0, fdistcm4, Line.kr(fdistcm4, fdistcm4_, sus*fdistcm4_d));
+fdistcm4 = if(fdistcm4lfo<=0, fdistcm4, fdistcm4 * SinOsc.kr(fdistcm4lfo, 0, 1, 1));
 fdistcq1 = if(fdistcq1_<=0, fdistcq1, Line.kr(fdistcq1, fdistcq1_, sus*fdistcq1_d));
+fdistcq1 = if(fdistcq1lfo<=0, fdistcq1, fdistcq1 * SinOsc.kr(fdistcq1lfo, 0, 1, 1));
 fdistcq2 = if(fdistcq2_<=0, fdistcq2, Line.kr(fdistcq2, fdistcq2_, sus*fdistcq2_d));
+fdistcq2 = if(fdistcq2lfo<=0, fdistcq2, fdistcq2 * SinOsc.kr(fdistcq2lfo, 0, 1, 1));
 fdistcq3 = if(fdistcq3_<=0, fdistcq3, Line.kr(fdistcq3, fdistcq3_, sus*fdistcq3_d));
+fdistcq3 = if(fdistcq3lfo<=0, fdistcq3, fdistcq3 * SinOsc.kr(fdistcq3lfo, 0, 1, 1));
 fdistcq4 = if(fdistcq4_<=0, fdistcq4, Line.kr(fdistcq4, fdistcq4_, sus*fdistcq4_d));
+fdistcq4 = if(fdistcq4lfo<=0, fdistcq4, fdistcq4 * SinOsc.kr(fdistcq4lfo, 0, 1, 1));
 osc = RLPF.ar(osc, fdistcfreq1, fdistcq1);
 osc = (osc * fdistcm1 * fdistc).tanh;
 osc = RLPF.ar(osc, fdistcfreq2, fdistcq2);

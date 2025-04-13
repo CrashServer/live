@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Configuration de CodeMirror
   const editor = CodeMirror(document.getElementById('editor'), {
     mode: 'python',
-    theme: 'eclipse',
+    theme: 'material-darker',
     lineNumbers: true,
     autofocus: true,
     matchBrackets: true,
@@ -244,8 +244,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       'Ctrl-Left': (cm) => {functionUtils.goToPreviousComma(cm)},
       'Ctrl-Right': (cm) => {functionUtils.goToNextComma(cm)},
       'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
-      'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
-      'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},
+      'Alt-Up': (cm) => {
+                    functionUtils.incrementValue(cm, 1)
+                    evaluateCode(cm, false)
+                  },
+      'Alt-Down': (cm) => {
+                    functionUtils.incrementValue(cm, -1)
+                    evaluateCode(cm, false)
+                  },
+      // 'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
+      // 'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},
       'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
       // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });

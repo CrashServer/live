@@ -12,6 +12,7 @@ export function setupConfigPanel(awareness, editor) {
     const modal = document.getElementById("shortcutsModal");
     const modalbtn = document.getElementById("openModalBtn");
     const closeModal = document.getElementById("closeModal");
+    const buttonValidatePlayerName = document.getElementById('validatePlayerName');
     // const themeInterface = document.getElementById('themeInterface');
     const themeInterfaceSelector = document.getElementById('themeInterfaceSelector');
 
@@ -45,6 +46,13 @@ export function setupConfigPanel(awareness, editor) {
             userNameInput.blur();
         }
     });
+
+    buttonValidatePlayerName.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateUserInfo();
+        userNameInput.blur();
+    }
+    );
     
     userColorInput.addEventListener('input', updateUserInfo);
 

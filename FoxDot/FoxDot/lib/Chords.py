@@ -1,6 +1,6 @@
-from .Patterns import Pattern, PGroup, asStream
+from .Patterns import Pattern, PGroup, asStream, P
 
-list_chords = ["6", "7", "9", "add9", "13", "sus2", "sus4"]
+list_chords = ["6", "7", "9", "add9", "13", "sus2", "sus4", "m", "m7", "dim", "aug", "maj7", "dim7"]
 
 I   = PGroup(0, 2, 4)
 II  = PGroup(1, 3, 5)
@@ -65,3 +65,59 @@ IVsus4 = PGroup(IV) + (0,1,0)
 Vsus4 = PGroup(V) + (0,1,0)
 VIsus4 = PGroup(VI) + (0,1,0)
 VIIsus4 = PGroup(VII) + (0,1,0)
+
+# Accords mineurs (m)
+Im   = PGroup(0, 2-1, 4)
+IIm  = PGroup(1, 3-1, 5)
+IIIm = PGroup(2, 4-1,-1)
+IVm  = PGroup(3, 5-1, 0)
+Vm   = PGroup(4,-1-1, 1)
+VIm  = PGroup(5, 0-1, 2)
+VIIm = PGroup(-1,1-1, 3)
+
+# Accords mineurs 7 (m7)
+Im7   = PGroup(Im).concat(-6)
+IIm7  = PGroup(IIm).concat(-7)
+IIIm7 = PGroup(IIIm).concat(-8)
+IVm7  = PGroup(IVm).concat(-9)
+Vm7   = PGroup(Vm).concat(-10)
+VIm7  = PGroup(VIm).concat(-11)
+VIIm7 = PGroup(VIIm).concat(-12)
+
+# Accords diminués (dim)
+Idim   = PGroup(0, 2-1, 4-1)
+IIdim  = PGroup(1, 3-1, 5-1)
+IIIdim = PGroup(2, 4-1,-1-1)
+IVdim  = PGroup(3, 5-1, 0-1)
+Vdim   = PGroup(4,-1-1, 1-1)
+VIdim  = PGroup(5, 0-1, 2-1)
+VIIdim = PGroup(-1,1-1, 3-1)
+
+# Accords augmentés (aug)
+Iaug   = PGroup(0, 2, 4+1)
+IIaug  = PGroup(1, 3, 5+1)
+IIIaug = PGroup(2, 4,-1+1)
+IVaug  = PGroup(3, 5, 0+1)
+Vaug   = PGroup(4,-1, 1+1)
+VIaug  = PGroup(5, 0, 2+1)
+VIIaug = PGroup(-1,1, 3+1)
+
+# Accords de septième majeure (maj7)
+Imaj7   = PGroup(I).concat(-5)
+IImaj7  = PGroup(II).concat(-6)
+IIImaj7 = PGroup(III).concat(-7)
+IVmaj7  = PGroup(IV).concat(-8)
+Vmaj7   = PGroup(V).concat(-9)
+VImaj7  = PGroup(VI).concat(-10)
+VIImaj7 = PGroup(VII).concat(-11)
+
+# Accords de septième diminuée (dim7)
+Idim7   = PGroup(Idim).concat(-7)
+IIdim7  = PGroup(IIdim).concat(-8)
+IIIdim7 = PGroup(IIIdim).concat(-9)
+IVdim7  = PGroup(IVdim).concat(-10)
+Vdim7   = PGroup(Vdim).concat(-11)
+VIdim7  = PGroup(VIdim).concat(-12)
+VIIdim7 = PGroup(VIIdim).concat(-13)
+
+circle5 = P[I, IV, VII, III, VI, II, V, I]

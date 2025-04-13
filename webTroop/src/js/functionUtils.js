@@ -215,13 +215,75 @@ export const functionUtils = {
 
         return { startLine, endLine };
     },
-
-    incrementValue(cm, value){
+    incrementValue(cm, value) {
         const cursor = cm.getCursor();
-        let text = cm.getRange({line: cursor.line, ch: cursor.ch}, {line: cursor.line, ch: cursor.ch +1});
-        if (parseInt(text) || parseInt(text) === 0) {
-            cm.replaceRange((parseInt(text) + value).toString(), {line: cursor.line, ch: cursor.ch}, {line: cursor.line, ch: cursor.ch +1});
-            cm.setCursor({line: cursor.line, ch: cursor.ch});
+        const line = cm.getLine(cursor.line);
+        
+        // Trouver les limites du nombre à partir de la position du curseur
+        let start = cursor.ch;
+        let end = cursor.ch;
+        
+        // Recherche du début du nombre (vers la gauche)
+        while (start > 0 && /[\d\.\-]/.test(line.charAt(start - 1))) {
+            start--;
+        }
+        
+        // Recherche de la fin du nombre (vers la droite)
+        while (end < line.length && /[\d\.]/.test(line.charAt(end))) {
+            end++;
+        }
+        
+        // Extraire le nombre complet
+        let numberStr = line.substring(start, end);
+
+        // Vérifier si c'est un nombre commençant par un point (comme .5)
+        const startsWithDot = /^\.\d+$/.test(numberStr);
+    
+        // Ajouter un zéro en préfixe pour le traitement interne si nécessaire
+        if (startsWithDot) {
+            numberStr = "0" + numberStr;
+        }
+        
+        // Vérifier si c'est un nombre valide
+        if (/^-?\d+(\.\d+)?$/.test(numberStr)) {
+            let result;
+            
+            // Déterminer s'il s'agit d'un entier ou d'un nombre à virgule
+            if (numberStr.includes('.')) {
+                // Nombre décimal
+                const num = parseFloat(numberStr);
+                
+                // Récupérer le nombre de décimales
+                const decimalPart = numberStr.split('.')[1] || '';
+                const precision = decimalPart.length > 0 ? decimalPart.length : 1; // Au moins 1 décimale
+                // Incrémenter de 0.01 pour les décimaux et garder le bon format
+                const multiplier = (precision > 1) ? 0.01 : 0.1;
+                result = (num + (value * multiplier)).toFixed(precision);
+                
+                // Supprimer les zéros non significatifs à la fin si le nombre original n'en avait pas
+                // if (!numberStr.endsWith('0')) {
+                //     result = result.replace(/0+$/, '');
+                //     if (result.endsWith('.')) {
+                //         result = result.slice(0, -1);
+                //     }
+                // }
+            } else {
+                // Nombre entier
+                const num = parseInt(numberStr, 10);
+                
+                // Pour les nombres supérieurs à 99, incrémenter par 100
+                if (Math.abs(num) > 99) {
+                    result = (num + (value * 100)).toString();
+                } else {
+                    result = (num + value).toString();
+                }
+            }
+            
+            // Remplacer l'ancien nombre par le nouveau
+            cm.replaceRange(result, {line: cursor.line, ch: start}, {line: cursor.line, ch: end});
+            
+            // Replacer le curseur
+            cm.setCursor({line: cursor.line, ch: start + result.length});
         }
     },
 

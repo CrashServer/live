@@ -11,6 +11,8 @@ const config = await configRequest.json();
 const crashPanel = document.getElementById('crashPanel')
 const crashPanelToggle = document.getElementById('crashPanelToggle');
 const crashPanelTitle = document.getElementById('crashPanelTitle');
+const todoList = document.querySelector('.todo-list');
+const showTodo = config.showTodo ?? false;
 
 let isResizing = false;
 let startX;
@@ -20,6 +22,10 @@ let startWidth;
 let tapTimes = [];
 let calculatedBPM = 0;
 let tapTimeout = null;
+
+if (!showTodo) {
+    todoList.style.display = 'none';
+}
 
 crashPanel.addEventListener('mousedown', function(e) {
     const rect = crashPanel.getBoundingClientRect();

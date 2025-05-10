@@ -1,0 +1,118 @@
+v5 >> pluck(dur=4,oct=3)
+
+v5 >> pluck(dur=4,oct=3, fx1=1)
+
+v5 >> pluck(dur=1/2,oct=3, fx1=1)
+
+n1 >> play("k.")
+
+n1 >> play("k-")
+
+v5 >> pluck(dur=1/2,oct=(3,4), fx1=1)
+
+n1 >> play("k-", fx1=1)
+
+n1 >> play("k-", fx1=0)
+
+v5 >> pluck(PGauss(), dur=1/2,oct=(3,4), fx1=1)
+
+v5 >> pluck(var(PGauss(),8), dur=1/2,oct=(3,4), fx1=1)
+
+v5 >> pluck(var(PGauss(),8), dur=1/2,oct=(3), fx1=1)
+
+n1 >> play("k-", fx1=1)
+
+v5.stop()
+
+Clock.clear()
+soff()
+
+v5 >> pluck(var(PGauss(),8), dur=1/2,oct=(3), fx1=1)
+
+n1 >> play("k-", fx1=1)
+
+n1 >> play("<k-><..u.>", fx1=1)
+
+n1 >> play("<k-><..u.>", fx1=1, drcomp=.5)
+
+n1 >> play("<k-><..u.>", fx1=1, drcomp=0)
+
+n1 >> play("<k-><..u.>", fx1=0, drcomp=0)
+
+n1 >> play("<k-><..u.>", fx1=1, drcomp=0)
+
+Clock.bpm=92
+
+o4 >> loop("break4", dur=4, fx1=1)
+
+n1 >> play("<k-><..u.>", fx1=à, drcomp=0)
+
+n1 >> play("<k-><..u.>", fx1=0, drcomp=0)
+
+n1 >> play("<k-><..u.><X.>", fx1=0, drcomp=0.2)
+
+Clock.bpm=178
+
+o4.stop()
+
+n1 >> play("<k-><..u.><X.>", fx1=1, drcomp=0.2)
+
+n1 >> play("<k-><..u.><X.>", fx1=1, drcomp=0)
+
+n1 >> play("<k.><X.>", fx1=1, drcomp=0)
+
+v5 >> pluck(var(PGauss(),8), dur=1/2,oct=(3), fx1=0)
+
+n1 >> play("<k-><X.>", fx1=1, drcomp=0)
+
+n1 >> play("<k-><..o.><X.>", fx1=1, drcomp=0)
+
+v5 >> pluck(var(PGauss(),8), dur=1/2,oct=(3), fx1=0, dist2=1)
+
+Clock.clear()
+soff()
+
+v5 >> pluck(var(PGauss(),8), dur=4,oct=(3), fx2=1, dist2=0)
+
+y3 >> supersaw(dur=8, fx2=1)
+
+y3 >> supersaw(dur=8, fx2=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+y3 >> supersaw(melody(), dur=8, fx2=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+y3 >> supersaw(melody(), dur=1/2, fx2=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+n1 >> play("<k-><..o.><X.>", fx1=1, drcomp=0)
+
+n1 >> play("<k-><..o.><X.>", fx1=0, drcomp=0)
+
+y3 >> supersaw(melody(), dur=1/2, fx2=1, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+y3 >> supersaw(melody(), dur=8, fx2=1, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+Clock.bpm=98
+
+n1 >> play("<k-><..o.><X.>", fx1=0, drcomp=0, fx2=1)
+
+n1 >> play("<k-><..o.><X.>", fx1=0, drcomp=0, fx2=0)
+
+y3 >> supersaw(melody(), oct=(4,5), dur=8, fx2=1, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+y3 >> supersaw(melody(), oct=(4,5,3), dur=8, fx2=1, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+Clock.clear()
+soff()
+
+k6 >> blip(fx2=1)
+
+k6 >> blip(fx2=1, dur=8)
+
+k6 >> blip(fx2=1, dur=8, oct=3)
+
+q4 >> play("p...", fx2=1, dur=4)
+
+q4 >> play("p..(.v)", fx2=1, dur=4)
+
+Clock.clear()
+soff()
+

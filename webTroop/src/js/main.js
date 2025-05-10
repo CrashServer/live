@@ -252,8 +252,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     functionUtils.incrementValue(cm, -1)
                     evaluateCode(cm, false)
                   },
-      // 'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
-      // 'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},
+      'Alt-A': (cm) => {functionUtils.randomizer(cm)},
       'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
       // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });

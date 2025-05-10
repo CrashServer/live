@@ -65,9 +65,10 @@ if __name__ != "__main__":
 	#LOOP LIST
 	# loopNames = sorted([fn for fn in listdir(FOXDOT_LOOP)])
 	loopNames = []
-	BANK_LEN = [item for item in os.listdir(FOXDOT_SND) if not (item.startswith("."))]
+	BANK_LEN = [item for item in os.listdir(FOXDOT_SND) if item.isdigit()]
 	for bankNbr in BANK_LEN:
 		loopNames += sorted([fn.rsplit(".", 1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
+	
 	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8", "__init__", "serverVoice", "onsetDict", "slaap", ""]
 	
 	# Remove all loops that start with "AKWF"

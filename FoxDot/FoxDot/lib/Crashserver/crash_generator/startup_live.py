@@ -289,6 +289,16 @@ pfx = print_fx
 psynth = print_synth
 pvideo = print_video
 
+def chaos(chaosInt=1):
+    ''' Generate some random players '''
+    chaosText = ""
+    for i in range(chaosInt):
+        chaosText += add_player(True)
+        chaosText += "\n"
+    sendAttack(chaosText)
+
+
+
 def PMorse(text, point=1/4, tiret=3/4):
     """ Convert a string to the value of point & tiret """
     MORSE_DICT = {'A': '.-', 'B': '-...',

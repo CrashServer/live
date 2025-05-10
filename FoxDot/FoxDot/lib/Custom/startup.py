@@ -748,13 +748,7 @@ if __name__ != "__main__":
             ''' Generate a melody based on Markov chain dict of melody '''
             return PChain2(melody_dict)
 
-        def chaos(chaosInt=1):
-            ''' Generate some random players '''
-            chaosText = ""
-            for i in range(chaosInt):
-                chaosText += add_player(True)
-                chaosText += "\n"
-            sendAttack(chaosText)
+
 
         def PRy(total=16, div=4, restProb=0):
             ''' Generate a ryhtm pattern '''

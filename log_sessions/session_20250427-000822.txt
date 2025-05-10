@@ -1,0 +1,992 @@
+v2 >> play("<k.><[--](:::=)><..u.><(#...)...>", sample=1, amp=1).sometimes("stutter").human(0)
+
+v2 >> play("<k.><[--](:::=)><..u.><(#...)...>", sample=1, amp=1, drcomp=0.5).sometimes("stutter").human(0)
+
+v2 >> play("<k.><[--](:::=)><..u.><(#...)...>", sample=0, amp=1, drcomp=0.5).sometimes("stutter").human(0)
+
+v2 >> play("<k.><[--](:::=)><..u.><(#...)...>", sample=0, amp=1, drcomp=0).sometimes("stutter").human(0)
+
+v2 >> play("<k.><[--](:::=)><..u.><(#...)...>", sample=0, amp=1, drcomp=0.5).sometimes("stutter").human(0)
+
+v2 >> play("<k.><[--](:::=)><..u.><(~...)...>", sample=0, amp=1, drcomp=0.5).sometimes("stutter").human(0)
+
+v2 >> play("<k.><[--](:::=)><..u.><(~...)...>", sample=0, amp=1, drcomp=0.5).sometimes("stutter").human(0)
+
+v2 >> play("<k.><[--](:::=)><..u.><(T...)...>", sample=0, amp=1, drcomp=0.5).sometimes("stutter").human(0)
+
+Clock.clear()
+soff()
+
+Clock.bpm=137
+
+b4 >> play("m")
+
+b4 >> play("M")
+
+b4 >> play("m")
+
+b4 >> play("T")
+
+b4 >> play("t")
+
+b4 >> play("mMt")
+
+b4 >> play("mMtT")
+
+b4 >> play("mMtT", amp=PWhite(0.8,1.1))
+
+b4 >> play("mMtT", amp=PWhite(0.8,1.1), drcomp=0.5)
+
+b4 >> play("mMt{mMTt}", amp=PWhite(0.8,1.1), drcomp=0.5)
+
+b4 >> play("mMt[T{mMTt}]", amp=PWhite(0.8,1.1), drcomp=0.5)
+
+b2 >> wobble(oct=3,dur=8,  cutoff=8500, wphase=0.5)
+
+b2 >> wobble(oct=3,dur=8,  cutoff=8500, wphase=0.2)
+
+b2 >> wobble(oct=3,dur=8,  cutoff=8500, wphase=0.2).unison(3)
+
+b2 >> wobble(oct=3,dur=8,  cutoff=8500, wphase=0.5).unison(3)
+
+b2 >> wobble(oct=3,dur=8,  cutoff=8500, wphase=0.1).unison(3)
+
+b2 >> wobble(oct=3,dur=8,  cutoff=8500, wphase=0.1, tanh=.2).unison(3)
+
+b2 >> wobble(oct=3,dur=8,  cutoff=8500, wphase=0.1, tanh=.1).unison(3)
+
+b2 >> wobble(oct=3,dur=8,  cutoff=8500, wphase=0.1, tanh=.1, vol=0.8).unison(3)
+
+w2 >> play("-")
+
+w2 >> play("---(---{-:=})")
+
+w2 >> play("---(---{-:=})", amp=PWhite(0.8,1.2))
+
+w2 >> play("---(---{-:=})", amp=PWhite(0.8,1.2)).sometimes("stutter")
+
+b4 >> play("mMt[T{mMTt}]", amp=PWhite(0.8,1.1), drcomp=0.5).sometimes("stutter")
+
+w2 >> play("---(---{-:=})", amp=PWhite(0.8,1.2), pan=PWhite(-1,1)).sometimes("stutter")
+
+n6 >> play("kkuk", drcomp=0.5)
+
+b4 >> play("mMt[T{mMTt}]", amp=var([0, PWhite(0.8,1.1)], [6,2]), drcomp=0.5).sometimes("stutter")
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin(), PWhite(0.8,1.1)], [6,2]), drcomp=0.5).sometimes("stutter")
+
+b2 >> wobble(I, oct=3, dur=8,  cutoff=8500, wphase=0.1, tanh=.1, vol=0.8).unison(3)
+
+b2 >> wobble(0, oct=3, dur=8,  cutoff=8500, wphase=0.1, tanh=.1, vol=0.8).unison(3)
+
+b2 >> wobble(0, oct=3, dur=8,  cutoff=8500, wphase=0.8, tanh=.1, vol=0.8).unison(3)
+
+b2 >> wobble(0, oct=3, dur=1/2,  cutoff=8500, wphase=0.8, tanh=.1, vol=0.8).unison(3)
+
+b2 >> wobble(0, oct=3, dur=2,  cutoff=8500, wphase=0.8, tanh=.1, vol=0.8).unison(3)
+
+b2 >> wobble(0, oct=3, dur=1,  cutoff=8500, wphase=0.8, tanh=.1, vol=0.8).unison(3)
+
+b2 >> wobble(0, oct=3, dur=1/4,  cutoff=8500, wphase=0.8, tanh=.1, vol=0.8).unison(3)
+
+b2 >> wobble(0, oct=3, dur=1/4, cutoff=8500, wphase=0.1, tanh=.1, vol=0.8).unison(3)
+
+b2 >> wobble(0, oct=3, dur=1/4, cutoff=8500, wphase=0.01, tanh=.1, vol=0.8).unison(3)
+
+b2.stop()
+
+b0 >> play("x.", sample=4, amp=3).start(64)
+
+n6 >> play(".kuk", drcomp=0.5)
+
+n6 >> play(".kuk", drcomp=0.1)
+
+n6 >> play(".kuk", drcomp=0.5)
+
+n6 >> play(".kuk", drcomp=0.5, sample=5)
+
+n6.solo()
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin(), PWhite(0.8,1.1)], [6,2]), drcomp=0.5).sometimes("stutter")
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin(), PWhite(0.8,1.1)], [6,2]), drcomp=0.1).sometimes("stutter")
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin(), PWhite(0.8,1.1)], [6,2]), drcomp=0.2).sometimes("stutter")
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin(), PWhite(0.8,1.1)], [6,2]), drcomp=1).sometimes("stutter")
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin(), PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin()*.5, PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin()*PWhite(0.1,0.5), PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+w2 >> play("---(---{-:=})", amp=PWhite(0.8,1.2), pan=PWhite(-1,1)).sometimes("stutter")
+
+w2 >> play("---{-:=}", amp=PWhite(0.8,1.2), pan=PWhite(-1,1)).sometimes("stutter")
+
+n6 >> play("kkuk", drcomp=0.5, sample=5)
+
+b2 >> elmbass(0, oct=3, dur=1/2, cutoff=8500, wphase=0.01, tanh=.1, vol=0.8).unison(3)
+
+b2 >> elmbass(0, oct=3, dur=1/2, cutoff=8500, tanh=.1, vol=0.8).unison(0)
+
+b2 >> elmbass(0, oct=5, dur=1/2, cutoff=8500, tanh=.1, vol=0.8).unison(0)
+
+b2.solo()
+
+b2 >> elmbass(0, oct=5, dur=1, cutoff=8500, tanh=.1, vol=0.8).unison(0)
+
+~b2 >> elmbass(0, oct=5, dur=1, cutoff=8500, tanh=0, vol=0.8).unison(0)
+
+b2 >> elmbass(0, oct=5, dur=1, cutoff=8500, tanh=0, vol=1).unison(0)
+
+b2 >> elmbass(0, oct=5, dur=1, cutoff=8500, tanh=0)
+
+Clock.clear()
+soff()
+
+b2 >> elmbass(0, oct=5, dur=1, cutoff=8500, tanh=0)
+
+Clock.clear()
+soff()
+
+o8 >> elmbass()
+
+o8 >> cbass(cutoff=200, rq=0.9, boost=1.5, detune=0.01, follow=2)
+
+o8 >> cbass(cutoff=200, rq=0.9, boost=1.5, detune=0.01, follow=2, dur=8)
+
+o8 >> cbass(cutoff=200, rq=0.9, boost=1.5, detune=0.02, follow=2, dur=8)
+
+o8 >> cbass(cutoff=300, rq=0.9, boost=1.5, detune=0.02, follow=2, dur=8)
+
+o8 >> cbass(cutoff=400, rq=0.9, boost=1.5, detune=0.02, follow=2, dur=8)
+
+o8 >> cbass(cutoff=400, rq=0.9, boost=1.5, detune=0.02, follow=1, dur=8)
+
+o8 >> cbass(cutoff=400, rq=0.9, boost=1.5, detune=0.02, follow=2, dur=8)
+
+o8 >> cbass(cutoff=400, rq=0.9, boost=1.5, detune=0.02, follow=3, dur=8)
+
+o8 >> cbass(cutoff=400, rq=0.9, boost=1.5, detune=0.02, follow=3, dur=8, oct=(3,4,5))
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin()*PWhite(0.1,0.5), PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+w2 >> play("---{-:=}", amp=PWhite(0.8,1.2), pan=PWhite(-1,1)).sometimes("stutter")
+
+n6 >> play("kkuk", drcomp=0.5, sample=5)
+
+b0 >> play("x.", sample=4, amp=3)
+
+o8 >> cbass(cutoff=400, rq=0.9, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.8, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.7, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.6, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.5, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.4, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.3, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.2, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.1, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=300, rq=0.1, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=200, rq=0.1, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=300, rq=0.1, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=400, rq=0.1, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=500, rq=0.1, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=600, rq=0.1, boost=1.5, detune=0.02, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=600, rq=0.1, boost=1.5, detune=0.01, follow=3, dur=PDur(3,5), oct=(3,4,5))
+
+o8 >> cbass(cutoff=600, rq=0.1, boost=1.5, detune=0.01, follow=3, dur=PDur(3,5), oct=(5))
+
+o8 >> cbass(cutoff=600, rq=0.1, boost=1.5, detune=0.01, follow=3, dur=PDur(3,5), oct=(4,5))
+
+o8 >> cbass(cutoff=600, rq=0.1, boost=1.5, detune=0.01, follow=3, dur=PDur(3,8), oct=(4,5))
+
+o8 >> cbass(cutoff=600, rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(4,5))
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(4,5))
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(4,5,6))
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,5), oct=(4,5,6))
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,[8,5]), oct=(4,5,6))
+
+c9 >> loop("gscreech16", dur=16)
+
+c9 >> loop("gscreech16", dur=16, sample=2)
+
+c9 >> loop("gscreecha16", dur=16, sample=2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3)
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(4,5,6))
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(4,5,6))
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(4,5,6))
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(4,5,6))
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(4,5,6))
+
+t9 >> dblbass(dur=1/2)
+
+t9.solo()
+
+t9 >> dblbass(dur=1/2, oct=4)
+
+t9 >> acidbass(dur=1/2, oct=4)
+
+t9 >> acidbass(dur=1/2, oct=4).unison(3)
+
+unsolo()
+
+t9 >> lbass(dur=1/2, oct=4).unison(3)
+
+t9 >> lbass(dur=1/2, oct=4, cutoff=6000).unison(3)
+
+t9 >> lbass(dur=1/2, oct=4, cutoff=6000, tone=0.3).unison(3)
+
+t9 >> lbass(dur=1/2, oct=4, cutoff=6000, tone=0.4).unison(3)
+
+t9 >> lbass(dur=1/2, oct=4, cutoff=6000, tone=0.5).unison(3)
+
+t9 >> lbass(dur=1/4, oct=4, cutoff=PFr(300,6000), tone=0.5).unison(3)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5).unison(3)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5).unison(1)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5).unison(0)
+
+c9 >> loop("gscreecha16", dur=16, sample=4)
+
+t9.stop()
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5)
+
+b4.stop()
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin()*PWhite(0.1,0.5), PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(5,6))
+
+n6.stop()
+
+n6 >> play("kkuk", drcomp=0.5, sample=5)
+
+n6 >> play("..u.")
+
+n6 >> play("..u.", amp=3)
+
+n6 >> play("..u.", amp=3, drcomp=0.5)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=120)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=20)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=21)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=22)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=23)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=24)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=25)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=26)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=27)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=28)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=29)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=30)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=30)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=130)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=230)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=130)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=30)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=60)
+
+c9 >> loop("gscreecha16", dur=16, sample=5)
+
+c9 >> loop("gscreecha16", dur=16, sample=2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3)
+
+y4 >> loop("gscreechvar16", dur=16)
+
+Clock.clear()
+soff()
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(5,6))
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin()*PWhite(0.1,0.5), PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+w2 >> play("---{-:=}", amp=PWhite(0.8,1.2), pan=PWhite(-1,1)).sometimes("stutter")
+
+n6 >> play("kkuk", drcomp=0.5, sample=5)
+
+c9 >> loop("gscreecha16", dur=16, sample=3)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=60)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=60, vol=.8)
+
+y4 >> loop("gbuild16", dur=16, sample=4)
+
+y4.stop()
+
+y4 >> loop("gbuild16", dur=16, sample=4)
+
+y4.stop()
+
+b0 >> play("x.", sample=4, amp=3)
+
+masterAll("amp", PBin())
+
+masterAll(0, "amp", PBin())
+
+y4 >> loop("gbuild16", dur=16, sample=4)
+
+masterAll(0, "amp", PBin())
+
+masterAll(0, "amp", PBin())
+
+masterAll("amp", PBin())
+
+y4.stop()
+
+y4 >> loop("gbuild16", dur=16, sample=4)
+
+y4.stop()
+
+masterAll(0, "amp", PBin())
+
+c9.stop()
+
+c9 >> loop("gscreecha16", dur=16, sample=3).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=400).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2400).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=1200, dastart=50, darel=0.2, darq=0.5, datype=0).lclip(2)
+
+c9.solo()
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=200, dastart=50, darel=0.2, darq=0.5, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.2, darq=0.5, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.2, darq=0.4, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.2, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.2, darq=0.3, datype=0).lclip(4)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.2, darq=0.3, datype=0).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.2, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.3, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.4, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.5, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.6, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.7, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.8, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.9, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=1.0, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=1.1, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=1.0, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.9, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.8, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.7, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.6, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.5, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.4, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.3, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.2, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.1, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=50, darel=0.01, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=2200, dastart=250, darel=0.01, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.01, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.02, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.03, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.04, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.05, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.06, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.07, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.08, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.09, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.10, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.11, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.12, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.13, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=4200, dastart=250, darel=0.14, darq=0.3, datype=0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=0, dastart=250, darel=0.14, darq=0.3, datype=0).lclip(0)
+
+c9.solo()
+
+n6 >> play("..u.", amp=3, drcomp=0.5)
+
+unsolo()
+
+y4 >> loop("gbuild16", dur=16, sample=6)
+
+y4.solo()
+
+y5 >> loop("gbuild16", dur=16, sample=6, delay=8)
+
+y6 >> loop("gbuild16", dur=16, sample=6, delay=12)
+
+masterAll(0, "amp", PBin())
+y3 >> loop("gbuild16", dur=16, sample=6)
+y4 >> loop("gbuild16", dur=16, sample=6, delay=4)
+y5 >> loop("gbuild16", dur=16, sample=6, delay=8)
+y6 >> loop("gbuild16", dur=16, sample=6, delay=12)
+
+masterAll(0, "amp", PBin())
+y3 >> loop("gbuild16", dur=16, sample=6)
+y4 >> loop("gbuild16", dur=16, sample=5, delay=4)
+y5 >> loop("gbuild16", dur=16, sample=4, delay=8)
+y6 >> loop("gbuild16", dur=16, sample=3, delay=12)
+
+y_all.stop()
+
+unsolo()
+
+y3 >> loop("gbuild16", dur=16, sample=6)
+y4 >> loop("gbuild16", dur=16, sample=5, delay=4)
+y5 >> loop("gbuild16", dur=16, sample=4, delay=8)
+y6 >> loop("gbuild16", dur=16, sample=3, delay=12)
+
+masterAll(0, "amp", PBin())
+
+masterAll("amp", PBin())
+
+masterAll(0,"amp", PBin())
+y_all.stop()
+
+Clock.clear()
+soff()
+
+g8 >> loop("gcindrum16", dur=16, sample=10)
+
+g8 >> loop("gcindrum16", dur=32, sample=10)
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(5,6))
+
+o8.stop()
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin()*PWhite(0.1,0.5), PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+w2 >> play("---{-:=}", amp=PWhite(0.8,1.2), pan=PWhite(-1,1)).sometimes("stutter")
+
+w2 >> play("---{-:=}", amp=PWhite(0.8,1.2), pan=PWhite(-1,1), sample=5).sometimes("stutter")
+
+w2 >> play("---(---{-:=})", amp=PWhite(0.8,1.2), pan=PWhite(-1,1), sample=5).sometimes("stutter")
+
+n6 >> play("kkuk", drcomp=0.5, sample=5)
+
+n6 >> play("kkuk", drcomp=0, sample=5)
+
+n6 >> play("kkuk", drcomp=0.3, sample=5)
+
+b0 >> play("x.", sample=4, amp=3)
+
+n6.stop()
+
+n6 >> play("..u.", amp=3, drcomp=0.5)
+
+t9 >> lbass(dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,2,2], [16,16,0])), dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,16,0])), dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,12,4])), dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.5, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.6, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.7, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(300,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(400,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(500,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(600,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(700,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(800,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(900,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1000,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1100,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, linvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1200,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, expvar([0,7,7], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1200,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1200,6000), tone=0.8, hpf=60, vol=.8)
+
+y3 >> loop("gbuild16", dur=16, sample=6)
+
+y4 >> loop("gbuild16", dur=16, sample=5, delay=4)
+
+y5 >> loop("gbuild16", dur=16, sample=4, delay=8)
+
+y6 >> loop("gbuild16", dur=16, sample=3, delay=12)
+
+masterAll("amp", PBin())
+
+y3 >> loop("gbuild16", dur=16, sample=6)
+y4 >> loop("gbuild16", dur=16, sample=6, delay=4)
+y5 >> loop("gbuild16", dur=16, sample=6, delay=8)
+y6 >> loop("gbuild16", dur=16, sample=6, delay=12)
+
+masterAll(0, "amp", PBin())
+y_all.stop()
+
+n6 >> play("..C.", amp=3, drcomp=0.5)
+
+n6 >> play("..c.", amp=3, drcomp=0.5)
+
+n6 >> play("..C.", amp=3, drcomp=0.5)
+
+n6 >> play("..C.", amp=3, drcomp=0.5, sample=2)
+
+n6 >> play("..C.", amp=3, drcomp=0.5, sample=3)
+
+n6 >> play("..C.", amp=3, drcomp=0.5, sample=1)
+
+n6 >> play("..C.", amp=3, drcomp=0.5, sample=3)
+
+n6 >> play("..C.", amp=2, drcomp=0.5, sample=3)
+
+n6 >> play("..c.", amp=2, drcomp=0.5, sample=3)
+
+n6 >> play("..c.", amp=2, drcomp=0.5, sample=2)
+
+n6 >> play("..c.", amp=2, drcomp=0.5, sample=1)
+
+Clock.clear()
+soff()
+
+q5 >> loop("gdrop8", sample=4)
+
+q5 >> loop("gdrop8", sample=4, dur=4)
+
+q5 >> loop("gdrop8", sample=4, dur=8)
+
+q5 >> loop("gdrop8", sample=4, dur=8, delay=4)
+
+q6 >> loop("gdrop8", sample=4, dur=8, delay=4)
+
+q5 >> loop("gdrop8", sample=4, dur=8)
+
+q5 >> loop("gdrop8", sample=4, dur=8)
+q6 >> loop("gdrop8", sample=4, dur=8, delay=4)
+
+q5 >> loop("gdrop8", sample=4, dur=8)
+q6 >> loop("gdrop8", sample=4, dur=8, delay=2)
+
+q5 >> noloop("gdrop8", sample=4, dur=8)
+q6 >> noloop("gdrop8", sample=4, dur=8, delay=2)
+
+Clock.clear()
+soff()
+
+q5 >> noloop("gdrop8", sample=11, dur=8)
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=2)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=4)
+
+q5 >> noloop("gdrop8", sample=11, dur=8)
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=2)
+
+q5 >> noloop("gdrop8", sample=11, dur=8)
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=2, rate=-1)
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.2)
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.4)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=2, rate=-1, tanh=.3)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=2, rate=-.8, tanh=.3)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=2, rate=-1.2, tanh=.3)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=2, rate=-2, tanh=.3)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-2, tanh=.3)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3)
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.4, tanh=.4)
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin()*PWhite(0.1,0.5), PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+b0 >> play("x.", sample=4, amp=3)
+
+Clock.clear()
+soff()
+
+b0 >> play("x.", sample=4, amp=3)
+n6 >> play("..c.", amp=2, drcomp=0.5, sample=1)
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=0, dastart=250, darel=0.14, darq=0.3, datype=0).lclip(0)
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1200,6000), tone=0.8, hpf=60, vol=.8)
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [28,4]))
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [28,4]), sample=PRand(909))
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [28,4]), sample=PRand(909), drcom=.5)
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [28,4]), sample=PRand(909), drcomP=.5)
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [28,4]), sample=PRand(909), drcomp=.5)
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [12,4]), sample=PRand(909), drcomp=.5)
+
+t9.stop()
+
+Clock.clear()
+soff()
+
+b0 >> play("x.", sample=4, amp=3)
+n6 >> play("..c.", amp=2, drcomp=0.5, sample=1)
+c9 >> loop("gscreecha16", dur=16, sample=3, dafilter=0, dastart=250, darel=0.14, darq=0.3, datype=0).lclip(0)
+t9.stop()
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [12,4]), sample=PRand(909), drcomp=.5)
+m8 >> loop("gfill8", dur=8, amp=var([0,1], [24,8]), sample=PRand(909), drcomp=.5)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1200,6000), tone=0.8, hpf=60, vol=.8)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1200,6000), tone=0.8, hpf=160, vol=.8)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=1/4, oct=5, cutoff=PFr(1200,6000), tone=0.8, hpf=160, vol=.7)
+
+c9 >> loop("gscreecha16", dur=16, sample=3).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=.9).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.6).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.5).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.4).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.3).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.2).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.1).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.1).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.2).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.3).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.4).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.5).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.6).lclip(2)
+
+c9.solo()
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.7).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.8).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.9).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=1.0).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.9).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.8).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.7).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.6).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.5).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.4).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.3).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.2).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.3).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.4).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.5).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.6).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.6).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0, mverb=.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0, mverb=0.5).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0, mverb=0.6).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0, mverb=0).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0, room=0.2).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0, room=0.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.2, room=0.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.3, room=0.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.4, room=0.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.5, room=0.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.6, room=0.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.7, room=0.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.8, room=0.4).lclip(1)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.8, room=0.4).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.8, room=0.4).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.9, room=0.4).lclip(2)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0.9, room=0.4)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0, room=0.4)
+
+c9 >> loop("gscreecha16", dur=16, sample=3, djf=0, room=0)
+
+~c9 >> loop("gscreecha16", dur=16, sample=3)
+
+unsolo()
+
+Clock.clear()
+soff()
+
+b4 >> play("mMt[T{mMTt}]", amp=var([PBin()*PWhite(0.1,0.5), PWhite(0.8,1.1)], [6,2]), drcomp=.5).sometimes("stutter")
+
+b4.amp=1
+
+w2 >> play("---(---{-:=})", amp=PWhite(0.8,1.2), pan=PWhite(-1,1), sample=5).sometimes("stutter")
+
+n6 >> play("kkuk", drcomp=0.3, sample=5)
+
+o8 >> cbass(cutoff=PFr(400,900), rq=0.1, boost=1.5, detune=0.01, follow=2, dur=PDur(3,8), oct=(5,6))
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.4, tanh=.4)
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3)
+
+o8.stop()
+
+c9 >> loop("gscreecha16", dur=16, sample=3)
+
+b0 >> play("x.", sample=4, amp=3)
+
+n6 >> play("..c.", amp=2, drcomp=0.5, sample=1)
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.4, tanh=.4, vol=.5)
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3, vol=.5)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3, vol=.6)
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.4, tanh=.4, vol=.6)
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3, vol=.6)
+
+Clock.clear()
+soff()
+
+p4 >> play("g...", sample=0, bank=1)
+
+p4 >> play("g...", sample=[0,0,1], bank=1)
+
+p4 >> play("g.", sample=[0,0,1], bank=1)
+
+b0 >> play("x.", sample=4, amp=3)
+
+Clock.clear()
+soff()
+
+p4 >> play("gh", sample=[0,0,1], bank=1)
+
+p4 >> play("h.", sample=[0,0,1], bank=1)
+
+p4 >> play("h.", sample=PStep(13,1,0), bank=1)
+
+p4 >> play("h.", sample=PStep(13,PRand(505),0), bank=1)
+
+p4 >> play("h.", sample=PStep(7,PRand(505),0), bank=1)
+
+p4 >> play("h+", sample=PStep(7,PRand(505),0), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),0), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),7), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),8), bank=1)
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [12,4]), sample=PRand(909), drcomp=.5)
+m8 >> loop("gfill8", dur=8, amp=var([0,1], [24,8]), sample=PRand(909), drcomp=.5)
+
+y3 >> loop("gbuild16", dur=16, sample=6)
+y4 >> loop("gbuild16", dur=16, sample=6, delay=4)
+y5 >> loop("gbuild16", dur=16, sample=6, delay=8)
+y6 >> loop("gbuild16", dur=16, sample=6, delay=12)
+
+b0 >> play("k.", sample=0, amp=12)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),12), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),13), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),14), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),15), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),16), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),17), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),18), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),19), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),18), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),17), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),16), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),15), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),14), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),13), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),12), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),11), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),10), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),9), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),8), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),7), bank=1)
+
+p4 >> play("h-", sample=PStep(7,PRand(505),8), bank=1)
+
+p4.stop()
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.4, tanh=.4, vol=.6)
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3, vol=.6)
+
+y3.stop()
+
+y4.stop()
+
+b0.stop()
+
+y6.stop()
+
+y5.stop()
+
+c9 >> loop("gscreecha16", dur=16, sample=3)
+
+b0 >> play("k.", sample=0, amp=12)
+
+b0 >> play("k.", sample=0, amp=3)
+
+Clock.clear()
+soff()
+

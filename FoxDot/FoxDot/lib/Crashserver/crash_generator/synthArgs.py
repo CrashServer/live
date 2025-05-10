@@ -79,6 +79,7 @@ synthArgs = {
 	'marimba': {},
 	'mpluck': {'atk': patk, 'decay': pdec, 'rel': prel, 'filter': [0,5], 'cutoff': pfreq, 'rq': prq},
 	'nylon': {'rate': [0.0,5.0], 'cutoff': pfreq, 'rq': prq},
+    'omi': {'fmamp': prel, 'fmrate': [0, 200], 'fb': prel, 'xfb':[0.0, 0.6], 'cutoff':[1000, 8000], 'rq':prq},
 	'orientmod': {'cutoff': pfreq, 'rq': prq, 'rate': [0.0,1.0]},
 	'organ': {'fmod': [0.0,5.0], 'rate': [-4,4]},
 	'pad2': {'rate': [0.0,8.0]},

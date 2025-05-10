@@ -338,6 +338,14 @@ fx = FxList.new("comp", "comp", {"comp": 0, "comp_down": 1, "comp_up": 0.8}, ord
 fx.add("osc = Compander.ar(osc, osc, thresh: comp, slopeAbove: comp_down, slopeBelow: comp_up, clampTime: 0.01, relaxTime: 0.01, mul: 1)")
 fx.save()
 
+fx = FxList.new("drcomp", "drcomp", {"drcomp": 0, }, order=2)
+fx.add_var("compOsc")
+fx.add("compOsc = Compander.ar(osc, osc, thresh: 0.1, slopeBelow:1, slopeAbove: 0.1, clampTime: 0.002, relaxTime: 0.05, mul:3)")
+fx.add("compOsc = BLowShelf.ar(compOsc, 200, 1, 2, 1)")
+fx.add("compOsc = BHiShelf.ar(compOsc, 6000, 1, 3)")
+fx.add("osc = SelectX.ar(drcomp, [osc, compOsc*0.7])")
+fx.save()
+
 fx = FxList.new("mu", "mimu", {"mu": 0}, order=2)
 fx.add("osc = MiMu.ar(osc, mu)")
 fx.save()

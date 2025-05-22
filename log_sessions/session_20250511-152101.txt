@@ -1,0 +1,63 @@
+s7 >> loop("futur16", dur=16)
+
+Clock.clear()
+soff()
+
+w8 >> loop("futurbeat16", dur=16)
+
+w8 >> loop("futurbeat16", dur=16, room=.1)
+
+f8 >> play("k.")
+
+w8 >> loop("futurbeat16", dur=16, room=.1, drcomp=.5)
+
+w8 >> loop("futurbeat16", dur=16, room=0, drcomp=.5)
+
+f8.stop()
+
+Clock.bpm=143
+
+w8 >> loop("futurbeat16", dur=32, room=0, drcomp=.5)
+
+Clock.clear()
+soff()
+
+w8 >> loop("bouncy8", dur=8, room=0, drcomp=.5)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5)
+
+Clock.bpm=120
+
+w8 >> loop("bouncy8", dur=8, sample=PRand(66), room=0, drcomp=.5)
+
+f8 >> play("k.")
+
+Clock.bpm=164
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5).lclip(2)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5).lclip(4)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5).lclip(0)
+
+f8 >> play("<k.><X.>")
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5, sbrk=0.5).lclip(0)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5, sbrk=1).lclip(0)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5, sbrk=.1).lclip(0)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5, sbrk=.5, sbrkdur=2).lclip(0)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5, sbrk=.5, sbrkdur=2, idist=0.5).lclip(0)
+
+w8 >> loop("bouncy8", dur=16, sample=PRand(66), room=0, drcomp=.5, shape=0.5, sbrk=.5, sbrkdur=2, idist=0.2).lclip(0)
+
+Clock.clear()
+soff()
+

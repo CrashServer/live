@@ -311,12 +311,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         else if (message.type === 'autocomplete') {
           const { loops, fxList, synthList, attackList } = functionUtils.formatFoxDotAutocomplete(message);
 
-          foxdotAutocomplete.loopList = loops;
+          const toExclude = ["__init__", "1s", ""];
+          let filteredLoops = loops.filter(i => !toExclude.includes(i.displayText)); 
+
+          foxdotAutocomplete.loopList = filteredLoops;
           foxdotAutocomplete.fxList = fxList;
           foxdotAutocomplete.synths= synthList;
           foxdotAutocomplete.attackList = attackList;
 
-          if (loops.length == 0 || fxList.length == 0 || synthList.length == 0 || attackList.length == 0) {
+          if (filteredLoops.length == 0 || fxList.length == 0 || synthList.length == 0 || attackList.length == 0) {
             console.error(`Erreur lors de la récupération de la liste des boucles (${loops.length}), effets (${fxList.length}), synthés (${synthList.length}) ou attaques (${attackList.length})`);
           }
         }

@@ -265,6 +265,7 @@ const synthList = {
   karp: 'rate=0',
   jbass: 'rate=0',
   ikea: 'instr=0, hhat=0.1, sn=0.1, harm=0',
+  hoover: 'porta=1, portadur=0.125',
   hnoise: 'freq=800, gate=1, rel=3, room=0.5',
   gsynth: 'rate=1.0, buf=0, pos=0, room=0.1, sample=0, size=0.5, density=10, deg=1',
   growl: 'rate=0',

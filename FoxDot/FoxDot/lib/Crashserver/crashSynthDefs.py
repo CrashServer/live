@@ -114,6 +114,9 @@ gray.add()
 hnoise = FileSynthDef("hnoise")
 hnoise.add()
 
+hoover = FileSynthDef("hoover")
+hoover.add()
+
 ikea = FileSynthDef("ikea")
 ikea.add()
 

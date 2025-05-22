@@ -9,9 +9,9 @@ fx = FxList.new("glide", "glide", {"glide": 0, "glidedur": 0.05}, order=0)
 fx.add("osc = Line.kr(start: (osc * glide).clip(-50,22000), end: osc, dur: glidedur)")
 fx.save()
 
-# fx = FxList.new("glide", "glissando", {"glide": 0, "glidedelay": 0.5, "sus": 1}, order=0)
-# fx.add("osc = osc * EnvGen.ar(Env([1, 1, (1.059463**glide)], [sus*glidedelay, sus*(1-glidedelay)]))")
-# fx.save()
+fx = FxList.new("glide2", "glissandoriginal", {"glide2": 0, "glide2dur": 0.5, "sus": 1}, order=0)
+fx.add("osc = osc * EnvGen.ar(Env([1, 1, (1.059463**glide2)], [sus*glide2dur, sus*(1-glide2dur)]))")
+fx.save()
 
 
 # Lpf slide

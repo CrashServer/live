@@ -289,11 +289,11 @@ pfx = print_fx
 psynth = print_synth
 pvideo = print_video
 
-def chaos(chaosInt=1):
+def chaos(chaosInt=1, plyrType=None):
     ''' Generate some random players '''
     chaosText = ""
     for i in range(chaosInt):
-        chaosText += add_player(True)
+        chaosText += add_player(True, plyrType)
         chaosText += "\n"
     sendAttack(chaosText)
 

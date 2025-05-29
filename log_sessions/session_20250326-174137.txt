@@ -1,0 +1,373 @@
+r0 >> loop("dune_16", dur=16, sample=0, lofi=0)
+
+k1 >> play("<x.><.><....>", sample=0, amp=1, fx1=1).sometimes("stutter")
+
+k1 >> play("<x.><.><....>", sample=0, amp=1, fx1=1, fx2=1).sometimes("stutter")
+
+Clock.bpm=108
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2).lclip(4) # ry
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0).lclip(4) # robot fight
+
+k1 >> play("<x.><.><....>", sample=0, amp=6, fx1=1, fx2=1).sometimes("stutter")
+
+k1 >> play("<x.><.><....>", sample=0, amp=3, fx1=1, fx2=1).sometimes("stutter")
+
+k1 >> play("<x.><.><....>", sample=0, amp=2, fx1=1, fx2=1).sometimes("stutter")
+
+k1 >> play("<x.><.><....>", sample=0, amp=1, fx1=1, fx2=1).sometimes("stutter")
+
+k1 >> play("<x.><.><....>", sample=0, amp=1, fx1=0, fx2=1).sometimes("stutter")
+
+k1.solo()
+
+k1 >> play("<x.><.><....>", sample=0, amp=1, fx1=0, fx2=0).sometimes("stutter")
+
+k4 >> play("X ")
+
+k1 >> play("<x.><-><....>", sample=0, amp=1, fx1=0, fx2=0).sometimes("stutter")
+
+k1 >> play("<x.><-><..u.>", sample=0, amp=1, fx1=0, fx2=0).sometimes("stutter")
+
+k1 >> play("<x.><-><..o.>", sample=0, amp=1, fx1=0, fx2=0).sometimes("stutter")
+
+k1 >> play("<x.><-><..o(...o)>", sample=0, amp=1, fx1=0, fx2=0).sometimes("stutter")
+
+k1 >> play("<x.><-><..o(...C)>", sample=0, amp=1, fx1=0, fx2=0).sometimes("stutter")
+
+d1 >> dbass(dur=1/2)
+
+d1 >> dbass(PWhite(-1,1), dur=1/2)
+
+d1 >> dbass(PWhite(-1,1), dur=1/2, fx1=1)
+
+d1 >> dbass(PWhite(-1,1), dur=1/2, fx1=1, fx2=1)
+
+k4 >> play("X ", amp=4)
+
+k4 >> play("X ", amp=3)
+
+Clock.clear()
+soff()
+
+d1 >> dbass(PWhite(-1,1), dur=1/2, fx1=1, fx2=1)
+
+d1 >> dbass(PWhite(-1,1), dur=1/4, fx1=1, fx2=1)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+k4 >> play("X ", amp=3)
+
+Clock.clear()
+soff()
+
+u4 >> loop("losthighway16", dur=16, sample=4, chop=2, chopi=P*[0,.25,.5,.75], mverb=.6, shift=1.1, tanh=.2) # sax
+
+f8 >> play("<x.><.><....>", sample=0, amp=3).sometimes("stutter")
+
+u7 >> loop("losthighway16", dur=16, sample=2, lofi=0).lclip(0) # heirate
+
+i1 >> loop("gbreak16", dur=16, fx=1, hpf=0, lpf=2200)
+
+i1 >> loop("gbreak16", dur=16, fx=1, hpf=0, lpf=0)
+
+Clock.clear()
+soff()
+
+i1 >> loop("gbreak16", dur=16, fx=1, hpf=0, lpf=0)
+
+Clock.clear()
+soff()
+
+x4 >> play("0", lpf=400)
+
+x4 >> play("1", lpf=400)
+
+x4 >> play("1", lpf=PFr(400,600))
+
+x4 >> play("1", lpf=PFr(400,1600))
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+x4 >> play("1", lpf=PFr(400,2600))
+
+x4 >> play("1", lpf=PFr(400,2600), cut=1)
+
+Clock.clear()
+soff()
+
+x3 >> loop("mulholland8", dur=8, sample=0, chop=0, amp=PBin(445), blur=1).lclip(4) # damdada
+
+x3 >> loop("mulholland8", dur=8, sample=0, chop=0, amp=PBin(445), blur=1).lclip(0) # damdada
+
+Clock.clear()
+soff()
+
+x2 >> play("l ", bank=1, sample=6, amp=.4, rate=var([1,0.9],16))
+
+x4 >> loop("twinpeaks16", dur=8, sample=6, mverb=0.2, comp=1) # polar noire
+
+e4 >> play("-")
+
+j7 >> play("<x.><.><....>", amp=5, lpf=400, sample=4).sometimes("stutter")
+
+x4.stop()
+
+drop()
+
+i1 >> loop("gbreak16", dur=16, fx=1, hpf=0, lpf=0)
+
+m4 >> play("X ")
+
+i1.stop()
+
+m4 >> play("X ").only()
+
+m4 >> play("X ", dist2=0.5)
+
+m4 >> play("X ", dist2=1)
+
+m4 >> play("X ", dist2=2)
+
+m4 >> play("X ", dist2=4)
+
+m4 >> play("X ", dist2=0)
+
+Clock.clear()
+soff()
+
+r0 >> loop("dune_16", dur=16, sample=0, lofi=0)
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1, hpf=0)
+
+u4 >> loop("lynchcrazy32", dur=32, sample=0).lclip(4) # noahs ark
+
+r2 >> loop("dune_16", dur=16, sample=2, delay=8, a=.1, hpf=0)
+
+u4.stop()
+
+Clock.bpm=108
+
+f8 >> play("<x.><.><....>", sample=0, amp=3).sometimes("stutter")
+
+f8 >> play("<x.><.><....>", sample=0, amp=3).sometimes("stutter", 32)
+
+f8 >> play("<x(...x)><.><....>", sample=0, amp=3).sometimes("stutter", 8)
+
+f8 >> play("<x(...k)><.><....>", sample=0, amp=3).sometimes("stutter", 8)
+
+f8 >> play("<x(...k)k><.><....>", sample=0, amp=3).sometimes("stutter", 8)
+
+d4 >> dbass(dur=4, a=0.5)
+
+f8 >> play("<x(...k)><.><....>", sample=0, amp=3).sometimes("stutter", 8)
+
+f8 >> play("<x(...k)k><.><....>", sample=0, amp=3).sometimes("stutter", 8)
+
+d4 >> dbass(dur=4, a=0.5, fx1=5)
+
+d4 >> dbass(dur=4, a=0.5, fx1=1)
+
+f8 >> play("<x(...k)[kk]><.><....>", sample=0, amp=3).sometimes("stutter", 8)
+
+~d4 >> dbass(dur=4, a=0.5, fx1=1)
+
+d4 >> dbass(dur=4, a=0.5, fx1=1)
+
+f8 >> play("<x(...k){.[kk]}><.><....>", sample=0, amp=3).sometimes("stutter", 8)
+
+d4 >> dbass(dur=4, a=00, fx1=1)
+
+d4 >> dbass(dur=4, a=0, fx1=1)
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0).lclip(4) # robot fight
+
+attack("nuance")
+
+attack("nuance")
+
+e9 >> loop("housebass24", dur=32, sample=7, hpf=0, octer=0, shift=0, octersub=à, octersubsub=0, room=.1).unison(4)
+
+e9.solo()
+
+~x4 >> play("x ", sample=3, amp=9)
+
+Clock.bpm=173
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+e9.chop=4
+
+e9.chop=8
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(2) # intro
+
+e9.stop()
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(4) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(4) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(4) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(8) # intro
+
+soloRnd()
+
+v8.solo()
+
+unsolo()
+
+k1 >> play("<x.><-><..o(...C)>", sample=0, amp=1, fx1=0, fx2=0).sometimes("stutter")
+
+r0.stop()
+
+r2.stop()
+
+f8.stop()
+
+r1.stop()
+
+d4 >> dbass(dur=4, a=0, fx1=1).solo()
+
+d4 >> dbass(dur=1/2, a=0, fx1=1).solo()
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16) # dark ambi laura
+
+d4.stop()
+
+f8 >> play("<x(...k){.[kk]}><.><....>", sample=0, amp=3).sometimes("stutter", 8)
+
+Clock.clear()
+soff()
+
+s7 >> loop("lynchvoice8", dur=8, sample=8, comp=0, rate=1, chop=2, chopi=.5)
+
+u3 >> noloop("lynchvoice8", dur=8, sample=8,rate=1)
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(8) # intro
+
+Clock.clear()
+soff()
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(8) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # 2 INtro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).lclip(8) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3) # 2 INtro
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+c7 >> play("<k.><..><....>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+c7 >> play("<k.><..><....><X.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter", rate=2)
+
+c7 >> play("<k.><..><....><X.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter", rate=2)
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).lclip(8) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3) # 2 INtro
+
+Clock.clear()
+soff()
+
+d4 >> dbass(dur=4)
+
+d4 >> dbass(dur=4, fx1=1)
+
+d4 >> dbass(dur=4, fx1=1, dist2=0.5)
+
+d4 >> dbass(dur=4, fx1=1, dist2=0)
+
+d4 >> dbass(dur=4, fx1=1, dist2=0).unison(4)
+
+f8 >> play("<x(...k){.[kk]}><.><....>", sample=0, amp=1).sometimes("stutter", 8)
+
+d5 >> blip(fx2=1)
+
+d4 >> dbass(dur=1/2, fx1=1, dist2=0).unison(4)
+
+f8 >> play("<x(...k){-[kk]}><.><....>", sample=0, amp=1).sometimes("stutter", 8)
+
+d5 >> blip(PSine(64) * 0.1,fx2=1)
+
+f8 >> play("<x(---k){-[kk]}><.><....>", sample=0, amp=1).sometimes("stutter", 8)
+
+f8 >> play("<x(---k){-[kk]}><.><..c.>", sample=0, amp=1).sometimes("stutter", 8)
+
+d5 >> blip(PSine(64) * 0.5,fx2=1)
+
+d5 >> blip(PSine(64) * 2,fx2=1)
+
+d5 >> blip(PSine(64) * 4,fx2=1)
+
+k4 >> play("K ", bank=1)
+
+k4 >> play("X ", bank=1)
+
+k4 >> play("X[--]", bank=1)
+
+drop()
+
+v8 >> loop("gbreak16", dur=16, fx=1)
+
+v8 >> loop("gbreak16", dur=16, fx=1,comp=1)
+
+d5 >> dbass(PSine(64) * 4,fx2=1)
+
+d5 >> dbass(PSine(64) * 4,fx2=1, shape=1)
+
+drop()
+
+v8.solo()
+
+unsolo()
+
+v8.solo()
+
+unsolo()
+
+k4 >> play("X ", amp=128)
+
+k4 >> play("X ", amp=512)
+
+v8.solo()
+
+k4 >> play("X ", amp=5000)
+
+k4 >> play("X ", amp=5000)
+
+unsolo()
+
+unsolo()
+
+k4 >> play("X ", amp=15000)
+
+k4 >> play("X ", sample=7, amp=15000)
+
+k4.amp=0
+
+k4 >> play("X ", sample=4, amp=15000)
+
+unsolo()
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0, sus=16)
+
+unsolo()
+
+v4.solo()
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0, sus=16)
+
+f8 >> play("<x(---k){-[kk]}><.><..c.>", sample=0, amp=1).sometimes("stutter", 8)
+
+Clock.clear()
+soff()
+

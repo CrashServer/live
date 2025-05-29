@@ -1,0 +1,42 @@
+doom = SynthDef("doomSynth")
+
+a7 >> doom(0, oct=(3), dur=8, rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(3), dur=1/2, rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(3,4), dur=1/2, rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(3), dur=1/2, rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(4), dur=1/2, rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(4), dur=8, rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+l0 >> play("<x.><.><....>", sample=0, amp=1).sometimes("stutter")
+
+Clock.clear()
+soff()
+
+a7 >> doom(0, oct=(4), dur=8, rq=0.2, clipAmt=10, distAmp=1).unison(1)
+
+e2 >> play("k.")
+
+a7 >> doom(0, oct=(4), dur=8, rq=0.2, clipAmt=10, distAmp=1, pw=0.7).unison(1)
+
+a7 >> doom(0, oct=(4), dur=8, rq=0.2, clipAmt=10, distAmp=1, pw=0.7).unison(3)
+
+a7 >> doom(0, oct=(3,4), dur=8, rq=0.2, clipAmt=10, distAmp=1, pw=0.7).unison(3)
+
+a7 >> doom(0, oct=(3,4), dur=8, rq=0.2, clipAmt=50, distAmp=1, pw=0.7).unison(3)
+
+a7 >> doom(0, oct=(3,4), dur=8, rq=0.2, clipAmt=1, distAmp=1, pw=0.7).unison(3)
+
+a7 >> doom(0, oct=(3,4), dur=8, rq=0.2, clipAmt=20, distAmp=1, pw=0.7).unison(3)
+
+a7 >> doom(0, oct=(4,5), dur=8, rq=0.2, clipAmt=20, distAmp=1, pw=0.7).unison(3)
+
+a7 >> doom(0, oct=(4,5), dur=1/2, rq=0.2, clipAmt=20, distAmp=1, pw=0.7).unison(3)
+
+Clock.clear()
+soff()
+

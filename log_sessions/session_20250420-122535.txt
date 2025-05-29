@@ -1,0 +1,73 @@
+doom = SynthDef("doomSynth")
+
+a7 >> doom(oct=3, dur=8)
+
+Clock.clear()
+soff()
+
+a7 >> doom(oct=3, dur=8)
+
+Clock.clear()
+soff()
+
+a7 >> doom(oct=3, dur=8)
+
+Clock.clear()
+soff()
+
+a7 >> doom(oct=3, dur=8)
+
+a7 >> doom(oct=3, dur=8, rq=0.1)
+
+a7 >> doom(oct=3, dur=8, rq=0.2)
+
+a7 >> doom(oct=3, dur=1/2, rq=0.2)
+
+a7 >> doom(oct=4, dur=1/2, rq=0.2)
+
+e2 >> play("k.")
+
+a7 >> doom(oct=4, dur=8, rq=0.2)
+
+a7 >> doom(oct=4, dur=8, rq=0.2, clipAmt=50)
+
+a7 >> doom(oct=3, dur=8, rq=0.2, clipAmt=50)
+
+a7 >> doom(oct=3, dur=8, rq=0.2, clipAmt=20)
+
+a7 >> doom(oct=3, dur=8, rq=0.2, clipAmt=20, distAmp=.1)
+
+a7 >> doom(oct=3, dur=8, rq=0.2, clipAmt=20, distAmp=1)
+
+a7 >> doom(oct=3, dur=8, rq=0.5, clipAmt=20, distAmp=1)
+
+a7 >> doom(oct=3, dur=8, rq=0.5, clipAmt=20, distAmp=1).unison(3)
+
+a7 >> doom(1, oct=3, dur=8, rq=0.5, clipAmt=20, distAmp=1).unison(3)
+
+a7 >> doom(64, oct=3, dur=8, rq=0.5, clipAmt=20, distAmp=1).unison(3)
+
+a7 >> doom(-4, oct=3, dur=8, rq=0.5, clipAmt=20, distAmp=1).unison(3)
+
+a7 >> doom(0, oct=(3,4), dur=8, rq=0.5, clipAmt=20, distAmp=1).unison(3)
+
+a7 >> doom(0, oct=(3,4), dur=1/4, rq=0.5, clipAmt=20, distAmp=1).unison(3)
+
+a7 >> doom(0, oct=(3,4), dur=PDur(3,8), rq=0.5, clipAmt=20, distAmp=1).unison(3)
+
+a7 >> doom(0, oct=(3,4), dur=PDur(3,8), rq=0.5, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(3), dur=PDur(3,8), rq=0.5, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(5), dur=PDur(3,8), rq=0.5, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(4), dur=PDur(3,8), rq=0.5, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(4), dur=PDur(3,8), rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(4), dur=PDur(1,8), rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(4), dur=8, rq=0.2, clipAmt=20, distAmp=1).unison(1)
+
+a7 >> doom(0, oct=(3), dur=8, rq=0.2, clipAmt=20, distAmp=1).unison(1)
+

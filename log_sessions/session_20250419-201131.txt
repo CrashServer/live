@@ -1,0 +1,103 @@
+doom = SynthDef("doomSynth")
+
+d1 >> doom([0, 2, 4, 5], dur=8, ddist=.8, cutoff=1500, rq=0.5,oct=3, hpf=10)
+
+d1 >> doom([0, 2, 4, 5], dur=8, ddist=12, cutoff=1500, rq=0.5,oct=3, hpf=10)
+
+d1 >> doom([0, 2, 4, 5], dur=1/2, ddist=12, cutoff=1500, rq=0.5,oct=3, hpf=10)
+
+Scale.default="minor"
+
+d1 >> doom([0, 2, 4, 5], dur=1/2, ddist=12, cutoff=1500, rq=0.15,oct=3, hpf=10)
+
+d1 >> doom([0, 2, 4, 5], dur=1/2, ddist=12, cutoff=1500, rq=0.25,oct=3, hpf=10)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=12, cutoff=1500, rq=0.25,oct=3, hpf=10)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=12, cutoff=1500, rq=0.1,oct=3, hpf=10)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=12, cutoff=1500, rq=0.4,oct=3, hpf=10)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=12, cutoff=1500, rq=0.4,oct=3, hpf=0)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=120, cutoff=1500, rq=0.4,oct=3, hpf=0)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=1200, cutoff=1500, rq=0.4,oct=3, hpf=0)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=12000, cutoff=1500, rq=0.4,oct=3, hpf=0)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=120, cutoff=1500, rq=0.4,oct=3, hpf=0)
+
+g5 >> play("k.", sample=0, amp=4)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=120, cutoff=1500, rq=0.4,oct=(3,4), hpf=0)
+
+Clock.clear()
+soff()
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=120, cutoff=1500, rq=0.4,oct=(3,4), hpf=0)
+
+d1 >> doom([0, 2, 4, 5], dur=4, ddist=120, cutoff=1500, rq=0.4,oct=(3,4), hpf=0)
+
+d1 >> doom(
+    [0, -2, -4, -5],
+    dur=1/8,
+    sus=0.15,
+    amp=0.6,
+    pw=0.3,       # Largeur d'impulsion (plus bas = plus fin)
+    noiseAmt=0.3, # Quantité de bruit
+    clipAmt=15,   # Niveau de clipping (plus haut = plus dur)
+    cutoff=2000,  # Fréquence de base du filtre
+    rq=0.4,       # Résonance du filtre
+    modRate=4,    # Vitesse de modulation du filtre
+    modDepth=1000,# Profondeur de modulation
+    distAmt=0.9   # Niveau de saturation post-filtre
+)
+
+d1 >> doom([0, 2, 4, 5], dur=4, ddist=120, cutoff=1500, rq=0.4,oct=(3,4), hpf=0)
+
+d1 >> doom(
+    [0, -2, -4, -5],
+    dur=1/8,
+    sus=0.15,
+    amp=0.6,
+    pw=0.3,       # Largeur d'impulsion (plus bas = plus fin)
+    noiseAmt=0.1, # Quantité de bruit
+    clipAmt=15,   # Niveau de clipping (plus haut = plus dur)
+    cutoff=2000,  # Fréquence de base du filtre
+    rq=0.4,       # Résonance du filtre
+    modRate=4,    # Vitesse de modulation du filtre
+    modDepth=1000,# Profondeur de modulation
+    distAmt=0.9   # Niveau de saturation post-filtre
+)
+
+d1 >> doom(
+    [0, -2, -4, -5],
+    dur=4,
+    sus=4,
+    amp=0.6,
+    pw=0.3,       # Largeur d'impulsion (plus bas = plus fin)
+    noiseAmt=0.1, # Quantité de bruit
+    clipAmt=15,   # Niveau de clipping (plus haut = plus dur)
+    cutoff=2000,  # Fréquence de base du filtre
+    rq=0.4,       # Résonance du filtre
+    modRate=4,    # Vitesse de modulation du filtre
+    modDepth=1000,# Profondeur de modulation
+    distAmt=0.9   # Niveau de saturation post-filtre
+)
+
+d1 >> doom(
+    [0, -2, -4, -5],
+    dur=4,
+    sus=4,
+    amp=0.6,
+    pw=0.3,       # Largeur d'impulsion (plus bas = plus fin)
+    noiseAmt=0.1, # Quantité de bruit
+    clipAmt=15,   # Niveau de clipping (plus haut = plus dur)
+    cutoff=2000,  # Fréquence de base du filtre
+    rq=0.4,       # Résonance du filtre
+    modRate=.4,    # Vitesse de modulation du filtre
+    modDepth=1000,# Profondeur de modulation
+    distAmt=0.9   # Niveau de saturation post-filtre
+)
+

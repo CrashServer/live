@@ -11,12 +11,21 @@ const config = await configRequest.json();
 const crashPanel = document.getElementById('crashPanel')
 const crashPanelToggle = document.getElementById('crashPanelToggle');
 const crashPanelTitle = document.getElementById('crashPanelTitle');
+const todoList = document.querySelector('.todo-list');
+const showTodo = config.showTodo ?? false;
 
 let isResizing = false;
 let startX;
 let startWidth;
-let sceneName = "";
-let sceneIntervalId = null;
+// let sceneName = "";
+// let sceneIntervalId = null;
+let tapTimes = [];
+let calculatedBPM = 0;
+let tapTimeout = null;
+
+if (!showTodo) {
+    todoList.style.display = 'none';
+}
 
 crashPanel.addEventListener('mousedown', function(e) {
     const rect = crashPanel.getBoundingClientRect();
@@ -92,9 +101,9 @@ ws.onmessage = function(event) {
             helpContainer.textContent = data.help;
             helpContainer.style.height = helpContainer.scrollHeight + 'px';
             break;
-        case 'nameScene':
-            formatSceneName(data.nameScene);
-            break;
+        // case 'nameScene':
+        //     formatSceneName(data.nameScene);
+        //     break;
         // case 'gameData':
         //     createGameTable(data.gameData);
         //     break;
@@ -217,7 +226,6 @@ function formatPlayers(message) {
             const playerId = e.currentTarget.dataset.playerId;
             EventEmitter.emit('send_foxdot', `${playerId}.stop()`);
         });
-        // line.style.cursor = 'pointer';
     });
 }
 
@@ -250,48 +258,85 @@ function updateCrashPanelTitle (serverState) {
     }
   };
 
-function formatSceneName(nameScene) {
-    if (nameScene !== sceneName) {
-        sceneName = nameScene;
-        document.getElementById('sceneName').textContent = nameScene;
-        if (sceneIntervalId !== null) {
-            clearInterval(sceneIntervalId);
-        }
+const checkboxes = document.querySelectorAll('.todo-checkbox');
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {        
+        // Vérifier si toutes les checkboxes sont cochées
+        checkAllTodos();
+    });
+  });
 
-        let startTime = Date.now();
-        sceneIntervalId = setInterval(() => {
-            const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-            const color = getDurationColor(elapsedTime/60);
-            const sceneTimeDiv = document.getElementById('sceneTime');
-            sceneTimeDiv.style.color = color;
-            sceneTimeDiv.textContent = formatTime(elapsedTime);
-        }, 1000);
+resetTodos();
+
+function resetTodos() {
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    })
+}
+
+document.querySelector("#todoTitle").addEventListener('click', ()=> {
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+    } )
+    checkAllTodos();
+})
+
+function checkAllTodos() {
+    const todoSection = document.querySelector('.todo-list');
+    const checkboxes = document.querySelectorAll('.todo-checkbox');
+    const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+    if (allChecked && checkboxes.length > 0) {
+        todoSection.style.display = 'none';
+    } else {
+        todoSection.style.display = 'block';
     }
 }
+
+
+
+// function formatSceneName(nameScene) {
+//     if (nameScene !== sceneName) {
+//         sceneName = nameScene;
+//         document.getElementById('sceneName').textContent = nameScene;
+//         if (sceneIntervalId !== null) {
+//             clearInterval(sceneIntervalId);
+//         }
+
+//         let startTime = Date.now();
+//         sceneIntervalId = setInterval(() => {
+//             const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+//             const color = getDurationColor(elapsedTime/60);
+//             const sceneTimeDiv = document.getElementById('sceneTime');
+//             sceneTimeDiv.style.color = color;
+//             sceneTimeDiv.textContent = formatTime(elapsedTime);
+//         }, 1000);
+//     }
+// }
+
 // Create a table to represent the game data  
-function createGameTable(gameData){
-    const gameDataContainer = document.getElementById('gameData')
-    gameDataContainer.innerHTML = ''; // Clear previous content
+// function createGameTable(gameData){
+//     const gameDataContainer = document.getElementById('gameData')
+//     gameDataContainer.innerHTML = ''; // Clear previous content
 
-    // Create a table to represent the game data
-    const table = document.createElement('table');
-    table.style.borderCollapse = 'collapse';
-    table.style.width = '100%';
+//     const table = document.createElement('table');
+//     table.style.borderCollapse = 'collapse';
+//     table.style.width = '100%';
 
-    gameData.forEach(row => {
-        const tr = document.createElement('tr');
-        row.forEach(cell => {
-            const td = document.createElement('td');
-            td.textContent = cell;
-            td.style.border = '1px solid black';
-            td.style.padding = '10px';
-            td.style.textAlign = 'center';
-            tr.appendChild(td);
-        });
-        table.appendChild(tr);
-    });
-    gameDataContainer.appendChild(table);
-}
+//     gameData.forEach(row => {
+//         const tr = document.createElement('tr');
+//         row.forEach(cell => {
+//             const td = document.createElement('td');
+//             td.textContent = cell;
+//             td.style.border = '1px solid black';
+//             td.style.padding = '10px';
+//             td.style.textAlign = 'center';
+//             tr.appendChild(td);
+//         });
+//         table.appendChild(tr);
+//     });
+//     gameDataContainer.appendChild(table);
+// }
 
 // piano stuff
 const scales = {
@@ -367,3 +412,110 @@ function updatePianoKeys(scale, root) {
     });
 
 }
+
+function initTapTempo() {
+    const bpmElement = document.getElementById('bpm');
+    
+    // Créer un élément tooltip pour afficher le BPM calculé
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tap-tempo-tooltip';
+    tooltip.style.display = 'none';
+    tooltip.style.position = 'absolute';
+    tooltip.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    tooltip.style.color = 'white';
+    tooltip.style.padding = '5px 10px';
+    tooltip.style.borderRadius = '4px';
+    tooltip.style.zIndex = '1000';
+    tooltip.style.fontSize = '14px';
+    document.body.appendChild(tooltip);
+    
+    // Écouter les clics sur l'élément BPM
+    bpmElement.addEventListener('click', function(e) {
+        e.preventDefault();
+        const now = Date.now();
+        
+        // Réinitialiser si plus de 2 secondes depuis le dernier tap
+        if (tapTimes.length > 0 && now - tapTimes[tapTimes.length - 1] > 2000) {
+            tapTimes = [];
+        }
+        
+        // Ajouter le timestamp actuel
+        tapTimes.push(now);
+        
+        // Garder seulement les 8 derniers taps pour un calcul plus précis et réactif
+        if (tapTimes.length > 8) {
+            tapTimes.shift();
+        }
+        
+        // Calculer le BPM si nous avons au moins 2 taps
+        if (tapTimes.length > 1) {
+            // Calculer les intervalles entre les taps
+            let intervals = [];
+            for (let i = 1; i < tapTimes.length; i++) {
+                intervals.push(tapTimes[i] - tapTimes[i - 1]);
+            }
+            
+            // Calculer l'intervalle moyen en millisecondes
+            const avgInterval = intervals.reduce((sum, val) => sum + val, 0) / intervals.length;
+            
+            // Convertir en BPM : (60 secondes * 1000 ms) / intervalle en ms
+            calculatedBPM = Math.round(60000 / avgInterval);
+            
+            // Ajouter un effet visuel de feedback
+            bpmElement.classList.add('tapped');
+            setTimeout(() => {
+                bpmElement.classList.remove('tapped');
+            }, 100);
+            
+            // Afficher temporairement le BPM calculé
+            bpmElement.setAttribute('data-tapped-bpm', calculatedBPM);
+            
+            // Effacer le tableau de taps après 3 secondes d'inactivité
+            clearTimeout(tapTimeout);
+            tapTimeout = setTimeout(() => {
+                tapTimes = [];
+            }, 3000);
+        }
+    });
+    
+    // Gérer l'affichage du tooltip au survol
+    bpmElement.addEventListener('mousemove', function(e) {
+        if (calculatedBPM > 0) {
+            tooltip.textContent = `Tap BPM: ${calculatedBPM}`;
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${e.pageX + 10}px`;
+            tooltip.style.top = `${e.pageY + 10}px`;
+        }
+    });
+    
+    bpmElement.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+    });
+    
+    // Ajouter un curseur de type "pointer" pour indiquer que l'élément est cliquable
+    bpmElement.style.cursor = 'pointer';
+    
+    // Ajouter une petite indication visuelle pour montrer que c'est cliquable
+    bpmElement.setAttribute('title', 'Cliquez pour le tap tempo');
+}
+
+function addTapTempoStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        #bpm.tapped {
+            background-color: var(--border-col-2);
+            transition: background-color 0.1s;
+        }
+        
+        #bpm:hover::after {
+            content: "⏱️";
+            margin-left: 5px;
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+initTapTempo();
+addTapTempoStyles();

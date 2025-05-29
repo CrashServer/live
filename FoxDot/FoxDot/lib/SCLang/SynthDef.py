@@ -333,12 +333,19 @@ class SampleSynthDef(SynthDefBaseClass):
         SynthDefBaseClass.__init__(self, *args, **kwargs)
         self.buf = self.new_attr_instance("buf")
         self.pos = self.new_attr_instance("pos")
+        self.ratelfo = self.new_attr_instance("ratelfo")
+        self.ratelfoadd = self.new_attr_instance("ratelfoadd")
+        self.ratelfomul = self.new_attr_instance("ratelfomul")
         self.defaults['buf']   = 0
         self.defaults['pos']   = 0
         self.defaults['room']  = 0.1
         self.defaults['rate']  = 1.0
         self.defaults['wide']  = 1.0
+        self.defaults['ratelfo'] = 0
+        self.defaults['ratelfoadd'] = 0.5
+        self.defaults['ratelfomul'] = 0.5
         self.base.append("rate = In.kr(bus, 1);")
+        self.base.append("rate = if(ratelfo<=0, rate, rate * SinOsc.kr(ratelfo, 0, ratelfomul, ratelfoadd));")
 
 
 # SynthDef from sc file

@@ -1,10 +1,13 @@
 SynthDef.new(\tek,
-{|bus, tek, tekr, tekd, tek_, tek_d, tekr_, tekr_d, tekd_, tekd_d, sus|
+{|bus, tek, tekr, tekd, tek_, tek_d, teklfo, teklfomul, teklfoadd, tekr_, tekr_d, tekrlfo, tekrlfomul, tekrlfoadd, tekd_, tekd_d, tekdlfo, tekdlfomul, tekdlfoadd, sus|
 var osc,osc_low,osc_med,osc_high,osc_base,lfo;
 osc = In.ar(bus, 2);
 tek = if(tek_<=0, tek, Line.kr(tek, tek_, sus*tek_d));
+tek = if(teklfo<=0, tek, tek * SinOsc.kr(teklfo, 0, teklfomul, teklfoadd));
 tekr = if(tekr_<=0, tekr, Line.kr(tekr, tekr_, sus*tekr_d));
+tekr = if(tekrlfo<=0, tekr, tekr * SinOsc.kr(tekrlfo, 0, tekrlfomul, tekrlfoadd));
 tekd = if(tekd_<=0, tekd, Line.kr(tekd, tekd_, sus*tekd_d));
+tekd = if(tekdlfo<=0, tekd, tekd * SinOsc.kr(tekdlfo, 0, tekdlfomul, tekdlfoadd));
 lfo = SinOsc.ar(0.5, phase: 0, mul: 50, add: 800);
 osc = In.ar(bus, 2);
 osc_base = osc;

@@ -37,7 +37,9 @@ if __name__ != "__main__":
     ''' LOAD CUSTOM SYNTHDEFS '''
     try:
         from .Crashserver.crashSynthDefs import *  # Crash Custom SynthDefs
+        time.sleep(3)
         from .Crashserver.crashFX import *  # Crash Custom Fx
+        time.sleep(3)
     except:
         print("Error importing SynthDefs, FX or Loop player : ",
               sys.exc_info()[0])
@@ -219,6 +221,11 @@ if __name__ != "__main__":
                 print("only with loop")
 
         @player_method
+        def note(self, note=0):
+            """ Set the note of the player, useful for the wavetable synth"""
+            self.degree=note
+
+        @player_method
         class PChain2(RandomGenerator):
             """ PChain Mod Markov Chain generator pattern with probability."""
 
@@ -249,6 +256,16 @@ if __name__ != "__main__":
                     self.last_value = self.choices(
                         self.mapping[index][0], self.mapping[index][1])[0]
                 return self.last_value
+        
+        @player_method
+        def lclip(self, clip=0):
+            """ Clip the loop player to a specific duration """
+            if clip != 0:
+                self.dur = clip
+                self.clip = clip
+            else:
+                self.clip = 0
+            
     except Exception as e:
         print(f'Player method problem : {e}')
 
@@ -731,13 +748,7 @@ if __name__ != "__main__":
             ''' Generate a melody based on Markov chain dict of melody '''
             return PChain2(melody_dict)
 
-        def chaos(chaosInt=1):
-            ''' Generate some random players '''
-            chaosText = ""
-            for i in range(chaosInt):
-                chaosText += add_player(True)
-                chaosText += "\n"
-            sendAttack(chaosText)
+
 
         def PRy(total=16, div=4, restProb=0):
             ''' Generate a ryhtm pattern '''

@@ -4,7 +4,7 @@ var osc, env;
 sus = sus * blur;
 rate = In.kr(bus, 1);
 rate = if(ratelfo<=0, rate, rate * SinOsc.kr(ratelfo, 0, ratelfomul, ratelfoadd));
-osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, trigger: Impulse.kr(trig*sus), startPos: start * BufFrames.kr(buf), loop: 1);
+osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, trigger: Impulse.kr(trig*sus), startPos: start * BufFrames.kr(buf), loop: 0);
 osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));
 pos=start;
 osc=(osc * amp);

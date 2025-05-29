@@ -1,0 +1,514 @@
+lost("beru1")
+
+n3 >> loop("elephant16", dur=16)
+
+Clock.clear()
+soff()
+
+n3 >> loop("elephant16", dur=16)
+
+Clock.bpm=102
+
+n3 >> loop("elephant16", dur=16, sample=1)
+
+n3 >> loop("elephant16", dur=16, sample=0)
+
+n3 >> loop("elephant16", dur=16, sample=0)
+
+n3 >> loop("elephant16", dur=16, sample=1)
+
+n3 >> loop("elephant16", dur=16, sample=0)
+
+ad >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=6700, vadiodr=0.6, vadiodd=21.8, vadiodc=0.3).lclip(8)
+
+ad >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=6700, vadiodr=0.6, vadiodd=21.8, vadiodc=0.3).lclip(8)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+n3 >> loop("elephant16", dur=16, sample=0)
+
+ad >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=6700, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(8)
+
+i7 >> play("<X-><..o.>", amp=4.0, lpf=0, lpr=0.5)
+
+i7 >> play("<X-><..o.>", amp=4.0, lpf=0, lpr=0.6)
+
+i7 >> play("<X-><..o.>", amp=4.0, lpf=0, lpr=0.7)
+
+w0 >> lbass(dur=1/2, )
+
+n3 >> loop("elephant16", dur=16, sample=0, out=7)
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7)
+
+w0 >> lbass(-2, dur=1/2, )
+
+w0 >> lbass(0, dur=1/2, )
+
+Scale.default="minor"
+
+w0 >> lbass(3, dur=1/2, )
+
+w0 >> lbass(4, dur=1/2, )
+
+w0 >> lbass(5, dur=1/2, )
+
+w0 >> lbass(var([3,4,5],8), dur=1/2, )
+
+w0 >> lbass(var([3,4,5],4), dur=1/2, )
+
+w0 >> lbass((0, var([3,4,5],4)), dur=1/2, )
+
+w0 >> lbass([0, var([3,4,5],4)], dur=1/2, )
+
+w0 >> lbass([0, var([3,4,5],4)], dur=1/4, )
+
+i7.stop()
+
+ad.stop()
+
+w0 >> lbass(0, dur=1/2, )
+
+w0 >> lbass(2, dur=1/2, )
+
+w0 >> lbass(1, dur=1/2, cutoff=PFr(400,3000))
+
+w0 >> lbass(1, dur=1/2, cutoff=PFr(1400,3000))
+
+w0 >> lbass(1, dur=1/2, cutoff=PFr(2400,8000))
+
+w0 >> lbass(2, dur=1/2, cutoff=PFr(2400,8000))
+
+w0 >> dbass(2, dur=1/2, cutoff=PFr(2400,8000))
+
+w0 >> omi(2, dur=1/2)
+
+w0 >> omi(2, dur=1/2, oct=3)
+
+w0 >> omi(2, dur=1/2, oct=4)
+
+w0 >> superbass(2, dur=1/2, oct=4)
+
+~w0 >> superbass(2, dur=1/2, oct=4)
+
+w0 >> superbass(2, dur=1/2, oct=4)
+
+w0 >> superbass(2, dur=1/2, oct=4)
+
+w0 >> superbass(2, dur=1/2, oct=5)
+
+w0 >> superbass(2, dur=1/2, oct=5, cutoff=5000)
+
+w0 >> superbass(2, dur=1/2, oct=5, cutoff=3000)
+
+w0 >> superbass(2, dur=1/2, oct=5, cutoff=2000)
+
+w0 >> superbass(2, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> superbass(0, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> ebass(0, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> ebass(0, dur=1/2, oct=3, cutoff=2000)
+
+w0 >> ebass(0, dur=1/2, oct=4, cutoff=2000)
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7)
+
+w0 >> faim(0, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> faim(3, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> faim(4, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> faim(5, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> faim(-4, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> faim(-4, dur=1/2, oct=5, cutoff=2000)
+
+w0 >> pluck(-4, dur=1/2, oct=5, cutoff=2000)
+
+w0 >> pluck(-4, dur=1/2, oct=3, cutoff=2000)
+
+w0 >> pluck(-4, dur=1/2, oct=4, cutoff=2000)
+
+w0 >> pluck(-4, dur=1/2, oct=4, cutoff=6000)
+
+w0 >> pluck(0, dur=1/2, oct=4, cutoff=6000)
+
+w0 >> pluck(0, dur=1/2, oct=3, cutoff=6000)
+
+w0 >> fbass(0, dur=1/2, oct=3, cutoff=6000)
+
+w0 >> fbass(0, dur=1/2, oct=5, cutoff=6000)
+
+w0 >> fbass(0, dur=1/2, rate=.2, oct=5, cutoff=6000)
+
+w0 >> subbass(0, dur=1/2, rate=.2, oct=5, cutoff=6000)
+
+w0 >> cbass(0, dur=1/2, rate=.2, oct=5, cutoff=6000)
+
+w0 >> cbass(0, dur=1/2, rate=.2, oct=5, cutoff=200)
+
+w0 >> cbass(0, dur=1/2, rate=4, oct=5, cutoff=200)
+
+w0 >> cbass(0, dur=1/2, rate=4, oct=4, cutoff=200)
+
+w0 >> cbass(0, dur=1/2, rate=4, oct=5, cutoff=200)
+
+w0 >> abass(0, dur=1/2, rate=4, oct=5, cutoff=200)
+
+w0 >> abass(0, dur=1/2, rate=4, oct=3, cutoff=200)
+
+w0 >> abass(2, dur=1/2, rate=4, oct=3, cutoff=200)
+
+w0 >> abass(2, dur=1/2, rate=4, oct=3, cutoff=2200)
+
+w0 >> blip(2, dur=1/2, rate=4, oct=3, cutoff=2200)
+
+w0 >> blip(2, dur=1/2, rate=4, oct=4, cutoff=2200)
+
+w0 >> blip(2, dur=1/2, rate=.4, oct=4, cutoff=2200)
+
+w0 >> blip(2, dur=1/2, rate=1, oct=4, cutoff=2200)
+
+w0 >> jbass(2, dur=1/2, rate=1, oct=4, cutoff=2200)
+
+w0 >> jbass(2, dur=8, rate=1, oct=4, cutoff=2200)
+
+w0 >> jbass(2, dur=8, rate=1, oct=5, cutoff=2200)
+
+w0 >> jbass(2, dur=8, rate=1, oct=5, cutoff=2200, tanh=.5)
+
+w0 >> jbass(0, dur=8, rate=1, oct=5, cutoff=2200, tanh=.5)
+
+w0 >> jbass(0, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.5)
+
+w0 >> jbass(0, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.5, decay=.6)
+
+w0 >> jbass(0, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.5, decay=0)
+
+w0 >> jbass(0, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.5, r=.5)
+
+w0 >> jbass(0, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.5, r=.8)
+
+w0 >> jbass(0, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.9, r=.8)
+
+w0 >> lbass(0, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.9, r=.8)
+
+w0 >> lbass(2, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.9, r=.8)
+
+w0 >> lbass(2, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.1, r=.8)
+
+w0 >> lbass(2, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.5, r=0)
+
+w0 >> lbass(-2, dur=8, rate=.1, oct=5, cutoff=2200, tanh=.5, r=0)
+
+w0 >> lbass(-2, dur=8, rate=2, oct=5, cutoff=2200, tanh=.5, r=0)
+
+w0 >> lbass(-2, dur=8, rate=6, oct=5, cutoff=2200, tanh=.5, r=0)
+
+w0 >> lbass(-2, dur=8, rate=.6, oct=5, cutoff=2200, tanh=.5, r=0)
+
+w0 >> lbass(-2, dur=8, rate=.2, oct=5, cutoff=2200, tanh=.5, r=0)
+
+w0 >> lbass(-2, dur=8, rate=.2, oct=5, cutoff=2200, tanh=.5, r=0).unison(3)
+
+x1 >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=6700, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(8)
+
+w0 >> lbass(0, dur=8, rate=.2, oct=5, cutoff=2200, tanh=.5, r=0).unison(3)
+
+i7 >> play("<X-><..o.>", amp=4.0, lpf=0, lpr=0.7)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=45, rate=1)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=45, rate=1)
+
+w1.stop()
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=45, rate=1)
+
+n3.stop()
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7)
+
+w0.stop()
+
+i2 >> noloop("beru4", dur=8, sample=1, mverb=0.3, amp=PZero(4), tanh=1, looping=0, trig=0, fx=0)
+
+w0 >> lbass(0, dur=8, rate=.2, oct=5, cutoff=2200, tanh=.5, r=0).unison(3)
+
+w0.stop()
+
+w0 >> lbass(0, dur=8, rate=.2, oct=5, cutoff=2200, tanh=.5, r=0).unison(3)
+
+w0 >> lbass(0, dur=8, rate=.2, oct=5, cutoff=2200, tanh=.5, r=0, vol=.5).unison(3)
+
+w0 >> lbass(0, dur=8, rate=.2, oct=5, cutoff=2200, tanh=.5, r=0, vol=0.6).unison(3)
+
+i7 >> play("<X-><..C.>", amp=4.0, lpf=0, lpr=0.7)
+
+i7 >> play("<X-><..c.>", amp=4.0, lpf=0, lpr=0.7)
+
+i7 >> play("<X-><..C.>", amp=4.0, lpf=0, lpr=0.7)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=45, rate=1)
+
+w1.stop()
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=45, rate=1)
+
+w1.solo()
+
+i7 >> play("<X-><..C.>", amp=4.0, lpf=0, lpr=0.7)
+
+w1.stop()
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=45, rate=1)
+
+i7 >> play("<X.><..C.>", amp=4.0, lpf=0, lpr=0.7)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=44, rate=1)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=43, rate=1)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=42, rate=1)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=41, rate=1)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=40, rate=1)
+
+i7 >> play("<X.><..C.>", amp=4.0, lpf=0, lpr=0.7)
+
+i7 >> play("<X-><..C.>", amp=4.0, lpf=0, lpr=0.7)
+
+unsolo()
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7).lclip(4)
+
+w0.stop()
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2200, tanh=.5, vol=0.6).unison(3)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=200, tanh=.5, vol=0.6).unison(3)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=1200, tanh=.5, vol=0.6).unison(3)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2200, tanh=.5, vol=0.6).unison(3)
+
+x1.solo()
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7).lclip(4)
+
+x1 >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=6700, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(2)
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7).lclip(2)
+
+i7 >> play("<X-><..C.>", amp=4.0, lpf=0, lpr=0.7)
+
+w1 >> play("<V..V..V.........><....P.......P...><-.---.---.------>", dur=1/2, sample=40, rate=1)
+
+i2 >> noloop("beru4", dur=8, sample=1, mverb=0.3, amp=PZero(4), tanh=1, looping=0, trig=0, fx=0)
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7).lclip(0)
+
+i7 >> play("<X-><..C.>", amp=4.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+i7 >> play("<X-><..C.>", amp=4.0, lpf=0, lpr=0.7).sometimes("stutter", PRand(6))
+
+x1 >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=6700, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.2).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=6, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=1, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+n9 >> loop("xdrum8", dur=8)
+
+n9.solo()
+
+n9 >> loop("xdrum8", dur=8, sample=1)
+
+n9 >> loop("xdrum8", dur=8, sample=2)
+
+n9 >> loop("xdrum8", dur=8, sample=3)
+
+n9 >> loop("xdrum8", dur=8, sample=4)
+
+unsolo()
+
+i7.stop()
+
+w1.stop()
+
+n9 >> loop("xdrum8", dur=8, sample=4, drcomp=0.5)
+
+n9 >> loop("xdrum8", dur=8, sample=PRand(808), drcomp=0.5)
+
+i7 >> play("<X.>", amp=4.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+n9 >> loop("xdrum8", dur=8, sample=PRand(808), drcomp=0.5, amp=2)
+
+n9 >> loop("xdrum8", dur=8, sample=PRand(808), drcomp=0.5, amp=1, tanh=.5)
+
+w0.stop()
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2200, tanh=.5, vol=0.6).unison(3)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2200, tanh=.5, amp=.7).unison(3)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2200, tanh=.5, amp=.7, vol=1).unison(3)
+
+~w0 >> lbass(0, dur=8, oct=5, cutoff=2200, tanh=.5, amp=.7, vol=1).unison(3)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2200, tanh=.5, amp=.7).unison(2)
+
+i7 >> play("<k.>", amp=4.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+i7 >> play("<x.>", amp=4.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7, chop=4, chopi=.1).lclip(0)
+
+w0.stop()
+
+x1.stop()
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7, chop=4, chopi=.01).lclip(0)
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7, chop=4,chopwave=2, chopi=.01).lclip(0)
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7, chop=4, chopwave=2, chopi=.2).lclip(0)
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7, chop=4, chopwave=5, chopi=.2).lclip(0)
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7, chop=8, chopwave=5, chopi=.2).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2200, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/2, oct=5, cutoff=2200, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=2200, tanh=.5, amp=.7).unison(2)
+
+i7 >> play("<x.>", amp=1.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=2300, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=2400, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=2500, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=2600, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=2700, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=2800, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=2900, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3000, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3100, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3200, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3300, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3400, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3500, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3600, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3700, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3800, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=3900, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4000, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4100, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4200, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4300, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4400, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4500, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4600, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4700, tanh=.5, amp=.7).unison(2)
+
+i7.stop()
+
+i7 >> play("<x.>", amp=5.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+i7 >> play("<X.>", amp=5.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+i7 >> play("<X.>", amp=1.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+Clock.clear()
+soff()
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7, chop=8, chopwave=5, chopi=.2).lclip(0)
+
+n3 >> loop("elephant16", dur=16, sample=0, output=7, chop=0, chopwave=5, chopi=.2).lclip(0)
+
+~n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2).lclip(0)
+
+w0 >> lbass(0, dur=1/4, oct=5, cutoff=4700, tanh=.5, amp=.7).unison(2)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=4700, tanh=.5, amp=.7).unison(2)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+n9 >> loop("xdrum8", dur=8, sample=PRand(808), drcomp=0.5, tanh=.5)
+
+i7 >> play("<X.>", amp=1.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+i2 >> noloop("beru4", dur=8, sample=1, mverb=0.3, amp=PZero(4), tanh=1, looping=0, trig=0, fx=0)
+
+i7 >> play("<X.>", amp=3.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+Clock.clear()
+soff()
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2).lclip(0)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=4700, tanh=.5, amp=.7).unison(2)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+n9 >> loop("xdrum8", dur=8, sample=PRand(808), drcomp=0.5, tanh=.5)
+
+i7 >> play("<X.>", amp=3.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+i2 >> noloop("beru4", dur=8, sample=1, mverb=0.3, amp=PZero(4), tanh=1, looping=0, trig=0, fx=0)
+
+Clock.clear()
+soff()
+

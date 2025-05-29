@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Configuration de CodeMirror
   const editor = CodeMirror(document.getElementById('editor'), {
     mode: 'python',
-    theme: 'eclipse',
+    theme: 'material-darker',
     lineNumbers: true,
     autofocus: true,
     matchBrackets: true,
@@ -244,8 +244,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       'Ctrl-Left': (cm) => {functionUtils.goToPreviousComma(cm)},
       'Ctrl-Right': (cm) => {functionUtils.goToNextComma(cm)},
       'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
-      'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
-      'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},
+      'Alt-Up': (cm) => {
+                    functionUtils.incrementValue(cm, 1)
+                    evaluateCode(cm, false)
+                  },
+      'Alt-Down': (cm) => {
+                    functionUtils.incrementValue(cm, -1)
+                    evaluateCode(cm, false)
+                  },
+      'Alt-A': (cm) => {functionUtils.randomizer(cm)},
       'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
       // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });
@@ -304,12 +311,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         else if (message.type === 'autocomplete') {
           const { loops, fxList, synthList, attackList } = functionUtils.formatFoxDotAutocomplete(message);
 
-          foxdotAutocomplete.loopList = loops;
+          const toExclude = ["__init__", "1s", ""];
+          let filteredLoops = loops.filter(i => !toExclude.includes(i.displayText)); 
+
+          foxdotAutocomplete.loopList = filteredLoops;
           foxdotAutocomplete.fxList = fxList;
           foxdotAutocomplete.synths= synthList;
           foxdotAutocomplete.attackList = attackList;
 
-          if (loops.length == 0 || fxList.length == 0 || synthList.length == 0 || attackList.length == 0) {
+          if (filteredLoops.length == 0 || fxList.length == 0 || synthList.length == 0 || attackList.length == 0) {
             console.error(`Erreur lors de la récupération de la liste des boucles (${loops.length}), effets (${fxList.length}), synthés (${synthList.length}) ou attaques (${attackList.length})`);
           }
         }

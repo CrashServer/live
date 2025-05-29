@@ -1,0 +1,93 @@
+doom = SynthDef("doomSynth")
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=0.8, cutoff=1500, rq=0.7)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=0.8, cutoff=1500, rq=0.7,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=1500, rq=0.7,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.7,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.6,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.5,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.4,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.3,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.2,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.3,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.4,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.5,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.6,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.7,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.8,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.9,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.8,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.7,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.6,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.5,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.4,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.3,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.4,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.5,oct=3)
+
+g9 >> play("<x.><-><..o.>", sample=7, amp=4, comp=1).sometimes("stutter", PRand(4))
+
+g9 >> play("<x.><-><..o.>", sample=7, amp=4, comp=1).sometimes("stutter", PRand(4))
+
+d1.stop()
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.5,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=2.8, cutoff=2500, rq=0.5,oct=4)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=.8, cutoff=2500, rq=0.5,oct=4)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, sus=0.2, ddist=.8, cutoff=2500, rq=0.5,oct=3)
+
+g9 >> play("<x.><-><..o.>", sample=7, amp=14, comp=1).sometimes("stutter", PRand(4))
+
+g9.stop()
+
+g5 >> play("k.", sample=0, amp=4)
+
+g9 >> play("<x.><-><..o.>", sample=7, amp=14, comp=1).sometimes("stutter", PRand(4))
+
+d1.stop()
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=.8, cutoff=2500, rq=0.5,oct=3)
+
+~d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=.8, cutoff=2500, rq=0.5,oct=3)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=.8, cutoff=2500, rq=0.5,oct=3, hpf=400)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=.8, cutoff=2500, rq=0.5,oct=3, hpf=1400)
+
+Clock.clear()
+soff()
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=.8, cutoff=2500, rq=0.5,oct=3, hpf=1400)
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=.8, cutoff=2500, rq=0.5,oct=3, hpf=10)
+
+g9 >> play("<x.><-><..o.>", sample=7, amp=4, comp=1).sometimes("stutter", PRand(4))
+
+d1 >> doom([0, 2, 4, 5], dur=1/4, ddist=.8, cutoff=1500, rq=0.5,oct=3, hpf=10)
+

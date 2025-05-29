@@ -1,0 +1,203 @@
+b1 >> MidiOut(PGauss(), oct=3)
+
+b1 >> MidiOut(PGauss(), oct=3, dur=1/4)
+
+b1 >> MidiOut(var(PGauss(), 8), oct=3, dur=1/4)
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=3, dur=1/4)
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=3, dur=PDur(3,5))
+
+g9 >> play("k.")
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(3,4), dur=PDur(3,5))
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(3,4), dur=PDur(3,8))
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(3), dur=PDur(3,8))
+
+Clock.clear()
+soff()
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(3), dur=PDur(3,8))
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(3), dur=PDur(3,8), amp=2)
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(3), dur=PDur(3,8)*4, amp=2)
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(3), dur=PDur(3,8)*4,blur=1.5, amp=2)
+
+g9 >> play("k.")
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(4), dur=PDur(3,8)*4,blur=1.5, amp=2)
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(4), dur=1/2,blur=1.5, amp=2)
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(4), dur=1/2, sus=0.65, blur=1.5, amp=2)
+
+b1 >> MidiOut(var(PGauss(), [7,1]), oct=(4), dur=1/2, sus=1, blur=1.5, amp=2)
+
+b1 >> MidiOut(0, oct=(4), dur=1/2, sus=1, blur=1.5, amp=2)
+
+b1 >> MidiOut(0, oct=(4), dur=1/2, sus=1, rel=2, blur=1.5, amp=2)
+
+b1 >> MidiOut(0, oct=(4), dur=8, sus=1, rel=2, blur=1.5, amp=2)
+
+b1 >> MidiOut(0, oct=(3), dur=8, sus=1, rel=2, blur=1.5, amp=2)
+
+b1 >> MidiOut(0, oct=(3), dur=1/2, sus=1, rel=2, blur=1.5, amp=2)
+
+g9 >> play("<k.><->")
+
+b1 >> MidiOut(0, oct=(3,4), dur=1/2, sus=1, rel=2, blur=1.5, amp=2)
+
+b1 >> MidiOut(0, oct=(3,), dur=1/2, rel=2, blur=1.5, amp=2)
+
+b1 >> MidiOut(2, oct=(3,), dur=1/2, rel=2, blur=1.5, amp=2)
+
+b1 >> MidiOut(1, oct=(3,), dur=1/2, rel=2, blur=1.5, amp=2)
+
+Scale.default="minor"
+
+b1 >> MidiOut(PGauss(), oct=(3,), dur=1/2, rel=2, blur=1.5, amp=2)
+
+b1 >> MidiOut(PGauss(), oct=(3,), dur=1/2, rel=2, blur=1.5, amp=1)
+
+b1 >> MidiOut(PGauss(), oct=(3,), dur=1/2, rel=2, blur=1, amp=1)
+
+~b1 >> MidiOut(PGauss(), oct=(3,), dur=1/2, amp=1)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(3,), dur=1/2, amp=1)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(2,), dur=1/2, amp=1)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(2,), dur=1/4, amp=1)
+
+~b1 >> MidiOut(var([0,1], [7,1]), oct=(2,), dur=1/4, amp=1)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(2,), dur=1/4, amp=1, sus=1/4)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(2,4), dur=1/4, amp=1, sus=1/4)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(2,3), dur=1/4, amp=1, sus=1/4)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(2,3), dur=1/4, amp=1, sus=1/5)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(2,3), dur=1/4, amp=1, sus=1/2)
+
+b1 >> MidiOut(var([0,1], [7,1]), oct=(2,3), dur=1/4, amp=1, sus=1/8)
+
+g9 >> play("<k.><-><..u.>")
+
+b1.stop()
+
+b2 >> MidiOut(var([0,1], [7,1]), oct=(2,3), dur=1/4, amp=1)
+
+b2 >> MidiOut(var([0,1], [7,1]), oct=(2,3), dur=1/2, amp=1)
+
+b2 >> MidiOut(var([0,1], [7,1]), oct=(2,3), dur=PDur(3,8), amp=1)
+
+b2 >> MidiOut(var([0,1], [7,1]), oct=(3), dur=PDur(3,8), amp=1)
+
+b2 >> MidiOut(var([0,PGauss()], [7,1]), oct=(3), dur=PDur(3,8), amp=1)
+
+b2 >> MidiOut(var([0,PGauss()], [7,1]), oct=(2), dur=PDur(3,8), amp=1)
+
+b2 >> MidiOut(var([0,PGauss()], [7,1]), oct=(4), dur=PDur(3,8), amp=1)
+
+b2 >> MidiOut(var([0,PGauss()], [7,1]), oct=(5), dur=PDur(3,8), amp=1)
+
+b2 >> MidiOut(var([0,PGauss()], [7,1]), oct=(3), dur=PDur(3,8), amp=1)
+
+g9 >> play("<k.><-><..u.>").sometimes("stutter")
+
+s7 >> loop("gbreak16", dur=16)
+
+b2 >> MidiOut(var([0,PGauss()], [7,1]), oct=(3), dur=PDur(4,8), amp=1)
+
+b2 >> MidiOut(var([0,PGauss()], [7,1]), oct=(3), dur=PDur(4,8), amp=1).slider()
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(4,8), amp=1).slider()
+
+b2.dur=8
+
+b2.dur=1/16
+
+b2.dur=1/4
+
+b2.dur=1/2
+
+b2.dur=1
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(4,8), amp=1).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(1,8), amp=1).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(2,8), amp=1).sometimes("stutter")
+
+Clock.clear()
+soff()
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(2,8), amp=1).sometimes("stutter")
+
+g9 >> play("<k.><-><..u.>").sometimes("stutter")
+
+g9 >> play("<k.><-><..u.><X.>").sometimes("stutter")
+
+s7 >> loop("gbreak16", dur=16)
+
+s7 >> loop("gbreak16", dur=16, fx=1)
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(3,8), amp=1).sometimes("stutter")
+
+s7.stop()
+
+g9 >> play("<k.><-><..u.><X.>").sometimes("stutter", PRand(4))
+
+g9 >> play("<k.><-><..u.><X.>").sometimes("stutter", PRand(16))
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(4), dur=PDur(3,8), amp=1).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(5), dur=PDur(3,8), amp=1).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(2), dur=PDur(3,8), amp=1).sometimes("stutter")
+
+g9 >> play("<k.><-><..u.><X.>").sometimes("stutter", PRand(3))
+
+s7 >> loop("gbreak16", dur=16, fx=1)
+
+s7 >> loop("gbreak16", dur=16, fx=1 ,sample=4)
+
+s7 >> loop("gbreak16", dur=16, fx=1 ,sample=3)
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(2,3), dur=PDur(3,8), amp=1).sometimes("stutter")
+
+g9.stop()
+
+s7.stop()
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(2,3), dur=PDur(3,8), amp=1, pan=PWhite(-1,1)).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(2,3), dur=PDur(3,8), amp=1, pan=0).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(2,3), dur=PDur(2,8), amp=1, pan=0).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(2,8), amp=1, pan=0).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(5,8), amp=1, pan=0).sometimes("stutter")
+
+g9 >> play("<k.><-><..u.><X.>").sometimes("stutter", PRand(4))
+
+Clock.dur=132
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(1), dur=PDur(5,8), amp=1, pan=0).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(2), dur=PDur(5,8), amp=1, pan=0).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(4), dur=PDur(5,8), amp=1, pan=0).sometimes("stutter")
+
+b2 >> MidiOut(var([0,PGauss()], [3,1]), oct=(3), dur=PDur(5,8), amp=1, pan=0).sometimes("stutter")
+
+Clock.clear()
+soff()
+

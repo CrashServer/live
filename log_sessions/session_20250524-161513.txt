@@ -1,0 +1,781 @@
+Clock.bpm=102
+
+Scale.default="minor"
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2).lclip(0)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2).lclip(4)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2).lclip(0)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=4700, tanh=.5, amp=.1).unison(2)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2700, tanh=.5, amp=.1).unison(2)
+
+n9 >> loop("xdrum8", dur=8, sample=PRand(808), drcomp=0.5, tanh=.5)
+
+n9 >> loop("xdrum8", dur=16, sample=PRand(808), drcomp=0.5, tanh=.5)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+i7 >> play("<X.>", amp=3.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+i7 >> play("<X.>", amp=2.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+i2 >> noloop("beru4", dur=8, sample=1, mverb=0.3, amp=PZero(4), tanh=1, looping=0, trig=0, fx=0)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=4, chopwave=5, chopi=.2).lclip(0)
+
+i2.stop()
+
+attack("rebelisme")
+
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=2)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=8, chopwave=5, chopi=.2).lclip(0)
+
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=1)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=2, chopwave=5, chopi=.2).lclip(0)
+
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=1, chop=4)
+
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=1, chop=4, choplfo=4)
+
+w0 >> lbass(2, dur=8, oct=5, cutoff=2700, tanh=.5, amp=.1).unison(2)
+
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=1, chop=0, choplfo=4)
+
+w0 >> lbass(-2, dur=8, oct=5, cutoff=2700, tanh=.5, amp=.1).unison(2)
+
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=1, chop=0, choplfo=0)
+
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=0.5, hpf=1200, chop=0, choplfo=0)
+
+w0 >> lbass(4, dur=8, oct=5, cutoff=2700, tanh=.5, amp=.1).unison(2)
+
+w0 >> lbass(5, dur=8, oct=5, cutoff=2700, tanh=.5, amp=.1).unison(2)
+
+m0 >> vati(I,off=(7, 3), dur=(4, 6), tremolo=0.1, leg=0.5, oct=3, tanh=1, hpf=600).unison(4)
+
+w0 >> lbass(0, dur=8, oct=5, cutoff=2700, tanh=.5, amp=.1).unison(2)
+
+n3.stop()
+
+m0 >> vati(I,off=(7, 3), dur=(4, 6), tremolo=0.1, leg=0.5, oct=4, tanh=1, hpf=600).unison(4)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=770, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=770, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+m0 >> vati(I,off=(7, 3), dur=(4, 6), tremolo=0.1, leg=0.5, oct=5, tanh=1, hpf=600).unison(4)
+
+m0 >> vati(I,off=(7, 3), dur=(4, 6), tremolo=0.1, leg=0.5, oct=4, tanh=1, hpf=600).unison(4)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=870, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=970, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+w0.stop()
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=1070, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=1170, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=1270, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=1370, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.3, noizt=0, vadiod=1470, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+b4 >> play("mMt[T{mMTt}]", amp=1, drcomp=.5).sometimes("stutter")
+
+b4.stop()
+
+w0.stop()
+
+x1.stop()
+
+w2 >> play("---(---{-:=})", amp=PWhite(0.8,1.2), pan=PWhite(-1,1), sample=5).sometimes("stutter")
+
+n9.stop()
+
+m0.stop()
+
+n6 >> play("kkuk", drcomp=0.3, sample=5)
+
+n6 >> play("kkuk", drcomp=0.3, sample=5)
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.4, tanh=.4, vol=.6)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3, vol=.6)
+
+q5.stop()
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3, vol=.6)
+
+q5 >> noloop("gdrop8", sample=11, dur=8, shape=.4, tanh=.4, vol=.6)
+
+q6.stop()
+
+g8 >> loop("gcindrum16", dur=32, sample=10)
+
+p4.stop()
+
+i7.stop()
+
+b0 >> play("k.", sample=0, amp=3)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=5, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=5, idist2=0.3, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=5, idist2=0.4, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+q6 >> noloop("gdrop8", sample=11, dur=8, delay=0, rate=-1.2, tanh=.3, vol=.6)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=5, idist=0.4, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=5, idist=0.5, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=5, idist=0.6, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+q5.stop()
+
+q6.stop()
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=4, idist=0.6, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+~t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=4, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=4, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+m7 >> loop("gfill4", dur=4, amp=var([0,1], [12,4]), sample=PRand(909), drcomp=.5)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=4, idist=0.4, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+y3 >> loop("gbuild16", dur=16, sample=6)
+
+t9 >> lbass((0, expvar([0,7,7.2], [16,14,2])), dur=P[1/4,1/4], oct=5, idist=0.4, cutoff=PFr(1200,6000), tone=0.4, hpf=160, vol=.7)
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=0, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+w2.stop()
+
+g8.stop()
+
+y_all.stop()
+
+m7.stop()
+
+attack("R_Psy")
+
+p1 >> loop("uk16", dur=16,pos=0, room=0.1, sample=3)
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=400, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=1240, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+p1.stop()
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=1340, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=1440, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=1540, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=1640, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=1740, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=1840, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=1940, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2040, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2140, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2240, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2340, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2440, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2540, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2640, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2740, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=2840, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+g2 >> loop("xtech8", dur=8, comp=1)
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=0, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+c9 >> loop("synth4", dur=4, amp=PBin(16), sample=6, mverb=0.5, echo=0.5, a=0.2)
+
+d0.stop()
+
+n6.stop()
+
+e9 >> loop("seq16", dur=16, sample=[2, 3, 4], comp=1, mverb=0.5)
+
+t9.lpf=400
+
+t9.lpf=1200
+
+t9.lpf=250
+
+m8 >> loop("gfill8", dur=8, amp=var([0,1], [24,8]), sample=PRand(909), drcomp=.5)
+
+e9 >> loop("seq16", dur=16, sample=5, comp=1, mverb=0.1).lclip(var([PRand([1,2,4,8])],32))
+
+z4 >> loop("psych32", dur=32, sample=var(PRand(808), 32), fx1=0, fx=0, hpf=200).lclip(var([PRand([1,2,4,8])],32))
+
+t9.stop()
+
+m8.stop()
+
+i4 >> loop("psybass32", dur=32,pos=0, amp=1, room=0.1, sample=var(PRand(16), 32), beat_stretch=1, looping=1.0, drcomp=0.1).lclip(var([PRand([1,2,4,8])],32))
+
+x8 >> play("<k.><.>", hpf=0, amp=2, drcomp=0.6)
+
+z4 >> loop("psych32", dur=32, sample=var(PRand(808), 32), fx1=0, fx=0, hpf=200).lclip(var([PRand([1,2,4,8])],32))
+
+e9 >> loop("seq16", dur=16, sample=5, comp=1, mverb=0.1).lclip(var([PRand([1,2,4,8])],32))
+
+y8 >> four(linvar([0,2],64), fx2=0, tremolo=P*[2,4,8], amp=.8, mverb=0.5, oct=4, shape=.3, pan=PWhite(-1, 1))
+
+masterAll("lpflfo", 4)
+
+masterAll("lpf", 1200)
+
+masterAll("lpflfo", 4)
+
+masterAll("lpflfo", 1)
+
+masterAll("lpf", 1300)
+
+masterAll("lpf", 1400)
+
+masterAll("lpf", 1500)
+
+masterAll("lpf", 1600)
+
+masterAll("lpf", 1700)
+
+masterAll("lpf", 1800)
+
+masterAll("lpf", 1900)
+
+masterAll("lpf", 2000)
+
+masterAll("lpf", 2100)
+
+masterAll("lpf", 2200)
+
+masterAll("lpf", 2300)
+
+masterAll("lpf", 2400)
+
+masterAll("lpf", 2500)
+
+masterAll("lpf", 2600)
+
+masterAll("lpf", 2700)
+
+masterAll("lpf", 2800)
+
+masterAll("lpf", 2900)
+
+masterAll("lpf", 3000)
+
+masterAll("lpf", 3100)
+
+masterAll("lpf", 3200)
+
+masterAll("lpf", 3300)
+
+masterAll("lpf", 3400)
+
+masterAll("lpf", 3500)
+
+masterAll("lpf", 3600)
+
+masterAll("lpf", 3700)
+
+masterAll("lpflfo", 4)
+
+attack("R_toto")
+
+x4 >> loop("ragedrum16", dur=32, sample=5, amp=1, comp=1, fx=1)
+
+b0.stop()
+
+b0.stop()
+
+g2.stop()
+
+e9.stop()
+
+c9.stop()
+
+x4 >> loop("ragedrum16", dur=32, sample=5, amp=1, comp=1, fx=1)
+
+z4.stop()
+
+y8.stop()
+
+r9 >> loop("electrodrum16", dur=16, sample=3, comp=1)
+
+x4 >> loop("ragedrum16", dur=32, sample=5, amp=1, comp=1, fx=1)
+
+f8 >> loop("beats8", dur=8, sample=5)
+
+c1 >> loop("berlin8", dur=8, sample=4)
+
+m0 >> loop("cinambi8", dur=8, sample=var([3,2],[24,8]), hpf=200)
+
+p6.bank=1
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+~p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bnk=0).sometimes("stutter")
+
+e9 >> loop("housebass24", dur=32, chop=0, sample=7, amp=0.1, hpf=0, fx1=0, a=0, octer=0, shift=0, octersub=à, octersubsub=1).unison(4).lclip(var([PRand([1,2,4,8])],32))
+
+Clock.clear()
+soff()
+
+d6 >> play("x ", bank=1)
+
+p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+d6 >> play("x ", bank=1, sample=7)
+
+p6.bank=1
+
+Clock.clear()
+soff()
+
+~p6 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+Clock.clear()
+soff()
+
+e9 >> loop("housebass24", dur=32, chop=0, sample=7, amp=0.1, hpf=0, fx1=0, a=0, octer=0, shift=0, octersub=à, octersubsub=1).unison(4).lclip(var([PRand([1,2,4,8])],32))
+
+e9 >> loop("housebass24", dur=32, chop=0, sample=7, amp=0.1, hpf=0, fx1=0, a=0, octer=0, shift=0, octersub=à, octersubsub=1).unison(4).lclip(var([PRand([1,2,4,8])],32))
+
+e9 >> loop("housebass24", dur=32, chop=0, sample=7, amp=0.2, hpf=0, fx1=0, a=0, octer=0, shift=0, octersub=à, octersubsub=1).unison(4).lclip(var([PRand([1,2,4,8])],32))
+
+e9 >> loop("housebass24", dur=32, chop=0, sample=7, amp=0.3, hpf=0, fx1=0, a=0, octer=0, shift=0, octersub=à, octersubsub=1).unison(4).lclip(var([PRand([1,2,4,8])],32))
+
+e9 >> loop("housebass24", dur=32, chop=0, sample=7, amp=0.2, hpf=0, fx1=0, a=0, octer=0, shift=0, octersub=à, octersubsub=1).unison(4).lclip(var([PRand([1,2,4,8])],32))
+
+e9 >> loop("housebass24", dur=32, chop=0, sample=7, amp=0.1, hpf=0, fx1=0, a=0, octer=0, shift=0, octersub=à, octersubsub=1).unison(4).lclip(var([PRand([1,2,4,8])],32))
+
+e9 >> loop("housebass24", dur=32, chop=0, sample=7, amp=0.0, hpf=0, fx1=0, a=0, octer=0, shift=0, octersub=à, octersubsub=1).unison(4).lclip(var([PRand([1,2,4,8])],32))
+
+Clock.clear()
+soff()
+
+h2 >> play(".(.U)..", rate=PWhite(-.5,-1), fx2=1)
+
+p7 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+p6.bank=1
+
+p6.bank=1
+
+p7 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+Clock.clear()
+soff()
+
+p7 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+p7 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=1).sometimes("stutter")
+
+p7 >> play("<x.><.><..o.><k.>", sample=1, amp=1, bank=0).sometimes("stutter")
+
+p7.bank=1
+
+Clock.clear()
+soff()
+
+attack("HEAR ME")
+
+p2 >> plaitsX([12, 0, 1, 11], dur=1/4, lpf=linvar([1200, 4000], [24, 8]), bright=linvar([0.5, 0.1], [16, 8]), rq=linvar([0.5, 0.1], [16, 18]), cutoff=4000, porta=linvar([4, 0.1], [8, 8]), morph=linvar([0.5, 0.1], [16, 8]), oct=var([3, 4]), timbre=linvar([0.5, 0.9], [16, 18]), harm=var([0.5, 0.3, 0.1], [24, 8, 8]), fdecay=2, leg=32).unison(2).slider()
+
+p1 >> plaitsX([4, 0, var([4, 12])], dur=1/4, lpf=linvar([1200, 14000], [24, 8]), bright=linvar([0.5, 0.1], [16, 8]), rq=linvar([0.5, 0.1], [16, 18]), cutoff=4000, porta=linvar([0.5, 0.1], [8, 8]), morph=linvar([0.5, 0.1], [16, 8]), oct=var([2, 3], 16), timbre=linvar([0.1, 0.01], 32), harm=0.1, fdecay=2).unison(4, 0.125)
+
+p3 >> plaitsX([(12, 4), 0, 1, 11, 21], dur=1/4, lpf=linvar([12000, 4000], [24, 8]), bright=linvar([1, 0.1], [16, 8]), rq=linvar([0.5, 0.1], [16, 18]), cutoff=12000, porta=linvar([0.5, 0.1], [8, 8]), morph=linvar([0.5, 1], [16, 8]), oct=var([3, 4]), timbre=linvar([0.5, 0.9], [16, 18]), harm=var([0.5, 0.3, 0.1], [24, 8, 8]), fdecay=2, leg=0).unison(2)
+
+attack("EuroDance")
+
+lost()
+
+attack("organ")
+
+~r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur([5,3,6],8)], [5,7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+Clock.bpm = 128;
+
+Root.default = "E"
+
+r2 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [7, 5]), amp=0.8, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.6, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+p1.stop()
+
+r4 >> bell(P*[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [11, 6]), amp=0.5, crush=1, crush_=4, crush_d=2, mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+p1.stop()
+
+p2.stop()
+
+c2 >> cbass(var([0,-4,-2,-3],8), dur=1/2, cutoff=40, follow=PFr(1,4, 555)).unison(2) + (0, var([0,7], [4,1]))
+
+p3.stop()
+
+d1 >> play("x", sample=4, amp=PBin(344))
+h3 >> play("s", valad=PFr(1000,3000)).sometimes("stutter", PRand(16))
+n2 >> play("..*.", echo=P*[0,PRand([0.125, 0.5, 0.75])], mverb=0.9, hpf=4000)
+
+c2 >> lbass(var([0, -2, linvar([-2,0],[8,0])], [16,8,8]), dur=var([1/2,1/4],[24,8]), cutoff=PFr(4000,12000), detune=0.9, tone=PFr(0.16,0.9), dist2=0, oct=var([5,lininf(5,6,8)],[24,8]), amp=0.5)
+
+c2 >> lbass(var([0, -2, linvar([-2,0],[8,0])], [16,8,8]), dur=var([1/2,1/4],[24,8]), cutoff=PFr(4000,12000), detune=0.9, tone=PFr(0.16,0.9), dist2=0, oct=var([5,lininf(5,6,8)],[24,8]), amp=0.8)
+
+c2 >> lbass(var([0, -2, linvar([-2,0],[8,0])], [16,8,8]), dur=var([1/2,1/4],[24,8]), cutoff=PFr(4000,12000), detune=0.9, tone=PFr(0.16,0.9), dist2=0, oct=var([5,lininf(5,6,8)],[24,8]), amp=0.7)
+
+s2 >> klank(oct=linvar([5, 6], [128,0]), dur=PDur(3, 8)* 2).slider()
+
+x1 >> play("<X.>", sample=10)
+
+Clock.bpm = 168
+
+s2 >> klank(oct=linvar([5, 6], [128,0]), dur=PDur(3, 8)* 2).slider()
+
+p1 >> supersaw(linvar([0,7], [64,0]), dur=1/4, mverb=0.9, oct=(4,5,6,7), amp=(linvar([0.3, 1], [64,0]), linvar([1, 0.5], [64,0])))
+
+r1.stop()
+
+r1.stop()
+
+r4 >> dab(dur=PDur(var([4,[5,3,8]],[6,2]),8), leg=([0, 5]), cutoff=400, dist2=0.4, hpf=1000, hpr=0.1)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+q2 >> play("k.", sample=0, amp=2)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+c2 >> lbass(var([0, -2, linvar([-2,0],[8,0])], [16,8,8]), dur=var([1/2,1/4],[24,8]), cutoff=PFr(4000,12000), detune=0.9, tone=PFr(0.16,0.9), dist2=0, oct=var([5,lininf(5,6,8)],[24,8]), amp=0.7, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3)
+
+Clock.clear()
+soff()
+
+Root.default="E"
+
+Scale.default="minor"
+
+Clock.bpm = 145
+
+p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+attack("power")
+
+b8 >> blip(PArp([0,2,[4,[5,6]]],4), dur=1/2, mverb=0.8, pan=[-1,1], echo=0.25, rate=var([0,4],[16]), echotime=0.01, shape=(0,linvar([0,0.8],[32,0]))).unison(3)
+
+b9 >> faim(var(P[-4:1:1],8), dur=ù, beef=(0,2), oct=5, dist2=0, vol=1)
+
+p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+b9 >> faim(var(P[-4:1:1],8), dur=ù, beef=(0,2), oct=5, dist2=1, vol=1)
+
+b9.stop()
+
+r9 >> loop("electrodrum16", dur=16, sample=3, drcomp=.5)
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=.5)
+
+attack("Crazy Train")
+
+r1 >> faim([6,6,13,6,14,6,13,6,11,9,8,9,11,9,8,4],dur=1/2,amp=1, dist2=1, oct=4, vol=0.7, leg=0, beef=0).chroma()
+
+r1.stop()
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=.5).lclip(2)
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=.5).lclip(1)
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=.5).lclip(1/2)
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=.5).lclip(1)
+
+drop()
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=0).lclip(1)
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=0, tanh=.2).lclip(1)
+
+masterAll("degree", 4)
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=0, tanh=.4).lclip(1)
+
+masterAll("degree", 2)
+
+masterAll("degree", -4)
+
+r9 >> loop("electrodrum16", dur=16, sample=4, drcomp=0, tanh=.6).lclip(1)
+
+masterAll("degree", [-4, -4, 0, 0])
+
+masterAll("degree", [-4, -4, 0, 0, -2, -2])
+
+# drop()
+
+Clock.clear()
+soff()
+
+attack("unprobable")
+
+Clock.bpm = 125;
+
+f5 >> sinepad(PArp([0,2,5],4), output=20, oct=7,dur=1/4, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=-1).unison(4)
+
+f4 >> pluck(PArp([0,2,5],4), output=24, dur=1/4, lpf=3200, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=1).unison(4)
+
+f5 >> pluck(PArp([0,2,5],4), output=24, dur=1/4, lpf=3200, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=1).unison(4)
+
+f0 >> sinepad(PArp([0,2,5],4), output=20, oct=PStep([4,5,6],5, 4) ,dur=P[1/2, 1/2, 1/4, 1/4], vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1).unison(4)
+
+b1 >> rsin(5 +var([IV, VI, III, VI]), octafuz=0, fx1=0, dur=1/4, sus=1/4, output=4)
+
+v1 >> play("K", amp=[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], sample=0, dur=1/4, output=8)
+
+v3 >> play("@", amp=[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0], dur=1/4, output=18)
+
+v4 >> play("N", amp=[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0], dur=1/4, shape=1, sample=PRand(99)[:12], cut=1, lpf=200, output=14, amplify=1)
+
+b1 >> rsin(5 +var([IV, VI, III, VI]), octafuz=0, fx1=0, dur=1/4, sus=1/4, output=4)
+v1 >> play("K", amp=[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], sample=0, dur=1/4, output=8)
+v3 >> play("@", amp=[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0], dur=1/4, output=18)
+v4 >> play("N", amp=[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0], dur=1/4, shape=1, sample=PRand(99)[:12], cut=1, lpf=200, output=14, amplify=1)
+v5 >> play("-", amp=[0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,1], dur=1/4, sample=2, hpf=180, vol=0.8, pan=PWhite(-1,1), output=12)
+v6 >> play("I", sample=4, hpf=PRand(2000,8000), rate=PWhite(-1,2), dur=P*[1,1/2], amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], pan=PWhite(-1,1), fx2=1, output=14)
+v2 >> play("t", amp=[0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0], lpf=P*[200,2000], dur=1/4, output=16)
+b1.oct=4
+f5.dur=1/2
+f5 >> dbass(dur=1/2)
+f0 >> dbass(dur=1/2)
+
+z1 >> play("K", amp=[1,0,00,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], dur=1/4, output=20)
+z2 >> play("o", amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], lpf=200, dur=1/4, output=10)
+z3 >> play("-", amp=[0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,1,0,0,0,1,0], dur=1/4, amplify=[0.76, 0.2, 0.4], pan=PWhite(-1,1), output=12)
+z4 >> play("-", sample=1, amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], dur=1/4, shape=1, lpf=200, pan=PWhite(-1,1), output=12)
+z6 >> play("t", hpf=8000, dur=1/4, amp=[1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1], sample=4, amplify=PGauss(4, 0.1), output=16)
+
+x1 >> play("K", amp=[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], dur=1/4, output=20)
+x2 >> play("--", amp=[0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0], lpf=200, dur=1/4, output=12)
+x5 >> play("o", amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], dur=1/4, sample=2, output=10)
+x6 >> play("O", hpf=8000, dur=1/4, amp=[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0], output=10)
+x7 >> play("p", hpf=8000, dur=1/4, amp=[0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0], output=16)
+l1 >> play("K ", sample=0, cut=1, output=20)
+x3 >> play("s", amp=[1], dur=1/4, amplify=[0.76, 0.2, 0.4], output=22)
+x4 >> play("c", amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], dur=1/4, shape=PWhite(0.2,2), lpf=P*[200,linvar([40,18200],[32,0])], output=18)
+
+e1 >> play("X ", sample=5, lpf=5800, output=8)
+b8.mverb=0.8
+b8.oct=6
+b8.oct=5
+x_all.stop()
+z_all.stop()
+f5 >> sinepad(PArp([0,2,5],4), output=20, oct=7,dur=1/4, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1).unison(4)
+f8 >> gong(P+(-3,2,5,P*[4,3]), oct=5, sus=6, dur=8, chop=0, chopwave=3, amp=0.3, output=24).unison(4)
+b8 >> varsaw([0, 0, 5], oct=3).stop()
+
+Clock.clear()
+soff()
+
+lost()
+
+lost("intropic")
+
+f0 >> loop("rageambi16", dur=16, sample=1)
+
+Clock.bpm = 143
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=0, sample=1, valadr=0.3, valadd=139, valadt=4, valadc=0.1).sometimes("stutter")
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=300, dastart=1220).lclip(2)
+
+h0 >> loop("gab16", dur=16, sample=6)
+
+p5 >> play("x.", sample=15, rate=1, dafilter=0)
+
+a7 >> loop("gab8", dur=8, sample=4)
+
+masterAll("cut", 1/4)
+
+masterAll("cut", 1/2)
+
+masterAll("cut", 0)
+
+masterAll("cut", 1/8)
+
+p5 >> play("x.", sample=15, rate=1, dafilter=4000)
+
+p5 >> play("x.", sample=15, rate=1, dafilter=0)
+
+masterAll("cut", 0)
+
+f0 >> loop("rageambi16", dur=16, sample=2)
+
+m0 >> vati(I,off=(7, 3), dur=(4, 6), tremolo=0.1, leg=0.5, oct=3, tanh=1).unison(4)
+
+f0 >> loop("rageambi16", dur=16, sample=2, dist=0.5)
+
+f0 >> loop("rageambi16", dur=16, sample=2, dist=0.5, idist=1)
+
+m0 >> vati(I,off=(7, 3), dur=(4, 6), tremolo=0.1, leg=0.5, oct=3, tanh=1).unison(4).only()
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=300, dastart=1220).lclip(2)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=30, dastart=1220).lclip(2)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=30, dastart=1220).lclip(4)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=30, dastart=20).lclip(4)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=230, dastart=20).lclip(1)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=230, dastart=20).lclip(1)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=230, dastart=220).lclip(0.5)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=230, dastart=220).lclip(0.1)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=230, dastart=220).lclip(0.125)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=230, dastart=220).lclip(2)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=2230, dastart=220).lclip(4)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=2230, dastart=220).lclip(4)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=2230, dastart=220).lclip(8)
+
+p5 >> play("x.", sample=15, rate=1, dafilter=0, amp=4)
+
+w9 >> loop("ragegtr16", dur=16, lpf=3900, sample=4, chop=2, dafilter=0, dastart=220).lclip(8)
+
+attack("Dark Synth Pop")
+
+r8 >> donorgan(var([6,5,3,1],[8,4,2,2]), oct=6, cutoff=2600, dur=PDur(3,8), sus=1, blur=2, pong=0, beat_dur=1, pongtime=1, mverb=.2, dist2=.4).unison(3)
+
+r8 >> donorgan(var([6,5,3,1],[8,4,2,2]), oct=6, cutoff=2600, dur=PDur(3,8), sus=1, blur=2, pong=0, beat_dur=1, pongtime=1, mverb=.2, dist2=.4).unison(3).only()
+
+e2 >> lbass(var([0,5,6],[8,4,4]), dur=1/2, oct=5, cutoff=PFr(1400, 4000, 512), tone=.8) + var([0, P*[-1,0,1]], [7,1])
+
+Scale.default="dorian"
+
+o5 >> play("<x-><..><..o.><|k0|.>", sample=7, amp=2).sometimes("stutter")
+
+k4 >> play("X.", amp=2)
+
+r8 >> donorgan(var([6,5,3,1],[8,4,2,2]), oct=6, cutoff=600, dur=PDur(3,8), sus=1, blur=2, pong=0, beat_dur=1, pongtime=1, mverb=.2, dist2=.4).unison(3)
+
+attack("Dark Synth Pop")
+
+attack("David Lynch Code")
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1, hpf=0)
+
+r8 >> donorgan(var([6,5,3,1],[8,4,2,2]), oct=6, cutoff=2600, dur=PDur(3,8), sus=1, blur=1, pong=0, beat_dur=1, pongtime=1, mverb=.2, dist2=.4).unison(3)
+
+r8 >> donorgan(var([6,5,3,1],[8,4,2,2]), oct=6, cutoff=600, dur=PDur(3,8), sus=1, blur=1, pong=0, beat_dur=1, pongtime=1, mverb=.2, dist2=.4).unison(3)
+
+r8 >> donorgan(var([6,5,3,1],[8,4,2,2]), oct=6, cutoff=600, dur=PDur(3,8), sus=1, blur=1, pong=0.5, beat_dur=1, pongtime=1, mverb=.2, dist2=.4).unison(3)
+
+r8 >> donorgan(var([6,5,3,1],[8,4,2,2]), oct=5, cutoff=600, dur=PDur(3,8), sus=1, blur=1, pong=0.5, beat_dur=1, pongtime=1, mverb=.2, dist2=.4).unison(3)
+
+u7 >> loop("losthighway16", dur=16, sample=2, lofi=0).lclip(0) # heirate
+
+r8 >> donorgan(var([6,5,3,1],[8,4,2,2]), oct=5, cutoff=600, dur=PDur(3,8), sus=1, blur=1, pong=0.5, beat_dur=1, pongtime=1, mverb=.2, dist2=0.3).unison(3)
+
+u7 >> loop("losthighway16", dur=16, sample=2, lofi=0).lclip(4) # heirate
+
+a7 >> loop("gab8", dur=8, sample=4)
+
+u7 >> loop("losthighway16", dur=16, sample=2, lofi=0).lclip(1) # heirate
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16) # dark ambi laura
+
+x4.solo()
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(0) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # 2 INtro
+
+x4.stop()
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=0)
+
+k3 >> bass(var([0,1], 16), hpf=0, hpr=0.3, oct=4, vakorg=500, vakorgr=0.5, vakorgd=10, vakorgt=0, vakorgc=0.4, dur=1/2, rate=.3).unison(2)
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+Clock.clear()
+soff()
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+# un truc
+
+# un truc
+
+# un truc
+
+# un truc
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(0) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # 2 INtro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(0) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # 2 INtro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # 2 INtro
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(0) # intro
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+

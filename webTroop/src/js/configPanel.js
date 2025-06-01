@@ -1,5 +1,5 @@
 // Nouveau fichier: configPanel.js
-export function setupConfigPanel(awareness, editor) {
+export function setupConfigPanel(awareness, editor, otherEditor) {
     const configButton = document.getElementById('configButton');
     const configPanel = document.getElementById('configPanel');
     const userNameInput = document.getElementById('userName');
@@ -13,8 +13,12 @@ export function setupConfigPanel(awareness, editor) {
     const modalbtn = document.getElementById("openModalBtn");
     const closeModal = document.getElementById("closeModal");
     const buttonValidatePlayerName = document.getElementById('validatePlayerName');
-    // const themeInterface = document.getElementById('themeInterface');
     const themeInterfaceSelector = document.getElementById('themeInterfaceSelector');
+
+    const splitScreenToggle = document.getElementById('splitScreenToggle');
+    const otherEditorWrapper = document.getElementById('other-editor-wrapper');
+    const editorResizeHandle = document.getElementById('editor-resize-handle');
+    const mainEditorWrapper = document.getElementById('main-editor-wrapper');
 
     // Restaurer les données utilisateur
     const savedUser = localStorage.getItem('webtroop-user');
@@ -60,6 +64,7 @@ export function setupConfigPanel(awareness, editor) {
     fontSelect.addEventListener('change', (e) => {
         const font = e.target.value;
         editor.getWrapperElement().style.fontFamily = font;
+        otherEditor.getWrapperElement().style.fontFamily = font;
         document.body.style.fontFamily = font;
         localStorage.setItem('preferredFont', font);
     });
@@ -69,6 +74,7 @@ export function setupConfigPanel(awareness, editor) {
     if (savedFont) {
         fontSelect.value = savedFont;
         editor.getWrapperElement().style.fontFamily = savedFont;
+        otherEditor.getWrapperElement().style.fontFamily = savedFont;
         }
 
     // Gestion ouverture/fermeture du panneau
@@ -90,6 +96,7 @@ export function setupConfigPanel(awareness, editor) {
     themeSelect.addEventListener('change', (e) => {
         const theme = e.target.value;
         editor.setOption('theme', theme);
+        otherEditor.setOption('theme', theme);
         localStorage.setItem('preferredTheme', theme);
     });
 
@@ -97,6 +104,7 @@ export function setupConfigPanel(awareness, editor) {
     const savedTheme = localStorage.getItem('preferredTheme');
     if (savedTheme) {
         editor.setOption('theme', savedTheme);
+        otherEditor.setOption('theme', savedTheme);
         themeSelect.value = savedTheme;
     }
 
@@ -127,10 +135,13 @@ export function setupConfigPanel(awareness, editor) {
         
         // Mettre à jour l'éditeur
         editor.getWrapperElement().style.fontSize = size + 'px';
+        otherEditor.getWrapperElement().style.fontSize = size + 'px';
         
+
         // Forcer le rafraîchissement
         editor.refresh();
-        
+        otherEditor.refresh();
+
         // Sauvegarder la préférence
         localStorage.setItem('preferredFontSize', size);
     }
@@ -179,13 +190,60 @@ export function setupConfigPanel(awareness, editor) {
         document.documentElement.className = `${selectedInterfaceTheme}-theme`;
         localStorage.setItem('selectedInterfaceTheme', selectedInterfaceTheme);
     });
-    // themeInterface.addEventListener('change', (event) => {
-    //     if (event.target.checked) {
-    //         document.documentElement.classList.remove('light-theme');
-    //     } else {
-    //         document.documentElement.classList.add('light-theme');
-    //     }
-    //   });
+
+
+    // Gestion du split screen
+    function toggleSplitScreen(enabled) {
+        if (enabled) {
+            // Activer le split screen
+            otherEditorWrapper.style.display = 'flex';
+            if (editorResizeHandle) {
+                editorResizeHandle.style.display = 'block';
+            }
+            mainEditorWrapper.style.height = '70%';
+            
+            // Restaurer les flex values par défaut
+            mainEditorWrapper.style.flex = '7';
+            otherEditorWrapper.style.flex = '3';
+        } else {
+            // Désactiver le split screen
+            otherEditorWrapper.style.display = 'none';
+            if (editorResizeHandle) {
+                editorResizeHandle.style.display = 'none';
+            }
+            mainEditorWrapper.style.height = '100%';
+            mainEditorWrapper.style.flex = '1';
+        }
+        
+        // Rafraîchir les éditeurs après changement
+        setTimeout(() => {
+            editor.refresh();
+            if (enabled) {
+                otherEditor.refresh();
+            }
+        }, 10);
+        
+        // Sauvegarder la préférence
+        localStorage.setItem('splitScreenEnabled', enabled.toString());
+    }
+
+    // Restaurer l'état du split screen
+    const savedSplitScreen = localStorage.getItem('splitScreenEnabled');
+    const splitScreenEnabled = savedSplitScreen !== 'false'; // Par défaut activé
+    splitScreenToggle.checked = splitScreenEnabled;
+    toggleSplitScreen(splitScreenEnabled);
+
+    // Event listener pour le toggle
+    splitScreenToggle.addEventListener('change', (e) => {
+        const enabled = e.target.checked;
+        toggleSplitScreen(enabled);
+        
+        // Mettre à jour le label
+        const toggleLabel = document.querySelector('.toggle-label');
+        if (toggleLabel) {
+            toggleLabel.textContent = enabled ? 'Actif' : 'Inactif';
+        }
+    });
 
     return {
         updateUserInfo() {
@@ -194,6 +252,9 @@ export function setupConfigPanel(awareness, editor) {
                 color: userColorInput.value
             };
             return userInfo;
-        }
+        }, 
+        isSplitScreenEnabled() {
+            return splitScreenToggle.checked;
+        },
     };
 }

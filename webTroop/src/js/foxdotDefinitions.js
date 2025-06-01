@@ -200,6 +200,8 @@ const synthList = {
   twang: 'rate=0',
   tritri: 'gate=1, modfreq=5, rate=4.85, phase=0.5, cutoff=2000, rq=0.5, mul=1, para1=70, rsing=0',
   total: 'rate=0',
+  tb304: 'cutoff=100, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0',
+  tb303: 'wave=0, cutoff=800, rq=0.4, dec=1.0, top=2500',
   swiss: 'gate=0.5, decay=1, detune=1, rq=0, cutoff=10000, saw=1, pulse=1, sin=1, pw=0.5, attack=0.001, rel=0.91',
   swell: 'rate=1',
   supersaw: 'rate=0, cutoff=1800, rq=0.8',

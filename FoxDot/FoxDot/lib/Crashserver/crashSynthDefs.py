@@ -211,6 +211,9 @@ swiss.add()
 tb303 = FileSynthDef("tb303")
 tb303.add()
 
+tb304 = FileSynthDef("tb304")
+tb304.add()
+
 varicelle = FileSynthDef("varicelle")
 varicelle.add()
 

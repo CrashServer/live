@@ -130,12 +130,17 @@
             </section>
         </div>
         <div id="editor-container">
-            
-            <div id="editor"></div>
+            <div id="main-editor-wrapper">
+                <div id="editor"></div>
+            </div>
+            <div id="editor-resize-handle"></div>
+            <div id="other-editor-wrapper">
+                <div id="other-editor"></div>
+            </div>
             <div class="logPanel" id="logPanel">
-                <div id="other-user-display"><span id="other-user-position"></span><span id="other-user-code"></span></div>
-                <!-- <div id="separator">
-                </div> -->
+                <!-- <div id="other-user-display"><span id="other-user-position"></span><span id="other-user-code"></span></div> -->
+                <div id="separator">
+                </div>
                 <div id="logAndChat">
                     <div id="logs"></div>
                     <div id="chat" class="chat"> </div>
@@ -268,13 +273,13 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <!-- <div class="toggle-item">
-                        <label>Theme interface</label>
+                    <div class="toggle-item">
+                        <label>Toggle Split Screen</label>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="themeInterface" checked/>
+                            <input type="checkbox" id="splitScreenToggle" checked/>
                             <span class="slider"></span>
                         </label>
-                    </div> -->
+                    </div>
                 </div>
                 <button id="openModalBtn" class="configButton">Afficher les raccourcis clavier</button>
             </div>

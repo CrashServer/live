@@ -265,7 +265,7 @@ export const functionUtils = {
                 const num = parseInt(numberStr, 10);
                 
                 // Pour les nombres supérieurs à 99, incrémenter par 100
-                if (Math.abs(num) > 99) {
+                if (Math.abs(num) > 300) {
                     result = (num + (value * 100)).toString();
                 } else {
                     result = (num + value).toString();

@@ -330,17 +330,76 @@ const definitions = { ...func, ...fxList, ...synthList };
 
 function showDefinition(cm) {
   const cursor = cm.getCursor();
+  const line = cm.getLine(cursor.line);
   const token = cm.getTokenAt(cursor);
   const word = token.string;
+  const cursorPos = cursor.ch;
 
   // Remove any existing tooltips
   const existingTooltips = document.querySelectorAll('.CodeMirror-tooltip');
   existingTooltips.forEach(tooltip => removeTooltip(tooltip));
 
-  if (definitions[word]) {
-    const definition = definitions[word];
+  function findFunctionFromParentheses(line, pos) {
+    const functionPattern = /([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g;
+    const functions = [];
+    let match;
+    
+    while ((match = functionPattern.exec(line)) !== null) {
+      const funcName = match[1];
+      const startPos = match.index;
+      const openParenPos = match.index + match[0].length - 1;
+      
+      let depth = 1;
+      let closeParenPos = openParenPos;
+      
+      for (let i = openParenPos + 1; i < line.length && depth > 0; i++) {
+        if (line[i] === '(') depth++;
+        else if (line[i] === ')') depth--;
+        closeParenPos = i;
+      }
+      
+      functions.push({
+        name: funcName,
+        start: startPos,
+        openParen: openParenPos,
+        closeParen: closeParenPos
+      });
+    }
+    
+    let targetFunction = null;
+    let maxSpecificity = -1;
+    
+    for (const func of functions) {
+      if (pos >= func.openParen && pos <= func.closeParen) {
+        const specificity = func.openParen;
+        if (specificity > maxSpecificity) {
+          maxSpecificity = specificity;
+          targetFunction = func.name;
+        }
+      }
+    }
+    
+    return targetFunction;
+  }
+
+  let lookupWord = word;
+  
+  if (word.includes('.')) {
+    const parts = word.split('.');
+    lookupWord = parts[parts.length - 1];
+  }
+
+  if (!definitions[lookupWord] || !lookupWord.match(/^[a-zA-Z_]/)) {
+    const nearestFunction = findFunctionFromParentheses(line, cursorPos);
+    if (nearestFunction) {
+      lookupWord = nearestFunction;
+    }
+  }
+  
+  if (definitions[lookupWord]) {
+    const definition = definitions[lookupWord];
     const tooltip = makeTooltip(cm, cursor, definition);
-    setTimeout(() => removeTooltip(tooltip), 10000); // Remove tooltip after 10 seconds
+    setTimeout(() => removeTooltip(tooltip), 7000); 
   }
 }
 
@@ -370,4 +429,9 @@ function removeTooltip(tooltip) {
   }
 }
 
-export { showDefinition };
+function removeAllTooltips() {
+  const tooltips = document.querySelectorAll('.CodeMirror-tooltip');
+  tooltips.forEach(tooltip => removeTooltip(tooltip));
+}
+
+export { showDefinition, removeAllTooltips };

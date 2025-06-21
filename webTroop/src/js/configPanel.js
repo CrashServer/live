@@ -200,11 +200,11 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             if (editorResizeHandle) {
                 editorResizeHandle.style.display = 'block';
             }
-            mainEditorWrapper.style.height = '70%';
+            mainEditorWrapper.style.height = '90%';
             
             // Restaurer les flex values par défaut
-            mainEditorWrapper.style.flex = '7';
-            otherEditorWrapper.style.flex = '3';
+            mainEditorWrapper.style.flex = '9';
+            otherEditorWrapper.style.flex = '1';
         } else {
             // Désactiver le split screen
             otherEditorWrapper.style.display = 'none';

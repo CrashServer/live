@@ -29,7 +29,7 @@ import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
 import { markerUtils } from './markerUtils.js';
 import { foxdotAutocomplete } from './foxdotAutocomplete.js';
-import { showDefinition } from './foxdotDefinitions.js';
+import { showDefinition, removeAllTooltips } from './foxdotDefinitions.js';
 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Centrer la vue sur le curseur de l'autre utilisateur
     if (line >= 0 && line < otherEditor.lineCount()) {
-      otherEditor.scrollIntoView({line: line, ch: position}, 100);
+      otherEditor.scrollIntoView({line: line, ch: position}, 0);
     }
   }
 
@@ -338,19 +338,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             to: CodeMirror.Pos(endLine, cm.getLine(endLine).length),
         };
       }}),
-      'Ctrl-Left': (cm) => {functionUtils.goToPreviousComma(cm)},
-      'Ctrl-Right': (cm) => {functionUtils.goToNextComma(cm)},
-      'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
-      'Alt-Up': (cm) => {
-                    functionUtils.incrementValue(cm, 1)
-                    evaluateCode(cm, false)
-                  },
-      'Alt-Down': (cm) => {
-                    functionUtils.incrementValue(cm, -1)
-                    evaluateCode(cm, false)
-                  },
-      'Alt-A': (cm) => {functionUtils.randomizer(cm)},
-      'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
+    'Ctrl-Left': (cm) => {functionUtils.goToPreviousComma(cm)},
+    'Ctrl-Right': (cm) => {functionUtils.goToNextComma(cm)},
+    'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
+    'Alt-Up': (cm) => {
+                  functionUtils.incrementValue(cm, 1)
+                  evaluateCode(cm, false)
+                },
+    'Alt-Down': (cm) => {
+                  functionUtils.incrementValue(cm, -1)
+                  evaluateCode(cm, false)
+                },
+    'Alt-A': (cm) => {functionUtils.randomizer(cm)},
+    'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
+    'Esc': () => {removeAllTooltips();},
       // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });
 

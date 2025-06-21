@@ -76,7 +76,7 @@ export const logsUtils = {
       
       // Calculer la nouvelle position relative
       const relativeY = e.clientY - containerRect.top;
-      const newMainHeight = Math.max(150, Math.min(availableHeight - 100, relativeY));
+      const newMainHeight = Math.max(150, Math.min(availableHeight - 50, relativeY));
       const newOtherHeight = availableHeight - newMainHeight;
       
       // Appliquer les nouvelles tailles

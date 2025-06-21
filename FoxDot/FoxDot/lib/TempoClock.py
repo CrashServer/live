@@ -295,7 +295,7 @@ class TempoClock(object):
 
         try:
 
-            assert bpm > 0, "Tempo must be a positive number"
+            assert bpm > 20, "Tempo must be superior to 20 bpm"
 
         except AssertionError as err:
 

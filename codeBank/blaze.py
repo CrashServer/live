@@ -1,5 +1,4 @@
 # blaze
-
 Root.default = "E"
 Scale.default = "minor"
 a0 >> dbass([1, var([1, [7, 2, 7, (0, 4, 2)]]), 4, 1, 2], lpf=linvar([400, 3200], 128), dur=[1/2, 1/2, 1/4, 1/4],scale=Scale.minor, vakorg=8400, vakorgr=0.5, vakorgd=0.1, vakorgt=4, oct=(5, var([3,4,6, 5])), sus=[1, 1/2, 1/2]).unison(4).every(4, "shuffle")

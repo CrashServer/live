@@ -37,6 +37,7 @@ const func = {
     PQuicken: '(dur=0.5, stepsize=3, steps=6)\r\n Returns a PGroup of delay amounts that gradually decrease ', 
     PRhythm: '(durations)\r\n Converts all tuples/PGroups into delays calculated using the PDur algorithm.\ne.g.\nPRhythm([1,(3,8)]) -> P[1,(2,0.75,1.5)]\n    *work in progress*\n', 
     PJoin: '(patterns)\r\n Joins a list of patterns together ', 
+    PTuple: '(pattern, size=1)\r\n Returns a PGroup of size \'size\' with the pattern',
     linvar: '(values, dur=None, start=0, **kwargs)\r\n', 
     expvar: '(values, dur=None, start=0, **kwargs)\r\n', 
     sinvar: '(values, dur=None, start=0, **kwargs)\r\n', 

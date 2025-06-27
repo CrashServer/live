@@ -803,6 +803,17 @@ if __name__ != "__main__":
             FoxDot.reload()
             panelreset()
 
+        def PTuple(pattern, size=1):
+            ''' Returns a PGroup of size 'size' with the pattern'''
+            if isinstance(pattern, GeneratorPattern):
+                return PGroup([pattern.copy() for _ in range(size)])
+            elif isinstance(pattern, metaPattern):
+                return pattern.stutter(size).asGroup()
+            elif callable(pattern):
+                return PGroup([pattern() for _ in range(size)])
+            else:
+                return PGroup([pattern for _ in range(size)])
+
     except Exception as e:
         print(f"useful function problem : {e}")
 

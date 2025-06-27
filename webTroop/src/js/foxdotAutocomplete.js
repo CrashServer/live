@@ -173,6 +173,7 @@ export const foxdotAutocomplete = {
         { text: 'clamp()', displayText: 'clamp' },
         { text: 'lmap()', displayText: 'lmap' },
         { text: 'PRand()', displayText: 'PRand' },
+        { text: 'PTuple()', displayText: 'PTuple' },
         { text: 'PWhite(0,1)', displayText: 'PWhite' },
         { text: 'PWhite(-1,1)', displayText: 'PWhite(-1,1)' },
         { text: 'PxRand()', displayText: 'PxRand' },
@@ -440,7 +441,7 @@ export const foxdotAutocomplete = {
         const matchPlayer = beforeCursor.match(playerPattern);
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;        
         const afterLastClosingParenthesis = /.*\)\s*\./;
-        const loopPattern = /loop\(([^,)]*)$/;
+        const loopPattern = /loop|gsynth|splaffer|splitter\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
         const lostPattern =/(lost|attack)\([^)]*$/
         const scenePattern = /!/;
@@ -472,7 +473,7 @@ export const foxdotAutocomplete = {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
             filteredLoops = filteredLoops.filter(loop => !loop.displayText.startsWith('AKWF'));
-            const loopMatch = line.match(/loop\("([^"]*)"/);
+            const loopMatch = line.match(/loop|gsynth|splaffer|splitter\("([^"]*)"/);
             const durMatch = line.match(/dur=(\d+(\.\d+)?|\d+\/\d+)/);
             const loopStart = loopMatch ? token.start : token.start;
             const loopEnd = durMatch ? durMatch.index + durMatch[0].length : cursorPosition;

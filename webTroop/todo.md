@@ -1,6 +1,10 @@
 # WebTroop 2000
 
 ## Todo
+- [ ] randomizer
+- [ ] keymap vim, emacs, ...
+- [X] ajout paramètre pour showTodo ou pas
+
 
 ## Bug
 - [X] copy paste

@@ -1,0 +1,242 @@
+Root.default="B"
+
+c0 >> pluck(oct=4)
+
+c0 >> pluck(oct=3)
+
+c0 >> pluck(oct=2)
+
+c0 >> pluck(oct=2, fx2=1)
+
+c0 >> pluck(oct=2, fx2=1, fx1=1)
+
+Clock.bpm=82
+
+c0 >> pluck(oct=2, fx2=1, fx1=1, dur=4)
+
+c0 >> pluck(oct=2, fx2=1, fx1=0, dur=4)
+
+c0 >> pluck(oct=2, fx2=1, fx1=0, dur=PDur(3,8))
+
+c0 >> pluck(oct=2, fx2=1, fx1=1, dur=PDur(3,8))
+
+v9 >> play("<k.><.><....>", sample=0, amp=1).sometimes("stutter")
+
+v2 >> play("<kk.kk><x.>", sample=(0,9), dur=1/4)
+
+v2 >> play("<kk.kk><x.>", sample=(0), dur=1/4)
+
+v2 >> play("<kk.kk[kk]><x.>", sample=(0), dur=1/4)
+
+v2 >> play("<kk.kk[kk]><..u.>", sample=(0), dur=1/4)
+
+v2 >> play("<kk.kk[kk]><..u.>", sample=(0), dur=1/4, comp=1)
+
+v2 >> play("<kk.kk[kk]><u...>", sample=(0), dur=1/4, comp=1)
+
+v2 >> play("<kk.kk[kk]><..u.>", sample=(0), dur=1/4, comp=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=0)
+
+Clock.clear()
+soff()
+
+Scale.default="chromatic"
+
+c0 >> pluck([1], oct=2, fx2=0, fx1=0, dur=1).gtr(0)
+
+c0 >> pluck([1], oct=3, fx2=0, fx1=0, dur=1).gtr(0)
+
+c0 >> pluck([11, 1], oct=3, fx2=0, fx1=0, dur=1).gtr(0)
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12], oct=3, fx2=0, fx1=0, dur=1).gtr(0)
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12], oct=3, fx2=0, fx1=0, dur=1/4).gtr(0)
+
+Clock.clear()
+soff()
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12], oct=3, fx2=0, fx1=0, dur=[0.5, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]).gtr(0)
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12], oct=3, fx2=0, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.25, 0.25]).gtr(0)
+
+Clock.clear()
+soff()
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12], oct=3, fx2=0, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125]).gtr(0)
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12, 11,1,1, 2,12,3], oct=3, fx2=0, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125, 0.5, 0.25,0.25, 0.25,0.25,0.5]).gtr(0)
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12, 11,1,1, 2,12,3], oct=3, fx2=1, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125, 0.5, 0.25,0.25, 0.25,0.25,0.5]).gtr(0)
+
+d2 >> play("x---x-x-", dur=[0.5, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5])
+
+d2 >> play("k---k-k-", dur=[0.5, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5])
+
+d2 >> play("kk.kkk.k", dur=1/4)
+
+d2 >> play("<kk.kkk.k><-...>", dur=1/4)
+
+d2 >> play("<kk.kkk.k><-..>", dur=1/4)
+
+d2 >> play("<kk.kkk.k><-.>", dur=1/4)
+
+d2 >> play("<kk.kkk.k><-.><..u...u.>", dur=1/4)
+
+Clock.clear()
+soff()
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12, 11,1,1, 2,12,3], oct=3, fx2=1, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125, 0.5, 0.25,0.25, 0.25,0.25,0.5]).gtr(0)
+
+x8 >> play("k.")
+
+x8 >> play("k.", ).drummer()
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12, 11,1,1, 2,12,3], oct=2, fx2=1, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125, 0.5, 0.25,0.25, 0.25,0.25,0.5]).gtr(0)
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12, 11,1,1, 2,12,3], oct=3, fx2=1, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125, 0.5, 0.25,0.25, 0.25,0.25,0.5]).gtr(0)
+
+Root.default="B"
+
+Root.default="D"
+
+c0.solo()
+
+Root.default="B"
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12, 11,1,1, 2,12,3], oct=3, fx2=1, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125, 0.5, 0.25,0.25, 0.25,0.25,0.5])
+
+Root.default="D"
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12, 11,1,1, 2,12,3], oct=2, fx2=1, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125, 0.5, 0.25,0.25, 0.25,0.25,0.5])
+
+Clock.clear()
+soff()
+
+a7 >> faim(oct=3, dur=1/4)
+
+a7 >> faim(oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim(oct=3, dur=1/4, fx1=1, fx2=0)
+
+a7 >> faim(oct=3, dur=1/4, fx1=1, fx2=1)
+
+Scale.default="aeolian"
+
+Scale.default="dorian"
+
+Scale.default="mixolydian"
+
+c0 >> pluck([11,1,1, 1,1,1, 10,12, 11,1,1, 2,12,3], oct=2, fx2=1, fx1=1, dur=[0.5, 0.25,0.25, 0.25,0.25,0.25, 0.125, 0.125, 0.5, 0.25,0.25, 0.25,0.25,0.5])
+
+a7.stop()
+
+Clock.clear()
+soff()
+
+a7 >> faim([0],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([1],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([0],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([1],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([2],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([1],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([0],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([1],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([2],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([3],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([4],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([5],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([4],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([3],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([2],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([1],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim([0],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim(P[0:5],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim(P[0:4],oct=3, dur=1/4, fx1=1, fx2=1)
+
+a7 >> faim(P[0:4], oct=3, dur=1/2, fx1=1, fx2=1)
+
+Clock.clear()
+soff()
+
+doom = SynthDef("doomSynth")
+
+x8 >> doom()
+
+x8 >> doom(oct=3)
+
+x8 >> doom(oct=4)
+
+x8 >> doom(oct=4, dur=8)
+
+x8 >> doom(oct=4, dur=8, fx1=1)
+
+x8 >> doom(oct=4, dur=8, fx1=1, fx2=1)
+
+x8 >> doom(oct=4, dur=8, fx1=1, fx2=1, pw=0.75)
+
+x8 >> doom(oct=4, dur=8, fx1=1, fx2=1, pw=0.15)
+
+x8 >> doom(oct=4, dur=8, fx1=0, fx2=0, pw=0.15)
+
+x8 >> doom(oct=4, dur=8, fx1=0, fx2=0, pw=.15)
+
+x8 >> doom(oct=4, dur=8, fx1=0, fx2=0, pw=.5)
+
+x8 >> doom(oct=4, dur=8, fx1=0, fx2=0, pw=0.6)
+
+x8 >> doom(oct=4, dur=8, fx1=0, fx2=0, pw=0.7)
+
+x8 >> doom(oct=5, dur=8, fx1=0, fx2=0, pw=0.7)
+
+x8 >> doom(oct=5, dur=1/2, fx1=0, fx2=0, pw=0.7)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.7)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.6)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.5)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.4)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.3)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.2)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.1)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.2)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.3)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.4)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.5)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.6)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.7)
+
+x8 >> doom(oct=5, dur=1/4, fx1=0, fx2=0, pw=0.8)
+
+Clock.clear()
+soff()
+

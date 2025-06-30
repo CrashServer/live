@@ -1,0 +1,679 @@
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16, output=7) # dark ambi laura
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16, output=7).lclip(2) # dark ambi laura
+
+Clock.bpm=132
+
+Clock.clear()
+soff()
+
+r0 >> loop("dune_16", dur=16, sample=0)
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1)
+
+r2 >> loop("dune_16", dur=16, sample=2, delay=8, a=.1)
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0) # robot fight
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0, comp=1) # robot fight
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1, hpf=200)
+
+r2 >> loop("dune_16", dur=16, sample=2, delay=8, a=.1, hpf=120)
+
+w1 >> loop("losthighway4", dur=4, sus=4, sample=0, mverb=0, comp=0, tanh=.2) # apples
+
+r0 >> loop("dune_16", dur=16, sample=0, hpf=120)
+
+w1 >> loop("losthighway4", dur=4, sus=4, sample=0, mverb=0, comp=0, tanh=.2).lclip(2) # apples
+
+w1 >> loop("losthighway4", dur=4, sus=4, sample=0, mverb=0, comp=1, tanh=.2).lclip(2) # apples
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=0, fx2=1, trig=0, sus=16)
+
+r0 >> loop("dune_16", dur=16, sample=0, hpf=120, amp=.8)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0, sus=16)
+
+z3 >> play("<x.><.><....>", sample=0, amp=3).sometimes("stutter")
+
+u7 >> loop("losthighway16", dur=16, sample=2).lclip(2) # heirate
+
+r1 >> loop("dune_16", dur=PRand(12,22), sample=1, delay=4, a=.1, hpf=200, amp=.7)
+
+u7 >> loop("losthighway16", dur=32, sample=2).lclip(2) # heirate
+
+r2.stop()
+
+r0.stop()
+
+u7 >> loop("losthighway16", dur=32, sample=2).lclip(4) # heirate
+
+r1.stop()
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0, comp=0) # robot fight
+
+u7 >> loop("losthighway16", dur=32, sample=2).lclip(8) # heirate
+
+u7 >> loop("losthighway16", dur=16, sample=2).lclip(8) # heirate
+
+r6.stop()
+
+u7 >> loop("losthighway16", dur=16, sample=2).lclip(16) # heirate
+
+Clock.bpm=102
+
+u7 >> loop("losthighway16", dur=16, sample=2).lclip(0) # heirate
+
+z3 >> play("<x.><.><..u.>", sample=0, amp=3).sometimes("stutter")
+
+w1.stop()
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0, sus=16).lclip(4)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0, sus=16).lclip(2)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0).lclip(2)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0).lclip(1)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0).lclip(1/2)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=1, fx2=1, trig=0, cut=1).lclip(1/2)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=0, fx2=1, trig=0, cut=1).lclip(1/2)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=0, fx2=1, trig=0, cut=1).lclip(1)
+
+v4 >> loop("lynchvoice8", dur=16, sample=7, comp=0, fx2=1, trig=0, cut=1).lclip(1)
+
+v4 >> loop("lynchvoice8", dur=8, sample=7, comp=0, fx2=1, trig=0, cut=1).lclip(1)
+
+v4 >> loop("lynchvoice8", dur=8, sample=7, comp=0, fx2=1, trig=0, cut=0).lclip(1)
+
+Clock.clear()
+soff()
+
+s7 >> loop("lynchvoice8", dur=8, sample=8, comp=0, rate=1, chop=2, chopi=.5)
+
+u3 >> noloop("lynchvoice8", dur=8, sample=8, chop=4, chopi=0, chorus=1.2, chorusrate=0.5, mverb=.2, shift=0, shift_=2)
+
+i1 >> loop("gbreak16", dur=16, fx=1)
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16, output=7).lclip(2) # dark ambi laura
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16, output=7, comp=1).lclip(2) # dark ambi laura
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16, output=7, comp=1, tanh=.2).lclip(2) # dark ambi laura
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16, output=7, comp=1, tanh=.2).lclip(4) # dark ambi laura
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=1.2, sus=16, output=7, comp=1, tanh=.2).lclip(0) # dark ambi laura
+
+p5 >> dbass(var([0,3,-2],1/2), dur=4, rate=.5, output=0)
+
+p5 >> dbass(var([0,3,-2],1/2), dur=1/2, rate=.5, output=0)
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=0.7, sus=16, output=7, comp=1, tanh=.2).lclip(0) # dark ambi laura
+
+p5 >> dbass(var([0,3,-2],8), dur=1/2, rate=.5, output=0)
+
+Root.default=3
+
+Scale.default="minor"
+
+p5 >> dbass(var([0,3,-2],8), dur=1/2, rate=.5, output=0, oct=6)
+
+p5.stop()
+
+u4 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+i1 >> loop("gbreak16", dur=16, fx=1, amp=.6)
+
+c7 >> play("<X-><.:><..u.>", sample=6, amp=2, comp=1, lpf=0).often("stutter", PRand(4))
+
+c7 >> play("<X-><..><..u.>", sample=6, amp=2, comp=1, lpf=0).often("stutter", PRand(4))
+
+c7 >> play("<k-><..><..u.>", sample=6, amp=2, comp=1, lpf=0).often("stutter", PRand(4))
+
+c7 >> play("<k-><..><..u.>", sample=0, amp=2, comp=1, lpf=0).often("stutter", PRand(4))
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=0.7, sus=16, output=7, comp=1, tanh=.5).lclip(0) # dark ambi laura
+
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=0.7, sus=16, output=7, comp=1, tanh=.5).lclip(2) # dark ambi laura
+
+u3.solo()
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # intro
+
+u3 >> noloop("lynchvoice8", dur=8, sample=8, chop=4, chopi=0, chorus=0, chorusrate=0.5, mverb=.2, shift=0, shift_=2)
+
+u3 >> noloop("lynchvoice8", dur=8, sample=8, chop=4, chopi=0, chorus=0, chorusrate=0.5, mverb=.2, shift=0.1, shift_=2)
+
+u3 >> noloop("lynchvoice8", dur=8, sample=8, chop=0, chopi=0, chorus=0, chorusrate=0.5, mverb=.2, shift=0.1, shift_=2)
+
+u3 >> noloop("lynchvoice8", dur=8, sample=8, chop=0, chopi=0, chorus=0, chorusrate=0.5, mverb=.2, shift=1, shift_=.02)
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # 2 INtro
+
+v9.stop()
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=1, valadt=0, valadc=0.3).lclip(0) # intro
+
+Clock.bpm=128
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=2, valadt=0, valadc=0.3).lclip(0) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=3, valadt=0, valadc=0.3).lclip(0) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=3, valadt=0, valadc=0.3).lclip(2) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=3, valadt=0, valadc=0.3).lclip(4) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).lclip(4) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=8, valadt=0, valadc=0.3).lclip(4) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=12, valadt=0, valadc=0.3).lclip(4) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # 2 INtro
+
+#### PART III "INSANE VOICES"
+# twin tech break reverse
+s7 >> loop("lynchvoice8", dur=8, sample=8, comp=0, rate=1, chop=2, chopi=.5)
+i1 >> loop("gbreak16", dur=16, fx=1, amp=.6)
+u3 >> noloop("lynchvoice8", dur=8, sample=8, chop=0, chopi=0, chorus=0, chorusrate=0.5, mverb=.2, shift=1, shift_=.02)
+x4 >> loop("twinpeaks16", dur=16, sample=5, amp=0.7, sus=16, output=7, comp=1, tanh=.5).lclip(2) # dark ambi laura
+c7 >> play("<k-><..><..u.>", sample=0, amp=2, comp=1, lpf=0).often("stutter", PRand(4))
+u4 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+#
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # intro
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # 2 INtro
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+Clock.clear()
+soff()
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # intro
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # 2 INtro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.75, sample=1, shape=0, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # 2 INtro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.75, sample=1, shape=0, valad=1500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(0) # 2 INtro
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=2500, valadr=0.3, valadd=25, valadt=4, valadc=0.3).lclip(0) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=2500, valadr=0.3, valadd=25, valadt=3, valadc=0.3).lclip(0) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=2500, valadr=0.3, valadd=25, valadt=2, valadc=0.3).lclip(0) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=2500, valadr=0.3, valadd=25, valadt=1, valadc=0.3).lclip(0) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0, shape=0, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.25, sample=1, shape=0, valad=1500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(0) # 2 INtro
+
+v9.stop()
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(2) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(2) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(1) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=2500, valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(1/2) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=PFr(500,2500), valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(1/2) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=PFr(400,2500), valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(1/2) # intro
+
+c7 >> play("<k.><..><..u.><X.>", sample=0, amp=5, comp=1, lpf=0).sometimes("stutter")
+
+c7 >> play("<k.><..><..u.><X.>", sample=0, amp=3, comp=1, lpf=0).sometimes("stutter")
+
+c7 >> play("<k-><..><..u.><X.>", sample=0, amp=3, comp=1, lpf=0).sometimes("stutter")
+
+c7 >> play("<k-><..><..u.><X.>", sample=0, amp=3, comp=1, lpf=0, bank=1).sometimes("stutter")
+
+c7 >> play("<k-><..><..u.><X.>", sample=0, amp=3, comp=1, lpf=0, bank=0).sometimes("stutter")
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=PFr(400,2500), valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(1) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=PFr(400,2500), valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(2) # intro
+
+c7 >> play("<k-><..><..u.><X.>", sample=0, amp=2, comp=1, lpf=0, bank=0).sometimes("stutter")
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=PFr(400,4500), valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(2) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=PFr(400,4500), valadr=0.3, valadd=135, valadt=0, valadc=0.3).lclip(2) # intro
+
+v8 >> loop("twinpeaks16", dur=16, chop=0, sample=0, shape=0, valad=PFr(400,4500), valadr=0.3, valadd=35, valadt=0, valadc=0.3).lclip(2) # intro
+
+v8.stop()
+
+v9 >> loop("twinpeaks16", dur=16, chop=0, chopi=0.25, sample=1, shape=0, valad=1500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(2) # 2 INtro
+
+v9 >> loop("twinpeaks16", dur=16, chop=0, chopi=0.25, sample=1, shape=0, valad=1500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(4) # 2 INtro
+
+v9 >> loop("twinpeaks16", dur=16, chop=0, chopi=0.25, sample=1, shape=0, valad=6500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(4) # 2 INtro
+
+v9 >> loop("twinpeaks16", dur=16, chop=0, chopi=0.25, sample=1, shape=0, valad=6500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # 2 INtro
+
+v9 >> loop("twinpeaks16", dur=16, chop=0, chopi=0.25, sample=1, shape=0.2, valad=6500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # 2 INtro
+
+v9 >> loop("twinpeaks16", dur=16, chop=0, chopi=0.25, sample=1, shape=0, valad=6500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # 2 INtro
+
+c7.solo()
+
+z4.stop()
+
+v9.stop()
+
+Clock.bpm=148
+
+h5 >> loop("dune_8", dur=8, sample=PRand(8), tanh=.2, amp=0.5)
+
+r4 >> loop("dune8", dur=8, sample=0, chop=0, chopwave=2, shift=(.25,.5,0,1.5,1.75), vol=.8) # ambi montee
+
+c7 >> play("<k-><..><..u.><X.>", sample=0, amp=1, comp=1, lpf=0, bank=0).sometimes("stutter")
+
+c7.stop()
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=2, chopi=0, mverb=0).lclip(P*[1,2,1/2,4,1/4]) # rammstein
+
+r4 >> loop("dune8", dur=8, sample=0, chop=0, chopwave=2, shift=(.25,.5,0,1.5,1.75), vol=.4) # ambi montee
+
+r4 >> loop("dune8", dur=8, sample=0, chop=0, chopwave=2, shift=(.25,.5,0,1.5,1.75), vol=.5) # ambi montee
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=2, chopi=0, mverb=0).lclip(2) # rammstein
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=0, chopi=0, mverb=0).lclip(2) # rammstein
+
+u4 >> loop("losthighway16", dur=16, sample=4, chop=2, chopi=P*[0,.25,.5,.75], mverb=.6, shift=1.1, tanh=.2) # sax
+
+c7.stop()
+
+c7 >> play("<k-><..><..u.>", sample=0, amp=1, comp=1, lpf=0, bank=0).sometimes("stutter")
+
+b0 >> loop("losthighway32", dur=32) # piano sax
+
+r4.stop()
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=2, chopi=0, mverb=0).lclip(2) # rammstein
+
+e3.solo()
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=0, chopi=0, mverb=0).lclip(2) # rammstein
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=0, chopi=0, mverb=0).lclip(1) # rammstein
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=0, chopi=0, mverb=0).lclip(2) # rammstein
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=0, chopi=0, mverb=0).lclip(4) # rammstein
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=0, chopi=0, mverb=0).lclip(8) # rammstein
+
+e3 >> loop("losthighway8", dur=8, sample=3, chop=0, chopi=0, mverb=0).lclip(0) # rammstein
+
+l4 >> play("X ", dur=8)
+
+c7 >> play("<k-><..><..u.>", sample=0, amp=1, comp=1, lpf=0, bank=0).sometimes("stutter")
+
+b0 >> loop("losthighway32", dur=32) # piano sax
+
+Clock.clear()
+soff()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0).lclip(2) # hoop
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(4) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(8) # perfectDrugsTakem 
+
+c7 >> play("<k-><..><..u.>", sample=0, amp=1).sometimes("stutter", PRand(2))
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(16) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(8) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(32) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(2) # perfectDrugsTakem 
+
+Clock.clear()
+soff()
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0).lclip(2) # perfectDrugsTakem 
+
+Clock.clear()
+soff()
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=0).lclip(2) # perfectDrugsTakem 
+
+Clock.clear()
+soff()
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=0).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=2).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=4).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=.2).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=.3).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=.4).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=.5).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=.6).lclip(2) # perfectDrugsTakem 
+
+Clock.clear()
+soff()
+
+u6 >> loop("break4", dur=4)
+
+u6 >> loop("break4", dur=4).lclip(1)
+
+u6 >> loop("break4", dur=4).lclip(2)
+
+u6 >> loop("break4", dur=4, pos=.5).lclip(2)
+
+u6 >> loop("break4", dur=4, pos=.9).lclip(2)
+
+u6 >> loop("break4", dur=4, pos=.25).lclip(2)
+
+u6 >> loop("break4", dur=4, pos=3).lclip(2)
+
+u6 >> loop("break4", dur=4, pos=1).lclip(2)
+
+u6 >> loop("break4", dur=4, pos=P[0:4]).lclip(2)
+
+u6 >> loop("break4", dur=4, pos=P[0:4]).lclip(1)
+
+u6 >> loop("break4", dur=4, pos=P[0:3]).lclip(1)
+
+u6 >> loop("break8", dur=4, pos=P[0:3]).lclip(2)
+
+u6 >> loop("break8", dur=8, pos=P[0:3]).lclip(2)
+
+u6 >> loop("break8", dur=8, pos=2).lclip(2)
+
+u6 >> loop("break8", dur=8, pos=2, sample=2).lclip(2)
+
+u6 >> loop("break8", dur=8, pos=2, sample=2).lclip(var([2,1/2],[12,4]))
+
+u6 >> loop("break8", dur=8, pos=2, sample=2).lclip(var([2,P*[1/2,1/4,1]],[12,4]))
+
+u6 >> loop("break8", dur=8, pos=2, sample=2, comp=1).lclip(var([2,P*[1/2,1/4,1]],[12,4]))
+
+ploop("lynchvoice8")
+
+u0 >> loop("lynchvoice8", dur=8, sample=5).lclip(1)
+
+u0 >> loop("lynchvoice8", dur=8, sample=5).lclip(2)
+
+u0 >> loop("lynchvoice8", dur=8, sample=5, amp=PBin()).lclip(2)
+
+u0 >> noloop("lynchvoice8", dur=8, sample=5, amp=PBin())
+
+~u0 >> noloop("lynchvoice8", dur=8, sample=5, amp=PBin())
+
+u0 >> noloop("lynchvoice8", dur=8, sample=5, amp=[1,0,0,0], )
+
+m4 >> loop("gbreak16", dur=16, sample=2, fx=1)
+
+m4.stop()
+
+r3 >> play("<x.><.><....>", sample=0, amp=2).sometimes("stutter")
+
+u6 >> loop("break8", dur=8, pos=0, sample=2, comp=1).lclip(var([2,P*[1/2,1/4,1]],[12,4]))
+
+u6 >> loop("break8", dur=8, pos=1, sample=2, comp=1).lclip(var([2,P*[1/2,1/4,1]],[12,4]))
+
+u6 >> loop("break8", dur=8, pos=0, sample=5, comp=1).lclip(var([2,P*[1/2,1/4,1]],[12,4]))
+
+u0.stop()
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=.6).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, rate=0).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0, cmode=0).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.5, cmode=0).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.6, cmode=0).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.6, cmode=4).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.6, cmode=3).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=0, cgain=2, cfb=0.5, cmode=3).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=(0, 12), cgain=2, cfb=0.5, cmode=3).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=(0, 12), cgain=1, cfb=0.5, cmode=3).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=(0, 12), cgain=1, cfb=0.2, cmode=3).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cpitch=(0, 12), cgain=1, cfb=0.2, cmode=2).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.25, cdens=0.4, ctex=0.5, cpitch=(0, 12), cgain=1, cfb=0.2, cmode=2).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.4, ctex=0.5, cpitch=(0, 12), cgain=1, cfb=0.2, cmode=2).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.4, ctex=0.5, cpitch=(0, 6), cgain=1, cfb=0.2, cmode=2).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.4, ctex=0.5, cpitch=(-6, 6), cgain=1, cfb=0.2, cmode=2).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.4, ctex=0.5, cpitch=(-6, 6), cgain=1, cfb=0.2, cmode=1).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.4, ctex=0.5, cpitch=(-6, 6), cgain=1, cfb=0.2, cmode=0).lclip(2) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.4, ctex=0.5, cpitch=(-6, 6), cgain=1, cfb=0.2, cmode=0).lclip(4) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.4, ctex=0.5, cpitch=(-6, 6), cgain=2, cfb=0.2, cmode=0).lclip(4) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.4, ctex=0.9, cpitch=(-6, 6), cgain=2, cfb=0.2, cmode=0).lclip(4) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.5, cdens=0.14, ctex=0.9, cpitch=(-6, 6), cgain=2, cfb=0.2, cmode=0).lclip(4) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.25, cdens=0.14, ctex=0.9, cpitch=(-6, 6), cgain=2, cfb=0.2, cmode=0).lclip(4) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.05, csize=0.25, cdens=0.14, ctex=0.9, cpitch=(-6, 6), cgain=2, cfb=0.2, cmode=0).lclip(4) # perfectDrugsTakem 
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0.3, comp=1, chop=0, chopi=0).lclip(2) # hoop
+
+r3.stop()
+
+j4.stop()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0.3, comp=1, chop=0, chopi=0).lclip(0) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0.3, comp=1, chop=0, chopi=0).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=50, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=150, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(0) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=150, valadr=0.1, valadd=25, valadt=0, valadc=0.3).lclip(0) # hoop
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=150, valadr=0.1, valadd=25, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=6, dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=150, valadr=0.1, valadd=25, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=6, dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=1250, valadr=0.1, valadd=25, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=6, dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0, valad=1250, valadr=0.1, valadd=5, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=6, dur=8, sample=1, shape=0, comp=0, chop=0, chopi=0, valad=1250, valadr=0.1, valadd=5, valadt=0, valadc=0.3).lclip(2) # hoop
+
+r3 >> play("<k.><.><....>", sample=0, amp=5).sometimes("stutter")
+
+z4 >> loop("lynchcrazy8", pos=PRand(0,8).rnd(2), dur=8, sample=1, shape=0, comp=0, chop=0, chopi=0, valad=1250, valadr=0.1, valadd=5, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=PRand(0,8).rnd(2), dur=8, sample=1, shape=0, comp=0, chop=0, chopi=0, valad=1250, valadr=0.9, valadd=5, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=PRand(0,8).rnd(2), dur=8, sample=1, shape=0, comp=0, chop=0, chopi=0, valad=1250, valadr=0.6, valadd=5, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=PRand(0,8).rnd(2), dur=8, sample=1, shape=0, comp=0, chop=0, chopi=0, valad=1250, valadr=0.6, valadd=15, valadt=0, valadc=0.3).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=PRand(0,8).rnd(2), dur=8, sample=1, shape=0, comp=0, chop=0, chopi=0, valad=1250, valadr=0.6, valadd=15, valadt=0, valadc=0.2).lclip(2) # hoop
+
+z4 >> loop("lynchcrazy8", pos=PRand(0,8).rnd(2), dur=8, sample=1, shape=0, comp=0, chop=0, chopi=0, valad=1250, valadr=0.6, valadd=15, valadt=0, valadc=0.2).lclip(1) # hoop
+
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=2, trig=0) # sus
+
+p4.stop()
+
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=2, trig=0) # sus
+
+p4.stop()
+
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=2, trig=0, amp=0) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=2, trig=0, amp=PwRand([0,1],[80,20]), pong=0.5, beat_dur=1, pongtime=1) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=2, trig=0, amp=PwRand([0,1],[50,40]), pong=0.5, beat_dur=1, pongtime=1) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, sample=5, fx1=0, sus=2, trig=0, amp=PwRand([0,1],[50,40]), pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-1, sample=5, fx1=0, sus=2, trig=0, amp=PwRand([0,1],[50,40]), pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-1, sample=5, fx1=0, sus=2, trig=0, amp=1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+Clock.clear()
+soff()
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-1, sample=5, fx1=0, sus=2, trig=0, amp=1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-1, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.91, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.51, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.51, wide=0, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+Clock.clear()
+soff()
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-1, wide=0, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-1, wide=0, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.1, wide=0, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.1, wide=0, sample=5, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.1, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.9, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-0, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=0, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.1, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.1, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-1, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.1, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.4, wide=0, sample=2, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-.4, wide=0, sample=1, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.4, wide=0, sample=1, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.8, wide=0, sample=1, fx1=0, sus=2, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.8, wide=0, sample=1, fx1=0, sus=2, trig=0.5, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.8, wide=0, sample=1, fx1=0, sus=2, trig=1, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.8, wide=0, sample=0, fx1=0, sus=2, trig=1, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.8, wide=0, sample=0, fx1=0, sus=2, trig=.1, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=.8, wide=0, sample=0, fx1=0, sus=2, trig=.5, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=0, fx1=0, sus=2, trig=.5, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=0, fx1=0, sus=4, trig=.5, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=8, fx1=0, sus=4, trig=.5, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=8, fx1=0, sus=4, trig=.2, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=8, fx1=0, sus=4, trig=4, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=1, wide=0, sample=8, fx1=0, sus=4, trig=2, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+Clock.clear()
+soff()
+
+p4 >> noloop("lynchvoice8", dur=16, rate=1, wide=0, sample=8, fx1=0, sus=4, trig=2, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=1, wide=0, sample=8, fx1=0, sus=4, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=.1, wide=0, sample=8, fx1=0, sus=4, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=.4, wide=0, sample=8, fx1=0, sus=4, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=-.4, wide=0, sample=8, fx1=0, sus=4, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=-1, wide=0, sample=8, fx1=0, sus=4, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=-1, wide=0, sample=8, fx1=0, sus=16, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=8, rate=-1, wide=0, sample=8, fx1=0, sus=8, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=-1, wide=0, sample=8, fx1=0, sus=8, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+Clock.clear()
+soff()
+
+p4 >> noloop("lynchvoice8", dur=16, rate=-1, wide=0, sample=8, fx1=0, sus=8, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=-1, wide=0, sample=7, fx1=0, sus=8, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=-1, wide=0, sample=7, fx1=0, sus=16, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+p4 >> noloop("lynchvoice8", dur=16, rate=-1, wide=0, sample=6, fx1=0, sus=16, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+Clock.clear()
+soff()
+

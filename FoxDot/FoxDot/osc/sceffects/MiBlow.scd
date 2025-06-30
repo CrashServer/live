@@ -1,11 +1,15 @@
 SynthDef.new(\MiBlow,
-{|bus, blow, bflow, bmodel, bpos, sus, blow_, blow_d, bflow_, bflow_d, bmodel_, bmodel_d, bpos_, bpos_d|
+{|bus, blow, bflow, bmodel, bpos, sus, blow_, blow_d, blowlfo, blowlfomul, blowlfoadd, bflow_, bflow_d, bflowlfo, bflowlfomul, bflowlfoadd, bmodel_, bmodel_d, bmodellfo, bmodellfomul, bmodellfoadd, bpos_, bpos_d, bposlfo, bposlfomul, bposlfoadd|
 var osc,dry,pitch;
 osc = In.ar(bus, 2);
 blow = if(blow_<=0, blow, Line.kr(blow, blow_, sus*blow_d));
+blow = if(blowlfo<=0, blow, blow * SinOsc.kr(blowlfo, 0, blowlfomul, blowlfoadd));
 bflow = if(bflow_<=0, bflow, Line.kr(bflow, bflow_, sus*bflow_d));
+bflow = if(bflowlfo<=0, bflow, bflow * SinOsc.kr(bflowlfo, 0, bflowlfomul, bflowlfoadd));
 bmodel = if(bmodel_<=0, bmodel, Line.kr(bmodel, bmodel_, sus*bmodel_d));
+bmodel = if(bmodellfo<=0, bmodel, bmodel * SinOsc.kr(bmodellfo, 0, bmodellfomul, bmodellfoadd));
 bpos = if(bpos_<=0, bpos, Line.kr(bpos, bpos_, sus*bpos_d));
+bpos = if(bposlfo<=0, bpos, bpos * SinOsc.kr(bposlfo, 0, bposlfomul, bposlfoadd));
 pitch = In.kr(bus, 1);
 dry = osc;
 osc = MiElements.ar(osc, 0, 1, pitch.cpsmidi.clip(1,70), blow_level:1, space:0.8, contour: 0.8, flow: bflow, damp:0.7, model:bmodel, pos:bpos);

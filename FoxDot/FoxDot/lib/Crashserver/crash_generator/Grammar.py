@@ -50,7 +50,7 @@ if __name__ != "__main__":
 	
 	#SYNTH LIST & Exclude
 	synthdefNames = [i for i in SynthDefs]
-	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin', 'onset', 'noloop']
+	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin', 'onset', 'noloop', "wavetable"]
 	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
 					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", 
 					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce", 'quin', 'cringe', 'swiss']
@@ -65,10 +65,14 @@ if __name__ != "__main__":
 	#LOOP LIST
 	# loopNames = sorted([fn for fn in listdir(FOXDOT_LOOP)])
 	loopNames = []
-	BANK_LEN = [item for item in os.listdir(FOXDOT_SND) if not (item.startswith("."))]
+	BANK_LEN = [item for item in os.listdir(FOXDOT_SND) if item.isdigit()]
 	for bankNbr in BANK_LEN:
 		loopNames += sorted([fn.rsplit(".", 1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
+	
 	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8", "__init__", "serverVoice", "onsetDict", "slaap", ""]
+	
+	# Remove all loops that start with "AKWF"
+	loopNames = [loop for loop in loopNames if not loop.startswith("AKWF")]
 	for loopxclude in loopExclude:
 		try:
 			loopNames.remove(loopxclude)

@@ -1,0 +1,197 @@
+lost("nuance")
+
+Clock.bpm = 128
+
+~j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1), leg=0)
+
+~j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1), leg=0)
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+j1 >> play("B.BB")
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+~j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1), leg=0)
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=4).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a2 >> play("-", dur=4).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a2 >> play("-", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+a2 >> play("-", dur=4).once()
+
+a1 >> play("o", dur=1/2).once()
+
+a1 >> play("o", dur=1/2).once()
+
+j3 >> play("T..h hh4. Tbbb mbbb", sample=4, cut=1/8)
+
+~j2 >> play("b ", sample=8, dur=PDur(5, 8), cut=1/2, mverb=0.2, hpf=var([0, PWhite(0, 1200)[:4]]))
+
+~j2 >> play("b ", triode=1, octafuz=1, octamix=PWhite(0.2, 0.6), sample=8, dur=PDur(5, 8), cut=1/2, echo=0, mverb=0.2, hpf=var([0, PWhite(0, 1200)[:4]]))
+
+u7 >> loop("electrodrum32", dur=32, sample=2, mverb=0)
+
+g8 >> play("<k(...[--])><-:><..*.>", sample=1, amp=1, bank=1, dur=1/2, rate=1, cut=1.2).sometimes("stutter")
+
+~j2 >> play("b ", sample=8, dur=PDur(5, 8), cut=1/2, mverb=0.2, hpf=var([0, PWhite(0, 1200)[:4]]))
+
+j1.stop()
+
+g8 >> play("<k(...[--])><-:><..*.>", sample=1, amp=1, bank=1, dur=1/2, rate=1, cut=1.2).sometimes("stutter")
+
+g8 >> play("<k(...[--])><-:><..*.>", sample=1, amp=1, bank=1, dur=1/2, rate=1, cut=1.2).sometimes("stutter")
+
+p1 >> loop("uk16", dur=16,pos=0, room=0.1, sample=3, beat_stretch=1, looping=1.0)
+
+r5 >> play("<x..(...x)><.><....>", sample=0, amp=3).sometimes("stutter")
+
+drop()
+
+i5 >> play("l ", bank=1, sample=1, dur=1/2, hpf=0, amp=1, cut=1)
+
+i5.stop()
+
+p2 >> dbass(fx1=1)
+
+Clock.clear()
+soff()
+
+l1 >> loop("gab16", dur=16, sample=3)
+
+r5 >> play("<x..(...x)><.><....>", sample=0, amp=3).sometimes("stutter")
+
+i0 >> loop("drumglitch32", dur=32, sample=var([PRand(88)],64))
+
+i0 >> loop("drumglitch32", dur=32, sample=var([PRand(88)],64))
+
+p5 >> noloop("oldies8", dur=8, sample=var(PRand(88),32), comp=0, fx1=0, shape=.0, trig=0, mverb=0)
+
+p4 >> loop("gbuild16", dur=16)
+
+o5 >> loop("gapr16", dur=32, sample=3, mverb=.5)
+
+i4 >> loop("gscreecha16", dur=16, sample=4, mverb=0.5, hpf=800)
+
+f8 >> loop("beats8", dur=8, sample=5)
+
+c1 >> loop("berlin8", dur=8, sample=4)
+
+m0 >> loop("cinambi8", dur=8, sample=var([3,2],[24,8]), hpf=200)
+
+v3 >> loop("circlebreak16", dur=16, sample=7, comp=1, sbrk=.5, sbrkdur=.5)
+
+Clock.clear()
+soff()
+
+p2 >> dbass(fx1=1)
+
+p2 >> dbass(fx1=1, fx2=1)
+
+Clock.clear()
+soff()
+

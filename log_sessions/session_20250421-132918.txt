@@ -1,0 +1,167 @@
+b8 >> pluck()
+
+b8 >> pluck(oct=3, dur=8)
+
+b8 >> pluck(oct=3, dur=8, fx1=1)
+
+b8 >> pluck(oct=2, dur=8, fx1=1)
+
+b8 >> pluck(oct=3, dur=1/2, fx1=1)
+
+b8 >> blip(oct=3, dur=1/2, fx1=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1)
+
+b8 >> blip(oct=2, dur=1/2, fx1=1)
+
+b8 >> blip(oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(-1, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(-1, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(-2, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(-3, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(-4, oct=4, dur=1/2, fx1=1)
+
+Scale.default="minor"
+
+Scale.default="aeolian"
+
+b8 >> blip(-4, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(-3, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(-2, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(-1, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(0, oct=4, dur=1/2, fx1=1)
+
+b8 >> blip(0, oct=4, dur=4, fx1=1)
+
+b8 >> pulse(0, oct=4, dur=4, fx1=1)
+
+b8 >> pulse(0, oct=3, dur=4, fx1=1)
+
+b8 >> pulse(-1, oct=3, dur=4, fx1=1)
+
+b8 >> pulse(-2, oct=3, dur=4, fx1=1)
+
+b8 >> pulse(-3, oct=3, dur=4, fx1=1)
+
+b8 >> pulse(-4, oct=3, dur=4, fx1=1)
+
+b8 >> pulse(-3, oct=3, dur=4, fx1=1)
+
+b8 >> pulse(-2, oct=3, dur=4, fx1=1)
+
+b8 >> pulse(-1, oct=3, dur=4, fx1=1)
+
+b8 >> pulse(0, oct=3, dur=4, fx1=1)
+
+b8 >> pluck(0, oct=3, dur=4, fx1=1)
+
+b8 >> pluck(0, oct=2, dur=4, fx1=1)
+
+b8 >> pluck(PStep(8,1,0), oct=2, dur=1/2, fx1=1)
+
+b8 >> pluck(PStep(8,1,0), oct=3, dur=1/2, fx1=1)
+
+b8 >> pluck(PStep(8,1,0), oct=3, dur=4, fx1=1)
+
+Clock.clear()
+soff()
+
+b8 >> pluck(PStep(8,1,0), oct=3, dur=4, fx1=1)
+
+b8 >> pluck(PStep(8,1,0), oct=3, dur=1/2, fx1=1)
+
+b8 >> pluck(PStep(8,1,0), oct=2, dur=1/2, fx1=1)
+
+b8 >> blip(PStep(8,1,0), oct=2, dur=1/2, fx1=1)
+
+b8 >> blip(PStep(8,1,0), oct=3, dur=1/2, fx1=1)
+
+Clock.clear()
+soff()
+
+b8 >> blip(PStep(8,1,0), oct=3, dur=1/2, fx1=1)
+
+b8 >> pluck(PStep(8,1,0), oct=3, dur=1/2, fx1=1)
+
+b8 >> pluck(PStep(8,1,0), oct=3, dur=1/4, fx1=1)
+
+b8 >> pluck(PStep(16,1,0), oct=3, dur=1/4, fx1=1)
+
+Clock.bpm=82
+
+b8 >> pluck(PStep(16,1,0), oct=2, dur=1/4, fx1=1)
+
+b8 >> pluck(PStep(16,1,0), oct=2, dur=1/4, fx1=0, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=2, dur=1/4, fx1=1, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=3, dur=1/4, fx1=1, fx2=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=1, fx2=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=0)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=0)
+
+b8 >> pluck(PStep(16,1,0), oct=2, dur=1/4, fx1=1, fx2=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=0)
+
+l5.stop()
+
+b8 >> pluck(PStep(16,1,0), oct=(2,3), dur=1/4, fx1=1, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=(3), dur=1/4, fx1=1, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=(3), dur=1/2, fx1=1, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=(3), dur=PDur(3,8), fx1=1, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=(3), dur=PDur(5,8), fx1=1, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=(2), dur=PDur(5,8), fx1=1, fx2=1)
+
+b8 >> blip(PStep(16,1,0), oct=(2), dur=PDur(5,8), fx1=1, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=(2), dur=PDur(5,8), fx1=1, fx2=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=0)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=1)
+
+l5.solo()
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=1, fx2=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=1, fx2=à)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=1, fx2=0)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=(2), dur=PDur(5,8), fx1=1, fx2=1)
+
+b8 >> pluck(PStep(16,1,0), oct=(3), dur=PDur(5,8), fx1=1, fx2=1)
+
+l5 >> play("<k-><..u.><.:><~.><X.><..o.>", sample=17, comp=1, fx1=0, fx2=0)
+
+Clock.clear()
+soff()
+

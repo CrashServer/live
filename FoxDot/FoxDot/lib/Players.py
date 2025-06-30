@@ -1640,6 +1640,18 @@ class Player(Repeatable):
 
         message = self.new_message_header(packet, **kwargs)
 
+        # Vérifier que message est bien un dictionnaire avant d'y assigner des éléments
+        if not isinstance(message, dict):
+            print(f"Attention: message n'est pas un dictionnaire dans push_osc_to_server (type: {type(message)})")
+            # Convertir en dictionnaire si possible
+            try:
+                if hasattr(message, '__dict__'):
+                    message = dict(message.__dict__)
+                else:
+                    message = {}
+            except:
+                message = {}
+
         # Add a reference to self (the Player) in the message
         message['player'] = self
 
@@ -1649,7 +1661,7 @@ class Player(Repeatable):
             # Need to send delay and synthdef separately
             delay = self.metro.beat_dur(message.get("delay", 0))
             synthdef = self.get_synth_name(message.get("buf", 0)) # to send to play1 or play2
-            compiled_msg = self.metro.server.get_bundle(synthdef, message, timestamp = timestamp + delay)
+            compiled_msg = self.metro.server.get_bundle(synthdef, message, timestamp = timestamp + delay, player=self)
 
             # Extraire et stocker l'ID du nœud du message compilé si disponible
             try:
@@ -1672,6 +1684,20 @@ class Player(Repeatable):
 
     def new_message_header(self, event, **kwargs):
         """ Returns the header of an osc message to be added to by osc_message() """
+
+        # Vérifier que event est bien un dictionnaire
+        if not isinstance(event, dict):
+            print(f"Attention: event n'est pas un dictionnaire dans new_message_header (type: {type(event)})")
+            # Essayer de convertir ou créer un nouveau dict
+            try:
+                if hasattr(event, '__dict__'):
+                    event = dict(event.__dict__)
+                elif hasattr(event, 'items'):
+                    event = dict(event.items())
+                else:
+                    event = {}
+            except:
+                event = {}
 
         # Let SC know the duration of 1 beat so effects can use it and adjust sustain too
 
@@ -1862,40 +1888,62 @@ class Player(Repeatable):
         Exemple:
             p1.addfx(chop=4, echo=0.5)
         """
-        #  Vérifier que le Player est en cours d'exécution
+        # Vérifier que le Player est en cours d'exécution
         if not self.isplaying:
             print("Impossible d'ajouter des effets: le Player n'est pas en cours d'exécution")
             return self
         
-        # Pour chaque effet
+        # Initialiser _fx_nodes si nécessaire (utiliser __dict__ pour éviter les PlayerKey)
+        if '_fx_nodes' not in self.__dict__ or self.__dict__['_fx_nodes'] is None:
+            self.__dict__['_fx_nodes'] = {}
+        
+        # Pour chaque effet demandé
         for fx_name, value in kwargs.items():
-            if fx_name:
-                # Vérifier si l'effet est actif (si l'attribut existe et n'est pas 0)
-                if hasattr(self, fx_name) and getattr(self, fx_name) != 0:
-                    # Convertir en nombre si nécessaire
-                    value = float(value) if isinstance(value, (int, float)) else value
-                    
-                    # Mettre à jour l'attribut localement
-                    setattr(self, fx_name, value)
-                    
-                    # Récupérer l'ID du nœud associé à l'effet (en utilisant le numéro de joueur)
-                    if hasattr(self, 'node'):
-                        node_id = getattr(self, 'node')
-                    else:
-                        # Si le joueur n'a pas d'ID de nœud enregistré, on ne peut pas modifier l'effet
-                        print(f"Impossible de modifier l'effet '{fx_name}': ID de nœud inconnu")
-                        continue
+            try:
+                # Convertir en nombre si nécessaire
+                float_value = float(value)
+                
+                # Utiliser la méthode __setattr__ de FoxDot qui gère correctement les patterns
+                setattr(self, fx_name, float_value)
+                
+                # Vérifier si l'effet est déjà actif (utiliser __dict__ pour éviter les PlayerKey)
+                fx_nodes = self.__dict__.get('_fx_nodes', {})
+                
+                if fx_name in fx_nodes:
+                    # L'effet est déjà actif, on le modifie
+                    node_id = fx_nodes[fx_name]
                     
                     # Créer et envoyer le message OSC pour modifier la valeur de l'effet
+                    try:
+                        from .OSC3 import OSCMessage
+                    except ImportError:
+                        from .OSC import OSCMessage
+                    
                     msg = OSCMessage("/n_set")
-                    msg.append(int(node_id))           # nodeID du joueur
-                    msg.append(str(fx_name))           # nom du paramètre 
-                    msg.append(float(value))           # valeur
+                    msg.append([int(node_id), str(fx_name), float_value])
                     
                     self.metro.server.sendOSC(msg)
-                    print(f"Effet '{fx_name}' modifié: {value}")
+                    print(f"Effet '{fx_name}' modifié: {float_value}")
+                    
                 else:
-                    print(f"Effet '{fx_name}' non actif ou non reconnu. Activez d'abord cet effet.")
+                    fx_attrs = self.__class__.fx_attributes
+                    
+                    if fx_attrs is not None and fx_name in fx_attrs:
+                        # L'effet existe mais n'est pas encore actif, utiliser la méthode du ServerManager
+                        if hasattr(self.metro.server, 'add_fx_to_player'):
+                            success = self.metro.server.add_fx_to_player(self, fx_name, float_value)
+                            if success:
+                                print(f"Effet '{fx_name}' ajouté: {float_value}")
+                            else:
+                                print(f"Erreur lors de l'ajout de l'effet '{fx_name}'")
+                        else:
+                            print(f"Ajout d'effet dynamique non supporté. Redémarrez le Player avec l'effet '{fx_name}'.")
+                    else:
+                        # L'effet n'existe pas
+                        print(f"Effet '{fx_name}' non reconnu.")
+                    
+            except (ValueError, TypeError) as e:
+                print(f"Erreur lors de la modification de l'effet '{fx_name}': {e}")
                     
         return self
 

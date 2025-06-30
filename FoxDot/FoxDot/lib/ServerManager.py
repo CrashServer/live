@@ -379,6 +379,20 @@ class SCLangServerManager(ServerManager):
 
         pkg = []
 
+        # Vérifier que packet est bien un dictionnaire
+        if not isinstance(packet, dict):
+            print(f"Attention: packet n'est pas un dictionnaire dans get_control_effect_nodes (type: {type(packet)})")
+            return pkg, node
+
+        # Si le player n'a pas de dictionnaire pour stocker les IDs des nœuds d'effets
+        if 'self' in packet and hasattr(packet['self'], '__dict__') and not hasattr(packet['self'], '_fx_nodes'):
+            # Vérifier que c'est bien un Player et non un PlayerKey
+            if hasattr(packet['self'], 'isplaying'):  # attribut unique aux Players
+                packet['self']._fx_nodes = {}
+            else:
+                print(f"Attention: packet['self'] n'est pas un Player valide (type: {type(packet['self'])})")
+                return pkg, node
+
         # Go through effects and put together with child attributes
 
         for fx in self.fxlist.order[0]:
@@ -402,6 +416,14 @@ class SCLangServerManager(ServerManager):
 
                 pkg.append(msg)
 
+                # Stocker l'ID du nœud dans le player si disponible et si c'est bien un Player
+                if 'self' in packet and hasattr(packet['self'], '__dict__') and hasattr(packet['self'], '_fx_nodes'):
+                    # Vérifier que c'est bien un Player et non un PlayerKey
+                    if hasattr(packet['self'], 'isplaying'):  # attribut unique aux Players
+                        packet['self']._fx_nodes[fx] = node
+                    else:
+                        print(f"Attention: packet['self'] n'est pas un Player valide dans get_control_effect_nodes (type: {type(packet['self'])})")
+
         return pkg, node
 
     def get_synth_node(self, node, bus, group_id, synthdef, packet):
@@ -412,7 +434,7 @@ class SCLangServerManager(ServerManager):
 
         for key in packet:
 
-            if key not in ("env", "degree"): # skip some attr
+            if key not in ("env", "degree", "self", "_fx_nodes"): # skip some attr
 
                 try:
 
@@ -438,6 +460,20 @@ class SCLangServerManager(ServerManager):
 
         pkg = []
 
+        # Vérifier que packet est bien un dictionnaire
+        if not isinstance(packet, dict):
+            print(f"Attention: packet n'est pas un dictionnaire dans get_pre_env_effect_nodes (type: {type(packet)})")
+            return pkg, node
+
+        # Si le player n'a pas de dictionnaire pour stocker les IDs des nœuds d'effets
+        if 'self' in packet and hasattr(packet['self'], '__dict__') and not hasattr(packet['self'], '_fx_nodes'):
+            # Vérifier que c'est bien un Player et non un PlayerKey
+            if hasattr(packet['self'], 'isplaying'):  # attribut unique aux Players
+                packet['self']._fx_nodes = {}
+            else:
+                print(f"Attention: packet['self'] n'est pas un Player valide dans get_pre_env_effect_nodes (type: {type(packet['self'])})")
+                return pkg, node
+
         for fx in self.fxlist.order[1]:
 
             if fx in packet and packet[fx] != 0:
@@ -450,6 +486,14 @@ class SCLangServerManager(ServerManager):
                 osc_packet = [self.fx_names[fx], node, 1, group_id, 'bus', bus] + this_effect
                 msg.append( osc_packet )
                 pkg.append(msg)
+
+                # Stocker l'ID du nœud dans le player si disponible et si c'est bien un Player
+                if 'self' in packet and hasattr(packet['self'], '__dict__') and hasattr(packet['self'], '_fx_nodes'):
+                    # Vérifier que c'est bien un Player et non un PlayerKey
+                    if hasattr(packet['self'], 'isplaying'):  # attribut unique aux Players
+                        packet['self']._fx_nodes[fx] = node
+                    else:
+                        print(f"Attention: packet['self'] n'est pas un Player valide dans get_pre_env_effect_nodes (type: {type(packet['self'])})")
 
         return pkg, node
 
@@ -498,9 +542,19 @@ class SCLangServerManager(ServerManager):
 
         pkg = []
 
-         # Si le player n'a pas de dictionnaire pour stocker les IDs des nœuds d'effets
-        if not hasattr(packet['self'], '_fx_nodes'):
-            packet['self']._fx_nodes = {}
+        # Vérifier que packet est bien un dictionnaire
+        if not isinstance(packet, dict):
+            print(f"Attention: packet n'est pas un dictionnaire dans get_post_env_effect_nodes (type: {type(packet)})")
+            return pkg, node
+
+        # Si le player n'a pas de dictionnaire pour stocker les IDs des nœuds d'effets
+        if 'self' in packet and hasattr(packet['self'], '__dict__') and not hasattr(packet['self'], '_fx_nodes'):
+            # Vérifier que c'est bien un Player et non un PlayerKey
+            if hasattr(packet['self'], 'isplaying'):  # attribut unique aux Players
+                packet['self']._fx_nodes = {}
+            else:
+                print(f"Attention: packet['self'] n'est pas un Player valide dans get_post_env_effect_nodes (type: {type(packet['self'])})")
+                return pkg, node
 
         for fx in self.fxlist.order[2]:
 
@@ -515,8 +569,13 @@ class SCLangServerManager(ServerManager):
                 msg.append( osc_packet )
                 pkg.append(msg)
 
-                # Stocker l'ID du nœud dans le player
-                packet['self']._fx_nodes[fx] = node
+                # Stocker l'ID du nœud dans le player si disponible et si c'est bien un Player
+                if 'self' in packet and hasattr(packet['self'], '__dict__') and hasattr(packet['self'], '_fx_nodes'):
+                    # Vérifier que c'est bien un Player et non un PlayerKey
+                    if hasattr(packet['self'], 'isplaying'):  # attribut unique aux Players
+                        packet['self']._fx_nodes[fx] = node
+                    else:
+                        print(f"Attention: packet['self'] n'est pas un Player valide dans get_post_env_effect_nodes (type: {type(packet['self'])})")
 
         return pkg, node
 
@@ -538,11 +597,27 @@ class SCLangServerManager(ServerManager):
 
         return msg, node
 
-    def get_bundle(self, synthdef, packet, timestamp=0):
+    def get_bundle(self, synthdef, packet, timestamp=0, player=None):
         """ Returns the OSC Bundle for a notew based on a Player's SynthDef, and event and effects dictionaries """
 
-            # Store a reference to the Player object if it exists
-        if 'self' not in packet and hasattr(packet, 'get') and callable(packet.get):
+        # Vérifier que packet est bien un dictionnaire
+        if not isinstance(packet, dict):
+            # Si packet n'est pas un dict, essayer de le convertir ou créer un nouveau dict
+            try:
+                if hasattr(packet, '__dict__'):
+                    packet = dict(packet.__dict__)
+                else:
+                    # Dernier recours: créer un dict vide et continuer
+                    print(f"Attention: packet n'est pas un dictionnaire (type: {type(packet)}), création d'un dict vide")
+                    packet = {}
+            except Exception as e:
+                print(f"Erreur lors de la conversion de packet en dictionnaire: {e}")
+                packet = {}
+
+        # Store a reference to the Player object if provided
+        if player is not None:
+            packet['self'] = player
+        elif 'self' not in packet and hasattr(packet, 'get') and callable(packet.get):
             if hasattr(packet.get('player', None), 'id'):
                 packet['self'] = packet.get('player')
 
@@ -809,6 +884,117 @@ class SCLangServerManager(ServerManager):
     def add_forward(self, addr, port):
         self.forward = OSCClientWrapper()
         self.forward.connect( (addr, port) )
+
+    def add_fx_to_player(self, player, fx_name, fx_value, **fx_args):
+        """ Ajoute dynamiquement un effet à un player en cours de lecture """
+        
+        # Vérifier que le player a le dictionnaire _fx_nodes
+        if not hasattr(player, '_fx_nodes'):
+            player._fx_nodes = {}
+            
+        # Vérifier que l'effet existe
+        if self.fxlist is None:
+            WarningMsg("fxlist not initialized in server")
+            return False
+            
+        if fx_name not in self.fxlist:
+            WarningMsg(f"Effect '{fx_name}' not found in fxlist")
+            return False
+            
+        # Si l'effet est déjà actif, le modifier plutôt que d'en créer un nouveau
+        if fx_name in player._fx_nodes:
+            return self.modify_fx_on_player(player, fx_name, fx_value, **fx_args)
+            
+        # Créer le nouvel effet
+        try:
+            # Préparer les paramètres de l'effet
+            effect = self.fxlist[fx_name]
+            effect_params = []
+            
+            # Ajouter le paramètre principal
+            effect_params.extend([fx_name, float(fx_value)])
+            
+            # Ajouter les autres paramètres
+            for key in effect.args:
+                if key != fx_name:  # éviter la duplication
+                    value = fx_args.get(key, effect.defaults.get(key, 0))
+                    effect_params.extend([key, float(value)])
+            
+            # Obtenir un nouveau nœud ID
+            node_id = self.nextnodeID()
+            
+            # Pour l'instant, on utilise des valeurs par défaut pour le bus et le groupe
+            # Dans un système plus avancé, il faudrait stocker ces informations dans le player
+            bus = self.nextbusID()
+            group_id = 1  # Groupe par défaut
+            
+            # Créer le message OSC
+            msg = OSCMessage("/s_new")
+            osc_packet = [self.fx_names[fx_name], node_id, 1, group_id, 'bus', bus] + effect_params
+            msg.append(osc_packet)
+            
+            # Envoyer le message
+            self.client.send(msg)
+            
+            # Stocker l'ID du nœud
+            player._fx_nodes[fx_name] = node_id
+            
+            return True
+            
+        except Exception as e:
+            WarningMsg(f"Error adding effect '{fx_name}': {str(e)}")
+            return False
+    
+    def modify_fx_on_player(self, player, fx_name, fx_value, **fx_args):
+        """ Modifie les paramètres d'un effet déjà actif sur un player """
+        
+        if not hasattr(player, '_fx_nodes') or fx_name not in player._fx_nodes:
+            WarningMsg(f"Effect '{fx_name}' not found on player")
+            return False
+            
+        try:
+            node_id = player._fx_nodes[fx_name]
+            effect = self.fxlist[fx_name]
+            
+            # Modifier la valeur principale de l'effet
+            msg = OSCMessage("/n_set")
+            msg.append([node_id, fx_name, float(fx_value)])
+            self.client.send(msg)
+            
+            # Modifier les autres paramètres si fournis
+            for key, value in fx_args.items():
+                if key in effect.args:
+                    msg = OSCMessage("/n_set")
+                    msg.append([node_id, key, float(value)])
+                    self.client.send(msg)
+                    
+            return True
+            
+        except Exception as e:
+            WarningMsg(f"Error modifying effect '{fx_name}': {str(e)}")
+            return False
+    
+    def remove_fx_from_player(self, player, fx_name):
+        """ Supprime un effet d'un player """
+        
+        if not hasattr(player, '_fx_nodes') or fx_name not in player._fx_nodes:
+            WarningMsg(f"Effect '{fx_name}' not found on player")
+            return False
+            
+        try:
+            node_id = player._fx_nodes[fx_name]
+            
+            # Libérer le nœud
+            self.free_node(node_id)
+            
+            # Supprimer de la liste des effets actifs
+            del player._fx_nodes[fx_name]
+            
+            return True
+            
+        except Exception as e:
+            WarningMsg(f"Error removing effect '{fx_name}': {str(e)}")
+            return False
 
 try:
 

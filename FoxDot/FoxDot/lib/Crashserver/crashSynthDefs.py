@@ -114,6 +114,9 @@ gray.add()
 hnoise = FileSynthDef("hnoise")
 hnoise.add()
 
+hoover = FileSynthDef("hoover")
+hoover.add()
+
 ikea = FileSynthDef("ikea")
 ikea.add()
 
@@ -207,6 +210,9 @@ swiss.add()
 
 tb303 = FileSynthDef("tb303")
 tb303.add()
+
+tb304 = FileSynthDef("tb304")
+tb304.add()
 
 varicelle = FileSynthDef("varicelle")
 varicelle.add()

@@ -150,7 +150,6 @@ from .Scale import midi, miditofreq, get_freq_and_midi
 from .Bang import Bang
 
 from .TimeVar import TimeVar, Pvar
-from .OSC3 import *
 
 class EmptyPlayer(object):
     """ Place holder for Player objects created at run-time to reduce load time.
@@ -1852,11 +1851,6 @@ class Player(Repeatable):
             synthdef = str(self.synthdef)
         return synthdef
 
-    # def addfx(self, **kwargs):
-    #     """ Not implemented - add an effect to the SynthDef bus on SuperCollider
-    #         after it has been triggered. """
-    #     return self
-
     def addfx(self, **kwargs):
         """ Ajoute des effets à un Player en cours d'exécution.
         Les effets sont ajoutés via des arguments nommés.
@@ -1904,7 +1898,6 @@ class Player(Repeatable):
                     print(f"Effet '{fx_name}' non actif ou non reconnu. Activez d'abord cet effet.")
                     
         return self
-
 
     #: Methods for stop/starting players
 

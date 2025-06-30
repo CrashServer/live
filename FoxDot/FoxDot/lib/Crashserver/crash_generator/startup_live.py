@@ -289,6 +289,16 @@ pfx = print_fx
 psynth = print_synth
 pvideo = print_video
 
+def chaos(chaosInt=1, plyrType=None):
+    ''' Generate some random players '''
+    chaosText = ""
+    for i in range(chaosInt):
+        chaosText += add_player(True, plyrType)
+        chaosText += "\n"
+    sendAttack(chaosText)
+
+
+
 def PMorse(text, point=1/4, tiret=3/4):
     """ Convert a string to the value of point & tiret """
     MORSE_DICT = {'A': '.-', 'B': '-...',
@@ -780,7 +790,7 @@ class WebsocketServer():
         fx_json_list = []
         for fx_name in FxList.keys():
             fxDefault = FxList[fx_name].defaults
-            filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k == 'sus')}
+            filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k.endswith('lfo') or k.endswith('lfomul') or k.endswith('lfoadd') or k == 'sus')}
             fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
             fx_json_list.append({'text': fx_text, 'displayText': fx_name + '_'})
         fxDict = json.dumps({"type": "fxList", "fx": fx_json_list})
@@ -1124,11 +1134,14 @@ class Variation():
         - variation = Variation(16, 4) : create a variation every 16 bars for 4 bars
         - variation.stop() : stop the variation
         - variation.start() : start the variation
-        - variation.help() : show this help''')
+        - variation.help() : show this help
+        - variation.set(total, break) : set the duration of the variation      
+              ''')
     
     def info(self):
         estActive = "active" if self.isPlaying else "inactive"
         print(f"Variation est {estActive} sur {self.durTotal} bars avec une variation sur les {self.durBreak} dernieres bars")
+        print("pour modifier les durées faire variation.set(total, break)")
 
     def set(self, durTotal, durBreak):
         ''' set the duration of the variation '''
@@ -1177,7 +1190,6 @@ class Variation():
         Clock.schedule(lambda: masterAll(0), Clock.mod(self.durTotal))
 
 Clock.link()
-
 
 # Archive of old function 
 

@@ -1,0 +1,118 @@
+p4 >> noloop("lynchvoice8", dur=16, rate=-1, wide=0, sample=6, fx1=0, sus=16, trig=0, amp=1, room=.1, pong=0.25, beat_dur=1, pongtime=2) # sus
+
+Clock.clear()
+soff()
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=0, fx2=1, trig=0, cut=1).lclip(1)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=0, fx2=1, trig=0, cut=1).lclip(2)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, comp=0, fx2=1, trig=0, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, sus=2, comp=0, fx2=1, trig=0, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, sus=2, comp=0, rate=-1, fx2=1, trig=0, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=16, sample=7, sus=8, comp=0, rate=-1, fx2=1, trig=0, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=8, comp=0, rate=-1, fx2=1, trig=0, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=8, comp=1, rate=-1, fx2=1, trig=0, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=8, comp=1, rate=-1, fx2=1, trig=2, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=8, comp=1, rate=-1, fx2=1, trig=1, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=-1, fx2=1, trig=1, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=-1, fx2=1, trig=.51, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=1, fx2=1, trig=.5, cut=1)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=1, fx2=1, trig=.5, cut=.1)
+
+u7 >> loop("losthighway16", dur=16, sample=2).lclip(0) # heirate
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=1, fx2=1, trig=.5, cut=.5)
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=1, fx2=1, trig=.5, cut=var([0.1,.5],8))
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=1, fx2=1, trig=.5, cut=var([0.1,.5],4))
+
+z3 >> play("<x.><.><..u.>", sample=0, amp=3).sometimes("stutter")
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=1, fx2=1, trig=.5, cut=var([0.1,.5],8))
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=1, fx2=1, trig=.75, cut=var([0.1,.5],8))
+
+v4 >> noloop("lynchvoice8", dur=8, sample=7, sus=16, comp=1, rate=1, fx2=1, trig=.25, cut=var([0.1,.5],8))
+
+u7 >> loop("losthighway16", dur=16, sample=2).lclip(2) # heirate
+
+v4.stop()
+
+u7 >> noloop("losthighway16", dur=2, sample=2, sus=2).lclip(2) # heirate
+
+u7 >> noloop("losthighway16", dur=2, sample=2, sus=2, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3).lclip(2) # heirate
+
+u7 >> noloop("losthighway16", dur=2, sample=2, sus=2, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3) # heirate
+
+~u7 >> noloop("losthighway16", dur=2, sample=2, sus=2, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.3) # heirate
+
+u7 >> noloop("losthighway16", dur=2, sample=2, sus=2, valad=500, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # heirate
+
+u7 >> noloop("losthighway16", dur=2, sample=2, sus=2, valad=1500, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # heirate
+
+u7 >> noloop("losthighway16", dur=2, sample=2, sus=2, valad=700, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # heirate
+
+u7 >> noloop("losthighway16", dur=2, sample=2, sus=2, valad=900, valadr=0.3, valadd=25, valadt=0, valadc=0.3) # heirate
+
+z3 >> play("<x.><.><..u.><X.>", sample=0, amp=3).sometimes("stutter")
+
+u7 >> noloop("losthighway16", dur=2, sample=2, sus=2, valad=900, valadr=0.3, valadd=250, valadt=0, valadc=0.3) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=2, valad=900, valadr=0.3, valadd=250, valadt=0, valadc=0.3).lclip(2) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=900, valadr=0.3, valadd=250, valadt=0, valadc=0.3).lclip(2) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=900, valadr=0.3, valadd=150, valadt=0, valadc=0.3).lclip(2) # heirate
+
+z3 >> play("<x.><.><..u.><X.>", sample=0, amp=2).sometimes("stutter")
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=500, valadr=0.3, valadd=150, valadt=0, valadc=0.3).lclip(2) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.3).lclip(2) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.3).lclip(4) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=32, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.3).lclip(4) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.3).lclip(4) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=1500, valadr=0.3, valadd=50, valadt=0, valadc=0.3).lclip(4) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=2500, valadr=0.3, valadd=50, valadt=0, valadc=0.3).lclip(4) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=700, valadr=0.3, valadd=50, valadt=0, valadc=0.3).lclip(4) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=700, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=1700, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # heirate
+
+z3 >> play("<x.><.><..u.><..>", sample=0, amp=2).sometimes("stutter")
+
+t3 >> play("k.", bank=1)
+
+t3.solo()
+
+t3 >> play("k.", bank=1, sample=2)
+
+t3 >> play("k.", bank=1, sample=1)
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=1700, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # heirate
+
+u7 >> loop("losthighway16", dur=2, sample=2, sus=16, valad=700, valadr=0.3, valadd=25, valadt=0, valadc=0.3).lclip(4) # heirate
+
+Clock.clear()
+soff()
+

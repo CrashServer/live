@@ -29,7 +29,7 @@ import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
 import { markerUtils } from './markerUtils.js';
 import { foxdotAutocomplete } from './foxdotAutocomplete.js';
-import { showDefinition } from './foxdotDefinitions.js';
+import { showDefinition, removeAllTooltips } from './foxdotDefinitions.js';
 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
@@ -68,13 +68,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Configuration de CodeMirror
   const editor = CodeMirror(document.getElementById('editor'), {
     mode: 'python',
-    theme: 'eclipse',
+    theme: 'material-darker',
     lineNumbers: true,
     autofocus: true,
     matchBrackets: true,
     autoCloseBrackets: {pairs: "()[]{}<>''\"\"", override: true},
     lineWrapping: true,
-    //cursorScrollMargin: 50,
     fixedGutter: false,
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
@@ -83,16 +82,114 @@ document.addEventListener('DOMContentLoaded', async () => {
     keyMap: 'sublime',
   });
 
+  const otherUserDoc = editor.getDoc().linkedDoc({shareHist: false});
+  const otherEditor = CodeMirror(document.getElementById('other-editor'), {
+    mode: 'python',
+    theme: 'material-darker',
+    lineNumbers: true,
+    readOnly: true,
+    lineWrapping: true,
+    styleActiveLine: true,
+  });
+
+  otherEditor.swapDoc(otherUserDoc);
+
+  let otherUserCursorMark = null;
+  let otherUserNameWidget = null;
+
+  // Fonction pour mettre à jour l'affichage de l'autre utilisateur
+  function updateOtherUserDisplay(userName, userColor, line, position, code) {
+    if (!configPanelControls.isSplitScreenEnabled) {
+      return;
+    }
+    
+    // Supprimer l'ancien marqueur de curseur
+    if (otherUserCursorMark) {
+      otherUserCursorMark.clear();
+    }
+    if (otherUserNameWidget) {
+      otherUserNameWidget.remove();
+      otherUserNameWidget = null;
+    }
+
+    // Ajouter le nouveau marqueur de curseur si valide
+    if (line >= 0 && line < otherEditor.lineCount() && position >= 0) {
+      const lineLength = otherEditor.getLine(line).length;
+      const endPos = Math.min(position + 1, lineLength);
+      
+      if (position <= lineLength) {
+        otherUserCursorMark = otherEditor.markText(
+          {line: line, ch: position},
+          {line: line, ch: endPos},
+          {
+            className: 'other-user-cursor',
+            css: `border-left: 2px solid ${userColor}`,
+            inclusiveLeft: true,
+            inclusiveRight: false
+          }
+        );
+
+      const nameElement = document.createElement('span');
+      nameElement.className = 'other-user-name-widget';
+      nameElement.textContent = userName;
+      nameElement.style.cssText = `
+        background-color: ${userColor};
+        color: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 11px;
+        font-weight: bold;
+        white-space: nowrap;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        z-index: 1000;
+        position: relative;
+        top: -20px;
+        left: -10px;
+      `;
+
+      // Ajouter le widget au-dessus du curseur
+      otherUserNameWidget = otherEditor.addWidget(
+        {line: line, ch: position}, 
+        nameElement, 
+        false // false = au-dessus de la ligne
+      );
+
+      otherUserNameWidget = nameElement;
+
+      }
+    }
+
+    // Centrer la vue sur le curseur de l'autre utilisateur
+    if (line >= 0 && line < otherEditor.lineCount()) {
+      otherEditor.scrollIntoView({line: line, ch: position}, 0);
+    }
+  }
+
+  const resizeObserver = new ResizeObserver(entries => {
+    for (let entry of entries) {
+      if (entry.target.id === 'editor-container') { 
+        logsUtils.refreshEditors();
+      }
+    }
+  });
+
+  resizeObserver.observe(document.getElementById('editor-container'));
+
+  setTimeout(() => {
+    logsUtils.refreshEditors();
+  }, 100);
+
+
   // undo Manager
   const yUndoManager = new Y.UndoManager(ytext, { trackedOrigins: new Set([]) });
   // Binding YJS avec CodeMirror
   const binding = new CodemirrorBinding(ytext, editor, provider.awareness, {yUndoManager});
 
   // Configuration du panneau de configuration
-  setupConfigPanel(awareness, editor);
+  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor);
   
   // Configuration des logs
-  logsUtils.initResize(editor);
+  logsUtils.initResize(editor, otherEditor);
 
   EventEmitter.on('send_foxdot', (command) => {
     wsServer.send(JSON.stringify({
@@ -241,12 +338,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             to: CodeMirror.Pos(endLine, cm.getLine(endLine).length),
         };
       }}),
-      'Ctrl-Left': (cm) => {functionUtils.goToPreviousComma(cm)},
-      'Ctrl-Right': (cm) => {functionUtils.goToNextComma(cm)},
-      'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
-      'Alt-=': (cm) => {functionUtils.incrementValue(cm, 1)},
-      'Ctrl-Alt-=': (cm) => {functionUtils.incrementValue(cm, -1)},
-      'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
+    'Ctrl-Left': (cm) => {functionUtils.goToPreviousComma(cm)},
+    'Ctrl-Right': (cm) => {functionUtils.goToNextComma(cm)},
+    'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
+    'Alt-Up': (cm) => {
+                  functionUtils.incrementValue(cm, 1)
+                  evaluateCode(cm, false)
+                },
+    'Alt-Down': (cm) => {
+                  functionUtils.incrementValue(cm, -1)
+                  evaluateCode(cm, false)
+                },
+    'Alt-A': (cm) => {functionUtils.randomizer(cm)},
+    'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
+    'Esc': () => {removeAllTooltips();},
       // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });
 
@@ -276,14 +381,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
       }
       // Gestion de l'affichage du code en temps réel des autres utilisateurs
-      if (state.otherInstantCode) { 
+      if (state.otherInstantCode && state.user?.name !== awareness.getLocalState().user?.name) {
         const { user, code, position, line } = state.otherInstantCode;
-        if (user !== awareness.getLocalState().user.name){
-          const updatedCode = code.slice(0, position) + '<span class="otherLive-cursor-marker">|</span>' + code.slice(position);
-          const positionIndicator = (line < editor.getCursor().line +1) ? '▲' : '▼';
-          logsUtils.insertOtherUserCode(line, updatedCode);
-          logsUtils.insertOtherUserPosition(positionIndicator);
-        }
+        const userColor = state.user?.color || '#fff';
+        
+        // Mettre à jour l'affichage (line-1 car votre code utilise line+1)
+        updateOtherUserDisplay(user, userColor, line - 1, position, code);
       }
     });
   });
@@ -304,12 +407,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         else if (message.type === 'autocomplete') {
           const { loops, fxList, synthList, attackList } = functionUtils.formatFoxDotAutocomplete(message);
 
-          foxdotAutocomplete.loopList = loops;
+          const toExclude = ["__init__", "1s", ""];
+          let filteredLoops = loops.filter(i => !toExclude.includes(i.displayText)); 
+
+          foxdotAutocomplete.loopList = filteredLoops;
           foxdotAutocomplete.fxList = fxList;
           foxdotAutocomplete.synths= synthList;
           foxdotAutocomplete.attackList = attackList;
 
-          if (loops.length == 0 || fxList.length == 0 || synthList.length == 0 || attackList.length == 0) {
+          if (filteredLoops.length == 0 || fxList.length == 0 || synthList.length == 0 || attackList.length == 0) {
             console.error(`Erreur lors de la récupération de la liste des boucles (${loops.length}), effets (${fxList.length}), synthés (${synthList.length}) ou attaques (${attackList.length})`);
           }
         }

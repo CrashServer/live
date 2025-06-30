@@ -1,0 +1,2575 @@
+a1 >> play("X ")
+
+a1 >> play("X:")
+
+d1 >> dbass(dur=4, lpf=1200)
+
+f8 >> bell(oct=3)
+
+d1 >> dbass(dur=4, lpf=1200, lpflfo=4)
+
+f8 >> bell(oct=3, dur=8)
+
+d1 >> dbass(dur=4, lpf=1200, lpflfo=[4, 0.2])
+
+d1 >> dbass(dur=4, lpf=1200, lpflfo=[4, 0.5])
+
+d1 >> dbass(dur=4, lpf=1200, lpflfo=1)
+
+d1 >> dbass(dur=4, lpf=1200, lpflfo=8)
+
+d1 >> dbass(dur=4, lpf=[1200, 600], lpflfo=8,)
+
+d1 >> gsynth("atmo16", pos=0, room=0.1, ratelfo=0, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1)
+
+a1.stop()
+
+d1 >> dbass(dur=4, lpf=([1200, 600]), lpflfo=8)
+
+d2 >> gsynth("atmo16", pos=0, room=0.1, ratelfo=0, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1)
+
+d1 >> dbass(dur=4, lpf=([1200, 600]), lpflfo=8, hpf=1200)
+
+d2 >> gsynth("atmo16", pos=0, room=0.1, ratelfo=0, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1).unison(3)
+
+d1 >> dbass(dur=4, lpf=([1200, 600]), lpflfo=8, hpf=500)
+
+d1 >> dbass(dur=4, lpf=([1200, 600]), lpflfo=8, hpf=200)
+
+d1 >> dbass(dur=4, lpf=([1200, 600]), lpflfo=8, hpf=[200, 400, 600, 800])
+
+d2 >> gsynth("atmo16", pos=0, room=0.1, ratelfo=0.5, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=2, room=0.1, ratelfo=0.5, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1).unison(3)
+
+Clock.bpm = 144;
+
+d2 >> gsynth("atmo16", pos=2, dur=8, dist2=1, room=0.1, ratelfo=0.5, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=2, dur=8, dist2=1, room=0.1, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=2, dur=1, dist2=1, room=0.1, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=2, dur=1, dist2=1, room=0.1, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=100, deg=1).unison(3)
+
+d1 >> dbass(dur=(4, 1/2), lpf=([1200, 600]), lpflfo=8, hpf=P*[200, 400, 600, 800])
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=1, room=0.1, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=100, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.1, room=0.1, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=100, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.2, room=0.1, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=100, deg=1).unison(3)
+
+d1 >> dbass(dur=2, lpf=([1200, 600]), lpflfo=8, hpf=P*[200, 400, 600, 800])
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, room=0.1, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=100, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, room=0.5, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=100, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, room=0.5, mverb=0.5, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=100, deg=1).unison(3)
+
+d1 >> dbass(dur=2, lpf=([1200, 600]), lpflfo=8, hpf=P*[200, 400, 600, 800]).unison(4)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, room=0, mverb=0.5, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=100, deg=1).unison(3)
+
+d1 >> dbass(dur=2, lpf=([1200, 600]), lpflfo=8, hpf=P*[200, 400, 600, 800], shape=0.5).unison(4)
+
+d1 >> dbass(dur=2, lpf=([1200, 600]), lpflfo=8, hpf=P*[200, 400, 600, 800], shape=0.3).unison(4)
+
+d1 >> dbass(dur=2, lpf=([1200, 600]), lpflfo=8, hpf=P*[200, 400, 600, 800], shape=0.1).unison(4)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=0, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=1).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=.1).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.5, sample=0, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.2, ratelfoadd=0.5, ratelfomul=0.25, sample=0, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.2, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+p4 >> play("p", dur=PDur(3, 8))
+
+p4 >> play("p", dur=PDur(3, 8), rate=0.5)
+
+p4 >> play("p", dur=PDur(3, 8), rate=4)
+
+p4 >> play("p", dur=PDur(3, 8), rate=[2, 4])
+
+p4 >> play("p", dur=PDur(3, 8), rate=[2, 4, 8])
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=2, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo16", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=1, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+l4 >> play("c...")
+
+d2 >> gsynth("atmo8", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=1, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+l4 >> play("c...", dur=4)
+
+l4.stop()
+
+d2 >> gsynth("atmo8", pos=2, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=1, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=1, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=1, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=1, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.5, density=10, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.5, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.4, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.3, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=.4, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+p4 >> play("p", dur=PDur(3, 8), rate=[2, 4, 8], bits=8, amp=1, crush=0.4)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=0.5, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=0.6, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=0.7, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=0.8, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=0.9, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.1, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.2, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.3, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.2, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.1, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.2, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.3, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.4, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.5, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.6, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.7, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.6, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.8, density=100, deg=PRand(4)).unison(3)
+
+p4 >> play("p", dur=PDur(3, 8), rate=[2, 4, 8], bits=8, amp=1, crush=0.2)
+
+p4.solo()
+
+d2 >> gsynth("atmo8", pos=3, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.8, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("atmo8", pos=1, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.8, density=100, deg=PRand(4)).unison(3)
+
+unsolo()
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.8, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=1.0, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.08, density=100, deg=PRand(4)).unison(3)
+
+p4 >> play("p", dur=PDur(3, 8), rate=[2, 4, 8], bits=8, amp=1, crush=0.2, sbrk=0.5)
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=.0, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.08, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=.2, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.08, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=.2, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.09, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=.2, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.10, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=.2, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.11, density=100, deg=PRand(4)).unison(3)
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=.2, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.11, density=100, deg=PRand(-4,4)).unison(3)
+
+d2 >> gsynth("break4", pos=1, dur=1/2, dist2=.2, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.11, density=10, deg=PRand(-4,4)).unison(3)
+
+k5 >> donorgan(dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(I, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(VI, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(II, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(III, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=1/2, dist2=.2, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.11, density=10, deg=PRand(-4,4)).unison(3)
+
+k5 >> donorgan(IV, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(I, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(III, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=1/2, dist2=0.3, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.11, density=10, deg=PRand(-4,4)).unison(3)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=1/2, dist2=0.4, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=0.11, density=10, deg=PRand(-4,4)).unison(3)
+
+k5 >> donorgan(IV, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(IV, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5).slider()
+
+k5 >> donorgan(III, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5).slider()
+
+~k5 >> donorgan(III, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=1/2, dist2=0.4, mverb=0.5, ratelfo=0.7, ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+k5 >> donorgan(VII, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(I, dec=0.5, lforate=4, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(I, dec=0.5, lforate=8, lfowidth=2, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(I, dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.25, ratelfomul=0.25, sample=0, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5, lpf=400)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5, lpf=400, hpf=1200)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5, lpf=400, hpf=1200, sbrk=0.5)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5, lpf=400, hpf=0, sbrk=0.5)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5, lpf=400, hpf=0, sbrk=0.1)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.5, ratelfomul=0.25, sample=0, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5, lpf=1200, hpf=0, sbrk=0.1)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.5, ratelfomul=1.25, sample=0, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.5, ratelfomul=2, sample=0, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=8, lfowidth=4, cutoff=1220, rq=0.5, lpf=linvar([500, 3200], 32), hpf=0, sbrk=0.1)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.5, ratelfomul=2, sample=1, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=1, lfowidth=4, cutoff=1220, rq=0.5, lpf=linvar([500, 3200], 32), hpf=0, sbrk=0.1)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.5, ratelfomul=2, sample=2, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+k5.solo()
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.5, ratelfomul=2, sample=3, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.5, ratelfomul=2, sample=2, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+unsolo()
+
+unsolo()
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=1, lfowidth=4, cutoff=1220, rq=0.5, lpf=linvar([500, 3200], 32), hpf=1200, sbrk=0.1)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=1, lfowidth=1, cutoff=1220, rq=0.5, lpf=linvar([500, 3200], 32), hpf=1200, sbrk=0.1)
+
+p5 >> play("f ", dur=4, rate=0.25, echo=0.5, mverb=0.5, delay=(0, 0.5))
+
+p5 >> play("f ", dur=4, amp=0.3, rate=0.25, echo=0.5, mverb=0.5, delay=(0, 0.5))
+
+p5 >> play("f ", dur=4, amp=0.3, rate=0.25, echo=0.5, mverb=0.5, delay=(0, 0.5))
+
+p5 >> play("f ", dur=4, amp=0.1, rate=0.25, echo=0.5, mverb=0.5, delay=(0, 0.5))
+
+k6 >> donk(var([I, II, VI]), dec=0.5, lforate=1, lfowidth=1, cutoff=1220, rq=0.5, lpf=linvar([500, 3200], 32), hpf=1200, sbrk=0.1)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.6, ratelfomul=2, sample=2, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.7, ratelfomul=2, sample=2, size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=PDur(3,8), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.7, ratelfomul=2, sample=PRand(16), size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=(8,PDur(3,8)), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.7, ratelfomul=2, sample=PRand(16), size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+Clock.clear()
+soff()
+
+m4 >> dbass()
+
+Clock.clear()
+soff()
+
+m4 >> dbass((0, 3), shape=0.5)
+
+Clock.clear()
+soff()
+
+m4 >> dbass((0, 3), shape=(0.5, 1))
+
+Clock.clear()
+soff()
+
+m4 >> dbass((0, 3), shape=(0.5, 1,0))
+
+m4 >> dbass((0, 3), shape=(0.5, 1,0))
+
+p5 >> play("f ", dur=4, amp=0.1, rate=0.25, echo=0.5, mverb=0.5, delay=(0, 0.5))
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=1, lfowidth=1, cutoff=1220, rq=0.5, lpf=linvar([500, 3200], 32), hpf=1200, sbrk=0.1)
+
+p4 >> play("p", dur=PDur(3, 8), rate=[2, 4, 8], bits=8, amp=1, crush=0.2, sbrk=0.5)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=(8,PDur(3,8)), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.7, ratelfomul=2, sample=PRand(16), size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=(8,PDur(3,8)), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.7, ratelfomul=2, sample=PRand(16), size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+m4 >> dbass((0, 3), shape=(0.5, 1,0), cut=1/4)
+
+m4 >> dbass((0, 3), shape=(0.5, 1,0), cut=1/8)
+
+m4 >> dbass((0, 3), shape=(0.5, 1,0), cut=1)
+
+m4 >> dbass((0, 3), shape=(0.5, 1,0), cut=1/2)
+
+m4 >> dbass((0, 3), shape=(0.5, 1,0), cut=[1/2, 1, 0.2])
+
+m4.stop()
+
+n4 >> play("{nN}", sample=(PRand(8), PRand(8)), rate=2)
+
+n4 >> play("{nN}", sample=(PRand(8), PRand(8)), rate=2, amp=0.2)
+
+n4 >> play("{nN}", sample=(PRand(8), PRand(8)), rate=2, amp=0.1)
+
+n4 >> play("{nN}", sample=(PRand(8), PRand(8)), rate=2, amp=0.05)
+
+n4 >> play("{nN}", sample=(PRand(8), PRand(8)), rate=2, amp=0.02)
+
+n4 >> play("{nN}", sample=(PRand(8), PRand(8)), rate=2, amp=0.01)
+
+n4 >> play("{nN}", sample=(PRand(8), PRand(8)), rate=2, amp=0.01, vol=0.5)
+
+n4 >> play("{nN}", sample=(PRand(8), PRand(8)), rate=2, amp=0.01, vol=0.2)
+
+Clock.clear()
+soff()
+
+m5 >> play("x ")
+
+m5 >> play("x ", sample=1)
+
+m5 >> play("x ", sample=2)
+
+m5 >> play("x ", sample=3)
+
+m5 >> play("x ", sample=4)
+
+m5 >> play("x ", sample=5)
+
+Clock.clear()
+soff()
+
+n4 >> play("{nN}", sample=(PRand(0, 8), PRand(0, 8)), delay=(0, 1.25, 0.5), rate=2, amp=0.01, vol=0.2)
+
+n4 >> play("{nN}", sample=(PRand(0, 8), PRand(0, 8)), delay=(0, 1.25, 0.5), rate=2, amp=0.1, vol=0.2)
+
+n4 >> play("{nN}", sample=(PRand(0, 8), PRand(0, 8)), delay=(0, 1.25, 0.5), rate=2, amp=0.2, vol=0.2)
+
+m5 >> play("x ", sample=5, echo=0.5)
+
+m5 >> play("x ", sample=5, echo=0.25)
+
+m5 >> play("x ", sample=5, echo=0.125)
+
+m5 >> play("x ", sample=5, echo=0.0125)
+
+m5.stop()
+
+n4.stop()
+
+m5 >> play("x ", sample=5)
+
+m5 >> play("x ", sample=5, echo=0.25)
+
+m5 >> play("x ", sample=5, echo=0.125)
+
+m5 >> play("x ", sample=5, echo=0.0125)
+
+m5 >> play("x ", sample=5, echo=0.0126)
+
+m5 >> play("x ", sample=5, echo=0.0123)
+
+m5 >> play("x ", sample=5, echo=0.0121)
+
+m5 >> play("x ", sample=5, echo=0.0119)
+
+m5 >> play("x ", sample=5, echo=0.0117)
+
+m5 >> play("x ", sample=5, echo=[0.0117, 0.0125])
+
+m5 >> play("x ", sample=5, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01))
+
+m5 >> play("x ", sample=5, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:4])
+
+m5 >> play("x ", sample=5, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:8])
+
+m5 >> play("x ", sample=5, dur=1/2, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:8])
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:8])
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16])
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.2)
+
+m5 >> play(": ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.2)
+
+m5 >> play("h ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3)
+
+m5 >> play("h ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3)
+
+m5 >> play("[hH] ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3)
+
+m5.stop()
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=300)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2300)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2300, bpr=0.2)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2300, bpr=0.3)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2300, bpr=0.4)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2300, bpr=0.5)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2300, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2200, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2100, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=2000, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1900, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1800, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1700, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1600, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1500, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1400, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1300, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1200, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1100, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1000, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=900, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=800, bpr=0.6)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=700, bpr=0.6)
+
+d2 >> gsynth("break4", pos=PWhite(0,4), dur=(8,PDur(3,8)), dist2=0.4, mverb=0.5, ratelfo=PWhite(0.2, 0.7), ratelfoadd=0.7, ratelfomul=2, sample=PRand(16), size=PWhite(0.0, 0.91), density=10, deg=PRand(-4,4)).unison(3)
+
+p4 >> play("p", dur=PDur(3, 8), rate=[2, 4, 8], bits=8, amp=1, crush=0.2, sbrk=0.5)
+
+k5 >> donorgan(var([I, II, VI]), dec=0.5, lforate=1, lfowidth=1, cutoff=1220, rq=0.5, lpf=linvar([500, 3200], 32), hpf=1200, sbrk=0.1)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=700, bpr=0.6, rate=0.2)
+
+p5 >> play("f ", dur=4, amp=0.1, rate=0.25, echo=0.5, mverb=0.5, delay=(0, 0.5))
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=700, bpr=0.6, rate=0.2).unison(3, 0.75)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=800, bpr=0.6, rate=0.2).unison(3, 0.75)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=900, bpr=0.6, rate=0.2).unison(3, 0.75)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1000, bpr=0.6, rate=0.2).unison(3, 0.75)
+
+p5 >> play("X ", dur=4, amp=0.1, rate=0.25, echo=0.5, mverb=0.5, delay=(0, 0.5))
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=1100, bpr=0.6, rate=0.2).unison(3, 0.75)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=PRand(1100,5000), bpr=0.6, rate=0.2).unison(3, 0.75)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=PRand(1100,5000)[:8], bpr=0.6, rate=0.2).unison(3, 0.75)
+
+m5 >> play("x ", sample=5, dur=1/4, echo=[0.0117, 0.0125] + PWhite(-0.01,0.01)[:16], mverb=0.3, bpf=PRand(1100,5000)[:16], bpr=0.6, rate=0.2).unison(3, 0.75)
+
+l6 >> play('..o.', hpf=1200)
+
+l6 >> play('..o.', hpf=1200, lpf=1600)
+
+l6.stop()
+
+c3 >> noise(dur=2, lpf=400)
+
+c3 >> noise(dur=2, lpf=2400)
+
+c3 >> noise(dur=2, lpf=0, bpf=400)
+
+c3 >> noise(echo=0.5, dur=2, lpf=0, bpf=400)
+
+p4.stop()
+
+k5.stop()
+
+p5.stop()
+
+k6.stop()
+
+# 
+
+Clock.clear()
+soff()
+
+d2.stop()
+
+c5 >> pink(hpf=1200, dur=4, lpf=1200)
+
+c5 >> pink(hpf=1200, dur=4, lpf=240)
+
+c5 >> pink(hpf=1200, dur=4, lpf=2400)
+
+b4 >> noise(dur=1/2, bpf=4000)
+
+c5 >> pink(hpf=1200, dur=4, lpf=[2400, 3500, 7200])
+
+c5 >> pink(hpf=1200, dur=4, lpf=[2400, 3500, 7200], mverb=0.5)
+
+b4 >> noise(dur=1/2, bpf=4000, bpr=0.1)
+
+b4 >> noise(dur=1/2, bpf=400, bpr=0.1)
+
+b4 >> noise(dur=1/42, bpf=400, bpr=0.1)
+
+b4 >> noise(dur=1/4, bpf=400, bpr=0.1)
+
+b4 >> noise(dur=1/4, bpf=2400, bpr=0.1)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.5)
+
+b4 >> noise(dur=1/4, bpf=2400, bpr=0.6)
+
+b4 >> noise(dur=1/4, bpf=2400, bpr=0.6, hpf=400)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2)
+
+b4 >> noise(dur=1/4, bpf=2400, bpr=0.6, hpf=400, lpf=600)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.1)
+
+b4 >> noise(dur=1/4, bpf=2400, bpr=0.6, hpf=400, lpf=2600)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.1)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2)
+
+b4 >> noise(dur=1/4, bpf=2400, bpr=0.6, hpf=400, lpf=2600, lpr=0.3)
+
+b4 >> noise(dur=1/4, bpf=2400, bpr=0.6, hpf=400, lpf=2600, lpr=0.2)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2, lpflfo=4)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2, lpflfo=1)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2, lpflfo=4)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2, lpflfo=4, leg=4)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2, lpflfo=4, leg=12)
+
+b4.stop()
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2, lpflfo=4, leg=24)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.4, lpflfo=4, leg=24)
+
+c5 >> pink(hpf=1200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.7, lpflfo=4, leg=24)
+
+c5 >> pink(hpf=200, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.7, lpflfo=4, leg=24)
+
+c5 >> pink(hpf=400, dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.7, lpflfo=4, leg=24)
+
+c5 >> pink(hpf=[400, 1200, 1600, 3200], dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.7, lpflfo=4, leg=24)
+
+d3 >> hnoise(dur=1/4, lpf=2000, hpf=400)
+
+d3 >> hnoise(dur=1/4, lpf=2300, hpf=400)
+
+d3 >> hnoise(dur=1/4, lpf=2400, hpf=400)
+
+d3 >> hnoise(dur=1/4, lpf=2500, hpf=400)
+
+d3 >> hnoise(dur=1/4, lpf=2500, hpf=300)
+
+d3 >> hnoise(dur=1/4, lpf=2500, hpf=299)
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=400)
+
+d3 >> noise(dur=1/4, lpf=2500, hpf=299)
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=0)
+
+d3.stop()
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=200)
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=1200)
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=1600)
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=1600, lpr=0.1)
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=1600, lpr=0.05)
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=1600, lpr=0.2)
+
+d3 >> noise(dur=1/4, lpf=2500, hpf=299, cut=.1)
+
+d5 >> brown(cutoff=2800, rq=0.8 , lpf=1600, lpr=0.2, cut=1/4)
+
+d5 >> brown(cutoff=2800, rq=0.8, dist2=0.5, lpf=1600, lpr=0.2, cut=1/4)
+
+~d3 >> noise(dur=1/4, lpf=2500, hpf=299, cut=.1)
+
+d3 >> noise(dur=1/4, lpf=2500, hpf=299, cut=0.2)
+
+d5 >> brown(cutoff=2800, rq=0.8, dist2=0.5, echo=0.5, lpf=1600, lpr=0.2, cut=1/4)
+
+d3 >> noise(dur=1/4, lpf=2500, hpf=1299, cut=0.2)
+
+d3 >> noise(dur=1/4, lpf=2500, hpf=299, cut=0.2)
+
+d3 >> noise(dur=1/4, lpf=2600, hpf=299, cut=0.2)
+
+d3 >> noise(dur=1/4, lpf=2700, hpf=299, cut=0.2)
+
+d3 >> noise(dur=1/4, lpf=2800, hpf=299, cut=0.2)
+
+d3 >> noise(dur=1/4, lpf=2900, hpf=299, cut=0.2)
+
+d3 >> noise(dur=1/4, lpf=5900, hpf=299, cut=0.2)
+
+d3 >> noise(dur=1/4, lpf=5900, hpf=2299, cut=0.2)
+
+d5 >> brown(cutoff=2800, rq=0.8, dist2=0.5, echo=0.5, lpf=var([1600, 200, 800, 2300]), lpr=0.2, cut=1/4)
+
+d3 >> noise(dur=1/4, lpf=5900, hpf=1299, cut=0.2)
+
+d3 >> noise(dur=1/4, lpf=9900, hpf=1299, cut=0.2)
+
+d5 >> brown(cutoff=2800, rq=0.8, dist2=0.5, echo=0.5, lpf=var([1600, 200, 800, 2300], 4), lpr=0.2, cut=1/4)
+
+d3 >> noise(dur=1/4, lpf=9900, hpf=1299, cut=0.2, pan=PWhite(-1,1))
+
+d3 >> noise(dur=1/4, lpf=9900, hpf=1299, cut=0.2, pan=PWhite(-1,1), room=0.4)
+
+d5 >> brown(cutoff=linvar([400, 4400]), rq=0.8, dist2=0.5, echo=0.5, lpf=var([1600, 200, 800, 2300], 4), lpr=0.2, cut=1/4)
+
+d3 >> noise(dur=1/4, lpf=9900, hpf=1299, cut=0.1, pan=PWhite(-1,1), room=0.4)
+
+d3 >> noise(dur=1/2, lpf=9900, hpf=1299, cut=0.1, pan=PWhite(-1,1), room=0.4)
+
+d5 >> brown(cutoff=linvar([400, 4400]), rq=0.8, dist2=[0.5, 0.3], echo=0.5, lpf=var([1600, 200, 800, 2300], 4), lpr=0.2, cut=1/4)
+
+d5.solo()
+
+d3 >> noise(dur=1/2, lpf=9900, hpf=1299, cut=0.4, pan=PWhite(-1,1), room=0.4)
+
+d3 >> noise(dur=1/2, lpf=9900, hpf=1299, cut=0.2, pan=PWhite(-1,1), room=0.4)
+
+unsolo()
+
+c5 >> pink(hpf=[400, 1200, 1600, 3200], dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.7, lpflfo=4, leg=24)
+
+c5 >> pink(hpf=[400, 1200, 1600, 3200], dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=0.7, lpr=0.2, lpflfo=4, leg=24)
+
+c5 >> pink(hpf=[400, 1200, 1600, 3200], dur=PDur(3, 8), lpf=[2400, 3500, 7200], mverb=1, lpr=0.2, lpflfo=4, leg=24,)
+
+u5 >> lfnoise(cutoff=2800, rq=0.8)
+
+u5 >> lfnoise(cutoff=1800, rq=0.8)
+
+u5 >> lfnoise(cutoff=1800, rq=0.8, dur=1/2)
+
+d3.stop()
+
+u5.stop()
+
+Clock.bpm = lininf(144, 210, 32)
+
+masterAll("amp", lininf(1,0, 64))
+
+c5.stop()
+
+masterAll("amp", lininf(1,0, 64))
+
+chaos(8)
+
+masterAll("amp", lininf(1,0, 16))
+
+chaos(8)
+
+vk >> loop("futurbeat16", dur=16, sample=3)
+
+la >> loop("jungleklanga16", dur=16, sample=3)
+
+drop()
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PRy(16,3,0), oct=[6, 6]).unison(2)
+
+x4 >> play("X ", sample=7, dur=4)
+
+x4 >> play("X ", sample=7, dur=4).every(4, "stutter")
+
+chaos(8)
+
+yb >> loop("xtech8", dur=8, sample=8)
+
+la >> loop("jungleklanga16", dur=16,sample=PRand(88), sbrk=0.5)
+
+yb.solo()
+
+unsolo()
+
+yb >> loop("xtech8", dur=8, sample=8, sbrk=0.5)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PRy(16,3,0), oct=[6, 6], cutoff=PRand(100, 500)).unison(2)
+
+unsolo()
+
+yb.solo()
+
+unsolo()
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PRy(16,3,0)*0.5, oct=[6, 6], cutoff=PRand(100, 500)).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PRy(16,3,0)*0.5, oct=[5, 6], cutoff=PRand(100, 500)).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PRy(16,3,0)*0.5, oct=[5, 6], cutoff=PRand(100, 500), rq=0.2).unison(2)
+
+d5.stop()
+
+k5 >> play("c ", dur=4)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PRy(16,3,0)*0.5, oct=[5, 6], cutoff=PRand(100, 500), rq=0.2, top=PRand(20, 1500)).unison(2)
+
+k5 >> play("c ", dur=4, amp=2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PRy(16,3,0)*0.5, oct=[5, 6], cutoff=PRand(100, 500), rq=0.3, top=PRand(20, 1500)).unison(2)
+
+k5 >> play("c ", dur=4, amp=2, echo=0.5)
+
+vu >> loop("core16", dur=16, sample=9)
+
+al.stop()
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=1/4, oct=[5, 6], cutoff=PRand(100, 500), rq=0.3, top=PRand(20, 1500)).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=1/2, oct=[5, 6], cutoff=PRand(100, 500), rq=0.3, top=PRand(20, 1500)).unison(2)
+
+vu.stop()
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=1/2, oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.3, top=PRand(20, 1500)).unison(2)
+
+masterAll("hpf", 1200)
+
+masterAll(0,"hpf", 1200)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=1/2, oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.3, top=PRand(520, 1500)).unison(2)
+
+masterAll("hpf", [1200, 600])
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0)
+
+masterAll("hpf", 3200)
+
+masterAll("hpf", 3100)
+
+masterAll("hpf", 3000)
+
+masterAll("hpf", 2900)
+
+masterAll("hpf", 2800)
+
+masterAll("hpf", 2700)
+
+masterAll("hpf", 2600)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.3, top=PRand(520, 1500)).unison(2)
+
+masterAll("hpf", 2500)
+
+masterAll("hpf", 2400)
+
+masterAll("hpf", 2300)
+
+masterAll("hpf", 2200)
+
+masterAll("hpf", 2100)
+
+masterAll("hpf", 2000)
+
+masterAll("hpf", 1900)
+
+masterAll("hpf", 1800)
+
+masterAll("hpf", 1700)
+
+masterAll("hpf", 1600)
+
+masterAll("hpf", 1500)
+
+masterAll("hpf", 1400)
+
+masterAll("hpf", 1300)
+
+masterAll("hpf", 1200)
+
+masterAll("hpf", 1100)
+
+masterAll("hpf", 1000)
+
+masterAll("hpf", 900)
+
+masterAll("hpf", 800)
+
+masterAll("hpf", 700)
+
+masterAll("hpf", 600)
+
+masterAll("hpf", 500)
+
+masterAll(0, "hpf", 500)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.3, top=PRand(520, 1500)).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.2, top=PRand(520, 1500)).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.1, top=PRand(520, 1500)).unison(2)
+
+soloRnd()
+
+ar >> loop("lynchcrazy8", dur=8, sample=6)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.1, top=PRand(520, 1500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.1, top=PRand(520, 500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.1, top=PRand(120, 500), wave=0.5).unison(2)
+
+ar >> loop("lynchcrazy8", dur=8, sample=6, dist2=0.5)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.1, top=PRand(120, 500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.2, top=PRand(120, 500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.3, top=PRand(120, 500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.4, top=PRand(120, 500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.5, top=PRand(120, 500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.6, top=PRand(120, 500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.7, top=PRand(120, 500), wave=0.5).unison(2)
+
+ar >> loop("lynchcrazy8", dur=8, sample=6, dist2=0.3)
+
+ar >> loop("lynchcrazy8", dur=8, sample=6, dist2=0.2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.7, top=PRand(1200, 1500), wave=0.5).unison(2)
+
+ar >> loop("lynchcrazy8", dur=8, sample=6, dist2=0.3)
+
+ar >> loop("lynchcrazy8", dur=8, sample=6, dist2=0.4)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(10, 500), rq=0.7, top=PRand(800, 1500), wave=0.5).unison(2)
+
+al >> tb304([1, 0, 7, 4, 4, 5, 5, 4, 0, 0, 0, 2, 0, 0, 0, 0], dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5).unison(2)
+
+masterAll("lpf", 400)
+
+al >> tb304(0, dur=PDur(5,8), oct=P*[5, 6], cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5).unison(2)
+
+masterAll("lpf", 500)
+
+masterAll("lpf", 600)
+
+masterAll("lpf", 700)
+
+masterAll("lpf", 800)
+
+masterAll("lpf", 900)
+
+masterAll("lpf", 1000)
+
+masterAll("lpf", 900)
+
+masterAll("lpf", 900)
+
+masterAll("lpf", 1000)
+
+masterAll("lpf", 1100)
+
+masterAll("lpf", 1200)
+
+masterAll("lpf", 1300)
+
+masterAll("lpf", 1400)
+
+masterAll("lpf", 1500)
+
+masterAll("lpf", 1600)
+
+masterAll("lpf", 1700)
+
+masterAll("lpf", 1800)
+
+masterAll("lpf", 1900)
+
+masterAll("lpf", 2000)
+
+masterAll("lpf", 2100)
+
+masterAll("lpf", 2200)
+
+masterAll("lpf", 2300)
+
+masterAll("lpf", 2400)
+
+masterAll("lpf", 2500)
+
+masterAll("lpf", 2600)
+
+masterAll("lpf", 2700)
+
+masterAll("lpf", 2800)
+
+masterAll("lpf", 2900)
+
+masterAll("lpf", 3000)
+
+masterAll("lpf", 3100)
+
+masterAll("lpf", 3200)
+
+masterAll("lpf", 3300)
+
+masterAll("lpf", 3400)
+
+al >> tb304(0, dur=PDur(5,8), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5).unison(2)
+
+masterAll(0,"lpf", 3400)
+x5 >> play("X ", amp=2)
+
+x5.stop()
+
+masterAll("lpf", 3400)
+
+masterAll("lpf", 400)
+
+masterAll("lpf", 500)
+
+masterAll("lpf", 600)
+
+masterAll("lpf", 700)
+
+masterAll("lpf", 800)
+
+masterAll("lpf", 900)
+
+masterAll("lpf", 1000)
+
+al >> tb304(0, dur=PDur(5,8), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=.1).unison(2)
+
+masterAll("lpf", 1100)
+
+masterAll("lpf", 1200)
+
+masterAll("lpf", 1300)
+
+al >> tb304(0, dur=PDur(5,8), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.2).unison(2)
+
+al >> tb304(0, dur=PDur(5,8), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.3).unison(2)
+
+masterAll("lpf", 1400)
+
+masterAll("lpf", 1500)
+
+masterAll("lpf", 1600)
+
+al >> tb304(0, dur=PDur(5,8), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.4).unison(2)
+
+masterAll("lpf", 1700)
+
+masterAll("lpf", 1800)
+
+al >> tb304(0, dur=PDur(5,8), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.5).unison(2)
+
+masterAll(0, "lpf", 1800)
+
+al >> tb304(0, dur=PDur(5,8), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+vk >> loop("futurbeat16", dur=16, sample=4)
+
+al >> tb304(0, dur=PDur([3,5],9), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+ar >> loop("lynchcrazy8", dur=8, sample=6, dist2=1)
+
+al >> tb304(0, dur=PDur([3,5],12), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],11), oct=PStep(8,6, 5), cutoff=PRand(100, 500), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],11), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.7, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+ar >> loop("lynchcrazy8", dur=8, sample=6, dist2=0)
+
+al >> tb304(0, dur=PDur([3,5],11), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.6, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],11), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.5, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],11), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.4, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],11), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.3, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],11), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.2, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],11), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.6).unison(2)
+
+l4 >> dbass(dur=2/3)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.6, mberb=0.6).unison(2)
+
+l4.stop()
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.6, mverb=0.6).unison(2)
+
+soloRnd()
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.5, mverb=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.4, mverb=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.3, mverb=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.4, dist2=0.3, mverb=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.3, dist2=0.3, mverb=0.6).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.3, dist2=0.3, mverb=0.5).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.3, dist2=0.3, mverb=0.4).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.3, dist2=0.3, mverb=0.3).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.3, dist2=0.3, mverb=0.2).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.3, dist2=0.3, mverb=0.1).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.3, dist2=0.3, mverb=0.0).unison(2)
+
+vk >> loop("futurbeat16", dur=16, sample=2)
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0).lclip(4)
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0).lclip(2)
+
+vk >> loop("futurbeat16", dur=16, sample=2).lclip(2)
+
+vk >> loop("futurbeat16", dur=16, sample=2).lclip(4)
+
+vk >> loop("futurbeat16", dur=16, sample=2).lclip(8)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.4, dist2=0.3, mverb=0.0).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.3, mverb=0.0).unison(2)
+
+ar.solo()
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.4, mverb=0.0).unison(2)
+
+al >> tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.5, mverb=0.0).unison(2)
+
+al.stop()
+
+ar >> loop("lynchcrazy8", dur=8, sample=7, dist2=0)
+
+ar >> loop("lynchcrazy8", dur=8, sample=7, dist2=0).lclip(4)
+
+ar >> loop("lynchcrazy8", dur=8, sample=7, dist2=0).lclip(2)
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0).lclip(2)
+
+ar >> loop("lynchcrazy8", dur=8, sample=7, dist2=0).lclip(1)
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0.5).lclip(2)
+
+unsolo()
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0.5).lclip(1)
+
+ar >> loop("lynchcrazy8", dur=8, sample=7, dist2=0).lclip(4)
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0.5).lclip(2)
+
+drop()
+
+ar >> loop("lynchcrazy8", dur=8, sample=8, dist2=0).lclip(4)
+
+ar >> loop("lynchcrazy8", dur=8, sample=7, dist2=0).lclip(4)
+
+attack("filter")
+
+masterAll("djf", 0.9)
+
+ar >> loop("lynchcrazy8", dur=8, sample=7, dist2=0).lclip(1)
+
+masterAll("djf", 0.8)
+
+ar >> loop("lynchcrazy8", dur=8, sample=7, dist2=0).lclip(2)
+
+masterAll("djf", 0.7)
+
+masterAll("djf", 0.6)
+
+masterAll("djf", 0.5)
+
+masterAll("djf", 0.4)
+
+masterAll("djf", 0.3)
+
+masterAll("djf", 0.2)
+
+masterAll("djf", 0.1)
+
+attack("filter")
+
+masterAll("rate", 2) 
+
+masterAll(0, "djf", 0.1)
+
+masterAll("reset")
+
+masterAll("degree", linvar([1, linvar([0, 2],[4, 0])], 8))
+
+masterAll("reset")
+
+masterAll("dafilter", 0.5)
+
+masterAll("djf", P[0,10]*0.1)
+
+masterAll(0, "dafilter", 0.5)
+
+masterAll("djf", P[0,10]*0.1)
+
+masterAll("djf", P[0,10]*0.01)
+
+masterAll("djf", P[0,10]*0.05)
+
+masterAll("dur", 32)
+
+masterAll("dur", 16)
+
+masterAll("dur", 8)
+
+masterAll("djf", P[0,10]*0.1)
+
+masterAll("djf", P[0:10]*0.1)
+
+masterAll(0, "dur", 8)
+
+masterAll(0, "dafilter", 0.5)
+
+masterAll("reset")
+
+masterAll("djf", P[0:10:2]*0.1)
+
+x5 >> play("[--]")
+
+x5 >> play("[--].-")
+
+k5 >> play("K ")
+
+masterAll("djf", P[0:100:2]*0.01)
+
+k5 >> play("K ", amp=4)
+
+k5.solo()
+
+unsolo()
+
+variation = Variation(16,4)
+
+variation = Variation(16,4)
+
+variation.start()
+
+x6 >> play(" W")
+
+x6 >> play(" L")
+
+masterAll("djf", linvar(0,1, 16))
+
+x6.solo()
+
+unsolo()
+
+x6.stop()
+
+masterAll("djf", linvar(0,1, 16))
+
+masterAll("sample", 4)
+
+masterAll(0,"sample", 4)
+
+masterAll("sample", 6)
+
+masterAll("djf", linvar([0,1], [16,0]))
+
+masterAll("djf", linvar([0,1], [16,0]))
+
+masterAll("sample", 8)
+
+masterAll("echo", 0.5)
+
+masterAll("sbrk", 0.5)
+
+masterAll("echo", 0.15)
+
+masterAll("sbrk", 0.5)
+
+masterAll("sbrk", 0.5)
+
+masterAll("echo", 0.05)
+
+masterAll("sbrk", 0.5)
+
+masterAll("echo", 0.01)
+
+masterAll("echo", [0.01, 0.02])
+
+masterAll("echo", [0.01, 0.02])
+
+masterAll(0, "echo", [0.01, 0.02])
+
+masterAll("mring", 0.5)
+
+masterAll(0, "echo", [0.01, 0.03])
+
+masterAll( "echo", [0.01, 0.03])
+
+variation.stop()
+
+masterAll("mring", 0.5)
+
+masterAll(0, "echo", [0.01, 0.03])
+
+masterAll("sbrk", 0.5)
+
+masterAll("mring", 0.5)
+
+masterAll("hpf", 320)
+
+masterAll("hpf", 420)
+
+masterAll("hpf", 520)
+
+masterAll("hpf", 620)
+
+masterAll("hpf", 720)
+
+masterAll("mverb", 0.5)
+
+masterAll("hpf", 820)
+
+p5 >> pianovel(melody(), dur=2, hpf=400)
+
+masterAll("drcomp", 0.5)
+
+p5 >> pianovel(melody(), dur=1, hpf=400)
+
+masterAll(0,"hpf", 820)
+
+p5.stop()
+
+masterAll("leg", 2.5)
+
+masterAll("sbrk", 0.5)
+masterAll("mring", 0.5)
+masterAll("mverb", 0.5)
+masterAll("drcomp", 0.5)
+masterAll("leg", 2.5)
+
+masterAll("sbrk", 0.5)
+
+masterAll("mring", 0.5)
+
+masterAll("mverb", 0.5)
+
+masterAll("drcomp", 0.5)
+
+masterAll("mverb", 0.5)
+
+masterAll("leg", 2.5)
+
+ma.solo()
+
+p5 >> pianovel(melody())
+
+p5 >> pianovel(melody(), dur=1/2)
+
+p5 >> pianovel(melody(), dur=1/2, oct=4)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3))
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=500)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=600)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=700)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=800)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=900)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=1000)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=1100)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=1000)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=900)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=800)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=700)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=600)
+
+p5 >> pianovel(melody(), dur=1/2, oct=(4, 3), lpf=500)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=500)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=600)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=700)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=800)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=900)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=1000)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=1100)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=1200)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=1300)
+
+p5 >> pianovel(melody(), dur=2, oct=(4, 3), lpf=1400)
+
+p5 >> pianovel(melody(), dur=[2, 1/2], oct=(4, 3), lpf=1400)
+
+p5 >> pianovel(melody(), dur=[2, 1/2], oct=(4, 3), lpf=1500)
+
+p5 >> pianovel(melody(), dur=[2, 1/2], oct=(4, 3), lpf=1600)
+
+p5 >> pianovel(melody(), dur=[2, 1/2], oct=(4, 3), lpf=1700)
+
+p5 >> pianovel(melody(), dur=4, oct=(4, 3), lpf=1700)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=1700)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=1700, mverb=0.5)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=1700, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=1800, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=1900, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2000, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2100, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2200, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2300, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2400, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2500, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2600, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2700, mverb=0.8)
+
+p5 >> pianovel(melody(), dur=8, oct=(4, 3), lpf=2800, mverb=0.8)
+
+p6 >> piano()
+
+p6.stop()
+
+p6 >> pianovel(velocity=70, hard=0.8, velhard=0.6)
+
+p6 >> pianovel(velocity=20, hard=0.8, velhard=0.6)
+
+p6 >> pianovel(velocity=30, hard=0.8, velhard=0.6)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=0.6)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=1)
+
+p5.stop()
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=12)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=127)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=60)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=0.1)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=0.3)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=0.4)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=0.5)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=0.6)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=0.7)
+
+p6 >> pianovel(velocity=40, hard=0.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=0.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=0.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=0.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=0.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=0.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=0.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=1.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=2.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=3.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=4.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=5.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=6.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=7.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=8.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=9.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=10.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=11.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=12.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=13.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=14.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=15.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.7, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.8, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=16.9, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.0, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.1, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.2, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.3, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.4, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.5, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=0.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=0.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=1.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=2.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=3.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=4.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=5.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=6.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=7.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=8.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=9.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=10.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=11.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=12.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.5)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.6)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.7)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.8)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=13.9)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=14.0)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=14.1)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=14.2)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=14.3)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=14.4)
+
+p6 >> pianovel(4, velocity=40, hard=17.6, velhard=14.5)
+
+p6 >> pianovel(4, velocity=40, hard=0.6, velhard=14.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.6, velhard=14.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.6, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.5, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.4, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.3, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.2, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.1, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.0, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.1, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.2, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.3, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.4, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.5, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.6, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.6, velhard=0.4)
+
+p6 >> pianovel(4, velocity=60, hard=0.7, velhard=0.5)
+
+p6 >> pianovel(4, velocity=60, hard=0.8, velhard=0.4)
+
+p6 >> pianovel(4, velocity=60, hard=0.9, velhard=0.4)
+
+p6 >> pianovel(4, velocity=60, hard=0.9, velhard=0.3)
+
+p6 >> pianovel(4, velocity=60, hard=1.0, velhard=0.3)
+
+p6 >> pianovel(4, velocity=60, hard=1.1, velhard=0.3)
+
+p6 >> pianovel(4, velocity=60, hard=1.1, velhard=0.2)
+
+p6 >> pianovel(4, velocity=60, hard=1.2, velhard=0.2)
+
+p6 >> pianovel(4, velocity=60, hard=1.3, velhard=0.2)
+
+p6 >> pianovel(4, velocity=60, hard=1.3, velhard=0.1)
+
+p6 >> pianovel(4, velocity=60, hard=1.4, velhard=0.1)
+
+p6 >> pianovel(4, velocity=60, hard=1.5, velhard=0.1)
+
+p6 >> pianovel(4, velocity=60, hard=1.6, velhard=0.1)
+
+p6 >> pianovel(4, velocity=60, hard=1.6, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.7, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.8, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.9, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.0, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.1, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.2, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.3, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.4, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.5, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.6, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.5, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.4, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.3, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.2, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.1, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=2.0, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.9, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.8, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.7, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.6, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.5, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.4, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.3, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.2, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.1, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=1.0, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=0.9, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=0.8, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=0.7, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=0.6, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=0.5, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=0.4, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=0.3, velhard=0.0)
+
+p6 >> pianovel(4, velocity=60, hard=0.3, velhard=-0.1)
+
+p6 >> pianovel(4, velocity=59, hard=0.3, velhard=-0.1)
+
+p6 >> pianovel(4, velocity=60, hard=0.3, velhard=-0.2)
+
+p6 >> pianovel(4, velocity=58, hard=0.3, velhard=-0.2)
+
+p6 >> pianovel(4, velocity=59, hard=0.3, velhard=-0.1)
+
+p6 >> pianovel(4, velocity=57, hard=0.3, velhard=-0.1)
+
+p6 >> pianovel(4, velocity=58, hard=0.3, velhard=0.0)
+
+p6 >> pianovel(4, velocity=57, hard=0.3, velhard=0.1)
+
+p6 >> pianovel(4, velocity=56, hard=0.3, velhard=0.0)
+
+p6 >> pianovel(4, velocity=56, hard=0.3, velhard=0.2)
+
+p6 >> pianovel(4, velocity=55, hard=0.3, velhard=0.2)
+
+p6 >> pianovel(4, velocity=55, hard=0.3, velhard=0.3)
+
+p6 >> pianovel(4, velocity=54, hard=0.3, velhard=0.3)
+
+p6 >> pianovel(4, velocity=54, hard=0.3, velhard=0.4)
+
+p6 >> pianovel(4, velocity=53, hard=0.3, velhard=0.4)
+
+p6 >> pianovel(4, velocity=53, hard=0.3, velhard=0.5)
+
+p6 >> pianovel(4, velocity=52, hard=0.3, velhard=0.5)
+
+p6 >> pianovel(4, velocity=52, hard=0.3, velhard=0.6)
+
+p6 >> pianovel(4, velocity=52, hard=0.3, velhard=0.7)
+
+tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.5, mverb=0.0).unison(2)
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0.5).lclip(2)
+
+p6 >> pianovel(4,oct=3, velocity=52, hard=0.3, velhard=0.7)
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0.5).lclip(4)
+
+la >> loop("jungleklanga16", dur=16, sample=PRand(88), sbrk=0.5).lclip(8)
+
+p6 >> pianovel(PGauss(),oct=3, velocity=52, hard=0.3, velhard=0.7)
+
+la.stop()
+
+# tb304(0, dur=PDur([3,5],8), oct=PStep(8,6, 5), cutoff=PRand(100, 800), rq=0.1, top=PRand(800, 1500), wave=0.5, dist2=0.5, mverb=0.0).unison(2)
+
+p6 >> pianovel(PGauss(),oct=[3,4], velocity=52, hard=0.3, velhard=0.7)
+
+p6 >> pianovel(PGauss(),oct=[3,4], velocity=PRand(52,66), hard=0.3, velhard=0.7)
+
+p6 >> pianovel(PGauss(),oct=P*[3,4], velocity=PRand(52,66), hard=0.3, velhard=0.7)
+
+attack("Crazy Train")
+
+p6 >> pianovel(PGauss(),oct=P*[3,4,5], velocity=PRand(52,66), hard=0.3, velhard=0.7)
+
+r0 >> faim([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=3, dist2=1, vol=0.7, beef=2).chroma()
+
+r0.stop()
+
+r0 >> pianovel([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=3, dist2=1, vol=0.7, beef=2).chroma()
+
+r0.stop()
+
+r0 >> pianovel([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=3, dist2=0, vol=0.7, beef=2).chroma()
+
+r0 >> pianovel([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=3, dist2=0, vol=0.7, beef=2).chroma()
+
+p6 >> pianovel(PGauss(),oct=P*[3,4,5], velocity=PRand(52,66), hard=0.3, velhard=PWhite(0.2, 0.7))
+
+p6 >> pianovel(PGauss(),oct=P*[3,4,5], velocity=PRand(52,66), hard=PWhite(0.2, 0.7), velhard=PWhite(0.2, 0.7))
+
+r0 >> pianovel([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=3, dist2=0, vol=0.7, beef=2).chroma()
+
+r0.stop()
+
+p6.stop()
+
+l5 >> noise(dur=1/4)
+
+lost()
+
+l5 >> noise(dur=1/4, lpf=20)
+
+l5 >> noise(dur=1/4, lpf=120)
+
+l5 >> noise(dur=1/4, lpf=220)
+
+l5 >> noise(dur=1/4, lpf=PFr(220,400, 16, 404))
+
+l5 >> noise(dur=1/4, lpf=PFr(220,2400, 16, 404))
+
+attack("crashHop")
+
+y1 >> play("<k.><..C.><-><.|B6|>", amp=5000, hpf=linvar([0,0,4000],[24,8,0]), vol=5, feed=[.25, 0, 0, ], echo=[0, 0, 0, 0.5], leg=[0, 0, PWhite(0,5)], rate=(1+PBin(262)*-2)).sometimes("trim", Cycle=[0,1,2]).every(16, "trim", 0)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+x9 >> play("X ", dur=1/4, amp=4000, sample=7, shift=2, rate=12, echo=[0.5, 0.25], flanger=4, mverb=0.5)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+chaos(8)
+
+tq >> loop("nshits16", dur=16, sample=4)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.5)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(4)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(2)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(1)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(1)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(2)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(0.5)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(2)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(4)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(1)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(2)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(0.5)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(1)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(2)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(4)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(8)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(0.5)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(0.5)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(2)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(2)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(4)
+
+ik >> loop("jazza8", dur=8, sample=5, amp=0.7).lclip(8)
+
+ik.stop()
+
+Clock.clear()
+soff()
+
+lost()
+
+attack("rockdrumbass")
+
+##### attack@rockdrumbass.mry:~$ #####
+
+k1 >> play("<k(.k)..><..u.><->", sample=1).human(30,5)
+
+k2 >> play("<k(.k)..><..u.><-><.:>", sample=0).sometimes("stutter")
+
+soloRnd()
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=(0,2), dist2=0.3) + PStep(5,melody(),0)
+
+soloRnd(32)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=0, dist2=0.3) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=0.5, dist2=0.3) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=0.7, dist2=0.3) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=1, dist2=0.3) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.3) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.4) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.5) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.6) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.7) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.6) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.5) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.4) + PStep(5,melody(),0)
+
+b1 >> faim(var([0,2,-2],[16,8,8]), dur=1/2, oct=PStep(8,5,4), beef=2, dist2=0.3) + PStep(5,melody(),0)
+
+soloRnd(16)
+
+soloRnd(16)
+
+soloRnd(1)
+
+soloRnd(1)
+
+soloRnd(1)
+
+soloRnd(1)
+
+soloRnd(1)
+
+soloRnd(2)
+
+soloRnd(2)
+
+soloRnd(2)
+
+soloRnd(2)
+
+soloRnd(8)
+
+drop()
+
+soloRnd(8)
+
+masterAll("degree", linvar([1, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([1, linvar([0, 2],[4, 0])], 8))
+
+masterAll("sbrk", .5)
+
+masterAll("degree", linvar([2, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([3, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([4, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([5, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([6, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([7, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([8, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([9, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([10, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([11, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([0, 2],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([0, 3],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([0, 4],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([0, 5],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([0, 6],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([0, 7],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([0, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([1, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([2, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([3, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([4, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([5, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([6, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([7, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([8, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([9, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([10, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([11, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([12, linvar([12, 8],[4, 0])], 8))
+
+masterAll("degree", linvar([0, linvar([12, 8],[4, 0])], 8))
+
+masterAll("mveb", .5)
+
+masterAll(0,"degree", linvar([0, linvar([12, 8],[4, 0])], 8))
+
+masterAll("lpf", var([0, 4000, 6000, 15000], [24, 4, 2, 2]))
+
+masterAll("sbrk", .5)
+masterAll("mveb", .5)
+
+masterAll("hpf", var([0, 20, 30, linvar([3200, 6400], 32)], [24, 4, 2, 2]))
+
+masterAll("cut", var([0, 1, 1/2, linvar([1/4, 1], 32)], [24, 4, 2, 2]))
+
+masterAll("rate", 2) 
+
+masterAll("dur", P*[1/2, 1, 1, 1/2, 2])
+
+masterAll("reset")
+
+l5 >> play("-")
+
+masterAll("hpf", var([0, 20, 30, linvar([3200, 6400], 32)], [24, 4, 2, 2]))
+
+masterAll("dur", 4)
+
+masterAll("dur", 2)
+
+masterAll("dur", 1)
+
+masterAll("echo", 0.5)
+
+masterAll("echo", 0.25)
+
+masterAll("dur", 1/2)
+
+masterAll("sbrk", .5)
+masterAll("mverb", .5)
+masterAll("shape", .5)
+
+masterAll("dur", 1/4)
+
+masterAll("dur", 1/8)
+
+Clock.clear()
+soff()
+

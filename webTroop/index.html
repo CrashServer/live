@@ -12,6 +12,44 @@
             <header>
                 <h1 id="crashPanelTitle">CrashPanel</h1>
             </header>
+
+            <section class="todo-list">
+                <fieldset class="info-row">
+                    <legend id="todoTitle">Todo List</legend>
+                    <div id="todo-container" class="simple-text">
+                        <div class="todo-item">
+                            <input type="checkbox" id="todo-1" class="todo-checkbox">
+                            <label for="todo-1">Reset Chrono</label>
+                        </div>
+                        <div class="todo-item">
+                            <input type="checkbox" id="todo-2" class="todo-checkbox">
+                            <label for="todo-2">Verif IP Cables</label>
+                        </div>
+                        <div class="todo-item">
+                            <input type="checkbox" id="todo-3" class="todo-checkbox">
+                            <label for="todo-3">Envoi CPU</label>
+                        </div>
+                        <div class="todo-item">
+                            <input type="checkbox" id="todo-4" class="todo-checkbox">
+                            <label for="todo-4">Démarrer Transport</label>
+                        </div>
+                        <div class="todo-item">
+                            <input type="checkbox" id="todo-5" class="todo-checkbox">
+                            <label for="todo-5">Vérifier les FX</label>
+                        </div>
+                        <div class="todo-item">
+                            <input type="checkbox" id="todo-6" class="todo-checkbox">
+                            <label for="todo-6">Check audio réactive</label>
+                        </div>
+                        <div class="todo-item">
+                            <input type="checkbox" id="todo-7" class="todo-checkbox">
+                            <label for="todo-7">Désactiver veille auto x2</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+
+
             <section class="foxdot-info">
                     <fieldset class="info-row">
                         <legend>Bpm</legend>
@@ -69,13 +107,13 @@
                 </fieldset>
             </section>
 
-            <section class="sceneName">
+            <!-- <section class="sceneName">
                 <fieldset class="info-row">
                     <legend>Scene Name</legend>
                     <div class="simple-text h20 sceneInfo">
                     <span id="sceneName">xxx</span><span id="sceneTime">00:00</span></div>
                 </fieldset>
-            </section>
+            </section> -->
             <!-- <section class="gameData">
                 <fieldset class="info-row">
                     <legend>Game Data</legend>
@@ -92,12 +130,17 @@
             </section>
         </div>
         <div id="editor-container">
-            
-            <div id="editor"></div>
+            <div id="main-editor-wrapper">
+                <div id="editor"></div>
+            </div>
+            <div id="editor-resize-handle"></div>
+            <div id="other-editor-wrapper">
+                <div id="other-editor"></div>
+            </div>
             <div class="logPanel" id="logPanel">
-                <div id="other-user-display"><span id="other-user-position"></span><span id="other-user-code"></span></div>
-                <!-- <div id="separator">
-                </div> -->
+                <!-- <div id="other-user-display"><span id="other-user-position"></span><span id="other-user-code"></span></div> -->
+                <div id="separator">
+                </div>
                 <div id="logAndChat">
                     <div id="logs"></div>
                     <div id="chat" class="chat"> </div>
@@ -110,6 +153,7 @@
                     <div class="input-group">
                         <input type="color" id="userColor" value="#2196f3">
                         <input type="text" id="userName" placeholder="Nom du joueur">
+                        <button id="validatePlayerName" class="configButton">Valider</button>
                     </div>
                 </div>    
                 <div class="input-group">
@@ -229,15 +273,15 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <!-- <div class="toggle-item">
-                        <label>Theme interface</label>
+                    <div class="toggle-item">
+                        <label>Toggle Split Screen</label>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="themeInterface" checked/>
+                            <input type="checkbox" id="splitScreenToggle" checked/>
                             <span class="slider"></span>
                         </label>
-                    </div> -->
+                    </div>
                 </div>
-                <button id="openModalBtn">Afficher les raccourcis clavier</button>
+                <button id="openModalBtn" class="configButton">Afficher les raccourcis clavier</button>
             </div>
         </div>
     </div>

@@ -1,0 +1,281 @@
+y8 >> rsin(a=.5, blur=4, dur=32, oct=(PWhite(3,5.5),PWhite(3,5.5),PWhite(3,5.5),PWhite(3,5.5)), para1=(PRand(0, 100),PRand(0, 100),PRand(0, 100),PRand(0, 100)), rsing=(PRand(0,5),PRand(0,5),PRand(0,5),PRand(0,10)), delay=(0,2,4,6), valad=(PRand(200,500),PRand(20,500),PRand(200,500),PRand(200,1000)), valadr=0.3, valadd=5, valadt=0, valadc=0.2, mverb=.9)
+
+Clock.bpm=70
+
+y8.fx2=1
+
+y8.fx1 = 1
+
+y8.fx1=1
+
+Clock.clear()
+soff()
+
+Clock.bpm = 140;
+
+Root.default = "E"
+
+Scale.default = "minor"
+
+war = SynthDef("war")
+
+cy = SynthDef("cy")
+
+truth = SynthDef("truth")
+
+justice = SynthDef("justice")
+
+stress = SynthDef("stress")
+
+peace = SynthDef("peace")
+
+b0 >> war()
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=8, cutoff=4000, resonance=0.5, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=0, cutoff=4000, resonance=0.5, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=1, cutoff=4000, resonance=0.5, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=8, cutoff=4000, resonance=0.5, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=12, cutoff=4000, resonance=0.5, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=4, cutoff=4000, resonance=0.5, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=4, cutoff=4000, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=4, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=1, distortion=4, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=0, distortion=4, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.3, crush=4, distortion=4, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.1, crush=4, distortion=4, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.1, crush=4, distortion=8, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.1, crush=4, distortion=8, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=4)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.1, crush=4, distortion=8, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=1)
+
+d3 >> play("x.")
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.1, crush=4, distortion=8, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+d3 >> play("x-")
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=8, cutoff=4000, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=8, cutoff=400, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=8, cutoff=20, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=8, cutoff=220, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=8, cutoff=400, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=8, cutoff=600, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=8, cutoff=1200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=-3, cutoff=1200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=1200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=1200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=1200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=1200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=1).unison(3)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=1200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=1).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=1200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.9, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.8, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.7, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.6, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.5, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.4, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.3, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.2, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=200, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=201, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=202, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=203, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=204, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=205, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=206, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=207, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=208, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=209, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=210, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=211, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=212, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=213, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=214, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=215, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=216, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=217, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=218, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+d4 >> play("XoXX-o-oX-o-XoX-", dur=0.25, sample=PRand(8))
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=219, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=220, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=221, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=222, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=223, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=224, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=225, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=226, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=227, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=228, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=229, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=230, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=231, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=232, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=233, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=234, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=235, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=236, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=237, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+d4.stop()
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=4, distortion=3, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=0, distortion=3, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=0, distortion=à, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=0, distortion=0, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1.stop()
+
+b1 >> war([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=0, distortion=0, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1.stop()
+
+b4 >> cy()
+
+b0.stop()
+
+b4 >> cy(dur=2)
+
+b4 >> cy(dur=2, bright=1)
+
+b4 >> cy(dur=2, bright=2)
+
+b4 >> cy(dur=2, bright=0.5)
+
+b4 >> cy(dur=2, bright=0.5, distortion=5)
+
+b4 >> cy(dur=2, bright=0.5, oct=4, distortion=5)
+
+b4 >> cy(dur=2, bright=0.5, oct=3, distortion=5)
+
+b4 >> cy(dur=2, bright=0.5, oct=2, distortion=5)
+
+b4.stop()
+
+k5 >> stress()
+
+k5 >> stress(dur=1/2)
+
+k5 >> stress(dur=1/2, oct=4)
+
+k5 >> stress(dur=1/2, oct=3)
+
+k5 >> stress(dur=1/2, oct=4, filterfFreq=20)
+
+k5 >> stress(dur=1/2, oct=4, filterfFreq=400)
+
+k5 >> stress(dur=1/2, oct=4, filterfFreq=1200)
+
+k5 >> stress(dur=1/2, oct=4, filterFreq=1200)
+
+k5 >> stress(dur=1/2, oct=4, filterFreq=120)
+
+k5 >> stress(dur=1/2, oct=4, filterFreq=200)
+
+k5 >> stress(dur=1/2, oct=4, filterFreq=300)
+
+k5 >> stress(dur=1/2, oct=(4, 5), filterFreq=300)
+
+k5 >> peace(dur=1/2, oct=(4, 5), filterFreq=300)
+
+k5 >> peace(dur=1/2, oct=6, filterFreq=300)
+
+k5 >> peace(dur=1/2, oct=6, filterFreq=1200)
+
+d3.stop()
+
+k5 >> peace(dur=1/2, oct=6, filterFreq=0)
+
+b1 >> stress([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=0, distortion=0, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> peace([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=0, distortion=0, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> truth([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=0, distortion=0, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+b1 >> justice([0,0,0,3,0,0,2,0], dur=0.25, sus=0.2, bits=12, lpr=0.4, crush=0, distortion=0, cutoff=1238, resonance=0.1, attack=0.01,amp=[1,0.7,0.9,1,0.8,0.6,1,0.7], lpf=var([400,800,400,1200],[4,2,4,8]), res=0.9,drive=linvar([0.2,0.8],16), vol=2).unison(3, .5)
+
+Clock.clear()
+soff()
+
+b5 >> faim(P[-5,-5,7,-5,-5,5,-5,-5,3,-5,-5,1,-5,-5,2,3] + var([0,PTrir(0,2,0)],[2,8]), dur=P[1/2].stutter(16)|2.5, lpf=[PRand(400,2280),0,0], lpr=PWhite(0.1,0.5), dist2=1, fx1=0, shape=0.3, vol=0.5, amp=var([0,1],[28,4])).gtr(2)
+
+Clock.clear()
+soff()
+

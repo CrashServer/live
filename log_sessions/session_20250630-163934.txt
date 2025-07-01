@@ -1,0 +1,1796 @@
+x6 >> war()
+
+x6 >> war(dur=PDur(5,8))
+
+x6 >> war(dur=PDur([5,7],8))
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(200,1200))
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(200,5200))
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(200,5200), rq=.1)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(200,15200), rq=.1)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(200,15200), rq=.1, oct=6)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(200,15200), rq=.2, oct=6)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(200,15200), rq=.02, oct=6)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12)
+
+j9 >> play("X.", lpf=300)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=.2)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=PTuple(PWhite(), 4))
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=PTuple(PWhite(), 1))
+
+d2 >> play("<X ><(-[--]-[::])><..|*2|.><..C.>", bits=16, amp=1, dur=2, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1)
+
+d2 >> play("<X ><(-[--]-[::])><..|*2|.><..C.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..C.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..d.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..x.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+x6 >> war(dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..a.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..b.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..x.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=1, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=1, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+x6 >> war(dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+x6 >> war(dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+x6 >> war(dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+x6 >> war(dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=4, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=1, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+x6 >> war(dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.2)
+
+x6 >> war(dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(I, dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+b7 >> dbass([0,1,0,-1,0], dur=0.5, oct=5, slide=var([0,0.1],[4,4]), lpf=var([800,3200],[8,8])).unison(4)
+
+b7 >> dbass([0,1,0,-1,0], dur=0.5, oct=5, slide=var([0,0.1],[4,4]), lpf=var([800,3200],[8,8])).unison(4)
+
+b7 >> dbass([0,1,0,-1,0], dur=0.5, oct=4, slide=var([0,0.1],[4,4]), lpf=var([800,3200],[8,8])).unison(4)
+
+b7 >> dbass([0,1,0,-1,0], dur=0.5, oct=6, slide=var([0,0.1],[4,4]), lpf=var([800,3200],[8,8])).unison(4)
+
+x6 >> war(PArp(III, 12), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+b7 >> dbass([0,1,0,-1,0], dur=0.5, oct=5, slide=var([0,0.1],[4,4]), lpf=var([800,3200],[8,8])).unison(4)
+
+b7.stop()
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=.02, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.03, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.04, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.05, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.06, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.07, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.08, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.09, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.11, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.12, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.13, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.12, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.11, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,15200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+Clock.bpm = 130;
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,8200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1)
+
+Clock.bpm = 124;
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,8200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.13, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,8200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.13, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5)
+
+~x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,8200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.13, valadd=50, valadt=0, valadc=0.1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,8200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.13, valadd=50, valadt=0, valadc=0.1)
+
+d2.stop()
+
+Clock.clear()
+soff()
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5)
+
+Clock.clear()
+soff()
+
+d3 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/4, valad=0, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1, amp=var([0.8,1.2],[8,8])).sometimes("stutter")
+
+d3.stop()
+
+b9 >> dbass(var([0,-2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, crush=var([0,8],[4,4]), fold=var([0,0.5],[8,8])).unison(3)
+
+e2 >> ebass([1,0,0,0,0] + var([0,PTrir(-2,2,0)],[8,8]), dur=[1/2,1/2,1,1], oct=(4), pick=[0.8, 0.2, 0.2], cutoff=linvar([850, 1250],32), decay=0.6, rel=e2.dur*0.5, amp=1, fold=(0, 0.14), vol=1, tanh=0.2, scale=Scale.chromatic).penta()
+
+e2.stop()
+
+b9.stop()
+
+e2 >> ebass([1,0,0,0,0] + var([0,PTrir(-2,2,0)],[8,8]), dur=[1/2,1/2,1,1], oct=(4), pick=[0.8, 0.2, 0.2], cutoff=linvar([850, 1250],32), decay=0.6, rel=e2.dur*0.5, amp=1, fold=(0, 0.14), vol=1, tanh=0.2, scale=Scale.chromatic).penta()
+
+Clock.bpm = 170
+
+Scale.default = "minor"
+
+Root.default = "G"
+
+Root.default = "E"
+
+Root.default = "C"
+
+e3 >> ebass(var([[1,0,0,0,0],[1,0,0,3,0],[1,0,-2,0,0]],[8,4,4]), dur=var([[1/2,1/2,1,1],[1/4,1/4,1/2,1/2],[1,1,2,2]],[8,4,4]), oct=(4), pick=var([[0.8,0.2,0.2],[0.9,0.1,0.1],[0.6,0.3,0.3]],[8,4,4]), cutoff=linvar([850, 1250],32), decay=0.6, rel=e3.dur*0.5, amp=1, fold=(0, 0.14), vol=1, tanh=0.2).penta()
+
+Clock.clear()
+soff()
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,8200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.13, valadd=50, valadt=0, valadc=0.1)
+
+Clock.clear()
+soff()
+
+j9 >> play("X.", lpf=300)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5)
+
+Clock.clear()
+soff()
+
+b9 >> dbass(var([0,-2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, crush=var([0,8],[4,4]), fold=var([0,0.5],[8,8])).unison(3)
+
+b9.stop()
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.125, sus=0.05, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16))
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5, amp=[1,0.5,0.5,0.5])
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.05, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16))
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.05, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2)
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.05, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=6)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5, amp=[1,0.5,PWhite(),0.5])
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.05, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.05, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.1, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.2, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+x6.stop()
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.3, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.4, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.6, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.01, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+b7 >> dbass([0,1,2,3,4,3,2,1], dur=0.25, sus=0.04, slide=var([0,0.2],[8,8]), lpf=linvar([800,3200],16), vol=2, oct=5)
+
+Clock.clear()
+soff()
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=0.2, amp=0.9, drive=var([0.4,0.8],[4,4]), oct=var([3,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=0.3, amp=0.9, drive=var([0.4,0.8],[4,4]), oct=var([3,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=0.4, amp=0.9, drive=var([0.4,0.8],[4,4]), oct=var([3,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=0.5, amp=0.9, drive=var([0.4,0.8],[4,4]), oct=var([3,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=0.6, amp=0.9, drive=var([0.4,0.8],[4,4]), oct=var([3,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=0.8, amp=0.9, drive=var([0.4,0.8],[4,4]), oct=var([3,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=0.4, amp=0.9, drive=var([0.4,0.8],[4,4]), oct=var([5,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=1, amp=0.9, drive=var([0.4,0.8],[4,4]), oct=var([5,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=1, amp=1, drive=var([0.4,0.8],[4,4]), oct=var([5,4],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=1, amp=1, drive=var([0.4,0.8],[4,4]), oct=var([5,6],[16,16]))
+
+b2 >> dbass([0,0,0,0,3,3,5,5], dur=0.5, sus=1, amp=1, drive=var([0.4,0.8],[4,4]), oct=var([3,4],[16,16]))
+
+Clock.clear()
+soff()
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5, amp=[1,0.5,PWhite(),0.5])
+
+x6.stop()
+
+d2.stop()
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,4],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([2,5],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([4,5],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([4,6],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([4,2],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([4,3],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([4,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([4,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([1,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([3,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+attack("EuroDance")
+
+Clock.clear()
+soff()
+
+p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+q2 >> play("k.", sample=0, amp=2)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+Root.default=lininf(0, -7, 128)
+
+x7 >> war(p1.degree, dur=p1.dur)
+
+x7 >> war(p1.degree, dur=p1.dur, oct=6)
+
+x7 >> war(p1.degree, dur=p1.dur, oct=6)
+
+x7 >> war(p1.degree, dur=p1.dur, oct=6, vol=2)
+
+x7 >> war(p1.degree, dur=p1.dur, oct=6, vol=4)
+
+x7 >> war(p1.degree, dur=p1.dur, oct=6, vol=8)
+
+x7 >> war(p1.degree, dur=p1.dur, oct=6, vol=12)
+
+x7 >> war(p1.degree, dur=p1.dur, oct=6, vol=0)
+
+Root.default=lininf(0, -7, 128)
+
+Root.default=lininf(0, -7, 4)
+
+Root.default=lininf(0, -7, 12)
+
+Root.default=lininf(0, -7, 4)
+
+Clock.clear()
+soff()
+
+p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+Root.default="E"
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+drop()
+
+q2 >> play("k.", sample=0, amp=2)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+q2 >> play("k.", sample=0, amp=2)
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+j9 >> play("X.", lpf=300)
+
+j9.stop()
+
+k5 >> varsaw(linvar([0, 7], [32,0]), lpf=400, oct=6, mverb=0.9)
+
+k5 >> varsaw(linvar([0, 7], [32,0]), lpf=5400, oct=6, mverb=0.9)
+
+k5 >> varsaw(linvar([0, 7], [32,0]), lpf=5400, oct=6, mverb=0.9, sus=0.5)
+
+k5 >> varsaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=0.9, sus=0.5)
+
+k5 >> varsaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=0.9, sus=0.4)
+
+k5 >> varsaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=0.9, sus=0.3)
+
+k5 >> varsaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=0.9, sus=0.2)
+
+k5 >> varsaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2)
+
+k5 >> war(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2, hpf=5000)
+
+k5 >> supersaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2, hpf=5000)
+
+k5 >> supersaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2, hpf=5000).unison(3)
+
+k5 >> supersaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2, hpf=500).unison(3)
+
+k5 >> supersaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2, hpf=500).unison(1)
+
+k5 >> supersaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2, hpf=1500, pan=(-1,1))
+
+~k5 >> supersaw(linvar([0, 7], [32,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2, hpf=1500, pan=(-1,1))
+
+k5 >> supersaw(linvar([0, 7], [64,0]), dur=1/8, lpf=5400, oct=6, mverb=1, sus=0.2, hpf=1500, pan=(-1,1))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2.stop()
+
+k5 >> supersaw(linvar([0, 7], [64,0]), dur=1/8, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.2, hpf=1500, pan=(-1,1))
+
+k5 >> supersaw(linvar([0, 7], [64,0]), dur=1/8, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.2, hpf=1500, pan=(-1,1), chop=4)
+
+k5.solo(8)
+
+k5.solo(-1)
+
+k5 >> supersaw(linvar([0, 7], [64,0]), dur=1/8, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.2, hpf=1500, pan=(-1,1), chop=32)
+
+p1.oct=3
+
+p1.oct=3.1
+
+p1.oct=3.3
+
+p1.oct=3.6
+
+p1.oct=3.7
+
+p1.oct=3.8
+
+p1.oct=4
+
+p1.oct=linvar([3, 4], 64)
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/8, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.2, hpf=1500, pan=(-1,1), chop=32)
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.2, hpf=1500, pan=(-1,1), chop=32)
+
+p1.oct=linvar([3, 4], [64, 64])
+
+p1.oct=linvar([3, 45], [64, 64])
+
+p1.oct=linvar([3, 56], [64, 64])
+
+p1.oct=linvar([3, 5], [64, 64])
+
+p1.oct=linvar([3, 56], [64, 64])
+
+p1.oct=linvar([3, 34], [64, 64])
+
+p1.oct=linvar([3, 32], [64, 64])
+
+p1.oct=linvar([3, 4], [64, 64])
+
+p1.oct=linvar([3, 12], [64, 64])
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.2, hpf=1500, pan=(-1,1), chop=0)
+
+p1.oct=linvar([3, 64], [64, 64])
+
+p1.oct=linvar([3, 654], [64, 64])
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=(-1,1), chop=0)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q2 >> play("k.", sample=0, amp=2)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0).unison(3)
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.6).unison(3)
+
+x5 >> play("X ")
+
+x5.stop()
+
+p1.oct=linvar([3, 12], [64, 64])
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.6).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+soloRnd()
+
+Clock.clear()
+soff()
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.6).unison(3)
+
+k5.stop()
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.6).unison(3)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=4, cutoff=2200)
+
+Clock.clear()
+soff()
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=4, cutoff=2200)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=5, cutoff=2200)
+
+h4.stop()
+
+h5 >> vati([2,5,7,2,5,7,9,2], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.5,0.7],[8,8]), oct=6, cutoff=5000, delay=0.25)
+
+h5.stop()
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=5, cutoff=2200)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=5, cutoff=4200)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=5, cutoff=12200)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+s1.stop()
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+h4.stop()
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=5, cutoff=12200)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=6, cutoff=12200)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=10000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9300, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=9000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8300, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=8000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7300, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=7000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6300, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=6000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5300, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4300, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3300, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=3000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2300, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=1900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=1800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=1700, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=1600, oct=PStep(8,P+(6,4),5)).unison(3)
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=1500, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=1400, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+drop()
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(32,1, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q2 >> play("k.", sample=0, amp=2)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,1, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+h4.solo(8)
+h4.fx1=1
+
+h4.solo(-1)
+h4.fx1=1
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.6).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+j7 >> play("X.", lpf=400, amp=8)
+
+j7 >> play("X.", lpf=400, amp=3)
+
+j7.stop()
+
+masterAll("degree", PTuple(PWhite(0,4), 4))
+
+masterAll("degree", PTuple(PWhite(0,12), 4))
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+masterAll("degree", PTuple(PWhite(0,12), 4))
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+p1.oct=linvar([3, 12], [64, 64])
+
+f9 >> loop("gab16", dur=16, sample=4)
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+f9 >> loop("gab16", dur=16, sample=4, fx=1)
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+soloRnd()
+
+f9.solo()
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+unsolo()
+
+j7 >> play("X.", lpf=400, amp=3)
+
+j7.stop()
+
+j7 >> play("X.", lpf=400, amp=3)
+
+j7.stop()
+
+j7 >> play("X.", lpf=400, amp=3)
+
+j7.stop()
+
+j7 >> play("X.", lpf=400, amp=3)
+
+j7.stop()
+
+f9.stop()
+
+masterAll("rate", -1)
+
+masterAll("rate", -4)
+
+masterAll("rate", -12)
+
+masterAll(0, "rate", -12)
+
+masterAll("fx", 1)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+# masterAll("fx", 1)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+masterAll("fx", 1)
+
+masterAll(0 ,"fx", 1)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+masterAll("fx", 1)
+
+q1.solo()
+
+masterAll(0, "fx", 1)
+
+unsolo()
+
+masterAll("fx", 1)
+
+masterAll(0, "fx", 1)
+
+x6 >> war(PArp(III, 3), dur=PDur([5,PStep(8,1,7)],8), cutoff=PFr(200,8200), rq=0.10, oct=(5,6), beef=12, mverb=.1, valad=500, valadr=0.13, valadd=50, valadt=0, valadc=0.1)
+
+masterAll("fx", .1)
+
+Clock.clear()
+soff()
+
+masterAll(0, "fx", .1)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+Clock.clear()
+soff()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=5000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4900, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=4800, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=6, cutoff=12200)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PRand(800,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(800,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.6).unison(3)
+
+masterAll("degree", PTuple(PWhite(0,12), 4))
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+masterAll("degree", PTuple(PWhite(0,12), 4))
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+masterAll(1,"degree", PTuple(PWhite(0,12), 4))
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+masterAll("degree", PTuple(PWhite(0,12), 4))
+
+masterAll(0,"degree", PTuple(PWhite(0,12), 4))
+
+masterAll(0,"degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll(0, "degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(800,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+Clock.bpm=lininf(170,62, 8)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(800,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+Clock.bpm=170
+
+Clock.bpm=lininf(170,62, 8)
+
+Clock.bpm=170
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+Clock.bpm=lininf(170,62, 4)
+
+Clock.bpm=170
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+masterAll("rate", -12)
+
+masterAll(0,"rate", -12)
+
+masterAll("dur", 1/4)
+
+masterAll(0, "dur", 1/4)
+
+masterAll("dur", 1/4)
+
+masterAll(0, "dur", 1/4)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(800,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+masterAll("rate", -12)
+
+masterAll("dur", 1/4)
+
+masterAll(0)
+
+masterAll("dur", 1/4)
+
+p1.only()
+
+masterAll(0)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=6, cutoff=12200)
+
+# ~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(800,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+j3.stop()
+
+h4.stop()
+
+q1.stop()
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=6, cutoff=12200)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(800,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+Clock.clear()
+soff()
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=6, cutoff=12200)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(800,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=6, cutoff=12200)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+Clock.clear()
+soff()
+
+q1 >> dab(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.4, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.4, oct=4, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.4, oct=4, boost=1.5, detune=0.01, follow=2, tanh=0.5).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0.5).unison(3)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=6, cutoff=12200)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0.5).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+Clock.clear()
+soff()
+
+q1 >> cbass((0,2,4), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0.5).unison(3)
+
+q1 >> cbass((0,2,4), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+q1 >> cbass((0,2,4), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+q1 >> cbass(([0,-2],2,4), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+q1 >> cbass((var([0,-2],16),2,4), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=6, cutoff=12200)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=(6, 7), cutoff=12200)
+
+q1 >> cbass((var([0,-2],16),2,4), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200)
+
+q1 >> cbass((var([0,-2],16),2,[4,5]), dur=8, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=0, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=100, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=200, oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=2000, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass((var([0,-2],16),2,[4,5]), dur=16, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000) , oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass((var([0,-2],16),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+p1.only()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass((var([0,-2],16),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+q1 >> cbass((var([0,-2],16),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200)
+
+Clock.bpm = 162
+
+q2 >> play("k.", sample=0, amp=2)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll(0,"degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll(0,"degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.6).unison(3)
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.6).unison(3)
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7, drcomp=0.5).sometimes("stutter")
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=5, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=4, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+k5 >> supersaw([linvar([0, 14], [64,0]),7], dur=1/4, lpf=5400, oct=5, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+k5.stop()
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=4, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=5, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+k5.stop()
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+k5.solo()
+
+unsolo()
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=4, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=1, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=0, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=4, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=0, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=3, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=0, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=4, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5)).unison(3)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=4, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5)).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass((var([0,-2],16),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=1.5, detune=0.01, follow=2, tanh=0).unison(1)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(PStep(15,2, 5), 8), sus=2, blur=2, chop=4, rate=1, mverb=0, fx2=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5)).unison(3)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll(0,"degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=4, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2.stop()
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5, amp=[1,0.5,PWhite(),0.5]).solo(8)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5, vol=2, amp=[1,0.5,PWhite(),0.5]).solo(8)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5, vol=3, amp=[1,0.5,PWhite(),0.5]).solo(8)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7, drcomp=0.5).sometimes("stutter")
+
+k5 >> supersaw([linvar([0, 7], [64,0]),7], dur=1/4, lpf=5400, oct=6, mverb=0, fx2=1, sus=0.25, hpf=1500, pan=0, chop=0, vol=0.7).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+q2 >> play("k.", sample=0, amp=.2)
+
+q2 >> play("k.", sample=0, amp=0.3)
+
+q2 >> play("k.", sample=0, amp=0.4)
+
+q2 >> play("k.", sample=0, amp=0.5)
+
+q2 >> play("k.", sample=0, amp=0.6)
+
+q2 >> play("k.", sample=0, amp=0.7)
+
+q2 >> play("k.", sample=0, amp=0.8)
+
+q2 >> play("k.", sample=0, amp=0.9)
+
+q2 >> play("k.", sample=0, amp=1.0)
+
+q2 >> play("k.", sample=0, amp=1.1)
+
+q2 >> play("k.", sample=0, amp=1.2)
+
+q2 >> play("k.", sample=0, amp=1.3)
+
+q2 >> play("k.", sample=0, amp=1.4)
+
+q2 >> play("k.", sample=0, amp=1.5)
+
+q2 >> play("k.", sample=0, amp=1.6)
+
+q2 >> play("k.", sample=0, amp=1.7)
+
+q2 >> play("k.", sample=0, amp=1.8)
+
+q2 >> play("k.", sample=0, amp=1.9)
+
+q2 >> play("k.", sample=0, amp=2.0)
+
+q2 >> play("k.", sample=0, amp=2.1)
+
+q2 >> play("k.", sample=0, amp=2.2)
+
+q2 >> play("k.", sample=0, amp=2.3)
+
+q2 >> play("k.", sample=0, amp=2.4)
+
+q2 >> play("k.", sample=0, amp=2.5)
+
+q2 >> play("k.", sample=0, amp=2.6)
+
+q2 >> play("k.", sample=0, amp=2.7)
+
+q2 >> play("k.", sample=0, amp=2.8)
+
+q2 >> play("k.", sample=0, amp=2.9)
+
+q2 >> play("k.", sample=0, amp=3.0)
+
+q2 >> play("k.", sample=0, amp=3.1)
+
+q2 >> play("k.", sample=0, amp=3.2)
+
+q2 >> play("k.", sample=0, amp=3.3)
+
+q2 >> play("k.", sample=0, amp=3.4)
+
+q2 >> play("k.", sample=0, amp=3.5)
+
+q2 >> play("k.", sample=0, amp=3.6)
+
+q2 >> play("k.", sample=0, amp=3.7)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[1,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([0.8,0.6],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200)
+
+q2 >> play("k.", sample=0, amp=3.8)
+
+q2 >> play("k.", sample=0, amp=3.9)
+
+q2 >> play("k.", sample=0, amp=4.0)
+
+q2 >> play("k.", sample=0, amp=4.1)
+
+q2 >> play("k.", sample=0, amp=4.2)
+
+q2 >> play("k.", sample=0, amp=4.3)
+
+q2 >> play("k.", sample=0, amp=4.4)
+
+q2 >> play("k.", sample=0, amp=4.5)
+
+q2 >> play("k.", sample=0, amp=4.6)
+
+q2 >> play("k.", sample=0, amp=4.7)
+
+q2 >> play("k.", sample=0, amp=4.8)
+
+q2 >> play("k.", sample=0, amp=4.9)
+
+q2 >> play("k.", sample=0, amp=5.0)
+
+q2 >> play("k.", sample=0, amp=5.1)
+
+q2 >> play("k.", sample=0, amp=5.2)
+
+q2 >> play("k.", sample=0, amp=5.3)
+
+q2 >> play("k.", sample=0, amp=5.4)
+
+q2 >> play("k.", sample=0, amp=5.5)
+
+q2 >> play("k.", sample=0, amp=5.6)
+
+q2 >> play("k.", sample=0, amp=5.7)
+
+q2 >> play("k.", sample=0, amp=5.8)
+
+q2 >> play("k.", sample=0, amp=5.9)
+
+q2 >> play("k.", sample=0, amp=6.0)
+
+q2 >> play("k.", sample=0, amp=6.1)
+
+q2 >> play("k.", sample=0, amp=6.2)
+
+q2 >> play("k.", sample=0, amp=6.3)
+
+q2 >> play("k.", sample=0, amp=6.4)
+
+q2 >> play("k.", sample=0, amp=6.5)
+
+q2 >> play("k.", sample=0, amp=6.6)
+
+q2 >> play("k.", sample=0, amp=6.7)
+
+q2 >> play("k.", sample=0, amp=6.8)
+
+q2 >> play("k.", sample=0, amp=6.9)
+
+q2 >> play("k.", sample=0, amp=7.0)
+
+q2 >> play("k.", sample=0, amp=7.1)
+
+q2 >> play("k.", sample=0, amp=7.2)
+
+q2 >> play("k.", sample=0, amp=7.3)
+
+q2 >> play("k.", sample=0, amp=7.4)
+
+q2 >> play("k.", sample=0, amp=7.5)
+
+q2 >> play("k.", sample=0, amp=7.6)
+
+q2 >> play("k.", sample=0, amp=7.7)
+
+q2 >> play("k.", sample=0, amp=7.8)
+
+q2 >> play("k.", sample=0, amp=7.9)
+
+q2 >> play("k.", sample=0, amp=8.0)
+
+q2 >> play("k.", sample=0, amp=8.1)
+
+q2 >> play("k.", sample=0, amp=8.2)
+
+q2 >> play("k.", sample=0, amp=8.3)
+
+q2 >> play("k.", sample=0, amp=8.4)
+
+q2 >> play("k.", sample=0, amp=8.5)
+
+q2 >> play("k.", sample=0, amp=8.6)
+
+q2 >> play("k.", sample=0, amp=8.7)
+
+q2 >> play("k.", sample=0, amp=8.8)
+
+q2 >> play("k.", sample=0, amp=8.9)
+
+q2 >> play("k.", sample=0, amp=9.0)
+
+q2 >> play("k.", sample=0, amp=9.1)
+
+q2 >> play("k.", sample=0, amp=9.2)
+
+q2 >> play("k.", sample=0, amp=9.3)
+
+q2 >> play("k.", sample=0, amp=9.4)
+
+q2 >> play("k.", sample=0, amp=9.5)
+
+q2 >> play("k.", sample=0, amp=9.6)
+
+q2 >> play("k.", sample=0, amp=9.7)
+
+q2 >> play("k.", sample=0, amp=9.8)
+
+q2 >> play("k.", sample=0, amp=9.9)
+
+q2 >> play("k.", sample=0, amp=10.0)
+
+q2 >> play("k.", sample=0, amp=10.1)
+
+q2 >> play("k.", sample=0, amp=10.2)
+
+q2 >> play("k.", sample=0, amp=10.3)
+
+q2 >> play("k.", sample=0, amp=10.4)
+
+q2 >> play("k.", sample=0, amp=10.5)
+
+q2 >> play("k.", sample=0, amp=10.6)
+
+q2 >> play("k.", sample=0, amp=10.7)
+
+q2 >> play("k.", sample=0, amp=10.8)
+
+q2 >> play("k.", sample=0, amp=10.9)
+
+q2 >> play("k.", sample=0, amp=11.0)
+
+q2 >> play("k.", sample=0, amp=11.1)
+
+q2 >> play("k.", sample=0, amp=11.2)
+
+q2 >> play("k.", sample=0, amp=11.3)
+
+q2 >> play("k.", sample=0, amp=11.4)
+
+q2 >> play("k.", sample=0, amp=11.5)
+
+q2 >> play("k.", sample=0, amp=11.6)
+
+q2 >> play("k.", sample=0, amp=11.7)
+
+q2 >> play("k.", sample=0, amp=11.8)
+
+q2 >> play("k.", sample=0, amp=11.9)
+
+q2 >> play("k.", sample=0, amp=12.0)
+
+q2 >> play("k.", sample=0, amp=12.1)
+
+q2 >> play("k.", sample=0, amp=12.2)
+
+q2 >> play("k.", sample=0, amp=12.3)
+
+q2 >> play("k.", sample=0, amp=12.4)
+
+q2 >> play("k.", sample=0, amp=12.5)
+
+q2 >> play("k.", sample=0, amp=12.6)
+
+q2 >> play("k.", sample=0, amp=12.7)
+
+q2 >> play("k.", sample=0, amp=12.8)
+
+q2 >> play("k.", sample=0, amp=12.9)
+
+q2 >> play("k.", sample=0, amp=13.0)
+
+q2 >> play("k.", sample=0, amp=13.1)
+
+q2 >> play("k.", sample=0, amp=13.2)
+
+q2 >> play("k.", sample=0, amp=13.3)
+
+q2 >> play("k.", sample=0, amp=13.4)
+
+q2 >> play("k.", sample=0, amp=13.5)
+
+q2 >> play("k.", sample=0, amp=13.6)
+
+q2 >> play("k.", sample=0, amp=13.7)
+
+q2 >> play("k.", sample=0, amp=13.8)
+
+q2 >> play("k.", sample=0, amp=13.9)
+
+q2 >> play("k.", sample=0, amp=14.0)
+
+q2 >> play("k.", sample=0, amp=14.1)
+
+q2 >> play("k.", sample=0, amp=14.2)
+
+q2 >> play("k.", sample=0, amp=14.3)
+
+q2 >> play("k.", sample=0, amp=14.4)
+
+q2 >> play("k.", sample=0, amp=14.5)
+
+q2 >> play("k.", sample=0, amp=14.6)
+
+q2 >> play("k.", sample=0, amp=14.7)
+
+q2 >> play("k.", sample=0, amp=14.8)
+
+q2 >> play("k.", sample=0, amp=14.9)
+
+q2 >> play("k.", sample=0, amp=15.0)
+
+q2 >> play("k.", sample=0, amp=15.1)
+
+q2 >> play("k.", sample=0, amp=15.2)
+
+q2 >> play("k.", sample=0, amp=15.3)
+
+q2 >> play("k.", sample=0, amp=15.4)
+
+q2 >> play("k.", sample=0, amp=15.5)
+
+q2 >> play("k.", sample=0, amp=15.6)
+
+q2 >> play("k.", sample=0, amp=15.7)
+
+q2 >> play("k.", sample=0, amp=15.8)
+
+q2 >> play("k.", sample=0, amp=15.9)
+
+q2 >> play("k.", sample=0, amp=16.0)
+
+q2 >> play("k.", sample=0, amp=16.1)
+
+q2 >> play("k.", sample=0, amp=16.2)
+
+q2 >> play("k.", sample=0, amp=16.3)
+
+q2 >> play("k.", sample=0, amp=16.4)
+
+q2 >> play("k.", sample=0, amp=16.5)
+
+q2 >> play("k.", sample=0, amp=16.6)
+
+q2 >> play("k.", sample=0, amp=16.7)
+
+q2 >> play("k.", sample=0, amp=16.8)
+
+q2 >> play("k.", sample=0, amp=16.9)
+
+q2 >> play("k.", sample=0, amp=17.0)
+
+q2 >> play("k.", sample=0, amp=17.1)
+
+q2 >> play("k.", sample=0, amp=17.2)
+
+q2 >> play("k.", sample=0, amp=17.3)
+
+q2 >> play("k.", sample=0, amp=17.4)
+
+q2 >> play("k.", sample=0, amp=17.5)
+
+q2 >> play("k.", sample=0, amp=17.6)
+
+q2 >> play("k.", sample=0, amp=17.7)
+
+q2 >> play("k.", sample=0, amp=17.8)
+
+q2 >> play("k.", sample=0, amp=17.9)
+
+q2 >> play("k.", sample=0, amp=18.0)
+
+q2 >> play("k.", sample=0, amp=18.1)
+
+q2 >> play("k.", sample=0, amp=18.2)
+
+q2 >> play("k.", sample=0, amp=18.3)
+
+q2 >> play("k.", sample=0, amp=18.4)
+
+q2 >> play("k.", sample=0, amp=18.5)
+
+q2 >> play("k.", sample=0, amp=18.6)
+
+q2 >> play("k.", sample=0, amp=18.7)
+
+q2 >> play("k.", sample=0, amp=18.8)
+
+q2 >> play("k.", sample=0, amp=18.9)
+
+q2 >> play("k.", sample=0, amp=19.0)
+
+q2 >> play("k.", sample=0, amp=19.1)
+
+q2 >> play("k.", sample=0, amp=19.2)
+
+q2 >> play("k.", sample=0, amp=19.3)
+
+q2 >> play("k.", sample=0, amp=19.4)
+
+q2 >> play("k.", sample=0, amp=19.5)
+
+q2 >> play("k.", sample=0, amp=19.6)
+
+q2 >> play("k.", sample=0, amp=19.7)
+
+q2 >> play("k.", sample=0, amp=19.8)
+
+q2 >> play("k.", sample=0, amp=19.9)
+
+q2 >> play("k.", sample=0, amp=20.0)
+
+p1.oct=linvar([3, 12], [64, 64])
+
+q2 >> play("k.", sample=0, amp=20.1)
+
+q2 >> play("k.", sample=0, amp=20.2)
+
+q2 >> play("k.", sample=0, amp=20.3)
+
+q2 >> play("k.", sample=0, amp=20.4)
+
+q2 >> play("k.", sample=0, amp=20.5)
+
+q2 >> play("k.", sample=0, amp=20.6)
+
+q2 >> play("k.", sample=0, amp=20.7)
+
+q2 >> play("k.", sample=0, amp=20.8)
+
+q2 >> play("k.", sample=0, amp=20.9)
+
+q2 >> play("k.", sample=0, amp=21.0)
+
+q2 >> play("k.", sample=0, amp=21.1)
+
+q2 >> play("k.", sample=0, amp=21.2)
+
+q2 >> play("k.", sample=0, amp=21.3)
+
+q2 >> play("k.", sample=0, amp=21.4)
+
+q2 >> play("k.", sample=0, amp=21.5)
+
+q2 >> play("k.", sample=0, amp=21.6)
+
+q2 >> play("k.", sample=0, amp=21.7)
+
+q2 >> play("k.", sample=0, amp=21.8)
+
+q2 >> play("k.", sample=0, amp=21.9)
+
+q2 >> play("k.", sample=0, amp=22.0)
+
+q2 >> play("k.", sample=0, amp=22.1)
+
+q2 >> play("k.", sample=0, amp=22.2)
+
+q2 >> play("k.", sample=0, amp=22.3)
+
+q2 >> play("k.", sample=0, amp=22.4)
+
+q2 >> play("k.", sample=0, amp=22.5)
+
+q2 >> play("k.", sample=0, amp=22.6)
+
+q2 >> play("k.", sample=0, amp=22.7)
+
+q2 >> play("k.", sample=0, amp=22.8)
+
+q2 >> play("k.", sample=0, amp=22.9)
+
+q2 >> play("k.", sample=0, amp=23.0)
+
+q2 >> play("k.", sample=0, amp=23.1)
+
+q2 >> play("k.", sample=0, amp=23.2)
+
+q2 >> play("k.", sample=0, amp=23.3)
+
+q2 >> play("k.", sample=0, amp=23.4)
+
+q2 >> play("k.", sample=0, amp=23.5)
+
+q2 >> play("k.", sample=0, amp=23.6)
+
+q2 >> play("k.", sample=0, amp=23.7)
+
+q2 >> play("k.", sample=0, amp=23.8)
+
+q2 >> play("k.", sample=0, amp=23.9)
+
+q2 >> play("k.", sample=0, amp=24.0)
+
+q2 >> play("k.", sample=0, amp=24.1)
+
+q2 >> play("k.", sample=0, amp=24.2)
+
+q2 >> play("k.", sample=0, amp=24.3)
+
+q2 >> play("k.", sample=0, amp=24.4)
+
+q2 >> play("k.", sample=0, amp=24.5)
+
+q2 >> play("k.", sample=0, amp=24.6)
+
+q2 >> play("k.", sample=0, amp=24.7)
+
+q2 >> play("k.", sample=0, amp=24.8)
+
+q2 >> play("k.", sample=0, amp=24.9)
+
+q2 >> play("k.", sample=0, amp=25.0)
+
+q2 >> play("k.", sample=0, amp=0)
+
+q2.oct=linvar([3, 12], [64, 64])
+
+h4.oct=linvar([3, 12], [64, 64])
+
+s1 >> play("<x(...x)><-><..u.>", sample=7, drcomp=0.5).sometimes("stutter")
+
+q2 >> play("k.", sample=0, amp=2)
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=4, dur=1, crush=3, room1=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+d2.stop()
+
+f9 >> loop("gab16", dur=16, sample=4, fx=1)
+
+Clock.clear()
+soff()
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=.02, oct=6, beef=12, mverb=0.5, vol=3, amp=[1,0.5,PWhite(),0.5]).solo(8)
+
+Clock.clear()
+soff()
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=.2, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2).unison(3)
+
+p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)
+
+q1 >> cbass(var([0, -2], 8), dur=8, cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=2, tanh=0).unison(3)
+
+q2 >> play("k.", sample=0, amp=2)
+
+s1 >> play("<x(...x)><-><..u.>", sample=7).sometimes("stutter")
+
+z8 >> play(".(...[U.])..(..(.([U.])))", sample=6).sometimes("stutter")
+
+attack("power")
+
+Clock.clear()
+soff()
+
+b8 >> blip(PArp([0,2,[4,[5,6]]],4), dur=1/2, mverb=0.8, pan=[-1,1], echo=0.25, rate=var([0,4],[16]), echotime=0.01, shape=(0,linvar([0,0.8],[32,0]))).unison(3)
+
+b9 >> faim(var(P[-4:1:1],8), dur=ù, beef=(0,2), oct=5, dist2=0, vol=1)
+
+Clock.clear()
+soff()
+

@@ -378,9 +378,6 @@ class SCLangServerManager(ServerManager):
     def get_control_effect_nodes(self, node, bus, group_id, packet):
 
         pkg = []
-        
-        # Get player to store effect node IDs
-        player = packet.get('self', None)
 
         # Go through effects and put together with child attributes
 
@@ -404,25 +401,18 @@ class SCLangServerManager(ServerManager):
                 msg.append(osc_packet)
 
                 pkg.append(msg)
-                
-                # Store the effect node ID in the player for later modification
-                if player and hasattr(player, '_store_fx_node'):
-                    player._store_fx_node(fx, node)
-                else:
-                    print(f"[DEBUG] Impossible de stocker le nœud pour {fx}: player={type(player) if player else None}, has_method={hasattr(player, '_store_fx_node') if player else False}")
 
         return pkg, node
-
 
     def get_synth_node(self, node, bus, group_id, synthdef, packet):
 
         msg = OSCMessage("/s_new")
 
         new_message = {}
-        
+
         for key in packet:
 
-            if key not in ("env", "degree", "self"): # skip some attr and player reference
+            if key not in ("env", "degree"): # skip some attr
 
                 try:
 
@@ -447,10 +437,6 @@ class SCLangServerManager(ServerManager):
     def get_pre_env_effect_nodes(self, node, bus, group_id, packet):
 
         pkg = []
-        
-
-        # Get player to store effect node IDs 
-        player = packet.get('self', None)
 
         for fx in self.fxlist.order[1]:
 
@@ -464,11 +450,6 @@ class SCLangServerManager(ServerManager):
                 osc_packet = [self.fx_names[fx], node, 1, group_id, 'bus', bus] + this_effect
                 msg.append( osc_packet )
                 pkg.append(msg)
-                
-                # Store the effect node ID in the player for later modification
-                if player and hasattr(player, '_store_fx_node'):
-                    player._store_fx_node(fx, node)
-                
 
         return pkg, node
 
@@ -517,9 +498,6 @@ class SCLangServerManager(ServerManager):
 
         pkg = []
 
-        # Get player to store effect node IDs
-        player = packet.get('self', None)
-
         for fx in self.fxlist.order[2]:
 
             if fx in packet and packet[fx] != 0:
@@ -532,19 +510,12 @@ class SCLangServerManager(ServerManager):
                 osc_packet = [self.fx_names[fx], node, 1, group_id, 'bus', bus] + this_effect
                 msg.append( osc_packet )
                 pkg.append(msg)
-                
-                # Store the effect node ID in the player for later modification
-                if player and hasattr(player, '_store_fx_node'):
-                    player._store_fx_node(fx, node)
-                else:
-                    print(f"[DEBUG] Impossible de stocker le nœud pour {fx}: player={type(player) if player else None}, has_method={hasattr(player, '_store_fx_node') if player else False}")
 
         return pkg, node
 
     def prepare_effect(self, name, packet):
         """ Finds the child attributes in packet and returns an OSC style list """
         data   = []
-                    
         effect = self.fxlist[name]
         for key in effect.args:
              data.append(key)
@@ -562,11 +533,6 @@ class SCLangServerManager(ServerManager):
 
     def get_bundle(self, synthdef, packet, timestamp=0):
         """ Returns the OSC Bundle for a notew based on a Player's SynthDef, and event and effects dictionaries """
-
-        # Remove the Player object reference before processing, but keep a copy for effect node tracking
-        player_ref = packet.get("self", None)
-        if "self" in packet:
-            del packet["self"]
 
         # Create a specific message for midi
 
@@ -608,10 +574,6 @@ class SCLangServerManager(ServerManager):
 
         bundle.append( msg )
 
-        # Restore player reference temporarily for effect functions
-        if player_ref is not None:
-            packet["self"] = player_ref
-
         pkg, this_node = self.get_control_effect_nodes(this_node, this_bus, group_id, packet)
 
         for msg in pkg:
@@ -641,10 +603,6 @@ class SCLangServerManager(ServerManager):
         # ORDER 2 (AUDIO EFFECTS)
 
         pkg, this_node = self.get_post_env_effect_nodes(this_node, this_bus, group_id, packet)
-
-        # Remove player reference again after all effect functions
-        if "self" in packet:
-            del packet["self"]
 
         for msg in pkg:
 

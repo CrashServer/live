@@ -229,5 +229,8 @@ video.add()
 virus = FileSynthDef("virus")
 virus.add()
 
+war = FileSynthDef("war")
+war.add()
+
 wobble = FileSynthDef("wobble")
 wobble.add()

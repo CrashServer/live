@@ -137,7 +137,6 @@ from .SCLang.SynthDef import SynthDefProxy, SynthDef, SynthDefs
 from .Effects import FxList
 from .Utils import stdout
 from .Buffers import Samples, SAMPLES_BANK
-from .OSC3 import *
 
 from .Key import *
 from .Repeat import *
@@ -323,9 +322,6 @@ class Player(Repeatable):
         self.modifier = Pattern()
         self.mod_data = 0
         self.filename = None
-        
-        # Dictionary to store effect node IDs for real-time modification
-        self._fx_nodes = {}
 
         # Keyword arguments that are used internally
 
@@ -367,38 +363,6 @@ class Player(Repeatable):
 
     def __hash__(self):
         return hash(self.id) # could be problematic if there are id clashes?
-
-    # Effect node management for real-time modifications
-    
-    def _store_fx_node(self, fx_name, node_id):
-        """ Store the SuperCollider node ID for an effect to allow real-time modification """
-        self._fx_nodes[fx_name] = node_id
-        return node_id
-    
-    def _get_fx_node(self, fx_name):
-        """ Get the SuperCollider node ID for an effect """
-        return self._fx_nodes.get(fx_name, None)
-    
-    def _clear_fx_nodes(self):
-        """ Clear all stored effect node IDs """
-        self._fx_nodes.clear()
-
-    def addfx(self, **kwargs):
-        """ Modify effects in real-time using stored SuperCollider node IDs """
-        for fx_name, value in kwargs.items():
-            # Get the stored node ID for this effect
-            node_id = self._get_fx_node(fx_name)
-            
-            if node_id is not None:
-                # Send OSC message to update the effect node in real-time
-                self.metro.server.send("/n_set", [node_id, fx_name, value])
-                
-                # Also update the local attribute for future events
-                setattr(self, fx_name, value)
-            else:
-                setattr(self, fx_name, value)
-        
-        return self
 
     # Player Object Manipulation
     
@@ -657,9 +621,6 @@ class Player(Repeatable):
         # Stop calling any repeating methods
 
         self.stop_calling_all()
-        
-        # Clear effect node tracking
-        self._clear_fx_nodes()
         
         return self
 
@@ -1704,7 +1665,7 @@ class Player(Repeatable):
 
         beat_dur = self.metro.beat_dur()
 
-        message = {"beat_dur": beat_dur, "sus": kwargs.get("sus", event["sus"]) * beat_dur, "self": self}
+        message = {"beat_dur": beat_dur, "sus": kwargs.get("sus", event["sus"]) * beat_dur}
 
         if self.synthdef == SamplePlayer:
 
@@ -1855,7 +1816,6 @@ class Player(Repeatable):
         # Remove keys we dont need
 
         del event["bpm"]
-        # Note: "self" will be removed later in the ServerManager before sending to SuperCollider
             
         return event        
 
@@ -1878,6 +1838,11 @@ class Player(Repeatable):
         else:
             synthdef = str(self.synthdef)
         return synthdef
+
+    def addfx(self, **kwargs):
+        """ Not implemented - add an effect to the SynthDef bus on SuperCollider
+            after it has been triggered. """
+        return self
 
     #: Methods for stop/starting players
 

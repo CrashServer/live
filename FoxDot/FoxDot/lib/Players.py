@@ -370,19 +370,30 @@ class Player(Repeatable):
 
     # Node management for real-time modifications
     
-    def _store_fx_node(self, attr_name, node_id):
-        """ Store the SuperCollider node ID for an attribute to allow real-time modification """
-        self._fx_nodes[attr_name] = node_id
+    def _store_fx_node(self, attr_name, node_id, params=None):
+        """ Store the SuperCollider node ID and parameters for an effect to allow real-time modification """
+        self._fx_nodes[attr_name] = {
+            'node_id': node_id,
+            'params': params or []
+        }
         return node_id
     
     def _get_fx_node(self, attr_name):
         """ Get the SuperCollider node ID for an attribute """
+        # First, check if this attribute is directly stored as an effect
         if attr_name in self._fx_nodes:
-            fx_node = self._fx_nodes.get(attr_name, None)
-        else:
-            fx_node = self._fx_nodes.get("playerId", None)  #   
+            return self._fx_nodes[attr_name]['node_id']
         
-        return fx_node
+        # Second, check if this attribute is a parameter of any stored effect
+        for effect_name, effect_data in self._fx_nodes.items():
+            if 'params' in effect_data and attr_name in effect_data['params']:
+                return effect_data['node_id']
+        
+        # Fallback to the main player node if available
+        if "playerId" in self._fx_nodes:
+            return self._fx_nodes["playerId"]['node_id']
+        
+        return None
     
     def _clear_fx_nodes(self):
         """ Clear all stored node IDs """
@@ -401,6 +412,7 @@ class Player(Repeatable):
                 # Also update the local attribute for future events
                 setattr(self, attr_name, value)
             else:
+                # No related effect node found, just update the attribute normally
                 setattr(self, attr_name, value)
         
         return self

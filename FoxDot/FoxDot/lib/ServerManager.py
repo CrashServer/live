@@ -407,7 +407,8 @@ class SCLangServerManager(ServerManager):
                 
                 # Store the effect node ID in the player for later modification
                 if player and hasattr(player, '_store_fx_node'):
-                    player._store_fx_node(fx, node)
+                    effect_params = self.fxlist[fx].args if fx in self.fxlist else []
+                    player._store_fx_node(fx, node, effect_params)
                 
 
         return pkg, node
@@ -445,7 +446,7 @@ class SCLangServerManager(ServerManager):
         msg.append( osc_packet )
 
         if player and hasattr(player, '_store_fx_node'):
-            player._store_fx_node("playerId", node)
+            player._store_fx_node("playerId", node, [])
 
         return msg, node
 
@@ -472,7 +473,8 @@ class SCLangServerManager(ServerManager):
                 
                 # Store the effect node ID in the player for later modification
                 if player and hasattr(player, '_store_fx_node'):
-                    player._store_fx_node(fx, node)
+                    effect_params = self.fxlist[fx].args if fx in self.fxlist else []
+                    player._store_fx_node(fx, node, effect_params)
                 
 
         return pkg, node
@@ -530,7 +532,6 @@ class SCLangServerManager(ServerManager):
             if fx in packet and packet[fx] != 0:
 
                 this_effect = self.prepare_effect(fx, packet)
-                print(this_effect)
 
                 # Get next node ID
                 node, last_node = self.nextnodeID(), node
@@ -541,7 +542,8 @@ class SCLangServerManager(ServerManager):
                 
                 # Store the effect node ID in the player for later modification
                 if player and hasattr(player, '_store_fx_node'):
-                    player._store_fx_node(fx, node)
+                    effect_params = self.fxlist[fx].args if fx in self.fxlist else []
+                    player._store_fx_node(fx, node, effect_params)
 
         return pkg, node
 

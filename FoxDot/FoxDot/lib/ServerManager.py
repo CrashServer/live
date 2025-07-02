@@ -408,8 +408,7 @@ class SCLangServerManager(ServerManager):
                 # Store the effect node ID in the player for later modification
                 if player and hasattr(player, '_store_fx_node'):
                     player._store_fx_node(fx, node)
-                else:
-                    print(f"[DEBUG] Impossible de stocker le nœud pour {fx}: player={type(player) if player else None}, has_method={hasattr(player, '_store_fx_node') if player else False}")
+                
 
         return pkg, node
 
@@ -419,6 +418,9 @@ class SCLangServerManager(ServerManager):
         msg = OSCMessage("/s_new")
 
         new_message = {}
+
+        # Get player to store effect node IDs
+        player = packet.get('self', None)
         
         for key in packet:
 
@@ -441,6 +443,9 @@ class SCLangServerManager(ServerManager):
             + self.create_osc_msg(new_message)
 
         msg.append( osc_packet )
+
+        if player and hasattr(player, '_store_fx_node'):
+            player._store_fx_node("playerId", node)
 
         return msg, node
 
@@ -525,6 +530,7 @@ class SCLangServerManager(ServerManager):
             if fx in packet and packet[fx] != 0:
 
                 this_effect = self.prepare_effect(fx, packet)
+                print(this_effect)
 
                 # Get next node ID
                 node, last_node = self.nextnodeID(), node
@@ -536,8 +542,6 @@ class SCLangServerManager(ServerManager):
                 # Store the effect node ID in the player for later modification
                 if player and hasattr(player, '_store_fx_node'):
                     player._store_fx_node(fx, node)
-                else:
-                    print(f"[DEBUG] Impossible de stocker le nœud pour {fx}: player={type(player) if player else None}, has_method={hasattr(player, '_store_fx_node') if player else False}")
 
         return pkg, node
 

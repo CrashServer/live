@@ -324,7 +324,7 @@ class Player(Repeatable):
         self.mod_data = 0
         self.filename = None
         
-        # Dictionary to store effect node IDs for real-time modification
+        # Dictionary to store node IDs for real-time modification of any attribute
         self._fx_nodes = {}
 
         # Keyword arguments that are used internally
@@ -368,35 +368,40 @@ class Player(Repeatable):
     def __hash__(self):
         return hash(self.id) # could be problematic if there are id clashes?
 
-    # Effect node management for real-time modifications
+    # Node management for real-time modifications
     
-    def _store_fx_node(self, fx_name, node_id):
-        """ Store the SuperCollider node ID for an effect to allow real-time modification """
-        self._fx_nodes[fx_name] = node_id
+    def _store_fx_node(self, attr_name, node_id):
+        """ Store the SuperCollider node ID for an attribute to allow real-time modification """
+        self._fx_nodes[attr_name] = node_id
         return node_id
     
-    def _get_fx_node(self, fx_name):
-        """ Get the SuperCollider node ID for an effect """
-        return self._fx_nodes.get(fx_name, None)
+    def _get_fx_node(self, attr_name):
+        """ Get the SuperCollider node ID for an attribute """
+        if attr_name in self._fx_nodes:
+            fx_node = self._fx_nodes.get(attr_name, None)
+        else:
+            fx_node = self._fx_nodes.get("playerId", None)  #   
+        
+        return fx_node
     
     def _clear_fx_nodes(self):
-        """ Clear all stored effect node IDs """
+        """ Clear all stored node IDs """
         self._fx_nodes.clear()
 
     def addfx(self, **kwargs):
-        """ Modify effects in real-time using stored SuperCollider node IDs """
-        for fx_name, value in kwargs.items():
-            # Get the stored node ID for this effect
-            node_id = self._get_fx_node(fx_name)
+        """ Modify attributes in real-time using stored SuperCollider node IDs """
+        for attr_name, value in kwargs.items():
+            # Get the stored node ID for this attribute
+            node_id = self._get_fx_node(attr_name)
             
             if node_id is not None:
-                # Send OSC message to update the effect node in real-time
-                self.metro.server.send("/n_set", [node_id, fx_name, value])
+                # Send OSC message to update the node in real-time
+                self.metro.server.send("/n_set", [node_id, attr_name, value])
                 
                 # Also update the local attribute for future events
-                setattr(self, fx_name, value)
+                setattr(self, attr_name, value)
             else:
-                setattr(self, fx_name, value)
+                setattr(self, attr_name, value)
         
         return self
 
@@ -520,6 +525,7 @@ class Player(Repeatable):
                     if isinstance(self.__dict__[name], PlayerKey):
 
                         self.__dict__[name].update_pattern()
+
 
                 # self.update_player_key(name, 0, 0)
 
@@ -658,7 +664,7 @@ class Player(Repeatable):
 
         self.stop_calling_all()
         
-        # Clear effect node tracking
+        # Clear node tracking
         self._clear_fx_nodes()
         
         return self

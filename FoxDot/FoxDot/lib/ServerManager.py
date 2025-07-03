@@ -1009,12 +1009,12 @@ class SCLangServerManager(ServerManager):
 
     def listFx(self):
         """ List currently active global effects """
-        if self.global_fx_nodes:
-            print("Active global effects:")
-            for fx_name, node_id in self.global_fx_nodes.items():
-                print(f"  {fx_name}: node {node_id}")
-        else:
-            print("No global effects active")
+        # if self.global_fx_nodes:
+        #     print("Active global effects:")
+        #     for fx_name, node_id in self.global_fx_nodes.items():
+        #         print(f"  {fx_name}: node {node_id}")
+        # else:
+        #     print("No global effects active")
         
         return self.global_fx_nodes
 

@@ -240,6 +240,11 @@ export const foxdotAutocomplete = {
         { text: 'Scale.default=', displayText: 'Scale' },
         { text: 'Root.default=', displayText: 'Root' },
         { text: 'variation = Variation(16,4)', displayText: 'variation' },
+        { text: 'Server.addFx()', displayText: 'Server.addFx' },
+        { text: 'Server.removeFx()', displayText: 'Server.removeFx' },
+        { text: 'Server.clearFx()', displayText: 'Server.clearFx' },
+        { text: 'Server.listFx()', displayText: 'Server.listFx' },
+        { text: 'Server.debugFx()', displayText: 'Server.debugFx' },
     ],
     playerFunction: [
         { text: 'gtr()', displayText: 'gtr' }, 
@@ -426,11 +431,7 @@ export const foxdotAutocomplete = {
         { text: 'target', displayText: 'target' },
     ],
     serverFunction: [
-        { text: 'Server.addFx()', displayText: 'Server.addFx' },
-        { text: 'Server.removeFx()', displayText: 'Server.removeFx' },
-        { text: 'Server.clearFx()', displayText: 'Server.clearFx' },
-        { text: 'Server.listFx()', displayText: 'Server.listFx' },
-        { text: 'Server.debugFx()', displayText: 'Server.debugFx' },
+        
     ],
 
     hint: function(cm, CodeMirror) {
@@ -451,7 +452,7 @@ export const foxdotAutocomplete = {
         const loopPattern = /loop|gsynth|splaffer|splitter\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
         const lostPattern =/(lost|attack)\([^)]*$/
-        const serverPattern = /(S|s)er\s*/;
+        const serverPattern = /(S|s)er\*/;
         const scenePattern = /!/;
 
         if (beforeCursor.trim() === '' && afterCursor.trim() === '') {
@@ -475,16 +476,6 @@ export const foxdotAutocomplete = {
                 list: [{ text: drumPattern, displayText: 'Basic drum pattern' }],
                 from: CodeMirror.Pos(cursor.line, 0),
                 to: CodeMirror.Pos(cursor.line, line.length)
-            };
-        }
-        else if (serverPattern.test(beforeCursor)) {
-            console.log('Server function detected');
-            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
-            const filteredServerFunctions = this.serverFunction.filter(func => func.displayText.startsWith(prefix));
-            return {
-                list: filteredServerFunctions.length > 0 ? filteredServerFunctions.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.serverFunction.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                from: CodeMirror.Pos(cursor.line, 0),
-                to: CodeMirror.Pos(cursor.line, line.length),
             };
         }
         else if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
@@ -528,16 +519,16 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, end),
             }
         }
-        else if (scenePattern.test(beforeCursor)) {
-            const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
-            const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
-            const end = line.match(/\s./)
-            return {
-                list: filteredScenes.length > 0 ? filteredScenes.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.sceneNames.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                from: CodeMirror.Pos(cursor.line, token.start +1),
-                to: CodeMirror.Pos(cursor.line, cursorPosition),
-            };
-        }
+        // else if (scenePattern.test(beforeCursor)) {
+        //     const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
+        //     const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
+        //     const end = line.match(/\s./)
+        //     return {
+        //         list: filteredScenes.length > 0 ? filteredScenes.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.sceneNames.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+        //         from: CodeMirror.Pos(cursor.line, token.start +1),
+        //         to: CodeMirror.Pos(cursor.line, cursorPosition),
+        //     };
+        // }
         else if (beforeCursor.includes('Scale.default=')) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
             const filteredScales = this.scales.filter(scale => scale.displayText.startsWith(prefix));

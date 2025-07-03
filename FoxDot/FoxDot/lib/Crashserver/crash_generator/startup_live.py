@@ -551,6 +551,7 @@ try:
             self.threadRoot = Thread(target=self.sendRoot, daemon=True)
             self.threadBeat = Thread(target=self.sendBeat, daemon=True)
             self.threadPlayer = Thread(target=self.sendPlayer, daemon=True)
+            self.threadMasterFx = Thread(target=self.sendMasterFx, daemon=True)
             # self.threadPdj = Thread(target=self.sendPdj, daemon=True)
             self.threadChrono = Thread(target=self.sendChrono, daemon=True)
             # self.threadVideoIndex = Thread(target=self.sendVideoIndex, daemon=True)
@@ -608,6 +609,17 @@ try:
             except:
                 pass
 
+        def sendMasterFx(self):
+            ''' send Master FX to OSC server '''
+            try:
+                while self.isrunning:
+                    masterFx = Server.listFx()
+                    msg = json.dumps({"type": "masterFx", "masterFx": masterFx})
+                    asyncio.run(wsServer.sendWebsocket(msg))
+                    sleep(self.bpmTime*8)
+            except:
+                pass
+
         def sendPdj(self):
             ''' send platdujour to OSC server '''
             try:
@@ -661,6 +673,7 @@ try:
             self.threadRoot.start()
             self.threadBeat.start()
             self.threadPlayer.start()
+            self.threadMasterFx.start()
             # self.threadPdj.start()
             self.threadChrono.start()
             # self.threadVideoIndex.start()

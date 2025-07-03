@@ -425,6 +425,13 @@ export const foxdotAutocomplete = {
         { text: 'shutdown', displayText: 'shutdown' },
         { text: 'target', displayText: 'target' },
     ],
+    serverFunction: [
+        { text: 'Server.addFx()', displayText: 'Server.addFx' },
+        { text: 'Server.removeFx()', displayText: 'Server.removeFx' },
+        { text: 'Server.clearFx()', displayText: 'Server.clearFx' },
+        { text: 'Server.listFx()', displayText: 'Server.listFx' },
+        { text: 'Server.debugFx()', displayText: 'Server.debugFx' },
+    ],
 
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
@@ -444,6 +451,7 @@ export const foxdotAutocomplete = {
         const loopPattern = /loop|gsynth|splaffer|splitter\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
         const lostPattern =/(lost|attack)\([^)]*$/
+        const serverPattern = /(S|s)er\s*/;
         const scenePattern = /!/;
 
         if (beforeCursor.trim() === '' && afterCursor.trim() === '') {
@@ -467,6 +475,16 @@ export const foxdotAutocomplete = {
                 list: [{ text: drumPattern, displayText: 'Basic drum pattern' }],
                 from: CodeMirror.Pos(cursor.line, 0),
                 to: CodeMirror.Pos(cursor.line, line.length)
+            };
+        }
+        else if (serverPattern.test(beforeCursor)) {
+            console.log('Server function detected');
+            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
+            const filteredServerFunctions = this.serverFunction.filter(func => func.displayText.startsWith(prefix));
+            return {
+                list: filteredServerFunctions.length > 0 ? filteredServerFunctions.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.serverFunction.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+                from: CodeMirror.Pos(cursor.line, 0),
+                to: CodeMirror.Pos(cursor.line, line.length),
             };
         }
         else if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {

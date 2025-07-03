@@ -349,6 +349,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                   functionUtils.incrementValue(cm, -1)
                   evaluateCode(cm, false)
                 },
+    'Ctrl-Up': (cm) => {
+                  functionUtils.incrementValue(cm, 10)
+                  evaluateCode(cm, false)
+                },
+    'Ctrl-Down': (cm) => {
+                  functionUtils.incrementValue(cm, -10)
+                  evaluateCode(cm, false)
+                },
     'Alt-A': (cm) => {functionUtils.randomizer(cm)},
     'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
     'Esc': () => {removeAllTooltips();},

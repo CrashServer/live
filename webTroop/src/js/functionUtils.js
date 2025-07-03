@@ -272,6 +272,10 @@ export const functionUtils = {
                 }
             }
             
+            if (parseInt(result) > 22000) {
+                result = "22000";
+            }
+
             // Remplacer l'ancien nombre par le nouveau
             cm.replaceRange(result, {line: cursor.line, ch: start}, {line: cursor.line, ch: end});
             

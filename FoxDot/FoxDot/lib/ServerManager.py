@@ -1000,14 +1000,14 @@ class SCLangServerManager(ServerManager):
         
         return self
 
-    def clearGlobalFx(self):
+    def clearFx(self):
         """ Remove all global effects """
         for fx_name in list(self.global_fx_nodes.keys()):
             self.removeFx(fx_name)
         
         return self
 
-    def listGlobalFx(self):
+    def listFx(self):
         """ List currently active global effects """
         if self.global_fx_nodes:
             print("Active global effects:")
@@ -1018,7 +1018,7 @@ class SCLangServerManager(ServerManager):
         
         return self.global_fx_nodes
 
-    def debugGlobalFx(self):
+    def debugFx(self):
         """ Debug the global effects system - shows node tree and status """
         print("=== Global FX Debug Info ===")
         print(f"Initialized: {self.global_fx_initialized}")

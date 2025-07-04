@@ -903,15 +903,24 @@ class SCLangServerManager(ServerManager):
         effects_to_create = {}
         effects_to_remove = []
         
+        # First pass: identify effects to remove
+        for param_name, param_value in kwargs.items():
+            effect_name = self._get_effect_for_param(param_name)
+            if effect_name and param_value == 0 and param_name == effect_name:
+                # Main parameter set to 0 means remove the effect
+                effects_to_remove.append(effect_name)
+        
+        # Second pass: group remaining parameters by effect
         for param_name, param_value in kwargs.items():
             # Find which effect this parameter belongs to
             effect_name = self._get_effect_for_param(param_name)
             
             if effect_name:
-                if param_value == 0 and param_name == effect_name:
-                    # Main parameter set to 0 means remove the effect
-                    effects_to_remove.append(effect_name)
-                elif param_value != 0 or param_name != effect_name:
+                # Skip if this effect is being removed
+                if effect_name in effects_to_remove:
+                    continue
+                    
+                if param_value != 0 or param_name != effect_name:
                     # Either non-zero value or secondary parameter
                     if effect_name in self.global_fx_nodes:
                         # Effect exists, add to update list

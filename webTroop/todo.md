@@ -5,11 +5,11 @@
 - [ ] keymap vim, emacs, ...
 - [X] ajout paramètre pour showTodo ou pas
 - [X] increment/decrement multiplicateur
-- [ ] voir les global fx dans panel
+- [X] voir les global fx dans panel
 - [ ] ordre global fx
 - [ ] voir pourquoi crush merde dans le global fx
 - [ ] mix du global fx
-- [ ] global fx à 0 fait bugger
+- [X] global fx à 0 fait bugger
 
 
 ## Bug

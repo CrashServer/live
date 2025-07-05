@@ -862,11 +862,11 @@ class SCLangServerManager(ServerManager):
     def initGlobalFx(self):
         """ Initialize the global effects system with a dedicated group and bus """
         if not self.global_fx_initialized:
-            # Create global effects group BEFORE the stageLimiter (which is typically node 1000)
+            # Create global effects group AFTER group 1 (more stable positioning)
             self.global_fx_group = self.nextnodeID()
             msg = OSCMessage("/g_new")
-            # Insert before node 1000 (stageLimiter) in group 1
-            msg.append([self.global_fx_group, 2, 1000])  # addBefore stageLimiter
+            # Insert after group 1 using addAfter action
+            msg.append([self.global_fx_group, 3, 1])  # addAfter group 1
             self.client.send(msg)
             
             # Allocate a dedicated bus for global effects
@@ -1011,6 +1011,7 @@ class SCLangServerManager(ServerManager):
 
     def clearFx(self):
         """ Remove all global effects """
+        self.global_fx_initialized = False
         for fx_name in list(self.global_fx_nodes.keys()):
             self.removeFx(fx_name)
         

@@ -245,6 +245,13 @@ fx.add("osc = SelectX.ar(tek, [osc_base, osc])")
 fx.save()
 
 
+fx = FxList.new('crush2', 'crush2', {'crush2': 0, 'bits2': 8, 'crush2mix': 0.5}, order=2)
+fx.add_var("trig")
+fx.add("trig = Impulse.ar(SampleRate.ir/bits2)")
+fx.add("osc = osc.round(2.pow(crush2).reciprocal)")
+fx.add("osc = SelectX.ar(crush2mix, [osc, Latch.ar(osc, trig)])")
+fx.save()
+
 ### TIDAL FX ####
 fx = FxList.new("krush", "dirt_krush", {"krush":0, "kutoff":15000, "krushmix": 0.5}, order=2)
 fx.add_var("signal")

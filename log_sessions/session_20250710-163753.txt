@@ -1,0 +1,1820 @@
+a3 >> play("-", amp=PWhite(0.2,1))
+
+Clock.bpm = 1000;
+
+j5 >> play("X(..k)(...k)k")
+
+x7 >> ikea()
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1)
+
+j5.stop()
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=1)
+
+j5 >> play("X(..k)(...k)k")
+
+j5.stop()
+
+j5 >> play("X(..k)(...k)k")
+
+j5.stop()
+
+Clock.bpm = 900;
+
+Clock.bpm = 1000;
+
+x7 >> ikea(hh=1)
+
+x7 >> ikea(hh=1, harm=1)
+
+x7 >> ikea(hh=1, harm=1, sn=1)
+
+x7 >> ikea(hh=1, harm=1, sn=[1, 0, 1, 1])
+
+l7 >> play("(o...)...", amp=4)
+
+l7 >> play("(o...)...", amp=1)
+
+l7 >> play("(o...)...", amp=0.5)
+
+l7 >> play("(o...)...", amp=0.25)
+
+a3 >> play("-:", amp=PWhite(0.2,1))
+
+l7 >> play("(o...)...", amp=0.5)
+
+l7.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k5 >> blip(linvar([-1, 1], 32))
+
+k5 >> blip(linvar([-1, 1], 64))
+
+k5 >> blip(linvar([-4, 4], 64))
+
+a3 >> play("-", amp=PWhite(0.2,1))
+
+k5 >> blip(linvar([-4, 4], 64), sus=1/2)
+
+a3 >> play("-", amp=PWhite(0.2,1), sample=7)
+
+k5 >> blip(linvar([-4, 4], 64), sus=1/4)
+
+k5 >> blip(linvar([-4, 4], 64), sus=1/8)
+
+k5 >> blip(linvar([-4, 4], 64), sus=1)
+
+k5 >> blip(linvar([-4, 4], 64), sus=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+a3 >> play("{---:}", amp=PWhite(0.2,1), sample=7)
+
+k5 >> blip(linvar([-4, [4, 2]], 64), sus=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [64, 3, 2, 8]), sus=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, 2, 8]), sus=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+e5 >> superbass()
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+e5 >> superbass(cutoff=PFr(40, 400))
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.6)
+
+e5 >> superbass(cutoff=PFr(140, 400))
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+e5 >> superbass(cutoff=PFr(140, 1400))
+
+e5 >> superbass(cutoff=PFr(140, 2400))
+
+e5 >> superbass(cutoff=PFr(140, 3400))
+
+e5 >> superbass(cutoff=PFr(150, 3400))
+
+e5 >> superbass(cutoff=PFr(160, 3400))
+
+e5 >> superbass(cutoff=PFr(170, 3400))
+
+e5 >> superbass(cutoff=PFr(180, 3400))
+
+e5 >> superbass(cutoff=PFr(190, 3400))
+
+e5 >> superbass(cutoff=PFr(200, 3400))
+
+e5 >> superbass(cutoff=PFr(210, 3400))
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=600, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=700, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=800, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=900, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+e5 >> superbass(cutoff=PFr(310, 3400))
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1100, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1200, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1300, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1400, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1600, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1400, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1300, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1200, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1100, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, 2]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+e5 >> superbass(cutoff=PFr(310, 5400))
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=1)
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=0)
+
+h5 >> play("X ")
+
+h5 >> play("X...")
+
+Server.addFx(crush2=4)
+
+h5 >> play("X...", hpf=40)
+
+h5 >> play("X...", hpf=140)
+
+Server.addFx(crush2=4, bits2=40)
+
+h5.stop()
+
+k5 >> blip(linvar([-4, [4, 12]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+Server.addFx(crush2=4, bits2=40, crush2mix=0.2)
+
+Server.addFx(crush2=4, bits2=40, crush2mix=0.3)
+
+Server.addFx(crush2=4, bits2=40, crush2mix=0.4)
+
+Server.addFx(crush2=4, bits2=50, crush2mix=0.4)
+
+k5 >> blip(linvar([-4, [4, linvar([2, 64])]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+Server.addFx(crush2=14, bits2=50, crush2mix=0.4)
+
+Server.addFx(crush2=14, bits2=50, crush2mix=1.4)
+
+k5 >> blip(linvar([-4, [4, linvar([2, 64], 8)]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+Server.addFx(crush2=14, bits2=50, crush2mix=0.4)
+
+Server.addFx(crush2=14, bits2=50, crush2mix=1.4)
+
+Server.addFx(crush2=14, bits2=50, crush2mix=0.4)
+
+Server.addFx(crush2=4, bits2=50, crush2mix=0.4)
+
+Server.addFx(crush2=4, bits2=50, crush2mix=1.4)
+
+Server.addFx(crush2=4, bits2=50, crush2mix=0.4)
+
+Server.addFx(crush2=4, bits2=50, crush2mix=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a3 >> play("{---:}", amp=PWhite(0.2,1), sample=7)
+
+x7 >> ikea(hh=1, harm=1, sn=[1, 0, 1, 1])
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=0)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+soloRnd()
+
+k5 >> blip(linvar([-4, [4, linvar([2, 64], 8)]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+variation = Variation(16,4)
+
+x6 >> play("X.....", amp=4)
+
+x6 >> play("X.....", amp=12)
+
+x6 >> play("X.........", amp=12)
+
+x6 >> play("X.........../", amp=12)
+
+variation = Variation(16,4)
+
+x6 >> play("X...........//", amp=12)
+
+x6 >> play("X...........//", amp=9)
+
+x6 >> play("X...........//", amp=0)
+
+variation.set(64,16)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+k5 >> blip(linvar([-4, [4, linvar([2, 64], 8)]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5 >> blip(linvar([-4, [4, linvar([2, 8], 8)]], [[4, 2], 3, PRand(16), 8]), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+e5 >> superbass(cutoff=PFr(310, 5400))
+
+a3 >> play("{---:}", amp=PWhite(0.2,1), sample=7)
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=0)
+
+x7 >> ikea(hh=1, harm=1, sn=[1, 0, 1, 1])
+
+e5 >> superbass(cutoff=PFr(310, 5400))
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=0, hpf=400)
+
+Server.addFx(crush2=4, bits2=50, crush2mix=0.5)
+
+Server.clearFx()
+
+k5 >> blip(linvar([-4, [4, linvar([2, 8], 8)]], [[4, 2], 3, PRand(16), 8]), amp=linvar([0, 1], 32), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+Server.addFx(crush2=4, bits2=50, crush2mix=0.5)
+
+Server.clearFx()
+
+Server.addFx(crush2=4, bits2=50, crush2mix=0.5)
+
+Server.clearFx()
+
+Server.addFx(crush2=4, bits2=50, crush2mix=0.5)
+
+Server.clearFx()
+
+l7 >> play("(o...)...", amp=1)
+
+Server.addFx(crush2=4, bits2=250, crush2mix=0.5)
+
+l7.stop()
+
+Server.clearFx()
+
+l7 >> play("(o...)...", amp=1)
+
+l7.stop()
+
+Server.addFx(crush2=4, bits2=250, crush2mix=1)
+
+Server.clearFx()
+
+Server.addFx(crush2=4, bits2=250, crush2mix=1)
+
+Server.clearFx()
+
+Server.addFx(crush2=2, bits2=250, crush2mix=1)
+
+Server.clearFx()
+
+k5.solo()
+
+unsolo()
+
+variation.set(64,16)
+
+j5 >> play("X(..k)(...k)k")
+
+j5.stop()
+
+variation = Variation(64,16)
+
+j5 >> play("X(..k)(...k)k")
+
+j5.stop()
+
+l7 >> play("(o...)...", amp=1)
+
+j5 >> play("X(..k)(...k)k")
+
+l7.stop()
+
+j5.stop()
+
+variation.set(64,16)
+
+x7.stop()
+
+j0.stop()
+
+e5.stop()
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=0, hpf=400)
+
+x7 >> ikea(hh=1, harm=1, sn=[1, 0, 1, 1])
+
+j5 >> play("X(..k)(...k)k")
+
+variation.start()
+
+l7 >> play("(o...)...", amp=1)
+
+e5 >> superbass(cutoff=PFr(310, 5400))
+
+Server.addFx(crush2=2, bits2=250, crush2mix=1)
+
+Server.clearFx()
+
+j5.stop()
+
+a3.stop()
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=0, hpf=400)
+
+j0.stop()
+
+x7.stop()
+
+x7.stop()
+
+l7.stop()
+
+j5 >> play("X(..k)(...k)k")
+
+a3 >> play("{---:}", amp=PWhite(0.2,1), sample=7)
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=0, hpf=400)
+
+x7 >> ikea(hh=1, harm=1, sn=[1, 0, 1, 1])
+
+l7 >> play("(o...)...", amp=1)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+l7 >> play("(o...)...", amp=1, shape=1)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33)).unison(3)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+l7 >> play("(o...)...", amp=1, shape=0)
+
+j5.stop()
+
+k5 >> supersaw([linvar([0, 6], [64,0]),7], dur=1/4, lpf=5400, oct=6, fx2=1, sus=0.25, hpf=PFr(2500,3000), vol=1.0).unison(2)
+
+j0.stop()
+
+x7.stop()
+
+# a3x >> play("{---:}", amp=PWhite(0.2,1), sample=7)
+
+x7 >> ikea(hh=1, harm=1, sn=[1, 0, 1, 1])
+
+j0 >> brown(cutoff=PFr(20, 4000, 464, 64), rq=0.1, fx1=0, hpf=400)
+
+unsolo()
+
+unsolo()
+
+j5.stop()
+
+j5 >> play("X(..k)(...k)k")
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+k5 >> blip(linvar([-4, [4, linvar([2, 8], 8)]], [[4, 2], 3, PRand(16), 8]), amp=linvar([0, 1], 32), sus=1, vadiod=1000, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+k5.solo()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+bpmInit = 142
+
+Clock.bpm = bpmInit;
+
+Root.default = "E"
+
+Scale.default = "minor"
+
+variation = Variation(16,4)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+p1.fx2mix=linmod(0,1,32,1)
+
+p1.dur=PDur(1,8)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33)).unison(3)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+q2 >> play("k.", sample=0, amp=2)
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+k5 >> supersaw([linvar([0, 6], [64,0]),7], dur=1/4, lpf=5400, oct=6, fx2=1, sus=0.25, hpf=PFr(2500,3000), vol=1.0).unison(2)
+
+k5 >> supersaw([linvar([-10, 6], [64,0]),7], dur=1/4, lpf=5400, oct=6, fx2=1, sus=0.25, hpf=PFr(2500,3000), vol=1.0).unison(2)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, mverb=0.8, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.4)
+x7 >> pluck(dur=PDur([5,7],18), cutoff=PFr(1200,15200), rq=-0.08, oct=4, beef=8, mverb=0.8, vol=3, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+~d2 >> play("X.", amp=2)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=2, dur=1, crush=3, room=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+Clock.bpm=lininf(bpmInit,62, 4)
+
+~d2 >> play("X.", amp=2)
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll(0,"vib", 2)
+
+masterAll(0)
+
+Clock.bpm=lininf(bpmInit,62, 4)
+
+bpmInit+=10
+
+Clock.bpm = bpmInit
+
+Clock.bpm = 142
+
+Server.addFx(dubfeed=0.6, dubwidth=0.6, dublen=0.1)
+
+Server.addFx(feed=0.99, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.clearFx()
+
+Server.addFx(dubfeed=0.6, dubwidth=0.6, dublen=0.1)
+
+Server.clearFx()
+
+e2 >> play("<x.><-><..o.>", sample=0, amp=1, crush=0, test=8, testa=60.0).sometimes("stutter")
+
+k5 >> supersaw([linvar([0, 6], [64,0]),7], dur=1/4, lpf=5400, oct=6, fx2=1, sus=0.25, hpf=PFr(2500,3000), vol=1.0).unison(2)
+
+e2.stop()
+
+e2 >> play("<x.><-><..o.>", sample=0, amp=1, test=0, crush=4, bits=8).sometimes("stutter")
+
+e2.stop()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+unsolo()
+
+q1.stop()
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+p1.dur=PDur(1,8)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+x6.stop()
+
+x7.stop()
+
+p1.stop()
+
+j3.stop()
+
+h4.stop()
+
+q2.stop()
+
+s1.stop()
+
+s2.stop()
+
+z8.stop()
+
+d2.stop()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+p1.fx2mix=linmod(0,1,32,1)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33)).unison(3)
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+
+q2 >> play("k.", sample=0, amp=2)
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+p1.dur=PDur(1,8)
+
+~d2 >> play("X.", amp=2)
+
+p1.dur=PDur(2,8)
+
+p1.dur=PDur(3,8)
+
+p1.dur=PDur(4,8)
+
+p1.oct=linvar([4, 10], [64, 64])
+
+p1.dur=PDur(5,8)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+masterAll("rate", -12)
+
+masterAll(0)
+
+p1.dur=PDur(1,8)
+
+masterAll("rate", 4)
+
+masterAll(0)
+
+h4.oct=linvar([3, 12], [64, 64])
+
+# ~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=11, vol=0.6).unison(2)
+
+q1.stop()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+Server.addFx(feed=0.1)
+
+Server.addFx(feed=0.1, mid=4)
+
+Server.addFx(feed=0.1, mid=8)
+
+Server.addFx(feed=0.1, mid=7)
+
+Server.addFx(feed=0.1, mid=6)
+
+Server.addFx(feed=0.1, mid=5)
+
+Server.addFx(feed=0.1, mid=4)
+
+Server.addFx(feed=0.1, mid=3)
+
+Server.addFx(feed=0.1, mid=2)
+
+Server.addFx(feed=0.1, mid=1)
+
+Server.addFx(feed=0.1, mid=0)
+
+Server.addFx(feed=0.1, mid=1)
+
+Server.addFx(feed=0.1, mid=2)
+
+Server.addFx(feed=0.1, mid=3)
+
+Server.addFx(feed=0.1, mid=3, high=4)
+
+Server.addFx(feed=0.1, mid=3, high=5)
+
+Server.addFx(feed=0.1, mid=3, high=4)
+
+Server.addFx(feed=0.1, mid=3, high=3)
+
+Server.addFx(feed=0.1, mid=3, high=2)
+
+Server.addFx(feed=0.1, mid=3, high=1)
+
+Server.addFx(feed=0.1, mid=3, high=2)
+
+Server.addFx(feed=0.1, mid=3, high=3)
+
+Server.addFx(feed=0.1, mid=3, high=4)
+
+Server.addFx(feed=0.1, mid=3, high=5)
+
+Server.addFx(feed=0.1, mid=3, high=6)
+
+Server.addFx(feed=0.1, mid=3, high=7)
+
+Server.addFx(feed=0.1, mid=3, high=8)
+
+Server.addFx(feed=0.1, mid=3, high=9)
+
+Server.addFx(feed=0.1, mid=3, high=8)
+
+Server.addFx(feed=0.1, mid=3, high=7)
+
+Server.addFx(feed=0.1, mid=3, high=6)
+
+Server.addFx(feed=0.1, mid=3, high=5)
+
+Server.addFx(feed=0.1, mid=3, high=4)
+
+Server.addFx(feed=0.1, mid=3, high=3)
+
+Server.addFx(feed=0.1, mid=3, high=2)
+
+Server.addFx(feed=0.1, mid=3, high=1)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=11, vol=0.6).unison(2)
+
+Server.addFx(feed=0.2, mid=3, high=1)
+
+Server.addFx(feed=0.3, mid=3, high=1)
+
+Server.addFx(feed=0.4, mid=3, high=1)
+
+Server.addFx(feed=0.5, mid=3, high=1)
+
+Server.addFx(feed=0.5, mid=2, high=1)
+
+Server.addFx(feed=0.5, mid=1, high=1)
+
+Server.addFx(feed=0.4, mid=1, high=1)
+
+Server.addFx(feed=0.3, mid=1, high=1)
+
+Server.addFx(feed=0.2, mid=1, high=1)
+
+~d2 >> play("X.", amp=2)
+
+Server.addFx(feed=0.1, mid=1, high=1)
+
+Server.addFx(feed=0.2, mid=1, high=1)
+
+Server.addFx(feed=0.3, mid=1, high=1)
+
+~d2 >> play("X.", amp=12)
+
+Server.addFx(feed=0.4, mid=1, high=1)
+
+Server.addFx(feed=0.5, mid=1, high=1)
+
+~d2 >> play("X.", amp=12)
+
+Server.addFx(feed=0.6, mid=1, high=1)
+
+Server.addFx(feed=0.7, mid=1, high=1)
+
+Server.addFx(feed=0.8, mid=1, high=1)
+
+Server.addFx(feed=0.9, mid=1, high=1)
+
+Server.addFx(feed=1.0, mid=1, high=1)
+
+Server.addFx(feed=1.1, mid=1, high=1)
+
+Server.addFx(feed=1.2, mid=1, high=1)
+
+Server.addFx(feed=1.3, mid=1, high=1)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=2, dur=1, crush=3, room=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+x5 >> play("X ", amp=4)
+
+Server.addFx(feed=1.2, mid=1, high=1)
+
+Server.addFx(feed=1.1, mid=1, high=1)
+
+Server.addFx(feed=1.0, mid=1, high=1)
+
+x5 >> play("X ", amp=12)
+
+Server.addFx(feed=0.9, mid=1, high=1)
+
+Server.addFx(feed=0.8, mid=1, high=1)
+
+Server.addFx(feed=0.7, mid=1, high=1)
+
+Server.addFx(feed=0.6, mid=1, high=1)
+
+Server.addFx(feed=0.5, mid=1, high=1)
+
+Server.addFx(feed=0.4, mid=1, high=1)
+
+Server.addFx(feed=0.3, mid=1, high=1)
+
+Server.clearFx()
+
+Server.addFx(feed=0.2, mid=1, high=1)
+
+Server.addFx(feed=0.1, mid=1, high=1)
+
+Server.addFx(feed=0.0, mid=1, high=1)
+
+Server.addFx(feed=0.1, mid=1, high=1)
+
+Server.addFx(feed=0.2, mid=1, high=1)
+
+Server.addFx(feed=0.3, mid=1, high=1)
+
+Server.addFx(feed=0.4, mid=1, high=1)
+
+Server.addFx(feed=0.5, mid=1, high=1)
+
+Server.addFx(feed=0.6, mid=1, high=1)
+
+Server.addFx(feed=0.7, mid=1, high=1)
+
+Server.addFx(feed=0.8, mid=1, high=1)
+
+Server.addFx(feed=0.9, mid=1, high=1)
+
+Server.addFx(feed=0.8, mid=1, high=1)
+
+Server.addFx(feed=0.7, mid=1, high=1)
+
+Server.addFx(feed=0.6, mid=1, high=1)
+
+Server.addFx(feed=0.5, mid=1, high=1)
+
+Server.addFx(feed=0.4, mid=1, high=1)
+
+Server.addFx(feed=0.3, mid=1, high=1)
+
+Server.addFx(feed=0.2, mid=1, high=1)
+
+Server.addFx(feed=0.1, mid=1, high=1)
+
+Server.addFx(feed=0.2, mid=1, high=1)
+
+Server.addFx(feed=0.1, mid=1, high=1)
+
+Server.addFx(feed=0.2, mid=1, high=1)
+
+Server.addFx(feed=0.2, mid=0, high=1)
+
+Server.addFx(feed=0.2, mid=0, high=0)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1200)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1100)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1000)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=900)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=800)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=700)
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=600)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=500)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=400)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=300)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=301)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=401)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=501)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=601)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=701)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=801)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=901)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1001)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1101)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1201)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1301)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1401)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1501)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1601)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1701)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1801)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=1901)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2001)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2101)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2201)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2301)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2401)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2501)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2601)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2701)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2801)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=2901)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=3001)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=3101)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=3201)
+
+masterAll(0)
+
+Server.addFx(feed=0.2, mid=0, high=0, lpf=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+p1.dur=PDur(1,8)
+
+p1.dur=PDur(1,8)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, mverb=0.8, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.4)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, mverb=0.8, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.4)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, mverb=0.8, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.2)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, mverb=0.8, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, mverb=0, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(4, dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(2, dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(0, dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(var([0, 2],[16, 8]), dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(var([0, -2],[16, 8]), dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(var([0, -2],[6, 2]), dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+x6 >> war(0, dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+q2 >> play("k.", sample=0, amp=2)
+
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# ~d2 >> play("X.", amp=12)
+
+~d2 >> play("X.", amp=12)
+
+~d2 >> play("X.", amp=2)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=2, dur=1, crush=3, room=1, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+~d2 >> play("X.", amp=2)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=16, amp=2, dur=1, crush=3, room=0, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+~d2 >> play("X.", amp=2)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=8, amp=2, dur=1, crush=3, room=0, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x7 >> pluck(dur=PDur([5,7],18), cutoff=PFr(1200,15200), rq=-0.08, oct=4, beef=8, mverb=0.8, vol=3, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+bpmInit = 142
+
+Root.default = "E"
+
+Scale.default = "minor"
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+p1.fx2mix=linmod(0,1,32,1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+crashpanel.timeInit = time()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+p1.fx2mix=linmod(0,1,32,1)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33)).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33)).unison(3)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=11, vol=0.6).unison(2)
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+q2 >> play("k.", sample=0, amp=2)
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=1, vol=0.6).unison(2)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=.01, vol=0.6).unison(2)
+
+crashpanel.timeInit = time()
+
+crashpanel.timeInit = time()
+
+crashpanel.timeInit = time()
+
+crashpanel.timeInit = time()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+crashpanel.timeInit = time()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+p1.fx2mix=linmod(0,1,32,1)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33)).unison(3)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=.01, vol=0.6).unison(2)
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+q2 >> play("k.", sample=0, amp=2)
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+variation = Variation(16,1)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+variation.start()
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=.01, vol=0.6).unison(2)
+
+k5 >> supersaw([linvar([0, 6], [64,0]),7], dur=1/4, lpf=5400, oct=6, fx2=1, sus=0.25, hpf=PFr(2500,3000), vol=1.0).unison(2)
+
+variation.set(16,1)
+
+variation.start()
+
+p1.dur=PDur(1,8)
+
+Clock.bpm=lininf(bpmInit,62, 4)
+
+bpmInit+=10
+
+Clock.bpm = bpmInit
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll(0)
+
+p1.oct=linvar([4, 10], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+~d2 >> play("X.", amp=2)
+
+p1.oct=linvar([4, 10], [64, 64])
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+Server.addFx(dubfeed=0.6, dubwidth=0.6, dublen=0.1)
+
+Server.clearFx()
+
+Server.addFx(dubfeed=0.6, dubwidth=0.6, dublen=0.1)
+
+Server.clearFx()
+
+p1.dur=PDur(1,8)
+
+x6 >> war(0, dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+Server.addFx(crush2=2, bits2=112, crush2mix=0.5, drcomp=0.0)
+
+Server.clearFx()
+
+k5.stop()
+
+s2.stop()
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+p1.oct=linvar([4, 10], [64, 64])
+
+masterAll(0)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=8, amp=2, dur=1, crush=3, room=0, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+masterAll("degree", PTuple(PWhite(-12,linvar([12, 0], 4)), 4))
+
+masterAll("degree", PTuple(PWhite(-12,linvar([22, 0], 4)), 4))
+
+q1.stop()
+
+masterAll(0,"degree", PTuple(PWhite(-12,linvar([22, 0], 4)), 4))
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+
+Server.addFx(feed=0.1, mid=0, high=0, lpf=0)
+
+masterAll("vib", 2)
+
+masterAll(0)
+
+Server.addFx(feed=0.1, mid=0, high=1, lpf=0)
+
+masterAll(0,"degree", PTuple(PWhite(-12,linvar([22, 0], 4)), 4))
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=0)
+
+masterAll("degree", PTuple(PWhite(-12,linvar([22, 0], 4)), 4))
+
+masterAll("dur", 1/4)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=400)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=500)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=600)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=700)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=800)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=900)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1000)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1100)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1200)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1300)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1400)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1500)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1600)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1700)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1800)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=1900)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=2000)
+
+masterAll("rate", 4)
+
+Server.addFx(feed=0.1, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=0.2, mid=1, high=1, lpf=0)
+
+masterAll("rate", 4)
+
+masterAll(0)
+
+Server.addFx(feed=0.3, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=0.4, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=1.00, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.01, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.02, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=0.5, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=1.03, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.04, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.05, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.06, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=0.4, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=0.5, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=0.6, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=0.7, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=1.07, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=0.8, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=1.08, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=0.9, mid=1, high=1, lpf=0)
+
+Server.addFx(feed=1.09, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.10, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.11, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+x5 >> play("X ", amp=12)
+
+Server.addFx(feed=1.12, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.13, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(feed=1.14, low=1, mid=1, high=5, valad=240, valadr=0.7, valadd=50, valadt=0, valadc=0.3)
+
+Server.addFx(dubfeed=0.6, dubwidth=0.6, dublen=0.1)
+
+Server.addFx(crush2=2, bits2=112, crush2mix=0.5, drcomp=0.0)
+
+Server.addFx(crush2=3, bits2=112, crush2mix=0.5, drcomp=0.0)
+
+Server.addFx(crush2=4, bits2=112, crush2mix=0.5, drcomp=0.0)
+
+Server.clearFx()
+
+Server.addFx(crush2=4, bits2=112, crush2mix=0.6, drcomp=0.0)
+
+Server.addFx(crush2=4, bits2=112, crush2mix=0.7, drcomp=0.0)
+
+Server.addFx(crush2=4, bits2=112, crush2mix=0.8, drcomp=0.0)
+
+Server.addFx(feed=0.9, mid=1, high=1, lpf=0)
+
+Server.clearFx()
+
+Server.addFx(crush2=4, bits2=112, crush2mix=0.8, drcomp=0.0)
+
+x6.oct=5
+
+x6 >> war(0, dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+q2 >> play("k.", sample=0, amp=2)
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+x6 >> war(0, dur=PDur([5,7],8), cutoff=PFr(1200,15200), rq=0.02, oct=7, beef=8, fx2=1, vol=1, amp=[1,0.5,PWhite(),0.5], dist2=0.3)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3).only()
+
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+l4 >> war(dur=2)
+
+l4 >> war(dur=2, echo=0.5)
+
+l4 >> war(dur=2, echo=[0.25, 0.5])
+
+l4 >> war(dur=2, echo=[0.25, 0.5, 0.125])
+
+l4 >> war(dur=2, echo=[0.25, 0.5, 0.125], valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+f1 >> bbass(dur=8, oct=6, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+f1 >> bbass(dur=8, oct=5, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+~z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+f1 >> abass(dur=8, oct=5, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+f1 >> abass(dur=8, oct=5, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+f1 >> abass(dur=8, oct=5, valad=-500, valadr=0.3, valadd=5, valadt=0, valadc=0.1)
+
+f1 >> abass(dur=8, oct=5, valad=-500, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+f1 >> abass(dur=8, oct=5, valad=-500, valadr=0.3, valadd=5, valadt=0, valadc=1.2)
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.5, dur=1/4).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+f1 >> abass(dur=8, oct=5, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+f1 >> abass(dur=8, oct=3, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.1, dur=1/4).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.8, dur=1/4).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.8, dur=1/4, mverb=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+f1 >> abass(dur=8, oct=3, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, chop=4)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33)).unison(3)
+
+f1 >> abass(dur=8, oct=3, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, chop=4, chopwave=0.5)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.6, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=900, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1000, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1100, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1200, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1300, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.1, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.3, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.4, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.5, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.6, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+e6 >> play("kk.k", drcom=0.5)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.7, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=.01, vol=0.6).unison(2)
+
+e6 >> play("kk.k", drcom=0.5, low=2)
+
+e6 >> play("kk-k", drcom=0.5, low=2)
+
+d2 >> play("<X ><(-[--]-[::])><..|*3|.><..-.>", bits=8, amp=2, dur=1, crush=3, room=0, mix=PWhite(0,0.5), sample=var([0,1],[8,8])).rarely("amen").sometimes("stutter", PRand(1,6), rate=PRand([1,6]))
+
+masterAll("cut", 1/4)
+
+masterAll("cut", 1/2)
+
+masterAll("cut", 1/3)
+
+masterAll("cut", 1/5)
+
+masterAll(0, "cut", 1/5)
+
+x2 >> plaitsX((0,2,4), oct=(3,4,5), preset=10, dur=4, fx2=1)
+
+x2 >> plaitsX((0,2,4), oct=(3,4,5), preset=10, dur=8, fx2=1)
+
+x2 >> plaitsX((0,2,4), oct=(3,4,5), preset=10, dur=8, fx2=1).unison(5)
+
+Root.default = "F"
+
+x2 >> plaitsX((0,2,5), oct=(3,4,5), preset=10, dur=8, fx2=1).unison(5)
+
+x2 >> plaitsX((0,2,4), oct=(3,4,5), preset=10, dur=8, fx2=1).unison(5)
+
+x2 >> plaitsX((-1,2,4), oct=(3,4,5), preset=10, dur=8, fx2=1).unison(5)
+
+x2 >> plaitsX((-2,2,4), oct=(3,4,5), preset=10, dur=8, fx2=1).unison(5)
+
+x2 >> plaitsX((-2,3,4), oct=(3,4,5), preset=10, dur=8, fx2=1).unison(5)
+
+Root.default = "F#"
+
+x2 >> plaitsX((-2,3,4), oct=(3,4,5), preset=10, dur=8, fx2=1, tanh=0.4).unison(5)
+
+Root.default = "F"
+
+x2 >> plaitsX((-2,3,4), oct=(3,4,5), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+variation = Variation(16,1)
+
+x2 >> plaitsX((-2,4,4), oct=(3,4,5), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,4,5), oct=(3,4,5), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-1,4,5), oct=(3,4,5), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,4,5), oct=(3,4,5), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,3,5), oct=(3,4,5), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+q1.stop()
+
+# ~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=.01, vol=0.6).unison(2)
+
+x2 >> plaitsX((0,3,5), oct=(4,5,4), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+j3.stop()
+
+x2 >> plaitsX((0,3,6), oct=(4,5,4), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+
+q2 >> play("k.", sample=0, amp=2)
+
+x2 >> plaitsX((0,2,6), oct=(4,5,4), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.8, dur=1/4, mverb=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+x2 >> plaitsX((-1,2,6), oct=(4,5,4), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,2,6), oct=(4,5,4), preset=10, dur=8, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,2,6), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-1,2,6), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,2,6), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,3,6), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,3,7), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,2,7), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-1,2,7), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,2,7), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,3,6), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,3,5), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,2,5), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-1,2,5), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,2,5), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((1,2,5), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((1,3,5), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((1,3,6), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((1,3,7), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 400)
+
+Server.addFx(lpf= 500)
+
+Server.addFx(lpf= 600)
+
+Server.addFx(lpf= 700)
+
+x2 >> plaitsX((0,3,7), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,4,7), oct=(4,5,4), preset=10, dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 700,  lpr=0.2)
+
+x2 >> plaitsX((0,4,7), oct=(4,5,4), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 800,  lpr=0.2)
+
+Server.addFx(lpf= 900,  lpr=0.2)
+
+Server.addFx(lpf= 1000,  lpr=0.2)
+
+Server.addFx(lpf= 1100,  lpr=0.2)
+
+x2 >> plaitsX((0,5,7), oct=(4,5,4), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 1200,  lpr=0.2)
+
+Server.addFx(lpf= 1300,  lpr=0.2)
+
+x2 >> plaitsX((0,5,7), oct=(4,5,6), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,5,6), oct=(4,5,6), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((0,5,5), oct=(4,5,6), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 1300,  lpr=0.2, echo=1)
+
+x2 >> plaitsX((0,4,5), oct=(4,5,6), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 1400,  lpr=0.2, echo=1)
+
+x2 >> plaitsX((-1,4,5), oct=(4,5,6), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,4,5), oct=(4,5,6), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 1500,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 1600,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 1700,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 1800,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 1900,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 2000,  lpr=0.2, echo=1)
+
+x2 >> plaitsX((-2,3,5), oct=(4,5,6), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 2100,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 2200,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 2300,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 2400,  lpr=0.2, echo=1)
+
+x2 >> plaitsX((-2,4,5), oct=(4,5,6), preset=(10,11), dur=[6,2], fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 2500,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 2600,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 2700,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 2800,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 2900,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 3000,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 3100,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 3200,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 3300,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 3400,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 3500,  lpr=0.2, echo=1)
+
+Server.addFx(lpf= 3600,  lpr=0.2, echo=1)
+
+x2 >> plaitsX((-2,4,5), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,4,6), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,4,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3).unison(5)
+
+Server.addFx(lpf= 0,  lpr=0.2, echo=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.2).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.3).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.4).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.5).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.6).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.7).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.8).unison(5)
+
+x2 >> plaitsX((-2,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((-1,3,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((-1,4,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((-1,4,8), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((-1,4,7), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((-1,4,6), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((-1,3,6), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+Server.clearFx()
+
+x2 >> plaitsX((0,3,6), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((0,2,6), oct=(4,5,6), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+p1.dur=PDur(1,8)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3).only()
+
+x2 >> plaitsX((0,2,6), oct=(4,5,5), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.7, valad=1400, valadr=0.3, valadd=15, valadt=0, valadc=0.7, hpf=expvar([55,PRand(200,500)],33),).unison(3)
+
+x2 >> plaitsX((0,1,6), oct=(4,5,5), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((0,1,5), oct=(4,5,5), preset=(10,11), dur=1/2, fx2=1, tanh=0.3, fdecay=1.9).unison(5)
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+
+x2 >> plaitsX((0,1,6), oct=(4,5,5), preset=(10,11), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+z8 >> play(".(...[u.])..(..(.([u.])))", sample=3, drcomp=0.8, dur=1/4, mverb=0.5).sometimes("stutter", PRand(2,6), amp=PWhite(0.5,1))
+
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+
+x2 >> plaitsX((0,2,6), oct=(4,5,5), preset=(10,11), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((0,2,6), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+x2 >> plaitsX((0,1,6), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+q1 >> cbass((var([0,-2],26),2,14), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+q1.stop()
+
+x2 >> plaitsX((1,1,6), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((2,1,6), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((2,2,6), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((2,3,6), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+x2 >> plaitsX((2,3,5), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5)
+
+drop()
+
+x2 >> plaitsX((2,3,5), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+Root.default = "F#"
+
+x2 >> plaitsX((2,3,6), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x2 >> plaitsX((2,3,6), oct=(4,5,5), preset=(10,11,12), dur=1/2, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((2,3,6), oct=(4,5,5), preset=(10,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((2,3,6), oct=(4,5,6), preset=(10,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((2,3,5), oct=(4,5,6), preset=(10,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((2,2,5), oct=(4,5,6), preset=(10,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((1,2,5), oct=(4,5,6), preset=(10,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((0,2,5), oct=(4,5,6), preset=(10,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((0,2,5), oct=(4,5,6), preset=(4,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((0,2,5), oct=(3,5,6), preset=(4,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((0,2,6), oct=(3,5,6), preset=(4,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((0,2,6), oct=(3,4,5), preset=(4,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((0,2,6), oct=(3,4,5), preset=(5,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9).unison(5).chroma()
+
+x2 >> plaitsX((0,2,6), oct=(3,4,5), preset=(5,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,6), oct=(3,4,5), preset=(5,11,12), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,6), oct=(3,4,5), preset=(5,11,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,6), oct=(3,4,5), preset=(5,11,10), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,6), oct=(3,4,5), preset=(5,11,9), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,5), oct=(3,4,5), preset=(5,11,9), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,1,5), oct=(3,4,5), preset=(5,11,9), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,1,5), oct=(3,4,5), preset=(5,10,9), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,1,6), oct=(3,4,5), preset=(5,10,9), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,1,6), oct=(3,4,5), preset=(5,13,9), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,1,7), oct=(3,4,5), preset=(5,13,9), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,1,7), oct=(3,4,5), preset=(5,12,9), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,1,7), oct=(3,4,5), preset=(5,12,10), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,1,7), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,7), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,8), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,9), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,10), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((0,2,11), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-1,2,11), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-2,2,11), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-2,3,11), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-2,4,11), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-2,4,10), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-3,4,10), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-4,4,10), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-4,5,10), oct=(3,4,5), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-4,5,10), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-4,6,10), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-4,6,9), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-4,6,8), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-4,6,7), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-5,6,7), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-6,6,7), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-7,6,7), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-8,6,7), oct=(3,4,3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-8,6,7), oct=(3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5).chroma()
+
+x2 >> plaitsX((-8,6,7), oct=(3), preset=(5,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,6,7), oct=(3), preset=(2,12,11), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,6,7), oct=(3), preset=(2), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,6,7), oct=(3), preset=(3), dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,6,7), oct=(3), preset=5, dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,7,7), oct=(3), preset=5, dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,7,8), oct=(3), preset=5, dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,7,9), oct=(3), preset=5, dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,7,9), oct=(3), preset=5, dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> plaitsX((-8,7,9), oct=(3), preset=5, dur=64, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2.addfx(valad=3000)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x2 >> war((-8,7,9), oct=(3), preset=5, dur=64, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> war((-8,7,9), oct=(3), preset=5, dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).unison(3).chroma()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x2 >> war((-8,7,9), oct=(3), preset=5, dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).unison(3).chroma()
+
+x2 >> war((-8,7,9), oct=(5), preset=5, dur=8, fx2=.1, tanh=0.3, vol=1.2, fdecay=1.9, valad=2500, valadr=0.3, valadd=25, valadt=0, valadc=0.3).unison(3).chroma()
+
+Clock.clear()
+soff()
+Server.clearFx()
+

@@ -400,6 +400,180 @@ if __name__ != "__main__":
                         ppat += "\n"
                     sendAttack(ppat)
 
+        @loop_pattern_func
+        def PBal(n, k, style=0, dur=0.25, start=0):
+            """ Returns balanced rhythm durations.
+                Creates patterns with natural strong/weak beat relationships.
+                
+                Args:
+                    n: number of pulses
+                    k: total steps
+                    style: rhythmic style variation (0-7, default 0)
+                    start: rotation offset (default 0)
+                    dur: base duration unit (default 1)
+                    
+                Examples:
+                    >>> PBal(5, 16)  # [0.75, 0.75, 1, 0.5, 1]
+                    >>> PBal(3, 8, style=1)  # Different patterns based on style
+            """
+            
+            if n == 0:
+                return Pattern([k * dur])
+            
+            if n >= k:
+                # Equal subdivisions if more pulses than steps
+                return Pattern([k / n] * n) * dur
+            
+            # Calculate base duration per pulse
+            base_dur = k / n
+            
+            # Create base pattern with equal durations
+            intervals = [base_dur] * n
+            
+            if style == 0:
+                # Default clave-inspired pattern
+                # Strong-weak-strong-weak-medium pattern
+                if n == 5:
+                    # Classic 5/16 pattern: [0.75, 0.75, 1, 0.5, 1]
+                    ratios = [0.75, 0.75, 1.0, 0.5, 1.0]
+                elif n == 3:
+                    # Classic 3/8 pattern: [1, 1, 1]
+                    ratios = [1.0, 1.0, 1.0]
+                elif n == 4:
+                    # 4 pulse pattern
+                    ratios = [0.75, 0.5, 1.0, 0.75]
+                elif n == 7:
+                    # 7 pulse pattern
+                    ratios = [0.75, 0.5, 0.75, 0.5, 1.0, 0.75, 0.75]
+                else:
+                    # General pattern for other values
+                    ratios = []
+                    for i in range(n):
+                        if i == 0:  # First beat - medium
+                            ratios.append(0.9)
+                        elif i == n // 2:  # Middle beat - strong
+                            ratios.append(1.2)
+                        elif i == n - 1:  # Last beat - strong
+                            ratios.append(1.1)
+                        elif i % 2 == 1:  # Odd positions - weak
+                            ratios.append(0.7)
+                        else:  # Even positions - medium
+                            ratios.append(0.9)
+            
+            elif style == 1:
+                # Rumba-inspired: emphasis on different beats
+                if n == 5:
+                    ratios = [0.75, 0.75, 1.0, 0.75, 0.75]
+                elif n == 3:
+                    ratios = [0.75, 1.25, 1.0]
+                else:
+                    ratios = []
+                    for i in range(n):
+                        if i == 2 and n > 2:  # Third beat strong
+                            ratios.append(1.3)
+                        elif i == 0:  # First beat medium
+                            ratios.append(0.85)
+                        else:
+                            ratios.append(0.95)
+            
+            elif style == 2:
+                # Reggae-inspired: off-beat emphasis
+                if n == 5:
+                    ratios = [0.75, 0.75, 1.0, 0.25, 1.25]
+                elif n == 3:
+                    ratios = [1.25, 0.75, 1.0]
+                else:
+                    ratios = []
+                    for i in range(n):
+                        if i % 2 == 1:  # Off-beats longer
+                            ratios.append(1.15)
+                        else:  # On-beats shorter
+                            ratios.append(0.85)
+            
+            elif style == 3:
+                # Swing feel
+                if n == 5:
+                    ratios = [1.0, 0.5, 1.0, 0.5, 1.0]
+                elif n == 3:
+                    ratios = [0.5, 1.5, 1.0]
+                else:
+                    ratios = []
+                    for i in range(n):
+                        if i % 2 == 0:  # On-beats
+                            ratios.append(1.2)
+                        else:  # Off-beats
+                            ratios.append(0.8)
+            
+            elif style == 4:
+                # Salsa clave feel
+                if n == 5:
+                    ratios = [0.75, 1.0, 0.75, 0.5, 1.0]
+                elif n == 3:
+                    ratios = [1.0, 0.5, 1.5]
+                else:
+                    pattern_3_2 = [1.1, 0.9, 1.2, 0.85, 1.05]
+                    ratios = [pattern_3_2[i % len(pattern_3_2)] for i in range(n)]
+            
+            elif style == 5:
+                # Cumbia steady
+                if n == 5:
+                    ratios = [0.75, 0.75, 1.0, 1.0, 0.5]
+                elif n == 3:
+                    ratios = [1.5, 1.0, 0.5]
+                else:
+                    ratios = [1.0] * n
+                    ratios[0] = 1.05  # Slight downbeat emphasis
+                    ratios[-1] = 0.95  # Slight last beat reduction
+            
+            elif style == 6:
+                # Quick-quick-slow pattern
+                ratios = []
+                for i in range(n):
+                    pattern_pos = i % 3
+                    if pattern_pos < 2:  # Quick
+                        ratios.append(0.8)
+                    else:  # Slow
+                        ratios.append(1.4)
+            
+            else:  # style == 7 or others
+                # Complex polyrhythmic
+                if n == 5:
+                    ratios = [0.75, 0.75, 1.0, 0.5, 1.0]  # Default back to style 0
+                elif n == 3:
+                    ratios = [1.0, 1.0, 1.0]
+                else:
+                    ratios = []
+                    for i in range(n):
+                        if i % 5 == 0:
+                            ratios.append(1.15)
+                        elif i % 3 == 0:
+                            ratios.append(0.9)
+                        else:
+                            ratios.append(1.0)
+            
+            # Apply ratios to base durations
+            for i in range(len(intervals)):
+                intervals[i] = intervals[i] * ratios[i % len(ratios)]
+            
+            # Normalize to maintain total duration = k
+            total = sum(intervals)
+            if total > 0:
+                scale_factor = k / total
+                intervals = [interval * scale_factor for interval in intervals]
+            
+            # Round to avoid floating point precision errors
+            intervals = [round(interval, 10) for interval in intervals]
+            
+            # Apply start rotation if specified
+            if start != 0:
+                pattern = Pattern(intervals)
+                pattern = pattern.rotate(int(start))
+                intervals = pattern.data
+            
+            return Pattern(intervals) * dur
+
+
+
         def darker():
             ''' Change Scale to a darkest one '''
             if Scale.default.name not in gamme:

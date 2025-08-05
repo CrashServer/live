@@ -898,6 +898,8 @@ class SCLangServerManager(ServerManager):
         if not self.global_fx_initialized:
             self.initGlobalFx()
         
+        bannedFx = ["crush", "bits", "leg"]
+
         # Group parameters by effect
         effects_to_update = {}
         effects_to_create = {}
@@ -905,33 +907,37 @@ class SCLangServerManager(ServerManager):
         
         # First pass: identify effects to remove
         for param_name, param_value in kwargs.items():
-            effect_name = self._get_effect_for_param(param_name)
-            if effect_name and param_value == 0 and param_name == effect_name:
-                # Main parameter set to 0 means remove the effect
-                effects_to_remove.append(effect_name)
+            # Skip banned effects
+            if param_name not in bannedFx:
+                effect_name = self._get_effect_for_param(param_name)
+                if effect_name and param_value == 0 and param_name == effect_name:
+                    # Main parameter set to 0 means remove the effect
+                    effects_to_remove.append(effect_name)
         
         # Second pass: group remaining parameters by effect
         for param_name, param_value in kwargs.items():
-            # Find which effect this parameter belongs to
-            effect_name = self._get_effect_for_param(param_name)
-            
-            if effect_name:
-                # Skip if this effect is being removed
-                if effect_name in effects_to_remove:
-                    continue
-                    
-                if param_value != 0 or param_name != effect_name:
-                    # Either non-zero value or secondary parameter
-                    if effect_name in self.global_fx_nodes:
-                        # Effect exists, add to update list
-                        if effect_name not in effects_to_update:
-                            effects_to_update[effect_name] = {}
-                        effects_to_update[effect_name][param_name] = param_value
-                    else:
-                        # Effect doesn't exist, add to create list
-                        if effect_name not in effects_to_create:
-                            effects_to_create[effect_name] = {}
-                        effects_to_create[effect_name][param_name] = param_value
+            # Skip banned effects
+            if param_name not in bannedFx:
+                # Find which effect this parameter belongs to
+                effect_name = self._get_effect_for_param(param_name)
+                
+                if effect_name:
+                    # Skip if this effect is being removed
+                    if effect_name in effects_to_remove:
+                        continue
+                        
+                    if param_value != 0 or param_name != effect_name:
+                        # Either non-zero value or secondary parameter
+                        if effect_name in self.global_fx_nodes:
+                            # Effect exists, add to update list
+                            if effect_name not in effects_to_update:
+                                effects_to_update[effect_name] = {}
+                            effects_to_update[effect_name][param_name] = param_value
+                        else:
+                            # Effect doesn't exist, add to create list
+                            if effect_name not in effects_to_create:
+                                effects_to_create[effect_name] = {}
+                            effects_to_create[effect_name][param_name] = param_value
         
         # Remove effects
         for effect_name in effects_to_remove:

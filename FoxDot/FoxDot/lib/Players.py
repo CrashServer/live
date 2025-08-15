@@ -137,7 +137,6 @@ from .SCLang.SynthDef import SynthDefProxy, SynthDef, SynthDefs
 from .Effects import FxList
 from .Utils import stdout
 from .Buffers import Samples, SAMPLES_BANK
-from .OSC3 import *
 
 from .Key import *
 from .Repeat import *
@@ -323,9 +322,6 @@ class Player(Repeatable):
         self.modifier = Pattern()
         self.mod_data = 0
         self.filename = None
-        
-        # Dictionary to store node IDs for real-time modification of any attribute
-        self._fx_nodes = {}
 
         # Keyword arguments that are used internally
 
@@ -367,55 +363,6 @@ class Player(Repeatable):
 
     def __hash__(self):
         return hash(self.id) # could be problematic if there are id clashes?
-
-    # Node management for real-time modifications
-    
-    def _store_fx_node(self, attr_name, node_id, params=None):
-        """ Store the SuperCollider node ID and parameters for an effect to allow real-time modification """
-        self._fx_nodes[attr_name] = {
-            'node_id': node_id,
-            'params': params or []
-        }
-        return node_id
-    
-    def _get_fx_node(self, attr_name):
-        """ Get the SuperCollider node ID for an attribute """
-        # First, check if this attribute is directly stored as an effect
-        if attr_name in self._fx_nodes:
-            return self._fx_nodes[attr_name]['node_id']
-        
-        # Second, check if this attribute is a parameter of any stored effect
-        for effect_name, effect_data in self._fx_nodes.items():
-            if 'params' in effect_data and attr_name in effect_data['params']:
-                return effect_data['node_id']
-        
-        # Fallback to the main player node if available
-        if "playerId" in self._fx_nodes:
-            return self._fx_nodes["playerId"]['node_id']
-        
-        return None
-    
-    def _clear_fx_nodes(self):
-        """ Clear all stored node IDs """
-        self._fx_nodes.clear()
-
-    def addfx(self, **kwargs):
-        """ Modify attributes in real-time using stored SuperCollider node IDs """
-        for attr_name, value in kwargs.items():
-            # Get the stored node ID for this attribute
-            node_id = self._get_fx_node(attr_name)
-            
-            if node_id is not None:
-                # Send OSC message to update the node in real-time
-                self.metro.server.send("/n_set", [node_id, attr_name, value])
-                
-                # Also update the local attribute for future events
-                setattr(self, attr_name, value)
-            else:
-                # No related effect node found, just update the attribute normally
-                setattr(self, attr_name, value)
-        
-        return self
 
     # Player Object Manipulation
     
@@ -537,7 +484,6 @@ class Player(Repeatable):
                     if isinstance(self.__dict__[name], PlayerKey):
 
                         self.__dict__[name].update_pattern()
-
 
                 # self.update_player_key(name, 0, 0)
 
@@ -675,9 +621,6 @@ class Player(Repeatable):
         # Stop calling any repeating methods
 
         self.stop_calling_all()
-        
-        # Clear node tracking
-        self._clear_fx_nodes()
         
         return self
 
@@ -1722,7 +1665,7 @@ class Player(Repeatable):
 
         beat_dur = self.metro.beat_dur()
 
-        message = {"beat_dur": beat_dur, "sus": kwargs.get("sus", event["sus"]) * beat_dur, "self": self}
+        message = {"beat_dur": beat_dur, "sus": kwargs.get("sus", event["sus"]) * beat_dur}
 
         if self.synthdef == SamplePlayer:
 
@@ -1873,7 +1816,6 @@ class Player(Repeatable):
         # Remove keys we dont need
 
         del event["bpm"]
-        # Note: "self" will be removed later in the ServerManager before sending to SuperCollider
             
         return event        
 
@@ -1896,6 +1838,11 @@ class Player(Repeatable):
         else:
             synthdef = str(self.synthdef)
         return synthdef
+
+    def addfx(self, **kwargs):
+        """ Not implemented - add an effect to the SynthDef bus on SuperCollider
+            after it has been triggered. """
+        return self
 
     #: Methods for stop/starting players
 

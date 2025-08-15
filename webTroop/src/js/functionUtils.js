@@ -5,7 +5,7 @@ export const functionUtils = {
     stopClock(wsServer) {
         wsServer.send(JSON.stringify({
             type: 'evaluate_code',
-            code: 'Clock.clear()\nsoff()\nServer.clearFx()\n'
+            code: 'Clock.clear()\nsoff()\n'
         }));
     },
 

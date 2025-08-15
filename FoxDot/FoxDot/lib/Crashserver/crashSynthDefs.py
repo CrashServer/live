@@ -113,6 +113,9 @@ grat.add()
 gray = FileSynthDef("gray")
 gray.add()
 
+guit = FileSynthDef("guit")
+guit.add()
+
 hnoise = FileSynthDef("hnoise")
 hnoise.add()
 

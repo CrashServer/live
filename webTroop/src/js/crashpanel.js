@@ -91,17 +91,16 @@ ws.onmessage = function(event) {
         case 'players':
             formatPlayers(data.players)
             break;
-        case 'masterFx':
-            const masterFxContainer = document.getElementById('masterFx');
-            masterFxContainer.innerHTML = ''; 
-            Object.keys(data.masterFx).forEach((fx, index) => {
-                const fxDiv = document.createElement('span');
-                fxDiv.className = 'master-fx-item';
-                fxDiv.textContent = `${fx}`;
-                masterFxContainer.appendChild(fxDiv);
-            });
-            // masterFxContainer.style.height = masterFxContainer.scrollHeight + 'px';
-            break;
+        // case 'masterFx':
+        //     const masterFxContainer = document.getElementById('masterFx');
+        //     masterFxContainer.innerHTML = ''; 
+        //     Object.keys(data.masterFx).forEach((fx, index) => {
+        //         const fxDiv = document.createElement('span');
+        //         fxDiv.className = 'master-fx-item';
+        //         fxDiv.textContent = `${fx}`;
+        //         masterFxContainer.appendChild(fxDiv);
+        //     });
+        //     break;
         // case 'pdj':
         //     const pdjContainer = document.getElementById('pdj')
         //     pdjContainer.textContent = data.intitule + " - " + data.plat;

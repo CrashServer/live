@@ -1255,12 +1255,12 @@ Clock.link()
 #             if "video" in str(message.message):
 #                 OSCClient.send(self, message, *args)
 
-#     def OSCVideo(video_adress):
+#     def OSCVideo(video_adress, port=20001):
 #         my_client = FilterOSCClient()
-#         my_client.connect((video_adress, 20000))
+#         my_client.connect((video_adress, port))
 #         Server.forward = my_client
-#     OSCVideo(crashOSIp)
-#     print("Video Connected")
+#     # OSCVideo(crashOSIp)
+#     # print("Video Connected")
 # except Exception as e:
 #     print(e)
 

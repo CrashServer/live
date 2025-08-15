@@ -103,31 +103,62 @@ body {
   margin: 0;
   background: var(--bg-col-1);
   width: 100%;
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  height: 100vh;
+}
+
+#main-editor-wrapper {
+  flex: 10;
+  min-height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+#editor-resize-handle {
+  height: 4px;
+  background: var(--border-col-1);
+  cursor: row-resize;
+  flex: none;
+  position: relative;
+  z-index: 10;
+}
+
+#editor-resize-handle:hover {
+  background: var(--border-col-2);
+}
+
+#other-editor-wrapper {
+  flex: 0.5;
+  /* min-height: 100px; */
+  position: relative;
+  overflow: hidden;
+  /* border-top: 2px solid var(--border-col-1); */
 }
 
 #editor {
-  flex: 1;
+  height: 100% !important;
+  width: 100%;
   min-height: 0;
 }
 
-#other-user-display {
-  height: 30px; /* Ajuster la hauteur selon les besoins */
-  min-height: 30px;
-  background: var(--col-green);
+#other-editor {
+  height: 100% !important;
+  width: 100%;
+  z-index: 2;
+}
+
+#separator {
+  height: 3px; /* Ajuster la hauteur selon les besoins */
+  min-height: 3px;
+  background: var(--border-col-1);
   cursor: row-resize; 
-  color: var(--text-col-1);
-  /* white-space: pre-wrap; */
-  /* word-wrap: break-word; */
-  font-family: inherit;
-  padding: 0.2rem;
   overflow: hidden;
   border-top: 1px solid var(--border-col-2);
   border-bottom: 1px solid var(--border-col-1);
 }
 
-#other-user-position {
-  padding: 0 1rem 0 0.5rem;
+#separator:hover {
+  background: var(--border-col-2);
 }
 
 .otherLive-cursor-marker {
@@ -299,6 +330,12 @@ body {
     0.5px 0.5px 0 #000;
   /* color: var(--text-col-1); */
   z-index: 1000;
+}
+
+.other-user-name-widget {
+  pointer-events: none;
+  user-select: none;
+  animation: fadeInOut 3s ease-in-out;
 }
 
 /* Style pour la sélection */

@@ -54,7 +54,8 @@ export const foxdotAutocomplete = {
         {text: 'glitchbass()', displayText: 'glitchbass'}, 
         {text: 'glitcher()', displayText: 'glitcher'}, 
         {text: 'gong()', displayText: 'gong'}, 
-        {text: 'grat()', displayText: 'grat'}, 
+        {text: 'grat()', displayText: 'grat'},
+        {text: 'guit()', displayText: 'guit'},
         {text: 'gray()', displayText: 'gray'}, 
         {text: 'growl()', displayText: 'growl'}, 
         {text: 'gsynth()', displayText: 'gsynth'}, 
@@ -173,6 +174,7 @@ export const foxdotAutocomplete = {
         { text: 'clamp()', displayText: 'clamp' },
         { text: 'lmap()', displayText: 'lmap' },
         { text: 'PRand()', displayText: 'PRand' },
+        { text: 'PTuple()', displayText: 'PTuple' },
         { text: 'PWhite(0,1)', displayText: 'PWhite' },
         { text: 'PWhite(-1,1)', displayText: 'PWhite(-1,1)' },
         { text: 'PxRand()', displayText: 'PxRand' },
@@ -206,6 +208,7 @@ export const foxdotAutocomplete = {
         { text: 'PDur()', displayText: 'PDur' },
         { text: 'PDur(3,8)', displayText: 'PDur(3,8)' },
         { text: 'PDur(5,8)', displayText: 'PDur(5,8)' },
+        { text: 'PBal(5,16)', displayText: 'PBal(5,16)' },
         { text: 'PDelay()', displayText: 'PDelay' },
         { text: 'PStrum()', displayText: 'PStrum' },
         { text: 'PQuicken()', displayText: 'PQuicken' },
@@ -239,6 +242,11 @@ export const foxdotAutocomplete = {
         { text: 'Scale.default=', displayText: 'Scale' },
         { text: 'Root.default=', displayText: 'Root' },
         { text: 'variation = Variation(16,4)', displayText: 'variation' },
+        // { text: 'Server.addFx()', displayText: 'Server.addFx' },
+        // { text: 'Server.removeFx()', displayText: 'Server.removeFx' },
+        // { text: 'Server.clearFx()', displayText: 'Server.clearFx' },
+        // { text: 'Server.listFx()', displayText: 'Server.listFx' },
+        // { text: 'Server.debugFx()', displayText: 'Server.debugFx' },
     ],
     playerFunction: [
         { text: 'gtr()', displayText: 'gtr' }, 
@@ -424,6 +432,9 @@ export const foxdotAutocomplete = {
         { text: 'shutdown', displayText: 'shutdown' },
         { text: 'target', displayText: 'target' },
     ],
+    serverFunction: [
+        
+    ],
 
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
@@ -440,9 +451,11 @@ export const foxdotAutocomplete = {
         const matchPlayer = beforeCursor.match(playerPattern);
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;        
         const afterLastClosingParenthesis = /.*\)\s*\./;
-        const loopPattern = /loop\(([^,)]*)$/;
+        // const loopPattern = /loop\(([^,)]*)$/;
+        const loopPattern = /(loop|gsynth|splaffer|splitter)\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
         const lostPattern =/(lost|attack)\([^)]*$/
+        const serverPattern = /(S|s)er\*/;
         const scenePattern = /!/;
 
         if (beforeCursor.trim() === '' && afterCursor.trim() === '') {
@@ -472,7 +485,7 @@ export const foxdotAutocomplete = {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
             filteredLoops = filteredLoops.filter(loop => !loop.displayText.startsWith('AKWF'));
-            const loopMatch = line.match(/loop\("([^"]*)"/);
+            const loopMatch = line.match(/loop|gsynth|splaffer|splitter\("([^"]*)"/);
             const durMatch = line.match(/dur=(\d+(\.\d+)?|\d+\/\d+)/);
             const loopStart = loopMatch ? token.start : token.start;
             const loopEnd = durMatch ? durMatch.index + durMatch[0].length : cursorPosition;
@@ -509,16 +522,16 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, end),
             }
         }
-        else if (scenePattern.test(beforeCursor)) {
-            const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
-            const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
-            const end = line.match(/\s./)
-            return {
-                list: filteredScenes.length > 0 ? filteredScenes.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.sceneNames.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                from: CodeMirror.Pos(cursor.line, token.start +1),
-                to: CodeMirror.Pos(cursor.line, cursorPosition),
-            };
-        }
+        // else if (scenePattern.test(beforeCursor)) {
+        //     const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
+        //     const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
+        //     const end = line.match(/\s./)
+        //     return {
+        //         list: filteredScenes.length > 0 ? filteredScenes.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.sceneNames.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+        //         from: CodeMirror.Pos(cursor.line, token.start +1),
+        //         to: CodeMirror.Pos(cursor.line, cursorPosition),
+        //     };
+        // }
         else if (beforeCursor.includes('Scale.default=')) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
             const filteredScales = this.scales.filter(scale => scale.displayText.startsWith(prefix));

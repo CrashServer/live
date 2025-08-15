@@ -32,11 +32,13 @@ const func = {
     PBern: '(size=16, ratio=0.5)\r\n Returns a pattern of 1s and 0s based on the ratio value (between 0 and 1).\nThis is called a Bernoulli sequence. ', 
     PBeat: '(string, start=0, dur=0.5)\r\n Returns a Pattern of durations based on an input string where\n non-whitespace or non-point denote a pulse e.g.\n        ::\n\n>>> PBeat(x xxx x)\nP[1, 0.5, 0.5, 1, 0.5]\n ', 
     PDur: '(n, k, start=0, dur=0.25)\r\n Returns the *actual* durations based on Euclidean rhythms (see PEuclid) where dur\n is the length of each step.\n        ::\n>>> PDur(3, 8)\nP[0.75, 0.75, 0.5]\n>>> PDur(5, 16)\nP[0.75, 0.75, 0.75, 0.75, 1]\n',
+    PBal: '(n, k, style=0, dur=0.25, start=0)\r\n Returns a pattern of durations based on the balance algorithm.\nn: number of pulses\nk: total steps\nstyle: rhythmic style variation (0-7, default 0)\nstart: rotation offset (default 0)\ndur: base duration unit (default 0.25) ',
     PDelay: '(*args)\r\n', 
     PStrum: '(n=4)\r\n Returns a pattern of durations similar to how you might strum a guitar ', 
     PQuicken: '(dur=0.5, stepsize=3, steps=6)\r\n Returns a PGroup of delay amounts that gradually decrease ', 
     PRhythm: '(durations)\r\n Converts all tuples/PGroups into delays calculated using the PDur algorithm.\ne.g.\nPRhythm([1,(3,8)]) -> P[1,(2,0.75,1.5)]\n    *work in progress*\n', 
     PJoin: '(patterns)\r\n Joins a list of patterns together ', 
+    PTuple: '(pattern, size=1)\r\n Returns a PGroup of size \'size\' with the pattern',
     linvar: '(values, dur=None, start=0, **kwargs)\r\n', 
     expvar: '(values, dur=None, start=0, **kwargs)\r\n', 
     sinvar: '(values, dur=None, start=0, **kwargs)\r\n', 
@@ -200,6 +202,8 @@ const synthList = {
   twang: 'rate=0',
   tritri: 'gate=1, modfreq=5, rate=4.85, phase=0.5, cutoff=2000, rq=0.5, mul=1, para1=70, rsing=0',
   total: 'rate=0',
+  tb304: 'cutoff=100, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0',
+  tb303: 'wave=0, cutoff=800, rq=0.4, dec=1.0, top=2500',
   swiss: 'gate=0.5, decay=1, detune=1, rq=0, cutoff=10000, saw=1, pulse=1, sin=1, pw=0.5, attack=0.001, rel=0.91',
   swell: 'rate=1',
   supersaw: 'rate=0, cutoff=1800, rq=0.8',
@@ -271,6 +275,7 @@ const synthList = {
   growl: 'rate=0',
   gray: 'freq=440',
   grat: 'rate=1, cutoff=4000, rq=0.8',
+  guit: 'detune=0.01, tone=0.7, beef=0.7, fdecay=1, mod=0.2',
   gong: 'rate=0',
   glitcher: 'len=10, henA=2, henB=0.4, t=1, gate=1',
   glitchbass: 'gate=1, modfreq=5, rate=4.85, phase=0.5, cutoff=2000, rq=0.5, mul=1',
@@ -328,17 +333,76 @@ const definitions = { ...func, ...fxList, ...synthList };
 
 function showDefinition(cm) {
   const cursor = cm.getCursor();
+  const line = cm.getLine(cursor.line);
   const token = cm.getTokenAt(cursor);
   const word = token.string;
+  const cursorPos = cursor.ch;
 
   // Remove any existing tooltips
   const existingTooltips = document.querySelectorAll('.CodeMirror-tooltip');
   existingTooltips.forEach(tooltip => removeTooltip(tooltip));
 
-  if (definitions[word]) {
-    const definition = definitions[word];
+  function findFunctionFromParentheses(line, pos) {
+    const functionPattern = /([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g;
+    const functions = [];
+    let match;
+    
+    while ((match = functionPattern.exec(line)) !== null) {
+      const funcName = match[1];
+      const startPos = match.index;
+      const openParenPos = match.index + match[0].length - 1;
+      
+      let depth = 1;
+      let closeParenPos = openParenPos;
+      
+      for (let i = openParenPos + 1; i < line.length && depth > 0; i++) {
+        if (line[i] === '(') depth++;
+        else if (line[i] === ')') depth--;
+        closeParenPos = i;
+      }
+      
+      functions.push({
+        name: funcName,
+        start: startPos,
+        openParen: openParenPos,
+        closeParen: closeParenPos
+      });
+    }
+    
+    let targetFunction = null;
+    let maxSpecificity = -1;
+    
+    for (const func of functions) {
+      if (pos >= func.openParen && pos <= func.closeParen) {
+        const specificity = func.openParen;
+        if (specificity > maxSpecificity) {
+          maxSpecificity = specificity;
+          targetFunction = func.name;
+        }
+      }
+    }
+    
+    return targetFunction;
+  }
+
+  let lookupWord = word;
+  
+  if (word.includes('.')) {
+    const parts = word.split('.');
+    lookupWord = parts[parts.length - 1];
+  }
+
+  if (!definitions[lookupWord] || !lookupWord.match(/^[a-zA-Z_]/)) {
+    const nearestFunction = findFunctionFromParentheses(line, cursorPos);
+    if (nearestFunction) {
+      lookupWord = nearestFunction;
+    }
+  }
+  
+  if (definitions[lookupWord]) {
+    const definition = definitions[lookupWord];
     const tooltip = makeTooltip(cm, cursor, definition);
-    setTimeout(() => removeTooltip(tooltip), 10000); // Remove tooltip after 10 seconds
+    setTimeout(() => removeTooltip(tooltip), 7000); 
   }
 }
 
@@ -368,4 +432,9 @@ function removeTooltip(tooltip) {
   }
 }
 
-export { showDefinition };
+function removeAllTooltips() {
+  const tooltips = document.querySelectorAll('.CodeMirror-tooltip');
+  tooltips.forEach(tooltip => removeTooltip(tooltip));
+}
+
+export { showDefinition, removeAllTooltips };

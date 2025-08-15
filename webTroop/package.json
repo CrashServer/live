@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "server": "node server.js",
-    "start": "concurrently \"npm run dev\" \"npm run server\""
+    "start": "concurrently \"npm run dev\" \"npm run server\"",
+    "db": "HOST=0.0.0.0 PORT=4444 YPERSISTENCE=./dbDir node ./node_modules/y-websocket/bin/server.cjs" 
   },
   "devDependencies": {
     "vite": "^6.0.1"

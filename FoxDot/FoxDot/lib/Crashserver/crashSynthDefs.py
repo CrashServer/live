@@ -68,7 +68,6 @@ dblbass.add()
 donorgan = FileSynthDef("donorgan")
 donorgan.add()
 
-
 dopple = FileSynthDef("dopple")
 dopple.add()
 
@@ -83,6 +82,9 @@ eeri.add()
 
 elmbass = FileSynthDef("elmbass")
 elmbass.add()
+
+ethpad = FileSynthDef("ethpad")
+ethpad.add()
 
 ews = FileSynthDef("ews")
 ews.add()
@@ -111,6 +113,9 @@ grat.add()
 gray = FileSynthDef("gray")
 gray.add()
 
+guit = FileSynthDef("guit")
+guit.add()
+
 hnoise = FileSynthDef("hnoise")
 hnoise.add()
 
@@ -119,7 +124,6 @@ hoover.add()
 
 ikea = FileSynthDef("ikea")
 ikea.add()
-
 
 latoo = FileSynthDef("latoo")
 latoo.add()
@@ -132,9 +136,6 @@ lbass.add()
 
 lfnoise = FileSynthDef("lfnoise")
 lfnoise.add()
-
-# mpluck = FileSynthDef("mpluck")
-# mpluck.add()
 
 mpluck = FileSynthDef("mpluck")
 mpluck.add()
@@ -211,6 +212,9 @@ swiss.add()
 tb303 = FileSynthDef("tb303")
 tb303.add()
 
+tb304 = FileSynthDef("tb304")
+tb304.add()
+
 varicelle = FileSynthDef("varicelle")
 varicelle.add()
 
@@ -225,6 +229,9 @@ video.add()
 
 virus = FileSynthDef("virus")
 virus.add()
+
+war = FileSynthDef("war")
+war.add()
 
 wobble = FileSynthDef("wobble")
 wobble.add()

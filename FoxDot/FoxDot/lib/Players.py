@@ -782,7 +782,7 @@ class Player(Repeatable):
         
         total_dur = float(sum(durations))
 
-        if total_dur == 0:
+        if total_dur <= 0:
 
             WarningMsg("Player object has a total duration of 0. Set to 1")
 

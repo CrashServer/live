@@ -119,6 +119,17 @@ export const functionUtils = {
         return false
     },
 
+    isServerFxCode(cm) {
+        const cursor = cm.getCursor();
+        const line = cursor.line;
+        const code = cm.getLine(cursor.line).trim();
+        const serverFxPattern = /^# Server\.addFx/;
+        if (serverFxPattern.test(code)) {
+            return [code, line];
+        }
+        return false
+    },
+
     getPlayer(code) {
         const playerPattern = /^[a-zA-Z][a-zA-Z0-9]/;
         const match = code.trim().match(playerPattern);

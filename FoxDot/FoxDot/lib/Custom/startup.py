@@ -1010,7 +1010,7 @@ try:
             self.degree = Pvar([drumRockPattern[drumCat][drumPat], drumRockFill[drumFillCat][drumFillPat]], [
                                durloop-fillDur, fillDur])
             self.human(30, PWhite(-5, 5))
-            self.comp = 0.8
+            self.drcomp = 0.5
             self.dur = durPlyr
             self.every(durloop, "drummer", durloop, durPlyr)
 except:

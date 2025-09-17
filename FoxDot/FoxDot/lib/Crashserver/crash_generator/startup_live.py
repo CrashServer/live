@@ -405,6 +405,12 @@ def trim(self, length):
             self.attr["dur"] = self.attr["dur"] * length
         return self
 
+@player_method
+def end(self, length=8, duration=2):
+    ''' amplify at the end of length, for duration'''
+    self.amplify=var([0,1], [length-duration, duration])
+
+
 def genArp(nbrseq=4, lengthseq=8):
     ''' Generate arpeggiato based on markov Chords progression '''
     seq = PMarkov()[:nbrseq]

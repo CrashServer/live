@@ -47,8 +47,8 @@ a_cy.add();
 a_poly = FileSynthDef("a_poly");
 a_poly.add();
 
-a_daftLead = FileSynthDef("a_daftLead");
-a_daftLead.add();
+a_daftlead = FileSynthDef("a_daftlead");
+a_daftlead.add();
 
 a_glead = FileSynthDef("a_glead");
 a_glead.add();

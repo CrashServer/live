@@ -1,4 +1,4 @@
-SynthDef.new(\vlead,
+SynthDef.new(\a_vlead,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
 	  complexity=0.7, glitch=0.5, cutoff=3000|
 		var osc, env, modFreq, chopped, filtered;

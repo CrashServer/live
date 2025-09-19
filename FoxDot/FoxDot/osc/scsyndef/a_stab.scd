@@ -1,4 +1,4 @@
-SynthDef.new(\stab,
+SynthDef.new(\a_stab,
 	{|amp=1, sus=0.3, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
 	  filterFreq=1000, resonance=0.7, distortion=5|
 		var osc, env, filterEnv, filtered, chord;

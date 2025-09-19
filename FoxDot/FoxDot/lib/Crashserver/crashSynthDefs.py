@@ -62,14 +62,14 @@ a_vpad.add();
 a_daft = FileSynthDef("a_daft");
 a_daft.add();
 
+a_xbass = FileSynthDef("a_xbass")
+a_xbass.add()
+
 a_vene = FileSynthDef("a_vene");
 a_vene.add();
 
 abass = FileSynthDef("abass")
 abass.add()
-
-xbass = FileSynthDef("xbass")
-xbass.add()
 
 acidbass = FileSynthDef("acidbass")
 acidbass.add()

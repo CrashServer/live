@@ -1,4 +1,4 @@
-SynthDef.new(\daftLead,
+SynthDef.new(\a_daftlead,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
 	  cutoff=2000, resonance=0.6, filterEnv=0.8, drive=2|
 		var osc, env, filter, filterFreq;

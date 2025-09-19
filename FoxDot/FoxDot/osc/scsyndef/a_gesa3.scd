@@ -1,4 +1,4 @@
-SynthDef.new(\gesa3,
+SynthDef.new(\a_gesa3,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=1, bus=0,
 	  distortion=8, cutoff=600, complexity=0.5, probability=0.8, shuffle=0.2|
 		var osc, env, filter, dist, rhythmSeq, gateSeq, ampMod, filterMod;

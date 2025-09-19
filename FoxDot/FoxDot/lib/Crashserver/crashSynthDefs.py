@@ -32,8 +32,8 @@ a_fantom.add();
 a_stab = FileSynthDef("a_stab");
 a_stab.add();
 
-a_db = FileSynthDef("a_db");
-a_db.add();
+a_bd = FileSynthDef("a_bd");
+a_bd.add();
 
 a_sn = FileSynthDef("a_sn");
 a_sn.add();

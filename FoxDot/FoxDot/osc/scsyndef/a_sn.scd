@@ -1,4 +1,4 @@
-synthDef.new(\a_sn,
+SynthDef.new(\a_sn,
 	{|amp=1, pan=0, freq=200, tone=1, snap=1, noise=1, distortion=4, bus=0|
 		var snare, env, toneEnv, tonal, noisePart, dist;
 

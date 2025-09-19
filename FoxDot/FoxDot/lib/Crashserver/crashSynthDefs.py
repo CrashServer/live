@@ -2,8 +2,74 @@
 
 from ..SCLang.SynthDef import FileSynthDef
 
+a_bassry = FileSynthDef("a_bassry");
+a_bassry.add();
+
+a_gesa = FileSynthDef("a_gesa");
+a_gesa.add();
+
+a_gesa2 = FileSynthDef("a_gesa2");
+a_gesa2.add();
+
+a_xbass = FileSynthDef("a_xbass");
+a_xbass.add();
+
+a_gheavy = FileSynthDef("a_gheavy");
+a_gheavy.add();
+
+a_bassry = FileSynthDef("a_bassry");
+a_bassry.add();
+
+a_gesa3 = FileSynthDef("a_gesa3");
+a_gesa3.add();
+
+a_stress = FileSynthDef("a_stress");
+a_stress.add();
+
+a_fantom = FileSynthDef("a_fantom");
+a_fantom.add();
+
+a_stab = FileSynthDef("a_stab");
+a_stab.add();
+
+a_db = FileSynthDef("a_db");
+a_db.add();
+
+a_sn = FileSynthDef("a_sn");
+a_sn.add();
+
+a_hhat = FileSynthDef("a_hhat");
+a_hhat.add();
+
+a_cy = FileSynthDef("a_cy");
+a_cy.add();
+
+a_poly = FileSynthDef("a_poly");
+a_poly.add();
+
+a_daftLead = FileSynthDef("a_daftLead");
+a_daftLead.add();
+
+a_glead = FileSynthDef("a_glead");
+a_glead.add();
+
+a_vlead = FileSynthDef("a_vlead");
+a_vlead.add();
+
+a_vpad = FileSynthDef("a_vpad");
+a_vpad.add();
+
+a_daft = FileSynthDef("a_daft");
+a_daft.add();
+
+a_vene = FileSynthDef("a_vene");
+a_vene.add();
+
 abass = FileSynthDef("abass")
 abass.add()
+
+xbass = FileSynthDef("xbass")
+xbass.add()
 
 acidbass = FileSynthDef("acidbass")
 acidbass.add()

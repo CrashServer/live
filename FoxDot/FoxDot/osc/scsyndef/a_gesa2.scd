@@ -1,4 +1,4 @@
-SynthDef.new(\gesa2,
+SynthDef.new(\a_gesa2,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
 	  drive=12, cutoff=600, bitcrush=8|
 		var osc, env, crushed, filtered;

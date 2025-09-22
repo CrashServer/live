@@ -102,19 +102,17 @@
 
 ## Pattern Generators
 
-| Pattern | Description des arguments | Description de la classe |
-|------------------|-----------|---------------------------|
-| `PChain2(mapping)`  | **mapping** : mapping dictionary | Markov chain pattern generator |
-| `PChords(chord=None)` | **chord** : chord (default: None) | Chords generator |
-| `PGauss(mean=0, deviation=1)` | **mean** : mean (default: 0)<br>**deviation** : deviation (default: 1)| Return random values with Gaussian distribution |
-| `PLog(mean=0, deviation=1)` | **mean** : mean (default: 0)<br>**deviation** : deviation (default: 1) | Return random values with Logarithmic distribution |
-| `PTrir(low=0, high=8, mode=None)` | **low** : low value (default: 0)<br>**high** : high value (default: 8)<br>**mode** : mode (default: None) | Return random values with Triangular distribution|
-| `PCoin(low=0, high=1, proba=0.5)` | **low** : low value (default: 0)<br>**high** : high value (default: 1)<br>**proba** : probability (default: 0.5)| Choose between 2 values with probability |
-| `PChar(case=2, alpha=2)` | **case** : case type (default: 2)<br>**alpha** : alpha type (default: 2)| return random char |
-| `PMarkov()` | - | PMarkov mod with probability |
-| `PZero(size=2, offset=0)` | **size** : size of the pattern (default: 2)<br>**offset** : offset the 1 (défaut: 0) | Generate a pattern with a '1' and size-1 '0' |
-| `PBool(pat1=P[0], pat2=P[0], operator=0)` | **pat1** : pattern 1 (default: P[0])<br>**pat2** : pattern 2 (default: P[0])<br>**operator** : 0 -> and, 1 -> or, 2 -> xor  (défaut: 0) | Binary operation between 2 patterns |
-| `PMorse(text, point=1/4, tiret=3/4)` | text: text to convert<br>point: dot duration (default: 1/4)<br>tiret: dash duration (default: 3/4) | Converts a string to morse dot and dash values |
+| Pattern | Arguments | Pattern Description | Example |
+|------------------|-----------|---------------------------|---------------------|
+| `PChords(chord=None)` | **chord** : chord (default: None) | Chords generator | `w2 >> pianovel(PChords(III), oct=(3,4,5), dur=4)` |
+| `PGauss(mean=0, deviation=1)` | **mean** : mean (default: 0)<br>**deviation** : deviation (default: 1)| Return random values with Gaussian distribution | `r3 >> dbass(var(PGauss(), [6,2]), dur=1/2, rate=0.5)` |
+| `PLog(mean=0, deviation=1)` | **mean** : mean (default: 0)<br>**deviation** : deviation (default: 1) | Return random values with Logarithmic distribution | `r3 >> dbass(var(PLog(), [6,2]), dur=1/2, rate=0.5)` |
+| `PTrir(low=0, high=8, mode=None)` | **low** : low value (default: 0)<br>**high** : high value (default: 8)<br>**mode** : mode (default: None) | Return random values with Triangular distribution| `r3 >> dbass(var(PTrir(0,8), [6,2]), dur=1/2, rate=0.5)` |
+| `PCoin(low=0, high=1, proba=0.5)` | **low** : low value (default: 0)<br>**high** : high value (default: 1)<br>**proba** : probability (default: 0.5)| Choose between 2 values with probability | `c6 >> play("-", dur=1/4, amplify=PCoin(.5,1.5))` |
+| `PChar(case=2, alpha=2)` | **case** : case type (default: 2)<br>**alpha** : alpha type (default: 2)| return random char | `c6 >> play(PChar()[:8], cut=1, dur=1/4, amplify=PCoin(.5,1.5))` |
+| `PZero(size=2, offset=0)` | **size** : size of the pattern (default: 2)<br>**offset** : offset the 1 (défaut: 0) | Generate a pattern with a '1' and size-1 '0' | `c6 >> play("#", amplify=PZero(8))` |
+| `PBool(pat1=P[0], pat2=P[0], operator=0)` | **pat1** : pattern 1 (default: P[0])<br>**pat2** : pattern 2 (default: P[0])<br>**operator** : 0 -> and, 1 -> or, 2 -> xor  (défaut: 0) | Binary operation between 2 patterns | `r3 >> dbass(PBool(P[0,2,4], P[1,3,5,-2], var([0,1,2],8)), dur=PDur(5,8))` |
+| `PMorse(text, point=1/4, tiret=3/4)` | text: text to convert<br>point: dot duration (default: 1/4)<br>tiret: dash duration (default: 3/4) | Converts a string to morse dot and dash values | `g0 >> play("x", dur=PMorse("thisisatest"))` |
 
 ## Shortcut Variables (French Cut)
 

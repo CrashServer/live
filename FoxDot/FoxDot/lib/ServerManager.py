@@ -878,13 +878,15 @@ class SCLangServerManager(ServerManager):
 
     def _get_effect_for_param(self, param_name):
         """ Determine which effect a parameter belongs to by checking all effects in fxlist """
+        bannedArgs = ["beat_dur", "sus"]
+        
         # First check if it's a main effect parameter
         if param_name in self.fxlist:
             return param_name
         
         # Then check if this parameter is in the args of any effect
         for effect_name, effect_obj in self.fxlist.items():
-            if hasattr(effect_obj, 'args') and param_name in effect_obj.args:
+            if hasattr(effect_obj, 'args') and param_name in effect_obj.args and param_name not in bannedArgs:
                 return effect_name
         
         # Parameter not found in any effect

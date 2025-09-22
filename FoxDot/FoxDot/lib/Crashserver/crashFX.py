@@ -471,6 +471,13 @@ fx = FxList.new('mverb', 'miVerb', {'mverb': 0, 'mverbmix': 0.5, 'mverbdamp':0.8
 fx.add("osc = MiVerb.ar(osc, time: mverb.clip(0.0,1.0), drywet: mverbmix, damp: mverbdamp, hp: 0.1, freeze: mverbfreeze, diff: mverbdiff, mul:1.5)")
 fx.save()
 
+fx = FxList.new('jpverb', 'jpVerb', {'jpverb': 0, 'jpmix': 0.5, 'jpdamp':0.0, 'jpsize': 1.0}, order=2)
+fx.add_var("dry")
+fx.add("dry = osc")
+fx.add("osc = JPverb.ar(osc, t60: jpverb, damp: jpdamp, size: jpsize)")
+fx.add("osc = SelectX.ar(jpmix, [dry, osc])")
+fx.save()
+
 fx = FxList.new('stut', 'stutterfx', { 'stut': 1, 'stutrate':1, 'stutlen':0.02, 't_reset': 0}, order=2)
 fx.add_var("dry")
 fx.add_var("reset")

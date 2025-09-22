@@ -1,4 +1,4 @@
-SynthDef.new(\vpad,
+SynthDef.new(\a_vpad,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
 	  texture=0.8, granularity=0.6, cutoff=1000|
 		var osc, env, textured, granular, filtered;

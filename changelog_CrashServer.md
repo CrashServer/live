@@ -41,15 +41,17 @@
   - chord dictionnary : I, II, III, IV, V, VI, VII
   - `drop(playtime=14, droptime=2, nbloop=1)` : make a drop every 'playtime', during 'droptime', 'nbloop' times.
   - `drop_bpm(duree=32, nbr=0, end=4)` : create a drop bpm effect. duree: how long total, nbr: how many parts, end: drop duration to the end.
-  - `chaos(n=1)` : generate n random player lines and copy to clipboard
+  - `chaos(n=1, plyType=None)` : generate n random player lines and copy to clipboard of type plyType (synth, loop, sample, None)
   - `ascii_gen(text="", font=0)` : generate ascii text
   - `lost()` : return all attacks available
   - `attack("name", printOut=0)` : copy to clipboard the attack "name", print the attack if printOut != 0
-  - `print_synth(synth="")` : print the argument of the synth or list of synth if no name
-  - `print_fx(fx="")` : print the argument of the fx or list of fx if no name
-  - `print_sample(sample="")` : print the description of the sample or find the letter, or find all letters according to the keyword
-  - `print_loops(loop="")` : print the all available loop or list of loop for directory name
-  - `print_video()` : helper for the video player
+  - `psynth(synth="")` : print the argument of the synth or list of synth if no name
+  - `pfx(fx="")` : print the argument of the fx or list of fx if no name
+  - `psample(sample="")` : print the description of the sample or find the letter, or find all letters according to the keyword
+  - `ploops(loop="")` : print the all available loop or list of loop for directory name
+  - `pvideo()` : helper for the video player
+  - `pfonk(fonk="")` : show all available function, or the help of the function 
+  - `pshort(short="")` : helper to shortcut 
   - `unsolo()` : remove all solo on players
   - [é, è, ê, ù, à, ç] are shortcut to some linvar, prand & Pdur
   - crashPanel: to have a nice gui with usefull stuff
@@ -72,10 +74,10 @@
   - `.clone(player)` : clone a player , all his attributes
   - `.once()` : play a player only once. 
   - `.drummer(duration=16, dur=1/2)` : turn a sample player to a human drummer. 'duration' is the time for a new drum pattern, `dur` is the duration of the player.
-  - `.basser(duration=64, markdur=2)`: turn a synth player to a bass player. 'duration' is the time for a new pattern, markdur is the length of the pattern
   - `.gtr(string=1)` : set player to match guitar tabs
   - `.chroma()` : set player to chromatic scale
-  - `.solo(-8)` : mod the solo method, if the number>0: solo after the next n %beats, if the number<0: solo now and unsolo after the next n %beats. 
+  - `.solo(-8)` : mod the solo method, if the number>0: solo after the next n %beats, if the number<0: solo now and unsolo after the next n %beats.
+  - `.lclip(clip=4)` : clip the loop player to a specific duration (keep sus)
   - `stop(8)` : mod stop method to stop after the next n %beats.
   - `only(16)` : mod to only after the next n % beats.
   - `trim(length)` : trim every players pattern length
@@ -112,6 +114,8 @@
   - `PMorse(text, point=1/4, tiret=3/4)` : convert a string to Morse code with values of point and tiret.
   - `PStep(8,1,0,4)` : mod PStep, the 4th parameter offset all the patern 
   - `genArp(numberOfSequence, sequenceLength)` : generate arpeggiato based on markov chords progression
+  - `PBal(n, k, style=0, dur=0.25, start=0)` : Return balanced rhythm duration (n: number of pulse, k: total steps, style: rhythmic style variation, start: rotation offset, dur: base duration)
+  - `PTuple(pattern, size)` : return a PGroup of size (size) with the pattern
 
 
 ## FX

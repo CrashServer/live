@@ -6,7 +6,7 @@ a_bassry = FileSynthDef("a_bassry");
 a_bassry.add();
 
 a_stress = FileSynthDef("a_stress");
-a_stres.add();
+a_stress.add();
 
 a_gesa = FileSynthDef("a_gesa");
 a_gesa.add();

@@ -75,7 +75,7 @@ class StorageAttack:
             print(prompt)
             print(self.attackDict[attackName])
             # clip.copy(prompt + '\n' + self.attackDict[attackName])
-        sendAttack(prompt + '\n' + self.attackDict[attackName])
+        sendAttack('\n' + prompt + '\n' + self.attackDict[attackName])
 
     def lost(self, attack=None):
         if attack is not None:
@@ -84,6 +84,10 @@ class StorageAttack:
             attackKeys = list(sorted(self.attackDict.keys()))
             print(attackKeys)
             crashpanel.sendOnce(str(attackKeys), "attack")
+    
+    def random(self):
+        attackName = choice(list(self.attackDict.keys()))
+        self.getAttack(attackName)
 
 storageAttack = StorageAttack()
 
@@ -126,10 +130,12 @@ def connect():
             "i3 >> sos(dur=8, lpf=linvar([60,4800],[16*PWhite(1,4), 16*PWhite(1,5)]), hpf=expvar([0,500],[16*PWhite(1,8), 16*PWhite(1,8)]), amplify=0.5)")
 
 
-def attack(attackName, prntOut=0):
+def attack(attackName=None, prntOut=0):
     ''' Get the attack code '''
-    storageAttack.getAttack(attackName, prntOut)
-
+    if attackName != None:
+        storageAttack.getAttack(attackName, prntOut)
+    else:
+        storageAttack.random()
 
 def lost(attack=None):
     ''' List of all attacks '''

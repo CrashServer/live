@@ -1,0 +1,1967 @@
+Clock.bpm = 210
+
+a2 >> plaitsX([PSine(PWalk(8, 6, PWalk(8, 1, 1)))], oct=PStep(4, P*[3, [5, 4]], 4), tanh=var([0, 0.2], P*[2, 4, 8, 16]), dur=P[1/2, [1/1, 1/2, 1/2]], sus=1/2, lpr=linvar([0.05, 4], P*[1, 2, 4, 8, 16]), preset=(6, 8), lpf=linvar([400, 4000], [24, 8]), amp=1, pan=(linvar([-1, 1], 32), PWhite(-1, 1))).sometimes("stutter", amp=0.5, echo=2, oct=4, sus=1).sometimes("stutter", amp=0.5, echo=0.5, degree=(0, P*[4, 12]), slide=0, dur=1/2, leg=4, mverb=0.8, delay=(0, 4, 0.25)).rarely("stutter", amp=0.2, echo=0.25, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=0, dur=1, dist2=0.0, sus=2, leg=4, mverb=0.8, delay=2).rarely("stutter", amp=0.4, echo=2, oct=6, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=2, slidedelay=2, dur=1, dist2=0.0, sus=2, leg=32, mverb=0.2, delay=(0, 1, 2.25)).unison(4)
+
+a3 >> dbass([PSine(PWalk(8, 6, PWalk(8, 1, 1)))], oct=PStep(4, P*[4, 5], 5), delay=(0, 2), tanh=var([0, 0.2], P*[2, 4, 8, 16]), shape=0.2, rate=1, dur=P[1/2, [1/1, 1/2, 1/2]], sus=1/2, lpr=linvar([0.05, 4], P*[1, 2, 4, 8, 16]), preset=(6, 8), lpf=linvar([400, 4000], [24, 8]), amp=P*[0.5, 1, 0, 1], pan=(linvar([-1, 1], 32), PWhite(-1, 1))).sometimes("stutter", amp=1, echo=2, oct=4, sus=1).sometimes("stutter", amp=0.5, echo=0.5, degree=(0, P*[4, 12]), slide=0, dur=1/2, leg=4, mverb=0.8, delay=(0, 4, 0.25)).rarely("stutter", amp=0.2, echo=0.25, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=0, dur=1, dist2=0.0, sus=2, leg=4, mverb=0.8, delay=2).rarely("stutter", amp=0.4, echo=2, oct=6, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=2, slidedelay=2, dur=1, dist2=0.0, sus=2, leg=32, mverb=0.2, delay=(0, 1, 2.25)).unison(4)
+
+b1 >> varsaw(a2.degree, sus=10, lpf=linvar([3000, 6700], 128), lpr=PWhite(0.2,0.9), blur=2, amp=0.6, dur=var([5,1,1], [6,1,1]), oct=PStep(6,3,4)).unison(2) + var([0, 4, 8], [6, 1, 1])
+
+b1 >> varsaw(a2.degree, sus=10, lpf=linvar([3000, 6700], 128), lpr=PWhite(0.2,0.9), blur=2, amp=0.7, dur=var([5,1,1], [6,1,1]), oct=PStep(6,3,4)).unison(2) + var([0, 4, 8], [6, 1, 1])
+
+b1 >> varsaw(a2.degree, sus=10, lpf=linvar([3000, 6700], 128), lpr=PWhite(0.2,0.9), blur=2, amp=0.8, dur=var([5,1,1], [6,1,1]), oct=PStep(6,3,4)).unison(2) + var([0, 4, 8], [6, 1, 1])
+
+e0 >> plaits(melody(),dur=(1/2, 1/4), engine=3, drive=0, mverb=0.8, oct=5)
+
+e0.stop()
+
+e1 >> bass(melody(),dur=var([1/4, 2],[13, 3]), drive=0, amp=2, mverb=0.8).unison(2).every(13, "offmul", 2)
+
+e1.stop()
+
+b1.stop()
+
+a2 >> plaitsX([PSine(PWalk(8, 6, PWalk(8, 1, 1)))], oct=PStep(4, P*[3, [5, 4]], 4), tanh=var([0, 0.2], P*[2, 4, 8, 16]), dur=P[1/2, [1/1, 1/2, 1/2]], sus=1/2, lpr=linvar([0.05, 4], P*[1, 2, 4, 8, 16]), preset=(6, 8), lpf=linvar([400, 4000], [24, 8]), amp=1, pan=(linvar([-1, 1], 32), PWhite(-1, 1))).sometimes("stutter", amp=0.5, echo=2, oct=4, sus=1).sometimes("stutter", amp=0.5, echo=0.5, degree=(0, P*[4, 12]), slide=0, dur=1/2, leg=4, mverb=0.8, delay=(0, 4, 0.25)).rarely("stutter", amp=0.2, echo=0.25, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=0, dur=1, dist2=0.0, sus=2, leg=4, mverb=0.8, delay=2).rarely("stutter", amp=0.4, echo=2, oct=6, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=2, slidedelay=2, dur=1, dist2=0.0, sus=2, leg=32, mverb=0.2, delay=(0, 1, 2.25)).unison(4)
+
+a3 >> dbass([PSine(PWalk(8, 6, PWalk(8, 1, 1)))], oct=PStep(4, P*[4, 5], 5), delay=(0, 2), tanh=var([0, 0.2], P*[2, 4, 8, 16]), shape=0.2, rate=1, dur=P[1/2, [1/1, 1/2, 1/2]], sus=1/2, lpr=linvar([0.05, 4], P*[1, 2, 4, 8, 16]), preset=(6, 8), lpf=linvar([400, 4000], [24, 8]), amp=P*[0.5, 1, 0, 1], pan=(linvar([-1, 1], 32), PWhite(-1, 1))).sometimes("stutter", amp=1, echo=2, oct=4, sus=1).sometimes("stutter", amp=0.5, echo=0.5, degree=(0, P*[4, 12]), slide=0, dur=1/2, leg=4, mverb=0.8, delay=(0, 4, 0.25)).rarely("stutter", amp=0.2, echo=0.25, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=0, dur=1, dist2=0.0, sus=2, leg=4, mverb=0.8, delay=2).rarely("stutter", amp=0.4, echo=2, oct=6, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=2, slidedelay=2, dur=1, dist2=0.0, sus=2, leg=32, mverb=0.2, delay=(0, 1, 2.25)).unison(4)
+
+b1 >> varsaw(a2.degree, sus=10, lpf=linvar([3000, 6700], 128), lpr=PWhite(0.2,0.9), blur=2, amp=0.8, dur=var([5,1,1], [6,1,1]), oct=PStep(6,3,4)).unison(2) + var([0, 4, 8], [6, 1, 1])
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a2 >> plaitsX([PSine(PWalk(8, 6, PWalk(8, 1, 1)))], oct=PStep(4, P*[3, [5, 4]], 4), tanh=var([0, 0.2], P*[2, 4, 8, 16]), dur=P[1/2, [1/1, 1/2, 1/2]], sus=1/2, lpr=linvar([0.05, 4], P*[1, 2, 4, 8, 16]), preset=(6, 8), lpf=linvar([400, 4000], [24, 8]), amp=1, pan=(linvar([-1, 1], 32), PWhite(-1, 1))).sometimes("stutter", amp=0.5, echo=2, oct=4, sus=1).sometimes("stutter", amp=0.5, echo=0.5, degree=(0, P*[4, 12]), slide=0, dur=1/2, leg=4, mverb=0.8, delay=(0, 4, 0.25)).rarely("stutter", amp=0.2, echo=0.25, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=0, dur=1, dist2=0.0, sus=2, leg=4, mverb=0.8, delay=2).rarely("stutter", amp=0.4, echo=2, oct=6, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=2, slidedelay=2, dur=1, dist2=0.0, sus=2, leg=32, mverb=0.2, delay=(0, 1, 2.25)).unison(4)
+
+a3 >> dbass([PSine(PWalk(8, 6, PWalk(8, 1, 1)))], oct=PStep(4, P*[4, 5], 5), delay=(0, 2), tanh=var([0, 0.2], P*[2, 4, 8, 16]), shape=0.2, rate=1, dur=P[1/2, [1/1, 1/2, 1/2]], sus=1/2, lpr=linvar([0.05, 4], P*[1, 2, 4, 8, 16]), preset=(6, 8), lpf=linvar([400, 4000], [24, 8]), amp=P*[0.5, 1, 0, 1], pan=(linvar([-1, 1], 32), PWhite(-1, 1))).sometimes("stutter", amp=1, echo=2, oct=4, sus=1).sometimes("stutter", amp=0.5, echo=0.5, degree=(0, P*[4, 12]), slide=0, dur=1/2, leg=4, mverb=0.8, delay=(0, 4, 0.25)).rarely("stutter", amp=0.2, echo=0.25, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=0, dur=1, dist2=0.0, sus=2, leg=4, mverb=0.8, delay=2).rarely("stutter", amp=0.4, echo=2, oct=6, degree=((4, P*[6, 12]), linvar([-4, 4], 4)), slide=2, slidedelay=2, dur=1, dist2=0.0, sus=2, leg=32, mverb=0.2, delay=(0, 1, 2.25)).unison(4)
+
+b1 >> varsaw(a2.degree, sus=10, lpf=linvar([3000, 6700], 128), lpr=PWhite(0.2,0.9), blur=2, amp=0.8, dur=var([5,1,1], [6,1,1]), oct=PStep(6,3,4)).unison(2) + var([0, 4, 8], [6, 1, 1])
+
+p1 >> pluck(var([([7, 0], 0), [(12, 0), ([Scale.chromatic, 0], 0), (0, [12, 7])]]),oct=(3, PStep(16, 3, 4)), dur=PwRand([[4, 1, 1/2], P[1/2, 1/4, 1/4, 1/4, 1/2, 1/4, 1/4, 1/2, 1/4, 1/2]], [1, 30]), leg=linvar([0, 4], PRand(16)[:4]), dist2=0.8, pan=linvar([-1, 1], [32]), scale=Scale.chromatic, drive=var([PWhite(0.01, 0.1), [0, (0.01, 0.2)]]), hpf=PWhite(30, 60), hpr=(0.1, 0.9)).sometimes("stutter", 1, mverb=0.6, feed=0.2, rate=0.2, shape=1) + var([0, 3, 4], [PRand([24, 128]), 2, 2])
+
+p1.stop()
+
+g2 >> bass(melody() + var([7, 3, [4, 0]]),dur=var([1/4, 1/2]), drive=0, vol=0.5, mverb=0.1).unison(0)
+
+e1 >> plaits(melody(),dur=var([1/2, (1/2, 2)]), mverb=0.8, engine=var([11, 5], [3, 1]), oct=4, amp=PWhite(0, 1))
+
+g2.stop()
+
+e1.stop()
+
+Server.addFx(jpverb=0.7)
+
+Server.addFx(jpverb=0.7, jpmix=0.3)
+
+Server.addFx(jpverb=0.8, jpmix=0.3)
+
+Server.addFx(jpverb=0.9, jpmix=0.3)
+
+Server.addFx(jpverb=1.0, jpmix=0.3)
+
+Server.addFx(jpverb=1.0, jpmix=0.4)
+
+g4 >> ebass(dur=1/4, hpf=(400, 1200), hpr=0.02, echo=(var([0.016, 0.012], [16, 4, 4]), 0.01), drive=0.0, delay=linvar([0, (0.01, 0.03)], 128), lpf=(1200, (400, 4000)), mpf=linvar([200, 2000], [24, 4]))
+
+g4.stop()
+
+Server.addFx(jpverb=1.0, jpmix=0.3)
+
+Server.addFx(jpverb=1.0, jpmix=0.2)
+
+Server.clearFx()
+
+e0 >> plaits(melody(),dur=(1/2, 1/4), engine=3, drive=0, mverb=0.8, oct=5)
+
+e0.stop()
+
+Server.addFx(fx2=1)
+
+Clock.bpm = 122;
+
+e0 >> karp(melody(),dur=1/4, oct=5)
+
+e0 >> karp(melody(),dur=1/4, oct=5, spf=400, spfslide=0.5, spfend=4000)
+
+e1 >> bass(melody(),dur=1/4, drive=linvar([0, 0.02], 32), mverb=0.8, hpf=0)
+
+e_all.only()
+
+e0.dur=var([2, 1/4, 1/4, 1/4, 1/4])
+
+f4 >> karp(melody(),dur=PDur(11, 15), lpf=1200, drive=linvar([0, 0.05], 32), mverb=0.8, delay=var([0, 0.5]), oct=PStep(5, 4, 5)).unison(2) + var([0, 2, 0, (0, 2)])
+
+Server.clearFx()
+
+e_all.lpf=0
+
+a3.lpf=200
+
+a2.stop()
+
+f4.dur=2
+
+f4 >> karp(melody(),dur=PDur(11, 15), lpf=1200, drive=linvar([0, 0.05], 32), mverb=0.8, delay=var([0, 0.5]), oct=PStep(5, 4, 5)).unison(2) + var([0, 2, 0, (0, 2)])
+
+f5 >> lbass(dur=16, oct=4, drive=0.0).unison(2)
+
+e_all.stop()
+
+f6 >> lbass(dur=16, oct=4, drive=1).unison(2)
+
+f7 >> lbass(dur=1/2, sus=1/4, oct=5, leg=12, lpf=800, rate=0.25,amp=PBin(16), hpf=0, dist2=0)
+
+b1 >> a_daft(var([0,linvar([0,P*[-7,7]], [4,0])],P*[1,1, 4, 0.1, 0.25]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, linvar([2000, 4000], 32)),detune=1.3, oct=(4,5,6), rq=0.01, slide=0, a=0.01, r=[1, 2, 4], rate=linvar([0.4,0.01],[64,0]), crush=PStep(8,4,0), tanh=0.2, bits=6).chroma()
+
+b1 >> a_daft(var([0,linvar([0,P*[-7,7]], [4,0])],P*[1,1, 4, 0.1, 0.25]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, linvar([2000, 4000], 32)),detune=1.3, oct=(4,5,16), rq=0.01, slide=0, a=0.01, r=[1, 2, 4], rate=linvar([0.4,0.01],[64,0]), crush=PStep(8,4,0), tanh=0.2, bits=6).chroma()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("nuance")
+
+~j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1), leg=0)
+
+attack("nuance")
+
+~j2 >> play("b ", sample=8, dur=PDur(5, 8), cut=1/2, mverb=0.2, hpf=var([0, PWhite(0, 1200)[:4]]))
+
+~j2 >> play("b ", triode=1, octafuz=1, octamix=PWhite(0.2, 0.6), sample=8, dur=PDur(5, 8), cut=1/2, echo=0, mverb=0.2, hpf=var([0, PWhite(0, 1200)[:4]]))
+
+~j2 >> play("b ", triode=1, octafuz=1, octamix=PWhite(0.2, 0.6), sample=8, dur=PDur(5, 8), cut=1/2, echo=0, mverb=0.2, hpf=var([0, PWhite(0, 1200)[:4]]))
+
+~j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), hpf=(200, var([200, 0, 30, 20]), 0),  cut=(0, 0, 0.1), dur=1/2, vadiod=500, vadiodr=0.5, vadiodd=4)
+
+~j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), hpf=(200, var([200, 0, 30, 20]), 0),  cut=(0, 0, 0.1), dur=1/2, vadiod=500, vadiodr=0.5, vadiodd=4)
+
+~j2 >> play("b ", triode=1, octafuz=1, octamix=PWhite(0.2, 0.6), sample=8, dur=PDur(5, 8), cut=1/2, echo=0, mverb=0.2, hpf=var([0, PWhite(0, 1200)[:4]]))
+
+~j2 >> play("b ", sample=8, dur=PDur(5, 8), cut=1/2, mverb=0.2, hpf=var([0, PWhite(0, 1200)[:4]]))
+
+j3 >> play("T..h hh4. Tbbb mbbb", sample=4, cut=1/8)
+
+j1 >> play("B.BB")
+
+j1 >> play("BVBB")
+
+j1 >> play("<BVBB><:>", echo=1)
+
+m9 >> play("..c.", sample=4)
+
+u4 >> loop("industia16", dur=16, sample=2)
+
+u7 >> loop("electrodrum32", dur=32, sample=2, mverb=0)
+
+u7 >> loop("electrodrum32", dur=32, sample=2, mverb=0)
+
+c5 >> loop("jazzc8", dur=8, sample=7, comp=1)
+
+u4.stop()
+
+# Clock.bpm = bpmInit;
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+p1.fx2mix=linmod(0,1,32,1)
+
+~p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), lpf=0, sus=2, blur=2, chop=4, fmod=0, rate=1, fx2=1, fx2mix=1, hpf=PFr(100,4000), oct=PStep(8,P+(6,4),5), cutoff=2300).unison(3)
+
+p1.fx2mix=linmod(0,1,32,1)
+
+j3 >> dbass(var([0, -2], 8), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=expvar([55,PRand(200,500)],33)).unison(3)
+
+~q1 >> cbass(7, dur=PDur(var(P[3:8],14),8), cutoff=10, rq=0.2, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1, fx2=11, vol=0.6).unison(2)
+
+q1 >> cbass((var([0,-2],26),2,4), dur=16, cutoff=10, rq=0.4, oct=5, boost=3, detune=0.01, follow=2, tanh=0).unison(1)
+
+q1.stop()
+
+h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6))
+
+soloRnd()
+
+s1 >> play("<x(...x)><..u.>", sample=(1,3), drcomp=0.5, delay=0, mverb=(0,.1), amp=(1,2)).sometimes("stutter")
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes("stutter", PRand(8))
+
+q2 >> play("k.", sample=0, amp=2)
+
+k5 >> supersaw([linvar([0, 6], [64,0]),7], dur=1/4, lpf=5400, oct=6, fx2=1, sus=0.25, hpf=PFr(2500,3000), vol=1.0).unison(2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+n2 >> dab(oct=6, dur=PDur([3, 5], 8), valad=2201, sbrk=0.4, valadr=0.1, shift=[2, 1, 4], dist2=1.0, valadd=23, leg=128, valadt=1, valadc=0.1, fx1=[0.9, 0.1], mverb=0.1)
+
+p1 >> pluck(var([([7, 0], 0), [(12, 0), ([Scale.chromatic, 0], 0), (0, [12, 7])]]),oct=(3, PStep(16, 3, 4)), dur=PwRand([[4, 1, 1/2], P[1/2, 1/4, 1/4, 1/4, 1/2, 1/4, 1/4, 1/2, 1/4, 1/2]], [1, 30]), leg=linvar([0, 4], PRand(16)[:4]), dist2=0.8, pan=linvar([-1, 1], [32]), scale=Scale.chromatic, drive=var([PWhite(0.01, 0.1), [0, (0.01, 0.2)]]), hpf=PWhite(30, 60), hpr=(0.1, 0.9)).sometimes("stutter", 1, mverb=0.6, feed=0.2, rate=0.2, shape=1) + var([0, 3, 4], [PRand([24, 128]), 2, 2])
+
+p1 >> pluck(var([([7, 0], 0), [(12, 0), ([Scale.chromatic, 0], 0), (0, [12, 7])]]),oct=(3, PStep(16, 3, 4)), dur=PwRand([[4, 1, 1/2], P[1/2, 1/4, 1/4, 1/4, 1/2, 1/4, 1/4, 1/2, 1/4, 1/2]], [1, 30]), leg=linvar([0, 4], PRand(16)[:4]), dist2=0.8, pan=linvar([-1, 1], [32]), scale=Scale.chromatic, drive=var([PWhite(0.01, 0.1), [0, (0.01, 0.2)]]), hpf=PWhite(30, 60), hpr=(0.1, 0.9)).sometimes("stutter", 1, mverb=0.6, feed=1.2, rate=0.2, shape=1) + var([0, 3, 4], [PRand([24, 128]), 2, 2])
+
+p1 >> pluck(var([([7, 0], 0), [(12, 0), ([Scale.chromatic, 0], 0), (0, [12, 7])]]),oct=(3, PStep(16, 3, 4)), dur=PwRand([[4, 1, 1/2], P[1/2, 1/4, 1/4, 1/4, 1/2, 1/4, 1/4, 1/2, 1/4, 1/2]], [1, 30]), leg=linvar([0, 4], PRand(16)[:4]), dist2=0.8, pan=linvar([-1, 1], [32]), scale=Scale.chromatic, drive=var([PWhite(0.01, 0.1), [0, (0.01, 0.2)]]), hpf=PWhite(30, 60), hpr=(0.1, 0.9)).sometimes("stutter", 1, mverb=0.6, feed=1.2, rate=0.2, shape=1) + var([0, 3, 4], [PRand([24, 128]), 2, 2])
+
+p1.solo()
+
+p1 >> pluck(var([([7, 0], 0), [(12, 0), ([Scale.chromatic, 0], 0), (0, [12, 7])]]),oct=(3, PStep(16, 3, 4)), dur=PwRand([[4, 1, 1/2], P[1/2, 1/4, 1/4, 1/4, 1/2, 1/4, 1/4, 1/2, 1/4, 1/2]], [1, 30]), leg=linvar([0, 4], PRand(16)[:4]), dist2=0.8, pan=linvar([-1, 1], [32]), scale=Scale.chromatic, drive=var([PWhite(0.01, 0.1), [0, (0.01, 0.2)]]), hpf=PWhite(30, 60), hpr=(0.1, 0.9)).sometimes("stutter", 1, mverb=0.6, feed=1.2, rate=0.2, shape=1) + var([0, 3, 4], [PRand([24, 128]), 2, 2])
+
+c5 >> play("<k.><X.>", sample=(0,4), bank=(1,0), echo=PStep(8, 0.25, 0), hpf=PFr(20, 40), amp=3.0).sometimes("stutter")
+p0 >> play("<.-*.><-.c:>", echo=(0.125,.25), mverb=0.7, fx2=1)
+
+n2 >> dab(oct=6, dur=PDur([3, 5], 8), valad=2201, sbrk=0.4, valadr=0.1, shift=[2, 1, 4], dist2=1.0, valadd=23, leg=128, valadt=1, valadc=0.1, fx1=[0.9, 0.1], mverb=0.1)
+
+g0 >> lbass(dur=[1/2, 1/4, 1/4, 1/2, 1/2, 1/4, 1/8, 1/8], lpf=linvar([1200, 4000]), lpr=0.1, sus=1/4, valadd=4, valad=12) + var([0, P[-2, -3]])
+
+n2.stop()
+
+g0.stop()
+
+n2 >> dab(oct=6, dur=PDur([3, 5], 8), valad=2201, sbrk=0.4, valadr=0.1, shift=[2, 1, 4], dist2=1.0, valadd=23, leg=128, valadt=1, valadc=0.1, fx1=[0.9, 0.1], mverb=0.1).end()
+
+p1 >> pluck(var([([7, 0], 0), [(12, 0), ([Scale.chromatic, 0], 0), (0, [12, 7])]]),oct=(3, PStep(16, 3, 4)), dur=PwRand([[4, 1, 1/2], P[1/2, 1/4, 1/4, 1/4, 1/2, 1/4, 1/4, 1/2, 1/4, 1/2]], [1, 30]), leg=linvar([0, 4], PRand(16)[:4]), dist2=0.8, pan=linvar([-1, 1], [32]), scale=Scale.chromatic, drive=var([PWhite(0.01, 0.1), [0, (0.01, 0.2)]]), hpf=PWhite(30, 60), hpr=(0.1, 0.9)).sometimes("stutter", 1, mverb=0.6, feed=1.2, rate=0.2, shape=1) + var([0, 3, 4], [PRand([24, 128]), 2, 2])
+
+g1 >> dbass(delay=0.25, oct=5,dur=PDur(11, 15), dist2=3, lpf=1200, cut=1/2, mverb=0.01, mpf=linvar([200, 2000], 128), vol=0.5, rate=(0.5, 1)).unison(4)
+
+g3 >> lbass(dur=[1/2, 1/3, 1/3, 1/3, 1/2], oct=4, hpf=400, drive=1.4, lpf=12000, mpf=3200, mverb=0)
+
+p1.stop()
+
+n2 >> dab(oct=6, dur=PDur([3, 5], 8), valad=2201, sbrk=0.4, valadr=0.1, shift=[2, 1, 4], dist2=1.0, valadd=23, leg=128, valadt=1, valadc=0.1, fx1=[0.9, 0.1], mverb=0.1).end(16,2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+n2 >> dab(oct=6, dur=PDur([3, 5], 8), valad=2201, sbrk=0.4, valadr=0.1, shift=[2, 1, 4], dist2=1.0, valadd=23, leg=128, valadt=1, valadc=0.1, fx1=[0.9, 0.1], mverb=0.1).end(16,2)
+
+p1 >> pluck(var([([7, 0], 0), [(12, 0), ([Scale.chromatic, 0], 0), (0, [12, 7])]]),oct=(3, PStep(16, 3, 4)), dur=PwRand([[4, 1, 1/2], P[1/2, 1/4, 1/4, 1/4, 1/2, 1/4, 1/4, 1/2, 1/4, 1/2]], [1, 30]), leg=linvar([0, 4], PRand(16)[:4]), dist2=0.8, pan=linvar([-1, 1], [32]), scale=Scale.chromatic, drive=var([PWhite(0.01, 0.1), [0, (0.01, 0.2)]]), hpf=PWhite(30, 60), hpr=(0.1, 0.9)).sometimes("stutter", 1, mverb=0.6, feed=1.2, rate=0.2, shape=1) + var([0, 3, 4], [PRand([24, 128]), 2, 2])
+
+p1.stop()
+
+o7 >> play("gngngngnngngngng".replace("g", "-"), valad=800, valadr=0.3, valadd=15, sample=PRand(22), valadt=(0,4), valadc=0.7, ).sometimes("stutter", PRand(32), pan=PWhite(-1,1))
+
+g3 >> lbass(dur=[1/2, 1/3, 1/3, 1/3, 1/2], oct=4, hpf=400, drive=1.4, lpf=12000, mpf=3200, mverb=0)
+
+g3 >> lbass(dur=[1/2, 1/3, 1/3, 1/3, 1/2], oct=5, hpf=400, drive=1.4, lpf=12000, mpf=3200, mverb=0)
+
+o7 >> play("gngngngnngngngng".replace("o", "-"), valad=800, valadr=0.3, valadd=15, sample=PRand(22), valadt=(0,4), valadc=0.7, ).sometimes("stutter", PRand(32), pan=PWhite(-1,1))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.8)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.3).unison(4)
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.8).lclip(4)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.3).unison(4)
+
+g2.amp=1
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+l0 >> loop("ragedrone32", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=0, dur=1/2, beat_stretch=0)
+
+l2 >> noloop("vocalcrash8", dur=[16, 8, 4, 2], lofi=1, start=0.5, rate=1, sample=4)
+
+l4.stop()
+
+l2 >> noloop("vocalcrash8", dur=[16, 8, 4, 2], lofi=1, start=0.5, rate=1, sample=4)
+
+rb >> play("<(X...)(v..(.//))(...(.v))(..v.)><(.r)...><-.><.+><...(.(.:))>",dur=1/2, amp=PBern(16), amplify=var([1,0],[14,1]), sample=6,pan=(0,-0.2,(-1,1),PWhite(-1,1),0.3)).human(20,5,0).often("stutter", PRand(16).rnd(2), delay=(0, 0.25), shape=0.2, mid=0, low=1.5, high=4).every(2, "shuffle")
+
+rb >> play("<(X...)(v..(.//))(...(.v))(..v.)><(.r)...><-.><.+><...(.(.:))>",dur=1/2, amp=PBern(16), amplify=var([1,0],[14,1]), sample=6,pan=(0,-0.2,(-1,1),PWhite(-1,1),0.3)).human(20,5,0).often("stutter", PRand(16).rnd(2), delay=(0, 0.25), shape=0.2, mid=0, low=1.5, high=4).every(2, "shuffle")
+
+e1 >> bass(melody(), lpf=1200,dur=var([2, 1, 1/4], [1, 2, 4]), drive=linvar([0, 0.1], 32), mverb=0.0, mverbdiff=0.4).slider()
+
+e1.stop()
+
+f4 >> karp(melody(),dur=PDur(11, 15), lpf=1200, drive=linvar([0, 0.05], 32), mverb=0.8, delay=var([0, 0.5]), oct=PStep(5, 4, 5)).unison(2) + var([0, 2, 0, (0, 2)])
+
+f4.stop()
+
+d0 >> play("<kk.Kkkkkk.kk><u.(...C).><~.><X...>", dur=1/1, valad=0, sample=P[0], valadr=0.3, valadd=139, valadt=0, valadc=0.1).sometimes("stutter")
+
+attack("overload")
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32))
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.05,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a2 >> organ([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6).unison(2)
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.8)
+
+a3 >> loop("synth16", dur=16, delay=0, a=0, cut=0.125, leg=8)
+
+l3 >> loop("synth16", dur=16, a=0, pos=PWhite(0, 1), beat_stretch=0, rate=-1)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.3).unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("overload")
+
+Clock.bpm = 170;
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32))
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.05,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.06,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.07,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.08,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.09,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.10,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.11,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.12,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.13,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.14,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.15,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.16,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.17,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.18,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.19,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.20,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.21,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.22,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(4)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(4)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(0.5)
+
+a2 >> organ([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=1)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.22,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=2)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=3)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=4)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.23,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.24,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.25,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.26,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.27,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=5)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=6)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=7)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=8)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(0.25)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=9)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=8)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=7)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=6)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(0.5)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(0.6)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(0.7)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(0.8)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(0.9)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.0)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.1)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.2)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.3)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.4)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.5)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.6)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.7)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.8)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(1.9)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2.0)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2.1)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=PSine(404)*13)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2.2)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2.3)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2.4)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2.5)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2.6)
+
+a2 >> organ([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.27,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32)).lclip(2.6)
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.27,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=PSine(404)*12)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(2.6)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(2.7)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(2.8)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(2.9)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(3.0)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(3.1)
+
+a2 >> organ([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a2 >> organ([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6).unison(2)
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=PSine(404)*12, lpf=5000)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(3.2)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(3.3)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(0)
+
+l2 >> loop("rock32", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=1/2, beat_stretch=0).start(32)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6).unison(3)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.2, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.3, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.4, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.5, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.6, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.7, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.8, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.9, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=1.0, vol=0.6).unison(4)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(4)
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.8)
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.1)
+
+l2 >> loop("rock32", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=1/2, beat_stretch=0, sbrk=0.5)
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.1).lclip(4)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(5)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(6)
+
+l0 >> loop("cyber8", dur=8, sample=PRand(32)).lclip(7)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=2, mid=4, low=1.0, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=3, mid=4, low=1.0, vol=0.6).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=0.6).unison(4)
+
+l2 >> loop("rock32", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=1/2, beat_stretch=0, sbrk=[0, 0.5])
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=0.7).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=0.8).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=0.9).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=0.9).unison(4)
+
+a3.stop()
+
+l0.stop()
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.0).lclip(2)
+
+g1.mix2=0
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.0).lclip(2)
+
+l1 >> loop("cyber32", dur=32, sample=1, beat_stretch=0, a=0.0).lclip(1)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+g1.mix2=0
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1700, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1800, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1900, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2000, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2100, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2200, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2300, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2400, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2500, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2700, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2800, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=2900, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3000, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3100, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3200, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3300, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3400, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3500, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3700, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3800, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3900, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3900, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+a2.stop()
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(5, var([5, 6], [24, 8]), linvar([5.99, 6.01])), fx1=0.5,scale=Scale.chromatic, drive=[0.5, 0.1], lpf=3900, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=4, mid=4, low=1.0, vol=1.0).unison(4)
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+a1.stop()
+
+a3 >> loop("synth16", dur=16, delay=0, a=0, cut=0.125, leg=8)
+
+l3 >> loop("synth16", dur=16, a=0, pos=PWhite(0, 1), beat_stretch=0, rate=-1)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.3).unison(4)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.4).unison(4)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.5).unison(4)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.6).unison(4)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.7).unison(4)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.8).unison(4)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.9).unison(4)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4)
+
+l1.stop()
+
+l3.chop=18
+
+l3.chop=28
+
+a3.chop=4
+
+l3.chop=4
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4)
+
+l3 >> loop("synth16", dur=16, a=0, pos=PWhite(0, 1), beat_stretch=0, rate=-1)
+
+a3 >> loop("synth16", dur=16, delay=0, a=0, cut=0.125, leg=8)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4)
+
+a3.chop=4
+
+l3.chop=4
+
+l0 >> loop("ragedrone32", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=0, dur=1/2, beat_stretch=0)
+
+l2 >> loop("noizebeat16", lpf=0, amp=1, chop=4)
+
+l2 >> loop("noizebeat16", lpf=0, amp=1, chop=4, dur=16)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(4)
+
+l3 >> loop("bass8", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=8, beat_stretch=0)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(2)
+
+l3.chop=14
+
+l1 >> loop("gscreechb16", dur=32, mverb=1)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 1]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(1)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 2]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(1)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 3]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(1)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 3]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(0)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 3]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(0.5)
+
+a5 >> play("[--]", sample=PCoin(3, 4, 0.5), amp=2, lpf=0, shape=0.1)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([2, 3]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(0.5)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([2, 3]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(0.25)
+
+l4 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([2, 3]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=1.0).unison(4).lclip(0.125)
+
+l4.solo()
+
+l4.stop()
+
+a5.stop()
+
+l1 >> loop("nsbass8", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=1/2, beat_stretch=0, wshape=PSine(404)*12, lpf=5000)
+
+l2 >> loop("rock32", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=1/2, beat_stretch=0, sbrk=[0, 0.5])
+
+g2.amp=1
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g2.amp=2
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.5, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.6, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.7, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.8, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.9, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=1.0, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=1.1, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=1.2, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=1.3, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+l1.stop()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=1.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=1.5, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+attack("glitch")
+
+c1 >> glitcher(oct=PRand(8), rate=PWhite(1, 128), amp=1, dur=8, len=PWhite(1, 16), henA=PWhite(0.01, 4), fmod=0, henB=PWhite(0.1, 0.2), t=[2, 4, 6, 8, 32], crush=PRand(16),bits=16, shape=4.0).unison(2)##### attack@overload.wce:~$ #####
+
+g7 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=PRand(-12, 12), amp=1.4, cut=PWhite(0.5, 1), sample=PRand(20), dur=1/2, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g7 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=PRand(-12, 12), amp=1.5, cut=PWhite(0.5, 1), sample=PRand(20), dur=1/2, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g7 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=PRand(-12, 12), amp=1.6, cut=PWhite(0.5, 1), sample=PRand(20), dur=1/2, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g7 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=PRand(-12, 12), amp=1.7, cut=PWhite(0.5, 1), sample=PRand(20), dur=1/2, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "[--]")), amp=1.5, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "[--]")), amp=1.6, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "[--]")), amp=1.7, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "[--]")), amp=1.8, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "[-u]")), amp=1.8, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+attack("disco punk")
+
+g3 >> play(PRand("Xx.U.xGg.xx.G[gg]x.x".replace("x", "[-u]")), amp=1.8, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+x5 >> play("<kku(...({.u[uu]}))><.->", drcomp=0.5).start(64)
+
+g3 >> play(PRand("Xx.U.xGg.xx.G[gg]u.x".replace("x", "[-u]")), amp=1.8, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3.stop()
+
+g7.stop()
+
+g5 >> play(PRand("fff".replace("f", "{o-}")), rate=1, sample=PRand(20), dur=1/4, amp=0.4, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+e5 >> lbass(var([0, -2, -4, -3], 8) + var([0, -1],[7,1]), oct=(5), dur=1/2, cutoff=PFr(1900,6200), tone=linvar([0.3, 0.9], 33), rel=0.11, hpf=50)
+
+g5 >> play(PRand("fff".replace("f", "{o-}")), rate=1, sample=PRand(20), dur=1/4, amp=0.4, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+g5 >> play(PRand("fff".replace("f", "{o-}")), rate=2, sample=PRand(20), dur=1/4, amp=0.4, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+Scale.default="minor"
+
+g5 >> play(PRand("fff".replace("f", "{o-}")), rate=1, sample=PRand(20), dur=1/4, amp=0.4, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+k4 >> play("C.c.....cc.....", sample=1, flanger=1)
+
+k5 >> play("[--]", sample=14, amp=PMorse("fzefk"))
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, 3, 5), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=1, low=0.1, vol=0.8).unison(8)
+
+b5 >> superbass([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.3, rqd=0.5, detune=0.5, fdecay=5, sub=1, amp=0.7, hpf=200, mverb=0.7, mverbmix=0.3).unison(3)
+
+a3.stop()
+
+l2.stop()
+
+l0.stop()
+
+c1.stop()
+
+c1.stop()
+
+x5.stop()
+
+g5.stop()
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=0.5, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=0.6, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=0.7, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=0.8, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=0.9, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.0, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.1, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.2, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.3, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.4, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.5, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.6, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.7, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.8, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=1.9, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=2.0, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=2.1, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+a2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=2.2, fold=0.5, leg=var([0, a1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)
+
+b5 >> superbass([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.3, rqd=0.5, detune=0.5, fdecay=5, sub=1, amp=0.7, hpf=200, mverb=0.7, mverbmix=0.3).unison(3).sometimes("stutter")
+
+e5.stop()
+
+a1 >> sawbass([3, (3, [4, var([3, 14], [15, 1])])], slide=a2.degree == 15,dur=[1/2, 1/2, 1], oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=var([[0.5, 0.1], [4, 5]], [48, 16]), lpf=1200, bpf=linvar([200, 3200, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=8, low=0.1, vol=0.5, chop=0).unison(8)
+
+k4.stop()
+
+k4.stop()
+
+k5.stop()
+
+l5 >> loop("circlebreak16", dur=16, amp=2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("A1")
+
+a0 >> loop("cosmic16", dur=16, sample=2, hpf=(300, PRand([400, 300])), room2=1, revsus=18, shift=var([(0.5, 1), 1], [4, 4]), beat_dur=1).unison(2)
+
+a1 >> play("c", dur=4, hpf=8000, leg=4, echotime=4, echo=0.5, echomix=0.25, pan=PWhite(-1, 1))
+
+a2 >> loop("sub4", dur=4, sample=9, amp=PWhite(0.5, 0) + 0.5, shift=(0, 1.01), hpf=0, drive=var([0, 0.1], [3, 1]))
+
+a7 >> loop("berlin8", dur=8, sample=5, hpf=PRand(100, 1000), amp=PWhite(0, 1), room2=1, revsus=4).lclip(4)
+
+attack("A2")
+
+a9 >> loop("berlin8", dur=8, sample=2, echo=var([0, 0.5], [3, 1]), amp=P[0, 0, 0, 1] / 1.5)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.6, a=2, oct=(5, 6, 7), hpf=200).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=200).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=201).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=202).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=203).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=204).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=205).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=206).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=207).unison(4)
+
+a7 >> loop("berlin8", dur=8, sample=5, hpf=PRand(10, 100), amp=PWhite(0, 1), room2=1, revsus=4).lclip(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=208).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=209).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=210).unison(4)
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 7), hpf=211).unison(4)
+
+3
+
+3
+
+a3 >> ethpad(dur=8, lpf=1000,mverb=0.7, a=2, oct=(5, 6, 3), hpf=211).unison(4)
+
+a3.stop()
+
+attack("cloudy")
+
+attack("A2_96")
+
+b1 >> plaitsX(dur=var([2, 1], [16, 8]), slide=(0.01, (-0.03, 0.04)), slidedelay=(0.01, 0.1, 4), oct=(3, var([4, 5]), PRand([3, 4, 5, 6])), preset=var([0, 4, 12]), slidefrom=(0, 0.02, 0), sus=var([2, 3, 1], [4, 2]), shift=var([0.5, 1, 0.75]), amp=0.5).unison(2)
+
+attack("unprobable")
+
+v1 >> play("K", amp=[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], sample=0, dur=1/4, output=8)
+
+v3 >> play("@", amp=[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0], dur=1/4, output=18)
+
+v4 >> play("N", amp=[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0], dur=1/4, shape=1, sample=PRand(99)[:12], cut=1, lpf=200, output=14, amplify=1)
+
+v5 >> play("-", amp=[0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,1], dur=1/4, sample=2, hpf=180, vol=0.8, pan=PWhite(-1,1), output=12)
+
+x6 >> play("O", hpf=8000, dur=1/4, amp=[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0], output=10)
+
+x5 >> play("o", amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], dur=1/4, sample=2, output=10)
+
+a0 >> loop("cosmic16", dur=16, sample=2, hpf=(300, PRand([400, 300])), room2=1, revsus=18, shift=var([(0.5, 1), 1], [4, 4]), beat_dur=1).unison(2).lclip(4)
+
+a0 >> loop("cosmic16", dur=16, sample=2, hpf=(300, PRand([400, 300])), room2=1, revsus=18, shift=var([(0.5, 1), 1], [4, 4]), beat_dur=1).unison(2).lclip(0.5)
+
+a0 >> loop("cosmic16", dur=16, sample=3, hpf=(300, PRand([400, 300])), room2=1, revsus=18, shift=var([(0.5, 1), 1], [4, 4]), beat_dur=1).unison(2).lclip(0.5)
+
+f4 >> pluck(PArp([0,2,5],4), dur=1/4, lpf=3200, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=1).unison(4).end(16,4)
+
+a0 >> loop("cosmic16", dur=16, sample=4, hpf=(300, PRand([400, 300])), room2=1, revsus=18, shift=var([(0.5, 1), 1], [4, 4]), beat_dur=1).unison(2).lclip(0.5)
+
+a0 >> loop("cosmic16", dur=16, sample=0, hpf=(300, PRand([400, 300])), room2=1, revsus=18, shift=var([(0.5, 1), 1], [4, 4]), beat_dur=1).unison(2).lclip(0.5)
+
+a0.stop()
+
+a1.stop()
+
+a2.stop()
+
+a2.stop()
+
+a7.stop()
+
+a9.stop()
+
+b1.stop()
+
+v1.stop()
+
+v1.stop()
+
+v3.stop()
+
+v3.stop()
+
+v3.stop()
+
+v3.stop()
+
+v4.stop()
+
+v5.stop()
+
+x6.stop()
+
+x5.stop()
+
+f4.stop()
+
+attack("oxydation")
+
+Scale.default="yu"
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=0.3).unison(4,0.25)
+
+attack("depths")
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1)
+
+attack("trone")
+
+d1 >> play("<(xxx(x.))(...(.x))..><.(---.)><..o.><..(...*).><...{---[--]:=[.x][-o]}><|(XXX(X[.X]))0|.>",sample=((7,6),7,(7,2),7), dur=1/2, amp=0.5, room2=P(0,0.3,0.2,0.3,0.5,0), mix2=0.2, revatk=0.2, revsus=PWhite(0.2,1.7), lpf=0).sometimes("stutter", PRand(4).rnd(2)).rarely("trim",3, cycle=8)
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=0.8, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=0.9, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.0, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.1, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+d1.stop()
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.2, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.3, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.4, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.5, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.6, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.7, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.8, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=1.9, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.0, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.1, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.2, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.3, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.4, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.5, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.6, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.7, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.8, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=2.9, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.0, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.1, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.2, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.3, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.4, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.5, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.6, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.7, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.8, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=3.9, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+b1 >> pbass(dur=PDur(var([4,P*[5,7,3]],[6,2]),8), rate=expvar([0,16],[64,0]), amp=4.0, oct=(4,PStep(32,6,5))).follow(a1, 8) + var([0,PGauss()],[7,1])
+
+a1.revatk=0
+
+a1 >> angst((var([0,-2,-4,2],8),2,PRand(8)), dur=PDur(5,8)*8, oct=(3,4,[5,[6,2,6]]), room2=0.7, mix2=0.5, damp2=PWhite(0.1,0.8), revatk=PWhite(-3,3), revsus=a1.revatk + PRand(3), drive=10, rate=PWhite(0,16), high=2, mid=0.5, hpf=PStep(8,1400,40), lpf=PRand(500,12000)).slider()
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+a1.stop()
+
+p1.stop()
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.7, amp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.6, amp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.5, amp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.4, amp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.3, amp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.2, amp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.1, amp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.0, amp=1)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=0.4).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=0.5).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=0.6).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=0.7).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=0.8).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=0.9).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=1.0).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=1.1).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=1.2).unison(4,0.25)
+
+f1 >> pluck(var(PChords(),8), dur=PRand(1,8)/PRand(1,4), blur=PWhite(1,4), decay=PRand(1,4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(1,16), atk=PStep(8,0.2,PRand(1,6)), room2=1, mix2=0.6, damp2=PWhite(0.1,0.5), revatk=PWhite(0.2,2), revsus=PWhite(1,4), hpf=160, lpf=PRand(1800,9065), amp=1.3).unison(4,0.25)
+
+f1.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a4 >> dbass(dur=1/2)
+
+a4 >> blip(dur=1/2)
+
+~a4 >> blip(dur=1/2)
+
+a4 >> blip(dur=1/2)
+
+a4 >> blip(dur=1/2)
+
+a4 >> blip(dur=1/2).unison(4)
+
+a4 >> blip(dur=1/2).unison(8)
+
+a4 >> blip(dur=1/2).unison(24)
+
+a4 >> blip(dur=1/2).unison(48)
+
+a4 >> blip(dur=1/2).unison(2)
+
+a4 >> blip(dur=1/2).unison(2)
+
+a4 >> blip(dur=1/2).unison(3)
+
+a4 >> blip(dur=1/2).unison(4)
+
+a4 >> blip(dur=1/2).unison(5)
+
+a4 >> blip(dur=1/2).unison(6)
+
+a4 >> blip(dur=1/2).unison(7)
+
+a4 >> blip(dur=1/2).unison(8)
+
+a4 >> blip(dur=1/2).unison(9)
+
+a4 >> blip(dur=1/2).unison(10)
+
+a4 >> blip(dur=1/2).unison(11)
+
+a4 >> blip(dur=1/2).unison(12)
+
+a4 >> blip(dur=1/2).unison(13)
+
+a4 >> blip(dur=1/2).unison(14)
+
+a4 >> blip(dur=1/2).unison(15)
+
+a4 >> blip(dur=1/2).unison(14)
+
+a4 >> blip(dur=1/2).unison(13)
+
+a4 >> blip(dur=1/2).unison(12)
+
+a4 >> blip(dur=1/2).unison(11)
+
+a4 >> blip(dur=1/2).unison(10)
+
+a4 >> blip(dur=1/2).unison(9)
+
+a4 >> blip(dur=1/2).unison(8)
+
+a4 >> blip(dur=1/2).unison(7)
+
+a4 >> blip(dur=1/2).unison(6)
+
+a4 >> blip(dur=1/2).unison(5)
+
+a4 >> blip(dur=1/2).unison(4)
+
+a4 >> blip(dur=1/2).unison(3)
+
+a4 >> blip(dur=1/2).unison(2)
+
+a4 >> blip(dur=1/2).unison(3)
+
+a4 >> blip(dur=1/2).unison(4)
+
+a4 >> blip(dur=1/2).unison(5)
+
+a4 >> blip(dur=1/2).unison(6)
+
+a4 >> blip(dur=1/2).unison(7)
+
+a4 >> blip(dur=1/2).unison(8)
+
+a4 >> blip(dur=1/2).unison(9)
+
+a4 >> blip(dur=1/2).unison(10)
+
+a4 >> blip(dur=1/2).unison(11)
+
+a4 >> blip(dur=1/2).unison(12)
+
+a4 >> blip(dur=1/2).unison(13)
+
+a4 >> blip(dur=1/2).unison(14)
+
+a4 >> blip(dur=1/2).unison(14)
+
+a4 >> blip(dur=1/2).unison(15)
+
+a4 >> blip(dur=1/2).unison(16)
+
+a4 >> blip(dur=1/2).unison(17)
+
+a4 >> blip(dur=1/2).unison(18)
+
+a4 >> blip(dur=1/2).unison(19)
+
+a4 >> blip(dur=1/2).unison(20)
+
+a4 >> blip(dur=1/2).unison(21)
+
+a4 >> blip(dur=1/2).unison(22)
+
+a4 >> blip(dur=1/2).unison(23)
+
+a4 >> blip(dur=1/2).unison(24)
+
+a4 >> blip(dur=1/2).unison(25)
+
+a4 >> blip(dur=1/2).unison(26)
+
+a4 >> blip(dur=1/2).unison(27)
+
+a4 >> blip(dur=1/2).unison(28)
+
+a4 >> blip(dur=1/2).unison(29)
+
+a4 >> blip(dur=1/2).unison(30)
+
+a4 >> blip(dur=1/2).unison(31)
+
+a4 >> blip(dur=1/2).unison(32)
+
+a4 >> blip(dur=1/2).unison(33)
+
+a4 >> blip(dur=1/2).unison(34)
+
+a4 >> blip(dur=1/2).unison(35)
+
+a4 >> blip(dur=1/2).unison(36)
+
+a4 >> blip(dur=1/2).unison(37)
+
+a4 >> blip(dur=1/2).unison(38)
+
+a4 >> blip(dur=1/2).unison(39)
+
+a4 >> blip(dur=1/2).unison(40)
+
+a4 >> blip(dur=1/2).unison(41)
+
+a4 >> blip(dur=1/2).unison(42)
+
+a4 >> blip(dur=1/2).unison(43)
+
+a4 >> blip(dur=1/2).unison(44)
+
+a4 >> blip(dur=1/2).unison(45)
+
+a4 >> blip(dur=1/2).unison(46)
+
+a4 >> blip(dur=1/2).unison(47)
+
+a4 >> blip(dur=1/2).unison(48)
+
+a4 >> blip(dur=1/2).unison(49)
+
+a4 >> blip(dur=1/2).unison(50)
+
+a4 >> blip(dur=1/2).unison(51)
+
+a4 >> blip(dur=1/2).unison(52)
+
+a4 >> blip(dur=1/2).unison(53)
+
+a4 >> blip(dur=1/2).unison(54)
+
+a4 >> blip(dur=1/2).unison(55)
+
+a4 >> blip(dur=1/2).unison(56)
+
+a4 >> blip(dur=1/2).unison(57)
+
+a4 >> blip(dur=1/2).unison(58)
+
+a4 >> blip(dur=1/2).unison(59)
+
+a4 >> blip(dur=1/2).unison(60)
+
+a4 >> blip(dur=1/2).unison(61)
+
+a4 >> blip(dur=1/2).unison(62)
+
+a4 >> blip(dur=1/2).unison(63)
+
+a4 >> blip(dur=1/2).unison(64)
+
+a4 >> blip(dur=1/2).unison(65)
+
+a4 >> blip(dur=1/2).unison(66)
+
+a4 >> blip(dur=1/2).unison(67)
+
+a4 >> blip(dur=1/2).unison(68)
+
+a4 >> blip(dur=1/2).unison(69)
+
+a4 >> blip(dur=1/2).unison(70)
+
+a4 >> blip(dur=1/2).unison(71)
+
+a4 >> blip(dur=1/2).unison(72)
+
+a4 >> blip(dur=1/2).unison(73)
+
+a4 >> blip(dur=1/2).unison(74)
+
+a4 >> blip(dur=1/2).unison(75)
+
+a4 >> blip(dur=1/2).unison(76)
+
+a4 >> blip(dur=1/2).unison(77)
+
+a4 >> blip(dur=1/2).unison(78)
+
+a4 >> blip(dur=1/2).unison(79)
+
+a4 >> blip(dur=1/2).unison(80)
+
+a4 >> blip(dur=1/2).unison(81)
+
+a4 >> blip(dur=1/2).unison(82)
+
+a4 >> blip(dur=1/2).unison(83)
+
+a4 >> blip(dur=1/2).unison(84)
+
+a4 >> blip(dur=1/2).unison(85)
+
+a4 >> blip(dur=1/2).unison(86)
+
+a4 >> blip(dur=1/2).unison(87)
+
+a4 >> blip(dur=1/2).unison(88)
+
+a4 >> blip(dur=1/2).unison(89)
+
+a4 >> blip(dur=1/2).unison(90)
+
+a4 >> blip(dur=1/2).unison(91)
+
+a4 >> blip(dur=1/2).unison(92)
+
+a4 >> blip(dur=1/2).unison(93)
+
+a4 >> blip(dur=1/2).unison(94)
+
+a4 >> blip(dur=1/2).unison(95)
+
+a4 >> blip(dur=1/2).unison(96)
+
+a4 >> blip(dur=1/2).unison(97)
+
+a4 >> blip(dur=1/2).unison(98)
+
+a4 >> blip(dur=1/2).unison(99)
+
+a4 >> blip(dur=1/2).unison(100)
+
+a4 >> blip(dur=1/2).unison(101)
+
+a4 >> blip(dur=1/2).unison(102)
+
+a4 >> blip(dur=1/2).unison(103)
+
+a4 >> blip(dur=1/2).unison(104)
+
+a4 >> blip(dur=1/2).unison(105)
+
+a4 >> blip(dur=1/2).unison(106)
+
+a4 >> blip(dur=1/2).unison(107)
+
+a4 >> blip(dur=1/2).unison(108)
+
+a4 >> blip(dur=1/2).unison(109)
+
+a4 >> blip(dur=1/2).unison(110)
+
+a4 >> blip(dur=1/2).unison(111)
+
+a4 >> blip(dur=1/2).unison(112)
+
+a4 >> blip(dur=1/2).unison(113)
+
+a4 >> blip(dur=1/2).unison(114)
+
+a4 >> blip(dur=1/2).unison(115)
+
+a4 >> blip(dur=1/2).unison(116)
+
+a4 >> blip(dur=1/2).unison(117)
+
+a4 >> blip(dur=1/2).unison(118)
+
+a4 >> blip(dur=1/2).unison(119)
+
+a4 >> blip(dur=1/2).unison(120)
+
+a4 >> blip(dur=1/2).unison(121)
+
+a4 >> blip(dur=1/2).unison(122)
+
+a4 >> blip(dur=1/2).unison(123)
+
+a4 >> blip(dur=1/2).unison(124)
+
+a4 >> blip(dur=1/2).unison(125)
+
+a4 >> blip(dur=1/2).unison(126)
+
+a4 >> blip(dur=1/2).unison(127)
+
+a4 >> blip(dur=1/2).unison(128)
+
+a4 >> blip(dur=1/2).unison(129)
+
+a4 >> blip(dur=1).unison(129)
+
+a4 >> blip(dur=8).unison(129)
+
+a4 >> blip(dur=8, oct=3).unison(129)
+
+a4 >> blip(dur=8, oct=3, sus=12).unison(129)
+
+a4 >> blip(dur=8, oct=3, sus=8).unison(129)
+
+a4.stop()
+
+a4 >> blip(dur=8, oct=3, sus=8).unison(129)
+
+a4 >> blip(dur=8, oct=3, sus=8).unison(129)
+
+lost()
+
+attack("depths")
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+a4 >> blip(dur=8, oct=3, sus=8).unison(64)
+
+a4 >> blip(dur=8, oct=3, sus=8).unison(64, .25)
+
+a4 >> blip(dur=8, oct=3, sus=8).unison(64, .5)
+
+p2 >> plaits(P[0,4,8,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+a4 >> blip(dur=8, oct=3, sus=8, wshape=8).unison(64, .5)
+
+p3 >> plaits(P[0,4,8,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3.stop()
+
+a4 >> blip(dur=8, oct=3, sus=8, wshape=3).unison(64, .5)
+
+a4 >> blip(dur=8, oct=3, sus=8, wshape=0).unison(64, .5)
+
+p3 >> plaits(P[0,4,8,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[0,4,8,7], dur=1/3, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+a4 >> blip(dur=8, oct=3, sus=8, wshape=4).unison(32, .5)
+
+p3 >> plaits(P[0,4,8,7], dur=1/3, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[0,4,8,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[0,4,8,7], dur=1/1, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[0,4,8,7], dur=1/1, oct=(3,6), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3.stop()
+
+a4 >> blip(dur=8, oct=3, sus=8, wshape=0).unison(32, .5)
+
+p3 >> plaits(P[0,4,8,7], dur=1/1, oct=(3,6), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[0,4,8,7], dur=1/1, oct=(3,6), harm=0.1, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[0,4,8,7], dur=1/1, oct=(3,6), harm=0.1, timbre=0.7, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[0,4,8,7], dur=1/1, oct=(3,6), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,4,8,7], dur=1/1, oct=(3,6), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,8,7], dur=1/1, oct=(3,6), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,7,7], dur=1/1, oct=(3,6), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,7,6], dur=1/1, oct=(3,6), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,4,7,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,4,6,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,7,6], dur=1/1, oct=(3,7), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,7,6], dur=1/1, oct=(3,6), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,7,6], dur=1/1, oct=(3,5), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,7,6], dur=1/1, oct=(3,4), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,7,6], dur=1/1, oct=(3,3), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[1,3,7,6], dur=1/1, oct=(3,2), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-1,4,8,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,8,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[2,3,7,6], dur=1/1, oct=(3,2), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3 >> plaits(P[3,3,7,6], dur=1/1, oct=(3,2), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,8], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,9], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p3.stop()
+
+p2 >> plaits(P[-2,4,7,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=3, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=4, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=5, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+a4 >> blip(PArp(I, 42), dur=8, oct=3, sus=8, wshape=0).unison(32, .5)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=6, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=7, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=8, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=9, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=10, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=11, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=10, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=9, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=8, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=7, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=6, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=5, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=4, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=3, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=3, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+Server.addFx(jpverb=.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Server.addFx(jpverb=.4, jpvermix=0.5)
+
+Server.clearFx()
+
+a4 >> blip(PArp(I, 42), dur=8, oct=3, sus=8, wshape=0).unison(32, .5)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=3, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=4, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=5, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=6, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=7, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+a4 >> blip(PArp(I, 42), dur=8, oct=3, sus=8, wshape=0, fx1=.001).unison(32, .5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=8, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=9, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=10, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=11, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+a4 >> blip(PArp(I, 42), dur=8, oct=3, sus=8, wshape=0, fx1=.01).unison(32, .5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=12, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=13, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=14, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=15, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=16, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=17, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+a4 >> blip(PArp(I, 42), dur=8, oct=3, sus=8, wshape=0, fx1=.01).unison(4, .5)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,[PWalk(8, 1, 1)]],8)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,[PWalk(8, 1, 1)]],7)
+
+a4 >> blip(PArp(I, 42), dur=8, oct=3, sus=8, wshape=0, fx1=.1).unison(4, .5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],11)
+
+a4 >> blip(PArp(I, 42), dur=8, oct=3, sus=8, wshape=0, fx1=0).unison(4, .5)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.3) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.2) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.1) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.0) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p5 >> loop("jungleklanga16", dur=8, sample=1)
+
+p5 >> loop("jungleklanga16", dur=16, sample=1)
+
+p5 >> loop("jungleklanga16", dur=16, sample=PRand(909))
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p5 >> loop("junglecool16", dur=16, sample=PRand(909))
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+p3 >> plaits(3, dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+a4 >> blip(0, dur=8, oct=3, sus=8, wshape=0, fx1=0, slide=5, slidedelay=0.7).unison(4, .5)
+
+p3 >> pluck(3, dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([4, 5], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([4, 5, _], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([4, 5, _, 2], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([4, 5, _, 0], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([2, 5, _, 0], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([2, 4, _, 0], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([2, 4, _, 0], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([2, 4, _, 0], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([2, 4, _, 0, [_, 4]], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([2, 4, _, 0, [_, 4]], dur=1/2, oct=(3,2), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([2, 4, _, 0, [_, 4]], dur=1/2, oct=(4,2), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> pluck([2, 4, _, 0, [_, 4]], dur=1/2, oct=(4,3), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=1/8, lag = 10, s1=1, s2=0, s3=0).end(16,4)
+
+p3 >> tb304([2, 4, _, 0, [_, 4]], dur=1/2, oct=(4,3), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> tb304([2, 4, _, 0, [_, 4]], dur=1/2, oct=(3,3), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=0, s3=0).end(16,4)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=0, s3=0, pong=0.25, beat_dur=1, pongtime=1).end(16,4)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=0, s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,4)
+
+p3 >> hoover([2, 4, _, 0, [_, 4]], dur=1/2, oct=(3,3), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> hoover([2, 4, _, 0, [_, 4]], dur=1/2, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> hoover([2, 4, _, 0, [_, 4]], dur=1/2, oct=(4,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> bell([2, 4, _, 0, [_, 4]], dur=1/2, oct=(4,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> cs80([2, 4, _, 0, [_, 4]], dur=1/2, oct=(4,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> cs80([2, 4, _, 0, [_, 4]], dur=1/2, oct=(4,3), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> cs80([2, 4, _, 0, [_, 4]], dur=1/2, oct=(3,3), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> cs80([2, 4, _, 0, [_, 4]], dur=1/2, oct=3, harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> a_stress([2, 4, _, 0, [_, 4]], dur=1/2, oct=3, harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=0, s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+p3 >> a_stress([2, 4, _, 0, [_, 4]], dur=1/2, oct=4, harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> a_daftlead([2, 4, _, 0, [_, 4]], dur=1/2, oct=4, harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> a_daftlead([2, 4, _, 0, [_, 4]], dur=1/2, oct=3, harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3 >> a_daftlead(4, dur=1/2, oct=3, harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3.stop()
+
+p5 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=[0, PWhite(.2, 2)])
+
+Server.addFx(brk=0.5)
+
+p5 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)])
+
+Server.addFx(brk=0.1)
+
+Server.addFx(brk=0.9)
+
+Server.addFx(brk=0.5)
+
+Server.addFx(brk=0)
+
+Server.addFx(sbrk=0.5)
+
+Server.addFx(sbrk=0.1)
+
+Server.addFx(sbrk=0.9)
+
+Server.addFx(sbrk=0)
+
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a4 >> blip(0, dur=8, oct=3, sus=8, wshape=0, fx1=0, slide=5, slidedelay=0.7).unison(4, .5)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.7, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.5, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.4, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.5, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.7, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.54, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+a4 >> blip(0, dur=8, oct=3, sus=8, wshape=0, fx1=0, slide=5, slidedelay=0.3).unison(4, .5)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+a4 >> blip(0, dur=8, oct=3, sus=8, wshape=0, fx1=0, slide=PRand(1, 12), slidedelay=0.3).unison(4, .5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.2, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,6), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.2, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.2, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p5 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)])
+
+a4 >> blip(0, dur=8, oct=3, sus=8, wshape=0, fx1=0, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.3, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.4, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.3, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,4), harm=0.4, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,4), harm=0.4, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+a4.stop()
+
+a4 >> blip(0, dur=8, oct=3, sus=8, wshape=0, fx1=0, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=0, s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+soloRnd()
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,4), harm=0.3, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=1, s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=2, s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=1, s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=0, s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+a4 >> blip(0, dur=8, oct=3, sus=8, wshape=0, fx1=0, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+soloRnd()
+
+a4 >> blip(0, dur=8, oct=4, sus=8, wshape=0, fx1=0, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+a4 >> blip(0, dur=8, oct=5, sus=8, wshape=0, fx1=0, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=PWhite(0,3), s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+p3 >> a_daftlead(4, dur=1/2, oct=3, harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p3.stop()
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.4, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.4, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.5, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.6, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.7, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.5, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.6, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.7, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+a4.stop()
+
+# 
+
+p5.stop()
+
+p6.stop()
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=PWhite(0,.3), s3=0, pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+y1.stop()
+
+p2.stop()
+
+a4 >> blip(0, dur=8, oct=5, sus=8, wshape=0, fx1=0, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.7, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=PWhite(0,.3), s3=PWhite(0,.3), pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)])
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.7, timbre=0.8, morph=0.94, engine=2, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+Server.addFx(echo=0.015)
+
+Clock.bpm =  lininf(170, 190, 32)
+
+Server.addFx(echo=0.025)
+
+Server.addFx(echo=0.015)
+
+Server.addFx(echo=0.025)
+
+p6.stop()
+
+p2.stop()
+
+p1.stop()
+
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p3.stop()
+

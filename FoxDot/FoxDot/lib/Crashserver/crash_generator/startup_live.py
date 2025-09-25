@@ -412,10 +412,14 @@ def trim(self, length):
         return self
 
 @player_method
-def end(self, length=8, duration=2):
+def end(self, duration=2, length=8):
     ''' amplify at the end of length, for duration'''
     self.amplify=var([0,1], [length-duration, duration])
 
+@player_method
+def begin(self, duration=2, length=8):
+    ''' amplify at the beginin of length, for duration'''
+    self.amplify=var([1,0], [length-duration, duration])
 
 def genArp(nbrseq=4, lengthseq=8):
     ''' Generate arpeggiato based on markov Chords progression '''

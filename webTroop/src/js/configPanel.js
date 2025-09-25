@@ -15,10 +15,12 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const buttonValidatePlayerName = document.getElementById('validatePlayerName');
     const themeInterfaceSelector = document.getElementById('themeInterfaceSelector');
 
-    const splitScreenToggle = document.getElementById('splitScreenToggle');
+    const splitScreenToggle = document.getElementById('splitScreenToggle');    
     const otherEditorWrapper = document.getElementById('other-editor-wrapper');
     const editorResizeHandle = document.getElementById('editor-resize-handle');
     const mainEditorWrapper = document.getElementById('main-editor-wrapper');
+
+    const retroTermToggle = document.getElementById('retroTermToggle');
 
     // Restaurer les données utilisateur
     const savedUser = localStorage.getItem('webtroop-user');
@@ -243,6 +245,61 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         if (toggleLabel) {
             toggleLabel.textContent = enabled ? 'Actif' : 'Inactif';
         }
+    });
+
+    // Gestion du toggle Retro Term
+    function toggleRetroTerm(enabled) {
+        if (enabled) {
+            console.log("Retro Term Activated");
+            // Sauvegarder le thème CodeMirror actuel avant de basculer
+            const currentTheme = editor.getOption('theme');
+            if (currentTheme !== 'retro-terminal') {
+                localStorage.setItem('previousTheme', currentTheme);
+            }
+            
+            // Sauvegarder le thème d'interface actuel avant de basculer
+            const currentInterfaceTheme = document.documentElement.className.replace('-theme', '');
+            if (currentInterfaceTheme !== 'retro-terminal') {
+                localStorage.setItem('previousInterfaceTheme', currentInterfaceTheme);
+            }
+            
+            // Basculer vers les thèmes rétro
+            editor.setOption('theme', 'retro-terminal');
+            otherEditor.setOption('theme', 'retro-terminal');
+            themeSelect.value = 'retro-terminal';
+            
+            // Basculer vers le thème d'interface rétro
+            document.documentElement.className = 'retro-terminal-theme';
+            themeInterfaceSelector.value = 'retro-terminal';
+        } else {
+            console.log("Retro Term Deactivated");
+            // Restaurer le thème CodeMirror précédent
+            const previousTheme = localStorage.getItem('previousTheme') || localStorage.getItem('preferredTheme') || 'erlang-dark';
+            
+            editor.setOption('theme', previousTheme);
+            otherEditor.setOption('theme', previousTheme);
+            themeSelect.value = previousTheme;
+            
+            // Restaurer le thème d'interface précédent
+            const previousInterfaceTheme = localStorage.getItem('previousInterfaceTheme') || localStorage.getItem('selectedInterfaceTheme') || 'dark';
+            document.documentElement.className = `${previousInterfaceTheme}-theme`;
+            themeInterfaceSelector.value = previousInterfaceTheme;
+        }
+        
+        // Sauvegarder l'état du mode rétro
+        localStorage.setItem('retroTermEnabled', enabled.toString());
+    }
+
+    // Restaurer l'état du mode rétro au chargement
+    const savedRetroTerm = localStorage.getItem('retroTermEnabled');
+    if (savedRetroTerm === 'true') {
+        retroTermToggle.checked = true;
+        toggleRetroTerm(true);
+    }
+
+    retroTermToggle.addEventListener('change', (e) => {
+        const enabled = e.target.checked;
+        toggleRetroTerm(enabled);
     });
 
     return {

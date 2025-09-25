@@ -1,0 +1,200 @@
+/* Retro Terminal Theme for CodeMirror - Based on erlang-dark */
+.cm-s-retro-terminal.CodeMirror { 
+    background: #0a0a0a; 
+    color: #00ff00;
+    font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+    text-shadow: 0 0 5px #00ff00;
+    border-radius: 8px;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 255, 0, 0.1),
+        0 0 10px rgba(0, 255, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de scanlines pour CodeMirror */
+/* .cm-s-retro-terminal.CodeMirror::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 0, 0.01) 2px,
+        rgba(0, 255, 0, 0.01) 4px
+    );
+    animation: scanlines 10s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+} */
+
+/* Bruit vidéo pour CodeMirror */
+.cm-s-retro-terminal.CodeMirror::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, rgba(0, 255, 0, 0.08) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 4px 4px, 6px 6px;
+    animation: noise 0.6s infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes scanlines {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(50%); }
+}
+
+@keyframes noise {
+    0%, 100% { background-position: 0 0, 0 0; }
+    10% { background-position: -2px -3px, 3px 1px; }
+    20% { background-position: 3px -1px, -1px -2px; }
+    30% { background-position: -1px 2px, 2px -3px; }
+    40% { background-position: 2px 3px, -3px 0px; }
+    50% { background-position: -3px -1px, 1px 3px; }
+    60% { background-position: 1px -2px, -2px -1px; }
+    70% { background-position: -2px 1px, 3px 2px; }
+    80% { background-position: 3px -3px, -1px 1px; }
+    90% { background-position: -1px 3px, 2px -2px; }
+}
+
+.cm-s-retro-terminal div.CodeMirror-selected { 
+    background: #003300b0; 
+}
+
+.cm-s-retro-terminal .CodeMirror-line::selection, 
+.cm-s-retro-terminal .CodeMirror-line > span::selection, 
+.cm-s-retro-terminal .CodeMirror-line > span > span::selection { 
+    background: rgba(0, 255, 0, 0.596); 
+}
+
+.cm-s-retro-terminal .CodeMirror-line::-moz-selection, 
+.cm-s-retro-terminal .CodeMirror-line > span::-moz-selection, 
+.cm-s-retro-terminal .CodeMirror-line > span > span::-moz-selection { 
+    background: rgba(0, 255, 0, 0.3); 
+}
+
+.cm-s-retro-terminal .CodeMirror-gutters { 
+    background: #0a0a0a; 
+    border-right: 1px solid #00aa00; 
+}
+
+.cm-s-retro-terminal .CodeMirror-guttermarker { 
+    color: #00ff00; 
+}
+
+.cm-s-retro-terminal .CodeMirror-guttermarker-subtle { 
+    color: #00dd00; 
+}
+
+.cm-s-retro-terminal .CodeMirror-linenumber { 
+    color: #00dd00; 
+    text-shadow: 0 0 3px #00ff00;
+}
+
+.cm-s-retro-terminal .CodeMirror-cursor { 
+    border-left: 2px solid #00ff00; 
+    box-shadow: 0 0 5px #00ff00;
+}
+
+/* Syntax highlighting with green terminal theme */
+.cm-s-retro-terminal span.cm-quote      { color: #00dd00; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-atom       { color: #00ff88; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-attribute  { color: #44ff44; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-bracket    { color: #88ff88; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-builtin    { color: #66ff66; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-comment    { color: #008800; text-shadow: 0 0 2px currentColor; }
+.cm-s-retro-terminal span.cm-def        { color: #00ff44; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-keyword    { color: #00ff00; font-weight: bold; text-shadow: 0 0 5px currentColor; }
+.cm-s-retro-terminal span.cm-meta       { color: #44ff88; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-number     { color: #44ff44; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-operator   { color: #88ff00; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-property   { color: #00dd00; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-qualifier  { color: #00bb00; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-special    { color: #66ff88; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-string     { color: #00ff66; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-string-2   { color: #44ff44; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-tag        { color: #88ff66; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-variable   { color: #00ff88; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-variable-2 { color: #66ff00; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-variable-3, 
+.cm-s-retro-terminal span.cm-type { color: #44ff88; text-shadow: 0 0 3px currentColor; }
+.cm-s-retro-terminal span.cm-error      { color: #ff4444; text-shadow: 0 0 5px #ff0000; }
+
+.cm-s-retro-terminal .CodeMirror-activeline-background { 
+    background: #002200; 
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+.cm-s-retro-terminal .CodeMirror-matchingbracket { 
+    outline: 1px solid #00ff00; 
+    color: #00ff00 !important; 
+    text-shadow: 0 0 8px #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+/* Retro terminal specific effects */
+.cm-s-retro-terminal .CodeMirror-lines {
+    padding: 8px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.cm-s-retro-terminal pre.CodeMirror-line {
+    padding: 0 4px;
+    line-height: 1.4;
+    position: relative;
+    z-index: 2;
+}
+
+/* Effet de flicker subtil pour les lignes de code */
+.cm-s-retro-terminal .CodeMirror-code {
+    animation: flicker 8s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    98% { opacity: 1; }
+    99% { opacity: 0.96; }
+    99.5% { opacity: 0.98; }
+    99.8% { opacity: 1; }
+}
+
+/* Scrollbar styling for retro theme */
+.cm-s-retro-terminal .CodeMirror-scrollbar-filler,
+.cm-s-retro-terminal .CodeMirror-gutter-filler {
+    background-color: #0a0a0a;
+}
+
+.cm-s-retro-terminal .CodeMirror-vscrollbar,
+.cm-s-retro-terminal .CodeMirror-hscrollbar {
+    background-color: #0a0a0a;
+}
+
+.cm-s-retro-terminal .CodeMirror-vscrollbar::-webkit-scrollbar,
+.cm-s-retro-terminal .CodeMirror-hscrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.cm-s-retro-terminal .CodeMirror-vscrollbar::-webkit-scrollbar-track,
+.cm-s-retro-terminal .CodeMirror-hscrollbar::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border: 1px solid #00aa00;
+}
+
+.cm-s-retro-terminal .CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
+.cm-s-retro-terminal .CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
+    background: #00aa00;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 5px #00ff00;
+}

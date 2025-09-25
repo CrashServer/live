@@ -206,3 +206,258 @@
     --col-full-blue: #78dce8;
     --flash-col: rgba(169, 220, 118, 0.3);
 }
+
+/* Retro Terminal Theme */
+:root.retro-terminal-theme {
+    --bg-col-1: #0a0a0a;
+    --bg-col-2: #111111;
+    --border-col-1: #00aa00;
+    --border-col-2: #00ff00;
+    --text-col-1: #00ff00;
+    --text-col-2: #00dd00;
+    --beat-col-1: #002200;
+    --beat-col-2: #00ff0055;
+    --col-red: rgba(255, 68, 68, 0.75);
+    --col-green: rgba(0, 255, 0, 0.75);
+    --col-blue: rgba(68, 255, 255, 0.75);
+    --col-full-red: #ff4444;
+    --col-full-green: #00ff00;
+    --col-full-blue: #44ffff;
+    --flash-col: rgba(0, 255, 0, 0.5);
+    
+    /* Ajout d'effets rétro spécifiques */
+    font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+}
+
+/* Animations keyframes pour les effets rétro */
+@keyframes scanlines {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    98% { opacity: 1; }
+    99% { opacity: 0.98; }
+    99.5% { opacity: 0.95; }
+    99.8% { opacity: 1; }
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 2px currentColor, 0 0 4px currentColor; }
+    50% { text-shadow: 0 0 1px currentColor, 0 0 3px currentColor; }
+}
+
+@keyframes noise {
+    0%, 100% { background-position: 0 0; }
+    10% { background-position: -5% -10%; }
+    20% { background-position: -10% 5%; }
+    30% { background-position: 5% -25%; }
+    40% { background-position: -25% 25%; }
+    50% { background-position: 25% 10%; }
+    60% { background-position: -10% 15%; }
+    70% { background-position: 15% 25%; }
+    80% { background-position: 25% -10%; }
+    90% { background-position: -25% 0%; }
+}
+
+/* Container principal avec courbure d'écran et vignette */
+:root.retro-terminal-theme body {
+    position: relative;
+    overflow: hidden;
+}
+
+:root.retro-terminal-theme body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.3) 100%),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 0, 0.015) 2px,
+            rgba(0, 255, 0, 0.015) 4px
+        );
+    /* animation: scanlines 8s linear infinite, noise 0.5s infinite; */
+    pointer-events: none;
+    z-index: 1000;
+}
+
+:root.retro-terminal-theme #main-container {
+    filter: 
+        contrast(1.2) 
+        brightness(1.1) 
+        saturate(1.3);
+    animation: flicker 3s infinite;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 
+        inset 0 0 50px rgba(0, 255, 0, 0.1),
+        0 0 30px rgba(0, 255, 0, 0.2);
+}
+
+/* Effets spéciaux pour le thème rétro terminal */
+:root.retro-terminal-theme * {
+    text-shadow: 0 0 1px currentColor;
+}
+
+:root.retro-terminal-theme .crash-panel,
+:root.retro-terminal-theme .config-panel,
+:root.retro-terminal-theme .logPanel {
+    box-shadow: 
+        0 0 5px rgba(0, 255, 0, 0.2),
+        inset 0 0 5px rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    background: var(--bg-col-1);
+}
+
+:root.retro-terminal-theme fieldset {
+    border-color: var(--border-col-1);
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+}
+
+:root.retro-terminal-theme legend {
+    color: var(--text-col-1);
+    text-shadow: 0 0 5px currentColor;
+    font-weight: bold;
+}
+
+:root.retro-terminal-theme input,
+:root.retro-terminal-theme select,
+:root.retro-terminal-theme button {
+    background-color: var(--bg-col-2);
+    border: 1px solid var(--border-col-1);
+    color: var(--text-col-1);
+    text-shadow: 0 0 3px currentColor;
+}
+
+:root.retro-terminal-theme input:focus,
+:root.retro-terminal-theme select:focus {
+    border-color: var(--border-col-2);
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+    outline: none;
+}
+
+:root.retro-terminal-theme button:hover {
+    background-color: var(--bg-col-1);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+:root.retro-terminal-theme .toggle-switch {
+    background-color: var(--bg-col-2);
+    border: 1px solid var(--border-col-1);
+}
+
+:root.retro-terminal-theme .toggle-switch:checked {
+    background-color: var(--col-full-green);
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+}
+
+/* Effets de courbure d'écran CRT */
+:root.retro-terminal-theme #editor-container,
+:root.retro-terminal-theme .crash-panel {
+    transform: perspective(1000px) rotateX(0.5deg);
+    border-radius: 8px;
+}
+
+/* Scintillement subtil pour les éléments interactifs */
+:root.retro-terminal-theme button,
+:root.retro-terminal-theme input,
+:root.retro-terminal-theme select {
+    animation: flicker 4s infinite;
+}
+
+/* Lueur phosphorescente subtile pour les textes importants */
+:root.retro-terminal-theme h1, 
+:root.retro-terminal-theme h2, 
+:root.retro-terminal-theme h3,
+:root.retro-terminal-theme legend {
+    text-shadow: 
+        0 0 2px currentColor,
+        0 0 4px currentColor;
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+/* Effet de barre de progression avec glow */
+:root.retro-terminal-theme .info-text {
+    background: 
+        linear-gradient(90deg, 
+            rgba(0, 255, 0, 0.1) 0%, 
+            rgba(0, 255, 0, 0.05) 50%, 
+            rgba(0, 255, 0, 0.1) 100%
+        );
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 3px;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 255, 0, 0.1),
+        0 0 5px rgba(0, 255, 0, 0.2);
+}
+
+/* Bruit vidéo sur les conteneurs principaux */
+:root.retro-terminal-theme .crash-panel::after,
+:root.retro-terminal-theme #editor-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, rgba(0, 255, 0, 0.06) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 5px 5px, 7px 7px;
+    animation: noise 0.4s infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Effet de dégradé vertical pour simuler un écran CRT */
+:root.retro-terminal-theme body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            transparent 10%,
+            transparent 90%,
+            rgba(0, 0, 0, 0.1) 100%
+        );
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Amélioration des scrollbars avec effet glow */
+:root.retro-terminal-theme ::-webkit-scrollbar {
+    width: 12px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+:root.retro-terminal-theme ::-webkit-scrollbar-track {
+    background: rgba(0, 50, 0, 0.3);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+:root.retro-terminal-theme ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00ff00, #00aa00);
+    border-radius: 6px;
+    box-shadow: 
+        0 0 5px rgba(0, 255, 0, 0.5),
+        inset 0 0 5px rgba(0, 255, 0, 0.2);
+}
+
+:root.retro-terminal-theme ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #44ff44, #00dd00);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 0, 0.8),
+        inset 0 0 5px rgba(0, 255, 0, 0.3);
+}

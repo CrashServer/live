@@ -1,0 +1,186 @@
+a4 >> sine((0, 2), sinefb=linvar([4, 0.5], 196), amp=0.3, delay=1, oct=3, sus=1, hpf=400, pan=linvar([1, -1], 128))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a2 >> sine((0, 2), sinefb=linvar([4, 1.4], 128), amp=0.5, delay=0.5, oct=3, sus=2, hpf=200, pan=linvar([-1, 1], 128))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+lost("R_intro")
+
+Clock.bpm=102
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2).lclip(0)
+
+Scale.default="minor"
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2).lclip(4)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, start=.3).lclip(4)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, start=4).lclip(4)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=4).lclip(4)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=2).lclip(4)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=2, mverb=0.2).lclip(4)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=2, mverb=0.2).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0.2).lclip(PBal(5,16))
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.4, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0.2).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.5, lofiamp=0.5).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.6, lofiamp=0.5).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.7, lofiamp=0.5).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.8, lofiamp=0.5).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.9, lofiamp=0.5).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.9, lofiamp=0.5, noiz=0.5, noizr=1, noizt=0).unison(3).lclip(PBal(5,16))
+
+n9 >> loop("xdrum8", dur=8, sample=PRand(808), drcomp=0.5, tanh=.5)
+
+i7 >> play("<X.>", amp=3.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=220, rq=0.9, top=1500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0).end(8, 2)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.9, lofiamp=0.5, noiz=0.5, noizr=1, noizt=0, vol=.3).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.9, lofiamp=0.5, noiz=0.5, noizr=1, noizt=0, vol=0.4).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.9, lofiamp=0.5, noiz=0.5, noizr=1, noizt=0, vol=0.5).unison(3).lclip(PBal(5,16))
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=PRand(0,14), mverb=0, lofi=0.4, lofiwow=0.9, lofiamp=0.5, noiz=0.5, noizr=1, noizt=0, vol=0.6).unison(3).lclip(PBal(5,16))
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=220, rq=0.9, top=1500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=220, rq=0.9, top=1500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=220, rq=0.9, top=2500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=220, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+x1.stop()
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=230, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=240, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=250, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=260, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=270, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=280, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=290, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=300, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=300, rq=0.9, top=3500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+n9 >> loop("xdrum8", dur=8, sample=PRand(808), drcomp=0.5, tanh=0)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=3, cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,3,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,6], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,7], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,6], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4).lclip(2)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4).lclip(2)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4).trim(2)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4).trim(3)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4).trim(4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4).trim(5)
+
+~z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=5)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=6)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=7)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=8)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=7)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=6)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=5)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=4)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=3)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=3).sometimes("degree.shuffle")
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.4, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(0)
+
+x1 >> loop("xbass8", dur=8, sample=0, idist=1.0, noiz=0, noizr=0.4, noizt=0, vadiod=670, vadiodr=0.6, vadiodd=21.8, vadiodc=0.1).lclip(4)
+
+n3.solo()
+
+~n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=0, mverb=0, lofi=0.4, lofiwow=0.9, lofiamp=0.5, noiz=0.5, noizr=1, noizt=0, vol=0.6).unison(3)
+
+n3 >> loop("elephant16", dur=16, sample=0, chop=0, chopwave=5, chopi=.2, pos=0, mverb=0, lofi=0, lofiwow=0.9, lofiamp=0.5, noiz=0.5, noizr=1, noizt=0, vol=0.6).unison(3)
+
+z8 >> tb304([0,2,4,5], dur=1/4, oct=(3,4), cutoff=300, rq=0.9, top=4500, fAtk=0.001, fDec=0.15, fSus=0.0, fRel=0.2, wave=0.5, wshape=3).sometimes("degree.shuffle")
+
+i7 >> play("<X.>", amp=3.0, lpf=0, lpr=0.7).sometimes("stutter")
+
+j7 >> hoover(I, dur=8, porta=1, portadur=0.125)
+
+j7 >> hoover([0,2,4], dur=1/2, porta=1, portadur=0.125)
+
+~j7 >> hoover([0,2,4], dur=1/2, porta=1, portadur=0.125)
+
+~j7 >> hoover([0,2,4], dur=1/2, porta=1, portadur=0.125)
+
+j7.solo()
+
+j7.stop()
+
+unsolo()
+
+soloRnd()
+
+soloRnd()
+
+Clock.clear()
+soff()
+Server.clearFx()
+

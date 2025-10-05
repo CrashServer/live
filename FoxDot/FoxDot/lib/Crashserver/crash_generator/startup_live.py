@@ -419,7 +419,7 @@ def end(self, duration=2, length=8):
 @player_method
 def begin(self, duration=2, length=8):
     ''' amplify at the beginin of length, for duration'''
-    self.amplify=var([1,0], [length-duration, duration])
+    self.amplify=var([1,0], [duration, length-duration])
 
 def genArp(nbrseq=4, lengthseq=8):
     ''' Generate arpeggiato based on markov Chords progression '''

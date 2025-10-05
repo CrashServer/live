@@ -207,15 +207,15 @@
     --flash-col: rgba(169, 220, 118, 0.3);
 }
 
-/* Retro Terminal Theme */
-:root.retro-terminal-theme {
-    --bg-col-1: #0a0a0a;
-    --bg-col-2: #111111;
+/* Green Terminal Theme (classique Matrix style) */
+:root.green-terminal-theme {
+    --bg-col-1: #000000;
+    --bg-col-2: #001100;
     --border-col-1: #00aa00;
     --border-col-2: #00ff00;
     --text-col-1: #00ff00;
     --text-col-2: #00dd00;
-    --beat-col-1: #002200;
+    --beat-col-1: #001100;
     --beat-col-2: #00ff0055;
     --col-red: rgba(255, 68, 68, 0.75);
     --col-green: rgba(0, 255, 0, 0.75);
@@ -224,41 +224,71 @@
     --col-full-green: #00ff00;
     --col-full-blue: #44ffff;
     --flash-col: rgba(0, 255, 0, 0.5);
-    
-    /* Ajout d'effets rétro spécifiques */
-    font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
 }
 
-/* Animations keyframes pour les effets rétro */
-@keyframes scanlines {
-    0% { transform: translateY(-100vh); }
-    100% { transform: translateY(100vh); }
+/* Amber Terminal Theme (VT100 classique) */
+:root.amber-terminal-theme {
+    --bg-col-1: #1a0a00;
+    --bg-col-2: #2a1100;
+    --border-col-1: #ff8800;
+    --border-col-2: #ffaa00;
+    --text-col-1: #ffaa00;
+    --text-col-2: #ff8800;
+    --beat-col-1: #2a1100;
+    --beat-col-2: #ffaa0055;
+    --col-red: rgba(255, 68, 68, 0.75);
+    --col-green: rgba(68, 255, 68, 0.75);
+    --col-blue: rgba(68, 68, 255, 0.75);
+    --col-full-red: #ff4444;
+    --col-full-green: #44ff44;
+    --col-full-blue: #4444ff;
+    --flash-col: rgba(255, 170, 0, 0.5);
 }
 
-@keyframes flicker {
-    0%, 100% { opacity: 1; }
-    98% { opacity: 1; }
-    99% { opacity: 0.98; }
-    99.5% { opacity: 0.95; }
-    99.8% { opacity: 1; }
+/* White Terminal Theme (IBM terminal) */
+:root.white-terminal-theme {
+    --bg-col-1: #000000;
+    --bg-col-2: #111111;
+    --border-col-1: #aaaaaa;
+    --border-col-2: #ffffff;
+    --text-col-1: #ffffff;
+    --text-col-2: #cccccc;
+    --beat-col-1: #222222;
+    --beat-col-2: #ffffff55;
+    --col-red: rgba(255, 68, 68, 0.75);
+    --col-green: rgba(68, 255, 68, 0.75);
+    --col-blue: rgba(68, 68, 255, 0.75);
+    --col-full-red: #ff4444;
+    --col-full-green: #44ff44;
+    --col-full-blue: #4444ff;
+    --flash-col: rgba(255, 255, 255, 0.5);
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.6) 2px,
+        rgba(255, 255, 255, 0.6) 4px
+    );
+    color: #ffffff;
 }
 
-@keyframes textGlow {
-    0%, 100% { text-shadow: 0 0 2px currentColor, 0 0 4px currentColor; }
-    50% { text-shadow: 0 0 1px currentColor, 0 0 3px currentColor; }
-}
-
-@keyframes noise {
-    0%, 100% { background-position: 0 0; }
-    10% { background-position: -5% -10%; }
-    20% { background-position: -10% 5%; }
-    30% { background-position: 5% -25%; }
-    40% { background-position: -25% 25%; }
-    50% { background-position: 25% 10%; }
-    60% { background-position: -10% 15%; }
-    70% { background-position: 15% 25%; }
-    80% { background-position: 25% -10%; }
-    90% { background-position: -25% 0%; }
+/* Blue Terminal Theme (IBM 3270) */
+:root.blue-terminal-theme {
+    --bg-col-1: #000033;
+    --bg-col-2: #000044;
+    --border-col-1: #4488ff;
+    --border-col-2: #66aaff;
+    --text-col-1: #66aaff;
+    --text-col-2: #4488ff;
+    --beat-col-1: #000044;
+    --beat-col-2: #66aaff55;
+    --col-red: rgba(255, 68, 68, 0.75);
+    --col-green: rgba(68, 255, 68, 0.75);
+    --col-blue: rgba(102, 170, 255, 0.75);
+    --col-full-red: #ff4444;
+    --col-full-green: #44ff44;
+    --col-full-blue: #66aaff;
+    --flash-col: rgba(102, 170, 255, 0.5);
 }
 
 /* Container principal avec courbure d'écran et vignette */
@@ -290,28 +320,22 @@
 
 :root.retro-terminal-theme #main-container {
     filter: 
-        contrast(1.2) 
-        brightness(1.1) 
-        saturate(1.3);
-    animation: flicker 3s infinite;
+        contrast(1.1) 
+        brightness(1.05) 
+        saturate(1.1);
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 
-        inset 0 0 50px rgba(0, 255, 0, 0.1),
-        0 0 30px rgba(0, 255, 0, 0.2);
+        inset 0 0 30px rgba(0, 255, 0, 0.08),
+        0 0 15px rgba(0, 255, 0, 0.15);
 }
 
-/* Effets spéciaux pour le thème rétro terminal */
-:root.retro-terminal-theme * {
-    text-shadow: 0 0 1px currentColor;
-}
+/* Effets spéciaux pour le thème rétro terminal - optimisé pour les performances */
 
 :root.retro-terminal-theme .crash-panel,
 :root.retro-terminal-theme .config-panel,
 :root.retro-terminal-theme .logPanel {
-    box-shadow: 
-        0 0 5px rgba(0, 255, 0, 0.2),
-        inset 0 0 5px rgba(0, 255, 0, 0.05);
+    box-shadow: 0 0 3px rgba(0, 255, 0, 0.15);
     border: 1px solid rgba(0, 255, 0, 0.3);
     background: var(--bg-col-1);
 }
@@ -350,7 +374,7 @@
 
 :root.retro-terminal-theme .toggle-switch {
     background-color: var(--bg-col-2);
-    border: 1px solid var(--border-col-1);
+    border: 1px solid var(--bg-col-2);
 }
 
 :root.retro-terminal-theme .toggle-switch:checked {
@@ -365,22 +389,16 @@
     border-radius: 8px;
 }
 
-/* Scintillement subtil pour les éléments interactifs */
-:root.retro-terminal-theme button,
-:root.retro-terminal-theme input,
-:root.retro-terminal-theme select {
-    animation: flicker 4s infinite;
-}
+/* Scintillement subtil pour les éléments interactifs - désactivé pour les performances */
 
-/* Lueur phosphorescente subtile pour les textes importants */
+/* Lueur phosphorescente subtile pour les textes importants - optimisé */
 :root.retro-terminal-theme h1, 
 :root.retro-terminal-theme h2, 
 :root.retro-terminal-theme h3,
 :root.retro-terminal-theme legend {
     text-shadow: 
-        0 0 2px currentColor,
-        0 0 4px currentColor;
-    animation: textGlow 3s ease-in-out infinite alternate;
+        0 0 2px currentColor;
+    /* animation supprimée pour les performances */
 }
 
 /* Effet de barre de progression avec glow */
@@ -398,22 +416,11 @@
         0 0 5px rgba(0, 255, 0, 0.2);
 }
 
-/* Bruit vidéo sur les conteneurs principaux */
+/* Bruit vidéo sur les conteneurs principaux - désactivé pour les performances */
 :root.retro-terminal-theme .crash-panel::after,
 :root.retro-terminal-theme #editor-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle, rgba(0, 255, 0, 0.06) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-    background-size: 5px 5px, 7px 7px;
-    animation: noise 0.4s infinite;
-    pointer-events: none;
-    z-index: 1;
+    /* Effet désactivé pour améliorer les performances GPU */
+    display: none;
 }
 
 /* Effet de dégradé vertical pour simuler un écran CRT */

@@ -216,15 +216,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   chrono.addEventListener('click', ()=> functionUtils.resetChrono(wsServer));
 
   function evaluateCode(cm, multi){
-    // const videoCodeResult = functionUtils.isVideoCode(cm);
-    // if (videoCodeResult){
-    //   var [videoCode, startLine] = videoCodeResult;
-    //   var endLine = startLine;
-    //   foxdotWs.send(JSON.stringify({
-    //     type: 'sceneName',
-    //     sceneName: videoCode
-    //   }))
-    //   }
+    const videoCodeResult = functionUtils.isVideoCode(cm);
+    if (videoCodeResult){
+      var [videoCode, startLine] = videoCodeResult;
+      var endLine = startLine;
+      foxdotWs.send(JSON.stringify({
+        type: 'sceneName',
+        sceneName: videoCode
+      }))
+      }
     const isServerFxCode = functionUtils.isServerFxCode(cm);
     if (isServerFxCode) {
       var [serverFxCode, startLine] = isServerFxCode;

@@ -91,9 +91,7 @@ function sendToArduino(arduino, character) {
     
     // Mettre à jour le timestamp du dernier envoi
     lastArduinoSend = now;
-  } else {
-    console.log('Arduino non connecté, impossible d\'envoyer:', character);
-  }
+  } 
 }
 
 // Fonction pour mapper les userNames aux caractères
@@ -262,10 +260,10 @@ wss.on('connection', (ws, req) => {
         const attackRequest = (code.trim().startsWith('lost') || code.trim().startsWith("attack") || code.trim().startsWith('chaos')) ? userName : "";
         broadcastLog(`${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor, attackRequest);
         foxdot.stdin.write(data.code + '\n' + '\n');
-      } else if (data.type === 'cpu_data') {
+      } else if (data.type === 'cpu_data' && arduino && arduino.isOpen) {
         // Recevoir les données CPU du crashPanel et les envoyer à l'Arduino
         const {cpu} = data;
-        if (typeof cpu === 'number') {
+        if (typeof cpu === 'number' ) {
           sendCpuToArduino(arduino, cpu);
         }
       } else if (data.type === 'save_file') {

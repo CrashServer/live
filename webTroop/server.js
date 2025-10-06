@@ -1,4 +1,4 @@
-import { WebSocketServer } from 'ws';
+import { WebSocketServer, WebSocket } from 'ws';
 import { spawn } from 'child_process';
 // import fetch from 'node-fetch';
 import path from 'path';
@@ -110,6 +110,115 @@ function getUserCharacter(userName) {
   return userMap[userName] || null;
 }
 
+// Fonction pour mapper le pourcentage CPU aux caractères Arduino
+function getCpuCharacter(cpuPercent) {
+  if (cpuPercent < 10) return 'a';      // 0-20%
+  else if (cpuPercent < 20) return 'b'; // 20-40%
+  else if (cpuPercent < 40) return 'c'; // 40-60%
+  else if (cpuPercent < 60) return 'd'; // 60-80%
+  else if (cpuPercent < 80) return 'e'; // 80-100%
+  else return 'f';                       // 100%+
+}
+
+// Variables pour le CPU tracking
+let lastCpuLevel = -1;
+let lastCpuSend = 0;
+const CPU_COOLDOWN = 1000; // 1 seconde entre les mises à jour CPU
+
+// Variables pour la gestion du bouton Arduino
+let buttonBuffer = '';
+let serverState = false; // État actuel du serveur FoxDot
+let lastButtonAction = 0;
+const BUTTON_COOLDOWN = 2000; // 2 secondes entre les actions du bouton
+
+// Fonction pour envoyer l'état CPU à l'Arduino
+function sendCpuToArduino(arduino, cpuPercent) {
+  const now = Date.now();
+  const cpuChar = getCpuCharacter(cpuPercent);
+  
+  // Ne pas envoyer si même niveau ou si cooldown actif
+  if (cpuChar === lastCpuLevel || now - lastCpuSend < CPU_COOLDOWN) {
+    return;
+  }
+  
+  if (arduino && arduino.isOpen) {
+    arduino.write(cpuChar, (err) => {
+      if (err) {
+        console.error('Erreur envoi CPU Arduino:', err.message);
+      } else {
+        // console.log(`État CPU '${cpuChar}' (${cpuPercent}%) envoyé à l'Arduino`);
+        
+        arduino.flush((flushErr) => {
+          if (flushErr) {
+            console.error('Erreur flush CPU Arduino:', flushErr.message);
+          }
+        });
+      }
+    });
+    
+    lastCpuLevel = cpuChar;
+    lastCpuSend = now;
+  }
+}
+
+// Fonction pour gérer les commandes du bouton Arduino
+function handleButtonCommand(command, foxdot) {
+  const now = Date.now();
+  
+  // Vérifier le cooldown pour éviter les activations multiples
+  if (now - lastButtonAction < BUTTON_COOLDOWN) {
+    console.log(`Bouton ignoré (cooldown actif: ${BUTTON_COOLDOWN - (now - lastButtonAction)}ms restantes)`);
+    return;
+  }
+  
+  if (command === 'activate' && !serverState) {
+    console.log('🟢 Activation du serveur FoxDot via bouton Arduino');
+    foxdot.stdin.write('activateServer()' + '\n' + '\n');
+    serverState = true;
+    lastButtonAction = now;
+  } else if (command === 'deactivate' && serverState) {
+    console.log('🔴 Désactivation du serveur FoxDot via bouton Arduino');
+    foxdot.stdin.write('soff()' + '\n' + '\n');
+    serverState = false;
+    lastButtonAction = now;
+  } else {
+    console.log(`Commande bouton '${command}' ignorée (état serveur: ${serverState ? 'activé' : 'désactivé'})`);
+  }
+}
+
+// Fonction pour traiter les données série de l'Arduino
+function processArduinoData(data, foxdot) {
+  const chars = data.toString();
+  
+  for (let char of chars) {
+    // Filtrer seulement les caractères 's' et 'c' du bouton
+    if (char === 's' || char === 'c') {
+      buttonBuffer += char;
+      
+      // Détecter la séquence d'activation (10 's' consécutifs)
+      if (buttonBuffer.endsWith('ssssssssss')) { // 10 's'
+        console.log('🔘 Séquence d\'activation détectée du bouton Arduino');
+        handleButtonCommand('activate', foxdot);
+        buttonBuffer = ''; // Reset buffer
+      }
+      // Détecter la séquence de désactivation (10 'c' consécutifs)
+      else if (buttonBuffer.endsWith('cccccccccc')) { // 10 'c'
+        console.log('🔘 Séquence de désactivation détectée du bouton Arduino');
+        handleButtonCommand('deactivate', foxdot);
+        buttonBuffer = ''; // Reset buffer
+      }
+      
+      // Limiter la taille du buffer pour éviter l'accumulation
+      if (buttonBuffer.length > 20) {
+        buttonBuffer = buttonBuffer.slice(-10); // Garder les 10 derniers caractères
+      }
+    }
+    // Ignorer les autres caractères (users codes, etc.)
+  }
+}
+
+// Les données CPU sont maintenant reçues via les messages WebSocket du crashPanel
+
 (async () => {
   const config = await loadConfig();
   const PROJECT_ROOT = path.resolve(config.FOXDOT_PATH, '..');
@@ -124,6 +233,19 @@ function getUserCharacter(userName) {
   });
 
 console.log('FoxDot démarré', foxdot.pid);
+
+// Écouter les données série de l'Arduino pour les commandes du bouton
+if (arduino && arduino.isOpen) {
+  arduino.on('data', (data) => {
+    processArduinoData(data, foxdot);
+  });
+  
+  arduino.on('error', (err) => {
+    console.error('Erreur série Arduino:', err.message);
+  });
+  
+  console.log('Écoute des commandes bouton Arduino activée');
+}
 
 // Créer serveur WebSocket
 const wss = new WebSocketServer({ port: 1234 });
@@ -140,6 +262,12 @@ wss.on('connection', (ws, req) => {
         const attackRequest = (code.trim().startsWith('lost') || code.trim().startsWith("attack") || code.trim().startsWith('chaos')) ? userName : "";
         broadcastLog(`${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor, attackRequest);
         foxdot.stdin.write(data.code + '\n' + '\n');
+      } else if (data.type === 'cpu_data') {
+        // Recevoir les données CPU du crashPanel et les envoyer à l'Arduino
+        const {cpu} = data;
+        if (typeof cpu === 'number') {
+          sendCpuToArduino(arduino, cpu);
+        }
       } else if (data.type === 'save_file') {
         console.log('Sauvegarde du fichier:', data.filename);
         const {filename, content} = data;

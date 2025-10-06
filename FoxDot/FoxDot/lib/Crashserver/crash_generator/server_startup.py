@@ -546,10 +546,10 @@ def soff():
 
 def activateServer():
     ''' Automatic activate server, voice and generate 5 random jam/log lines '''
-    Clock.bpm = 92
+    Clock.bpm = 164
     Server.freeAllNodes()
-    eval('se >> loop("serverVoice", dur=16, beat_stretch=0, looping=0, mverb=0.1, amp=0.5).unison(3).only()')
-    Clock.schedule(lambda: son(), Clock.mod(32))
+    eval('ho >> hoover(dur=1/2, porta=[(linvar([1.5, 0.5],32), 1, linvar([.5, 1.5],32)),(linvar([.5, 1.5],32), 1, linvar([.5, 1.5],32))], portadur=(.9, 1), lpf=0, oct=(4,5,5,4), wshape=4).unison(3).start(32).only()')
+    Clock.schedule(lambda: son(), Clock.mod(64))
     
 def playRandomLog(num_lines=5):
     ''' Play 5 random jam/log lines '''

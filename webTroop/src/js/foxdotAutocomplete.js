@@ -522,16 +522,16 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, end),
             }
         }
-        // else if (scenePattern.test(beforeCursor)) {
-        //     const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
-        //     const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
-        //     const end = line.match(/\s./)
-        //     return {
-        //         list: filteredScenes.length > 0 ? filteredScenes.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.sceneNames.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-        //         from: CodeMirror.Pos(cursor.line, token.start +1),
-        //         to: CodeMirror.Pos(cursor.line, cursorPosition),
-        //     };
-        // }
+        else if (scenePattern.test(beforeCursor)) {
+            const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
+            const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
+            const end = line.match(/\s./)
+            return {
+                list: filteredScenes.length > 0 ? filteredScenes.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.sceneNames.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+                from: CodeMirror.Pos(cursor.line, token.start +1),
+                to: CodeMirror.Pos(cursor.line, cursorPosition),
+            };
+        }
         else if (beforeCursor.includes('Scale.default=')) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
             const filteredScales = this.scales.filter(scale => scale.displayText.startsWith(prefix));

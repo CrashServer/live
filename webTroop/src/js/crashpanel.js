@@ -17,8 +17,8 @@ const showTodo = config.showTodo ?? false;
 let isResizing = false;
 let startX;
 let startWidth;
-// let sceneName = "";
-// let sceneIntervalId = null;
+let sceneName = "";
+let sceneIntervalId = null;
 let tapTimes = [];
 let calculatedBPM = 0;
 let tapTimeout = null;
@@ -124,9 +124,9 @@ ws.onmessage = function(event) {
             helpContainer.textContent = data.help;
             helpContainer.style.height = helpContainer.scrollHeight + 'px';
             break;
-        // case 'nameScene':
-        //     formatSceneName(data.nameScene);
-        //     break;
+        case 'sceneName':
+            formatSceneName(data.sceneName);
+            break;
         // case 'gameData':
         //     createGameTable(data.gameData);
         //     break;
@@ -318,24 +318,24 @@ function checkAllTodos() {
 
 
 
-// function formatSceneName(nameScene) {
-//     if (nameScene !== sceneName) {
-//         sceneName = nameScene;
-//         document.getElementById('sceneName').textContent = nameScene;
-//         if (sceneIntervalId !== null) {
-//             clearInterval(sceneIntervalId);
-//         }
+function formatSceneName(nameScene) {
+    if (nameScene !== sceneName) {
+        sceneName = nameScene;
+        document.getElementById('sceneName').textContent = nameScene;
+        if (sceneIntervalId !== null) {
+            clearInterval(sceneIntervalId);
+        }
 
-//         let startTime = Date.now();
-//         sceneIntervalId = setInterval(() => {
-//             const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-//             const color = getDurationColor(elapsedTime/60);
-//             const sceneTimeDiv = document.getElementById('sceneTime');
-//             sceneTimeDiv.style.color = color;
-//             sceneTimeDiv.textContent = formatTime(elapsedTime);
-//         }, 1000);
-//     }
-// }
+        let startTime = Date.now();
+        sceneIntervalId = setInterval(() => {
+            const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+            const color = getDurationColor(elapsedTime/60);
+            const sceneTimeDiv = document.getElementById('sceneTime');
+            sceneTimeDiv.style.color = color;
+            sceneTimeDiv.textContent = formatTime(elapsedTime);
+        }, 1000);
+    }
+}
 
 // Create a table to represent the game data  
 // function createGameTable(gameData){

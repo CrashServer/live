@@ -56,9 +56,14 @@ crashPanelToggle.addEventListener('change', () => {
 })
 
 const ws = new WebSocket(`ws://${config.HOST_IP}:20000`);
+const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
 
 ws.onopen = function() {
     console.log('CrashPanel WebSocket connection opened');
+};
+
+wsServer.onopen = function() {
+    console.log('CrashPanel connection to main server opened');
 };
 
 ws.onmessage = function(event) {
@@ -75,6 +80,13 @@ ws.onmessage = function(event) {
             break;
         case 'cpu':
             updateCpu(data.cpu);
+            // Transmettre les données CPU au serveur principal pour l'Arduino
+            if (wsServer.readyState === WebSocket.OPEN) {
+                wsServer.send(JSON.stringify({
+                    type: 'cpu_data',
+                    cpu: data.cpu
+                }));
+            }
             break;
         case 'bpm':
             document.getElementById('bpm').textContent = data.bpm;

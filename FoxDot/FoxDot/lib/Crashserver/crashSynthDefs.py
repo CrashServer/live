@@ -11,6 +11,9 @@ a_stress.add();
 a_gesa = FileSynthDef("a_gesa");
 a_gesa.add();
 
+a_wave = FileSynthDef("a_wave");
+a_wave.add();
+
 a_gesa2 = FileSynthDef("a_gesa2");
 a_gesa2.add();
 

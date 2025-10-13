@@ -99,8 +99,8 @@ function getUserCharacter(userName) {
   if (!userName) return null;
   
   const userMap = {
-    'zbdm': 'z',
-    'svdk': 'v', 
+    'zbdm': 'v',
+    'svdk': 'z', 
     'server': 's'
   };
   
@@ -110,9 +110,9 @@ function getUserCharacter(userName) {
 
 // Fonction pour mapper le pourcentage CPU aux caractères Arduino
 function getCpuCharacter(cpuPercent) {
-  if (cpuPercent < 10) return 'a';      // 0-20%
-  else if (cpuPercent < 20) return 'b'; // 20-40%
-  else if (cpuPercent < 40) return 'c'; // 40-60%
+  if (cpuPercent < 15) return 'a';      // 0-20%
+  else if (cpuPercent < 25) return 'b'; // 20-40%
+  else if (cpuPercent < 42) return 'c'; // 40-60%
   else if (cpuPercent < 60) return 'd'; // 60-80%
   else if (cpuPercent < 80) return 'e'; // 80-100%
   else return 'f';                       // 100%+

@@ -547,10 +547,17 @@ def soff():
 def activateServer():
     ''' Automatic activate server, voice and generate 5 random jam/log lines '''
     Clock.bpm = 164
+    eval('ho >> hoover(amp=0).only()')
     Server.freeAllNodes()
-    eval('ho >> hoover(dur=1/2, porta=[(linvar([1.5, 0.5],32), 1, linvar([.5, 1.5],32)),(linvar([.5, 1.5],32), 1, linvar([.5, 1.5],32))], portadur=(.9, 1), lpf=0, oct=(4,5,5,4), wshape=4).unison(3).start(32).only()')
-    Clock.schedule(lambda: son(), Clock.mod(64))
-    
+    # eval('ho >> hoover(dur=1/2, porta=[(linvar([1.5, 0.5],32), 1, linvar([.5, 1.5],32)),(linvar([.5, 1.5],32), 1, linvar([.5, 1.5],32))], portadur=(.9, 1), lpf=0, oct=(4,5,5,4), wshape=4).unison(3).start(32).only()')
+    Clock.schedule(lambda: activateServerCmd(), Clock.now() + 16)
+    Clock.schedule(lambda: son(), Clock.now() + 64)
+
+def activateServerCmd():
+    ''' what to play when activating the server '''
+    ho >> hoover(dur=1/2, porta=[(linvar([1.5, 0.5],32), 1, linvar([.5, 1.5],32)),(linvar([.5, 1.5],32), 1, linvar([.5, 1.5],32))], portadur=(.9, 1), lpf=expvar([160, 8000], [64]), oct=(4,5,5,4), wshape=4, amp=1).unison(3)
+    wa >> noloop("vocalcrash8", dur=32, r=0.17, wshape=5, mverb=0.1, amp=1).unison(4, 0.1)
+
 def playRandomLog(num_lines=5):
     ''' Play 5 random jam/log lines '''
     lines = scan_and_extract_lines(num_lines)

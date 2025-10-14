@@ -631,6 +631,40 @@ fx.add("shaped = LeakDC.ar(shaped*0.4)")
 fx.add("osc = SelectX.ar(wmix, [osc, shaped])")
 fx.save()
 
+# Auto Pan
+fx = FxList.new('apan', 'autopan', {'apan': 0, 'awidth': 1, 'apwave': 0, 'beat_dur': 1}, order=2)
+fx.doc("Rhythmic auto-panning with waveform selection (0=sine, 1=tri, 2=saw, 3=pulse)")
+fx.add_var("panLfo")
+fx.add_var("rate")
+fx.add("rate = apan / beat_dur")
+fx.add("panLfo = SelectX.kr(apwave, [SinOsc.kr(rate), LFTri.kr(rate), LFSaw.kr(rate), LFPulse.kr(rate)])")
+fx.add("osc = Pan2.ar(osc[0] + osc[1], panLfo * awidth)")
+fx.save()
+
+# Frequency Shifter
+fx = FxList.new('fshift', 'freqshift', {'fshift': 0, 'fphase': 0, 'fmix': 0.5}, order=2)
+fx.doc("Frequency shifter - shifts all frequencies by a fixed Hz amount (creates metallic/robotic sounds)")
+fx.add_var("dry")
+fx.add_var("wet")
+fx.add("dry = osc")
+fx.add("wet = FreqShift.ar(osc, fshift, fphase)")
+fx.add("osc = SelectX.ar(fmix, [dry, wet])")
+fx.save()
+
+# Shimmer Reverb
+fx = FxList.new('shimmer', 'shimmer', {'shimmer': 0, 'shimsize': 0.8, 'shimpitch': 0.5, 'shimmix': 0.5}, order=2)
+fx.doc("Shimmer reverb - octave-up pitch shift + reverb for ethereal sounds")
+fx.add_var("dry")
+fx.add_var("pitched")
+fx.add_var("reverbed")
+fx.add_var("wet")
+fx.add("dry = osc")
+fx.add("pitched = PitchShift.ar(osc, 0.2, LinExp.kr(shimpitch, 0, 1, 1, 2), 0, 0.01)")
+fx.add("reverbed = FreeVerb.ar(osc + (pitched * 0.5), shimmix, shimsize)")
+fx.add("wet = reverbed * LinLin.kr(shimmer, 0, 1, 0.3, 1.5)")
+fx.add("osc = SelectX.ar(shimmer, [dry, wet])")
+fx.save()
+
 ###########
 
 Effect.server.setFx(FxList)

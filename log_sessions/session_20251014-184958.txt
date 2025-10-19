@@ -1,0 +1,762 @@
+n2.stop()
+
+n2.stop()
+
+n2.stop()
+
+Clock.bpm=92
+
+b1 >> loop("ubuntu8", dur=8, sample=2)
+
+c6 >> play("-")
+
+h2 >> loop("break16", dur=16, drcomp=.5).lclip(4)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=.5).lclip(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> loop("ubuntu8", dur=8, sample=2)
+
+b1 >> loop("ubuntu8", dur=8, sample=3)
+
+b1 >> loop("ubuntu8", dur=8, sample=2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+FoxDot.reload()
+
+b1 >> loop("ubuntu8", dur=8, sample=2)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=.5).lclip(4)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=0).lclip(4)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=0, sample=5).lclip(4)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=0, sample=4).lclip(4)
+
+n3 >> play("k.")
+
+b1 >> loop("ubuntu8", dur=8, sample=2, fshift=400)
+
+b1 >> loop("ubuntu8", dur=8, sample=2, fshift=40)
+
+b1 >> loop("ubuntu8", dur=8, sample=2, fshift=-40)
+
+b1 >> loop("ubuntu8", dur=8, sample=2, fshift=(-40,0))
+
+b1 >> loop("ubuntu8", dur=8, sample=2, fshift=(-40,0,38))
+
+b1 >> loop("ubuntu8", dur=8, sample=2, fshift=(-38,0,38))
+
+b1 >> loop("ubuntu8", dur=8, sample=2, fshift=0)
+
+b1 >> loop("ubuntu8", dur=8, sample=2, sbrk=.5)
+
+b1 >> loop("ubuntu8", dur=8, sample=2, sbrk=0)
+
+b1 >> loop("ubuntu8", dur=8, sample=2, chop=4)
+
+b1 >> loop("ubuntu8", dur=8, sample=2, chop=4, chopwave=5)
+
+z5 >> loop("ubuntu8", dur=8, sample=3)
+
+z5 >> loop("ubuntu8", dur=8, sample=3, pshift=-5)
+
+b1.stop()
+
+z5 >> loop("ubuntu8", dur=8, sample=3, pshift=0)
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0)
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2))
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4))
+
+e4 >> dbass(dur=8, oct=4, lpf=400)
+
+e4 >> dbass(dur=8, oct=5, lpf=400)
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4), amp=0.8)
+
+e4 >> dbass(dur=8, oct=5, lpf=700)
+
+e4 >> dbass(dur=8, oct=5, lpf=700, rate=.5)
+
+e4 >> dbass(-2, dur=8, oct=5, lpf=700, rate=.5)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=0, sample=4).lclip(var([4, 2, 1],[8, 4,4]))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=0, sample=4).lclip(var([4, 2, 1, 1/2, 1/4],[8, 4,2, 2]))
+
+e4 >> dbass(var([0, -2], [8]), dur=8, oct=5, lpf=700, rate=.5)
+
+e4 >> dbass(var([0, -2], [8]), dur=8, oct=5, lpf=700, rate=.5, wshape=4)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=0, sample=4).lclip(var([16, 4, 2, 1, 1/2, 1/4],[16, 8, 4,2, 2]))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=0, sample=4).lclip(var([16, 4, 2, 1, 1/2, 1/4, 1/8 , 1/16],[16, 8, 4,2, 1,1]))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=4).lclip(var([16, 4, 2, 1, 1/2, 1/4, 1/8 , 1/16],[16, 8, 4,2, 1,1]))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=4).lclip(var([16, 4, 2, 1, 1/2, 1/4, 1/8 , 1/16],[16,8,4,4,2,2,1,1]))
+
+e4 >> dbass(var([0, -2], [8]), dur=1/2, oct=5, lpf=700, rate=.5, wshape=4)
+
+e4 >> dbass(var([0, -2], [8]), dur=1/2, oct=5, lpf=800, rate=.5, wshape=4)
+
+e4 >> dbass(var([0, -2], [8]), dur=1/2, oct=5, lpf=900, rate=.5, wshape=4)
+
+e4 >> dbass(var([0, -2], [8]), dur=1/2, oct=5, lpf=1000, rate=.5, wshape=4)
+
+e4 >> dbass(var([0, -2], [8]), dur=1/2, oct=5, lpf=1100, rate=.5, wshape=4)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, chopwave=5)
+
+b1.stop()
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, chopwave=5).lclip(4)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=0, chopwave=5).lclip(4)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, chopwave=5).lclip(4)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, chopwave=5).lclip(4).end(32,4)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, chopwave=5).lclip(4).end(4,32)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, chopwave=5).lclip(4).end(4,16)
+
+e4 >> lbass(var([0, -2], [8]), dur=1/2, oct=5, cutoff=2400, lpf=0, rate=.5, wshape=4)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, mverb=.4, chopwave=5).lclip(4).end(4,16)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, mverb=0.5, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, mverb=0.6, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, mverb=0.7, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, mverb=0.8, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+e4.stop()
+
+b1 >> noloop("ubuntu8", pos=1, dur=8, sample=2, chop=4, mverb=0.8, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", pos=2, dur=8, sample=2, chop=4, mverb=0.8, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=4).lclip(var(P*[16, 4, 2, 1, 1/2, 1/4,1/8,1/16],[8,4,4,2,2,1,1]))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=4).lclip(var(PwRand([16, 4, 2, 1, 1/2, 1/4,1/8,1/16],[8,4,4,2,2,1,1]),8))
+
+b1.stop()
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=4).lclip(var(PwRand([16, 4, 2, 1, 1/2, 1/4,1/8],[8,4,4,2,2,1]),8))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=8).lclip(var(PwRand([16, 4, 2, 1, 1/2, 1/4,1/8],[8,4,4,2,2,1]),8))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=9).lclip(var(PwRand([16, 4, 2, 1, 1/2, 1/4,1/8],[8,4,4,2,2,1]),8))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=9).lclip(var(PwRand([16, 4, 2, 1, 1/2, 1/4,1/8],[8,4,4,2,2,1]),2))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=9).lclip(var(PwRand([16, 8, 4, 2, 1, 1/2, 1/4,1/8],[16, 8,4,4,2,2,1]),2))
+
+z5 >> noloop("ubuntu8", dur=8, sample=4, pshift=0, delay=(0, 2, 4), amp=0.8) # drone
+
+h2.stop()
+
+~z5 >> noloop("ubuntu8", dur=8, sample=4, pshift=0, delay=(0, 2, 4), amp=0.8) # drone
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4), amp=0.8) # drone
+
+z6 >> noloop("ubuntu8", dur=8, sample=4, pshift=0, delay=(0, 3, 7), amp=0.8) # drone
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4), amp=0.4).unison(3) # drone
+
+z6 >> noloop("ubuntu8", dur=8, sample=4, pshift=0, delay=(0, 3, 7), amp=0.6).unison(3) # drone
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, chop=4, mverb=0.8, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+b1.stop()
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=.5, chop=4, mverb=0.8, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, mverb=0.8, chopwave=5).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, mverb=0.8, chopwave=5, pong=0.5, beat_dur=1, pongtime=1).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, pong=0.5, mverb=0.8, chopwave=5, beat_dur=1, pongtime=1).lclip(4).end(4,16) # jingle bells
+
+n3 >> play("k.").sometimes("stutter")
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, pong=0.5, mverb=0.8, chopwave=5, beat_dur=1, pongtime=1, crush=8, bits=4).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, pong=0.5, mverb=0.8, chopwave=5, beat_dur=1, pongtime=1, crush=8, bits=5).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, pong=0.5, mverb=0.8, chopwave=5, beat_dur=1, pongtime=1, crush=8, bits=6).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, pong=0.5, mverb=0.8, chopwave=5, beat_dur=1, pongtime=1, crush=8, bits=7).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, pong=0.5, mverb=0.8, chopwave=5, beat_dur=1, pongtime=1, crush=8, bits=8).lclip(4).end(4,16) # jingle bells
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, pong=0.5, mverb=0.8, chopwave=5, beat_dur=1, pongtime=1, crush=4, bits=8).lclip(4).end(4,16) # jingle bells
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4), amp=0.4, rate=PTuple(PWhite(0.5, 1.4),3)).unison(3) # drone
+
+z6 >> noloop("ubuntu8", dur=8, sample=4, pshift=0, delay=(0, 3, 7), amp=0.6, rate=PTuple(PWhite(0.5, 1.4),3)).unison(3) # drone
+
+b1.stop()
+
+e2 >> noloop("ubuntu8", dur=8, sample=0)
+
+e2.stop()
+
+n3.stop()
+
+r1 >> play("u", sample=0, dur=4)
+
+r1 >> play("u", sample=0, dur=4, bank=2)
+
+z6.stop()
+
+z5.stop()
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=.2)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=.2, amp=2)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=.2, amp=2, wshape=5)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=.1).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.2).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.3).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.3, hpf=20).lclip(2)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=.2, amp=3, wshape=5)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=0.3, amp=3, wshape=5)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=0.4, amp=3, wshape=5)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.3, hpf=20, chop=16).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.3, hpf=20, chop=32).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.3, hpf=20, chop=64).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.3, hpf=20, chop=0).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.34, hpf=20).lclip(2)
+
+e2 >> noloop("ubuntu8", dur=8, sample=0, rate=0.30, hpf=20).lclip(2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+e2 >> loop("ubuntu8", dur=8, sample=5, rate=0.30, hpf=20).lclip(2)
+
+e2 >> loop("ubuntu8", dur=8, sample=5, rate=0.30, hpf=20)
+
+~e2 >> loop("ubuntu8", dur=8, sample=5, rate=0.30, hpf=20)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=0.4, amp=3, wshape=5)
+
+e2 >> loop("ubuntu8", dur=8, sample=5, rate=1, hpf=20)
+
+r1.stop()
+
+e2 >> loop("ubuntu8", dur=4, sample=5, rate=1, hpf=20)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=0.4, amp=3, wshape=5)
+
+r1.stop()
+
+e2 >> loop("ubuntu8", dur=4, sample=5, rate=1, hpf=0)
+
+e2 >> loop("ubuntu8", dur=4, sample=5, rate=.5, hpf=0)
+
+e2 >> noloop("ubuntu8", dur=4, sample=5, rate=0, hpf=0)
+
+e2 >> loop("ubuntu8", dur=4, sample=5, rate=0, hpf=0)
+
+e2 >> loop("ubuntu8", dur=2, sample=5, rate=0, hpf=0)
+
+e2 >> loop("ubuntu8", dur=(2,4), sample=5, rate=0, hpf=0)
+
+n3 >> play("k.").sometimes("stutter")
+
+n3 >> play("k.", amp=2).sometimes("stutter")
+
+e2 >> loop("ubuntu8", dur=(2,4), sample=5, rate=0, hpf=0, mverb=.3)
+
+e2 >> loop("ubuntu8", dur=(2,4), sample=5, rate=0, hpf=0, mverb=0.4)
+
+e2 >> loop("ubuntu8", dur=(2,4), sample=5, rate=0, hpf=30, mverb=0.4)
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=0.4, amp=3, wshape=5)
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4), amp=0.4, rate=PTuple(PWhite(0.5, 1.4),3)).unison(3) # drone
+
+~z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4), amp=0.4).unison(3) # drone
+
+p7 >> play("u", sample=4)
+
+p7 >> play("u", sample=4, bank=2)
+
+y9 >> play("u", sample=8, bank=2, wshape=4, rate=2, dur=1/4, pan=(-1,1)).often("stutter") # hihat
+
+variation = Variation(16,4)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=9).lclip(var(PwRand([16,8,4,2,1,1/2,1/4,1/8],[16,8,4,4,2,2,1]),2))
+
+h2.stop()
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=9).lclip(var(PwRand([16,8,4,2,1,1/2,1/4,1/8],[16,8,4,4,2,2,1]),2))
+
+e2.stop()
+
+z5.stop()
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=8).lclip(var(PwRand([16,8,4,2,1,1/2,1/4,1/8],[16,8,4,4,2,2,1]),2))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=7).lclip(var(PwRand([16,8,4,2,1,1/2,1/4,1/8],[16,8,4,4,2,2,1]),2))
+
+h2.solo()
+
+~h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=7).lclip(var(PwRand([16,8,4,2,1,1/2,1/4,1/8],[16,8,4,4,2,2,1]),2))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=7)
+
+~h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=7)
+
+~h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=7)
+
+~h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=7)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=7).lclip(var(PwRand([16,8,4,2,1,1/2,1/4,1/8],[16,8,4,4,2,2,1]),2))
+
+r1 >> play("u", sample=0, dur=4, bank=2, echo=0.5, rate=0.4, amp=3, wshape=5)
+
+p7 >> play("u", sample=4, bank=2)
+
+y9 >> play("u", sample=8, bank=2, wshape=4, rate=2, dur=1/4, pan=(-1,1)).often("stutter") # hihat
+
+e2 >> loop("ubuntu8", dur=(2,4), sample=5, rate=0, hpf=30, mverb=0.4)
+
+e2.stop()
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4), amp=0.4).unison(3) # drone
+
+variation = Variation(16,4)
+
+variation.start()
+
+n3 >> play("k.", amp=2).sometimes("stutter")
+
+p7 >> play("u", sample=4, bank=2)
+
+y9 >> play("u", sample=8, bank=2, wshape=4, rate=2, dur=1/4, pan=(-1,1)).often("stutter") # hihat
+
+y9 >> play("u", sample=8, bank=2, wshape=4, rate=2, dur=1/4, pan=(-1,1)).often("stutter", PRand(5)) # hihat
+
+p7.stop()
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=13)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=13, mverb=.8)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=13, mverb=.2)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=12)
+
+~h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=12)
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=12).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[16,8,4,4,2,2,1]),2))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=12).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[16,8,4,4,2,2,1]),4))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=12).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[8,8,4,4,2,2,1]),4))
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=12, sbrk=.5).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[8,8,4,4,2,2,1]),4))
+
+e2 >> loop("ubuntu8", dur=(2,4), sample=5, rate=0, hpf=30, mverb=0.4)
+
+e2.stop()
+
+e2 >> loop("ubuntu8", dur=(8,4), sample=5, rate=0, hpf=30, mverb=0.4)
+
+n3.stop()
+
+p7 >> play("u", sample=4, bank=2)
+
+p7 >> play("u", sample=5, bank=2)
+
+p7 >> play("u", sample=6, bank=2)
+
+p7 >> play("u", sample=7, bank=2)
+
+p7 >> play("u", sample=8, bank=2)
+
+p7 >> play("u", sample=9, bank=2)
+
+p7.solo()
+
+unsolo()
+
+p7.solo()
+
+unsolo()
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=12, sbrk=P*[0,PWhite(0, 4)]).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[8,8,4,4,2,2,1]),4))
+
+e2.stop()
+
+z6 >> noloop("ubuntu8", dur=8, sample=4, pshift=0, delay=(0, 3, 7), amp=0.6).unison(3) # drone
+
+h2 >> loop("break16", dur=16, drcomp=.5, lofi=var([0,PWhite(0,1)], 8), sample=14, sbrk=P*[0,PWhite(0, 4)]).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[8,8,4,4,2,2,1]),4))
+
+z5.stop()
+
+z5.stop()
+
+z6.stop()
+
+r1.stop()
+
+y9.stop()
+
+p7.stop()
+
+e4 >> lbass(var([0, -2], [8]), dur=1/2, oct=5, cutoff=2400, lpf=0, rate=.5, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=2400, lpf=0, rate=.5, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), lpf=0, rate=.5, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), lpf=0, rate=0.6, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), lpf=0, rate=0.7, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), lpf=0, rate=0.8, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), lpf=0, rate=0.9, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), lpf=0, rate=1.0, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), lpf=0, rate=1.1, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), lpf=0, rate=1.2, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=.4, lpf=0, rate=1.2, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.5, lpf=0, rate=1.2, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.6, lpf=0, rate=1.2, wshape=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=4)
+
+h3 >> loop("break16", dur=16, drcomp=.5, sample=14)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=4, formant=4)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=4, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=3, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=4, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=5, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=6, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=7, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=8, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,3000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(400,4000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(1400,4000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=3)
+
+e4 >> lbass(0, dur=1/2, oct=5, cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=3)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=3)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=2)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=1)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=0)
+
+n3.stop()
+
+n3 >> play("k.", amp=2).sometimes("stutter")
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=0).begin(4,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=0).begin(32,4)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=0).begin(4,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.8, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.5, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.4, lpf=0, rate=1.2, wshape=10, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,6), cutoff=PFr(1400,5000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,5), cutoff=PFr(1400,5000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(32,6,5)), cutoff=PFr(1400,5000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(32,[6,7],5)), cutoff=PFr(1400,5000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(32,[6,7],5)), cutoff=PFr(1400,6000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(32,[6,7],5)), cutoff=PFr(1400,7000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(16,[6,7],5)), cutoff=PFr(1400,7000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(1400,7000), tone=0.4, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(1400,7000), tone=0.5, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(1400,7000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(1400,7000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(1400,6000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(1400,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(400,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(0,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+h3.stop()
+
+h2 >> loop("break16", dur=16, drcomp=.5, amp=2, lofi=var([0,PWhite(0,1)], 8), sample=14, sbrk=P*[0,PWhite(0, 4)]).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[8,8,4,4,2,2,1]),4))
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=1).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=5).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=1).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=5).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=6).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=5).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=6).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=7).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=8).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=9).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=8).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=7).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=6).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=5).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=5).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=1).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=5).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=PRand(8)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=9, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=8, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.7, lpf=0, rate=1.2, wshape=7, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,7],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=7, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=7, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=8, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=10, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=11, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=12, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=13, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=12, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=11, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=10, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=10, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=11, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=12, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=13, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=12, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=11, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=10, formant=PRand(4)).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=PRand(4)).begin(28,32)
+
+n3 >> play("k.", amp=6).sometimes("stutter")
+
+n3 >> play("<k.><X.>", amp=6).sometimes("stutter")
+
+n3 >> play("<k.><X.><..|o4|.>", amp=6).sometimes("stutter")
+
+c6 >> play("[--]")
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

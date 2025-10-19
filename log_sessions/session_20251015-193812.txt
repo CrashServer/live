@@ -1,0 +1,140 @@
+n3 >> play("<k.><X.><..|o4|.>", amp=6).sometimes("stutter")
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+h2 >> loop("break16", dur=16, drcomp=.5, amp=2, lofi=var([0,PWhite(0,1)], 8), sample=14, sbrk=P*[0,PWhite(0, 4)]).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[8,8,4,4,2,2,1]),4))
+
+e4.stop()
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=0).begin(28,32)
+
+n3 >> play("<k.><X.><..|o4|.>", amp=1).sometimes("stutter")
+
+variation = Variation(16,4)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=1).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=2).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=3).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=5).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=6).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=7).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=6).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=5).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,5000), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,500), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+Clock.bpm=92
+
+c6 >> play("[--]")
+
+Server.addFx(lofi=.5)
+
+Server.addFx(lofi=0.6)
+
+Server.addFx(lofi=0.7)
+
+Server.addFx(lofi=0.8)
+
+Server.addFx(lofi=0.7)
+
+Server.addFx(lofi=0.6)
+
+Server.addFx(lofi=0.5)
+
+Server.addFx(lofi=0.4)
+
+Server.addFx(lofi=0.3)
+
+Server.addFx(lofi=0.2)
+
+Server.addFx(lofi=0.3)
+
+Server.addFx(lofi=0.4)
+
+Server.addFx(lofi=0.3)
+
+Server.addFx(lofi=0.4)
+
+Server.addFx(lofi=0.5)
+
+Server.addFx(lofi=0.6)
+
+Server.addFx(lofi=0.7)
+
+Server.addFx(lofi=0.6)
+
+Server.addFx(lofi=0.5)
+
+Server.addFx(lofi=0.6)
+
+Server.addFx(lofi=0.7)
+
+Server.addFx(lofi=0.6)
+
+Server.addFx(lofi=0.5)
+
+Server.addFx(lofi=0.6)
+
+Server.addFx(lofi=0.5)
+
+Server.addFx(lofi=0.4)
+
+Server.addFx(lofi=0.3)
+
+Server.addFx(lofi=0)
+
+n3 >> play("<k.><X..X.X><..|o4|.>", amp=1).sometimes("stutter")
+
+n3 >> play("<k.><X..X.X><..|o4|.c>", amp=1).sometimes("stutter")
+
+e4.stop()
+
+e2 >> loop("ubuntu8", dur=(8,4), sample=5, rate=0, hpf=30, mverb=0.4)
+
+b1 >> noloop("ubuntu8", dur=8, sample=2, rate=0.6, chop=4, pong=0.5, mverb=0.8, chopwave=5, beat_dur=1, pongtime=1, crush=4, bits=8).lclip(4).end(4,16) # jingle bells
+
+z6 >> noloop("ubuntu8", dur=8, sample=4, pshift=0, delay=(0, 3, 7), amp=0.6).unison(3) # drone
+
+z5 >> noloop("ubuntu8", dur=8, sample=3, pshift=0, delay=(0, 2, 4), amp=0.4).unison(3) # drone
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+n3 >> play("<k.><X..X.X><..|o4|.c>", amp=1).sometimes("stutter")
+
+h2 >> loop("break16", dur=26, drcomp=.5, amp=2, lofi=var([0,PWhite(0,1)], 8), sample=14, sbrk=P*[0,PWhite(0, 4)]).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[8,8,4,4,2,2,1]),4))
+
+h2 >> loop("break16", dur=26, drcomp=.5, amp=2, lofi=var([0,PWhite(0,1)], 8), sample=14, sbrk=P*[0,PWhite(0, 4)]).lclip(var(PwRand([8,4,2,1,1/2,1/4,1/8],[8,8,4,4,2,2,1]),4))
+
+e4 >> lbass(0, dur=1/4, oct=(4,PStep(8,[6,4],5)), cutoff=PFr(10,500), tone=0.6, lpf=0, rate=1.2, wshape=9, formant=4).begin(28,32)
+
+son()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+

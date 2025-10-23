@@ -1,10 +1,10 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { spawn } from 'child_process';
-// import fetch from 'node-fetch';
 import path from 'path';
 import { promises as fs } from 'fs';
 import { SerialPort } from 'serialport';
 
+// Fonction pour charger le fichier de configuration
 async function loadConfig(){
   try {
     const configPath = path.resolve('./crash_config.json');
@@ -62,6 +62,7 @@ async function initArduino() {
 // Variables pour le cooldown Arduino
 let lastArduinoSend = 0;
 const ARDUINO_COOLDOWN = 300; // 300ms de cooldown entre les envois
+let arduino = null;
 
 // Fonction pour envoyer un caractère à l'Arduino avec cooldown simple
 function sendToArduino(arduino, character) {
@@ -69,7 +70,6 @@ function sendToArduino(arduino, character) {
   
   // Vérifier le cooldown - ignorer si trop récent
   if (now - lastArduinoSend < ARDUINO_COOLDOWN) {
-    // console.log(`Caractère '${character}' ignoré (cooldown actif: ${ARDUINO_COOLDOWN - (now - lastArduinoSend)}ms restantes)`);
     return;
   }
   
@@ -78,7 +78,6 @@ function sendToArduino(arduino, character) {
       if (err) {
         console.error('Erreur envoi Arduino:', err.message);
       } else {
-        // console.log(`Caractère '${character}' envoyé à l'Arduino`);
         
         // Flush pour s'assurer que les données sont envoyées immédiatement
         arduino.flush((flushErr) => {
@@ -99,12 +98,11 @@ function getUserCharacter(userName) {
   if (!userName) return null;
   
   const userMap = {
-    'zbdm': 'v',
-    'svdk': 'z', 
+    'zbdm': 'z',
+    'svdk': 'v', 
     'server': 's'
   };
   
-  // Normaliser en minuscules pour gérer les variations de casse
   return userMap[userName] || null;
 }
 
@@ -144,7 +142,6 @@ function sendCpuToArduino(arduino, cpuPercent) {
       if (err) {
         console.error('Erreur envoi CPU Arduino:', err.message);
       } else {
-        // console.log(`État CPU '${cpuChar}' (${cpuPercent}%) envoyé à l'Arduino`);
         
         arduino.flush((flushErr) => {
           if (flushErr) {
@@ -220,9 +217,15 @@ function processArduinoData(data, foxdot) {
 (async () => {
   const config = await loadConfig();
   const PROJECT_ROOT = path.resolve(config.FOXDOT_PATH, '..');
+  const isArduinoEnabled = config.ARDUINO;
   
   // Initialiser la connexion Arduino
-  const arduino = await initArduino();
+  if (isArduinoEnabled){
+    arduino = await initArduino();
+  } else {
+    arduino = null;
+    console.log('Arduino désactivé dans la configuration.');
+  }
   
   // Lancer FoxDot
   const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
@@ -307,7 +310,7 @@ function broadcastLog(message, color=null, attackRequest="") {
     
     // Envoyer le caractère correspondant à l'Arduino
     const userChar = getUserCharacter(userName.toLowerCase());
-    if (userChar) {
+    if (userChar && arduino && arduino.isOpen) {
       sendToArduino(arduino, userChar);
     }
   }

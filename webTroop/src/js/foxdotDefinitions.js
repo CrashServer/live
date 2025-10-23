@@ -329,7 +329,28 @@ const synthList = {
   abass: 'freq=440, gate=1, spread=0.8, cutoff=2800, rq=0.8'
 };
 
-const definitions = { ...func, ...fxList, ...synthList };
+// Dictionnaire de définitions (mutable) fusionnant statique + dynamique
+let definitions = { ...func, ...fxList, ...synthList };
+
+// Met à jour dynamiquement les définitions (ex: à la réception de l'autocomplete)
+// params:
+// - synthDefs: { [synthName: string]: "(param=..., ...)" }
+// - fxDefs:    { [fxName: string]: "param=..., ..." }  (optionnel)
+export function updateDefinitions({ synthDefs = {}, fxDefs = {} } = {}) {
+  // Normaliser: ne garder que des chaînes non vides
+  const norm = (v) => (typeof v === 'string' && v.trim().length > 0 ? v : undefined);
+
+  // Fusion non destructive: les entrées dynamiques remplacent les statiques si collision
+  Object.entries(synthDefs).forEach(([name, sig]) => {
+    const v = norm(sig);
+    if (v) definitions[name] = v; // ex: definitions['tb303'] = "(wave=..., ...)"
+  });
+
+  Object.entries(fxDefs).forEach(([name, sig]) => {
+    const v = norm(sig);
+    if (v) definitions[name] = v; // ex: definitions['dist'] = "dist: 0, ..."
+  });
+}
 
 function showDefinition(cm) {
   const cursor = cm.getCursor();

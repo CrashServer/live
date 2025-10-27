@@ -57,7 +57,9 @@ fxdict = {
 'mverb': {'mverb': preso, 'mverbmix': preso, 'mverbdamp': preso, 'mverbdiff': [0.5,0.99]},
 'clouds': {'clouds': preso, 'cpos': [0.0,1.0], 'csize': [0.0,1.0], 'cdens': [0.0,1.0], 'ctex': [0.0,1.0], 'cpitch': [-48,48], 'cgain': [0.5,1.0], 'cfb': [0.0,0.5], 'cmode': [0,3]},
 'dist2': {'dist2': [0.2,1], 'dist2mix': preso, 'dist2shape': [0.03,0.5]},
-
+'valad': {'valad': pfreq, 'valadr': preso },
+'pong': {'pong': preso, 'pongtime': [0.1, 1]},
+'lofi': {'lofi': [0.1,1.0], 'lofiwow': [0.0, 0.5]}
 }
 
 sorted_sample = {

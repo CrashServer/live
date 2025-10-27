@@ -296,7 +296,7 @@ if __name__ != "__main__":
             """ Returns a random binary pattern or convert number to bin pattern """
             if number == 0:
                 number = PRand(10, 1000000)[0]
-            return [int(i) for i in str(bin(number)[2:])]
+            return Pattern([int(i) for i in str(bin(number)[2:])])
 
         @loop_pattern_func
         def PSaw(n=16, inverse=0):
@@ -308,9 +308,12 @@ if __name__ != "__main__":
                 return Pattern([i * j for j in range(0, int(n))]).reverse()
 
         @loop_pattern_func
-        def PTime():
+        def PTime(low=0, high=0, rnd=1):
             """Generate a pattern from the local machine time"""
-            return [int(t) for t in str(Clock.get_time_at_beat(int(Clock.now()))) if t != '.']
+            if low ==0 and high ==0:
+                return Pattern([int(t) for t in str(Clock.get_time_at_beat(int(Clock.now()))) if t != '.'])
+            else:
+                return Pattern([int(t) for t in str(Clock.get_time_at_beat(int(Clock.now()))) if t != '.']).lmap(low, high).transform(lambda value: round(rnd * round(float(value) / rnd),3))
 
         @loop_pattern_func
         def PTimebin():

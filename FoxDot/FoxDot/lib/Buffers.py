@@ -210,6 +210,7 @@ class BufferManager(object):
         while self._buffers[self._nextbuf] is not None:
             self._incr_nextbuf()
             if self._nextbuf == start:
+                self.freeAll()
                 raise RuntimeError("Buffers full! Cannot allocate additional buffers.")
         freebuf = self._nextbuf
         self._incr_nextbuf()

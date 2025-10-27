@@ -88,6 +88,10 @@ dropTimeMin = 2
 dropTimeMax = 8
 dropLoop = 4
 
+# Variation parameters
+variationTotal = 64 # total beats 
+variationBreak = 4 # number of beats for the break (at the end of total duration)
+
 # change probability player parameters
 probPlayerAttributes = [2, #amp
 						2, #amplify

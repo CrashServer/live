@@ -533,7 +533,7 @@ def son(s=999, d=999, l=999):
     serverActive = True
     playRandomLog(5)
     global variation
-    variation = Variation(16,4)
+    variation = Variation(variationTotal,variationBreak)
 
 def soff():
     ''' Deactivate the server '''

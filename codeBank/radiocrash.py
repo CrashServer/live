@@ -1,4 +1,6 @@
 # radiocrash
+# Cover
+
 Scale.default="major"
 Root.default="Db"
 Clock.bpm = 76

@@ -1,4 +1,5 @@
 # Twin Peaks Theme
+# Cover
 Scale.default="chromatic"
 Clock.bpm=72
 s1 >> faim([[2,5], _, 0],dur=[3.0, 0.5, 0.5],amp=1, oct=(4,5), blur=1.2, tremolo=8, tremolomix=0.7, beef=2, mverb=0.2).unison(1)

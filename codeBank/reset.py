@@ -1,4 +1,6 @@
 # reset
+# Utils
+
 # List of functions to reset FoxDot
 FoxDot.reassign_clock()
 Clock.clear()

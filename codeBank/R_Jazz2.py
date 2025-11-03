@@ -1,4 +1,6 @@
 # R_Jazz2
+# R_
+
 g8 >> play("<k(...[--])><-:><..*.>", sample=1, amp=1, bank=1, dur=1/2, rate=1, cut=1.2).sometimes("stutter")
 c5 >> loop("jazzc8", dur=8, sample=7, comp=1)
 j8 >> loop("jazzguitar8", dur=8, sample=4)

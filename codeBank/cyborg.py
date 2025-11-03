@@ -1,4 +1,6 @@
 # cyborg
+# Reisub
+
 o4 >> splitter("cyborg8", sample=2, dur=4, pos=PWhite(0,1), rd=PWhite(0,0.8), sus=8, hpf=4000)
 o5 >> splitter("cyborg8", sample=3, delay=2, dur=4, pos=0, rd=0, sus=4, hpf=2000)
 3 >> play("(Cc)", dur=12, delay=3, rate=PwRand([-1, 1], [1, 9]), room=0.4, mix=0.2, sample=PRand(2) + 2).often("stutter", leg=PWhite(50,128), slide=PWhite(0.9, 1.1), echo=PwRand([0, 1], [8, 2]), pan=(-1,1))

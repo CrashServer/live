@@ -1,4 +1,5 @@
 # merlin 
+
 # hardishstuff, approximative
 Clock.bpm = 128
 j1 >> play("<B.BBv.Bv><v.Bbv.Bv><(...:)>", sample=(6, 6, 4), hpf=(200, var([200, 0, 30, 20]), 0), cut=(0, 0, 0.1), leg=0)

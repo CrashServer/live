@@ -1,4 +1,6 @@
 # R_Metlas
+# R_
+
 n3 >> loop("metalgtr8", dur=8)
 p7 >> loop("metalgtr16", dur=16, sample=13, sbrk=0, mverb=0, room=0.2).lclip(4)
 j5 >> loop("metaldrum16", dur=16, sample=8, drcomp=0.5, shape=0.2).lclip(2)

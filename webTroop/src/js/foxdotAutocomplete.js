@@ -437,6 +437,11 @@ export const foxdotAutocomplete = {
         
     ],
 
+    _currentView: 'categories',
+    _currentCategory: null,
+    _completionWidget: null,
+    categories: {"test": {items: "testItems"}},
+
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
         const token = cm.getTokenAt(cursor);
@@ -444,6 +449,10 @@ export const foxdotAutocomplete = {
         const cursorPosition = cursor.ch;
         const beforeCursor = line.slice(0, cursorPosition);
         const afterCursor = line.slice(cursorPosition);
+
+        // Reset view state for new hints
+        this._currentView = 'categories';
+        this._currentCategory = null;
 
         // Regex pour détecter un player suivi de '>>'
         // const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*/;
@@ -512,13 +521,24 @@ export const foxdotAutocomplete = {
         }
         else if (lostPattern.test(beforeCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
-            const filteredLost = this.attackList.filter(lost => lost.displayText.includes(prefix));
+            let filteredLost = this.attackList.filter(lost => lost.displayText.toLowerCase().includes(prefix.toLowerCase()));
             const match = line.match(/(lost|attack)\(([^)]*)\)$/);
             const start = match.index + match[0].indexOf('(') + 1;
             const endMatch = line.match(/\)/);
             const end = endMatch ? endMatch.index : cursorPosition;
+
+            filteredLost = filteredLost.length > 0 ? filteredLost.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.attackList.sort((a, b) => a.displayText.localeCompare(b.displayText));
+
+            // Add category separator
+            if (prefix.length === 0){
+            Object.keys(this.categories).forEach(categoryKey => {
+                if (categoryKey && categoryKey.trim() !== ""){
+                    filteredLost.unshift(this.createCategorySeparator(categoryKey, categoryKey));
+                }
+            })};
+
             return {
-              list: filteredLost.length > 0 ? filteredLost.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.attackList.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+              list: filteredLost,
               from: CodeMirror.Pos(cursor.line, start),
               to: CodeMirror.Pos(cursor.line, end),
             }
@@ -598,5 +618,111 @@ export const foxdotAutocomplete = {
             };
 
         }
+    },
+
+    // create separator for categories
+    createCategorySeparator: function(text, categoryKey) {
+        return {
+            text: "",
+            displayText: text + " →",
+            className: "autocomplete-category-separator",
+            categoryKey: categoryKey,
+            render: function(element, self, data) {
+                element.className += " autocomplete-category-separator";
+                element.innerHTML = `<span class="category-text">${data.displayText}</span>`;
+                element.style.cursor = 'pointer';
+                element.setAttribute('data-category', data.categoryKey);
+            },
+            hint: function(cm, self, data) {
+                return false;
+            }
+        };
+    },
+
+    // create back button for categories
+    createBackButton: function() {
+        return {
+            text: "",
+            displayText: "← Retour aux catégories",
+            className: "autocomplete-back-button",
+            render: function(element, self, data) {
+                element.className += " autocomplete-back-button";
+                element.innerHTML = `<span class="back-text">${data.displayText}</span>`;
+                element.style.cursor = 'pointer';
+            },
+            hint: function(cm, self, data) {
+                return false;
+            }
+        };
+    },
+
+    // Create category list
+    /**
+     * Extract unique attack categories from the attack list.
+     * @returns {Object} Object with unique attack categories as keys and their related attacks in array.
+     * Exemple: { "Cover": [...], "Original": [...], "Remix": [...] }
+     */
+    getAttackCategories: function() {
+        if (!this.attackList || this.attackList.length === 0) {
+            return [];
+        }
+        
+        const categorizedAttacks = {};
+        
+        this.attackList.forEach(attack => {
+            const categoryString = attack.category || '';
+            
+            const categories = categoryString.split(',').map(cat => cat.trim()).filter(cat => cat !== '');
+
+            if (categories.length === 0) {
+                categories.push('');
+            }
+
+            categories.forEach(category => {
+            const normalizedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+
+            if (!categorizedAttacks[normalizedCategory]) {
+                categorizedAttacks[normalizedCategory] = [];
+            }
+            
+            categorizedAttacks[normalizedCategory].push(attack);
+        });
+        });
+        
+        // Sort attacks within each category alphabetically
+        Object.keys(categorizedAttacks).forEach(category => {
+            categorizedAttacks[category].sort((a, b) => 
+                a.displayText.localeCompare(b.displayText)
+            );
+        });
+        
+        return categorizedAttacks;
+    },
+
+    // show elements of a category
+    showCategoryItems: function(cm, categoryKey) {
+        const categoryItems = this.categories[categoryKey];
+        if (!categoryItems || categoryItems.length === 0) {
+            return null;
+        }
+
+        const formattedItems = categoryItems.map(attack => ({
+            text: attack.text,
+            displayText: attack.displayText.charAt(0).toUpperCase() + attack.displayText.slice(1),
+        }));
+        
+        const items = [
+            this.createBackButton(),
+            ...formattedItems
+        ];
+
+        this._currentView = 'items';
+        this._currentCategory = categoryKey;
+
+        return {
+            list: items,
+            from: cm.getCursor(),
+            to: cm.getCursor()
+        };
     }
 }

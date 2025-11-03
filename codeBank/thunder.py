@@ -1,4 +1,6 @@
 # thunder
+# cover
+
 f1 >> dafbass([Pvar([P[4,7], P[5,8]],8),0], dur=1/4, oct=6, dist2=[0.8,0.4], fmod=[0,0]).gtr(5)
 d1 >> play("-", sample=0, comp=0.8, mverb=0.4)
 

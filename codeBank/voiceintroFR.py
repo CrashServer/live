@@ -1,2 +1,3 @@
 # voixintroFR
+# Utils
 Voice("A l'aube d'une ère d'aliénation technologique, les serveurs ont pris le contrôle de la quasi totalité des données humaines. Identités. Modes de pensée. ADN. L'humanité semble à la merci de ces forces impalpables, et pourtant un duo de machinistes informatiques livre un combat sans fin contre le méta cerveau central. Leur spécialité: surchauffer et faire abdiquer les serveurs audio. On les appelle, les CRASH SERVER. Voici leur histoire.")

@@ -1,4 +1,5 @@
 # EuroDance
+# Banger
 Root.default="E"
 Scale.default="minor"
 p1 >> pluck((var([0, -2], 32),var([[3,5], 4, 2], 8)), dur=PDur(5, 8), sus=2, blur=2, chop=4, rate=1, mverb=.2, hpf=10, oct=PStep(8,P+(6,4),5)).unison(3)

@@ -1,4 +1,6 @@
 # attention
+# Reisub
+
 Root.default = linvar([0, 4, 2, PRand(2)], [PRand([4, 8, 12, 16])])
 Clock.bpm = lininf(112, 132, 512)
 r1 >> rsin((linvar([0,4],16),linvar([2,-2],24), linvar([-4,4],32)), dur=var(PRand([1,1/2,1/4,2]),8), hpf=linvar([30,180],23),oct=var([3, 4, 5], PRand(8)), para1=PWhite(200, 8000), fmod=8,lpf=linvar([3000,8000],19), amp=0.5, sus=r1.dur, fold=var([0.5, 0.1]), fx2=0.5, room2=1, revsus=r1.dur*PWhite(0,2), revatk=-1, damp2=PWhite(0.1,0.9))

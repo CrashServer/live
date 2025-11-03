@@ -1,4 +1,6 @@
 # R_Psy
+# R_
+
 Clock.bpm=168
 # p1 >> loop("uk16", dur=16,pos=0, room=0.1, sample=3)
 p3 >> loop("hiphop16", dur=16,pos=0, room=0.1, sample=0)

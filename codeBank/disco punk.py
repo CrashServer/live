@@ -1,4 +1,6 @@
 # disco punk
+# Banger
+
 Clock.bpm =192
 Scale.default="minor"
 b5 >> superbass([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.3, rqd=0.5, detune=0.5, fdecay=5, sub=1, amp=0.7, hpf=200, mverb=0.7, mverbmix=0.3).unison(3)

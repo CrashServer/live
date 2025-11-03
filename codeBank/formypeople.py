@@ -1,4 +1,6 @@
 # for my people
+# Cover
+
 Clock.bpm = 88
 Scale.default="minor"
 Root.default="E"

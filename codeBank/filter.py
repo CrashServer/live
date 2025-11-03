@@ -1,4 +1,6 @@
 # filter
+# Utils
+
 masterAll("lpf", var([0, 4000, 6000, 15000], [24, 4, 2, 2]))
 masterAll("hpf", var([0, 20, 30, linvar([3200, 6400], 32)], [24, 4, 2, 2]))
 masterAll("cut", var([0, 1, 1/2, linvar([1/4, 1], 32)], [24, 4, 2, 2]))

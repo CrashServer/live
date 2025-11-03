@@ -2,6 +2,7 @@
 Clock.bpm = 120
 Root.default=var([0,[1,8]],[14,2])
 
+d1.feed=0
 d1 >> play("x.",  amp=0.1, feed=var(PRand([0,0.125,0.25,0.5,0.75]),16), feedfreq=[[0,PRand(500)],0], sample=4, tanh=[15], chop=var(PRand(8), 16), lpf=0, hpf=d1.feed.map({0:0, 0.125:75, 0.25: 100, 0.5:125, 0.75:255})).strum(8)
 
 s1 >> abass(PWhite(-0.2,0.2), amp=0.2, fmod=[0,PRand(8)], oct=[4,[5,6]], dur=[1/2,1.5,1/4,1/4,1/4,1/4,1/2,1/2], dfm=d1.feed.map({0:linvar([2800,4640],16), 0.125:linvar([1664,2400],16), 0.25:linvar([1180,1664],[16,0]), 0.5:linvar([808,1180],[16,0]), 0.75:linvar([606,808],[16,0])}, default=2600), dfmr=PWhite(0.2,1), dfmd=1, sus=PWhite(1/8,1),slide=PStep([12,4,3],PRand(8),0), slidedelay=PWhite(0.2,0.9)).unison(3).every(32, "dur.shuffle")

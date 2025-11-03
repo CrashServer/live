@@ -1,0 +1,1986 @@
+c5 >> a_wave()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+c5 >> a_wave()
+
+c5 >> a_wave(oct=3, duir=8)
+
+c5 >> a_wave(oct=3, dur=8)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.0, oct=( 3, 2, PStep(3, [3, 3.5],[[3, 5, 4.5, 5], 4, 3, 4])), unison=0,  wide=1.1, cutoff=2500,  hpf=0, leg=0.0, rq=0.1, detune=linvar([0.01, 0.02], 128), chorus=0.0, lpf=6200).unison(4).chroma()
+
+c5.stop()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.0, oct=( 3, 2, PStep(3, [3, 3.5],[[3, 5, 4.5, 5], 4, 3, 4])), unison=0,  wide=1.1, cutoff=2500,  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=0.0, lpf=6200,apan=1, awidth=3.5).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=0.0, lpf=5700, fshift=linvar([400, 3000], 128), fmix=[0.0, 0.1,0.4]).unison(4).chroma()
+
+s0 >> loop("perc8", dur=16, hpf=300, amp=2, sample=4, shift=0, leg=0, dist2=0.0).lclip(2)
+
+s0 >> loop("perc8", dur=16, hpf=300, amp=2, sample=4, shift=0, leg=0, dist2=0.0).lclip(1)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.0, oct=( 3, 2, PStep(3, [3, 3.5],[[3, 5, 4.5, 5], 4, 3, 4])), unison=0,  wide=1.1, cutoff=2500,  hpf=0, leg=0.0, rq=0.1, fshift=linvar([0.1, 1], 32), detune=0.1, chorus=0.0, lpf=6200).unison(4).chroma()
+
+s1 >> a_wave(10, dur=var([(1/4, 1/1), 2], [7.5, 0.5]), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.10, detune=0.1, chorus=0.0, lpf=5700).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.8, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=4, rq=0.1, detune=linvar([0.1, 0.6], 32), chorus=0, lpf=5400).unison(4).chroma() #detune 0
+
+k9 >> play("x.", bank=3)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=0.0, lpf=5700, fshift=linvar([400, 3000], 128), fmix=[0.0, 0.1,0.4]).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.0, oct=( 3, 2, PStep(3, [3, 3.5],[[3, 5, 4.5, 5], 4, 3, 4])), unison=0,  wide=1.1, cutoff=linvar([300, 14400], 32),  hpf=0, leg=0, fshift=linvar([0.1, 1], 32), detune=0.1, chorus=0.0, lpf=6200).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, fshift=0, detune=linvar([0.1, 0.7], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+k9 >> play("<x.><..o.>", bank=3)
+
+s0 >> loop("xxsbass16", dur=16, hpf=300, amp=4, sample=PRand(8), shift=0, leg=0, dist2=0.2).lclip(0)
+
+k9 >> play("<x.><..o.>", bank=3, sample=1)
+
+k9 >> play("<x.><..o.>", bank=3, sample=1, drcomp=.5)
+
+s1 >> a_wave(10, dur=(1/2, 1), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+k9 >> play("<x.><..o.>", bank=3, sample=2, drcomp=.5)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=linvar([0.1, 0.7], 32), chorus=0.0, lpf=5400, fshift=4).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.0, oct=( 3, 2, PStep(3, [3, 3.5],[[3, 5, 4.5, 5], 4, 3, 4])), unison=0,  wide=1.1, cutoff=2500,  hpf=0, leg=0.0, rq=0.1, detune=linvar([0.01, 0.02], 128), chorus=0.0, lpf=6200).unison(4).chroma()
+
+k9 >> play("<x-><..o.>", bank=3, sample=2, drcomp=.5)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.6, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.8, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.9, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.0, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.1, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+k9 >> play("<x-><..o.>", bank=3, sample=1, drcomp=.5)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.2, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.3, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.4, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.6, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.8, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=1.9, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.0, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.1, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.2, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.3, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.4, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+k9 >> play("<x-><..o.>", bank=3, sample=0, drcomp=.5)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.6, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.8, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=2.9, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=var([0, 0.5], [30, 2]), lpf=linvar([400, 7000], 128), ).unison(4).chroma()
+
+k9 >> play("<x-><..o.>", bank=3, sample=0, drcomp=.5, amp=2)
+
+k9 >> play("<x-><..o.>", bank=3, sample=1, drcomp=.5, amp=2)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+k9 >> play("<x-><..o.>", bank=3, sample=1, drcomp=.5, amp=2).sometimes("stutter")
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=1.0, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.9, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.8, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.7, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.6, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.5, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.4, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.3, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.2, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.0, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.2, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+k9 >> play("<x.x..x.x><..o.>", bank=3, sample=1, drcomp=.5, amp=2).sometimes("stutter")
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.3, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.4, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.5, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.6, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.7, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.8, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=0.9, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.7, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=1.0, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.2, rq=0.1, detune=linvar([0.1, 0.8], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.8, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=1,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=4, rq=0.1, detune=linvar([0.1, 0.6], 32), chorus=0, lpf=5400).unison(4).chroma() #detune 0
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s0 >> loop("perc8", dur=16, hpf=300, amp=2, sample=4, shift=0, leg=0, dist2=0.0).lclip(1)
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.0, oct=( 3, 2, PStep(3, [3, 3.5],[[3, 5, 4.5, 5], 4, 3, 4])), unison=0,  wide=1.1, cutoff=2500,  hpf=0, leg=0.0, rq=0.1, fshift=linvar([0.1, 1], 32), detune=0.1, chorus=0.0, lpf=6200).unison(4).chroma()
+
+s0 >> loop("perc8", dur=16, hpf=300, amp=2, sample=4, shift=0, leg=0, dist2=0.0).lclip(2)
+
+s0 >> loop("perc8", dur=16, hpf=300, amp=2, sample=4, shift=0, leg=0, dist2=0.0).lclip(1)
+
+s1 >> a_wave(10, dur=var([(1/4, 1/1), 2], [7.5, 0.5]), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.10, detune=0.1, chorus=0.0, lpf=5700).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, fshift=0, detune=linvar([0.1, 0.7], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.1, fshift=0, detune=linvar([0.1, 0.7], 32), chorus=0.0, lpf=5400).unison(4).chroma()
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.0, oct=( 3, 2, PStep(3, [3, 3.5],[[3, 5, 4.5, 5], 4, 3, 4])), unison=0,  wide=1.1, cutoff=linvar([300, 14400], 32),  hpf=0, leg=0, fshift=linvar([0.1, 1], 32), detune=0.1, chorus=0.0, lpf=6200).unison(4).chroma()
+
+s1 >> a_wave(10, dur=var([(1/4, 1/1), 2], [7.5, 0.5]), dist2=0.5, oct=( 2, 2, PStep(3, [3, 3.5],[[3, 3, 3.5, 5], 3, 3, 2])), unison=0,  wide=1.1, cutoff=linvar([1200, 4000], 128),  hpf=0, leg=0.0, rq=0.10, detune=0.1, fshift=0, chorus=0.0, lpf=5700).unison(4).chroma()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+lost("hyperstatic")
+
+g1 >> faim([2,3,[5,7]], dur=([[1,1,1/2],2,1/2,4,1/2]*PRand([2,3,1,4])), slide=var([0,[-4,4]], [7,1]), leg=PWhite(0,4), sus=g1.dur*PWhite(0.2,1.5), oct=5, chop=P*[0,4,16], hpf=var([1000, 0], [PRand(2,11), PRand(12,19)]), fx1=1, fx2=1, fx1hpf=150, amp=0.5, room=1, mix=PWhite(0.2,0.5)).unison(2).sometimes("shuffle") + (0,[2,[4,6]])
+
+b1 >> faim(var([-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5,hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(3,4)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+Root.default = -4
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.2)
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 4), rate=(1, 0.5), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 4), rate=(1, 0.5), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d2 >> play("(.v)(.V|w0|).(.v.)", sample=3, hpf=50, dur=var([4,1],16), crush=1, echo=P*[0.5,0.25], echomix=linvar([0,1],[19,0]), lpf=4800)
+
+d2 >> play("(.v)(.V|w0|).(.v.)", sample=3, hpf=50, dur=var([4,1],16), crush=1, echo=P*[0.5,0.25], echomix=linvar([0,1],[19,0]), lpf=4800)
+
+p1 >> play("j", amp=var([0,0.5], [3,1]), crush=8, sample=PRand(8), rate=linvar([8,PRand(16)*-1],[8,0]), leg=PRand(25), dur=1/4, echotime=1, echo=1, pan=PWhite(-0.5,0.5))
+
+p2 >> play("p", sample=PRand(8), crush=4, amp=p1.rate>=0, amplify=PWhite(0.1, 1), leg=PWhite(10, 25), room=1, mix=0.3, dur=1/8, echotime=1, echo=1, pan=[-1,1])
+
+h2 >> play("[--]", sample=PRand(8), rate=var([0.7, linvar([1,4],8)]), leg=1, dur=1/4, amp=var([0,0.5], [3,4]), hpf=5600).spread()
+
+attack("tabation")
+
+p3 >> play("(Xs)", sample=PRand(8), rate=[0.7,1.1], leg=PRand([16,64,32]), dur=1/4, amp=var([0,p2.amp==1],[8,16]), mpf=PRand(6500,14000))
+
+c1 >> click(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=40, drive=[PWhite(0.4,0.8),0.2], oct=(3, PStep(9,5,4)), octer=1, octersub=2, octersubsub=var([2, PRand(15,2222)], [15, 1]), triode=4, amp=0.1, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400)
+
+##### attack@tabation.ccu:~$ #####
+
+d2 >> bass(0, dur=c1.dur, leg=12, amp=var([0.5, 0], [12, 4]), rate=PWhite(0.01, 0.2), sus=d2.dur*1.5).unison(2)
+
+c1 >> click(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=40, drive=[PWhite(0.4,0.8),0.2], oct=(3, PStep(9,5,4)), octer=1, octersub=2, octersubsub=var([2, PRand(15,2222)], [15, 1]), triode=4, amp=0.2, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400)
+
+c1 >> click(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=40, drive=[PWhite(0.4,0.8),0.2], oct=(3, PStep(9,5,4)), octer=1, octersub=2, octersubsub=var([2, PRand(15,2222)], [15, 1]), triode=4, amp=0.3, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400)
+
+g1 >> faim([2,3,[5,7]], dur=([[1,1,1/2],2,1/2,4,1/2]*PRand([2,3,1,4])), slide=var([0,[-4,4]], [7,1]), leg=PWhite(0,4), sus=g1.dur*PWhite(0.2,1.5), oct=5, chop=P*[0,4,16], hpf=var([1000, 0], [PRand(2,11), PRand(12,19)]), dist2=.9, fx1=1, fx2=1, fx1hpf=150, amp=0.5, room=1, mix=PWhite(0.2,0.5)).unison(2).sometimes("shuffle") + (0,[2,[4,6]])
+
+c1.stop()
+
+d2.stop()
+
+n1 >> play("<u><t>", sample=(2,P[0:5]), delay=(0,(0,[0,0.25])), dur=c1.dur, crush=[0,0,0,PRand(8)], bits=4, lpf=n1.crush*1500)
+
+n1.stop()
+
+p3 >> play("(Xs)", sample=PRand(8), rate=[0.7,1.1], leg=PRand([16,64,32]), dur=1/4, amp=var([0,p2.amp==1],[8,16]), mpf=PRand(6500,14000))
+
+p3 >> play("(Xs)", sample=PRand(8), rate=[0.7,1.1], leg=PRand([16,64,32]), dur=1/4, amp=var([0,p2.amp==1],[8,16]), mpf=PRand(6500,14000))
+
+s1 >> play("(yL) ", sample=(PRand(8), PRand(8)), dur=2, rate=(0.4, -2), delay=(0, 1), slide=(4, 1), bpf=(800,4800), bpr=(0.2,0.8))
+
+d3 >> play("K", dur=var([32,1/4], [1,[4,8]]), rate=linvar([2,1], 4), echo=var([0.75,0.5,0.25,0.125], P*[0.25,1,0.5,0.125]), cut=0.9)
+
+b1 >> lbass(var([-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5,hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(3,4)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> lbass(var([-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5,hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(5,6)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+p3.stop()
+
+s1.stop()
+
+d3.stop()
+
+b1 >> lbass(var([-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=4000, hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(5,6)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> lbass(var([-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=4000,tone=.4, hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(5,6)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> lbass(var([-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=4000,tone=0.5, hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(5,6)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+s1 >> a_wave(10, dur=(1/4, 1/1), dist2=0.0, oct=( 3, 2, PStep(3, [3, 3.5],[[3, 5, 4.5, 5], 4, 3, 4])), unison=0,  wide=1.1, cutoff=2500,  hpf=0, leg=0.0, rq=0.1, detune=0.1, chorus=0.0, lpf=6200,apan=1, awidth=3.5).unison(4).chroma()
+
+s1.stop()
+
+s1.stop()
+
+c1 >> a_cy()
+
+c1 >> a_cy(dur=PDur(3, 8))
+
+b1 >> lbass(var([-4,-3,-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=4000, tone=0.5, hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(5,6)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4000)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4100)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4200)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4300)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4400)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4500)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4600)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4700)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4800)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=4900)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5000)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5100)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5200)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5300)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5400)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5500)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5600)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5700)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5800)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=5900)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6000)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6100)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6200)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6300)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6400)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6500)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6600)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6700)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6800)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=6900)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7000)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7100)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7200)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7300)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7400)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7500)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7600)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7700)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7800)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=7900)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=8000)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=8100)
+
+c1 >> a_cy(dur=PDur(3, 8), hpf=8200)
+
+b1 >> lbass(var([-4,-3,-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=2000, tone=0.5, hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(5,6)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+c1 >> a_cy(dur=PDur(3, 8), amp=PBin(8), hpf=8200)
+
+b1 >> lbass(var([-4,-3,-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=2000, tone=0.5, hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.2)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.0)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.1)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.2)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.3)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.4)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(1.4)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(1.3)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(1.2)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(1.1)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(1.0)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.9)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.8)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.7)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.6)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.5)
+
+h1 >> play("H", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.5)
+
+g1 >> faim([2,3,[5,7]], dur=([[1,1,1/2],2,1/2,4,1/2]*PRand([2,3,1,4,1/2])), slide=var([0,[-4,4]], [7,1]), leg=PWhite(0,4), sus=g1.dur*PWhite(0.2,1.5), oct=5, chop=P*[0,4,16], hpf=var([1000, 0], [PRand(2,11), PRand(12,19)]), dist2=.9, fx1=1, fx2=1, fx1hpf=150, amp=0.5, room=1, mix=PWhite(0.2,0.5)).unison(2).sometimes("shuffle") + (0,[2,[4,6]])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 4), rate=(1,2), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 4), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 5), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 0), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, -1), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, -2), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, -3), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, -2), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, -1), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 0), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 1), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1 >> play("<(x.)(.x).(..x)><(k.)(.M).(..O)>", delay=0, sample=(2, 2), rate=(1,[2, 1]), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Root.default = 4
+
+g1 >> faim([2,3,[5,7]], dur=([[1,1,1/2],2,1/2,4,1/2]*PRand([2,3,1,4,1/2])), slide=var([0,[-4,4]], [7,1]), leg=PWhite(0,4), sus=g1.dur*PWhite(0.2,1.5), oct=5, chop=P*[0,4,16], hpf=var([1000, 0], [PRand(2,11), PRand(12,19)]), dist2=.9, fx1=1, fx2=1, fx1hpf=150, amp=0.5, room=1, mix=PWhite(0.2,0.5)).unison(2).sometimes("shuffle") + (0,[2,[4,6]])
+
+b1 >> lbass(var([-4,-3,-2,0],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=2000, tone=0.5, hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> lbass(var([-4,-3,-2,-6],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=2000, tone=0.5, hpf=var([0, 1000], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> lbass(var([-4,-3,-2,-6],8), dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=2000, tone=0.5, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+attack("augmendrum")
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,4]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.2)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,4]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.2)
+
+d1 >> play("(x.)(.x).(..x)", sample=(4,2), hpf=30, dur=var([2,1/4], 8), spf=[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+d1.stop()
+
+d1 >> play("(x.)(.x).(..x)", sample=(4,2), hpf=30, dur=var([2,1/4], 8), spf=[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])
+
+b1 >> lbass(var([-4,-3,-2,-6],8), glide=.25, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=2000, tone=0.5, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+d2 >> play("(.v)(.V|w0|).(.v.)", sample=3, hpf=50, dur=var([4,1],16), crush=1, echo=P*[0.5,0.25], echomix=linvar([0,1],[19,0]), lpf=4800)
+
+b1 >> lbass(var([-4,-3,-2,-6],8), glide=.125, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=2000, tone=0.5, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+d2.stop()
+
+d1.stop()
+
+h1.stop()
+
+p1 >> play("j", amp=var([0,0.5], [3,1]), crush=8, sample=PRand(8), rate=linvar([8,PRand(16)*-1],[8,0]), leg=25, dur=1/4, echotime=1, echo=1)
+
+p2 >> play("p", sample=PRand(8), crush=4, amp=p1.rate>=0, amplify=PWhite(0.1, 1), leg=PWhite(10, 25), room=1, mix=0.3, dur=1/8, echotime=1, echo=1, pan=[-1,1])
+
+p2.stop()
+
+p2 >> play("p", sample=PRand(8), crush=4, amp=p1.rate>=0, amplify=PWhite(0.1, 1), leg=PWhite(10, 25), room=1, mix=0.3, dur=1/8, echotime=1, echo=1, pan=[-1,1])
+
+p2.stop()
+
+p2 >> play("p", sample=PRand(8), crush=4, amp=p1.rate>=0, amplify=PWhite(0.1, 1), leg=PWhite(10, 25), room=1, mix=0.3, dur=1/8, echotime=1, echo=1, pan=[-1,1])
+
+g1 >> faim([2,3,[5,7]], dur=([[1,1,1/2],2,1/2,4,1/2]*PRand([2,3,1,4,1/2])), slide=var([0,[-4,4]], [7,1]), leg=PWhite(0,4), sus=g1.dur*PWhite(0.2,1.5), oct=5, chop=P*[0,4,16], hpf=var([1000, 0], [PRand(2,11), PRand(12,19)]), dist2=.9, fx1=1, fx2=1, fx1hpf=150, amp=0.5, room=1, mix=PWhite(0.2,0.5)).unison(2).sometimes("shuffle") + (0,P*[2,P*[4,6]])
+
+p2.stop()
+
+p2 >> play("p", sample=PRand(8), crush=4, amp=p1.rate>=0, amplify=PWhite(0.1, 1), leg=PWhite(10, 25), room=1, mix=0.3, dur=1/8, echotime=1, echo=1, pan=[-1,1])
+
+h2 >> play("[--]", sample=PRand(8), rate=var([0.7, linvar([1,4],8)]), leg=1, dur=1/4, amp=var([0,0.5], [3,4]), hpf=5600).spread()
+
+p2.stop()
+
+h2.stop()
+
+p3 >> play("(XP)", sample=PRand(8), rate=[0.7,1.1], leg=PRand([16,64,32]), dur=1/4, amp=var([0,p2.amp==1],[8,16]), mpf=6500)
+
+p3.stop()
+
+b1 >> lbass(var([-4,-3,-2,-6],8), glide=.125, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=3000, tone=0.5, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> lbass(var([-4,-3,-2,-6],8), glide=.125, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+a3 >> play("(+.)(.+)", room=0.5, mix=0.2, sample=5, amplify=P*[0,1], rate=[-0.5,1], delay=[PWhite(0,0.12),0])
+
+h2 >> play("[--]", sample=PRand(8), rate=var([0.7, linvar([1,4],8)]), leg=1, dur=1/4, amp=var([0,0.5], [3,4]), hpf=5600).spread()
+
+h2.stop()
+
+p2 >> play("p", sample=PRand(8), crush=4, amp=p1.rate>=0, amplify=PWhite(0.1, 1), leg=PWhite(10, 25), room=1, mix=0.3, dur=1/8, echotime=1, echo=1, pan=[-1,1])
+
+h2 >> play("[--]", sample=PRand(8), rate=var([0.7, linvar([1,4],8)]), leg=1, dur=1/4, amp=var([0,0.5], [3,4]), hpf=5600).spread()
+
+attack("anniriff")
+
+b1 >> lbass(var(P*[-4,-3,-2,-6],8), glide=.125, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+n2 >> sawbass(0, dur=8, sus=[8], echo=1/2, amp=(n1.amp==0), mid=2, echotime=PRand(0,12), oct=(5,4,5), drive=(0.01,0,0.01), vol=0.6).unison(3,var(PWhite(0.25,0.30)),var(PRand(99),8))
+
+n2.stop()
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(3, PStep(9,5,[4, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.3,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+b1 >> lbass(var(P*[-4,-3,-2,-6],8), glide=à, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> lbass(var(P*[-4,-3,-2,-6],8), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(4, PStep(9,5,[4, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.3,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(4, PStep(9,5,[4, (6, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.3,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(4, PStep(9,5,[4, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.3,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(4, PStep(9,5,[3, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.3,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(4, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.3,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+i7 >> loop("junglebouncy16", dur=16, sample=PRand(404))
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.3,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.4,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.5,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,1, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,2, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,3, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,2, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,1, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 7)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,1, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+a3 >> play("(+.)(.+)", room=0.5, mix=0.2, sample=5, amplify=P*[0,1], rate=[-0.5,1], delay=[PWhite(0,0.12),0])
+
+b1 >> lbass(var(P*[-4,-3,-2,-6],[7,1]), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+a2 >> play("(kc){.@}(..)P", amp=1, rate=4).sometimes("trim",3).every(13, "stutter", Cycle([4,13,2]), hpf=4000, pan=[-1,1])
+
+a2.stop()
+
+a3.stop()
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 7)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,0.5, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+h1 >> play("h", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,4]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.2)
+
+b1 >> cbass(var(P*[-4,-3,-2,-6],[7,1]), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(4,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+# 
+
+d3.stop()
+
+b1 >> cbass(var(P*[-4,-3,-2,-6],[7,1]), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.5, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(3,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+a1 >> play("I ",rate=(0.25,PWhite(0.15,0.3)), triode=PRand(9), dur=4, spin=0.25, amp=0.5, room=1, mix=(0,0.6), hpf=350).after(4, "stop")
+
+a1.stop()
+
+b1 >> cbass(var(P*[-4,-3,-2,-6],[7,1]), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.6, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(3,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> cbass(var(P*[-4,-3,-2,-6],[7,1]), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.7, cutoff=3000, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(3,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> cbass(var(P*[-4,-3,-2,-6],[7,1]), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.7, cutoff=3100, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(3,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+b1 >> cbass(var(P*[-4,-3,-2,-6],[7,1]), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.7, cutoff=3200, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(3,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+n1.stop()
+
+b1 >> cbass(var(P*[-4,-3,-2,-6],[7,1]), glide=0, dur=P[1,1,1,0, 1,0,0,1]*1/2, amp=0.7, cutoff=3100, tone=0.6, hpf=var([0, 200], [PRand(4,16), PRand(4,9)]), oct=(3,5)).sometimes("stutter") + var([0,PGauss()],[6,2])
+
+n1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(5, PStep(9,5,[5, (5, 7)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.6,0.5, 0.1, 0, 0.1, 0], vol=0.7).unison(4)
+
+n1.solo()
+
+unsolo()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+g9 >> a_glead(cutoff=1200, bitcrush=4, chaos=0.3)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=0.4)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=0.5)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=0.6)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=0.7)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=0.8)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=0.9)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.0)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.1)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.2)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.3)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.4)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.5)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.6)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.7)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.8)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=1.9)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.0)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.1)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.2)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.3)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.4)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.5)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.6)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.7)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.8)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=2.9)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.0)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.1)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.2)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.3)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.4)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.5)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.6)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.7)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.8)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=3.9)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=4.0)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=4.1)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=4.2)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=4.3)
+
+g9 >> a_glead(PTime(), cutoff=1200, bitcrush=4, chaos=4.4)
+
+g9 >> a_glead(PTime(-7, ), cutoff=1200, bitcrush=3, chaos=4.4)
+
+g9 >> a_glead(PTime(-7, ), cutoff=1200, bitcrush=2, chaos=4.4)
+
+g9 >> a_glead(PTime(-7, ), cutoff=1200, bitcrush=1, chaos=4.4)
+
+g9 >> a_glead(PTime(-7, ), cutoff=1200, bitcrush=0, chaos=4.4)
+
+g9 >> a_glead(PTime(-7, 7, ), cutoff=1200, bitcrush=1, chaos=4.4)
+
+g9 >> a_glead(PTime(-7, 7, ), cutoff=1200, bitcrush=2, chaos=4.4)
+
+g9 >> a_glead(PTime(-7, 7, 1), cutoff=1200, bitcrush=3, chaos=4.4)
+
+g9 >> a_glead(PTime(-7, 7, 1), cutoff=1200, bitcrush=3, chaos=4.4)
+
+print(PTime())
+
+print(PTime())
+
+print(PTime())
+
+print(PTime())
+
+g9 >> a_glead(PTime(0.2, 4, .25), cutoff=1200, bitcrush=3, chaos=4.4)
+
+g9 >> a_glead(0,dur=PTime(0.2, 4, .25), cutoff=1200, bitcrush=3, chaos=4.4)
+
+g9 >> dbass(0,dur=PTime(0.2, 4, .25), cutoff=1200, bitcrush=3, chaos=4.4)
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25), cutoff=1200, bitcrush=3, chaos=4.4)
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.25))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.26))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.27))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.28))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.29))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.30))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.31))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.32))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.33))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.34))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.35))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.36))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.37))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.38))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.39))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.40))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.41))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.42))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.43))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.44))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.45))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.46))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.47))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.48))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.49))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.50))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.51))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.52))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.53))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.54))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.55))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.56))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.57))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.58))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.59))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.60))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.61))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.62))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.63))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.64))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.65))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.66))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.67))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.68))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.69))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.70))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.71))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.72))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 1))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.1, 1, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.2, 1, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.3, 1, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.4, 1, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.5, 1, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.2, 4, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 1, .125),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 1, .125),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, oct=4, sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 1, .125),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=9, sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 1, .125),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 9], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 9], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=1, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=3, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=4, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=5, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=6, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=7, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=8, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=9, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=10, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=11, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=12, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=13, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=14, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=15, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=16, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=17, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=18, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=19, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=20, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=21, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=22, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=23, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=24, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=25, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=26, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=27, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=28, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=29, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=30, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=31, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=32, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=33, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=34, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=35, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=36, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=37, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=38, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=39, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=40, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=41, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=42, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=43, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=44, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=45, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=46, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=47, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=48, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=49, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=50, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=51, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=52, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=53, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=54, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=55, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=56, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=57, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=58, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=59, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=60, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=61, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=62, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=63, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=64, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=65, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+r8 >> play("k", dur=g9.dur)
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=66, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=67, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=68, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=69, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=70, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=71, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=1200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=1300, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=1400, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=1500, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=1600, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=1700, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=1800, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=1900, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2000, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2100, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2300, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2400, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2500, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2600, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2700, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2800, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=2900, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3000, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3100, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3300, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3400, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3500, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3600, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3700, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3800, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=3900, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4000, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4100, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4300, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4400, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4500, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4600, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4700, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4800, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=4900, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5000, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5100, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5300, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5400, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5500, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5600, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5700, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5800, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=5900, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6000, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6100, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6300, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6400, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6500, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6600, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6700, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6800, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=6900, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7000, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7100, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7300, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7400, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7500, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7600, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7700, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7800, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=7900, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8000, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8100, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8200, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8300, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8400, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8500, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8600, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=4.4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+r8 >> play("-", dur=g9.dur)
+
+r8 >> play("-", dur=g9.dur, bank=3)
+
+r8 >> play("x-", dur=g9.dur, bank=3)
+
+attack("depths")
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1)
+
+y1.stop()
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.69, fdecay=1, mverb=0.8, amp=1)
+
+r8 >> play("x-", dur=g9.dur, bank=3, sample=1)
+
+y1.stop()
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1.stop()
+
+r8 >> play("x-", dur=g9.dur, bank=3, sample=1, drcomp=.5)
+
+r8 >> play("x-o", dur=g9.dur, bank=3, sample=1, drcomp=.5)
+
+r8 >> play("x-o", dur=g9.dur, bank=0, sample=8, drcomp=.5)
+
+r8 >> play("x-o", dur=g9.dur, bank=0, sample=9, drcomp=.5)
+
+r8 >> play("x-o", dur=g9.dur, bank=0, sample=9, drcomp=.5)
+
+attack("organsav")
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=1, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+r8 >> play("x-o", dur=PTime(0.1, 2, .25), bank=0, sample=9, drcomp=.5)
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=1, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=0, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=1, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=2, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=3, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=4, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=5, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=6, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=7, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=8, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=9, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=10, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=11, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=12, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=13, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=14, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=15, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=16, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=72, cutoff=8700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=8700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=3, cutoff=8700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=4, cutoff=8700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=4, cutoff=700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=3, cutoff=700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=42, cutoff=700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=42, cutoff=800, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=900, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1000, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1100, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1100, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1300, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1400, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1500, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1600, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1800, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1900, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2000, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2100, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2300, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2400, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2500, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2400, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2300, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2100, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=2000, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1900, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1800, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1700, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1600, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1500, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1400, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1300, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=3, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=4, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=5, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=-4, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=-3, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=-2, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=-1, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=0, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=1, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=2, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=3, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=4, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=5, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=6, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=7, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=8, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=9, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=10, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=11, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=12, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=13, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=14, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=14, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=14, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=-14, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=14, cutoff=1200, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=14, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+attack("organsav")
+
+g9 >> cbass(0,dur=PTime(0.1, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+g9 >> cbass(PTime(),dur=PTime(0.1, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+~r1 >> organ(P[var([0, -2, -3, -4], 8), 2, PStep(8, 5, 4), 2], dur=var([PDur(4, 8), PDur([5, 3, 6], 8)],[5, 7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.1, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1))
+
+Root.default = "E"
+
+Scale.default = Scale.minor
+
+Root.default = "E"
+
+Root.default = "G"
+
+# ~r1 >> organ(P[var([0, -2, -3, -4], 8), 2, PStep(8, 5, 4), 2], dur=var([PDur(4, 8), PDur([5, 3, 6], 8)],[5, 7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+r1.stop()
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.1, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1)).unison(3)
+
+attack("organ")
+
+h3 >> play("s", valad=PFr(1000,3000)).sometimes("stutter", PRand(16))
+
+d1 >> play("x", sample=4, amp=PBin(344))
+
+n2 >> play("..*.", echo=P*[0,PRand([0.125, 0.5, 0.75])], mverb=0.9, hpf=4000)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1)).unison(3)
+
+g9.dur=8
+g9.sus=8
+
+g9.dur=8
+g9.sus=8
+
+c2 >> cbass(var([0,-4,-2,-3],8), dur=1/2, cutoff=40, follow=PFr(1,4, 555)).unison(2) + (0, var([0,7], [4,1]))
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=.2).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.4).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.5).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.6).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.5).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.4).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.2).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.1).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0).unison(3)
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.6, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=6).unison(3)
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.6, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle").unison(4)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=6, amp=0.8).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=7, amp=0.8).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=8, amp=0.8).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=9, amp=0.8).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=8, amp=0.8).unison(3)
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.7, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle").unison(4)
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.8, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle").unison(4)
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.9, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle").unison(4)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=9, amp=0.8).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=9, amp=0.7).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.0, wshape=9, amp=0.6).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.1, wshape=9, amp=0.6).unison(3)
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.8, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle").unison(4)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.2, wshape=9, amp=0.6).unison(3)
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.7, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle").unison(4)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=120, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3, wshape=9, amp=0.6).unison(3)
+
+r4 >> bell(P*[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [11, 6]), amp=0.5, crush=1, crush_=4, crush_d=2, mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+r4 >> bell(P*[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [11, 6]), amp=0.6, crush=1, crush_=4, crush_d=2, mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+r4 >> bell(P*[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [11, 6]), amp=0.7, crush=1, crush_=4, crush_d=2, mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+r4 >> bell(P*[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [11, 6]), amp=0.8, crush=1, crush_=4, crush_d=2, mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=20, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3, wshape=9, amp=0.6).unison(3)
+
+r4 >> bell(P*[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [11, 6]), amp=0.9, crush=1, crush_=4, crush_d=2, mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+r4 >> bell(P*[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [11, 6]), amp=1.0, crush=1, crush_=4, crush_d=2, mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=20, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3, wshape=9, amp=0.6, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=20, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3, wshape=9, amp=0.6, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2).unison(3)
+
+~r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur([5,3,6],8)], [5,7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+~r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur([5,3,6],8)], [5,7]), amp=2, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+~r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur([5,3,6],8)], [5,7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+~r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur([5,3,6],8)], [5,7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+u3 >> play("X.", mpf=400)
+
+~r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur([5,3,6],8)], [5,7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+r2 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [7, 5]), amp=0.8, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+r2 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [7, 5]), amp=0.8, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+r2 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [7, 5]), amp=0.8, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 6), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [9, 3]), amp=0.7, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle").unison(4)
+
+u3 >> play("X.", mpf=400, amp=2)
+
+u3 >> play("X.", mpf=1400, amp=2)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=.1)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.2)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.3)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.4)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.5)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.6)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.7)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.8)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.9)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=1.0)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.9)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.8)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.7)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.6)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.5)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.4)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.3)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.2)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.1)
+
+masterAll("lpf", 3200)
+
+masterAll("lpf", 3100)
+
+masterAll("lpf", 3000)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.1).sometimes("stutter")
+
+masterAll("lpf", 2900)
+
+masterAll("lpf", 2800)
+
+masterAll("lpf", 2700)
+
+masterAll("lpf", 2600)
+
+masterAll("lpf", 2500)
+
+masterAll("lpf", 2400)
+
+masterAll("lpf", 2300)
+
+masterAll("lpf", 2200)
+
+masterAll("lpf", 2100)
+
+masterAll("lpf", 2000)
+
+masterAll("lpf", 1900)
+
+masterAll("lpf", 1800)
+
+masterAll("lpf", 1700)
+
+masterAll("lpf", 1600)
+
+masterAll("lpf", 1500)
+
+masterAll("lpf", 1400)
+
+masterAll("lpf", 1300)
+
+masterAll("lpf", 1200)
+
+masterAll("lpf", 1100)
+
+u3 >> play("X.", mpf=1400, amp=2, mpr=0.1).sometimes("stutter", PRand(5))
+
+masterAll("lpf", 1000)
+
+masterAll("lpf", 900)
+
+masterAll("lpf", 800)
+
+masterAll("lpf", 700)
+
+masterAll("lpf", 600)
+
+masterAll("lpf", 500)
+
+masterAll("lpf", 400)
+
+masterAll("lpf", 300)
+
+masterAll("lpf", 299)
+
+masterAll("lpf", 298)
+
+masterAll(0, "lpf", 298)
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=.8)
+
+Server.clearFx()
+
+Server.addFx(lofi=0.5)
+
+Server.clearFx()
+
+Server.addFx(lofi=0.5)
+
+Server.clearFx()
+
+Server.addFx(lpf=400)
+
+Server.clearFx()
+
+Server.clearFx()
+
+Server.addFx(lpf=2300)
+
+Server.addFx(crush2=50)
+
+Server.addFx(lpf=2200)
+
+Server.addFx(lpf=2100)
+
+Server.addFx(lpf=2000)
+
+Server.addFx(lpf=1900)
+
+Server.addFx(lpf=1800)
+
+Server.addFx(lpf=1700)
+
+Server.addFx(lpf=1600)
+
+Server.addFx(lpf=1500)
+
+Server.addFx(lpf=1400)
+
+Server.addFx(lpf=1300)
+
+Server.addFx(lpf=1200)
+
+Server.addFx(lpf=1100)
+
+Server.addFx(lpf=1000)
+
+Server.addFx(lpf=900)
+
+Server.addFx(lpf=800)
+
+Server.addFx(lpf=700)
+
+Server.addFx(lpf=600)
+
+Server.addFx(lpf=500)
+
+Server.addFx(lpf=400)
+
+Server.addFx(lpf=300)
+
+Server.addFx(lpf=299)
+
+Server.addFx(crush2=51)
+
+Server.addFx(crush2=52)
+
+Server.addFx(crush2=53)
+
+Server.addFx(crush2=54)
+
+Server.addFx(crush2=55)
+
+Server.addFx(crush2=56)
+
+Server.addFx(crush2=57)
+
+Server.addFx(crush2=58)
+
+Server.addFx(crush2=59)
+
+Server.addFx(crush2=60)
+
+Server.addFx(crush2=61)
+
+Server.addFx(crush2=62)
+
+Server.addFx(crush2=63)
+
+Server.addFx(crush2=64)
+
+Server.clearFx()
+
+Server.addFx(crush2=65)
+
+Server.clearFx()
+
+Server.addFx(crush2=65)
+
+Server.clearFx()
+
+Server.addFx(crush2=65)
+
+Server.clearFx()
+
+drop()
+
+Server.addFx(mverb=1)
+
+Server.addFx(mverb=1, mverbmix=1)
+
+Server.clearFx()
+
+Server.addFx(mverb=1, mverbmix=1)
+
+Server.clearFx()
+
+Server.addFx(mverb=1, mverbmix=1)
+
+Server.clearFx()
+
+r2 >> organ(P[var([0, -2, -3, -4], 8), 2, PStep(8, 5, 4), 2], dur=var([4, PDur(4, 8)], [7, 5]), amp=0.8, crush=1, crush_=4,crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+r3 >> bell(P[var([0, -2, -3, -4], 8), 4, PStep(4, 6, 8), 2], dur=var([4, PDur(4, 8)], [9, 3]), amp=0.6, crush=1, crush_=4, crush_d=2,mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+Server.addFx(room2=1, mix2=1, damp2=0.8, revatk=-2, revsus=1)
+
+Server.clearFx()
+
+Server.addFx(room2=1, mix2=1, damp2=0.8, revatk=2, revsus=1)
+
+Server.clearFx()
+
+Server.addFx(room2=1, mix2=1, damp2=0.8, revatk=2, revsus=-1)
+
+Server.clearFx()
+
+Server.addFx(room2=1, mix2=1, damp2=0.8, revatk=2, revsus=-1)
+
+Server.clearFx()
+
+Server.addFx(room2=1, mix2=1, damp2=0.8, revatk=2, revsus=-1)
+
+Server.clearFx()
+
+Server.addFx(mverb=1, mverbmix=1)
+
+Server.clearFx()
+
+Server.addFx(room2=1, mix2=.5, damp2=0.8, revatk=2, revsus=-1)
+
+Server.clearFx()
+
+Server.addFx(room2=1, mix2=.5, damp2=0.8, revatk=2, revsus=-1)
+
+Server.clearFx()
+
+Server.addFx(room2=1, mix2=.8, damp2=0.8, revatk=2, revsus=-1)
+
+Server.clearFx()
+
+Server.addFx(room2=1, mix2=.8, damp2=2.8, revatk=2, revsus=-1)
+
+Server.addFx(hpf=1600)
+
+Server.clearFx()
+
+Server.addFx(hpf=1600, lofi=1)
+
+Server.clearFx()
+
+Server.addFx(hpf=1600, lofi=1)
+
+Server.addFx(hpf=1600, lofi=1, low=4)
+
+Server.addFx(hpf=1600, lofi=1, low=4, rate=2)
+
+Server.addFx(hpf=1600, lofi=1, low=0)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.clearFx()
+
+Server.clearFx()
+
+Server.addFx(hpf=1600, lofi=1, low=0)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.addFx(hpf=1600, lofi=4, low=0)
+
+Server.addFx(hpf=1600, lofi=5, low=0)
+
+Server.addFx(hpf=1600, lofi=4, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.clearFx()
+
+Server.addFx(hpf=1600, lofi=0, low=0)
+
+Server.addFx(hpf=1600, lofi=1, low=0)
+
+Server.addFx(lofi=1.4)
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(hpf=1600, lofi=3, low=0)
+
+Server.clearFx()
+
+Server.addFx(hpf=1600, lofi=2, low=0)
+
+Server.addFx(lofi=1.4)
+
+Server.clearFx()
+
+r4 >> dbass(dur=var([1/2, 1/4, 2]), amp=2, shape=[0.2, 0.5])
+
+r1 >> dbass(dafilter=PWhite(0.1, 0.1)[:32], lpf=var([400, linvar([400, 3200], 64)], [16, 8]), lpr=0.1, dur=var(
+    [1/2, 1/4], [6, 2]), oct=var([6, 7, (3, 4, 5), (3, 4, 6), (4, 5, 6, 7), 3]), mpf=linvar([200, 3200], PRand(8)))
+
+r4.stop()
+
+r1 >> dbass(dafilter=PWhite(0.1, 0.1)[:32], lpf=var([400, linvar([400, 3200], 64)], [16, 8]), lpr=0.1, dur=var(
+    [1/2, 1/4], [6, 2]), oct=var([6, 7, (3, 4, 5), (3, 4, 6), (4, 5, 6, 7), 3]), mpf=linvar([200, 3200], PRand(8)))
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=20, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3, wshape=9, amp=0.6, valad=500, valadr=0.3, valadd=5, valadt=0,hpf=400, valadc=0.2).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=20, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3, wshape=9, amp=0.6, valad=500, valadr=0.3, valadd=5, valadt=0,hpf=1400, valadc=0.2).unison(3)
+
+g9 >> cbass(PTime(-4,4),dur=PTime(0.01, 2, .25),follow=4, cutoff=20, bitcrush=3, chaos=17, oct=4,leg=[0, 2], sus=PTime(0.5, 2, 0.1), dist2=0.3, wshape=9, amp=0.6, valad=500, valadr=0.3, valadd=5, valadt=0,hpf=2400, valadc=0.2).unison(3)
+
+r1 >> dbass(dafilter=PWhite(0.1, 0.1)[:32], lpf=var([400, linvar([400, 3200], 64)], [16, 8]), lpr=0.1, dur=var(
+    [1/2, 1/4], [6, 2]), oct=var([6, 7, (3, 4, 5), (3, 4, 6), (4, 5, 6, 7), 3]), amp=2, mpf=linvar([200, 3200], PRand(8)))
+
+g9.stop()
+
+u3 >> play("X.", mpf=140, amp=2, mpr=0.1).sometimes("stutter", PRand(5))
+
+r1 >> cbass(dafilter=PWhite(0.1, 0.1)[:32], lpf=var([400, linvar([400, 3200], 64)], [16, 8]), lpr=0.1, dur=var(
+    [1/2, 1/4], [6, 2]), oct=var([6, 7, (3, 4, 5), (3, 4, 6), (4, 5, 6, 7), 3]), amp=2, mpf=linvar([200, 3200], PRand(8)))
+
+u3.stop()
+
+r8.stop()
+
+j1 >> bell(P[var([0, -2, -3, -4], 8), 2, PStep(8, 5, 4), 2],
+           dur=4, amp=1, feed=0.5, oct=(3, 4), mverb=0.5)
+
+s3 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 5) *
+            2, drive=linvar([0.02, 0.04], 32)).stop()
+k4 >> lapin(([-4, -3], 4), oct=(3, 4), shape=0.4, fdistfreq=4000, dur=8, lpf=4000,
+            fdist=1, hpf=200, bpf=0, lofi=1, amp=PCoin(0.2, 0, 0.25)).unison(2).slider().solo(0)
+
+lost("hyperstatic")
+
+d3 >> play("K", dur=var([32,1/4], [1,[4,8]]), rate=linvar([2,1], 4), echo=var([0.75,0.5,0.25,0.125], P*[0.25,1,0.5,0.125]), cut=0.9)
+
+s1 >> play("(yL) ", sample=(PRand(8), PRand(8)), dur=2, rate=(0.4, -2), delay=(0, 1), slide=(4, 1), bpf=(800,4800), bpr=(0.2,0.8))
+
+s3 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 5) *
+            2, drive=linvar([0.02, 0.04], 32)).stop()
+k4 >> lapin(([-4, -3], 4), oct=(3, 4), shape=0.4, fdistfreq=4000, dur=8, lpf=4000,
+            fdist=1, hpf=200, bpf=0, lofi=1, amp=PCoin(0.2, 0, 0.25)).unison(2).slider().solo(8)
+
+p3 >> play("(Xs)", sample=PRand(8), rate=[0.7,1.1], leg=PRand([16,64,32]), dur=1/4, amp=var([0,p2.amp==1],[8,16]), mpf=PRand(6500,14000))
+
+p3 >> play("(Xs)", sample=PRand(8), rate=[0.7,1.1], leg=PRand([16,64,32]), dur=1/4, amp=var([0,p2.amp==1],[8,16]), mpf=PRand(6500,14000))
+
+k4 >> lapin(([-4, -3], 4), oct=(3, 4), shape=0.4, fdistfreq=4000, dur=8, lpf=4000,fdist=1, hpf=200, bpf=0, lofi=1, amp=PCoin(0.2, 0, 0.25)).unison(2).slider().solo(8)
+
+p2 >> play("p", sample=PRand(8), crush=4, amp=p1.rate>=0, amplify=PWhite(0.1, 1), leg=PWhite(10, 25), room=1, mix=0.3, dur=1/8, echotime=1, echo=1, pan=[-1,1])
+
+unsolo()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> plaits(P[0,4,8,7], dur=1/4, oct=(3,4), harm=0.0, timbre=0.6, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.6) + var([0,7],8)
+
+p1.stop()
+
+# 
+
+# 
+
+# 
+
+# 
+
+# 
+
+# 
+
+# 
+
+# 
+
+# 
+
+# 
+

@@ -368,3 +368,88 @@ body {
 .CodeMirror-hint-active {
   background: var(--col-blue);
 }
+
+/* Autocomplete */
+.CodeMirror-hints .autocomplete-category-separator {
+  background: linear-gradient(45deg, var(--bg-col-1), var(--bg-col-2)); 
+  color: var(--text-col-1);
+  font-weight: bold ;
+  text-align: left ;
+  font-size: 16px ;
+  letter-spacing: 1px ;
+  cursor: pointer ;
+  border-top: 1px solid var(--border-col-1) ;
+  border-bottom: 1px solid var(--border-col-1) ;
+  margin: 2px 0 ;
+  padding: 6px 12px ;
+  transition: all 0.2s ease;
+}
+
+.CodeMirror-hints .autocomplete-category-separator:hover,
+.CodeMirror-hints .CodeMirror-hint-active.autocomplete-category-separator {
+  background: linear-gradient(45deg, var(--border-col-2), var(--border-col-1));
+  transform: translateX(4px);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--bg-col-1);
+}
+
+.CodeMirror-hints .autocomplete-category-separator .category-text {
+  display: block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Styles pour le bouton retour */
+.CodeMirror-hints .autocomplete-back-button {
+  /* background: linear-gradient(45deg, var(--col-full-blue), var(--col-blue));  */
+  color: #E8F4FD ;
+  font-weight: bold ;
+  text-align: left ;
+  font-size: 12px ;
+  letter-spacing: 1px ;
+  cursor: pointer ;
+  border-top: 1px solid var(--border-col-1) ;
+  border-bottom: 1px solid var(--border-col-1) ;
+  margin: 2px 0 ;
+  padding: 6px 12px ;
+  transition: all 0.2s ease;
+}
+
+.CodeMirror-hints .autocomplete-back-button:hover,
+.CodeMirror-hints .CodeMirror-hint-active.autocomplete-back-button {
+  background: linear-gradient(45deg, var(--col-red), var(--col-full-red));
+  transform: translateX(-4px);
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.CodeMirror-hints .autocomplete-back-button .back-text {
+  display: block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+
+.CodeMirror-hints .autocomplete-separator .separator-text {
+  display: block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Style for real suggestion */
+.CodeMirror-hints li:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button) {
+  background: rgba(15, 20, 25, 0.9);
+  color: #E8F4FD;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.CodeMirror-hints li:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button):hover,
+.CodeMirror-hints .CodeMirror-hint-active:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button) {
+  background: linear-gradient(90deg, rgba(74, 144, 194, 0.2), rgba(107, 191, 223, 0.1)) ;
+  border-left: 3px solid #6BBFDF ;
+  color: #6BBFDF ;
+}
+
+.CodeMirror-hints .autocomplete-separator {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

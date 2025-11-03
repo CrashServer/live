@@ -373,9 +373,57 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   // Gestion de l'autocomplétion
+  // editor.setOption('hintOptions', {
+  //   hint: (cm) => foxdotAutocomplete.hint(cm, CodeMirror),
+  // });
   editor.setOption('hintOptions', {
-    hint: (cm) => foxdotAutocomplete.hint(cm, CodeMirror),
+    hint: (cm) => {
+      return foxdotAutocomplete.hint(cm, CodeMirror);
+    },
+    completeSingle: true,
+    extraKeys: {
+      'Right': function(cm, handle) {
+        // Si on est sur une catégorie, montrer ses éléments
+        const activeElement = document.querySelector('.CodeMirror-hint-active');
+        if (activeElement) {
+          const categoryAttr = activeElement.getAttribute('data-category');
+          
+          if (categoryAttr) {
+            const categoryItems = foxdotAutocomplete.showCategoryItems(cm, categoryAttr);
+            if (categoryItems) {
+              handle.close();
+              setTimeout(() => {
+                cm.showHint({
+                  hint: () => categoryItems,
+                  completeSingle: false,
+                  extraKeys: {
+                    'Left': function(cm, handle) {
+                      // Retour aux catégories
+                      handle.close();
+                      setTimeout(() => {
+                        cm.showHint();
+                      }, 50);
+                    }
+                  }
+                });
+              }, 50);
+            }
+          }
+        }
+      },
+      'Left': function(cm, handle) {
+        // Si on est dans les éléments et que le premier élément (bouton retour) est sélectionné
+        const selectedItem = handle.data[handle.selectedHint];
+        if (selectedItem && selectedItem.displayText && selectedItem.displayText.includes('Retour aux catégories')) {
+          handle.close();
+          setTimeout(() => {
+            cm.showHint();
+          }, 50);
+        }
+      }
+    }
   });
+
 
   // Ajouter l'écouteur d'awareness
   awareness.on('change', () => {
@@ -431,6 +479,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           foxdotAutocomplete.fxList = fxList;
           foxdotAutocomplete.synths= synthList;
           foxdotAutocomplete.attackList = attackList;
+          foxdotAutocomplete.categories = foxdotAutocomplete.getAttackCategories(); 
 
           // Construire les définitions dynamiques pour les synths
           // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)

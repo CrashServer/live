@@ -60,10 +60,17 @@ class StorageAttack:
         for filename in os.listdir(self.codepath):
             if filename.endswith(('.py')):
                 with open(os.path.join(self.codepath, filename)) as f:
+                    attackContent = {}
                     content = f.readlines()
                     attackName = content[0].replace(
                         "#", "").replace("\n", "").strip()
-                    self.attackDict[attackName] = ''.join(content[1:])
+                    category = ""
+                    if (content[1].startswith("#")):
+                        category = content[1].replace("#", "").replace(
+                            "\n", "").strip()
+                    attackContent["attack"] = ''.join(content[2:]) if category != "" else ''.join(content[1:])    
+                    attackContent["category"] = category
+                    self.attackDict[attackName] = attackContent
 
     def getAttack(self, attackName, printOut=0):
         exten = ''.join(choice(string.ascii_lowercase) for x in range(3))
@@ -73,9 +80,9 @@ class StorageAttack:
             print(attackName)
         if printOut != 0:
             print(prompt)
-            print(self.attackDict[attackName])
+            print(self.attackDict[attackName]["attack"])
             # clip.copy(prompt + '\n' + self.attackDict[attackName])
-        sendAttack('\n' + prompt + '\n' + self.attackDict[attackName])
+        sendAttack('\n' + prompt + '\n' + self.attackDict[attackName]["attack"])
 
     def lost(self, attack=None):
         if attack is not None:
@@ -811,7 +818,7 @@ class WebsocketServer():
         attackList = [ k for k in storageAttack.attackDict.keys()]
         attackJsonList = []
         for attack in attackList:
-            attackJsonList.append({"text": f"\"{attack}\"", "displayText": attack})
+            attackJsonList.append({"text": f"\"{attack}\"", "displayText": attack, "category": storageAttack.attackDict[attack]['category']})
         return attackJsonList
 
     async def sendFxDict(self):

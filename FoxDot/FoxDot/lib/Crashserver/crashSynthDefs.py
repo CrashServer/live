@@ -116,6 +116,9 @@ cbass.add()
 click = FileSynthDef("click")
 click.add()
 
+choir = FileSynthDef("choir")
+choir.add()
+
 combs = FileSynthDef("combs")
 combs.add()
 

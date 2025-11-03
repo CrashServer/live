@@ -98,8 +98,8 @@ function getUserCharacter(userName) {
   if (!userName) return null;
   
   const userMap = {
-    'zbdm': 'z',
-    'svdk': 'v', 
+    'zbdm': 'v',
+    'svdk': 'z',
     'server': 's'
   };
   

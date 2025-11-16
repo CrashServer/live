@@ -1,4 +1,6 @@
-# overload
+# overload 170
+# todo
+
 Clock.bpm = 170;
 l0 >> loop("cyber32", dur=32, sample=PRand(32))
 a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.05,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)

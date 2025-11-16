@@ -1,8 +1,6 @@
-# tabamix
-Clock.link()
+# tabamix 135
 Root.default="E"
 Scale.default="minor"
-Master().reset()
 Clock.bpm = 135;
 
 c1 >> plaitsX(0,dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), preset=P*[2,11], mverb=0.5, leg=4, hpf=P*[4000, 800])
@@ -24,6 +22,7 @@ p1 >> play("PTptpPTtp", amp=1, sample=0)
 
 c2.dur=1
 
+a1.dist2=0
 a1 >> play("-.--[--]-(.-){:.}", dist2=PwRand([0, 1], [15, 1]), fold=(1, 0), dur=(1/2, 1), sample=(4,2), hpf=(10000, linvar([200, 4000])), tanh=a1.dist2, mverb=a1.dist2, echo=a1.dist2, rate=(a1.dist2 + 1))
 
 g0 >> tb303(0, dur=1/4, cut=1/2, amp=PBin(), cutoff=var([200, 3200, 4000, 8000], [8, 12, 4, 8]), top=PRand(1200)[:8], rq=0.1, dec=var([0.1, 0.2, 0.5, 12], [4]))

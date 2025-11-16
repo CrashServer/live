@@ -1,4 +1,4 @@
-# doom
+# doom 170
 # Cover
 Clock.bpm = 170
 

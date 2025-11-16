@@ -1,4 +1,5 @@
-# merlin 
+# merlin 128
+# todo
 
 # hardishstuff, approximative
 Clock.bpm = 128

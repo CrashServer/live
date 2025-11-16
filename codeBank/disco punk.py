@@ -1,4 +1,4 @@
-# disco punk
+# disco punk 192
 # Banger
 
 Clock.bpm =192
@@ -7,3 +7,5 @@ b5 >> superbass([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.3
 e5 >> lbass(var([0, -2, -4, -3], 8) + var([0, -1],[7,1]), oct=(5), dur=1/2, cutoff=PFr(1900,6200), tone=linvar([0.3, 0.9], 33), rel=0.11, hpf=50)
 x5 >> play("<kku(...({.u[uu]}))><.->", drcomp=0.5)
 a5 >> play("X.", amp=1)
+
+b5.fdecay=linmod(1,7, 64, 5)

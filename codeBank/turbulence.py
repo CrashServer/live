@@ -1,4 +1,6 @@
-# turbulence
+# turbulence 120
+# todo
+
 Clock.bpm = 120
 Root.default=var([0,[1,8]],[14,2])
 

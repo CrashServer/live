@@ -1,4 +1,6 @@
-# organ
+# organ 128
+# banger
+
 Clock.bpm = 128;
 Root.default = "E"
 Scale.default = Scale.minor;
@@ -21,7 +23,7 @@ c2 >> lbass(var([0, -2, linvar([-2,0],[8,0])], [16,8,8]), dur=var([1/2,1/4],[24,
 x1 >> play("<X.>", sample=10)
 
 s2 >> klank(oct=linvar([5, 6], [128,0]), dur=PDur(3, 8)* 2).slider()
-p1 >> supersaw(linvar([0,7], [64,0]), dur=1/4, mverb=0.9, oct=(4,5,6,7), amp=(linvar([0.3, 1], [64,0]), linvar([1, 0.5], [64,0])))
+p1 >> supersaw(linvar([0,7], [64,0]), dur=1/4, mverb=0.9, oct=(5,6), amp=(linvar([0.3, 1], [64,0]), linvar([1, 0.5], [64,0])))
 
 p2 >> play("<E ><p >", sample=0, dur=PDur([3, 5], 8), amp=PWhite(2,1), hpf=220, chop=1/2, leg=PWhite(15), pan=PWhite(-1,1), fx2=1)
 

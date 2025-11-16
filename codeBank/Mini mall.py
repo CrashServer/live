@@ -1,4 +1,5 @@
-# Mini mall
+# Mini mall 132
+# drums
 Clock.bpm=132
 l4 >>  loop("break4", dur=4,pos=0, poslfo=2, room=0.1, sample=PRand(8), beat_stretch=1, looping=1.0, fx=1).lclip(2)
 l8 >> loop("xtech8", dur=8, sample=PRand(8), blur=1, amp=1, rate=1, mverb=0.5,ratelfo=2,  beat_stretch=0, ratelfoadd=linvar([1.2, 1.6], 64), ratelfomul=0.4).lclip(P*[1,2,4])

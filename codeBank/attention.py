@@ -1,4 +1,4 @@
-# attention
+# attention 112->132
 # Reisub
 
 Root.default = linvar([0, 4, 2, PRand(2)], [PRand([4, 8, 12, 16])])

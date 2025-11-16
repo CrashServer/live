@@ -1,4 +1,4 @@
-# third
+# third 133
 Clock.bpm = 133;
 Root.default = "D#"
 k0 >> dbass([3, 4, 4, 8, 4, 7, 4, [4, 5]], scale=Scale.chromatic, dur=1/3, rate=([4, 2, 1, 0.5], 0.1), lpf=1200, hpf=[1200, 400, 300, 600], lpr=0.4, lofi=PSine(256) + 0.5).every(5, "stutter", rate=0.25, oct=6)

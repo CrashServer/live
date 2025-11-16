@@ -1,4 +1,6 @@
-# snowdation
+# snowdation 133
+# interlude
+
 Clock.bpm = 133;
 
 a2 >> sine((0, 2), sinefb=linvar([0, 1.0], 128), amp=0.5, delay=0.5, oct=3, sus=2, hpf=200, pan=linvar([-1, 1], 128))

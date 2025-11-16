@@ -1,4 +1,4 @@
-# R_Jazz
+# R_Jazz 128
 # R_
 
 Clock.bpm=128

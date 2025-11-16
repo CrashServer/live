@@ -1,7 +1,11 @@
-# G1
+# G1 72
+# interlude
+Clock.bpm=72
+Root.default=3
+
 g1 >> play("V ", sample=4, lpf=1200)
-g2 >> dbass(dur=1/4, drive=0).unison(4)
-g3 >> play("[--]", sample=4)
+g2 >> dbass(dur=1/4, drive=PStep(9, 1,0), rate=linvar([2, .1],[64,0]), lpf=PFr(500,2200)).unison(4)
+g3 >> play("[--]", sample=4, pan=PWhite(-1,1)).human(60, 10)
 g4 >> loop("noizebeat16", dur=8, sample=4, amp=[0.5, 0.5, 0, 0.5])
 g5 >> loop("noizebeat16", dur=8, sample=6, amp=[0, 0, 0.5, 0])
 g6 >> loop("noizebeat16", dur=8, sample=5, amp=[0, 0, 0, 1])

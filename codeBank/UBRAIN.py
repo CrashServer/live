@@ -1,4 +1,6 @@
-# UBRAIN
+# R_UBRAIN
+# R_
+
 Clock.bpm=88
 Clock.bpm=88*2
 l4 >> loop("rageambi16", dur=16, hpf=300)

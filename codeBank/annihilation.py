@@ -1,4 +1,4 @@
-# annihilation
+# annihilation 120
 # Reisub
 
 Master().reset()

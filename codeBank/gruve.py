@@ -1,4 +1,5 @@
 # gruve
+# todo
 s1 >> play(".s", dur=1/2, echo=0.23, high=2)
 d1 >> play("x.", sample=(4,0), amp=1)
 

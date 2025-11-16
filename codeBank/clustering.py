@@ -1,4 +1,4 @@
-# Clustering
+# Clustering 96
 Clock.bpm = 96
 b2 >> donk()
 b1 >> cluster(hpf=400, hpr=0.1, dur=2.5, oct=4, mverb=0.5)

@@ -1,6 +1,5 @@
 SynthDef.new(\a_bassry,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=1, bus=0,
-	  distortion=10, cutoff=700, resonance=0.6, pattern=0, swing=0.1|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=1, bus=0, distortion=10, cutoff=700, resonance=0.6, pattern=0, swing=0.1|
 		var osc, env, filter, dist, rhythmGate, rhythmEnv, patternTrig;
 		freq = In.kr(bus, 1);
 

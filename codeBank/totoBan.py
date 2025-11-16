@@ -1,4 +1,6 @@
-# totoBan
+# totoBan 173
+# mud
+
 Clock.bpm=173
 f8 >> loop("beats8", dur=8, sample=5)
 c1 >> loop("berlin8", dur=8, sample=4)

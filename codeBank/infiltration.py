@@ -1,4 +1,4 @@
-# infiltration
+# infiltration 123
 # Garbage
 
 Scale.default="minor"
@@ -7,8 +7,7 @@ Root.default = 0;
 
 d9 >> play("<.3>", amp=1, dur=4, sample=(0), rate=(-0.5,1))
 
-l1 >> loop("cindrum8", dur=8, sample=0, sbrk=0.2, sbrkdur=P*[4,0.5,1,2])
-l1 >> loop("cindrum8", dur=8, sample=2, sbrk=0.2, sbrkdur=P*[4,0.5,1,2])
+l1 >> loop("cindrum8", dur=8, sample=P*[0,2], sbrk=0.2, sbrkdur=P*[4,0.5,1,2])
 l2 >> loop("cindrum16", dur=16, sample=6, sbrk=0.2, sbrkdur=P*[4,0.5,1,2])
 l6 >> loop("rbot4", dur=8, delay=4, cut=PWhite(0.1,0.5), sample=2, leg=0)
 l7 >> play("{UMTmt[UU]}", rate=1, delay=7.5, dur=8, hpf=200, amp=2, fx2=0, pan=PWhite(-1,1))

@@ -1,4 +1,5 @@
-# H3
+# H3 120
+# interlude
 Clock.bpm = 120;
 Root.default = 4
 y0 >> subbass([2,3,[5,7]], dur=16, amp=0.4, crush=(0,PRand(0,4)), bits=PRand(4,16), fx1=0.2, atk=PWhite(0.005,0.1), oct=(4,5), lpf=4000).unison(4)

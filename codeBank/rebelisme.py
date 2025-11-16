@@ -1,4 +1,6 @@
-# rebelisme
+# rebelisme 142
+# mud
+
 Clock.bpm=142
 
 p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=2)

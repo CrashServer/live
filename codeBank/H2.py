@@ -1,4 +1,5 @@
-# H2
+# H2 120
+# interlude
 Clock.bpm = 120;
 Scale.default = "minorPentatonic"
 Root.default=4

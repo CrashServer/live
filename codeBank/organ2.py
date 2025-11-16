@@ -1,4 +1,6 @@
 # organ 2
+# garbage
+
 Root.default = "E"
 Scale.default = Scale.minor;
 e0 >> bell(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=1/4, rate=([0.125, 1, 1, 0.5], 0.1), lpf=0, hpf=600, mpf=400, mpr=0.3, lpr=0.1, amp=Pvar([1, 0.25, 0.5]))
@@ -11,11 +13,10 @@ r4 >> bell(P*[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [8,
 r2 >> varsaw(oct=(3, 4, 5), lpf=(800, linvar([400, 12000], 128)), dur=[6, 2], sus=[4, 8], lpr=0.1, a=0.5).unison(4)
 r1 >> karp()
 
-r1 >> dab([-2, PWalk(8, 1, 1), -3, _, _, [0, 0, 3]], leg=4, echo=0.25, dur=1/4, oct=PStep(4, [5, 6],
- [5, 7]), mverb=0.5).unison(2).sometimes("shuffle")
+r1 >> dab([-2, PWalk(8, 1, 1), -3, _, _, [0, 0, 3]], leg=4, echo=0.25, dur=1/4, oct=PStep(4, [5, 6], [5, 7]), mverb=0.5).unison(2).sometimes("shuffle")
 
 s1 >> klank(dur=8, oct=(3, 4, 5)).unison(3) # progressif
-r0.stop()
+
 s2 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 8)* 2, hpf=linvar([1200, 3200],32), hpr=0.1)
 s1.amp=1.5
 s1.shape=0.1
@@ -25,9 +26,7 @@ r1.degree=var([ [-2, -4, 0], [-4, 0, 2], [-2, 4, 2]])
 r2 >> donk()
 r3 >> donk()
 
-r1.oct=1
 r4.oct=7
-
 
 r4 >> lbass()
 r1.oct=(4, 5, 6)
@@ -44,7 +43,7 @@ x2 >> play("u ", sample=3, dur=2)
 
 r1.dur=1/4
 r1.shape=0.3
-s1>>dbass().unison(4)
+s1 >> dbass().unison(4)
 q1 >> loop("rytm8", dur=8, sample=2)
 
 r4 >> dbass([0, 4], amp=2, dist2=0.1, chop=4).unison(4)

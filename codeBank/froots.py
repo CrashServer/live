@@ -1,4 +1,5 @@
-# froots
+# froots 76
+# todo
 Root.default=3
 Clock.bpm = 76
 

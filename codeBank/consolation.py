@@ -1,4 +1,4 @@
-# consolation
+# consolation 120
 # Reisub
 Scale.default="minor"
 Clock.bpm = 120

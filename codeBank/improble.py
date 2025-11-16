@@ -1,64 +1,12 @@
-# unprobable
+# unprobable 125
 Clock.bpm = 125;
 x_all.hpf=40
-f5 >> sinepad(PArp([0,2,5],4), output=20, oct=7,dur=1/4, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=-1).unison(4)
-f4 >> pluck(PArp([0,2,5],4), output=24, dur=1/4, lpf=3200, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=1).unison(4)
-f5 >> pluck(PArp([0,2,5],4), output=24, dur=1/4, lpf=3200, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=1).unison(4)
-f0 >> sinepad(PArp([0,2,5],4), output=20, oct=PStep([4,5,6],5, 4) ,dur=P[1/2, 1/2, 1/4, 1/4], vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1).unison(4)
+f5 >> sinepad(PArp([0,2,5],4), oct=7,dur=1/4, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=-1).unison(4)
+f4 >> pluck(PArp([0,2,5],4), dur=1/4, lpf=3200, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=1).unison(4)
+f5 >> pluck(PArp([0,2,5],4), dur=1/4, lpf=3200, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=1).unison(4)
+f0 >> sinepad(PArp([0,2,5],4), oct=PStep([4,5,6],5, 4) ,dur=P[1/2, 1/2, 1/4, 1/4], vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1).unison(4)
 f5.oct=lininf(6, 4, 32)
 
-b8 >> fbass(oct=(4,PStep(16,6,5)), lpf=linvar([800,8800],[32,0]), hpf=40, dur=PDur(5,8), fdist=linvar([2, 6], 128),utput=6, vol=1)
+b8 >> fbass(oct=(4,PStep(16,6,5)), lpf=linvar([800,8800],[32,0]), hpf=40, dur=PDur(5,8), fdist=linvar([2, 6], 128), vol=1)
 
-b1 >> rsin(5 +var([IV, VI, III, VI]), octafuz=0, fx1=0, dur=1/4, sus=1/4, output=4)
-v1 >> play("K", amp=[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], sample=0, dur=1/4, output=8)
-v3 >> play("@", amp=[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0], dur=1/4, output=18)
-v4 >> play("N", amp=[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0], dur=1/4, shape=1, sample=PRand(99)[:12], cut=1, lpf=200, output=14, amplify=1)
-v5 >> play("-", amp=[0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,1], dur=1/4, sample=2, hpf=180, vol=0.8, pan=PWhite(-1,1), output=12)
-v6 >> play("I", sample=4, hpf=PRand(2000,8000), rate=PWhite(-1,2), dur=P*[1,1/2], amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], pan=PWhite(-1,1), fx2=1, output=14)
-v2 >> play("t", amp=[0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0], lpf=P*[200,2000], dur=1/4, output=16)
-b1.oct=4
-f5.dur=1/2
-f5 >> dbass(dur=1/2)
-f0 >> dbass(dur=1/2)
-
-b8.hpf=400
-b8.mverb=0.5
-
-b1.oct=2
-
-f5.oct=2
-b1.shape=0.3
-b1.shape=[0.3, 0.3, 0.5, 0.8]
-
-x_all.stop()
-f5.dailter=linvar([200, 1600], 64)
-b8.dafilter=linvar([200, 1600], 16)
-
-z1 >> play("K", amp=[1,0,00,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], dur=1/4, output=20)
-z2 >> play("o", amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], lpf=200, dur=1/4, output=10)
-z3 >> play("-", amp=[0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,1,0,0,0,1,0], dur=1/4, amplify=[0.76, 0.2, 0.4], pan=PWhite(-1,1), output=12)
-z4 >> play("-", sample=1, amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], dur=1/4, shape=1, lpf=200, pan=PWhite(-1,1), output=12)
-z6 >> play("t", hpf=8000, dur=1/4, amp=[1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1], sample=4, amplify=PGauss(4, 0.1), output=16)
-
-variations = Variation(16, 4)
-
-drop(4, 1, 1)
-
-x1 >> play("K", amp=[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], dur=1/4, output=20)
-x2 >> play("--", amp=[0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0], lpf=200, dur=1/4, output=12)
-x5 >> play("o", amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], dur=1/4, sample=2, output=10)
-x6 >> play("O", hpf=8000, dur=1/4, amp=[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0], output=10)
-x7 >> play("p", hpf=8000, dur=1/4, amp=[0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0], output=16)
-l1 >> play("K ", sample=0, cut=1, output=20)
-x3 >> play("s", amp=[1], dur=1/4, amplify=[0.76, 0.2, 0.4], output=22)
-x4 >> play("c", amp=[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], dur=1/4, shape=PWhite(0.2,2), lpf=P*[200,linvar([40,18200],[32,0])], output=18)
-
-e1 >> play("X ", sample=5, lpf=5800, output=8)
-b8.mverb=0.8
-b8.oct=6
-b8.oct=5
-x_all.stop()
-z_all.stop()
-f5 >> sinepad(PArp([0,2,5],4), output=20, oct=7,dur=1/4, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1).unison(4)
-f8 >> gong(P+(-3,2,5,P*[4,3]), oct=5, sus=6, dur=8, chop=0, chopwave=3, amp=0.3, output=24).unison(4)
-b8 >> varsaw([0, 0, 5], oct=3).stop()
+b1 >> rsin(5 +var([IV, VI, III, VI]), octafuz=0, fx1=0, dur=1/4, sus=1/4)

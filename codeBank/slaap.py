@@ -1,8 +1,12 @@
-# slaap
+# slaap 176
+# reisub, cover, todo
+
+# To clear, sound messy
 Root.default="C"
 Scale.default="minor"
 Clock.bpm=176
 
+#intro
 w1 >> stretch("slaap16", sample=1, dur=P[16,32,64], sus=[32,64], lpf=1800, amp=0.2, rate=PWhite(-1,1)).unison(4)
 w2 >> loop("slaap4", sample=2, formant=1, dur=12, hpr=0.1, hpf=4000, amp=0.2, room=1, mix=0.6, pan=(-1,1))
 w3 >> loop("slaap16", 4, sample=1,dur=6, sus=[12, 24], spin=[4, 8, 16, 2], hpr=0.1, hpf=0, amp=0.3, room=1, mix=0.4, pan=(-1,1))

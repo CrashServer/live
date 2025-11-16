@@ -1,6 +1,5 @@
 SynthDef.new(\a_glead,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
-	  distortion=6, cutoff=1200, bitcrush=4, chaos=0.3|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, distortion=6, cutoff=1200, bitcrush=4, chaos=0.3|
 		var osc, env, crushed, filtered, noise;
 		freq = In.kr(bus, 1);
 

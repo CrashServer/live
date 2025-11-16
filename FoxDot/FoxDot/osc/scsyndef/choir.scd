@@ -1,9 +1,6 @@
-SynthDef(\choir, {
-    |bend=0, vow=0, bus=0, amp=1, atk=0.001, decay=0.01, sus=1, rel=0.01,
-     level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, rate=1, blur=1|
-
-    var vibs, mods, gens, formantsFemale, formantsMale, vowelsFemale, vowelsMale,
-        vowelMix, panPositions, out, env, noise;
+SynthDef.new(\choir,
+{|bus=0, amp=1, atk=0.001, decay=0.01, sus=1, rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, rate=1, blur=1, bendc=0.0, vow=0.0|
+var vibs, mods, gens, formantsFemale, formantsMale, vowelsFemale, vowelsMale, vowelMix, panPositions, out, env, noise;
 
     sus = sus * blur;
     freq = In.kr(bus, 1);
@@ -26,7 +23,7 @@ SynthDef(\choir, {
 
     // Générateurs de base
     gens = LFPulse.ar(
-        freq * bend.midiratio + mods + vibs,
+        freq * bendc.midiratio + mods + vibs,
         0,
         0.4 * mods.reverse / 8 + 0.2,
         0.15

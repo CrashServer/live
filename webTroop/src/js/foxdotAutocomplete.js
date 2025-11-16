@@ -523,9 +523,34 @@ export const foxdotAutocomplete = {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredLost = this.attackList.filter(lost => lost.displayText.toLowerCase().includes(prefix.toLowerCase()));
             const match = line.match(/(lost|attack)\(([^)]*)\)$/);
-            const start = match.index + match[0].indexOf('(') + 1;
-            const endMatch = line.match(/\)/);
-            const end = endMatch ? endMatch.index : cursorPosition;
+            
+            if (!match) return null;
+
+            const functionStart = match.index + match[0].indexOf('(') + 1;
+            const content = match[2]; // Le contenu entre les parenthèses
+            
+            // Calculer le début et la fin en fonction du contenu
+            let start, end;
+            
+            if (content.trim() === '') {
+                // Cas lost() vide
+                start = functionStart;
+                end = functionStart;
+            } else if (content.includes('"') || content.includes("'")) {
+                // Cas lost("...") avec guillemets existants - on remplace tout
+                start = functionStart;
+                const closingParen = line.indexOf(')', functionStart);
+                end = closingParen !== -1 ? closingParen : cursorPosition;
+            } else {
+                // Cas sans guillemets
+                start = functionStart;
+                const closingParen = line.indexOf(')', functionStart);
+                end = closingParen !== -1 ? closingParen : cursorPosition;
+            }
+            
+            // const start = match.index + match[0].indexOf('(') + 1;
+            // const endMatch = line.match(/\)/);
+            // const end = endMatch ? endMatch.index : cursorPosition;
 
             filteredLost = filteredLost.length > 0 ? filteredLost.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.attackList.sort((a, b) => a.displayText.localeCompare(b.displayText));
 

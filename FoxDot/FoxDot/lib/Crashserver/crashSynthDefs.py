@@ -245,6 +245,9 @@ pink.add()
 prof = FileSynthDef("prof")
 prof.add()
 
+prodrums = FileSynthDef("prodrums")
+prodrums.add()
+
 pbass = FileSynthDef("pbass")
 pbass.add()
 
@@ -289,6 +292,9 @@ tb303.add()
 
 tb304 = FileSynthDef("tb304")
 tb304.add()
+
+tb305 = FileSynthDef("tb305")
+tb305.add()
 
 varicelle = FileSynthDef("varicelle")
 varicelle.add()

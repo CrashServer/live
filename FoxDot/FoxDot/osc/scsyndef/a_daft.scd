@@ -1,6 +1,5 @@
 SynthDef.new(\a_daft,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
-	  cutoff=300, resonance=0.8, punch=1.2|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, cutoff=300, resonance=0.8, punch=1.2|
 		var osc, env, filtered;
 		freq = In.kr(bus, 1);
 

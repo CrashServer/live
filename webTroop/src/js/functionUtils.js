@@ -567,7 +567,7 @@ export const functionUtils = {
         // Get loop List
         const loopList = message.autocomplete.loopList
         const formattedLoops = loopList.map(loop => {
-            const match = loop.match(/\d+/);
+            const match = loop.match(/\d+$/);
             let dur= "";
             if  (loop.startsWith("AKWF")) {
                 dur = ``; 

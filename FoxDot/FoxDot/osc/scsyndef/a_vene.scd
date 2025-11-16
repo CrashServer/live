@@ -1,6 +1,5 @@
 SynthDef.new(\a_vene,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
-	  distortion=10, cutoff=500, bitcrush=6, sub=0.4|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, distortion=10, cutoff=500, bitcrush=6, sub=0.4|
 		var osc, env, crushed, filtered;
 		freq = In.kr(bus, 1);
 

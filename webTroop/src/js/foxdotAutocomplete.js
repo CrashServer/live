@@ -665,10 +665,10 @@ export const foxdotAutocomplete = {
     },
 
     // create back button for categories
-    createBackButton: function() {
+    createBackButton: function(categoryKey) {
         return {
             text: "",
-            displayText: "← Retour aux catégories",
+            displayText: `← ${categoryKey}`,
             className: "autocomplete-back-button",
             render: function(element, self, data) {
                 element.className += " autocomplete-back-button";
@@ -731,13 +731,41 @@ export const foxdotAutocomplete = {
             return null;
         }
 
-        const formattedItems = categoryItems.map(attack => ({
-            text: attack.text,
-            displayText: attack.displayText.charAt(0).toUpperCase() + attack.displayText.slice(1),
-        }));
+        const formattedItems = categoryItems.map(attack => {
+            // Extraire le BPM (2 ou 3 chiffres après un espace)
+            const bpmMatch = attack.displayText.match(/\s(\d{2,3})$/);
+            const bpm = bpmMatch ? bpmMatch[1] : null;
+            
+            // Nettoyer le displayText en enlevant le BPM
+            let cleanName = bpm ? attack.displayText.replace(/\s\d{2,3}$/, '').trim() : attack.displayText;
+            cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+            
+            return {
+                text: attack.text,
+                displayText: cleanName,
+                bpm: bpm,
+                render: function(element, self, data) {
+                    element.innerHTML = '';
+                    
+                    // Créer le nom de l'attack
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'attack-name';
+                    nameSpan.textContent = data.displayText;
+                    element.appendChild(nameSpan);
+                    
+                    // Ajouter le tag BPM si présent
+                    if (data.bpm) {
+                        const bpmTag = document.createElement('span');
+                        bpmTag.className = 'attack-bpm-tag';
+                        bpmTag.textContent = data.bpm;
+                        element.appendChild(bpmTag);
+                    }
+                }
+            };
+        });
         
         const items = [
-            this.createBackButton(),
+            this.createBackButton(categoryKey),
             ...formattedItems
         ];
 

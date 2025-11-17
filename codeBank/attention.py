@@ -1,4 +1,4 @@
-# attention 112->132
+# attention 112
 # Reisub
 
 Root.default = linvar([0, 4, 2, PRand(2)], [PRand([4, 8, 12, 16])])
@@ -12,8 +12,7 @@ p4 >> play("p ", sample=2, dur=1/2, lpf=17000, lpr=0.1, amp=sinvar([0,0.3],37), 
 p5 >> play("p ", sample=1, dur=PDur([3, P*[5,7]], 8), lpf=8000, lpr=0.3, amp=sinvar([0,0.4],13), leg=8, pan=PWhite(0.5,-1), hpf=400)
 p6 >> play("q ", sample=1, dur=PDur([3, P*[6,7]], 8), amp=0.4, spf=8800, spfend=340, spfslide=2, chop=1/2, leg=PWhite(150), hpf=240, pshift=0, pan=PWhite(-0.4,0.7))
 p7 >> play("q ", sample=2, dur=PDur([[1, 6],8], 8), amp=0.5, leg=25, hpf=400, pan=PWhite(-1,1))
-d1 >> play("<X(..{XxK.})X(..X)(X.)>", sample=2, lpf=linvar([500,1500],[32,7]), lpr=PWhite(0.3,1), amp=0.3).every(PRand(1,9)
-, "stutter", PRand([6,8,12,16]), rate=PWhite(1,1.125), pan=[-1,1], bpf=1500, drive=0.2)
+d1 >> play("<X(..{XxK.})X(..X)(X.)>", sample=2, lpf=linvar([500,1500],[32,7]), lpr=PWhite(0.3,1), amp=0.3).every(PRand(1,9), "stutter", PRand([6,8,12,16]), rate=PWhite(1,1.125), pan=[-1,1], bpf=1500, drive=0.2)
 r3 >> dbass(linvar([0,0.6],[64,0]), root=0, mid=2, dur=PDur(8,14), amplify=0.8*(d1.degree!="X"), leg=PRand(4), a=0, sus=0.4, oct=4, lpf=13000, hpf=60).unison(3)
 d1 >> play("<X(.....{X[XX]xv})><..O.><|x4|.>", amp=0.2, lpf=8000)
 d2 >> play("<[-{---[--]|:4|}]><.:>", sample=7, amp=0.5, lpf=0 ,pan=PWhite(-0.5,0.5), rate=PWhite(0.99,1.01)).human(80,3,4).sometimes("stutter", PRand(4))

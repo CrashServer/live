@@ -521,7 +521,6 @@ export const foxdotAutocomplete = {
         }
         else if (lostPattern.test(beforeCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
-            let filteredLost = this.attackList.filter(lost => lost.displayText.toLowerCase().includes(prefix.toLowerCase()));
             const match = line.match(/(lost|attack)\(([^)]*)\)$/);
             
             if (!match) return null;
@@ -547,20 +546,27 @@ export const foxdotAutocomplete = {
                 const closingParen = line.indexOf(')', functionStart);
                 end = closingParen !== -1 ? closingParen : cursorPosition;
             }
+
+            let filteredLost = [];
             
-            // const start = match.index + match[0].indexOf('(') + 1;
-            // const endMatch = line.match(/\)/);
-            // const end = endMatch ? endMatch.index : cursorPosition;
-
-            filteredLost = filteredLost.length > 0 ? filteredLost.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.attackList.sort((a, b) => a.displayText.localeCompare(b.displayText));
-
-            // Add category separator
-            if (prefix.length === 0){
-            Object.keys(this.categories).forEach(categoryKey => {
-                if (categoryKey && categoryKey.trim() !== ""){
-                    filteredLost.unshift(this.createCategorySeparator(categoryKey, categoryKey));
-                }
-            })};
+            // If there's a prefix, filter attacks
+            if (prefix.length > 0) {
+                filteredLost = this.attackList.filter(lost => lost.displayText.toLowerCase().includes(prefix.toLowerCase()));
+                filteredLost.sort((a, b) => a.displayText.localeCompare(b.displayText));
+            } else {
+                // No prefix: show categories only
+                // Add "All" category first
+                filteredLost.push(this.createCategorySeparator("All", "All"));
+                
+                // Add other categories sorted alphabetically
+                const sortedCategories = Object.keys(this.categories)
+                    .filter(key => key && key.trim() !== "")
+                    .sort((a, b) => a.localeCompare(b));
+                
+                sortedCategories.forEach(categoryKey => {
+                    filteredLost.push(this.createCategorySeparator(categoryKey, categoryKey));
+                });
+            }
 
             return {
               list: filteredLost,
@@ -726,7 +732,15 @@ export const foxdotAutocomplete = {
 
     // show elements of a category
     showCategoryItems: function(cm, categoryKey) {
-        const categoryItems = this.categories[categoryKey];
+        let categoryItems;
+        
+        // Special case for "All" category - show all attacks
+        if (categoryKey === "All") {
+            categoryItems = [...this.attackList].sort((a, b) => a.displayText.localeCompare(b.displayText));
+        } else {
+            categoryItems = this.categories[categoryKey];
+        }
+        
         if (!categoryItems || categoryItems.length === 0) {
             return null;
         }

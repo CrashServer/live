@@ -1,0 +1,91 @@
+/* MIDI Mapping Widgets */
+.midi-widget {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #00ff88 0deg,
+    #00ff88 calc(var(--midi-value, 0) * 360deg),
+    rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg),
+    rgba(255, 255, 255, 0.2) 360deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 
+              inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  pointer-events: none;
+  animation: midi-widget-appear 0.2s ease-out;
+}
+
+@keyframes midi-widget-appear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.midi-widget-inner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: #00ff88;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+/* Animation du widget quand la valeur change */
+.midi-widget.updating {
+  animation: midi-pulse 0.1s ease-out;
+}
+
+@keyframes midi-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Variantes de couleurs pour différents CC */
+.midi-widget[data-cc="1"] { --midi-color: #00ff88; }
+.midi-widget[data-cc="2"] { --midi-color: #ff0088; }
+.midi-widget[data-cc="3"] { --midi-color: #0088ff; }
+.midi-widget[data-cc="4"] { --midi-color: #ffaa00; }
+.midi-widget[data-cc="5"] { --midi-color: #ff00ff; }
+.midi-widget[data-cc="6"] { --midi-color: #00ffff; }
+.midi-widget[data-cc="7"] { --midi-color: #ff4400; }
+.midi-widget[data-cc="8"] { --midi-color: #88ff00; }
+.midi-widget[data-cc="9"] { --midi-color: #ff0044; }
+
+.midi-widget[data-cc="1"] { background: conic-gradient(#00ff88 0deg, #00ff88 calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+.midi-widget[data-cc="2"] { background: conic-gradient(#ff0088 0deg, #ff0088 calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+.midi-widget[data-cc="3"] { background: conic-gradient(#0088ff 0deg, #0088ff calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+.midi-widget[data-cc="4"] { background: conic-gradient(#ffaa00 0deg, #ffaa00 calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+.midi-widget[data-cc="5"] { background: conic-gradient(#ff00ff 0deg, #ff00ff calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+.midi-widget[data-cc="6"] { background: conic-gradient(#00ffff 0deg, #00ffff calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+.midi-widget[data-cc="7"] { background: conic-gradient(#ff4400 0deg, #ff4400 calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+.midi-widget[data-cc="8"] { background: conic-gradient(#88ff00 0deg, #88ff00 calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+.midi-widget[data-cc="9"] { background: conic-gradient(#ff0044 0deg, #ff0044 calc(var(--midi-value, 0) * 360deg), rgba(255, 255, 255, 0.2) calc(var(--midi-value, 0) * 360deg)); }
+
+.midi-widget[data-cc="1"] .midi-widget-inner { color: #00ff88; }
+.midi-widget[data-cc="2"] .midi-widget-inner { color: #ff0088; }
+.midi-widget[data-cc="3"] .midi-widget-inner { color: #0088ff; }
+.midi-widget[data-cc="4"] .midi-widget-inner { color: #ffaa00; }
+.midi-widget[data-cc="5"] .midi-widget-inner { color: #ff00ff; }
+.midi-widget[data-cc="6"] .midi-widget-inner { color: #00ffff; }
+.midi-widget[data-cc="7"] .midi-widget-inner { color: #ff4400; }
+.midi-widget[data-cc="8"] .midi-widget-inner { color: #88ff00; }
+.midi-widget[data-cc="9"] .midi-widget-inner { color: #ff0044; }

@@ -30,6 +30,8 @@ import { functionUtils } from './functionUtils.js';
 import { markerUtils } from './markerUtils.js';
 import { foxdotAutocomplete } from './foxdotAutocomplete.js';
 import { showDefinition, removeAllTooltips, updateDefinitions } from './foxdotDefinitions.js';
+import { midiController } from './midiController.js';
+import { midiMapping } from './midiMapping.js';
 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
@@ -46,6 +48,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     throw new Error(`HTTP error! status: ${configRequest.status}`);
   }
   const config = await configRequest.json();
+  
+  // Initialisation du contrôleur MIDI
+  console.log('🎹 Initialisation du contrôleur MIDI...');
+  const midiInitialized = await midiController.init();
+  if (midiInitialized) {
+    console.log('✅ Contrôleur MIDI prêt');
+  } else {
+    console.warn('⚠️  Contrôleur MIDI non disponible');
+  }
   
   // Connexion aux serveurs
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
@@ -185,6 +196,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Binding YJS avec CodeMirror
   const binding = new CodemirrorBinding(ytext, editor, provider.awareness, {yUndoManager});
 
+  // Initialisation du mapping MIDI
+  if (midiInitialized) {
+    midiMapping.init(editor, midiController);
+    
+    // Callback pour auto-évaluer le code quand une valeur MIDI change
+    midiMapping.onChange((line) => {
+      // Positionner le curseur sur la ligne modifiée
+      const cursor = editor.getCursor();
+      editor.setCursor({ line: line, ch: cursor.ch });
+      
+      // Évaluer le code
+      evaluateCode(editor, false);
+    });
+  }
+
   // Configuration du panneau de configuration
   const configPanelControls = setupConfigPanel(awareness, editor, otherEditor);
   
@@ -306,10 +332,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Ctrl-Alt-S': () => {functionUtils.unSoloPlayers(wsServer)},
     'Alt-J': (cm) => {functionUtils.jumpToOtherPlayer(cm, awareness)},
     'Ctrl-Alt-J': (cm) => {functionUtils.previousJump(cm)},
-    'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "[[ Attention à un truc ]]", awareness, ymarkers, ychat),
-    'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
-    'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
-    'Alt-4': () => markerUtils.resetMarkers(ymarkers),
+    'Alt-1': () => midiMapping.toggleMapping(91),
+    'Alt-2': () => midiMapping.toggleMapping(93),
+    'Alt-3': () => midiMapping.toggleMapping(63),
+    'Alt-4': () => midiMapping.toggleMapping(5),
+    'Alt-5': () => midiMapping.toggleMapping(73),
+    'Alt-6': () => midiMapping.toggleMapping(75),
+    'Alt-7': () => midiMapping.toggleMapping(70),
+    'Alt-8': () => midiMapping.toggleMapping(72),
     'Alt-C': (cm) => {
       chatUtils.getChat(cm, "", (text, line) => {
         const userState = awareness.getLocalState();

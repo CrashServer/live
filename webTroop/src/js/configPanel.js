@@ -18,6 +18,13 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const otherEditorWrapper = document.getElementById('other-editor-wrapper');
     const editorResizeHandle = document.getElementById('editor-resize-handle');
     const mainEditorWrapper = document.getElementById('main-editor-wrapper');
+    const spectatorModeToggle = document.getElementById('spectatorModeToggle');
+
+    // Variables pour le mode spectateur
+    let spectatorMode = false;
+    let spectatorInterval = null;
+    let currentFocusedPlayer = null;
+    let lastPlayerActivity = {};
 
     // Restaurer les données utilisateur
     const savedUser = localStorage.getItem('webtroop-user');
@@ -28,14 +35,16 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         updateUserInfo(); // Met à jour awareness
     }
 
-    function updateUserInfo() {
+    function updateUserInfo(forceSpectator = false) {
         const userInfo = {
-            name: userNameInput.value || 'Anonyme',
+            name: forceSpectator ? 'Spectator' : (userNameInput.value || 'Anonyme'),
             color: userColorInput.value
         };
         
-        // Sauvegarder dans localStorage
-        localStorage.setItem('webtroop-user', JSON.stringify(userInfo));
+        // Sauvegarder dans localStorage (sauf si mode spectateur)
+        if (!forceSpectator) {
+            localStorage.setItem('webtroop-user', JSON.stringify(userInfo));
+        }
         
         // Mettre à jour awareness
         awareness.setLocalStateField('user', userInfo);
@@ -244,6 +253,108 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         }
     });
 
+    // Gestion du mode spectateur
+    function toggleSpectatorMode(enabled) {
+        spectatorMode = enabled;
+        
+        if (enabled) {
+            console.log('Mode spectateur activé');
+            // Forcer le nom à "Spectator"
+            updateUserInfo(true);
+            // Désactiver le champ de saisie du nom
+            userNameInput.disabled = true;
+        } else {
+            console.log('Mode spectateur désactivé');
+            currentFocusedPlayer = null;
+            lastPlayerActivity = {};
+            // Réactiver le champ et restaurer le nom original
+            userNameInput.disabled = false;
+            updateUserInfo(false);
+        }
+        
+        // Sauvegarder la préférence
+        localStorage.setItem('spectatorMode', enabled.toString());
+    }
+
+    // Écouter les changements d'awareness pour suivre les joueurs en temps réel
+    awareness.on('change', () => {
+        const states = awareness.getStates();
+        const localUserName = awareness.getLocalState()?.user?.name;
+        const players = [];
+        
+        // Collecter tous les joueurs actifs (excluant Spectator)
+        states.forEach((state) => {
+            if (state.otherInstantCode && state.user?.name && 
+                state.user.name !== 'Spectator' && state.user.name !== localUserName) {
+                players.push({
+                    name: state.user.name,
+                    line: state.otherInstantCode.line,
+                    position: state.otherInstantCode.position,
+                    color: state.user.color
+                });
+            }
+        });
+        
+        if (spectatorMode) {
+            // MODE SPECTATEUR: haut = joueur 1, bas = joueur 2
+            if (players.length > 0) {
+                const player1 = players[0];
+                
+                if (currentFocusedPlayer !== player1.name) {
+                    currentFocusedPlayer = player1.name;
+                    console.log(`Éditeur principal (spectateur): ${player1.name}`);
+                }
+                
+                // Scroller vers le joueur 1 dans l'éditeur principal
+                if (player1.line >= 0 && player1.line < editor.lineCount()) {
+                    editor.scrollIntoView(
+                        {line: player1.line - 1, ch: player1.position}, 
+                        50
+                    );
+                }
+            }
+            
+            // Si split screen activé et qu'il y a un deuxième joueur
+            if (players.length > 1 && splitScreenToggle.checked) {
+                const player2 = players[1];
+                console.log(`Éditeur secondaire (spectateur): ${player2.name}`);
+                
+                // Scroller vers le joueur 2 dans l'éditeur du bas
+                if (player2.line >= 0 && player2.line < otherEditor.lineCount()) {
+                    otherEditor.scrollIntoView(
+                        {line: player2.line - 1, ch: player2.position}, 
+                        50
+                    );
+                }
+            }
+        } else {
+            // MODE NORMAL: haut = joueur local, bas = autre joueur (pas Spectator)
+            // L'éditeur du bas suit le premier autre joueur trouvé
+            if (players.length > 0 && splitScreenToggle.checked) {
+                const otherPlayer = players[0];
+                
+                // Scroller vers l'autre joueur dans l'éditeur du bas
+                if (otherPlayer.line >= 0 && otherPlayer.line < otherEditor.lineCount()) {
+                    otherEditor.scrollIntoView(
+                        {line: otherPlayer.line - 1, ch: otherPlayer.position}, 
+                        50
+                    );
+                }
+            }
+        }
+    });
+
+    // Restaurer l'état du mode spectateur
+    const savedSpectatorMode = localStorage.getItem('spectatorMode');
+    const spectatorModeEnabled = savedSpectatorMode === 'true';
+    spectatorModeToggle.checked = spectatorModeEnabled;
+    toggleSpectatorMode(spectatorModeEnabled);
+
+    // Event listener pour le toggle spectateur
+    spectatorModeToggle.addEventListener('change', (e) => {
+        toggleSpectatorMode(e.target.checked);
+    });
+
     return {
         updateUserInfo() {
             const userInfo = {
@@ -254,6 +365,9 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         }, 
         isSplitScreenEnabled() {
             return splitScreenToggle.checked;
+        },
+        isSpectatorMode() {
+            return spectatorMode;
         },
     };
 }

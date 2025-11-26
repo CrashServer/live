@@ -103,6 +103,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
     
+    // Ne pas traiter si on est en mode spectateur ou si c'est un spectateur
+    if (configPanelControls.isSpectatorMode() || userName === 'Spectator') {
+      return;
+    }
+    
     // Supprimer l'ancien marqueur de curseur
     if (otherUserCursorMark) {
       otherUserCursorMark.clear();

@@ -24,7 +24,7 @@ import 'codemirror/addon/search/matchesonscrollbar.js'
 import 'codemirror/addon/fold/foldcode.js'
 import 'codemirror/addon/fold/foldgutter.js'
 
-import { chatUtils } from './chatUtils.js';
+// import { chatUtils } from './chatUtils.js';
 import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
 import { markerUtils } from './markerUtils.js';
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     awareness: awareness,
   });
   const ytext = ydoc.getText('webtroop');
-  const ychat = ydoc.getArray('chat');
+  // const ychat = ydoc.getArray('chat');
   const ymarkers = ydoc.getArray('markers');
 
   // Configuration de CodeMirror
@@ -263,16 +263,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   
   // Écouter les changements dans le Y.Array des messages de chat
-  ychat.observe(event => {
-    event.changes.added.forEach(item => {
-      const message = item.content.getContent()[0];
-      chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor, message.line);
-    });
-    // Supprimer les anciens messages pour ne garder que les 20 plus récents
-    if (ychat.length > 15) {
-      ychat.delete(0, ychat.length - 15);
-    }
-  });
+  // ychat.observe(event => {
+  //   event.changes.added.forEach(item => {
+  //     const message = item.content.getContent()[0];
+  //     chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor, message.line);
+  //   });
+  //   // Supprimer les anciens messages pour ne garder que les 20 plus récents
+  //   if (ychat.length > 15) {
+  //     ychat.delete(0, ychat.length - 15);
+  //   }
+  // });
 
   // Écouter les changements dans le Y.Array des marqueurs
   ymarkers.observe(event => {
@@ -310,14 +310,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
     'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
     'Alt-4': () => markerUtils.resetMarkers(ymarkers),
-    'Alt-C': (cm) => {
-      chatUtils.getChat(cm, "", (text, line) => {
-        const userState = awareness.getLocalState();
-        const userName = userState?.user?.name || 'Anonymous';
-        const userColor = userState?.user?.color || '#000000';
-        ychat.push([{ text, userName, userColor, line }]); // Ajouter le message au Y.Array
-      });
-    }, 
+    // 'Alt-C': (cm) => {
+    //   chatUtils.getChat(cm, "", (text, line) => {
+    //     const userState = awareness.getLocalState();
+    //     const userName = userState?.user?.name || 'Anonymous';
+    //     const userColor = userState?.user?.color || '#000000';
+    //     ychat.push([{ text, userName, userColor, line }]); // Ajouter le message au Y.Array
+    //   });
+    // }, 
     'Ctrl-Enter': (cm) => {evaluateCode(cm, false)},
     'Ctrl-Alt-Enter': (cm) => {evaluateCode(cm, true)},
     'Alt-I': (cm) => showDefinition(cm),

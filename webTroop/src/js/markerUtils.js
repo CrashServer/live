@@ -27,7 +27,7 @@ export const markerUtils = {
         default:
           break;
       }
-      ychat.push([{ text: txt, userName: userName, userColor: color, line: line+1 }]); // Ajouter le message
+      // ychat.push([{ text: txt, userName: userName, userColor: color, line: line+1 }]); // Ajouter le message
     }
   },
 

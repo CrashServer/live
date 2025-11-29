@@ -129,7 +129,7 @@ if __name__ != "__main__":
     ###########################
     try:
         @player_method
-        def unison(self, unison=2, detune=0.125, analog=0):
+        def unison(self, unison=2, detune=0.125, analog=0, wide=1):
             """ Like spread(), but can specify number of voices(unison)
             Sets pan to (-1,-0.5,..,0.5,1) and pshift to (-0.125,-0.0625,...,0.0625,0.125)
             If unison is odd, an unchanged voice is added in the center
@@ -138,7 +138,7 @@ if __name__ != "__main__":
                     p1.unison(5,(0.3,2)) => pshift=(-2.0,-0.3,0,0.3,2.0), pan=(-1,-0.5,0,0.5,1)
             """
             if unison > 1:
-                pan = []
+                pan = Pattern()
                 pshift = []
                 uni = int(unison if unison % 2 == 0 else unison-1)
                 for i in range(1, int(uni/2)+1):
@@ -158,7 +158,7 @@ if __name__ != "__main__":
                 if unison % 2 != 0 and unison > 1:
                     pan.insert(int(len(pan)/2), 0)
                     pshift.insert(int(len(pan)/2), 0)
-                self.pan = tuple(pan)
+                self.pan = pan.asGroup()*wide
                 self.pshift = tuple(pshift)
             else:
                 self.pan = 0

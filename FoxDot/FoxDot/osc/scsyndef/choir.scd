@@ -1,5 +1,5 @@
 SynthDef.new(\choir,
-{|bus=0, amp=1, atk=0.001, decay=0.01, sus=1, rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, rate=1, blur=1, bendc=0.0, vow=0.0|
+{|bus=0, amp=1, atk=2, decay=0.01, sus=1, rel=0.5, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, rate=1, blur=1, bendc=0.0, vow=0.0|
 var vibs, mods, gens, formantsFemale, formantsMale, vowelsFemale, vowelsMale, vowelMix, panPositions, out, env, noise;
 
     sus = sus * blur;
@@ -80,7 +80,9 @@ var vibs, mods, gens, formantsFemale, formantsMale, vowelsFemale, vowelsMale, vo
     }));
 
 	// Enveloppe
-    env = EnvGen.ar(Env.asr(2, 1, 0.005), gate, doneAction: 2);
+		// env = EnvGen.ar(Env.asr(2, 1, 0.005), gate, doneAction: 2);
+	env = EnvGen.ar(Env([0, 0.8, 0.5, 0],[atk, 0.5 * sus, rel * sus]));
+
 
     ReplaceOut.ar(bus, out * amp * 0.5 * env);
 }).add;

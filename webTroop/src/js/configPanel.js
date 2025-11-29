@@ -299,6 +299,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             // MODE SPECTATEUR: haut = joueur 1, bas = joueur 2
             if (players.length > 0) {
                 const player1 = players[0];
+                console.log(player1);
                 
                 if (currentFocusedPlayer !== player1.name) {
                     currentFocusedPlayer = player1.name;

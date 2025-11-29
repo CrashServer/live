@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
       }
       // Gestion de l'affichage du code en temps réel des autres utilisateurs
-      if (state.otherInstantCode && state.user?.name !== awareness.getLocalState().user?.name) {
+      if (state.otherInstantCode && state.user?.name !== awareness.getLocalState().user?.name && state.user?.name !== "Spectator") {
         const { user, code, position, line } = state.otherInstantCode;
         const userColor = state.user?.color || '#fff';
         

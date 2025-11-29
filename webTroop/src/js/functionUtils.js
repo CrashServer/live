@@ -156,13 +156,41 @@ export const functionUtils = {
         );
 
         if (blockCode.trim()) {
-            // Verifier s'il faut stopper un player
+            // Verifier s'il faut stopper un player et convertir les syntaxes ! et ?
             let blockCodeArray = blockCode.split('\n');
+            let hasChanged = false;
+            
             blockCodeArray.forEach((code, index) => {
-            const convertToVar = this.convertExclamationToVar(code);
-            blockCodeArray[index] = functionUtils.ifPlayerStop(convertToVar);
+                let convertedCode = code;
+                
+                // Convertir ?nombre en PRand(0, nombre)
+                const convertedQuestion = this.convertQuestionMarkToPRand(convertedCode);
+                if (convertedQuestion !== convertedCode) {
+                    hasChanged = true;
+                    convertedCode = convertedQuestion;
+                }
+                
+                // Convertir expression!nombre en var(expression, nombre)
+                const convertToVar = this.convertExclamationToVar(convertedCode);
+                if (convertToVar !== convertedCode) {
+                    hasChanged = true;
+                    convertedCode = convertToVar;
+                }
+                
+                blockCodeArray[index] = functionUtils.ifPlayerStop(convertedCode);
             });
+            
             const blockCodeJoin = blockCodeArray.join('\n');
+            
+            // Remplacer dans l'éditeur si le code a changé
+            if (hasChanged) {
+                cm.replaceRange(
+                    blockCodeJoin,
+                    {line: startLine, ch: 0},
+                    {line: endLine, ch: cm.getLine(endLine).length}
+                );
+            }
+            
             return [blockCodeJoin, startLine, endLine];
         }
         return [blockCode, startLine, endLine];
@@ -651,6 +679,19 @@ export const functionUtils = {
         }
         
         return result;
+    },
+
+    // Convertir la syntaxe ?<number> en PRand(0, <number>) ou PWhite(0, <number>)
+    convertQuestionMarkToPRand(code) {
+        // Remplacer ?nombre par PRand(0, nombre) pour int ou PWhite(0, nombre) pour float
+        return code.replace(/\?([\d.]+)/g, (match, num) => {
+            // Vérifier si c'est un float (contient un point)
+            if (num.includes('.')) {
+                return `PWhite(0.0, ${num})`;
+            } else {
+                return `PRand(0, ${num})`;
+            }
+        });
     },
 
     

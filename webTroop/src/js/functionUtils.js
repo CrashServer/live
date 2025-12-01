@@ -682,14 +682,16 @@ export const functionUtils = {
     },
 
     // Convertir la syntaxe ?<number> en PRand(0, <number>) ou PWhite(0, <number>)
+    // Ou nombre1?nombre2 en PRand(nombre1, nombre2) ou PWhite(nombre1, nombre2)
     convertQuestionMarkToPRand(code) {
-        // Remplacer ?nombre par PRand(0, nombre) pour int ou PWhite(0, nombre) pour float
-        return code.replace(/\?([\d.]+)/g, (match, num) => {
-            // Vérifier si c'est un float (contient un point)
-            if (num.includes('.')) {
-                return `PWhite(0.0, ${num})`;
+        // Remplacer nombre1?nombre2 ou ?nombre par PRand/PWhite selon si c'est int ou float
+        return code.replace(/([\d.]+)?\?([\d.]+)/g, (match, num1, num2) => {
+            const firstNum = num1 || '0';
+            // Vérifier si c'est un float (l'un des deux nombres contient un point)
+            if (firstNum.includes('.') || num2.includes('.')) {
+                return `PWhite(${firstNum}, ${num2})`;
             } else {
-                return `PRand(0, ${num})`;
+                return `PRand(${firstNum}, ${num2})`;
             }
         });
     },

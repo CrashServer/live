@@ -1,4 +1,3 @@
-// Nouveau fichier: configPanel.js
 export function setupConfigPanel(awareness, editor, otherEditor) {
     const configButton = document.getElementById('configButton');
     const configPanel = document.getElementById('configPanel');
@@ -15,7 +14,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const buttonValidatePlayerName = document.getElementById('validatePlayerName');
     const themeInterfaceSelector = document.getElementById('themeInterfaceSelector');
 
-    const splitScreenToggle = document.getElementById('splitScreenToggle');
+    const splitScreenToggle = document.getElementById('splitScreenToggle');    
     const otherEditorWrapper = document.getElementById('other-editor-wrapper');
     const editorResizeHandle = document.getElementById('editor-resize-handle');
     const mainEditorWrapper = document.getElementById('main-editor-wrapper');

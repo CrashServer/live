@@ -422,15 +422,16 @@ export const foxdotAutocomplete = {
         { text: 'attackTest', displayText: 'attackTest' },
     ],
     sceneNames: [
-        { text: 'init', displayText: 'init' },
-        { text: 'screensaver', displayText: 'screensaver' },
-        { text: 'home', displayText: 'home' },
         { text: 'boot', displayText: 'boot' },
-        { text: 'scan', displayText: 'scan' },
-        { text: 'warp', displayText: 'warp' },
-        { text: 'scene', displayText: 'scene' },
-        { text: 'shutdown', displayText: 'shutdown' },
-        { text: 'target', displayText: 'target' },
+        { text: 'startup', displayText: 'startup' },
+        { text: 'clift', displayText: 'clift' },
+        { text: 'stock', displayText: 'stock' },
+        { text: 'audio', displayText: 'audio' },
+        { text: 'video', displayText: 'video' },
+        { text: 'war', displayText: 'war' },
+        //{ text: 'game', displayText: 'game' },
+        { text: 'server', displayText: 'server' },
+        { text: 'end', displayText: 'end' },
     ],
     serverFunction: [
         
@@ -522,16 +523,16 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, end),
             }
         }
-        // else if (scenePattern.test(beforeCursor)) {
-        //     const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
-        //     const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
-        //     const end = line.match(/\s./)
-        //     return {
-        //         list: filteredScenes.length > 0 ? filteredScenes.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.sceneNames.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-        //         from: CodeMirror.Pos(cursor.line, token.start +1),
-        //         to: CodeMirror.Pos(cursor.line, cursorPosition),
-        //     };
-        // }
+        else if (scenePattern.test(beforeCursor)) {
+            const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
+            const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
+            const end = line.match(/\s./)
+            return {
+                list: filteredScenes.length > 0 ? filteredScenes : this.sceneNames,
+                from: CodeMirror.Pos(cursor.line, token.start +1),
+                to: CodeMirror.Pos(cursor.line, cursorPosition),
+            };
+        }
         else if (beforeCursor.includes('Scale.default=')) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
             const filteredScales = this.scales.filter(scale => scale.displayText.startsWith(prefix));

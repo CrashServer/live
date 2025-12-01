@@ -17,8 +17,8 @@ const showTodo = config.showTodo ?? false;
 let isResizing = false;
 let startX;
 let startWidth;
-// let sceneName = "";
-// let sceneIntervalId = null;
+let sceneName = "";
+let sceneIntervalId = null;
 let tapTimes = [];
 let calculatedBPM = 0;
 let tapTimeout = null;
@@ -56,9 +56,14 @@ crashPanelToggle.addEventListener('change', () => {
 })
 
 const ws = new WebSocket(`ws://${config.HOST_IP}:20000`);
+const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
 
 ws.onopen = function() {
     console.log('CrashPanel WebSocket connection opened');
+};
+
+wsServer.onopen = function() {
+    console.log('CrashPanel connection to main server opened');
 };
 
 ws.onmessage = function(event) {
@@ -75,6 +80,13 @@ ws.onmessage = function(event) {
             break;
         case 'cpu':
             updateCpu(data.cpu);
+            // Transmettre les données CPU au serveur principal pour l'Arduino
+            if (wsServer.readyState === WebSocket.OPEN) {
+                wsServer.send(JSON.stringify({
+                    type: 'cpu_data',
+                    cpu: data.cpu
+                }));
+            }
             break;
         case 'bpm':
             document.getElementById('bpm').textContent = data.bpm;
@@ -111,9 +123,9 @@ ws.onmessage = function(event) {
             helpContainer.textContent = data.help;
             helpContainer.style.height = helpContainer.scrollHeight + 'px';
             break;
-        // case 'nameScene':
-        //     formatSceneName(data.nameScene);
-        //     break;
+        case 'sceneName':
+            formatSceneName(data.sceneName);
+            break;
         // case 'gameData':
         //     createGameTable(data.gameData);
         //     break;
@@ -305,24 +317,24 @@ function checkAllTodos() {
 
 
 
-// function formatSceneName(nameScene) {
-//     if (nameScene !== sceneName) {
-//         sceneName = nameScene;
-//         document.getElementById('sceneName').textContent = nameScene;
-//         if (sceneIntervalId !== null) {
-//             clearInterval(sceneIntervalId);
-//         }
+function formatSceneName(nameScene) {
+    if (nameScene !== sceneName) {
+        sceneName = nameScene;
+        document.getElementById('sceneName').textContent = nameScene;
+        if (sceneIntervalId !== null) {
+            clearInterval(sceneIntervalId);
+        }
 
-//         let startTime = Date.now();
-//         sceneIntervalId = setInterval(() => {
-//             const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-//             const color = getDurationColor(elapsedTime/60);
-//             const sceneTimeDiv = document.getElementById('sceneTime');
-//             sceneTimeDiv.style.color = color;
-//             sceneTimeDiv.textContent = formatTime(elapsedTime);
-//         }, 1000);
-//     }
-// }
+        let startTime = Date.now();
+        sceneIntervalId = setInterval(() => {
+            const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+            const color = getDurationColor(elapsedTime/60);
+            const sceneTimeDiv = document.getElementById('sceneTime');
+            sceneTimeDiv.style.color = color;
+            sceneTimeDiv.textContent = formatTime(elapsedTime);
+        }, 1000);
+    }
+}
 
 // Create a table to represent the game data  
 // function createGameTable(gameData){

@@ -1,4 +1,4 @@
-SynthDef.new(\fantom,
+SynthDef.new(\a_fantom,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,
 		cutoff=800, drive=8, crush=4|
 		var osc, env, filter, crushed;

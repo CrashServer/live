@@ -119,6 +119,17 @@ export const functionUtils = {
         return false
     },
 
+    isServerFxCode(cm) {
+        const cursor = cm.getCursor();
+        const line = cursor.line;
+        const code = cm.getLine(cursor.line).trim();
+        const serverFxPattern = /^# Server\.addFx/;
+        if (serverFxPattern.test(code)) {
+            return [code, line];
+        }
+        return false
+    },
+
     getPlayer(code) {
         const playerPattern = /^[a-zA-Z][a-zA-Z0-9]/;
         const match = code.trim().match(playerPattern);
@@ -274,6 +285,10 @@ export const functionUtils = {
             
             if (parseInt(result) > 22000) {
                 result = "22000";
+            }
+
+            if (value == -10 && parseInt(result) < 0) {
+                result = "0";
             }
 
             // Remplacer l'ancien nombre par le nouveau

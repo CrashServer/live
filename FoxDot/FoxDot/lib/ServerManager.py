@@ -797,6 +797,201 @@ class SCLangServerManager(ServerManager):
         self.forward = OSCClientWrapper()
         self.forward.connect( (addr, port) )
 
+    def initGlobalFx(self):
+        """ Initialize the global effects system with a dedicated group and bus """
+        if not self.global_fx_initialized:
+            # Create global effects group AFTER group 1 (more stable positioning)
+            self.global_fx_group = self.nextnodeID()
+            msg = OSCMessage("/g_new")
+            # Insert after group 1 using addAfter action
+            msg.append([self.global_fx_group, 3, 1])  # addAfter group 1
+            self.client.send(msg)
+            
+            # Allocate a dedicated bus for global effects
+            self.global_fx_bus = self.nextbusID()
+            
+            self.global_fx_initialized = True
+        
+        return self.global_fx_group, self.global_fx_bus
+
+    def _get_effect_for_param(self, param_name):
+        """ Determine which effect a parameter belongs to by checking all effects in fxlist """
+        bannedArgs = ["beat_dur", "sus"]
+        
+        # First check if it's a main effect parameter
+        if param_name in self.fxlist:
+            return param_name
+        
+        # Then check if this parameter is in the args of any effect
+        for effect_name, effect_obj in self.fxlist.items():
+            if hasattr(effect_obj, 'args') and param_name in effect_obj.args and param_name not in bannedArgs:
+                return effect_name
+        
+        # Parameter not found in any effect
+        return None
+
+    def addFx(self, **kwargs):
+        """ Add global effects that apply to all sounds 
+        Usage: Server.addFx(room=0.5, verb=0.3, lpf=400, lpr=0.2, etc.)
+        Can set multiple parameters for the same effect in one call.
+        """
+        if not self.global_fx_initialized:
+            self.initGlobalFx()
+        
+        bannedFx = ["crush", "bits", "leg"]
+
+        # Group parameters by effect
+        effects_to_update = {}
+        effects_to_create = {}
+        effects_to_remove = []
+        
+        # First pass: identify effects to remove
+        for param_name, param_value in kwargs.items():
+            # Skip banned effects
+            if param_name not in bannedFx:
+                effect_name = self._get_effect_for_param(param_name)
+                if effect_name and param_value == 0 and param_name == effect_name:
+                    # Main parameter set to 0 means remove the effect
+                    effects_to_remove.append(effect_name)
+        
+        # Second pass: group remaining parameters by effect
+        for param_name, param_value in kwargs.items():
+            # Skip banned effects
+            if param_name not in bannedFx:
+                # Find which effect this parameter belongs to
+                effect_name = self._get_effect_for_param(param_name)
+                
+                if effect_name:
+                    # Skip if this effect is being removed
+                    if effect_name in effects_to_remove:
+                        continue
+                        
+                    if param_value != 0 or param_name != effect_name:
+                        # Either non-zero value or secondary parameter
+                        if effect_name in self.global_fx_nodes:
+                            # Effect exists, add to update list
+                            if effect_name not in effects_to_update:
+                                effects_to_update[effect_name] = {}
+                            effects_to_update[effect_name][param_name] = param_value
+                        else:
+                            # Effect doesn't exist, add to create list
+                            if effect_name not in effects_to_create:
+                                effects_to_create[effect_name] = {}
+                            effects_to_create[effect_name][param_name] = param_value
+        
+        # Remove effects
+        for effect_name in effects_to_remove:
+            self.removeFx(effect_name)
+        
+        # Update existing effects
+        for effect_name, params in effects_to_update.items():
+            node_id = self.global_fx_nodes[effect_name]
+            # Build parameter list for /n_set
+            param_list = []
+            for param_name, param_value in params.items():
+                param_list.extend([param_name, float(param_value)])
+            
+            if param_list:
+                msg = OSCMessage("/n_set")
+                msg.append([node_id] + param_list)
+                self.client.send(msg)
+        
+        # Create new effects
+        for effect_name, params in effects_to_create.items():
+            # If main parameter is provided, use it; otherwise use default value
+            main_value = params.get(effect_name, 1.0)
+            self._createGlobalFxNode(effect_name, main_value, additional_params=params)
+        
+        return self
+
+    def _createGlobalFxNode(self, fx_name, fx_value, additional_params=None):
+        """ Create a new global effect node with optional additional parameters """
+        # Prepare effect parameters
+        effect = self.fxlist[fx_name]
+        effect_params = []
+        
+        # Track which parameters we've set
+        params_set = set()
+        
+        # Add the main parameter
+        effect_params.extend([fx_name, float(fx_value)])
+        params_set.add(fx_name)
+        
+        # Add additional parameters if provided
+        if additional_params:
+            for param_name, param_value in additional_params.items():
+                if param_name != fx_name and param_name in effect.args:
+                    effect_params.extend([param_name, float(param_value)])
+                    params_set.add(param_name)
+        
+        # Add default values for remaining parameters
+        for param in effect.args:
+            if param not in params_set:
+                effect_params.extend([param, float(effect.defaults[param])])
+        
+        # Create the effect node in the global effects group
+        node_id = self.nextnodeID()
+        msg = OSCMessage("/s_new")
+        # Add effect to the global effects group (addToTail so effects are processed in order)
+        # Use bus 0 (main output) directly since we're in the proper position before stageLimiter
+        osc_packet = [self.fx_names[fx_name], node_id, 1, self.global_fx_group, 'bus', 0] + effect_params
+        msg.append(osc_packet)
+        self.client.send(msg)
+        
+        # Store the node ID for future updates
+        self.global_fx_nodes[fx_name] = node_id
+        
+        return node_id
+
+    def removeFx(self, fx_name):
+        """ Remove a global effect """
+        if fx_name in self.global_fx_nodes:
+            node_id = self.global_fx_nodes[fx_name]
+            msg = OSCMessage("/n_free")
+            msg.append(node_id)
+            self.client.send(msg)
+            
+            del self.global_fx_nodes[fx_name]
+        
+        return self
+
+    def clearFx(self):
+        """ Remove all global effects """
+        self.global_fx_initialized = False
+        for fx_name in list(self.global_fx_nodes.keys()):
+            self.removeFx(fx_name)
+        
+        return self
+
+    def listFx(self):
+        """ List currently active global effects """
+        # if self.global_fx_nodes:
+        #     print("Active global effects:")
+        #     for fx_name, node_id in self.global_fx_nodes.items():
+        #         print(f"  {fx_name}: node {node_id}")
+        # else:
+        #     print("No global effects active")
+        
+        return self.global_fx_nodes
+
+    def debugFx(self):
+        """ Debug the global effects system - shows node tree and status """
+        print("=== Global FX Debug Info ===")
+        print(f"Initialized: {self.global_fx_initialized}")
+        print(f"Group ID: {self.global_fx_group}")
+        print(f"Bus ID: {self.global_fx_bus} (not used - effects route directly to bus 0)")
+        print(f"Active effects: {len(self.global_fx_nodes)}")
+        
+        if self.global_fx_nodes:
+            for fx_name, node_id in self.global_fx_nodes.items():
+                print(f"  {fx_name}: node {node_id}")
+                
+        # Show the SuperCollider node tree
+        print("\nRequesting SuperCollider node tree...")
+        self.dumpTree()
+        
+        return self
+
 try:
 
     import socketserver

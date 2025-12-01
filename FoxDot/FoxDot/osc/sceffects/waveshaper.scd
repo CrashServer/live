@@ -1,0 +1,30 @@
+SynthDef.new(\waveshaper,
+{|bus, wshape, wgain, wmix, wshape_, wshape_d, wshapelfo, wshapelfomul, wshapelfoadd, wgain_, wgain_d, wgainlfo, wgainlfomul, wgainlfoadd, wmix_, wmix_d, wmixlfo, wmixlfomul, wmixlfoadd, sus|
+var osc,shaped,input_signal,x,wt,wt0,wt1,wt2,wt3,wt4,wt5,wt6,wt7,wt8,wt9,wt10,wt11;
+osc = In.ar(bus, 2);
+wshape = if(wshape_<=0, wshape, Line.kr(wshape, wshape_, sus*wshape_d));
+wshape = if(wshapelfo<=0, wshape, wshape * SinOsc.kr(wshapelfo, 0, wshapelfomul, wshapelfoadd));
+wgain = if(wgain_<=0, wgain, Line.kr(wgain, wgain_, sus*wgain_d));
+wgain = if(wgainlfo<=0, wgain, wgain * SinOsc.kr(wgainlfo, 0, wgainlfomul, wgainlfoadd));
+wmix = if(wmix_<=0, wmix, Line.kr(wmix, wmix_, sus*wmix_d));
+wmix = if(wmixlfo<=0, wmix, wmix * SinOsc.kr(wmixlfo, 0, wmixlfomul, wmixlfoadd));
+input_signal = (osc * wgain).clip(-1, 1);
+x = input_signal;
+wt= x;
+wt0 = x + ((x * 8).sin * 0.4 * exp(-3 * x.abs));
+wt1 = (x.tanh + (x ** 3 * 0.2 * (1 - x.abs)) + ((x * 3).sin * 0.05))*1.5;
+wt2 = ((x * 4).fold(-1, 1) * 1.3 + (x * 1.7))*0.4;
+wt3 = (x.sign * (sin(x.abs * pi * 2) * x.abs * 2))*1.5;
+wt4 = (x.sign * (x.abs ** (0.5 + x.abs)) * (1 - x.abs ** 2))*1.5;
+wt5 = (x.sign * ((x.abs ** 0.4) * (1 - (x.abs ** 0.6))) + (x * 0.1))*1.3;
+wt6 = (x.sign * (x.abs ** (1 + x.abs * 0.4)) * (1 - (x.abs * 0.1)));
+wt7 = x.sign * (x.abs ** 0.2);
+wt8 = ((x * 3).wrap(-0.5, 0.5) * 2.5 + (x * 0.3))*0.4;
+wt9 = (x.sign * ((x.abs ** 0.2) - (x.abs ** 2.5)))*0.5;
+wt10 = (x.sign * (x.abs ** (3 - 2.5 * x.abs)))*0.4;
+wt11 = (((x % 0.3) * 5) - 0.75)*1.2;
+shaped = Select.ar(wshape, [wt, wt0, wt1, wt2, wt3, wt4, wt5, wt6, wt7, wt8, wt9, wt10, wt11]);
+shaped = HPF.ar(shaped, 20);
+shaped = LeakDC.ar(shaped*0.4);
+osc = SelectX.ar(wmix, [osc, shaped]);
+ReplaceOut.ar(bus, osc)}).add;

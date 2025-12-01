@@ -29,7 +29,7 @@ import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
 import { markerUtils } from './markerUtils.js';
 import { foxdotAutocomplete } from './foxdotAutocomplete.js';
-import { showDefinition, removeAllTooltips } from './foxdotDefinitions.js';
+import { showDefinition, removeAllTooltips, updateDefinitions } from './foxdotDefinitions.js';
 
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
@@ -225,6 +225,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         sceneName: videoCode
       }))
       }
+    const isServerFxCode = functionUtils.isServerFxCode(cm);
+    if (isServerFxCode) {
+      var [serverFxCode, startLine] = isServerFxCode;
+      var endLine = startLine;
+      wsServer.send(JSON.stringify({
+        type: 'evaluate_code',
+        code: "Server.clearFx()"
+      }));
+    } 
     else {
       var [blockCode, startLine, endLine] = functionUtils.getCodeAndCheckStop(cm, multi);
 
@@ -422,6 +431,40 @@ document.addEventListener('DOMContentLoaded', async () => {
           foxdotAutocomplete.fxList = fxList;
           foxdotAutocomplete.synths= synthList;
           foxdotAutocomplete.attackList = attackList;
+
+          // Construire les définitions dynamiques pour les synths
+          // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)
+          try {
+            const dynamicSynthDefs = {};
+            (synthList || []).filter(item => {
+              return item && typeof item.displayText === 'string' && item.displayText.endsWith('_') && typeof item.text === 'string';
+            }).forEach(item => {
+              const baseName = item.displayText.slice(0, -1); // retirer le '_'
+              const parenIdx = item.text.indexOf('(');
+              const signature = parenIdx >= 0 ? item.text.slice(parenIdx) : '';
+              if (baseName && signature) {
+                dynamicSynthDefs[baseName] = signature; // ex: tb303 -> (wave=0, cutoff=800, ...)
+              }
+            });
+
+            // Construire les définitions dynamiques pour les FX
+            const dynamicFxDefs = {};
+            (fxList || []).filter(item => {
+              return item && typeof item.displayText === 'string' && item.displayText.endsWith('_') && typeof item.text === 'string';
+            }).forEach(item => {
+              const baseName = item.displayText.slice(0, -1); // retirer le '_'
+              // Pour les FX, "text" est souvent une liste de paramètres sans parenthèses
+              const signature = item.text.includes('(') ? item.text.slice(item.text.indexOf('(')) : item.text;
+              if (baseName && signature) {
+                dynamicFxDefs[baseName] = signature; // ex: sidechain -> "sidechain: 0, sidechain_atk: 0.05, ..."
+              }
+            });
+
+            // Mettre à jour les définitions utilisées par Alt-I (showDefinition)
+            updateDefinitions({ synthDefs: dynamicSynthDefs, fxDefs: dynamicFxDefs });
+          } catch (e) {
+            console.warn('Impossible de mettre à jour les définitions dynamiques (synth/fx):', e);
+          }
 
           if (filteredLoops.length == 0 || fxList.length == 0 || synthList.length == 0 || attackList.length == 0) {
             console.error(`Erreur lors de la récupération de la liste des boucles (${loops.length}), effets (${fxList.length}), synthés (${synthList.length}) ou attaques (${attackList.length})`);

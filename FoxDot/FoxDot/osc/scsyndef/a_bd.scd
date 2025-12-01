@@ -1,4 +1,4 @@
-SynthDef.new(\edb,
+SynthDef.new(\a_bd,
 	{|amp=1, pan=0, freq=60, click=1, punch=1, sub=1, distortion=3, bus=0|
 		var kick, env, clickEnv, subEnv, punchy, dist;
 

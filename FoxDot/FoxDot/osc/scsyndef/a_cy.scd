@@ -1,4 +1,4 @@
-SynthDef.new(\cy,
+SynthDef.new(\a_cy,
 	{|amp=1, pan=0, decay=2, bright=1, distortion=1.5, bus=0|
 		var crash, env, noise, metallic, dist;
 

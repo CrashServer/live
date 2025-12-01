@@ -1,4 +1,4 @@
-SynthDef.new(\hhat,
+SynthDef.new(\a_hhat,
 	{|amp=1, pan=0, tone=8000, decay=0.1, metallic=1, distortion=2, open=0, bus=0|
 		var hihat, env, noise, metallic_part, dist;
 

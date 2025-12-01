@@ -1,0 +1,214 @@
+a4 >> blip(0, dur=8, oct=5, sus=8, wshape=0, fx1=0, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+Clock.bpm = 170
+
+a4 >> blip(0, dur=8, oct=5, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+a4 >> blip(0, dur=8, oct=3, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+a4 >> blip(0, dur=8, oct=3, rate=4, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+a4 >> blip(0, dur=8, oct=3, rate=.4, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+y1.stop()
+
+a4 >> blip(0, dur=8, oct=3, rate=0.5, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+a4 >> blip(0, dur=8, oct=3, rate=0.6, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+Scale.default="minor"
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=PWhite(0,.3), s3=PWhite(0,.3), pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
+
+p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)])
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a4 >> blip(0, dur=8, oct=3, rate=0.6, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.6)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/2, oct=(3,5), harm=0.1, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/2, oct=(3,5), harm=0.2, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/2, oct=(3,5), harm=0.3, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.1, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), harm=0.2, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)], lofi=.9)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.44, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.45, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.46, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)], lofi=0)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.47, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.48, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.49, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(3,5), harm=0.3, timbre=0.8, morph=0.50, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,5), harm=0.3, timbre=0.8, morph=0.50, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(4,5), harm=0.2, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.50, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(4,6), harm=0.2, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.51, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.52, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.53, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.54, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.55, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.56, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)], lofi=0, drcomp=0.5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.57, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.58, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.59, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.60, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.61, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.62, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.63, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.64, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.65, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.66, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.67, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,6), harm=0.3, timbre=0.8, morph=0.68, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,3), harm=0.3, timbre=0.8, morph=0.68, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(4,5), harm=0.2, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,3), harm=0.3, timbre=0.9, morph=0.68, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)]*0, lofi=0, drcomp=0.5)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,3), harm=0.3, timbre=0.9, morph=0.98, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+a4 >> blip(0, dur=8, oct=4, rate=0.6, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+a4 >> blip(0, dur=8, oct=3, rate=0.6, sus=8, wshape=0, fx1=0, slide=0, slidedelay=PWhite(0.3,0.7)).unison(4, .5)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(4,6), harm=0.2, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,4), harm=0.3, timbre=0.9, morph=0.98, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(4,5), harm=0.3, timbre=0.9, morph=0.98, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p6.addfx(lofi=0.6)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(5,5), harm=0.3, timbre=0.9, morph=0.98, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p6.addfx(lofi=0.7)
+
+p6.addfx(lofi=0.8)
+
+p6.addfx(lofi=0.7)
+
+p6.addfx(lofi=0.6)
+
+p6.addfx(lofi=0.5)
+
+p6.addfx(lofi=0.4)
+
+p6.addfx(lofi=0.3)
+
+a4.solo()
+
+p6.addfx(lofi=0.4)
+
+p6.addfx(lofi=0.5)
+
+p6.addfx(lofi=0.6)
+
+p6.addfx(lofi=0.7)
+
+y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.7)
+
+p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)]*0, lofi=0, drcomp=0.5)
+
+p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)], lofi=0, drcomp=0.5)
+
+p7 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)], lofi=0, drcomp=0.25)
+
+p1 >> plaits(P[0,5,6,10], dur=1/2, oct=(5,5), harm=0.3, timbre=0.9, morph=0.98, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p7 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)], lofi=0, drcomp=0.25, lpf=6600)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(4,6), harm=0.3, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(4,6), harm=0.4, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(4,6), harm=0.5, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p1 >> plaits(P[0,5,6,10], dur=1/2, oct=(5,4), harm=0.3, timbre=0.9, morph=0.98, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(4,3), harm=0.5, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p7 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)], lofi=0, drcomp=0.25, lpf=6600).lclip(4)
+
+p1 >> plaits(P[0,5,6,10], dur=1/4, oct=(5,4), harm=0.3, timbre=0.9, morph=0.98, engine=1, fdecay=1.8, cutoff=PFr(7000,9000), bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
+
+p7 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)]*0, lofi=0, drcomp=0.25, lpf=6600).lclip(4)
+
+p2 >> plaits(P[-2,4,6,7], dur=1/4, oct=(4,3), harm=0.5, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
+
+p7 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)]*0, lofi=0, drcomp=0.25, lpf=6600, hpf=400).lclip(4)
+
+p7 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)]*0, lofi=0, drcomp=0.25, lpf=6600, hpf=40).lclip(4)
+
+Server.addFx(jpverb=.4, jpvermix=0.5)
+
+y1.solo()
+
+Clock.clear()
+soff()
+Server.clearFx()
+

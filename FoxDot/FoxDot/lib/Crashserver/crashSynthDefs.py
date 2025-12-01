@@ -5,8 +5,14 @@ from ..SCLang.SynthDef import FileSynthDef
 a_bassry = FileSynthDef("a_bassry");
 a_bassry.add();
 
+a_stress = FileSynthDef("a_stress");
+a_stress.add();
+
 a_gesa = FileSynthDef("a_gesa");
 a_gesa.add();
+
+a_wave = FileSynthDef("a_wave");
+a_wave.add();
 
 a_gesa2 = FileSynthDef("a_gesa2");
 a_gesa2.add();
@@ -32,8 +38,8 @@ a_fantom.add();
 a_stab = FileSynthDef("a_stab");
 a_stab.add();
 
-a_db = FileSynthDef("a_db");
-a_db.add();
+a_bd = FileSynthDef("a_bd");
+a_bd.add();
 
 a_sn = FileSynthDef("a_sn");
 a_sn.add();
@@ -47,8 +53,8 @@ a_cy.add();
 a_poly = FileSynthDef("a_poly");
 a_poly.add();
 
-a_daftLead = FileSynthDef("a_daftLead");
-a_daftLead.add();
+a_daftlead = FileSynthDef("a_daftlead");
+a_daftlead.add();
 
 a_glead = FileSynthDef("a_glead");
 a_glead.add();
@@ -61,6 +67,9 @@ a_vpad.add();
 
 a_daft = FileSynthDef("a_daft");
 a_daft.add();
+
+a_xbass = FileSynthDef("a_xbass")
+a_xbass.add()
 
 a_vene = FileSynthDef("a_vene");
 a_vene.add();
@@ -109,6 +118,9 @@ cbass.add()
 
 click = FileSynthDef("click")
 click.add()
+
+choir = FileSynthDef("choir")
+choir.add()
 
 combs = FileSynthDef("combs")
 combs.add()

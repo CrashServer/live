@@ -30,7 +30,7 @@ probAddLpf = 6
 probAddDrop = 3
 probAddKick = 4
 probAddAccompany = 3
-probAddFxOut = 1 # probability to add an fx output
+probAddFxOut = 0 # probability to add an fx output
 
 # Add player probability
 probAddSynth = 1
@@ -87,6 +87,10 @@ humanSwingMax = 10 # % max swing
 dropTimeMin = 2
 dropTimeMax = 8
 dropLoop = 4
+
+# Variation parameters
+variationTotal = 64 # total beats 
+variationBreak = 4 # number of beats for the break (at the end of total duration)
 
 # change probability player parameters
 probPlayerAttributes = [2, #amp

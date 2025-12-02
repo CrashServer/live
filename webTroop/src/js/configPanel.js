@@ -19,12 +19,13 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const editorResizeHandle = document.getElementById('editor-resize-handle');
     const mainEditorWrapper = document.getElementById('main-editor-wrapper');
     const spectatorModeToggle = document.getElementById('spectatorModeToggle');
+    const consoleToggle = document.getElementById('consoleToggle');
+    const guttersToggle = document.getElementById('guttersToggle');
+
 
     // Variables pour le mode spectateur
     let spectatorMode = false;
-    let spectatorInterval = null;
     let currentFocusedPlayer = null;
-    let lastPlayerActivity = {};
 
     // Restaurer les données utilisateur
     const savedUser = localStorage.getItem('webtroop-user');
@@ -115,8 +116,6 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         otherEditor.setOption('theme', savedTheme);
         themeSelect.value = savedTheme;
     }
-
-    
 
     // Restaurer la taille sauvegardée
     const savedSize = localStorage.getItem('preferredFontSize');
@@ -245,12 +244,52 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     splitScreenToggle.addEventListener('change', (e) => {
         const enabled = e.target.checked;
         toggleSplitScreen(enabled);
-        
-        // Mettre à jour le label
-        const toggleLabel = document.querySelector('.toggle-label');
-        if (toggleLabel) {
-            toggleLabel.textContent = enabled ? 'Actif' : 'Inactif';
+    });
+
+    
+    // Gestion de la console
+    function toggleConsole(visible) {
+        const consoleElement = document.getElementById('logPanel');
+        if (visible) {
+            consoleElement.style.display = 'flex';
+        } else {
+            consoleElement.style.display = 'none';
         }
+        // Sauvegarder la préférence
+        localStorage.setItem('consoleVisible', visible.toString());
+    }
+    
+    const savedConsoleState = localStorage.getItem('consoleVisible');
+    const consoleVisible = savedConsoleState !== 'false';
+    consoleToggle.checked = consoleVisible;
+    toggleConsole(consoleVisible);
+
+    consoleToggle.addEventListener('change', (e) => {
+        const visible = e.target.checked;
+        toggleConsole(visible);
+    });
+
+    // Gestion des gutters
+    function toggleGutters(visible) {
+        if (visible) {
+            editor.setOption('lineNumbers', true);
+            otherEditor.setOption('lineNumbers', true);
+        } else {
+            editor.setOption('lineNumbers', false);
+            otherEditor.setOption('lineNumbers', false);
+        }
+        // Sauvegarder la préférence
+        localStorage.setItem('guttersVisible', visible.toString());
+    }
+    
+    const savedGuttersState = localStorage.getItem('guttersVisible');
+    const guttersVisible = savedGuttersState !== 'false';
+    guttersToggle.checked = guttersVisible;
+    toggleGutters(guttersVisible);
+
+    guttersToggle.addEventListener('change', (e) => {
+        const visible = e.target.checked;
+        toggleGutters(visible);
     });
 
     // Gestion du mode spectateur
@@ -258,15 +297,12 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         spectatorMode = enabled;
         
         if (enabled) {
-            console.log('Mode spectateur activé');
             // Forcer le nom à "Spectator"
             updateUserInfo(true);
             // Désactiver le champ de saisie du nom
             userNameInput.disabled = true;
         } else {
-            console.log('Mode spectateur désactivé');
             currentFocusedPlayer = null;
-            lastPlayerActivity = {};
             // Réactiver le champ et restaurer le nom original
             userNameInput.disabled = false;
             updateUserInfo(false);
@@ -282,16 +318,20 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         const localUserName = awareness.getLocalState()?.user?.name;
         const players = [];
         
-        // Collecter tous les joueurs actifs (excluant Spectator)
+        // Collecter tous les joueurs actifs
         states.forEach((state) => {
             if (state.otherInstantCode && state.user?.name && 
-                state.user.name !== 'Spectator' && state.user.name !== localUserName) {
-                players.push({
-                    name: state.user.name,
-                    line: state.otherInstantCode.line,
-                    position: state.otherInstantCode.position,
-                    color: state.user.color
-                });
+                state.user.name !== 'Spectator') {
+                // En mode spectateur : collecter tous les joueurs (sauf Spectator)
+                // En mode normal : exclure le joueur local
+                if (spectatorMode || state.user.name !== localUserName) {
+                    players.push({
+                        name: state.user.name,
+                        line: state.otherInstantCode.line,
+                        position: state.otherInstantCode.position,
+                        color: state.user.color
+                    });
+                }
             }
         });
         

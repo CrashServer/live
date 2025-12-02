@@ -235,6 +235,18 @@ body {
   left: -0.5rem !important; 
 }
 
+/* Synchronisation des gutters pour les éditeurs split - utilise des unités relatives */
+#editor .CodeMirror-gutters,
+#other-editor .CodeMirror-gutters {
+  min-width: 3.5em !important;
+  width: 3.5em !important;
+}
+
+#editor .CodeMirror-gutter-wrapper,
+#other-editor .CodeMirror-gutter-wrapper {
+  left: -3.5em !important;
+}
+
 .CodeMirror-tooltip {
   position: absolute;
   background-color: var(--bg-col-2);
@@ -446,8 +458,8 @@ body {
 .CodeMirror-hints li:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button):hover,
 .CodeMirror-hints .CodeMirror-hint-active:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button) {
   background: linear-gradient(90deg, rgba(74, 144, 194, 0.2), rgba(107, 191, 223, 0.1)) ;
-  border-left: 3px solid #6BBFDF ;
-  color: #6BBFDF ;
+  border-left: 3px solid var(--bg-col-1) ;
+  color: var(--text-col-1);
 }
 
 /* Styles pour le nom de l'attack */

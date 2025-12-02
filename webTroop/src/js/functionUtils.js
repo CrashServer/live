@@ -691,7 +691,7 @@ export const functionUtils = {
             if (firstNum.includes('.') || num2.includes('.')) {
                 return `PWhite(${firstNum}, ${num2})`;
             } else {
-                return `PRand(${firstNum}, ${num2})`;
+                return `PFr(${firstNum}, ${num2})`;
             }
         });
     },

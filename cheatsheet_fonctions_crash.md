@@ -152,4 +152,13 @@
 | `Aug` | `P(0, 4, 8)` | Augmented chord |
 | `Six` | `P(0, 4, 7, 9)` | Sixth chord |
 
+## Editor Replacement
+
+| Opérator | Example | Example Replacement |
+|---------------|-------|-------------|
+|[] **!** number| `d1 >> blip([0,4,5]!8)` | `d1 >> blip(var([0,4,5],8)`  |
+|function **!** number| `d1 >> play("x.", sample=PRand(55)!8)` | `d1 >> play("x.", sample=var(PRand(55),8)`  |
+|**?** number| `d1 >> play("x.", sample=?404)` | `d1 >> play("x.", sample=PRand(404))`  |
+|**?** float| `d1 >> play("-", pan=?1.0)` | `d1 >> play("-", pan=PWhite(0.0, 1.0))`  |
 ---
+

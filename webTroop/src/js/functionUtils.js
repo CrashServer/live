@@ -156,12 +156,41 @@ export const functionUtils = {
         );
 
         if (blockCode.trim()) {
-            // Verifier s'il faut stopper un player
+            // Verifier s'il faut stopper un player et convertir les syntaxes ! et ?
             let blockCodeArray = blockCode.split('\n');
+            let hasChanged = false;
+            
             blockCodeArray.forEach((code, index) => {
-            blockCodeArray[index] = functionUtils.ifPlayerStop(code);
+                let convertedCode = code;
+                
+                // Convertir ?nombre en PRand(0, nombre)
+                const convertedQuestion = this.convertQuestionMarkToPRand(convertedCode);
+                if (convertedQuestion !== convertedCode) {
+                    hasChanged = true;
+                    convertedCode = convertedQuestion;
+                }
+                
+                // Convertir expression!nombre en var(expression, nombre)
+                const convertToVar = this.convertExclamationToVar(convertedCode);
+                if (convertToVar !== convertedCode) {
+                    hasChanged = true;
+                    convertedCode = convertToVar;
+                }
+                
+                blockCodeArray[index] = functionUtils.ifPlayerStop(convertedCode);
             });
+            
             const blockCodeJoin = blockCodeArray.join('\n');
+            
+            // Remplacer dans l'éditeur si le code a changé
+            if (hasChanged) {
+                cm.replaceRange(
+                    blockCodeJoin,
+                    {line: startLine, ch: 0},
+                    {line: endLine, ch: cm.getLine(endLine).length}
+                );
+            }
+            
             return [blockCodeJoin, startLine, endLine];
         }
         return [blockCode, startLine, endLine];
@@ -608,7 +637,66 @@ export const functionUtils = {
         const attackList = message.autocomplete.attackList;
 
         return { loops: formattedLoops, fxList: allFx, synthList: allSynthDefs, attackList: attackList };
-    }
+    },
+
+    // Convertir la syntaxe expression!<number> en var(expression, <number>)
+    convertExclamationToVar(code) {
+        // Traiter d'abord les cas simples avec crochets
+        code = code.replace(/(\[[^\]]+\])!(\d+)/g, 'var($1, $2)');
+        
+        // Pour les fonctions avec parenthèses, on doit gérer les parenthèses imbriquées
+        // On cherche pattern: nom_fonction(...contenu_avec_parentheses...)!nombre
+        let result = code;
+        let match;
+        const funcPattern = /(\w+)\(/g;
+        
+        while ((match = funcPattern.exec(result)) !== null) {
+            const funcName = match[1];
+            let startPos = match.index + funcName.length + 1; // Position après la parenthèse ouvrante
+            let depth = 1;
+            let endPos = startPos;
+            
+            // Trouver la parenthèse fermante correspondante
+            while (endPos < result.length && depth > 0) {
+                if (result[endPos] === '(') depth++;
+                else if (result[endPos] === ')') depth--;
+                endPos++;
+            }
+            
+            // Vérifier s'il y a un ! suivi d'un nombre juste après
+            if (endPos < result.length && result[endPos] === '!') {
+                const numMatch = result.substring(endPos + 1).match(/^(\d+)/);
+                if (numMatch) {
+                    const num = numMatch[1];
+                    const funcArgs = result.substring(startPos, endPos - 1);
+                    const fullMatch = result.substring(match.index, endPos + 1 + num.length);
+                    const replacement = `var(${funcName}(${funcArgs}), ${num})`;
+                    result = result.substring(0, match.index) + replacement + result.substring(endPos + 1 + num.length);
+                    // Réinitialiser la recherche
+                    funcPattern.lastIndex = match.index + replacement.length;
+                }
+            }
+        }
+        
+        return result;
+    },
+
+    // Convertir la syntaxe ?<number> en PRand(0, <number>) ou PWhite(0, <number>)
+    // Ou nombre1?nombre2 en PRand(nombre1, nombre2) ou PWhite(nombre1, nombre2)
+    convertQuestionMarkToPRand(code) {
+        // Remplacer nombre1?nombre2 ou ?nombre par PRand/PWhite selon si c'est int ou float
+        return code.replace(/([\d.]+)?\?([\d.]+)/g, (match, num1, num2) => {
+            const firstNum = num1 || '0';
+            // Vérifier si c'est un float (l'un des deux nombres contient un point)
+            if (firstNum.includes('.') || num2.includes('.')) {
+                return `PWhite(${firstNum}, ${num2})`;
+            } else {
+                return `PRand(${firstNum}, ${num2})`;
+            }
+        });
+    },
+
+    
 };
 
 export let playersList = [];

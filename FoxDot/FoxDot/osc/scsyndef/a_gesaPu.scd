@@ -1,0 +1,55 @@
+SynthDef.new(\a_gesa,
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, distortion=8, cutoff=800, rq=0.7, attack=0.01|
+		var osc, env, filter, dist, freqFollower, dynamicCutoff, compressed;
+		freq = In.kr(bus, 1);
+
+		// Slight frequency modulation and detuning for width
+		freq = [freq, freq+fmod, freq*1.005] * Line.kr(Rand(0.98,1.02),1,0.01);
+		freq = freq / 4; // Sub bass range
+
+		// Multi-oscillator approach - sawtooth + square for aggression
+		osc = Mix([
+			VarSaw.ar(freq, width: LFNoise1.ar(2).range(0.1, 0.9), mul: 0.6),
+			Pulse.ar(freq * 0.5, width: LFTri.ar(0.3).range(0.2, 0.8), mul: 0.4),
+			SinOsc.ar(freq * 2, mul: 0.2) // Harmonic for punch
+		]);
+
+		// Aggressive envelope with quick attack and controlled sustain
+		env = EnvGen.kr(Env([0, 1, 0.9, 0.7, 0],
+			[attack, 0.04, sus * 0.3, sus * 0.7]), doneAction: 2);
+
+		// Heavy distortion - key to Gesaffelstein sound
+		dist = (osc * distortion).tanh * 0.7;
+
+		// Aggressive low-pass filtering with resonance
+		//filter = RLPF.ar(dist, cutoff * (1 + (LFNoise1.ar(rate * 0.5) * 0.3)) * env.pow(0.5),resonance);
+		freqFollower = Lag.kr(freq[0], 0.1);
+		dynamicCutoff = Lag.kr(cutoff + (freqFollower * 0.5), 0.1).clip(1, 20000);
+		filter = VALadder.ar(dist, dynamicCutoff * env, rq, 1, 0);
+		//filter = RLPF.ar(dist, cutoff * (1 + (LFNoise1.ar(rate * 0.5) * 0.3)) * env.pow(0.5),rq);
+
+		filter = BLowShelf.ar(filter, 100, 1.0, -12);
+		filter = BPeakEQ.ar(filter, 2000, 3, 6);
+
+		compressed = Compander.ar(
+        filter,
+        filter,
+        thresh: 0.4,
+        slopeBelow: 1,
+        slopeAbove: 0.25,
+        clampTime: 0.001,
+        relaxTime: 0.05
+		);
+
+		// Additional saturation and bite
+		//filter = (filter * 1.5).softclip;
+
+		// Final shaping
+		osc = filter * env * amp * 0.3;
+
+		// Slight stereo widening
+		osc = Pan2.ar(osc, pan + (LFNoise1.ar(0.5) * 0.1));
+
+		ReplaceOut.ar(bus, osc)
+	}
+).add;

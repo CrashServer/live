@@ -867,6 +867,11 @@ class metaPattern(object):
         """ Converts a new item to PGroup etc and appends """
         self.data.append(convert_nested_data(item))
         return
+
+    def insert(self, index, item):
+        """ Converts a new item to PGroup etc and inserts at the specified index """
+        self.data.insert(index, convert_nested_data(item))
+        return
     
     def i_rotate(self, n=1):
         self.data = self.data[n:] + self.data[0:n]

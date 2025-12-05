@@ -339,11 +339,9 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             // MODE SPECTATEUR: haut = joueur 1, bas = joueur 2
             if (players.length > 0) {
                 const player1 = players[0];
-                console.log(player1);
                 
                 if (currentFocusedPlayer !== player1.name) {
                     currentFocusedPlayer = player1.name;
-                    console.log(`Éditeur principal (spectateur): ${player1.name}`);
                 }
                 
                 // Scroller vers le joueur 1 dans l'éditeur principal
@@ -358,7 +356,6 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             // Si split screen activé et qu'il y a un deuxième joueur
             if (players.length > 1 && splitScreenToggle.checked) {
                 const player2 = players[1];
-                console.log(`Éditeur secondaire (spectateur): ${player2.name}`);
                 
                 // Scroller vers le joueur 2 dans l'éditeur du bas
                 if (player2.line >= 0 && player2.line < otherEditor.lineCount()) {

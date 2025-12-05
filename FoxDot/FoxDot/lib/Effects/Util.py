@@ -67,7 +67,7 @@ from ..ServerManager import Server
 
 class Effect:
     server=Server
-    def __init__(self, foxdot_name, synthdef, args={}, control=False, useControl=True):
+    def __init__(self, foxdot_name, synthdef, args={}, control=False, tag="", useControl=True):
         self.name      = foxdot_name
         self.synthdef  = synthdef
         self.filename  = EFFECTS_DIR + "/{}.scd".format(self.synthdef)
@@ -78,6 +78,7 @@ class Effect:
         self.defaults  = self.ctrlArgs if self.useControl else args
         self.effects   = []
         self.control   = control
+        self.tag       = tag
 
         self.suffix    = "kr" if self.control else "ar"
         self.channels  = 1 if self.control else 2
@@ -231,8 +232,8 @@ class EffectManager(dict):
         """ Returns the keys sorted by attribute name"""
         return sorted(self.keys(), key=lambda effect: getattr(self[effect], attr))
 
-    def new(self, foxdot_arg_name, synthdef, args, order=2, useControl=True):
-        self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0, useControl)
+    def new(self, foxdot_arg_name, synthdef, args, order=2, tag="", useControl=True):
+        self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0, tag, useControl)
 
         if order in self.order:
 

@@ -366,9 +366,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const activeElement = document.querySelector('.CodeMirror-hint-active');
         if (activeElement) {
           const categoryAttr = activeElement.getAttribute('data-category');
+          const categoryTypeAttr = activeElement.getAttribute('data-category-type') || 'attack';
           
           if (categoryAttr) {
-            const categoryItems = foxdotAutocomplete.showCategoryItems(cm, categoryAttr);
+            const categoryItems = foxdotAutocomplete.showCategoryItems(cm, categoryAttr, categoryTypeAttr);
             if (categoryItems) {
               handle.close();
               setTimeout(() => {
@@ -458,7 +459,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           foxdotAutocomplete.fxList = fxList;
           foxdotAutocomplete.synths= synthList;
           foxdotAutocomplete.attackList = attackList;
-          foxdotAutocomplete.categories = foxdotAutocomplete.getAttackCategories(); 
+          foxdotAutocomplete.attackCategories = foxdotAutocomplete.getAttackCategories(); 
+          foxdotAutocomplete.fxCategories = foxdotAutocomplete.getFxCategories(); 
 
           // Construire les définitions dynamiques pour les synths
           // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)

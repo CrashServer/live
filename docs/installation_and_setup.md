@@ -18,6 +18,7 @@ The following Python libraries are required:
 - install this supercollider plugins (see `config/sc_Extensions`):
     - [mi-UGens](https://github.com/v7b1/mi-UGens)
     - [PortedPlugins](https://github.com/madskjeldgaard/portedplugins)
+    package name aur : supercollider-portedplugins
     - [Open303](https://github.com/schollz/open303)
 - replace `.local/share/SuperCollider/downloaded-quarks/FoxDot/FoxDot.sc` with the one provided in `config/FoxDot.sc` for multioutput, midicc and memsize fixs.
 

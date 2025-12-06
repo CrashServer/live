@@ -5,6 +5,7 @@ Before installing the software, ensure that your system meets the following requ
 - only tested on Linux
 - Python 3.12 or higher
 - Supercollider & SC3 plugins
+- nodejs v18 or higher (use of nvm is strongly recommended)
 
 ## Python libraries
 The following Python libraries are required:
@@ -62,3 +63,11 @@ npm run dev
 ```
 
 This will start the CrashServer application, and you can access it via your web browser at `http://<HOST_IP>:3000`.
+
+## Troubleshooting
+
+### Python3 vs Python
+If you distribution (like ubuntu) defaults to `python` as Python 3, you may need to install `python-is-python3` package:
+```bash
+sudo apt install python-is-python3
+``` 

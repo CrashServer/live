@@ -84,7 +84,7 @@ const func = {
     random_bpm_var: '()\r\nChange the clock randomly with random var', 
     random_bpm: '()\r\n Change Clock to a random number', 
     setseed: '(seed=None)\r\nNone', 
-    unison: '(self, unison=2, detune=0.125, analog=0)\r\n Like spread(), but can specify number of voices(unison)\nSets pan to (-1,-0.5,..,0.5,1) and pshift to (-0.125,-0.0625,...,0.0625,0.125)\nIf unison is odd, an unchanged voice is added in the center\nEg : p1.unison(4, 0.5) => pshift=(-0.5,-0.25,0.25,0.5), pan=(-1.0,-0.5,0.5,1.0)\np1.unison(5, 0.8) => pshift=(-0.8,-0.4,0,0.4,0.8), pan=(-1.0,-0.5,0,0.5,1.0)\np1.unison(5,(0.3,2)) => pshift=(-2.0,-0.3,0,0.3,2.0), pan=(-1,-0.5,0,0.5,1)\n', 
+    unison: '(self, unison=2, detune=0.125, analog=0, wide=1)\r\n Like spread(), but can specify number of voices(unison)\nSets pan to (-1,-0.5,..,0.5,1) and pshift to (-0.125,-0.0625,...,0.0625,0.125)\nIf unison is odd, an unchanged voice is added in the center\nEg : p1.unison(4, 0.5) => pshift=(-0.5,-0.25,0.25,0.5), pan=(-1.0,-0.5,0.5,1.0)\np1.unison(5, 0.8) => pshift=(-0.8,-0.4,0,0.4,0.8), pan=(-1.0,-0.5,0,0.5,1.0)\np1.unison(5,(0.3,2)) => pshift=(-2.0,-0.3,0,0.3,2.0), pan=(-1,-0.5,0,0.5,1)\n', 
     human: '(self, velocity=20, humanize=5, swing=0)\r\n Humanize the velocity, delay and add swing in % (less to more)', 
     fill: '(self, mute_player=0, on=1)\r\n add fill to a drum player\nyou can mute other players with .fill(Group(p1,d2,d3))\n0 = off\n1 = dur + amplify\n2 = dur  //  amplify =1\n3 = amplify // dur=1/2\n', 
     brk: '(self, multi=1, code="")\r\n turn loop into break beat (only with splitter player ', 

@@ -49,11 +49,22 @@ document.addEventListener('mouseup', function() {
 crashPanelToggle.addEventListener('change', () => {
   if (crashPanelToggle.checked) {
     crashPanel.style.display = 'block';
+    localStorage.setItem('crashPanelVisible', 'true');
   }
   else {
     crashPanel.style.display = 'none';
+    localStorage.setItem('crashPanelVisible', 'false');
   }
 })
+
+const crashPanelVisible = localStorage.getItem('crashPanelVisible');
+if (crashPanelVisible === 'true') {
+    crashPanel.style.display = 'block';
+    crashPanelToggle.checked = true;
+} else {
+    crashPanel.style.display = 'none';
+    crashPanelToggle.checked = false;
+}
 
 const ws = new WebSocket(`ws://${config.HOST_IP}:20000`);
 const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);

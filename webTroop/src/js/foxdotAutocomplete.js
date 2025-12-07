@@ -439,8 +439,10 @@ export const foxdotAutocomplete = {
 
     _currentView: 'categories',
     _currentCategory: null,
+    _currentCategoryType: null,
     _completionWidget: null,
-    categories: {"test": {items: "testItems"}},
+    attackCategories: {},
+    fxCategories: {},
 
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
@@ -556,15 +558,15 @@ export const foxdotAutocomplete = {
             } else {
                 // No prefix: show categories only
                 // Add "All" category first
-                filteredLost.push(this.createCategorySeparator("All", "All"));
+                filteredLost.push(this.createCategorySeparator("All", "All", "attack"));
                 
                 // Add other categories sorted alphabetically
-                const sortedCategories = Object.keys(this.categories)
-                    .filter(key => key && key.trim() !== "")
+                const sortedCategories = Object.keys(this.attackCategories)
+                    .filter(key => key && key.trim() !== "" && key !== "Uncategorized")
                     .sort((a, b) => a.localeCompare(b));
                 
                 sortedCategories.forEach(categoryKey => {
-                    filteredLost.push(this.createCategorySeparator(categoryKey, categoryKey));
+                    filteredLost.push(this.createCategorySeparator(categoryKey, categoryKey, "attack"));
                 });
             }
 
@@ -598,7 +600,25 @@ export const foxdotAutocomplete = {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z:]/g, "");
             let foxdotKeyword = [];
             if (prefix.startsWith('x')) {
-                foxdotKeyword = this.fxList.filter(f => f.displayText.toLowerCase().startsWith(prefix.slice(1,).toLowerCase()));;
+                const fxPrefix = prefix.slice(1,).toLowerCase();
+                
+                // Si on tape juste 'x' sans autre caractère, afficher les catégories
+                if (fxPrefix === '') {
+                    // Add "All" category first
+                    foxdotKeyword.push(this.createCategorySeparator("All", "All", "fx"));
+                    
+                    // Add other categories sorted alphabetically
+                    const sortedFxCategories = Object.keys(this.fxCategories)
+                        .filter(key => key && key.trim() !== "" && key !== "Uncategorized")
+                        .sort((a, b) => a.localeCompare(b));
+                    
+                    sortedFxCategories.forEach(categoryKey => {
+                        foxdotKeyword.push(this.createCategorySeparator(categoryKey, categoryKey, "fx"));
+                    });
+                } else {
+                    // Si on a tapé plus que 'x', filtrer les FX
+                    foxdotKeyword = this.fxList.filter(f => f.displayText.toLowerCase().startsWith(fxPrefix));
+                }
             }
             else {
                 const combinedKeyword = [...this.foxKeyword, ...this.patternFunction];
@@ -652,17 +672,19 @@ export const foxdotAutocomplete = {
     },
 
     // create separator for categories
-    createCategorySeparator: function(text, categoryKey) {
+    createCategorySeparator: function(text, categoryKey, categoryType = 'attack') {
         return {
             text: "",
             displayText: text + " →",
             className: "autocomplete-category-separator",
             categoryKey: categoryKey,
+            categoryType: categoryType,
             render: function(element, self, data) {
                 element.className += " autocomplete-category-separator";
                 element.innerHTML = `<span class="category-text">${data.displayText}</span>`;
                 element.style.cursor = 'pointer';
                 element.setAttribute('data-category', data.categoryKey);
+                element.setAttribute('data-category-type', data.categoryType);
             },
             hint: function(cm, self, data) {
                 return false;
@@ -689,93 +711,170 @@ export const foxdotAutocomplete = {
 
     // Create category list
     /**
-     * Extract unique attack categories from the attack list.
-     * @returns {Object} Object with unique attack categories as keys and their related attacks in array.
+     * Extract unique categories from a list of items.
+     * @param {Array} itemList - The list of items to categorize
+     * @param {String} categoryField - The field name containing the category (e.g., 'category', 'tag')
+     * @returns {Object} Object with unique categories as keys and their related items in array.
      * Exemple: { "Cover": [...], "Original": [...], "Remix": [...] }
      */
-    getAttackCategories: function() {
-        if (!this.attackList || this.attackList.length === 0) {
-            return [];
+    getCategoriesFromList: function(itemList, categoryField = 'category') {
+        if (!itemList || itemList.length === 0) {
+            return {};
         }
         
-        const categorizedAttacks = {};
+        const categorizedItems = {};
         
-        this.attackList.forEach(attack => {
-            const categoryString = attack.category || '';
+        itemList.forEach(item => {
+            const categoryString = item[categoryField] || '';
             
             const categories = categoryString.split(',').map(cat => cat.trim()).filter(cat => cat !== '');
 
             if (categories.length === 0) {
-                categories.push('');
+                categories.push('Uncategorized');
             }
 
             categories.forEach(category => {
-            const normalizedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+                const normalizedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
 
-            if (!categorizedAttacks[normalizedCategory]) {
-                categorizedAttacks[normalizedCategory] = [];
-            }
-            
-            categorizedAttacks[normalizedCategory].push(attack);
-        });
+                if (!categorizedItems[normalizedCategory]) {
+                    categorizedItems[normalizedCategory] = [];
+                }
+                
+                categorizedItems[normalizedCategory].push(item);
+            });
         });
         
-        // Sort attacks within each category alphabetically
-        Object.keys(categorizedAttacks).forEach(category => {
-            categorizedAttacks[category].sort((a, b) => 
+        // Sort items within each category alphabetically
+        Object.keys(categorizedItems).forEach(category => {
+            categorizedItems[category].sort((a, b) => 
                 a.displayText.localeCompare(b.displayText)
             );
         });
         
-        return categorizedAttacks;
+        return categorizedItems;
+    },
+
+    /**
+     * Legacy method for backward compatibility
+     */
+    getAttackCategories: function() {
+        return this.getCategoriesFromList(this.attackList, 'category');
+    },
+
+    /**
+     * Get FX categories from the FX list
+     */
+    getFxCategories: function() {
+        return this.getCategoriesFromList(this.fxList, 'tag');
     },
 
     // show elements of a category
-    showCategoryItems: function(cm, categoryKey) {
+    /**
+     * Show category items with customizable rendering
+     * @param {Object} cm - CodeMirror instance
+     * @param {String} categoryKey - The category to display
+     * @param {String} categoryType - Type of category ('attack' or 'fx')
+     * @returns {Object} Hint object with list of items
+     */
+    showCategoryItems: function(cm, categoryKey, categoryType = 'attack') {
         let categoryItems;
+        let categoriesMap;
+        let allItemsList;
         
-        // Special case for "All" category - show all attacks
-        if (categoryKey === "All") {
-            categoryItems = [...this.attackList].sort((a, b) => a.displayText.localeCompare(b.displayText));
+        // Determine which categories and items to use
+        if (categoryType === 'fx') {
+            categoriesMap = this.fxCategories;
+            allItemsList = this.fxList;
         } else {
-            categoryItems = this.categories[categoryKey];
+            categoriesMap = this.attackCategories;
+            allItemsList = this.attackList;
+        }
+        
+        // Special case for "All" category
+        if (categoryKey === "All") {
+            categoryItems = [...allItemsList].sort((a, b) => a.displayText.localeCompare(b.displayText));
+        } else {
+            categoryItems = categoriesMap[categoryKey];
         }
         
         if (!categoryItems || categoryItems.length === 0) {
             return null;
         }
 
-        const formattedItems = categoryItems.map(attack => {
-            // Extraire le BPM (2 ou 3 chiffres après un espace)
-            const bpmMatch = attack.displayText.match(/\s(\d{2,3})$/);
-            const bpm = bpmMatch ? bpmMatch[1] : null;
+        // Calculer les bonnes positions from/to en fonction du type
+        const cursor = cm.getCursor();
+        const token = cm.getTokenAt(cursor);
+        let fromPos, toPos;
+        
+        if (categoryType === 'fx') {
+            // Pour les FX, on doit remplacer le 'x' qui a été tapé
+            // On cherche le début du token qui contient 'x'
+            const line = cm.getLine(cursor.line);
+            const tokenStr = token.string;
             
-            // Nettoyer le displayText en enlevant le BPM
-            let cleanName = bpm ? attack.displayText.replace(/\s\d{2,3}$/, '').trim() : attack.displayText;
-            cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
-            
-            return {
-                text: attack.text,
-                displayText: cleanName,
-                bpm: bpm,
-                render: function(element, self, data) {
-                    element.innerHTML = '';
-                    
-                    // Créer le nom de l'attack
-                    const nameSpan = document.createElement('span');
-                    nameSpan.className = 'attack-name';
-                    nameSpan.textContent = data.displayText;
-                    element.appendChild(nameSpan);
-                    
-                    // Ajouter le tag BPM si présent
-                    if (data.bpm) {
-                        const bpmTag = document.createElement('span');
-                        bpmTag.className = 'attack-bpm-tag';
-                        bpmTag.textContent = data.bpm;
-                        element.appendChild(bpmTag);
+            // Si le token commence par 'x', on remplace depuis le début du token
+            if (tokenStr.toLowerCase().startsWith('x')) {
+                fromPos = cm.constructor.Pos(cursor.line, token.start);
+                toPos = cm.constructor.Pos(cursor.line, cursor.ch);
+            } else {
+                // Sinon, utiliser la position du curseur
+                fromPos = cm.getCursor();
+                toPos = cm.getCursor();
+            }
+        } else {
+            // Pour les attacks, on utilise la position du curseur
+            fromPos = cm.getCursor();
+            toPos = cm.getCursor();
+        }
+
+        const formattedItems = categoryItems.map(item => {
+            if (categoryType === 'attack') {
+                // Extraire le BPM (2 ou 3 chiffres après un espace)
+                const bpmMatch = item.displayText.match(/\s(\d{2,3})$/);
+                const bpm = bpmMatch ? bpmMatch[1] : null;
+                
+                // Nettoyer le displayText en enlevant le BPM
+                let cleanName = bpm ? item.displayText.replace(/\s\d{2,3}$/, '').trim() : item.displayText;
+                cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+                
+                return {
+                    text: item.text,
+                    displayText: cleanName,
+                    bpm: bpm,
+                    render: function(element, self, data) {
+                        element.innerHTML = '';
+                        
+                        // Créer le nom de l'attack
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'attack-name';
+                        nameSpan.textContent = data.displayText;
+                        element.appendChild(nameSpan);
+                        
+                        // Ajouter le tag BPM si présent
+                        if (data.bpm) {
+                            const bpmTag = document.createElement('span');
+                            bpmTag.className = 'attack-bpm-tag';
+                            bpmTag.textContent = data.bpm;
+                            element.appendChild(bpmTag);
+                        }
                     }
-                }
-            };
+                };
+            } else if (categoryType === 'fx') {
+                // Pour les FX, afficher simplement le nom (avec ou sans underscore)
+                return {
+                    text: item.text,
+                    displayText: item.displayText,
+                    render: function(element, self, data) {
+                        element.innerHTML = '';
+                        
+                        // Créer le nom du FX
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'fx-name';
+                        nameSpan.textContent = data.displayText;
+                        element.appendChild(nameSpan);
+                    }
+                };
+            }
         });
         
         const items = [
@@ -785,11 +884,12 @@ export const foxdotAutocomplete = {
 
         this._currentView = 'items';
         this._currentCategory = categoryKey;
+        this._currentCategoryType = categoryType;
 
         return {
             list: items,
-            from: cm.getCursor(),
-            to: cm.getCursor()
+            from: fromPos,
+            to: toPos
         };
     }
 }

@@ -83,6 +83,18 @@
   font-family: UbuntuMono;
   src: url("../fonts/UbuntuMono-Regular.ttf");
 }
+@font-face {
+  font-family: TerminalGrotesque;
+  src: url("../fonts/terminal-grotesque-open.woff2");
+}
+@font-face {
+  font-family: BluuNextBold;
+  src: url("../fonts/bluu-next-bold.woff2");
+}
+@font-face {
+  font-family: InterBlack;
+  src: url("../fonts/inter-black.woff2");
+}
 
 body {
   margin: 0;
@@ -234,6 +246,18 @@ body {
 .CodeMirror-linenumber {
   left: -0.5rem !important; 
 }
+
+/* Synchronisation des gutters pour les éditeurs split - utilise des unités relatives */
+/* #editor .CodeMirror-gutters,
+#other-editor .CodeMirror-gutters {
+  min-width: 3.5em !important;
+  width: 3.5em !important;
+}
+
+#editor .CodeMirror-gutter-wrapper,
+#other-editor .CodeMirror-gutter-wrapper {
+  left: -3.5em !important;
+} */
 
 .CodeMirror-tooltip {
   position: absolute;
@@ -445,13 +469,21 @@ body {
 
 .CodeMirror-hints li:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button):hover,
 .CodeMirror-hints .CodeMirror-hint-active:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button) {
-  background: linear-gradient(90deg, rgba(74, 144, 194, 0.2), rgba(107, 191, 223, 0.1)) ;
-  border-left: 3px solid #6BBFDF ;
-  color: #6BBFDF ;
+  background: linear-gradient(90deg, var(--bg-col-1), var(--bg-col-2));
+  border-left: 3px solid var(--bg-col-1) ;
+  color: var(--text-col-1);
 }
 
 /* Styles pour le nom de l'attack */
 .attack-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Styles pour le nom du FX */
+.fx-name {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -478,6 +510,30 @@ body {
 .CodeMirror-hint-active .attack-bpm-tag {
   background: linear-gradient(135deg, #6BBFDF, #8AD4F5);
   box-shadow: 0 2px 6px rgba(107, 191, 223, 0.5);
+  transform: scale(1.05);
+}
+
+/* Styles pour le tag de catégorie FX */
+.fx-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #9B59B6, #BB8FCE);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-left: 8px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+}
+
+.CodeMirror-hint-active .fx-tag {
+  background: linear-gradient(135deg, #BB8FCE, #D7BDE2);
+  box-shadow: 0 2px 6px rgba(187, 143, 206, 0.5);
   transform: scale(1.05);
 }
 

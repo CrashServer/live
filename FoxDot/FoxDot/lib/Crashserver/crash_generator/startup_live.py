@@ -826,9 +826,10 @@ class WebsocketServer():
         fx_json_list = []
         for fx_name in FxList.keys():
             fxDefault = FxList[fx_name].defaults
+            fxTag = FxList[fx_name].tag
             filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k.endswith('lfo') or k.endswith('lfomul') or k.endswith('lfoadd') or k == 'sus')}
             fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
-            fx_json_list.append({'text': fx_text, 'displayText': fx_name + '_'})
+            fx_json_list.append({'text': fx_text, 'displayText': fx_name + '_', 'tag': fxTag})
         fxDict = json.dumps({"type": "fxList", "fx": fx_json_list})
         return fx_json_list
         # await self.sendWebsocket(fxDict)

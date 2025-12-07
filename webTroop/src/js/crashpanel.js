@@ -43,6 +43,10 @@ document.addEventListener('mousemove', function(e) {
 });
 
 document.addEventListener('mouseup', function() {
+    if (isResizing) {
+        // Sauvegarder la largeur finale dans localStorage
+        localStorage.setItem('crashPanelWidth', crashPanel.style.width);
+    }
     isResizing = false;
 });
 
@@ -64,6 +68,12 @@ if (crashPanelVisible === 'true') {
 } else {
     crashPanel.style.display = 'none';
     crashPanelToggle.checked = false;
+}
+
+// Restaurer la largeur sauvegardée
+const savedWidth = localStorage.getItem('crashPanelWidth');
+if (savedWidth) {
+    crashPanel.style.width = savedWidth;
 }
 
 const ws = new WebSocket(`ws://${config.HOST_IP}:20000`);

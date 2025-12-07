@@ -21,11 +21,82 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const spectatorModeToggle = document.getElementById('spectatorModeToggle');
     const consoleToggle = document.getElementById('consoleToggle');
     const guttersToggle = document.getElementById('guttersToggle');
+    const themeSelect = document.getElementById('themeSelect');
 
 
     // Variables pour le mode spectateur
     let spectatorMode = false;
     let currentFocusedPlayer = null;
+    let currentUserName = '';
+
+    // Fonction pour obtenir la clé localStorage avec le nom d'utilisateur
+    function getStorageKey(key) {
+        return currentUserName ? `${currentUserName}-${key}` : key;
+    }
+
+    // Fonction pour charger les paramètres d'un utilisateur
+    function loadUserSettings(userName) {
+        currentUserName = userName;
+        
+        // Charger la police
+        const savedFont = localStorage.getItem(getStorageKey('preferredFont'));
+        if (savedFont) {
+            fontSelect.value = savedFont;
+            editor.getWrapperElement().style.fontFamily = savedFont;
+            otherEditor.getWrapperElement().style.fontFamily = savedFont;
+        }
+
+        // Charger le thème
+        const savedTheme = localStorage.getItem(getStorageKey('preferredTheme'));
+        if (savedTheme) {
+            editor.setOption('theme', savedTheme);
+            otherEditor.setOption('theme', savedTheme);
+            themeSelect.value = savedTheme;
+        }
+
+        // Charger la taille de police
+        const savedSize = localStorage.getItem(getStorageKey('preferredFontSize'));
+        if (savedSize) {
+            fontSizeSlider.value = savedSize;
+            updateFontSize(savedSize);
+        }
+
+        // Charger la taille de l'interface
+        const savedInterfaceSize = localStorage.getItem(getStorageKey('preferredInterfaceFontSize'));
+        if (savedInterfaceSize) {
+            fontInterfaceSizeSlider.value = savedInterfaceSize;
+            updateInterfaceFontSize(savedInterfaceSize);
+        }
+
+        // Charger le split screen
+        const savedSplitScreen = localStorage.getItem(getStorageKey('splitScreenEnabled'));
+        const splitScreenEnabled = savedSplitScreen !== 'false';
+        splitScreenToggle.checked = splitScreenEnabled;
+        toggleSplitScreen(splitScreenEnabled);
+
+        // Charger l'état de la console
+        const savedConsoleState = localStorage.getItem(getStorageKey('consoleVisible'));
+        const consoleVisible = savedConsoleState !== 'false';
+        consoleToggle.checked = consoleVisible;
+        toggleConsole(consoleVisible);
+
+        // Charger l'état des gutters
+        const savedGuttersState = localStorage.getItem(getStorageKey('guttersVisible'));
+        const guttersVisible = savedGuttersState !== 'false';
+        guttersToggle.checked = guttersVisible;
+        toggleGutters(guttersVisible);
+
+        // Charger le thème d'interface
+        const savedInterfaceTheme = localStorage.getItem(getStorageKey('selectedInterfaceTheme')) || 'dark';
+        document.documentElement.className = `${savedInterfaceTheme}-theme`;
+        themeInterfaceSelector.value = savedInterfaceTheme;
+
+        // Charger le mode spectateur
+        const savedSpectatorMode = localStorage.getItem(getStorageKey('spectatorMode'));
+        const spectatorModeEnabled = savedSpectatorMode === 'true';
+        spectatorModeToggle.checked = spectatorModeEnabled;
+        toggleSpectatorMode(spectatorModeEnabled);
+    }
 
     // Restaurer les données utilisateur
     const savedUser = localStorage.getItem('webtroop-user');
@@ -34,17 +105,24 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         userNameInput.value = userInfo.name;
         userColorInput.value = userInfo.color;
         updateUserInfo(); // Met à jour awareness
+        loadUserSettings(userInfo.name); // Charger les paramètres de cet utilisateur
     }
 
     function updateUserInfo(forceSpectator = false) {
+        const newUserName = forceSpectator ? 'Spectator' : (userNameInput.value || 'Anonyme');
         const userInfo = {
-            name: forceSpectator ? 'Spectator' : (userNameInput.value || 'Anonyme'),
+            name: newUserName,
             color: userColorInput.value
         };
         
         // Sauvegarder dans localStorage (sauf si mode spectateur)
         if (!forceSpectator) {
             localStorage.setItem('webtroop-user', JSON.stringify(userInfo));
+            
+            // Si le nom d'utilisateur a changé, charger les paramètres de ce nouvel utilisateur
+            if (newUserName !== currentUserName) {
+                loadUserSettings(newUserName);
+            }
         }
         
         // Mettre à jour awareness
@@ -75,16 +153,11 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         editor.getWrapperElement().style.fontFamily = font;
         otherEditor.getWrapperElement().style.fontFamily = font;
         document.body.style.fontFamily = font;
-        localStorage.setItem('preferredFont', font);
+        localStorage.setItem(getStorageKey('preferredFont'), font);
     });
 
     // Restaurer la police sauvegardée
-    const savedFont = localStorage.getItem('preferredFont');
-    if (savedFont) {
-        fontSelect.value = savedFont;
-        editor.getWrapperElement().style.fontFamily = savedFont;
-        otherEditor.getWrapperElement().style.fontFamily = savedFont;
-        }
+    // Supprimé car maintenant géré dans loadUserSettings
 
     // Gestion ouverture/fermeture du panneau
     configButton.addEventListener('click', () => {
@@ -101,34 +174,18 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     });
 
     // Gestion du thème
-    const themeSelect = document.getElementById('themeSelect');
     themeSelect.addEventListener('change', (e) => {
         const theme = e.target.value;
         editor.setOption('theme', theme);
         otherEditor.setOption('theme', theme);
-        localStorage.setItem('preferredTheme', theme);
+        localStorage.setItem(getStorageKey('preferredTheme'), theme);
     });
 
     // Restaurer le thème
-    const savedTheme = localStorage.getItem('preferredTheme');
-    if (savedTheme) {
-        editor.setOption('theme', savedTheme);
-        otherEditor.setOption('theme', savedTheme);
-        themeSelect.value = savedTheme;
-    }
+    // Supprimé car maintenant géré dans loadUserSettings
 
     // Restaurer la taille sauvegardée
-    const savedSize = localStorage.getItem('preferredFontSize');
-    if (savedSize) {
-        fontSizeSlider.value = savedSize;
-        updateFontSize(savedSize);
-    }
-
-    const savedInterfaceSize = localStorage.getItem('preferredInterfaceFontSize');
-    if (savedInterfaceSize) {
-        fontInterfaceSizeSlider.value = savedInterfaceSize;
-        updateInterfaceFontSize(savedInterfaceSize);
-    }
+    // Supprimé car maintenant géré dans loadUserSettings
 
     // Mettre à jour lors du changement
     fontSizeSlider.addEventListener('input', (e) => {
@@ -150,7 +207,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         otherEditor.refresh();
 
         // Sauvegarder la préférence
-        localStorage.setItem('preferredFontSize', size);
+        localStorage.setItem(getStorageKey('preferredFontSize'), size);
     }
 
     fontInterfaceSizeSlider.addEventListener('input', (e) => {
@@ -166,7 +223,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         document.documentElement.style.fontSize = size + 'px';
         
         // Sauvegarder la préférence
-        localStorage.setItem('preferredInterfaceFontSize', size);
+        localStorage.setItem(getStorageKey('preferredInterfaceFontSize'), size);
     };
 
     // Ouvrir la modal
@@ -187,15 +244,13 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     }
 
     // Restore the interface theme
-    const savedInterfaceTheme = localStorage.getItem('selectedInterfaceTheme') || 'dark';
-    document.documentElement.className = `${savedInterfaceTheme}-theme`;
-    themeInterfaceSelector.value = savedInterfaceTheme;
+    // Supprimé car maintenant géré dans loadUserSettings
     
     // Gérer le changement de thème
     themeInterfaceSelector.addEventListener('change', (e) => {
         const selectedInterfaceTheme = e.target.value;
         document.documentElement.className = `${selectedInterfaceTheme}-theme`;
-        localStorage.setItem('selectedInterfaceTheme', selectedInterfaceTheme);
+        localStorage.setItem(getStorageKey('selectedInterfaceTheme'), selectedInterfaceTheme);
     });
 
 
@@ -231,14 +286,11 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         }, 10);
         
         // Sauvegarder la préférence
-        localStorage.setItem('splitScreenEnabled', enabled.toString());
+        localStorage.setItem(getStorageKey('splitScreenEnabled'), enabled.toString());
     }
 
     // Restaurer l'état du split screen
-    const savedSplitScreen = localStorage.getItem('splitScreenEnabled');
-    const splitScreenEnabled = savedSplitScreen !== 'false'; // Par défaut activé
-    splitScreenToggle.checked = splitScreenEnabled;
-    toggleSplitScreen(splitScreenEnabled);
+    // Supprimé car maintenant géré dans loadUserSettings
 
     // Event listener pour le toggle
     splitScreenToggle.addEventListener('change', (e) => {
@@ -256,13 +308,11 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             consoleElement.style.display = 'none';
         }
         // Sauvegarder la préférence
-        localStorage.setItem('consoleVisible', visible.toString());
+        localStorage.setItem(getStorageKey('consoleVisible'), visible.toString());
     }
     
-    const savedConsoleState = localStorage.getItem('consoleVisible');
-    const consoleVisible = savedConsoleState !== 'false';
-    consoleToggle.checked = consoleVisible;
-    toggleConsole(consoleVisible);
+    // Restaurer l'état de la console
+    // Supprimé car maintenant géré dans loadUserSettings
 
     consoleToggle.addEventListener('change', (e) => {
         const visible = e.target.checked;
@@ -279,13 +329,11 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             otherEditor.setOption('lineNumbers', false);
         }
         // Sauvegarder la préférence
-        localStorage.setItem('guttersVisible', visible.toString());
+        localStorage.setItem(getStorageKey('guttersVisible'), visible.toString());
     }
     
-    const savedGuttersState = localStorage.getItem('guttersVisible');
-    const guttersVisible = savedGuttersState !== 'false';
-    guttersToggle.checked = guttersVisible;
-    toggleGutters(guttersVisible);
+    // Restaurer l'état des gutters
+    // Supprimé car maintenant géré dans loadUserSettings
 
     guttersToggle.addEventListener('change', (e) => {
         const visible = e.target.checked;
@@ -309,7 +357,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         }
         
         // Sauvegarder la préférence
-        localStorage.setItem('spectatorMode', enabled.toString());
+        localStorage.setItem(getStorageKey('spectatorMode'), enabled.toString());
     }
 
     // Écouter les changements d'awareness pour suivre les joueurs en temps réel
@@ -383,10 +431,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     });
 
     // Restaurer l'état du mode spectateur
-    const savedSpectatorMode = localStorage.getItem('spectatorMode');
-    const spectatorModeEnabled = savedSpectatorMode === 'true';
-    spectatorModeToggle.checked = spectatorModeEnabled;
-    toggleSpectatorMode(spectatorModeEnabled);
+    // Supprimé car maintenant géré dans loadUserSettings
 
     // Event listener pour le toggle spectateur
     spectatorModeToggle.addEventListener('change', (e) => {

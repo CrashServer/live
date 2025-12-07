@@ -65,6 +65,18 @@ npm run dev
 
 This will start the CrashServer application, and you can access it via your web browser at `http://<HOST_IP>:3000`.
 
+
+## Setup Transparent Mode for webTroop (optional)
+- use zen browser 
+- in `about:config`, set `browser.tabs.allow_transparent_browser` to true
+- install the `Transparent Zen` Zen Mods 
+- in settings/Zen Mods/Transparent Zen settings, make sur the ` Allow transparency on linux (TURN OFF BEFORE UNINSTALL)` is checked
+- restart the browser 
+- choose the transparent theme in CrashServer settings panel
+- right click on the Zen browser tab window on a blank area and choose `Edit theme` to choose/remove a background color, adjust opacity, and grain effect.
+- restart or refresh
+
+
 ## Troubleshooting
 
 ### Python3 vs Python

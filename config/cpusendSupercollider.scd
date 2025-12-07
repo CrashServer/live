@@ -1,5 +1,5 @@
 // CPU peak osc send every 10s
-b = NetAddr.new("192.168.0.40", 20000);    // create the NetAddr
+b = NetAddr.new("192.168.1.42", 2887);    // create the NetAddr
 
 
 (

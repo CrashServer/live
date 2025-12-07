@@ -44,17 +44,17 @@ class _Effect:
 
 Effect = _Effect() # singleton
 
-@Effect(order=0)
+@Effect(order=0, tag="modulation")
 def vibrato(vib=0, vibdepth=0.02):
     osc = Vibrato.ar(Effect.In(), vib, depth=vibdepth)
     return Effect.Out(osc)
 
-@Effect(order=0)
+@Effect(order=0, tag="pitch")
 def slideTo(slide=0, sus=1, slide_delay=0):
     osc = Effect.In() * EnvGen.ar(Env([1, 1, slide + 1], [sus * slide_delay, sus * (1 - slide_delay)]))
     return Effect.Out(osc)
 
-@Effect(order=0)
+@Effect(order=0, tag="pitch")
 def slideFrom(slide_from=0, sus=1, slide_delay=0):
     osc = Effect.In() * EnvGen.ar(Env([slide_from + 1, slide_from + 1, 1], [sus * slide_delay, sus * (1 - slide_delay)]))
     return Effect.Out(osc)
@@ -85,7 +85,7 @@ def formantFilter(formant=0):
     Effect.add(osc = Formlet.ar(Effect.In(), formant * 200, (formant % 5 + 1) / 1000, (formant * 1.5) / 600).tanh)
     Effect.Out() 
 
-@Effect(order=2)
+@Effect(order=2, tag="filter")
 def filterSwell(swell=0, sus=1, hpr=1):
     env = EnvGen.kr(Env([0, 1, 0], times = [(sus * 0.25), (sus * 0.25)], curve="\\sin"))
     osc = RHPF.ar(Effect.In(), env * swell * 2000, hpr)

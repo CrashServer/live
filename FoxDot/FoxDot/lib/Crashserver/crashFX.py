@@ -541,7 +541,7 @@ fx.add("osc = SelectX.ar(blow, [dry, osc*0.5], wrap:1)")
 fx.save()
 
 
-fx = FxList.new('panR','panR', {'panR': 1}, order=2, tag="util")
+fx = FxList.new('panR','panR', {'panR': 1}, order=2, tag="panning")
 fx.doc("Pan rear")
 fx.add("osc = Pan4.ar(osc, 0, panR)")
 fx.save()
@@ -633,7 +633,7 @@ fx.add("osc = SelectX.ar(wmix, [osc, shaped])")
 fx.save()
 
 # Auto Pan
-fx = FxList.new('apan', 'autopan', {'apan': 0, 'awidth': 1, 'apwave': 0, 'beat_dur': 1}, order=2, tag="util")
+fx = FxList.new('apan', 'autopan', {'apan': 0, 'awidth': 1, 'apwave': 0, 'beat_dur': 1}, order=2, tag="panning")
 fx.doc("Rhythmic auto-panning with waveform selection (0=sine, 1=tri, 2=saw, 3=pulse)")
 fx.add_var("panLfo")
 fx.add_var("rate")

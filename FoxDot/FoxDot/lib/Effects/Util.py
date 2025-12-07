@@ -381,22 +381,22 @@ fx.save()
 
 # Signal effects
 
-fx = FxList.new('hpf','highPassFilter', {'hpf': 0, 'hpr': 1}, order=2)
+fx = FxList.new('hpf','highPassFilter', {'hpf': 0, 'hpr': 1}, order=2, tag="filter")
 fx.doc("Highpass filter")
 fx.add('osc = RHPF.ar(osc, hpf, hpr)')
 fx.save()
 
-fx = FxList.new('lpf','lowPassFilter', {'lpf': 0, 'lpr': 1}, order=2)
+fx = FxList.new('lpf','lowPassFilter', {'lpf': 0, 'lpr': 1}, order=2, tag="filter")
 fx.add('osc = RLPF.ar(osc, lpf, lpr)')
 fx.save()
 
-fx = FxList.new('swell','filterSwell', {'swell': 0, 'sus': 1, 'hpr': 1}, order=2)
+fx = FxList.new('swell','filterSwell', {'swell': 0, 'sus': 1, 'hpr': 1}, order=2, tag="filter")
 fx.add_var("env")
 fx.add("env = EnvGen.kr(Env([0,1,0], times:[(sus*0.25), (sus*0.25)], curve:\\sin))")
 fx.add('osc = RHPF.ar(osc, env * swell * 2000, hpr)')
 fx.save()
 
-fx = FxList.new("bpf", "bandPassFilter", {"bpf": 0, "bpr": 1, "bpnoise": 0, "sus": 1}, order=2)
+fx = FxList.new("bpf", "bandPassFilter", {"bpf": 0, "bpr": 1, "bpnoise": 0, "sus": 1}, order=2, tag="filter")
 fx.add("bpnoise = bpnoise / sus")
 fx.add("bpf = LFNoise1.kr(bpnoise).exprange(bpf * 0.5, bpf * 2)")
 fx.add("bpr = LFNoise1.kr(bpnoise).exprange(bpr * 0.5, bpr * 2)")
@@ -405,12 +405,12 @@ fx.save()
        
 if SC3_PLUGINS:
 
-    fx = FxList.new('crush', 'bitcrush', {'bits': 8, 'sus': 1, 'amp': 1, 'crush': 0}, order=1)
+    fx = FxList.new('crush', 'bitcrush', {'bits': 8, 'sus': 1, 'amp': 1, 'crush': 0}, order=1, tag="distortion")
     fx.add("osc = Decimator.ar(osc, rate: 44100/crush, bits: bits)")
     fx.add("osc = osc * Line.ar(amp * 0.85, 0.0001, sus * 2)") 
     fx.save()
 
-    fx = FxList.new('dist', 'distortion', {'dist': 0, 'tmp': 0}, order=1)
+    fx = FxList.new('dist', 'distortion', {'dist': 0, 'tmp': 0}, order=1, tag="distortion")
     fx.add("tmp = osc")
     fx.add("osc = CrossoverDistortion.ar(osc, amp:0.2, smooth:0.01)")
     fx.add("osc = osc + (0.1 * dist * DynKlank.ar(`[[60,61,240,3000 + SinOsc.ar(62,mul:100)],nil,[0.1, 0.1, 0.05, 0.01]], osc))")
@@ -434,15 +434,15 @@ if SC3_PLUGINS:
 # fx.add('osc = osc + CombL.ar(osc, delaytime: echo * beat_dur, maxdelaytime: 2 * beat_dur, decaytime: echotime * beat_dur)')
 # fx.save()
 
-fx = FxList.new('spin', 'spinPan', {'spin': 0,'sus': 1}, order=2)
+fx = FxList.new('spin', 'spinPan', {'spin': 0,'sus': 1}, order=2, tag="panning")
 fx.add('osc = osc * [FSinOsc.ar(spin / 2, iphase: 1, mul: 0.5, add: 0.5), FSinOsc.ar(spin / 2, iphase: 3, mul: 0.5, add: 0.5)]')
 fx.save()
 
-fx = FxList.new("cut", "trimLength", {"cut": 0, "sus": 1}, order=2)
+fx = FxList.new("cut", "trimLength", {"cut": 0, "sus": 1}, order=2, tag="envelope")
 fx.add("osc = osc * EnvGen.ar(Env(levels: [1,1,0.01], curve: 'linear', times: [sus * cut, 0.01]))")
 fx.save()
 
-fx = FxList.new('room', 'reverb', {'room': 0, 'mix': 0.1}, order=2)
+fx = FxList.new('room', 'reverb', {'room': 0, 'mix': 0.1}, order=2, tag="reverb")
 fx.add("osc = FreeVerb.ar(osc, mix, room)")
 fx.save()
 

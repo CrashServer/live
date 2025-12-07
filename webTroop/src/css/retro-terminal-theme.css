@@ -62,6 +62,15 @@
     box-shadow: 0 0 8px rgba(102, 170, 255, 0.3);
 }
 
+/* Transparent Terminal Theme for CodeMirror */
+.cm-s-transparent-terminal.CodeMirror { 
+    background: transparent;
+    color: #ffffff;
+    text-shadow: 0 0 2px #ffffff;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
 /* Green Terminal Selection */
 .cm-s-green-terminal div.CodeMirror-selected { background: #003300; }
 .cm-s-green-terminal .CodeMirror-line::selection, 
@@ -98,6 +107,15 @@
 .cm-s-blue-terminal .CodeMirror-line > span::-moz-selection, 
 .cm-s-blue-terminal .CodeMirror-line > span > span::-moz-selection { background: rgba(102, 170, 255, 0.3); }
 
+/* Transparent Terminal Selection */
+.cm-s-transparent-terminal div.CodeMirror-selected { background: rgba(255, 255, 255, 0.15); }
+.cm-s-transparent-terminal .CodeMirror-line::selection, 
+.cm-s-transparent-terminal .CodeMirror-line > span::selection, 
+.cm-s-transparent-terminal .CodeMirror-line > span > span::selection { background: rgba(255, 255, 255, 0.2); }
+.cm-s-transparent-terminal .CodeMirror-line::-moz-selection, 
+.cm-s-transparent-terminal .CodeMirror-line > span::-moz-selection, 
+.cm-s-transparent-terminal .CodeMirror-line > span > span::-moz-selection { background: rgba(255, 255, 255, 0.2); }
+
 /* Green Terminal Gutters & Cursor */
 .cm-s-green-terminal .CodeMirror-gutters { background: #000000; border-right: 1px solid #00aa00; }
 .cm-s-green-terminal .CodeMirror-guttermarker { color: #00ff00; }
@@ -125,6 +143,13 @@
 .cm-s-blue-terminal .CodeMirror-guttermarker-subtle { color: #4488ff; }
 .cm-s-blue-terminal .CodeMirror-linenumber { color: #4488ff; }
 .cm-s-blue-terminal .CodeMirror-cursor { border-left: 6px solid #ffffff; }
+
+/* Transparent Terminal Gutters & Cursor */
+.cm-s-transparent-terminal .CodeMirror-gutters { background: transparent; border-right: 1px solid rgba(170, 170, 170, 0.3); }
+.cm-s-transparent-terminal .CodeMirror-guttermarker { color: #ffffff; }
+.cm-s-transparent-terminal .CodeMirror-guttermarker-subtle { color: #cccccc; }
+.cm-s-transparent-terminal .CodeMirror-linenumber { color: rgba(170, 170, 170, 0.7); }
+.cm-s-transparent-terminal .CodeMirror-cursor { border-left: 6px solid #ffffff; }
 
 /* GREEN TERMINAL SYNTAX HIGHLIGHTING - Contraste amélioré + Bloom */
 .cm-s-green-terminal span.cm-comment    { color: #008800; font-style: italic; text-shadow: 0 0 2px currentColor; }
@@ -202,6 +227,25 @@
 .cm-s-blue-terminal span.cm-meta        { color: #99bbdd; text-shadow: 0 0 2px currentColor; }
 .cm-s-blue-terminal span.cm-error       { color: #ff5555; font-weight: bold; text-shadow: 0 0 4px currentColor; }
 
+/* TRANSPARENT TERMINAL SYNTAX HIGHLIGHTING - Basé sur white-terminal avec bloom léger */
+.cm-s-transparent-terminal span.cm-comment    { color: #777777; font-style: italic; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-keyword    { color: #ffffff; font-weight: bold; text-shadow: 0 0 3px currentColor; }
+.cm-s-transparent-terminal span.cm-string     { color: #dddddd; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-number     { color: #eeeeee; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-variable   { color: #999999; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-def        { color: #ffffff; font-weight: bold; text-shadow: 0 0 2px currentColor; }
+.cm-s-transparent-terminal span.cm-operator   { color: #aaaaaa; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-bracket    { color: #cccccc; font-weight: bold; text-shadow: 0 0 2px currentColor; }
+.cm-s-transparent-terminal span.cm-tag        { color: #eeeeee; font-weight: bold; text-shadow: 0 0 2px currentColor; }
+.cm-s-transparent-terminal span.cm-attribute  { color: #bbbbbb; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-property   { color: #cccccc; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-builtin    { color: #dddddd; font-weight: bold; text-shadow: 0 0 2px currentColor; }
+.cm-s-transparent-terminal span.cm-qualifier  { color: #888888; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-type       { color: #aaaaaa; font-weight: bold; text-shadow: 0 0 2px currentColor; }
+.cm-s-transparent-terminal span.cm-atom       { color: #eeeeee; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-meta       { color: #bbbbbb; text-shadow: 0 0 1px currentColor; }
+.cm-s-transparent-terminal span.cm-error      { color: #ff6666; font-weight: bold; text-shadow: 0 0 3px currentColor; }
+
 /* Active lines and matching brackets */
 .cm-s-green-terminal .CodeMirror-activeline-background { background: #001100; }
 .cm-s-green-terminal .CodeMirror-matchingbracket { outline: 1px solid #00ff00; color: #00ff00 !important; background: rgba(0, 255, 0, 0.1); }
@@ -214,6 +258,9 @@
 
 .cm-s-blue-terminal .CodeMirror-activeline-background { background: #001122; }
 .cm-s-blue-terminal .CodeMirror-matchingbracket { outline: 1px solid #66aaff; color: #66aaff !important; background: rgba(102, 170, 255, 0.1); }
+
+.cm-s-transparent-terminal .CodeMirror-activeline-background { background: #222222b0; }
+.cm-s-transparent-terminal .CodeMirror-matchingbracket { outline: 1px solid #ffffff; color: #ffffff !important; background: rgba(255, 255, 255, 0.1); }
 
 /* Retro terminal specific effects */
 .cm-s-retro-terminal .CodeMirror-lines {

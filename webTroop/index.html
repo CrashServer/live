@@ -150,7 +150,7 @@
                 </div>
                 <div id="logAndChat">
                     <div id="logs"></div>
-                    <div id="chat" class="chat"> </div>
+                    <!-- <div id="chat" class="chat"> </div> -->
                 </div>
             </div>
             <button id="configButton"><img src="/src/images/gear.svg"></button>
@@ -161,6 +161,13 @@
                         <input type="color" id="userColor" value="#2196f3">
                         <input type="text" id="userName" placeholder="Nom du joueur">
                         <button id="validatePlayerName" class="configButton">Valider</button>
+                    </div>
+                    <div class="input-group">
+                        <label>Mode Spectateur</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="spectatorModeToggle"/>
+                            <span class="slider"></span>
+                        </label>
                     </div>
                 </div>    
                 <div class="input-group">
@@ -248,14 +255,17 @@
                         <option value="UbuntuMono">Ubuntu Mono</option>
                         <option value="Cascadia">Cascadia</option>
                         <option value="JetBrainsMono">JetBrain Mono</option>
+                        <option value="TerminalGrotesque">Terminal Grotesque</option>
+                        <option value="BluuNextBold">Bluu next bold</option>
+                        <option value="InterBlack">Inter Black</option>
                     </select>
                 </div>
                 <div class="input-group">
-                        <label for="fontSizeSelect">Font Size: </label>
+                        <label for="fontSizeSelect">Font: </label>
                         <input type="range" min="12" max="64" value="16" step="1" id="fontSizeSlider"><span id="fontSizeValue">16</span>
                 </div>
                 <div class="input-group">
-                        <label for="fontInterfaceSizeSelect">Font Interface Size: </label>
+                        <label for="fontInterfaceSizeSelect">Interface: </label>
                         <input type="range" min="12" max="64" value="16" step="1" id="fontInterfaceSizeSlider"><span id="fontInterfaceSizeValue">16</span>
                 </div>
 
@@ -292,6 +302,20 @@
                         <label>Toggle Split Screen</label>
                         <label class="toggle-switch">
                             <input type="checkbox" id="splitScreenToggle" checked/>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <label>Toggle Console</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="consoleToggle" checked/>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <label>Toggle Gutters</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="guttersToggle" checked/>
                             <span class="slider"></span>
                         </label>
                     </div>

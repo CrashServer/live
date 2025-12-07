@@ -608,11 +608,11 @@ export const functionUtils = {
         });
        
         const fxList = message.autocomplete.fxList;
-        const updatedFxList = fxList.map(fx => {
-        const fxName = fx.displayText.replace(/_$/, ''); // Retirer le suffixe '_'
-        return { text: `${fxName}=`, displayText: fxName };
+        // Ne garder que les FX avec '_' mais les afficher sans le '_'
+        const formattedFxList = fxList.map(fx => {
+            const fxName = fx.displayText.replace(/_$/, ''); // Retirer le suffixe '_' pour l'affichage
+            return { text: fx.text, displayText: fxName, tag: fx.tag };
         });
-        const allFx = [...fxList, ...updatedFxList];
 
         // Get SynthDefs
         const synthDefs = message.autocomplete.synthList;
@@ -636,7 +636,7 @@ export const functionUtils = {
         // Get AttackList
         const attackList = message.autocomplete.attackList;
 
-        return { loops: formattedLoops, fxList: allFx, synthList: allSynthDefs, attackList: attackList };
+        return { loops: formattedLoops, fxList: formattedFxList, synthList: allSynthDefs, attackList: attackList };
     },
 
     // Convertir la syntaxe expression!<number> en var(expression, <number>)
@@ -691,7 +691,7 @@ export const functionUtils = {
             if (firstNum.includes('.') || num2.includes('.')) {
                 return `PWhite(${firstNum}, ${num2})`;
             } else {
-                return `PRand(${firstNum}, ${num2})`;
+                return `PFr(${firstNum}, ${num2})`;
             }
         });
     },

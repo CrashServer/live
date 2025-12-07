@@ -21,10 +21,8 @@ import 'codemirror/addon/search/searchcursor.js'
 import 'codemirror/addon/search/search.js'
 import 'codemirror/addon/search/jump-to-line.js'
 import 'codemirror/addon/search/matchesonscrollbar.js'
-import 'codemirror/addon/fold/foldcode.js'
-import 'codemirror/addon/fold/foldgutter.js'
 
-import { chatUtils } from './chatUtils.js';
+// import { chatUtils } from './chatUtils.js';
 import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
 import { markerUtils } from './markerUtils.js';
@@ -34,7 +32,6 @@ import { showDefinition, removeAllTooltips, updateDefinitions } from './foxdotDe
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/hint/show-hint.css'
 import 'codemirror/addon/dialog/dialog.css'
-import 'codemirror/addon/fold/foldgutter.css'
 import '../css/style.css'
 import '../css/crashpanel.css'
 import '../css/configPanel.css'
@@ -62,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     awareness: awareness,
   });
   const ytext = ydoc.getText('webtroop');
-  const ychat = ydoc.getArray('chat');
+  // const ychat = ydoc.getArray('chat');
   const ymarkers = ydoc.getArray('markers');
 
   // Configuration de CodeMirror
@@ -77,8 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     fixedGutter: false,
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
-    foldGutter: true,
-    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+    gutters: ['CodeMirror-linenumbers'],
     keyMap: 'sublime',
   });
 
@@ -100,6 +96,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Fonction pour mettre à jour l'affichage de l'autre utilisateur
   function updateOtherUserDisplay(userName, userColor, line, position, code) {
     if (!configPanelControls.isSplitScreenEnabled) {
+      return;
+    }
+    
+    // Ne pas traiter si on est en mode spectateur ou si c'est un spectateur
+    if (configPanelControls.isSpectatorMode() || userName === 'Spectator') {
       return;
     }
     
@@ -263,16 +264,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   
   // Écouter les changements dans le Y.Array des messages de chat
-  ychat.observe(event => {
-    event.changes.added.forEach(item => {
-      const message = item.content.getContent()[0];
-      chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor, message.line);
-    });
-    // Supprimer les anciens messages pour ne garder que les 20 plus récents
-    if (ychat.length > 15) {
-      ychat.delete(0, ychat.length - 15);
-    }
-  });
+  // ychat.observe(event => {
+  //   event.changes.added.forEach(item => {
+  //     const message = item.content.getContent()[0];
+  //     chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor, message.line);
+  //   });
+  //   // Supprimer les anciens messages pour ne garder que les 20 plus récents
+  //   if (ychat.length > 15) {
+  //     ychat.delete(0, ychat.length - 15);
+  //   }
+  // });
 
   // Écouter les changements dans le Y.Array des marqueurs
   ymarkers.observe(event => {
@@ -310,14 +311,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
     'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
     'Alt-4': () => markerUtils.resetMarkers(ymarkers),
-    'Alt-C': (cm) => {
-      chatUtils.getChat(cm, "", (text, line) => {
-        const userState = awareness.getLocalState();
-        const userName = userState?.user?.name || 'Anonymous';
-        const userColor = userState?.user?.color || '#000000';
-        ychat.push([{ text, userName, userColor, line }]); // Ajouter le message au Y.Array
-      });
-    }, 
+    // 'Alt-C': (cm) => {
+    //   chatUtils.getChat(cm, "", (text, line) => {
+    //     const userState = awareness.getLocalState();
+    //     const userName = userState?.user?.name || 'Anonymous';
+    //     const userColor = userState?.user?.color || '#000000';
+    //     ychat.push([{ text, userName, userColor, line }]); // Ajouter le message au Y.Array
+    //   });
+    // }, 
     'Ctrl-Enter': (cm) => {evaluateCode(cm, false)},
     'Ctrl-Alt-Enter': (cm) => {evaluateCode(cm, true)},
     'Alt-I': (cm) => showDefinition(cm),
@@ -325,28 +326,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Ctrl-G': "findNext",
     'Ctrl-Alt-Left': "goLineStart",
     'Ctrl-Alt-Right': "goLineEnd",
-    'Alt-Q': (cm) => cm.foldCode(cm.getCursor(), 
-      {rangeFinder: (cm,start) => {
-        if(!start){return null;}
-        let startLine = start.line;
-        let endLine = start.line + 1;
-        while (startLine > 0 && !cm.getLine(startLine).trim().startsWith("#")){
-          startLine--;
-        }
-     
-        while (endLine < cm.lineCount() -1  && !cm.getLine(endLine).trim().startsWith("#")){
-          endLine++;
-        }
-
-        if (startLine === endLine){
-          return null;
-        }
-
-        return {
-            from: CodeMirror.Pos(startLine+1, 0),
-            to: CodeMirror.Pos(endLine, cm.getLine(endLine).length),
-        };
-      }}),
     'Ctrl-Left': (cm) => {functionUtils.goToPreviousComma(cm)},
     'Ctrl-Right': (cm) => {functionUtils.goToNextComma(cm)},
     'Alt-P': () => {document.getElementById('piano-roll').classList.toggle('hidden')},
@@ -387,9 +366,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const activeElement = document.querySelector('.CodeMirror-hint-active');
         if (activeElement) {
           const categoryAttr = activeElement.getAttribute('data-category');
+          const categoryTypeAttr = activeElement.getAttribute('data-category-type') || 'attack';
           
           if (categoryAttr) {
-            const categoryItems = foxdotAutocomplete.showCategoryItems(cm, categoryAttr);
+            const categoryItems = foxdotAutocomplete.showCategoryItems(cm, categoryAttr, categoryTypeAttr);
             if (categoryItems) {
               handle.close();
               setTimeout(() => {
@@ -446,7 +426,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
       }
       // Gestion de l'affichage du code en temps réel des autres utilisateurs
-      if (state.otherInstantCode && state.user?.name !== awareness.getLocalState().user?.name) {
+      if (state.otherInstantCode && state.user?.name !== awareness.getLocalState().user?.name && state.user?.name !== "Spectator") {
         const { user, code, position, line } = state.otherInstantCode;
         const userColor = state.user?.color || '#fff';
         
@@ -479,7 +459,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           foxdotAutocomplete.fxList = fxList;
           foxdotAutocomplete.synths= synthList;
           foxdotAutocomplete.attackList = attackList;
-          foxdotAutocomplete.categories = foxdotAutocomplete.getAttackCategories(); 
+          foxdotAutocomplete.attackCategories = foxdotAutocomplete.getAttackCategories(); 
+          foxdotAutocomplete.fxCategories = foxdotAutocomplete.getFxCategories(); 
 
           // Construire les définitions dynamiques pour les synths
           // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)

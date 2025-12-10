@@ -527,7 +527,7 @@ fx.add("osc = osc * EnvGen.kr(Env([1,1,0], [sus*rsus, 0.01]), doneAction: 2)")
 fx.add("osc = SelectX.ar(mring, [dry, osc], wrap:1)")
 fx.save()
 
-fx = FxList.new('blow','MiBlow', {'blow': 0, 'bflow': 0.3, 'bmodel': 0, 'bpos': 0.2, 'sus':0}, order=2)
+fx = FxList.new('blow','MiBlow', {'blow': 0, 'bflow': 0.3, 'bmodel': 0, 'bpos': 0.2, 'sus':0}, order=1, tag="pitch")
 fx.doc("Mi Blow resonator")
 fx.add_var("dry")
 fx.add_var("pitch")

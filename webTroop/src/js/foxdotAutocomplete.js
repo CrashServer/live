@@ -238,7 +238,7 @@ export const foxdotAutocomplete = {
         { text: 'drop()', displayText: 'drop' },  
         { text: 'drop_bpm()', displayText: 'drop_bpm' },  
         { text: 'chaos()', displayText: 'chaos' },
-        { text: 'Clock', displayText: 'Clock' },
+        { text: 'Clock.bpm=', displayText: 'Clock' },
         { text: 'Scale.default=', displayText: 'Scale' },
         { text: 'Root.default=', displayText: 'Root' },
         { text: 'variation = Variation(16,4)', displayText: 'variation' },

@@ -22,10 +22,10 @@ import 'codemirror/addon/search/search.js'
 import 'codemirror/addon/search/jump-to-line.js'
 import 'codemirror/addon/search/matchesonscrollbar.js'
 
-// import { chatUtils } from './chatUtils.js';
 import { logsUtils } from './logs.js';
 import { functionUtils } from './functionUtils.js';
-import { markerUtils } from './markerUtils.js';
+// import { markerUtils } from './markerUtils.js';
+// import { chatUtils } from './chatUtils.js';
 import { foxdotAutocomplete } from './foxdotAutocomplete.js';
 import { showDefinition, removeAllTooltips, updateDefinitions } from './foxdotDefinitions.js';
 
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
   const ytext = ydoc.getText('webtroop');
   // const ychat = ydoc.getArray('chat');
-  const ymarkers = ydoc.getArray('markers');
+  // const ymarkers = ydoc.getArray('markers');
 
   // Configuration de CodeMirror
   const editor = CodeMirror(document.getElementById('editor'), {
@@ -276,17 +276,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   // });
 
   // Écouter les changements dans le Y.Array des marqueurs
-  ymarkers.observe(event => {
-    event.changes.added.forEach(item => {
-      const marker = item.content.getContent()[0];
-      markerUtils.applyMarker(editor, marker.line, marker.color);
-    });
+  // ymarkers.observe(event => {
+  //   event.changes.added.forEach(item => {
+  //     const marker = item.content.getContent()[0];
+  //     markerUtils.applyMarker(editor, marker.line, marker.color);
+  //   });
 
-    event.changes.deleted.forEach(item => {
-      const marker = item.content.getContent()[0];
-      markerUtils.removeMarker(editor, marker.line);
-    });
-  });
+  //   event.changes.deleted.forEach(item => {
+  //     const marker = item.content.getContent()[0];
+  //     markerUtils.removeMarker(editor, marker.line);
+  //   });
+  // });
 
   // Gestion de CTRL+ENTER
   editor.setOption('extraKeys', {
@@ -307,10 +307,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     'Ctrl-Alt-S': () => {functionUtils.unSoloPlayers(wsServer)},
     'Alt-J': (cm) => {functionUtils.jumpToOtherPlayer(cm, awareness)},
     'Ctrl-Alt-J': (cm) => {functionUtils.previousJump(cm)},
-    'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "[[ Attention à un truc ]]", awareness, ymarkers, ychat),
-    'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
-    'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
-    'Alt-4': () => markerUtils.resetMarkers(ymarkers),
+    // 'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "[[ Attention à un truc ]]", awareness, ymarkers, ychat),
+    // 'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
+    // 'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
+    // 'Alt-4': () => markerUtils.resetMarkers(ymarkers),
     // 'Alt-C': (cm) => {
     //   chatUtils.getChat(cm, "", (text, line) => {
     //     const userState = awareness.getLocalState();

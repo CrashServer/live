@@ -383,13 +383,13 @@ body {
   padding: 4px 8px;
 }
 .CodeMirror-hint-active {
-  background: var(--col-blue);
+  background: #BB8FCE;
 }
 
 /* Autocomplete */
 .CodeMirror-hints .autocomplete-category-separator {
-  background: linear-gradient(45deg, var(--bg-col-1), var(--bg-col-2)); 
-  color: var(--text-col-1);
+  background: var(--bg-col-1); 
+  color: var(--text-col-2);
   font-weight: bold ;
   text-align: left ;
   font-size: 16px ;
@@ -404,7 +404,7 @@ body {
 
 .CodeMirror-hints .autocomplete-category-separator:hover,
 .CodeMirror-hints .CodeMirror-hint-active.autocomplete-category-separator {
-  background: linear-gradient(45deg, var(--border-col-2), var(--border-col-1));
+  background: var(--border-col-2);
   transform: translateX(4px);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   color: var(--bg-col-1);
@@ -451,8 +451,8 @@ body {
 
 /* Style for real suggestion */
 .CodeMirror-hints li:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button) {
-  background: rgba(15, 20, 25, 0.9);
-  color: #E8F4FD;
+  background: var(--bg-col-1);
+  color: var(--text-col-2);
   border-left: 3px solid transparent;
   transition: all 0.2s ease;
   display: flex;
@@ -462,9 +462,10 @@ body {
 
 .CodeMirror-hints li:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button):hover,
 .CodeMirror-hints .CodeMirror-hint-active:not(.autocomplete-separator):not(.autocomplete-category-separator):not(.autocomplete-back-button) {
-  background: linear-gradient(90deg, var(--bg-col-1), var(--bg-col-2));
+  background: var(--border-col-2);
   border-left: 3px solid var(--bg-col-1) ;
-  color: var(--text-col-1);
+  color: var(--text-col-2);
+  color:var(--bg-col-1);
 }
 
 /* Styles pour le nom de l'attack */
@@ -486,8 +487,8 @@ body {
 /* Styles pour le tag BPM */
 .attack-bpm-tag {
   display: inline-block;
-  background: linear-gradient(135deg, #4A90C2, #6BBFDF);
-  color: #0F1419;
+  background: var(--border-col-1);
+  color: var(--bg-col-2);
   font-size: 14px;
   font-weight: bold;
   padding: 2px 8px;
@@ -501,32 +502,9 @@ body {
 }
 
 .CodeMirror-hint-active .attack-bpm-tag {
-  background: linear-gradient(135deg, #6BBFDF, #8AD4F5);
-  box-shadow: 0 2px 6px rgba(107, 191, 223, 0.5);
-  transform: scale(1.05);
-}
-
-/* Styles pour le tag de catégorie FX */
-.fx-tag {
-  display: inline-block;
-  background: linear-gradient(135deg, #9B59B6, #BB8FCE);
-  color: #FFFFFF;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 8px;
-  margin-left: 8px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  letter-spacing: 0.3px;
-  flex-shrink: 0;
-  transition: all 0.2s ease;
-  text-transform: capitalize;
-}
-
-.CodeMirror-hint-active .fx-tag {
-  background: linear-gradient(135deg, #BB8FCE, #D7BDE2);
-  box-shadow: 0 2px 6px rgba(187, 143, 206, 0.5);
+  background: var(--bg-col-2);
+  color: var(--border-col-1);
+  box-shadow: 0 2px 6px var(--border-col-1);
   transform: scale(1.05);
 }
 

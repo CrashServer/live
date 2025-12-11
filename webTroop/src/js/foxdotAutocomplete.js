@@ -150,6 +150,7 @@ export const foxdotAutocomplete = {
         { text: 'PMorse()', displayText: 'PMorse' },
         { text: 'genArp()', displayText: 'genArp' },
         { text: 'PBin()', displayText: 'PBin' },
+        { text: 'PHex("")', displayText: 'PHex' },
         { text: 'PSaw()', displayText: 'PSaw' },
         { text: 'PTime()', displayText: 'PTime' },
         { text: 'PFrac()', displayText: 'PFrac' },
@@ -216,7 +217,7 @@ export const foxdotAutocomplete = {
         { text: 'PJoin()', displayText: 'PJoin' },
     ],
     coolFunction: [
-        { text: 'ascii_gen()', displayText: 'ascii_gen' },
+        { text: 'ascii_gen("Crash")', displayText: 'ascii_gen' },
         { text: 'connect()', displayText: 'connect' },  
         { text: 'attack()', displayText: 'attack' },  
         { text: 'lost()', displayText: 'lost' },  
@@ -227,12 +228,12 @@ export const foxdotAutocomplete = {
         { text: 'pshort()', displayText: 'pshort' },  
         { text: 'unsolo()', displayText: 'unsolo' },  
         { text: 'soloRnd()', displayText: 'soloRnd' },  
-        { text: 'masterAll()', displayText: 'masterAll' },  
+        { text: 'masterAll("")', displayText: 'masterAll' },  
         { text: 'voice_count()', displayText: 'voice_count' },  
         { text: 'random_bpm_var()', displayText: 'random_bpm_var' },  
         { text: 'random_bpm()', displayText: 'random_bpm' },  
         { text: 'setseed()', displayText: 'setseed' },  
-        { text: 'linbpm()', displayText: 'linbpm' },  
+        { text: 'linbpm(170, 32)', displayText: 'linbpm' },  
         { text: 'darker()', displayText: 'darker' },  
         { text: 'lighter()', displayText: 'lighter' },  
         { text: 'drop()', displayText: 'drop' },  
@@ -262,7 +263,7 @@ export const foxdotAutocomplete = {
         { text: 'switch()', displayText: 'switch' }, 
         { text: 'clone()', displayText: 'clone' }, 
         { text: 'once()', displayText: 'once' }, 
-        { text: 'start()', displayText: 'start' }, 
+        { text: 'start(32)', displayText: 'start' }, 
         { text: 'drummer()', displayText: 'drummer' },
         { text: 'sometimes("stutter")', displayText: 'sometimes'},
         { text: 'often()', displayText: 'often'},
@@ -486,7 +487,7 @@ export const foxdotAutocomplete = {
             do {
                 randomPlayer = String.fromCharCode(97 + Math.floor(Math.random() * 26)) + Math.floor(Math.random() * 10) + ' >> ';
             } while (playersList.includes(randomPlayer));
-            const drumPattern = `${randomPlayer}play("<x.><.><....>", sample=0, amp=1).sometimes("stutter")`;
+            const drumPattern = `${randomPlayer}play("<x.><.><....>", sample=9, amp=1).sometimes("stutter")`;
             return {
                 list: [{ text: drumPattern, displayText: 'Basic drum pattern' }],
                 from: CodeMirror.Pos(cursor.line, 0),

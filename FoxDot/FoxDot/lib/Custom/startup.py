@@ -299,6 +299,27 @@ if __name__ != "__main__":
             return Pattern([int(i) for i in str(bin(number)[2:])])
 
         @loop_pattern_func
+        def PHex(hexnum="A"):
+            """ Returns a binary pattern from hexadecimal number 
+            Examples:
+                PHex(8) => P[1,0,0,0]
+                PHex("b") => P[1,0,1,1]
+                PHex("ff") => P[1,1,1,1,1,1,1,1]
+                PHex("3a") => P[0,0,1,1,1,0,1,0]
+            """
+            # Convert to string and remove '0x' prefix if present
+            if isinstance(hexnum, int):
+                hexnum = hex(hexnum)[2:]
+            else:
+                hexnum = str(hexnum).lower().replace('0x', '')
+            
+            # Convert hex to decimal then to binary
+            decimal = int(hexnum, 16)
+            binary = bin(decimal)[2:]
+            
+            return Pattern([int(i) for i in binary])
+
+        @loop_pattern_func
         def PSaw(n=16, inverse=0):
             """ Returns values of one cycle of Saw wave split into 'n' parts """
             i = 1 / (n-1)

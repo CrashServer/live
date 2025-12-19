@@ -230,6 +230,9 @@ function interpolateColor(color1, color2, factor) {
     return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
   }
 
+// Stocker l'état précédent des players
+let previousPlayersState = new Map();
+
 function formatPlayers(message) {
     const players = message.map(ply => {
     const { player: id, name: synth, duration: duration, solo: solo } = JSON.parse(ply);
@@ -238,8 +241,6 @@ function formatPlayers(message) {
     const [minutes, seconds] = duration.split(':').map(Number);
     const totalMinutes = minutes + seconds/60;
     const durationColor = getDurationColor(totalMinutes);
-    // console.log(solo);
-    // const isSolo = (solo == "True") ? "soloed" : "";
 
     return {
     id,
@@ -255,20 +256,61 @@ function formatPlayers(message) {
     // Vérifier si un ou plusieurs joueurs ont `solo` à `true`
     const hasSolo = players.some(p => p.solo);
 
-    // Créer le HTML formaté
     const playersDiv = document.getElementById('players');
-    playersDiv.innerHTML = players.map(p => `
-        <div class="player-line ${hasSolo && !p.solo ? 'player-solo' : ''}" data-player-id="${p.id}">
-            <span class="player-id">${p.id}</span>
-            <span class="player-synth">${p.synth}</span>
-            <span class="player-duration" style="color: ${p.durationColor}">${p.duration}</span>
-        </div>
-    `).join('');
+    const currentPlayerIds = new Set(players.map(p => p.id));
+    const previousPlayerIds = new Set(previousPlayersState.keys());
 
-    document.querySelectorAll('.player-line').forEach(line => {
-        line.addEventListener('click', (e) => {
-            const playerId = e.currentTarget.dataset.playerId;
-            EventEmitter.emit('send_foxdot', `${playerId}.stop()`);
+    // Vérifier si la structure a changé (nouveaux joueurs, joueurs supprimés, ou changement de solo)
+    const structureChanged = 
+        currentPlayerIds.size !== previousPlayerIds.size ||
+        ![...currentPlayerIds].every(id => previousPlayerIds.has(id)) ||
+        players.some(p => {
+            const prev = previousPlayersState.get(p.id);
+            return !prev || prev.synth !== p.synth || prev.solo !== p.solo;
+        });
+
+    if (structureChanged) {
+        // Recréer tout le HTML si la structure a changé
+        playersDiv.innerHTML = players.map(p => `
+            <div class="player-line ${hasSolo && !p.solo ? 'player-solo' : ''}" data-player-id="${p.id}">
+                <span class="player-id">${p.id}</span>
+                <span class="player-synth" title="${p.synth}">${p.synth}</span>
+                <span class="player-duration" style="color: ${p.durationColor}">${p.duration}</span>
+            </div>
+        `).join('');
+
+        // Réattacher les event listeners
+        document.querySelectorAll('.player-line').forEach(line => {
+            line.addEventListener('click', (e) => {
+                const playerId = e.currentTarget.dataset.playerId;
+                EventEmitter.emit('send_foxdot', `${playerId}.stop()`);
+            });
+        });
+    } else {
+        // Mettre à jour uniquement les durées
+        players.forEach(p => {
+            const prev = previousPlayersState.get(p.id);
+            if (!prev || prev.duration !== p.duration || prev.durationColor !== p.durationColor) {
+                const playerLine = playersDiv.querySelector(`[data-player-id="${p.id}"]`);
+                if (playerLine) {
+                    const durationSpan = playerLine.querySelector('.player-duration');
+                    if (durationSpan) {
+                        durationSpan.textContent = p.duration;
+                        durationSpan.style.color = p.durationColor;
+                    }
+                }
+            }
+        });
+    }
+
+    // Mettre à jour l'état précédent
+    previousPlayersState.clear();
+    players.forEach(p => {
+        previousPlayersState.set(p.id, {
+            synth: p.synth,
+            duration: p.duration,
+            durationColor: p.durationColor,
+            solo: p.solo
         });
     });
 }

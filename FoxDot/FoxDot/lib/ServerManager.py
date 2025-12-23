@@ -346,18 +346,18 @@ class SCLangServerManager(ServerManager):
 
         msg     = OSCMessage("/video")
 
-        vidpos1  = float(packet.get("pos1", 0.0))
-        vidpos2  = float(packet.get("pos2", 0.0))
+        vidpos  = float(packet.get("vidpos", 0.0))
+        # vidpos2  = float(packet.get("pos2", 0.0))
 
-        vidid1   = int(packet.get("vid1", 0))
-        vidid2   = int(packet.get("vid2", 0))
+        # vidid1   = int(packet.get("vid1", 0))
+        # vidid2   = int(packet.get("vid2", 0))
 
-        blend1   = int(min(255,(packet.get("blend1", 0.5))*255))
-        blend2   = int(min(255,(packet.get("blend2", 0.5))*255))
-        scene   = int(packet.get("scene", 0))
-        blendtype = int(packet.get("blendtype", 0))
+        # blend1   = int(min(255,(packet.get("blend1", 0.5))*255))
+        # blend2   = int(min(255,(packet.get("blend2", 0.5))*255))
+        rate   = int(packet.get("rate", 1))
+        # blendtype = int(packet.get("blendtype", 0))
 
-        msg.append( [synthdef, vidpos1, vidid1, vidpos2, vidid2, blend1, blend2, scene, blendtype] ) # crash mod
+        msg.append( [synthdef, vidpos, rate] ) # crash mod
 
         bundle.append(msg)
 

@@ -205,6 +205,44 @@ fx.add("osc = DelayC.ar(osc, (maxDelayTime * 2), lfos).sum")
 fx.add("osc = Splay.ar(osc*3)")
 fx.save()
 
+# Juno-style Chorus with stereo preservation
+fx = FxList.new("chorus2", "chorus2", {"chorus2":0, "chorus2rate":0.5, "chorus2depth":1, "chorus2mode":1}, order=2, tag="time")
+fx.add_var("dry")
+fx.add_var("wet")
+fx.add_var("wetL")
+fx.add_var("wetR")
+fx.add_var("lfo1")
+fx.add_var("lfo2")
+fx.add_var("lfo3")
+fx.add_var("rate")
+fx.add_var("depth")
+fx.add_var("baseDelay")
+
+# Store dry signal
+fx.add("dry = osc")
+
+# Map rate and depth similar to Juno's sweet spots
+fx.add("rate = LinExp.kr(chorus2rate, 0.0, 1.0, 0.2, 1.2)")
+fx.add("depth = LinLin.kr(chorus2depth, 0.0, 1.0, 0.001, 0.004)")
+fx.add("baseDelay = 0.003")
+
+# Three BBD-style LFOs with phase offsets (like Juno's BBD chips)
+fx.add("lfo1 = SinOsc.kr(rate * 0.51, 0, depth, baseDelay)")
+fx.add("lfo2 = SinOsc.kr(rate * 0.73, 1.2, depth * 0.9, baseDelay)")
+fx.add("lfo3 = SinOsc.kr(rate * 1.19, 2.4, depth * 0.8, baseDelay)")
+
+# Mode 1: Single chorus - both channels use same LFO
+fx.add("wetL = Select.kr(chorus2mode.clip(1,3) - 1, [DelayC.ar(osc[0], 0.02, lfo1), DelayC.ar(osc[0], 0.02, lfo1) + DelayC.ar(osc[0], 0.02, lfo2), DelayC.ar(osc[0], 0.02, lfo1) + DelayC.ar(osc[0], 0.02, lfo2) + DelayC.ar(osc[0], 0.02, lfo3)])")
+fx.add("wetR = Select.kr(chorus2mode.clip(1,3) - 1, [DelayC.ar(osc[1], 0.02, lfo1), DelayC.ar(osc[1], 0.02, lfo2) + DelayC.ar(osc[1], 0.02, lfo3), DelayC.ar(osc[1], 0.02, lfo2) + DelayC.ar(osc[1], 0.02, lfo3) + DelayC.ar(osc[1], 0.02, lfo1)])")
+fx.add("wet = [wetL, wetR]")
+
+# Gentle HPF to remove DC offset and low rumble (like analog chorus)
+fx.add("wet = HPF.kr(wet, 30)")
+
+# Mix with dry signal - Juno has fixed 50/50 mix but we make it controllable
+fx.add("osc = SelectX.ar(chorus2, [dry, (dry * 0.7) + (wet * 0.6)])")
+fx.save()
+
 # dub delay based on «Dub Echo» by Bjorn Westergard [sccode https://sccode.org/1-h]
 fx = FxList.new('dubd', 'dubdelay', {'dubd': 0, 'dublen': 0.1, 'dubwidth': 0.12, 'dubfeed': 0.8}, order=2, tag="time")
 fx.add_var("dry")

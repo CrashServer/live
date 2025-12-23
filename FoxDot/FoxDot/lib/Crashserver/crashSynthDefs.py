@@ -170,6 +170,9 @@ faim.add()
 fbass = FileSynthDef("fbass")
 fbass.add()
 
+fmsynth = FileSynthDef("fmsynth")
+fmsynth.add()
+
 four = FileSynthDef("four")
 four.add()
 

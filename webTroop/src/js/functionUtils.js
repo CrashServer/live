@@ -625,13 +625,15 @@ export const functionUtils = {
             return synth;
         });
 
-        const formattedSynthDefs = updatedSynthDefs.map(synth => {
-          return { text: synth.displayText, displayText: synth.displayText };
-        });
+        // const formattedSynthDefs = updatedSynthDefs.map(synth => {
+        //   return { text: synth.displayText, displayText: synth.displayText, tag: synth.tag };
+        // });
         const argsSynth = updatedSynthDefs.map(synth => {
-          return { text: synth.displayText + "(" + synth.text + ")", displayText: synth.displayText + "_" };
+          return { text: synth.displayText + "(" + synth.text + ")", displayText: synth.displayText, tag: synth.tag };
         });
-        const allSynthDefs = [...formattedSynthDefs, ...argsSynth];
+        // const allSynthDefs = [...formattedSynthDefs, ...argsSynth];
+        const allSynthDefs = [...argsSynth];
+
 
         // Get AttackList
         const attackList = message.autocomplete.attackList;

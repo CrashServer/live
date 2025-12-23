@@ -31,5 +31,11 @@ SynthDef.new(\a_cy,
 		crash = dist * amp * 0.4;
 		crash = Pan2.ar(crash, pan);
 		ReplaceOut.ar(bus, crash);
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

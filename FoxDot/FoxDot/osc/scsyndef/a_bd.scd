@@ -38,5 +38,11 @@ SynthDef.new(\a_bd,
 
 		kick = Pan2.ar(kick, pan);
 		ReplaceOut.ar(bus, kick);
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

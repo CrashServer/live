@@ -25,4 +25,13 @@ SynthDef.new(\abass,
 	sig = sig.tanh;
 	osc = Mix(sig) * 0.25;
 	osc = Pan2.ar(osc * env , pan);
-	ReplaceOut.ar(bus, osc * amp)}).add;
+	ReplaceOut.ar(bus, osc * amp)
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \bass,
+	tags: []
+	)
+	
+).add;

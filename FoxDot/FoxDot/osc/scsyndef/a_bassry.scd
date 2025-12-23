@@ -72,5 +72,11 @@ SynthDef.new(\a_bassry,
 		osc = Pan2.ar(osc, pan);
 
 		ReplaceOut.ar(bus, osc)
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

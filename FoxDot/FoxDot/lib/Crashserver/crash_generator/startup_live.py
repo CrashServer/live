@@ -837,7 +837,6 @@ class WebsocketServer():
     async def sendSynthList(self):
         args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', ]
         synthList = []
-        # path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")
         synth_list = sorted([f for f in SynthDefs])
         for syn in synth_list:
             if syn != "":
@@ -848,11 +847,15 @@ class WebsocketServer():
                 txt = str(''.join(synth_txt))
                 synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
                 synthargs = re.findall(r"\{\|(.*?)\|\s*var", txt, re.S)
+                
+                # Extract category from metadata
+                category_match = re.search(r"category:\s*\\(\w+)", txt)
+                category = category_match.group(1) if category_match else ""
+                
                 if (len(synthname) != 0 and len(synthargs) != 0):
                     filtered_args = ', '.join([arg.strip() for arg in synthargs[0].split(', ') if arg.split('=')[0].strip() not in args_to_remove])
-                    synthList.append({'text': filtered_args, 'displayText': synthname[0]})	
+                    synthList.append({'text': filtered_args, 'displayText': synthname[0], 'tag': category})	
         return synthList
-        # return json.dumps({"type": "synthList", "synth": synthList})
 
     def sendServerState(self):
         ''' Send server state to websocket server '''

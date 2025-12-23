@@ -461,15 +461,16 @@ document.addEventListener('DOMContentLoaded', async () => {
           foxdotAutocomplete.attackList = attackList;
           foxdotAutocomplete.attackCategories = foxdotAutocomplete.getAttackCategories(); 
           foxdotAutocomplete.fxCategories = foxdotAutocomplete.getFxCategories(); 
+          console.log(synthList);
 
           // Construire les définitions dynamiques pour les synths
           // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)
           try {
             const dynamicSynthDefs = {};
             (synthList || []).filter(item => {
-              return item && typeof item.displayText === 'string' && item.displayText.endsWith('_') && typeof item.text === 'string';
+              return item && typeof item.displayText === 'string' && typeof item.text === 'string';
             }).forEach(item => {
-              const baseName = item.displayText.slice(0, -1); // retirer le '_'
+              const baseName = item.displayText; // retirer le '_'
               const parenIdx = item.text.indexOf('(');
               const signature = parenIdx >= 0 ? item.text.slice(parenIdx) : '';
               if (baseName && signature) {

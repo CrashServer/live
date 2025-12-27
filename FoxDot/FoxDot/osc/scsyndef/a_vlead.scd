@@ -35,5 +35,11 @@ SynthDef.new(\a_vlead,
 		osc = Pan2.ar(osc, pan + (LFNoise1.ar(7) * 0.3));
 
 		ReplaceOut.ar(bus, osc)
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

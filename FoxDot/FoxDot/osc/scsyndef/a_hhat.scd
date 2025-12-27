@@ -35,5 +35,11 @@ SynthDef.new(\a_hhat,
 
 		hihat = Pan2.ar(hihat, pan);
 		ReplaceOut.ar(bus, hihat);
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

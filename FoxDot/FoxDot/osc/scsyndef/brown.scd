@@ -9,5 +9,11 @@ SynthDef.new(\brown,
 		osc = RLPF.ar(osc, cutoff,rq);
 		osc = Mix(osc) * 0.1;
 		osc = Pan2.ar(osc * amp, pan);
-		ReplaceOut.ar(bus, osc)}
-	).add;
+		ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \noise,
+	tags: []
+	)
+).add;

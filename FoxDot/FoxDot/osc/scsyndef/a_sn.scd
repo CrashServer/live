@@ -40,5 +40,11 @@ SynthDef.new(\a_sn,
 		snare = dist * amp * 0.6;
 		snare = Pan2.ar(snare, pan);
 		ReplaceOut.ar(bus, snare);
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

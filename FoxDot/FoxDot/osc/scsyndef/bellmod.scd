@@ -30,4 +30,11 @@ osc =  (sig1 * s1) +(sig2 * s2) + (sig3 * s3);
 osc = Mix(osc) * 0.5;
 osc = Pan2.ar(osc, pan);
 
-ReplaceOut.ar(bus, osc)}).add;
+ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \keyboard,
+	tags: []
+	)
+).add;

@@ -85,4 +85,11 @@ var vibs, mods, gens, formantsFemale, formantsMale, vowelsFemale, vowelsMale, vo
 
 
     ReplaceOut.ar(bus, out * amp * 0.5 * env);
-}).add;
+},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \ambi,
+	tags: []
+	)
+).add;

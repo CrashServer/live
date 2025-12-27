@@ -24,6 +24,6 @@ metadata: (
 	credit: "Mike Hairston",
 	modified_by: "Bruno Ruviaro, Josh Mitchell, Jens Meisner",
 	description: "Vangelis/Blade Runner lead sound, based on tutorial by meastempo ",
-	category: \keyboards,
+	category: \keyboard,
 	tags: [\lead, \modulation, \analog, \cs80, \vangelis, \bladerunner]
 )).add;

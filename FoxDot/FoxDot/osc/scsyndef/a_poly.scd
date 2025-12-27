@@ -52,5 +52,11 @@ SynthDef.new(\a_poly,
 		osc = Pan2.ar(osc, pan + (combinedGate * LFNoise1.kr(1) * 0.2));
 
 		ReplaceOut.ar(bus, osc)
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

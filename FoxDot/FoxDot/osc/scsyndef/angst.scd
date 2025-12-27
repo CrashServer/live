@@ -14,4 +14,12 @@ SynthDef.new(\angst,
 
 		osc = Mix(osc*env) * 1.6 * amp;
 		osc = Pan2.ar(osc, pan);
-		ReplaceOut.ar(bus, osc)}).add;
+		ReplaceOut.ar(bus, osc)}
+		,
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \ambi,
+	tags: []
+	)
+).add;

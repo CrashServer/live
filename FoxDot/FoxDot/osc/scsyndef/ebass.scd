@@ -107,7 +107,7 @@ SynthDef.new(\ebass,
 },
 metadata: (
 	credit: "by Josh Mitchell, CrashServer FoxDot Mod",
-	category: \guitar,
+	category: \bass,
 	tags: [\pitched, \modal]
 )
 ).add;

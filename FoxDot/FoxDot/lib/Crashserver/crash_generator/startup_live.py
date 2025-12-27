@@ -835,7 +835,7 @@ class WebsocketServer():
         # await self.sendWebsocket(fxDict)
 
     async def sendSynthList(self):
-        args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'rate', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', ]
+        args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', 'ratelfo', 'ratelfoadd', 'ratelfomul', 'room', 'beat_stretch', 'clip', 'looping' ]
         synthList = []
         synth_list = sorted([f for f in SynthDefs])
         for syn in synth_list:

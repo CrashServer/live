@@ -444,6 +444,7 @@ export const foxdotAutocomplete = {
     _completionWidget: null,
     attackCategories: {},
     fxCategories: {},
+    synthCategories: {},
 
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
@@ -471,6 +472,7 @@ export const foxdotAutocomplete = {
         const serverPattern = /(S|s)er\*/;
         const scenePattern = /!/;
 
+        // Random player name suggestion
         if (beforeCursor.trim() === '' && afterCursor.trim() === '') {
             let randomPlayer;
             do {
@@ -482,6 +484,7 @@ export const foxdotAutocomplete = {
                 to: CodeMirror.Pos(cursor.line, cursor.ch),
             };
         }
+        // drum player suggestion
         else if (beforeCursor.trim().toLowerCase() === 'dr' && line.trim().toLowerCase() === 'dr') {
             let randomPlayer;
             do {
@@ -494,6 +497,7 @@ export const foxdotAutocomplete = {
                 to: CodeMirror.Pos(cursor.line, line.length)
             };
         }
+        // loop suggestion
         else if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
@@ -508,6 +512,7 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, loopEnd),
             }
         }
+        // wavetable suggestion
         else if (wavetablePattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
@@ -522,6 +527,7 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, loopEnd),
             }
         }
+        // lost and attack suggestion
         else if (lostPattern.test(beforeCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             const match = line.match(/(lost|attack)\(([^)]*)\)$/);
@@ -577,6 +583,7 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, end),
             }
         }
+        // Scene suggestion
         else if (scenePattern.test(beforeCursor)) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
             const filteredScenes = this.sceneNames.filter(scene => scene.displayText.startsWith(prefix));
@@ -587,6 +594,7 @@ export const foxdotAutocomplete = {
                 to: CodeMirror.Pos(cursor.line, cursorPosition),
             };
         }
+        // Scale suggestion
         else if (beforeCursor.includes('Scale.default=')) {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
             const filteredScales = this.scales.filter(scale => scale.displayText.startsWith(prefix));
@@ -596,10 +604,12 @@ export const foxdotAutocomplete = {
             to: CodeMirror.Pos(cursor.line, cursorPosition),
             };
         }
-
+        // Fx, keyword, player function suggestion
         else if (isInsideParentheses) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z:]/g, "");
             let foxdotKeyword = [];
+            
+            // Fx suggestion
             if (prefix.startsWith('x')) {
                 const fxPrefix = prefix.slice(1,).toLowerCase();
                 
@@ -621,17 +631,18 @@ export const foxdotAutocomplete = {
                     foxdotKeyword = this.fxList.filter(f => f.displayText.toLowerCase().startsWith(fxPrefix));
                 }
             }
+            // Keyword and pattern function suggestion
             else {
                 const combinedKeyword = [...this.foxKeyword, ...this.patternFunction];
                 foxdotKeyword = combinedKeyword.filter(f => f.displayText.toLowerCase().startsWith(prefix.toLowerCase()));;
             }
-            // const foxdotKeyword = filterKeyword.filter(f => f.displayText.toLowerCase().startsWith(prefix.toLowerCase()));
             return {
                 list: foxdotKeyword.length > 0 ? foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)) : foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)),
                 from: CodeMirror.Pos(cursor.line, token.start),
                 to: CodeMirror.Pos(cursor.line, cursorPosition),
                 };
         }
+        // player function suggestion
         else if (afterLastClosingParenthesis.test(beforeCursor)) {
             const prefix = token.string;
             const filteredPlayerFunction = this.playerFunction.filter(f => f.displayText.startsWith(prefix));
@@ -641,24 +652,37 @@ export const foxdotAutocomplete = {
                 to: CodeMirror.Pos(cursor.line, cursorPosition),
             };
         }
+        // Synth suggestion
         else if (matchPlayer) {
-            // const prefix = line.slice(matchPlayer.index + matchPlayer[0].length).trim();
-            const filteredSynths = this.synths.filter(synth => synth.displayText.includes(token.string));
-            const synthMatch = line.match(/>>\s*([a-zA-Z0-9_]+)\(/);
-            if (synthMatch) {
-                const synthWithoutUndescore = filteredSynths.filter(synth => !synth.displayText.endsWith("_"));
-                return {
-                    list: synthWithoutUndescore.length > 0 ? synthWithoutUndescore.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                    from: CodeMirror.Pos(cursor.line, token.start),
-                    to: CodeMirror.Pos(cursor.line, token.end),
-                };
+            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
+            let filteredSynths = [];
+            
+            const synthPrefix = prefix.toLowerCase();
+            
+            if (synthPrefix === '') {
+                // Add "All" category first
+                filteredSynths.push(this.createCategorySeparator("All", "All", "synth"));
+                
+                // Add other categories sorted alphabetically
+                const sortedSynthCategories = Object.keys(this.synthCategories)
+                    .filter(key => key && key.trim() !== "" && key !== "Uncategorized")
+                    .sort((a, b) => a.localeCompare(b));
+                
+                sortedSynthCategories.forEach(categoryKey => {
+                    filteredSynths.push(this.createCategorySeparator(categoryKey, categoryKey, "synth"));
+                });
             } else {
-                return {
-                    list: filteredSynths.length > 0 ? filteredSynths.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                    from: CodeMirror.Pos(cursor.line, (token.string.trim() == "") ? token.start +1 : token.start ),
-                    to: cursor,
-                };
+                filteredSynths = this.synths.filter(synth => synth.displayText.toLowerCase().startsWith(synthPrefix));
             }
+
+            
+
+
+            return {
+                list: filteredSynths.length > 0 ? filteredSynths.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+                from: CodeMirror.Pos(cursor.line, (token.string.trim() == "") ? token.start +1 : token.start ),
+                to: cursor,
+            };
         }
         else {
             const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
@@ -769,6 +793,13 @@ export const foxdotAutocomplete = {
         return this.getCategoriesFromList(this.fxList, 'tag');
     },
 
+    /**
+     * Get Synth categories from the Synth list
+     */
+    getSynthCategories: function() {
+        return this.getCategoriesFromList(this.synths, 'tag');
+    },
+
     // show elements of a category
     /**
      * Show category items with customizable rendering
@@ -786,7 +817,12 @@ export const foxdotAutocomplete = {
         if (categoryType === 'fx') {
             categoriesMap = this.fxCategories;
             allItemsList = this.fxList;
-        } else {
+        } 
+        else if (categoryType === 'synth') {
+            categoriesMap = this.synthCategories;
+            allItemsList = this.synths;
+        } 
+        else {
             categoriesMap = this.attackCategories;
             allItemsList = this.attackList;
         }
@@ -871,6 +907,21 @@ export const foxdotAutocomplete = {
                         // Créer le nom du FX
                         const nameSpan = document.createElement('span');
                         nameSpan.className = 'fx-name';
+                        nameSpan.textContent = data.displayText;
+                        element.appendChild(nameSpan);
+                    }
+                };
+            } else if (categoryType === 'synth') {
+                // Pour les Synths, afficher simplement le nom
+                return {
+                    text: item.text,
+                    displayText: item.displayText,
+                    render: function(element, self, data) {
+                        element.innerHTML = '';
+                        
+                        // Créer le nom du Synth
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'synth-name';
                         nameSpan.textContent = data.displayText;
                         element.appendChild(nameSpan);
                     }

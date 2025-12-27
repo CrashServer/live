@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           foxdotAutocomplete.attackList = attackList;
           foxdotAutocomplete.attackCategories = foxdotAutocomplete.getAttackCategories(); 
           foxdotAutocomplete.fxCategories = foxdotAutocomplete.getFxCategories(); 
-          console.log(synthList);
+          foxdotAutocomplete.synthCategories = foxdotAutocomplete.getSynthCategories();
 
           // Construire les définitions dynamiques pour les synths
           // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)

@@ -1,13 +1,13 @@
 SynthDef.new(\acidbass, {
-	|bus = 0, gate = 1, freq = 440, amp = 1, pan = 0, fmod=0, atk = 0.001, dec = 0.4, sus = 1, rel = 0.3, curve = -4, rate = 4, width = 0.51, rq = 0.4|
+	|bus = 0, gate = 1, freq = 440, amp = 1, pan = 0, fmod=0, atk = 0.001, decay = 0.4, sus = 1, rel = 0.3, curve = -4, rate = 4, width = 0.51, rq = 0.4|
 	var ampEnv, filterEnv, osc;
 	freq = In.kr(bus, 1);
-	
+
 	freq = [freq, freq+fmod];
 	freq = freq/2;
 	ampEnv = Env.adsr(
 		attackTime: atk,
-		decayTime: dec,
+		decayTime: decay,
 		sustainLevel: sus / 20,
 		releaseTime: rel,
 		peakLevel: amp * 0.1,
@@ -15,7 +15,7 @@ SynthDef.new(\acidbass, {
 	).kr(gate: gate, doneAction: 2);
 	filterEnv = Env.adsr(
 		attackTime: atk,
-		decayTime: dec * 2,
+		decayTime: decay * 2,
 		sustainLevel: sus * 1/20,
 		releaseTime: rel,
 		peakLevel: 2.pow(rate.clip(0,6)), // octaves multiplier

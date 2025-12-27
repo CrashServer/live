@@ -32,4 +32,11 @@ SynthDef.new(\cbass,
     filt = Pan2.ar(filt, pan);
 
     ReplaceOut.ar(bus, filt);
-}).add;
+    },
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \bass,
+	tags: []
+	)
+).add;

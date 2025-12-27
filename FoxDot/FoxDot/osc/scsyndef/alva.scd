@@ -1,4 +1,3 @@
-(
 SynthDef(\alva,
 	{|bus=0, amp=1, freq=240, pan=0, gate=1, fmod=0, vib=0, sus=1, blur=1, mod=0|
 	var osc, env, freqenv, freqenv2, line;
@@ -15,6 +14,12 @@ SynthDef(\alva,
 	osc = Limiter.ar(osc);
 	osc = Mix(osc) * 0.13;
 	osc = Pan2.ar(osc, pan);
-	ReplaceOut.ar(bus, osc)}).add;
-)
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \misc,
+	tags: []
+	)
+).add;
 

@@ -31,5 +31,11 @@ SynthDef.new(\a_gheavy,
 		osc = Pan2.ar(osc, pan);
 
 		ReplaceOut.ar(bus, osc)
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

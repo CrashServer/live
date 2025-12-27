@@ -25,5 +25,5 @@ metadata: (
 	credit: "https://nathan.ho.name/",
 	modified_by: "CrashServer",
 	decription: "Hollow noise",
-	category: \noise,
+	category: \ambi,
 )).add;

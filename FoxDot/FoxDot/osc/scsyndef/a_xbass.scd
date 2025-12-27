@@ -91,5 +91,11 @@ SynthDef.new(\a_xbass,
 		osc = Pan2.ar(osc, pan);
 
 		ReplaceOut.ar(bus, osc)
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

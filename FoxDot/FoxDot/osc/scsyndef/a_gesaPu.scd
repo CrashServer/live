@@ -51,5 +51,11 @@ SynthDef.new(\a_gesa,
 		osc = Pan2.ar(osc, pan + (LFNoise1.ar(0.5) * 0.1));
 
 		ReplaceOut.ar(bus, osc)
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

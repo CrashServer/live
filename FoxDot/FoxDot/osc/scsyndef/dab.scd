@@ -10,4 +10,11 @@ env=EnvGen.ar(Env(times: [(sus * 0.25), (sus * 1)],levels: [0, amp, 0],curve: 'l
 osc=(osc * env);
 osc = Mix(osc) * 0.5;
 osc = Pan2.ar(osc, pan);
-	ReplaceOut.ar(bus, osc)}).add;
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \bass,
+	tags: []
+	)
+).add;

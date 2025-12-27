@@ -14,4 +14,11 @@ SynthDef(\click,
 	sig = Mix(sig) * 0.4;
 	sig = Pan2.ar(sig, pan);
 	ReplaceOut.ar(bus,Splay.ar( sig * amp ))
-}).add;
+},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \basic,
+	tags: []
+	)
+).add;

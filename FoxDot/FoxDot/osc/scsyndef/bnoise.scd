@@ -1,15 +1,14 @@
-(
 SynthDef(\bnoise,
 	{|bus=0, amp=0.1, freq=10, blur=1, fmod=0, dur=1, gate=1, freq1=1000, freq2=2000, cutoff=2800, rq=0.8, pan=0, sus=1.015|
 	var sig0, sig1, sig2, sig3, osc,  env;
 
 
 	sus = sus * blur;
-freq = In.kr(bus, 1);
-freq = [freq, freq+fmod];
+	freq = In.kr(bus, 1);
+	freq = [freq, freq+fmod];
 
 
-env=EnvGen.ar(Env(times: [sus, sus],levels: [0, amp, 0],curve: 'lin'), doneAction: 0);
+	env=EnvGen.ar(Env(times: [sus, sus],levels: [0, amp, 0],curve: 'lin'), doneAction: 0);
 	sig1 = BPF.ar(
 		BrownNoise.ar
 		(mul: SinOsc.ar(freq, phase: Rand (0, pi), mul: Rand (0.1, 2))),
@@ -23,11 +22,17 @@ env=EnvGen.ar(Env(times: [sus, sus],levels: [0, amp, 0],curve: 'lin'), doneActio
 
 	sig0 = (((sig1 + sig2 + sig3)) * 8).tanh ;
 
-osc = sig0 * amp;
-osc=(osc * env);
-osc = HPF.ar(osc, 40);
-osc = RLPF.ar(osc, cutoff, rq);
-osc = Mix(osc) * 0.2;
-osc = Pan2.ar(osc, pan);
-	ReplaceOut.ar(bus, osc)}).add;
-)
+	osc = sig0 * amp;
+	osc=(osc * env);
+	osc = HPF.ar(osc, 40);
+	osc = RLPF.ar(osc, cutoff, rq);
+	osc = Mix(osc) * 0.2;
+	osc = Pan2.ar(osc, pan);
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \noise,
+	tags: []
+	)
+).add;

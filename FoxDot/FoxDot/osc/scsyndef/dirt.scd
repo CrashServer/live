@@ -11,4 +11,11 @@ env=EnvGen.ar(Env.perc(attackTime: 0.01,releaseTime: sus,level: amp,curve: 0), d
 osc=(osc * env);
 osc = Mix(osc) * 0.5;
 osc = Pan2.ar(osc, pan);
-	ReplaceOut.ar(bus, osc)}).add;
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \basic,
+	tags: []
+	)
+).add;

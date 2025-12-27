@@ -43,5 +43,11 @@ SynthDef.new(\a_stress,
 		osc = Pan2.ar(osc, pan + (LFNoise1.ar(0.3) * 0.15));
 
 		ReplaceOut.ar(bus, osc)
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \a_,
+	tags: []
+	)
 ).add;

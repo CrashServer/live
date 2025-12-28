@@ -1,4 +1,5 @@
-SynthDef(\fmsynth, { arg bus = 0, freq = 440, index = 3, amp=1, pan=0, sus=0, level=1, gate=1, fmod=0;
+SynthDef.new(\fmsynth, 
+	{|bus = 0, freq = 440, index = 3, amp=1, pan=0, sus=0, level=1, gate=1, fmod=0|
 	var mod, car, env, osc;
 	freq = In.kr(bus, 1);
 	freq = [freq, freq+fmod] * Line.ar(Rand(0.5,1.5),1,0.02);
@@ -9,4 +10,11 @@ SynthDef(\fmsynth, { arg bus = 0, freq = 440, index = 3, amp=1, pan=0, sus=0, le
 	osc=(osc * env);
 	osc = Mix(osc) * 1/16;
 	osc = Pan2.ar(osc * amp, pan);
-	ReplaceOut.ar(bus, osc)}).add;
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \basic,
+	tags: []
+	)	
+).add;

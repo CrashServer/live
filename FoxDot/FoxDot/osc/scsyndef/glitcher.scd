@@ -28,4 +28,11 @@ SynthDef.new(\glitcher,
 	osc = osc * amp * env;
 	osc = Mix(osc) * 0.4;
 	osc = Pan2.ar(osc, pan);
-ReplaceOut.ar(bus, osc)}).add;
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \noise,
+	tags: []
+	)
+).add;

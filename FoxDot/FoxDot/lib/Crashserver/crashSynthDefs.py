@@ -80,6 +80,9 @@ abass.add()
 acidbass = FileSynthDef("acidbass")
 acidbass.add()
 
+ambi = FileSynthDef("ambi")
+ambi.add()
+
 angst = FileSynthDef("angst")
 angst.add()
 
@@ -89,8 +92,20 @@ alva.add()
 arpymod = FileSynthDef("arpymod")
 arpymod.add()
 
+bass = FileSynthDef("bass")
+bass.add()
+
+charm = FileSynthDef("charm")
+charm.add()
+
 bbass = FileSynthDef("bbass")
 bbass.add()
+
+bell = FileSynthDef("bell")
+bell.add()
+
+blip = FileSynthDef("blip")
+blip.add()
 
 bounce = FileSynthDef("bounce")
 bounce.add()
@@ -110,6 +125,9 @@ bellmod.add()
 braids = FileSynthDef("braids")
 braids.add()
 
+bug = FileSynthDef("bug")
+bug.add()
+
 cbass = FileSynthDef("cbass")
 cbass.add()
 
@@ -122,6 +140,9 @@ choir.add()
 combs = FileSynthDef("combs")
 combs.add()
 
+creep = FileSynthDef("creep")
+creep.add()
+
 cluster = FileSynthDef("cluster")
 cluster.add()
 
@@ -131,11 +152,23 @@ crackle.add()
 cringe = FileSynthDef("cringe")
 cringe.add()
 
+crunch = FileSynthDef("crunch")
+crunch.add()
+
 cs80 = FileSynthDef("cs80")
 cs80.add()
 
+dab = FileSynthDef("dab")
+dab.add()
+
 dafbass = FileSynthDef("dafbass")
 dafbass.add()
+
+dirt = FileSynthDef("dirt")
+dirt.add()
+
+dbass = FileSynthDef("dbass") 
+dbass.add()
 
 dblbass = FileSynthDef("dblbass")
 dblbass.add()
@@ -146,6 +179,12 @@ donorgan.add()
 dopple = FileSynthDef("dopple")
 dopple.add()
 
+donk = FileSynthDef("donk")
+donk.add()
+
+dub = FileSynthDef("dub")
+dub.add()
+
 dustV = FileSynthDef("dustV")
 dustV.add()
 
@@ -155,8 +194,8 @@ ebass.add()
 eeri = FileSynthDef("eeri")
 eeri.add()
 
-elmbass = FileSynthDef("elmbass")
-elmbass.add()
+# elmbass = FileSynthDef("elmbass")
+# elmbass.add()
 
 ethpad = FileSynthDef("ethpad")
 ethpad.add()
@@ -167,6 +206,9 @@ ews.add()
 faim = FileSynthDef("faim")
 faim.add()
 
+feel = FileSynthDef("feel")
+feel.add()
+
 fbass = FileSynthDef("fbass")
 fbass.add()
 
@@ -175,6 +217,9 @@ fmsynth.add()
 
 four = FileSynthDef("four")
 four.add()
+
+fuzz = FileSynthDef("fuzz")
+fuzz.add()
 
 # gaze = FileSynthDef("gaze")
 # gaze.add()
@@ -185,11 +230,20 @@ glitcher.add()
 glitchbass = FileSynthDef("glitchbass")
 glitchbass.add()
 
+glass = FileSynthDef("glass")
+glass.add()
+
+gong = FileSynthDef("gong")
+gong.add()
+
 grat = FileSynthDef("grat")
 grat.add()
 
 gray = FileSynthDef("gray")
 gray.add()
+
+growl = FileSynthDef("growl")
+growl.add()
 
 guit = FileSynthDef("guit")
 guit.add()
@@ -203,11 +257,26 @@ hoover.add()
 ikea = FileSynthDef("ikea")
 ikea.add()
 
+jbass = FileSynthDef("jbass")
+jbass.add()
+
+karp = FileSynthDef("karp")
+karp.add()
+
+keys = FileSynthDef("keys")
+keys.add()
+
+klank = FileSynthDef("klank")
+klank.add()
+
 latoo = FileSynthDef("latoo")
 latoo.add()
 
 lapin = FileSynthDef("lapin")
 lapin.add()
+
+lazer = FileSynthDef("lazer")
+lazer.add()
 
 lbass = FileSynthDef("lbass")
 lbass.add()
@@ -215,8 +284,17 @@ lbass.add()
 lfnoise = FileSynthDef("lfnoise")
 lfnoise.add()
 
+marimba = FileSynthDef("marimba")
+marimba.add()
+
 mpluck = FileSynthDef("mpluck")
 mpluck.add()
+
+noise = FileSynthDef("noise")
+noise.add()
+
+nylon = FileSynthDef("nylon")
+nylon.add()
 
 orientmod = FileSynthDef("orientmod")
 orientmod.add()
@@ -230,14 +308,14 @@ omi.add()
 pad2 = FileSynthDef("pad2")
 pad2.add()
 
-plaits = FileSynthDef("plaits")
-plaits.add()
+pads = FileSynthDef('pads')
+pads.add()
 
-plaitsX = FileSynthDef("plaitsX")
-plaitsX.add()
+pasha = FileSynthDef('pasha')
+pasha.add()
 
-pluck2 = FileSynthDef("pluck2")
-pluck2.add()
+piano = FileSynthDef("piano")
+piano.add()
 
 pianovel = FileSynthDef("pianovel")
 pianovel.add()
@@ -245,17 +323,47 @@ pianovel.add()
 pink = FileSynthDef("pink")
 pink.add()
 
+plaits = FileSynthDef("plaits")
+plaits.add()
+
+plaitsX = FileSynthDef("plaitsX")
+plaitsX.add()
+
+pluck = FileSynthDef("pluck")
+pluck.add()
+
+pluck2 = FileSynthDef("pluck2")
+pluck2.add()
+
 prof = FileSynthDef("prof")
 prof.add()
 
 prodrums = FileSynthDef("prodrums")
 prodrums.add()
 
+prophet = FileSynthDef('prophet')
+prophet.add()
+
 pbass = FileSynthDef("pbass")
 pbass.add()
 
+pulse = FileSynthDef("pulse")
+pulse.add()
+
+quin = FileSynthDef("quin")
+quin.add()
+
 radio = FileSynthDef("radio")
 radio.add()
+
+rave = FileSynthDef("rave")
+rave.add()
+
+razz = FileSynthDef("razz")
+razz.add()
+
+ripple = FileSynthDef("ripple")
+ripple.add()
 
 rsin = FileSynthDef("rsin")
 rsin.add()
@@ -263,17 +371,62 @@ rsin.add()
 rhodes = FileSynthDef("rhodes")
 rhodes.add()
 
+saw = FileSynthDef("saw")
+saw.add()
+
+sawbass = FileSynthDef('sawbass')
+sawbass.add()
+
+scatter = FileSynthDef("scatter")
+scatter.add()
+
+scratch = FileSynthDef("scratch")
+scratch.add()
+
+squish = FileSynthDef("squish")
+squish.add()
+
+snick = FileSynthDef("snick")
+snick.add()
+
+space = FileSynthDef("space")
+space.add()
+
 sine = FileSynthDef("sine")
 sine.add()
 
+sinepad = FileSynthDef("sinepad") 
+sinepad.add()
+
+sitar = FileSynthDef("sitar")
+sitar.add()
+
+soft = FileSynthDef("soft")
+soft.add()
+
+soprano = FileSynthDef("soprano")
+soprano.add()
+
 sos = FileSynthDef("sos")
 sos.add()
+
+spark = FileSynthDef("spark")
+spark.add()
+
+star = FileSynthDef("star")
+star.add()
+
+swell = FileSynthDef("swell")
+swell.add()
 
 subbass = FileSynthDef("subbass")
 subbass.add()
 
 total = FileSynthDef("total")
 total.add()
+
+twang = FileSynthDef("twang")
+twang.add()
 
 tritri = FileSynthDef("tritri")
 tritri.add()
@@ -305,11 +458,17 @@ varicelle.add()
 waves = FileSynthDef("waves")
 waves.add()
 
+varsaw = FileSynthDef("varsaw")
+varsaw.add()
+
 vati = FileSynthDef("vati")
 vati.add()
 
 video = FileSynthDef("video")
 video.add()
+
+viola = FileSynthDef("viola")
+viola.add()
 
 virus = FileSynthDef("virus")
 virus.add()
@@ -319,3 +478,6 @@ war.add()
 
 wobble = FileSynthDef("wobble")
 wobble.add()
+
+zap = FileSynthDef("zap")
+zap.add()

@@ -4,9 +4,16 @@ var osc, env;
 sus = sus * blur;
 rate = In.kr(bus, 1);
 rate = if(ratelfo<=0, rate, rate * SinOsc.kr(ratelfo, 0, ratelfomul, ratelfoadd));
-osc = TGrains.ar(2, trigger:Impulse.ar(density), bufnum:buf, rate: deg, centerPos: pos*BufDur.kr(buf), dur: size);
-osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));
-osc=((osc * amp) * 2);
-osc = Mix(osc) * 0.5;
-osc = Pan2.ar(osc, pan);
-	ReplaceOut.ar(bus, osc)}).add;
+	osc = TGrains.ar(2, trigger:Impulse.ar(density), bufnum:buf, rate: deg, centerPos: pos*BufDur.kr(buf), dur: size);
+	osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));
+	osc=((osc * amp) * 2);
+	osc = Mix(osc) * 0.5;
+	osc = Pan2.ar(osc, pan);
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+		credit: "CrashServer",
+		description: "",
+		category: \loop,
+		tags: []
+	)
+).add;

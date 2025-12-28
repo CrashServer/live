@@ -1,4 +1,3 @@
-(
 SynthDef(\faim,
 	{|bus=0, amp=0.1, atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, beef=0, rate=1, blur=1, beat_dur=1|
 	var sig;
@@ -26,7 +25,6 @@ SynthDef(\faim,
 		sig = sig /(2+beef);
 	sig = sig.flop.sum;
 
-	//sig = sig * EnvGen.ar(\adsr.kr( Env.adsr(0.001,0,1,0.01, 1,-1) ),gate,doneAction:2);
 	//add a ADSR envelope
 	sig = sig * EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);
 
@@ -38,5 +36,11 @@ SynthDef(\faim,
 	sig = Mix(sig) * 0.1;
 	sig = Pan2.ar(sig, pan + [ 0, 0, 0, 0, 0, 0], amp).sum;
 	ReplaceOut.ar(bus, sig);
-}).add;
-)
+},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \guitar,
+	tags: []
+	)
+).add;

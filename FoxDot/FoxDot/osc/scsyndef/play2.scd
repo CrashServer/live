@@ -7,4 +7,5 @@ rate = if(ratelfo<=0, rate, rate * SinOsc.kr(ratelfo, 0, ratelfomul, ratelfoadd)
 osc=PlayBuf.ar(2, buf, (BufRateScale.ir(buf) * rate), startPos: (BufSampleRate.kr(buf) * pos));
 osc=(osc * amp);
 osc = Splay.ar(osc, level:1,spread:wide, center:pan, levelComp: true);
-	ReplaceOut.ar(bus, osc)}).add;
+	ReplaceOut.ar(bus, osc)},
+).add;

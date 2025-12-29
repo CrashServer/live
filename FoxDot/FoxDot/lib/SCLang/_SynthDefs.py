@@ -18,10 +18,10 @@ with SampleSynthDef("play2") as play:
 
 # Synth Players
 
-with SynthDef("audioin") as audioin:
-    audioin.defaults.update(channel=1)
-    audioin.osc = AudioIn.ar(audioin.channel)
-    audioin.env = Env.mask()
+# with SynthDef("audioin") as audioin:
+#     audioin.defaults.update(channel=1)
+#     audioin.osc = SoundIn.ar(audioin.channel)
+#     audioin.env = Env.mask()
 
 # with SynthDef("sinepad") as sinepad:
 #     sinepad.amp = sinepad.amp * 1.5
@@ -421,4 +421,4 @@ with SynthDef("audioin") as audioin:
 
 # Get rid of the variable synth
 
-del synth
+# del synth

@@ -1,6 +1,5 @@
-(
 SynthDef(\organ,
-	{|f=440, width = 0.5, pan = 0.0, bus = 0, amp = 1, sus=1, freq=440, fmod=0,rate = 0.5|
+	{|bus=0, width = 0.5, pan = 0.0, amp=1, sus=1, freq=440, fmod=0, rate=0.5|
 
 	var signal, tapPhase, tap, tapPhaseL, tapPhaseR, tapL, tapR;
 	var timeMod, eqMod, bufferL, bufferR;
@@ -35,8 +34,8 @@ SynthDef(\organ,
 
 	output = 0.01*LeakDC.ar(output, 0.9995);
 
-	output = MoogFF.ar(output.tanh*20.0, (f*12)+LFNoise2.ar(1, 400, 1), LFNoise2.ar(0,3.5, 0));
-	output = MoogFF.ar(output*4, f*LFNoise2.kr(0.2, 6, 4), 0.5);
+	output = MoogFF.ar(output.tanh*20.0, (freq*12)+LFNoise2.ar(1, 400, 1), LFNoise2.ar(0,3.5, 0));
+	output = MoogFF.ar(output*4, freq*LFNoise2.kr(0.2, 6, 4), 0.5);
 
 	timeMod = LFDNoise3.ar(rate, 0.0005);
     eqMod = LFDNoise3.kr(1, 400);
@@ -46,6 +45,11 @@ SynthDef(\organ,
 	osc = HPF.ar(osc, 40);
 	osc = LPF.ar(osc, 14000);
 	osc = Splay.ar(osc * amp, pan);
-	ReplaceOut.ar(bus, osc)}).add;
-
-)
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \keyboard,
+	tags: []
+	)
+).add;

@@ -33,7 +33,11 @@ SynthDef(\hoover,
     // This envelope mainly exists to allow the synth to free when needed:
     osc = osc * EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);
 
-	ReplaceOut.ar(bus, Pan2.ar(osc * 0.15 * amp, pan));
-}).add;
-
-/// based on https://mcld.co.uk/blog/2009/reverse-engineering-the-rave-hoover.html
+	ReplaceOut.ar(bus, Pan2.ar(osc * 0.15 * amp, pan))},
+    metadata: (
+	credit: "CrashServer",
+	description: "based on https://mcld.co.uk/blog/2009/reverse-engineering-the-rave-hoover.html",
+	category: \iconic,
+	tags: []
+	)
+).add;

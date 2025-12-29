@@ -92,6 +92,9 @@ alva.add()
 arpymod = FileSynthDef("arpymod")
 arpymod.add()
 
+audioin = FileSynthDef("audioin")
+audioin.add()
+
 bass = FileSynthDef("bass")
 bass.add()
 

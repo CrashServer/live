@@ -136,7 +136,15 @@ class SynthDefBaseClass(object):
             Def += "osc = Mix(osc) * 0.5;\n"
             Def += "osc = Pan2.ar(osc, pan);\n"
         Def += "\tReplaceOut.ar(bus, osc)"
-        Def += "}).add;\n"
+        Def += "},\n"
+        if self.name in ["loop", "noloop", "stretch", "gsynth", "breakcore", "splitter", "splaffer", "wavetable"]:
+            Def += "metadata: (\n"
+            Def += "credit: \"CrashServer\",\n"
+            Def += "description: \"\",\n"
+            Def += "category: \\sample,\n"
+            Def += "tags: []\n"
+            Def += ")"
+        Def += ").add;\n"
         return Def
 
     def __repr__(self):

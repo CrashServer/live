@@ -13,4 +13,10 @@ osc = Mix(osc1+osc2+osc3+osc4);
 osc=(osc * amp);
 osc = Mix(osc) * 0.5;
 osc = Pan2.ar(osc, pan);
-	ReplaceOut.ar(bus, osc)}).add;
+	ReplaceOut.ar(bus, osc)},
+metadata: (
+credit: "CrashServer",
+description: "",
+category: \sample,
+tags: []
+)).add;

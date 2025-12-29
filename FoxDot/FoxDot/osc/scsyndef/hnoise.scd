@@ -1,6 +1,5 @@
-(
 SynthDef(\hnoise,
-	{| bus=0, freq=800, gate=1, amp=0.5, pan=0, rel=3, room=0.5, rate=1|
+{| bus=0, freq=800, gate=1, amp=0.5, pan=0, rel=3, room=0.5, rate=1|
 	var env, osc, osc2;
 	var cenv;
 	cenv = EnvGen.ar(Env.perc(0,0.02),Dust.kr(SinOsc.kr(0.01).range(1,10)));
@@ -16,5 +15,11 @@ SynthDef(\hnoise,
 	osc = LeakDC.ar(CombC.ar(osc,1,SinOsc.kr(TRand.kr(0, 10)).range(0.0001,2),80));
 	osc = Limiter.ar(osc*env*0.8);
 	osc = Splay.ar(osc * amp, pan);
-	ReplaceOut.ar(bus, osc)}).add;
-)
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \noise,
+	tags: []
+	)
+).add;

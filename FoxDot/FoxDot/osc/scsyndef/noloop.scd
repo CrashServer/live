@@ -9,4 +9,10 @@ osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));
 pos=start;
 osc=(osc * amp);
 osc = Splay.ar(osc, level:1,spread:wide, center:pan, levelComp: true);
-	ReplaceOut.ar(bus, osc)}).add;
+	ReplaceOut.ar(bus, osc)},
+metadata: (
+credit: "CrashServer",
+description: "",
+category: \sample,
+tags: []
+)).add;

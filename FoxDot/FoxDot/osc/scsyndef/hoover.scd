@@ -1,5 +1,5 @@
-SynthDef(\hoover,
-{|bus=0, amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, atk=0.01, decay=0.2, rel=0.01, peak=1, level=0.8, gate=1, porta=1, portadur=0.125|
+SynthDef.new(\hoover,
+{|bus=0, amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, atk=0.01, decay=0.2, rel=0.01, peak=1, level=0.8, gate=1, porta=1, portadur=0.125|
     var osc, env, midfreqs, vibamount;
 
     // Portamento:

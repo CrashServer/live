@@ -1,4 +1,4 @@
-(SynthDef(\fmperc,{|bus=0, amp=0.1, atk=0.015, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vel=0.7, rate=1, blur=1, beat_dur=1, f0r=2, f1r=2, f2r=4, fm0=1, fm1=0.6, fm2=0.3|
+SynthDef.new(\fmperc,{|bus=0, amp=0.1, atk=0.015, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vel=0.7, rate=1, blur=1, beat_dur=1, f0r=2, f1r=2, f2r=4, fm0=1, fm1=0.6, fm2=0.3|
 	var osc, env;
 	var ff0,ff1,ff2, mod0, mod1, mod2;
 	freq = In.kr(bus, 1);
@@ -27,8 +27,5 @@
 
 	osc = OnePole.ar(osc, 0.8);
 	osc = Pan2.ar(osc,pan);
-	ReplaceOut.ar(0,osc);
-
-}).add
-
-)
+	ReplaceOut.ar(0,osc)}
+).add

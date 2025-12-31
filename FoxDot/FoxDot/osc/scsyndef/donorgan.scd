@@ -19,6 +19,6 @@ metadata: (
 	credit: "Mitchell Sigman, Nick Collins",
 	modified_by: "Bruno Ruviaro, Jens Meisner",
 	decription: "Description",
-	category: \keyboard,
+	category: \organ,
 	tags: [\keys, \pulsesynth]
 )).add;

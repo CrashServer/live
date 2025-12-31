@@ -344,8 +344,8 @@ prof.add()
 prodrums = FileSynthDef("prodrums")
 prodrums.add()
 
-prophet = FileSynthDef('prophet')
-prophet.add()
+# prophet = FileSynthDef('prophet')
+# prophet.add()
 
 pbass = FileSynthDef("pbass")
 pbass.add()

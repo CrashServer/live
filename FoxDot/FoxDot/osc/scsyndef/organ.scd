@@ -1,4 +1,4 @@
-SynthDef(\organ,
+SynthDef.new(\organ,
 	{|bus=0, width = 0.5, pan = 0.0, amp=1, sus=1, freq=440, fmod=0, rate=0.5|
 
 	var signal, tapPhase, tap, tapPhaseL, tapPhaseR, tapL, tapR;
@@ -49,7 +49,7 @@ SynthDef(\organ,
 	metadata: (
 	credit: "CrashServer",
 	description: "",
-	category: \keyboard,
+	category: \organ,
 	tags: []
 	)
 ).add;

@@ -1,4 +1,4 @@
-SynthDef(\cluster,
+SynthDef.new(\cluster,
 	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=4.0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=0.0, para1=4|
 	var env, snd;
 
@@ -27,7 +27,7 @@ SynthDef(\cluster,
 	metadata: (
 	credit: "CrashServer",
 	description: "",
-	category: \misc,
+	category: \experiment,
 	tags: []
 	)
 ).add;

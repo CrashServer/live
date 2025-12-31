@@ -1,4 +1,4 @@
-SynthDef(\faim,
+SynthDef.new(\faim,
 	{|bus=0, amp=0.1, atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, beef=0, rate=1, blur=1, beat_dur=1|
 	var sig;
 	var sig1, sig2, sig3, sig4, sig5, sig6, sig7, sig8;

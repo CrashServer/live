@@ -100,7 +100,7 @@ chords = {
 
 synthType = {
     "pads" : ["ambi", "angst", "charm", "creep", "glass", "organ", "ripple", "sinepad", "soprano", "space", "swell", "total", "varsaw"],
-    "lead" : ["arpy", "blip", "dirt", "karp", "lapin", "nylon", "pasha", "piano", "pluck", "prof", "prophet", "pulse", "quin", "razz", "saw", "scatter", "sine", "sitar", "spark", "star", "supersaw", "tb303", "tritri", "varicelle", "zap"],
+    "lead" : ["arpy", "blip", "dirt", "karp", "lapin", "nylon", "pasha", "piano", "pluck", "prof", "pulse", "quin", "razz", "saw", "scatter", "sine", "sitar", "spark", "star", "supersaw", "tb303", "tritri", "varicelle", "zap"],
     "fx" : ["noise", "lazer", "scratch", "snick"],
     "bass" : ["bass", "bbass", "dab", "dafbass", "dbass", "dirt", "faim", "glitchbass", "jbass", "pbass", "sawbass"],
     }

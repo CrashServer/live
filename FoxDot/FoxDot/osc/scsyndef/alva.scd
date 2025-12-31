@@ -1,4 +1,4 @@
-SynthDef(\alva,
+SynthDef.new(\alva,
 	{|bus=0, amp=1, freq=240, pan=0, gate=1, fmod=0, vib=0, sus=1, blur=1, mod=0|
 	var osc, env, freqenv, freqenv2, line;
 
@@ -18,7 +18,7 @@ SynthDef(\alva,
 	metadata: (
 	credit: "CrashServer",
 	description: "",
-	category: \misc,
+	category: \experiment,
 	tags: []
 	)
 ).add;

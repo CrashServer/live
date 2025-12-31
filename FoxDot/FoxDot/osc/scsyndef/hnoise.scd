@@ -1,4 +1,4 @@
-SynthDef(\hnoise,
+SynthDef.new(\hnoise,
 {| bus=0, freq=800, gate=1, amp=0.5, pan=0, rel=3, room=0.5, rate=1|
 	var env, osc, osc2;
 	var cenv;

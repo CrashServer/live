@@ -1,4 +1,4 @@
-SynthDef.new(\ews,{|amp=0.5, sus=1, pan=0, freq=440, vib=0, fmod=0, rate=0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=4, peak=1, level=0.8, wide=0.0, cutoff=230, detune = 0.5, gate=1|
+SynthDef.new(\ews,{|amp=0.5, sus=1, pan=0, freq=440, vib=0, fmod=0, rate=1, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=4, peak=1, level=0.8, wide=0.0, cutoff=230, detune = 0.5, gate=1|
 	var osc, env;
 	var maxNoOfTones = 15;
 	sus = sus * blur;

@@ -19,7 +19,7 @@ SynthDef.new(\angst,
 	metadata: (
 	credit: "CrashServer",
 	description: "",
-	category: \ambi,
+	category: \experiment,
 	tags: []
 	)
 ).add;

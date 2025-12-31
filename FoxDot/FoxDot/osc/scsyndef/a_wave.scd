@@ -1,5 +1,5 @@
 SynthDef.new(\a_wave,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=0.5, cutoff=3500, rq=0.5, detune=0.5, chorus=0.3, unison=7|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=0.5, cutoff=3500, rq=0.5, detune=0.5, chorus=0.3, unison=7|
 	var osc, env, center, sides, filterEnv, vibLFO, pwm, filtered, drift, detuneCurve;
 	sus = sus * blur;
 	freq = In.kr(bus, 1);

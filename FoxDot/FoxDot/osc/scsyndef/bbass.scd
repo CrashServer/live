@@ -1,4 +1,4 @@
-SynthDef(\bbass,
+SynthDef.new(\bbass,
 	{|bus=0, freq = 440, amp=1, gate=1, pan=0, sus=1, blur=1, fmod=0|
 	var snd, env, oscfreq, output, osc, envout;
 	var lfo;

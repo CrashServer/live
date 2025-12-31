@@ -310,5 +310,11 @@ SynthDef.new(\prodrums,
 		final_sig = Balance2.ar(final_sig[0], final_sig[1], pan);
 
 		ReplaceOut.ar(bus, final_sig);
-	}
+	},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \percussion,
+	tags: []
+	)
 ).add;

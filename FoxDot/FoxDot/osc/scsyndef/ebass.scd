@@ -1,5 +1,5 @@
 SynthDef.new(\ebass,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, blur=1, beat_dur=1, atk=0.001, decay=0.01, rel=0.01, pick=0.414, rq = 0.5, cutoff = 250|
+{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, bus=0, blur=1, beat_dur=1, atk=0.001, decay=0.01, rel=0.01, pick=0.414, rq = 0.5, cutoff = 250|
 
 	var exciter, freqArray, ampArray, decArray, constant, mute, snd, openFreq, pickupPos, pickupWidth, decayCoef, dampCoef;
 	openFreq = 82.5;

@@ -1,4 +1,4 @@
-SynthDef(\click,
+SynthDef.new(\click,
 	{|amp = 0.25, freq = 42, bus=0, fmod=0, blur=1, sus=1, pan = 0, vib=1, rate=10|
 	var sig;
 	freq = In.kr(bus, 1);

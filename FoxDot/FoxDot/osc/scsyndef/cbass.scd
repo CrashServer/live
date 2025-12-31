@@ -1,5 +1,5 @@
 SynthDef.new(\cbass,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, cutoff=200, rq=0.9, boost=1.5, detune=0.01, follow=2|
+{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, bus=0, cutoff=200, rq=0.9, boost=1.5, detune=0.01, follow=2|
     var osc1, osc2, subOsc, env, filt, mod, dist, oscSum, freqFollower, dynamicCutoff;
 
     freq = In.kr(bus, 1);

@@ -1,5 +1,5 @@
 SynthDef.new(\longsaw,
-{|amp=1, sus=1, pan=0, freq=0, fmod=0, rate=0, bus=0|
+{|amp=1, sus=1, pan=0, freq=0, fmod=0, bus=0|
 var osc, env;
 freq = In.kr(bus, 1);
 freq = freq + fmod;

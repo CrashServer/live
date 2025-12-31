@@ -1,4 +1,4 @@
-SynthDef(\grat,
+SynthDef.new(\grat,
 {|bus=0, amp=1, atk=0.001, decay=0.01, sus=1,rel=0.01, level=0.8, peak=1, gate=1, pan=0, freq=0, fmod=0, vib=0, rate=1, blur=1, beat_dur=1, cutoff=4000, rq=0.8|
     var osc, env, string;
     string = { |freq|

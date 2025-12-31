@@ -1,4 +1,4 @@
-SynthDef(\bnoise,
+SynthDef.new(\bnoise,
 	{|bus=0, amp=0.1, freq=10, blur=1, fmod=0, dur=1, gate=1, freq1=1000, freq2=2000, cutoff=2800, rq=0.8, pan=0, sus=1.015|
 	var sig0, sig1, sig2, sig3, osc,  env;
 

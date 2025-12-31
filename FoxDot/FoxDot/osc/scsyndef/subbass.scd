@@ -1,5 +1,5 @@
 SynthDef.new(\subbass,
-	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, blur=1, beat_dur=1, atk=0.001, decay=0.01, rel=0.01, blend = 250|
+	{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, bus=0, blur=1, beat_dur=1, atk=0.001, decay=0.01, rel=0.01|
 
 	var env, in, ina, synca, octa, inb, syncb, octb, octave, snd;
 	sus = sus*blur;
@@ -28,7 +28,7 @@ SynthDef.new(\subbass,
 	octave = Mix.ar([octa, octb]);
 
 	//Mixer stage, volume adjustments, envelope, and output
-	snd = Mix.ar([octave * blend, in * (blend - 1)]);
+	snd = Mix.ar([octave, in]);
     snd = LeakDC.ar(snd);
 	snd = Limiter.ar(in: snd, level: 1);
 	snd = snd * env;
@@ -37,7 +37,7 @@ SynthDef.new(\subbass,
 	ReplaceOut.ar(bus, snd);
 },
 metadata: (
-		credit: "Eric Sluyter, CrashServer",
+	credit: "Eric Sluyter, CrashServer",
 	category: \bass,
 	tags: [\pitched, \bass]
 	)

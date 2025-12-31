@@ -1,5 +1,5 @@
 SynthDef.new(\ikea,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0,instr=0, hhat=0.1, sn=0.1, harm=0|
+{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, bus=0,instr=0, hhat=0.1, sn=0.1, harm=0|
 	var osc, env, osc1, osc2, osc3, osc4, osc5, osc6, triggers;
 	var trigMod = LFNoise0.ar(8).round;
 	freq = In.kr(bus, 1);

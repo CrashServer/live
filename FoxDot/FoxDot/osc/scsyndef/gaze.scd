@@ -1,7 +1,7 @@
 // Initialize the synth
 
 SynthDef.new(\gaze,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0, bus=0, blur=1, beat_dur=1, atk=0.0001, decay=0.01, rel=0.01, peak=1, level=0.8, wave=0, freq1=880, freq2=880, res1=0.0, res2=0.0, rate1=10, rate2 = 10, rate3 = 10, depth1=1, depth2=1, depth3=1, lfo1=0, lfo2=0, lfo3 = 0|
+{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=1, bus=0, blur=1, beat_dur=1, atk=0.0001, decay=0.01, rel=0.01, peak=1, level=0.8, wave=0, freq1=880, freq2=880, res1=0.0, res2=0.0, rate1=10, rate2 = 10, rate3 = 10, depth1=1, depth2=1, depth3=1, lfo1=0, lfo2=0, lfo3 = 0|
 	var sig, env, detuned, pitch, lfo1wave, lfo2wave, lfo3wave, filter1;
 
 ~wt = Array.fill(90, {

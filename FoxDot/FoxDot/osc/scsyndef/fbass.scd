@@ -30,6 +30,7 @@ SynthDef.new(\fbass,
 		thresh: 0.4,
 		slopeBelow: 1,
 		slopeAbove: 1/2.5);
+	snd = HPF.ar(snd, 40);
 	snd = Mix.ar(snd.tanh);
 	snd = LeakDC.ar(snd);
 	snd = snd *env* amp;

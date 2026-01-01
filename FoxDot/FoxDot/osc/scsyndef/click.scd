@@ -3,9 +3,9 @@ SynthDef.new(\click,
 	var sig;
 	freq = In.kr(bus, 1);
 	sus = sus * blur;
-		
+
 	freq = [freq, freq+fmod];
-		sig = BLowPass.ar(Impulse.ar(vib,0,4), freq*(rate+0.01), 0.2);
+	sig = BLowPass.ar(Impulse.ar(vib,0,4), freq*(rate+0.01), 0.2);
 	sig = sig + LFPar.ar(
 		Env.perc(0,0.1).ar.linexp(0,1,freq, freq * 2) *
 		LFDNoise3.kr(4).exprange(fmod.midiratio, 0.1.midiratio),

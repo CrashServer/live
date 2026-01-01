@@ -1,11 +1,11 @@
 SynthDef.new(\dblbass, {
-	|bus = 0, amp = 1, freq = 440, fmod=0, atk = 0.001, sus=0, rel = 1.0, crv = \lin, vel = 1.0, freqdev = 4, op1mul = 0.5, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, pan=0, cutoff=3000, rq=0.5|
+	|bus = 0, amp = 1, freq = 440, fmod=0, atk = 0.001, sus=0, rel = 1.0, vel = 1.0, freqdev = 4, op1mul = 0.5, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, pan=0, cutoff=3000, rq=0.5|
 	var env, op1, op2, op3, op4, osc, sub;
 	freq = In.kr(bus, 1);
-	
+
 	freq = [freq, freq+fmod];
 	freq = (freq / 4);
-	env = Env.linen(attackTime: atk, sustainTime: sus, releaseTime: rel, curve: crv).kr(doneAction: 0);
+	env = Env.linen(attackTime: atk, sustainTime: sus, releaseTime: rel, curve: \lin).kr(doneAction: 0);
 	op1 = SinOsc.ar(freq: freq * 4, mul: vel / 2 + op1mul);
 	op2 = SinOsc.ar(freq: freq * 3, phase: op1, mul: vel / 2 + op2mul);
 	op3 = SinOsc.ar(freq: freq * 2, phase: op2, mul: vel / 2 + op3mul);

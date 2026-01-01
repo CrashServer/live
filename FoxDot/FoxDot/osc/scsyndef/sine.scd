@@ -4,11 +4,12 @@ SynthDef.new(\sine,
 	sus = sus * blur;
 	freq = In.kr(bus, 1);
 	freq = [freq, freq+fmod];
-	
+
 	osc = SinOscFB.ar(freq, rate);
 	env=EnvGen.ar(Env(times: [atk, sus],levels: [0, amp, 0],curve: 'lin'), doneAction: 2);
 	osc=(osc * env);
 	osc = RLPF.ar(osc, cutoff, rq);
+	osc = HPF.ar(osc, 40);
 	osc = Mix(osc) * 0.2;
 	osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)},

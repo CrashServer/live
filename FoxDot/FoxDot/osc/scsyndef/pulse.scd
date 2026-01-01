@@ -8,6 +8,7 @@ SynthDef.new(\pulse,
 	osc=LFPulse.ar(freq, rate);
 	osc=(osc * amp);
 	env=EnvGen.ar(Env(times: [0.01, (sus - 0.01), 0.01],levels: [0, 1, 1, 0],curve: 'lin'), doneAction: 0);
+	osc = HPF.ar(osc, 40);
 	osc=(osc * env);
 	osc = Mix(osc) * 0.5;
 	osc = Pan2.ar(osc, pan);

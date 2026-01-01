@@ -1,5 +1,5 @@
 SynthDef.new(\swiss,
-{|freq,gate=1,decay=1,rate=1,fmod=0,blur=1,rq=0,cutoff=8000,saw=1,pulse=1,sin=1,pw=0.5,atk=0.001,sus=1,rel=0.91,pan=0,bus=0,amp=1,dur=1|
+{|freq=0, gate=1, decay=1, rate=1, fmod=0, blur=1, rq=0, cutoff=8000, saw=1, pulse=1, sin=1, pw=0.5, atk=0.001, sus=1, rel=0.91, pan=0, bus=0, amp=1|
 	var osc, sig, vEnv,fEnv, volfunc;
 	sus = sus * blur;
 	freq = In.kr(bus, 1);
@@ -11,6 +11,7 @@ SynthDef.new(\swiss,
 	volfunc = pulse+saw+sin;
 	sig=sig/10;
 	sig = MoogFF.ar(sig,fEnv*cutoff,rq,0);
+	sig = HPF.ar(sig, 40);
 	sig=Mix(sig*amp);
 	osc = Pan2.ar(sig,pan,vEnv);
 	ReplaceOut.ar(bus, osc)},

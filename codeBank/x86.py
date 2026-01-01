@@ -8,6 +8,6 @@ i3 >> faim(var([[P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2]], (0, -2)]), dur=1/4, o
 i4 >> lbass([P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2]], oct=PStep(16, 3, (4, 3)), dur=var([ [10, 1, 1, 1, 1, 1/2, 1/2, 1], [1/2, 1/4, 1/4, 1/2, 1, 1/2, 1, 12]]), echo=[0.5, 0.25], echomix=[0.25, 0.5, 0.25], amp=1,octer=0.1, bpf=1200, octersub=0.1, octersubsub=var([0.1, PRand(1,4)], [15, 1]), dist2=1).slider().every(4, "shuffle")
 
 j0 >> loop("break16", dur=8, dist2=(1), sample=4, amp=[0, 1, 0.5, 1, 1], shift=[0, 1], hpf=100, hpr=0.9)
-j1 >> glitchbass([0], oct=PStep(4, 5, [6, 3]), dur=[1, 1/2, 1/2, 1, 1/2, 1/2], vib=0.015, leg=12, cut=1/2, bpf=[400, 1200])
+j1 >> glitchbass([0], oct=PStep(4, 5, [6, 3]), dur=[1, 1/2, 1/2, 1, 1/2, 1/2], rate=0.015, leg=12, cut=1/2, bpf=[400, 1200])
 j2 >> play("[xBo[B+]]", dur=j1.dur*PRand([1/2, 1, 2]), sample=5, lpf=4480, hpf=60, lpr=0.2, amp=0.8)
 j4 >> loop("hiphop8", dur=8, sample=1, dist2=2)

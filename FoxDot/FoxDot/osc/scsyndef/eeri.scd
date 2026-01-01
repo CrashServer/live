@@ -11,6 +11,7 @@ SynthDef.new(\eeri,
 	osc=RLPF.ar(SinOsc.ar(Saw.ar([1, 2]).range(1, 104)) * SyncSaw.ar(SinOsc.ar(0.01).range(1, 100), SinOsc.ar(0.01).range(freq, freq*2)), Line.ar(cutoff, freq, 1));
 	osc=GVerb.ar(osc + CombL.ar(osc, 0.3, 1, 1), 10);
 	env=EnvGen.ar(Env(times: [(sus / 2), (sus / 2)],levels: [0, amp, 0],curve: 'lin'), doneAction: 0);
+	osc = HPF.ar(osc, 40);
 	osc=(osc * env);
 	osc = Mix(osc) * 1/16;
 	osc = Pan2.ar(osc, pan);
@@ -18,7 +19,7 @@ SynthDef.new(\eeri,
 	metadata: (
 	credit: "CrashServer",
 	description: "",
-	category: \ambi,
+	category: \experiment,
 	tags: []
 	)
 ).add;

@@ -1,4 +1,4 @@
-SynthDef.new(\fmsynth, 
+SynthDef.new(\fmsynth,
 	{|bus = 0, freq = 440, index = 3, amp=1, pan=0, sus=0, level=1, gate=1, fmod=0|
 	var mod, car, env, osc;
 	freq = In.kr(bus, 1);
@@ -8,6 +8,7 @@ SynthDef.new(\fmsynth,
 	osc = osc + (Mix.arFill(7, { CombL.ar(osc, 0.005, 0.15, 0.15) })/2);
 	env=EnvGen.ar(Env([0,1,0.8,0.8,0], [0.02, 0.01, sus/2, sus/2]), doneAction: 0);
 	osc=(osc * env);
+	osc = HPF.ar(osc, 40);
 	osc = Mix(osc) * 1/16;
 	osc = Pan2.ar(osc * amp, pan);
 	ReplaceOut.ar(bus, osc)},
@@ -16,5 +17,5 @@ SynthDef.new(\fmsynth,
 	description: "",
 	category: \basic,
 	tags: []
-	)	
+	)
 ).add;

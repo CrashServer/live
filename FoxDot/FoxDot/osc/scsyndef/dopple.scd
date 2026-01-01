@@ -7,7 +7,7 @@ SynthDef.new(\dopple,
 	freq = In.kr(bus, 1);
 
 	freq = [freq, freq+fmod];
-	ffreq = Sweep.kr(Impulse.kr(1/rate), 1/rate) * 10000;
+	ffreq = Sweep.kr(Impulse.kr(1/(rate+0.001), 1/(rate+0.001))) * 10000;
 	osc1 = LFSaw.ar(freq * 1 + (0.04 * [1,-1]));
 	osc2 = LFSaw.ar(freq * 0.99);
 	osc3 = LFSaw.ar(freq * 1 );

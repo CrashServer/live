@@ -3,7 +3,7 @@ SynthDef.new(\pbass,
 	var subfreq, subenv, env, pluck, tri, sin, sub, click, sig, osc;
 	sus = sus*blur;
 	freq = In.kr(bus, 1);
-		
+
 	freq = [freq, freq+fmod];
 	subfreq = freq / 2;
 
@@ -46,6 +46,7 @@ SynthDef.new(\pbass,
 
 	// Another resonant LPF
 	sig = MoogFF.ar(sig, 10000, 0.1, mul:amp);
+	sig = HPF.ar(sig, 40);
 	osc = Mix(sig) * 0.3;
 	osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)},

@@ -12,7 +12,7 @@ prate = [1,10]
 
 synthArgs = {
 	'abass': {'atk': patk, 'decay': pdec, 'rel': prel, 'cutoff': [101,2000], 'rq': prq},
-	'acidbass': {'atk': patk, 'decay': pdec, 'rel': prel, 'rq': prq, 'rate': [0,7], 'width': prq, 'curve': [-12,12]},
+	'acidbass': {'atk': patk, 'dec': pdec, 'rel': prel, 'rq': prq, 'rate': [0,7], 'width': prq, 'curve': [-12,12]},
 	'alva': {'fmod': [0.0,1.0]},
 	'ambi': {'rate': [0,40]},
 	'angst': {'atk': patk, 'decay': pdec, 'rel': prel, 'rate': [0.0,10.0], 'cutoff': pfreq, 'rq': prq},
@@ -36,8 +36,8 @@ synthArgs = {
 	'crunch': {},
 	'cs80': {'atk': patk, 'decay': pdec, 'rel': prel, 'cutoff': [101,5000], 'detune': [0.002,0.02]},
 	'dab': {},
-	'dafbass': {'atk': patk, 'decay': pdec, 'rel': prel, 'fmod': [0,7]},
-	'dbass': {'rate': [0.0,20.0], 'vib': [0.0,10.0]},
+	'dafbass': {'atk': patk, 'decay': pdec, 'rel': prel, 'rate': [0,7]},
+	'dbass': {'rate': [0.0,20.0], 'phase': [0.0,10.0]},
 	'dblbass': {'atk': patk, 'rel': prel, 'freqdev': [0,10], 'op1mul': [0.0,3.0], 'op2mul': [0.0,3.0], 'op3mul': [0.0,3.0], 'cutoff': [101, 5800], 'rq': [0.1,0.9]},
 	'dirt': {'vib': [0.0,1.0]},
 	'donk': {'rate': [0.0,12.0]},
@@ -57,7 +57,7 @@ synthArgs = {
 	# 			'freq2':[880,880], 'res1':[0.0,0.0], 'res2':[0.0,0.0], 'rate1':[10,10], 'rate2':[10,10], 'rate3':[10,10], 
 	# 			'depth1':[1,1], 'depth2':[1,1], 'depth3':[1,1], 'lfo1':[0,0], 'lfo2':[0,0], 'lfo3':[0,0]}, # TODO
 	'glass': {'rate':[0,12]},
-	'glitchbass': {'vib': [0.0,8.0], 'cutoff': [101,8000], 'rq': [0.1,0.9]},
+	'glitchbass': {'rate': [0.0,8.0], 'cutoff': [101,8000], 'rq': [0.1,0.9]},
 	'glitcher': {'len': [1,20], 't': [1,5], 'rate': [1,4], 'henA': [0.1,2.0], 'henB': [0.1,0.9]},
 	'gong': {'rate': [0,4]},
 	'grat': {},

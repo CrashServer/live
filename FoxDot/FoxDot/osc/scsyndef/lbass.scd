@@ -12,9 +12,10 @@ SynthDef.new(\lbass,
 	env = EnvGen.ar(Env([0, peak, level, level, 0], [atk,decay,sus-(atk+decay+rel),rel], curve:\sin), doneAction: 0);
 	envf = EnvGen.ar(Env.adsr(0.01,0.05,tone,0.5));
 	osc = SelectX.ar(oscmix, [osc1, osc2]);
-	osc = HPF.ar(osc, 150);
+	//osc = HPF.ar(osc, 150);
 	osc = SelectX.ar(submix, [osc*0.8, sub]);
 	osc = MoogFF.ar(osc, (cutoff*envf).clip(20,20000), rq.clip(0,3.99), mul:2);
+	osc = HPF.ar(osc, 40);
 	osc = LeakDC.ar(osc);
 	osc=(osc * env);
 	osc = Pan2.ar(osc*amp, pan);

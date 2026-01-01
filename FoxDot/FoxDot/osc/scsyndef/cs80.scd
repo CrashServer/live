@@ -1,8 +1,8 @@
 SynthDef.new(\cs80, {
-	|bus = 0, freq = 440, amp = 1, gate = 1.0, pan = 0, fmod = 0, atk = 0.3, sus = 0.8, rel = 1.0, dec = 0.8, fatk = 0.75, fdec = 0.5, fsus = 0.8, frel = 1.0, cutoff = 2200, detune = 0.002, vibspeed = 4, vibdepth = 0.015, glide = 0.8, glidedur = 0.015|
+	|bus = 0, freq = 440, amp = 1, gate = 1.0, pan = 0, fmod = 0, atk = 0.3, sus = 0.8, rel = 1.0, fatk = 0.75, fdec = 0.5, fsus = 0.8, frel = 1.0, cutoff = 2200, detune = 0.002, vibspeed = 4, vibdepth = 0.015, glide = 0.8, glidedur = 0.015|
 	var env, fenv, vibr, ffreq, osc;
 	freq = In.kr(bus, 1);
-	
+
 	freq = [freq, freq+fmod];
 	//Envelopes for amplitude and frequency:
 	env = Env.linen(atk, sus, rel, curve: \sin).kr(gate: gate, doneAction: 0);

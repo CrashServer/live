@@ -16,7 +16,7 @@ e2 >> klank(b1.degree[1] + var([0, -2, -4, 6]), dur=1, rate=4, oct=var([(5, 6), 
 
 p1 >> pianovel(P*[b1.degree[0],b1.degree[1],b4.degree[2], (b1.degree[0], b1.degree[1]), (b1.degree[1], b1.degree[2]), (b1.degree[0], b1.degree[2]),P**(b1.degree[0], b1.degree[1], b1.degree[2]),P+(b1.degree[0], b1.degree[1], b1.degree[2]), P/(b1.degree[0], b1.degree[1], b1.degree[2])], dur=P*[5,1,1/2,8,3], sus = p1.dur*PWhite(1,1.5), delay=P*[0,PWhite(0,1)], oct=PwRand([6,5,4,3],[30,35,20,15]), velocity=PRand(40,65), fx2=1, amp=PWhite(0.6,0.8), velhard=PWhite(0.2,1), hard=PWhite(0,2), lpf=PRand(5000,18000)).unison(3).penta()
 
-z1 >> total(b1.degree[0],dur=16, amp=[1,PWhite(0,0.5)], fmod=PRand([16, 32, 64, 128]), fx1=0, bpf=PRand(800,4000), bpr=0.1, vib=PRand(16), spin=PWhite(-1,1)).slider()
+z1 >> total(b1.degree[0],dur=16, amp=[1,PWhite(0,0.5)], mod=PRand([16, 32, 64, 128]), fx1=0, bpf=PRand(800,4000), bpr=0.1, vib=PRand(16), spin=PWhite(-1,1)).slider()
 
 y4 >> subbass(p1.degree, dur=16, amp=0.4, crush=(0,PRand(0,4)), bits=PRand(4,16), fx1=1, atk=PWhite(0.005,0.1), oct=(4,5)).unison(3)
 y5 >> faim(y4.degree[0], oct=(4,5), dur=[15,1], amp=0.5, fx1=1, delay=PWhite(-1,1).rnd(0.25), echo=[0,P[0,0.25,0.5,0.75]], comp=0.6)

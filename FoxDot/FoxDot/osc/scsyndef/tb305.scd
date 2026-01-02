@@ -8,8 +8,9 @@ SynthDef.new(\tb305, {
 
     ampEnv = EnvGen.kr(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);
 
-    sig = sig * ampEnv * amp;
-    ReplaceOut.ar(bus, Pan2.ar(sig, pan))},
+    sig = sig * ampEnv * amp * 1.2;
+	sig = HPF.ar(sig, 40);
+	ReplaceOut.ar(bus, Pan2.ar(sig, pan))},
     metadata: (
 	credit: "CrashServer",
 	description: "",

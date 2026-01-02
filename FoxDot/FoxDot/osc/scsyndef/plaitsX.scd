@@ -19,6 +19,7 @@ SynthDef.new(\plaitsX,
 
 	osc=(osc * env);
 	osc = RLPF.ar(osc, cutoff, rq);
+	osc = HPF.ar(osc, 40);
 	osc = Select.ar(aux, [osc, osc[0]!2, osc[1]!2]);
 	osc = Mix(osc*amp) * 0.2;
 	osc = Pan2.ar(osc, pan);

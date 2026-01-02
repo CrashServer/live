@@ -4,17 +4,18 @@ SynthDef.new(\pianovel,
 	sus = sus * blur;
 	freq = In.kr(bus, 1);
 	freq = [freq, freq+fmod];
-	
+
 	son = MdaPiano.ar(freq, gate, release: 0.9, stereo: wide, sustain: sus * blur, vel: velocity, hard: hard, velhard: velhard);
 	son = TwoPole.ar(son, 200,0.4, mul:0.5) + son/2;
 	env=EnvGen.ar(Env(times: [sus],levels: [(amp * 1), (amp * 1)],curve: 'step'), doneAction: 0);
 	son = (son * env*amp*1.6);
+	son = HPF.ar(son, 40);
 	//DetectSilence.ar(son, 0.01, doneAction:2);
 	ReplaceOut.ar(bus, Splay.ar(son, 1, 1, pan))},
 	metadata: (
 	credit: "CrashServer",
 	description: "",
-	category: \instrument,
+	category: \keyboard,
 	tags: []
 	)
 ).add;

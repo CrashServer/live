@@ -14,7 +14,7 @@ SynthDef.new(\piano,
 	metadata: (
 	credit: "CrashServer",
 	description: "",
-	category: \instrument,
+	category: \keyboard,
 	tags: []
 	)
 ).add;

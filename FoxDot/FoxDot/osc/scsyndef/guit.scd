@@ -8,6 +8,7 @@ SynthDef.new(\guit,
 
 	osc=(osc * env);
 	osc = Mix(osc[0]!2)* amp * 0.5;
+	osc = HPF.ar(osc, 40);
 	osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)},
 	metadata: (

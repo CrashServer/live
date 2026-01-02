@@ -29,7 +29,7 @@ metadata: (
 	credit: "Josh Mitchell",
 	modified_by: "Jens Meisner",
 	description: "Modification of combs bass synth led to ambient sound shape",
-	category: \misc,
+	category: \experiment,
 	tags: [\metallic, \bass, \ambient, \pitched]
 	)
 ).add

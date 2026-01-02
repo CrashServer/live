@@ -6,7 +6,8 @@ SynthDef.new(\rave,
 	freq = [freq, freq+fmod];
 	osc=Gendy1.ar((rate - 1), mul: (amp * 0.7), minfreq: freq, maxfreq: (freq * 2));
 	env=EnvGen.ar(Env.perc(attackTime: 0.01,releaseTime: sus,level: amp,curve: 0), doneAction: 0);
-	osc=(osc * env);
+	osc = (osc * env);
+	osc = HPF.ar(osc, 40);
 	osc = Mix(osc) * 0.5;
 	osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)},

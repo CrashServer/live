@@ -1,5 +1,5 @@
 SynthDef.new(\total,
-	{|bus=0, amp=1, fmod=0, sus=1, blur=1, rate=.5, freq=220, atk=0.25, rel=0.2, gate=1, pan=0, mod=0|
+	{|bus=0, amp=1, fmod=0, sus=1, blur=1, rate=0.5, freq=220, atk=0.25, rel=0.2, gate=1, pan=0, mod=0|
 
 	var sig, env, osc;
 	sus = sus * blur;

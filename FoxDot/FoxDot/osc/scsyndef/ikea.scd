@@ -61,6 +61,7 @@ SynthDef.new(\ikea,
 	// osc = osc5;
 	env=EnvGen.ar(Env([0,1,0.8,0.8,0], [0.02, 0.01, sus/2, sus/2]), doneAction: 2);
 	osc=(osc * env);
+	osc = HPF.ar(osc, 30);
 	osc = Mix(osc) * 0.5;
 	osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)},

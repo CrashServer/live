@@ -7,8 +7,9 @@ SynthDef.new(\dustV,
 		env=EnvGen.ar(Env.new([1, 1], [1, 1]), doneAction:1);
 		osc=(osc * env);
 		osc = Mix(osc) * 1;
+		osc = HPF.ar(osc, 40);
 		osc = Pan2.ar(osc * amp, pan);
-		
+
 		ReplaceOut.ar(bus, osc)},
 		metadata: (
 		credit: "CrashServer",

@@ -4,11 +4,12 @@ SynthDef.new(\latoo,
 	freq = In.kr(bus, 1);
 	freq = [freq, freq+fmod];
 	osc = Latoocarfian2DN.ar(SampleRate.ir/4,SampleRate.ir, LFNoise2.kr(2.dup, 1.5, 1.5), d:LFNoise2.kr(2.dup, 0.5, 1.5),  mul:0.2);
-	env=EnvGen.ar(Env.new([1, 1], [1, 1]), doneAction:1);
-	osc=(osc * env);
+	env = EnvGen.ar(Env.new([1, 1], [1, 1]), doneAction:1);
+	osc = (osc * env);
+	osc = HPF.ar(osc, 30);
 	osc = Mix(osc) * 0.5;
 	osc = Pan2.ar(osc * amp, pan);
-	
+
 	ReplaceOut.ar(bus, osc)},
 	metadata: (
 	credit: "CrashServer",

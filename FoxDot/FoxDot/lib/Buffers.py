@@ -573,8 +573,10 @@ class BreakcoreSynthDef(SampleSynthDef):
         self.osc = self.osc * self.amp
         self.add()
     def __call__(self, filename, pos=0, sample=0, **kwargs):
-        kwargs["buf"] = Samples.loadBuffer(filename, sample)
-        return SampleSynthDef.__call__(self, pos, **kwargs)
+        kwargs["buf"] = Samples.loadBufferMono(filename, sample)
+        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
+        proxy.kwargs["filename"] = filename
+        return proxy
 
 class SplitterSynthDef(SampleSynthDef):
     def __init__(self):

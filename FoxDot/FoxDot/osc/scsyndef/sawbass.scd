@@ -1,6 +1,6 @@
 SynthDef.new(\sawbass,
-{|amp=1, sus=0.2, pan=0, bus=0, freq=440, cutoff=1000, rq=0.5, fmod=0, rate|
-	var osc1, osc2, filter, filter2, env, filterenv, ab;
+{|amp=1, sus=0.2, pan=0, bus=0, freq=440, cutoff=1000, rq=0.5, fmod=0, blur=1|
+	var osc, osc1, osc2, filter, filter2, env, filterenv, ab;
 	amp = amp * 0.25;
 	sus = sus * blur;
 	freq = In.kr(bus, 1);
@@ -16,7 +16,8 @@ SynthDef.new(\sawbass,
 	filter2 = BLowShelf.ar(filter2, 300, 1.0, -12);
 	filter2 = BPeakEQ.ar(filter2, 1600, 1.0, -6);
 	env = EnvGen.ar(Env([0,1,0.8,0.8,0], [0.01, 0, sus, 0.05]), doneAction:3);
-	ReplaceOut.ar(bus,Pan2.ar((filter + filter2) * env * amp, pan))},
+		osc = HPF.ar((filter + filter2) * env * amp, 40);
+	ReplaceOut.ar(bus,Pan2.ar(osc, pan))},
 	metadata: (
 	credit: "CrashServer",
 	description: "",

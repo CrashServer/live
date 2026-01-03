@@ -466,7 +466,7 @@ export const foxdotAutocomplete = {
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;        
         const afterLastClosingParenthesis = /.*\)\s*\./;
         // const loopPattern = /loop\(([^,)]*)$/;
-        const loopPattern = /(loop|gsynth|splaffer|splitter)\(([^,)]*)$/;
+        const loopPattern = /(loop|gsynth|splaffer|splitter|breakcore)\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
         const lostPattern =/(lost|attack)\([^)]*$/
         const serverPattern = /(S|s)er\*/;
@@ -502,7 +502,7 @@ export const foxdotAutocomplete = {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
             filteredLoops = filteredLoops.filter(loop => !loop.displayText.startsWith('AKWF'));
-            const loopMatch = line.match(/loop|gsynth|splaffer|splitter\("([^"]*)"/);
+            const loopMatch = line.match(/loop|gsynth|splaffer|splitter|breakcore\("([^"]*)"/);
             const durMatch = line.match(/dur=(\d+(\.\d+)?|\d+\/\d+)/);
             const loopStart = loopMatch ? token.start : token.start;
             const loopEnd = durMatch ? durMatch.index + durMatch[0].length : cursorPosition;

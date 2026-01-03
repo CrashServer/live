@@ -7,6 +7,7 @@ SynthDef.new(\brown,
 		env=EnvGen.ar(Env.new([1, 1], [1, 1]), doneAction:1);
 		osc=(osc * env);
 		osc = RLPF.ar(osc, cutoff,rq);
+		osc = HPF.ar(osc, 20);
 		osc = Mix(osc) * 0.1;
 		osc = Pan2.ar(osc * amp, pan);
 		ReplaceOut.ar(bus, osc)},

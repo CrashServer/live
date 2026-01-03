@@ -12,7 +12,8 @@ SynthDef.new(\mpluck,
 	osc = SelectX.ar(0.5,[LPF.ar(osc_pluck,2500),osc_moog]);
 	env=EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 0);
 	osc=((osc * XLine.kr(amp, (amp / 10000), (sus * 4), doneAction: 2)) * 1);
-			osc = RLPF.ar(osc, cutoff, rq);
+	osc = RLPF.ar(osc, cutoff, rq);
+	osc=HPF.ar(osc,40);
 	osc = Mix(osc) * 4;
 	osc = Pan2.ar(osc * env, pan);
 	ReplaceOut.ar(bus, osc)},

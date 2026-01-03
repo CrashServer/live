@@ -11,6 +11,7 @@ SynthDef.new(\lfnoise,
 	env=EnvGen.ar(Env(times: [(sus / 2), (sus*2)],levels: [0, amp, 0],curve: 'lin'), doneAction: 0);
 	osc=(osc * env*4);
 	osc= RLPF.ar(osc, cutoff, rq);
+	osc= HPF.ar(osc, 30);
 	//osc = Mix(osc);
 	osc = Pan2.ar(osc, pan);
 	ReplaceOut.ar(bus, osc)},

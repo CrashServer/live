@@ -13,7 +13,7 @@ SynthDef.new(\audioin,
 	metadata: (
 	credit: "CrashServer",
 	description: "",
-	category: \utils,
+	category: "",
 	tags: []
 	)
 ).add;

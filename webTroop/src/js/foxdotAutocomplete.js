@@ -659,6 +659,9 @@ export const foxdotAutocomplete = {
             
             const synthPrefix = prefix.toLowerCase();
             
+            // Détecter si des parenthèses existent déjà après le synth actuel
+            const hasParenthesesAfter = afterCursor.trimStart().startsWith('(');
+            
             if (synthPrefix === '') {
                 // Add "All" category first
                 filteredSynths.push(this.createCategorySeparator("All", "All", "synth"));
@@ -673,15 +676,31 @@ export const foxdotAutocomplete = {
                 });
             } else {
                 filteredSynths = this.synths.filter(synth => synth.displayText.toLowerCase().startsWith(synthPrefix));
+                
+                // Si des parenthèses existent déjà, retirer les parenthèses du text des synths
+                if (hasParenthesesAfter) {
+                    filteredSynths = filteredSynths.map(synth => ({
+                        text: synth.displayText, // Juste le nom, sans ()
+                        displayText: synth.displayText,
+                        tag: synth.tag
+                    }));
+                }
             }
 
-            
-
+            // Calculer le 'to' : si des parenthèses existent, remplacer jusqu'au nom du synth uniquement
+            let toPos = cursor;
+            if (hasParenthesesAfter && synthPrefix !== '') {
+                // Trouver la position de la parenthèse ouvrante
+                const openParenPos = line.indexOf('(', cursorPosition);
+                if (openParenPos !== -1) {
+                    toPos = CodeMirror.Pos(cursor.line, openParenPos);
+                }
+            }
 
             return {
                 list: filteredSynths.length > 0 ? filteredSynths.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.synths.sort((a, b) => a.displayText.localeCompare(b.displayText)),
                 from: CodeMirror.Pos(cursor.line, (token.string.trim() == "") ? token.start +1 : token.start ),
-                to: cursor,
+                to: toPos,
             };
         }
         else {
@@ -841,12 +860,13 @@ export const foxdotAutocomplete = {
         // Calculer les bonnes positions from/to en fonction du type
         const cursor = cm.getCursor();
         const token = cm.getTokenAt(cursor);
+        const line = cm.getLine(cursor.line);
+        const afterCursor = line.slice(cursor.ch);
         let fromPos, toPos;
         
         if (categoryType === 'fx') {
             // Pour les FX, on doit remplacer le 'x' qui a été tapé
             // On cherche le début du token qui contient 'x'
-            const line = cm.getLine(cursor.line);
             const tokenStr = token.string;
             
             // Si le token commence par 'x', on remplace depuis le début du token
@@ -855,6 +875,28 @@ export const foxdotAutocomplete = {
                 toPos = cm.constructor.Pos(cursor.line, cursor.ch);
             } else {
                 // Sinon, utiliser la position du curseur
+                fromPos = cm.getCursor();
+                toPos = cm.getCursor();
+            }
+        } else if (categoryType === 'synth') {
+            // Pour les synths, vérifier si des parenthèses existent déjà
+            const hasParenthesesAfter = afterCursor.trimStart().startsWith('(');
+            
+            // Trouver la position de début du synth (après >>)
+            const playerMatch = line.match(/([a-zA-Z0-9]+\d*)\s*>>\s*/);
+            if (playerMatch) {
+                const synthStart = playerMatch[0].length;
+                // Trouver où se termine le nom du synth actuel
+                let synthEnd = cursor.ch;
+                if (hasParenthesesAfter) {
+                    const openParenPos = line.indexOf('(', synthStart);
+                    if (openParenPos !== -1) {
+                        synthEnd = openParenPos;
+                    }
+                }
+                fromPos = cm.constructor.Pos(cursor.line, synthStart);
+                toPos = cm.constructor.Pos(cursor.line, synthEnd);
+            } else {
                 fromPos = cm.getCursor();
                 toPos = cm.getCursor();
             }
@@ -912,9 +954,16 @@ export const foxdotAutocomplete = {
                     }
                 };
             } else if (categoryType === 'synth') {
-                // Pour les Synths, afficher simplement le nom
+                // Pour les Synths, vérifier si des parenthèses existent déjà
+                const line = cm.getLine(cm.getCursor().line);
+                const afterCursor = line.slice(cm.getCursor().ch);
+                const hasParenthesesAfter = afterCursor.trimStart().startsWith('(');
+                
+                // Si des parenthèses existent, ne pas inclure les () dans le text
+                const synthText = hasParenthesesAfter ? item.displayText : item.text;
+                
                 return {
-                    text: item.text,
+                    text: synthText,
                     displayText: item.displayText,
                     render: function(element, self, data) {
                         element.innerHTML = '';

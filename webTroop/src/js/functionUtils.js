@@ -644,7 +644,7 @@ export const functionUtils = {
     // Convertir la syntaxe expression!<number> en var(expression, <number>)
     convertExclamationToVar(code) {
         // Traiter d'abord les cas simples avec crochets
-        code = code.replace(/(\[[^\]]+\])!(\d+)/g, 'var($1, $2)');
+        code = code.replace(/(\[[^\]]+\])!(\d+)/g, 'var($1, [$2, $2])');
         
         // Pour les fonctions avec parenthèses, on doit gérer les parenthèses imbriquées
         // On cherche pattern: nom_fonction(...contenu_avec_parentheses...)!nombre
@@ -672,7 +672,7 @@ export const functionUtils = {
                     const num = numMatch[1];
                     const funcArgs = result.substring(startPos, endPos - 1);
                     const fullMatch = result.substring(match.index, endPos + 1 + num.length);
-                    const replacement = `var(${funcName}(${funcArgs}), ${num})`;
+                    const replacement = `var(${funcName}(${funcArgs}), [${num}, ${num}])`;
                     result = result.substring(0, match.index) + replacement + result.substring(endPos + 1 + num.length);
                     // Réinitialiser la recherche
                     funcPattern.lastIndex = match.index + replacement.length;

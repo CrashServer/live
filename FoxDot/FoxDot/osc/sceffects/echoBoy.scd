@@ -1,0 +1,37 @@
+SynthDef.new(\echoBoy,
+{|bus, eb, ebfeed, ebmix, ebmode, ebwow, ebflutter, ebsat, sus, eb_, eb_d, eblfo, eblfomul, eblfoadd, ebfeed_, ebfeed_d, ebfeedlfo, ebfeedlfomul, ebfeedlfoadd, ebmix_, ebmix_d, ebmixlfo, ebmixlfomul, ebmixlfoadd, ebmode_, ebmode_d, ebmodelfo, ebmodelfomul, ebmodelfoadd, ebwow_, ebwow_d, ebwowlfo, ebwowlfomul, ebwowlfoadd, ebflutter_, ebflutter_d, ebflutterlfo, ebflutterlfomul, ebflutterlfoadd, ebsat_, ebsat_d, ebsatlfo, ebsatlfomul, ebsatlfoadd|
+var osc,delayed,feedback,delaytime,modulation,wowSig,flutterSig,leftDelay,rightDelay,filtered,saturated,ebhpf,eblpf,ebstereo;
+osc = In.ar(bus, 2);
+eb = if(eb_<=0, eb, Line.kr(eb, eb_, sus*eb_d));
+eb = if(eblfo<=0, eb, eb * SinOsc.kr(eblfo, 0, eblfomul, eblfoadd));
+ebfeed = if(ebfeed_<=0, ebfeed, Line.kr(ebfeed, ebfeed_, sus*ebfeed_d));
+ebfeed = if(ebfeedlfo<=0, ebfeed, ebfeed * SinOsc.kr(ebfeedlfo, 0, ebfeedlfomul, ebfeedlfoadd));
+ebmix = if(ebmix_<=0, ebmix, Line.kr(ebmix, ebmix_, sus*ebmix_d));
+ebmix = if(ebmixlfo<=0, ebmix, ebmix * SinOsc.kr(ebmixlfo, 0, ebmixlfomul, ebmixlfoadd));
+ebmode = if(ebmode_<=0, ebmode, Line.kr(ebmode, ebmode_, sus*ebmode_d));
+ebmode = if(ebmodelfo<=0, ebmode, ebmode * SinOsc.kr(ebmodelfo, 0, ebmodelfomul, ebmodelfoadd));
+ebwow = if(ebwow_<=0, ebwow, Line.kr(ebwow, ebwow_, sus*ebwow_d));
+ebwow = if(ebwowlfo<=0, ebwow, ebwow * SinOsc.kr(ebwowlfo, 0, ebwowlfomul, ebwowlfoadd));
+ebflutter = if(ebflutter_<=0, ebflutter, Line.kr(ebflutter, ebflutter_, sus*ebflutter_d));
+ebflutter = if(ebflutterlfo<=0, ebflutter, ebflutter * SinOsc.kr(ebflutterlfo, 0, ebflutterlfomul, ebflutterlfoadd));
+ebsat = if(ebsat_<=0, ebsat, Line.kr(ebsat, ebsat_, sus*ebsat_d));
+ebsat = if(ebsatlfo<=0, ebsat, ebsat * SinOsc.kr(ebsatlfo, 0, ebsatlfomul, ebsatlfoadd));
+ebhpf = 100;
+eblpf = 8000;
+ebstereo = 0.5;
+delaytime = (ebtime * sus).clip(0.001, 2.0);
+wowSig = SinOsc.kr(0.5 + (0.3 * LFNoise1.kr(0.2)), 0, ebwow * 0.003);
+flutterSig = LFNoise1.kr(10 + (20 * LFNoise1.kr(0.5)), ebflutter * 0.002);
+modulation = 1 + wowSig + flutterSig;
+leftDelay = DelayC.ar(LocalIn.ar(1) + osc[0], 2.0, (delaytime * modulation).clip(0.001, 2.0));
+rightDelay = DelayC.ar(LocalIn.ar(1) + osc[1], 2.0, (delaytime * modulation * (1 + (ebstereo * 0.1))).clip(0.001, 2.0));
+delayed = [leftDelay, rightDelay];
+filtered = HPF.ar(delayed, ebhpf.clip(20, 10000));
+filtered = LPF.ar(filtered, eblpf.clip(100, 18000));
+saturated = Select.ar(ebmode.clip(0, 2), [filtered, (filtered * (1 + (ebsat * 2))).tanh * 0.7, (filtered * (1 + (ebsat * 4))).distort * 0.5]);
+feedback = saturated * ebfeed.clip(0, 0.95);
+feedback = LeakDC.ar(feedback);
+LocalOut.ar(feedback);
+osc = (osc * (1 - ebmix)) + (saturated * ebmix);
+osc = HPF.ar(osc, 40);
+ReplaceOut.ar(bus, osc)}).add;

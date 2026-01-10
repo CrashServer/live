@@ -19,12 +19,12 @@ ebsat = if(ebsatlfo<=0, ebsat, ebsat * SinOsc.kr(ebsatlfo, 0, ebsatlfomul, ebsat
 ebhpf = 100;
 eblpf = 8000;
 ebstereo = 0.5;
-delaytime = (ebtime * sus).clip(0.001, 2.0);
+delaytime = (eb * sus);
 wowSig = SinOsc.kr(0.5 + (0.3 * LFNoise1.kr(0.2)), 0, ebwow * 0.003);
 flutterSig = LFNoise1.kr(10 + (20 * LFNoise1.kr(0.5)), ebflutter * 0.002);
 modulation = 1 + wowSig + flutterSig;
-leftDelay = DelayC.ar(LocalIn.ar(1) + osc[0], 2.0, (delaytime * modulation).clip(0.001, 2.0));
-rightDelay = DelayC.ar(LocalIn.ar(1) + osc[1], 2.0, (delaytime * modulation * (1 + (ebstereo * 0.1))).clip(0.001, 2.0));
+leftDelay = DelayL.ar(LocalIn.ar(1) + osc[0], maxdelaytime: 2*sus, delaytime: (delaytime * modulation), decaytime: sus*2);
+rightDelay = DelayL.ar(LocalIn.ar(1) + osc[1], maxdelaytime: 2*sus, delaytime: (delaytime * modulation * (1 + (ebstereo * 0.1))), decaytime: sus*2);
 delayed = [leftDelay, rightDelay];
 filtered = HPF.ar(delayed, ebhpf.clip(20, 10000));
 filtered = LPF.ar(filtered, eblpf.clip(100, 18000));

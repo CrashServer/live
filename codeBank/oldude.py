@@ -1,5 +1,5 @@
-# olddude 128
-
+#olddude 128
+#interlude
 Clock.bpm = 128
 Scale.default = "minor"
 j1 >> bass([12, 11, 1, 0.5, 4, _, 4, _], oct=(4, 5, 6), dur=PDur(3, 8), shape=j1.degree==2,shift=j1.degree==1,dist2=j1.degree==0.5,mverb=(j1.degree==4)/4, echo=0.5, leg=4).unison(2)

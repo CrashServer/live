@@ -37,6 +37,25 @@ export const functionUtils = {
         }
     },
 
+    soloDrop(cm, wsServer) {
+        const cursor = cm.getCursor();
+        let startLine = cursor.line;
+        let endLine = cursor.line;
+        const code = cm.getLine(cursor.line).trim();
+        
+        const playerName = this.getPlayer(code);
+        if (playerName) {
+            wsServer.send(JSON.stringify({
+                type: 'evaluate_code',
+                code: `${playerName}.solo()\n`
+            }));
+            wsServer.send(JSON.stringify({
+                type: 'evaluate_code',
+                code: `Clock.schedule(unsolo, Clock.mod(64))\n`
+            }));            
+        }
+    },
+
     resetPlayer(cm, wsServer) {
         const cursor = cm.getCursor();
         const line = cursor.line;

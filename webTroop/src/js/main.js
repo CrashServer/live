@@ -347,6 +347,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
     'Alt-A': (cm) => {functionUtils.randomizer(cm)},
     'Alt-R': (cm) => {functionUtils.resetPlayer(cm, wsServer)},
+    'Alt-O': (cm) => {functionUtils.soloDrop(cm, wsServer)},
     'Esc': () => {removeAllTooltips();},
       // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });

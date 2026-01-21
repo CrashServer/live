@@ -23,7 +23,7 @@ l2.dafilter=var(PRand(400, 1200),16)
 
 # optionnal 
 l4 >> loop("jungleboy16", dur=16,sample=var(PRand(404), [cyH]), hpf=500, drcomp=var([0, .5],[cyH, cyL]))
-s1 >> rave([PSaw(cyH*2)*14], dur=1/2, glide=PWhite(0.0,2.0), oct=(5,4,5), eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=.56, ebflutter=125, ebsat=0.6, hpf=500, high=2).unison(3)
+s1 >> rave(Pvar([var([14,18],[15,1]), PSaw(cyH*2)*14], [cyH, cyL]), dur=var([1/2,1],[15,1]), glide=PWhite(0.0,2.0), oct=(5,4,5), eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=.56, ebflutter=125, ebsat=0.6, hpf=500, high=2).unison(3)
 
 # Server.addFx(dafilter=1200, dastart=50, darel=1, darq=0.5, datype=0, sus=1) ## trigger once cause sus
 

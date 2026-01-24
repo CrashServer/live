@@ -1,5 +1,5 @@
-#  darkChill  92
-# interlude
+# darkChill 92
+# interlude, chaosbits
 
 Clock.bpm=92
 Scale.default="minor"

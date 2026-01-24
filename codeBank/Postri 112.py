@@ -1,5 +1,5 @@
 # Postri 112
-# mud
+# mud, chaosbits
 Clock.bpm=112
 Root.default="A"
 Scale.default="minor"

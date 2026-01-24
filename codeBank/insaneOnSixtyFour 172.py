@@ -1,5 +1,5 @@
 #  insaneOnSixtyFour 172
-# banger, chaosBits
+# banger, chaosbits
 
 Clock.bpm=172
 Scale.default="minor"

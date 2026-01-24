@@ -909,11 +909,11 @@ export const foxdotAutocomplete = {
         const formattedItems = categoryItems.map(item => {
             if (categoryType === 'attack') {
                 // Extraire le BPM (2 ou 3 chiffres après un espace)
-                const bpmMatch = item.displayText.match(/\s(\d{2,3})$/);
+                const bpmMatch = item.displayText.match(/\s(\d{2,4})$/);
                 const bpm = bpmMatch ? bpmMatch[1] : null;
                 
                 // Nettoyer le displayText en enlevant le BPM
-                let cleanName = bpm ? item.displayText.replace(/\s\d{2,3}$/, '').trim() : item.displayText;
+                let cleanName = bpm ? item.displayText.replace(/\s\d{2,4}$/, '').trim() : item.displayText;
                 cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
                 
                 return {

@@ -40,7 +40,7 @@ fx.add('osc = DFM1.ar(osc, dfm, dfmr, dfmd,0.0)')
 fx.save()
 
 # VALadder filter
-fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.3, 'valadd': 5, 'valadt': 0, 'valadc': 0.3}, order=2, tag="filter")
+fx = FxList.new('valad', 'VALadder', {'valad': 500, 'valadr': 0.3, 'valadd': 5, 'valadt': 0, 'valadc': 0.2}, order=2, tag="filter")
 fx.doc("VALadder filter")
 fx.add('osc = VALadder.ar(osc*0.4, valad, valadr, valadd,valadt)')
 fx.add('osc = Compander.ar(osc, osc, valadc, 1, 0.1, 0.01, 0.1 )')

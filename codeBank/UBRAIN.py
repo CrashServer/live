@@ -1,4 +1,4 @@
-# R_UBRAIN
+# R_UBRAIN 88
 # R_
 
 Clock.bpm=88

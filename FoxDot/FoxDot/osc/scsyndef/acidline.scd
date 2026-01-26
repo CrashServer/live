@@ -1,7 +1,7 @@
 // Acid line - 303 style, reliable
 SynthDef.new(\acidline,
 	{|bus=0, amp=1, pan=0, freq=440, fmod=0, sus=0.3, atk=0.001, rel=0.1,
-	  cutoff=1000, res=0.6, drive=2, accent=0, slide=0|
+	  cutoff=1000, rq=0.6, beef=2, accent=0, slide=0|
 		var sig, env, filterEnv, osc, filtered, final;
 
 		freq = In.kr(bus, 1);
@@ -23,16 +23,16 @@ SynthDef.new(\acidline,
 		osc = osc + (LFPulse.ar(freq, width: 0.5).bipolar * 0.3);
 
 		// Pre-filter drive
-		osc = (osc * (1 + drive * 0.5)).tanh;
+		osc = (osc * (1 + beef * 0.5)).tanh;
 
 		// Resonant filter - the acid sound
 		filtered = RLPF.ar(osc,
 			(cutoff * (1 + (filterEnv * 3))).clip(50, 15000),
-			res.clip(0.05, 0.95)
+			rq.clip(0.05, 0.95)
 		);
 
 		// Post-filter saturation
-		filtered = (filtered * drive).tanh;
+		filtered = (filtered * beef).tanh;
 
 		// Compression
 		filtered = Compander.ar(filtered, filtered,

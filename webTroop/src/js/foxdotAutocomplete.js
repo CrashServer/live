@@ -448,7 +448,7 @@ export const foxdotAutocomplete = {
 
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
-        const token = cm.getTokenAt(cursor);
+        const token = this.getEffectiveToken(cm, cursor);
         const line = cm.getLine(cursor.line);
         const cursorPosition = cursor.ch;
         const beforeCursor = line.slice(0, cursorPosition);
@@ -459,17 +459,14 @@ export const foxdotAutocomplete = {
         this._currentCategory = null;
 
         // Regex pour détecter un player suivi de '>>'
-        // const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*/;
         const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*(\w*\(?)/;
 
         const matchPlayer = beforeCursor.match(playerPattern);
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;        
         const afterLastClosingParenthesis = /.*\)\s*\./;
-        // const loopPattern = /loop\(([^,)]*)$/;
         const loopPattern = /(loop|gsynth|splaffer|splitter|breakcore)\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
         const lostPattern =/(lost|attack)\([^)]*$/
-        const serverPattern = /(S|s)er\*/;
         const scenePattern = /!/;
 
         // Random player name suggestion
@@ -637,7 +634,7 @@ export const foxdotAutocomplete = {
                 foxdotKeyword = combinedKeyword.filter(f => f.displayText.toLowerCase().startsWith(prefix.toLowerCase()));;
             }
             return {
-                list: foxdotKeyword.length > 0 ? foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)) : foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)),
+                list: foxdotKeyword.sort((a, b) => a.displayText.localeCompare(b.displayText)),
                 from: CodeMirror.Pos(cursor.line, token.start),
                 to: CodeMirror.Pos(cursor.line, cursorPosition),
                 };
@@ -992,5 +989,38 @@ export const foxdotAutocomplete = {
             from: fromPos,
             to: toPos
         };
-    }
+    },
+
+    getEffectiveToken: function(cm, cursor) {
+        const token = cm.getTokenAt(cursor);
+        
+        if (token.type === "comment") {
+            const line = cm.getLine(cursor.line);
+            const cursorCh = cursor.ch;
+            
+            let start = cursorCh;
+            let end = cursorCh;
+            
+            // Caractères valides pour un identifiant
+            const validChar = /[a-zA-Z_0-9]/;
+            
+            while (start > 0 && validChar.test(line[start - 1])) {
+            start--;
+            }
+            
+            while (end < line.length && validChar.test(line[end])) {
+            end++;
+            }
+            
+            return {
+            ...token,
+            start: start,
+            end: end,
+            string: line.slice(start, end),
+            type: "comment" 
+            };
+        }
+    
+        return token;
+    },
 }

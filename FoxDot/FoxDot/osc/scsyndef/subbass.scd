@@ -1,5 +1,5 @@
 // Simple sub bass - just works
-SynthDef.new(\subbass,
+SynthDef.new(\subbass2,
 	{|bus=0, amp=1, pan=0, freq=440, fmod=0, sus=1, atk=0.01, rel=0.1,
 	  drive=1.5, sub=1, mid=0.3, feedback=0.2|
 		var sig, env, subOsc, midOsc, final;

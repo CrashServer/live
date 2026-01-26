@@ -348,8 +348,8 @@ noisehit.add()
 darklead = FileSynthDef("darklead")
 darklead.add()
 
-subbass = FileSynthDef("subbass")
-subbass.add()
+subbass2 = FileSynthDef("subbass2")
+subbass2.add()
 
 acidline = FileSynthDef("acidline")
 acidline.add()

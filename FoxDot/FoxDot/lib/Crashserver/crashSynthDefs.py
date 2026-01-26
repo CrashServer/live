@@ -484,3 +484,40 @@ wobble.add()
 
 zap = FileSynthDef("zap")
 zap.add()
+
+# Industrial techno synths - Berlin style
+compkick = FileSynthDef("compkick")
+compkick.add()
+
+pumpbass = FileSynthDef("pumpbass")
+pumpbass.add()
+
+compperc = FileSynthDef("compperc")
+compperc.add()
+
+hardstab = FileSynthDef("hardstab")
+hardstab.add()
+
+pumphihat = FileSynthDef("pumphihat")
+pumphihat.add()
+
+industrialdrone = FileSynthDef("industrialdrone")
+industrialdrone.add()
+
+industrialsnare = FileSynthDef("industrialsnare")
+industrialsnare.add()
+
+darkpad = FileSynthDef("darkpad")
+darkpad.add()
+
+noisehit = FileSynthDef("noisehit")
+noisehit.add()
+
+darklead = FileSynthDef("darklead")
+darklead.add()
+
+subbass2 = FileSynthDef("subbass2")
+subbass2.add()
+
+acidline = FileSynthDef("acidline")
+acidline.add()

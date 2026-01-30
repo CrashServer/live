@@ -1,5 +1,5 @@
 # Connection 48
-# resiub
+# reisub
 
 Clock.bpm = 48
 Scale.default="locrian"

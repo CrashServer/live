@@ -12,4 +12,6 @@ k9 >> play("k", dur=P*[1,2,6]/3)
 w5 >> play("o...", dur=1/3, rate=1, sample=12, high=2, room2=0.9, mix2=0.3, damp2=0.2, revatk=0.2, revsus=0.4)
 k5 >> play("X", dur=P[2]/3)
 
-o6 >> choir(PChords(VI), oct=(3,4,P*[5,6]),rel=3,  atk=2, dur=8, bendc=0.1, vow=PTuple(PWhite(5), 3), amp=.8, eb=0.75, ebfeed=0.7, ebmix=0.3, ebmode=1, ebwow=0.5, ebflutter=PStep(3, 40, 0.15), ebsat=0.3)
+# attention au cpu
+o6 >> choir(PChords(VI), oct=(3,4,P*[5,5]),rel=.1,  atk=2, dur=8, bendc=0.1, vow=PTuple(PWhite(5), 3), amp=.8, eb=0.75, ebfeed=0.7, ebmix=0.3, ebmode=1, ebwow=.2, ebflutter=.15, ebsat=0.3, fx2=1)
+

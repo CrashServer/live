@@ -4,6 +4,7 @@ import CodeMirror from "codemirror";
 import { CodemirrorBinding } from "y-codemirror";
 import { EventEmitter } from "./eventBus.js";
 import { setupConfigPanel } from "./configPanel.js";
+import { AudioAnalyzer } from "./audioAnalyzer.js";
 import * as Y from "yjs";
 import { WebsocketProvider } from "y-websocket";
 import { Awareness } from "y-protocols/awareness";
@@ -199,6 +200,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Configuration du panneau de configuration
   const configPanelControls = setupConfigPanel(awareness, editor, otherEditor);
+
+  // Initialiser l'analyseur audio (sera géré par le configPanel)
+  const audioVizContainer = document.getElementById("audio-viz");
+  const audioAnalyzer = new AudioAnalyzer(audioVizContainer);
+  
+  // Passer l'analyseur audio au panneau de configuration AVANT de charger les settings
+  configPanelControls.setAudioAnalyzer(audioAnalyzer);
 
   // Configuration des logs
   logsUtils.initResize(editor, otherEditor);
@@ -695,4 +703,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const ch = cursor.ch;
     editor.replaceRange(index + ",", { line, ch }, { line, ch });
   }
+
+  // Cleanup lors du fermeture
+  window.addEventListener("beforeunload", () => {
+    if (audioAnalyzer.isRunning) {
+      audioAnalyzer.stop();
+    }
+  });
 });

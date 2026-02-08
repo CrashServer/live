@@ -21,6 +21,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const spectatorModeToggle = document.getElementById('spectatorModeToggle');
     const consoleToggle = document.getElementById('consoleToggle');
     const guttersToggle = document.getElementById('guttersToggle');
+    const audiovizToggle = document.getElementById('audiovizToggle');
     const themeSelect = document.getElementById('themeSelect');
 
 
@@ -28,6 +29,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     let spectatorMode = false;
     let currentFocusedPlayer = null;
     let currentUserName = '';
+    let audioAnalyzer = null;
 
     // Fonction pour obtenir la clé localStorage avec le nom d'utilisateur
     function getStorageKey(key) {
@@ -86,6 +88,12 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         guttersToggle.checked = guttersVisible;
         toggleGutters(guttersVisible);
 
+        // Charger l'état du visualiseur audio
+        const savedAudioVizState = localStorage.getItem(getStorageKey('audioVizEnabled'));
+        const audioVizEnabled = savedAudioVizState !== 'false';
+        audiovizToggle.checked = audioVizEnabled;
+        toggleAudioViz(audioVizEnabled);
+
         // Charger le thème d'interface
         const savedInterfaceTheme = localStorage.getItem(getStorageKey('selectedInterfaceTheme')) || 'dark';
         document.documentElement.className = `${savedInterfaceTheme}-theme`;
@@ -105,7 +113,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         userNameInput.value = userInfo.name;
         userColorInput.value = userInfo.color;
         updateUserInfo(); // Met à jour awareness
-        loadUserSettings(userInfo.name); // Charger les paramètres de cet utilisateur
+        // Charger les paramètres sera fait après setAudioAnalyzer()
     }
 
     function updateUserInfo(forceSpectator = false) {
@@ -156,9 +164,6 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         localStorage.setItem(getStorageKey('preferredFont'), font);
     });
 
-    // Restaurer la police sauvegardée
-    // Supprimé car maintenant géré dans loadUserSettings
-
     // Gestion ouverture/fermeture du panneau
     configButton.addEventListener('click', () => {
         configPanel.classList.toggle('open');
@@ -180,12 +185,6 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         otherEditor.setOption('theme', theme);
         localStorage.setItem(getStorageKey('preferredTheme'), theme);
     });
-
-    // Restaurer le thème
-    // Supprimé car maintenant géré dans loadUserSettings
-
-    // Restaurer la taille sauvegardée
-    // Supprimé car maintenant géré dans loadUserSettings
 
     // Mettre à jour lors du changement
     fontSizeSlider.addEventListener('input', (e) => {
@@ -242,9 +241,6 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         modal.style.display = "none";
         }
     }
-
-    // Restore the interface theme
-    // Supprimé car maintenant géré dans loadUserSettings
     
     // Gérer le changement de thème
     themeInterfaceSelector.addEventListener('change', (e) => {
@@ -289,9 +285,6 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         localStorage.setItem(getStorageKey('splitScreenEnabled'), enabled.toString());
     }
 
-    // Restaurer l'état du split screen
-    // Supprimé car maintenant géré dans loadUserSettings
-
     // Event listener pour le toggle
     splitScreenToggle.addEventListener('change', (e) => {
         const enabled = e.target.checked;
@@ -311,9 +304,6 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         localStorage.setItem(getStorageKey('consoleVisible'), visible.toString());
     }
     
-    // Restaurer l'état de la console
-    // Supprimé car maintenant géré dans loadUserSettings
-
     consoleToggle.addEventListener('change', (e) => {
         const visible = e.target.checked;
         toggleConsole(visible);
@@ -332,12 +322,36 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         localStorage.setItem(getStorageKey('guttersVisible'), visible.toString());
     }
     
-    // Restaurer l'état des gutters
-    // Supprimé car maintenant géré dans loadUserSettings
-
     guttersToggle.addEventListener('change', (e) => {
         const visible = e.target.checked;
         toggleGutters(visible);
+    });
+
+    // Gestion du visualiseur audio
+    function toggleAudioViz(enabled) {
+        const audioVizElement = document.getElementById('audio-viz');
+        if (enabled) {
+            audioVizElement.style.display = 'block';
+            // Démarrer l'analyseur audio uniquement si activé
+            if (audioAnalyzer) {
+                audioAnalyzer.init().catch((error) => {
+                    console.error("Erreur lors du démarrage de l'analyseur audio:", error);
+                });
+            }
+        } else {
+            audioVizElement.style.display = 'none';
+            // Arrêter l'analyseur audio pour économiser les ressources
+            if (audioAnalyzer && audioAnalyzer.isRunning) {
+                audioAnalyzer.stop();
+            }
+        }
+        // Sauvegarder la préférence
+        localStorage.setItem(getStorageKey('audioVizEnabled'), enabled.toString());
+    }
+
+    audiovizToggle.addEventListener('change', (e) => {
+        const enabled = e.target.checked;
+        toggleAudioViz(enabled);
     });
 
     // Gestion du mode spectateur
@@ -430,9 +444,6 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         }
     });
 
-    // Restaurer l'état du mode spectateur
-    // Supprimé car maintenant géré dans loadUserSettings
-
     // Event listener pour le toggle spectateur
     spectatorModeToggle.addEventListener('change', (e) => {
         toggleSpectatorMode(e.target.checked);
@@ -451,6 +462,14 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         },
         isSpectatorMode() {
             return spectatorMode;
+        },
+        setAudioAnalyzer(analyzer) {
+            audioAnalyzer = analyzer;
+            // Charger les paramètres utilisateur MAINTENANT que audioAnalyzer est défini
+            if (savedUser) {
+                const userInfo = JSON.parse(savedUser);
+                loadUserSettings(userInfo.name);
+            }
         },
     };
 }

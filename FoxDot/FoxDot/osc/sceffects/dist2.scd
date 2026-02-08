@@ -13,5 +13,5 @@ tmp = (tmp * 16.dbamp * dist2).tanh;
 tmp = BHiShelf.ar(tmp, 9000, 0.8, -12);
 tmp = LPF.ar(tmp, 9000);
 osc = SelectX.ar(dist2mix, [osc, tmp]);
-		osc = HPF.ar(osc, 30);
+osc = HPF.ar(osc, 30);
 ReplaceOut.ar(bus, osc)}).add;

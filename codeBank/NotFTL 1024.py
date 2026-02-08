@@ -4,7 +4,7 @@ Clock.bpm=1024
 
 w4 >> play("x", valad=PFr(500,800,1664, 128), amp=PStep(16, 0, 1), rate=PWhite(0.98, 1.02), valadr=PWhite(.1, 0.9), valadd=5, valadt=0, valadc=0.2, mverb=.2, wshape=linvar([0, 12],[333,222]), hpf=120)
 
-g3 >> play("X", sample=0, dur=var([8, PRand(1,8).rnd(2)], [120,12]), amp=3, lpf=0)
+g3 >> play("X", sample=0, dur=var([8, PRand(1,8)], [120,12]), amp=3, lpf=0)
 e5 >> play("l", bank=1, sample=2, dur=[8, 4, 2, 1,1/2,1/2],  hpf=linvar([50,600],[147,33]), cut=PFr(0.5, 2), valad=linvar([400,4000],256), valadr=linvar([.2, 0.9], [356, 156]), valadd=15, valadt=0, valadc=0.2)
 w5 >> play("-", pan=PWhite(-1,1), cut=1, rate=PWhite(1,1.04), amp=1, dur=var([1/2, 8], 4)).human(40)
 s3 >> play(":", sample=9, amp=PStep(32, 4,0), rate=(-.5,.5), mverb=.7, eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=150, ebsat=0.3)

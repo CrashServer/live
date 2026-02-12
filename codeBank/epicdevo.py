@@ -57,6 +57,15 @@ b1 >> plaitsX(var([[0,0,0,3,0,0,5,0], [0,1,2,3,4,5,6,7]], [16, 16]),  dur=0.25, 
 x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=4, crush=4)
 l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
 
+k4 >> play("....C.", amp=2, fbdelay=0.5, lpf=12000, glitch=0.5)
+
+l5 >> compkick(punch=1, comp=8, release=0.35, click=4,drive=0.5, sub=1, oct=4, body=1, tone=12)
+
+l5 >> a_bd()
+t1.stop()
+p1.stop()
+
+
 drop()
 # Server.addFx(hpf=400)
 
@@ -68,6 +77,7 @@ b1.stop()
 Group(k1, s1, s2, h1).solo()
 s1.stop()
 # a1 >> acidline([0, 0, 3, 0, 5, 0, 3, -2], dur=0.25, oct=6, beef=122, cutoff=linvar([400, 2000], 8), rq=0.8, amp=1.8)
+
 c5 >> faim([0, 6, 12, 1, 7], dur=2, oct=3, beef=2,  dist2=0.8, amp=1.2, leg=2, room=0.6, mix=0.4)
 b1 >> dbass([0, 0, 0, 0, 0, 0, 0, 0], dur=1/8, oct=5, amp=P[1, 0.4, 0.7, 0.4], lpf=1200, shape=0)
 r1 >> prophet([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)

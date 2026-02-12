@@ -1,0 +1,10 @@
+# bells2 120
+# todo
+p1 >> bell2([0,4,7], dur=16, oct=5, amp=0.8, atk=4, sus=14, lpf=linvar([400,2500],64), room=0.6, mix=0.4, multicrush=2, mclowdrive=2, tube=1, tubegain=1, tubewarm=1, mcmiddrive=1, mchighdrive=4, mclofreq=1200, mchifreq=1200)
+s1 >> bell2([0,0,4,0,7,0,4,0], rgate=0.4, fbdelay=linvar([0.1, 0.7], 128), dur=1/4, oct=4.01, amp=0.56,lpf=linvar([600,3000],32), lpr=0.2, sus=0.3, tube=0.2, tubewarm=1, tubegain=0.9, multicrush=0, hpf=200, apan=0, awidth=0.6).unison(2,0.01)
+s2 >> bell2([0,0,4,0,7,0,4,0], gate=0.0, fbdelay=0.78, dur=2, oct=5, amp=0.56,lpf=linvar([600,3000],32), lpr=0.3, sus=0.5, tube=0, tubewarm=0, tubegain=1, multicrush=0, apan=0, awidth=0.5, hard=var([0, 1, 2, 4, 8, 4, 2, 16, 4, 2]), round=0.2,nharm=2, fmamt=[0, 0,1, 1, 2, 4, 4], fmratio=12,strike=1, shimmer=2.0).unison(2,0.01)
+s1 >> bell2([0,0,4,0,7,0,4,0], gate=0.3, fbdelay=linvar([0.1, 0.7], 128), dur=1/4, oct=5, amp=0.56,lpf=linvar([600,3000],32), lpr=0.5, sus=0.3, tube=0.0, tubewarm=2, tubegain=0.9, multicrush=0, apan=0, awidth=0.6).unison(2,0.01)
+s1 >> bell2([0,0,4,0,7,0,4,0], gate=0.0, fbdelay=0.2, dur=1/4, oct=4, amp=0.76,lpf=linvar([600,3000],32), lpr=0.3, sus=0.5, tube=0, tubewarm=4, tubegain=1, multicrush=0, apan=0, awidth=0.5).unison(2,0.01)
+s3 >> bell2([0,4,7,4], dur=1/4, oct=5, amp=var([0,0.65],[16,16]), lpf=linvar([1000,4000],32), room=0, sus=0.15, eb=0.5, leg=4, tube=0.5, tubewarm=4, mverb=0.1, a=0, bright=0.5, damp=0.5, hard=12, round=1,inharm=0.01, fmamt=1, fmratio=2.4,	strike=0.3, shimmer=0.31)
+p5 >> bell2([0,4,7], dur=6, delay=2, oct=6, amp=0.8, atk=4, sus=14, lpf=linvar([400,2500],64), room=0.6, mix=0.4, multicrush=2, mclowdrive=2, tube=1, tubegain=1, tubewarm=1, mcmiddrive=1, mchighdrive=4, mclofreq=1200, mchifreq=1200)
+s1 >> bell2([0,0,4,0,7,0,4,0], rgate=0.4, fbdelay=linvar([0.1, 0.7], 128), dur=1/4, oct=4.01, amp=0.56,lpf=linvar([600,3000],32), lpr=0.2, sus=0.3, tube=0.2, tubewarm=1, tubegain=0.9, multicrush=0, hpf=200, apan=0, tape=1.0, tapedrive=0.8, awidth=0.6).unison(2,0.01)

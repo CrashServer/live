@@ -45,23 +45,31 @@ r1.stop()
 p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, room=0.9, mix=0.6)
 a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.3,  amp=linvar([0, 0.3], 16))
 
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=4, crush=4)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
 Clock.bpm = 132
-c5 >> faim([0, 1, 6], dur=4, oct=6, beef=1, amp=0.9,   fshift=linvar([-20, 20], 16), fmix=0.3)
-c4.stop()
-d1 >> industrialdrone([0], dur=16, oct=6, feedback=0.5, amp=0.3)
 p1 >> ethpad(r1.degree, dur=8, oct=5, attack=2, amp=0.2, room=0.9)
 t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=1, dark=0.7)
 r2 >> vati([0, 1, 3, 6, 7, 11, 12, 6], dur=0.25, oct=var([5, 6], [16, 16]), cutoff=3000, amp=var([0, 1.0], [16, 16]), leg=0)
 b1 >> plaitsX(var([[0,0,0,3,0,0,5,0], [0,1,2,3,4,5,6,7]], [16, 16]),  dur=0.25, oct=6, amp=P[0.8, 0.3, 0.5, 0.6], lpf=900, shape=0)
 
-x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=4, crush=4)
+
+c5 >> faim([0, 1, 6], dur=4, oct=6, beef=1, amp=0.9,   fshift=linvar([-20, 20], 16), fmix=0.3)
+c4.stop()
+d1 >> industrialdrone([0], dur=16, oct=6, feedback=0.5, amp=0.3)
+
+k4 >> play("....C.", amp=1, fbdelay=0.5, lpf=12000, glitch=0.5)
+l5 >> compkick(punch=12, comp=8, release=0.35, click=1,drive=0.5, sub=1, oct=4, body=1, tone=6)
 l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
 
-k4 >> play("....C.", amp=2, fbdelay=0.5, lpf=12000, glitch=0.5)
-
-l5 >> compkick(punch=1, comp=8, release=0.35, click=4,drive=0.5, sub=1, oct=4, body=1, tone=12)
-
 l5 >> a_bd()
+r1.dur=16
+m4 >> play("[--]")
+p1.stop()
+p2.stop()
+t1.stop()
+
+
 t1.stop()
 p1.stop()
 
@@ -91,6 +99,7 @@ Clock.bpm = 66
 c5 >> faim([0, 3, 6, 9], dur=2, oct=3, beef=2, dist2=0.6, amp=1.0, leg=1, room=0.5)
 k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
 s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=3)
+
 
 Clock.bpm = 132
 r1 >> prophet([0, 1, 3, 4, 6, 7, 9, 10], dur=0.5, oct=4,cutoff=linvar([500, 6000], 16), amp=0.9, leg=0.3)

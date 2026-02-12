@@ -123,7 +123,7 @@ d7 >> varicelle([9, 14, 16, 18, 21, 23, 26], dur=var([0.25, 0.5, 1], [8, 8, 4]),
 
 Clock.bpm = 180
 
-d3 >> faim([18, 23, 26, 30, 33, 35], dur=0.125, amp=1.5, oct=7, sus=4, dist2=2, pan=PSine(16), lpf=12000).human(30).unison(8).only()
+d3 >> faim([18, 23, 26, 30, 33, 35], dur=0.125, amp=1.5, oct=7, sus=0.1, dist2=2, pan=PSine(16), lpf=12000).human(30).unison(8).only()
 
 d8 >> faim(P[11, 14, 18, 21, 25, 28, 32].rotate(), dur=0.0625, amp=1.2, oct=6, beef=4, sus=3, room=0.8).human(10).unison(6)
 

@@ -18,5 +18,11 @@ SynthDef.new(\brass2, {
 	osc = osc * env * amp * 0.4;
 	osc = Pan2.ar(osc, pan);
 	osc = LeakDC.ar(osc);
-	ReplaceOut.ar(bus, osc);
-}).add;
+	ReplaceOut.ar(bus, osc)},
+	metadata: (
+	credit: "CrashServer",
+	description: "",
+	category: \keyboard,
+	tags: []
+	)
+).add;

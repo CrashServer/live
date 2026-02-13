@@ -1,5 +1,3 @@
-// organx - Hammond-style organ with drawbar controls
-
 SynthDef.new(\organx, {
 	|bus=0, freq=440, amp=1, pan=0, fmod=0,
 	atk=0.005, dec=0.1, sus=1, rel=0.1, peak=1, level=0.8,
@@ -73,6 +71,6 @@ SynthDef.new(\organx, {
 metadata: (
 	credit: "Custom FoxDot synth",
 	description: "Hammond-style organ with 9 drawbars, key click, leslie speaker, percussion",
-	category: \keys,
+	category: \organ,
 	tags: [\organ, \hammond, \keys, \drawbar, \leslie, \rock, \jazz]
 )).add;

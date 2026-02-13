@@ -1,5 +1,3 @@
-// bell2 - Tuneable bell (optimized)
-
 SynthDef.new(\bell2, {
 	|bus=0, freq=440, amp=1, pan=0, fmod=0,
 	atk=0.001, dec=2, sus=1, rel=1, peak=1, level=0.5,

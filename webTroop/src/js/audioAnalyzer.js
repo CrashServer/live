@@ -25,11 +25,11 @@ export class AudioAnalyzer {
     this.gridColor = window.getComputedStyle(document.body).getPropertyValue('--flash-col');
     // this.colorRight = '#4444FF';
     this.freqLabels = [20, 30, 50, 100, 200, 300, 500, 1000, 2000, 3000, 5000, 10000, 20000];
-    
+
     // Optimisations cohérentes
     this.smoothingFactor = 0.7; // Réduit pour moins d'accumulation
     this.lastFrameTime = 0;
-    this.targetFrameTime = 1000 / 30; // 30 fps
+    this.targetFrameTime = 1000 / 15; // 30 fps
     this.canvasScale = 0.75;
     this.displayPoints = 128*2; // Nombre de points à afficher
 
@@ -92,7 +92,7 @@ export class AudioAnalyzer {
     if (freq <= 0) {
       return 0;
     }
-    
+
     const logMin = Math.log10(this.minFreq);
     const logMax = Math.log10(this.maxFreq);
     const logFreq = Math.log10(Math.max(freq, this.minFreq));
@@ -134,7 +134,7 @@ export class AudioAnalyzer {
         continue;
       }
       smoothedArray[i] = Math.round(
-        dataArray[i] * (1 - this.smoothingFactor) + 
+        dataArray[i] * (1 - this.smoothingFactor) +
         smoothedArray[i] * this.smoothingFactor
       );
     }
@@ -202,7 +202,7 @@ export class AudioAnalyzer {
       if (binFloor === binCeil) {
         value = dataArray[binFloor];
       } else {
-        value = dataArray[binFloor] * (1 - binFraction) + 
+        value = dataArray[binFloor] * (1 - binFraction) +
                 dataArray[binCeil] * binFraction;
       }
 

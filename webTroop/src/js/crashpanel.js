@@ -1,5 +1,5 @@
 import { EventEmitter } from './eventBus.js';
-import { playersList, updatePlayersList } from './functionUtils.js';
+import { playersList, updatePlayersList, toggleRecording } from './functionUtils.js';
 
 const configRequest = await fetch('../../crash_config.json' );
   if (!configRequest.ok) {
@@ -13,6 +13,7 @@ const crashPanelToggle = document.getElementById('crashPanelToggle');
 const crashPanelTitle = document.getElementById('crashPanelTitle');
 const todoList = document.querySelector('.todo-list');
 const showTodo = config.showTodo ?? false;
+const recordButton = document.getElementById('recording');
 
 let isResizing = false;
 let startX;
@@ -22,6 +23,21 @@ let sceneIntervalId = null;
 let tapTimes = [];
 let calculatedBPM = 0;
 let tapTimeout = null;
+let isRecording = false;
+const folder = config.RECORDING_PATH ?? null
+
+recordButton.addEventListener('click', () => {
+  isRecording = !isRecording;
+    if (isRecording) {
+      recordButton.classList.add('recording-active');
+      recordButton.textContent = 'Recording...';
+      toggleRecording(wsServer, true, folder);
+    } else {
+      recordButton.classList.remove('recording-active');
+      recordButton.textContent = 'Start';
+      toggleRecording(wsServer, false);
+    }
+});
 
 if (!showTodo) {
     todoList.style.display = 'none';
@@ -89,7 +105,7 @@ wsServer.onopen = function() {
 
 ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
-    
+
     switch(data.type) {
         case 'scale':
             document.getElementById('scale').textContent = data.scale;
@@ -126,7 +142,7 @@ ws.onmessage = function(event) {
             break;
         case 'masterFx':
             const masterFxContainer = document.getElementById('masterFx');
-            masterFxContainer.innerHTML = ''; 
+            masterFxContainer.innerHTML = '';
             Object.keys(data.masterFx).forEach((fx, index) => {
                 const fxDiv = document.createElement('span');
                 fxDiv.className = 'master-fx-item';
@@ -152,7 +168,7 @@ ws.onmessage = function(event) {
         //     createGameTable(data.gameData);
         //     break;
         default:
-            break;    
+            break;
             // console.log('Unknown message type:', data.type);
     }
 };
@@ -219,14 +235,14 @@ function updateCpu(usagePercent){
 function interpolateColor(color1, color2, factor) {
     const c1 = parseInt(color1.slice(1), 16);
     const c2 = parseInt(color2.slice(1), 16);
-  
+
     const r1 = (c1 >> 16) & 0xff, g1 = (c1 >> 8) & 0xff, b1 = c1 & 0xff;
     const r2 = (c2 >> 16) & 0xff, g2 = (c2 >> 8) & 0xff, b2 = c2 & 0xff;
-  
+
     const r = Math.round(r1 + factor * (r2 - r1));
     const g = Math.round(g1 + factor * (g2 - g1));
     const b = Math.round(b1 + factor * (b2 - b1));
-  
+
     return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
   }
 
@@ -261,7 +277,7 @@ function formatPlayers(message) {
     const previousPlayerIds = new Set(previousPlayersState.keys());
 
     // Vérifier si la structure a changé (nouveaux joueurs, joueurs supprimés, ou changement de solo)
-    const structureChanged = 
+    const structureChanged =
         currentPlayerIds.size !== previousPlayerIds.size ||
         ![...currentPlayerIds].every(id => previousPlayerIds.has(id)) ||
         players.some(p => {
@@ -321,7 +337,7 @@ function getDurationColor(totalMinutes) {
     const green = '#4caf50';
     const orange = '#ff9800';
     const red = '#f44336';
-    
+
     // Calculer la couleur
     if (totalMinutes <= 1) {
         return green;
@@ -346,7 +362,7 @@ function updateCrashPanelTitle (serverState) {
 
 const checkboxes = document.querySelectorAll('.todo-checkbox');
 checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {        
+    checkbox.addEventListener('change', () => {
         // Vérifier si toutes les checkboxes sont cochées
         checkAllTodos();
     });
@@ -400,7 +416,7 @@ function formatSceneName(nameScene) {
     }
 }
 
-// Create a table to represent the game data  
+// Create a table to represent the game data
 // function createGameTable(gameData){
 //     const gameDataContainer = document.getElementById('gameData')
 //     gameDataContainer.innerHTML = ''; // Clear previous content
@@ -501,7 +517,7 @@ function updatePianoKeys(scale, root) {
 
 function initTapTempo() {
     const bpmElement = document.getElementById('bpm');
-    
+
     // Créer un élément tooltip pour afficher le BPM calculé
     const tooltip = document.createElement('div');
     tooltip.className = 'tap-tempo-tooltip';
@@ -514,25 +530,25 @@ function initTapTempo() {
     tooltip.style.zIndex = '1000';
     tooltip.style.fontSize = '14px';
     document.body.appendChild(tooltip);
-    
+
     // Écouter les clics sur l'élément BPM
     bpmElement.addEventListener('click', function(e) {
         e.preventDefault();
         const now = Date.now();
-        
+
         // Réinitialiser si plus de 2 secondes depuis le dernier tap
         if (tapTimes.length > 0 && now - tapTimes[tapTimes.length - 1] > 2000) {
             tapTimes = [];
         }
-        
+
         // Ajouter le timestamp actuel
         tapTimes.push(now);
-        
+
         // Garder seulement les 8 derniers taps pour un calcul plus précis et réactif
         if (tapTimes.length > 8) {
             tapTimes.shift();
         }
-        
+
         // Calculer le BPM si nous avons au moins 2 taps
         if (tapTimes.length > 1) {
             // Calculer les intervalles entre les taps
@@ -540,22 +556,22 @@ function initTapTempo() {
             for (let i = 1; i < tapTimes.length; i++) {
                 intervals.push(tapTimes[i] - tapTimes[i - 1]);
             }
-            
+
             // Calculer l'intervalle moyen en millisecondes
             const avgInterval = intervals.reduce((sum, val) => sum + val, 0) / intervals.length;
-            
+
             // Convertir en BPM : (60 secondes * 1000 ms) / intervalle en ms
             calculatedBPM = Math.round(60000 / avgInterval);
-            
+
             // Ajouter un effet visuel de feedback
             bpmElement.classList.add('tapped');
             setTimeout(() => {
                 bpmElement.classList.remove('tapped');
             }, 100);
-            
+
             // Afficher temporairement le BPM calculé
             bpmElement.setAttribute('data-tapped-bpm', calculatedBPM);
-            
+
             // Effacer le tableau de taps après 3 secondes d'inactivité
             clearTimeout(tapTimeout);
             tapTimeout = setTimeout(() => {
@@ -563,7 +579,7 @@ function initTapTempo() {
             }, 3000);
         }
     });
-    
+
     // Gérer l'affichage du tooltip au survol
     bpmElement.addEventListener('mousemove', function(e) {
         if (calculatedBPM > 0) {
@@ -573,14 +589,14 @@ function initTapTempo() {
             tooltip.style.top = `${e.pageY + 10}px`;
         }
     });
-    
+
     bpmElement.addEventListener('mouseleave', function() {
         tooltip.style.display = 'none';
     });
-    
+
     // Ajouter un curseur de type "pointer" pour indiquer que l'élément est cliquable
     bpmElement.style.cursor = 'pointer';
-    
+
     // Ajouter une petite indication visuelle pour montrer que c'est cliquable
     bpmElement.setAttribute('title', 'Cliquez pour le tap tempo');
 }
@@ -592,7 +608,7 @@ function addTapTempoStyles() {
             background-color: var(--border-col-2);
             transition: background-color 0.1s;
         }
-        
+
         #bpm:hover::after {
             content: "⏱️";
             margin-left: 5px;

@@ -28,7 +28,7 @@ export const functionUtils = {
         );
 
         const playerName = this.getPlayer(blockCode);
-    
+
         if (playerName) {
             wsServer.send(JSON.stringify({
                 type: 'evaluate_code',
@@ -42,7 +42,7 @@ export const functionUtils = {
         let startLine = cursor.line;
         let endLine = cursor.line;
         const code = cm.getLine(cursor.line).trim();
-        
+
         const playerName = this.getPlayer(code);
         if (playerName) {
             wsServer.send(JSON.stringify({
@@ -52,7 +52,7 @@ export const functionUtils = {
             wsServer.send(JSON.stringify({
                 type: 'evaluate_code',
                 code: `Clock.schedule(unsolo, Clock.mod(64))\n`
-            }));            
+            }));
         }
     },
 
@@ -75,14 +75,14 @@ export const functionUtils = {
         foxdotWs.send(JSON.stringify({
             type: 'sceneName',
             sceneName: sceneName
-        }));        
+        }));
     },
 
     // jump^ to the other player's position
     jumpToOtherPlayer(cm, awareness) {
         const states = awareness.getStates();
         states.forEach((state) => {
-          if (state.otherInstantCode) { 
+          if (state.otherInstantCode) {
             const { user, code, position, line } = state.otherInstantCode;
             if (user !== awareness.getLocalState().user.name){
                 this.previousPosition = cm.getCursor();
@@ -178,29 +178,29 @@ export const functionUtils = {
             // Verifier s'il faut stopper un player et convertir les syntaxes ! et ?
             let blockCodeArray = blockCode.split('\n');
             let hasChanged = false;
-            
+
             blockCodeArray.forEach((code, index) => {
                 let convertedCode = code;
-                
+
                 // Convertir ?nombre en PRand(0, nombre)
                 const convertedQuestion = this.convertQuestionMarkToPRand(convertedCode);
                 if (convertedQuestion !== convertedCode) {
                     hasChanged = true;
                     convertedCode = convertedQuestion;
                 }
-                
+
                 // Convertir expression!nombre en var(expression, nombre)
                 const convertToVar = this.convertExclamationToVar(convertedCode);
                 if (convertToVar !== convertedCode) {
                     hasChanged = true;
                     convertedCode = convertToVar;
                 }
-                
+
                 blockCodeArray[index] = functionUtils.ifPlayerStop(convertedCode);
             });
-            
+
             const blockCodeJoin = blockCodeArray.join('\n');
-            
+
             // Remplacer dans l'éditeur si le code a changé
             if (hasChanged) {
                 cm.replaceRange(
@@ -209,7 +209,7 @@ export const functionUtils = {
                     {line: endLine, ch: cm.getLine(endLine).length}
                 );
             }
-            
+
             return [blockCodeJoin, startLine, endLine];
         }
         return [blockCode, startLine, endLine];
@@ -277,52 +277,52 @@ export const functionUtils = {
     incrementValue(cm, value) {
         const cursor = cm.getCursor();
         const line = cm.getLine(cursor.line);
-        
+
         // Trouver les limites du nombre à partir de la position du curseur
         let start = cursor.ch;
         let end = cursor.ch;
-        
+
         // Recherche du début du nombre (vers la gauche)
         while (start > 0 && /[\d\.\-]/.test(line.charAt(start - 1))) {
             start--;
         }
-        
+
         // Recherche de la fin du nombre (vers la droite)
         while (end < line.length && /[\d\.]/.test(line.charAt(end))) {
             end++;
         }
-        
+
         // Extraire le nombre complet
         let numberStr = line.substring(start, end);
 
         // Vérifier si c'est un nombre commençant par un point (comme .5)
         const startsWithDot = /^\.\d+$/.test(numberStr);
-    
+
         // Ajouter un zéro en préfixe pour le traitement interne si nécessaire
         if (startsWithDot) {
             numberStr = "0" + numberStr;
         }
-        
+
         // Vérifier si c'est un nombre valide
         if (/^-?\d+(\.\d+)?$/.test(numberStr)) {
             let result;
-            
+
             // Déterminer s'il s'agit d'un entier ou d'un nombre à virgule
             if (numberStr.includes('.')) {
                 // Nombre décimal
                 const num = parseFloat(numberStr);
-                
+
                 // Récupérer le nombre de décimales
                 const decimalPart = numberStr.split('.')[1] || '';
                 const precision = decimalPart.length > 0 ? decimalPart.length : 1; // Au moins 1 décimale
                 // Incrémenter de 0.01 pour les décimaux et garder le bon format
                 const multiplier = (precision > 1) ? 0.01 : 0.1;
                 result = (num + (value * multiplier)).toFixed(precision);
-                
+
             } else {
                 // Nombre entier
                 const num = parseInt(numberStr, 10);
-                
+
                 // Pour les nombres supérieurs à 99, incrémenter par 100
                 if (Math.abs(num) > 300) {
                     result = (num + (value * 100)).toString();
@@ -330,7 +330,7 @@ export const functionUtils = {
                     result = (num + value).toString();
                 }
             }
-            
+
             if (parseInt(result) > 22000) {
                 result = "22000";
             }
@@ -341,7 +341,7 @@ export const functionUtils = {
 
             // Remplacer l'ancien nombre par le nouveau
             cm.replaceRange(result, {line: cursor.line, ch: start}, {line: cursor.line, ch: end});
-            
+
             // Replacer le curseur
             cm.setCursor({line: cursor.line, ch: start + result.length});
         }
@@ -350,7 +350,7 @@ export const functionUtils = {
     randomizer(cm) {
         const cursor = cm.getCursor();
         const line = cm.getLine(cursor.line);
-        
+
         const quoteBefore = line.lastIndexOf('"', cursor.ch);
         const quoteAfter = line.indexOf('"', cursor.ch);
 
@@ -362,14 +362,14 @@ export const functionUtils = {
             while (paramStart > 0 && /[a-zA-Z0-9_]/.test(line.charAt(paramStart - 1))) {
                 paramStart--;
             }
-            
+
             // Trouver la fin du paramètre (jusqu'à la virgule ou la fin)
             let paramEnd = equalPosBefore + 1;
-            
+
             // Tenir compte des structures imbriquées après le =
             let openBrackets = 0;
             let openParens = 0;
-            
+
             while (paramEnd < line.length) {
                 const char = line.charAt(paramEnd);
                 if (char === '[') openBrackets++;
@@ -377,14 +377,14 @@ export const functionUtils = {
                 else if (char === '(') openParens++;
                 else if (char === ')') openParens--;
                 else if (char === ',' && openBrackets === 0 && openParens === 0) break;
-                
+
                 paramEnd++;
             }
-            
+
             // Vérifier si le curseur est dans ce paramètre
             if (cursor.ch > equalPosBefore && cursor.ch < paramEnd) {
                 const paramContent = line.substring(equalPosBefore + 1, paramEnd);
-                
+
                 // Vérifier si c'est une valeur simple ou une structure complexe
                 if (/^\s*-?\d*\.?\d+\s*$/.test(paramContent) || /^\s*\.\d+\s*$/.test(paramContent)) {
                     // C'est un nombre simple, randomiser directement
@@ -392,10 +392,10 @@ export const functionUtils = {
                     const startsWithDot = /^\.\d+$/.test(trimmedContent);
                     const numberStr = startsWithDot ? "0" + trimmedContent : trimmedContent;
                     const result = this.randomizeNumber(numberStr, startsWithDot);
-                    
+
                     // Remplacer la valeur
-                    cm.replaceRange(result, 
-                        {line: cursor.line, ch: equalPosBefore + 1}, 
+                    cm.replaceRange(result,
+                        {line: cursor.line, ch: equalPosBefore + 1},
                         {line: cursor.line, ch: paramEnd});
                     return;
                 } else {
@@ -404,14 +404,14 @@ export const functionUtils = {
                         { open: '[', close: ']' },
                         { open: '(', close: ')' }
                     ];
-                    
+
                     for (const bracket of innerBrackets) {
                         const innerOpenPos = paramContent.indexOf(bracket.open);
                         if (innerOpenPos !== -1) {
                             // Trouver la position correspondante du délimiteur fermant
                             let depth = 1;
                             let innerClosePos = -1;
-                            
+
                             for (let i = innerOpenPos + 1; i < paramContent.length; i++) {
                                 if (paramContent[i] === bracket.open) depth++;
                                 else if (paramContent[i] === bracket.close) {
@@ -422,19 +422,19 @@ export const functionUtils = {
                                     }
                                 }
                             }
-                            
+
                             if (innerClosePos !== -1) {
                                 // Si le curseur est à l'intérieur de ces délimiteurs
                                 const absOpenPos = equalPosBefore + 1 + innerOpenPos;
                                 const absClosePos = equalPosBefore + 1 + innerClosePos;
-                                
+
                                 if (cursor.ch > absOpenPos && cursor.ch < absClosePos) {
                                     const innerContent = paramContent.substring(innerOpenPos + 1, innerClosePos);
                                     const randomized = this.randomizeNumbersInString(innerContent);
-                                    
+
                                     // Remplacer le contenu entre les délimiteurs
-                                    cm.replaceRange(randomized, 
-                                        {line: cursor.line, ch: absOpenPos + 1}, 
+                                    cm.replaceRange(randomized,
+                                        {line: cursor.line, ch: absOpenPos + 1},
                                         {line: cursor.line, ch: absClosePos});
                                     cm.setCursor({line: cursor.line, ch: absOpenPos + 1});
                                     return;
@@ -445,19 +445,19 @@ export const functionUtils = {
                 }
             }
         }
-        
+
         // Cas 2: Vérifier les délimiteurs directs autour du curseur
         const brackets = [
             { open: '[', close: ']' },
             { open: '(', close: ')' }
         ];
-        
+
         for (const bracket of brackets) {
             // Trouver tous les couples de délimiteurs dans la ligne
             let depth = 0;
             let openPositions = [];
             let matchingClosePositions = [];
-            
+
             for (let i = 0; i < line.length; i++) {
                 if (line[i] === bracket.open) {
                     if (depth === 0) {
@@ -471,56 +471,56 @@ export const functionUtils = {
                     }
                 }
             }
-            
+
             // Vérifier chaque paire de délimiteurs
             for (let j = 0; j < openPositions.length; j++) {
                 const openPos = openPositions[j];
                 const closePos = matchingClosePositions[j];
-                
+
                 // Si le curseur est entre ces délimiteurs
                 if (closePos && cursor.ch > openPos && cursor.ch < closePos) {
                     const content = line.substring(openPos + 1, closePos);
                     const randomized = this.randomizeNumbersInString(content);
-                    
+
                     // Remplacer le contenu entre les délimiteurs
-                    cm.replaceRange(randomized, 
-                        {line: cursor.line, ch: openPos + 1}, 
+                    cm.replaceRange(randomized,
+                        {line: cursor.line, ch: openPos + 1},
                         {line: cursor.line, ch: closePos});
                     return;
                 }
             }
         }
-        
+
         // Cas 3: Si aucun délimiteur ou paramètre n'est trouvé, traiter un seul nombre sous le curseur
         let start = cursor.ch;
         let end = cursor.ch;
-        
+
         // Recherche du début du nombre (vers la gauche)
         while (start > 0 && /[\d\.\-]/.test(line.charAt(start - 1))) {
             start--;
         }
-        
+
         // Recherche de la fin du nombre (vers la droite)
         while (end < line.length && /[\d\.]/.test(line.charAt(end))) {
             end++;
         }
-        
+
         // Si le curseur est sur un nombre
         if (start !== end) {
             let numberStr = line.substring(start, end);
             const startsWithDot = /^\.\d+$/.test(numberStr);
-            
+
             if (startsWithDot) {
                 numberStr = "0" + numberStr;
             }
-            
+
             // Vérifier si c'est un nombre valide
             if (/^-?\d+(\.\d+)?$/.test(numberStr)) {
                 const result = this.randomizeNumber(numberStr, startsWithDot);
-                
+
                 // Remplacer l'ancien nombre par le nouveau
                 cm.replaceRange(result, {line: cursor.line, ch: start}, {line: cursor.line, ch: end});
-                
+
                 // Replacer le curseur
                 cm.setCursor({line: cursor.line, ch: start });
             }
@@ -538,14 +538,14 @@ export const functionUtils = {
 
     randomizeNumber(numberStr, startsWithDot) {
         let result;
-        
+
         // Déterminer s'il s'agit d'un entier ou d'un nombre à virgule
         if (numberStr.includes('.')) {
             // Nombre décimal
             const num = parseFloat(numberStr);
             const decimalPart = numberStr.split('.')[1] || '';
             const precision = decimalPart.length;
-            
+
             // Pour les très petits nombres, utiliser une plage adaptée
             let minVal, maxVal;
             if (Math.abs(num) < 0.2) {
@@ -556,13 +556,13 @@ export const functionUtils = {
                 minVal = Math.max(0.001, num * 0.5); // Minimum: 50% de la valeur originale avec un plancher
                 maxVal = num * 1.5; // Maximum: 150% de la valeur originale
             }
-            
+
             // Nouvelle valeur aléatoire
             let randomVal = minVal + (Math.random() * (maxVal - minVal));
-            
+
             // Formater le résultat avec le bon nombre de décimales
             result = randomVal.toFixed(precision);
-            
+
             // Si le nombre original commençait par un point, enlever le 0 du début
             if (startsWithDot && result.startsWith('0.')) {
                 result = result.substring(1);
@@ -570,14 +570,14 @@ export const functionUtils = {
         } else {
             // Nombre entier
             const num = parseInt(numberStr, 10);
-            
+
             // Calculer le facteur de randomisation en fonction de la taille du nombre
             const magnitude = Math.abs(num) > 200 ? 100 : 1;
-            
+
             // Générer un entier aléatoire du même ordre de grandeur
             const minVal = Math.max(magnitude, Math.floor(num * 0.5)); // Minimum: 50% de la valeur originale
             const maxVal = Math.ceil((num < 15000) ? num * 1.5: 15000); // Maximum: 150% de la valeur originale
-            
+
             // Nouvelle valeur aléatoire
             result = (Math.floor(Math.random() * (maxVal - minVal + magnitude)) + minVal);
             result = (result < 15000 ? result : 15000);
@@ -598,7 +598,7 @@ export const functionUtils = {
             cm.execCommand("goWordRight");
         }
     },
-  
+
     // Fonction pour aller à la précédente occurrence de virgule
     goToPreviousComma(cm) {
         const cursor = cm.getCursor();
@@ -618,14 +618,14 @@ export const functionUtils = {
             const match = loop.match(/\d+$/);
             let dur= "";
             if  (loop.startsWith("AKWF")) {
-                dur = ``; 
+                dur = ``;
             }
             else {
                 dur = match ? `, dur=${parseInt(match[0], 10)}` : ""; // Extraire la durée du nom de la loop ou définir une chaîne vide
             }
             return { text: `"${loop}"${dur}`, displayText: loop };
         });
-       
+
         const fxList = message.autocomplete.fxList;
         // Ne garder que les FX avec '_' mais les afficher sans le '_'
         const formattedFxList = fxList.map(fx => {
@@ -664,26 +664,26 @@ export const functionUtils = {
     convertExclamationToVar(code) {
         // Traiter d'abord les cas simples avec crochets
         code = code.replace(/(\[[^\]]+\])!(\d+)/g, 'var($1, [$2, $2])');
-        
+
         // Pour les fonctions avec parenthèses, on doit gérer les parenthèses imbriquées
         // On cherche pattern: nom_fonction(...contenu_avec_parentheses...)!nombre
         let result = code;
         let match;
         const funcPattern = /(\w+)\(/g;
-        
+
         while ((match = funcPattern.exec(result)) !== null) {
             const funcName = match[1];
             let startPos = match.index + funcName.length + 1; // Position après la parenthèse ouvrante
             let depth = 1;
             let endPos = startPos;
-            
+
             // Trouver la parenthèse fermante correspondante
             while (endPos < result.length && depth > 0) {
                 if (result[endPos] === '(') depth++;
                 else if (result[endPos] === ')') depth--;
                 endPos++;
             }
-            
+
             // Vérifier s'il y a un ! suivi d'un nombre juste après
             if (endPos < result.length && result[endPos] === '!') {
                 const numMatch = result.substring(endPos + 1).match(/^(\d+)/);
@@ -698,7 +698,7 @@ export const functionUtils = {
                 }
             }
         }
-        
+
         return result;
     },
 
@@ -717,11 +717,25 @@ export const functionUtils = {
         });
     },
 
-    
+
 };
 
 export let playersList = [];
 
 export function updatePlayersList(newPlayersList) {
     playersList = newPlayersList;
+}
+
+export function toggleRecording(wsServer, record, folder=null) {
+  if (record)
+      wsServer.send(JSON.stringify({
+          type: 'evaluate_code',
+          code: (folder) ? `Server.record("${folder}")\n` : 'Server.record()\n'
+      }));
+  else {
+      wsServer.send(JSON.stringify({
+          type: 'evaluate_code',
+          code: 'Server.stopRecording()\n'
+      }));
+  }
 }

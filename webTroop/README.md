@@ -17,6 +17,15 @@ npm install
 Copier le fichier `crash_config_sample.json` en `crash_config.json` et modifier les paramètres en fonction de votre configuration
 Les ports n'ont pas besoin d'être modifiés si vous n'avez pas de conflit.
 
+- "HOST_IP": ip du serveur FoxDot,
+- "FOXDOT_PATH": chemin vers le dossier d'installation de FoxDot,
+- "sample_path": chemin vers le dossier des samples,
+- "RECORDING_PATH": chemin vers le dossier où seront stocké les enregistrements,
+- "FOXDOT_WS_PORT": port websocket pour la communication avec FoxDot,
+- "freesoundApiKey": la clé API pour accéder à Freesound (optionnel, pour la recherche de samples depuis l'interface),
+- "SC_CPU_PORT": port pour recevoir les données CPU de SuperCollider,
+- "showTodo": afficher ou non la section TODO (pre-live) dans l'interface,
+- "ARDUINO": activer ou non le support Arduino (voir section Arduino plus bas),
 
 ## Utilisation
 

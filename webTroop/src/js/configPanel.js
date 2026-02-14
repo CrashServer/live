@@ -14,7 +14,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const buttonValidatePlayerName = document.getElementById('validatePlayerName');
     const themeInterfaceSelector = document.getElementById('themeInterfaceSelector');
 
-    const splitScreenToggle = document.getElementById('splitScreenToggle');    
+    const splitScreenToggle = document.getElementById('splitScreenToggle');
     const otherEditorWrapper = document.getElementById('other-editor-wrapper');
     const editorResizeHandle = document.getElementById('editor-resize-handle');
     const mainEditorWrapper = document.getElementById('main-editor-wrapper');
@@ -39,13 +39,14 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     // Fonction pour charger les paramètres d'un utilisateur
     function loadUserSettings(userName) {
         currentUserName = userName;
-        
+
         // Charger la police
         const savedFont = localStorage.getItem(getStorageKey('preferredFont'));
         if (savedFont) {
             fontSelect.value = savedFont;
             editor.getWrapperElement().style.fontFamily = savedFont;
-            otherEditor.getWrapperElement().style.fontFamily = savedFont;
+          otherEditor.getWrapperElement().style.fontFamily = savedFont;
+          document.body.style.fontFamily = savedFont;
         }
 
         // Charger le thème
@@ -122,17 +123,17 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             name: newUserName,
             color: userColorInput.value
         };
-        
+
         // Sauvegarder dans localStorage (sauf si mode spectateur)
         if (!forceSpectator) {
             localStorage.setItem('webtroop-user', JSON.stringify(userInfo));
-            
+
             // Si le nom d'utilisateur a changé, charger les paramètres de ce nouvel utilisateur
             if (newUserName !== currentUserName) {
                 loadUserSettings(newUserName);
             }
         }
-        
+
         // Mettre à jour awareness
         awareness.setLocalStateField('user', userInfo);
     }
@@ -152,7 +153,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         userNameInput.blur();
     }
     );
-    
+
     userColorInput.addEventListener('input', updateUserInfo);
 
     // Gestion du changement de police
@@ -171,8 +172,8 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
 
     // Fermer le panneau en cliquant en dehors
     document.addEventListener('click', (e) => {
-        if (!configPanel.contains(e.target) && 
-            !configButton.contains(e.target) && 
+        if (!configPanel.contains(e.target) &&
+            !configButton.contains(e.target) &&
             configPanel.classList.contains('open')) {
             configPanel.classList.remove('open');
         }
@@ -195,11 +196,11 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     function updateFontSize(size) {
         // Mettre à jour l'affichage
         fontSizeValue.textContent = size;
-        
+
         // Mettre à jour l'éditeur
         editor.getWrapperElement().style.fontSize = size + 'px';
         otherEditor.getWrapperElement().style.fontSize = size + 'px';
-        
+
 
         // Forcer le rafraîchissement
         editor.refresh();
@@ -213,14 +214,14 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         const size = e.target.value;
         updateInterfaceFontSize(size);
         });
-    
+
     function updateInterfaceFontSize(size) {
         // Mettre à jour l'affichage
         fontInterfaceSizeValue.textContent = size;
-        
+
         // Mettre à jour l'interface
         document.documentElement.style.fontSize = size + 'px';
-        
+
         // Sauvegarder la préférence
         localStorage.setItem(getStorageKey('preferredInterfaceFontSize'), size);
     };
@@ -241,7 +242,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         modal.style.display = "none";
         }
     }
-    
+
     // Gérer le changement de thème
     themeInterfaceSelector.addEventListener('change', (e) => {
         const selectedInterfaceTheme = e.target.value;
@@ -259,7 +260,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
                 editorResizeHandle.style.display = 'block';
             }
             mainEditorWrapper.style.height = '90%';
-            
+
             // Restaurer les flex values par défaut
             mainEditorWrapper.style.flex = '9';
             otherEditorWrapper.style.flex = '1';
@@ -272,7 +273,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             mainEditorWrapper.style.height = '100%';
             mainEditorWrapper.style.flex = '1';
         }
-        
+
         // Rafraîchir les éditeurs après changement
         setTimeout(() => {
             editor.refresh();
@@ -280,7 +281,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
                 otherEditor.refresh();
             }
         }, 10);
-        
+
         // Sauvegarder la préférence
         localStorage.setItem(getStorageKey('splitScreenEnabled'), enabled.toString());
     }
@@ -291,7 +292,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         toggleSplitScreen(enabled);
     });
 
-    
+
     // Gestion de la console
     function toggleConsole(visible) {
         const consoleElement = document.getElementById('logPanel');
@@ -303,7 +304,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         // Sauvegarder la préférence
         localStorage.setItem(getStorageKey('consoleVisible'), visible.toString());
     }
-    
+
     consoleToggle.addEventListener('change', (e) => {
         const visible = e.target.checked;
         toggleConsole(visible);
@@ -321,7 +322,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         // Sauvegarder la préférence
         localStorage.setItem(getStorageKey('guttersVisible'), visible.toString());
     }
-    
+
     guttersToggle.addEventListener('change', (e) => {
         const visible = e.target.checked;
         toggleGutters(visible);
@@ -357,7 +358,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     // Gestion du mode spectateur
     function toggleSpectatorMode(enabled) {
         spectatorMode = enabled;
-        
+
         if (enabled) {
             // Forcer le nom à "Spectator"
             updateUserInfo(true);
@@ -369,7 +370,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             userNameInput.disabled = false;
             updateUserInfo(false);
         }
-        
+
         // Sauvegarder la préférence
         localStorage.setItem(getStorageKey('spectatorMode'), enabled.toString());
     }
@@ -379,10 +380,10 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         const states = awareness.getStates();
         const localUserName = awareness.getLocalState()?.user?.name;
         const players = [];
-        
+
         // Collecter tous les joueurs actifs
         states.forEach((state) => {
-            if (state.otherInstantCode && state.user?.name && 
+            if (state.otherInstantCode && state.user?.name &&
                 state.user.name !== 'Spectator') {
                 // En mode spectateur : collecter tous les joueurs (sauf Spectator)
                 // En mode normal : exclure le joueur local
@@ -396,33 +397,33 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
                 }
             }
         });
-        
+
         if (spectatorMode) {
             // MODE SPECTATEUR: haut = joueur 1, bas = joueur 2
             if (players.length > 0) {
                 const player1 = players[0];
-                
+
                 if (currentFocusedPlayer !== player1.name) {
                     currentFocusedPlayer = player1.name;
                 }
-                
+
                 // Scroller vers le joueur 1 dans l'éditeur principal
                 if (player1.line >= 0 && player1.line < editor.lineCount()) {
                     editor.scrollIntoView(
-                        {line: player1.line - 1, ch: player1.position}, 
+                        {line: player1.line - 1, ch: player1.position},
                         50
                     );
                 }
             }
-            
+
             // Si split screen activé et qu'il y a un deuxième joueur
             if (players.length > 1 && splitScreenToggle.checked) {
                 const player2 = players[1];
-                
+
                 // Scroller vers le joueur 2 dans l'éditeur du bas
                 if (player2.line >= 0 && player2.line < otherEditor.lineCount()) {
                     otherEditor.scrollIntoView(
-                        {line: player2.line - 1, ch: player2.position}, 
+                        {line: player2.line - 1, ch: player2.position},
                         50
                     );
                 }
@@ -432,11 +433,11 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             // L'éditeur du bas suit le premier autre joueur trouvé
             if (players.length > 0 && splitScreenToggle.checked) {
                 const otherPlayer = players[0];
-                
+
                 // Scroller vers l'autre joueur dans l'éditeur du bas
                 if (otherPlayer.line >= 0 && otherPlayer.line < otherEditor.lineCount()) {
                     otherEditor.scrollIntoView(
-                        {line: otherPlayer.line - 1, ch: otherPlayer.position}, 
+                        {line: otherPlayer.line - 1, ch: otherPlayer.position},
                         50
                     );
                 }
@@ -456,7 +457,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
                 color: userColorInput.value
             };
             return userInfo;
-        }, 
+        },
         isSplitScreenEnabled() {
             return splitScreenToggle.checked;
         },

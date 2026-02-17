@@ -39,6 +39,31 @@ recordButton.addEventListener('click', () => {
     }
 });
 
+// Video window - opened via FoxDot command
+let videoWindow = null;
+
+function openVideoWindow(videoUrl = null) {
+  // Focus existing window if open
+  if (videoWindow && !videoWindow.closed) {
+    videoWindow.focus();
+    return;
+  }
+
+  const width = 640;
+  const height = 400;
+  const left = window.screenX + window.outerWidth - width - 50;
+  const top = window.screenY + 50;
+
+  // Pass video URL as query parameter if provided
+  const urlParam = videoUrl ? `?url=${encodeURIComponent(videoUrl)}` : '';
+
+  videoWindow = window.open(
+    `/video.html${urlParam}`,
+    `WebTroop Video`,
+    `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=no,menubar=no,toolbar=no,location=no,status=no`
+  );
+}
+
 if (!showTodo) {
     todoList.style.display = 'none';
 }
@@ -101,6 +126,18 @@ ws.onopen = function() {
 
 wsServer.onopen = function() {
     console.log('CrashPanel connection to main server opened');
+};
+
+// Listen for yt_open_window command from FoxDot
+wsServer.onmessage = function(event) {
+    try {
+        const data = JSON.parse(event.data);
+        if (data.type === 'yt_open_window') {
+            openVideoWindow(data.url || null);
+        }
+    } catch (e) {
+        // Ignore non-JSON messages
+    }
 };
 
 ws.onmessage = function(event) {

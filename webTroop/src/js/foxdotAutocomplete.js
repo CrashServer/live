@@ -435,8 +435,12 @@ export const foxdotAutocomplete = {
         { text: 'end', displayText: 'end' },
     ],
     serverFunction: [
-        
+
     ],
+
+    // Drum patterns (loaded from server)
+    drumPatterns: [],
+    drumGroups: [],
 
     _currentView: 'categories',
     _currentCategory: null,
@@ -445,6 +449,50 @@ export const foxdotAutocomplete = {
     attackCategories: {},
     fxCategories: {},
     synthCategories: {},
+    drumCategories: {},
+
+    // Load drum patterns from JSON
+    loadDrumPatterns: async function() {
+        try {
+            const response = await fetch('/drumPatterns.json');
+            if (!response.ok) throw new Error('Failed to load drum patterns');
+
+            const data = await response.json();
+
+            // Convert to autocomplete format
+            this.drumPatterns = data.patterns.map(p => ({
+                text: `"${p.code}"`,
+                displayText: p.code,
+                preview: p.preview,
+                category: p.category,
+                fullPattern: p.pattern,
+                length: p.length
+            }));
+
+            this.drumGroups = data.groups.map(g => ({
+                text: `"${g.code}"`,
+                displayText: g.code,
+                preview: g.preview,
+                category: g.category,
+                items: g.items,
+                isGroup: true
+            }));
+
+            // Build categories
+            this.drumCategories = {};
+            [...this.drumPatterns, ...this.drumGroups].forEach(item => {
+                const cat = item.category;
+                if (!this.drumCategories[cat]) {
+                    this.drumCategories[cat] = [];
+                }
+                this.drumCategories[cat].push(item);
+            });
+
+            console.log(`Loaded ${this.drumPatterns.length} drum patterns, ${this.drumGroups.length} groups`);
+        } catch (e) {
+            console.warn('Could not load drum patterns:', e.message);
+        }
+    },
 
     hint: function(cm, CodeMirror) {
         const cursor = cm.getCursor();
@@ -523,6 +571,67 @@ export const foxdotAutocomplete = {
               from: CodeMirror.Pos(cursor.line, loopStart + (prefix.length === 0 ? 1 : 0)),
               to: CodeMirror.Pos(cursor.line, loopEnd),
             }
+        }
+        // Drum pattern suggestion (pat, p, pbuild, ppat, pamp, phits)
+        else if (/(?:pat|pbuild|ppat|pamp|phits)\(\s*["']?([^"')]*)$/.test(beforeCursor) ||
+                 /\bp\(\s*["']?([^"')]*)$/.test(beforeCursor)) {
+
+            // Extract what user has typed so far
+            const patMatch = beforeCursor.match(/(?:pat|pbuild|ppat|pamp|phits|(?<!\w)p)\(\s*["']?([^"')]*)$/);
+            const prefix = patMatch ? patMatch[1].toLowerCase() : '';
+
+            // Find function start position
+            const funcMatch = beforeCursor.match(/(pat|pbuild|ppat|pamp|phits|(?<!\w)p)\(\s*["']?[^"']*$/);
+            const funcStart = funcMatch ? beforeCursor.lastIndexOf('(') + 1 : token.start;
+
+            // Check if quote already exists
+            const hasQuote = /["']$/.test(beforeCursor.slice(0, funcStart + 1)) ||
+                             beforeCursor.slice(funcStart).match(/^["']/);
+
+            let items = [];
+
+            if (prefix.length > 0) {
+                // Filter patterns and groups by prefix
+                const allItems = [...this.drumPatterns, ...this.drumGroups];
+                items = allItems.filter(item =>
+                    item.displayText.toLowerCase().includes(prefix)
+                ).map(item => ({
+                    ...item,
+                    render: (element, self, data) => {
+                        element.innerHTML = '';
+                        element.className += ' drum-pattern-item';
+
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'pattern-name';
+                        nameSpan.textContent = data.displayText;
+
+                        const previewSpan = document.createElement('span');
+                        previewSpan.className = 'pattern-preview';
+                        previewSpan.textContent = data.preview;
+
+                        element.appendChild(nameSpan);
+                        element.appendChild(previewSpan);
+                    }
+                }));
+                items.sort((a, b) => a.displayText.localeCompare(b.displayText));
+            } else {
+                // Show categories
+                items.push(this.createCategorySeparator("All", "All", "drum"));
+
+                const sortedCategories = Object.keys(this.drumCategories)
+                    .filter(key => key && key.trim() !== "")
+                    .sort((a, b) => a.localeCompare(b));
+
+                sortedCategories.forEach(categoryKey => {
+                    items.push(this.createCategorySeparator(categoryKey, categoryKey, "drum"));
+                });
+            }
+
+            return {
+                list: items,
+                from: CodeMirror.Pos(cursor.line, funcStart),
+                to: CodeMirror.Pos(cursor.line, cursorPosition),
+            };
         }
         // lost and attack suggestion
         else if (lostPattern.test(beforeCursor)) {
@@ -828,16 +937,20 @@ export const foxdotAutocomplete = {
         let categoryItems;
         let categoriesMap;
         let allItemsList;
-        
+
         // Determine which categories and items to use
         if (categoryType === 'fx') {
             categoriesMap = this.fxCategories;
             allItemsList = this.fxList;
-        } 
+        }
         else if (categoryType === 'synth') {
             categoriesMap = this.synthCategories;
             allItemsList = this.synths;
-        } 
+        }
+        else if (categoryType === 'drum') {
+            categoriesMap = this.drumCategories;
+            allItemsList = [...this.drumPatterns, ...this.drumGroups];
+        }
         else {
             categoriesMap = this.attackCategories;
             allItemsList = this.attackList;
@@ -893,6 +1006,20 @@ export const foxdotAutocomplete = {
                 }
                 fromPos = cm.constructor.Pos(cursor.line, synthStart);
                 toPos = cm.constructor.Pos(cursor.line, synthEnd);
+            } else {
+                fromPos = cm.getCursor();
+                toPos = cm.getCursor();
+            }
+        } else if (categoryType === 'drum') {
+            // For drum patterns, find position after pat(, p(, pbuild(, etc.
+            const drumFuncMatch = line.match(/(pat|pbuild|ppat|pamp|phits|(?<!\w)p)\(\s*["']?/);
+            if (drumFuncMatch) {
+                const funcStart = line.indexOf('(', drumFuncMatch.index) + 1;
+                // Skip any existing quote
+                const afterParen = line.slice(funcStart);
+                const quoteOffset = afterParen.match(/^["']/) ? 1 : 0;
+                fromPos = cm.constructor.Pos(cursor.line, funcStart + quoteOffset);
+                toPos = cm.constructor.Pos(cursor.line, cursor.ch);
             } else {
                 fromPos = cm.getCursor();
                 toPos = cm.getCursor();
@@ -955,21 +1082,48 @@ export const foxdotAutocomplete = {
                 const line = cm.getLine(cm.getCursor().line);
                 const afterCursor = line.slice(cm.getCursor().ch);
                 const hasParenthesesAfter = afterCursor.trimStart().startsWith('(');
-                
+
                 // Si des parenthèses existent, ne pas inclure les () dans le text
                 const synthText = hasParenthesesAfter ? item.displayText : item.text;
-                
+
                 return {
                     text: synthText,
                     displayText: item.displayText,
                     render: function(element, self, data) {
                         element.innerHTML = '';
-                        
+
                         // Créer le nom du Synth
                         const nameSpan = document.createElement('span');
                         nameSpan.className = 'synth-name';
                         nameSpan.textContent = data.displayText;
                         element.appendChild(nameSpan);
+                    }
+                };
+            } else if (categoryType === 'drum') {
+                // Drum patterns with preview
+                return {
+                    text: item.text,
+                    displayText: item.displayText,
+                    preview: item.preview,
+                    isGroup: item.isGroup,
+                    render: function(element, self, data) {
+                        element.innerHTML = '';
+                        element.className += ' drum-pattern-item';
+
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'pattern-name';
+                        nameSpan.textContent = data.displayText;
+
+                        const previewSpan = document.createElement('span');
+                        previewSpan.className = 'pattern-preview';
+                        previewSpan.textContent = data.preview;
+
+                        if (data.isGroup) {
+                            nameSpan.className += ' pattern-group';
+                        }
+
+                        element.appendChild(nameSpan);
+                        element.appendChild(previewSpan);
                     }
                 };
             }

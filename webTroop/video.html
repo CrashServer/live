@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebTroop Video Control</title>
+    <link rel="icon" href="/src/images/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="stylesheet" href="/src/css/video.css" />
+  </head>
+  <body>
+    <div id="video-container">
+      <!-- Header with controls -->
+      <header id="video-header">
+        <div class="url-input-group">
+          <input type="text" id="youtube-url" placeholder="YouTube URL or Video ID" />
+          <button id="load-video" class="control-btn">Load</button>
+        </div>
+        <div class="header-controls">
+          <button id="sync-btn" class="control-btn" title="Sync with beat">Sync</button>
+          <button id="always-top-btn" class="control-btn" title="Request always on top (requires browser support)">Pin</button>
+          <button id="minimize-header-btn" class="control-btn" title="Minimize header">_</button>
+        </div>
+      </header>
+
+      <!-- YouTube Player -->
+      <div id="player-wrapper">
+        <div id="player"></div>
+        <div id="player-overlay" class="hidden">
+          <span id="overlay-text"></span>
+        </div>
+      </div>
+
+      <!-- Status bar -->
+      <footer id="video-footer">
+        <div class="status-group">
+          <span id="status-position">00:00.0</span>
+          <span class="separator">|</span>
+          <span id="status-duration">00:00</span>
+        </div>
+        <div class="status-group">
+          <span id="status-rate">1.0x</span>
+          <span class="separator">|</span>
+          <span id="status-state">Idle</span>
+        </div>
+        <div class="status-group">
+          <span id="ws-status" class="ws-disconnected">WS: --</span>
+        </div>
+      </footer>
+
+      <!-- Loop region indicator -->
+      <div id="loop-indicator" class="hidden">
+        <span id="loop-start">0.0</span>
+        <span> - </span>
+        <span id="loop-end">0.0</span>
+        <button id="clear-loop" class="control-btn small">Clear</button>
+      </div>
+    </div>
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="module" src="/src/js/video.js"></script>
+  </body>
+</html>

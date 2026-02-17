@@ -501,6 +501,46 @@ body {
   transform: scale(1.05);
 }
 
+/* Drum pattern autocomplete styles */
+.drum-pattern-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pattern-name {
+  font-weight: bold;
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.pattern-name.pattern-group {
+  color: var(--col-green);
+}
+
+.pattern-preview {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--text-col-1);
+  opacity: 0.7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  text-align: right;
+  letter-spacing: 0.5px;
+}
+
+.CodeMirror-hint-active .pattern-preview {
+  opacity: 1;
+  color: var(--bg-col-1);
+}
+
+.CodeMirror-hint-active .pattern-name.pattern-group {
+  color: var(--bg-col-1);
+}
+
 .CodeMirror-hints .autocomplete-separator {
   -webkit-user-select: none;
   -moz-user-select: none;

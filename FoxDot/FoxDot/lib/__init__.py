@@ -23,6 +23,8 @@ from .ServerManager import *
 from .SCLang import SynthDefs, Env, SynthDef, CompiledSynthDef
 from .Root import Root
 from .Scale import Scale, Tuning
+from .VideoControl import VidCtrl, YouTubeController
+from .DrumPatterns import pat, p, pbuild, ppat, pamp, phits, patterns, groups, PATTERNS, GROUPS
 
 # stdlib imports
 

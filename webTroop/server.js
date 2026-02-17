@@ -276,6 +276,9 @@ wss.on('connection', (ws, req) => {
         await fs.mkdir(path.dirname(filePath), { recursive: true });
         await fs.writeFile(filePath, content, 'utf-8');
         broadcastLog(`Fichier sauvegardé: ${filename}\n`, 'green');
+      } else if (data.type && data.type.startsWith('yt_')) {
+        // Relay YouTube control messages to all clients (video windows)
+        broadcastYouTubeCommand(data);
       }
     } catch (e) {
       // Ignorer les messages non-JSON (messages Y.js)
@@ -298,23 +301,23 @@ foxdot.stdout.on('data', (data) => {
 
 // Logs de console de FoxDot
 function broadcastLog(message, color=null, attackRequest="") {
-  
+
   // Nettoyer le message (enlever les sauts de ligne, espaces inutiles)
   const cleanMessage = message.trim();
-  
+
   // Regex plus flexible pour capturer différents formats
   const userLogMatch = cleanMessage.match(/(SERVER|zbdm|svdk)\s*:\s*(.+)/);
-  
+
   if (userLogMatch) {
     const userName = userLogMatch[1];
-    
+
     // Envoyer le caractère correspondant à l'Arduino
     const userChar = getUserCharacter(userName.toLowerCase());
     if (userChar && arduino && arduino.isOpen) {
       sendToArduino(arduino, userChar);
     }
   }
-  
+
   const messageObj = {
     type: 'foxdot_log',
     data: message,
@@ -325,6 +328,15 @@ function broadcastLog(message, color=null, attackRequest="") {
   wss.clients.forEach(client => {
     if (client.readyState === 1) {
       client.send(JSON.stringify(messageObj));
+    }
+  });
+}
+
+// Broadcast YouTube control commands to all clients
+function broadcastYouTubeCommand(data) {
+  wss.clients.forEach(client => {
+    if (client.readyState === 1) {
+      client.send(JSON.stringify(data));
     }
   });
 }

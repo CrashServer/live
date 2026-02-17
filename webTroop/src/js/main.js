@@ -550,6 +550,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           foxdotAutocomplete.synthCategories =
             foxdotAutocomplete.getSynthCategories();
 
+          // Load drum patterns from server
+          foxdotAutocomplete.loadDrumPatterns();
+
           // Construire les définitions dynamiques pour les synths
           // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)
           try {

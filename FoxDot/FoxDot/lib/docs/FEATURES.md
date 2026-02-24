@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Drum Patterns](#drum-patterns)
+- [Synth Patterns](#synth-patterns)
 - [Video Control](#video-control)
 
 ---
@@ -357,6 +358,354 @@ Clock.bpm = 92
 d1 >> play(pat("hp1"), dur=1/4,
     amp=var([0.9, 0.7], [0.5, 0.5]),  # Swing feel
     sample=1)
+```
+
+---
+
+# Synth Patterns
+
+A pattern dictionary system for envelopes, melodies, arpeggios, and chord progressions.
+
+## Functions
+
+### `env(name)` / `e(name)`
+Look up an envelope pattern by name. Returns values for `sus`, `amp`, or filter parameters.
+
+```python
+# Basic envelope usage
+s1 >> pluck([0, 2, 4], sus=env("stab"))
+
+# Short alias
+s1 >> keys([0, 2, 4, 7], sus=e("hold"))
+
+# Amplitude envelope
+p1 >> pads([0, 2, 4], amp=env("pump"))
+
+# Filter envelope
+b1 >> bass([0], dur=1, lpf=linvar([200, 2000], env("swell")))
+```
+
+### `mel(name)` / `m(name)`
+Look up a melodic pattern by name. Returns values for `degree`.
+
+```python
+# Basic melody usage
+s1 >> pluck(mel("techno1"), dur=1/4)
+
+# Short alias
+s1 >> saw(m("acid1"), dur=1/8, lpf=400)
+
+# With scale
+s1 >> bass(mel("house1"), dur=1/2, scale=Scale.minor)
+
+# Combine with envelope
+s1 >> pluck(mel("techno2"), dur=1/4, sus=env("stab"))
+```
+
+### `arp(name)`
+Look up an arpeggio pattern. Searches melody patterns with "arp" or "trance" prefix.
+
+```python
+# Basic arpeggio
+s1 >> pluck(arp("up"), dur=1/4)
+
+# Trance arp
+s1 >> saw(arp("trance1"), dur=1/8, amp=0.6)
+
+# With octave shift
+s1 >> keys(arp("down") + [0, 12], dur=1/4)
+```
+
+### `chord(name)`
+Look up a chord voicing. Returns a PGroup for simultaneous notes.
+
+```python
+# Basic chord
+p1 >> pads(chord("maj"), dur=4)
+
+# Seventh chord
+p1 >> keys(chord("min7"), dur=2)
+
+# Extended chord
+p1 >> piano(chord("maj9"), dur=4, amp=0.7)
+```
+
+### `envs()`
+Print all available envelope patterns organized by category.
+
+```python
+envs()
+# Output:
+# === ENVELOPE PATTERNS ===
+# stab:
+#   stab         [0.1]
+#   stabshort    [0.05]
+#   ...
+```
+
+### `mels()`
+Print all available melodic patterns organized by category.
+
+```python
+mels()
+# Output:
+# === MELODIC PATTERNS ===
+# techno_bass:
+#   techno1      [0, 0, 0, -2, 0, 0, 3, 0]
+#   ...
+```
+
+---
+
+## Pattern Categories
+
+### Envelope Patterns
+
+#### Stab (short, punchy)
+| Name | Values | Use |
+|------|--------|-----|
+| `stab` | `[0.1]` | Basic stab |
+| `stabshort` | `[0.05]` | Very short stab |
+| `stablong` | `[0.2]` | Longer stab |
+| `stabvar` | `[0.1, 0.15, 0.1, 0.2]` | Varied stab |
+
+#### Hold (sustained)
+| Name | Values | Use |
+|------|--------|-----|
+| `hold` | `[1]` | Full sustain |
+| `holdlong` | `[2]` | Extra long |
+| `holdshort` | `[0.5]` | Half note |
+| `holdvar` | `[1, 0.5, 1, 2]` | Varied hold |
+
+#### Gate (rhythmic on/off)
+| Name | Values | Use |
+|------|--------|-----|
+| `gate` | `[0.2, 0.2, 0.2, 0.2]` | Even gates |
+| `gate16` | `[0.1] * 16` | 16th gates |
+| `gatevar` | `[0.2, 0.1, 0.3, 0.1]` | Varied gates |
+| `gatesynco` | `[0.1, 0.3, 0.1, 0.2]` | Syncopated gate |
+
+#### Swell (rising/falling)
+| Name | Values | Use |
+|------|--------|-----|
+| `swell` | `[0.1, 0.2, 0.4, 0.8]` | Building swell |
+| `swelldown` | `[0.8, 0.4, 0.2, 0.1]` | Falling swell |
+| `swellwave` | `[0.1, 0.4, 0.8, 0.4]` | Wave shape |
+
+#### Pump (sidechain style)
+| Name | Values | Use |
+|------|--------|-----|
+| `pump` | `[0.8, 0.2, 0.5, 0.3]` | Classic pump |
+| `pumphard` | `[1, 0.1, 0.6, 0.2]` | Hard pump |
+| `pumpsoft` | `[0.7, 0.4, 0.6, 0.5]` | Soft pump |
+
+#### Accent (emphasis patterns)
+| Name | Values | Use |
+|------|--------|-----|
+| `accent1` | `[1, 0.5, 0.5, 0.5]` | Beat 1 accent |
+| `accent24` | `[0.5, 1, 0.5, 1]` | Backbeat |
+| `accentsynco` | `[0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 0.5]` | Syncopated |
+
+#### Filter Envelopes
+| Name | Values | Use |
+|------|--------|-----|
+| `lpfopen` | `[200, 500, 1000, 2000]` | Opening filter |
+| `lpfclose` | `[2000, 1000, 500, 200]` | Closing filter |
+| `lpfpulse` | `[2000, 200, 2000, 200]` | Pulsing filter |
+| `lpfsweep` | `[200, 400, 800, 1600, 3200, 1600, 800, 400]` | Sweep up/down |
+
+---
+
+### Melodic Patterns
+
+#### Techno Bass
+| Name | Pattern | Description |
+|------|---------|-------------|
+| `techno1` | `[0, 0, 0, -2, 0, 0, 3, 0]` | Classic techno |
+| `techno2` | `[0, 0, -5, 0, 0, 0, -5, -7]` | Dark techno |
+| `techno3` | `[0, 0, 0, 0, -2, -2, 3, 3]` | Driving |
+| `technominimal` | `[0, 0, 0, 0]` | Minimal root |
+
+#### Acid
+| Name | Pattern | Description |
+|------|---------|-------------|
+| `acid1` | `[0, 0, 12, 0, 3, 0, 12, 5]` | Classic 303 |
+| `acid2` | `[0, 3, 7, 12, 7, 3, 0, -5]` | Rising acid |
+| `acid3` | `[0, 0, 0, 7, 0, 0, 10, 12]` | Sparse acid |
+| `acidwobble` | `[0, 0, 1, 0, 0, -1, 0, 2]` | Wobble acid |
+
+#### House
+| Name | Pattern | Description |
+|------|---------|-------------|
+| `house1` | `[0, 0, 7, 0]` | Classic house |
+| `house2` | `[0, 5, 7, 5]` | Disco house |
+| `housedisco` | `[0, 4, 7, 4, 0, 4, 7, 9]` | Full disco |
+| `housechord` | `[0, 0, 0, 0, 7, 7, 5, 5]` | Chord bass |
+
+#### Drum & Bass
+| Name | Pattern | Description |
+|------|---------|-------------|
+| `dnb1` | `[0, 0, 0, 12, 0, 10, 0, 7]` | Jump up |
+| `dnb2` | `[0, 0, 12, 0, 0, 0, 10, 0]` | Neurofunk |
+| `dnbreese` | `[0, 0, 0, 0, -5, -5, -5, -5]` | Reese pattern |
+| `dnbroller` | `[0] * 8` | Rolling root |
+
+#### Arpeggios
+| Name | Pattern | Description |
+|------|---------|-------------|
+| `arpup` | `[0, 2, 4, 7]` | Up arpeggio |
+| `arpdown` | `[7, 4, 2, 0]` | Down arpeggio |
+| `arpupdown` | `[0, 2, 4, 7, 4, 2]` | Up then down |
+| `arppendulum` | `[0, 4, 2, 7, 4, 9, 7, 12]` | Pendulum |
+
+#### Trance Arps
+| Name | Pattern | Description |
+|------|---------|-------------|
+| `trance1` | `[0, 0, 4, 4, 7, 7, 4, 4]` | Classic trance |
+| `trance2` | `[0, 4, 7, 12, 7, 4, 0, -5]` | Epic trance |
+| `trancegate` | `[0, 0, 0, 0, 7, 7, 7, 7]` | Gated arp |
+
+#### Chord Progressions
+| Name | Pattern | Description |
+|------|---------|-------------|
+| `prog1` | `[0, 0, 5, 5, 7, 7, 3, 3]` | I-IV-V-ii |
+| `prog2` | `[0, 0, 3, 3, 5, 5, 7, 7]` | Rising |
+| `progminor` | `[0, 0, -2, -2, -4, -4, -5, -5]` | Minor descent |
+
+#### Lead Lines
+| Name | Pattern | Description |
+|------|---------|-------------|
+| `lead1` | `[7, 5, 4, 2, 0]` | Descending |
+| `lead2` | `[0, 2, 4, 5, 7, 9, 11, 12]` | Scale run |
+| `leadcall` | `[7, 9, 7, 5]` | Call phrase |
+| `leadanswer` | `[4, 2, 0, -2]` | Answer phrase |
+
+---
+
+### Chord Dictionary
+
+#### Triads
+| Name | Notes | Description |
+|------|-------|-------------|
+| `maj` | `(0, 2, 4)` | Major triad |
+| `min` | `(0, 2, 3)` | Minor triad (scale) |
+| `dim` | `(0, 2, 3)` | Diminished |
+| `aug` | `(0, 2, 5)` | Augmented |
+| `sus2` | `(0, 1, 4)` | Suspended 2nd |
+| `sus4` | `(0, 3, 4)` | Suspended 4th |
+
+#### Seventh Chords
+| Name | Notes | Description |
+|------|-------|-------------|
+| `maj7` | `(0, 2, 4, 6)` | Major 7th |
+| `min7` | `(0, 2, 3, 6)` | Minor 7th |
+| `dom7` | `(0, 2, 4, 5)` | Dominant 7th |
+| `dim7` | `(0, 2, 3, 5)` | Diminished 7th |
+
+#### Extended
+| Name | Notes | Description |
+|------|-------|-------------|
+| `maj9` | `(0, 2, 4, 6, 8)` | Major 9th |
+| `min9` | `(0, 2, 3, 6, 8)` | Minor 9th |
+| `add9` | `(0, 2, 4, 8)` | Add 9 |
+| `min11` | `(0, 2, 3, 6, 8, 10)` | Minor 11th |
+
+#### Special
+| Name | Notes | Description |
+|------|-------|-------------|
+| `power` | `(0, 4)` | Power chord (5th) |
+| `octave` | `(0, 0)` | Octave doubling |
+| `sixth` | `(0, 2, 4, 5)` | Major 6th |
+
+---
+
+## Complete Examples
+
+### Basic Synth with Envelope
+```python
+Clock.bpm = 128
+
+# Stab synth
+s1 >> pluck(mel("techno1"), dur=1/4, sus=env("stab"), amp=0.8)
+
+# Pad with long envelope
+p1 >> pads([0, 2, 4], dur=4, sus=env("hold"), room=0.5)
+```
+
+### Acid Line
+```python
+Clock.bpm = 130
+
+# Classic acid
+b1 >> bass(mel("acid1"), dur=1/8,
+    lpf=linvar([200, 2000], 8),
+    res=0.8,
+    sus=env("gate"))
+```
+
+### Trance Arp
+```python
+Clock.bpm = 140
+
+# Trance arpeggio
+s1 >> saw(arp("trance1"), dur=1/8,
+    oct=5,
+    lpf=1500,
+    sus=env("gate"))
+
+# Pad chords underneath
+p1 >> pads(chord("maj7"), dur=4, oct=4, amp=0.5)
+```
+
+### Layered Production
+```python
+Clock.bpm = 126
+
+# Drums
+d1 >> play(pat("h1"), dur=1/4)
+
+# Bass follows drum rhythm
+b1 >> bass(mel("house1"), dur=ppat("hk1"), amp=0.9)
+
+# Chord stabs
+s1 >> keys(chord("min7"), dur=var([1, 0.5], [3, 1]),
+    sus=env("stabvar"),
+    amp=env("accent24"))
+
+# Lead melody
+l1 >> pluck(mel("lead1"), dur=1/2, oct=6, amp=0.6)
+```
+
+### Envelope Automation
+```python
+Clock.bpm = 128
+
+# Filter envelope that opens over 8 bars
+s1 >> saw([0, 0, 3, 0], dur=1/4,
+    lpf=var(env("lpfopen"), 8),
+    res=0.5)
+
+# Amplitude pump effect
+p1 >> pads([0, 2, 4], dur=1,
+    amp=env("pump"))
+```
+
+### Chord Progression
+```python
+Clock.bpm = 120
+
+# 4-bar chord progression
+chords = var([
+    chord("maj"),
+    chord("min"),
+    chord("sus4"),
+    chord("maj7")
+], 4)
+
+p1 >> keys(chords, dur=4, sus=3, oct=4)
+
+# Arp over the top
+s1 >> pluck(arp("updown"), dur=1/4, oct=5, amp=0.5)
 ```
 
 ---

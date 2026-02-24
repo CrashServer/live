@@ -1,4 +1,4 @@
-SynthDef.new(\doomSynth,
+SynthDef.new(\doom,
     {|bus=0, freq=440, amp=0.5, pan=0, atk=0.001, decay=0.01, sus=1,rel=0.01, pw=0.5, cutoff=3000, rq=0.5, rate=1, wnoise=0.1|
     var sig, osc1, osc2, noise, env, lfo;
 		freq = In.kr(bus, 1);

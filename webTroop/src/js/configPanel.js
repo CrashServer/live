@@ -1,4 +1,4 @@
-export function setupConfigPanel(awareness, editor, otherEditor) {
+export function setupConfigPanel(awareness, editor, otherEditor, visualMode = null, patternLog = null) {
     const configButton = document.getElementById('configButton');
     const configPanel = document.getElementById('configPanel');
     const userNameInput = document.getElementById('userName');
@@ -105,6 +105,40 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         const spectatorModeEnabled = savedSpectatorMode === 'true';
         spectatorModeToggle.checked = spectatorModeEnabled;
         toggleSpectatorMode(spectatorModeEnabled);
+
+        // Charger le mode visuel
+        if (visualMode) {
+            const savedVisualMode = localStorage.getItem(getStorageKey('visualModeEnabled'));
+            const visualModeEnabled = savedVisualMode === 'true';
+            const visualModeToggle = document.getElementById('visualModeToggle');
+            if (visualModeToggle) {
+                visualModeToggle.checked = visualModeEnabled;
+                if (visualModeEnabled) {
+                    visualMode.enable();
+                }
+            }
+
+            // Charger le thème visuel
+            const savedVisualTheme = localStorage.getItem(getStorageKey('visualTheme'));
+            const visualThemeSelect = document.getElementById('visualThemeSelect');
+            if (savedVisualTheme && visualThemeSelect) {
+                visualThemeSelect.value = savedVisualTheme;
+                visualMode.setTheme(savedVisualTheme);
+            }
+        }
+
+        // Charger le pattern log
+        if (patternLog) {
+            const savedPatternLog = localStorage.getItem(getStorageKey('patternLogEnabled'));
+            const patternLogEnabled = savedPatternLog === 'true';
+            const patternVizToggle = document.getElementById('patternVizToggle');
+            if (patternVizToggle) {
+                patternVizToggle.checked = patternLogEnabled;
+                if (patternLogEnabled) {
+                    patternLog.enable();
+                }
+            }
+        }
     }
 
     // Restaurer les données utilisateur
@@ -449,6 +483,56 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     spectatorModeToggle.addEventListener('change', (e) => {
         toggleSpectatorMode(e.target.checked);
     });
+
+    // Gestion du mode visuel
+    function setupVisualModeControls() {
+        const visualModeToggle = document.getElementById('visualModeToggle');
+        const visualThemeSelect = document.getElementById('visualThemeSelect');
+
+        if (visualModeToggle && visualMode) {
+            visualModeToggle.addEventListener('change', (e) => {
+                const enabled = e.target.checked;
+                if (enabled) {
+                    visualMode.enable();
+                } else {
+                    visualMode.disable();
+                }
+                localStorage.setItem(getStorageKey('visualModeEnabled'), enabled.toString());
+            });
+        }
+
+        if (visualThemeSelect && visualMode) {
+            visualThemeSelect.addEventListener('change', (e) => {
+                const theme = e.target.value;
+                visualMode.setTheme(theme);
+                localStorage.setItem(getStorageKey('visualTheme'), theme);
+            });
+        }
+    }
+
+    // Gestion du pattern log (text-based viz)
+    function setupPatternLogControls() {
+        const patternVizToggle = document.getElementById('patternVizToggle');
+
+        if (patternVizToggle && patternLog) {
+            patternVizToggle.addEventListener('change', (e) => {
+                const enabled = e.target.checked;
+                const container = document.getElementById('pattern-log');
+                if (enabled) {
+                    patternLog.enable();
+                    if (container) container.classList.add('active');
+                } else {
+                    patternLog.disable();
+                    if (container) container.classList.remove('active');
+                }
+                localStorage.setItem(getStorageKey('patternLogEnabled'), enabled.toString());
+            });
+        }
+    }
+
+    // Setup visual mode controls after DOM is ready
+    setupVisualModeControls();
+    setupPatternLogControls();
 
     return {
         updateUserInfo() {

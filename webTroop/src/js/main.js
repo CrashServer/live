@@ -40,6 +40,9 @@ import "codemirror/addon/dialog/dialog.css";
 import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
+import "../css/visualMode.css";
+import { visualMode } from "./visualMode.js";
+import { patternLog } from "./patternLog.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Récupération de la configuration
@@ -198,8 +201,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     yUndoManager,
   });
 
+  // Initialize visual mode with editor
+  visualMode.init(editor);
+
+  // Initialize pattern log (text-based visualization)
+  patternLog.init('pattern-log');
+
   // Configuration du panneau de configuration
-  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor);
+  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor, visualMode, patternLog);
 
   // Initialiser l'analyseur audio (sera géré par le configPanel)
   const audioVizContainer = document.getElementById("audio-viz");
@@ -293,6 +302,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       lineEnd: endLine,
       timestamp: Date.now(),
     });
+
+    // Trigger visual mode flash
+    visualMode.triggerFlash();
   }
 
   // Écouter les changements dans le Y.Array des messages de chat
@@ -552,6 +564,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           // Load drum patterns from server
           foxdotAutocomplete.loadDrumPatterns();
+
+          // Load synth patterns from server
+          foxdotAutocomplete.loadSynthPatterns();
 
           // Construire les définitions dynamiques pour les synths
           // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)

@@ -442,6 +442,11 @@ export const foxdotAutocomplete = {
     drumPatterns: [],
     drumGroups: [],
 
+    // Synth patterns (loaded from server)
+    synthEnvelopes: [],
+    synthMelodies: [],
+    synthChords: [],
+
     _currentView: 'categories',
     _currentCategory: null,
     _currentCategoryType: null,
@@ -450,6 +455,8 @@ export const foxdotAutocomplete = {
     fxCategories: {},
     synthCategories: {},
     drumCategories: {},
+    envCategories: {},
+    melCategories: {},
 
     // Load drum patterns from JSON
     loadDrumPatterns: async function() {
@@ -491,6 +498,66 @@ export const foxdotAutocomplete = {
             console.log(`Loaded ${this.drumPatterns.length} drum patterns, ${this.drumGroups.length} groups`);
         } catch (e) {
             console.warn('Could not load drum patterns:', e.message);
+        }
+    },
+
+    // Load synth patterns from JSON
+    loadSynthPatterns: async function() {
+        try {
+            const response = await fetch('/synthPatterns.json');
+            if (!response.ok) throw new Error('Failed to load synth patterns');
+
+            const data = await response.json();
+
+            // Convert envelopes
+            this.synthEnvelopes = data.envelopes.map(p => ({
+                text: `"${p.code}"`,
+                displayText: p.code,
+                preview: p.preview,
+                category: p.category,
+                length: p.length
+            }));
+
+            // Convert melodies
+            this.synthMelodies = data.melodies.map(p => ({
+                text: `"${p.code}"`,
+                displayText: p.code,
+                preview: p.preview,
+                category: p.category,
+                length: p.length
+            }));
+
+            // Convert chords
+            this.synthChords = data.chords.map(p => ({
+                text: `"${p.code}"`,
+                displayText: p.code,
+                preview: p.preview,
+                category: 'Chords'
+            }));
+
+            // Build envelope categories
+            this.envCategories = {};
+            this.synthEnvelopes.forEach(item => {
+                const cat = item.category;
+                if (!this.envCategories[cat]) {
+                    this.envCategories[cat] = [];
+                }
+                this.envCategories[cat].push(item);
+            });
+
+            // Build melody categories
+            this.melCategories = {};
+            this.synthMelodies.forEach(item => {
+                const cat = item.category;
+                if (!this.melCategories[cat]) {
+                    this.melCategories[cat] = [];
+                }
+                this.melCategories[cat].push(item);
+            });
+
+            console.log(`Loaded ${this.synthEnvelopes.length} envelopes, ${this.synthMelodies.length} melodies, ${this.synthChords.length} chords`);
+        } catch (e) {
+            console.warn('Could not load synth patterns:', e.message);
         }
     },
 
@@ -626,6 +693,117 @@ export const foxdotAutocomplete = {
                     items.push(this.createCategorySeparator(categoryKey, categoryKey, "drum"));
                 });
             }
+
+            return {
+                list: items,
+                from: CodeMirror.Pos(cursor.line, funcStart),
+                to: CodeMirror.Pos(cursor.line, cursorPosition),
+            };
+        }
+        // Envelope pattern suggestion (env, e)
+        else if (/(?:env|(?<!\w)e)\(\s*["']?([^"')]*)$/.test(beforeCursor)) {
+            const patMatch = beforeCursor.match(/(?:env|(?<!\w)e)\(\s*["']?([^"')]*)$/);
+            const prefix = patMatch ? patMatch[1].toLowerCase() : '';
+            const funcStart = beforeCursor.lastIndexOf('(') + 1;
+
+            let items = [];
+
+            if (prefix.length > 0) {
+                items = this.synthEnvelopes.filter(item =>
+                    item.displayText.toLowerCase().includes(prefix)
+                ).map(item => ({
+                    ...item,
+                    render: (element, self, data) => {
+                        element.innerHTML = '';
+                        element.className += ' synth-pattern-item';
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'pattern-name';
+                        nameSpan.textContent = data.displayText;
+                        const previewSpan = document.createElement('span');
+                        previewSpan.className = 'pattern-preview';
+                        previewSpan.textContent = data.preview;
+                        element.appendChild(nameSpan);
+                        element.appendChild(previewSpan);
+                    }
+                }));
+                items.sort((a, b) => a.displayText.localeCompare(b.displayText));
+            } else {
+                items.push(this.createCategorySeparator("All", "All", "env"));
+                Object.keys(this.envCategories).sort().forEach(cat => {
+                    items.push(this.createCategorySeparator(cat, cat, "env"));
+                });
+            }
+
+            return {
+                list: items,
+                from: CodeMirror.Pos(cursor.line, funcStart),
+                to: CodeMirror.Pos(cursor.line, cursorPosition),
+            };
+        }
+        // Melody pattern suggestion (mel, m, arp)
+        else if (/(?:mel|arp|(?<!\w)m)\(\s*["']?([^"')]*)$/.test(beforeCursor)) {
+            const patMatch = beforeCursor.match(/(?:mel|arp|(?<!\w)m)\(\s*["']?([^"')]*)$/);
+            const prefix = patMatch ? patMatch[1].toLowerCase() : '';
+            const funcStart = beforeCursor.lastIndexOf('(') + 1;
+
+            let items = [];
+
+            if (prefix.length > 0) {
+                items = this.synthMelodies.filter(item =>
+                    item.displayText.toLowerCase().includes(prefix)
+                ).map(item => ({
+                    ...item,
+                    render: (element, self, data) => {
+                        element.innerHTML = '';
+                        element.className += ' synth-pattern-item';
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'pattern-name';
+                        nameSpan.textContent = data.displayText;
+                        const previewSpan = document.createElement('span');
+                        previewSpan.className = 'pattern-preview';
+                        previewSpan.textContent = data.preview;
+                        element.appendChild(nameSpan);
+                        element.appendChild(previewSpan);
+                    }
+                }));
+                items.sort((a, b) => a.displayText.localeCompare(b.displayText));
+            } else {
+                items.push(this.createCategorySeparator("All", "All", "mel"));
+                Object.keys(this.melCategories).sort().forEach(cat => {
+                    items.push(this.createCategorySeparator(cat, cat, "mel"));
+                });
+            }
+
+            return {
+                list: items,
+                from: CodeMirror.Pos(cursor.line, funcStart),
+                to: CodeMirror.Pos(cursor.line, cursorPosition),
+            };
+        }
+        // Chord pattern suggestion
+        else if (/(?:chord|chords)\(\s*["']?([^"')]*)$/.test(beforeCursor)) {
+            const patMatch = beforeCursor.match(/(?:chord|chords)\(\s*["']?([^"')]*)$/);
+            const prefix = patMatch ? patMatch[1].toLowerCase() : '';
+            const funcStart = beforeCursor.lastIndexOf('(') + 1;
+
+            let items = this.synthChords.filter(item =>
+                item.displayText.toLowerCase().includes(prefix)
+            ).map(item => ({
+                ...item,
+                render: (element, self, data) => {
+                    element.innerHTML = '';
+                    element.className += ' synth-pattern-item';
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'pattern-name';
+                    nameSpan.textContent = data.displayText;
+                    const previewSpan = document.createElement('span');
+                    previewSpan.className = 'pattern-preview';
+                    previewSpan.textContent = data.preview;
+                    element.appendChild(nameSpan);
+                    element.appendChild(previewSpan);
+                }
+            }));
+            items.sort((a, b) => a.displayText.localeCompare(b.displayText));
 
             return {
                 list: items,
@@ -951,6 +1129,14 @@ export const foxdotAutocomplete = {
             categoriesMap = this.drumCategories;
             allItemsList = [...this.drumPatterns, ...this.drumGroups];
         }
+        else if (categoryType === 'env') {
+            categoriesMap = this.envCategories;
+            allItemsList = this.synthEnvelopes;
+        }
+        else if (categoryType === 'mel') {
+            categoriesMap = this.melCategories;
+            allItemsList = this.synthMelodies;
+        }
         else {
             categoriesMap = this.attackCategories;
             allItemsList = this.attackList;
@@ -1015,7 +1201,32 @@ export const foxdotAutocomplete = {
             const drumFuncMatch = line.match(/(pat|pbuild|ppat|pamp|phits|(?<!\w)p)\(\s*["']?/);
             if (drumFuncMatch) {
                 const funcStart = line.indexOf('(', drumFuncMatch.index) + 1;
-                // Skip any existing quote
+                const afterParen = line.slice(funcStart);
+                const quoteOffset = afterParen.match(/^["']/) ? 1 : 0;
+                fromPos = cm.constructor.Pos(cursor.line, funcStart + quoteOffset);
+                toPos = cm.constructor.Pos(cursor.line, cursor.ch);
+            } else {
+                fromPos = cm.getCursor();
+                toPos = cm.getCursor();
+            }
+        } else if (categoryType === 'env') {
+            // For envelope patterns
+            const envFuncMatch = line.match(/(env|(?<!\w)e)\(\s*["']?/);
+            if (envFuncMatch) {
+                const funcStart = line.indexOf('(', envFuncMatch.index) + 1;
+                const afterParen = line.slice(funcStart);
+                const quoteOffset = afterParen.match(/^["']/) ? 1 : 0;
+                fromPos = cm.constructor.Pos(cursor.line, funcStart + quoteOffset);
+                toPos = cm.constructor.Pos(cursor.line, cursor.ch);
+            } else {
+                fromPos = cm.getCursor();
+                toPos = cm.getCursor();
+            }
+        } else if (categoryType === 'mel') {
+            // For melody patterns
+            const melFuncMatch = line.match(/(mel|arp|(?<!\w)m)\(\s*["']?/);
+            if (melFuncMatch) {
+                const funcStart = line.indexOf('(', melFuncMatch.index) + 1;
                 const afterParen = line.slice(funcStart);
                 const quoteOffset = afterParen.match(/^["']/) ? 1 : 0;
                 fromPos = cm.constructor.Pos(cursor.line, funcStart + quoteOffset);
@@ -1121,6 +1332,28 @@ export const foxdotAutocomplete = {
                         if (data.isGroup) {
                             nameSpan.className += ' pattern-group';
                         }
+
+                        element.appendChild(nameSpan);
+                        element.appendChild(previewSpan);
+                    }
+                };
+            } else if (categoryType === 'env' || categoryType === 'mel') {
+                // Synth patterns (envelopes/melodies) with preview
+                return {
+                    text: item.text,
+                    displayText: item.displayText,
+                    preview: item.preview,
+                    render: function(element, self, data) {
+                        element.innerHTML = '';
+                        element.className += ' synth-pattern-item';
+
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'pattern-name';
+                        nameSpan.textContent = data.displayText;
+
+                        const previewSpan = document.createElement('span');
+                        previewSpan.className = 'pattern-preview';
+                        previewSpan.textContent = data.preview;
 
                         element.appendChild(nameSpan);
                         element.appendChild(previewSpan);

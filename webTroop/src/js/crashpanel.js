@@ -1,5 +1,7 @@
 import { EventEmitter } from './eventBus.js';
 import { playersList, updatePlayersList, toggleRecording } from './functionUtils.js';
+import { visualMode } from './visualMode.js';
+import { patternLog } from './patternLog.js';
 
 const configRequest = await fetch('../../crash_config.json' );
   if (!configRequest.ok) {
@@ -164,18 +166,35 @@ ws.onmessage = function(event) {
             break;
         case 'bpm':
             document.getElementById('bpm').textContent = data.bpm;
+            visualMode.setBpm(parseInt(data.bpm) || 120);
+            patternLog.setBpm && patternLog.setBpm(parseInt(data.bpm) || 120);
             break;
         case 'serverState':
             updateCrashPanelTitle(data.serverState);
             break;
         case 'beat':
             updateBeat(data.beat);
+            visualMode.setBeat(data.beat);
+            patternLog.setBeat(data.beat);
+            // Update player steps in real-time (faster than player data)
+            if (data.playerSteps) {
+                visualMode.setPlayerSteps(data.playerSteps);
+                patternLog.setPlayerSteps(data.playerSteps);
+            }
             break;
         case 'chrono':
             document.getElementById('chrono').textContent = formatTime(data.chrono);
             break;
         case 'players':
-            formatPlayers(data.players)
+            formatPlayers(data.players);
+            // Send player data to visual mode and pattern viz
+            try {
+                const playerData = data.players.map(ply => JSON.parse(ply));
+                visualMode.setPlayers(playerData);
+                patternLog.setPlayers(playerData);
+            } catch (e) {
+                console.error('Error parsing player data:', e);
+            }
             break;
         case 'masterFx':
             const masterFxContainer = document.getElementById('masterFx');

@@ -205,6 +205,25 @@ body {
   width: 70%;
 }
 
+#pattern-log {
+  display: none;
+  background: var(--bg-col-1);
+  color: var(--text-col-1);
+  white-space: pre;
+  font-family: inherit;
+  font-size: 0.85em;
+  line-height: 1.4;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border-col-1);
+  min-height: 2em;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+#pattern-log.active {
+  display: block;
+}
+
 .log-entry {
   margin: 2px 0;
   padding: 2px 5px;
@@ -539,6 +558,14 @@ body {
 
 .CodeMirror-hint-active .pattern-name.pattern-group {
   color: var(--bg-col-1);
+}
+
+/* Synth pattern autocomplete (same style as drum) */
+.synth-pattern-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .CodeMirror-hints .autocomplete-separator {

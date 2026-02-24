@@ -1,5 +1,6 @@
 import { EventEmitter } from './eventBus.js';
 import { playersList, updatePlayersList, toggleRecording } from './functionUtils.js';
+import { visualMode } from './visualMode.js';
 
 const configRequest = await fetch('../../crash_config.json' );
   if (!configRequest.ok) {
@@ -103,6 +104,26 @@ wsServer.onopen = function() {
     console.log('CrashPanel connection to main server opened');
 };
 
+let videoWindow = null;
+
+function openVideoWindow(videoId) {
+    if (!videoWindow || videoWindow.closed) {
+        const url = videoId ? `/video.html?v=${videoId}` : '/video.html';
+        videoWindow = window.open(url, 'crashtroop-video', 'width=640,height=400,resizable=yes');
+    } else {
+        videoWindow.focus();
+    }
+}
+
+wsServer.onmessage = function(event) {
+    try {
+        const data = JSON.parse(event.data);
+        if (data.type === 'yt_open_window') {
+            openVideoWindow(data.videoId);
+        }
+    } catch (_) {}
+};
+
 ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
 
@@ -133,12 +154,24 @@ ws.onmessage = function(event) {
             break;
         case 'beat':
             updateBeat(data.beat);
+            if (data.playerSteps) {
+                visualMode.setPlayerSteps(data.playerSteps);
+            }
             break;
         case 'chrono':
             document.getElementById('chrono').textContent = formatTime(data.chrono);
             break;
         case 'players':
-            formatPlayers(data.players)
+            formatPlayers(data.players);
+            // Forward parsed player data to visual mode
+            try {
+                const parsedPlayers = {};
+                for (const ply of data.players) {
+                    const p = JSON.parse(ply);
+                    parsedPlayers[p.player] = p;
+                }
+                visualMode.setPlayers(parsedPlayers);
+            } catch (_) {}
             break;
         case 'masterFx':
             const masterFxContainer = document.getElementById('masterFx');

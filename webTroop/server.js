@@ -269,6 +269,9 @@ wss.on('connection', (ws, req) => {
         if (typeof cpu === 'number' ) {
           sendCpuToArduino(arduino, cpu);
         }
+      } else if (data.type && data.type.startsWith('yt_')) {
+        // Route YouTube commands to all connected clients (video popup + crashpanel)
+        broadcastToClients(wss, message.toString());
       } else if (data.type === 'save_file') {
         console.log('Sauvegarde du fichier:', data.filename);
         const {filename, content} = data;
@@ -323,8 +326,16 @@ function broadcastLog(message, color=null, attackRequest="") {
   };
 
   wss.clients.forEach(client => {
-    if (client.readyState === 1) {
+    if (client.readyState === WebSocket.OPEN) {
       client.send(JSON.stringify(messageObj));
+    }
+  });
+}
+
+function broadcastToClients(wss, rawMessage) {
+  wss.clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(rawMessage);
     }
   });
 }

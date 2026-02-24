@@ -33,6 +33,7 @@ import {
   removeAllTooltips,
   updateDefinitions,
 } from "./foxdotDefinitions.js";
+import { visualMode } from "./visualMode.js";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/addon/hint/show-hint.css";
@@ -40,6 +41,7 @@ import "codemirror/addon/dialog/dialog.css";
 import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
+import "../css/visualMode.css";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Récupération de la configuration
@@ -198,8 +200,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     yUndoManager,
   });
 
+  // Initialize visual mode with the editor (before configPanel so loadUserSettings can enable/disable)
+  visualMode.init(editor);
+
   // Configuration du panneau de configuration
-  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor);
+  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor, visualMode);
 
   // Initialiser l'analyseur audio (sera géré par le configPanel)
   const audioVizContainer = document.getElementById("audio-viz");

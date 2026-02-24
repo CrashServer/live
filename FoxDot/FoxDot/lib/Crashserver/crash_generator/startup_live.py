@@ -558,6 +558,10 @@ try:
         crashpanel.timeInit = time()
 
     class CrashPanelWs():
+        MAX_PATTERN_VALUES = 32
+        MAX_FLATTEN_DEPTH = 5
+        VISUAL_MODE_ATTRS = ('degree', 'dur', 'amp', 'oct', 'pan', 'rate', 'sample', 'sus')
+
         def __init__(self):
             self.bpmTime = 0.2  # time cycle send bpm
             self.beatTime = 0.1  # time cycle send beat
@@ -603,11 +607,53 @@ try:
             ''' send Clock.beat to OSC server '''
             try:
                 while self.isrunning:
-                    msg = json.dumps({"type": "beat", "beat": Clock.beat})
+                    playerSteps = {}
+                    try:
+                        for player in Clock.playing:
+                            playerSteps[player.name] = getattr(player, 'event_n', 0)
+                    except (AttributeError, RuntimeError):
+                        pass
+                    msg = json.dumps({"type": "beat", "beat": Clock.beat, "playerSteps": playerSteps})
                     asyncio.run(wsServer.sendWebsocket(msg))
                     sleep(self.beatTime)
-            except:
+            except (ConnectionError, OSError):
                 pass
+
+        def getGeneratorMeta(self, pat):
+            ''' Introspect generator patterns and return metadata dict or None '''
+            type_name = type(pat).__name__
+            generators = ('PWhite', 'PRand', 'PwRand', 'PWalk', 'linvar', 'var', 'Pvar')
+            if type_name not in generators:
+                return None
+            meta = {"type": type_name}
+            try:
+                if hasattr(pat, 'start') and hasattr(pat, 'stop'):
+                    meta["start"] = float(pat.start)
+                    meta["stop"] = float(pat.stop)
+                if hasattr(pat, 'data') and hasattr(pat.data, '__len__'):
+                    meta["values"] = [float(v) for v in list(pat.data)[:self.MAX_PATTERN_VALUES]]
+                if hasattr(pat, 'dur'):
+                    meta["dur"] = [float(d) for d in list(pat.dur)[:self.MAX_PATTERN_VALUES]]
+            except (TypeError, ValueError, AttributeError):
+                pass
+            return meta
+
+        def flattenPattern(self, data, depth=0):
+            ''' Recursively flatten PGroups/nested structures into JSON-serializable lists '''
+            if depth > self.MAX_FLATTEN_DEPTH:
+                return data
+            if isinstance(data, (int, float)):
+                return data
+            if isinstance(data, str):
+                return data
+            try:
+                items = list(data)
+                return [self.flattenPattern(item, depth + 1) for item in items[:self.MAX_PATTERN_VALUES]]
+            except (TypeError, ValueError):
+                try:
+                    return float(data)
+                except (TypeError, ValueError):
+                    return str(data)
 
         def sendPlayer(self):
             ''' send active player to OSC server '''
@@ -623,13 +669,58 @@ try:
                             name = k.filename
                         else:
                             name = k.synthdef
-                        playerListCount.append(json.dumps({"player": player, "name": name, "duration": duration, "solo": player in soloPlayers}))
-                    # playerListCount = [
-                    #     f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
+
+                        playerData = {
+                            "player": player, "name": name,
+                            "duration": duration, "solo": player in soloPlayers,
+                            "step": getattr(k, 'event_n', 0),
+                        }
+
+                        # Enrich with pattern data for visual mode
+                        current = {}
+                        patterns = {}
+                        generators = {}
+                        for attr in self.VISUAL_MODE_ATTRS:
+                            try:
+                                raw = getattr(k, attr, None)
+                                if raw is None:
+                                    continue
+                                # Get current resolved value
+                                try:
+                                    cur_val = k.event.get(attr, None)
+                                    if cur_val is not None:
+                                        current[attr] = self.flattenPattern(cur_val)
+                                except (AttributeError, TypeError, KeyError):
+                                    pass
+                                # Check if it's a generator pattern
+                                gen_meta = self.getGeneratorMeta(raw)
+                                if gen_meta:
+                                    generators[attr] = gen_meta
+                                else:
+                                    # Static pattern — flatten to array
+                                    flat = self.flattenPattern(raw)
+                                    if isinstance(flat, list):
+                                        patterns[attr] = flat[:self.MAX_PATTERN_VALUES]
+                                    else:
+                                        patterns[attr] = [flat]
+                            except (AttributeError, TypeError, ValueError):
+                                pass
+
+                        playerData["current"] = current
+                        playerData["patterns"] = patterns
+                        playerData["generators"] = generators
+
+                        # Add playstring if available
+                        try:
+                            playerData["playstring"] = str(getattr(k, 'playstring', ''))
+                        except (AttributeError, TypeError):
+                            pass
+
+                        playerListCount.append(json.dumps(playerData))
                     msg = json.dumps({"type": "players", "players": playerListCount})
                     asyncio.run(wsServer.sendWebsocket(msg))
                     sleep(self.plyTime)
-            except:
+            except (ConnectionError, OSError):
                 pass
 
         def sendMasterFx(self):

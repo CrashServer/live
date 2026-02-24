@@ -600,14 +600,154 @@ try:
                 pass
 
         def sendBeat(self):
-            ''' send Clock.beat to OSC server '''
+            ''' send Clock.beat to OSC server with player steps '''
             try:
                 while self.isrunning:
-                    msg = json.dumps({"type": "beat", "beat": Clock.beat})
+                    # Collect current step for each active player
+                    playerSteps = {}
+                    for player in Clock.playing:
+                        try:
+                            playerSteps[player.name] = getattr(player, 'event_n', 0)
+                        except:
+                            pass
+                    msg = json.dumps({
+                        "type": "beat",
+                        "beat": Clock.beat,
+                        "playerSteps": playerSteps
+                    })
                     asyncio.run(wsServer.sendWebsocket(msg))
                     sleep(self.beatTime)
             except:
                 pass
+
+        def getGeneratorMeta(self, pat):
+            ''' Extract metadata from generator patterns for visualization '''
+            from FoxDot.lib.Patterns.Generators import GeneratorPattern, PWhite, PRand, PwRand, PWalk, PDelta
+            from FoxDot.lib.TimeVar import TimeVar, linvar, Pvar
+
+            meta = None
+            try:
+                # PWhite - random float in range
+                if isinstance(pat, PWhite):
+                    meta = {
+                        "type": "PWhite",
+                        "lo": float(pat.low),
+                        "hi": float(pat.high),
+                        "current": float(pat.last_value) if pat.last_value is not None else None
+                    }
+                # PRand - random from range or list
+                elif isinstance(pat, PRand):
+                    if getattr(pat, 'choosing', False):
+                        values = [float(x) if isinstance(x, (int, float)) else str(x) for x in list(pat.data)[:16]]
+                        meta = {
+                            "type": "PRand",
+                            "values": values,
+                            "current": float(pat.last_value) if pat.last_value is not None else None
+                        }
+                    else:
+                        meta = {
+                            "type": "PRand",
+                            "lo": float(pat.low) if pat.low is not None else 0,
+                            "hi": float(pat.high) if pat.high is not None else 7,
+                            "current": float(pat.last_value) if pat.last_value is not None else None
+                        }
+                # PwRand - weighted random
+                elif isinstance(pat, PwRand):
+                    values = [float(x) if isinstance(x, (int, float)) else str(x) for x in list(pat.data)[:16]]
+                    weights = [float(x) for x in list(pat.weights)[:16]]
+                    meta = {
+                        "type": "PwRand",
+                        "values": values,
+                        "weights": weights,
+                        "current": float(pat.last_value) if pat.last_value is not None else None
+                    }
+                # PWalk - random walk
+                elif isinstance(pat, PWalk):
+                    meta = {
+                        "type": "PWalk",
+                        "lo": float(pat.min),
+                        "hi": float(pat.max),
+                        "step": float(pat.step) if isinstance(pat.step, (int, float)) else 1,
+                        "current": float(pat.last_value) if pat.last_value is not None else None
+                    }
+                # linvar - linear interpolation over time
+                elif isinstance(pat, linvar):
+                    values = [float(x) if isinstance(x, (int, float)) else str(x) for x in list(pat.values)[:16]]
+                    durs = [float(x) for x in list(pat.dur)[:16]]
+                    progress = getattr(pat, 'proportion', 0)
+                    meta = {
+                        "type": "linvar",
+                        "values": values,
+                        "durs": durs,
+                        "progress": float(progress),
+                        "current": float(pat.now()) if hasattr(pat, 'now') else None
+                    }
+                # Pvar - pattern that changes over time
+                elif isinstance(pat, Pvar):
+                    meta = {
+                        "type": "Pvar",
+                        "progress": float(getattr(pat, 'proportion', 0)),
+                        "current": str(pat.now()) if hasattr(pat, 'now') else None
+                    }
+                # TimeVar (var) - stepped changes over time
+                elif isinstance(pat, TimeVar):
+                    values = [float(x) if isinstance(x, (int, float)) else str(x) for x in list(pat.values)[:16]]
+                    durs = [float(x) for x in list(pat.dur)[:16]]
+                    progress = getattr(pat, 'proportion', 0)
+                    idx = getattr(pat, 'current_index', 0)
+                    meta = {
+                        "type": "var",
+                        "values": values,
+                        "durs": durs,
+                        "progress": float(progress),
+                        "index": int(idx),
+                        "current": float(pat.now()) if hasattr(pat, 'now') else None
+                    }
+                # Generic GeneratorPattern
+                elif isinstance(pat, GeneratorPattern):
+                    meta = {
+                        "type": pat.__class__.__name__,
+                        "current": float(pat.last_value) if pat.last_value is not None else None
+                    }
+            except Exception as e:
+                pass
+            return meta
+
+        def flattenPattern(self, data, depth=0):
+            ''' Flatten nested pattern structures (PGroup, etc.) into simple list for visualization '''
+            if depth > 5:  # Prevent infinite recursion
+                return [str(data)]
+            result = []
+            try:
+                for item in data:
+                    try:
+                        if isinstance(item, (int, float)):
+                            result.append(float(item))
+                        elif isinstance(item, str):
+                            result.append(item)
+                        elif hasattr(item, 'data') and not hasattr(item, 'last_value'):
+                            # Nested pattern (PGroup, etc.) but not generator
+                            try:
+                                flattened = self.flattenPattern(item.data, depth + 1)
+                                if len(flattened) == 1:
+                                    result.append(flattened[0])
+                                else:
+                                    result.append(''.join(str(x) for x in flattened))
+                            except:
+                                result.append(str(item))
+                        elif isinstance(item, (list, tuple)):
+                            flattened = self.flattenPattern(list(item), depth + 1)
+                            if len(flattened) == 1:
+                                result.append(flattened[0])
+                            else:
+                                result.append(''.join(str(x) for x in flattened))
+                        else:
+                            result.append(str(item))
+                    except:
+                        result.append(str(item))
+            except:
+                return [str(data)]
+            return result
 
         def sendPlayer(self):
             ''' send active player to OSC server '''
@@ -623,9 +763,70 @@ try:
                             name = k.filename
                         else:
                             name = k.synthdef
-                        playerListCount.append(json.dumps({"player": player, "name": name, "duration": duration, "solo": player in soloPlayers}))
-                    # playerListCount = [
-                    #     f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
+
+                        # Get current step and values for visualization
+                        step = getattr(k, 'event_n', 0)
+                        current_values = {}
+                        patterns = {}
+                        generators = {}
+                        playstring = None
+                        try:
+                            # Get current values from player event
+                            if hasattr(k, 'event') and k.event:
+                                for attr in ['degree', 'dur', 'amp', 'oct', 'sus', 'pan', 'rate', 'lpf', 'hpf']:
+                                    if attr in k.event:
+                                        val = k.event[attr]
+                                        # Convert to JSON-serializable format
+                                        if val is None:
+                                            current_values[attr] = None
+                                        elif isinstance(val, (int, float)):
+                                            current_values[attr] = val
+                                        elif hasattr(val, 'data'):
+                                            # Pattern object - get underlying data
+                                            current_values[attr] = float(val) if hasattr(val, '__float__') else str(val)
+                                        else:
+                                            current_values[attr] = str(val)
+
+                            # Get playstring for play synths (SamplePlayer)
+                            if hasattr(k, 'playstring') and k.playstring:
+                                playstring = str(k.playstring)
+
+                            # Get pattern data and generator metadata
+                            if hasattr(k, 'attr') and k.attr:
+                                for attr in ['degree', 'dur', 'amp', 'oct', 'pan', 'rate', 'sample']:
+                                    try:
+                                        if attr in k.attr and len(k.attr[attr]) > 0:
+                                            pat = k.attr[attr]
+
+                                            # Check if it's a generator pattern
+                                            gen_meta = self.getGeneratorMeta(pat)
+                                            if gen_meta:
+                                                generators[attr] = gen_meta
+                                            else:
+                                                # Static pattern - extract values as list
+                                                try:
+                                                    if hasattr(pat, 'data'):
+                                                        patterns[attr] = self.flattenPattern(pat.data[:32])
+                                                    elif hasattr(pat, '__iter__'):
+                                                        patterns[attr] = self.flattenPattern(list(pat)[:32])
+                                                except:
+                                                    pass
+                                    except:
+                                        pass
+                        except Exception as e:
+                            pass
+
+                        playerListCount.append(json.dumps({
+                            "player": player,
+                            "name": name,
+                            "duration": duration,
+                            "solo": player in soloPlayers,
+                            "step": step,
+                            "current": current_values,
+                            "patterns": patterns,
+                            "generators": generators,
+                            "playstring": playstring
+                        }))
                     msg = json.dumps({"type": "players", "players": playerListCount})
                     asyncio.run(wsServer.sendWebsocket(msg))
                     sleep(self.plyTime)

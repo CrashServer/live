@@ -28,6 +28,26 @@ from .Scale import Scale, Tuning
 
 from random import choice as choose
 
+def follow(target, transform='degree'):
+    """Get a PlayerKey from target with named transform.
+
+        degree=follow(d1, 'degree')    # follow degree
+        degree=follow(d1, 'oct')       # follow octave
+        degree=follow(d1, 'invert')    # follow inverted degree
+
+    """
+    _transforms = {
+        'degree': lambda t: t.degree,
+        'oct':    lambda t: t.degree + 7,
+        'invert': lambda t: 7 - t.degree,
+        'amp':    lambda t: t.amp,
+        'dur':    lambda t: t.dur,
+    }
+    if transform in _transforms:
+        return _transforms[transform](target)
+    # Fallback: treat as attribute name
+    return getattr(target, transform)
+
 # Define any custom functions
 
 @PatternMethod

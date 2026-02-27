@@ -280,27 +280,18 @@ def PEuclidR(n, k, rotation=1):
     return Pattern(EuclidsAlgorithm(n, k)).rotate(rotation)
 
 def PFDur(*pairs):
-    ''' Layered Euclidean fill with weighted density.
-        Each pair is (n, k) or (n, k, weight). Weight is optional (default 1.0).
-        Returns 0 where no layer hits, up to 1.0 where weighted pulses stack.
-        e.g. `PFDur((3, 8), (5, 8))` equal weight layers
-             `PFDur((3, 8, 0.3), (5, 8, 1.0))` first layer soft, second full
-             `PFDur((3, 5), (5, 8), (12, 16))` three equal layers '''
+    ''' Layered Euclidean fill density pattern.
+        Each pair is (n, k). Returns 1 where any layer hits, 0 otherwise.
+        e.g. `PFDur((3, 8), (5, 8))` two layers combined
+             `PFDur((3, 5), (5, 8), (12, 16))` three layers '''
     if len(pairs) == 0:
         return Pattern([0])
-    # Parse pairs: (n, k) or (n, k, weight)
-    parsed = []
-    for p in pairs:
-        if len(p) == 3:
-            parsed.append((p[0], p[1], float(p[2])))
-        else:
-            parsed.append((p[0], p[1], 1.0))
-    k = max(kk for _, kk, _ in parsed)
-    layers = [(EuclidsAlgorithm(n, kk), w) for n, kk, w in parsed]
+    k = max(kk for _, kk in pairs)
+    layers = [EuclidsAlgorithm(n, kk) for n, kk in pairs]
     result = []
     for i in range(k):
-        total = sum(w * layer[i % len(layer)] for layer, w in layers)
-        result.append(min(total, 1.0))
+        hit = max(layer[i % len(layer)] for layer in layers)
+        result.append(hit)
     return Pattern(result)
 
 @loop_pattern_func

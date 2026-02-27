@@ -278,40 +278,26 @@ def PEuclidR(n, k, rotation=1):
     return Pattern(EuclidsAlgorithm(n, k)).rotate(rotation)
 
 @loop_pattern_func
-def PEuclidFill(*pairs):
-    ''' Combines multiple Euclidean rhythms by OR-ing them together.
-        Takes tuples of (n, k): `PEuclidFill((3,8), (5,8))`
-        All pairs must share the same step count k.
-        Returns 1 where any layer has a pulse, 0 otherwise. '''
+def PFDur(*pairs):
+    ''' Layered Euclidean fill with additive density.
+        Each pair is (n, k). Layers are summed and normalized so more
+        overlapping pulses = higher value, giving natural accent structure.
+
+            amplify=PFDur((3, 5), (5, 8), (12, 16))
+
+        Returns values between 0 and 1 where density of overlapping
+        pulses determines the amplitude. '''
     if len(pairs) == 0:
         return Pattern([0])
-    k = pairs[0][1]
+    # Use the max k across all pairs as the step count
+    k = max(kk for _, kk in pairs)
+    n_layers = len(pairs)
     layers = [EuclidsAlgorithm(n, kk) for n, kk in pairs]
     result = []
     for i in range(k):
-        result.append(max(layer[i % len(layer)] for layer in layers))
-    return Pattern(result)
-
-@loop_pattern_func
-def PEuclidAccent(n, k, accent_n=None, accent_k=None):
-    ''' Two-layer Euclidean rhythm: base hits + accent layer.
-        Returns 0 (rest), 0.5 (normal hit), or 1.0 (accented hit).
-        Apply to `amplify` for velocity variation.
-        e.g. `PEuclidAccent(5, 8, accent_n=3)` '''
-    if accent_n is None:
-        accent_n = max(1, n // 2)
-    if accent_k is None:
-        accent_k = k
-    base = EuclidsAlgorithm(n, k)
-    accent = EuclidsAlgorithm(accent_n, accent_k)
-    result = []
-    for i in range(k):
-        if base[i] == 0:
-            result.append(0)
-        elif accent[i % len(accent)] == 1:
-            result.append(1.0)
-        else:
-            result.append(0.5)
+        total = sum(layer[i % len(layer)] for layer in layers)
+        # Normalize: 0 layers hitting = 0, all layers = 1
+        result.append(total / float(n_layers))
     return Pattern(result)
 
 @loop_pattern_func

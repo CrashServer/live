@@ -75,12 +75,7 @@ from .Sequences  import *
 from .PGroups    import *
 from .Generators import *
 from .Generative import *
-from .Stochastic import *
 from .Grooves    import *
 from .PlayString import *
 from .Parse      import *
 from .Utils      import *
-from .Polymetric import *
-from .Spatial    import *
-from .Slicing    import *
-from .Envelopes  import *

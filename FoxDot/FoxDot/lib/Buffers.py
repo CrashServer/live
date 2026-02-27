@@ -27,12 +27,6 @@ from .SCLang import SampleSynthDef
 from .ServerManager import Server
 from .Settings import FOXDOT_SND, FOXDOT_LOOP, SAMPLES_BANK
 
-import sys
-if sys.version_info[0] > 2:
-    from .OSC3 import OSCMessage
-else:
-    from .OSC import OSCMessage
-
 import json
 
 alpha    = "abcdefghijklmnopqrstuvwxyz"
@@ -160,17 +154,6 @@ class Buffer(object):
         except wave.Error:
             numChannels = 1
         return cls(filename, number, numChannels)
-
-
-class LiveBuffer(Buffer):
-    """Buffer subclass for empty (recording) buffers."""
-    def __init__(self, number, duration, numFrames, channels=2):
-        Buffer.__init__(self, '<live>', number, channels)
-        self.duration = duration
-        self.numFrames = numFrames
-
-    def __repr__(self):
-        return "<LiveBuffer num {} dur={:.2f}s>".format(self.bufnum, self.duration)
 
 
 nil = Buffer('', 0)
@@ -473,16 +456,6 @@ class BufferManager(object):
             buf = self._allocateAndLoadMono(samplepath, force=force)
             return buf.bufnum
 
-    def allocateEmpty(self, duration, channels=2, sr=44100):
-        """Allocate an empty buffer for live recording.
-        Returns a LiveBuffer object."""
-        numFrames = int(duration * sr)
-        bufnum = self._getNextBufnum()
-        buf = LiveBuffer(bufnum, duration, numFrames, channels)
-        self._server.bufferAlloc(bufnum, numFrames, channels)
-        self._buffers[bufnum] = buf
-        return buf
-
     ### crashmod
     # def loadOnset(self):
     #     with open(os.path.join(FOXDOT_LOOP, "onsetDict.py")) as f:
@@ -606,56 +579,6 @@ class TimeStretchSynthDef(SampleSynthDef):
         proxy = SampleSynthDef.__call__(self, pos, **kwargs)
         proxy.kwargs["filename"] = filename
         return proxy
-
-class SlicerSynthDef(SampleSynthDef):
-    def __init__(self):
-        SampleSynthDef.__init__(self, "slicer")
-        self.pos = self.new_attr_instance("pos")
-        self.sample = self.new_attr_instance("sample")
-        self.slice_start = self.new_attr_instance("slice_start")
-        self.slice_end = self.new_attr_instance("slice_end")
-        self.defaults['pos'] = 0
-        self.defaults['sample'] = 0
-        self.defaults['slice_start'] = 0
-        self.defaults['slice_end'] = 1
-        self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * (BufDur.kr(buf) * (slice_end - slice_start).max(0.001) / sus) * rate, startPos: BufFrames.kr(buf) * slice_start, loop: 0);")
-        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.01, sus-0.02, 0.01]));")
-        self.osc = self.osc * self.amp
-        self.add()
-    def __call__(self, filename, pos=0, sample=0, **kwargs):
-        kwargs["buf"] = Samples.loadBuffer(filename, sample)
-        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
-        proxy.kwargs["filename"] = filename
-        return proxy
-
-
-class GrainXSynthDef(SampleSynthDef):
-    def __init__(self):
-        SampleSynthDef.__init__(self, "grainX")
-        self.pos = self.new_attr_instance("pos")
-        self.sample = self.new_attr_instance("sample")
-        self.defaults['pos'] = 0
-        self.defaults['sample'] = 0
-        self.defaults['density'] = 10
-        self.defaults['size'] = 0.1
-        self.defaults['spray'] = 0
-        self.defaults['jitter'] = 0
-        self.defaults['scan'] = 0
-        self.defaults['shape'] = 0
-        self.defaults['spread'] = 0.5
-        self.defaults['start'] = 0
-        self.defaults['end'] = 1
-        self.defaults['trigger_mode'] = 0
-        self.base.append("osc = GrainBuf.ar(2, trig, size, buf, rate, pos*BufDur.kr(buf), 2, pan);")
-        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.05, sus-0.05, 0.05]));")
-        self.osc = self.osc * self.amp
-        self.add()
-    def __call__(self, filename, pos=0, sample=0, **kwargs):
-        kwargs["buf"] = Samples.loadBufferMono(filename, sample)
-        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
-        proxy.kwargs["filename"] = filename
-        return proxy
-
 
 class BreakcoreSynthDef(SampleSynthDef):
     def __init__(self):
@@ -794,9 +717,7 @@ loop = LoopSynthDef()
 noloop = NoLoopSynthDef()
 stretch = StretchSynthDef()
 gsynth = GranularSynthDef()
-grainX = GrainXSynthDef()
 timestretch = TimeStretchSynthDef()
-slicer = SlicerSynthDef()
 breakcore = BreakcoreSynthDef()
 splitter = SplitterSynthDef()
 splaffer = SplafferSynthDef()
@@ -804,145 +725,3 @@ splaffer = SplafferSynthDef()
 wavetable = WavetableSynthDef()
 
 
-class LivePlaySynthDef(SampleSynthDef):
-    def __init__(self):
-        SampleSynthDef.__init__(self, "livePlay")
-        self.pos = self.new_attr_instance("pos")
-        self.sample = self.new_attr_instance("sample")
-        self.beat_stretch = self.new_attr_instance("beat_stretch")
-        self.filename = self.new_attr_instance("filename")
-        self.looping = self.new_attr_instance("looping")
-        self.clip = self.new_attr_instance("clip")
-        self.reverse = self.new_attr_instance("reverse")
-        self.defaults['pos'] = 0
-        self.defaults['sample'] = 0
-        self.defaults['beat_stretch'] = 1
-        self.defaults['looping'] = 1.0
-        self.defaults['clip'] = 0
-        self.defaults['reverse'] = 0
-        self.base.append("rate = if(ratelfo<=0, rate, rate * SinOsc.kr(ratelfo, 0, ratelfomul, ratelfoadd));")
-        self.base.append("playRate = Select.kr(reverse > 0, [rate, rate.neg]);")
-        self.base.append("rate = (playRate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));")
-        self.base.append("clip = if(clip<=0, 1, (clip/sus)*0.5);")
-        self.base.append("osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, startPos: BufSampleRate.kr(buf) * pos, loop: looping);")
-        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0, (sus*clip), 0]));")
-        self.osc = self.osc * self.amp
-        self.add()
-
-    def __call__(self, filename, pos=0, sample=0, **kwargs):
-        kwargs["filename"] = filename
-        kwargs["sample"] = sample
-        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
-        proxy.kwargs["filename"] = filename
-        self.filename = filename
-        return proxy
-
-
-livePlay = LivePlaySynthDef()
-
-
-class LiveLooper(object):
-    """Live sampling/looping controller.
-
-    Allocates a buffer for live recording and provides methods for
-    recording, overdubbing, and playback.
-
-        ll = LiveLooper(duration=4)      # 4-beat buffer
-        ll.rec()                          # start recording
-        ll.stop_rec()                     # stop recording
-        ll.overdub(amount=0.5)            # overdub at next bar
-        ll.play(beat_stretch=1, room=0.3) # returns SynthDefProxy for >>
-        ll.from_player(d1)                # capture from another player's bus
-        ll.free()                         # cleanup
-    """
-
-    _node_counter = 9000
-
-    def __init__(self, duration=4, channels=2, sr=44100):
-        from .TempoClock import Clock
-        self._clock = Clock
-        self.duration_beats = duration
-        self.duration_secs = duration * (60.0 / Clock.bpm)
-        self.channels = channels
-        self.sr = sr
-        self._buf = Samples.allocateEmpty(self.duration_secs, channels, sr)
-        self._rec_node = None
-        self._source = 0
-        self._channel = 0
-        self._bus = 0
-
-    @classmethod
-    def _next_node(cls):
-        cls._node_counter += 1
-        return cls._node_counter
-
-    def rec(self, channel=0):
-        """Start recording from hardware input at the next bar."""
-        self._source = 0
-        self._channel = channel
-        self._clock.schedule(self._start_recording, self._clock.next_bar())
-
-    def from_player(self, player):
-        """Capture audio from another player's output bus."""
-        self._source = 1
-        self._bus = player.bus
-        self._clock.schedule(self._start_recording, self._clock.next_bar())
-
-    def overdub(self, amount=0.5, channel=0):
-        """Start overdub recording at the next bar."""
-        self._source = 0
-        self._channel = channel
-        self._overdub_amount = amount
-        self._clock.schedule(self._start_overdub, self._clock.next_bar())
-
-    def _start_recording(self):
-        self.stop_rec()
-        node_id = self._next_node()
-        self._rec_node = node_id
-        msg = OSCMessage("/s_new")
-        msg.append(["liveRec", node_id, 0, 1,
-                     "buf", int(self._buf.bufnum),
-                     "bus", int(self._bus),
-                     "channel", int(self._channel),
-                     "source", int(self._source),
-                     "overdub", 0.0,
-                     "run", 1,
-                     "level", 1.0])
-        Server.client.send(msg)
-
-    def _start_overdub(self):
-        self.stop_rec()
-        node_id = self._next_node()
-        self._rec_node = node_id
-        amount = getattr(self, '_overdub_amount', 0.5)
-        msg = OSCMessage("/s_new")
-        msg.append(["liveRec", node_id, 0, 1,
-                     "buf", int(self._buf.bufnum),
-                     "bus", int(self._bus),
-                     "channel", int(self._channel),
-                     "source", int(self._source),
-                     "overdub", float(amount),
-                     "run", 1,
-                     "level", 1.0])
-        Server.client.send(msg)
-
-    def stop_rec(self):
-        """Stop the current recording node."""
-        if self._rec_node is not None:
-            Server.free_node(self._rec_node)
-            self._rec_node = None
-
-    def play(self, **kwargs):
-        """Return a SynthDefProxy for playback. Use with >> operator."""
-        kwargs["buf"] = self._buf.bufnum
-        return livePlay("<live>", **kwargs)
-
-    def free(self):
-        """Stop recording and free the buffer."""
-        self.stop_rec()
-        Samples.free(self._buf.bufnum)
-
-    def __repr__(self):
-        status = "recording" if self._rec_node else "idle"
-        return "<LiveLooper buf={} dur={}beats {}>".format(
-            self._buf.bufnum, self.duration_beats, status)

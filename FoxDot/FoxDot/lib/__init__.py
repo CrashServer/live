@@ -11,7 +11,7 @@ FoxDotCode.namespace = globals()
 
 from .TempoClock import *
 from .Buffers import *
-from .Buffers import LiveLooper
+
 from .Players import *
 from .Patterns import *
 from .Effects import *
@@ -23,45 +23,33 @@ from .SCLang._SynthDefs import *
 from .ServerManager import *
 from .SCLang import SynthDefs, Env, SynthDef, CompiledSynthDef
 from .Root import Root
-from .Scale import Scale, Tuning
+from .Scale import Scale
 from .Crashserver.et_tunings import *
 from .VideoControl import VidCtrl, YouTubeController
-from .AudioReactive import PAmp, POnset, PReact, AudioReactive, reactive, unreactive
 
 # stdlib imports
 
 from random import choice as choose
 
-def sidechain_bus(player):
-    """Get a player's output bus number for sidechain routing."""
-    return player.bus if player.bus is not None else 0
+def follow(target, transform='degree'):
+    """Get a PlayerKey from target with named transform.
 
-def follow(target, attr="degree", transform=None):
-    """Get a PlayerKey from target, optionally transformed.
-
-        d2 >> pluck(degree=follow(d1, 'degree', lambda x: x + 7))
+        degree=follow(d1, 'degree')    # follow degree
+        degree=follow(d1, 'oct')       # follow octave
+        degree=follow(d1, 'invert')    # follow inverted degree
 
     """
-    val = getattr(target, attr)
-    if transform is not None:
-        val = transform(val)
-    return val
-
-def xmod(source, attr="amp", scale=1, offset=0):
-    """Cross-modulate: source.attr * scale + offset as PlayerKey.
-
-        d2 >> pluck(lpf=xmod(d1, 'degree', scale=200, offset=400))
-
-    """
-    return getattr(source, attr) * scale + offset
-
-def bus_route(source, target_attr="duck"):
-    """Return a dict for sidechain routing via **kwargs unpacking.
-
-        d2 >> bass(**bus_route(d1))
-
-    """
-    return {target_attr: sidechain_bus(source)}
+    _transforms = {
+        'degree': lambda t: t.degree,
+        'oct':    lambda t: t.degree + 7,
+        'invert': lambda t: 7 - t.degree,
+        'amp':    lambda t: t.amp,
+        'dur':    lambda t: t.dur,
+    }
+    if transform in _transforms:
+        return _transforms[transform](target)
+    # Fallback: treat as attribute name
+    return getattr(target, transform)
 
 # Define any custom functions
 

@@ -1,11 +1,10 @@
 """
 Grooves.py
 ----------
-Named groove/swing templates as Pattern factories.
+Swing and accent pattern factories.
 
-PSwing  -- Basic swing delay pattern
-PGroove -- Named groove delay templates (mpc60, tr808, etc.)
-PAccent -- Named velocity accent patterns (backbeat, ghost, etc.)
+PSwing -- Swing delay pattern
+Pacc   -- Accent patterns by type number
 
 """
 
@@ -15,87 +14,48 @@ from .Main import Pattern
 
 
 def PSwing(amount=0.1, steps=8):
-    """Basic swing pattern — alternating delay offsets.
+    """Swing delay pattern.
 
-    Returns a Pattern of alternating [0, amount] for use with the `delay` attribute.
-    Applies a swing feel by delaying every other step.
+    Returns alternating [0, amount] for use with `delay`.
 
-        >>> d1 >> pluck(delay=PSwing(0.08))
+        >>> d1 >> pluck(delay=PSwing(0.4, 16))
 
     """
     return Pattern([0, amount] * (steps // 2))
 
 
-# Pre-measured groove delay templates (normalized to beat fractions)
-_groove_templates = {
-    "mpc60": [0, 0.04, 0, 0.06, 0, 0.03, 0, 0.07,
-              0, 0.04, 0, 0.05, 0, 0.03, 0, 0.06],
+# Accent type templates (indexed by number)
+_accent_types = {
+    # 0: Backbeat accents on 2 and 4
+    0: [0.6, 0.4, 0.4, 0.4, 1.0, 0.4, 0.4, 0.4,
+        0.6, 0.4, 0.4, 0.4, 1.0, 0.4, 0.4, 0.4],
 
-    "tr808": [0, 0.02, 0, 0.03, 0, 0.01, 0, 0.04,
-              0, 0.02, 0, 0.03, 0, 0.01, 0, 0.03],
+    # 1: Four on the floor
+    1: [1.0, 0.4, 0.4, 0.4, 1.0, 0.4, 0.4, 0.4,
+        1.0, 0.4, 0.4, 0.4, 1.0, 0.4, 0.4, 0.4],
 
-    "sp1200": [0, 0.05, 0, 0.08, 0, 0.04, 0, 0.09,
-               0, 0.05, 0, 0.07, 0, 0.04, 0, 0.08],
+    # 2: Offbeat accents
+    2: [0.4, 0.4, 1.0, 0.4, 0.4, 0.4, 1.0, 0.4,
+        0.4, 0.4, 1.0, 0.4, 0.4, 0.4, 1.0, 0.4],
 
-    "linn": [0, 0.03, 0, 0.05, 0, 0.02, 0, 0.06,
-             0, 0.03, 0, 0.04, 0, 0.02, 0, 0.05],
-
-    "shuffle": [0, 0.08, 0, 0.08, 0, 0.08, 0, 0.08,
-                0, 0.08, 0, 0.08, 0, 0.08, 0, 0.08],
-
-    "clave": [0, 0, 0.06, 0, 0, 0.04, 0, 0,
-              0, 0, 0.06, 0, 0, 0, 0.04, 0],
+    # 3: Ghost notes
+    3: [1.0, 0.25, 0.3, 0.25, 0.7, 0.25, 0.3, 0.25,
+        1.0, 0.25, 0.3, 0.25, 0.7, 0.25, 0.3, 0.25],
 }
 
-def PGroove(name="mpc60", steps=16):
-    """Named groove delay templates.
+def Pacc(ptype=0, steps=16):
+    """Accent pattern by type number.
 
-    Returns a Pattern of delay offsets per step, scaled and tiled to `steps`.
-    Available templates: mpc60, tr808, sp1200, linn, shuffle, clave.
+    Returns a Pattern of amplify values (0-1).
+    Types: 0=backbeat, 1=four_floor, 2=offbeat, 3=ghost
 
-        >>> d1 >> play("x-o-x-o-", dur=0.25, delay=PGroove("mpc60"))
-
-    """
-    if name not in _groove_templates:
-        raise ValueError("Unknown groove '{}'. Available: {}".format(
-            name, list(_groove_templates.keys())))
-    template = _groove_templates[name]
-    # Tile template to fill requested steps
-    data = [template[i % len(template)] for i in range(steps)]
-    return Pattern(data)
-
-
-# Named accent/velocity templates
-_accent_templates = {
-    # Backbeat: accents on beats 2 and 4 (in 16th-note grid)
-    "backbeat": [0.6, 0.4, 0.4, 0.4, 1.0, 0.4, 0.4, 0.4,
-                 0.6, 0.4, 0.4, 0.4, 1.0, 0.4, 0.4, 0.4],
-
-    # Four on the floor: every beat accented
-    "four_floor": [1.0, 0.4, 0.4, 0.4, 1.0, 0.4, 0.4, 0.4,
-                   1.0, 0.4, 0.4, 0.4, 1.0, 0.4, 0.4, 0.4],
-
-    # Offbeat: upbeats accented
-    "offbeat": [0.4, 0.4, 1.0, 0.4, 0.4, 0.4, 1.0, 0.4,
-                0.4, 0.4, 1.0, 0.4, 0.4, 0.4, 1.0, 0.4],
-
-    # Ghost notes: quiet e-and-a ghost notes with normal downbeats
-    "ghost": [1.0, 0.25, 0.3, 0.25, 0.7, 0.25, 0.3, 0.25,
-              1.0, 0.25, 0.3, 0.25, 0.7, 0.25, 0.3, 0.25],
-}
-
-def PAccent(name="backbeat", steps=16):
-    """Named velocity accent patterns.
-
-    Returns a Pattern of amplify values (0-1) for use with `amplify`.
-    Available templates: backbeat, four_floor, offbeat, ghost.
-
-        >>> d1 >> play("x-o-x-o-", dur=0.25, amplify=PAccent("ghost"))
+        >>> amp=Pacc(0)          # backbeat
+        >>> amp=Pacc(1)          # four on the floor
+        >>> amplify=Pacc(2, 4)   # offbeat, 4-step grid
 
     """
-    if name not in _accent_templates:
-        raise ValueError("Unknown accent pattern '{}'. Available: {}".format(
-            name, list(_accent_templates.keys())))
-    template = _accent_templates[name]
+    if ptype not in _accent_types:
+        ptype = 0
+    template = _accent_types[ptype]
     data = [template[i % len(template)] for i in range(steps)]
     return Pattern(data)

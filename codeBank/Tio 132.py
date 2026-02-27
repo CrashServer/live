@@ -26,3 +26,6 @@ a1 >> acidline(var([seq], [16, 8, 8]), dur=var([0.25, 0.125, 0.25], [24, 4, 4]),
 
 d2 >> play("-", sample=5, dur=0.25, amp=P[0.4,0.15,0.3,0.15], hpf=4000)
 d3 >> play("..C.", sample=2, dur=0.5, amp=0.55)
+
+dp >> darkpad([(0,4,7),(0,3,7)], dur=var([8,8],[8,8]), dark=0.6, movement=linvar([0.2,0.6],32), cutoff=linvar([600,1500],16), pumper=0.4, pumprate=1, amp=0.4)
+px >> plaitsX(var([P[0,2,4],P[4,5,7],P[7,9,11]],[8,8,8]), dur=0.5, preset=var([9,10,11],[8,8,8]), oct=(4,5), chopmix=linvar([0,0.5],16), chopwave=(2,3), mverb=0.4, amp=0.55)

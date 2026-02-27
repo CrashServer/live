@@ -86,10 +86,43 @@ class TuningType(list):
         list.__init__(self, data[:-1])
         self.steps = int(data[-1])
 
+    @classmethod
+    def from_ratios(cls, ratios):
+        """Create a TuningType from frequency ratios (e.g. just intonation).
+        Converts ratios to semitone offsets: 12 * log2(ratio).
+        The number of ratios determines the number of steps per octave."""
+        semitones = [12.0 * _log2(r) for r in ratios]
+        semitones.append(len(ratios))  # steps = number of ratios
+        return cls(semitones)
+
+    @classmethod
+    def from_cents(cls, cents):
+        """Create a TuningType from cent values.
+        Converts cents to semitones: cent / 100.
+        The number of cent values determines the number of steps."""
+        semitones = [c / 100.0 for c in cents]
+        semitones.append(len(cents))
+        return cls(semitones)
+
 class Tuning:
     ET12          = TuningType([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
     just          = TuningType([0.0, 1.1173128526978, 2.0391000173077, 3.1564128700055, 3.8631371386483, 4.9804499913461, 5.9022371559561, 7.0195500086539, 8.1368628613517, 8.8435871299945, 10.175962878659, 10.882687147302, 12 ])
     bohlen_pierce = TuningType([i*12/13*math.log(3, 2) for i in range(14)])
+
+    # Pythagorean tuning (3-limit, pure fifths chain)
+    pythagorean   = TuningType([0.0, 1.10985, 2.03910, 2.94135, 4.07820, 4.98045, 5.88270, 7.01955, 8.10940, 9.01955, 9.99090, 11.04000, 12])
+
+    # Quarter-comma meantone
+    meantone      = TuningType([0.0, 0.76314, 1.93157, 3.10000, 3.86314, 5.03157, 5.79471, 6.96314, 7.72627, 8.89471, 10.06314, 10.82627, 12])
+
+    # Werkmeister III well temperament
+    werkmeister3  = TuningType([0.0, 0.90225, 1.92180, 2.94135, 3.92180, 4.98045, 5.88270, 6.96090, 7.88270, 8.94135, 9.96090, 10.90225, 12])
+
+    # 19-tone equal temperament
+    ET19          = TuningType([i * 12.0 / 19.0 for i in range(20)])
+
+    # 31-tone equal temperament
+    ET31          = TuningType([i * 12.0 / 31.0 for i in range(32)])
 
 class ScalePattern(ScaleType, Pattern):
 
@@ -388,6 +421,9 @@ class __scale__:
 
     justMajor       = ScalePattern([0,2,4,5,7,9,11], name="justMajor", tuning=Tuning.just)
     justMinor       = ScalePattern([0,2,3,5,7,8,10], name="justMinor", tuning=Tuning.just)
+
+    pythagoreanMajor = ScalePattern([0,2,4,5,7,9,11], name="pythagoreanMajor", tuning=Tuning.pythagorean)
+    pythagoreanMinor = ScalePattern([0,2,3,5,7,8,10], name="pythagoreanMinor", tuning=Tuning.pythagorean)
 
     dorian          = ScalePattern([0,2,3,5,7,9,10], name="dorian")
     dorian2         = ScalePattern([0,1,3,5,6,8,9,11], name="dorian2") 

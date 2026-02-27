@@ -441,6 +441,14 @@ fx.add("schain = In.ar(sidechain,1)")
 fx.add("osc = Compander.ar(osc, schain, thresh: thresh, slopeAbove: 0.1, slopeBelow: 1, clampTime: sidechain_atk, relaxTime: sidechain_rel, mul: 1)")
 fx.save()
 
+fx = FxList.new("duck", "autoDuck", {"duck": 0, "duckamt": 0.8, "duckatk": 0.005, "duckrel": 0.15, "duckthresh": 0.01}, order=2, tag="volume")
+fx.add_var("duckSrc")
+fx.add_var("duckSlope")
+fx.add("duckSrc = In.ar(duck, 1)")
+fx.add("duckSlope = 1 - duckamt")
+fx.add("osc = Compander.ar(osc, duckSrc, thresh: duckthresh, slopeAbove: duckSlope, slopeBelow: 1, clampTime: duckatk, relaxTime: duckrel, mul: 1)")
+fx.save()
+
 fx = FxList.new("lofi", "lofi", {"lofi": 0, "lofiwow": 0.5, "lofiamp":0.5}, order=2, tag="filter")
 fx.add_var("minWowRate")
 fx.add_var("wowRate")
@@ -1084,6 +1092,239 @@ fx.add("delayMod = LFNoise2.kr(driftspeed).range(0, driftdepth * maxDelay)")
 fx.add("delayMod = Lag.kr(delayMod, driftsmooth * 0.1)")
 fx.add("drifted = DelayC.ar(osc, maxDelay, delayMod)")
 fx.add("osc = XFade2.ar(dry, drifted, drift * 2 - 1)")
+fx.save()
+
+# Grain Cloud - turns any signal into a granular texture
+fx = FxList.new("gcloud", "grainCloud", {"gcloud": 0, "gcloud_density": 20, "gcloud_size": 0.05, "gcloud_spray": 0, "gcloud_spread": 0.5}, order=2, tag="granular")
+fx.doc("Grain Cloud - granulates any signal into a cloud texture")
+fx.add_var("grainTrig")
+fx.add_var("grainBuf")
+fx.add_var("grainSig")
+fx.add("grainBuf = LocalBuf(SampleRate.ir * 0.5, 2).clear")
+fx.add("RecordBuf.ar(osc, grainBuf, loop: 1)")
+fx.add("grainTrig = Impulse.ar(gcloud_density)")
+fx.add("grainSig = GrainBuf.ar(2, grainTrig, gcloud_size, grainBuf, 1 + (gcloud_spray * LFNoise1.kr(gcloud_density * 0.5)), LFNoise1.kr(gcloud_density).range(0, 1), 2, 0)")
+fx.add("grainSig = Splay.ar(grainSig, gcloud_spread)")
+fx.add("osc = XFade2.ar(osc, grainSig, gcloud * 2 - 1)")
+fx.save()
+
+# Grain Freeze - captures and loops a tiny moment as grains
+fx = FxList.new("gfreeze", "grainFreeze", {"gfreeze": 0, "gfreeze_dur": 0.1, "gfreeze_density": 30}, order=2, tag="granular")
+fx.doc("Grain Freeze - freezes a moment in time as repeating grains")
+fx.add_var("freezeBuf")
+fx.add_var("freezeTrig")
+fx.add_var("freezeSig")
+fx.add("freezeBuf = LocalBuf(SampleRate.ir * gfreeze_dur, 2).clear")
+fx.add("RecordBuf.ar(osc, freezeBuf, loop: 1)")
+fx.add("freezeTrig = Impulse.ar(gfreeze_density)")
+fx.add("freezeSig = GrainBuf.ar(2, freezeTrig, gfreeze_dur * 0.8, freezeBuf, 1, LFNoise0.kr(gfreeze_density * 0.25).range(0, 1), 2, 0)")
+fx.add("osc = XFade2.ar(osc, freezeSig, gfreeze * 2 - 1)")
+fx.save()
+
+# === SPECTRAL PROCESSING FX ===
+
+# Spectral Blur - smears energy across frequency bins
+fx = FxList.new("sblur", "spectralBlur", {"sblur": 0, "sblurmix": 0.5, "sbluramt": 0.5}, order=2, tag="spectral")
+fx.doc("Spectral blur - smears frequency bins for washy textures")
+fx.add_var("dry")
+fx.add_var("chain")
+fx.add_var("blurred")
+fx.add("dry = osc")
+fx.add("chain = FFT(Array.fill(2, { LocalBuf(2048, 1) }), osc)")
+fx.add("chain = PV_MagSmear(chain, sbluramt * 20)")
+fx.add("blurred = IFFT(chain)")
+fx.add("blurred = LeakDC.ar(blurred)")
+fx.add("osc = XFade2.ar(dry, (dry * (1 - sblurmix)) + (blurred * sblurmix), sblur * 2 - 1)")
+fx.save()
+
+# Spectral Gate - threshold-based bin filtering
+fx = FxList.new("sgate", "spectralGate", {"sgate": 0, "sgatemix": 0.5, "sgatethresh": 1}, order=2, tag="spectral")
+fx.doc("Spectral gate - keeps only loud frequency bins above threshold")
+fx.add_var("dry")
+fx.add_var("chain")
+fx.add_var("gated")
+fx.add("dry = osc")
+fx.add("chain = FFT(Array.fill(2, { LocalBuf(2048, 1) }), osc)")
+fx.add("chain = PV_MagAbove(chain, sgatethresh)")
+fx.add("gated = IFFT(chain)")
+fx.add("gated = LeakDC.ar(gated)")
+fx.add("osc = XFade2.ar(dry, (dry * (1 - sgatemix)) + (gated * sgatemix), sgate * 2 - 1)")
+fx.save()
+
+# Spectral Shift - pitch shift via bin rotation
+fx = FxList.new("sshift", "spectralShift", {"sshift": 0, "sshiftmix": 0.5, "sshiftamt": 0, "sshiftstretch": 1}, order=2, tag="spectral")
+fx.doc("Spectral shift - pitch shift by rotating frequency bins")
+fx.add_var("dry")
+fx.add_var("chain")
+fx.add_var("shifted")
+fx.add("dry = osc")
+fx.add("chain = FFT(Array.fill(2, { LocalBuf(2048, 1) }), osc)")
+fx.add("chain = PV_BinShift(chain, sshiftstretch, sshiftamt)")
+fx.add("shifted = IFFT(chain)")
+fx.add("shifted = LeakDC.ar(shifted)")
+fx.add("osc = XFade2.ar(dry, (dry * (1 - sshiftmix)) + (shifted * sshiftmix), sshift * 2 - 1)")
+fx.save()
+
+# Spectral Morph - cross-convolves live signal with captured spectral snapshot
+fx = FxList.new("smorph", "spectralMorph", {"smorph": 0, "smorphmix": 0.5, "smorphrate": 1, "smorphfreeze": 0}, order=2, tag="spectral")
+fx.doc("Spectral morph - cross-convolves live signal with a captured spectral snapshot")
+fx.add_var("dry")
+fx.add_var("refBuf")
+fx.add_var("refSig")
+fx.add_var("chainA")
+fx.add_var("chainB")
+fx.add_var("morphed")
+fx.add("dry = osc")
+fx.add("refBuf = LocalBuf(SampleRate.ir * 0.25, 2).clear")
+fx.add("RecordBuf.ar(osc, refBuf, run: (1 - smorphfreeze), loop: 1)")
+fx.add("refSig = PlayBuf.ar(2, refBuf, smorphrate, loop: 1)")
+fx.add("chainA = FFT(Array.fill(2, { LocalBuf(2048, 1) }), osc)")
+fx.add("chainB = FFT(Array.fill(2, { LocalBuf(2048, 1) }), refSig)")
+fx.add("chainA = PV_MagMul(chainA, chainB)")
+fx.add("morphed = IFFT(chainA)")
+fx.add("morphed = LeakDC.ar(morphed)")
+fx.add("osc = XFade2.ar(dry, (dry * (1 - smorphmix)) + (morphed * smorphmix), smorph * 2 - 1)")
+fx.save()
+
+# Orbital panning - circular stereo pan synced to beat_dur
+fx = FxList.new("orbit", "orbitPan", {"orbit": 0, "orbitwidth": 1}, order=2, tag="panning")
+fx.doc("Circular stereo panning synced to tempo")
+fx.add("osc = Pan2.ar(Mix.ar(osc), SinOsc.kr(orbit / beat_dur) * orbitwidth)")
+fx.save()
+
+# Frequency-dependent stereo spread
+fx = FxList.new("fspread", "freqSpread", {"fspread": 0, "fspreadfreq": 1000}, order=2, tag="panning")
+fx.doc("Frequency-dependent stereo spread - low center, highs wide")
+fx.add_var("low")
+fx.add_var("mid")
+fx.add_var("high")
+fx.add_var("mono")
+fx.add("mono = Mix.ar(osc)")
+fx.add("low = LPF.ar(mono, fspreadfreq)")
+fx.add("mid = BPF.ar(mono, fspreadfreq, 1)")
+fx.add("high = HPF.ar(mono, fspreadfreq * 2)")
+fx.add("osc = Pan2.ar(low, 0) + Pan2.ar(mid, LFNoise1.kr(0.5) * fspread * 0.5) + Pan2.ar(high, LFNoise1.kr(0.7) * fspread)")
+fx.save()
+
+# Multichannel rotation for quad output
+fx = FxList.new("rotate", "multiRotate", {"rotate": 0, "rotwidth": 1.5}, order=2, tag="panning")
+fx.doc("Multichannel rotation using PanAz for quad output")
+fx.add("osc = PanAz.ar(4, Mix.ar(osc), LFSaw.kr(rotate / beat_dur), 1, rotwidth).clump(2).collect({|pair| pair.sum})")
+fx.save()
+
+# Time-stretch FX - PitchShift-based time manipulation (pitch preserved)
+fx = FxList.new("tstretch", "timeStretchFx", {"tstretch": 1, "tstretchsize": 0.2}, order=2, tag="granular")
+fx.doc("PitchShift-based time stretch on any signal, pitch preserved")
+fx.add_var("stretched")
+fx.add_var("xfade")
+fx.add("stretched = PitchShift.ar(osc, tstretchsize, 1, 0, 0.004)")
+fx.add("xfade = (1 - tstretch).abs.min(1)")
+fx.add("osc = XFade2.ar(osc, stretched, xfade * 2 - 1)")
+fx.save()
+
+# ── Modulation & Envelope FX ──────────────────────────────────────────────
+
+# ADSR Amplitude Modulator
+fx = FxList.new("envmod", "envmod", {
+    "envmod": 0, "ematk": 0.01, "emdec": 0.3, "emslev": 0.7,
+    "emrel": 0.2, "emcurve": -4, "sus": 1
+}, order=2, tag="modulation", useControl=False)
+fx.doc("ADSR amplitude envelope modulator")
+fx.add_var("env")
+fx.add_var("sustainTime")
+fx.add("sustainTime = (sus - ematk - emdec - emrel).max(0)")
+fx.add("env = EnvGen.kr(Env.new([0, 1, emslev, emslev, 0], [ematk * sus, emdec * sus, sustainTime * sus, emrel * sus], emcurve))")
+fx.add("osc = osc * ((1 - envmod) + (envmod * env))")
+fx.save()
+
+# ADSR Envelope Filter
+fx = FxList.new("envfilt", "envfilt", {
+    "envfilt": 0, "efstart": 200, "efpeak": 8000, "efattk": 0.01,
+    "efdec": 0.3, "efsus": 0.5, "efrel": 0.2, "efcurve": -4,
+    "efres": 0.5, "eftype": 0, "sus": 1
+}, order=2, tag="filter", useControl=False)
+fx.doc("ADSR envelope filter (eftype: 0=LPF, 1=HPF, 2=BPF)")
+fx.add_var("env")
+fx.add_var("sustainTime")
+fx.add_var("susFreq")
+fx.add_var("filtered")
+fx.add_var("dry")
+fx.add("dry = osc")
+fx.add("susFreq = efstart + ((efpeak - efstart) * efsus)")
+fx.add("sustainTime = (sus - efattk - efdec - efrel).max(0)")
+fx.add("env = EnvGen.kr(Env.new([efstart, efpeak, susFreq, susFreq, efstart], [efattk * sus, efdec * sus, sustainTime * sus, efrel * sus], efcurve))")
+fx.add("filtered = Select.ar(eftype.clip(0, 2), [RLPF.ar(osc, env.clip(20, 20000), efres.clip(0.01, 1)), RHPF.ar(osc, env.clip(20, 20000), efres.clip(0.01, 1)), BPF.ar(osc, env.clip(20, 20000), efres.clip(0.01, 1))])")
+fx.add("osc = SelectX.ar(envfilt, [dry, filtered])")
+fx.save()
+
+# Multi-Shape LFO Amplitude Modulator
+fx = FxList.new("lfomod", "lfomod", {
+    "lfomod": 0, "lmrate": 4, "lmshape": 0, "lmphase": 0,
+    "lmsync": 0, "beat_dur": 1
+}, order=2, tag="modulation", useControl=False)
+fx.doc("Multi-shape LFO amplitude mod (lmshape: 0=sin, 1=tri, 2=saw, 3=pulse, 4=smooth noise, 5=S&H)")
+fx.add_var("rate")
+fx.add_var("lfoSig")
+fx.add("rate = Select.kr(lmsync > 0, [lmrate, lmrate / beat_dur])")
+fx.add("lfoSig = SelectX.kr(lmshape.clip(0, 5), [SinOsc.kr(rate, lmphase).range(0, 1), LFTri.kr(rate, lmphase).range(0, 1), LFSaw.kr(rate, lmphase).range(0, 1), LFPulse.kr(rate, lmphase).range(0, 1), LFNoise1.kr(rate).range(0, 1), LFNoise0.kr(rate).range(0, 1)])")
+fx.add("osc = osc * ((1 - lfomod) + (lfomod * lfoSig))")
+fx.save()
+
+# Multi-Shape LFO Filter
+fx = FxList.new("lfofilt", "lfofilt", {
+    "lfofilt": 0, "lfcenter": 2000, "lfdepth": 1500, "lfrate": 2,
+    "lfshape": 0, "lfres": 0.5, "lftype": 0, "lfsync": 0, "beat_dur": 1
+}, order=2, tag="filter", useControl=False)
+fx.doc("Multi-shape LFO filter (lftype: 0=LPF, 1=HPF, 2=BPF)")
+fx.add_var("rate")
+fx.add_var("lfoSig")
+fx.add_var("cutoff")
+fx.add_var("filtered")
+fx.add_var("dry")
+fx.add("dry = osc")
+fx.add("rate = Select.kr(lfsync > 0, [lfrate, lfrate / beat_dur])")
+fx.add("lfoSig = SelectX.kr(lfshape.clip(0, 5), [SinOsc.kr(rate), LFTri.kr(rate), LFSaw.kr(rate), LFPulse.kr(rate, width: 0.5, mul: 2, add: -1), LFNoise1.kr(rate), LFNoise0.kr(rate)])")
+fx.add("cutoff = (lfcenter + (lfoSig * lfdepth)).clip(20, 20000)")
+fx.add("filtered = Select.ar(lftype.clip(0, 2), [RLPF.ar(osc, cutoff, lfres.clip(0.01, 1)), RHPF.ar(osc, cutoff, lfres.clip(0.01, 1)), BPF.ar(osc, cutoff, lfres.clip(0.01, 1))])")
+fx.add("osc = SelectX.ar(lfofilt, [dry, filtered])")
+fx.save()
+
+# Band Vocoder (8 fixed bands)
+fx = FxList.new("vocoder", "vocoder", {
+    "vocoder": 0, "voccarrier": 0, "vocfreq": 100, "vocq": 0.05
+}, order=2, tag="modulation", useControl=False)
+fx.doc("8-band vocoder (voccarrier: 0=saw, 1=pulse, 2=noise)")
+fx.add_var("carrier")
+fx.add_var("vocout")
+fx.add_var("dry")
+fx.add_var("f1"); fx.add_var("f2"); fx.add_var("f3"); fx.add_var("f4")
+fx.add_var("f5"); fx.add_var("f6"); fx.add_var("f7"); fx.add_var("f8")
+fx.add("dry = osc")
+fx.add("carrier = Select.ar(voccarrier.clip(0, 2), [Saw.ar(vocfreq), Pulse.ar(vocfreq), WhiteNoise.ar])")
+fx.add("f1 = vocfreq")
+fx.add("f2 = vocfreq * 2")
+fx.add("f3 = vocfreq * 4")
+fx.add("f4 = vocfreq * 8")
+fx.add("f5 = vocfreq * 16")
+fx.add("f6 = vocfreq * 32")
+fx.add("f7 = vocfreq * 64")
+fx.add("f8 = vocfreq * 128")
+fx.add("vocout = (BPF.ar(carrier, f1, vocq) * Amplitude.kr(BPF.ar(osc, f1, vocq))) + (BPF.ar(carrier, f2, vocq) * Amplitude.kr(BPF.ar(osc, f2, vocq))) + (BPF.ar(carrier, f3, vocq) * Amplitude.kr(BPF.ar(osc, f3, vocq))) + (BPF.ar(carrier, f4, vocq) * Amplitude.kr(BPF.ar(osc, f4, vocq))) + (BPF.ar(carrier, f5, vocq) * Amplitude.kr(BPF.ar(osc, f5, vocq))) + (BPF.ar(carrier, f6, vocq) * Amplitude.kr(BPF.ar(osc, f6, vocq))) + (BPF.ar(carrier, f7, vocq) * Amplitude.kr(BPF.ar(osc, f7, vocq))) + (BPF.ar(carrier, f8, vocq) * Amplitude.kr(BPF.ar(osc, f8, vocq)))")
+fx.add("osc = SelectX.ar(vocoder, [dry, vocout])")
+fx.save()
+
+# Resonator Bank (6 resonators)
+fx = FxList.new("resonbank", "resonbank", {
+    "resonbank": 0, "rbfreq": 200, "rbdecay": 0.5, "rbspread": 1.0
+}, order=2, tag="modulation", useControl=False)
+fx.doc("6-resonator bank (rbspread=1 harmonic, other = inharmonic)")
+fx.add_var("resonated")
+fx.add_var("dry")
+fx.add("dry = osc")
+fx.add("resonated = Ringz.ar(osc, rbfreq * (1 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (2 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (3 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (4 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (5 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (6 ** rbspread), rbdecay)")
+fx.add("resonated = LeakDC.ar(resonated * 0.5)")
+fx.add("resonated = Limiter.ar(resonated, 0.95)")
+fx.add("osc = SelectX.ar(resonbank, [dry, dry + (resonated * 0.5)])")
 fx.save()
 
 Effect.server.setFx(FxList)

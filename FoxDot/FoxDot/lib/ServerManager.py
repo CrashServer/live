@@ -101,6 +101,11 @@ class BidirectionalOSCServer(OSCServer):
     def _handle_message(self, addr, tags, data, client_address):
         self._response_queue.put((addr, data))
 
+    def addHandler(self, address, callback):
+        """Register a persistent callback for an OSC address pattern.
+        The callback receives (data) where data is a list of values."""
+        self.addMsgHandler(address, lambda addr, tags, data, client: callback(data))
+
     def send(self, *args, **kwargs):
         try:
             self.client.send(*args, **kwargs)
@@ -720,6 +725,12 @@ class SCLangServerManager(ServerManager):
         """ Sends a message to SuperCollider to free a buffer """
         message = OSCMessage("/b_free")
         message.append([bufnum])
+        self.client.send(message)
+
+    def bufferAlloc(self, bufnum, numFrames, numChannels=2):
+        """ Allocate an empty buffer on the SC server. """
+        message = OSCMessage("/b_alloc")
+        message.append([bufnum, numFrames, numChannels])
         self.client.send(message)
 
     def sendMidi(self, msg, cmd=OSC_MIDI_ADDRESS):

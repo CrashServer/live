@@ -346,6 +346,9 @@ def unsolo():
     for p in Clock.playing:
         p.solo(0)
 
+# Audio-reactive convenience functions are imported from AudioReactive module
+# Usage: reactive(d1) / unreactive(d1) — available via lib/__init__.py
+
 def soloRnd(time=8, soloPlayer=None):
     ''' solo a random player at time modulo '''
     if not soloPlayer:

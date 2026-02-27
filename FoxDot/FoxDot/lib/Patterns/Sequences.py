@@ -271,6 +271,50 @@ def PEuclid2(n, k, lo, hi):
     return Pattern( EuclidsAlgorithm(n, k, lo, hi) )
 
 @loop_pattern_func
+def PEuclidR(n, k, rotation=1):
+    ''' Returns a rotated Euclidean rhythm. Same as PEuclid but with a
+        different starting phase.
+        e.g. `PEuclidR(3, 8, 2)` rotates the pattern by 2 steps '''
+    return Pattern(EuclidsAlgorithm(n, k)).rotate(rotation)
+
+@loop_pattern_func
+def PEuclidFill(*pairs):
+    ''' Combines multiple Euclidean rhythms by OR-ing them together.
+        Takes tuples of (n, k): `PEuclidFill((3,8), (5,8))`
+        All pairs must share the same step count k.
+        Returns 1 where any layer has a pulse, 0 otherwise. '''
+    if len(pairs) == 0:
+        return Pattern([0])
+    k = pairs[0][1]
+    layers = [EuclidsAlgorithm(n, kk) for n, kk in pairs]
+    result = []
+    for i in range(k):
+        result.append(max(layer[i % len(layer)] for layer in layers))
+    return Pattern(result)
+
+@loop_pattern_func
+def PEuclidAccent(n, k, accent_n=None, accent_k=None):
+    ''' Two-layer Euclidean rhythm: base hits + accent layer.
+        Returns 0 (rest), 0.5 (normal hit), or 1.0 (accented hit).
+        Apply to `amplify` for velocity variation.
+        e.g. `PEuclidAccent(5, 8, accent_n=3)` '''
+    if accent_n is None:
+        accent_n = max(1, n // 2)
+    if accent_k is None:
+        accent_k = k
+    base = EuclidsAlgorithm(n, k)
+    accent = EuclidsAlgorithm(accent_n, accent_k)
+    result = []
+    for i in range(k):
+        if base[i] == 0:
+            result.append(0)
+        elif accent[i % len(accent)] == 1:
+            result.append(1.0)
+        else:
+            result.append(0.5)
+    return Pattern(result)
+
+@loop_pattern_func
 def PBern(size=16, ratio=0.5):
     """ Returns a pattern of 1s and 0s based on the ratio value (between 0 and 1).
         This is called a Bernoulli sequence. """

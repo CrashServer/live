@@ -557,30 +557,6 @@ class GranularSynthDef(SampleSynthDef):
         return proxy
 
 
-class TimeStretchSynthDef(SampleSynthDef):
-    def __init__(self):
-        SampleSynthDef.__init__(self, "timeStretch")
-        self.pos = self.new_attr_instance("pos")
-        self.sample = self.new_attr_instance("sample")
-        self.stretchratio = self.new_attr_instance("stretchratio")
-        self.windowSize = self.new_attr_instance("windowSize")
-        self.overlaps = self.new_attr_instance("overlaps")
-        self.defaults['pos'] = 0
-        self.defaults['sample'] = 0
-        self.defaults['stretchratio'] = 1
-        self.defaults['windowSize'] = 0.2
-        self.defaults['overlaps'] = 8
-        self.base.append("osc = Warp1.ar(2, buf, Line.kr(pos, pos + ((1-pos)/stretchratio), sus), rate, windowSize, -1, overlaps, 0, 2);")
-        self.base.append("osc = osc * EnvGen.ar(Env([0,1,1,0],[0.01, sus-0.02, 0.01]));")
-        self.osc = self.osc * self.amp
-        self.add()
-    def __call__(self, filename, pos=0, sample=0, **kwargs):
-        kwargs["buf"] = Samples.loadBuffer(filename, sample)
-        proxy = SampleSynthDef.__call__(self, pos, **kwargs)
-        proxy.kwargs["filename"] = filename
-        return proxy
-
-
 class BreakcoreSynthDef(SampleSynthDef):
     def __init__(self):
         SampleSynthDef.__init__(self, "breakcore")
@@ -718,7 +694,6 @@ loop = LoopSynthDef()
 noloop = NoLoopSynthDef()
 stretch = StretchSynthDef()
 gsynth = GranularSynthDef()
-timestretch = TimeStretchSynthDef()
 breakcore = BreakcoreSynthDef()
 splitter = SplitterSynthDef()
 splaffer = SplafferSynthDef()

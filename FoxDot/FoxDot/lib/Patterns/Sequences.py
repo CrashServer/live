@@ -272,32 +272,35 @@ def PEuclid2(n, k, lo, hi):
 
 @loop_pattern_func
 def PEuclidR(n, k, rotation=1):
-    ''' Returns a rotated Euclidean rhythm. Same as PEuclid but with a
-        different starting phase.
-        e.g. `PEuclidR(3, 8, 2)` rotates the pattern by 2 steps '''
+    ''' Returns a rotated Euclidean rhythm.
+        `n`: number of pulses
+        `k`: number of steps
+        `rotation`: rotation offset (default 1)
+        e.g. `PEuclidR(3, 8)` or `PEuclidR(3, 8, 2)` rotates by 2 steps '''
     return Pattern(EuclidsAlgorithm(n, k)).rotate(rotation)
 
-@loop_pattern_func
 def PFDur(*pairs):
-    ''' Layered Euclidean fill with additive density.
-        Each pair is (n, k). Layers are summed and normalized so more
-        overlapping pulses = higher value, giving natural accent structure.
-
-            amplify=PFDur((3, 5), (5, 8), (12, 16))
-
-        Returns values between 0 and 1 where density of overlapping
-        pulses determines the amplitude. '''
+    ''' Layered Euclidean fill with weighted density.
+        Each pair is (n, k) or (n, k, weight). Weight is optional (default 1.0).
+        Returns 0 where no layer hits, up to 1.0 where weighted pulses stack.
+        e.g. `PFDur((3, 8), (5, 8))` equal weight layers
+             `PFDur((3, 8, 0.3), (5, 8, 1.0))` first layer soft, second full
+             `PFDur((3, 5), (5, 8), (12, 16))` three equal layers '''
     if len(pairs) == 0:
         return Pattern([0])
-    # Use the max k across all pairs as the step count
-    k = max(kk for _, kk in pairs)
-    n_layers = len(pairs)
-    layers = [EuclidsAlgorithm(n, kk) for n, kk in pairs]
+    # Parse pairs: (n, k) or (n, k, weight)
+    parsed = []
+    for p in pairs:
+        if len(p) == 3:
+            parsed.append((p[0], p[1], float(p[2])))
+        else:
+            parsed.append((p[0], p[1], 1.0))
+    k = max(kk for _, kk, _ in parsed)
+    layers = [(EuclidsAlgorithm(n, kk), w) for n, kk, w in parsed]
     result = []
     for i in range(k):
-        total = sum(layer[i % len(layer)] for layer in layers)
-        # Normalize: 0 layers hitting = 0, all layers = 1
-        result.append(total / float(n_layers))
+        total = sum(w * layer[i % len(layer)] for layer, w in layers)
+        result.append(min(total, 1.0))
     return Pattern(result)
 
 @loop_pattern_func

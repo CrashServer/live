@@ -13,16 +13,13 @@ import random
 
 
 class PLife(GeneratorPattern):
-    """Cellular automaton pattern with chaos control.
+    ''' Returns values shaped by cellular automaton rules.
+        `chaos`: 0.0 (linear/steady) to 1.0 (fully chaotic)
+        `steps`: grid size / repetition length (default 16)
+        e.g. `amplify=PLife(0.0)` completely linear
+             `amplify=PLife(1.0)` maximum chaos
+             `amplify=PLife(0.5, 4)` medium chaos, 4-step grid '''
 
-    Goes from completely linear (chaos=0) to chaotic (chaos=1).
-    Optional `steps` sets the grid/repetition length.
-
-        >>> amplify=PLife(0.0)        # linear, normal
-        >>> amplify=PLife(1.0)        # fully chaotic
-        >>> amplify=PLife(0.5, 4)     # medium chaos, 4-step grid
-
-    """
     def __init__(self, chaos=0.0, steps=16, **kwargs):
         GeneratorPattern.__init__(self, **kwargs)
         self.args = (chaos, steps)
@@ -34,12 +31,6 @@ class PLife(GeneratorPattern):
 
     @staticmethod
     def _chaos_to_rule(chaos):
-        """Map chaos 0-1 to cellular automaton rules.
-        0.0 = rule 0 (all dead, linear)
-        ~0.3 = rule 90 (moderate complexity)
-        ~0.5 = rule 110 (complex/edge of chaos)
-        1.0 = rule 30 (maximum chaos)
-        """
         rules = [
             (0.0,  0),    # all zeros — perfectly linear
             (0.15, 254),  # nearly all ones — steady
@@ -49,10 +40,8 @@ class PLife(GeneratorPattern):
             (0.85, 30),   # highly chaotic
             (1.0,  30),   # maximum chaos
         ]
-        # Find nearest rule
         for i in range(len(rules) - 1):
             if chaos <= rules[i + 1][0]:
-                # Linear interpolation bias toward closest
                 mid = (rules[i][0] + rules[i + 1][0]) / 2.0
                 if chaos <= mid:
                     return rules[i][1]
@@ -85,8 +74,7 @@ class PLife(GeneratorPattern):
         c = index % self.steps
         if r >= len(self._grid):
             self._compute_grid(r + 256)
-        # Scale output by chaos amount so low chaos = low amplitude variation
         raw = self._grid[r][c]
         if self.chaos <= 0.0:
-            return 1.0  # perfectly linear = always 1
+            return 1.0
         return raw * self.chaos + (1.0 - self.chaos)

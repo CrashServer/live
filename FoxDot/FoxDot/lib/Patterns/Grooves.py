@@ -14,13 +14,10 @@ from .Main import Pattern
 
 
 def PSwing(amount=0.1, steps=8):
-    """Swing delay pattern.
-
-    Returns alternating [0, amount] for use with `delay`.
-
-        >>> d1 >> pluck(delay=PSwing(0.4, 16))
-
-    """
+    ''' Returns alternating [0, amount] swing delay pattern.
+        `amount`: swing offset (default 0.1)
+        `steps`: pattern length (default 8)
+        e.g. `delay=PSwing(0.4, 16)` '''
     return Pattern([0, amount] * (steps // 2))
 
 
@@ -44,16 +41,12 @@ _accent_types = {
 }
 
 def Pacc(ptype=0, steps=16):
-    """Accent pattern by type number.
-
-    Returns a Pattern of amplify values (0-1).
-    Types: 0=backbeat, 1=four_floor, 2=offbeat, 3=ghost
-
-        >>> amp=Pacc(0)          # backbeat
-        >>> amp=Pacc(1)          # four on the floor
-        >>> amplify=Pacc(2, 4)   # offbeat, 4-step grid
-
-    """
+    ''' Returns accent amplify values (0-1) for a given type.
+        `ptype`: 0=backbeat, 1=four_floor, 2=offbeat, 3=ghost
+        `steps`: pattern length (default 16)
+        e.g. `amp=Pacc(0)` backbeat
+             `amp=Pacc(3)` ghost notes
+             `amplify=Pacc(2, 4)` offbeat, 4-step grid '''
     if ptype not in _accent_types:
         ptype = 0
     template = _accent_types[ptype]

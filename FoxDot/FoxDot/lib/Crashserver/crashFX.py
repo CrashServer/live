@@ -1086,4 +1086,28 @@ fx.add("drifted = DelayC.ar(osc, maxDelay, delayMod)")
 fx.add("osc = XFade2.ar(dry, drifted, drift * 2 - 1)")
 fx.save()
 
+# Time-stretch FX - PitchShift-based time manipulation (pitch preserved)
+fx = FxList.new("tstretch", "timeStretchFx", {"tstretch": 1, "tstretchsize": 0.2}, order=2, tag="granular")
+fx.doc("PitchShift-based time stretch on any signal, pitch preserved")
+fx.add_var("stretched")
+fx.add_var("xfade")
+fx.add("stretched = PitchShift.ar(osc, tstretchsize, 1, 0, 0.004)")
+fx.add("xfade = (1 - tstretch).abs.min(1)")
+fx.add("osc = XFade2.ar(osc, stretched, xfade * 2 - 1)")
+fx.save()
+
+# Resonator Bank (6 resonators)
+fx = FxList.new("resonbank", "resonbank", {
+    "resonbank": 0, "rbfreq": 200, "rbdecay": 0.5, "rbspread": 1.0
+}, order=2, tag="modulation", useControl=False)
+fx.doc("6-resonator bank (rbspread=1 harmonic, other = inharmonic)")
+fx.add_var("resonated")
+fx.add_var("dry")
+fx.add("dry = osc")
+fx.add("resonated = Ringz.ar(osc, rbfreq * (1 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (2 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (3 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (4 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (5 ** rbspread), rbdecay) + Ringz.ar(osc, rbfreq * (6 ** rbspread), rbdecay)")
+fx.add("resonated = LeakDC.ar(resonated * 0.5)")
+fx.add("resonated = Limiter.ar(resonated, 0.95)")
+fx.add("osc = SelectX.ar(resonbank, [dry, dry + (resonated * 0.5)])")
+fx.save()
+
 Effect.server.setFx(FxList)

@@ -271,6 +271,30 @@ def PEuclid2(n, k, lo, hi):
     return Pattern( EuclidsAlgorithm(n, k, lo, hi) )
 
 @loop_pattern_func
+def PEuclidR(n, k, rotation=1):
+    ''' Returns a rotated Euclidean rhythm.
+        `n`: number of pulses
+        `k`: number of steps
+        `rotation`: rotation offset (default 1)
+        e.g. `PEuclidR(3, 8)` or `PEuclidR(3, 8, 2)` rotates by 2 steps '''
+    return Pattern(EuclidsAlgorithm(n, k)).rotate(rotation)
+
+def PFDur(*pairs):
+    ''' Layered Euclidean fill density pattern.
+        Each pair is (n, k). Returns 1 where any layer hits, 0 otherwise.
+        e.g. `PFDur((3, 8), (5, 8))` two layers combined
+             `PFDur((3, 5), (5, 8), (12, 16))` three layers '''
+    if len(pairs) == 0:
+        return Pattern([0])
+    k = max(kk for _, kk in pairs)
+    layers = [EuclidsAlgorithm(n, kk) for n, kk in pairs]
+    result = []
+    for i in range(k):
+        hit = max(layer[i % len(layer)] for layer in layers)
+        result.append(hit)
+    return Pattern(result)
+
+@loop_pattern_func
 def PBern(size=16, ratio=0.5):
     """ Returns a pattern of 1s and 0s based on the ratio value (between 0 and 1).
         This is called a Bernoulli sequence. """

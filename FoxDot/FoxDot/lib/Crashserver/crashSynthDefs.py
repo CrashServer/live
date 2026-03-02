@@ -425,6 +425,9 @@ spark.add()
 star = FileSynthDef("star")
 star.add()
 
+svdk = FileSynthDef("svdk")
+svdk.add()
+
 swell = FileSynthDef("swell")
 swell.add()
 

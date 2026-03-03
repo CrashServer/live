@@ -1,5 +1,8 @@
 # Changelog CrashServer 
 
+## 03-mars-2026
+added Pacc, PSwing (on delays) and PFDur()
+
 ## 08-dec-2024
 - add masterPlayer() to add specific method to all active players, still need to add a reset method
 - when the server is activated add a function to generate 5 random lines based on previous jam/session (log directory)

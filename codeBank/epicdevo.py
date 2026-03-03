@@ -1,4 +1,4 @@
-   # epicdevo 66
+# epicdevo 66
 # epic
 Scale.default = "chromatic"
 Clock.bpm = 66

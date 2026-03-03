@@ -1,6 +1,7 @@
-Clock.bpm = 122;
 # biases_are_bells 124
 # trance
+
+Clock.bpm = 122;
 d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
                   
 d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.6, high=1, dftone=2, lpf=0, lpr=0.1).unison(4)   

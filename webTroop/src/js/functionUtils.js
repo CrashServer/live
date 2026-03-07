@@ -257,6 +257,53 @@ export const functionUtils = {
         }
     },
 
+    // Parse a #@section(beats) or #@section tag line
+    // Returns {name, beats, type} or null
+    // beats is null when no number is given (play forever)
+    parseSectionTag(lineText) {
+        const trimmed = lineText.trim();
+        // Try with beats: #@name(16)
+        const matchBeats = trimmed.match(/^#@(\w+)\((\d+)\)/);
+        if (matchBeats) {
+            const name = matchBeats[1];
+            const beats = parseInt(matchBeats[2]);
+            let type = 'section';
+            if (name === 'end') type = 'end';
+            else if (name === 'endfade') type = 'endfade';
+            return { name, beats, type };
+        }
+        // Try without beats: #@name
+        const matchNoBeat = trimmed.match(/^#@(\w+)$/);
+        if (matchNoBeat) {
+            return { name: matchNoBeat[1], beats: null, type: 'section' };
+        }
+        return null;
+    },
+
+    // Collect code from the line AFTER a #@ tag until the next #@ or EOF
+    getSectionCode(cm, sectionLine) {
+        let endLine = sectionLine + 1;
+        while (endLine < cm.lineCount()) {
+            if (cm.getLine(endLine).trim().startsWith('#@')) break;
+            endLine++;
+        }
+        if (sectionLine + 1 >= endLine) return '';
+        return cm.getRange(
+            {line: sectionLine + 1, ch: 0},
+            {line: endLine - 1, ch: cm.getLine(endLine - 1).length}
+        );
+    },
+
+    // Return all #@ sections in document order
+    findAllSections(cm) {
+        const sections = [];
+        for (let i = 0; i < cm.lineCount(); i++) {
+            const tag = this.parseSectionTag(cm.getLine(i));
+            if (tag) sections.push({ line: i, ...tag });
+        }
+        return sections;
+    },
+
     // Get the content and the position of a block
     getBlock(cm, line) {
         let startLine = line;

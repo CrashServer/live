@@ -1,6 +1,15 @@
 # replay-function 92
 # documentation
 
+
+ # ===  SECTION SEQUENCING — Lecture automatique de compositions ===                                                                   
+ # Placer le curseur sur une ligne # @ et Ctrl+Enter pour lancer                                                                          
+ # La section s'évalue, puis avance automatiquement après N beats                                                                      
+ # Re-évaluer n'importe quel # @ annule la chaîne et repart de là                                                                         
+ # Ctrl+; arrête tout (players + séquence), on peut modifier, réévaluer etc...
+ # avec dieze + @end() ca coupe, on peut mettre un chiffre pour le delay d'arrêt
+                                               
+
 #@intro(32)
 Clock.bpm = 92
 m2 >> alva(dur=PDur([5, 3, 7, 5, 9, 5, 6], 12), sus=0.76, fbdelay=var([0, 0, 0.5, 0.25, 0, 0]), gate=0.1, gaterate=1, gatewave=1, leg=PRand(8)[:13], glitch=0.0, oct=(3, 4), tube=1,fshift=var([0, 1, 2, 4, 0], PRand([1,2,4,8])), shimmer=0, shimsize=0, shimpitch=var([1, 1.5, 2], PRand(32)), shimmix=0, tape=0, fbfeed=0.9, fbtime=0.5, tapedrive=4, drift=0, envdist=0, lpf=var([4000, 2000, 1000],[13, 2, 1]), lpr=0.1, mu=4)

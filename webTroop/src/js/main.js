@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Connexion aux serveurs
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
   let foxdotWs = null;
+  let activeSequence = null; // {id, currentIndex} for #@ section sequencing
   // let foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
 
   // Récupération des éléments du DOM
@@ -232,6 +233,20 @@ document.addEventListener("DOMContentLoaded", async () => {
           });
         }
       }
+      // Handle section sequencing callback from FoxDot
+      else if (message.type === "seq_next") {
+        if (activeSequence && message.seqId == activeSequence.id) {
+          activeSequence.currentIndex++;
+          // Re-scan sections fresh from editor (content may have changed)
+          const freshSections = functionUtils.findAllSections(editor);
+          if (activeSequence.currentIndex < freshSections.length) {
+            const nextSection = freshSections[activeSequence.currentIndex];
+            evaluateSection(editor, nextSection.line);
+          } else {
+            activeSequence = null; // no more sections, keep playing
+          }
+        }
+      }
     } catch (error) {}
   };
 
@@ -239,6 +254,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   chrono.addEventListener("click", () => functionUtils.resetChrono(wsServer));
 
   function evaluateCode(cm, multi) {
+    // Detect #@ section tag → enter section sequencing mode
+    const cursorLine = cm.getCursor().line;
+    const cursorLineText = cm.getLine(cursorLine).trim();
+    if (cursorLineText.startsWith('#@')) {
+      evaluateSection(cm, cursorLine);
+      return;
+    }
+
     const videoCodeResult = functionUtils.isVideoCode(cm);
     if (videoCodeResult) {
       var [videoCode, startLine] = videoCodeResult;
@@ -295,6 +318,89 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // Section sequencing: evaluate a #@ section and schedule next
+  function evaluateSection(cm, sectionLine) {
+    const tag = functionUtils.parseSectionTag(cm.getLine(sectionLine));
+    if (!tag) return;
+
+    // Cancel any running sequence
+    if (activeSequence) {
+      wsServer.send(JSON.stringify({
+        type: 'evaluate_code',
+        code: '_seq_cancel()\n'
+      }));
+    }
+
+    const seqId = Date.now();
+    const allSections = functionUtils.findAllSections(cm);
+    const currentIdx = allSections.findIndex(s => s.line === sectionLine);
+
+    // end/endfade are pure stop commands — don't evaluate code below them
+    // No beats: end=immediate, endfade=default 8 beats
+    if (tag.type === 'end' || tag.type === 'endfade') {
+      let cmd;
+      if (tag.type === 'end') {
+        cmd = tag.beats !== null ? `_seq_end(${tag.beats})\n` : `Clock.clear()\n`;
+      } else {
+        cmd = `_seq_endfade(${tag.beats !== null ? tag.beats : 8})\n`;
+      }
+      wsServer.send(JSON.stringify({
+        type: 'evaluate_code',
+        code: cmd
+      }));
+      activeSequence = null;
+      awareness.setLocalStateField('flash', {
+        lineStart: sectionLine, lineEnd: sectionLine, timestamp: Date.now()
+      });
+      return;
+    }
+
+    // Collect and process the code block for this section
+    let sectionCode = functionUtils.getSectionCode(cm, sectionLine);
+    sectionCode = sectionCode.split('\n').map(line => {
+      line = functionUtils.convertQuestionMarkToPRand(line);
+      line = functionUtils.convertExclamationToVar(line);
+      return functionUtils.ifPlayerStop(line);
+    }).join('\n');
+
+    const userState = awareness.getLocalState();
+    const userName = userState.user.name;
+    const userColor = userState.user.color;
+
+    // Send section code to FoxDot
+    wsServer.send(JSON.stringify({
+      type: 'evaluate_code',
+      code: sectionCode,
+      userName, userColor
+    }));
+
+    // Send to CrashOS visuals
+    foxdotWs.send(JSON.stringify({
+      type: `${userName}Code`,
+      code: sectionCode
+    }));
+
+    // Flash effect on section block
+    const endLine = (currentIdx < allSections.length - 1)
+      ? allSections[currentIdx + 1].line - 1
+      : cm.lineCount() - 1;
+    awareness.setLocalStateField('flash', {
+      lineStart: sectionLine, lineEnd: endLine, timestamp: Date.now()
+    });
+
+    // Store sequence state
+    activeSequence = { id: seqId, currentIndex: currentIdx };
+
+    // Schedule next if there is a next section AND beats is set
+    // No beats (e.g. #@bassline) → play forever, no auto-advance
+    if (tag.beats !== null && currentIdx < allSections.length - 1) {
+      wsServer.send(JSON.stringify({
+        type: 'evaluate_code',
+        code: `_seq_schedule(${tag.beats}, ${seqId})\n`
+      }));
+    }
+  }
+
   // Écouter les changements dans le Y.Array des messages de chat
   // ychat.observe(event => {
   //   event.changes.added.forEach(item => {
@@ -322,7 +428,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Gestion de CTRL+ENTER
   editor.setOption("extraKeys", {
-    "Ctrl-;": () => functionUtils.stopClock(wsServer),
+    "Ctrl-;": () => {
+      functionUtils.stopClock(wsServer);
+      if (activeSequence) {
+        wsServer.send(JSON.stringify({
+          type: 'evaluate_code',
+          code: '_seq_cancel()\n'
+        }));
+        activeSequence = null;
+      }
+    },
     "Ctrl-Space": "autocomplete",
     "Ctrl-S": (cm) => {
       functionUtils.saveEditorContent(cm, wsServer);

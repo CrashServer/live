@@ -149,6 +149,39 @@ def lost(attack=None):
     storageAttack.lost(attack)
 
 
+##########################
+### SECTION SEQUENCING ###
+##########################
+
+_seq_id = 0
+
+def _seq_schedule(beats, seq_id):
+    """Schedule next section trigger after N beats"""
+    global _seq_id
+    _seq_id = seq_id
+    Clock.future(beats, _seq_trigger, args=(seq_id,))
+
+def _seq_trigger(seq_id):
+    """Callback: print marker for server.js to route back to client"""
+    if seq_id == _seq_id:
+        print("__SEQ_NEXT__:" + str(seq_id))
+
+def _seq_cancel():
+    """Cancel pending sequence by invalidating the ID"""
+    global _seq_id
+    _seq_id = 0
+
+def _seq_end(beats):
+    """Stop all players after N beats"""
+    Clock.future(beats, Clock.clear)
+
+def _seq_endfade(beats):
+    """Fade all players to 0 over N beats, then stop"""
+    for player in Clock.playing:
+        player.amplify = linvar([player.amplify, 0], beats)
+    Clock.future(beats, Clock.clear)
+
+
 def print_synth(synth=""):
     ''' Show the name and the args of a synth '''
     path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", "")

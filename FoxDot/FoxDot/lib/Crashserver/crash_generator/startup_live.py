@@ -163,6 +163,12 @@ def _parse_fab(args, dn=16, da=0, db=1):
         return args[0], args[1], args[2]
     raise ValueError("f-shortcut: expected 0, 1, or 3 arguments")
 
+def _safe_slice(pat, n, has_args):
+    """Slice pattern by n only if n is an int. Arrays/lists → infinite pattern."""
+    if has_args and isinstance(n, int):
+        return pat[:n]
+    return pat
+
 def fi(*args):
     """fade in: linvar a→b, one-shot. fi() fi(8) fi(8, 200, 2000)"""
     n, a, b = _parse_fab(args)
@@ -191,32 +197,27 @@ def fs(*args):
 def fr(*args):
     """f random: PWhite in range, optional length. fr() fr(8) fr(8, 4, 24)"""
     n, a, b = _parse_fab(args)
-    pat = PWhite(a, b)
-    return pat[:n] if n != 16 or len(args) > 0 else pat
+    return _safe_slice(PWhite(a, b), n, len(args) > 0)
 
 def fw(*args):
     """f walk: PWalk bounded random walk. fw() fw(8) fw(8, 1, 7)"""
     n, a, b = _parse_fab(args, dn=16, da=1, db=7)
-    pat = PWalk(max=b, step=a)
-    return pat[:n] if len(args) > 0 else pat
+    return _safe_slice(PWalk(max=b, step=a), n, len(args) > 0)
 
 def fg(*args):
     """f gaussian: PGauss distribution. fg() fg(8) fg(8, 0, 2)"""
     n, a, b = _parse_fab(args)
-    pat = PGauss(a, b)
-    return pat[:n] if len(args) > 0 else pat
+    return _safe_slice(PGauss(a, b), n, len(args) > 0)
 
 def ft(*args):
     """f triangular: PTrir distribution. ft() ft(8) ft(8, 0, 8)"""
     n, a, b = _parse_fab(args, dn=16, da=0, db=8)
-    pat = PTrir(a, b)
-    return pat[:n] if len(args) > 0 else pat
+    return _safe_slice(PTrir(a, b), n, len(args) > 0)
 
 def fc(*args):
     """f coin: PCoin flip between a and b. fc() fc(8) fc(8, 0, 4)"""
     n, a, b = _parse_fab(args)
-    pat = PCoin(a, b)
-    return pat[:n] if len(args) > 0 else pat
+    return _safe_slice(PCoin(a, b), n, len(args) > 0)
 
 def fq(*args):
     """f freq/sine wave: PSine mapped to range. fq() fq(16) fq(16, 200, 8000)"""

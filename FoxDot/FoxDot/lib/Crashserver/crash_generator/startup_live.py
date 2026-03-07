@@ -150,6 +150,90 @@ def lost(attack=None):
 
 
 ##########################
+### F-FAMILY SHORTCUTS ###
+##########################
+
+def _parse_fab(args, dn=16, da=0, db=1):
+    """Parse f-family args: () → defaults, (n) → steps, (n,a,b) → full"""
+    if len(args) == 0:
+        return dn, da, db
+    elif len(args) == 1:
+        return args[0], da, db
+    elif len(args) == 3:
+        return args[0], args[1], args[2]
+    raise ValueError("f-shortcut: expected 0, 1, or 3 arguments")
+
+def fi(*args):
+    """fade in: linvar a→b, one-shot. fi() fi(8) fi(8, 200, 2000)"""
+    n, a, b = _parse_fab(args)
+    return linvar([a, b], [n, 0])
+
+def fo(*args):
+    """fade out: linvar b→a, one-shot. fo() fo(8) fo(8, 200, 2000)"""
+    n, a, b = _parse_fab(args)
+    return linvar([b, a], [n, 0])
+
+def fb(*args):
+    """fade bounce: linvar a↔b, looping. fb() fb(8) fb(8, 200, 2000)"""
+    n, a, b = _parse_fab(args)
+    return linvar([a, b], [n, n])
+
+def fe(*args):
+    """fade exp: expvar a→b, one-shot. fe() fe(8) fe(8, 200, 2000)"""
+    n, a, b = _parse_fab(args)
+    return expvar([a, b], [n, 0])
+
+def fs(*args):
+    """fade sine: sinvar a↔b, looping. fs() fs(8) fs(8, -1, 1)"""
+    n, a, b = _parse_fab(args)
+    return sinvar([a, b], [n, n])
+
+def fr(*args):
+    """f random: PWhite in range, optional length. fr() fr(8) fr(8, 4, 24)"""
+    n, a, b = _parse_fab(args)
+    pat = PWhite(a, b)
+    return pat[:n] if n != 16 or len(args) > 0 else pat
+
+def fw(*args):
+    """f walk: PWalk bounded random walk. fw() fw(8) fw(8, 1, 7)"""
+    n, a, b = _parse_fab(args, dn=16, da=1, db=7)
+    pat = PWalk(max=b, step=a)
+    return pat[:n] if len(args) > 0 else pat
+
+def fg(*args):
+    """f gaussian: PGauss distribution. fg() fg(8) fg(8, 0, 2)"""
+    n, a, b = _parse_fab(args)
+    pat = PGauss(a, b)
+    return pat[:n] if len(args) > 0 else pat
+
+def ft(*args):
+    """f triangular: PTrir distribution. ft() ft(8) ft(8, 0, 8)"""
+    n, a, b = _parse_fab(args, dn=16, da=0, db=8)
+    pat = PTrir(a, b)
+    return pat[:n] if len(args) > 0 else pat
+
+def fc(*args):
+    """f coin: PCoin flip between a and b. fc() fc(8) fc(8, 0, 4)"""
+    n, a, b = _parse_fab(args)
+    pat = PCoin(a, b)
+    return pat[:n] if len(args) > 0 else pat
+
+def fq(*args):
+    """f freq/sine wave: PSine mapped to range. fq() fq(16) fq(16, 200, 8000)"""
+    n, a, b = _parse_fab(args)
+    if a == 0 and b == 1:
+        return PSine(n)
+    return PSine(n) * (b - a) + a
+
+def fz(*args):
+    """f zag/sawtooth: PSaw mapped to range. fz() fz(16) fz(16, 200, 8000)"""
+    n, a, b = _parse_fab(args)
+    if a == 0 and b == 1:
+        return PSaw(n)
+    return PSaw(n) * (b - a) + a
+
+
+##########################
 ### SECTION SEQUENCING ###
 ##########################
 

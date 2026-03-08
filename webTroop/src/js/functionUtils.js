@@ -270,12 +270,20 @@ export const functionUtils = {
             let type = 'section';
             if (name === 'end') type = 'end';
             else if (name === 'endfade') type = 'endfade';
+            else if (name === 'loop') type = 'loop';
+            else if (name === 'clear') type = 'clear';
             return { name, beats, type };
         }
         // Try without beats: #@name
         const matchNoBeat = trimmed.match(/^#@(\w+)$/);
         if (matchNoBeat) {
-            return { name: matchNoBeat[1], beats: null, type: 'section' };
+            const name = matchNoBeat[1];
+            let type = 'section';
+            if (name === 'end') type = 'end';
+            else if (name === 'endfade') type = 'endfade';
+            else if (name === 'loop') type = 'loop';
+            else if (name === 'clear') type = 'clear';
+            return { name, beats: null, type };
         }
         return null;
     },

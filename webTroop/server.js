@@ -127,6 +127,12 @@ let serverState = false; // État actuel du serveur FoxDot
 let lastButtonAction = 0;
 const BUTTON_COOLDOWN = 2000; // 2 secondes entre les actions du bouton
 
+// Recording state
+let isRecording = false;
+let recordingBpm = 120;
+let recordingStartTime = 0;
+let recordingEvents = [];
+
 // Fonction pour envoyer l'état CPU à l'Arduino
 function sendCpuToArduino(arduino, cpuPercent) {
   const now = Date.now();
@@ -263,6 +269,13 @@ wss.on('connection', (ws, req) => {
         const attackRequest = (code.trim().startsWith('lost') || code.trim().startsWith("attack") || code.trim().startsWith('chaos')) ? userName : "";
         broadcastLog(`${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor, attackRequest);
         foxdot.stdin.write(data.code + '\n' + '\n');
+        // Capture code during recording
+        if (isRecording && data.code) {
+          recordingEvents.push({
+            timeMs: Date.now() - recordingStartTime,
+            code: data.code.trim()
+          });
+        }
       } else if (data.type === 'cpu_data' && arduino && arduino.isOpen) {
         // Recevoir les données CPU du crashPanel et les envoyer à l'Arduino
         const {cpu} = data;
@@ -306,6 +319,41 @@ foxdot.stdout.on('data', (data) => {
       return; // don't show marker in logs
     }
 
+    // Detect compose start marker from FoxDot
+    const composeMatch = logMessage.match(/__COMPOSE_START__:(\w+)/);
+    if (composeMatch) {
+      const sectionName = composeMatch[1];
+      wss.clients.forEach(client => {
+        if (client.readyState === 1) {
+          client.send(JSON.stringify({
+            type: 'compose_start',
+            section: sectionName
+          }));
+        }
+      });
+      return;
+    }
+
+    // Detect recording start marker
+    const recStartMatch = logMessage.match(/__REC_START__:(\d+)/);
+    if (recStartMatch) {
+      isRecording = true;
+      recordingBpm = parseInt(recStartMatch[1]);
+      recordingStartTime = Date.now();
+      recordingEvents = [];
+      console.log(`Recording started at ${recordingBpm} BPM`);
+      return;
+    }
+
+    // Detect recording stop marker
+    const recStopMatch = logMessage.match(/__REC_STOP__:(.*)/);
+    if (recStopMatch !== null && isRecording) {
+      isRecording = false;
+      const rawName = recStopMatch[1].trim();
+      processRecording(rawName, recordingBpm, recordingEvents);
+      return;
+    }
+
     broadcastLog(logMessage);
   } catch (e) {
     console.error('Erreur lors de l\'envoi des logs:', e);
@@ -343,6 +391,94 @@ function broadcastLog(message, color=null, attackRequest="") {
       client.send(JSON.stringify(messageObj));
     }
   });
+}
+
+// Recording: quantize captured events into #@ script
+async function processRecording(rawName, bpm, events) {
+  if (events.length === 0) {
+    broadcastLog('Recording empty, nothing saved\n', 'red');
+    return;
+  }
+
+  const now = new Date();
+  const timeStr = now.toTimeString().slice(0, 8).replace(/:/g, '');
+  const fileName = rawName || `recorded_${timeStr}`;
+
+  const msPerBeat = 60000 / bpm;
+  const beatEvents = events.map(e => ({
+    beat: e.timeMs / msPerBeat,
+    code: e.code
+  }));
+
+  // Group events into sections by gap > 4 beats
+  const SECTION_GAP = 4;
+  const sectionNames = ['intro', 'build', 'peak', 'break', 'drop', 'outro'];
+  const sections = [];
+  let currentSection = { codes: [beatEvents[0].code], startBeat: 0 };
+  let sectionCounter = 0;
+
+  for (let i = 1; i < beatEvents.length; i++) {
+    const gap = beatEvents[i].beat - beatEvents[i - 1].beat;
+    if (gap > SECTION_GAP) {
+      const rawDur = beatEvents[i].beat - currentSection.startBeat;
+      currentSection.dur = snapDuration(rawDur);
+      currentSection.name = sectionCounter < sectionNames.length
+        ? sectionNames[sectionCounter] : `part${sectionCounter + 1}`;
+      sections.push(currentSection);
+      sectionCounter++;
+      currentSection = { codes: [], startBeat: beatEvents[i].beat };
+    }
+    currentSection.codes.push(beatEvents[i].code);
+  }
+  // Last section
+  currentSection.dur = 16;
+  currentSection.name = sectionCounter < sectionNames.length
+    ? sectionNames[sectionCounter] : `part${sectionCounter + 1}`;
+  sections.push(currentSection);
+
+  // Build script
+  let script = `# ${fileName}\n# recorded\n\n`;
+  for (const sec of sections) {
+    script += `#@${sec.name}(${sec.dur})\n`;
+    script += sec.codes.join('\n') + '\n\n';
+  }
+  script += '#@endfade(16)\n';
+
+  // Save file
+  const filePath = path.join(PROJECT_ROOT, 'codeBank', `${fileName}.py`);
+  try {
+    await fs.writeFile(filePath, script, 'utf-8');
+    console.log(`Recording saved: ${filePath}`);
+    foxdot.stdin.write('storageAttack.compileAttack()\n\n');
+    broadcastLog(`Recording saved: ${fileName}.py\n`, 'green');
+
+    // Send script to editor
+    wss.clients.forEach(client => {
+      if (client.readyState === 1) {
+        client.send(JSON.stringify({
+          type: 'rec_script',
+          content: script
+        }));
+      }
+    });
+  } catch (err) {
+    console.error('Error saving recording:', err.message);
+    broadcastLog(`Error saving recording: ${err.message}\n`, 'red');
+  }
+}
+
+function snapDuration(rawBeats) {
+  const snaps = [4, 8, 16, 32, 64];
+  let closest = snaps[0];
+  let minDiff = Math.abs(rawBeats - snaps[0]);
+  for (const s of snaps) {
+    const diff = Math.abs(rawBeats - s);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closest = s;
+    }
+  }
+  return closest;
 }
 
 console.log('Serveur démarré sur le port 1234');

@@ -247,6 +247,18 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         }
       }
+      // Handle compose() auto-play: paste arrived via foxdotWs, now start section
+      else if (message.type === "compose_start") {
+        setTimeout(() => {
+          const sections = functionUtils.findAllSections(editor);
+          const target = sections.find(s => s.name === message.section);
+          if (target) evaluateSection(editor, target.line);
+        }, 300);
+      }
+      // Handle recording output: insert generated script in editor
+      else if (message.type === "rec_script") {
+        functionUtils.insertAttackContent(editor, message.content);
+      }
     } catch (error) {}
   };
 

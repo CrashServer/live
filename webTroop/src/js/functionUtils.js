@@ -262,28 +262,46 @@ export const functionUtils = {
     // beats is null when no number is given (play forever)
     parseSectionTag(lineText) {
         const trimmed = lineText.trim();
-        // Try with beats: #@name(16)
-        const matchBeats = trimmed.match(/^#@(\w+)\((\d+)\)/);
-        if (matchBeats) {
-            const name = matchBeats[1];
-            const beats = parseInt(matchBeats[2]);
-            let type = 'section';
-            if (name === 'end') type = 'end';
-            else if (name === 'endfade') type = 'endfade';
-            else if (name === 'loop') type = 'loop';
-            else if (name === 'clear') type = 'clear';
-            return { name, beats, type };
+        const specialTypes = { end: 'end', endfade: 'endfade', loop: 'loop', clear: 'clear' };
+
+        // Try with args: #@name(...)
+        const matchArgs = trimmed.match(/^#@(\w+)\(([^)]*)\)/);
+        if (matchArgs) {
+            const name = matchArgs[1];
+            const rawArgs = matchArgs[2];
+            const type = specialTypes[name] || 'section';
+            let beats = null;
+            let targets = [];
+
+            const parts = rawArgs.split(',').map(p => p.trim()).filter(p => p);
+            if (parts.length > 0) {
+                // First part: beats if numeric (int, float, or fraction)
+                const first = parts[0];
+                const numVal = first.includes('/')
+                    ? first.split('/').reduce((a, b) => parseFloat(a) / parseFloat(b))
+                    : parseFloat(first);
+                if (!isNaN(numVal)) {
+                    beats = numVal;
+                    parts.shift();
+                }
+                // Remaining: targets with optional :weight
+                for (const p of parts) {
+                    if (p.includes(':')) {
+                        const [t, w] = p.split(':');
+                        targets.push({ name: t.trim(), weight: parseInt(w.trim()) || 1 });
+                    } else {
+                        targets.push({ name: p.trim(), weight: 1 });
+                    }
+                }
+            }
+            return { name, beats, type, targets };
         }
-        // Try without beats: #@name
+        // Try without args: #@name
         const matchNoBeat = trimmed.match(/^#@(\w+)$/);
         if (matchNoBeat) {
             const name = matchNoBeat[1];
-            let type = 'section';
-            if (name === 'end') type = 'end';
-            else if (name === 'endfade') type = 'endfade';
-            else if (name === 'loop') type = 'loop';
-            else if (name === 'clear') type = 'clear';
-            return { name, beats: null, type };
+            const type = specialTypes[name] || 'section';
+            return { name, beats: null, type, targets: [] };
         }
         return null;
     },

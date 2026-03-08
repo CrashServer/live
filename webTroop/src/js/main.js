@@ -368,27 +368,39 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Loop: restart from first section after optional beat delay
+    // Loop: jump to target section after optional beat delay
     if (tag.type === 'loop') {
-      const firstSection = allSections[0];
-      if (firstSection) {
-        const loopSeqId = Date.now();
-        // Evaluate any code in the loop section
-        let loopCode = functionUtils.getSectionCode(cm, sectionLine);
-        if (loopCode.trim()) {
-          wsServer.send(JSON.stringify({
-            type: 'evaluate_code',
-            code: loopCode
-          }));
-        }
-        // Schedule jump back to first section
-        activeSequence = { id: loopSeqId, currentIndex: -1 };
-        const delay = tag.beats || 1;
+      const loopSeqId = Date.now();
+      // Evaluate any code in the loop section
+      let loopCode = functionUtils.getSectionCode(cm, sectionLine);
+      if (loopCode.trim()) {
         wsServer.send(JSON.stringify({
           type: 'evaluate_code',
-          code: `_seq_schedule(${delay}, ${loopSeqId})\n`
+          code: loopCode
         }));
       }
+      // Pick target: weighted random from targets, or first section
+      let targetIdx = 0;
+      if (tag.targets && tag.targets.length > 0) {
+        const names = tag.targets.map(t => t.name);
+        const weights = tag.targets.map(t => t.weight);
+        const totalWeight = weights.reduce((a, b) => a + b, 0);
+        let r = Math.random() * totalWeight;
+        let picked = names[0];
+        for (let i = 0; i < weights.length; i++) {
+          r -= weights[i];
+          if (r <= 0) { picked = names[i]; break; }
+        }
+        targetIdx = allSections.findIndex(s => s.name === picked);
+        if (targetIdx === -1) targetIdx = 0;
+      }
+      // Set currentIndex so seq_next increments to targetIdx
+      activeSequence = { id: loopSeqId, currentIndex: targetIdx - 1 };
+      const delay = tag.beats || 0.125;
+      wsServer.send(JSON.stringify({
+        type: 'evaluate_code',
+        code: `_seq_schedule(${delay}, ${loopSeqId})\n`
+      }));
       awareness.setLocalStateField('flash', {
         lineStart: sectionLine, lineEnd: sectionLine, timestamp: Date.now()
       });

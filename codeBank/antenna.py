@@ -39,3 +39,48 @@ e4.oct = var([6, 5, 6], [4, 4, 8])
 e4.amp = linvar([0.4, 0.6], 32)
 Root.default = "F#"
 
+# --- phase 2: signal bleeds through — texture + harmonic widening ---
+e0.engine = var([1, 4, 11], [8, 4, 4])
+e0.dur = var([(1/2, 1/4), (1/2, 1/4, 1)], [12, 4])
+e1.drive = linvar([0.02, 0.08], 64)
+e1.oct = var([5, 4], [12, 4])
+g2.delay = var([0, 0.25], [8, 8])
+g2.mverb = linvar([0.1, 0.5], 32)
+e3.drive = linvar([1, 0.3], 32)
+e3.lpf = linvar([800, 3000], 48)
+
+# --- phase 3: drift — root shifts, new voice materializes ---
+Root.default = "E"
+e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))
+e0.mverb = linvar([0.8, 0.3], 16)
+e1.dur = var([1/4, (1/4, 1/2)], [8, 8])
+g2.degree = melody() + var([7, 3, [4, 0], 5], [4, 4, 4, 4])
+e3.delay = var([0, 0.5, 0.25], [8, 4, 4])
+
+# --- phase 4: density — loop enters, e0 stretches, bass darkens ---
+l1 >> loop("cinambi8", dur=8, sample=var([3, 5], [8, 8]), amp=var([0, 0.35], [16, 16]), hpf=400, mverb=0.4)
+e0.dur = var([(1/2, 1/4), 2, 4], [8, 4, 4])
+e0.engine = var([11, 5, 3], [4, 4, 8])
+e1.drive = linvar([0.08, 0.15], 48)
+e1.lpf = linvar([4000, 1200], 32)
+g2.vol = linvar([0.5, 0.3], 32)
+e3.oct = var([4, 3], [12, 4])
+e4.oct = var([6, 5, 6], [4, 4, 8])
+e4.amp = linvar([0.4, 0.6], 32)
+Root.default = "F#"
+
+# --- phase 5: recede — voices filter down, reverb swells ---
+e0.dur = 4
+e0.mverb = linvar([0.3, 0.9], 32)
+e0.amp = linvar([0.5, 0.1], 48)
+e1.lpf = linvar([1200, 400], 48)
+e1.drive = linvar([0.15, 0], 48)
+e1.mverb = linvar([0.8, 0.95], 32)
+g2.amp = linvar([0.5, 0], 48)
+e4.lpf = linvar([2400, 300], 32)
+e4.amp = linvar([0.6, 0], 32)
+l1.amp = linvar([0.35, 0], 32)
+e3.lpf = linvar([3000, 400], 64)
+e3.mverb = linvar([0.8, 0.95], 48)
+e3.amp = linvar([1, 0.3], 64)
+

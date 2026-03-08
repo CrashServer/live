@@ -656,6 +656,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             awareness.getLocalState().user.name
           ) {
             functionUtils.insertAttackContent(editor, message.content);
+            // Reset to prevent duplicate inserts from multiple WS deliveries
+            awareness.setLocalStateField("attackRequest", { attackRequestName: "" });
           }
         } else if (message.type === "autocomplete") {
           const { loops, fxList, synthList, attackList } =

@@ -347,20 +347,48 @@ document.addEventListener("DOMContentLoaded", async () => {
     const allSections = functionUtils.findAllSections(cm);
     const currentIdx = allSections.findIndex(s => s.line === sectionLine);
 
-    // end/endfade are pure stop commands — don't evaluate code below them
-    // No beats: end=immediate, endfade=default 8 beats
-    if (tag.type === 'end' || tag.type === 'endfade') {
+    // Special terminator sections
+    if (tag.type === 'end' || tag.type === 'endfade' || tag.type === 'clear') {
       let cmd;
       if (tag.type === 'end') {
         cmd = tag.beats !== null ? `_seq_end(${tag.beats})\n` : `Clock.clear()\n`;
-      } else {
+      } else if (tag.type === 'endfade') {
         cmd = `_seq_endfade(${tag.beats !== null ? tag.beats : 8})\n`;
+      } else {
+        cmd = `Clock.clear()\n`;
       }
       wsServer.send(JSON.stringify({
         type: 'evaluate_code',
         code: cmd
       }));
       activeSequence = null;
+      awareness.setLocalStateField('flash', {
+        lineStart: sectionLine, lineEnd: sectionLine, timestamp: Date.now()
+      });
+      return;
+    }
+
+    // Loop: restart from first section after optional beat delay
+    if (tag.type === 'loop') {
+      const firstSection = allSections[0];
+      if (firstSection) {
+        const loopSeqId = Date.now();
+        // Evaluate any code in the loop section
+        let loopCode = functionUtils.getSectionCode(cm, sectionLine);
+        if (loopCode.trim()) {
+          wsServer.send(JSON.stringify({
+            type: 'evaluate_code',
+            code: loopCode
+          }));
+        }
+        // Schedule jump back to first section
+        activeSequence = { id: loopSeqId, currentIndex: -1 };
+        const delay = tag.beats || 1;
+        wsServer.send(JSON.stringify({
+          type: 'evaluate_code',
+          code: `_seq_schedule(${delay}, ${loopSeqId})\n`
+        }));
+      }
       awareness.setLocalStateField('flash', {
         lineStart: sectionLine, lineEnd: sectionLine, timestamp: Date.now()
       });

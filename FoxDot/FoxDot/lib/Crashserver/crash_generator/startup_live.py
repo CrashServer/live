@@ -1229,7 +1229,9 @@ class WebsocketServer():
         attackList = [ k for k in storageAttack.attackDict.keys()]
         attackJsonList = []
         for attack in attackList:
-            attackJsonList.append({"text": f"\"{attack}\"", "displayText": attack, "category": storageAttack.attackDict[attack]['category']})
+            secs = storageAttack.attackDict[attack].get('sections', {})
+            secList = [{"name": s, "beats": secs[s].get('beats')} for s in secs]
+            attackJsonList.append({"text": f"\"{attack}\"", "displayText": attack, "category": storageAttack.attackDict[attack]['category'], "sections": secList})
         return attackJsonList
 
     async def sendFxDict(self):

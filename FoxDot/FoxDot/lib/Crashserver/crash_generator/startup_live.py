@@ -420,10 +420,18 @@ def _fire_advance(name, section, dur_override, play_id):
 
     # Handle special terminator sections
     if section == "loop":
-        # Loop back to first section
+        # Execute code if any, then loop back to first section
+        if code.strip():
+            exec(code, globals())
+            _fire_players.update(_extract_players(code))
+        beats = dur_override if dur_override is not None else (sec_data.get("beats") or 0)
         first_sec = list(secs.keys())[0]
-        Clock.future(0, _fire_advance,
-                    args=(name, first_sec, dur_override, play_id))
+        if beats > 0:
+            Clock.future(beats, _fire_advance,
+                        args=(name, first_sec, dur_override, play_id))
+        else:
+            Clock.future(0, _fire_advance,
+                        args=(name, first_sec, dur_override, play_id))
         return
     if section == "clear":
         # Stop all players accumulated during this fire sequence

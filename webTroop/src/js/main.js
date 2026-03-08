@@ -335,27 +335,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tag = functionUtils.parseSectionTag(cm.getLine(sectionLine));
     if (!tag) return;
 
-    // Cancel any running sequence
-    if (activeSequence) {
-      wsServer.send(JSON.stringify({
-        type: 'evaluate_code',
-        code: '_seq_cancel()\n'
-      }));
-    }
-
     const seqId = Date.now();
     const allSections = functionUtils.findAllSections(cm);
     const currentIdx = allSections.findIndex(s => s.line === sectionLine);
 
     // Special terminator sections
     if (tag.type === 'end' || tag.type === 'endfade' || tag.type === 'clear') {
-      let cmd;
+      let cmd = '_seq_cancel()\n';
       if (tag.type === 'end') {
-        cmd = tag.beats !== null ? `_seq_end(${tag.beats})\n` : `Clock.clear()\n`;
+        cmd += tag.beats !== null ? `_seq_end(${tag.beats})\n` : `Clock.clear()\n`;
       } else if (tag.type === 'endfade') {
-        cmd = `_seq_endfade(${tag.beats !== null ? tag.beats : 8})\n`;
+        cmd += `_seq_endfade(${tag.beats !== null ? tag.beats : 8})\n`;
       } else {
-        cmd = `Clock.clear()\n`;
+        cmd += `Clock.clear()\n`;
       }
       wsServer.send(JSON.stringify({
         type: 'evaluate_code',
@@ -370,15 +362,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Loop: jump to target section after optional beat delay
     if (tag.type === 'loop') {
-      const loopSeqId = Date.now();
-      // Evaluate any code in the loop section
       let loopCode = functionUtils.getSectionCode(cm, sectionLine);
-      if (loopCode.trim()) {
-        wsServer.send(JSON.stringify({
-          type: 'evaluate_code',
-          code: loopCode
-        }));
-      }
       // Pick target: weighted random from targets, or first section
       let targetIdx = 0;
       if (tag.targets && tag.targets.length > 0) {
@@ -394,13 +378,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         targetIdx = allSections.findIndex(s => s.name === picked);
         if (targetIdx === -1) targetIdx = 0;
       }
-      // Set currentIndex so seq_next increments to targetIdx
-      activeSequence = { id: loopSeqId, currentIndex: targetIdx - 1 };
+      // Build atomic command: cancel + loop code + schedule
+      const loopSeqId = Date.now();
       const delay = tag.beats || 0.125;
+      let cmd = '_seq_cancel()\n';
+      if (loopCode.trim()) cmd += loopCode + '\n';
+      cmd += `_seq_schedule(${delay}, ${loopSeqId})\n`;
       wsServer.send(JSON.stringify({
         type: 'evaluate_code',
-        code: `_seq_schedule(${delay}, ${loopSeqId})\n`
+        code: cmd
       }));
+      activeSequence = { id: loopSeqId, currentIndex: targetIdx - 1 };
       awareness.setLocalStateField('flash', {
         lineStart: sectionLine, lineEnd: sectionLine, timestamp: Date.now()
       });
@@ -419,10 +407,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const userName = userState.user.name;
     const userColor = userState.user.color;
 
-    // Send section code to FoxDot
+    // Build atomic command: cancel + code + schedule
+    let cmd = '_seq_cancel()\n' + sectionCode;
+    if (tag.beats !== null && currentIdx < allSections.length - 1) {
+      cmd += '\n_seq_schedule(' + tag.beats + ', ' + seqId + ')';
+    }
+
+    // Send as single message to avoid race conditions
     wsServer.send(JSON.stringify({
       type: 'evaluate_code',
-      code: sectionCode,
+      code: cmd,
       userName, userColor
     }));
 
@@ -442,15 +436,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Store sequence state
     activeSequence = { id: seqId, currentIndex: currentIdx };
-
-    // Schedule next if there is a next section AND beats is set
-    // No beats (e.g. #@bassline) → play forever, no auto-advance
-    if (tag.beats !== null && currentIdx < allSections.length - 1) {
-      wsServer.send(JSON.stringify({
-        type: 'evaluate_code',
-        code: `_seq_schedule(${tag.beats}, ${seqId})\n`
-      }));
-    }
   }
 
   // Écouter les changements dans le Y.Array des messages de chat

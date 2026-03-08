@@ -28,9 +28,13 @@ p1 >> pluck([0,2,4,7], dur=0.25, amp=0.8, lpf=4000)
 
 - First line: `# name` (used as attack name in menus)
 - Second line: `# category` (optional, for autocomplete grouping)
-- `#@name(beats)` — section with beat duration
+- `#@name(beats)` — section with beat duration (supports floats: `0.5`, fractions: `1/4`)
 - `#@name` — section without specified duration
-- `#@loop` — special: jumps back to first section, creating an infinite loop until cancelled
+- `#@loop` — jumps back to first section
+- `#@loop(4)` — waits 4 beats, then jumps back to first section
+- `#@loop(4, verse)` — waits 4 beats, jumps to `verse` section
+- `#@loop(4, s1, s2)` — waits 4 beats, random pick between `s1` and `s2`
+- `#@loop(4, s1:3, s2:1)` — waits 4 beats, weighted random (75% s1, 25% s2)
 - `#@clear` — special: stops all players created during the fire sequence
 - `#@end(N)` — special: calls `Clock.clear()` after N beats (stops everything)
 - `#@endfade(N)` — special: fades all players to 0 then clears (stops everything)

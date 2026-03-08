@@ -75,9 +75,9 @@ class StorageAttack:
                     self.attackDict[attackName] = attackContent
 
     def _parseSections(self, code):
-        """Parse #@name(beats) tags from code into OrderedDict."""
+        """Parse #@name(beats) or #@loop(beats, target:weight, ...) tags."""
         sections = OrderedDict()
-        section_re = re.compile(r'^#@(\w+)(?:\((\d+)\))?$')
+        section_re = re.compile(r'^#@(\w+)(?:\(([^)]*)\))?$')
         current = None
         buf = []
         for line in code.split('\n'):
@@ -86,10 +86,28 @@ class StorageAttack:
                 if current is not None:
                     sections[current]['code'] = '\n'.join(buf).strip()
                 name = m.group(1)
-                beats = int(m.group(2)) if m.group(2) else None
+                raw_args = m.group(2)
+                beats = None
+                targets = []
+                if raw_args:
+                    parts = [p.strip() for p in raw_args.split(',')]
+                    # First part: beats if numeric
+                    first = parts[0]
+                    try:
+                        beats = float(eval(first)) if '/' in first else float(first)
+                        parts = parts[1:]
+                    except (ValueError, SyntaxError):
+                        pass
+                    # Remaining parts: targets with optional weight
+                    for p in parts:
+                        if ':' in p:
+                            t, w = p.split(':', 1)
+                            targets.append((t.strip(), int(w.strip())))
+                        elif p.strip():
+                            targets.append((p.strip(), 1))
                 current = name
                 buf = []
-                sections[name] = {'beats': beats, 'code': ''}
+                sections[name] = {'beats': beats, 'code': '', 'targets': targets}
             elif current is not None:
                 buf.append(line)
         if current is not None:
@@ -422,16 +440,22 @@ def _fire_advance(name, section, dur_override, play_id):
 
     # Handle special terminator sections
     if section == "loop":
-        # Execute code if any, then loop back to first section
+        # Execute code if any, then loop back
         if code.strip():
             exec(code, globals())
             _fire_players.update(_extract_players(code))
         beats = dur_override if dur_override is not None else (sec_data.get("beats") or 0)
-        first_sec = list(secs.keys())[0]
         delay = max(beats, 0.125)
-        print(f"[fire] looping back to '{first_sec}' in {delay}b")
+        # Pick target: weighted random from targets, or first section
+        targets = sec_data.get("targets", [])
+        if targets:
+            names, weights = zip(*targets)
+            target_sec = choices(names, weights)[0]
+        else:
+            target_sec = list(secs.keys())[0]
+        print(f"[fire] loop -> '{target_sec}' in {delay}b")
         Clock.future(delay, _fire_advance,
-                    args=(name, first_sec, dur_override, play_id))
+                    args=(name, target_sec, dur_override, play_id))
         return
     if section == "clear":
         # Stop all players accumulated during this fire sequence
@@ -491,7 +515,14 @@ def sections(name):
     parts = []
     for sec_name, sec_data in secs.items():
         beats = sec_data.get("beats")
-        parts.append(f"{sec_name}({beats})" if beats else sec_name)
+        targets = sec_data.get("targets", [])
+        label = sec_name
+        if beats is not None:
+            label += f"({beats:g})"
+        if targets:
+            tstr = ",".join(f"{t[0]}:{t[1]}" if t[1] != 1 else t[0] for t in targets)
+            label += f" [{tstr}]"
+        parts.append(label)
     print(" -> ".join(parts))
 
 def reload():

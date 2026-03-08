@@ -419,6 +419,12 @@ def _fire_advance(name, section, dur_override, play_id):
     code = sec_data["code"]
 
     # Handle special terminator sections
+    if section == "loop":
+        # Loop back to first section
+        first_sec = list(secs.keys())[0]
+        Clock.future(0, _fire_advance,
+                    args=(name, first_sec, dur_override, play_id))
+        return
     if section == "clear":
         # Stop all players accumulated during this fire sequence
         _play_stop(set(_fire_players), play_id)

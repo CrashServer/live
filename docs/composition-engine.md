@@ -30,6 +30,7 @@ p1 >> pluck([0,2,4,7], dur=0.25, amp=0.8, lpf=4000)
 - Second line: `# category` (optional, for autocomplete grouping)
 - `#@name(beats)` — section with beat duration
 - `#@name` — section without specified duration
+- `#@loop` — special: jumps back to first section, creating an infinite loop until cancelled
 - `#@clear` — special: stops all players created during the fire sequence
 - `#@end(N)` — special: calls `Clock.clear()` after N beats (stops everything)
 - `#@endfade(N)` — special: fades all players to 0 then clears (stops everything)

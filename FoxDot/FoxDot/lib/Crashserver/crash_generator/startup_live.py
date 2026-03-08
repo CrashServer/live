@@ -317,6 +317,7 @@ def _seq_endfade(beats):
 ##############################
 
 _play_id = 0
+_fire_players = set()
 _setlist_data = []
 _setlist_index = 0
 
@@ -351,9 +352,10 @@ def fire(name, section=None, dur=None, seq=False):
     fire("edge93", "intro", seq=True)         # auto-advance using file beats
     fire("edge93", "intro", seq=True, dur=64) # override timing
     """
-    global _play_id
+    global _play_id, _fire_players
     _play_id += 1
     current_id = _play_id
+    _fire_players = set()
 
     if name not in storageAttack.attackDict:
         print(f"'{name}' not found")
@@ -366,6 +368,7 @@ def fire(name, section=None, dur=None, seq=False):
         exec(code, globals())
         if dur is not None:
             players = _extract_players(code)
+            _fire_players.update(players)
             Clock.future(dur, _play_stop, args=(players, current_id))
         return
 
@@ -381,10 +384,11 @@ def fire(name, section=None, dur=None, seq=False):
     code = sec_data["code"]
     exec(code, globals())
 
+    players = _extract_players(code)
+    _fire_players.update(players)
     effective_dur = dur if dur is not None else sec_data.get("beats")
 
-    if dur is not None:
-        players = _extract_players(code)
+    if dur is not None and not seq:
         Clock.future(dur, _play_stop, args=(players, current_id))
 
     if seq and effective_dur is not None:
@@ -394,10 +398,13 @@ def fire(name, section=None, dur=None, seq=False):
             next_sec = sec_names[idx + 1]
             Clock.future(effective_dur, _fire_advance,
                         args=(name, next_sec, dur, current_id))
+        else:
+            # Last section in seq: stop all accumulated players
+            Clock.future(effective_dur, _play_stop, args=(set(_fire_players), current_id))
 
 def _fire_advance(name, section, dur_override, play_id):
     """Auto-advance to next section (internal, does NOT increment _play_id)."""
-    global _play_id
+    global _play_id, _fire_players
     if play_id != _play_id:
         return
 
@@ -411,7 +418,11 @@ def _fire_advance(name, section, dur_override, play_id):
     sec_data = secs[section]
     code = sec_data["code"]
 
-    # Handle end/endfade sections
+    # Handle special terminator sections
+    if section == "clear":
+        # Stop all players accumulated during this fire sequence
+        _play_stop(set(_fire_players), play_id)
+        return
     if section == "end":
         beats = sec_data.get("beats")
         if beats:
@@ -427,6 +438,8 @@ def _fire_advance(name, section, dur_override, play_id):
         return
 
     exec(code, globals())
+    players = _extract_players(code)
+    _fire_players.update(players)
 
     effective_dur = dur_override if dur_override is not None else sec_data.get("beats")
     sec_names = list(secs.keys())
@@ -437,8 +450,8 @@ def _fire_advance(name, section, dur_override, play_id):
         Clock.future(effective_dur, _fire_advance,
                     args=(name, next_sec, dur_override, play_id))
     elif effective_dur is not None:
-        players = _extract_players(code)
-        Clock.future(effective_dur, _play_stop, args=(players, play_id))
+        # Last section: stop all accumulated players
+        Clock.future(effective_dur, _play_stop, args=(set(_fire_players), play_id))
 
 def compose(name, section=None):
     """Paste full attack in editor, optionally auto-play from a section.

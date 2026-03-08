@@ -30,8 +30,9 @@ p1 >> pluck([0,2,4,7], dur=0.25, amp=0.8, lpf=4000)
 - Second line: `# category` (optional, for autocomplete grouping)
 - `#@name(beats)` — section with beat duration
 - `#@name` — section without specified duration
-- `#@end(N)` — special: calls `Clock.clear()` after N beats
-- `#@endfade(N)` — special: fades all players to 0 then clears
+- `#@clear` — special: stops all players created during the fire sequence
+- `#@end(N)` — special: calls `Clock.clear()` after N beats (stops everything)
+- `#@endfade(N)` — special: fades all players to 0 then clears (stops everything)
 
 Files without `#@` tags work normally — `fire("name")` executes the whole file.
 
@@ -54,8 +55,8 @@ fire("edge93", "intro", seq=True, dur=64)   # auto-advance, override each sectio
 **Behavior:**
 - No section: executes entire file code
 - With section: executes only that section's code
-- `dur=N`: extracts player names from code (regex `p1 >>`, `b1.attr`), schedules stop after N beats
-- `seq=True`: after current section finishes, auto-advances to next section using file's beat values
+- `dur=N`: extracts player names from code, schedules stop after N beats
+- `seq=True`: auto-advances through sections. All players created across all sections are tracked and stopped when the sequence ends (or when `#@clear` is reached)
 - `dur` + `seq`: dur overrides per-section beat timing for all sections
 - Each `fire()` call cancels any previous fire/setlist via `_play_id` counter
 

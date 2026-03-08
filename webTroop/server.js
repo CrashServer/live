@@ -267,7 +267,10 @@ wss.on('connection', (ws, req) => {
         const {code, userName, userColor} = data;
         
         const attackRequest = (code.trim().startsWith('lost') || code.trim().startsWith("attack") || code.trim().startsWith('chaos') || code.trim().startsWith('compose')) ? userName : "";
-        broadcastLog(`${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor, attackRequest);
+        // Don't log internal sequencing commands
+        if (!code.trim().startsWith('_seq_')) {
+          broadcastLog(`${(userName!=undefined) ? userName : ""}: ${code}\n`, userColor, attackRequest);
+        }
         foxdot.stdin.write(data.code + '\n' + '\n');
         // Capture code during recording
         if (isRecording && data.code) {

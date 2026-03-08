@@ -466,7 +466,7 @@ export const foxdotAutocomplete = {
         const afterLastClosingParenthesis = /.*\)\s*\./;
         const loopPattern = /(loop|gsynth|splaffer|splitter|breakcore)\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
-        const lostPattern =/(lost|attack)\([^)]*$/
+        const lostPattern =/(lost|attack|fire|compose|sections)\([^)]*$/
         const scenePattern = /!/;
 
         // Random player name suggestion
@@ -524,37 +524,79 @@ export const foxdotAutocomplete = {
               to: CodeMirror.Pos(cursor.line, loopEnd),
             }
         }
-        // lost and attack suggestion
+        // lost, attack, fire, compose, sections suggestion
         else if (lostPattern.test(beforeCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
-            const match = line.match(/(lost|attack)\(([^)]*)\)$/);
-            
+            const match = line.match(/(lost|attack|fire|compose|sections)\(([^)]*)\)?$/);
+
             if (!match) return null;
 
+            const funcName = match[1];
             const functionStart = match.index + match[0].indexOf('(') + 1;
-            const content = match[2]; // Le contenu entre les parenthèses
-            
-            // Calculer le début et la fin en fonction du contenu
+            const content = match[2]; // Content between parentheses
+
+            // Detect if we're on the second argument (section name)
+            // e.g. fire("edge93", "intro") — cursor after the comma
+            const secondArgFuncs = ['fire', 'compose', 'attack'];
+            const commaMatch = content.match(/^["']([^"']+)["']\s*,\s*(.*)$/);
+            const isSecondArg = secondArgFuncs.includes(funcName) && commaMatch;
+
+            if (isSecondArg) {
+                // Second argument: show sections for the matched attack
+                const attackName = commaMatch[1];
+                const secContent = commaMatch[2]; // what's after the comma
+                const secPrefix = secContent.replace(/["']/g, '').trim().toLowerCase();
+
+                // Find attack in attackList
+                const attackItem = this.attackList.find(a => a.displayText === attackName);
+                const sections = (attackItem && attackItem.sections) || [];
+
+                if (sections.length === 0) {
+                    return null; // No sections available
+                }
+
+                // Build section hints
+                let sectionHints = sections.map(s => ({
+                    text: `"${s.name}"`,
+                    displayText: s.name + (s.beats ? ` (${s.beats}b)` : ''),
+                }));
+
+                if (secPrefix.length > 0) {
+                    sectionHints = sectionHints.filter(s => s.displayText.toLowerCase().includes(secPrefix));
+                }
+
+                // Calculate replacement range for second arg
+                const commaPos = content.indexOf(',');
+                const secStart = functionStart + commaPos + 1;
+                // Find where to end replacement
+                const closingParen = line.indexOf(')', secStart);
+                const secEnd = closingParen !== -1 ? closingParen : cursorPosition;
+
+                return {
+                    list: sectionHints,
+                    from: CodeMirror.Pos(cursor.line, secStart),
+                    to: CodeMirror.Pos(cursor.line, secEnd),
+                };
+            }
+
+            // First argument: show attack names (existing behavior)
             let start, end;
-            
+
             if (content.trim() === '') {
-                // Cas lost() vide
                 start = functionStart;
                 end = functionStart;
             } else if (content.includes('"') || content.includes("'")) {
-                // Cas lost("...") avec guillemets existants - on remplace tout
                 start = functionStart;
                 const closingParen = line.indexOf(')', functionStart);
                 end = closingParen !== -1 ? closingParen : cursorPosition;
             } else {
-                // Cas sans guillemets
                 start = functionStart;
                 const closingParen = line.indexOf(')', functionStart);
                 end = closingParen !== -1 ? closingParen : cursorPosition;
             }
 
             let filteredLost = [];
-            
+
             // If there's a prefix, filter attacks
             if (prefix.length > 0) {
                 filteredLost = this.attackList.filter(lost => lost.displayText.toLowerCase().includes(prefix.toLowerCase()));
@@ -563,12 +605,12 @@ export const foxdotAutocomplete = {
                 // No prefix: show categories only
                 // Add "All" category first
                 filteredLost.push(this.createCategorySeparator("All", "All", "attack"));
-                
+
                 // Add other categories sorted alphabetically
                 const sortedCategories = Object.keys(this.attackCategories)
                     .filter(key => key && key.trim() !== "" && key !== "Uncategorized")
                     .sort((a, b) => a.localeCompare(b));
-                
+
                 sortedCategories.forEach(categoryKey => {
                     filteredLost.push(this.createCategorySeparator(categoryKey, categoryKey, "attack"));
                 });

@@ -413,10 +413,12 @@ def _fire_advance(name, section, dur_override, play_id):
         return
     secs = entry.get("sections", {})
     if section not in secs:
+        print(f"[fire] section '{section}' not found in sections: {list(secs.keys())}")
         return
 
     sec_data = secs[section]
     code = sec_data["code"]
+    print(f"[fire] >> {section}" + (f" ({sec_data.get('beats')}b)" if sec_data.get('beats') else ""))
 
     # Handle special terminator sections
     if section == "loop":
@@ -426,12 +428,10 @@ def _fire_advance(name, section, dur_override, play_id):
             _fire_players.update(_extract_players(code))
         beats = dur_override if dur_override is not None else (sec_data.get("beats") or 0)
         first_sec = list(secs.keys())[0]
-        if beats > 0:
-            Clock.future(beats, _fire_advance,
-                        args=(name, first_sec, dur_override, play_id))
-        else:
-            Clock.future(0, _fire_advance,
-                        args=(name, first_sec, dur_override, play_id))
+        delay = max(beats, 0.125)
+        print(f"[fire] looping back to '{first_sec}' in {delay}b")
+        Clock.future(delay, _fire_advance,
+                    args=(name, first_sec, dur_override, play_id))
         return
     if section == "clear":
         # Stop all players accumulated during this fire sequence

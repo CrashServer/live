@@ -38,7 +38,7 @@ o9 >> viola([6,3,P*[4,2,5,1]], dur=[P*[1,2,4,8], P*[2,4],P*[8,12,16]], beat_dur=
 lpf=linvar([800,4000],[48]),hpf=PRand(200,500), amp=linvar([0.4,0.8],[32])).unison(3) + (-7, PStep(5,7,0), PStep(3,10,0))
 
 #@breakcoreintro(16)
-r3 >> loop("breakcore160_16", dur=var([8,4,2],[48,8,8]), sample=var(PRand(66), [48,16,8]), sbrk=P*[0.25,0.5,1,1.5,2], sbrkdur=P*[0.25,0.5,1,2,4],sbrkmix=linvar([0.3,0.8],[32]), hpf=linvar([200,800],[32]), high=linvar([1,3],[32]),vol=0.8, drcomp=.7)
+r3 >> loop("breakcore160_16", dur=var([8,4,6],[48,8,8]), sample=var(PRand(66), [48,16,8]), sbrk=P*[0.25,0.5,1,1.5,2], sbrkdur=P*[0.25,0.5,1,2,4],sbrkmix=linvar([0.3,0.8],[32]), hpf=linvar([200,800],[32]), high=linvar([1,3],[32]),vol=0.8, drcomp=.7)
 
 #@eight(16)
 d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)

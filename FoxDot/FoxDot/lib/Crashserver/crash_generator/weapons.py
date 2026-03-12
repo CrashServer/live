@@ -14,7 +14,7 @@ except Exception as e:
 	print(e)
 
 ########
-### Generate players 
+### Generate players
 ######
 
 def generate_random_synth_player():
@@ -61,9 +61,9 @@ def generate_random_loop_player():
 		return {"player":player, "synth": synth, "degree": degree, "sample": sample, "dur": dur}
 	except Exception as e:
 		print("random loop player : ", e)
-		
+
 def generate_drum_style_player():
-	''' return a drum style pattern, according to the DrumsPattern2 dict, 
+	''' return a drum style pattern, according to the DrumsPattern2 dict,
 		you can change the char with khsor '''
 	try:
 		drumpat = ""
@@ -84,7 +84,7 @@ def generate_drum_style_player():
 def generate_player_name():
 	try:
 		player = "os"
-		while player in ["os", "in", "fx", "if", "at", "or", "is", "in", "as", "id", "it", "re", "on"]:
+		while player in ["as", "at", "fx", "id", "if", "in", "is", "it", "on", "or", "os", "re"]:
 			player = ''.join(choice(string.ascii_lowercase) for x in range(2))
 		return player
 	except Exception as e:
@@ -119,7 +119,7 @@ def gen_player_attributes(playerType=None):
 		if attr in ["amp", "amplify"]:
 			value = GENERATE_AMPLIFY()
 		elif attr in ["dur"]:
-			if playerType != "loop": 
+			if playerType != "loop":
 				value = f'PRy(16,{choice([2,3,4])}, {GENERATE_WHITE(0.01,0.1)})'
 			else:
 				if randint(0,100) > 90:
@@ -162,7 +162,7 @@ def gen_filter():
 		filType = choices(['lpf', 'hpf'],[probLowPass,probHighPass])[0]
 		if filType == 'hpf':
 			filfreq = choices([GENERATE_FREQLIST(filterFreqMin,int(filterFreqMax/3),5), GENERATE_INTEGER(filterFreqMin,int(filterFreqMax/3)), "0"],probFilterFreq)[0]
-		else:	 
+		else:
 			filfreq = choices([GENERATE_FREQLIST(filterFreqMin,filterFreqMax,5), GENERATE_INTEGER(filterFreqMin,filterFreqMax), "0"],probFilterFreq)[0]
 		return (filType,filfreq)
 	except Exception as e:

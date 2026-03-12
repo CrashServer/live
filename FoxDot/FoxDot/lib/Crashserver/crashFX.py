@@ -1167,4 +1167,15 @@ fx.add("wet = LeakDC.ar(wet * 0.25)")
 fx.add("osc = XFade2.ar(dry, wet, cheapverb * 2 - 1)")
 fx.save()
 
+
+## Keep this fx at the end to force the order and use at the end of fx chain. Use other filter for filtering before.
+fx = FxList.new('hpf','highPassFilter', {'hpf': 0, 'hpr': 1}, order=2, tag="filter")
+fx.doc("Highpass filter")
+fx.add('osc = RHPF.ar(osc, hpf, hpr)')
+fx.save()
+
+fx = FxList.new('lpf','lowPassFilter', {'lpf': 0, 'lpr': 1}, order=2, tag="filter")
+fx.add('osc = RLPF.ar(osc, lpf, lpr)')
+fx.save()
+
 Effect.server.setFx(FxList)

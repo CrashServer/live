@@ -11,7 +11,7 @@
     ::
         # Example. Reverb effect "title" is `room` and attribute is `mix`, which
         # defaults to 0.25. The following adds a reverb effect
-        
+
         p1 >> pads(room=0.5)
 
         # This still adds the effect, but a mix of 0 doesn't actually do anything
@@ -23,7 +23,7 @@
         p1 >> pads(room=0, mix=0.5)
 
     Other effects are outlined below:
-    
+
     *High Pass Filter* - Title keyword: `hpf`, Attribute keyword(s): `hpr`
     Only frequences **above** the value of `hpf` are kept in the final signal. Use `hpr` to set the resonance (usually a value between 0 and 1)
 
@@ -51,7 +51,7 @@
     *Panning* - Title keyword: `pan`, Attribute keyword(s):
     Panning, where -1 is far left, 1 is far right (defaults to 0)
 
-    *Vibrato* - Title keyword: `vib`, Attribute keyword(s): 
+    *Vibrato* - Title keyword: `vib`, Attribute keyword(s):
     Vibrato (defaults to 0)
 
     Undocumented: Spin, Shape, Formant, BandPassFilter, Echo
@@ -85,11 +85,11 @@ class Effect:
 
         self.input     = "osc = In.{}(bus, {});\n".format(self.suffix, self.channels)
         self.output    = "ReplaceOut.{}".format(self.suffix)
-        
+
     @classmethod
     def set_server(cls, server):
         cls.server = server
-    
+
     def __repr__(self):
         # return "<Fx '{}' -- args: {}>".format(self.synthdef, ", ".join(self.args))
         other_args = ['{}'.format(arg) for arg in self.args if arg != self.name]
@@ -113,7 +113,7 @@ class Effect:
 
     def doc(self, string):
         """ Set a docstring for the effects"""
-        return 
+        return
 
     def list_effects(self):
         s = ""
@@ -147,7 +147,7 @@ class Effect:
 
     def save(self):
         ''' writes to file and sends to server '''
-        
+
         # 1. See if the file exists
 
         if os.path.isfile(self.filename):
@@ -169,7 +169,7 @@ class Effect:
             try:
 
                 with open(self.filename, 'w') as f:
-                
+
                     f.write(this_string)
 
             except IOError:
@@ -189,7 +189,7 @@ class Effect:
 class In(Effect):
     def __init__(self):
         Effect.__init__(self, 'startSound', 'startSound')
-        self.save()      
+        self.save()
     def __str__(self):
         s  = "SynthDef.new(\\startSound,\n"
         s += "{ arg bus, rate=1, sus; var osc;\n"
@@ -260,7 +260,7 @@ class EffectManager(dict):
                     self.all_kw.append(arg + "lfoadd")
 
             # Store the default value
-            
+
             self.defaults[arg] = args[arg]
 
             if arg not in ["sus"] and useControl and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo") and not arg.endswith("lfomul") and not arg.endswith("lfoadd"):
@@ -271,7 +271,7 @@ class EffectManager(dict):
                 self.defaults[arg + "lfoadd"] = 1
 
         return self[foxdot_arg_name]
-    
+
     # def newNoControl(self, foxdot_arg_name, synthdef, args, order=2):
     #     self[foxdot_arg_name] = Effect(foxdot_arg_name, synthdef, args, order==0, False)
 
@@ -294,7 +294,7 @@ class EffectManager(dict):
     #             self.all_kw.append(arg)
 
     #         # Store the default value
-            
+
     #         self.defaults[arg] = args[arg]
 
     #     return self[foxdot_arg_name]
@@ -381,15 +381,6 @@ fx.save()
 
 # Signal effects
 
-fx = FxList.new('hpf','highPassFilter', {'hpf': 0, 'hpr': 1}, order=2, tag="filter")
-fx.doc("Highpass filter")
-fx.add('osc = RHPF.ar(osc, hpf, hpr)')
-fx.save()
-
-fx = FxList.new('lpf','lowPassFilter', {'lpf': 0, 'lpr': 1}, order=2, tag="filter")
-fx.add('osc = RLPF.ar(osc, lpf, lpr)')
-fx.save()
-
 fx = FxList.new('swell','filterSwell', {'swell': 0, 'sus': 1, 'hpr': 1}, order=2, tag="filter")
 fx.add_var("env")
 fx.add("env = EnvGen.kr(Env([0,1,0], times:[(sus*0.25), (sus*0.25)], curve:\\sin))")
@@ -402,12 +393,12 @@ fx.add("bpf = LFNoise1.kr(bpnoise).exprange(bpf * 0.5, bpf * 2)")
 fx.add("bpr = LFNoise1.kr(bpnoise).exprange(bpr * 0.5, bpr * 2)")
 fx.add("osc = BPF.ar(osc, bpf, bpr)")
 fx.save()
-       
+
 if SC3_PLUGINS:
 
     fx = FxList.new('crush', 'bitcrush', {'bits': 8, 'sus': 1, 'amp': 1, 'crush': 0}, order=1, tag="distortion")
     fx.add("osc = Decimator.ar(osc, rate: 44100/crush, bits: bits)")
-    fx.add("osc = osc * Line.ar(amp * 0.85, 0.0001, sus * 2)") 
+    fx.add("osc = osc * Line.ar(amp * 0.85, 0.0001, sus * 2)")
     fx.save()
 
     fx = FxList.new('dist', 'distortion', {'dist': 0, 'tmp': 0}, order=1, tag="distortion")
@@ -420,7 +411,7 @@ if SC3_PLUGINS:
 
 # Envelope -- just include in the SynthDef and use asdr?
 
-# Post envelope effects    
+# Post envelope effects
 
 # fx = FxList.new('chop', 'chop', {'chop': 0, 'sus': 1}, order=2)
 # fx.add("osc = osc * LFPulse.kr(chop / sus, add: 0.01)")

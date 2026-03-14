@@ -1,0 +1,640 @@
+w2 >> play("x.", sample=1, mverb=0.1, lpf=310, combres=0.5, combfreq=200, combdecay=0.3, combspread=0.01)
+
+w2 >> play("x.",sample=1, mverb=PWhite(.1, 0.5), lpf=PFr(200,350), combres=0.5, combfreq=50, combdecay=0.3, combspread=0.01)
+
+a1 >> play("l.(...l)[ll]", bank=1, sample=1, cut=3, mverb=.2, lpf=4400, hpf=0)
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([0,1], [12, 4]))
+
+j7 >> loop("acid2", dur=2)
+
+j7 >> loop("acid2", dur=4)
+
+j7 >> loop("acid4", dur=4)
+
+j7 >> loop("acid4", dur=4, sampl=2)
+
+j7 >> loop("acid4", dur=4, sampl=3)
+
+j7 >> loop("acid4", dur=4, sample=3)
+
+j7 >> loop("acid4", dur=4, sample=2)
+
+j7 >> loop("acid4", dur=4, sample=1)
+
+j7 >> loop("acid4", dur=4, sample=2)
+
+e4 >> play("j..", bank=1)
+
+j7.stop()
+
+e4.solo()
+
+e4 >> play("J..", bank=1)
+
+e4 >> play("k..", bank=1)
+
+e4 >> play("k..", bank=1, mverb=0.3, lpf=500)
+
+e4 >> play("k..", bank=1, mverb=0.3, lpf=2500)
+
+e4 >> play("k..", bank=1, mverb=0.3, lpf=1500)
+
+j7 >> loop("acid4", dur=4, sample=2)
+
+j7 >> loop("acid4", dur=8, sample=2)
+
+j7 >> loop("acid4", dur=8, sample=3)
+
+j7 >> loop("acid4", dur=4, sample=3)
+
+e4 >> play("k.", bank=1, mverb=0.3, lpf=1500)
+
+e4 >> play("k...", bank=1, mverb=0.3, lpf=1500)
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([0,1], [12, 4]))
+
+j7 >> loop("acid4", dur=4, sample=4)
+
+y2 >> play("..o.", sample=2, mverb=.5, lpf=5000)
+
+y2 >> play("..o.", sample=2, mverb=.2, lpf=5000)
+
+y2 >> play("..o.", sample=2, mverb=0, lpf=5000)
+
+y2 >> play("..o.", sample=2, mverb=0, lpf=0)
+
+j7 >> loop("acid4", dur=4, sample=4, lofi=.5)
+
+j7 >> loop("acid4", dur=4, sample=4, lofi=0.6)
+
+k0.solo()
+
+Clock.schedule(unsolo, Clock.mod(64))
+
+k0 >> play("X.", lpf=400, amp=2)
+
+k0 >> play("X.", lpf=400, amp=1)
+
+k0 >> play("X.", lpf=0, amp=1)
+
+k0 >> play("X.", lpf=0, amp=1, sample=2)
+
+k0 >> play("X.", lpf=0, amp=1, sample=3)
+
+k0.solo()
+
+k0 >> play("X.", lpf=0, amp=1, sample=4)
+
+k0 >> play("X.", lpf=0, amp=1, sample=5)
+
+k0 >> play("W.", lpf=0, amp=1, sample=5)
+
+k0 >> play("W.", lpf=0, amp=1, sample=4)
+
+k0 >> play("W.", lpf=0, amp=1, sample=3)
+
+k0 >> play("W.", lpf=0, amp=1, sample=2)
+
+k0 >> play("W.", lpf=0, amp=1, sample=3)
+
+k0 >> play("W.", lpf=0, amp=1, sample=4)
+
+k0 >> play("W.", lpf=0, amp=1, sample=5)
+
+k0 >> play("W.", lpf=0, amp=1, sample=6)
+
+k0 >> play("W.", lpf=0, amp=1, sample=7)
+
+k0 >> play("W.", lpf=0, amp=1, sample=8)
+
+k0 >> play("W.", lpf=0, amp=1, sample=9)
+
+k0 >> play("w.", lpf=0, amp=1, sample=9)
+
+k0 >> play("w.", lpf=0, amp=1, sample=8)
+
+k0 >> play("w.", lpf=0, amp=1, sample=7)
+
+k0 >> play("w.", lpf=0, amp=1, sample=6)
+
+k0 >> play("w.", lpf=0, amp=1, sample=5)
+
+k0 >> play("w.", lpf=0, amp=1, sample=4)
+
+k0 >> play("w.", lpf=0, amp=1, sample=3)
+
+k0 >> play("8.", lpf=0, amp=1, sample=3)
+
+unsolo()
+
+Clock.bpm=172
+
+k0.stop()
+
+j7.solo()
+
+j7 >> loop("acid4", dur=4, sample=4, lofi=0.7)
+
+j7 >> loop("acid4", dur=4, sample=4, lofi=0.8)
+
+j7 >> loop("acid4", dur=4, sample=4, lofi=0.9)
+
+j7 >> loop("acid4", dur=4, sample=4, lofi=0.9).only()
+
+w2 >> play("x.",sample=1, mverb=PWhite(.1, 0.5), lpf=PFr(200,350), combres=0.5, combfreq=50, combdecay=0.3, combspread=0.01)
+
+w2 >> play("x.",sample=1, mverb=PWhite(.1, 0.5), lpf=PFr(200,350),cut=1,  combres=0.5, combfreq=50, combdecay=0.3, combspread=0.01)
+
+a1 >> play("l.(...l)[ll]", bank=1, sample=1, cut=3, mverb=.2, lpf=4400, hpf=0)
+
+a1.stop()
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([0,1], [12, 4]))
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([0,1], [12, 4]), hpf=400)
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([1,1], [12, 4]), hpf=400)
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([2,1], [12, 4]), hpf=400)
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([1,1], [12, 4]), hpf=400)
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([0,1], [12, 4]), hpf=400)
+
+g2.stop()
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.9)
+
+i7 >> loop("break160_16", dur=16)
+
+i7 >> loop("break160_16", dur=16).lclip(4)
+
+i7 >> loop("break160_16", dur=16).lclip([4,2])
+
+i7 >> loop("break160_16", dur=16).lclip(P[4,2])
+
+i7 >> loop("break160_16", dur=16).lclip(P[4,2,1/2])
+
+i7.solo()
+
+i7 >> loop("break160_16", dur=16).lclip(var([4,2,1/2], [4, 4]))
+
+i7 >> loop("break160_16", dur=16).lclip(var(P*[4,2,1/2], [4, 4]))
+
+i7 >> loop("break160_16", dur=16).lclip(var(P*[4,2,1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=1, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=2, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=1, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=-1, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=-2, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=-3, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=.3, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.4, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.5, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.6, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.7, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=0, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=2, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=3, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=2, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [4, 4]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [PRand(8)]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [PRand(4)]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4, 1/16], [PRand(4)]))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4, 1/16], [PRand(4)])).sometimes("stutter", PRand(8))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4, 1/16], [PRand(4)])).sometimes("stutter", PRand(8), pshift=2)
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0.8, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4, 1/16], [PRand(4)])).sometimes("stutter", PRand(8), pshift=PWhite(.1, 2))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4, 1/16], [PRand(4)])).sometimes("stutter", PRand(8), pshift=PWhite(.1, 2))
+
+i7 >> loop("break160_16", dur=16,sample=4, fshift=0, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [PRand(4)])).sometimes("stutter", PRand(8), pshift=PWhite(.1, 2))
+
+i7 >> loop("break4", dur=16,sample=4, fshift=0, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [PRand(4)])).sometimes("stutter", PRand(8), pshift=PWhite(.1, 2))
+
+i7 >> loop("break4", dur=16,sample=3, fshift=0, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [PRand(4)])).sometimes("stutter", PRand(8), pshift=PWhite(.1, 2))
+
+i7 >> loop("break16", dur=16,sample=3, fshift=0, fphase=.1, fmix=0.5 ).lclip(var(P*[4,2,1, 1/2,1/4], [PRand(4)])).sometimes("stutter", PRand(8), pshift=PWhite(.1, 2))
+
+w2 >> play("x.", sample=1, mverb=0.1, lpf=310, combres=0.5, combfreq=200, combdecay=0.3, combspread=0.01)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.9)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.8)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.7)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.6)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.5)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.4)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.3)
+
+j7 >> loop("acid4", dur=4, sample=6, lofi=0.3)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.3)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.4)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.5)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.6)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.7)
+
+i7 >> loop("break16", dur=16,sample=2).lclip(var(P*[4,2,1, 1/2,1/4], [PRand(4)])).sometimes("stutter", PRand(8), pshift=PWhite(.1, 2))
+
+i7 >> loop("break16", dur=16,sample=2, drcomp=.5).lclip(var(P*[4,2,1, 1/2,1/4], [PRand(4)])).sometimes("stutter", PRand(8), pshift=PWhite(.1, 2))
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.6)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.5)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.4)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.3)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=1.3)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=2.3)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=1.3)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.3)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=-0.7)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0.3)
+
+g2 >> play("..g.", bank=1, cut=0, sample=var([0,1], [12, 4]), hpf=400)
+
+j7 >> loop("acid4", dur=4, sample=5, lofi=0)
+
+g2.stop()
+
+y2 >> play("..o.", sample=2, mverb=0, lpf=0)
+
+j7.stop()
+
+w2 >> play("x.",sample=1, mverb=PWhite(.1, 0.5), lpf=PFr(200,350),cut=1,  combres=0.5, combfreq=50, combdecay=0.3, combspread=0.01)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+l1 >> pulse(rate=0.5, oct=3, dur=4)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=800, fm_sin_i=1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.4, fm_sin_i=1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.04, fm_sin_i=1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.01, fm_sin_i=1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.01, fm_sin_i=.1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.11, fm_sin_i=.1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.21, fm_sin_i=.1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.31, fm_sin_i=.1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.41, fm_sin_i=.1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.51, fm_sin_i=.1)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.51, fm_sin_i=0.2)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.51, fm_sin_i=0.3)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.51, fm_sin_i=0.4)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.51, fm_sin_i=0.5)
+
+l1 >> pulse(rate=0.5, oct=3, dur=4, fm_sin=0.51, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(rate=0.5, oct=3,dur=1/4, fm_sin=0.51, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(rate=0.5, oct=3,dur=1/2, fm_sin=0.51, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=3,dur=1/2, fm_sin=0.51, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.6, oct=3,dur=1/2, fm_sin=0.51, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.7, oct=3,dur=1/2, fm_sin=0.51, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.51, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.2, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.3, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.4, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.5, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.6, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.7, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.8, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=0.9, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=1.0, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=1.1, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=1.2, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=1.3, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=13, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=130, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=13, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=.13, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.9, oct=3,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=1.0, oct=3,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.9, oct=3,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.8, oct=3,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.7, oct=3,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.6, oct=3,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=3,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=.03, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=.5, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=.5, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=.05, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=.02, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.03, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.04, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.05, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.06, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.8, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.7, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.6, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.4, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.3, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.2, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.1, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.07, fm_sin_i=0.2, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.1, fm_sin_i=0.2, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.2, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.3, fm_sin_i=0.2, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.2, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.3, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.4, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.5, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.6, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.7, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.8, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.9, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.8, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=3,dur=1/2, fm_sin=0.2, fm_sin_i=0.8, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=4,dur=1/2, fm_sin=0.2, fm_sin_i=0.8, r=.5)
+
+l1 >> pulse(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.8, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.8, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.8, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.8, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.02, fm_sin_i=0.8, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.8, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=2.2, fm_sin_i=0.8, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=2.2, fm_sin_i=0.7, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=2.2, fm_sin_i=0.6, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=2.2, fm_sin_i=0.5, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=2.2, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.4, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.5, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.4, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.02, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=20.3, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=20.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.4, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.9, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.8, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.7, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.6, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.5, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.4, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.04, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.02, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.2, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.4, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.5, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.6, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.7, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.8, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.03, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=-0.07, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=-0.17, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=-0.27, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=-0.37, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=-0.27, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=-0.17, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=-0.07, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.03, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.13, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.23, fm_sin_i=0.9, r=.5)
+
+l1 >> supersaw(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.33, fm_sin_i=0.9, r=.5)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.33, fm_sin_i=0.9, r=.5)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.33, fm_sin_i=0.9, r=0.6)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.33, fm_sin_i=0.9, r=0.7)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.33, fm_sin_i=0.9, r=0.8)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.33, fm_sin_i=0.9, r=0.9)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.33, fm_sin_i=0.9, r=1.0)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.33, fm_sin_i=0.9, r=0)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0, fm_sin_i=0.9, r=0)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.3, fm_sin_i=0.9, r=0)
+
+l1 >> plaitsX(PTime(), rate=0.5, oct=5,dur=1/2, fm_sin=0.4, fm_sin_i=0.9, r=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+

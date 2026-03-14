@@ -73,15 +73,15 @@ fx.save()
 
 
 fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0, tag="modulation")
-fx.add("osc = osc + (fm_sin_i * SinOsc.kr(osc * fm_sin))")
+fx.add("osc = osc + (SinOsc.kr(osc*fm_sin, 0, fm_sin_i * osc))")
 fx.save()
 
-fx = FxList.new("fm_saw", "FrequencyModulationSaw", {"fm_saw":0, "fm_saw_i":1}, order=0, tag="modulation")
-fx.add("osc = osc + (fm_saw_i * Saw.kr(osc * fm_saw))")
+fx = FxList.new("fm_saw", "FrequencyModulationSaw", {"fm_saw":0.5, "fm_saw_i":0.7}, order=0, tag="modulation")
+fx.add("osc = osc + (LFSaw.kr(osc * fm_saw, 0, fm_saw_i * osc))")
 fx.save()
 
 fx = FxList.new("fm_pulse", "FrequencyModulationPulse", {"fm_pulse":0, "fm_pulse_i":1}, order=0, tag="modulation")
-fx.add("osc = osc + (fm_pulse_i * Pulse.kr(osc * fm_pulse))")
+fx.add("osc = osc + (LFPulse.kr(osc * fm_pulse, 0, 0, fm_pulse_i * osc))")
 fx.save()
 
 #Dist mod

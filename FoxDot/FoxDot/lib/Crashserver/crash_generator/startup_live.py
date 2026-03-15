@@ -316,9 +316,10 @@ def fr(*args):
     return _fab_expand(lambda n, a, b: _safe_slice(PWhite(a, b), n, ha), args)
 
 def fw(*args):
-    """f walk: PWalk bounded random walk. fw() fw(8) fw(8, 1, 7). Lists expand."""
+    """f walk: PWalk bounded random walk, always >= 0. fw() fw(8) fw(8, 1, 7).
+    n=length, a=step size, b=max. Uses abs() to fold negatives."""
     ha = len(args) > 0
-    return _fab_expand(lambda n, a, b: _safe_slice(PWalk(max=b, step=a), n, ha), args, dn=16, da=1, db=7)
+    return _fab_expand(lambda n, a, b: _safe_slice(PWalk(max=b, step=a), n, ha).transform(abs), args, dn=16, da=1, db=7)
 
 def fg(*args):
     """f gaussian: PGauss distribution. fg() fg(8) fg(8, 0, 2). Lists expand."""
@@ -361,16 +362,20 @@ def ff(*args):
     return _fab_expand(_ff, args)
 
 def fd(*args):
-    """f drunk: PWalk with small step for brownian drift. fd() fd(16) fd(16, 0.2, 7).
-    n=length, a=step size (small=smooth), b=max range. Lists expand."""
+    """f drunk: PWalk with small step for brownian drift, always >= 0. fd() fd(16) fd(16, 0.2, 7).
+    n=length, a=step size (small=smooth), b=max range. Uses abs() to fold negatives."""
     ha = len(args) > 0
-    return _fab_expand(lambda n, a, b: _safe_slice(PWalk(max=b, step=a), n, ha), args, dn=16, da=0.5, db=7)
+    return _fab_expand(lambda n, a, b: _safe_slice(PWalk(max=b, step=a), n, ha).transform(abs), args, dn=16, da=0.5, db=7)
 
 def fl(*args):
     """f life: PLife cellular automaton. fl() fl(16) fl(16, 0.3, 7).
     n=length, a=chaos (0.0-1.0), b=max value. Lists expand."""
     ha = len(args) > 0
-    return _fab_expand(lambda n, a, b: _safe_slice(PLife(chaos=a, steps=int(n)).lmap(0, b), n, ha), args, dn=16, da=0.5, db=7)
+    def _fl(n, a, b):
+        pat = _safe_slice(PLife(chaos=a, steps=int(n)), n, ha)
+        # PLife outputs 0/1, scale to [0, b]
+        return pat * b
+    return _fab_expand(_fl, args, dn=16, da=0.5, db=7)
 
 def fh(*args):
     """f hold: var() step changes. fh(4, 0, 1) = var([0,1], 4).

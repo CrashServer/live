@@ -217,20 +217,73 @@ def lost(attack=None):
 ##########################
 
 def _parse_fab(args, dn=16, da=0, db=1):
-    """Parse f-family args: () → defaults, (n) → steps, (n,a,b) → full"""
+    """Parse f-family args: () → defaults, (n) → steps, (n,a,b) → full.
+    All args can be lists/Patterns for per-step variation."""
     if len(args) == 0:
         return dn, da, db
     elif len(args) == 1:
         return args[0], da, db
+    elif len(args) == 2:
+        return args[0], args[1], db
     elif len(args) == 3:
         return args[0], args[1], args[2]
-    raise ValueError("f-shortcut: expected 0, 1, or 3 arguments")
+    raise ValueError("f-shortcut: expected 0-3 arguments")
 
 def _safe_slice(pat, n, has_args):
     """Slice pattern by n only if n is an int. Arrays/lists → infinite pattern."""
     if has_args and isinstance(n, int):
         return pat[:n]
     return pat
+
+def _fab_expand(fn, args, dn=16, da=0, db=1):
+    """If any arg is a list, map fn over elements and concatenate.
+    If any arg is a tuple/PGroup, generate per-element and zip as PGroups.
+    Otherwise call fn directly."""
+    n, a, b = _parse_fab(args, dn, da, db)
+    has_args = len(args) > 0
+
+    # Tuples/PGroups → generate one pattern per element, zip into PGroups
+    # e.g. ft(8, 0, (12, 40)) → zip(PTrir(0,12)[:8], PTrir(0,40)[:8]) as PGroups
+    n_tup = isinstance(n, (tuple, PGroup))
+    a_tup = isinstance(a, (tuple, PGroup))
+    b_tup = isinstance(b, (tuple, PGroup))
+    if n_tup or a_tup or b_tup:
+        n_vals = tuple(n) if n_tup else (n,)
+        a_vals = tuple(a) if a_tup else (a,)
+        b_vals = tuple(b) if b_tup else (b,)
+        width = max(len(n_vals), len(a_vals), len(b_vals))
+        layers = []
+        for i in range(width):
+            ni = n_vals[i % len(n_vals)]
+            ai = a_vals[i % len(a_vals)]
+            bi = b_vals[i % len(b_vals)]
+            layers.append(fn(ni, ai, bi))
+        # Zip layers into PGroups
+        max_len = max(len(L) if hasattr(L, '__len__') else 16 for L in layers)
+        result = Pattern([])
+        for j in range(max_len):
+            vals = tuple(L[j] if hasattr(L, '__getitem__') else L for L in layers)
+            result = result | Pattern([PGroup(vals)])
+        return result
+
+    # Lists/Patterns → expand and concatenate
+    n_list = isinstance(n, (list, Pattern))
+    a_list = isinstance(a, (list, Pattern))
+    b_list = isinstance(b, (list, Pattern))
+    if n_list or a_list or b_list:
+        n_vals = list(n) if n_list else [n]
+        a_vals = list(a) if a_list else [a]
+        b_vals = list(b) if b_list else [b]
+        length = max(len(n_vals), len(a_vals), len(b_vals))
+        result = Pattern([])
+        for i in range(length):
+            ni = n_vals[i % len(n_vals)]
+            ai = a_vals[i % len(a_vals)]
+            bi = b_vals[i % len(b_vals)]
+            result = result | fn(ni, ai, bi)
+        return result
+
+    return fn(n, a, b)
 
 def fi(*args):
     """fade in: linvar a→b, one-shot. fi() fi(8) fi(8, 200, 2000)"""
@@ -258,43 +311,194 @@ def fs(*args):
     return sinvar([a, b], [n, n])
 
 def fr(*args):
-    """f random: PWhite in range, optional length. fr() fr(8) fr(8, 4, 24)"""
-    n, a, b = _parse_fab(args)
-    return _safe_slice(PWhite(a, b), n, len(args) > 0)
+    """f random: PWhite in range, optional length. fr() fr(8) fr(8, 4, 24). Lists expand."""
+    ha = len(args) > 0
+    return _fab_expand(lambda n, a, b: _safe_slice(PWhite(a, b), n, ha), args)
 
 def fw(*args):
-    """f walk: PWalk bounded random walk. fw() fw(8) fw(8, 1, 7)"""
-    n, a, b = _parse_fab(args, dn=16, da=1, db=7)
-    return _safe_slice(PWalk(max=b, step=a), n, len(args) > 0)
+    """f walk: PWalk bounded random walk, always >= 0. fw() fw(8) fw(8, 1, 7).
+    n=length, a=step size, b=max. Uses abs() to fold negatives."""
+    ha = len(args) > 0
+    return _fab_expand(lambda n, a, b: _safe_slice(PWalk(max=b, step=a), n, ha).transform(abs), args, dn=16, da=1, db=7)
 
 def fg(*args):
-    """f gaussian: PGauss distribution. fg() fg(8) fg(8, 0, 2)"""
-    n, a, b = _parse_fab(args)
-    return _safe_slice(PGauss(a, b), n, len(args) > 0)
+    """f gaussian: PGauss distribution. fg() fg(8) fg(8, 0, 2). Lists expand."""
+    ha = len(args) > 0
+    return _fab_expand(lambda n, a, b: _safe_slice(PGauss(a, b), n, ha), args)
 
 def ft(*args):
-    """f triangular: PTrir distribution. ft() ft(8) ft(8, 0, 8)"""
-    n, a, b = _parse_fab(args, dn=16, da=0, db=8)
-    return _safe_slice(PTrir(a, b), n, len(args) > 0)
+    """f triangular: PTrir distribution. ft() ft(8) ft(8, 0, 8). Lists expand."""
+    ha = len(args) > 0
+    return _fab_expand(lambda n, a, b: _safe_slice(PTrir(a, b), n, ha), args, dn=16, da=0, db=8)
 
 def fc(*args):
-    """f coin: PCoin flip between a and b. fc() fc(8) fc(8, 0, 4)"""
-    n, a, b = _parse_fab(args)
-    return _safe_slice(PCoin(a, b), n, len(args) > 0)
+    """f coin: PCoin flip between a and b. fc() fc(8) fc(8, 0, 4). Lists expand."""
+    ha = len(args) > 0
+    return _fab_expand(lambda n, a, b: _safe_slice(PCoin(a, b), n, ha), args)
 
 def fq(*args):
-    """f freq/sine wave: PSine mapped to range. fq() fq(16) fq(16, 200, 8000)"""
-    n, a, b = _parse_fab(args)
-    if a == 0 and b == 1:
-        return PSine(n)
-    return PSine(n) * (b - a) + a
+    """f freq/sine wave: PSine mapped to range. fq() fq(16) fq(16, 200, 8000). Lists expand.
+    PSine is [-1,1], normalized to [0,1] then mapped to [a,b]."""
+    def _fq(n, a, b):
+        s = (PSine(n) + 1) * 0.5  # [-1,1] → [0,1]
+        if a == 0 and b == 1:
+            return s
+        return s * (b - a) + a
+    return _fab_expand(_fq, args)
 
 def fz(*args):
-    """f zag/sawtooth: PSaw mapped to range. fz() fz(16) fz(16, 200, 8000)"""
+    """f zag/sawtooth: PSaw mapped to range. fz() fz(16) fz(16, 200, 8000). Lists expand."""
+    def _fz(n, a, b):
+        if a == 0 and b == 1:
+            return PSaw(n)
+        return PSaw(n) * (b - a) + a
+    return _fab_expand(_fz, args)
+
+def ff(*args):
+    """f fractal: PFrac pattern. ff() ff(16) ff(16, 0, 7). Lists expand.
+    PFrac(a, b, size, mapl, maph) — positional only (loop_pattern_func)."""
+    def _ff(n, a, b):
+        return PFrac(0.63, 0.0, int(n), a, b)
+    return _fab_expand(_ff, args)
+
+def fd(*args):
+    """f drunk: PWalk with small step for brownian drift, always >= 0. fd() fd(16) fd(16, 0.2, 7).
+    n=length, a=step size (small=smooth), b=max range. Uses abs() to fold negatives."""
+    ha = len(args) > 0
+    return _fab_expand(lambda n, a, b: _safe_slice(PWalk(max=b, step=a), n, ha).transform(abs), args, dn=16, da=0.5, db=7)
+
+def fl(*args):
+    """f life: PLife cellular automaton. fl() fl(16) fl(16, 0.3, 7).
+    n=length, a=chaos (0.0-1.0), b=max value. Lists expand."""
+    ha = len(args) > 0
+    def _fl(n, a, b):
+        pat = _safe_slice(PLife(chaos=a, steps=int(n)), n, ha)
+        # PLife outputs 0/1, scale to [0, b]
+        return pat * b
+    return _fab_expand(_fl, args, dn=16, da=0.5, db=7)
+
+def fh(*args):
+    """f hold: var() step changes. fh(4, 0, 1) = var([0,1], 4).
+    n=beats per step, a/b=values to alternate. fh(4, 0, 1) fh([4,8], 0, 1)
+    For more values use list: fh(4, [0, 0.5, 1, 0.3]) steps through each for 4 beats."""
+    n, a, b = _parse_fab(args, dn=4, da=0, db=1)
+    # If a is a list, use it as the full value sequence
+    if isinstance(a, (list, tuple, Pattern)):
+        vals = list(a)
+        if isinstance(n, (list, tuple, Pattern)):
+            return var(vals, list(n))
+        return var(vals, n)
+    # Otherwise alternate between a and b
+    if isinstance(n, (list, tuple, Pattern)):
+        return var([a, b], list(n))
+    return var([a, b], n)
+
+def fn(*args):
+    """f now: like fi but starts from current beat. fn() fn(8) fn(8, 0, 1).
+    Critical for live: eval mid-performance and it fades from NOW."""
     n, a, b = _parse_fab(args)
-    if a == 0 and b == 1:
-        return PSaw(n)
-    return PSaw(n) * (b - a) + a
+    return linvar([a, b], [n, 0], start=Clock.now())
+
+def fon(*args):
+    """f out now: like fo but starts from current beat."""
+    n, a, b = _parse_fab(args)
+    return linvar([b, a], [n, 0], start=Clock.now())
+
+def fbn(*args):
+    """f bounce now: like fb but starts from current beat."""
+    n, a, b = _parse_fab(args)
+    return linvar([a, b], [n, n], start=Clock.now())
+
+def fen(*args):
+    """f exp now: like fe but starts from current beat."""
+    n, a, b = _parse_fab(args)
+    return expvar([a, b], [n, 0], start=Clock.now())
+
+def fsn(*args):
+    """f sine now: like fs but starts from current beat."""
+    n, a, b = _parse_fab(args)
+    return sinvar([a, b], [n, n], start=Clock.now())
+
+def frot(pat, n=4, step=1):
+    """f rotate: pattern rotates by `step` positions every `n` beats.
+    frot(P[0,2,4,7], 4) → every 4 beats: P[0,2,4,7] → P[2,4,7,0] → P[4,7,0,2] → ...
+    frot(P[0,2,4,7], 4, 2) → rotate by 2 each time.
+    frot(P[0,2,4,7], [4,8]) → different durations per rotation."""
+    pat = Pattern(pat) if not isinstance(pat, Pattern) else pat
+    length = len(pat)
+    rotations = [pat.rotate(i * step) for i in range(length)]
+    return Pvar(rotations, n)
+
+def fxr(*args):
+    """f exclusive random: PxRand, never repeats same value twice in a row.
+    fxr() fxr(8) fxr(8, 0, 7). Lists/tuples expand."""
+    ha = len(args) > 0
+    def _fxr(n, a, b):
+        return _safe_slice(PxRand(int(a), int(b)), n, ha)
+    return _fab_expand(_fxr, args, dn=16, da=0, db=7)
+
+def fperlin(*args):
+    """f perlin: Perlin noise pattern. Smooth organic movement.
+    fperlin() fperlin(32) fperlin(32, 0, 7) fperlin(32, 200, 8000)
+    n=length, a=min, b=max. Optional 4th arg: octaves (1-6, default 3).
+    More octaves = more detail/roughness. Lists/tuples expand."""
+    # Parse args — support optional 4th arg for octaves
+    octaves = 3
+    if len(args) == 4:
+        octaves = int(args[3])
+        args = args[:3]
+    ha = len(args) > 0
+    def _fperlin(n, a, b):
+        n = int(n)
+        vals = _perlin_1d(n, octaves)
+        # vals are in ~[-1, 1], map to [a, b]
+        pat = Pattern([(v * 0.5 + 0.5) * (b - a) + a for v in vals])
+        return pat
+    return _fab_expand(_fperlin, args)
+
+def _perlin_1d(n, octaves=3, seed=None):
+    """Generate 1D Perlin noise values. Returns list of n floats in ~[-1, 1].
+    Uses classic Perlin gradient noise with multi-octave fractal layering."""
+    import math
+    import random as _rng
+    state = _rng.getstate()
+    _rng.seed(seed if seed is not None else _rng.randint(0, 99999))
+
+    # Generate gradient tables per octave (each needs its own)
+    max_grids = n * (2 ** octaves) + 4
+    perm = list(range(256))
+    _rng.shuffle(perm)
+    perm = perm + perm  # double for wrapping
+    grads = [_rng.uniform(-1, 1) for _ in range(512)]
+    _rng.setstate(state)  # restore RNG state
+
+    def fade(t):
+        return t * t * t * (t * (t * 6 - 15) + 10)
+
+    def noise_at(x):
+        xi = int(math.floor(x)) & 255
+        xf = x - math.floor(x)
+        g0 = grads[perm[xi]]
+        g1 = grads[perm[xi + 1]]
+        d0 = g0 * xf
+        d1 = g1 * (xf - 1)
+        u = fade(xf)
+        return d0 + u * (d1 - d0)
+
+    result = []
+    for i in range(n):
+        val = 0.0
+        amp = 1.0
+        max_amp = 0.0
+        for o in range(octaves):
+            freq = 2 ** o
+            # Scale so base octave has ~4 "hills" across the pattern
+            x = i / n * 4 * freq + o * 31.7  # offset per octave
+            val += noise_at(x) * amp
+            max_amp += amp
+            amp *= 0.5
+        result.append(val / max_amp)
+    return result
 
 
 ##########################

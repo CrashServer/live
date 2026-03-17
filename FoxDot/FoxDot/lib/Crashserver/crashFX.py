@@ -73,15 +73,15 @@ fx.save()
 
 
 fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0, tag="modulation")
-fx.add("osc = osc + (fm_sin_i * SinOsc.kr(osc * fm_sin))")
+fx.add("osc = osc + (SinOsc.kr(osc*fm_sin, 0, fm_sin_i * osc))")
 fx.save()
 
-fx = FxList.new("fm_saw", "FrequencyModulationSaw", {"fm_saw":0, "fm_saw_i":1}, order=0, tag="modulation")
-fx.add("osc = osc + (fm_saw_i * Saw.kr(osc * fm_saw))")
+fx = FxList.new("fm_saw", "FrequencyModulationSaw", {"fm_saw":0.5, "fm_saw_i":0.7}, order=0, tag="modulation")
+fx.add("osc = osc + (LFSaw.kr(osc * fm_saw, 0, fm_saw_i * osc))")
 fx.save()
 
 fx = FxList.new("fm_pulse", "FrequencyModulationPulse", {"fm_pulse":0, "fm_pulse_i":1}, order=0, tag="modulation")
-fx.add("osc = osc + (fm_pulse_i * Pulse.kr(osc * fm_pulse))")
+fx.add("osc = osc + (LFPulse.kr(osc * fm_pulse, 0, 0, fm_pulse_i * osc))")
 fx.save()
 
 #Dist mod
@@ -1165,6 +1165,17 @@ fx.add("wet = AllpassC.ar(wet, 0.02, 0.005, 0.08)")
 fx.add("wet = AllpassC.ar(wet, 0.02, 0.012, 0.06)")
 fx.add("wet = LeakDC.ar(wet * 0.25)")
 fx.add("osc = XFade2.ar(dry, wet, cheapverb * 2 - 1)")
+fx.save()
+
+
+## Keep this fx at the end to force the order and use at the end of fx chain. Use other filter for filtering before.
+fx = FxList.new('hpf','highPassFilter', {'hpf': 0, 'hpr': 1}, order=2, tag="filter")
+fx.doc("Highpass filter")
+fx.add('osc = RHPF.ar(osc, hpf, hpr)')
+fx.save()
+
+fx = FxList.new('lpf','lowPassFilter', {'lpf': 0, 'lpr': 1}, order=2, tag="filter")
+fx.add('osc = RLPF.ar(osc, lpf, lpr)')
 fx.save()
 
 Effect.server.setFx(FxList)

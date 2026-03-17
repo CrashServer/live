@@ -147,7 +147,7 @@ class StorageAttack:
             attackKeys = list(sorted(self.attackDict.keys()))
             print(attackKeys)
             crashpanel.sendOnce(str(attackKeys), "attack")
-    
+
     def random(self):
         attackName = choice(list(self.attackDict.keys()))
         self.getAttack(attackName)
@@ -1359,7 +1359,7 @@ try:
             ''' send on txt msg to OSC '''
             msg = json.dumps({"type": "help", "helpType": helpType, "help": txt})
             asyncio.run(wsServer.sendWebsocket(msg))
-            
+
         def stop(self):
             self.isrunning = False
 
@@ -1439,7 +1439,7 @@ class WebsocketServer():
                 #     await self.sendLoopList()
                 # elif data["type"] == "get_fx":
                 #     await self.sendFxDict()
-                    
+
         except websockets.ConnectionClosed:
             pass
         finally:
@@ -1472,14 +1472,14 @@ class WebsocketServer():
             bpm = int(Clock.get_bpm())
             asyncio.run(self.sendWebsocket(json.dumps({"type": "bpm", "bpm": bpm})))
             sleep(60/bpm)
-    
+
     async def sendFoxdotAutocomplete(self):
         ''' Send FoxDot autocomplete data to websocket server '''
         fxList = await self.sendFxDict()
         synthList = await self.sendSynthList()
         attackList = await self.sendAttackList()
         combined_message = json.dumps({"type": "autocomplete", "autocomplete": {"loopList": loops, "fxList": fxList, "synthList": synthList, "attackList": attackList}})
-        await self.sendWebsocket(combined_message) 
+        await self.sendWebsocket(combined_message)
 
     async def sendLoopList(self):
         ''' Send loop list to websocket server '''
@@ -1522,14 +1522,14 @@ class WebsocketServer():
                 txt = str(''.join(synth_txt))
                 synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
                 synthargs = re.findall(r"\{\|(.*?)\|\s*var", txt, re.S)
-                
+
                 # Extract category from metadata
                 category_match = re.search(r"category:\s*\\(\w+)", txt)
                 category = category_match.group(1) if category_match else ""
-                
+
                 if (len(synthname) != 0 and len(synthargs) != 0):
                     filtered_args = ', '.join([arg.strip() for arg in synthargs[0].split(', ') if arg.split('=')[0].strip() not in args_to_remove])
-                    synthList.append({'text': filtered_args, 'displayText': synthname[0], 'tag': category})	
+                    synthList.append({'text': filtered_args, 'displayText': synthname[0], 'tag': category})
         return synthList
 
     def sendServerState(self):
@@ -1798,14 +1798,14 @@ class Variation():
         else:
             print("Une instance de Variation existe déjà")
             cls._instance.info()
-        return cls._instance   
+        return cls._instance
 
     def __init__(self, durTotal, durBreak):
         if not hasattr(self, 'initialized'):
             self.durTotal = durTotal
             self.durBreak = durBreak
-            self.event = [self.eventFilter, 
-                        self.eventSoloRnd,  
+            self.event = [self.eventFilter,
+                        self.eventSoloRnd,
                         self.eventMasterAll]
             self.randomFx = {
                 "bend": PWhite(-1, 4),
@@ -1839,7 +1839,7 @@ class Variation():
     def stop(self):
         masterAll(0)
         self.isPlaying=False
-    
+
     def start(self):
         self.isPlaying = True
         Clock.schedule(lambda: self.chooseEvent(), Clock.mod(self.durTotal) + self.durTotal-self.durBreak)
@@ -1850,9 +1850,9 @@ class Variation():
         - variation.stop() : stop the variation
         - variation.start() : start the variation
         - variation.help() : show this help
-        - variation.set(total, break) : set the duration of the variation      
+        - variation.set(total, break) : set the duration of the variation
               ''')
-    
+
     def info(self):
         estActive = "active" if self.isPlaying else "inactive"
         print(f"Variation est {estActive} sur {self.durTotal} bars avec une variation sur les {self.durBreak} dernieres bars")
@@ -1870,7 +1870,7 @@ class Variation():
         rnd_event()
         if self.isPlaying:
             Clock.schedule(lambda: self.chooseEvent(), Clock.mod(self.durTotal) + self.durTotal-self.durBreak)
-    
+
     def eventFilter(self):
         ''' set a random filter on master '''
         filtr = choice(["lpf", "hpf"])
@@ -1904,9 +1904,137 @@ class Variation():
         masterAll(fx, self.randomFx[fx])
         Clock.schedule(lambda: masterAll(0), Clock.mod(self.durTotal))
 
+
+# SANITY CHECK
+
+def checkFxTag():
+    ''' Check if all fx have a tag for the autocomplete '''
+    missingTag = []
+    for fx_name in FxList.keys():
+        if (FxList[fx_name].tag == ""):
+            missingTag.append(fx_name)
+    lines = []
+    if len(missingTag) > 0:
+        lines.append(f"  ❌ {len(missingTag)} fx missing tag: {missingTag}")
+    else:
+        lines.append("  ✅ All fx have a tag")
+    return lines
+
+def checkPlayerNameType():
+    ''' Check if all playerName are instance of player class '''
+    RESERVED_NAMES = {"os", "in", "fx", "if", "at", "or", "is", "as", "id", "it", "re", "on"}
+
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    wrong_type = []
+    reserved_name = []
+
+    for char1 in alphabet:
+        for char2 in alphabet:
+            name = char1 + char2
+            if name in RESERVED_NAMES:
+                reserved_name.append((name, "RESERVED"))
+                continue
+            obj = FoxDotCode.namespace.get(name)
+            if not isinstance(obj, (Player, EmptyPlayer)):
+                wrong_type.append((name, type(obj).__name__))
+
+    lines = []
+    if wrong_type:
+        lines.append(f"  ❌ {len(wrong_type)} name(s) are not Player/EmptyPlayer:")
+        for name, type_name in wrong_type:
+            lines.append(f"     {name} -> {type_name}")
+    else:
+        lines.append("  ✅ All aa-zz names are Player or EmptyPlayer instances.")
+    if reserved_name:
+        lines.append(f"  ⚠️  {len(reserved_name)} reserved name(s): {', '.join(name for name, _ in reserved_name)}")
+    return lines
+
+def checkIfSynthArgsAreInFxArgs(synthDictArgs):
+    ''' Check if a synth args is also declare as a fx arg '''
+    fxKeyWords = []
+    wrongSynthArgs = []
+    for fx_name in FxList.keys():
+        for fxKeys in FxList[fx_name].defaults.keys():
+            fxKeyWords.append(fx_name)
+            fxKeyWords.append(fxKeys)
+    for synth in synthDictArgs:
+        for arg in synth['args']:
+            if arg in fxKeyWords:
+                wrongSynthArgs.append((synth['name'], arg))
+    lines = []
+    if len(wrongSynthArgs) > 0:
+        lines.append(f"  ❌ {len(wrongSynthArgs)} synth arg(s) colliding with fx args:")
+        for synth, arg in wrongSynthArgs:
+            lines.append(f"     {synth} -> {arg}")
+    else:
+        lines.append("  ✅ No synth args collide with fx args")
+    return lines
+
+
+def getSynthList():
+    args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', 'ratelfo', 'ratelfoadd', 'ratelfomul', 'room', 'beat_stretch', 'clip', 'looping', 'rate' ]
+    synthList = []
+    synth_list = sorted([f for f in SynthDefs])
+    for syn in synth_list:
+        if syn != "":
+            path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+            with open(str(path), "r") as synth:
+                synth = synth.readlines()
+            synth_txt = [line.strip() for line in synth if line != "\n"]
+            txt = str(''.join(synth_txt))
+            synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+            synthargs = re.findall(r"\{\|(.*?)\|\s*var", txt, re.S)
+
+            # Extract category from metadata
+            category_match = re.search(r"category:\s*\\(\w+)", txt)
+            category = category_match.group(1) if category_match else ""
+
+            if (len(synthname) != 0 and len(synthargs) != 0):
+                filtered_args = [arg.split('=')[0].strip() for arg in synthargs[0].split(', ') if arg.split('=')[0].strip() not in args_to_remove]
+                synthList.append({'name': synthname[0], 'args': filtered_args, 'tag': category})
+    return synthList
+
+def checkSynthTag(synthDictArgs):
+    ''' Check if all synth have a tag for the autocomplete '''
+    missingTag = []
+    for synth in synthDictArgs:
+        if (synth['tag'] == ""):
+            missingTag.append(synth['name'])
+    lines = []
+    if len(missingTag) > 0:
+        lines.append(f"  ❌ {len(missingTag)} synth(s) missing tag: {missingTag}")
+    else:
+        lines.append("  ✅ All synths have a tag")
+    return lines
+
+
+def sanityCheck():
+    ''' Run some tests to check if everything is working fine '''
+    SEP = "─" * 40
+
+    synthDictArgs = getSynthList()
+
+    checks = [
+        ("🔧 CHECK FX TAGS",           checkFxTag()),
+        ("🎹 CHECK PLAYER NAME TYPES",  checkPlayerNameType()),
+        ("⚡ CHECK SYNTH ARGS vs FX ARGS", checkIfSynthArgsAreInFxArgs(synthDictArgs)),
+        ("🏷️  CHECK SYNTH TAGS",        checkSynthTag(synthDictArgs)),
+    ]
+
+    output = ["\n"]
+    for title, lines in checks:
+        output.append(SEP)
+        output.append(f"  {title}")
+        output.append(SEP)
+        output.extend(lines)
+        output.append("")
+    output.append(SEP)
+
+    print("\n".join(output))
+
 Clock.link()
 
-# Archive of old function 
+# Archive of old function
 
 # Mixer
 # try:

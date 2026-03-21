@@ -84,7 +84,7 @@ def generate_drum_style_player():
 def generate_player_name():
 	try:
 		player = "os"
-		while player in ["as", "at", "fx", "id", "if", "in", "is", "it", "on", "or", "os", "re"]:
+		while player in ["as", "at", "fx", "id", "if", "in", "is", "it", "on", "or", "os", "re", "fa", "fb", "fc","fd","fe","ff","fg","fh","fi","fj","fk","fl","fm","fn","fo","fp","fq","fr","fs","ft","fu","fv","fw","fx","fy","fz"]:
 			player = ''.join(choice(string.ascii_lowercase) for x in range(2))
 		return player
 	except Exception as e:

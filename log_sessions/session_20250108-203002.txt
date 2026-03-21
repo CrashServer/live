@@ -1,12 +1,12 @@
 hi >> play("<k.k.......k.....><....h.......h...>", dur=1, sample=96, rate=1)
 
-fh >> loop("break4", dur=4, sample=6)
+ih >> loop("break4", dur=4, sample=6)
 
 Clock.link
 
 Clock.link()
 
-fh >> loop("break4", dur=4, sample=6, fx=1)
+ph >> loop("break4", dur=4, sample=6, fx=1)
 
 n8 >> lbass(dur=1/2, valad=400)
 
@@ -62,7 +62,7 @@ n8 >> lbass(dur=1/2, valad=PFr(400,600), vol=0.1, valadr=PFr(0.8, 0.99), valadd=
 
 n8.stop()
 
-# 
+#
 
 n8 >> lbass(dur=1/2, valad=PFr(400,600), vol=0.1, valadr=PFr(0.8, 0.99), valadd=PFr(290,400))
 
@@ -110,7 +110,7 @@ d9 >> loop("circledrum16", dur=16)
 
 p9 >> play("x.").start(16)
 
-# j'ai utilisé alt j pour venir ici 
+# j'ai utilisé alt j pour venir ici
 
 js >> loop("ghperc16", dur=32, sample=1)
 
@@ -392,7 +392,7 @@ p1 >> play("<q ><p >", sample=1, dur=PDur([3, 5], 8), amp=PWhite(0.3,0.5), hpf=2
 
 p2 >> play("(qp) ", sample=2, dur=PDur([1, 6], 8), hpf=200, amp=PWhite(0.3, 0.5), leg=25, pan=PWhite(-0.5,0.5))
 
-p3 >> play("//", sample=67, dur=16, hpf=140, spf=40, spfslide=5, spfend=8000, amp=0.3, rate=[PWhite(-0.5,-0.1), PWhite(2,8)], pan=(PWhite(-1,1),PWhite(-1,1))) # 
+p3 >> play("//", sample=67, dur=16, hpf=140, spf=40, spfslide=5, spfend=8000, amp=0.3, rate=[PWhite(-0.5,-0.1), PWhite(2,8)], pan=(PWhite(-1,1),PWhite(-1,1))) #
 
 p4 >> play("p ", sample=2, dur=1/2, lpf=17000, lpr=0.1, amp=sinvar([0,0.3],37), leg=8, pan=PWhite(-0.25,0.75), hpf=200)
 
@@ -440,7 +440,7 @@ d1 >> play("<X(.....{X[XX]xv})><..O.><|x4|.>", amp=0.8, lpf=8000, hpf=200)
 
 r3 >> dbass(linvar([0,0.6],[64,0]), root=var([0, 4, 12, 4], 8), mid=2, dur=PDur(8,14), amplify=0.8*(d1.degree!="X"), leg=PRand(4), a=0, sus=0.4, oct=4, lpf=13000, hpf=60).unison(3)
 
-d2 >> play("<[-{---[--]|:4|}]><.:>", sample=7, amp=0.5, lpf=0 ,pan=PWhite(-0.5,0.5), rate=PWhite(0.99,1.01)).human(80,3,4).sometimes("stutter", PRand(4))   
+d2 >> play("<[-{---[--]|:4|}]><.:>", sample=7, amp=0.5, lpf=0 ,pan=PWhite(-0.5,0.5), rate=PWhite(0.99,1.01)).human(80,3,4).sometimes("stutter", PRand(4))
 
 d1 >> play("<X(.....{X[XX]xv})><..O.><|x4|.>", amp=1, lpf=8000, hpf=0)
 
@@ -754,31 +754,31 @@ d9 >> play("<.3>", amp=1, dur=4, sample=(0), rate=(-0.5,1))
 
 attack("filter")
 
-masterAll("rate", 2) 
+masterAll("rate", 2)
 
-masterAll("rate", 4) 
+masterAll("rate", 4)
 
 ~d7 >> play("<.[xx]><k...><[--]><X.>", sample=(7), bank=1, valad=400, valadd=10, valadr=0.8, vol=0.2, pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1).sometimes("stutter", PRand(2,16).rnd(2))
 
-masterAll("rate", 1) 
+masterAll("rate", 1)
 
-masterAll("rate", 12) 
+masterAll("rate", 12)
 
-masterAll("rate", 12) 
+masterAll("rate", 12)
 
-masterAll("rate", 12) 
+masterAll("rate", 12)
 
-masterAll("rate", 12) 
+masterAll("rate", 12)
 
-masterAll("rate", 12) 
+masterAll("rate", 12)
 
-masterAll("rate", 24) 
+masterAll("rate", 24)
 
-masterAll("rate", 1) 
+masterAll("rate", 1)
 
 ~d7 >> play("<.[xx]><k...><[--]><X.>", sample=(7), bank=1, vakorg=400, vakorgd=10, vakorgr=0.8, vol=0.2, pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1).sometimes("stutter", PRand(2,16).rnd(2))
 
-masterAll(0,"rate", 1) 
+masterAll(0,"rate", 1)
 
 x4.stop()
 
@@ -969,4 +969,3 @@ attack("deambulation")
 attack("deambulation")
 
 attack("deambulation")
-

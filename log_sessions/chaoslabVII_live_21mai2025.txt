@@ -555,27 +555,27 @@ b4 >> play("mMt[T{mMTt}]", amp=1, drcomp=.5).sometimes("stutter")
 
 m4 >> play("X ", bank=1, amp=2, sample=7, lpf=[400, 1200, 1600, 3200])
 
-c9 >> loop("gscreecha16", dur=16, sample=5, hpf=400).lclip(4) # 6 3 5 
+c9 >> loop("gscreecha16", dur=16, sample=5, hpf=400).lclip(4) # 6 3 5
 
 m4 >> play("X[--]", bank=1, amp=2, sample=7, lpf=[400, 1200, 1600, 3200])
 
-c9 >> loop("gscreecha16", dur=16, sample=5, hpf=300).lclip(4) # 6 3 5 
+c9 >> loop("gscreecha16", dur=16, sample=5, hpf=300).lclip(4) # 6 3 5
 
-c9 >> loop("gscreecha16", dur=16, sample=5, hpf=400).lclip(4) # 6 3 5 
+c9 >> loop("gscreecha16", dur=16, sample=5, hpf=400).lclip(4) # 6 3 5
 
-c9 >> loop("gscreecha16", dur=16, sample=5, hpf=300).lclip(4) # 6 3 5 
+c9 >> loop("gscreecha16", dur=16, sample=5, hpf=300).lclip(4) # 6 3 5
 
-c9 >> loop("gscreecha16", dur=16, sample=5, hpf=200).lclip(4) # 6 3 5 
+c9 >> loop("gscreecha16", dur=16, sample=5, hpf=200).lclip(4) # 6 3 5
 
-c9 >> loop("gscreecha16", dur=16, sample=5, hpf=200, fx2=1).lclip(4) # 6 3 5 
+c9 >> loop("gscreecha16", dur=16, sample=5, hpf=200, fx2=1).lclip(4) # 6 3 5
 
 attack("nuance")
 
-c9 >> loop("gscreecha16", dur=16, sample=5, hpf=100, fx2=1).lclip(4) # 6 3 5 
+c9 >> loop("gscreecha16", dur=16, sample=5, hpf=100, fx2=1).lclip(4) # 6 3 5
 
 r5 >> play("<x..(...x)><.><....>", sample=0, amp=3).sometimes("stutter")
 
-c9 >> loop("gscreecha16", dur=16, sample=5, hpf=100, fx2=1, chop=4).lclip(4) # 6 3 5 
+c9 >> loop("gscreecha16", dur=16, sample=5, hpf=100, fx2=1, chop=4).lclip(4) # 6 3 5
 
 z4 >> loop("psych32", dur=32, sample=4, fx1=0, fx=0, hpf=200, lpf=400, fx2=0.5)
 
@@ -1203,14 +1203,14 @@ mi >> radio(P[0, 2, 2, 0, 0, 9, 7, 4, 0, 2, 4, 9, 2, 0, 0, 7], dur=PRy(16,4,0), 
 sp >> scatter([1, 2, 3, 2, 2, 0, 7, 0], dur=PRy(16,3,0), oct=[4, 6], rate = [8.71, 5.15, 6.33, 6.74, 3.64, 0.27, 0.01, 3.79], cutoff = linvar([[7577.15, 15521.76, 3434.09, 16891.62],[2961.94, 17855.81]],[13.99, 13.51, 20.81]), ).unison(2)
 lf >> varsaw(P[7, 4, 2, 2, 2, 4, 4, 2, 4, 7, 9, 7, 9, 7, 0, 2], dur=PRy(16,4,0), oct=[6, 6, 3], rate = [0.21, 0.55, 0.94], ).unison(2)
 vn >> loop("frica8", dur=8, sample=6)
-fb >> loop("druma8", dur=8, sample=5)
+qb >> loop("druma8", dur=8, sample=5)
 te >> loop("nbsub16", dur=16, sample=1)
 jw >> play("<p...p...p...p...><....o.......o...><-.-.-.-----.-.-->", dur=1, sample=23, rate=1)
 xh >> play("<..T.............><....m...m.mm....><..............mm><C......C....C...>", dur=0.25, sample=35, rate=1)
 ra >> loop("druma8", dur=8, sample=8)
 ri >> play("<................><....C.......C...>", dur=0.25, sample=85, rate=1)
 xm >> loop("berlin8", dur=8, sample=1)
-fj >> loop("xxpiano16", dur=32, sample=6)
+s3 >> loop("xxpiano16", dur=32, sample=6)
 vf >> loop("psybass32", dur=32, sample=2)
 kn >> loop("electrodrum16", dur=16, sample=6)
 lv >> loop("rytm8", dur=16, sample=4)
@@ -1538,13 +1538,13 @@ masterAll("reset")
 
 d1 >> pianovel(melody(), velocity=60, hard=0.8, velhard=0.6, dur=1, lpf=5400, mverb=(0.5, 0.8)).unison(3)
 
-masterAll("rate", 4) 
+masterAll("rate", 4)
 
 d1 >> pianovel(melody(), velocity=60, hard=0.8, velhard=0.6, dur=1, lpf=5400, mverb=(0.5, 0.8, 0.9)).unison(3)
 
-masterAll("rate", 12) 
+masterAll("rate", 12)
 
-masterAll(0,"rate", 12) 
+masterAll(0,"rate", 12)
 
 masterAll("cut", var([0, 1, 1/2, linvar([1/4, 1], 32)], [24, 4, 2, 2]))
 
@@ -1604,7 +1604,7 @@ d0 >> play("x.", lpf=900, amp=15, )
 
 d0 >> play("x.", lpf=1000, amp=15, )
 
-masterAll("rate", 2) 
+masterAll("rate", 2)
 
 d0 >> play("x.", lpf=1100, amp=15, )
 
@@ -1614,7 +1614,7 @@ d0 >> play("x.", lpf=1300, amp=15, )
 
 d0 >> play("x.", lpf=1400, amp=15, )
 
-masterAll(0,"rate", 2) 
+masterAll(0,"rate", 2)
 
 s4.lpf=400
 
@@ -1649,4 +1649,3 @@ soff()
 
 Clock.clear()
 soff()
-

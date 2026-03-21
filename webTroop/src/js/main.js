@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Initialiser l'analyseur audio (sera géré par le configPanel)
   const audioVizContainer = document.getElementById("audio-viz");
   const audioAnalyzer = new AudioAnalyzer(audioVizContainer);
-  
+
   // Passer l'analyseur audio au panneau de configuration AVANT de charger les settings
   configPanelControls.setAudioAnalyzer(audioAnalyzer);
 

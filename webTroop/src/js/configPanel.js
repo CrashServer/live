@@ -31,6 +31,8 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     let currentUserName = '';
     let audioAnalyzer = null;
 
+    resizeToStoredHeights();
+
     // Fonction pour obtenir la clé localStorage avec le nom d'utilisateur
     function getStorageKey(key) {
         return currentUserName ? `${currentUserName}-${key}` : key;
@@ -251,6 +253,25 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     });
 
 
+    function resizeToStoredHeights() {
+      const storedMainHeight = localStorage.getItem('mainEditorHeight');
+      const storedOtherHeight = localStorage.getItem('otherEditorHeight');
+      const storedLogsHeight = localStorage.getItem('logsHeight');
+
+      if (storedMainHeight && storedOtherHeight && storedLogsHeight) {
+        mainEditorWrapper.style.height = `${storedMainHeight}px`;
+        otherEditorWrapper.style.height = `${storedOtherHeight}px`;
+
+        // Mettre à jour les flex pour maintenir les proportions
+        mainEditorWrapper.style.flex = storedMainHeight;
+        otherEditorWrapper.style.flex = storedOtherHeight;
+        const logPanel = document.getElementById('logPanel');
+        if (logPanel) {
+          logPanel.style.height = `${storedLogsHeight}px`;
+        }
+      }
+    }
+
     // Gestion du split screen
     function toggleSplitScreen(enabled) {
         if (enabled) {
@@ -259,11 +280,11 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
             if (editorResizeHandle) {
                 editorResizeHandle.style.display = 'block';
             }
-            mainEditorWrapper.style.height = '90%';
+            // mainEditorWrapper.style.height = '90%';
 
             // Restaurer les flex values par défaut
-            mainEditorWrapper.style.flex = '9';
-            otherEditorWrapper.style.flex = '1';
+            // mainEditorWrapper.style.flex = '9';
+            // otherEditorWrapper.style.flex = '1';
         } else {
             // Désactiver le split screen
             otherEditorWrapper.style.display = 'none';

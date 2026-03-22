@@ -2,142 +2,142 @@ import { playersList } from "./functionUtils";
 
 export const foxdotAutocomplete = {
     synths: [
-        {text: 'abass()', displayText: 'abass'}, 
-        {text: 'acidbass()', displayText: 'acidbass'}, 
-        {text: 'alva()', displayText: 'alva'}, 
-        {text: 'ambi()', displayText: 'ambi'}, 
-        {text: 'angst()', displayText: 'angst'}, 
-        {text: 'arpy()', displayText: 'arpy'}, 
-        {text: 'arpymod()', displayText: 'arpymod'}, 
-        {text: 'audioin()', displayText: 'audioin'}, 
-        {text: 'bass()', displayText: 'bass'}, 
-        {text: 'bbass()', displayText: 'bbass'}, 
-        {text: 'bell()', displayText: 'bell'}, 
-        {text: 'bellmod()', displayText: 'bellmod'}, 
-        {text: 'blip()', displayText: 'blip'}, 
-        {text: 'bnoise()', displayText: 'bnoise'}, 
-        {text: 'bounce()', displayText: 'bounce'}, 
-        {text: 'braids()', displayText: 'braids'}, 
-        {text: 'breakcore()', displayText: 'breakcore'}, 
-        {text: 'brown()', displayText: 'brown'}, 
-        {text: 'bug()', displayText: 'bug'}, 
-        {text: 'cbass()', displayText: 'cbass'}, 
-        {text: 'charm()', displayText: 'charm'}, 
-        {text: 'click()', displayText: 'click'}, 
-        {text: 'cluster()', displayText: 'cluster'}, 
-        {text: 'combs()', displayText: 'combs'}, 
-        {text: 'crackle()', displayText: 'crackle'}, 
-        {text: 'creep()', displayText: 'creep'}, 
-        {text: 'cringe()', displayText: 'cringe'}, 
-        {text: 'crunch()', displayText: 'crunch'}, 
-        {text: 'cs80()', displayText: 'cs80'}, 
-        {text: 'dab()', displayText: 'dab'}, 
-        {text: 'dafbass()', displayText: 'dafbass'}, 
-        {text: 'dbass()', displayText: 'dbass'}, 
-        {text: 'dblbass()', displayText: 'dblbass'}, 
-        {text: 'dirt()', displayText: 'dirt'}, 
-        {text: 'donk()', displayText: 'donk'}, 
-        {text: 'donorgan()', displayText: 'donorgan'}, 
-        {text: 'dopple()', displayText: 'dopple'}, 
-        {text: 'dub()', displayText: 'dub'}, 
-        {text: 'dustV()', displayText: 'dustV'}, 
-        {text: 'ebass()', displayText: 'ebass'}, 
-        {text: 'eeri()', displayText: 'eeri'}, 
-        {text: 'elmbass()', displayText: 'elmbass'}, 
-        {text: 'ews()', displayText: 'ews'}, 
-        {text: 'faim()', displayText: 'faim'}, 
-        {text: 'fbass()', displayText: 'fbass'}, 
-        {text: 'feel()', displayText: 'feel'}, 
-        {text: 'four()', displayText: 'four'}, 
-        {text: 'fuzz()', displayText: 'fuzz'}, 
-        {text: 'glass()', displayText: 'glass'}, 
-        {text: 'glitchbass()', displayText: 'glitchbass'}, 
-        {text: 'glitcher()', displayText: 'glitcher'}, 
-        {text: 'gong()', displayText: 'gong'}, 
+        {text: 'abass()', displayText: 'abass'},
+        {text: 'acidbass()', displayText: 'acidbass'},
+        {text: 'alva()', displayText: 'alva'},
+        {text: 'ambi()', displayText: 'ambi'},
+        {text: 'angst()', displayText: 'angst'},
+        {text: 'arpy()', displayText: 'arpy'},
+        {text: 'arpymod()', displayText: 'arpymod'},
+        {text: 'audioin()', displayText: 'audioin'},
+        {text: 'bass()', displayText: 'bass'},
+        {text: 'bbass()', displayText: 'bbass'},
+        {text: 'bell()', displayText: 'bell'},
+        {text: 'bellmod()', displayText: 'bellmod'},
+        {text: 'blip()', displayText: 'blip'},
+        {text: 'bnoise()', displayText: 'bnoise'},
+        {text: 'bounce()', displayText: 'bounce'},
+        {text: 'braids()', displayText: 'braids'},
+        {text: 'breakcore()', displayText: 'breakcore'},
+        {text: 'brown()', displayText: 'brown'},
+        {text: 'bug()', displayText: 'bug'},
+        {text: 'cbass()', displayText: 'cbass'},
+        {text: 'charm()', displayText: 'charm'},
+        {text: 'click()', displayText: 'click'},
+        {text: 'cluster()', displayText: 'cluster'},
+        {text: 'combs()', displayText: 'combs'},
+        {text: 'crackle()', displayText: 'crackle'},
+        {text: 'creep()', displayText: 'creep'},
+        {text: 'cringe()', displayText: 'cringe'},
+        {text: 'crunch()', displayText: 'crunch'},
+        {text: 'cs80()', displayText: 'cs80'},
+        {text: 'dab()', displayText: 'dab'},
+        {text: 'dafbass()', displayText: 'dafbass'},
+        {text: 'dbass()', displayText: 'dbass'},
+        {text: 'dblbass()', displayText: 'dblbass'},
+        {text: 'dirt()', displayText: 'dirt'},
+        {text: 'donk()', displayText: 'donk'},
+        {text: 'donorgan()', displayText: 'donorgan'},
+        {text: 'dopple()', displayText: 'dopple'},
+        {text: 'dub()', displayText: 'dub'},
+        {text: 'dustV()', displayText: 'dustV'},
+        {text: 'ebass()', displayText: 'ebass'},
+        {text: 'eeri()', displayText: 'eeri'},
+        {text: 'elmbass()', displayText: 'elmbass'},
+        {text: 'ews()', displayText: 'ews'},
+        {text: 'faim()', displayText: 'faim'},
+        {text: 'fbass()', displayText: 'fbass'},
+        {text: 'feel()', displayText: 'feel'},
+        {text: 'four()', displayText: 'four'},
+        {text: 'fuzz()', displayText: 'fuzz'},
+        {text: 'glass()', displayText: 'glass'},
+        {text: 'glitchbass()', displayText: 'glitchbass'},
+        {text: 'glitcher()', displayText: 'glitcher'},
+        {text: 'gong()', displayText: 'gong'},
         {text: 'grat()', displayText: 'grat'},
         {text: 'guit()', displayText: 'guit'},
-        {text: 'gray()', displayText: 'gray'}, 
-        {text: 'growl()', displayText: 'growl'}, 
-        {text: 'gsynth()', displayText: 'gsynth'}, 
-        {text: 'hnoise()', displayText: 'hnoise'}, 
-        {text: 'ikea()', displayText: 'ikea'}, 
-        {text: 'jbass()', displayText: 'jbass'}, 
-        {text: 'karp()', displayText: 'karp'}, 
-        {text: 'keys()', displayText: 'keys'}, 
-        {text: 'klank()', displayText: 'klank'}, 
-        {text: 'lapin()', displayText: 'lapin'}, 
-        {text: 'latoo()', displayText: 'latoo'}, 
-        {text: 'lazer()', displayText: 'lazer'}, 
-        {text: 'lbass()', displayText: 'lbass'}, 
-        {text: 'lfnoise()', displayText: 'lfnoise'}, 
-        {text: 'loop()', displayText: 'loop'}, 
-        {text: 'marimba()', displayText: 'marimba'}, 
-        {text: 'mpluck()', displayText: 'mpluck'}, 
-        {text: 'noise()', displayText: 'noise'}, 
-        {text: 'noloop()', displayText: 'noloop'}, 
-        {text: 'nylon()', displayText: 'nylon'}, 
-        {text: 'onset()', displayText: 'onset'}, 
-        {text: 'organ()', displayText: 'organ'}, 
-        {text: 'orient()', displayText: 'orient'}, 
-        {text: 'orientmod()', displayText: 'orientmod'}, 
-        {text: 'pad2()', displayText: 'pad2'}, 
-        {text: 'pads()', displayText: 'pads'}, 
-        {text: 'pasha()', displayText: 'pasha'}, 
-        {text: 'pbass()', displayText: 'pbass'}, 
-        {text: 'piano()', displayText: 'piano'}, 
-        {text: 'pianovel()', displayText: 'pianovel'}, 
-        {text: 'pink()', displayText: 'pink'}, 
-        {text: 'plaits()', displayText: 'plaits'}, 
-        {text: 'plaitsX()', displayText: 'plaitsX'}, 
-        {text: 'play()', displayText: 'play'}, 
-        {text: 'pluck()', displayText: 'pluck'}, 
-        {text: 'pluck2()', displayText: 'pluck2'}, 
-        {text: 'prof()', displayText: 'prof'}, 
-        {text: 'prophet()', displayText: 'prophet'}, 
-        {text: 'pulse()', displayText: 'pulse'}, 
-        {text: 'quin()', displayText: 'quin'}, 
-        {text: 'radio()', displayText: 'radio'}, 
-        {text: 'rave()', displayText: 'rave'}, 
-        {text: 'razz()', displayText: 'razz'}, 
-        {text: 'rhodes()', displayText: 'rhodes'}, 
-        {text: 'ripple()', displayText: 'ripple'}, 
-        {text: 'rsin()', displayText: 'rsin'}, 
-        {text: 'saw()', displayText: 'saw'}, 
-        {text: 'sawbass()', displayText: 'sawbass'}, 
-        {text: 'scatter()', displayText: 'scatter'}, 
-        {text: 'scratch()', displayText: 'scratch'}, 
-        {text: 'sine()', displayText: 'sine'}, 
-        {text: 'sinepad()', displayText: 'sinepad'}, 
-        {text: 'sitar()', displayText: 'sitar'}, 
-        {text: 'snick()', displayText: 'snick'}, 
-        {text: 'soft()', displayText: 'soft'}, 
-        {text: 'soprano()', displayText: 'soprano'}, 
-        {text: 'sos()', displayText: 'sos'}, 
-        {text: 'space()', displayText: 'space'}, 
-        {text: 'spark()', displayText: 'spark'}, 
-        {text: 'splaffer()', displayText: 'splaffer'}, 
-        {text: 'splitter()', displayText: 'splitter'}, 
-        {text: 'squish()', displayText: 'squish'}, 
-        {text: 'ssaw()', displayText: 'ssaw'}, 
-        {text: 'star()', displayText: 'star'}, 
-        {text: 'stretch()', displayText: 'stretch'}, 
-        {text: 'subbass()', displayText: 'subbass'}, 
-        {text: 'superbass()', displayText: 'superbass'}, 
-        {text: 'supersaw()', displayText: 'supersaw'}, 
-        {text: 'swell()', displayText: 'swell'}, 
-        {text: 'swiss()', displayText: 'swiss'}, 
-        {text: 'tb303()', displayText: 'tb303'}, 
-        {text: 'total()', displayText: 'total'}, 
-        {text: 'tritri()', displayText: 'tritri'}, 
-        {text: 'twang()', displayText: 'twang'}, 
-        {text: 'varicelle()', displayText: 'varicelle'}, 
-        {text: 'varsaw()', displayText: 'varsaw'}, 
-        {text: 'vati()', displayText: 'vati'}, 
-        {text: 'video()', displayText: 'video'}, 
-        {text: 'viola()', displayText: 'viola'}, 
-        {text: 'virus()', displayText: 'virus'}, 
-        {text: 'waves()', displayText: 'waves'}, 
-        {text: 'wobble()', displayText: 'wobble'}, 
+        {text: 'gray()', displayText: 'gray'},
+        {text: 'growl()', displayText: 'growl'},
+        {text: 'gsynth()', displayText: 'gsynth'},
+        {text: 'hnoise()', displayText: 'hnoise'},
+        {text: 'ikea()', displayText: 'ikea'},
+        {text: 'jbass()', displayText: 'jbass'},
+        {text: 'karp()', displayText: 'karp'},
+        {text: 'keys()', displayText: 'keys'},
+        {text: 'klank()', displayText: 'klank'},
+        {text: 'lapin()', displayText: 'lapin'},
+        {text: 'latoo()', displayText: 'latoo'},
+        {text: 'lazer()', displayText: 'lazer'},
+        {text: 'lbass()', displayText: 'lbass'},
+        {text: 'lfnoise()', displayText: 'lfnoise'},
+        {text: 'loop()', displayText: 'loop'},
+        {text: 'marimba()', displayText: 'marimba'},
+        {text: 'mpluck()', displayText: 'mpluck'},
+        {text: 'noise()', displayText: 'noise'},
+        {text: 'noloop()', displayText: 'noloop'},
+        {text: 'nylon()', displayText: 'nylon'},
+        {text: 'onset()', displayText: 'onset'},
+        {text: 'organ()', displayText: 'organ'},
+        {text: 'orient()', displayText: 'orient'},
+        {text: 'orientmod()', displayText: 'orientmod'},
+        {text: 'pad2()', displayText: 'pad2'},
+        {text: 'pads()', displayText: 'pads'},
+        {text: 'pasha()', displayText: 'pasha'},
+        {text: 'pbass()', displayText: 'pbass'},
+        {text: 'piano()', displayText: 'piano'},
+        {text: 'pianovel()', displayText: 'pianovel'},
+        {text: 'pink()', displayText: 'pink'},
+        {text: 'plaits()', displayText: 'plaits'},
+        {text: 'plaitsX()', displayText: 'plaitsX'},
+        {text: 'play()', displayText: 'play'},
+        {text: 'pluck()', displayText: 'pluck'},
+        {text: 'pluck2()', displayText: 'pluck2'},
+        {text: 'prof()', displayText: 'prof'},
+        {text: 'prophet()', displayText: 'prophet'},
+        {text: 'pulse()', displayText: 'pulse'},
+        {text: 'quin()', displayText: 'quin'},
+        {text: 'radio()', displayText: 'radio'},
+        {text: 'rave()', displayText: 'rave'},
+        {text: 'razz()', displayText: 'razz'},
+        {text: 'rhodes()', displayText: 'rhodes'},
+        {text: 'ripple()', displayText: 'ripple'},
+        {text: 'rsin()', displayText: 'rsin'},
+        {text: 'saw()', displayText: 'saw'},
+        {text: 'sawbass()', displayText: 'sawbass'},
+        {text: 'scatter()', displayText: 'scatter'},
+        {text: 'scratch()', displayText: 'scratch'},
+        {text: 'sine()', displayText: 'sine'},
+        {text: 'sinepad()', displayText: 'sinepad'},
+        {text: 'sitar()', displayText: 'sitar'},
+        {text: 'snick()', displayText: 'snick'},
+        {text: 'soft()', displayText: 'soft'},
+        {text: 'soprano()', displayText: 'soprano'},
+        {text: 'sos()', displayText: 'sos'},
+        {text: 'space()', displayText: 'space'},
+        {text: 'spark()', displayText: 'spark'},
+        {text: 'splaffer()', displayText: 'splaffer'},
+        {text: 'splitter()', displayText: 'splitter'},
+        {text: 'squish()', displayText: 'squish'},
+        {text: 'ssaw()', displayText: 'ssaw'},
+        {text: 'star()', displayText: 'star'},
+        {text: 'stretch()', displayText: 'stretch'},
+        {text: 'subbass()', displayText: 'subbass'},
+        {text: 'superbass()', displayText: 'superbass'},
+        {text: 'supersaw()', displayText: 'supersaw'},
+        {text: 'swell()', displayText: 'swell'},
+        {text: 'swiss()', displayText: 'swiss'},
+        {text: 'tb303()', displayText: 'tb303'},
+        {text: 'total()', displayText: 'total'},
+        {text: 'tritri()', displayText: 'tritri'},
+        {text: 'twang()', displayText: 'twang'},
+        {text: 'varicelle()', displayText: 'varicelle'},
+        {text: 'varsaw()', displayText: 'varsaw'},
+        {text: 'vati()', displayText: 'vati'},
+        {text: 'video()', displayText: 'video'},
+        {text: 'viola()', displayText: 'viola'},
+        {text: 'virus()', displayText: 'virus'},
+        {text: 'waves()', displayText: 'waves'},
+        {text: 'wobble()', displayText: 'wobble'},
         {text: 'zap()', displayText: 'zap'}
     ],
     foxKeyword: [
@@ -216,28 +216,54 @@ export const foxdotAutocomplete = {
         { text: 'PRhythm()', displayText: 'PRhythm' },
         { text: 'PJoin()', displayText: 'PJoin' },
     ],
+    fFamily: [
+        { text: 'fi()', displayText: 'fi - linvarIn' },
+        { text: 'fo()', displayText: 'fo - linvarOut' },
+        { text: 'fb()', displayText: 'fb - linvar' },
+        { text: 'fe()', displayText: 'fe - expvar' },
+        { text: 'fs()', displayText: 'fs - sinvar' },
+        { text: 'fr()', displayText: 'fr - PWhite' },
+        { text: 'fw()', displayText: 'fw - PWalk' },
+        { text: 'fg()', displayText: 'fg - PGauss' },
+        { text: 'ft()', displayText: 'ft - PTrir' },
+        { text: 'fc()', displayText: 'fc - PCoin' },
+        { text: 'fq()', displayText: 'fq - PSine' },
+        { text: 'fz()', displayText: 'fz - PSaw' },
+        { text: 'ff()', displayText: 'ff - PFrac' },
+        { text: 'fd()', displayText: 'fd - PWalkDrunk' },
+        { text: 'fl()', displayText: 'fl - PLife' },
+        { text: 'fh()', displayText: 'fh - var' },
+        { text: 'fn()', displayText: 'fn - linvarIn now' },
+        { text: 'fon()', displayText: 'fon - linvarOut now' },
+        { text: 'fbn()', displayText: 'fbn - linvar now' },
+        { text: 'fen()', displayText: 'fen - expvar now' },
+        { text: 'fsn()', displayText: 'fsn - Psine now' },
+        { text: 'frot()', displayText: 'frot - rotate' },
+        { text: 'fxr()', displayText: 'fxr - PxRand' },
+        { text: 'fperlin()', displayText: 'fperlin' },
+    ],
     coolFunction: [
         { text: 'ascii_gen("Crash")', displayText: 'ascii_gen' },
-        { text: 'connect()', displayText: 'connect' },  
-        { text: 'attack()', displayText: 'attack' },  
-        { text: 'lost()', displayText: 'lost' },  
-        { text: 'psynth()', displayText: 'psynth' },  
-        { text: 'psample()', displayText: 'psample' },  
-        { text: 'pfx()', displayText: 'pfx' },  
-        { text: 'ploop()', displayText: 'ploop' },  
-        { text: 'pshort()', displayText: 'pshort' },  
-        { text: 'unsolo()', displayText: 'unsolo' },  
-        { text: 'soloRnd()', displayText: 'soloRnd' },  
-        { text: 'masterAll("")', displayText: 'masterAll' },  
-        { text: 'voice_count()', displayText: 'voice_count' },  
-        { text: 'random_bpm_var()', displayText: 'random_bpm_var' },  
-        { text: 'random_bpm()', displayText: 'random_bpm' },  
-        { text: 'setseed()', displayText: 'setseed' },  
-        { text: 'linbpm(170, 32)', displayText: 'linbpm' },  
-        { text: 'darker()', displayText: 'darker' },  
-        { text: 'lighter()', displayText: 'lighter' },  
-        { text: 'drop()', displayText: 'drop' },  
-        { text: 'drop_bpm()', displayText: 'drop_bpm' },  
+        { text: 'connect()', displayText: 'connect' },
+        { text: 'attack()', displayText: 'attack' },
+        { text: 'lost()', displayText: 'lost' },
+        { text: 'psynth()', displayText: 'psynth' },
+        { text: 'psample()', displayText: 'psample' },
+        { text: 'pfx()', displayText: 'pfx' },
+        { text: 'ploop()', displayText: 'ploop' },
+        { text: 'pshort()', displayText: 'pshort' },
+        { text: 'unsolo()', displayText: 'unsolo' },
+        { text: 'soloRnd()', displayText: 'soloRnd' },
+        { text: 'masterAll("")', displayText: 'masterAll' },
+        { text: 'voice_count()', displayText: 'voice_count' },
+        { text: 'random_bpm_var()', displayText: 'random_bpm_var' },
+        { text: 'random_bpm()', displayText: 'random_bpm' },
+        { text: 'setseed()', displayText: 'setseed' },
+        { text: 'linbpm(170, 32)', displayText: 'linbpm' },
+        { text: 'darker()', displayText: 'darker' },
+        { text: 'lighter()', displayText: 'lighter' },
+        { text: 'drop()', displayText: 'drop' },
+        { text: 'drop_bpm()', displayText: 'drop_bpm' },
         { text: 'chaos()', displayText: 'chaos' },
         { text: 'Clock.bpm=', displayText: 'Clock' },
         { text: 'Scale.default=', displayText: 'Scale' },
@@ -250,20 +276,20 @@ export const foxdotAutocomplete = {
         { text: 'Server.debugFx()', displayText: 'Server.debugFx' },
     ],
     playerFunction: [
-        { text: 'gtr()', displayText: 'gtr' }, 
-        { text: 'chroma()', displayText: 'chroma' }, 
-        { text: 'porta()', displayText: 'porta' }, 
-        { text: 'gtr()', displayText: 'gtr' }, 
-        { text: 'morph()', displayText: 'morph' }, 
-        { text: 'trim()', displayText: 'trim' }, 
-        { text: 'unison()', displayText: 'unison' }, 
-        { text: 'human()', displayText: 'human' }, 
-        { text: 'fill()', displayText: 'fill' }, 
-        { text: 'brk()', displayText: 'brk' }, 
-        { text: 'switch()', displayText: 'switch' }, 
-        { text: 'clone()', displayText: 'clone' }, 
-        { text: 'once()', displayText: 'once' }, 
-        { text: 'start(32)', displayText: 'start' }, 
+        { text: 'gtr()', displayText: 'gtr' },
+        { text: 'chroma()', displayText: 'chroma' },
+        { text: 'porta()', displayText: 'porta' },
+        { text: 'gtr()', displayText: 'gtr' },
+        { text: 'morph()', displayText: 'morph' },
+        { text: 'trim()', displayText: 'trim' },
+        { text: 'unison()', displayText: 'unison' },
+        { text: 'human()', displayText: 'human' },
+        { text: 'fill()', displayText: 'fill' },
+        { text: 'brk()', displayText: 'brk' },
+        { text: 'switch()', displayText: 'switch' },
+        { text: 'clone()', displayText: 'clone' },
+        { text: 'once()', displayText: 'once' },
+        { text: 'start(32)', displayText: 'start' },
         { text: 'drummer()', displayText: 'drummer' },
         { text: 'sometimes("stutter")', displayText: 'sometimes'},
         { text: 'often()', displayText: 'often'},
@@ -279,7 +305,7 @@ export const foxdotAutocomplete = {
         { text: 'offadd()', displayText: 'offadd' },
         { text: 'offmul()', displayText: 'offmul' },
         { text: 'amen()', displayText: 'amen' },
-        { text: 'bubble()', displayText: 'bubble' }, 
+        { text: 'bubble()', displayText: 'bubble' },
     ],
     scales: [
         { text: '"aeolian"', displayText: 'aeolian' },
@@ -435,7 +461,7 @@ export const foxdotAutocomplete = {
         { text: 'end', displayText: 'end' },
     ],
     serverFunction: [
-        
+
     ],
 
     _currentView: 'categories',
@@ -462,7 +488,7 @@ export const foxdotAutocomplete = {
         const playerPattern = /([a-zA-Z0-9]+\d*)\s*>>\s*(\w*\(?)/;
 
         const matchPlayer = beforeCursor.match(playerPattern);
-        const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;        
+        const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;
         const afterLastClosingParenthesis = /.*\)\s*\./;
         const loopPattern = /(loop|gsynth|splaffer|splitter|breakcore)\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
@@ -647,21 +673,21 @@ export const foxdotAutocomplete = {
         else if (isInsideParentheses) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z:]/g, "");
             let foxdotKeyword = [];
-            
+
             // Fx suggestion
             if (prefix.startsWith('x')) {
                 const fxPrefix = prefix.slice(1,).toLowerCase();
-                
+
                 // Si on tape juste 'x' sans autre caractère, afficher les catégories
                 if (fxPrefix === '') {
                     // Add "All" category first
                     foxdotKeyword.push(this.createCategorySeparator("All", "All", "fx"));
-                    
+
                     // Add other categories sorted alphabetically
                     const sortedFxCategories = Object.keys(this.fxCategories)
                         .filter(key => key && key.trim() !== "" && key !== "Uncategorized")
                         .sort((a, b) => a.localeCompare(b));
-                    
+
                     sortedFxCategories.forEach(categoryKey => {
                         foxdotKeyword.push(this.createCategorySeparator(categoryKey, categoryKey, "fx"));
                     });
@@ -672,7 +698,7 @@ export const foxdotAutocomplete = {
             }
             // Keyword and pattern function suggestion
             else {
-                const combinedKeyword = [...this.foxKeyword, ...this.patternFunction];
+                const combinedKeyword = [...this.foxKeyword, ...this.patternFunction, ...this.fFamily];
                 foxdotKeyword = combinedKeyword.filter(f => f.displayText.toLowerCase().startsWith(prefix.toLowerCase()));;
             }
             return {
@@ -695,27 +721,27 @@ export const foxdotAutocomplete = {
         else if (matchPlayer) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredSynths = [];
-            
+
             const synthPrefix = prefix.toLowerCase();
-            
+
             // Détecter si des parenthèses existent déjà après le synth actuel
             const hasParenthesesAfter = afterCursor.trimStart().startsWith('(');
-            
+
             if (synthPrefix === '') {
                 // Add "All" category first
                 filteredSynths.push(this.createCategorySeparator("All", "All", "synth"));
-                
+
                 // Add other categories sorted alphabetically
                 const sortedSynthCategories = Object.keys(this.synthCategories)
                     .filter(key => key && key.trim() !== "" && key !== "Uncategorized")
                     .sort((a, b) => a.localeCompare(b));
-                
+
                 sortedSynthCategories.forEach(categoryKey => {
                     filteredSynths.push(this.createCategorySeparator(categoryKey, categoryKey, "synth"));
                 });
             } else {
                 filteredSynths = this.synths.filter(synth => synth.displayText.toLowerCase().startsWith(synthPrefix));
-                
+
                 // Si des parenthèses existent déjà, retirer les parenthèses du text des synths
                 if (hasParenthesesAfter) {
                     filteredSynths = filteredSynths.map(synth => ({
@@ -804,12 +830,12 @@ export const foxdotAutocomplete = {
         if (!itemList || itemList.length === 0) {
             return {};
         }
-        
+
         const categorizedItems = {};
-        
+
         itemList.forEach(item => {
             const categoryString = item[categoryField] || '';
-            
+
             const categories = categoryString.split(',').map(cat => cat.trim()).filter(cat => cat !== '');
 
             if (categories.length === 0) {
@@ -822,18 +848,18 @@ export const foxdotAutocomplete = {
                 if (!categorizedItems[normalizedCategory]) {
                     categorizedItems[normalizedCategory] = [];
                 }
-                
+
                 categorizedItems[normalizedCategory].push(item);
             });
         });
-        
+
         // Sort items within each category alphabetically
         Object.keys(categorizedItems).forEach(category => {
-            categorizedItems[category].sort((a, b) => 
+            categorizedItems[category].sort((a, b) =>
                 a.displayText.localeCompare(b.displayText)
             );
         });
-        
+
         return categorizedItems;
     },
 
@@ -870,28 +896,28 @@ export const foxdotAutocomplete = {
         let categoryItems;
         let categoriesMap;
         let allItemsList;
-        
+
         // Determine which categories and items to use
         if (categoryType === 'fx') {
             categoriesMap = this.fxCategories;
             allItemsList = this.fxList;
-        } 
+        }
         else if (categoryType === 'synth') {
             categoriesMap = this.synthCategories;
             allItemsList = this.synths;
-        } 
+        }
         else {
             categoriesMap = this.attackCategories;
             allItemsList = this.attackList;
         }
-        
+
         // Special case for "All" category
         if (categoryKey === "All") {
             categoryItems = [...allItemsList].sort((a, b) => a.displayText.localeCompare(b.displayText));
         } else {
             categoryItems = categoriesMap[categoryKey];
         }
-        
+
         if (!categoryItems || categoryItems.length === 0) {
             return null;
         }
@@ -902,12 +928,12 @@ export const foxdotAutocomplete = {
         const line = cm.getLine(cursor.line);
         const afterCursor = line.slice(cursor.ch);
         let fromPos, toPos;
-        
+
         if (categoryType === 'fx') {
             // Pour les FX, on doit remplacer le 'x' qui a été tapé
             // On cherche le début du token qui contient 'x'
             const tokenStr = token.string;
-            
+
             // Si le token commence par 'x', on remplace depuis le début du token
             if (tokenStr.toLowerCase().startsWith('x')) {
                 fromPos = cm.constructor.Pos(cursor.line, token.start);
@@ -920,7 +946,7 @@ export const foxdotAutocomplete = {
         } else if (categoryType === 'synth') {
             // Pour les synths, vérifier si des parenthèses existent déjà
             const hasParenthesesAfter = afterCursor.trimStart().startsWith('(');
-            
+
             // Trouver la position de début du synth (après >>)
             const playerMatch = line.match(/([a-zA-Z0-9]+\d*)\s*>>\s*/);
             if (playerMatch) {
@@ -950,24 +976,24 @@ export const foxdotAutocomplete = {
                 // Extraire le BPM (2 ou 3 chiffres après un espace)
                 const bpmMatch = item.displayText.match(/\s(\d{2,4})$/);
                 const bpm = bpmMatch ? bpmMatch[1] : null;
-                
+
                 // Nettoyer le displayText en enlevant le BPM
                 let cleanName = bpm ? item.displayText.replace(/\s\d{2,4}$/, '').trim() : item.displayText;
                 cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
-                
+
                 return {
                     text: item.text,
                     displayText: cleanName,
                     bpm: bpm,
                     render: function(element, self, data) {
                         element.innerHTML = '';
-                        
+
                         // Créer le nom de l'attack
                         const nameSpan = document.createElement('span');
                         nameSpan.className = 'attack-name';
                         nameSpan.textContent = data.displayText;
                         element.appendChild(nameSpan);
-                        
+
                         // Ajouter le tag BPM si présent
                         if (data.bpm) {
                             const bpmTag = document.createElement('span');
@@ -984,7 +1010,7 @@ export const foxdotAutocomplete = {
                     displayText: item.displayText,
                     render: function(element, self, data) {
                         element.innerHTML = '';
-                        
+
                         // Créer le nom du FX
                         const nameSpan = document.createElement('span');
                         nameSpan.className = 'fx-name';
@@ -997,16 +1023,16 @@ export const foxdotAutocomplete = {
                 const line = cm.getLine(cm.getCursor().line);
                 const afterCursor = line.slice(cm.getCursor().ch);
                 const hasParenthesesAfter = afterCursor.trimStart().startsWith('(');
-                
+
                 // Si des parenthèses existent, ne pas inclure les () dans le text
                 const synthText = hasParenthesesAfter ? item.displayText : item.text;
-                
+
                 return {
                     text: synthText,
                     displayText: item.displayText,
                     render: function(element, self, data) {
                         element.innerHTML = '';
-                        
+
                         // Créer le nom du Synth
                         const nameSpan = document.createElement('span');
                         nameSpan.className = 'synth-name';
@@ -1016,7 +1042,7 @@ export const foxdotAutocomplete = {
                 };
             }
         });
-        
+
         const items = [
             this.createBackButton(categoryKey),
             ...formattedItems
@@ -1035,34 +1061,34 @@ export const foxdotAutocomplete = {
 
     getEffectiveToken: function(cm, cursor) {
         const token = cm.getTokenAt(cursor);
-        
+
         if (token.type === "comment") {
             const line = cm.getLine(cursor.line);
             const cursorCh = cursor.ch;
-            
+
             let start = cursorCh;
             let end = cursorCh;
-            
+
             // Caractères valides pour un identifiant
             const validChar = /[a-zA-Z_0-9]/;
-            
+
             while (start > 0 && validChar.test(line[start - 1])) {
             start--;
             }
-            
+
             while (end < line.length && validChar.test(line[end])) {
             end++;
             }
-            
+
             return {
             ...token,
             start: start,
             end: end,
             string: line.slice(start, end),
-            type: "comment" 
+            type: "comment"
             };
         }
-    
+
         return token;
     },
 }

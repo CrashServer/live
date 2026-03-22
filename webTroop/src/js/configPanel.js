@@ -22,6 +22,8 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const consoleToggle = document.getElementById('consoleToggle');
     const guttersToggle = document.getElementById('guttersToggle');
     const audiovizToggle = document.getElementById('audiovizToggle');
+    const consoleElement = document.getElementById('logPanel');
+    const logs = document.getElementById('logs');
     const themeSelect = document.getElementById('themeSelect');
 
 
@@ -316,7 +318,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
 
     // Gestion de la console
     function toggleConsole(visible) {
-        const consoleElement = document.getElementById('logPanel');
+
         if (visible) {
             consoleElement.style.display = 'flex';
         } else {
@@ -361,7 +363,8 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
                 });
             }
         } else {
-            audioVizElement.style.display = 'none';
+          audioVizElement.style.display = 'none';
+          logs.style.width = '100%';
             // Arrêter l'analyseur audio pour économiser les ressources
             if (audioAnalyzer && audioAnalyzer.isRunning) {
                 audioAnalyzer.stop();

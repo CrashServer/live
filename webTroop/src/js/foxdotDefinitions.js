@@ -54,6 +54,8 @@ const func = {
     linbpm: '(endBpm=170, durBpm=128)\r\n use with Clock.bpm = linbpm(220, 12) to change bpm from current bpm to target in x beats',
     linmod: '(start, end, duration, default=0)\r\n linvar from start to end during duration at next mod(duration) and switch back to default',
     PDrum: '(style=None, pat="", listen=False, khsor="", duree=0.5, spl=0, charPlayer="d")\r\n Generate a drum pattern style ',
+    pbuild: '(genre="techno", evolve=8, fill=0, density=1.0, mute=None, seed=None, **overrides)\r\n Genre-aware drum pattern builder.\n Genres: techno, ebm, dnb, house, breaks, halftime, industrial, reggae, afro\n evolve: bars of evolution (1=static, 8=default)\n Overrides: kick="...", snare="...", hat="...", perc="..."\n e.g. pbuild("techno", 4) pbuild("techno", 16, fill=4)',
+    pat: '(code)\r\n Named drum pattern. Codes: t1-t6(techno) e1-e5(ebm) d1-d5(dnb) h1-h3(house) b1-b4(breaks) hf1-hf3(halftime) i1-i4(industrial) rg1-rg3(reggae) af1-af3(afro)',
     PChords: '(chord=None, **kwargs)\r\n Chords generator ',
     PGauss: '(mean=0, deviation=1, **kwargs)\r\n Returns random floating point values using Gaussian distribution ',
     PLog: '(mean=0, deviation=1, **kwargs)\r\n Returns random floating point values using logarithmic distribution ',
@@ -211,7 +213,18 @@ const fxList = {
   fx2: 'fx2: 0, lpfx2: 22000, hpfx2: 0, fx2mix: 1, sus: 1',
   fx: 'fx: 0, lpfx: 22000, hpfx: 0, fxout: 2, fxmix: 1, sus: 1',
   output: 'output: 0, sus: 1',
-  mon: 'mon: 0, sus: 1'
+  mon: 'mon: 0, sus: 1',
+  subenh: 'subenh: 0, subhfreq: 100, subhgain: 1',
+  spring: 'spring: 0, sprdecay: 1.5, sprdamp: 0.5, sprtens: 0.5',
+  sblur: 'sblur: 0, sbluramt: 4',
+  gdel: 'gdel: 0, gdeltime: 0.5, gdelsize: 0.1, gdelsprd: 0.5, gdelfb: 0.3',
+  mbcomp: 'mbcomp: 0, mbcxlo: 200, mbcxhi: 3000, mbcrat: 3, mbcatk: 0.01, mbcrel: 0.1',
+  vocod: 'vocod: 0, voccarr: 0.5, vocbw: 0.3',
+  sgate: 'sgate: 0, sgthresh: 1, sgmode: 0',
+  spwarp: 'spwarp: 0, spwstr: 1.5, spwshift: 0',
+  csweep: 'csweep: 0, cswfreq: 200, cswdepth: 0.3, cswrate: 0.5, cswdecay: 0.5',
+  doppler: 'doppler: 0, dopspd: 0.5, dopdist: 1.0',
+  vowel: 'vowel: 0, vowelf: 0, vowelq: 1'
 };
 
 const synthList = {
@@ -351,7 +364,8 @@ const synthList = {
   ambi: 'rate=0',
   alva: 'freq=240, gate=1, dur',
   acidbass: 'freq=440, gate=1, dec=0.4, curve=-4, rate=4, width=0.51, rq=0.4',
-  abass: 'freq=440, gate=1, spread=0.8, cutoff=2800, rq=0.8'
+  abass: 'freq=440, gate=1, spread=0.8, cutoff=2800, rq=0.8',
+  tekno: 'tcut=800, trez=0.5, tenv=4000, tdec=0.3, tlfo=0, tmod=0, tsub=0.6, tgrit=0.5, tfold=0, tpw=0.5, tsync=0, txmod=0'
 };
 
 // Dictionnaire de définitions (mutable) fusionnant statique + dynamique

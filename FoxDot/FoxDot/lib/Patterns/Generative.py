@@ -16,15 +16,21 @@ class PLife(GeneratorPattern):
     ''' Returns values shaped by cellular automaton rules.
         `chaos`: 0.0 (linear/steady) to 1.0 (fully chaotic)
         `steps`: grid size / repetition length (default 16)
-        e.g. `amplify=PLife(0.0)` completely linear
-             `amplify=PLife(1.0)` maximum chaos
-             `amplify=PLife(0.5, 4)` medium chaos, 4-step grid '''
+        `low`:   minimum output value (default 0)
+        `high`:  maximum output value (default 1)
+        e.g. `amplify=PLife(0.5)`         — amp values in [0.5, 1.0]
+             `degree=PLife(0.7, 0, 7)`   — scale degrees 0-7
+             `oct=PLife(0.3, 4, 6)`      — octave range 4-6
+             `lpf=PLife(0.6, 400, 4000)` — filter sweep '''
 
-    def __init__(self, chaos=0.0, steps=16, **kwargs):
+    def __init__(self, chaos=0.0, low=0, high=1, steps=16, **kwargs):
         GeneratorPattern.__init__(self, **kwargs)
-        self.args = (chaos, steps)
+        self.args = (chaos, low, high, steps)
         self.chaos = float(chaos)
         self.steps = steps
+        self.low = low
+        self.high = high
+        self._use_int = isinstance(low, int) and isinstance(high, int)
         self._grid = []
         self._rule = self._chaos_to_rule(self.chaos)
         self._compute_grid(256)
@@ -72,9 +78,27 @@ class PLife(GeneratorPattern):
     def func(self, index):
         r = index // self.steps
         c = index % self.steps
-        if r >= len(self._grid):
-            self._compute_grid(r + 256)
-        raw = self._grid[r][c]
         if self.chaos <= 0.0:
-            return 1.0
-        return raw * self.chaos + (1.0 - self.chaos)
+            return self.high
+        # Use a local neighborhood density for continuous output
+        radius = 2
+        needed = r + radius + 1
+        if needed >= len(self._grid):
+            self._compute_grid(needed + 256)
+        total = 0
+        count = 0
+        for dr in range(-radius, radius + 1):
+            ri = r + dr
+            if ri < 0:
+                continue
+            for dc in range(-radius, radius + 1):
+                ci = (c + dc) % self.steps
+                total += self._grid[ri][ci]
+                count += 1
+        density = total / count
+        # chaos controls how much of the range is used
+        floor = self.low + (self.high - self.low) * (1.0 - self.chaos)
+        val = floor + (self.high - floor) * density
+        if self._use_int:
+            return int(round(val))
+        return val

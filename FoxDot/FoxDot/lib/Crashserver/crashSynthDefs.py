@@ -504,6 +504,9 @@ compkick.add()
 pumpbass = FileSynthDef("pumpbass")
 pumpbass.add()
 
+tekno = FileSynthDef("tekno")
+tekno.add()
+
 compperc = FileSynthDef("compperc")
 compperc.add()
 

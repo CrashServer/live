@@ -13,7 +13,6 @@ if __name__ != "__main__":
         from .Settings import FOXDOT_ROOT, SAMPLES_BANK
         from .Buffers import alpha, nonalpha
         from .DrumPatterns import pbuild, pkit, pat, genres as drum_genres
-        from .MelodyPatterns import gen, gp, gen_genres, gen_roles, gen_show
 
         from pathlib import Path
         sys.path.append(str(Path('.').absolute().parent))
@@ -183,19 +182,6 @@ if __name__ != "__main__":
                 return self
             except Exception as e:
                 return self
-
-        @player_method
-        def pgen(self, genre="techno", role="bass", evolve=1, idx=None, seed=None):
-            """ Generate melody/bass/pad/arp pattern. Sets degree, sus, amp.
-            e.g. .pgen("techno", "bass")  .pgen("metal", "lead", 8)
-                 .pgen("gesaffelstein", "bass", seed=42)
-            """
-            from .MelodyPatterns import gen as _gen
-            p = _gen(genre, role, evolve=evolve, idx=idx, seed=seed)
-            self.degree = list(p)
-            self.sus = p.sus
-            self.amp = p.amp
-            return self
 
         @player_method
         def fill(self, mute_player=0, on=1):

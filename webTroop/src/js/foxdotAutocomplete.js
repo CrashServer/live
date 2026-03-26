@@ -161,8 +161,6 @@ export const foxdotAutocomplete = {
         { text: 'PTimebin()', displayText: 'PTimebin' },
         { text: 'linmod()', displayText: 'linmod' },
         { text: 'PDrum()', displayText: 'PDrum' },
-        { text: 'gen("techno", "bass")', displayText: 'gen - melody pattern' },
-        { text: 'gp("tb1")', displayText: 'gp - named melody' },
         { text: 'PChords()', displayText: 'PChords' },
         { text: 'PGauss()', displayText: 'PGauss' },
         { text: 'PLog()', displayText: 'PLog' },
@@ -294,17 +292,6 @@ export const foxdotAutocomplete = {
         { text: 'once()', displayText: 'once' },
         { text: 'start(32)', displayText: 'start' },
         { text: 'drummer()', displayText: 'drummer' },
-        { text: 'gen("techno", "bass")', displayText: 'gen - melody generator' },
-        { text: 'pgen("techno", "bass")', displayText: 'pgen - melody player method' },
-        { text: 'pgen("techno", "lead")', displayText: 'pgen - lead' },
-        { text: 'pgen("techno", "pad")', displayText: 'pgen - pad' },
-        { text: 'pgen("techno", "arp")', displayText: 'pgen - arp' },
-        { text: 'pgen("techno", "stab")', displayText: 'pgen - stab' },
-        { text: 'pgen("gesaffelstein", "bass")', displayText: 'pgen - gesaffelstein bass' },
-        { text: 'pgen("metal", "bass")', displayText: 'pgen - metal bass' },
-        { text: 'pgen("minimal", "bass")', displayText: 'pgen - minimal bass' },
-        { text: 'pgen("dnb", "bass")', displayText: 'pgen - dnb bass' },
-        { text: 'pgen("industrial", "bass")', displayText: 'pgen - industrial bass' },
         { text: 'sometimes("stutter")', displayText: 'sometimes'},
         { text: 'often()', displayText: 'often'},
         { text: 'rarely()', displayText: 'rarely'},
@@ -558,9 +545,6 @@ export const foxdotAutocomplete = {
         const lostPattern =/(lost|attack|fire|compose|sections)\([^)]*$/
         const pbuildPattern = /pbuild\(([^)]*)$/;
         const patPattern = /pat\(([^)]*)$/;
-        const pgenPattern = /\.pgen\(([^)]*)$/;
-        const genPattern = /(?<!\.)gen\(([^)]*)$/;
-        const gpPattern = /gp\(([^)]*)$/;
         const scenePattern = /!/;
 
         // Random player name suggestion
@@ -717,122 +701,6 @@ export const foxdotAutocomplete = {
             const prefix = content.replace(/["']/g, '').trim().toLowerCase();
             const filtered = prefix.length > 0
                 ? codes.filter(c => c.displayText.toLowerCase().startsWith(prefix))
-                : codes;
-            return {
-                list: filtered,
-                from: CodeMirror.Pos(cursor.line, functionStart),
-                to: CodeMirror.Pos(cursor.line, end),
-            };
-        }
-        // pgen() / gen() — suggest genres then roles inside parentheses
-        else if (pgenPattern.test(beforeCursor) || genPattern.test(beforeCursor)) {
-            const isPgen = pgenPattern.test(beforeCursor);
-            const match = beforeCursor.match(isPgen ? pgenPattern : genPattern);
-            const content = match[1];
-            const funcStr = isPgen ? '.pgen(' : 'gen(';
-            const functionStart = beforeCursor.lastIndexOf(funcStr) + funcStr.length;
-            const closingParen = line.indexOf(')', functionStart);
-            const end = closingParen !== -1 ? closingParen : cursorPosition;
-
-            // Count commas to detect which argument
-            const commaCount = (content.match(/,/g) || []).length;
-
-            if (commaCount >= 2) {
-                // Third+ arg — show params
-                const params = [
-                    { text: 'seed=42', displayText: 'seed — reproducible' },
-                    { text: 'idx=0', displayText: 'idx — specific pattern' },
-                ];
-                return {
-                    list: params,
-                    from: CodeMirror.Pos(cursor.line, cursorPosition),
-                    to: CodeMirror.Pos(cursor.line, cursorPosition),
-                };
-            }
-
-            if (commaCount === 1) {
-                // Second arg — show roles
-                const roles = [
-                    { text: '"bass"', displayText: 'bass' },
-                    { text: '"lead"', displayText: 'lead' },
-                    { text: '"pad"', displayText: 'pad' },
-                    { text: '"arp"', displayText: 'arp' },
-                    { text: '"stab"', displayText: 'stab' },
-                ];
-                const afterComma = content.split(',').pop().trim();
-                const prefix = afterComma.replace(/["'\s]/g, '').toLowerCase();
-                const filtered = prefix.length > 0
-                    ? roles.filter(r => r.displayText.startsWith(prefix))
-                    : roles;
-                const commaPos = content.lastIndexOf(',');
-                const roleStart = functionStart + commaPos + 1;
-                return {
-                    list: filtered,
-                    from: CodeMirror.Pos(cursor.line, roleStart),
-                    to: CodeMirror.Pos(cursor.line, end),
-                };
-            }
-
-            // First arg — show genres
-            const genres = [
-                { text: '"techno"', displayText: 'techno' },
-                { text: '"gesaffelstein"', displayText: 'gesaffelstein' },
-                { text: '"minimal"', displayText: 'minimal' },
-                { text: '"metal"', displayText: 'metal' },
-                { text: '"dnb"', displayText: 'dnb' },
-                { text: '"dub"', displayText: 'dub' },
-                { text: '"ebm"', displayText: 'ebm' },
-                { text: '"acid"', displayText: 'acid' },
-                { text: '"ambient"', displayText: 'ambient' },
-                { text: '"industrial"', displayText: 'industrial' },
-                { text: '"idm"', displayText: 'idm' },
-            ];
-            const prefix = content.replace(/["']/g, '').trim().toLowerCase();
-            const filtered = prefix.length > 0
-                ? genres.filter(g => g.displayText.startsWith(prefix))
-                : genres;
-            return {
-                list: filtered,
-                from: CodeMirror.Pos(cursor.line, functionStart),
-                to: CodeMirror.Pos(cursor.line, end),
-            };
-        }
-        // gp() — suggest named pattern codes
-        else if (gpPattern.test(beforeCursor)) {
-            const match = beforeCursor.match(gpPattern);
-            const content = match[1];
-            const functionStart = beforeCursor.lastIndexOf('gp(') + 3;
-            const closingParen = line.indexOf(')', functionStart);
-            const end = closingParen !== -1 ? closingParen : cursorPosition;
-
-            const codes = [
-                { text: '"tb1"', displayText: 'tb1 — techno bass' },
-                { text: '"tl1"', displayText: 'tl1 — techno lead' },
-                { text: '"tp1"', displayText: 'tp1 — techno pad' },
-                { text: '"ta1"', displayText: 'ta1 — techno arp' },
-                { text: '"ts1"', displayText: 'ts1 — techno stab' },
-                { text: '"gb1"', displayText: 'gb1 — gesaffelstein bass' },
-                { text: '"gl1"', displayText: 'gl1 — gesaffelstein lead' },
-                { text: '"gs1"', displayText: 'gs1 — gesaffelstein stab' },
-                { text: '"mb1"', displayText: 'mb1 — minimal bass' },
-                { text: '"ml1"', displayText: 'ml1 — minimal lead' },
-                { text: '"mtb1"', displayText: 'mtb1 — metal bass' },
-                { text: '"mtl1"', displayText: 'mtl1 — metal lead' },
-                { text: '"db1"', displayText: 'db1 — dnb bass' },
-                { text: '"dl1"', displayText: 'dl1 — dnb lead' },
-                { text: '"dub1"', displayText: 'dub1 — dub bass' },
-                { text: '"dul1"', displayText: 'dul1 — dub lead' },
-                { text: '"eb1"', displayText: 'eb1 — ebm bass' },
-                { text: '"el1"', displayText: 'el1 — ebm lead' },
-                { text: '"acb1"', displayText: 'acb1 — acid bass' },
-                { text: '"amp1"', displayText: 'amp1 — ambient pad' },
-                { text: '"ib1"', displayText: 'ib1 — industrial bass' },
-                { text: '"idb1"', displayText: 'idb1 — idm bass' },
-                { text: '"idl1"', displayText: 'idl1 — idm lead' },
-            ];
-            const prefix = content.replace(/["']/g, '').trim().toLowerCase();
-            const filtered = prefix.length > 0
-                ? codes.filter(c => c.displayText.toLowerCase().includes(prefix))
                 : codes;
             return {
                 list: filtered,

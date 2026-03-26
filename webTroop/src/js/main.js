@@ -539,21 +539,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Alt-P": () => {
       document.getElementById("piano-roll").classList.toggle("hidden");
     },
+    "Alt-T": (cm) => {
+      functionUtils.autoRecToggle(cm, evaluateCode, wsServer);
+    },
     "Alt-Up": (cm) => {
       functionUtils.incrementValue(cm, 1);
       evaluateCode(cm, false);
+      functionUtils.autoRecCapture(cm);
     },
     "Alt-Down": (cm) => {
       functionUtils.incrementValue(cm, -1);
       evaluateCode(cm, false);
+      functionUtils.autoRecCapture(cm);
     },
     "Ctrl-Up": (cm) => {
       functionUtils.incrementValue(cm, 10);
       evaluateCode(cm, false);
+      functionUtils.autoRecCapture(cm);
     },
     "Ctrl-Down": (cm) => {
       functionUtils.incrementValue(cm, -10);
       evaluateCode(cm, false);
+      functionUtils.autoRecCapture(cm);
     },
     "Alt-A": (cm) => {
       functionUtils.randomizer(cm);
@@ -564,8 +571,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Alt-O": (cm) => {
       functionUtils.soloDrop(cm, wsServer);
     },
-    Esc: () => {
-      removeAllTooltips();
+    Esc: (cm) => {
+      if (functionUtils._autoRec.armed) {
+        functionUtils.autoRecCancel(cm, evaluateCode);
+      } else {
+        removeAllTooltips();
+      }
     },
     // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });

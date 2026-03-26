@@ -33,3 +33,54 @@ Server.addFx(hpf=0)
 k4 >> play("K ", sample=7, amp=2)
                   
 d1.dur=8
+
+
+#@intro(32)
+Clock.bpm = 122;
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=3, lpf=0, lpr=0.1).unison(4)
+
+
+
+#@build(16)
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.3, high=1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+#@peak(16)
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.2, high=1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+#@break(16)
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.3, high=1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+#fully automated
+
+#@drop(32)
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+#@outro(16)
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)
+d2 >> play("p ", combres=0.9, combfreq=100, combdecay=0.3, combspread=0.01)
+
+#@part7(16)
+d4 >> play("x", dur=0.5, mverb=1, rate=2, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0, cheapverb=PBin(8), cvdecay=1.5, cvdamp=0.5, amp=Pacc(6, 4), amplify=PLife(0.5), hpf=3200, echo=0.25, sample=6, resonbank=0.1, rbfreq=36, rbdecay=0.5, rbspread=1, glitch=0.5, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+
+#@part8(16)
+d8 >> play(".-u-", dur=0.25, amp=Pacc(4))
+d6 >> play("..U:", rfreq=8000, resonz=0.4, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.11, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+#@part10(16)
+d1 >> play("x", csweep=0.1, cswfreq=[200], cswdepth=0.4, cswrate=0.5, cswdecay=0.5, shape=0.1)
+
+#@part11(8)
+d1 >> play("x", csweep=0.1, cswfreq=400, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+#@part12(8)
+d1 >> play("x", csweep=0.1, cswfreq=800, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+d2 >> play("X ")
+
+#@part13(16)
+d1 >> play("x", csweep=0.1, cswfreq=100, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+d1 >> play("x", csweep=-0.9, cswfreq=100, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+#@part13(16)
+Server.addFx(tstop=1, tstoptime=16)
+
+#@endfade(16)

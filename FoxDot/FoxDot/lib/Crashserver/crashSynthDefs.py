@@ -507,6 +507,9 @@ pumpbass.add()
 tekno = FileSynthDef("tekno")
 tekno.add()
 
+grandpiano = FileSynthDef("grandpiano")
+grandpiano.add()
+
 compperc = FileSynthDef("compperc")
 compperc.add()
 

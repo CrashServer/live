@@ -137,6 +137,7 @@ export const foxdotAutocomplete = {
         {text: 'viola()', displayText: 'viola'},
         {text: 'virus()', displayText: 'virus'},
         {text: 'waves()', displayText: 'waves'},
+        {text: 'tekno()', displayText: 'tekno'},
         {text: 'wobble()', displayText: 'wobble'},
         {text: 'zap()', displayText: 'zap'}
     ],
@@ -306,6 +307,55 @@ export const foxdotAutocomplete = {
         { text: 'offmul()', displayText: 'offmul' },
         { text: 'amen()', displayText: 'amen' },
         { text: 'bubble()', displayText: 'bubble' },
+    ],
+    drumPatterns: [
+        { text: 'pbuild("techno")', displayText: 'pbuild("techno")' },
+        { text: 'pbuild("ebm")', displayText: 'pbuild("ebm")' },
+        { text: 'pbuild("dnb")', displayText: 'pbuild("dnb")' },
+        { text: 'pbuild("house")', displayText: 'pbuild("house")' },
+        { text: 'pbuild("breaks")', displayText: 'pbuild("breaks")' },
+        { text: 'pbuild("halftime")', displayText: 'pbuild("halftime")' },
+        { text: 'pbuild("industrial")', displayText: 'pbuild("industrial")' },
+        { text: 'pbuild("reggae")', displayText: 'pbuild("reggae")' },
+        { text: 'pbuild("afro")', displayText: 'pbuild("afro")' },
+        { text: 'pbuild("techno", 16, fill=4)', displayText: 'pbuild fill' },
+        { text: 'pbuild("techno", 8, fill=4, density=0.8)', displayText: 'pbuild full' },
+        { text: 'pat("t1")', displayText: 'pat("t1") techno' },
+        { text: 'pat("t2")', displayText: 'pat("t2") techno' },
+        { text: 'pat("t3")', displayText: 'pat("t3") techno' },
+        { text: 'pat("t4")', displayText: 'pat("t4") techno' },
+        { text: 'pat("t5")', displayText: 'pat("t5") techno' },
+        { text: 'pat("t6")', displayText: 'pat("t6") techno' },
+        { text: 'pat("e1")', displayText: 'pat("e1") ebm' },
+        { text: 'pat("e2")', displayText: 'pat("e2") ebm' },
+        { text: 'pat("e3")', displayText: 'pat("e3") ebm' },
+        { text: 'pat("e4")', displayText: 'pat("e4") ebm' },
+        { text: 'pat("e5")', displayText: 'pat("e5") ebm' },
+        { text: 'pat("d1")', displayText: 'pat("d1") dnb' },
+        { text: 'pat("d2")', displayText: 'pat("d2") dnb' },
+        { text: 'pat("d3")', displayText: 'pat("d3") dnb' },
+        { text: 'pat("d4")', displayText: 'pat("d4") dnb' },
+        { text: 'pat("d5")', displayText: 'pat("d5") dnb' },
+        { text: 'pat("h1")', displayText: 'pat("h1") house' },
+        { text: 'pat("h2")', displayText: 'pat("h2") house' },
+        { text: 'pat("h3")', displayText: 'pat("h3") house' },
+        { text: 'pat("b1")', displayText: 'pat("b1") breaks' },
+        { text: 'pat("b2")', displayText: 'pat("b2") breaks' },
+        { text: 'pat("b3")', displayText: 'pat("b3") breaks' },
+        { text: 'pat("b4")', displayText: 'pat("b4") breaks' },
+        { text: 'pat("hf1")', displayText: 'pat("hf1") halftime' },
+        { text: 'pat("hf2")', displayText: 'pat("hf2") halftime' },
+        { text: 'pat("hf3")', displayText: 'pat("hf3") halftime' },
+        { text: 'pat("i1")', displayText: 'pat("i1") industrial' },
+        { text: 'pat("i2")', displayText: 'pat("i2") industrial' },
+        { text: 'pat("i3")', displayText: 'pat("i3") industrial' },
+        { text: 'pat("i4")', displayText: 'pat("i4") industrial' },
+        { text: 'pat("rg1")', displayText: 'pat("rg1") reggae' },
+        { text: 'pat("rg2")', displayText: 'pat("rg2") reggae' },
+        { text: 'pat("rg3")', displayText: 'pat("rg3") reggae' },
+        { text: 'pat("af1")', displayText: 'pat("af1") afro' },
+        { text: 'pat("af2")', displayText: 'pat("af2") afro' },
+        { text: 'pat("af3")', displayText: 'pat("af3") afro' },
     ],
     scales: [
         { text: '"aeolian"', displayText: 'aeolian' },
@@ -493,6 +543,8 @@ export const foxdotAutocomplete = {
         const loopPattern = /(loop|gsynth|splaffer|splitter|breakcore)\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
         const lostPattern =/(lost|attack|fire|compose|sections)\([^)]*$/
+        const pbuildPattern = /pbuild\(([^)]*)$/;
+        const patPattern = /pat\(([^)]*)$/;
         const scenePattern = /!/;
 
         // Random player name suggestion
@@ -549,6 +601,112 @@ export const foxdotAutocomplete = {
               from: CodeMirror.Pos(cursor.line, loopStart + (prefix.length === 0 ? 1 : 0)),
               to: CodeMirror.Pos(cursor.line, loopEnd),
             }
+        }
+        // pbuild() — suggest genres and params inside parentheses
+        else if (pbuildPattern.test(beforeCursor)) {
+            const match = beforeCursor.match(pbuildPattern);
+            const content = match[1]; // content inside pbuild(...)
+            const functionStart = beforeCursor.lastIndexOf('pbuild(') + 7;
+            const closingParen = line.indexOf(')', functionStart);
+            const end = closingParen !== -1 ? closingParen : cursorPosition;
+
+            // After first arg (comma present) — show params
+            if (content.includes(',')) {
+                const params = [
+                    { text: 'fill=4', displayText: 'fill=4 — drum fill every N bars' },
+                    { text: 'density=0.7', displayText: 'density — 0.0-1.0 hit density' },
+                    { text: 'mute="hat"', displayText: 'mute — silence layers' },
+                    { text: 'mute="snare"', displayText: 'mute="snare"' },
+                    { text: 'mute="kick"', displayText: 'mute="kick"' },
+                    { text: 'seed=42', displayText: 'seed — reproducible pattern' },
+                    { text: 'kick="X   X X X   X   "', displayText: 'kick — override kick' },
+                    { text: 'hat="----------------"', displayText: 'hat — override hat' },
+                    { text: 'snare="    o       o   "', displayText: 'snare — override snare' },
+                ];
+                return {
+                    list: params,
+                    from: CodeMirror.Pos(cursor.line, cursorPosition),
+                    to: CodeMirror.Pos(cursor.line, cursorPosition),
+                };
+            }
+
+            // First arg — show genres
+            const genres = [
+                { text: '"techno"', displayText: 'techno' },
+                { text: '"ebm"', displayText: 'ebm' },
+                { text: '"dnb"', displayText: 'dnb' },
+                { text: '"house"', displayText: 'house' },
+                { text: '"breaks"', displayText: 'breaks' },
+                { text: '"halftime"', displayText: 'halftime' },
+                { text: '"industrial"', displayText: 'industrial' },
+                { text: '"reggae"', displayText: 'reggae' },
+                { text: '"afro"', displayText: 'afro' },
+            ];
+            const prefix = content.replace(/["']/g, '').trim().toLowerCase();
+            const filtered = prefix.length > 0
+                ? genres.filter(g => g.displayText.startsWith(prefix))
+                : genres;
+            return {
+                list: filtered,
+                from: CodeMirror.Pos(cursor.line, functionStart),
+                to: CodeMirror.Pos(cursor.line, end),
+            };
+        }
+        // pat() — suggest pattern codes inside parentheses
+        else if (patPattern.test(beforeCursor)) {
+            const match = beforeCursor.match(patPattern);
+            const content = match[1];
+            const functionStart = beforeCursor.lastIndexOf('pat(') + 4;
+            const closingParen = line.indexOf(')', functionStart);
+            const end = closingParen !== -1 ? closingParen : cursorPosition;
+
+            const codes = [
+                { text: '"t1"', displayText: 't1 — techno 1' },
+                { text: '"t2"', displayText: 't2 — techno 2' },
+                { text: '"t3"', displayText: 't3 — techno 3' },
+                { text: '"t4"', displayText: 't4 — techno 4' },
+                { text: '"t5"', displayText: 't5 — techno 5' },
+                { text: '"t6"', displayText: 't6 — techno 6' },
+                { text: '"e1"', displayText: 'e1 — ebm 1' },
+                { text: '"e2"', displayText: 'e2 — ebm 2' },
+                { text: '"e3"', displayText: 'e3 — ebm 3' },
+                { text: '"e4"', displayText: 'e4 — ebm 4' },
+                { text: '"e5"', displayText: 'e5 — ebm 5' },
+                { text: '"d1"', displayText: 'd1 — dnb 1' },
+                { text: '"d2"', displayText: 'd2 — dnb 2' },
+                { text: '"d3"', displayText: 'd3 — dnb 3' },
+                { text: '"d4"', displayText: 'd4 — dnb 4' },
+                { text: '"d5"', displayText: 'd5 — dnb 5' },
+                { text: '"h1"', displayText: 'h1 — house 1' },
+                { text: '"h2"', displayText: 'h2 — house 2' },
+                { text: '"h3"', displayText: 'h3 — house 3' },
+                { text: '"b1"', displayText: 'b1 — breaks 1' },
+                { text: '"b2"', displayText: 'b2 — breaks 2' },
+                { text: '"b3"', displayText: 'b3 — breaks 3' },
+                { text: '"b4"', displayText: 'b4 — breaks 4' },
+                { text: '"hf1"', displayText: 'hf1 — halftime 1' },
+                { text: '"hf2"', displayText: 'hf2 — halftime 2' },
+                { text: '"hf3"', displayText: 'hf3 — halftime 3' },
+                { text: '"i1"', displayText: 'i1 — industrial 1' },
+                { text: '"i2"', displayText: 'i2 — industrial 2' },
+                { text: '"i3"', displayText: 'i3 — industrial 3' },
+                { text: '"i4"', displayText: 'i4 — industrial 4' },
+                { text: '"rg1"', displayText: 'rg1 — reggae 1' },
+                { text: '"rg2"', displayText: 'rg2 — reggae 2' },
+                { text: '"rg3"', displayText: 'rg3 — reggae 3' },
+                { text: '"af1"', displayText: 'af1 — afro 1' },
+                { text: '"af2"', displayText: 'af2 — afro 2' },
+                { text: '"af3"', displayText: 'af3 — afro 3' },
+            ];
+            const prefix = content.replace(/["']/g, '').trim().toLowerCase();
+            const filtered = prefix.length > 0
+                ? codes.filter(c => c.displayText.toLowerCase().startsWith(prefix))
+                : codes;
+            return {
+                list: filtered,
+                from: CodeMirror.Pos(cursor.line, functionStart),
+                to: CodeMirror.Pos(cursor.line, end),
+            };
         }
         // lost, attack, fire, compose, sections suggestion
         else if (lostPattern.test(beforeCursor)) {
@@ -698,7 +856,7 @@ export const foxdotAutocomplete = {
             }
             // Keyword and pattern function suggestion
             else {
-                const combinedKeyword = [...this.foxKeyword, ...this.patternFunction, ...this.fFamily];
+                const combinedKeyword = [...this.foxKeyword, ...this.patternFunction, ...this.fFamily, ...this.drumPatterns];
                 foxdotKeyword = combinedKeyword.filter(f => f.displayText.toLowerCase().startsWith(prefix.toLowerCase()));;
             }
             return {

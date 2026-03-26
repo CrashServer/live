@@ -881,7 +881,7 @@ class Player(Repeatable):
 
         if synthdef == SamplePlayer:
 
-            if type(degree) == str:
+            if isinstance(degree, str):
 
                 self.playstring = degree
 

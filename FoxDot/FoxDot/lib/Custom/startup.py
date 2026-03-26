@@ -12,6 +12,7 @@ if __name__ != "__main__":
 
         from .Settings import FOXDOT_ROOT, SAMPLES_BANK
         from .Buffers import alpha, nonalpha
+        from .DrumPatterns import pbuild, pkit, pat, genres as drum_genres
 
         from pathlib import Path
         sys.path.append(str(Path('.').absolute().parent))

@@ -2,6 +2,200 @@ export const functionUtils = {
     previousPosition: null,
     playersList: [],
 
+    // === F-FAMILY CONTEXTUAL MENU (Alt+W) ===
+
+    showFamilyMenu(cm, evaluateFn) {
+        const cursor = cm.getCursor();
+        const line = cm.getLine(cursor.line);
+
+        // Find number at cursor
+        let numStart = cursor.ch;
+        let numEnd = cursor.ch;
+        while (numStart > 0 && /[\d.\-]/.test(line.charAt(numStart - 1))) numStart--;
+        while (numEnd < line.length && /[\d.]/.test(line.charAt(numEnd))) numEnd++;
+        const valueStr = line.substring(numStart, numEnd);
+        if (!/^-?\d+(\.\d+)?$/.test(valueStr)) return;
+
+        const val = parseFloat(valueStr);
+
+        // Detect param name by looking left for "name="
+        let paramName = '';
+        let eqPos = numStart - 1;
+        while (eqPos >= 0 && line.charAt(eqPos) === ' ') eqPos--;
+        if (eqPos >= 0 && line.charAt(eqPos) === '=') {
+            let nameEnd = eqPos;
+            let nameStart = nameEnd - 1;
+            while (nameStart >= 0 && /[a-zA-Z_\d]/.test(line.charAt(nameStart))) nameStart--;
+            nameStart++;
+            paramName = line.substring(nameStart, nameEnd).toLowerCase();
+        }
+
+        // Context-aware defaults based on param name and current value
+        // All f-family: f(n, a, b) = (steps, min, max) except fg(n, mean, dev) and fc(lo, hi)
+        const filterParams = ['lpf', 'hpf', 'cutoff', 'tcut', 'spf', 'mpf', 'dfm', 'valad', 'vadiod', 'vakorg', 'dafilter', 'djf', 'cswfreq', 'subhfreq', 'rbfreq', 'rfreq', 'ringzfreq', 'formant', 'ehpf', 'elpf'];
+        const mixParams = ['amp', 'vol', 'amplify', 'shape', 'drive', 'tape', 'fuzz', 'dynfuzz', 'triode', 'tanh', 'subenh', 'spring', 'sblur', 'gdel', 'vocod', 'sgate', 'spwarp', 'csweep', 'doppler', 'vowel', 'mbcomp', 'cheapverb', 'mverb', 'jpverb', 'shimmer', 'chorus', 'echo', 'tgrit', 'tfold', 'tmod', 'bright', 'body', 'vel', 'trez', 'tpw', 'tsub', 'voccarr', 'vocbw', 'sprdamp', 'sprtens', 'cswdepth'];
+        const susParams = ['sus', 'tdec', 'sprdecay', 'cswdecay', 'cvdecay', 'gdeltime', 'gdelsize'];
+        const rateParams = ['rate', 'vib', 'tlfo', 'dopspd', 'cswrate', 'tremolo'];
+
+        let lo, hi, n, dev;
+        if (filterParams.includes(paramName)) {
+            lo = Math.max(50, Math.round(val * 0.3 / 50) * 50);
+            hi = Math.max(lo + 200, Math.round(val * 2.5 / 50) * 50);
+            n = 8;
+            dev = Math.round((hi - lo) * 0.15);
+        } else if (mixParams.includes(paramName)) {
+            lo = 0;
+            hi = Math.min(1, Math.max(0.1, Math.round(val * 100) / 100));
+            n = 4;
+            dev = Math.round(hi * 0.2 * 100) / 100;
+        } else if (susParams.includes(paramName)) {
+            lo = Math.max(0.05, Math.round(val * 0.4 * 100) / 100);
+            hi = Math.max(lo + 0.1, Math.round(val * 2 * 100) / 100);
+            n = 4;
+            dev = Math.round((hi - lo) * 0.2 * 100) / 100;
+        } else if (rateParams.includes(paramName)) {
+            lo = Math.max(0.1, Math.round(val * 0.3 * 10) / 10);
+            hi = Math.max(lo + 0.5, Math.round(val * 3 * 10) / 10);
+            n = 4;
+            dev = Math.round((hi - lo) * 0.2 * 10) / 10;
+        } else if (val >= 100) {
+            lo = Math.round(val * 0.3 / 50) * 50;
+            hi = Math.round(val * 2.5 / 50) * 50;
+            n = 8;
+            dev = Math.round((hi - lo) * 0.15);
+        } else if (val > 1) {
+            lo = 0;
+            hi = Math.max(1, Math.round(val * 2));
+            n = 4;
+            dev = Math.max(1, Math.round(hi * 0.2));
+        } else {
+            lo = 0;
+            hi = Math.max(0.1, Math.round(val * 100) / 100);
+            n = 4;
+            dev = Math.max(0.05, Math.round(hi * 0.2 * 100) / 100);
+        }
+
+        // Build items — each f-function with its correct signature
+        const items = [
+            // Sweeps: f(n, start, end) — fi goes 0→val, fo goes val→0
+            { label: `fi(${n}, ${lo}, ${hi})`,    desc: 'fade in',          text: `fi(${n}, ${lo}, ${hi})` },
+            { label: `fo(${n}, ${lo}, ${hi})`,    desc: 'fade out',         text: `fo(${n}, ${lo}, ${hi})` },
+            { label: `fb(${n}, ${lo}, ${hi})`,    desc: 'bounce',           text: `fb(${n}, ${lo}, ${hi})` },
+            { label: `fe(${n}, ${lo}, ${hi})`,    desc: 'exp curve',        text: `fe(${n}, ${lo}, ${hi})` },
+            // Oscillators: f(n, min, max)
+            { label: `fs(${n}, ${lo}, ${hi})`,    desc: 'sine',             text: `fs(${n}, ${lo}, ${hi})` },
+            { label: `fq(${n}, ${lo}, ${hi})`,    desc: 'sine pattern',     text: `fq(${n}, ${lo}, ${hi})` },
+            { label: `fz(${n}, ${lo}, ${hi})`,    desc: 'saw pattern',      text: `fz(${n}, ${lo}, ${hi})` },
+            // Random: f(n, min, max)
+            { label: `fr(${n}, ${lo}, ${hi})`,    desc: 'random',           text: `fr(${n}, ${lo}, ${hi})` },
+            { label: `fxr(${n}, ${lo}, ${hi})`,   desc: 'exclusive rand',   text: `fxr(${n}, ${lo}, ${hi})` },
+            // Walk: f(n, step_size, max_val)
+            { label: `fw(${n}, 1, ${hi})`,        desc: 'walk',             text: `fw(${n}, 1, ${hi})` },
+            { label: `fd(${n}, 1, ${hi})`,        desc: 'drunk walk',       text: `fd(${n}, 1, ${hi})` },
+            // Statistical: fg(n, mean, deviation)
+            { label: `fg(${n}, ${val}, ${dev})`,  desc: 'gauss',            text: `fg(${n}, ${val}, ${dev})` },
+            { label: `ft(${n}, ${lo}, ${hi})`,    desc: 'triangle',         text: `ft(${n}, ${lo}, ${hi})` },
+            // Coin: fc(lo, hi) — NO steps
+            { label: `fc(${lo}, ${hi})`,          desc: 'coin flip',        text: `fc(${lo}, ${hi})` },
+            // Patterns
+            { label: `ff(${n}, ${lo}, ${hi})`,    desc: 'frac',             text: `ff(${n}, ${lo}, ${hi})` },
+            { label: `fl(${n}, ${lo}, ${hi})`,    desc: 'life (cellular)',   text: `fl(${n}, ${lo}, ${hi})` },
+            // Step: fh(n, val1, val2)
+            { label: `fh(${n}, ${lo}, ${hi})`,    desc: 'hold (step)',       text: `fh(${n}, ${lo}, ${hi})` },
+        ];
+
+        // Build menu element
+        this._removeFamilyMenu();
+        const menu = document.createElement('div');
+        menu.id = 'f-family-menu';
+        menu.style.cssText = 'position:absolute;z-index:10000;background:#1a1a2e;border:1px solid #444;border-radius:4px;padding:4px 0;font-family:monospace;font-size:12px;box-shadow:0 4px 12px rgba(0,0,0,0.5);max-height:300px;overflow-y:auto;';
+
+        let selectedIdx = 0;
+
+        const renderItems = () => {
+            menu.innerHTML = '';
+            items.forEach((item, i) => {
+                const row = document.createElement('div');
+                row.style.cssText = `padding:4px 12px;cursor:pointer;display:flex;justify-content:space-between;gap:16px;white-space:nowrap;${i === selectedIdx ? 'background:#333;color:#0f0;' : 'color:#ccc;'}`;
+                row.innerHTML = `<span>${item.label}</span><span style="color:#666;font-size:11px">${item.desc}</span>`;
+                row.addEventListener('mouseenter', () => { selectedIdx = i; renderItems(); });
+                row.addEventListener('click', (e) => { e.preventDefault(); selectItem(i); });
+                menu.appendChild(row);
+            });
+            // Scroll selected item into view
+            const selected = menu.children[selectedIdx];
+            if (selected) selected.scrollIntoView({ block: 'nearest' });
+        };
+
+        const selectItem = (idx) => {
+            const replacement = items[idx].text;
+            cm.replaceRange(replacement,
+                { line: cursor.line, ch: numStart },
+                { line: cursor.line, ch: numEnd }
+            );
+            // Place cursor at end of inserted text for quick editing
+            cm.setCursor({ line: cursor.line, ch: numStart + replacement.length });
+            this._removeFamilyMenu();
+            cm.focus();
+            if (evaluateFn) evaluateFn(cm, false);
+        };
+
+        const handleKey = (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'j') {
+                e.preventDefault();
+                selectedIdx = (selectedIdx + 1) % items.length;
+                renderItems();
+            } else if (e.key === 'ArrowUp' || e.key === 'k') {
+                e.preventDefault();
+                selectedIdx = (selectedIdx - 1 + items.length) % items.length;
+                renderItems();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                selectItem(selectedIdx);
+                document.removeEventListener('keydown', handleKey, true);
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                this._removeFamilyMenu();
+                document.removeEventListener('keydown', handleKey, true);
+                cm.focus();
+            } else if (e.key >= '1' && e.key <= '9') {
+                // Quick select by number
+                const idx = parseInt(e.key) - 1;
+                if (idx < items.length) {
+                    e.preventDefault();
+                    selectItem(idx);
+                    document.removeEventListener('keydown', handleKey, true);
+                }
+            }
+        };
+
+        renderItems();
+
+        // Position near cursor
+        const coords = cm.cursorCoords(true, 'page');
+        menu.style.left = coords.left + 'px';
+        menu.style.top = (coords.bottom + 4) + 'px';
+        document.body.appendChild(menu);
+
+        // Capture keyboard
+        setTimeout(() => document.addEventListener('keydown', handleKey, true), 50);
+
+        // Close on outside click
+        const closeOnClick = (e) => {
+            if (!menu.contains(e.target)) {
+                this._removeFamilyMenu();
+                document.removeEventListener('keydown', handleKey, true);
+                document.removeEventListener('mousedown', closeOnClick);
+            }
+        };
+        document.addEventListener('mousedown', closeOnClick);
+    },
+
+    _removeFamilyMenu() {
+        const existing = document.getElementById('f-family-menu');
+        if (existing) existing.remove();
+    },
+
     // === AUTOMATION RECORDER ===
     _autoRec: {
         armed: false,

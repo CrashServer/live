@@ -806,11 +806,16 @@ def current():
         marker = ">> " if i == _setlist_index else "   "
         print(f"{marker}[{i+1}/{len(_setlist_data)}] {name} -> {section} ({dur}b)")
 
-def rec():
-    """Start recording code evaluations for composition capture."""
+def rec(gap=4):
+    """Start recording code evaluations for composition capture.
+    gap: beats of silence before starting a new section (1, 2, 4, 8). Default 4.
+    e.g. rec()    — standard, new section after 4 beats pause
+         rec(1)   — precise, new section after 1 beat pause
+         rec(8)   — loose, new section after 8 beats pause
+    """
     bpm = int(Clock.bpm)
-    print(f"__REC_START__:{bpm}")
-    print(f"Recording started at {bpm} BPM...")
+    print(f"__REC_START__:{bpm}:{int(gap)}")
+    print(f"Recording started at {bpm} BPM, section gap: {int(gap)} beats...")
 
 def rec_stop(name=None):
     """Stop recording and generate a composed script.

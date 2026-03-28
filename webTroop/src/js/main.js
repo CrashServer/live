@@ -562,6 +562,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       evaluateCode(cm, false);
       functionUtils.autoRecCapture(cm);
     },
+    "Alt-W": (cm) => {
+      functionUtils.showFamilyMenu(cm, evaluateCode);
+    },
     "Alt-A": (cm) => {
       functionUtils.randomizer(cm);
     },

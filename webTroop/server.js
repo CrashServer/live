@@ -132,6 +132,7 @@ let isRecording = false;
 let recordingBpm = 120;
 let recordingStartTime = 0;
 let recordingEvents = [];
+let recordingSectionGap = 4; // beats gap to split sections (1, 2, 4, 8)
 
 // Fonction pour envoyer l'état CPU à l'Arduino
 function sendCpuToArduino(arduino, cpuPercent) {
@@ -338,14 +339,15 @@ foxdot.stdout.on('data', (data) => {
       return;
     }
 
-    // Detect recording start marker
-    const recStartMatch = logMessage.match(/__REC_START__:(\d+)/);
+    // Detect recording start marker — format: __REC_START__:bpm or __REC_START__:bpm:gap
+    const recStartMatch = logMessage.match(/__REC_START__:(\d+)(?::(\d+))?/);
     if (recStartMatch) {
       isRecording = true;
       recordingBpm = parseInt(recStartMatch[1]);
+      recordingSectionGap = recStartMatch[2] ? parseInt(recStartMatch[2]) : 4;
       recordingStartTime = Date.now();
       recordingEvents = [];
-      console.log(`Recording started at ${recordingBpm} BPM`);
+      console.log(`Recording started at ${recordingBpm} BPM, section gap: ${recordingSectionGap} beats`);
       return;
     }
 
@@ -414,8 +416,8 @@ async function processRecording(rawName, bpm, events) {
     code: e.code
   }));
 
-  // Group events into sections by gap > 4 beats
-  const SECTION_GAP = 4;
+  // Group events into sections by gap
+  const SECTION_GAP = recordingSectionGap;
   const sectionNames = ['intro', 'build', 'peak', 'break', 'drop', 'outro'];
   const sections = [];
   let currentSection = { codes: [beatEvents[0].code], startBeat: 0 };

@@ -1,3 +1,5 @@
+# TDH 170
+
 Clock.bpm = 170
 a4 >> blip(0, dur=16, fbdelay=0.5, oct=4, sus=8, wshape=0, fx1=0, mverb=0.5, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
 y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5, shimmer=1)

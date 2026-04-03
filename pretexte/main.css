@@ -1,0 +1,209 @@
+/* Pretexte - Main Stylesheet
+   Grosse police grasse, sans numéros de lignes
+   Retour à la ligne automatique avec coupure brute des mots */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+  font-family: InterBlack;
+  src: url("inter-black.woff2");
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #0e0e0e;
+    color: #888888;
+    font-family: 'InterBlack', 'Courier New', monospace;
+    font-size: 3rem;        /* GROSSE POLICE */
+    font-weight: 900;       /* TRÈS GRASSE */
+    line-height: 1.1;
+    height: 100vh;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+#code-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 20px;
+    background-color: #000000;
+    word-break: break-all;  /* Coupe les mots brutalement */
+    white-space: normal;    /* Retour à la ligne automatique */
+    word-wrap: break-word;
+}
+
+.code-line {
+    display: inline;        /* Inline, retour à la ligne auto */
+    color: #888888;
+    transition: color 0.1s ease, text-shadow 0.1s ease;
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.code-line.active {
+    color: #00ff00;         /* VERT FLUORESCENT */
+    text-shadow:
+        0 0 5px rgba(0, 255, 0, 0.4),
+        0 0 10px rgba(0, 255, 0, 0.3),
+        0 0 20px rgba(0, 255, 0, 0.2);
+    font-weight: 900;
+}
+
+.separator {
+    display: inline;
+    color: #555555;
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.status {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    padding: 12px 18px;
+    background-color: #222222;
+    border: 2px solid #444444;
+    color: #888888;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    z-index: 1000;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+.status.connected {
+    color: #00ff00;
+    border-color: #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    animation: pulse-green 2s infinite;
+}
+
+.status.disconnected {
+    color: #ff0000;
+    border-color: #ff0000;
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-green {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes pulse-red {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Scrollbars */
+#code-container::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+#code-container::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+#code-container::-webkit-scrollbar-thumb {
+    background: #555555;
+    border-radius: 6px;
+}
+
+#code-container::-webkit-scrollbar-thumb:hover {
+    background: #888888;
+}
+
+/* Firefox */
+#code-container {
+    scrollbar-color: #555555 #000000;
+    scrollbar-width: thin;
+}
+
+/* Selection */
+::selection {
+    background-color: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+    body {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 1024px) {
+    body {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 20px;
+    }
+
+    .status {
+        font-size: 11px;
+        padding: 10px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 16px;
+    }
+
+    #code-container {
+        padding: 10px;
+    }
+}
+
+/* Mode réduit */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Curseur ultra-visible - bloc clignotant avec fond vert */
+.cursor {
+    display: inline;
+    color: #000000;
+    font-weight: 900;
+    background-color: #00ff00;
+    padding: 0 2px;
+    animation: cursor-blink 0.8s infinite;
+    text-shadow: none;
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+    border-radius: 1px;
+}
+
+@keyframes cursor-blink {
+    0%, 49% { 
+        opacity: 1;
+        background-color: #00ff00;
+        box-shadow: 0 0 12px rgba(0, 255, 0, 1);
+    }
+    50%, 100% { 
+        opacity: 0.3;
+        background-color: #004400;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+    }
+}

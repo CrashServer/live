@@ -651,12 +651,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Récupérer la position du curseur et le contenu
     const cursor = cm.getCursor();
     const currentLine = cm.getLine(cursor.line);
+    const allCode = cm.getValue();
 
-    // Préparer le message
+    // Préparer le message avec code complet
     const message = {
       type: `${userName}InstantCode`,
       position: cursor.ch,
       code: currentLine,
+      allCode: allCode,
+      currentLineNumber: cursor.line + 1,
     };
 
     // envoyer le message dans le live other player display
@@ -666,6 +669,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         code: currentLine,
         position: cursor.ch,
         line: cursor.line + 1,
+        allCode: allCode,
       });
     } catch (error) {}
 

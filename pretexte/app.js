@@ -5,7 +5,6 @@ let currentLineNumber = 0;
 let fullCode = '';
 let ws = null;
 let config = null;
-let cursorLine = 0;           // Position de la ligne du curseur (0-indexed)
 let cursorCh = 0;             // Position du caractère dans la ligne
 
 // Configuration par défaut
@@ -65,9 +64,7 @@ function connectWebSocket() {
                     if (message.allCode !== undefined) {
                         fullCode = message.allCode;
                         currentLineNumber = message.currentLineNumber || 0;
-                        cursorLine = message.cursorLine || 0;
-                        cursorCh = message.cursorCh || 0;
-                        console.log(`📍 Curseur: ligne=${cursorLine}, char=${cursorCh}`);
+                        cursorCh = message.position || 0;
                         renderCode();
                     }
                 }
@@ -113,7 +110,7 @@ function renderCode() {
         }
 
         // Si c'est la ligne du curseur, insérer le curseur à la bonne position
-        if (index === cursorLine) {
+        if (index + 1 === currentLineNumber) {
             const beforeCursor = line.substring(0, Math.min(cursorCh, line.length));
             const afterCursor = line.substring(Math.min(cursorCh, line.length));
 
@@ -123,7 +120,6 @@ function renderCode() {
             // Bloc clignotant pour le curseur (█)
             const cursorSpan = document.createElement('span');
             cursorSpan.className = 'cursor';
-            cursorSpan.textContent = '█';
             lineSpan.appendChild(cursorSpan);
 
             // Texte après le curseur

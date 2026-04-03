@@ -2,6 +2,15 @@
    Grosse police grasse, sans numéros de lignes
    Retour à la ligne automatique avec coupure brute des mots */
 
+:root {
+    --bg-color: #0e0e0e;
+    --text-color: #888888;
+    --active-color: #00ff00;
+    --separator-color: #555555;
+    --disconnected-color: #FF0000;
+    --font-size: 3rem;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -19,11 +28,11 @@ html, body {
 }
 
 body {
-    background-color: #0e0e0e;
-    color: #888888;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: 'InterBlack', 'Courier New', monospace;
-    font-size: 3rem;        /* GROSSE POLICE */
-    font-weight: 900;       /* TRÈS GRASSE */
+    font-size: var(--font-size);
+    font-weight: 900;
     line-height: 1.1;
     height: 100vh;
     overflow: hidden;
@@ -36,37 +45,28 @@ body {
     height: 100%;
     overflow: auto;
     padding: 20px;
-    background-color: #000000;
-    word-break: break-all;  /* Coupe les mots brutalement */
-    white-space: normal;    /* Retour à la ligne automatique */
+    background-color: var(--bg-color);
+    word-break: break-all;
+    white-space: normal;
     word-wrap: break-word;
 }
 
 .code-line {
-    display: inline;        /* Inline, retour à la ligne auto */
-    color: #888888;
+    display: inline;
+    color: var(--text-color);
     transition: color 0.1s ease, text-shadow 0.1s ease;
     margin: 0;
     padding: 0;
-    font-size: 32px;
+    font-size: var(--font-size);
     font-weight: 900;
 }
 
 .code-line.active {
-    color: #00ff00;         /* VERT FLUORESCENT */
+    color: var(--active-color);
     text-shadow:
         0 0 5px rgba(0, 255, 0, 0.4),
         0 0 10px rgba(0, 255, 0, 0.3),
         0 0 20px rgba(0, 255, 0, 0.2);
-    font-weight: 900;
-}
-
-.separator {
-    display: inline;
-    color: #555555;
-    margin: 0;
-    padding: 0;
-    font-size: 32px;
     font-weight: 900;
 }
 
@@ -87,15 +87,15 @@ body {
 }
 
 .status.connected {
-    color: #00ff00;
-    border-color: #00ff00;
+    color: var(--active-color);
+    border-color: var(--active-color);
     box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
     animation: pulse-green 2s infinite;
 }
 
 .status.disconnected {
-    color: #ff0000;
-    border-color: #ff0000;
+    color: var(--disconnected-color);
+    border-color: var(--disconnected-color);
     animation: pulse-red 2s infinite;
 }
 
@@ -184,26 +184,23 @@ body {
 
 /* Curseur ultra-visible - bloc clignotant avec fond vert */
 .cursor {
-    display: inline;
-    color: #000000;
-    font-weight: 900;
-    background-color: #00ff00;
-    padding: 0 2px;
-    animation: cursor-blink 0.8s infinite;
-    text-shadow: none;
-    box-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
-    border-radius: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.cursor::after {
+  content: '_'; /* Le caractère du curseur */
+  position: absolute;
+  bottom: -0.2em;
+  left: 50%;
+  color: var(--active-color);
+  transform: translateX(-100%);
+  animation: cursor-blink 0.8s infinite;
+  font-weight: normal;
+  font-size: calc(var(--font-size) + 1rem);
 }
 
 @keyframes cursor-blink {
-    0%, 49% { 
-        opacity: 1;
-        background-color: #00ff00;
-        box-shadow: 0 0 12px rgba(0, 255, 0, 1);
-    }
-    50%, 100% { 
-        opacity: 0.3;
-        background-color: #004400;
-        box-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
-    }
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }

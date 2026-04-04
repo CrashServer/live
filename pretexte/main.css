@@ -3,8 +3,9 @@
 :root {
     --bg-color: #0e0e0e;
     --text-color: #888888;
-    --zbdm-color: #00ff00;
-    --svdk-color: #00ffff;
+    --zbdm-color: 0, 255, 0;
+    --svdk-color: 0, 255, 255;
+    --both-color: 164, 31, 255;
     --disconnected-color: #FF0000;
     --font-size: 3rem;
 }
@@ -60,55 +61,35 @@ body {
 }
 
 .code-line.active.zbdm {
-    color: var(--zbdm-color);
+    color: rgb(var(--zbdm-color));
     text-shadow:
-        0 0 5px rgba(0, 255, 0, 0.4),
-        0 0 10px rgba(0, 255, 0, 0.3),
-        0 0 20px rgba(0, 255, 0, 0.2);
+        0 0 5px rgba(var(--zbdm-color), 0.4),
+        0 0 10px rgba(var(--zbdm-color), 0.3),
+        0 0 20px rgba(var(--zbdm-color), 0.2);
     font-weight: 900;
 }
 
 .code-line.active.svdk {
-    color: var(--svdk-color);
+    color: rgb(var(--svdk-color));
     text-shadow:
-        0 0 5px rgba(0, 255, 255, 0.4),
-        0 0 10px rgba(0, 255, 255, 0.3),
-        0 0 20px rgba(0, 255, 255, 0.2);
+        0 0 5px rgba(var(--svdk-color), 0.4),
+        0 0 10px rgba(var(--svdk-color), 0.3),
+        0 0 20px rgba(var(--svdk-color), 0.2);
     font-weight: 900;
 }
 
 /* Cas spécial: les deux joueurs éditent la même ligne */
 .code-line.active.zbdm.svdk {
-    color: #00ff7f;
+    color: rgb(var(--both-color));
     text-shadow:
-        0 0 5px rgba(0, 255, 127, 0.5),
-        0 0 10px rgba(0, 255, 127, 0.4),
-        0 0 15px rgba(0, 255, 0, 0.3),
-        0 0 15px rgba(0, 255, 255, 0.3),
-        0 0 25px rgba(0, 255, 127, 0.2);
+        0 0 5px rgba(var(--both-color), 0.5),
+        0 0 10px rgba(var(--both-color), 0.4),
+        0 0 15px rgba(var(--both-color), 0.3),
+        0 0 15px rgba(var(--both-color), 0.3),
+        0 0 25px rgba(var(--both-color), 0.2);
     font-weight: 900;
-    animation: dual-cursor-pulse 1.2s infinite;
     position: relative;
     z-index: 10;
-}
-
-@keyframes dual-cursor-pulse {
-    0%, 100% {
-        text-shadow:
-            0 0 5px rgba(0, 255, 127, 0.5),
-            0 0 10px rgba(0, 255, 127, 0.4),
-            0 0 15px rgba(0, 255, 0, 0.3),
-            0 0 15px rgba(0, 255, 255, 0.3),
-            0 0 25px rgba(0, 255, 127, 0.2);
-    }
-    50% {
-        text-shadow:
-            0 0 8px rgba(0, 255, 127, 0.6),
-            0 0 15px rgba(0, 255, 127, 0.5),
-            0 0 20px rgba(0, 255, 0, 0.4),
-            0 0 20px rgba(0, 255, 255, 0.4),
-            0 0 30px rgba(0, 255, 127, 0.3);
-    }
 }
 
 .status {
@@ -128,10 +109,7 @@ body {
 }
 
 .status.connected {
-    color: var(--zbdm-color);
-    border-color: var(--zbdm-color);
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-    animation: pulse-green 2s infinite;
+    display: none;
 }
 
 .status.disconnected {
@@ -241,19 +219,19 @@ body {
 }
 
 /* Curseur zbdm - vert fluorescent */
-.cursor.zbdm-cursor::after {
-  color: var(--zbdm-color);
+.cursor.cursor-zbdm::after {
+  color: rgb(var(--zbdm-color));
   text-shadow:
-    0 0 3px rgba(0, 255, 0, 0.6),
-    0 0 8px rgba(0, 255, 0, 0.4);
+    0 0 3px rgba(var(--zbdm-color), 0.6),
+    0 0 8px rgba(var(--zbdm-color), 0.4);
   animation: cursor-blink 0.8s infinite;
 }
 
-.cursor.svdk-cursor::after {
-  color: var(--svdk-color);
+.cursor.cursor-svdk::after {
+  color: rgb(var(--svdk-color));
   text-shadow:
-    0 0 3px rgba(0, 255, 255, 0.6),
-    0 0 8px rgba(0, 255, 255, 0.4);
+    0 0 3px rgba(var(--svdk-color), 0.6),
+    0 0 8px rgba(var(--svdk-color), 0.4);
   animation: cursor-blink 0.8s infinite;
 }
 

@@ -89,9 +89,6 @@ function connectWebSocket() {
                             players[playerType].lastUpdate = Date.now();
 
                             lastUpdatedPlayer = playerType;
-
-                            console.log(`📝 ${playerType}: fenêtre [${players[playerType].windowStartLine}-${players[playerType].windowEndLine}], L${players[playerType].currentLineNumber}:${players[playerType].cursorCh}`);
-
                             renderCode();
                         }
                     }
@@ -163,7 +160,7 @@ function mergePlayerWindows() {
 
     // Trier par numéro de ligne
     const sortedLineNums = Array.from(lineMap.keys()).sort((a, b) => a - b);
-    
+
     return sortedLineNums.map(lineNum => ({
         lineNumber: lineNum,
         text: lineMap.get(lineNum).text,
@@ -268,8 +265,7 @@ function renderLineWithTwoCursors(lineSpan, text, cursorCh1, playerType1, cursor
 }
 
 function updateStatus(connected) {
-    if (connected) {
-        statusElement.textContent = 'Connecté';
+    if (!connected) {
         statusElement.className = 'status connected';
     } else {
         statusElement.textContent = 'Déconnecté';

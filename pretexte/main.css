@@ -1,12 +1,10 @@
-/* Pretexte - Main Stylesheet
-   Grosse police grasse, sans numéros de lignes
-   Retour à la ligne automatique avec coupure brute des mots */
+/* Pretexte - Main Stylesheet */
 
 :root {
     --bg-color: #0e0e0e;
     --text-color: #888888;
-    --active-color: #00ff00;
-    --separator-color: #555555;
+    --zbdm-color: #00ff00;
+    --svdk-color: #00ffff;
     --disconnected-color: #FF0000;
     --font-size: 3rem;
 }
@@ -61,13 +59,56 @@ body {
     font-weight: 900;
 }
 
-.code-line.active {
-    color: var(--active-color);
+.code-line.active.zbdm {
+    color: var(--zbdm-color);
     text-shadow:
         0 0 5px rgba(0, 255, 0, 0.4),
         0 0 10px rgba(0, 255, 0, 0.3),
         0 0 20px rgba(0, 255, 0, 0.2);
     font-weight: 900;
+}
+
+.code-line.active.svdk {
+    color: var(--svdk-color);
+    text-shadow:
+        0 0 5px rgba(0, 255, 255, 0.4),
+        0 0 10px rgba(0, 255, 255, 0.3),
+        0 0 20px rgba(0, 255, 255, 0.2);
+    font-weight: 900;
+}
+
+/* Cas spécial: les deux joueurs éditent la même ligne */
+.code-line.active.zbdm.svdk {
+    color: #00ff7f;
+    text-shadow:
+        0 0 5px rgba(0, 255, 127, 0.5),
+        0 0 10px rgba(0, 255, 127, 0.4),
+        0 0 15px rgba(0, 255, 0, 0.3),
+        0 0 15px rgba(0, 255, 255, 0.3),
+        0 0 25px rgba(0, 255, 127, 0.2);
+    font-weight: 900;
+    animation: dual-cursor-pulse 1.2s infinite;
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes dual-cursor-pulse {
+    0%, 100% {
+        text-shadow:
+            0 0 5px rgba(0, 255, 127, 0.5),
+            0 0 10px rgba(0, 255, 127, 0.4),
+            0 0 15px rgba(0, 255, 0, 0.3),
+            0 0 15px rgba(0, 255, 255, 0.3),
+            0 0 25px rgba(0, 255, 127, 0.2);
+    }
+    50% {
+        text-shadow:
+            0 0 8px rgba(0, 255, 127, 0.6),
+            0 0 15px rgba(0, 255, 127, 0.5),
+            0 0 20px rgba(0, 255, 0, 0.4),
+            0 0 20px rgba(0, 255, 255, 0.4),
+            0 0 30px rgba(0, 255, 127, 0.3);
+    }
 }
 
 .status {
@@ -87,8 +128,8 @@ body {
 }
 
 .status.connected {
-    color: var(--active-color);
-    border-color: var(--active-color);
+    color: var(--zbdm-color);
+    border-color: var(--zbdm-color);
     box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
     animation: pulse-green 2s infinite;
 }
@@ -182,7 +223,7 @@ body {
     }
 }
 
-/* Curseur ultra-visible - bloc clignotant avec fond vert */
+/* Curseur ultra-visible - bloc clignotant avec couleurs par joueur */
 .cursor {
   position: relative;
   display: inline-block;
@@ -193,11 +234,27 @@ body {
   position: absolute;
   bottom: -0.2em;
   left: 50%;
-  color: var(--active-color);
   transform: translateX(-100%);
   animation: cursor-blink 0.8s infinite;
   font-weight: normal;
   font-size: calc(var(--font-size) + 1rem);
+}
+
+/* Curseur zbdm - vert fluorescent */
+.cursor.zbdm-cursor::after {
+  color: var(--zbdm-color);
+  text-shadow:
+    0 0 3px rgba(0, 255, 0, 0.6),
+    0 0 8px rgba(0, 255, 0, 0.4);
+  animation: cursor-blink 0.8s infinite;
+}
+
+.cursor.svdk-cursor::after {
+  color: var(--svdk-color);
+  text-shadow:
+    0 0 3px rgba(0, 255, 255, 0.6),
+    0 0 8px rgba(0, 255, 255, 0.4);
+  animation: cursor-blink 0.8s infinite;
 }
 
 @keyframes cursor-blink {

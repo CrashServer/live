@@ -1,19 +1,35 @@
 const codeContainer = document.getElementById('code-container');
 const statusElement = document.getElementById('status');
 
-let currentLineNumber = 0;
-let fullCode = '';
+// Structure pour stocker les données de chaque joueur séparément
+const players = {
+    zbdmInstantCode: {
+        windowLines: '',
+        currentLineNumber: 0,
+        cursorCh: 0,
+        windowStartLine: 0,
+        windowEndLine: 0,
+        lastUpdate: 0
+    },
+    svdkInstantCode: {
+        windowLines: '',
+        currentLineNumber: 0,
+        cursorCh: 0,
+        windowStartLine: 0,
+        windowEndLine: 0,
+        lastUpdate: 0
+    }
+};
+
+let lastUpdatedPlayer = null;
 let ws = null;
 let config = null;
-let cursorCh = 0;             // Position du caractère dans la ligne
 
-// Configuration par défaut
 const defaultConfig = {
     HOST_IP: '192.168.1.42',
     FOXDOT_WS_PORT: 20000
 };
 
-// Charger la configuration
 async function loadConfig() {
     try {
         console.log('1️⃣  Tentative: charger config.json local...');
@@ -61,11 +77,23 @@ function connectWebSocket() {
                 const message = JSON.parse(event.data);
 
                 if (message.type && message.type.endsWith('InstantCode')) {
-                    if (message.allCode !== undefined) {
-                        fullCode = message.allCode;
-                        currentLineNumber = message.currentLineNumber || 0;
-                        cursorCh = message.position || 0;
-                        renderCode();
+                    const playerType = message.type;
+
+                    if (players[playerType]) {
+                        if (message.windowLines !== undefined) {
+                            players[playerType].windowLines = message.windowLines;
+                            players[playerType].windowStartLine = message.windowStartLine || 0;
+                            players[playerType].windowEndLine = message.windowEndLine || 0;
+                            players[playerType].currentLineNumber = message.currentLineNumber || 0;
+                            players[playerType].cursorCh = message.position || 0;
+                            players[playerType].lastUpdate = Date.now();
+
+                            lastUpdatedPlayer = playerType;
+
+                            console.log(`📝 ${playerType}: fenêtre [${players[playerType].windowStartLine}-${players[playerType].windowEndLine}], L${players[playerType].currentLineNumber}:${players[playerType].cursorCh}`);
+
+                            renderCode();
+                        }
                     }
                 }
             } catch (error) {
@@ -90,53 +118,152 @@ function connectWebSocket() {
     }
 }
 
+/**
+ * Fusionner les fenêtres de lignes en un flux continu sans séparateur
+ */
+function mergePlayerWindows() {
+    const zbdm = players.zbdmInstantCode;
+    const svdk = players.svdkInstantCode;
+
+    // Créer une map de toutes les lignes
+    const lineMap = new Map();
+
+    // Ajouter les lignes de zbdm
+    if (zbdm.windowLines) {
+        const zbdmLines = zbdm.windowLines.split('\n');
+        zbdmLines.forEach((text, index) => {
+            const lineNum = zbdm.windowStartLine + index;
+            if (!lineMap.has(lineNum)) {
+                lineMap.set(lineNum, { text, from: [] });
+            }
+            if (!lineMap.get(lineNum).from.includes('zbdm')) {
+                lineMap.get(lineNum).from.push('zbdm');
+            }
+        });
+    }
+
+    // Ajouter les lignes de svdk (fusion en cas de chevauchement)
+    if (svdk.windowLines) {
+        const svdkLines = svdk.windowLines.split('\n');
+        svdkLines.forEach((text, index) => {
+            const lineNum = svdk.windowStartLine + index;
+            if (!lineMap.has(lineNum)) {
+                lineMap.set(lineNum, { text, from: [] });
+            } else {
+                // Si chevauchement, priorité au dernier joueur qui a écrit
+                if (lastUpdatedPlayer === 'svdkInstantCode') {
+                    lineMap.get(lineNum).text = text;
+                }
+            }
+            if (!lineMap.get(lineNum).from.includes('svdk')) {
+                lineMap.get(lineNum).from.push('svdk');
+            }
+        });
+    }
+
+    // Trier par numéro de ligne
+    const sortedLineNums = Array.from(lineMap.keys()).sort((a, b) => a - b);
+    
+    return sortedLineNums.map(lineNum => ({
+        lineNumber: lineNum,
+        text: lineMap.get(lineNum).text,
+        from: lineMap.get(lineNum).from
+    }));
+}
+
 function renderCode() {
     codeContainer.innerHTML = '';
 
-    if (!fullCode) {
+    const displayLines = mergePlayerWindows();
+
+    if (displayLines.length === 0) {
         codeContainer.textContent = 'En attente de code...';
         return;
     }
 
-    const lines = fullCode.split('\n');
+    const zbdm = players.zbdmInstantCode;
+    const svdk = players.svdkInstantCode;
 
-    lines.forEach((line, index) => {
+    displayLines.forEach(({ lineNumber, text, from }) => {
         const lineSpan = document.createElement('span');
         lineSpan.className = 'code-line';
 
-        // Mettre en évidence la ligne courante
-        if (index + 1 === currentLineNumber) {
+        const isZbdmActiveLine = (lineNumber === zbdm.currentLineNumber);
+        const isSvdkActiveLine = (lineNumber === svdk.currentLineNumber);
+
+        if (isZbdmActiveLine) {
             lineSpan.classList.add('active');
+            lineSpan.classList.add('zbdm');
+        }
+        if (isSvdkActiveLine) {
+            lineSpan.classList.add('active');
+            lineSpan.classList.add('svdk');
         }
 
-        // Si c'est la ligne du curseur, insérer le curseur à la bonne position
-        if (index + 1 === currentLineNumber) {
-            const beforeCursor = line.substring(0, Math.min(cursorCh, line.length));
-            const afterCursor = line.substring(Math.min(cursorCh, line.length));
-
-            // Texte avant le curseur
-            lineSpan.appendChild(document.createTextNode(beforeCursor));
-
-            // Bloc clignotant pour le curseur (█)
-            const cursorSpan = document.createElement('span');
-            cursorSpan.className = 'cursor';
-            lineSpan.appendChild(cursorSpan);
-
-            // Texte après le curseur
-            lineSpan.appendChild(document.createTextNode(afterCursor));
+        // Rendre la ligne selon les curseurs actifs
+        if (isZbdmActiveLine && isSvdkActiveLine) {
+            renderLineWithTwoCursors(lineSpan, text,
+                zbdm.cursorCh, 'zbdm',
+                svdk.cursorCh, 'svdk');
+        } else if (isZbdmActiveLine) {
+            renderLineWithCursor(lineSpan, text, zbdm.cursorCh, 'zbdm');
+        } else if (isSvdkActiveLine) {
+            renderLineWithCursor(lineSpan, text, svdk.cursorCh, 'svdk');
         } else {
-            lineSpan.textContent = line || '';
+            lineSpan.textContent = text || '';
         }
 
         codeContainer.appendChild(lineSpan);
     });
 
     // Scroll vers la ligne active
-    if (currentLineNumber > 0) {
+    if (lastUpdatedPlayer && players[lastUpdatedPlayer].currentLineNumber > 0) {
         const activeLines = document.querySelectorAll('.code-line.active');
         if (activeLines.length > 0) {
-            activeLines[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            activeLines[activeLines.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+    }
+}
+
+function renderLineWithCursor(lineSpan, text, cursorCh, playerType) {
+    const safePos = Math.min(Math.max(0, cursorCh), text.length);
+
+    const beforeCursor = text.substring(0, safePos);
+    lineSpan.appendChild(document.createTextNode(beforeCursor));
+
+    const cursorSpan = document.createElement('span');
+    cursorSpan.className = `cursor cursor-${playerType}`;
+    lineSpan.appendChild(cursorSpan);
+
+    const afterCursor = text.substring(safePos);
+    lineSpan.appendChild(document.createTextNode(afterCursor));
+}
+
+function renderLineWithTwoCursors(lineSpan, text, cursorCh1, playerType1, cursorCh2, playerType2) {
+    const safePos1 = Math.min(Math.max(0, cursorCh1), text.length);
+    const safePos2 = Math.min(Math.max(0, cursorCh2), text.length);
+
+    const positions = [
+        { pos: safePos1, playerType: playerType1 },
+        { pos: safePos2, playerType: playerType2 }
+    ].sort((a, b) => a.pos - b.pos);
+
+    let lastPos = 0;
+
+    positions.forEach((item) => {
+        if (item.pos > lastPos) {
+            lineSpan.appendChild(document.createTextNode(text.substring(lastPos, item.pos)));
+        }
+
+        const cursorSpan = document.createElement('span');
+        cursorSpan.className = `cursor cursor-${item.playerType}`;
+        lineSpan.appendChild(cursorSpan);
+
+        lastPos = item.pos;
+    });
+
+    if (lastPos < text.length) {
+        lineSpan.appendChild(document.createTextNode(text.substring(lastPos)));
     }
 }
 
@@ -150,7 +277,6 @@ function updateStatus(connected) {
     }
 }
 
-// Démarrer
 document.addEventListener('DOMContentLoaded', () => {
     loadConfig();
     renderCode();

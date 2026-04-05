@@ -25,6 +25,7 @@ import "codemirror/addon/search/matchesonscrollbar.js";
 
 import { logsUtils } from "./logs.js";
 import { functionUtils } from "./functionUtils.js";
+import { recUtils } from "./recUtils.js";
 // import { markerUtils } from './markerUtils.js';
 // import { chatUtils } from './chatUtils.js';
 import { foxdotAutocomplete } from "./foxdotAutocomplete.js";
@@ -540,27 +541,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("piano-roll").classList.toggle("hidden");
     },
     "Alt-T": (cm) => {
-      functionUtils.autoRecToggle(cm, evaluateCode, wsServer);
+      recUtils.autoRecToggle(cm, evaluateCode, wsServer);
     },
     "Alt-Up": (cm) => {
       functionUtils.incrementValue(cm, 1);
       evaluateCode(cm, false);
-      functionUtils.autoRecCapture(cm);
+      recUtils.autoRecCapture(cm);
     },
     "Alt-Down": (cm) => {
       functionUtils.incrementValue(cm, -1);
       evaluateCode(cm, false);
-      functionUtils.autoRecCapture(cm);
+      recUtils.autoRecCapture(cm);
     },
     "Ctrl-Up": (cm) => {
       functionUtils.incrementValue(cm, 10);
       evaluateCode(cm, false);
-      functionUtils.autoRecCapture(cm);
+      recUtils.autoRecCapture(cm);
     },
     "Ctrl-Down": (cm) => {
       functionUtils.incrementValue(cm, -10);
       evaluateCode(cm, false);
-      functionUtils.autoRecCapture(cm);
+      recUtils.autoRecCapture(cm);
     },
     "Alt-A": (cm) => {
       functionUtils.randomizer(cm);
@@ -572,19 +573,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       functionUtils.soloDrop(cm, wsServer);
     },
     Esc: (cm) => {
-      if (functionUtils._autoRec.armed) {
-        functionUtils.autoRecCancel(cm, evaluateCode);
+      if (recUtils._autoRec.armed) {
+        recUtils.autoRecCancel(cm, evaluateCode);
       } else {
         removeAllTooltips();
       }
     },
-    // 'Alt-V': (cm) => {functionUtils.sendSceneName(cm, foxdotWs)},
   });
 
   // Gestion de l'autocomplétion
-  // editor.setOption('hintOptions', {
-  //   hint: (cm) => foxdotAutocomplete.hint(cm, CodeMirror),
-  // });
   editor.setOption("hintOptions", {
     hint: (cm) => {
       return foxdotAutocomplete.hint(cm, CodeMirror);

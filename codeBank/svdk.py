@@ -1,5 +1,5 @@
-# svdkdirty # trance
-# 134
+# svdkdirty # 134
+# aggressive
 
 b6 >> play("X ", amp=3, sample=8)
 s3 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.15, oct=4, grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.2)

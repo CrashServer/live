@@ -3,12 +3,11 @@ export const recUtils = {
   _autoRec: {
       armed: false,
       startTime: 0,
-      bpm: 120,
       recordings: {},  // { paramName: [{time, value}, ...] }
       cursorLine: null,
   },
 
-  autoRecToggle(cm, evaluateFn, wsServer) {
+  autoRecToggle(cm, evaluateFn) {
       const rec = this._autoRec;
       if (!rec.armed) {
           // ARM — start recording
@@ -17,8 +16,6 @@ export const recUtils = {
           rec.recordings = {};
           rec.cursorLine = cm.getCursor().line;
           rec.originalLine = cm.getLine(rec.cursorLine);
-          // Get BPM from FoxDot
-          this._autoRecFetchBpm(wsServer);
           this._autoRecShowIndicator(true);
       } else {
           // DISARM — stop, convert, replace
@@ -133,8 +130,7 @@ export const recUtils = {
           }
       }
 
-      const elapsed = (performance.now() - rec.startTime) / 1000;
-      const beatTime = elapsed * (rec.bpm / 60);
+      const beatTime = this._autoRecGetCurrentBeat();
 
       if (!rec.recordings[paramName]) {
           rec.recordings[paramName] = [];
@@ -146,16 +142,6 @@ export const recUtils = {
           charEnd: numEnd,
           isDurationArg: isDurationArg,
       });
-  },
-
-  _autoRecFetchBpm(wsServer) {
-      // Read BPM from the crashpanel display
-      const bpmEl = document.getElementById('bpm');
-      if (bpmEl) {
-          this._autoRec.bpm = parseFloat(bpmEl.textContent) || 120;
-      } else {
-          this._autoRec.bpm = 120;
-      }
   },
 
   _autoRecShowIndicator(show) {
@@ -268,8 +254,8 @@ export const recUtils = {
       // Compute durations between extremes and snap to musical grid
       const durations = [];
       for (let i = 1; i < unique.length; i++) {
-          const raw = unique[i].time - unique[i - 1].time;
-          durations.push(this._autoRecSnapBeat(raw));
+          const raw = this._autoRecBeatDelta(unique[i - 1].time, unique[i].time);
+          durations.push(raw);
       }
       const vals = unique.map(u => u.value);
 
@@ -287,7 +273,7 @@ export const recUtils = {
       if (vals.length === 3 && Math.abs(vals[0] - vals[2]) < (max - min) * 0.1) {
           // Symmetric — sinvar
           const totalDur = durations[0] + durations[1];
-          return `sinvar([${vals[0]}, ${vals[1]}], ${this._autoRecSnapBeat(totalDur)})`;
+          return `sinvar([${vals[0]}, ${vals[1]}], ${totalDur})`;
       }
 
       // Check if all durations are the same (within tolerance)
@@ -303,6 +289,7 @@ export const recUtils = {
       return `linvar([${vals.join(', ')}], [${durations.join(', ')}])`;
   },
 
+  // Plus utilisé pour le moment, à voir si on snap ou pas sachant qu'on récupère que des entiers de beat.
   _autoRecSnapBeat(beats) {
       // Snap to nearest musical subdivision
       const grid = [0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8, 12, 16, 32];
@@ -316,5 +303,23 @@ export const recUtils = {
           }
       }
       return best;
+  },
+
+  _autoRecGetCurrentBeat() {
+      // Read current beat from beat-64 div (format: "27/64")
+      const beatEl = document.getElementById('beat-64');
+      if (!beatEl) return 0;
+      const beatText = beatEl.textContent.trim();
+      const beatValue = parseInt(beatText.split('/')[0], 10);
+      return beatValue;
+  },
+
+  _autoRecBeatDelta(beatStart, beatEnd, cycleSize = 64) {
+      // Calculate beat difference, handling wrap-around (e.g., 55 → 8 = 17 beats)
+      if (beatEnd >= beatStart) {
+          return beatEnd - beatStart;
+      }
+      // Wrap case: beatEnd < beatStart means we crossed the cycle boundary
+      return (cycleSize - beatStart) + beatEnd;
   },
 }

@@ -541,7 +541,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("piano-roll").classList.toggle("hidden");
     },
     "Alt-T": (cm) => {
-      recUtils.autoRecToggle(cm, evaluateCode, wsServer);
+      recUtils.autoRecToggle(cm, evaluateCode);
     },
     "Alt-Up": (cm) => {
       functionUtils.incrementValue(cm, 1);

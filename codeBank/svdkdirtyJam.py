@@ -1,3 +1,5 @@
+# svdkdirtyJam 134
+# aggressive
 
 b6 >> play("X.", amp=3, sample=8)
 s0 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.15, oct=4, grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.7, lofi=0)
@@ -5,9 +7,9 @@ s0 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.15, oct=4, grit=1,          cutof
 z8 >> play("x.", sample=8, amp=3, hpf=60, lpr=.2).sometimes("stutter", PRand(4))
 
 # Server.addFx(dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0)
-           
-i5 >> play()  
-  
+
+i5 >> play()
+
 drop()
 
 s_all.r=0

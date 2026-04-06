@@ -1,5 +1,4 @@
-
-# blackorchid # 88
+# blackorchid 88
 # dark
 
 Clock.bpm = 88;

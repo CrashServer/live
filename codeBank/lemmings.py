@@ -1,5 +1,5 @@
-# Lemmings 160 
-# gaming
+# Lemmings 160
+# cover
 
 
 Scale.default = Scale.chromatic

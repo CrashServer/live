@@ -1,6 +1,5 @@
+# Prechaos 132
 
-
-# Prechaos
 
 Clock.bpm = 132
 # d1 >> dbass(dur=1/2)
@@ -206,4 +205,3 @@ gz >> prophet(var([chd, [(0,4,7,11)], [(0,5,9)]], [16, 8, 8]), dur=var([8, 4, 16
 hv >> hoover(var([chd, [(0,7,12)], [(0,4,11)]], [24, 4, 4]), dur=var([16, 8, 32], [16, 8, 8]), porta=linvar([0.5, 2.5], 48), portadur=linvar([0.1, 0.4], 32), tubedrive=linvar([0.3, 0.7], 48), tubewarm=linvar([0.2, 0.6], 64), amp=var([0.6, 0.8, 0.5], [16, 8, 8]), sus=linvar([3, 8], 48))
 
 do >> dopple(var([seq,  seq+P[0,0,0,0,7,7,7,7]], [16, 8, 8]), dur=var([0.25, 0.125, 0.5], [16, 8, 8]), rate=expvar([0.3, 5], 16), hpf=linvar([200, 600], 32), dist2=linvar([1, 4], 48), rhythmgate=var([0, 0.5, 0.8], [16, 8, 8]), gaterate=var([4, 8, 2], [12, 8, 12]), gatewave=var([1, 2, 0], [8, 8, 16]), oct=var([5, 6, 4], [16, 8, 8]), amp=var([0.8, 1, 0.6], [12, 8, 12]))
-

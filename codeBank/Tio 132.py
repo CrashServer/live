@@ -1,5 +1,5 @@
 # Tio 132
-# chaosbits
+# chaosbits, algorave
 
 q3 >> compkick(0, punch=0.5, comp=16, release=0.35, click=1.0,drive=0.4, sub=1, tape=1, tapedrive=2, body=0.2, echo=0, tone=0.0, oct=3,)
 

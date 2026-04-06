@@ -1,5 +1,5 @@
 # multiCore 172
-# mud
+# mud, algorave
 
 Clock.bpm=172
 

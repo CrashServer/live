@@ -1246,7 +1246,7 @@ fx.add("osc = XFade2.ar(dry, grains, gdel * 2 - 1)")
 fx.save()
 
 # Multiband compressor - 3-band split with per-band compression
-fx = FxList.new("mbcomp", "mbcomp", {"mbcomp": 0, "mbcxlo": 200, "mbcxhi": 3000, "mbcrat": 3, "mbcatk": 0.01, "mbcrel": 0.1}, order=2, tag="dynamics")
+fx = FxList.new("mbcomp", "mbcomp", {"mbcomp": 0, "mbcxlo": 200, "mbcxhi": 3000, "mbcrat": 3, "mbcatk": 0.01, "mbcrel": 0.1}, order=2, tag="volume")
 fx.doc("Multiband compressor - tighten lows without squashing highs")
 fx.add_var("dry")
 fx.add_var("lo")

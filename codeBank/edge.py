@@ -1,5 +1,5 @@
 # edge 93
-# trance, chaosBits
+# trance, chaosBits, algorave
 
 Clock.bpm = 93;
 c1 >> cs80(cutoff=linvar([400, 5300], [8, 4, 8]), dec=1.0, leg=var([0, 4], [31, 1]), detune=0, lpr=0.2, bits=8, crush=8, oct=(4, PStep(4, 3, 4)), vibspeed=P[0.5,2, 0.5, 1.1], vibdepth=0.1, lpf=linvar([400, 4000], 128), glide=1, dur=1/6, shape=0.2, fx1=1, delay=PSine(128)*0.33)

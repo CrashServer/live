@@ -1,5 +1,5 @@
 # XRuns - 144
-# banger
+# banger, algorave
 
 Clock.bpm=144
 Root.default = 2

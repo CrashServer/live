@@ -2012,6 +2012,29 @@ def checkSynthTag(synthDictArgs):
         lines.append("  ✅ All synths have a tag")
     return lines
 
+def checkCodeBank():
+    ''' Check the code bank for any issues '''
+    wrongTitle = []
+    wrongCategory =  []
+    lines = []
+    codeBankPath = os.path.join(Path('.').absolute().parent, 'codeBank')
+    for filename in os.listdir(codeBankPath):
+      if filename.endswith('.py'):
+        with open(os.path.join(codeBankPath, filename)) as f:
+          content = f.readlines()
+          if not content[0].startswith('#'):
+              wrongTitle.append(filename)
+          if not content[1].startswith('#'):
+            wrongCategory.append(filename)
+    if len(wrongTitle) > 0:
+        lines.append(f"  ❌ {len(wrongTitle)} code snippet(s) with wrong title: {wrongTitle}")
+    else:
+        lines.append("  ✅ All code snippets have a title")
+    if len(wrongCategory) > 0:
+        lines.append(f"  ❌ {len(wrongCategory)} code snippet(s) with wrong category: {wrongCategory}")
+    else:
+        lines.append("  ✅ All code snippets have a category")
+    return lines
 
 def sanityCheck():
     ''' Run some tests to check if everything is working fine '''
@@ -2024,6 +2047,7 @@ def sanityCheck():
         ("🎹 CHECK PLAYER NAME TYPES",  checkPlayerNameType()),
         ("⚡ CHECK SYNTH ARGS vs FX ARGS", checkIfSynthArgsAreInFxArgs(synthDictArgs)),
         ("🏷️  CHECK SYNTH TAGS",        checkSynthTag(synthDictArgs)),
+        ("📂 CHECK CODE BANK",         checkCodeBank())
     ]
 
     output = ["\n"]

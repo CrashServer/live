@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pretexte - Visualisation du Code</title>
     <link rel="stylesheet" href="main.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "@chenglou/pretext": "./node_modules/@chenglou/pretext/dist/layout.js"
+      }
+    }
+    </script>
 </head>
 <body>
     <div id="code-container"></div>
     <div id="status" class="status disconnected">Déconnecté</div>
     
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>

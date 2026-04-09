@@ -1,3 +1,147 @@
+import { prepare, layout } from '@chenglou/pretext';
+// Configuration for dynamic font sizing
+const FONT_CONFIG = {
+    MIN_FONT_SIZE: 6,
+    MAX_FONT_SIZE: 200,
+    FONT_FAMILY: 'InterBlack, Courier New, monospace',
+    LINE_HEIGHT_MULTIPLIER: 1.1
+};
+
+
+// Font size calculation
+let lastCalculatedFontSize = null;
+let containerDimensions = null;
+let lastLineCount = null;
+let lastTextContent = null;
+let recalcAttempts = 0;
+const MAX_RECALC_ATTEMPTS = 5;
+
+/**
+ * Calculate optimal font size to fit text in container using binary search
+ * @param {string} text - The text to measure
+ * @param {number} containerWidth - Available width in pixels
+ * @param {number} containerHeight - Available height in pixels
+ * @returns {Promise<number|null>} - Optimal font size in pixels, or null on failure
+ */
+async function calculateOptimalFontSize(text, containerWidth, containerHeight) {
+
+    try {
+        let minSize = FONT_CONFIG.MIN_FONT_SIZE;
+        // Reduce max size by 20% for each recalc attempt after the first
+        let maxSize = FONT_CONFIG.MAX_FONT_SIZE * Math.pow(0.8, Math.max(0, recalcAttempts - 1));
+        let optimalSize = minSize;
+        const lineHeightMultiplier = FONT_CONFIG.LINE_HEIGHT_MULTIPLIER;
+        const padding = 80; // total padding (top + bottom + buffer for safety)
+        const availableHeight = containerHeight - padding;
+        const availableWidth = containerWidth - padding;
+
+        // Binary search for the largest font size that fits
+        for (let i = 0; i < 15; i++) {
+            const testSize = (minSize + maxSize) / 2;
+            const cssFont = `${testSize}px ${FONT_CONFIG.FONT_FAMILY}`;
+
+            try {
+                const prepared = prepare(text, cssFont);
+                const lineHeightAbsolute = testSize * lineHeightMultiplier;
+                const result = layout(prepared, availableWidth, lineHeightAbsolute);
+
+                // Check if text fits in height
+                if (result.height <= availableHeight) {
+                    optimalSize = testSize;
+                    minSize = testSize;
+                } else {
+                    maxSize = testSize;
+                }
+            } catch (e) {
+                console.warn('Error during font size calculation:', e);
+                maxSize = testSize;
+            }
+        }
+
+        return Math.round(optimalSize * 10) / 10; // Round to 0.1px
+    } catch (error) {
+        console.error('Failed to calculate optimal font size:', error);
+        return null;
+    }
+}
+
+/**
+ * Apply calculated font size to the container
+ * @param {number} fontSize - Font size in pixels
+ */
+function applyFontSize(fontSize) {
+    if (fontSize && fontSize > 0) {
+        codeContainer.style.setProperty('--font-size', `${fontSize}px`);
+        lastCalculatedFontSize = fontSize;
+    }
+}
+
+/**
+ * Initialize container dimensions (called once on page load)
+ */
+function initializeContainerDimensions() {
+    const containerRect = codeContainer.getBoundingClientRect();
+    containerDimensions = {
+        width: containerRect.width,
+        height: containerRect.height
+    };
+}
+
+/**
+ * Check if content overflows and needs font size adjustment
+ */
+function checkContentOverflow() {
+    const scrollHeight = codeContainer.scrollHeight;
+    const clientHeight = codeContainer.clientHeight;
+    const padding = 10;
+    const overflows = scrollHeight > clientHeight + padding;
+
+    return overflows;
+}
+
+/**
+ * Font size calculation - recalculates only if line count changes
+ */
+async function calculateFontSize(allText) {
+    // Lazy initialization of container dimensions on first use
+    if (!containerDimensions) {
+        initializeContainerDimensions();
+    }
+
+    const lineCount = allText.split('\n').filter(line => line.trim().length > 0).length;
+    // Skip if nothing changed and we have a valid size
+    if (lastLineCount === lineCount && lastCalculatedFontSize && lastTextContent === allText) {
+        return;
+    }
+
+    recalcAttempts++;
+    if (recalcAttempts > MAX_RECALC_ATTEMPTS) {
+        return;
+    }
+    lastLineCount = lineCount;
+    lastTextContent = allText;
+
+    const optimalSize = await calculateOptimalFontSize(
+        allText,
+        containerDimensions.width,
+        containerDimensions.height
+    );
+
+    if (optimalSize) {
+        applyFontSize(optimalSize);
+    }
+}
+
+/**
+ * Reset font size calculation when window is resized
+ */
+function handleWindowResize() {
+    containerDimensions = null;
+    lastCalculatedFontSize = null;
+    lastLineCount = null;
+    console.log('Window resized - container dimensions will be recalculated');
+}
+
 const codeContainer = document.getElementById('code-container');
 const statusElement = document.getElementById('status');
 
@@ -171,12 +315,20 @@ function mergePlayerWindows() {
 function renderCode() {
     codeContainer.innerHTML = '';
 
-    const displayLines = mergePlayerWindows();
+    // Reset recalc attempts for this render cycle
+    recalcAttempts = 0;
+
+    const displayLines = mergePlayerWindows()
+        .filter(line => line.text.trim().length > 0);
 
     if (displayLines.length === 0) {
-        codeContainer.textContent = 'En attente de code...';
+        codeContainer.textContent = '...';
         return;
     }
+
+    // Font size calculation based on content
+    const allText = displayLines.map(line => line.text).join('\n');
+    calculateFontSize(allText);
 
     const zbdm = players.zbdmInstantCode;
     const svdk = players.svdkInstantCode;
@@ -220,6 +372,18 @@ function renderCode() {
             activeLines[activeLines.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
+
+    // Check if rendered content fits in container (with a small delay to ensure layout is done)
+    // requestAnimationFrame(() => {
+    //     setTimeout(() => {
+
+    //         if (checkContentOverflow() && recalcAttempts < MAX_RECALC_ATTEMPTS) {
+    //             lastCalculatedFontSize = null;  // Force recalculation with smaller size
+    //         } else {
+    //             console.log('[RENDER] Content fits OK or max attempts reached');
+    //         }
+    //     }, 0);
+    // });
 }
 
 function renderLineWithCursor(lineSpan, text, cursorCh, playerType) {
@@ -265,7 +429,7 @@ function renderLineWithTwoCursors(lineSpan, text, cursorCh1, playerType1, cursor
 }
 
 function updateStatus(connected) {
-    if (!connected) {
+    if (connected) {
         statusElement.className = 'status connected';
     } else {
         statusElement.textContent = 'Déconnecté';
@@ -274,6 +438,9 @@ function updateStatus(connected) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadConfig();
-    renderCode();
+  window.addEventListener('resize', () => {
+    handleWindowResize();
+    recalcAttempts = 0;
+  });
+  loadConfig();
 });

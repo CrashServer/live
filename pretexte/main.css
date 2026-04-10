@@ -8,6 +8,7 @@
     --both-color: 164, 31, 255;
     --disconnected-color: #FF0000;
     --font-size: 3rem;
+    --active-font-size: 3rem;
 }
 
 * {
@@ -32,11 +33,11 @@ body {
     font-family: 'InterBlack', 'Courier New', monospace;
     font-size: var(--font-size);
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 0.8;
     height: 100vh;
     overflow: hidden;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    /*letter-spacing: 0.03em;*/
     transition: font-size 0.5s ease;
 }
 
@@ -44,7 +45,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    padding: 40px;
+    padding: 10px;
     background-color: var(--bg-color);
     word-break: break-all;
     white-space: normal;
@@ -58,7 +59,6 @@ body {
     margin: 0;
     padding: 0;
     font-size: var(--font-size);
-    font-weight: 900;
 }
 
 .code-line.active.zbdm {
@@ -67,7 +67,8 @@ body {
         0 0 5px rgba(var(--zbdm-color), 0.4),
         0 0 10px rgba(var(--zbdm-color), 0.3),
         0 0 20px rgba(var(--zbdm-color), 0.2);
-    font-weight: 900;
+    font-size: var(--active-font-size);
+    line-height: 1.0;
 }
 
 .code-line.active.svdk {
@@ -76,7 +77,9 @@ body {
         0 0 5px rgba(var(--svdk-color), 0.4),
         0 0 10px rgba(var(--svdk-color), 0.3),
         0 0 20px rgba(var(--svdk-color), 0.2);
-    font-weight: 900;
+
+    font-size: var(--active-font-size);
+    line-height: 1.0;
 }
 
 /* Cas spécial: les deux joueurs éditent la même ligne */
@@ -88,7 +91,6 @@ body {
         0 0 15px rgba(var(--both-color), 0.3),
         0 0 15px rgba(var(--both-color), 0.3),
         0 0 25px rgba(var(--both-color), 0.2);
-    font-weight: 900;
     position: relative;
     z-index: 10;
 }
@@ -158,48 +160,6 @@ body {
 ::selection {
     background-color: rgba(0, 255, 0, 0.2);
     color: #00ff00;
-}
-
-/* Responsive */
-@media (max-width: 1280px) {
-    body {
-        font-size: 28px;
-    }
-}
-
-@media (max-width: 1024px) {
-    body {
-        font-size: 24px;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        font-size: 20px;
-    }
-
-    .status {
-        font-size: 11px;
-        padding: 10px 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        font-size: 16px;
-    }
-
-    #code-container {
-        padding: 10px;
-    }
-}
-
-/* Mode réduit */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
 }
 
 /* Curseur ultra-visible - bloc clignotant avec couleurs par joueur */

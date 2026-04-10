@@ -168,9 +168,9 @@ def ascii_gen(text="", font=""):
     if asciiEnable:
         if font == "":
             font = randint(0, len(cool_ascii))
-        if type(font) != str:
+        if type(font) is str:
             font = fig_fonts_list[cool_ascii[int(font)]]
-        if text != None:
+        if text is None:
             sendAttack(figlet_format(text, font=font))
     else:
         print("No ascii pyfiglet")
@@ -500,332 +500,7 @@ def _perlin_1d(n, octaves=3, seed=None):
         result.append(val / max_amp)
     return result
 
-
-##########################
-### SECTION SEQUENCING ###
-##########################
-
-_seq_id = 0
-
-def _seq_schedule(beats, seq_id):
-    """Schedule next section trigger after N beats"""
-    global _seq_id
-    _seq_id = seq_id
-    Clock.future(beats, _seq_trigger, args=(seq_id,))
-
-def _seq_trigger(seq_id):
-    """Callback: print marker for server.js to route back to client"""
-    if seq_id == _seq_id:
-        print("__SEQ_NEXT__:" + str(seq_id))
-
-def _seq_cancel():
-    """Cancel pending sequence by invalidating the ID"""
-    global _seq_id
-    _seq_id = 0
-
-def _seq_end(beats):
-    """Stop all players after N beats"""
-    Clock.future(beats, Clock.clear)
-
-def _seq_endfade(beats):
-    """Fade all players to 0 over N beats, then stop"""
-    for player in Clock.playing:
-        player.amplify = linvar([player.amplify, 0], beats)
-    Clock.future(beats, Clock.clear)
-
-
-##############################
-### COMPOSITION ENGINE     ###
-##############################
-
-_play_id = 0
-_fire_players = set()
-_setlist_data = []
-_setlist_index = 0
-
-def _extract_players(code):
-    """Extract player names (e.g. p1, d1, j12) from code."""
-    names = set()
-    for m in re.finditer(r'\b([a-z]\d+)\s*>>', code):
-        names.add(m.group(1))
-    for m in re.finditer(r'\b([a-z]\d+)\.', code):
-        names.add(m.group(1))
-    return names
-
-def _play_stop(players, play_id):
-    """Stop specific players if play_id is still current."""
-    global _play_id
-    if play_id != _play_id:
-        return
-    for name in players:
-        try:
-            p = globals().get(name)
-            if p is not None and hasattr(p, 'stop'):
-                p.stop()
-        except:
-            pass
-
-def fire(name, section=None, dur=None, seq=False):
-    """Execute codeBank attack code by section with timing control.
-
-    fire("edge93")                            # exec entire file
-    fire("edge93", "intro")                   # exec intro, plays forever
-    fire("edge93", "intro", dur=32)           # exec intro, stop players after 32b
-    fire("edge93", "intro", seq=True)         # auto-advance using file beats
-    fire("edge93", "intro", seq=True, dur=64) # override timing
-    """
-    global _play_id, _fire_players
-    _play_id += 1
-    current_id = _play_id
-    _fire_players = set()
-
-    if name not in storageAttack.attackDict:
-        print(f"'{name}' not found")
-        return
-
-    entry = storageAttack.attackDict[name]
-
-    if section is None:
-        code = entry["attack"]
-        exec(code, globals())
-        if dur is not None:
-            players = _extract_players(code)
-            _fire_players.update(players)
-            Clock.future(dur, _play_stop, args=(players, current_id))
-        return
-
-    secs = entry.get("sections", {})
-    if not secs:
-        print(f"No sections in '{name}'")
-        return
-    if section not in secs:
-        print(f"Section '{section}' not in '{name}'")
-        return
-
-    sec_data = secs[section]
-    code = sec_data["code"]
-    exec(code, globals())
-
-    players = _extract_players(code)
-    _fire_players.update(players)
-    effective_dur = dur if dur is not None else sec_data.get("beats")
-
-    if dur is not None and not seq:
-        Clock.future(dur, _play_stop, args=(players, current_id))
-
-    if seq and effective_dur is not None:
-        sec_names = list(secs.keys())
-        idx = sec_names.index(section)
-        if idx + 1 < len(sec_names):
-            next_sec = sec_names[idx + 1]
-            Clock.future(effective_dur, _fire_advance,
-                        args=(name, next_sec, dur, current_id))
-        else:
-            # Last section in seq: stop all accumulated players
-            Clock.future(effective_dur, _play_stop, args=(set(_fire_players), current_id))
-
-def _fire_advance(name, section, dur_override, play_id):
-    """Auto-advance to next section (internal, does NOT increment _play_id)."""
-    global _play_id, _fire_players
-    if play_id != _play_id:
-        return
-
-    entry = storageAttack.attackDict.get(name)
-    if not entry:
-        return
-    secs = entry.get("sections", {})
-    if section not in secs:
-        print(f"[fire] section '{section}' not found in sections: {list(secs.keys())}")
-        return
-
-    sec_data = secs[section]
-    code = sec_data["code"]
-    print(f"[fire] >> {section}" + (f" ({sec_data.get('beats')}b)" if sec_data.get('beats') else ""))
-
-    # Handle special terminator sections
-    if section == "loop":
-        # Execute code if any, then loop back
-        if code.strip():
-            exec(code, globals())
-            _fire_players.update(_extract_players(code))
-        beats = dur_override if dur_override is not None else (sec_data.get("beats") or 0)
-        delay = max(beats, 0.125)
-        # Pick target: weighted random from targets, or first section
-        targets = sec_data.get("targets", [])
-        if targets:
-            names, weights = zip(*targets)
-            target_sec = choices(names, weights)[0]
-        else:
-            target_sec = list(secs.keys())[0]
-        print(f"[fire] loop -> '{target_sec}' in {delay}b")
-        Clock.future(delay, _fire_advance,
-                    args=(name, target_sec, dur_override, play_id))
-        return
-    if section == "clear":
-        # Stop all players accumulated during this fire sequence
-        _play_stop(set(_fire_players), play_id)
-        return
-    if section == "end":
-        beats = sec_data.get("beats")
-        if beats:
-            Clock.future(beats, Clock.clear)
-        else:
-            Clock.clear()
-        return
-    if section == "endfade":
-        beats = sec_data.get("beats") or 8
-        for player in Clock.playing:
-            player.amplify = linvar([player.amplify, 0], beats)
-        Clock.future(beats, Clock.clear)
-        return
-
-    exec(code, globals())
-    players = _extract_players(code)
-    _fire_players.update(players)
-
-    effective_dur = dur_override if dur_override is not None else sec_data.get("beats")
-    sec_names = list(secs.keys())
-    idx = sec_names.index(section)
-
-    if effective_dur is not None and idx + 1 < len(sec_names):
-        next_sec = sec_names[idx + 1]
-        Clock.future(effective_dur, _fire_advance,
-                    args=(name, next_sec, dur_override, play_id))
-    elif effective_dur is not None:
-        # Last section: stop all accumulated players
-        Clock.future(effective_dur, _play_stop, args=(set(_fire_players), play_id))
-
-def compose(name, section=None):
-    """Paste full attack in editor, optionally auto-play from a section.
-
-    compose("edge93", "intro")
-    """
-    attack(name)
-    if section is not None:
-        print(f"__COMPOSE_START__:{section}")
-
-def sections(name):
-    """List sections of a composition.
-
-    sections("edge93")  # prints: intro(32) -> build -> peak(16) -> end(8)
-    """
-    if name not in storageAttack.attackDict:
-        print(f"'{name}' not found")
-        return
-    secs = storageAttack.attackDict[name].get("sections", {})
-    if not secs:
-        print(f"No sections in '{name}'")
-        return
-    parts = []
-    for sec_name, sec_data in secs.items():
-        beats = sec_data.get("beats")
-        targets = sec_data.get("targets", [])
-        label = sec_name
-        if beats is not None:
-            label += f"({beats:g})"
-        if targets:
-            tstr = ",".join(f"{t[0]}:{t[1]}" if t[1] != 1 else t[0] for t in targets)
-            label += f" [{tstr}]"
-        parts.append(label)
-    print(" -> ".join(parts))
-
-def reload():
-    """Reload all codeBank attacks."""
-    storageAttack.compileAttack()
-    print(f"Reloaded {len(storageAttack.attackDict)} attacks")
-
-def setlist(entries):
-    """Queue a setlist of (name, section, dur) tuples for sequential playback.
-
-    setlist([
-        ("edge93", "intro", 32),
-        ("hearme", "part3", 64),
-        ("antenna", "peak", 16),
-    ])
-    """
-    global _play_id, _setlist_data, _setlist_index
-    _play_id += 1
-    _setlist_data = entries
-    _setlist_index = 0
-    _run_setlist_entry(0, _play_id)
-
-def _run_setlist_entry(index, play_id):
-    """Execute a setlist entry and schedule the next."""
-    global _play_id, _setlist_index
-    if play_id != _play_id:
-        return
-    if index >= len(_setlist_data):
-        print("Setlist finished")
-        return
-
-    _setlist_index = index
-    name, section, dur = _setlist_data[index]
-    total = len(_setlist_data)
-    print(f">> [{index+1}/{total}] {name} -> {section} ({dur}b)")
-
-    sec_code = storageAttack.getSection(name, section)
-    if sec_code:
-        exec(sec_code, globals())
-
-    if index + 1 < len(_setlist_data):
-        Clock.future(dur, _run_setlist_entry, args=(index + 1, play_id))
-    else:
-        if sec_code:
-            players = _extract_players(sec_code)
-            Clock.future(dur, _play_stop, args=(players, play_id))
-
-def skip():
-    """Jump to the next setlist entry now."""
-    global _play_id, _setlist_index
-    if not _setlist_data:
-        print("No active setlist")
-        return
-    _play_id += 1
-    next_idx = _setlist_index + 1
-    if next_idx >= len(_setlist_data):
-        print("Already at last entry")
-        return
-    _run_setlist_entry(next_idx, _play_id)
-
-def back():
-    """Go back to the previous setlist entry."""
-    global _play_id, _setlist_index
-    if not _setlist_data:
-        print("No active setlist")
-        return
-    _play_id += 1
-    prev_idx = max(0, _setlist_index - 1)
-    _run_setlist_entry(prev_idx, _play_id)
-
-def current():
-    """Show current setlist position."""
-    if not _setlist_data:
-        print("No active setlist")
-        return
-    for i, (name, section, dur) in enumerate(_setlist_data):
-        marker = ">> " if i == _setlist_index else "   "
-        print(f"{marker}[{i+1}/{len(_setlist_data)}] {name} -> {section} ({dur}b)")
-
-def rec(gap=4):
-    """Start recording code evaluations for composition capture.
-    gap: beats of silence before starting a new section (1, 2, 4, 8). Default 4.
-    e.g. rec()    — standard, new section after 4 beats pause
-         rec(1)   — precise, new section after 1 beat pause
-         rec(8)   — loose, new section after 8 beats pause
-    """
-    bpm = int(Clock.bpm)
-    print(f"__REC_START__:{bpm}:{int(gap)}")
-    print(f"Recording started at {bpm} BPM, section gap: {int(gap)} beats...")
-
-def rec_stop(name=None):
-    """Stop recording and generate a composed script.
-
-    rec_stop()               # auto-name: recorded_HHMMSS.py
-    rec_stop("my_session")   # named: my_session.py
-    """
-    name_str = name if name else ""
-    print(f"__REC_STOP__:{name_str}")
-
+####### HELPERS TO PRINT SYNTHS, FX, SAMPLES, LOOPS, FONKS, SHORTCUTS ###
 
 def print_synth(synth=""):
     ''' Show the name and the args of a synth '''
@@ -2060,6 +1735,335 @@ def sanityCheck():
     output.append(SEP)
 
     print("\n".join(output))
+
+##########################
+### SECTION SEQUENCING ###
+##########################
+
+_seq_id = 0
+
+def _seq_schedule(beats, seq_id):
+    """Schedule next section trigger after N beats"""
+    global _seq_id
+    _seq_id = seq_id
+    Clock.future(beats, _seq_trigger, args=(seq_id,))
+
+def _seq_trigger(seq_id):
+    """Callback: print marker for server.js to route back to client"""
+    if seq_id == _seq_id:
+        print("__SEQ_NEXT__:" + str(seq_id))
+
+def _seq_cancel():
+    """Cancel pending sequence by invalidating the ID"""
+    global _seq_id
+    _seq_id = 0
+
+def _seq_end(beats):
+    """Stop all players after N beats"""
+    Clock.future(beats, Clock.clear)
+
+def _seq_endfade(beats):
+    """Fade all players to 0 over N beats, then stop"""
+    for player in Clock.playing:
+        player.amplify = linvar([player.amplify, 0], beats)
+    Clock.future(beats, Clock.clear)
+
+
+##############################
+### COMPOSITION ENGINE     ###
+##############################
+
+class Compo():
+    """Composition engine to execute codeBank snippets with timing control and sequencing. """
+    def __init__(self):
+        self._play_id = 0
+        self._fire_players = set()
+        self._setlist_data = []
+        self._setlist_index = 0
+
+    def _extract_players(self, code):
+        """Extract player names (e.g. p1, d1, j12) from code."""
+        names = set()
+        for m in re.finditer(r'\b([a-z]\d+)\s*>>', code):
+            names.add(m.group(1))
+        for m in re.finditer(r'\b([a-z]\d+)\.', code):
+            names.add(m.group(1))
+        return names
+
+    def _play_stop(self, players, play_id):
+        """Stop specific players if play_id is still current."""
+        if play_id != self._play_id:
+            return
+        for name in players:
+            try:
+                p = globals().get(name)
+                if p is not None and hasattr(p, 'stop'):
+                    p.stop()
+            except:
+                pass
+
+    def fire(self, name, section=None, dur=None, seq=False):
+        """Execute codeBank attack code by section with timing control.
+
+        fire("edge93")                            # exec entire file
+        fire("edge93", "intro")                   # exec intro, plays forever
+        fire("edge93", "intro", dur=32)           # exec intro, stop players after 32b
+        fire("edge93", "intro", seq=True)         # auto-advance using file beats
+        fire("edge93", "intro", seq=True, dur=64) # override timing
+        """
+        # global _play_id, _fire_players
+        self._play_id += 1
+        current_id = self._play_id
+        self._fire_players = set()
+
+        if name not in storageAttack.attackDict:
+            print(f"'{name}' not found")
+            return
+
+        entry = storageAttack.attackDict[name]
+
+        if section is None:
+            code = entry["attack"]
+            exec(code, globals())
+            if dur is not None:
+                players = self._extract_players(code)
+                self._fire_players.update(players)
+                Clock.future(dur, self._play_stop, args=(players, current_id))
+            return
+
+        secs = entry.get("sections", {})
+        if not secs:
+            print(f"No sections in '{name}'")
+            return
+        if section not in secs:
+            print(f"Section '{section}' not in '{name}'")
+            return
+
+        sec_data = secs[section]
+        code = sec_data["code"]
+        exec(code, globals())
+
+        players = self._extract_players(code)
+        self._fire_players.update(players)
+        effective_dur = dur if dur is not None else sec_data.get("beats")
+
+        if dur is not None and not seq:
+            Clock.future(dur, self._play_stop, args=(players, current_id))
+
+        if seq and effective_dur is not None:
+            sec_names = list(secs.keys())
+            idx = sec_names.index(section)
+            if idx + 1 < len(sec_names):
+                next_sec = sec_names[idx + 1]
+                Clock.future(effective_dur, self._fire_advance,
+                            args=(name, next_sec, dur, current_id))
+            else:
+                # Last section in seq: stop all accumulated players
+                Clock.future(effective_dur, self._play_stop, args=(set(self._fire_players), current_id))
+
+    def _fire_advance(self, name, section, dur_override, play_id):
+        """Auto-advance to next section (internal, does NOT increment _play_id)."""
+        # global _play_id, _fire_players
+        if play_id != self._play_id:
+            return
+
+        entry = storageAttack.attackDict.get(name)
+        if not entry:
+            return
+        secs = entry.get("sections", {})
+        if section not in secs:
+            print(f"[fire] section '{section}' not found in sections: {list(secs.keys())}")
+            return
+
+        sec_data = secs[section]
+        code = sec_data["code"]
+        print(f"[fire] >> {section}" + (f" ({sec_data.get('beats')}b)" if sec_data.get('beats') else ""))
+
+        # Handle special terminator sections
+        if section == "loop":
+            # Execute code if any, then loop back
+            if code.strip():
+                exec(code, globals())
+                self._fire_players.update(self._extract_players(code))
+            beats = dur_override if dur_override is not None else (sec_data.get("beats") or 0)
+            delay = max(beats, 0.125)
+            # Pick target: weighted random from targets, or first section
+            targets = sec_data.get("targets", [])
+            if targets:
+                names, weights = zip(*targets)
+                target_sec = choices(names, weights)[0]
+            else:
+                target_sec = list(secs.keys())[0]
+            print(f"[fire] loop -> '{target_sec}' in {delay}b")
+            Clock.future(delay, self._fire_advance,
+                        args=(name, target_sec, dur_override, play_id))
+            return
+        if section == "clear":
+            # Stop all players accumulated during this fire sequence
+            self._play_stop(set(self._fire_players), play_id)
+            return
+        if section == "end":
+            beats = sec_data.get("beats")
+            if beats:
+                Clock.future(beats, Clock.clear)
+            else:
+                Clock.clear()
+            return
+        if section == "endfade":
+            beats = sec_data.get("beats") or 8
+            for player in Clock.playing:
+                player.amplify = linvar([player.amplify, 0], beats)
+            Clock.future(beats, Clock.clear)
+            return
+
+        exec(code, globals())
+        players = self._extract_players(code)
+        self._fire_players.update(players)
+
+        effective_dur = dur_override if dur_override is not None else sec_data.get("beats")
+        sec_names = list(secs.keys())
+        idx = sec_names.index(section)
+
+        if effective_dur is not None and idx + 1 < len(sec_names):
+            next_sec = sec_names[idx + 1]
+            Clock.future(effective_dur, self._fire_advance,
+                        args=(name, next_sec, dur_override, play_id))
+        elif effective_dur is not None:
+            # Last section: stop all accumulated players
+            Clock.future(effective_dur, self._play_stop, args=(set(self._fire_players), play_id))
+
+    def compose(self, name, section=None):
+        """Paste full attack in editor, optionally auto-play from a section.
+
+        compose("edge93", "intro")
+        """
+        attack(name)
+        if section is not None:
+            print(f"__COMPOSE_START__:{section}")
+
+    def sections(self, name):
+        """List sections of a composition.
+
+        sections("edge93")  # prints: intro(32) -> build -> peak(16) -> end(8)
+        """
+        if name not in storageAttack.attackDict:
+            print(f"'{name}' not found")
+            return
+        secs = storageAttack.attackDict[name].get("sections", {})
+        if not secs:
+            print(f"No sections in '{name}'")
+            return
+        parts = []
+        for sec_name, sec_data in secs.items():
+            beats = sec_data.get("beats")
+            targets = sec_data.get("targets", [])
+            label = sec_name
+            if beats is not None:
+                label += f"({beats:g})"
+            if targets:
+                tstr = ",".join(f"{t[0]}:{t[1]}" if t[1] != 1 else t[0] for t in targets)
+                label += f" [{tstr}]"
+            parts.append(label)
+        print(" -> ".join(parts))
+
+    def reload(self):
+        """Reload all codeBank attacks."""
+        storageAttack.compileAttack()
+        print(f"Reloaded {len(storageAttack.attackDict)} attacks")
+
+    def setlist(self, entries):
+        """Queue a setlist of (name, section, dur) tuples for sequential playback.
+
+        setlist([
+            ("edge93", "intro", 32),
+            ("hearme", "part3", 64),
+            ("antenna", "peak", 16),
+        ])
+        """
+        # global _play_id, _setlist_data, _setlist_index
+        self._play_id += 1
+        self._setlist_data = entries
+        self._setlist_index = 0
+        self._run_setlist_entry(0, self._play_id)
+
+    def _run_setlist_entry(self, index, play_id):
+        """Execute a setlist entry and schedule the next."""
+        global _play_id, _setlist_index
+        if play_id != self._play_id:
+            return
+        if index >= len(self._setlist_data):
+            print("Setlist finished")
+            return
+
+        _setlist_index = index
+        name, section, dur = self._setlist_data[index]
+        total = len(self._setlist_data)
+        print(f">> [{index+1}/{total}] {name} -> {section} ({dur}b)")
+
+        sec_code = storageAttack.getSection(name, section)
+        if sec_code:
+            exec(sec_code, globals())
+
+        if index + 1 < len(self._setlist_data):
+            Clock.future(dur, self._run_setlist_entry, args=(index + 1, play_id))
+        else:
+            if sec_code:
+                players = self._extract_players(sec_code)
+                Clock.future(dur, self._play_stop, args=(players, play_id))
+
+    def skip(self):
+        """Jump to the next setlist entry now."""
+        # global _play_id, _setlist_index
+        if not self._setlist_data:
+            print("No active setlist")
+            return
+        self._play_id += 1
+        next_idx = _setlist_index + 1
+        if next_idx >= len(self._setlist_data):
+            print("Already at last entry")
+            return
+        self._run_setlist_entry(next_idx, self._play_id)
+
+    def back(self):
+        """Go back to the previous setlist entry."""
+        # global _play_id, _setlist_index
+        if not self._setlist_data:
+            print("No active setlist")
+            return
+        self._play_id += 1
+        prev_idx = max(0, _setlist_index - 1)
+        self._run_setlist_entry(prev_idx, self._play_id)
+
+    def current(self):
+        """Show current setlist position."""
+        if not self._setlist_data:
+            print("No active setlist")
+            return
+        for i, (name, section, dur) in enumerate(self._setlist_data):
+            marker = ">> " if i == _setlist_index else "   "
+            print(f"{marker}[{i+1}/{len(self._setlist_data)}] {name} -> {section} ({dur}b)")
+
+    def rec(self, gap=4):
+        """Start recording code evaluations for composition capture.
+        gap: beats of silence before starting a new section (1, 2, 4, 8). Default 4.
+        e.g. rec()    — standard, new section after 4 beats pause
+            rec(1)   — precise, new section after 1 beat pause
+            rec(8)   — loose, new section after 8 beats pause
+        """
+        bpm = int(Clock.bpm)
+        print(f"__REC_START__:{bpm}:{int(gap)}")
+        print(f"Recording started at {bpm} BPM, section gap: {int(gap)} beats...")
+
+    def rec_stop(self, name=None):
+        """Stop recording and generate a composed script.
+
+        rec_stop()               # auto-name: recorded_HHMMSS.py
+        rec_stop("my_session")   # named: my_session.py
+        """
+        name_str = name if name else ""
+        print(f"__REC_STOP__:{name_str}")
+
+compo = Compo()
 
 Clock.link()
 

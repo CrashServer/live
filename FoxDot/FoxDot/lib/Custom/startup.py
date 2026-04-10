@@ -102,7 +102,7 @@ if __name__ != "__main__":
             FOXDOT_ROOT, "lib", "Crashserver", "crash_generator", "server_startup.py"))
         execute.load_startup_file()
         FOXDOT_STARTUP = _StartupFile(os.path.join(
-            FOXDOT_ROOT, "lib", "Crashserver", "crash_generator", "startup_live.py"))
+            FOXDOT_ROOT, "lib", "Crashserver", "startup_live.py"))
         execute.load_startup_file()
     except Exception as e:
         print("fail : ", e)
@@ -257,7 +257,7 @@ if __name__ != "__main__":
                     self.last_value = self.choices(
                         self.mapping[index][0], self.mapping[index][1])[0]
                 return self.last_value
-        
+
         @player_method
         def lclip(self, clip=0):
             """ Clip the loop player to a specific duration """
@@ -266,7 +266,7 @@ if __name__ != "__main__":
                 self.clip = clip
             else:
                 self.clip = 0
-            
+
     except Exception as e:
         print(f'Player method problem : {e}')
 
@@ -301,7 +301,7 @@ if __name__ != "__main__":
 
         @loop_pattern_func
         def PHex(hexnum="A"):
-            """ Returns a binary pattern from hexadecimal number 
+            """ Returns a binary pattern from hexadecimal number
             Examples:
                 PHex(8) => P[1,0,0,0]
                 PHex("b") => P[1,0,1,1]
@@ -313,11 +313,11 @@ if __name__ != "__main__":
                 hexnum = hex(hexnum)[2:]
             else:
                 hexnum = str(hexnum).lower().replace('0x', '')
-            
+
             # Convert hex to decimal then to binary
             decimal = int(hexnum, 16)
             binary = bin(decimal)[2:]
-            
+
             return Pattern([int(i) for i in binary])
 
         @loop_pattern_func
@@ -344,8 +344,8 @@ if __name__ != "__main__":
 
         @loop_pattern_func
         def PFrac(a=0.63, b=0.0, size=16, mapl=0, maph=1):
-            ''' return a Pattern with fractional step, 
-                    not sure what it is but sounds cool try with:  
+            ''' return a Pattern with fractional step,
+                    not sure what it is but sounds cool try with:
                             a = 0.63, b = 0.00
                             a = 0.66, b = 0.08
                             a = 0.42, b = 0.10
@@ -429,32 +429,32 @@ if __name__ != "__main__":
         def PBal(n, k, style=0, dur=0.25, start=0):
             """ Returns balanced rhythm durations.
                 Creates patterns with natural strong/weak beat relationships.
-                
+
                 Args:
                     n: number of pulses
                     k: total steps
                     style: rhythmic style variation (0-7, default 0)
                     start: rotation offset (default 0)
                     dur: base duration unit (default 1)
-                    
+
                 Examples:
                     >>> PBal(5, 16)  # [0.75, 0.75, 1, 0.5, 1]
                     >>> PBal(3, 8, style=1)  # Different patterns based on style
             """
-            
+
             if n == 0:
                 return Pattern([k * dur])
-            
+
             if n >= k:
                 # Equal subdivisions if more pulses than steps
                 return Pattern([k / n] * n) * dur
-            
+
             # Calculate base duration per pulse
             base_dur = k / n
-            
+
             # Create base pattern with equal durations
             intervals = [base_dur] * n
-            
+
             if style == 0:
                 # Default clave-inspired pattern
                 # Strong-weak-strong-weak-medium pattern
@@ -484,7 +484,7 @@ if __name__ != "__main__":
                             ratios.append(0.7)
                         else:  # Even positions - medium
                             ratios.append(0.9)
-            
+
             elif style == 1:
                 # Rumba-inspired: emphasis on different beats
                 if n == 5:
@@ -500,7 +500,7 @@ if __name__ != "__main__":
                             ratios.append(0.85)
                         else:
                             ratios.append(0.95)
-            
+
             elif style == 2:
                 # Reggae-inspired: off-beat emphasis
                 if n == 5:
@@ -514,7 +514,7 @@ if __name__ != "__main__":
                             ratios.append(1.15)
                         else:  # On-beats shorter
                             ratios.append(0.85)
-            
+
             elif style == 3:
                 # Swing feel
                 if n == 5:
@@ -528,7 +528,7 @@ if __name__ != "__main__":
                             ratios.append(1.2)
                         else:  # Off-beats
                             ratios.append(0.8)
-            
+
             elif style == 4:
                 # Salsa clave feel
                 if n == 5:
@@ -538,7 +538,7 @@ if __name__ != "__main__":
                 else:
                     pattern_3_2 = [1.1, 0.9, 1.2, 0.85, 1.05]
                     ratios = [pattern_3_2[i % len(pattern_3_2)] for i in range(n)]
-            
+
             elif style == 5:
                 # Cumbia steady
                 if n == 5:
@@ -549,7 +549,7 @@ if __name__ != "__main__":
                     ratios = [1.0] * n
                     ratios[0] = 1.05  # Slight downbeat emphasis
                     ratios[-1] = 0.95  # Slight last beat reduction
-            
+
             elif style == 6:
                 # Quick-quick-slow pattern
                 ratios = []
@@ -559,7 +559,7 @@ if __name__ != "__main__":
                         ratios.append(0.8)
                     else:  # Slow
                         ratios.append(1.4)
-            
+
             else:  # style == 7 or others
                 # Complex polyrhythmic
                 if n == 5:
@@ -575,26 +575,26 @@ if __name__ != "__main__":
                             ratios.append(0.9)
                         else:
                             ratios.append(1.0)
-            
+
             # Apply ratios to base durations
             for i in range(len(intervals)):
                 intervals[i] = intervals[i] * ratios[i % len(ratios)]
-            
+
             # Normalize to maintain total duration = k
             total = sum(intervals)
             if total > 0:
                 scale_factor = k / total
                 intervals = [interval * scale_factor for interval in intervals]
-            
+
             # Round to avoid floating point precision errors
             intervals = [round(interval, 10) for interval in intervals]
-            
+
             # Apply start rotation if specified
             if start != 0:
                 pattern = Pattern(intervals)
                 pattern = pattern.rotate(int(start))
                 intervals = pattern.data
-            
+
             return Pattern(intervals) * dur
 
 
@@ -816,9 +816,9 @@ if __name__ != "__main__":
                     return self.active_value
 
         class PZero(GeneratorPattern):
-            ''' Generate a Pattern with '1' and size-1 '0' 
-                    eg: PZero(5) -> P[1,0,0,0,0] 
-                    the '1' position can be offset 
+            ''' Generate a Pattern with '1' and size-1 '0'
+                    eg: PZero(5) -> P[1,0,0,0,0]
+                    the '1' position can be offset
                     '''
 
             def __init__(self, size=2, offset=0):

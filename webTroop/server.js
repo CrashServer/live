@@ -21,26 +21,26 @@ async function initArduino() {
   try {
     // Lister les ports série disponibles
     const ports = await SerialPort.list();
-    
+
     // Chercher l'Arduino (souvent /dev/ttyUSB* ou /dev/ttyACM* sur Linux)
-    let arduinoPort = ports.find(port => 
-      port.path.includes('ttyUSB') || 
-      port.path.includes('ttyACM') || 
+    let arduinoPort = ports.find(port =>
+      port.path.includes('ttyUSB') ||
+      port.path.includes('ttyACM') ||
       port.manufacturer?.includes('Arduino') ||
       port.manufacturer?.includes('Arduino')
     );
-    
+
     if (!arduinoPort) {
       console.log('Arduino non trouvé automatiquement. Essai avec /dev/ttyUSB0...');
       arduinoPort = { path: '/dev/ttyUSB0' };
     }
-        
+
     const arduino = new SerialPort({
       path: arduinoPort.path,
       baudRate: 115200,
       autoOpen: false
     });
-    
+
     return new Promise((resolve, reject) => {
       arduino.open((err) => {
         if (err) {
@@ -52,7 +52,7 @@ async function initArduino() {
         }
       });
     });
-    
+
   } catch (error) {
     console.error('Erreur lors de l\'initialisation Arduino:', error.message);
     return null;
@@ -67,18 +67,18 @@ let arduino = null;
 // Fonction pour envoyer un caractère à l'Arduino avec cooldown simple
 function sendToArduino(arduino, character) {
   const now = Date.now();
-  
+
   // Vérifier le cooldown - ignorer si trop récent
   if (now - lastArduinoSend < ARDUINO_COOLDOWN) {
     return;
   }
-  
+
   if (arduino && arduino.isOpen) {
     arduino.write(character, (err) => {
       if (err) {
         console.error('Erreur envoi Arduino:', err.message);
       } else {
-        
+
         // Flush pour s'assurer que les données sont envoyées immédiatement
         arduino.flush((flushErr) => {
           if (flushErr) {
@@ -87,22 +87,22 @@ function sendToArduino(arduino, character) {
         });
       }
     });
-    
+
     // Mettre à jour le timestamp du dernier envoi
     lastArduinoSend = now;
-  } 
+  }
 }
 
 // Fonction pour mapper les userNames aux caractères
 function getUserCharacter(userName) {
   if (!userName) return null;
-  
+
   const userMap = {
     'zbdm': 'v',
     'svdk': 'z',
     'server': 's'
   };
-  
+
   return userMap[userName] || null;
 }
 
@@ -138,18 +138,18 @@ let recordingSectionGap = 4; // beats gap to split sections (1, 2, 4, 8)
 function sendCpuToArduino(arduino, cpuPercent) {
   const now = Date.now();
   const cpuChar = getCpuCharacter(cpuPercent);
-  
+
   // Ne pas envoyer si même niveau ou si cooldown actif
   if (cpuChar === lastCpuLevel || now - lastCpuSend < CPU_COOLDOWN) {
     return;
   }
-  
+
   if (arduino && arduino.isOpen) {
     arduino.write(cpuChar, (err) => {
       if (err) {
         console.error('Erreur envoi CPU Arduino:', err.message);
       } else {
-        
+
         arduino.flush((flushErr) => {
           if (flushErr) {
             console.error('Erreur flush CPU Arduino:', flushErr.message);
@@ -157,7 +157,7 @@ function sendCpuToArduino(arduino, cpuPercent) {
         });
       }
     });
-    
+
     lastCpuLevel = cpuChar;
     lastCpuSend = now;
   }
@@ -166,13 +166,13 @@ function sendCpuToArduino(arduino, cpuPercent) {
 // Fonction pour gérer les commandes du bouton Arduino
 function handleButtonCommand(command, foxdot) {
   const now = Date.now();
-  
+
   // Vérifier le cooldown pour éviter les activations multiples
   if (now - lastButtonAction < BUTTON_COOLDOWN) {
     console.log(`Bouton ignoré (cooldown actif: ${BUTTON_COOLDOWN - (now - lastButtonAction)}ms restantes)`);
     return;
   }
-  
+
   if (command === 'activate' && !serverState) {
     console.log('🟢 Activation du serveur FoxDot via bouton Arduino');
     foxdot.stdin.write('activateServer()' + '\n' + '\n');
@@ -191,12 +191,12 @@ function handleButtonCommand(command, foxdot) {
 // Fonction pour traiter les données série de l'Arduino
 function processArduinoData(data, foxdot) {
   const chars = data.toString();
-  
+
   for (let char of chars) {
     // Filtrer seulement les caractères 's' et 'c' du bouton
     if (char === 's' || char === 'c') {
       buttonBuffer += char;
-      
+
       // Détecter la séquence d'activation (10 's' consécutifs)
       if (buttonBuffer.endsWith('ssssssssss')) { // 10 's'
         console.log('🔘 Séquence d\'activation détectée du bouton Arduino');
@@ -209,7 +209,7 @@ function processArduinoData(data, foxdot) {
         handleButtonCommand('deactivate', foxdot);
         buttonBuffer = ''; // Reset buffer
       }
-      
+
       // Limiter la taille du buffer pour éviter l'accumulation
       if (buttonBuffer.length > 20) {
         buttonBuffer = buttonBuffer.slice(-10); // Garder les 10 derniers caractères
@@ -225,7 +225,7 @@ function processArduinoData(data, foxdot) {
   const config = await loadConfig();
   const PROJECT_ROOT = path.resolve(config.FOXDOT_PATH, '..');
   const isArduinoEnabled = config.ARDUINO;
-  
+
   // Initialiser la connexion Arduino
   if (isArduinoEnabled){
     arduino = await initArduino();
@@ -233,7 +233,7 @@ function processArduinoData(data, foxdot) {
     arduino = null;
     console.log('Arduino désactivé dans la configuration.');
   }
-  
+
   // Lancer FoxDot
   const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
     cwd: config.FOXDOT_PATH,
@@ -247,11 +247,11 @@ if (arduino && arduino.isOpen) {
   arduino.on('data', (data) => {
     processArduinoData(data, foxdot);
   });
-  
+
   arduino.on('error', (err) => {
     console.error('Erreur série Arduino:', err.message);
   });
-  
+
   console.log('Écoute des commandes bouton Arduino activée');
 }
 
@@ -266,7 +266,7 @@ wss.on('connection', (ws, req) => {
       const data = JSON.parse(message.toString());
       if (data.type === 'evaluate_code') {
         const {code, userName, userColor} = data;
-        
+
         const attackRequest = (code.trim().startsWith('lost') || code.trim().startsWith("attack") || code.trim().startsWith('chaos') || code.trim().startsWith('compose')) ? userName : "";
         // Strip internal sequencing commands from log output
         const logCode = code.split('\n').filter(l => !l.trim().startsWith('_seq_')).join('\n').trim();
@@ -368,23 +368,23 @@ foxdot.stdout.on('data', (data) => {
 
 // Logs de console de FoxDot
 function broadcastLog(message, color=null, attackRequest="") {
-  
+
   // Nettoyer le message (enlever les sauts de ligne, espaces inutiles)
   const cleanMessage = message.trim();
-  
+
   // Regex plus flexible pour capturer différents formats
   const userLogMatch = cleanMessage.match(/(SERVER|zbdm|svdk)\s*:\s*(.+)/);
-  
+
   if (userLogMatch) {
     const userName = userLogMatch[1];
-    
+
     // Envoyer le caractère correspondant à l'Arduino
     const userChar = getUserCharacter(userName.toLowerCase());
     if (userChar && arduino && arduino.isOpen) {
       sendToArduino(arduino, userChar);
     }
   }
-  
+
   const messageObj = {
     type: 'foxdot_log',
     data: message,
@@ -451,12 +451,12 @@ async function processRecording(rawName, bpm, events) {
   script += '#@endfade(16)\n';
 
   // Save file
-  const filePath = path.join(PROJECT_ROOT, 'codeBank', `${fileName}.py`);
+  // const filePath = path.join(PROJECT_ROOT, 'codeBank', `${fileName}.py`);
   try {
-    await fs.writeFile(filePath, script, 'utf-8');
-    console.log(`Recording saved: ${filePath}`);
-    foxdot.stdin.write('storageAttack.compileAttack()\n\n');
-    broadcastLog(`Recording saved: ${fileName}.py\n`, 'green');
+    // await fs.writeFile(filePath, script, 'utf-8');
+    // console.log(`Recording saved: ${filePath}`);
+    // foxdot.stdin.write('storageAttack.compileAttack()\n\n');
+    // broadcastLog(`Recording saved: ${fileName}.py\n`, 'green');
 
     // Send script to editor
     wss.clients.forEach(client => {

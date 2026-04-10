@@ -4,7 +4,7 @@ const FONT_CONFIG = {
     MIN_FONT_SIZE: 6,
     MAX_FONT_SIZE: 200,
     FONT_FAMILY: 'InterBlack, Courier New, monospace',
-    LINE_HEIGHT_MULTIPLIER: 1.1
+    LINE_HEIGHT_MULTIPLIER: 0.8
 };
 
 
@@ -13,8 +13,6 @@ let lastCalculatedFontSize = null;
 let containerDimensions = null;
 let lastLineCount = null;
 let lastTextContent = null;
-let recalcAttempts = 0;
-const MAX_RECALC_ATTEMPTS = 5;
 
 /**
  * Calculate optimal font size to fit text in container using binary search
@@ -27,35 +25,30 @@ async function calculateOptimalFontSize(text, containerWidth, containerHeight) {
 
     try {
         let minSize = FONT_CONFIG.MIN_FONT_SIZE;
-        // Reduce max size by 20% for each recalc attempt after the first
-        let maxSize = FONT_CONFIG.MAX_FONT_SIZE * Math.pow(0.8, Math.max(0, recalcAttempts - 1));
+        let maxSize = FONT_CONFIG.MAX_FONT_SIZE;
         let optimalSize = minSize;
         const lineHeightMultiplier = FONT_CONFIG.LINE_HEIGHT_MULTIPLIER;
         const padding = 80; // total padding (top + bottom + buffer for safety)
-        const availableHeight = containerHeight - padding;
+        const availableHeight = containerHeight - padding*4;
         const availableWidth = containerWidth - padding;
 
         // Binary search for the largest font size that fits
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 20; i++) {
             const testSize = (minSize + maxSize) / 2;
             const cssFont = `${testSize}px ${FONT_CONFIG.FONT_FAMILY}`;
 
-            try {
-                const prepared = prepare(text, cssFont);
-                const lineHeightAbsolute = testSize * lineHeightMultiplier;
-                const result = layout(prepared, availableWidth, lineHeightAbsolute);
+            const prepared = prepare(text, cssFont);
+            const lineHeightAbsolute = testSize * lineHeightMultiplier;
+            const result = layout(prepared, availableWidth, lineHeightAbsolute);
 
-                // Check if text fits in height
-                if (result.height <= availableHeight) {
-                    optimalSize = testSize;
-                    minSize = testSize;
-                } else {
-                    maxSize = testSize;
-                }
-            } catch (e) {
-                console.warn('Error during font size calculation:', e);
+            // Check if text fits in height
+            if (result.height <= availableHeight) {
+                optimalSize = testSize;
+                minSize = testSize;
+            } else {
                 maxSize = testSize;
             }
+            if (maxSize - minSize < 0.5) break;
         }
 
         return Math.round(optimalSize * 10) / 10; // Round to 0.1px
@@ -88,18 +81,6 @@ function initializeContainerDimensions() {
 }
 
 /**
- * Check if content overflows and needs font size adjustment
- */
-function checkContentOverflow() {
-    const scrollHeight = codeContainer.scrollHeight;
-    const clientHeight = codeContainer.clientHeight;
-    const padding = 10;
-    const overflows = scrollHeight > clientHeight + padding;
-
-    return overflows;
-}
-
-/**
  * Font size calculation - recalculates only if line count changes
  */
 async function calculateFontSize(allText) {
@@ -108,16 +89,12 @@ async function calculateFontSize(allText) {
         initializeContainerDimensions();
     }
 
-    const lineCount = allText.split('\n').filter(line => line.trim().length > 0).length;
+    const lineCount = allText.split('\n').length; //.filter(line => line.trim().length > 0).length;
     // Skip if nothing changed and we have a valid size
     if (lastLineCount === lineCount && lastCalculatedFontSize && lastTextContent === allText) {
         return;
     }
 
-    recalcAttempts++;
-    if (recalcAttempts > MAX_RECALC_ATTEMPTS) {
-        return;
-    }
     lastLineCount = lineCount;
     lastTextContent = allText;
 
@@ -126,6 +103,7 @@ async function calculateFontSize(allText) {
         containerDimensions.width,
         containerDimensions.height
     );
+    console.log(`Calculated optimal font size: ${optimalSize}px for ${lineCount} lines`);
 
     if (optimalSize) {
         applyFontSize(optimalSize);
@@ -315,11 +293,8 @@ function mergePlayerWindows() {
 function renderCode() {
     codeContainer.innerHTML = '';
 
-    // Reset recalc attempts for this render cycle
-    recalcAttempts = 0;
-
-    const displayLines = mergePlayerWindows()
-        .filter(line => line.text.trim().length > 0);
+  const displayLines = mergePlayerWindows();
+        // .filter(line => line.text.trim().length > 0);
 
     if (displayLines.length === 0) {
         codeContainer.textContent = '...';
@@ -343,10 +318,12 @@ function renderCode() {
         if (isZbdmActiveLine) {
             lineSpan.classList.add('active');
             lineSpan.classList.add('zbdm');
+            lineSpan.style.fontSize = (lastCalculatedFontSize < 48) ? `48px` : `${lastCalculatedFontSize}px`;
         }
         if (isSvdkActiveLine) {
             lineSpan.classList.add('active');
             lineSpan.classList.add('svdk');
+            lineSpan.style.fontSize = (lastCalculatedFontSize < 48) ? `48px` : `${lastCalculatedFontSize}px`;
         }
 
         // Rendre la ligne selon les curseurs actifs
@@ -372,18 +349,6 @@ function renderCode() {
             activeLines[activeLines.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
-
-    // Check if rendered content fits in container (with a small delay to ensure layout is done)
-    // requestAnimationFrame(() => {
-    //     setTimeout(() => {
-
-    //         if (checkContentOverflow() && recalcAttempts < MAX_RECALC_ATTEMPTS) {
-    //             lastCalculatedFontSize = null;  // Force recalculation with smaller size
-    //         } else {
-    //             console.log('[RENDER] Content fits OK or max attempts reached');
-    //         }
-    //     }, 0);
-    // });
 }
 
 function renderLineWithCursor(lineSpan, text, cursorCh, playerType) {
@@ -440,7 +405,6 @@ function updateStatus(connected) {
 document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', () => {
     handleWindowResize();
-    recalcAttempts = 0;
   });
   loadConfig();
 });

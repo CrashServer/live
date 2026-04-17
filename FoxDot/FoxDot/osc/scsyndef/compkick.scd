@@ -5,6 +5,7 @@ SynthDef.new(\compkick,
 		var sig, subOsc, bodyOsc, clickSig, final;
 		var pitchEnv, env, clickEnv, subEnv;
 
+		freq = In.kr(bus, 1);
 		// Pitch envelope - tight
 		pitchEnv = EnvGen.ar(Env([5, 1.8, 1.1, 1], [0.003, 0.015, 0.06], [\exp, \exp, \lin]));
 

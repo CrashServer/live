@@ -42,6 +42,8 @@ import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
 
+const LINES_TO_SHOW = 20; // pretext number of lines to show
+
 document.addEventListener("DOMContentLoaded", async () => {
   // Récupération de la configuration
   const configRequest = await fetch("../../crash_config.json");
@@ -54,7 +56,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
   let foxdotWs = null;
   let activeSequence = null; // {id, currentIndex} for #@ section sequencing
-  // let foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
 
   // Récupération des éléments du DOM
   const chrono = document.getElementById("chrono");
@@ -439,31 +440,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     activeSequence = { id: seqId, currentIndex: currentIdx };
   }
 
-  // Écouter les changements dans le Y.Array des messages de chat
-  // ychat.observe(event => {
-  //   event.changes.added.forEach(item => {
-  //     const message = item.content.getContent()[0];
-  //     chatUtils.insertChatMessage(editor, message.text, message.userName, message.userColor, message.line);
-  //   });
-  //   // Supprimer les anciens messages pour ne garder que les 20 plus récents
-  //   if (ychat.length > 15) {
-  //     ychat.delete(0, ychat.length - 15);
-  //   }
-  // });
-
-  // Écouter les changements dans le Y.Array des marqueurs
-  // ymarkers.observe(event => {
-  //   event.changes.added.forEach(item => {
-  //     const marker = item.content.getContent()[0];
-  //     markerUtils.applyMarker(editor, marker.line, marker.color);
-  //   });
-
-  //   event.changes.deleted.forEach(item => {
-  //     const marker = item.content.getContent()[0];
-  //     markerUtils.removeMarker(editor, marker.line);
-  //   });
-  // });
-
   // Gestion de CTRL+ENTER
   editor.setOption("extraKeys", {
     "Ctrl-;": () => {
@@ -508,18 +484,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Ctrl-Alt-J": (cm) => {
       functionUtils.previousJump(cm);
     },
-    // 'Alt-1': (cm) => markerUtils.setMarker(cm, "Red", "[[ Attention à un truc ]]", awareness, ymarkers, ychat),
-    // 'Alt-2': (cm) => markerUtils.setMarker(cm, "Green", "[[ taggué ]]", awareness, ymarkers, ychat),
-    // 'Alt-3': (cm) => markerUtils.setMarker(cm, "Blue", "[[ ça c'est cool ]]", awareness, ymarkers, ychat),
-    // 'Alt-4': () => markerUtils.resetMarkers(ymarkers),
-    // 'Alt-C': (cm) => {
-    //   chatUtils.getChat(cm, "", (text, line) => {
-    //     const userState = awareness.getLocalState();
-    //     const userName = userState?.user?.name || 'Anonymous';
-    //     const userColor = userState?.user?.color || '#000000';
-    //     ychat.push([{ text, userName, userColor, line }]); // Ajouter le message au Y.Array
-    //   });
-    // },
     "Ctrl-Enter": (cm) => {
       evaluateCode(cm, false);
     },
@@ -804,21 +768,75 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   foxDotWs();
 
+  // Fonction pour extraire une fenêtre de lignes autour de la position courante
+  // Positionne la ligne active au quart haut pour zbdm, au 3/4 bas pour svdk
+  function getLineWindow(cm, linesToShow = 5, userName = 'Anonymous') {
+    const cursor = cm.getCursor();
+    const totalLines = cm.lineCount();
+
+    // Calculer le positionnement selon le joueur
+    // zbdm: ligne active au 1/4 haut (1/4 avant, 3/4 après)
+    // svdk: ligne active au 3/4 bas (3/4 avant, 1/4 après)
+    let beforeLines, afterLines;
+    if (userName === 'zbdm') {
+      beforeLines = Math.floor(linesToShow / 4);
+      afterLines = linesToShow - beforeLines - 1;
+    } else if (userName === 'svdk') {
+      beforeLines = Math.floor(linesToShow * 3 / 4);
+      afterLines = linesToShow - beforeLines - 1;
+    } else {
+      // Défaut: centré
+      beforeLines = Math.floor(linesToShow / 2);
+      afterLines = linesToShow - beforeLines - 1;
+    }
+
+    let startLine = Math.max(0, cursor.line - beforeLines);
+    let endLine = Math.min(totalLines, cursor.line + afterLines + 1);
+
+    // Ajuster les limites pour garder approximativement la taille de fenêtre
+    if (endLine - startLine < linesToShow) {
+      if (startLine === 0) {
+        endLine = Math.min(totalLines, linesToShow);
+      } else if (endLine === totalLines) {
+        startLine = Math.max(0, totalLines - linesToShow);
+      }
+    }
+
+    // Extraire les lignes de la fenêtre
+    const lines = [];
+    for (let i = startLine; i < endLine; i++) {
+      lines.push(cm.getLine(i));
+    }
+
+    return {
+      windowLines: lines.join('\n'),
+      windowStartLine: startLine + 1,      // 1-indexed
+      windowEndLine: endLine,              // 1-indexed
+      currentLineNumber: cursor.line + 1,  // Position absolue du curseur
+      cursorCh: cursor.ch
+    };
+  }
+
   // Gestion de l'envoi de code en temps réel
   editor.on("cursorActivity", (cm) => {
     // Récupérer les infos utilisateur depuis awareness
     const userState = awareness.getLocalState();
     const userName = userState?.user?.name || "Anonymous";
 
-    // Récupérer la position du curseur et le contenu
+    // Récupérer la position du curseur et extraire une fenêtre de lignes
     const cursor = cm.getCursor();
     const currentLine = cm.getLine(cursor.line);
+    const windowData = getLineWindow(cm, LINES_TO_SHOW, userName);
 
-    // Préparer le message
+    // Préparer le message avec fenêtre de lignes au lieu du code complet
     const message = {
       type: `${userName}InstantCode`,
       position: cursor.ch,
       code: currentLine,
+      windowLines: windowData.windowLines,        // Fenêtre de lignes autour du curseur
+      windowStartLine: windowData.windowStartLine, // Numéro de la première ligne de la fenêtre
+      windowEndLine: windowData.windowEndLine,     // Numéro de la dernière ligne de la fenêtre
+      currentLineNumber: cursor.line + 1,
     };
 
     // envoyer le message dans le live other player display
@@ -828,6 +846,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         code: currentLine,
         position: cursor.ch,
         line: cursor.line + 1,
+        windowLines: windowData.windowLines,
+        windowStartLine: windowData.windowStartLine,
+        windowEndLine: windowData.windowEndLine,
       });
     } catch (error) {}
 

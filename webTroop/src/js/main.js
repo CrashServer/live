@@ -41,7 +41,7 @@ import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
 
-const LINES_TO_SHOW = 20; // pretext number of lines to show
+const LINES_TO_SHOW = 40; // pretext number of lines to show
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Récupération de la configuration

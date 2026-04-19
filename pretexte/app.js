@@ -1,12 +1,12 @@
-import { prepare, layout } from '@chenglou/pretext';
+import { prepare, layout} from '@chenglou/pretext';
+
 // Configuration for dynamic font sizing
 const FONT_CONFIG = {
     MIN_FONT_SIZE: 6,
-    MAX_FONT_SIZE: 200,
+    MAX_FONT_SIZE: 500,
     FONT_FAMILY: 'InterBlack, Courier New, monospace',
-    LINE_HEIGHT_MULTIPLIER: 0.8
+    LINE_HEIGHT_MULTIPLIER: 1.1
 };
-
 
 // Font size calculation
 let lastCalculatedFontSize = null;
@@ -16,20 +16,17 @@ let lastTextContent = null;
 
 /**
  * Calculate optimal font size to fit text in container using binary search
- * @param {string} text - The text to measure
- * @param {number} containerWidth - Available width in pixels
- * @param {number} containerHeight - Available height in pixels
- * @returns {Promise<number|null>} - Optimal font size in pixels, or null on failure
+* @return {number} Optimal font size in pixels
  */
-async function calculateOptimalFontSize(text, containerWidth, containerHeight) {
+function calculateOptimalFontSize(text, containerWidth, containerHeight) {
 
     try {
         let minSize = FONT_CONFIG.MIN_FONT_SIZE;
         let maxSize = FONT_CONFIG.MAX_FONT_SIZE;
         let optimalSize = minSize;
         const lineHeightMultiplier = FONT_CONFIG.LINE_HEIGHT_MULTIPLIER;
-        const padding = 80; // total padding (top + bottom + buffer for safety)
-        const availableHeight = containerHeight - padding*4;
+        const padding = 20; // total padding (top + bottom + buffer for safety)
+        const availableHeight = containerHeight - padding*3;
         const availableWidth = containerWidth - padding;
 
         // Binary search for the largest font size that fits
@@ -83,7 +80,7 @@ function initializeContainerDimensions() {
 /**
  * Font size calculation - recalculates only if line count changes
  */
-async function calculateFontSize(allText) {
+function calculateFontSize(allText) {
     // Lazy initialization of container dimensions on first use
     if (!containerDimensions) {
         initializeContainerDimensions();
@@ -98,12 +95,11 @@ async function calculateFontSize(allText) {
     lastLineCount = lineCount;
     lastTextContent = allText;
 
-    const optimalSize = await calculateOptimalFontSize(
+    const optimalSize = calculateOptimalFontSize(
         allText,
         containerDimensions.width,
         containerDimensions.height
     );
-    console.log(`Calculated optimal font size: ${optimalSize}px for ${lineCount} lines`);
 
     if (optimalSize) {
         applyFontSize(optimalSize);
@@ -193,11 +189,11 @@ function connectWebSocket() {
             console.log('✓ WebSocket connecté');
             updateStatus(true);
         };
+        let renderPending = false;
 
         ws.onmessage = (event) => {
             try {
                 const message = JSON.parse(event.data);
-
                 if (message.type && message.type.endsWith('InstantCode')) {
                     const playerType = message.type;
 
@@ -211,7 +207,13 @@ function connectWebSocket() {
                             players[playerType].lastUpdate = Date.now();
 
                             lastUpdatedPlayer = playerType;
-                            renderCode();
+                          if (!renderPending) {
+                            renderPending = true;
+                            requestAnimationFrame(() => {
+                                renderCode();
+                                renderPending = false;
+                            });
+                          }
                         }
                     }
                 }
@@ -240,59 +242,52 @@ function connectWebSocket() {
 /**
  * Fusionner les fenêtres de lignes en un flux continu sans séparateur
  */
-function mergePlayerWindows() {
-    const zbdm = players.zbdmInstantCode;
-    const svdk = players.svdkInstantCode;
+ // Version optimisée de mergePlayerWindows
+ function mergePlayerWindows() {
+     const zbdm = players.zbdmInstantCode;
+     const svdk = players.svdkInstantCode;
+     const lineMap = new Map();
 
-    // Créer une map de toutes les lignes
-    const lineMap = new Map();
+     const processLines = (windowLines, startLine, playerName) => {
+         if (!windowLines) return;
+         let currentIndex = 0;
+         let lineNum = startLine;
 
-    // Ajouter les lignes de zbdm
-    if (zbdm.windowLines) {
-        const zbdmLines = zbdm.windowLines.split('\n');
-        zbdmLines.forEach((text, index) => {
-            const lineNum = zbdm.windowStartLine + index;
-            if (!lineMap.has(lineNum)) {
-                lineMap.set(lineNum, { text, from: [] });
-            }
-            if (!lineMap.get(lineNum).from.includes('zbdm')) {
-                lineMap.get(lineNum).from.push('zbdm');
-            }
-        });
-    }
+         // Remplace le split('\n') par une recherche d'index pour éviter
+         // de créer de gros tableaux de strings jetables.
+         while (currentIndex < windowLines.length) {
+             let nextIndex = windowLines.indexOf('\n', currentIndex);
+             if (nextIndex === -1) nextIndex = windowLines.length;
 
-    // Ajouter les lignes de svdk (fusion en cas de chevauchement)
-    if (svdk.windowLines) {
-        const svdkLines = svdk.windowLines.split('\n');
-        svdkLines.forEach((text, index) => {
-            const lineNum = svdk.windowStartLine + index;
-            if (!lineMap.has(lineNum)) {
-                lineMap.set(lineNum, { text, from: [] });
-            } else {
-                // Si chevauchement, priorité au dernier joueur qui a écrit
-                if (lastUpdatedPlayer === 'svdkInstantCode') {
-                    lineMap.get(lineNum).text = text;
-                }
-            }
-            if (!lineMap.get(lineNum).from.includes('svdk')) {
-                lineMap.get(lineNum).from.push('svdk');
-            }
-        });
-    }
+             const text = windowLines.substring(currentIndex, nextIndex);
 
-    // Trier par numéro de ligne
-    const sortedLineNums = Array.from(lineMap.keys()).sort((a, b) => a - b);
+             let lineObj = lineMap.get(lineNum);
+             if (!lineObj) {
+                 lineObj = { text: text, from: new Set() }; // Set évite les doublons plus vite que .includes()
+                 lineMap.set(lineNum, lineObj);
+             } else if (lastUpdatedPlayer === `${playerName}InstantCode`) {
+                 lineObj.text = text;
+             }
+             lineObj.from.add(playerName);
 
-    return sortedLineNums.map(lineNum => ({
-        lineNumber: lineNum,
-        text: lineMap.get(lineNum).text,
-        from: lineMap.get(lineNum).from
-    }));
-}
+             currentIndex = nextIndex + 1;
+             lineNum++;
+         }
+     };
+
+     processLines(zbdm.windowLines, zbdm.windowStartLine, 'zbdm');
+     processLines(svdk.windowLines, svdk.windowStartLine, 'svdk');
+
+     return Array.from(lineMap.entries())
+         .sort((a, b) => a[0] - b[0])
+         .map(([lineNumber, data]) => ({
+             lineNumber,
+             text: data.text,
+             from: Array.from(data.from)
+         }));
+ }
 
 function renderCode() {
-    codeContainer.innerHTML = '';
-
   const displayLines = mergePlayerWindows();
         // .filter(line => line.text.trim().length > 0);
 
@@ -308,6 +303,7 @@ function renderCode() {
     const zbdm = players.zbdmInstantCode;
     const svdk = players.svdkInstantCode;
 
+    const fragement = document.createDocumentFragment();
     displayLines.forEach(({ lineNumber, text, from }) => {
         const lineSpan = document.createElement('span');
         lineSpan.className = 'code-line';
@@ -339,14 +335,16 @@ function renderCode() {
             lineSpan.textContent = text || '';
         }
 
-        codeContainer.appendChild(lineSpan);
+        fragement.appendChild(lineSpan);
     });
 
+    codeContainer.innerHTML = '';
+    codeContainer.appendChild(fragement);
     // Scroll vers la ligne active
     if (lastUpdatedPlayer && players[lastUpdatedPlayer].currentLineNumber > 0) {
         const activeLines = document.querySelectorAll('.code-line.active');
         if (activeLines.length > 0) {
-            activeLines[activeLines.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            activeLines[activeLines.length - 1].scrollIntoView({ behavior: 'auto', block: 'center' });
         }
     }
 }

@@ -200,3 +200,33 @@ body {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
+
+/* Obstacle Mode Styles */
+#code-container.obstacle-mode {
+    position: relative;
+}
+
+#code-container.obstacle-mode .code-line {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    margin-bottom: 2px;
+}
+
+/* SVG Obstacle Circle */
+#obstacle-circle {
+    pointer-events: none;
+    z-index: 10;
+}
+
+#obstacle-circle circle {
+    filter: drop-shadow(0 0 10px rgba(164, 31, 255, 0.3));
+}
+
+/* Responsive adjustments for obstacle mode */
+@media (max-width: 1024px) {
+    #code-container.obstacle-mode .code-line {
+        font-size: 0.8em;
+    }
+}

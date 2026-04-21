@@ -2,6 +2,9 @@
 # todo
 
 
+
+Clock.bpm = 132
+
 #@intro(32)
 b3 >> prodrums([0, 3, 7, 10, 12, 7], voice=4, dur=PDur(3, 8), layer1_amp=0.6, layer2_amp=0.7, layer3_amp=0.4, body_tone=var([3500, 3000, 4200], [6, 1, 1]), harmonic=1.5, fm_amount=1.7, fm_ratio=12.5, echo=0.5, tube=0.1, waveform=var([1, 6], 12), texture=11, decay=var([0.4, 0.2], 8), attack=0.1, mid_sat=0.8, high_sat=1.0, amp=0.55, scale=Scale.minor, oct=6, pan=PSine(8) * 0.3)
 
@@ -27,8 +30,8 @@ p4 >> cs80([12, 15, 17, 19], dur=0.25, amp=0.445, oct=6, sus=0.2, lpf=linvar([30
 #@part8(16)
 b3 >> prodrums([0, [3, 7,12], 7, 10, 12, var([7, 12, 13], [12, 1, 1])], voice=4, dur=PDur(3, 8), layer1_amp=0.5, layer2_amp=0.4, layer3_amp=0.4, body_tone=var([3500, 3000, 4200], [6, 1, 1]), harmonic=1.7, fm_amount=var([3,24], [7, 3]), fm_ratio=2, waveform=var([1, 6], 12), texture=6, leg=1,  decay=var([0.4, 0.2], 8), attack=0.1, echo=0.25, mid_sat=0.8, high_sat=1.0, amp=0.8, scale=Scale.minor, oct=(6, 5), pan=PSine(8) * 0.3)
 
-#@part9(32)
-p3 >> dbass([0, 3, 5, 7], dur=PDur(5, 8), amp=0.9, oct=5, decay=0.3, hpf=200, hpr=0.5, room=0.1, tape=1, tapedrive=1, dist2=0.3,scale=Scale.minor).every(8, 'reverse').unison(2)
+#@part9(256)
+p3 >> dbass([0, 3, 5, 7], dur=PDur(5, 8), amp=0.9, oct=5, decay=0.3, hpf=200, hpr=0.5, room=0.1, tape=1, tapedrive=1, dist2=0.3,scale=Scale.minor, csweep=0.2, resonbank=0.15, rbfreq=[60, 65, 70, 120, 150, 210], rbdecay=0.6, rbspread=1.0, cswfreq=[75, 78, 90, 95], cswdepth=0.3, cswrate=0.5, cswdecay=0.5).every(8, 'reverse').unison(2)
 
 #@part10(32)
 b6 >> prodrums([0, 3, 7, 5, PWalk(8, 1, 1)], voice=(4), dur=0.25, layer1_amp=1, layer2_amp=0.5, layer3_amp=0.3, body_tone=linvar([500, 900, 1400], 16), harmonic=2, fm_amount=1.2, hpf=200, fm_ratio=var([2, 2.5, 3], 4), waveform=6, texture=lininf(0, 42, 128), decay=0.2, mid_sat=var([0.6, 2.5], [16, 4]), amp=0.75,  scale=Scale.minor, oct=4, fshift=0, leg=0)

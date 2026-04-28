@@ -284,6 +284,12 @@ if __name__ != "__main__":
                     sorted_chord[-1] -= 7
                     sorted_chord = sorted(sorted_chord)
             return PGroup(sorted_chord)
+
+        @PatternMethod
+        def exp(self, n=16):
+            """ Extend pattern to n value """
+            return self | n - sum(self)
+
     except Exception as e:
         print(f'Pattern method problem : {e}')
 

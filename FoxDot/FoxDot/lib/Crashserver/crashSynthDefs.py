@@ -188,6 +188,9 @@ dopple.add()
 donk = FileSynthDef("donk")
 donk.add()
 
+dsaw = FileSynthDef("dsaw")
+dsaw.add()
+
 dub = FileSynthDef("dub")
 dub.add()
 

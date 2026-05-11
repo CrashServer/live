@@ -1780,6 +1780,7 @@ class Compo():
         self._fire_players = set()
         self._setlist_data = []
         self._setlist_index = 0
+        self._stem_session = None
 
     def _extract_players(self, code):
         """Extract player names (e.g. p1, d1, j12) from code."""
@@ -2062,6 +2063,298 @@ class Compo():
         """
         name_str = name if name else ""
         print(f"__REC_STOP__:{name_str}")
+
+    # ============================================================
+    # STEM RECORDING (video_game branch)
+    # Captures each FoxDot player to its own .wav stem for adaptive
+    # game audio (vertical-remix layering). Player gets routed to a
+    # private SC bus via player.output=N; \stemDiskOut writes the bus
+    # to disk; \stemTap mirrors the bus to master so user still hears.
+    # All stems are synced to the next bar boundary and run for the
+    # same wallclock duration regardless of internal cycle lengths.
+    # ============================================================
+
+    def rec_stems(self, bars=16, session="scene", variation="v1",
+                  players=None, output_dir=None, tail_bars=0, bus_start=32):
+        """Record each active player to its own .wav file, synced + same length.
+
+        bars: int  -- loop length in bars (4 beats per bar)
+        session: str -- scene name (e.g. 'forest', 'cave')
+        variation: str -- intensity tag (e.g. 'calm', 'tense', 'combat')
+        players: None | list -- player names ['p1','b1'] or refs [p1,b1].
+                                None = autodiscover all 2-char Player instances.
+        output_dir: str -- defaults to './stems'
+        tail_bars: int -- extra bars past loop for tail-fold post-process (0=hard cut)
+        bus_start: int -- first private audio bus to route to (default 32). Must be
+                          >= numOutputBusChannels + numInputBusChannels. With the
+                          default FoxDot.sc (16 out + 2 in), private busses start
+                          at 18; we use 32 for comfortable headroom.
+
+        Files land as: {output_dir}/{session}__{playername}__{variation}.wav
+
+        Starts on the next bar boundary so loops align cleanly. Stops after
+        (bars + tail_bars) * 4 beats and restores each player.output to its
+        original value.
+        """
+        import os, re
+
+        if self._stem_session is not None:
+            print("[rec_stems] Already running. Call compo.stem_stop() first.")
+            return
+
+        output_dir = output_dir or "./stems"
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Discover players
+        discovered = self._discover_stem_players(players)
+        if not discovered:
+            print("[rec_stems] No active players. Pass players=['p1','b1',...]")
+            return
+
+        # Assign a private bus per player (stereo pairs from bus_start upward).
+        # ROUTING: we set p.output=N, which FoxDot recognizes as the 'output'
+        # FX (registered in crashFX.py via FxList.new('output','output', ...)).
+        # That spawns a \output synth in the player's effect chain doing
+        # `Out.ar(output, In.ar(bus, 2))` — it reads the player's internal
+        # bus and copies the signal to bus N, leaving the synth's own freq
+        # controls untouched. \stemDiskOut and \stemTap then operate on bus N.
+        bus_map = {name: bus_start + 2*i for i, (name, _) in enumerate(discovered)}
+        needs_routing = list(discovered)
+
+        # Build file paths
+        paths = {
+            name: os.path.abspath(
+                os.path.join(output_dir, f"{session}__{name}__{variation}.wav"))
+            for name, _ in discovered
+        }
+
+        # Save each player's pre-existing output value (if any), so we can
+        # restore. If 'output' wasn't in attr before, we'll delete it on stop.
+        original_outputs = {}
+        for name, p in discovered:
+            try:
+                if 'output' in p.attr:
+                    original_outputs[name] = p.attr['output']
+                else:
+                    original_outputs[name] = None
+            except Exception:
+                original_outputs[name] = None
+
+        self._stem_session = {
+            'discovered': discovered,
+            'bus_map': bus_map,
+            'paths': paths,
+            'original_outputs': original_outputs,
+            'needs_routing': needs_routing,
+            'session': session,
+            'variation': variation,
+            'bars': bars,
+            'tail_bars': tail_bars,
+        }
+
+        # Defer to next bar boundary for clean phase alignment
+        beats_to_bar = self._beats_to_next_bar()
+        print(f"__STEMS_START__:{session}:{variation}:{bars}b:{len(discovered)}p")
+        print(f"  scheduling start in {beats_to_bar:.2f} beats (next bar)")
+        for name, p in discovered:
+            print(f"  {name} -> bus {bus_map[name]} -> {paths[name]}")
+        Clock.future(beats_to_bar, self._stem_start_actual)
+
+    def _user_namespaces(self):
+        """Return list of namespaces where user-coded players might live.
+        Order: caller's globals (2 frames up) > __main__ > this module's globals.
+        webTroop pipes user code into an exec that runs in __main__; the caller
+        of compo.rec_stems() is usually that exec's frame."""
+        import inspect, sys
+        out = []
+        try:
+            frame = inspect.currentframe()
+            # Walk up a few frames to find user-coded namespace
+            for _ in range(6):
+                if frame is None:
+                    break
+                frame = frame.f_back
+                if frame is None:
+                    break
+                g = frame.f_globals
+                if g not in out:
+                    out.append(g)
+        except Exception:
+            pass
+        try:
+            mg = sys.modules['__main__'].__dict__
+            if mg not in out:
+                out.append(mg)
+        except Exception:
+            pass
+        gl = globals()
+        if gl not in out:
+            out.append(gl)
+        return out
+
+    def _discover_stem_players(self, players):
+        """Returns list of (name, player_ref) tuples for ACTIVE players.
+
+        Strategy: trust Clock.playing as the source of truth (only actually
+        playing players). Reverse-look-up the variable name via identity
+        check across namespaces. Avoids touching EmptyPlayer placeholders
+        FoxDot pre-creates in __main__ for all 2-char names — those have
+        a callable-like __getattr__ that triggers TypeError when probed.
+        """
+        import re
+
+        namespaces = self._user_namespaces()
+
+        def find_name(ref):
+            for ns in namespaces:
+                try:
+                    keys = list(ns.keys())
+                except Exception:
+                    continue
+                for var_name in keys:
+                    if not re.match(r'^[a-z]\d+$', var_name):
+                        continue
+                    try:
+                        if ns[var_name] is ref:
+                            return var_name
+                    except Exception:
+                        continue
+            return None
+
+        # --- autodiscover from Clock.playing ---
+        if players is None:
+            try:
+                active = list(Clock.playing)
+            except Exception as e:
+                print(f"  [rec_stems] couldn't read Clock.playing: {e}")
+                return []
+            if not active:
+                print("  [rec_stems] Clock.playing is empty — no players running")
+                return []
+            discovered = []
+            for p in active:
+                name = find_name(p)
+                discovered.append((name or f"x{len(discovered)}", p))
+            return discovered
+
+        if not players:
+            return []
+
+        # --- explicit list of names ---
+        if isinstance(players[0], str):
+            out = []
+            for n in players:
+                p = None
+                for ns in namespaces:
+                    try:
+                        if n in ns:
+                            p = ns[n]
+                            break
+                    except Exception:
+                        continue
+                if p is None:
+                    print(f"  [rec_stems] skip '{n}' (not found)")
+                    continue
+                if type(p).__name__ == 'EmptyPlayer':
+                    print(f"  [rec_stems] skip '{n}' (EmptyPlayer placeholder — not yet played)")
+                    continue
+                out.append((n, p))
+            return out
+
+        # --- explicit list of Player refs ---
+        out = []
+        for i, p in enumerate(players):
+            out.append((find_name(p) or f'p{i}', p))
+        return out
+
+    def _beats_to_next_bar(self):
+        """Beats until next bar boundary (assumes 4/4)."""
+        try:
+            bar_len = Clock.bar_length()
+            now = Clock.now()
+            rem = bar_len - (now % bar_len)
+            if rem < 0.1:
+                rem = bar_len
+            return rem
+        except Exception:
+            return 4.0
+
+    def _stem_start_actual(self):
+        """Fire actual stem recording (deferred to bar boundary)."""
+        if self._stem_session is None:
+            return
+        s = self._stem_session
+
+        # Build OSC payload: bus, path, bus, path, ...
+        payload = []
+        for name, _ in s['discovered']:
+            payload.append(s['bus_map'][name])
+            payload.append(s['paths'][name])
+
+        # Send /foxdot_stems_start to SC
+        try:
+            from FoxDot.lib.OSC3 import OSCMessage
+            msg = OSCMessage("/foxdot_stems_start")
+            for item in payload:
+                msg.append(item)
+            Server.sclang.send(msg)
+        except Exception as e:
+            print(f"[stems] OSC send failed: {e}")
+            self._stem_session = None
+            return
+
+        # Re-route via the 'output' FX. `p.output = N` runs through Player's
+        # normal __setattr__ — since 'output' isn't in __vars, it lands in
+        # self.attr and gets sent to SC on each /s_new. FoxDot recognizes
+        # 'output' as a registered FX (FxList.new('output','output',...) in
+        # crashFX.py:660) and spawns the \output SynthDef in the player's
+        # FX chain, which does `Out.ar(N, In.ar(bus, 2))` — copies the
+        # post-FX signal to bus N. The player's own bus and control signals
+        # (freq via In.kr, ReplaceOut.ar(bus, osc)) stay intact.
+        for name, p in s['needs_routing']:
+            try:
+                p.output = s['bus_map'][name]
+            except Exception as e:
+                print(f"  [stems] failed to route {name}: {e}")
+
+        total_beats = (s['bars'] + s['tail_bars']) * 4
+        print(f"[stems] recording for {total_beats} beats ({s['bars']}b + {s['tail_bars']}b tail)")
+        Clock.future(total_beats, self._stem_stop_actual)
+
+    def _stem_stop_actual(self):
+        """Stop stem recording session and restore player.output values."""
+        if self._stem_session is None:
+            return
+        s = self._stem_session
+
+        try:
+            from FoxDot.lib.OSC3 import OSCMessage
+            msg = OSCMessage("/foxdot_stems_stop")
+            Server.sclang.send(msg)
+        except Exception as e:
+            print(f"[stems] OSC stop send failed: {e}")
+
+        # Restore each player's output: if they had one before, set back to
+        # that; otherwise delete the attr so the default (bus 0 / no \output
+        # FX synth) returns. This mutation runs through __setattr__ which is
+        # fine — 'output' is in attr, not __vars.
+        for name, p in s['needs_routing']:
+            orig = s['original_outputs'].get(name)
+            try:
+                if orig is None:
+                    if 'output' in p.attr:
+                        del p.attr['output']
+                else:
+                    p.output = orig
+            except Exception:
+                pass
+
+        print(f"__STEMS_STOP__:{s['session']}:{s['variation']}:{s['bars']}b")
+        self._stem_session = None
+
+    def stem_stop(self):
+        """Force-stop the active stem recording session immediately."""
+        self._stem_stop_actual()
 
 compo = Compo()
 

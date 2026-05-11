@@ -2356,6 +2356,207 @@ class Compo():
         """Force-stop the active stem recording session immediately."""
         self._stem_stop_actual()
 
+    # ============================================================
+    # GRID REGISTRY (grid_registry branch)
+    # 2D grid of short, role-focused snippets addressable by
+    # COL+ROW coordinate (A0..Z99). Stored externally in
+    # ~/live/grid/cells.json so an editor tool can manage them
+    # without touching code.
+    #
+    # Conventions:
+    #   columns A..Z = role (A=pad, B=bass, C=kick, D=snare, ...)
+    #   rows 0..99   = tempo bands (0-9: 60-80 BPM, 10-19: 80-100,
+    #                  20-29: 100-120, 30-39: 120-140, ...)
+    #   each cell's code should use the column-canonical player
+    #   name so cross-column stacking is automatic.
+    #
+    # Three actions per cell, exposed via compo.cell_*:
+    #   compo.cell_display(coord)     -> print code (for inspection)
+    #   compo.cell_run(coord)         -> run code, players forever
+    #   compo.cell_run(coord, 8)      -> run code, auto-stop after 8 beats
+    #
+    # The webTroop UI sends these as method calls; the user can
+    # also call them directly in a session.
+    # ============================================================
+
+    GRID_CELLS_PATH = "/home/svdk/live/grid/cells.json"
+
+    def _cells_load_if_needed(self):
+        """Lazy-load the cells JSON. Re-reads from disk if file mtime changed."""
+        import os, json
+        try:
+            path = self.GRID_CELLS_PATH
+            mtime = os.path.getmtime(path)
+        except OSError:
+            print(f"[grid] cells file not found at {self.GRID_CELLS_PATH}")
+            self._cells = {}
+            self._cells_mtime = 0
+            return
+        if not hasattr(self, '_cells') or getattr(self, '_cells_mtime', 0) != mtime:
+            try:
+                with open(path) as f:
+                    raw = json.load(f)
+                # strip _meta from the working dict
+                self._cells = {k: v for k, v in raw.items() if not k.startswith('_')}
+                self._cells_mtime = mtime
+                print(f"[grid] loaded {len(self._cells)} cells")
+            except Exception as e:
+                print(f"[grid] load failed: {e}")
+                self._cells = {}
+                self._cells_mtime = 0
+
+    def cell_reload(self):
+        """Force reload cells.json from disk."""
+        self._cells_mtime = 0
+        self._cells_load_if_needed()
+
+    def cell(self, coord):
+        """Return the cell dict at coord (e.g. 'B32'), or None."""
+        self._cells_load_if_needed()
+        return self._cells.get(coord)
+
+    def cells_list(self, prefix=None):
+        """Print all populated cells, optionally filtered by coord prefix.
+
+        compo.cells_list()      -> all cells
+        compo.cells_list('B')   -> all column-B cells
+        compo.cells_list('B3')  -> B30..B39
+        """
+        self._cells_load_if_needed()
+        keys = sorted(self._cells.keys(),
+                      key=lambda k: (k[0], int(k[1:]) if k[1:].isdigit() else 0))
+        if prefix:
+            keys = [k for k in keys if k.startswith(prefix)]
+        for k in keys:
+            cell = self._cells[k]
+            label = cell.get('label', '<no label>')
+            print(f"  {k:>4}  {label}")
+        print(f"  ({len(keys)} cells)")
+
+    def cell_display(self, coord):
+        """Print a cell's code (for inspection)."""
+        cell = self.cell(coord)
+        if cell is None:
+            print(f"[grid] {coord} empty")
+            return
+        print(f"# {coord}: {cell.get('label', '')}")
+        print(cell.get('code', ''))
+
+    def cell_run(self, coord, stop_after=None):
+        """Run a grid cell, optionally auto-stopping its created players after N beats.
+
+        coord: 'B32' style address
+        stop_after: None | 2 | 4 | 8 | 16 | 64 — beats after which created
+                    players auto-stop. None = run forever.
+        """
+        import sys
+        cell = self.cell(coord)
+        if cell is None:
+            print(f"[grid] {coord} empty")
+            return
+        code = cell.get('code', '')
+        if not code:
+            print(f"[grid] {coord} has no code")
+            return
+
+        # Snapshot active players before exec
+        try:
+            before = set(id(p) for p in Clock.playing)
+        except Exception:
+            before = set()
+
+        # Exec in __main__ namespace (where users' p1, b1, ... etc. live)
+        try:
+            ns = sys.modules['__main__'].__dict__
+        except Exception:
+            ns = globals()
+
+        try:
+            exec(code, ns)
+            label = cell.get('label', '')
+            tag = f" -> stop in {stop_after}b" if stop_after else ""
+            print(f"[grid] {coord} fired ({label}){tag}")
+        except Exception as e:
+            print(f"[grid] {coord} exec error: {e}")
+            return
+
+        if stop_after is None:
+            return
+
+        # Find newly-active players
+        try:
+            new_players = [p for p in Clock.playing if id(p) not in before]
+        except Exception:
+            new_players = []
+
+        if not new_players:
+            return
+
+        # Schedule auto-stop
+        def _stop_them():
+            for p in new_players:
+                try:
+                    p.stop()
+                except Exception:
+                    pass
+            print(f"[grid] {coord} auto-stopped {len(new_players)} player(s)")
+
+        try:
+            Clock.future(stop_after, _stop_them)
+        except Exception as e:
+            print(f"[grid] schedule stop failed: {e}")
+
+    def cell_save(self, coord, code, label=""):
+        """Save a cell back to disk (atomic write). Used by the editor.
+
+        compo.cell_save("B32", "b1 >> dbass(...)", label="rolling sub")
+        """
+        import json, os, tempfile
+        path = self.GRID_CELLS_PATH
+        # load fresh (don't trample concurrent edits)
+        try:
+            with open(path) as f:
+                raw = json.load(f)
+        except Exception:
+            raw = {}
+        raw[coord] = {"code": code, "label": label}
+        # atomic write
+        try:
+            d = os.path.dirname(path)
+            with tempfile.NamedTemporaryFile('w', dir=d, delete=False, suffix='.json') as tf:
+                json.dump(raw, tf, indent=2, ensure_ascii=False)
+                tmp = tf.name
+            os.replace(tmp, path)
+            self.cell_reload()
+            print(f"[grid] saved {coord}")
+        except Exception as e:
+            print(f"[grid] save failed: {e}")
+
+    def cell_delete(self, coord):
+        """Remove a cell."""
+        import json, os, tempfile
+        path = self.GRID_CELLS_PATH
+        try:
+            with open(path) as f:
+                raw = json.load(f)
+        except Exception:
+            print(f"[grid] load failed")
+            return
+        if coord not in raw:
+            print(f"[grid] {coord} not found")
+            return
+        del raw[coord]
+        try:
+            d = os.path.dirname(path)
+            with tempfile.NamedTemporaryFile('w', dir=d, delete=False, suffix='.json') as tf:
+                json.dump(raw, tf, indent=2, ensure_ascii=False)
+                tmp = tf.name
+            os.replace(tmp, path)
+            self.cell_reload()
+            print(f"[grid] deleted {coord}")
+        except Exception as e:
+            print(f"[grid] delete failed: {e}")
+
 compo = Compo()
 
 Clock.link()

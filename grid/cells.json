@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "format_version": 1,
+    "convention": {
+      "columns": {
+        "A": "pad (uses p1)",
+        "B": "bass (uses b1)",
+        "C": "kick (uses k1)",
+        "D": "snare (uses s1)",
+        "E": "hihat (uses h1)",
+        "F": "drum loop (uses l1)",
+        "G": "lead 1 (uses m1)",
+        "H": "lead 2 (uses n1)",
+        "I": "chord stab (uses c1)",
+        "J": "acid (uses t1)",
+        "K": "texture/drone (uses x1)",
+        "L": "vocal (uses v1)",
+        "M": "bell (uses e1)",
+        "N": "atmo loop (uses a1)",
+        "O": "FX (uses f1)",
+        "P": "modular morph (uses q1)",
+        "Q-Z": "user-defined"
+      },
+      "rows": {
+        "0-9": "60-80 BPM",
+        "10-19": "80-100 BPM",
+        "20-29": "100-120 BPM",
+        "30-39": "120-140 BPM",
+        "40-49": "140-160 BPM",
+        "50-59": "160-180 BPM",
+        "60-69": "180-200 BPM",
+        "70-89": "variations / alt scales",
+        "90-99": "one-shots / fills"
+      }
+    }
+  },
+
+  "A30": {
+    "code": "p1 >> ethpad([0, 4, 7, 5], dur=8, oct=5, amp=0.5, attack=2, decay=4, room=0.7, mix=0.5)",
+    "label": "soft ethpad chord cycle"
+  },
+  "A32": {
+    "code": "p1 >> darkpad([0, 6, 0, 4], dur=16, sus=14, oct=4, amp=0.5, atk=4, dark=0.7, detune=0.04, cutoff=linvar([300, 1800], 64), room=0.85, mix=0.6)",
+    "label": "darkpad cathedral 120"
+  },
+  "A50": {
+    "code": "p1 >> sinepad((PSine(4) | PSine(16), 4), formant=PRand(4), flanger=PWhite(0, 0.4), fold=0.2, oct=(4, 5), dur=8, chop=1.6, lpf=linvar([1200, 3200], 64), amp=0.45).unison(5, 0.25)",
+    "label": "Dereliction sinepad with PSine alt"
+  },
+
+  "B30": {
+    "code": "b1 >> dbass(var([2, 2, 1, 1, 0, 0, 1, 2], 4), dur=4, oct=4, sus=3.5, lpf=300, subenh=0.5, subhfreq=80, subhgain=1.2, tape=0.4, tapedrive=1.2, hpf=35, amp=0.8).unison(3)",
+    "label": "slow sub dbass with subenh"
+  },
+  "B32": {
+    "code": "b1 >> dbass([0, 0, -2, 0, -5, 0, 0, -2], dur=PDur(7, 8), oct=4, sus=PDur(7, 8)*0.6, hpf=80, cutoff=fb(8, 600, 2400), rq=0.3, dist2=fb(24, 0.4, 1.4), tubedrive=0.6, tubewarm=0.5, amp=1.0)",
+    "label": "7/8 dbass groove"
+  },
+  "B36": {
+    "code": "b1 >> pumpbass([0, 0, -5, -5, 0, 0, -7, -5], dur=PDur(5, 8), sus=PDur(5, 8)*0.75, oct=4, amp=1.85, cutoff=sinvar([380, 920], 32), res=0.6, sub=0.85, body=0.7, growl=0.55, pumper=linvar([0.3, 0.85], 48), pumprate=2, tape=0.6, tapedrive=1.8, multicrush=0.25, hpf=55)",
+    "label": "Gesaffelstein pumpbass with growl"
+  },
+
+  "C30": {
+    "code": "k1 >> compkick(0, dur=1, oct=3, amp=1.0, punch=0.9, comp=14, click=0.6, sub=0.85, body=0.75, tone=0.45, tape=0.5, tapedrive=1.4)",
+    "label": "4/4 techno kick @ 120"
+  },
+  "C32": {
+    "code": "k1 >> compkick(0, dur=1, oct=3, amp=1.1, punch=0.95, comp=16, click=0.8, sub=0.95, body=0.85, tone=0.5, tape=0.6, tapedrive=1.7)",
+    "label": "harder techno kick"
+  },
+  "C38": {
+    "code": "k1 >> compkick(P[0, 0, 0, 5, 0, 0, -1, 0, 0, 0, 5, 0], dur=1/2, oct=3, punch=fb(32, 0.6, 1.0), comp=14, click=fb(16, 0.5, 0.95), release=0.32, sub=1.0, body=0.45, tone=0.5, tape=0.7, tapedrive=fb(24, 1.2, 2.4), amp=1.2)",
+    "label": "pitched chord-progression kick"
+  },
+
+  "D32": {
+    "code": "s1 >> play(\"..o.\", dur=1/2, sample=3, amp=0.7, hpf=200, room=0.3, mix=0.4, delay=PSwing(0.04)).human(20, 3)",
+    "label": "swung backbeat snare"
+  },
+  "D36": {
+    "code": "s1 >> industrialsnare(0, dur=2, delay=1, oct=5, amp=0.85, tone=0.18, noise=0.95, rattle=0.55, ring=0.45, bend=0.4, snap=0.6, comp=0.75, hpf=260, pan=PRand([-0.12, 0.12]))",
+    "label": "industrial clap"
+  },
+
+  "E30": {
+    "code": "h1 >> click(0, dur=1/4, sus=0.014, amp=Pacc(6, 4), amplify=0.25, rate=18, hpf=5200, pan=PRand([-0.35, 0.35]))",
+    "label": "Pacc(6,4) click hat"
+  },
+  "E32": {
+    "code": "h1 >> play(\"-(--)-(--)-(--)-([--])\", dur=1/4, sample=PStep(16, 1, 3), rate=PWhite(0.95, 1.08), amp=PWhite(0.25, 0.5), pan=PWhite(-0.4, 0.4)).degrade(0.15)",
+    "label": "skittery hihat 16ths"
+  },
+
+  "F32": {
+    "code": "l1 >> loop(\"breakcore160_16\", dur=16, sample=PRand(64), sbrk=fperlin(32, 0.3, 0.9), sbrkdur=PWhite(-4, 30), sbrkmix=1.0, t_reset=PRand(9), decimate=fi(48, 0, 0.7), decbits=PRand(0, 6), multicrush=2, octafuz=fi(32, 0, 1), amp=0.85)",
+    "label": "breakcore loop with octafuz"
+  },
+
+  "I32": {
+    "code": "c1 >> hardstab([(0, 3, 7), (0, 3, 7), (-1, 2, 6), (0, 3, 7), (-2, 1, 5), (-2, 1, 5), (-4, -1, 3), (0, 3, 7)], dur=var([2, 1, 1, 2, 2, 2, 2, 2], 3), sus=[0.18, 0.35, 0.12, 0.4], oct=5, amp=0.6, cutoff=2400, res=0.5, comp=6, detune=0.025, fold=0.45, feedback=0.4, hpf=220, tubedrive=0.6, tubegain=1.9, tubewarm=0.65, tubebias=0.18, tape=0.5, tapedrive=1.6, fbdelay=0.55, fbtime=0.375, fbfeed=0.78, fbcutoff=3000, fbspread=0.02, beat_dur=1)",
+    "label": "Gesaffelstein hardstab 7th-chord walk"
+  },
+
+  "J32": {
+    "code": "t1 >> tb303([0, 0, 7, 0, 5, 0, 3, 0], oct=3, dur=1/4, top=linvar([200, 10000], 128), cutoff=linvar([500, 4000], [PRand(24, 36), PRand(2, 12)]), rq=PWhite(0.1, 0.3), sus=PStep(8, 0.5, 0.25), amp=0.7, lpf=9000).unison(3)",
+    "label": "classic tb303 acid line"
+  },
+
+  "M30": {
+    "code": "e1 >> bell(PRand([0, 4, 7, 11]), dur=PWhite(8, 24), sus=PWhite(4, 12), oct=(5, 6, 7), amp=0.35, cheapverb=0.85, cvdecay=5, hpf=600, shimmer=0.4, shimsize=0.8, shimpitch=0.5, shimmix=0.4, pan=PRand([-0.7, -0.3, 0.3, 0.7]))",
+    "label": "random bell pings cathedral"
+  },
+
+  "N32": {
+    "code": "a1 >> loop(\"gscreecha16\", dur=16, sample=PRand(8), amp=0.18, hpf=400, lpf=2400, formant=PRand(4))",
+    "label": "gscreech atmo bed"
+  }
+}

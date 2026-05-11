@@ -332,6 +332,32 @@ async function testCell() {
   const coord = $("coord-input").value.trim().toUpperCase();
   await saveCell();
   const cmd = `compo.cell_reload(); compo.cell_run('${coord}', 16)`;
+
+  // If embedded in webTroop (parent window exists), ask it to fire the code
+  // directly via its WebSocket. Wait briefly for ack; fall back to clipboard
+  // if no ack within 400ms (standalone-mode, or parent doesn't listen).
+  if (window.parent !== window) {
+    const acked = await new Promise((resolve) => {
+      const onAck = (e) => {
+        if (e.data && e.data.type === "gridTestAck" && e.data.coord === coord) {
+          window.removeEventListener("message", onAck);
+          resolve(true);
+        }
+      };
+      window.addEventListener("message", onAck);
+      window.parent.postMessage({ type: "gridTest", code: cmd, coord }, "*");
+      setTimeout(() => {
+        window.removeEventListener("message", onAck);
+        resolve(false);
+      }, 400);
+    });
+    if (acked) {
+      setStatus(`fired ${coord} (16b) via webTroop`, "ok");
+      return;
+    }
+  }
+
+  // Standalone fallback: copy to clipboard
   try {
     await navigator.clipboard.writeText(cmd);
     setStatus(`copied: ${cmd} - paste into webTroop`, "ok");

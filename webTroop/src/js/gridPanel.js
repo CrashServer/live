@@ -17,8 +17,39 @@
  */
 
 import "../css/gridPanel.css";
+import { EventEmitter } from "./eventBus.js";
 
 const EDITOR_URL = "http://localhost:1235";
+
+// ===== Listen for test-fire requests from the iframe editor =====
+// The iframe (origin http://localhost:1235) posts a message of the form
+//   { type: 'gridTest', code: '...', coord: 'B32' }
+// and waits ~400ms for an ack. We forward `code` to FoxDot via the existing
+// EventEmitter('send_foxdot') bridge that main.js wires to wsServer.
+
+window.addEventListener("message", (e) => {
+    if (!e.data || e.data.type !== "gridTest") return;
+    // Origin check — accept only the editor server we know
+    try {
+        const url = new URL(e.origin);
+        if (url.hostname !== "localhost" || url.port !== "1235") return;
+    } catch (_) {
+        return;
+    }
+    const { code, coord } = e.data;
+    if (!code) return;
+
+    // Forward to FoxDot via the shared send_foxdot bus
+    EventEmitter.emit("send_foxdot", code);
+    console.log(`[gridPanel] fired ${coord} via send_foxdot`);
+
+    // Ack back to the iframe so it can update its status
+    try {
+        e.source.postMessage({ type: "gridTestAck", coord }, e.origin);
+    } catch (err) {
+        console.warn("[gridPanel] ack failed:", err);
+    }
+});
 
 function createGridPanel() {
     if (document.getElementById("gridPanel")) return; // idempotent

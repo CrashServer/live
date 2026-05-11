@@ -1,0 +1,78 @@
+@import 'interfaceThemes.css';
+
+/* Grid Panel — embedded grid cell editor */
+
+.grid-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 920px;
+    height: 100vh;
+    background: var(--bg-col-1, #2b2b2b);
+    border-left: 1px solid var(--border-col, #444);
+    z-index: 1000;
+    display: none; /* hidden by default; toggle to flex */
+    flex-direction: column;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+}
+.grid-panel.visible {
+    display: flex;
+}
+
+.grid-panel-header {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background: var(--header-bg, #1c1c1c);
+    border-bottom: 1px solid var(--border-col, #444);
+    color: var(--text-col, #d4d4d8);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+.grid-panel-header h2 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-col, #4ade80);
+}
+.grid-panel-header .spacer {
+    flex: 1;
+}
+.grid-panel-header button {
+    background: transparent;
+    color: var(--text-col, #d4d4d8);
+    border: 1px solid var(--border-col, #444);
+    padding: 4px 10px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 11px;
+    border-radius: 3px;
+    margin-left: 6px;
+}
+.grid-panel-header button:hover { background: var(--hover-bg, #3a3a3a); }
+.grid-panel-header .close-btn {
+    color: #ef4444;
+    border-color: #444;
+    font-size: 14px;
+    line-height: 1;
+    padding: 2px 8px;
+}
+
+.grid-panel iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: var(--bg-col-1, #2b2b2b);
+}
+
+.grid-panel-status {
+    padding: 4px 10px;
+    font-size: 10px;
+    color: var(--muted-col, #71717a);
+    background: var(--header-bg, #1c1c1c);
+    border-top: 1px solid var(--border-col, #444);
+    font-family: ui-monospace, monospace;
+}
+.grid-panel-status.ok { color: var(--accent-col, #4ade80); }
+.grid-panel-status.err { color: #ef4444; }

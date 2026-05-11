@@ -34,7 +34,6 @@
       }
     }
   },
-
   "A30": {
     "code": "p1 >> ethpad([0, 4, 7, 5], dur=8, oct=5, amp=0.5, attack=2, decay=4, room=0.7, mix=0.5)",
     "label": "soft ethpad chord cycle"
@@ -47,7 +46,6 @@
     "code": "p1 >> sinepad((PSine(4) | PSine(16), 4), formant=PRand(4), flanger=PWhite(0, 0.4), fold=0.2, oct=(4, 5), dur=8, chop=1.6, lpf=linvar([1200, 3200], 64), amp=0.45).unison(5, 0.25)",
     "label": "Dereliction sinepad with PSine alt"
   },
-
   "B30": {
     "code": "b1 >> dbass(var([2, 2, 1, 1, 0, 0, 1, 2], 4), dur=4, oct=4, sus=3.5, lpf=300, subenh=0.5, subhfreq=80, subhgain=1.2, tape=0.4, tapedrive=1.2, hpf=35, amp=0.8).unison(3)",
     "label": "slow sub dbass with subenh"
@@ -60,7 +58,6 @@
     "code": "b1 >> pumpbass([0, 0, -5, -5, 0, 0, -7, -5], dur=PDur(5, 8), sus=PDur(5, 8)*0.75, oct=4, amp=1.85, cutoff=sinvar([380, 920], 32), res=0.6, sub=0.85, body=0.7, growl=0.55, pumper=linvar([0.3, 0.85], 48), pumprate=2, tape=0.6, tapedrive=1.8, multicrush=0.25, hpf=55)",
     "label": "Gesaffelstein pumpbass with growl"
   },
-
   "C30": {
     "code": "k1 >> compkick(0, dur=1, oct=3, amp=1.0, punch=0.9, comp=14, click=0.6, sub=0.85, body=0.75, tone=0.45, tape=0.5, tapedrive=1.4)",
     "label": "4/4 techno kick @ 120"
@@ -73,7 +70,6 @@
     "code": "k1 >> compkick(P[0, 0, 0, 5, 0, 0, -1, 0, 0, 0, 5, 0], dur=1/2, oct=3, punch=fb(32, 0.6, 1.0), comp=14, click=fb(16, 0.5, 0.95), release=0.32, sub=1.0, body=0.45, tone=0.5, tape=0.7, tapedrive=fb(24, 1.2, 2.4), amp=1.2)",
     "label": "pitched chord-progression kick"
   },
-
   "D32": {
     "code": "s1 >> play(\"..o.\", dur=1/2, sample=3, amp=0.7, hpf=200, room=0.3, mix=0.4, delay=PSwing(0.04)).human(20, 3)",
     "label": "swung backbeat snare"
@@ -82,7 +78,6 @@
     "code": "s1 >> industrialsnare(0, dur=2, delay=1, oct=5, amp=0.85, tone=0.18, noise=0.95, rattle=0.55, ring=0.45, bend=0.4, snap=0.6, comp=0.75, hpf=260, pan=PRand([-0.12, 0.12]))",
     "label": "industrial clap"
   },
-
   "E30": {
     "code": "h1 >> click(0, dur=1/4, sus=0.014, amp=Pacc(6, 4), amplify=0.25, rate=18, hpf=5200, pan=PRand([-0.35, 0.35]))",
     "label": "Pacc(6,4) click hat"
@@ -91,29 +86,1156 @@
     "code": "h1 >> play(\"-(--)-(--)-(--)-([--])\", dur=1/4, sample=PStep(16, 1, 3), rate=PWhite(0.95, 1.08), amp=PWhite(0.25, 0.5), pan=PWhite(-0.4, 0.4)).degrade(0.15)",
     "label": "skittery hihat 16ths"
   },
-
   "F32": {
     "code": "l1 >> loop(\"breakcore160_16\", dur=16, sample=PRand(64), sbrk=fperlin(32, 0.3, 0.9), sbrkdur=PWhite(-4, 30), sbrkmix=1.0, t_reset=PRand(9), decimate=fi(48, 0, 0.7), decbits=PRand(0, 6), multicrush=2, octafuz=fi(32, 0, 1), amp=0.85)",
     "label": "breakcore loop with octafuz"
   },
-
   "I32": {
     "code": "c1 >> hardstab([(0, 3, 7), (0, 3, 7), (-1, 2, 6), (0, 3, 7), (-2, 1, 5), (-2, 1, 5), (-4, -1, 3), (0, 3, 7)], dur=var([2, 1, 1, 2, 2, 2, 2, 2], 3), sus=[0.18, 0.35, 0.12, 0.4], oct=5, amp=0.6, cutoff=2400, res=0.5, comp=6, detune=0.025, fold=0.45, feedback=0.4, hpf=220, tubedrive=0.6, tubegain=1.9, tubewarm=0.65, tubebias=0.18, tape=0.5, tapedrive=1.6, fbdelay=0.55, fbtime=0.375, fbfeed=0.78, fbcutoff=3000, fbspread=0.02, beat_dur=1)",
     "label": "Gesaffelstein hardstab 7th-chord walk"
   },
-
   "J32": {
     "code": "t1 >> tb303([0, 0, 7, 0, 5, 0, 3, 0], oct=3, dur=1/4, top=linvar([200, 10000], 128), cutoff=linvar([500, 4000], [PRand(24, 36), PRand(2, 12)]), rq=PWhite(0.1, 0.3), sus=PStep(8, 0.5, 0.25), amp=0.7, lpf=9000).unison(3)",
     "label": "classic tb303 acid line"
   },
-
   "M30": {
     "code": "e1 >> bell(PRand([0, 4, 7, 11]), dur=PWhite(8, 24), sus=PWhite(4, 12), oct=(5, 6, 7), amp=0.35, cheapverb=0.85, cvdecay=5, hpf=600, shimmer=0.4, shimsize=0.8, shimpitch=0.5, shimmix=0.4, pan=PRand([-0.7, -0.3, 0.3, 0.7]))",
     "label": "random bell pings cathedral"
   },
-
   "N32": {
     "code": "a1 >> loop(\"gscreecha16\", dur=16, sample=PRand(8), amp=0.18, hpf=400, lpf=2400, formant=PRand(4))",
     "label": "gscreech atmo bed"
+  },
+  "F41": {
+    "code": "l1 >> loop(\"wardrum16\", dur=16, amp=1, sample=var(PRand(99), [32, 32]), drcomp=0, hpf=120)",
+    "label": "loop from @S33d 143 @ 143"
+  },
+  "G41": {
+    "code": "b1 >> swiss(var([0,-2, 2, 5], [16]), dur=1/2, oct=3, rate=1.4, rq=0.1, cutoff=3000, saw=2, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])",
+    "label": "swiss from @S33d 143 @ 143"
+  },
+  "B41": {
+    "code": "b2 >>  lbass(PStep(8,P[1:16],var([0,-2, 2, 5], [16])), glide=0.3, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2,cutoff=2610, tone=0.7, rq=0.9, detune=0.3, amp=0.8, hpf=120).unison(3)",
+    "label": "lbass from @S33d 143 @ 143"
+  },
+  "A41": {
+    "code": "s2 >> soprano(PTime(), dur=PRy(), rate=1, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)",
+    "label": "soprano from @S33d 143 @ 143"
+  },
+  "C41": {
+    "code": "d1 >> play(\"<x..><..o.>\", sample=9, drcomp=.5, high=2)",
+    "label": "play from @S33d 143 @ 143"
+  },
+  "F35": {
+    "code": "a0 >> loop(\"cosmic16\", dur=16, sample=2, tube=1, hpf=(300, PRand([400, 300])), room2=1, revsus=18, shift=var([(0.5, 1), 1], [4, 4]), beat_dur=1).unison(2)",
+    "label": "loop from A1"
+  },
+  "D35": {
+    "code": "a3 >> play(\"o \", amp=2, dur=4, sample=2, room2=1, lpf=400, hpf=400, echotime=4, echo=0.25, echomix=0.2)",
+    "label": "play from A1"
+  },
+  "B35": {
+    "code": "a1 >> bass([(0, 4, 2), [V, III, II, III, II]], amp=0.5, dur=4, a=2, oct=var([5, 7, [5,4, 5]]))",
+    "label": "bass from A2"
+  },
+  "A35": {
+    "code": "a3 >> varsaw(dur=8, lpf=1000,mverb=0.6, a=2, oct=(5, 6, 7), hpf=200).unison(4)",
+    "label": "varsaw from A2"
+  },
+  "H35": {
+    "code": "a0 >> plaits(melody() + PWalk(8, 1, 1),dur=(1/2, P[1/2, 1/4, 1], 4, 2, 1/2, 1/2), engine=var([5, 7, 3], 8), mverb=0.5, oct=PStep(4, 4, 5), amp=0.3, vol=0.5, pan=PWhite(linvar([-0.5, 0.5])))",
+    "label": "plaits from A3"
+  },
+  "L35": {
+    "code": "a1 >> loop(\"rvoice16\", dur=16, sample=1, spf=(100, PWhite(2000, 500)), spfend=(PWhite(200, 5000), 500), chop=4, shift=(P*[1, 2, 0.5], P*[1, 2, 0.5]), chopmix=(0.5, 0.25, 2), feed=0.5, delay=(0, 4, 8), spfslide=16, hpf=800).unison(2)",
+    "label": "loop from A3"
+  },
+  "E55": {
+    "code": "a1 >> play(\"[--]. \", hpf=4000 + PRand(-400, 400), mpf=8000, delay=(0, [0,0.25], 1.25), echo=(0.5, 0.25), sample=(3, var([0, (5, 2)]), 5)).sometimes(\"stutter\", degree=\"[--.:]\", sample=1, a=0.1, rate=(1,2))",
+    "label": "play from A6 @ 170"
+  },
+  "F55": {
+    "code": "a7 >> play(\"a \", sample=4, shift=(0, 0.5), feed=0.5, tremolo=4, dur=8, delay=4, lpf=1200, room2=1, damp2=0, revus=8, shape=0.2, amp=0.5, spf=400, spfslide=1, spfend=3200, echo=(0.025,0.25), echotime=8)",
+    "label": "play from A6 @ 170"
+  },
+  "C55": {
+    "code": "a6 >> play(\"x \", dur=8, lpf=400, room2=0, damp2=0, revus=8, shape=4, echo=0.05, echotime=8, mverb=0.5)",
+    "label": "play from A6 @ 170"
+  },
+  "N35": {
+    "code": "c7 >> loop(\"atmo32\", dur=32, sample=2).unison(0)",
+    "label": "loop from B1"
+  },
+  "H37": {
+    "code": "b1 >> rsin(dur=var([1/4, 1, 1/2, 1/4], [12, 4, 2]), cut=linvar([1/4, 1/2], 32), hpf=linvar([50, 4000], 16), echo=linvar([0.25, 2], 4), oct=3, feed=[0.5, 0.33, 0.33, 0.33], dubd=0.5, dublen=0.01)",
+    "label": "rsin from B2 @ 135"
+  },
+  "I18": {
+    "code": "b7 >> organ([1, var([_, [7, _, 7, (0, 4, 2)]]), 4, 1, 2], mverb=0.8, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0,dur=1/2, leg=0, scale=Scale.minor, oct=(var([5, 4, 6]), var([8,5,6, 7]))).unison(2).sometimes(\"shuffle\")",
+    "label": "organ from B3 @ 96"
+  },
+  "H18": {
+    "code": "b8 >> donk([1, var([_, [7, _, 7, (0, 4, 2)]]), 4, 1, 2], dur=1/2, mverb=0.5, scale=Scale.minor, valad=1000, valadr=0.5, valadd=0.5, valadt=0, oct=(var([2, 3, 2]), var([8,5,6, 7])), beef=2).unison(2).sometimes(\"shuffle\")",
+    "label": "donk from B3 @ 96"
+  },
+  "B18": {
+    "code": "b6 >> dbass([1, var([1, [7, 2, 7, (0, 4, 2)]]), 4, 1, 2], lpf=400, dur=[1/2, 1/2, 1/4, 1/4],scale=Scale.minor, vakorg=8400, vakorgr=0.5, vakorgd=0.1, vakorgt=4, oct=(5, var([3,4,6, 5])), sus=[1, 1/2, 1/2]).unison(4).every(4, \"shuffle\")",
+    "label": "dbass from B3 @ 96"
+  },
+  "G18": {
+    "code": "b7 >> faim(dur=1/2, amp=PBin(16), mverb=0.5, echo=0.5, sus=1)",
+    "label": "faim from B3 @ 96"
+  },
+  "F36": {
+    "code": "w9 >> loop(\"ragegtr16\", dur=16, lpf=3900, sample=PRand(8), mverb=0.0, chop=2, formant=0.0, dafilter=1300, dastart=1220, amp=PBin()).lclip([1, 2, 4]).slider()",
+    "label": "loop from BarredeJam 132 @ 132"
+  },
+  "E36": {
+    "code": "q4 >> play(\"-{:n}\", rate=PFr(1, 8),dur=PDur(7,8), pan=PWhite(-1,1),wshape=5).unison(3).sometimes(\"stutter\")",
+    "label": "play from BarredeJam 132 @ 132"
+  },
+  "M35": {
+    "code": "c2 >> blip(var([(3, (3, 8)),3, PCoin(3, 4, 0.5), linvar([4, var([4.01, 4])]), [var([1, 7]), 4, 4, 4, 4]], [4]), rate=2, oct=(PStep(3, 4, 5), var([3, 4])), scale=Scale.chromatic, dur=[1/2], vol=0.5, fold=0.5, leg=var([0, c1.drive], [3, 1], echo=[0, 0.1], feed=0), sus=[1/4, 1/2], lpf=1200).unison(4)",
+    "label": "blip from C2"
+  },
+  "F0": {
+    "code": "g1 >> play(\"g...\", sample=0, vol=0.8, lpf=PWhite(200,8000), room=0.2, mix=PWhite(0.2,0.9), shape=(0,0.2), dur=2, output=6)",
+    "label": "play from Connection 48 @ 48"
+  },
+  "C0": {
+    "code": "x2 >> play(\"x.-x..\", echo=0.5, dur=1/2, shape=.4, rate=1, octafuz=linvar([0.3,1]), formant=var([1, 0,5]), fdist=1, output=10).every(3, \"stutter\")",
+    "label": "play from Connection 48 @ 48"
+  },
+  "B0": {
+    "code": "i5 >> bbass(0, oct=(lininf(2, 3, a), lininf(2, 4, a)), output=18, dur=1/4, shape=0, shapemix=0.2, med=0, sus=1, blur=1, amp=1, fx1=b, fx2=b, vol=0.4).unison(3)",
+    "label": "bbass from Connection 48 @ 48"
+  },
+  "G42": {
+    "code": "r0 >> faim([6, 6, _, [9, 14], [9,14], _, 4, 4, _], dur=[0.5, 0.5, [3,1,1]],amp=1, oct=3, dist2=1, vol=0.7, beef=2).chroma()",
+    "label": "faim from Crazy Train @ 144"
+  },
+  "C42": {
+    "code": "d1 >> play(\"<xx.>\", dur=[0.5, 0.5, [3,1,1]], comp=1, vol=4)",
+    "label": "play from Crazy Train @ 144"
+  },
+  "D42": {
+    "code": "d2 >> play(\"<..u.><->\", dur=1/2 ,sample=0, comp=1)",
+    "label": "play from Crazy Train @ 144"
+  },
+  "F42": {
+    "code": "w6 >> loop(\"circlebreak16\", dur=16, sample=7, comp=0, vol=1, fx=1)",
+    "label": "loop from Crazy Train @ 144"
+  },
+  "C35": {
+    "code": "a1 >> play(\"<X[--]><..O.>\", amp=4, room=0.7, mix=PRand([0,.4,0])).sometimes(\"stutter\", PRand(8))",
+    "label": "play from D3"
+  },
+  "G35": {
+    "code": "s1 >> saw((0,1), oct=(3,[4,5]), lpf=PRand(8800), lpr=PWhite(0.1,0.9), amp=[0,0.4,0], dur=var([4,1/4,2],16), chop=8, drive=0.2, slide=(PWhite(-2,2),PWhite(-1,1))).unison(16, analog=40)",
+    "label": "saw from D3"
+  },
+  "F18": {
+    "code": "d1 >> play(\"v(...v.)(.[.v])(.{v.})\".replace(\"v\",\"W\"), sample=0, amp=1, dur=1/2)",
+    "label": "play from DDOS 92 @ 96"
+  },
+  "C18": {
+    "code": "d1 >> play(\"<k><@>\", sample=(0,1), dur=1/4, amp=a2.amp > 1, hpf=40)",
+    "label": "play from DDOS 92 @ 96"
+  },
+  "E18": {
+    "code": "d3 >> play(\"--\", dur=var(PRand([4,3,2,1,1/2,1/4,1/8]),P*[4,2,1,1/2]), sample=(7,8), lpf=0, amp=1)",
+    "label": "play from DDOS 92 @ 96"
+  },
+  "F24": {
+    "code": "w1 >> loop(\"losthighway4\", dur=4, sample=0, mverb=0, comp=0, tanh=.2)",
+    "label": "loop from David Lynch Code @ 108"
+  },
+  "C24": {
+    "code": "c7 >> play(\"<k.><..><..u.>\", sample=0, amp=2, comp=1, lpf=0).sometimes(\"stutter\")",
+    "label": "play from David Lynch Code @ 108"
+  },
+  "B24": {
+    "code": "k3 >> dbass(var([0,-2], 16), oct=5, dur=1/2)",
+    "label": "dbass from David Lynch Code @ 108"
+  },
+  "F31": {
+    "code": "g4 >> loop(\"elephant16\", dur=16, sample=1)",
+    "label": "loop from David Lynch Code @ 123"
+  },
+  "L31": {
+    "code": "s7 >> loop(\"lynchvoice8\", dur=8, sample=8, comp=0, rate=1, chop=2, chopi=.5)",
+    "label": "loop from David Lynch Code @ 123"
+  },
+  "C31": {
+    "code": "c7 >> play(\"<k.><..><..u.>\", sample=0, amp=2, comp=1, lpf=0).sometimes(\"stutter\")",
+    "label": "play from David Lynch Code @ 123"
+  },
+  "F44": {
+    "code": "z4 >> loop(\"lynchcrazy8\", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0)",
+    "label": "loop from David Lynch Code @ 148"
+  },
+  "C44": {
+    "code": "r3 >> play(\"<x.><.><....>\", sample=0, amp=2).sometimes(\"stutter\")",
+    "label": "play from David Lynch Code @ 148"
+  },
+  "A15": {
+    "code": "a1 >> sinepad((PSine(4)|PSine(16)|PSine(32),4), formant=PRand(4), flanger=PWhite(0,0.4), fdecay=PWhite(0,4), fx1=0, fx2=1, drive=0.1, fold=0.2, oct=(3,4,5), dur=8, room=1, mix=0.7, amp=0.3, chop=1.6, chopwave=PRand(8), output=10).unison(5,0.25)",
+    "label": "sinepad from Dereliction 95 @ 90"
+  },
+  "B15": {
+    "code": "w2 >> sawbass(PWhite(0,0.3), dur=PDur(var([5,7],[6,2]),8,var(PRand(8),36)), cutoff=PRand(190,1580), oct=(4,5,[6,7]), amp=0.3, output=8)",
+    "label": "sawbass from Dereliction 95 @ 90"
+  },
+  "F15": {
+    "code": "d1 >> play(\"V \", dur=4, hpf=80, lpf=0, room=1, mix=0.7, rate=0.7, sample=2, amplify=1, amp=linvar([1,0.5],[64,0]), pan=(PWhite(-1,-0.5),PWhite(0.5 ,1)), octafuz=expvar([0,1],[64,0]), octamix=linvar([1,0],[64,0]), fx1=1, output=16)",
+    "label": "play from Dereliction 95 @ 90"
+  },
+  "D15": {
+    "code": "d6 >> play(\"..u.\", lpf=4000, crush=5, room=[0.5,1,0.8], mix=[0,0.2,0.4], sample=0, delay=PWhite(-0.1,0.1), output=20).often(\"stutter\", Cycle([2,4,3,6,5,2]), amp=PWhite(0.5,1.1), rate=PWhite(1,2))",
+    "label": "play from Dereliction 95 @ 90"
+  },
+  "C15": {
+    "code": "k1 >> play(\"<X.><..o.><..U(.(...{O.[.O][Oo]}))><..x>\", amp=0.3, output=4, sample=0).sometimes(\"stutter\")",
+    "label": "play from Dereliction 95 @ 90"
+  },
+  "E15": {
+    "code": "h1 >> play(\"<{[---][--{.-}][-{.-}-][{.-}--]}><(.:)><..+>\", hpf=180, lpf=0, amp=1, sample=(1,3,2), pan=PWhite(-1,1), lofi=0, output=6).human(40,5)",
+    "label": "play from Dereliction 95 @ 90"
+  },
+  "M15": {
+    "code": "a2 >> bell(a1.degree, formant=(0,PRand(6)), formantmix=0.8, oct=(3,4,5), dur=8, room=1, mix=0.7, amp=1, chop=8, chopwave=PRand(8), output=12).spread() + (0,var([-2,-4,-3,-1],8))",
+    "label": "bell from Dereliction 95 @ 90"
+  },
+  "E35": {
+    "code": "s2 >> play(\"<-[--]>\", sample=7, pan=PWhite(-1,1), mverb=(0)).sometimes(\"stutter\", PRand(8))",
+    "label": "play from EuroDance"
+  },
+  "F6": {
+    "code": "g1 >> play(\"V \", sample=4, lpf=1200)",
+    "label": "play from G1 @ 72"
+  },
+  "B6": {
+    "code": "g2 >> dbass(dur=PDur(9, 12), drive=PStep(9, 1,0), tube=1, fbdelay=0.2, tape=1, tubewarmth=20, leg=0, rate=linvar([2, .1],[64,0]), glide=0.01, lpf=PFr(500,2200)).unison(2)",
+    "label": "dbass from G1 @ 72"
+  },
+  "E6": {
+    "code": "g3 >> play(\"[--]\", sample=5, hpf=12000, pan=PWhite(-1,1)).human(60, 10)",
+    "label": "play from G1 @ 72"
+  },
+  "D6": {
+    "code": "g9 >> play(\"<Oo><[Pp.@]>\", sample=PRand(8), cut=PRand([1/2, 1/4, 0]), krush=PRand([0, 12]), bits=PRand([2, 12, 0]), crush=(8, 1), amp=1, lpf=PRand([1200, 3200, 15000]), hpf=4000)",
+    "label": "play from G1 @ 72"
+  },
+  "C6": {
+    "code": "g1 >> play(\"X \", sample=13, amp=2, dist2=0).sometimes(\"stutter\", rate=2)",
+    "label": "play from G1 @ 72"
+  },
+  "G52": {
+    "code": "t1 >> mpluck([[0, 1, 2, 1, 0, 1 ,0, -1],-3], mverb=lininf(0,0.8,32), amp=0.70, oct=(PStep(8, 5, 6), 5, 7), pan=PWhite(-1,1), cut=1/2, dur=2, delay=0, hpf=400, fx2=1).unison(4)",
+    "label": "mpluck from GTA_2025 @ 164"
+  },
+  "B52": {
+    "code": "t7 >> dbass([0,0,-1,7,7,-1], dur=[1/2,1/2,[rest(3)]], amp=1, oct=5, echo=0.25, sus=1.5)",
+    "label": "dbass from GTA_2025 @ 164"
+  },
+  "F52": {
+    "code": "d0 >> play(\".{...u}..u...\", sample=5, hpf=var(PRand(4000)+10), rate=(.5,2)).sometimes(\"stutter\")",
+    "label": "play from GTA_2025 @ 164"
+  },
+  "E52": {
+    "code": "d5 >> play(\"-{-[--]}-.-{[---][--]}(-.)(-[----])\", sample=2, amp=PCoin(PWhite(0, 1),0,0.5), hpf=6000, pan=PWhite(-1,1)).sometimes(\"amen\").sometimes(\"bubble\").sometimes(\"stutter\", PRand(16), rate=PWhite(-1,5))",
+    "label": "play from GTA_2025 @ 164"
+  },
+  "C52": {
+    "code": "b8 >> play(\"X.\", bank=0, lpf=400)",
+    "label": "play from GTA_2025 @ 164"
+  },
+  "H30": {
+    "code": "a2 >> ews(PTrir(0,8), dur=2, sus=2, squiz=0.8, rel=0.2, fx2=1, oct=PWhite(2,3), amp=0.8, vol=1)",
+    "label": "ews from H1 @ 120"
+  },
+  "F30": {
+    "code": "a5 >> play(\"{{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{n[yyyN][xxxx]}} \", dur=PRand([1/2, 1/4]), sample=PRand(128), pan=PWhite(-1,1), lpf=PWhite(800, 8000), fx2=1, rate=PwRand([[-1, 0.2, 0.5, 1, 2],linvar([1, 4], 8),linvar([4, 1], 8),linvar([0.25, 4],8)],[16, 8, 4, 4]), echotime=PRand([0, 1, 2, 3, 4]),echo=PRand([0.25, 0, 0, 1, 2, 0.125, 0]), hpf=PWhite(40, 2000), amp=var([0, PWhite(0.0, 0.4)], [PRand([8, 16]), PRand([2, 4, 6])]))",
+    "label": "play from H1 @ 120"
+  },
+  "L30": {
+    "code": "a7 >> radio(dur=32, hpf=PWhite(1000, 2000), formant=PWhite(1, 2), amp=PMorse(\"kakaaop\"), fx2=1)",
+    "label": "radio from H2 @ 120"
+  },
+  "I30": {
+    "code": "y1 >> klank(y0.degree[0], fx2=1, rate=linvar([8, 16], 64), oct=(3, 4), dur=P*[4, 8, 12], lpf=linvar([400,3800],128), lpr=0.1, amp=linvar([0.5, 0.7], 128), hpf=600, bpm = 80 + PWhite(-20, 20), fdist=1, fdistfreq=PWhite(1200, 2000)).unison(2)",
+    "label": "klank from H3 @ 120"
+  },
+  "C36": {
+    "code": "b6 >> play(\"..X.\", shape=0.5, dist2=0.5, dist2lfo=PRand(10), mverb=0.5, echo=var([0, 0.5], [2, 4]), amp=PBin())",
+    "label": "play from Mini mall @ 132"
+  },
+  "C69": {
+    "code": "w4 >> play(\"x\", valad=PFr(500,800,1664, 128), amp=PStep(16, 0, 1), rate=PWhite(0.98, 1.02), valadr=PWhite(.1, 0.9), valadd=5, valadt=0, valadc=0.2, mverb=.2, wshape=linvar([0, 12],[333,222]), hpf=120)",
+    "label": "play from NotFTL 1024 @ 1024"
+  },
+  "F69": {
+    "code": "e5 >> play(\"l\", bank=1, sample=2, dur=[8, 4, 2, 1,1/2,1/2],  hpf=linvar([50,600],[147,33]), cut=PFr(0.5, 2), valad=linvar([400,4000],256), valadr=linvar([.2, 0.9], [356, 156]), valadd=15, valadt=0, valadc=0.2)",
+    "label": "play from NotFTL 1024 @ 1024"
+  },
+  "E69": {
+    "code": "w5 >> play(\"-\", pan=PWhite(-1,1), cut=1, rate=PWhite(1,1.04), amp=1, dur=var([1/2, 8], 4)).human(40)",
+    "label": "play from NotFTL 1024 @ 1024"
+  },
+  "I69": {
+    "code": "e3 >> hoover((linvar([0, 7], [128,0]),linvar([7,0], [128,0])),leg=0.0, dur=1/2, oct=PStep(16,6,5), mverb=.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.8, fbcutoff=3000, fbspread=0.2, beat_dur=.5, formant=PRand(5), amp=var([0.6,0],16), ).unison(2)",
+    "label": "hoover from NotFTL 1024 @ 1024"
+  },
+  "H69": {
+    "code": "m2 >> rsin(rate=0.1, para1=4, rsing=7,dur=8, valad=var([900,PRand(2000,8000)], 32), valadr=0.1, valadd=100, valadt=0, valadc=0.2, octafuz=2, octamix=0.5)",
+    "label": "rsin from NotFTL 1024 @ 1024"
+  },
+  "G26": {
+    "code": "v2 >> guit(P[0, 2,4], dur=1/3,formant=PStep(8,PRand(5),0), formantmix=0.3,  oct=(4,5), detune=0.01, tone=0.8, beef=0.5, fdecay=0.2, mod=0.3, amp=.8, mverb=.2).unison(3)",
+    "label": "guit from Postri 112 @ 112"
+  },
+  "E26": {
+    "code": "d0 >> play(\"-{-=}\", dur=1/3, sample=[1,2,4], pan=PWhite(-1,1))",
+    "label": "play from Postri 112 @ 112"
+  },
+  "C26": {
+    "code": "k9 >> play(\"k\", dur=P*[1,2,6]/3)",
+    "label": "play from Postri 112 @ 112"
+  },
+  "D26": {
+    "code": "w5 >> play(\"o...\", dur=1/3, rate=1, sample=12, high=2, room2=0.9, mix2=0.3, damp2=0.2, revatk=0.2, revsus=0.4)",
+    "label": "play from Postri 112 @ 112"
+  },
+  "A26": {
+    "code": "o6 >> choir(PChords(VI), oct=(3,4,P*[5,5]),rel=.1,  atk=2, dur=8, bendc=0.1, vow=PTuple(PWhite(5), 3), amp=.8, eb=0.75, ebfeed=0.7, ebmix=0.3, ebmode=1, ebwow=.2, ebflutter=.15, ebsat=0.3, fx2=1)",
+    "label": "choir from Postri 112 @ 112"
+  },
+  "F34": {
+    "code": "u7 >> loop(\"electrodrum32\", dur=32, sample=2, mverb=0)",
+    "label": "loop from R_Jazz @ 128"
+  },
+  "L34": {
+    "code": "g0 >> noloop(\"fx4\", dur=8, sample=1, rate=.1)",
+    "label": "noloop from R_Jazz @ 128"
+  },
+  "C34": {
+    "code": "g8 >> play(\"<k(...[--])><-:><..*.>\", sample=1, amp=1, bank=1, dur=1/2, rate=1, cut=1.2).sometimes(\"stutter\")",
+    "label": "play from R_Jazz @ 128"
+  },
+  "H34": {
+    "code": "s5 >> plaitsX(preset=14, harm=PWhite(-1,1), morph=PWhite(-1,1), pan=PWhite(-1,1))",
+    "label": "plaitsX from R_Jazz @ 128"
+  },
+  "F54": {
+    "code": "p3 >> loop(\"hiphop16\", dur=16,pos=0, room=0.1, sample=0)",
+    "label": "loop from R_Psy @ 168"
+  },
+  "C54": {
+    "code": "s3 >> play(\"X.\")",
+    "label": "play from R_Psy @ 168"
+  },
+  "A54": {
+    "code": "l5 >> varicelle(PTime(), dur=1/2, amp=PTimebin(), a=PWhite(0.001, 0.4), oct=6, fx2=1, valad=300, valadr=0.3, valadd=5, valadt=0, valadc=0.1, pan=PWhite(-1,1), echo=.25).end(4,16)",
+    "label": "varicelle from R_Psy @ 168"
+  },
+  "H54": {
+    "code": "y8 >> four(linvar([0,2],64), fx2=0, tremolo=P*[2,4,8], amp=.8, mverb=0.5, oct=5, shape=.3, pan=PWhite(-1, 1))",
+    "label": "four from R_Psy @ 168"
+  },
+  "F21": {
+    "code": "n3 >> loop(\"elephant16\", dur=16, sample=0, chop=0, chopwave=5, chopi=.2).lclip(0)",
+    "label": "loop from R_intro @ 102"
+  },
+  "C21": {
+    "code": "i7 >> play(\"<X.>\", amp=3.0, lpf=0, lpr=0.7).sometimes(\"stutter\")",
+    "label": "play from R_intro @ 102"
+  },
+  "L21": {
+    "code": "i2 >> noloop(\"beru4\", dur=8, sample=1, mverb=0.3, amp=PZero(4), tanh=1, looping=0, trig=0, fx=0)",
+    "label": "noloop from R_intro @ 102"
+  },
+  "D54": {
+    "code": "h2 >> play(\".(.U)..\", rate=PWhite(-.5,-1), fx2=1)",
+    "label": "play from R_toto @ 168"
+  },
+  "K35": {
+    "code": "a1 >> angst((var([0,-2,-4,2],8),2,PRand(8)), dur=PDur(5,8)*8, oct=(3,4,[5,[6,2,6]]), room2=0.7, mix2=0.5, damp2=PWhite(0.1,0.8), revatk=PWhite(-3,3), revsus=a1.revatk + PRand(3), drive=0, rate=PWhite(0,16), high=2, mid=0.5, hpf=PStep(8,1400,40), lpf=PRand(500,12000)).slider()",
+    "label": "angst from T1"
+  },
+  "M55": {
+    "code": "a4 >> blip(0, dur=16, fbdelay=0.5, oct=4, sus=8, wshape=0, fx1=0, mverb=0.5, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)",
+    "label": "blip from TDH @ 170"
+  },
+  "H55": {
+    "code": "y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5, shimmer=1)",
+    "label": "plaitsX from TDH @ 170"
+  },
+  "J35": {
+    "code": "a1 >> acidline([0,0,3,0,5,0,0,3], dur=0.25, cutoff=linvar([400,2000],8), res=linvar([0.5,0.8],4), drive=2.5, accent=P[0,0,1,0]*0.5, tubedrive=0.4, amp=4.0)",
+    "label": "acidline from Tio 132"
+  },
+  "F14": {
+    "code": "l4 >> loop(\"rageambi16\", dur=16, hpf=300)",
+    "label": "loop from UBRAIN @ 88"
+  },
+  "C14": {
+    "code": "d6 >> play(\"X \" , sample=5, amp=x0.sample==12)",
+    "label": "play from UBRAIN @ 88"
+  },
+  "D14": {
+    "code": "d3 >> play(\"..u(...{u[uu][.u]})\", sample=(10,4))",
+    "label": "play from UBRAIN @ 88"
+  },
+  "A14": {
+    "code": "k4 >> ethpad(dur=8,oct=(6, 5, var([4, 7], [28, 4])), fx2=1).unison(4)",
+    "label": "ethpad from UBRAIN @ 88"
+  },
+  "B14": {
+    "code": "q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=.2, wshape=4)",
+    "label": "dbass from UBRAIN @ 88"
+  },
+  "L14": {
+    "code": "h5 >> noloop(\"vocalcrash8\", dur=8,pos=PWhite(0, 1), room=0.1, ratelfo=0, ratelfoadd=0.5, ratelfomul=0.5,  start=PWhite(0, 1), sample=PRand(8), trig=0, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)",
+    "label": "noloop from UBRAIN @ 88"
+  },
+  "E14": {
+    "code": "h3 >> play(\"-\", dur=1/4, high=2).human(60,6,3)",
+    "label": "play from UBRAIN @ 88"
+  },
+  "A42": {
+    "code": "p6 >> choir(h4.degree[0],dur=8,  atk=1, rel=1, bendc=0.1, vow=PTuple(PWhite(0.0, 5.0), 3), oct=(3,4,5), fx2=1, amp=1, hpf=140, high=1.2) + PWhite(-0.1,.1)",
+    "label": "choir from XRuns - 144 @ 144"
+  },
+  "B42": {
+    "code": "h4 >> dbass([(0, 2, 5), (0, 5, 6), (2, 5, 9), (0, 2, 6)], mverb=0.2, dur=8, sus=8, glide=0.15, amp=var([1, 0.8], [8, 8]), oct=var([6, (6, 7)], 8), cutoff=12200, vib=2, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, rgate=0)",
+    "label": "dbass from XRuns - 144 @ 144"
+  },
+  "H42": {
+    "code": "h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1], sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)",
+    "label": "plaitsX from XRuns - 144 @ 144"
+  },
+  "E42": {
+    "code": "s2 >> play(\"<-[--]>\", sample=7, pan=PWhite(-1,1), hpf=240, rate=PWhite(1, 1.04)).sometimes(\"stutter\", PRand(8))",
+    "label": "play from XRuns - 144 @ 144"
+  },
+  "G8": {
+    "code": "p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]) , dur=1/4, vol=0.5, fenv=0.2, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])",
+    "label": "svdk from XRuns - 144 @ 77"
+  },
+  "F8": {
+    "code": "k8 >> loop(\"breakcore160_16\", dur=8, sample=var([PRand(808)], [64, 64])).lclip(0)",
+    "label": "loop from XRuns - 144 @ 77"
+  },
+  "C8": {
+    "code": "f2 >> play(\"X.\", sample=0, dur=1/4, amp=1, delay=0, rate=1, hpf=0)",
+    "label": "play from XRuns - 144 @ 77"
+  },
+  "H8": {
+    "code": "h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1/2, sus=1, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)",
+    "label": "plaitsX from XRuns - 144 @ 77"
+  },
+  "C37": {
+    "code": "d1 >> compkick(0, dur=1, oct=3, amp=1.05, punch=0.95, comp=0.95, click=0.5, sub=0.9, body=0.8, tone=0.45)",
+    "label": "compkick from abyss @ 135"
+  },
+  "B37": {
+    "code": "b1 >> subbass([0, 0, -5, 0], dur=8, sus=8, oct=4, amp=1.8, lpf=220, lpr=0.25, hpf=40, tape=0.5, tapedrive=1.5)",
+    "label": "subbass from abyss @ 135"
+  },
+  "E37": {
+    "code": "d2 >> click(0, dur=1/2, sus=0.04, amp=[0, 0.3], rate=13, hpf=2400, pan=0.1)",
+    "label": "click from abyss @ 135"
+  },
+  "I37": {
+    "code": "s1 >> hardstab([(0,3,7), (0,3,7), (-1,2,6), (0,3,7), (-2,1,5), (-2,1,5), (-4,-1,3), (0,3,7)], dur=var([2,1,1,2,2,2,2,2],3), sus=[0.18, 0.35, 0.12, 0.4], oct=5, amp=0.55, cutoff=2400, res=0.5, comp=6, detune=0.02, fold=0.4, feedback=0.35, hpf=220, tubedrive=0.55, tubegain=1.8, tubewarm=0.65, tubebias=0.15, tape=0.45, tapedrive=1.5, fbdelay=0.55, fbtime=0.375, fbfeed=0.75, fbcutoff=3000, fbspread=0.02, beat_dur=1, stereowidth=0.85)",
+    "label": "hardstab from abyss @ 135"
+  },
+  "D37": {
+    "code": "c1 >> industrialsnare(0, dur=2, delay=1, oct=5, amp=0.65, tone=0.2, noise=0.9, rattle=0.5, ring=0.4, bend=0.35, snap=0.55, comp=0.7, hpf=260, jpverb=0.72, jpsize=0.88, jpdamp=0.4, pan=PRand([-0.12, 0.12]))",
+    "label": "industrialsnare from abyss @ 135"
+  },
+  "M37": {
+    "code": "t1 >> compperc(PRand([0, 5, 7, 12, -3]), dur=PDur(7, 16), sus=0.08, amp=0.32, tone=0.35, noise=0.55, body=0.25, metal=0.45, ring=0.4, comp=0.5, hpf=900, cheapverb=0.45, cvdecay=1.8, pan=PRand([-0.55, -0.2, 0.2, 0.55]))",
+    "label": "compperc from abyss @ 135"
+  },
+  "K37": {
+    "code": "p1 >> industrialdrone([0, -5, -7, 0, -3], dur=16, sus=17, oct=4, amp=0.7, cutoff=linvar([240, 2100], 40), res=0.6, detune=0.45, noise=0.35, sub=0.55, feedback=0.4, cheapverb=0.8, cvdecay=4, miVerb=0.55, mverbfreeze=sinvar([0, 0.8], 32), spectralfreeze=sinvar([0, 0.5], 24), stereowidth=0.88, hpf=80)",
+    "label": "industrialdrone from abyss @ 135"
+  },
+  "A37": {
+    "code": "m1 >> darkpad([0, -5], dur=16, sus=17, oct=5, amp=0.45, cutoff=linvar([600, 3200], 48), res=0.4, detune=0.35, dark=0.7, sub=0.4, cheapverb=0.65, cvdecay=2.5, hpf=180)",
+    "label": "darkpad from abyss @ 135"
+  },
+  "G37": {
+    "code": "l1 >> darklead(PRand([0, 3, 5, 7, 10, -2]), dur=PDur(5, 8), sus=[0.35, 0.2, 0.5, 0.3], oct=5, amp=0.45, cutoff=linvar([1500, 3500], 16), res=0.55, detune=0.3, width=0.4, sub=0.3, hpf=400, tubedrive=0.5, tubegain=1.6, tubewarm=0.55, tubebias=0.1, tape=0.4, tapedrive=1.4, fbdelay=0.45, fbtime=0.25, fbfeed=0.65, fbcutoff=3500, fbspread=0.02, beat_dur=1, jpverb=0.5, jpsize=0.85, jpdamp=0.4, stereowidth=0.85)",
+    "label": "darklead from abyss @ 135"
+  },
+  "G30": {
+    "code": "t5 >> faim((0, 4), oct=(3,4),amp=0.4, hpf=120, dur=2, echo=[0,PWhite(1.5,1.75)], echomix=PWhite(0,0.9), lpf=[0,PRand(500,4813)]).unison(3)",
+    "label": "faim from alienation 120 @ 120"
+  },
+  "D30": {
+    "code": "d4 >> play(\"o.\", dur=1, delay=0.5, rate=0.5, bpr=0.2, bpf=4000)",
+    "label": "play from alienation 120 @ 120"
+  },
+  "G34": {
+    "code": "j1 >> alva([12, 11, 1, 0.5, 4, _, 4, _], oct=(4, 5, 6), dur=PDur(3, 8), shape=j1.degree==2,shift=j1.degree==1,dist2=j1.degree==0.5,mverb=(j1.degree==4)/4, echo=0.5, leg=12, mod=0.1, hpf=0).unison(4)",
+    "label": "alva from alva @ 128"
+  },
+  "B34": {
+    "code": "j2 >> bass(dur=1/2, amp=j1.degree==4, oct=(6, 7), leg=40)",
+    "label": "bass from alva @ 128"
+  },
+  "D34": {
+    "code": "d2 >> play(\"..o...o.\", dur=1/4, sample=3, amp=var([0,0.6],[24,8]))",
+    "label": "play from alva @ 128"
+  },
+  "E34": {
+    "code": "d3 >> play(\"-\", dur=1/4, amp=PWhite(0.1,0.4), hpf=6000, pan=PWhite(-1,1))",
+    "label": "play from alva @ 128"
+  },
+  "A34": {
+    "code": "j3 >> varsaw(j1.degree+2, oct=(4, 5), dur=1/2, lpf=linvar([800, 3000], 16), lpr=0.2, leg=8, amp=var([0, 0.5], [16, 16])).unison(2)",
+    "label": "varsaw from alva @ 128"
+  },
+  "G16": {
+    "code": "m2 >> alva(dur=PDur([5, 3, 7, 5, 9, 5, 6], 12), sus=0.76, fbdelay=var([0, 0, 0.5, 0.25, 0, 0]), gate=0.1, gaterate=1, gatewave=1, leg=PRand(8)[:13], glitch=0.0, oct=(3, 4), tube=1,fshift=var([0, 1, 2, 4, 0], PRand([1,2,4,8])), shimmer=0, shimsize=0, shimpitch=var([1, 1.5, 2], PRand(32)), shimmix=0, tape=0, fbfeed=0.9, fbtime=0.5, tapedrive=4, drift=0, envdist=0, lpf=var([4000, 2000, 1000],[13, 2, 1]), lpr=0.1, mu=4)",
+    "label": "alva from alvaofcpudeath @ 92"
+  },
+  "F16": {
+    "code": "o8 >> loop(\"circledrum16\", dur=16, amp=4, tape=1)",
+    "label": "loop from alvaofcpudeath @ 92"
+  },
+  "B16": {
+    "code": "j2 >> bass(dur=1/2, amp=j1.degree==4, oct=(6, 7), leg=40)",
+    "label": "bass from alvaofcpudeath @ 92"
+  },
+  "C16": {
+    "code": "k9 >> play(\"{X.X.[XX].X.[XXX]}\", amp=4, sample=3, lpf=620, lpr=0.2, formant=1)",
+    "label": "play from alvaofcpudeath @ 92"
+  },
+  "M4": {
+    "code": "r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.4, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))",
+    "label": "bell from ambient @ 68"
+  },
+  "B4": {
+    "code": "b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)",
+    "label": "subbass from ambient @ 68"
+  },
+  "K30": {
+    "code": "y5 >> ambi(P*[y0.degree[0],y0.degree[1],y0.degree[2], (y0.degree[0], y4.degree[1]), (y0.degree[1], y0.degree[2]), (y0.degree[0], y0.degree[2]),P**(y0.degree[0], y0.degree[1], y0.degree[2]),P+(y0.degree[0], y0.degree[1], y0.degree[2]), P/(y0.degree[0], y0.degree[1], y0.degree[2])], dur=P*[5,1,1/2,8,3], sus = p1.dur, delay=P*[0,PWhite(0,1)], oct=PwRand([6,5,4,3],[30,35,20,15]), velocity=PRand(40,65), fx2=1, amp=PWhite(0.2,0.3), velhard=PWhite(0.2,1), hard=PWhite(0,2), lpf=PRand(5000,18000)).unison(3).penta()",
+    "label": "ambi from annihilation @ 120"
+  },
+  "M57": {
+    "code": "z1 >> zap(0, dur=8, hpf=40, drive=[PWhite(0.1,0.4),0.2], oct=(3, PStep(9,5,[4, (5, 6)])), chop=4, chopmix=0.25, spf=10, spfend=8000, spfslide=(0.1, PRand(4,8)), octer=1, octersubsub=var([2, PRand(1,15)], [13]), fx1=0, hpfx1=80, amp=P[0.3,0, 0.1, 0, 0.1, 0], vol=0.7).unison(4)",
+    "label": "zap from annihilation @ 174"
+  },
+  "B57": {
+    "code": "z2 >> sawbass(0, dur=8, sus=[8], echo=1/2, amp=(z1.amp==0), mid=2, echotime=PRand(0,12), oct=(5,4,5), drive=(0.01,0,0.01), vol=0.6).unison(3,var(PWhite(0.25,0.30)),var(PRand(99),8))",
+    "label": "sawbass from annihilation @ 174"
+  },
+  "K57": {
+    "code": "n2 >> brown(chop=PRand(8), chopwave=PWhite(0,8), dur=PWhite(0.1,4), amp=var([0, expvar([0,2],[6,0])], [14, 2]), pan=PWhite(-1,1), spf=40, spfend=PRand(400,9800), spfslide=n2.dur/2, drive=1, hpf=linvar([3200, 200], [PRand(4,32), 0]), fx2=1, fx1=1, hpr=PWhite(0.1,0.9))",
+    "label": "brown from annihilation @ 174"
+  },
+  "E57": {
+    "code": "f1 >> click(PWhite(-0.1, 0.1),dur=b8.dur, hpf=var([200, 3200], [4, 4]), oct=(3, 4), hpr=0.2, shape=(1,0.5), amp=b8.degree == 0).unison(0)",
+    "label": "click from annihilation @ 174"
+  },
+  "F57": {
+    "code": "i7 >> play(\"b...\", sample=4, vol=0.7, cut=2)",
+    "label": "play from annihilation @ 174"
+  },
+  "C57": {
+    "code": "i2 >> play(\"(K...)(K...)..\", dur=1/2, sample=(0,9), cut=PWhite(0.5,5), vol=0.8, fx1=1)",
+    "label": "play from annihilation @ 174"
+  },
+  "D57": {
+    "code": "i4 >> play(\"(O...)(O...)..\", dur=1/2, sample=(8), cut=PWhite(0.5,5), vol=0.7)",
+    "label": "play from annihilation @ 174"
+  },
+  "G57": {
+    "code": "n4 >> lapin((0,4), amp=var([0, 1], [PRand(8,16),PRand(1,8)]), dur=PDur(var([4,P*[6,5,7]],[6,2]),8), sus=1/8, oct=(5,6), rate=0.8, shape=0.2, fx1=0, fx2=1, drive=0.8, tanh=0).unison(3,0.25,90)",
+    "label": "lapin from annihilation @ 174"
+  },
+  "H57": {
+    "code": "r9 >> rsin([0,0,P[2,3,[5,[6,4,1],P+(PRand(0,8),PRand(0,8))]].palindrome(1)], oct=6, dur=PStep(15,1,1/2), sus=PWhite(1/4,1), amp=1, lpf=z1.amp * 11480, vol=0.5, pan=[0,0,PWhite(-1,1)]).unison(5).after(8, \"only\")",
+    "label": "rsin from annihilation @ 174"
+  },
+  "K56": {
+    "code": "t1 >> angst(0 * PRand([1/2, 1/4, 1] + [4, 21]), dur=1/2, oct=(t1.leg / 4) + PRand([3, 4]), sus=1/2, fmod=(0,12), lpf=t1.leg * PWhite(400, 2000), fx1=0, vib=0, leg=var([4,1], [PRand([3, 7, 15]), 1]))",
+    "label": "angst from annihilation @ 173"
+  },
+  "F56": {
+    "code": "l1 >> loop(\"break8\", dur=8, sample=30, amp=P[PCoin(), PCoin(), PCoin(), 0, PCoin(), 0, PCoin(), 0]*0.5)",
+    "label": "loop from annihilation @ 173"
+  },
+  "C56": {
+    "code": "i2 >> play(\"(K...)(K...)..\", dur=1/2, sample=(0,9), cut=PWhite(0.5,5), vol=0.8).often(\"stutter\", PRand(16), bpf=linvar([400,8000],2), spin=1)",
+    "label": "play from annihilation @ 173"
+  },
+  "D56": {
+    "code": "i3 >> play(\"(O...)(O...)..\", dur=1/2, sample=(8), cut=PWhite(0.5,5), vol=0.8).often(\"stutter\", PRand(16), bpf=linvar([400,8000],2), spin=1)",
+    "label": "play from annihilation @ 173"
+  },
+  "E56": {
+    "code": "f2 >> play(\"[--]\", sample=3, hpf=12000)",
+    "label": "play from annihilation @ 173"
+  },
+  "G56": {
+    "code": "f8 >> faim(PArp([0,1,0.5],11) + PGauss(0, 0.2) + P[0, 0, 0, [0.1, 0.1]], oct=(4, 5), beef=(1,0), dur=PDur(var([4,[5,3,8]],[6,2]),8), sus=f1.dur*PWhite(0.5,1), lpf=0, amp=0.5)",
+    "label": "faim from annihilation @ 173"
+  },
+  "H31": {
+    "code": "e0 >> plaits(melody(),dur=(1/2, P[1/2, 1/4, 1], 4, 2, 1/2, 1/2), engine=var([5, 7, 3], 8), drive=0, mverb=0.1, oct=3, amp=0.1, vol=0.5, pan=PWhite(linvar([-0.5, 0.5])))",
+    "label": "plaits from antenna @ 122"
+  },
+  "B31": {
+    "code": "e1 >> bass(melody()[:8],dur=var([1/4, 2],[13, 3]), a=PWhite(0, 1), drive=0, amp=0.7, mverb=0.8).unison(2).every(13, \"offmul\", 2)",
+    "label": "bass from antenna @ 122"
+  },
+  "G31": {
+    "code": "e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))",
+    "label": "karp from antenna @ 122"
+  },
+  "H26": {
+    "code": "r1 >> rsin((linvar([0,4],16),linvar([2,-2],24), linvar([-4,4],32)), dur=var(PRand([1,1/2,1/4,2]),8), hpf=linvar([30,180],23),oct=var([3, 4, 5], PRand(8)), para1=PWhite(200, 8000), fmod=8,lpf=linvar([3000,8000],19), amp=0.5, sus=r1.dur, fold=var([0.5, 0.1]), fx2=0.5, room2=1, revsus=r1.dur*PWhite(0,2), revatk=-1, damp2=PWhite(0.1,0.9))",
+    "label": "rsin from attention @ 112"
+  },
+  "F26": {
+    "code": "p1 >> play(\"<q ><p >\", sample=1, dur=PDur([3, 5], 8), amp=PWhite(0.3,0.5), hpf=220, chop=1/2, leg=PWhite(150), pan=PWhite(-1,1))",
+    "label": "play from attention @ 112"
+  },
+  "B26": {
+    "code": "r3 >> dbass(linvar([0,0.6],[64,0]), root=0, mid=2, dur=PDur(8,14), amplify=0.8*(d1.degree!=\"X\"), leg=PRand(4), a=0, sus=0.4, oct=4, lpf=13000, hpf=60).unison(3)",
+    "label": "dbass from attention @ 112"
+  },
+  "G19": {
+    "code": "g1 >> faim([2,3,[5,7]], dur=([[1,1,1/2],2,1/2,4,1/2]*PRand([2,3,1,4])), slide=var([0,[-4,4]], [7,1]), leg=PWhite(0,4), sus=g1.dur*PWhite(0.2,1.5), oct=(4,5), chop=P*[0,4,16], hpf=var([1000, 0], [PRand(2,11), PRand(12,19)]), fx1=1, fx2=1, fx1hpf=150, amp=0.5, room=1, mix=PWhite(0.2,0.5)).unison(3).sometimes(\"shuffle\") + (0,[2,[4,6]])",
+    "label": "faim from augmentation @ 98"
+  },
+  "E19": {
+    "code": "h1 >> play(\"h\", dur=PDur(var([7,8,4],[8,2,2]),8)/var([1,[2,0.5]],16), sample=PStep(8,1,3), rate=PWhite(1,4), amp=PWhite(0.0, 0.5), pan=PWhite(-1,1)).degrade(0.2)",
+    "label": "play from augmentation @ 98"
+  },
+  "C19": {
+    "code": "d1 >> play(\"<(x.)(.x).(..x)><(k.)(.M).(..O)>\", delay=0, sample=(2, 4), rate=(1, 0.5), hpf=30, dur=var([2,1/4], 8), spf=P*[14000,60,300], spfslide=PSine(64)*0.35, spfend=P*[500,1700,200])",
+    "label": "play from augmentation @ 98"
+  },
+  "F19": {
+    "code": "d2 >> play(\"(.v)(.V|w0|).(.v.)\", sample=3, hpf=50, dur=var([4,1],16), crush=1, echo=P*[0.5,0.25], echomix=linvar([0,1],[19,0]), lpf=4800)",
+    "label": "play from augmentation @ 98"
+  },
+  "E31": {
+    "code": "d8 >> play(\".-u-\", dur=0.25, amp=Pacc(4))",
+    "label": "play from biases_are_bells @ 122"
+  },
+  "D31": {
+    "code": "d3 >> play(\"s\", dur=0.5, sample=2, amp=0.56, amplify=PFDur((3,8),(5,16)), octclean=0.4, ocsub=0.7, ocup=0, hpf=100, lpf=4000, delay=PSwing(0.06))",
+    "label": "play from biases_are_bells @ 122"
+  },
+  "G25": {
+    "code": "k7 >> swiss(PStep(12,[1,2],0),dur=[1/2,PDur([4,5],8)], oct=(3),rate=1, rq=0, cutoff=8000, saw=2, pulse=0.5, sin=0.2, pw=0.9,tape=.3, tapedrive=15, tapewarm=0.3, tapewobble=0.5, valad=1510, valadr=0.4, valadd=1.5, valadt=0, valadc=0.1, r=0.7, rc=4,hpf=120, high=3, vol=.8).unison(3, .1).every(0.5, \"stutter\", cycle=8, r=0.5, cut=1)",
+    "label": "swiss from biniou style 110 @ 110"
+  },
+  "C25": {
+    "code": "u6 >> play(\"<(k.)-><|x5|.>\", sample=0, amp=2, drcomp=.5).sometimes(\"stutter\")",
+    "label": "play from biniou style 110 @ 110"
+  },
+  "D25": {
+    "code": "s1 >> play(\"<..o.><..C.>\", sample=(6,3), room2=0.1, mix2=0.6, damp2=0.8, revatk=0.3, revsus=0.4, wshape=5, wgain=1, wmix=0.5, hpf=200)",
+    "label": "play from biniou style 110 @ 110"
+  },
+  "F25": {
+    "code": "m0 >> play(\".[.i]..\", bank=2, sample=PRand(999), wshape=6, wgain=1, wmix=0.5, cut=1, hpf=200)",
+    "label": "play from biniou style 110 @ 110"
+  },
+  "J14": {
+    "code": "a1 >> acidline(var([P[0, 0, 3, 0, 5, 0, 0, 3], P[0, 3, 5, 7, 10, 7, 5, 3]], [16, 16]), dur=var([0.25, 0.125], [24, 8]), cutoff=expvar([300, 4000], 8), res=linvar([0.4, 0.9], 16), drive=linvar([1.5, 0.2], 32), lpf=1200, accent=var([P[0, 0, 1, 0]*0.5, P[1, 0, 0, 1]*0.6], [12, 4]), tubedrive=linvar([0.2, 0.7], 48), amp=0.6)",
+    "label": "acidline from blackorchid @ 88"
+  },
+  "H14": {
+    "code": "x1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5, cutoff=linvar([2000, 8000], 4), amp=var([0, 0.6, 0, 0.8], [16, 8, 8, 32]), leg=0, crush=4)",
+    "label": "plaitsX from blackorchid @ 88"
+  },
+  "G14": {
+    "code": "x2 >> vati([11, 10, 9, 8, 7, 4, 3, 0], dur=0.25, oct=6, cutoff=linvar([800, 4000], 8), amp=var([0, 0.8], [24, 8]), leg=0)",
+    "label": "vati from blackorchid @ 88"
+  },
+  "I35": {
+    "code": "a1 >> organ([1, var([_, [7, _, 7, (0, 4, 2)]]), 4, 1, 2], mverb=0.8, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0,dur=1/2, leg=4, scale=Scale.minor, shape=0, oct=(var([5, 4, 6]), var([8,5,6, 7]))).unison(2).sometimes(\"shuffle\")",
+    "label": "organ from blaze"
+  },
+  "A9": {
+    "code": "s1 >> varsaw((var([-7,-5,0,-3],16),4,7,0), oct=(3,4,5,6), sus=12, blur=2, shape=PWhite(0.0,0.08), dur=8, lpf=linvar([600,1800],32), lpr=PWhite(0.2,0.4), amp=0.45, room=0, mix=0).unison(8,0.25)",
+    "label": "varsaw from cathelapse @ 78"
+  },
+  "F9": {
+    "code": "c1 >> play(\"  c \", dur=8, amp=0.35, echo=0.5, room=1, mix=0.75)",
+    "label": "play from cathelapse @ 78"
+  },
+  "D9": {
+    "code": "s2 >> play(\"..O.\", dur=0.5, sample=PRand(8), rate=PWhite(-2,2), chop=PRand([0,2,4,8]), pan=PWhite(-1,1), hpf=350, crush=PRand(8), amp=0.7).often(\"stutter\", PRand([4,8,16]))",
+    "label": "play from cathelapse @ 78"
+  },
+  "G9": {
+    "code": "a2 >> vati([0,0,PWalk(8),0,0,PWalk(8),-2,PRand(8)], dur=0.25, oct=5, amp=0.65, drive=0, lpf=linvar([350,2200],2), fold=0.5, shape=0.0)",
+    "label": "vati from cathelapse @ 78"
+  },
+  "B9": {
+    "code": "b1 >> sawbass([0,2,4,5,7,5,4,2], dur=0.5, oct=5, amp=0.8, lpf=4200, shape=0.2, slide=0.0).human(0.01)",
+    "label": "sawbass from cathelapse @ 78"
+  },
+  "E9": {
+    "code": "h1 >> play(\".-\", sample=2, amp=0.2, hpf=6000, room=0.3).human(0.015)",
+    "label": "play from cathelapse @ 78"
+  },
+  "C9": {
+    "code": "x4 >> play(\"x \")",
+    "label": "play from cathelapse @ 78"
+  },
+  "M18": {
+    "code": "b1 >> cluster(hpf=400, hpr=0.1, dur=2.5, oct=4, mverb=0.5)",
+    "label": "cluster from clustering @ 96"
+  },
+  "G54": {
+    "code": "n7 >> prof(rate=linvar( [.01, .7], 128), oct=3, dur=8, valad=700, valadr=0.3, valadd=5, valadt=0, valadc=0.2, fx2=.4, eb=0.5, ebfeed=0.25, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, fx1=.1).after(16, \"stop\")",
+    "label": "prof from code_20260312T075113566Z @ 168"
+  },
+  "J54": {
+    "code": "a1 >> acidline([0,0,3,0,5,0,0,3], dur=0.25, cutoff=linvar([400,2000],8), res=linvar([0.5,0.8],4), drive=2.5, accent=P[0,0,1,0]*0.5, tubedrive=0.4, amp=4.0)",
+    "label": "acidline from code_20260312T075113566Z @ 168"
+  },
+  "E54": {
+    "code": "d2 >> play(\"-\", sample=5, dur=0.25, amp=P[0.4,0.15,0.3,0.15], hpf=4000)",
+    "label": "play from code_20260312T075113566Z @ 168"
+  },
+  "L41": {
+    "code": "z5 >> loop(\"surfVoice8\", dur=8, sample=2, amp=0)",
+    "label": "loop from code_20260412T053826928Z @ 142"
+  },
+  "A16": {
+    "code": "o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))",
+    "label": "viola from darkChill 92 @ 92"
+  },
+  "H16": {
+    "code": "j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)",
+    "label": "a_gesa from darkChill 92 @ 92"
+  },
+  "B55": {
+    "code": "b1 >> dbass(var([0,[-4,2,-2]],[14,2]), dur=P*[2,6],amp=(d1.degree!=\"v\")*0.8, lpf=linvar([1800,3500],19), lpr=expvar([1,0.2],17), sus=b1.dur*PWhite(0.8,2),fx1=1, fx2=0.0, rate=linvar([0.1,15],23), oct=(PStep(7,6,5),4,PStep(4,6,5))).unison(3)",
+    "label": "dbass from deambulation @ 170"
+  },
+  "C66": {
+    "code": "b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)",
+    "label": "compkick from disco punk @ 192"
+  },
+  "B66": {
+    "code": "e5 >> lbass(var([0, -2, -4, -3], 8) + var([0, -1],[7,1]), oct=(5), dur=1/2, cutoff=PFr(1900,6200), tone=linvar([0.3, 0.9], 33), rel=0.11, hpf=50, shimmer=0.8, shimsize=0.6, shimpitch=0.5, shimmix=0.5)",
+    "label": "lbass from disco punk @ 192"
+  },
+  "G55": {
+    "code": "g1 >> faim(P[-5,-5,7,-5, -5,5,-5,-5, 3,-5,-5,1, -5,-5,2,3, -5,-5,7,-5, -5, 5,-5,-5, 3,-5,-5, P(-5,1)], dur=P[1/2].stutter(27) | 2.5, lpf=[PRand(400,2280),0,0], leg=PRand(12,128), lpr=PWhite(0.1,0.5), beef=(0, 0.5), dist2=1, fx1=0, shape=0.3, vol=0.4).gtr(2)",
+    "label": "faim from doom @ 170"
+  },
+  "E16": {
+    "code": "x4 >> play(\"[--]\", dur=1/3, amp=3, sample=8, hpf=1200, hpr=0.9)",
+    "label": "play from edge @ 93"
+  },
+  "G20": {
+    "code": "d5 >> a_daft([4, 4,4.8],dur=1/6, oct=7, amp=7, dist2=1.2)",
+    "label": "a_daft from edge @ 100"
+  },
+  "C20": {
+    "code": "f4 >> play(\"X[--]\", amp=8, dur=1/3)",
+    "label": "play from edge @ 100"
+  },
+  "K3": {
+    "code": "d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)",
+    "label": "industrialdrone from epicdevo @ 66"
+  },
+  "A3": {
+    "code": "p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)",
+    "label": "darkpad from epicdevo @ 66"
+  },
+  "G3": {
+    "code": "c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)",
+    "label": "faim from epicdevo @ 66"
+  },
+  "I3": {
+    "code": "c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)",
+    "label": "organ from epicdevo @ 66"
+  },
+  "B3": {
+    "code": "b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=1300, envdist=0.8, envdistgain=2, leg=0, envdistsens=0.7, envdistattack=0.020)",
+    "label": "dbass from epicdevo @ 66"
+  },
+  "H3": {
+    "code": "r1 >> plaitsX([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=5,cutoff=linvar([800, 4000], 8), amp=1.2, leg=0)",
+    "label": "plaitsX from epicdevo @ 66"
+  },
+  "D3": {
+    "code": "s1 >> play(\"..o...o.\", dur=0.25, sample=5, amp=1.0, hpf=200, fbdelay=0.5)",
+    "label": "play from epicdevo @ 66"
+  },
+  "F3": {
+    "code": "s2 >> play(\"e\", dur=0.25, sample=3, amp=var([0, 0.5], [30, 2]))",
+    "label": "play from epicdevo @ 66"
+  },
+  "G36": {
+    "code": "c5 >> faim([0, 1, 6], dur=4, oct=6, beef=1, amp=0.9,   fshift=linvar([-20, 20], 16), fmix=0.3)",
+    "label": "faim from epicdevo @ 132"
+  },
+  "K36": {
+    "code": "d1 >> industrialdrone([0], dur=16, oct=6, feedback=0.5, amp=0.3)",
+    "label": "industrialdrone from epicdevo @ 132"
+  },
+  "A36": {
+    "code": "p1 >> ethpad(r1.degree, dur=8, oct=5, attack=2, amp=0.2, room=0.9)",
+    "label": "ethpad from epicdevo @ 132"
+  },
+  "H36": {
+    "code": "b1 >> plaitsX(var([[0,0,0,3,0,0,5,0], [0,1,2,3,4,5,6,7]], [16, 16]),  dur=0.25, oct=6, amp=P[0.8, 0.3, 0.5, 0.6], lpf=900, shape=0)",
+    "label": "plaitsX from epicdevo @ 132"
+  },
+  "C3": {
+    "code": "k1 >> play(\"X...\", dur=0.5, sample=4, amp=1.3, shape=0.8)",
+    "label": "play from epicdevo @ 66"
+  },
+  "I36": {
+    "code": "c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)",
+    "label": "organ from epicdevo @ 132"
+  },
+  "E41": {
+    "code": "k7 >> play(\"<V(-[VX])V-><--(pu)->\", sample=3, amp=var([0, 1], [3, 5]), hpf=45).every(7, \"stutter\", Cycle([2, 3, 1, 2, 3, 4]))",
+    "label": "play from explosion @ 142"
+  },
+  "I14": {
+    "code": "p3 >> a_stress(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5), (0,2,5), (0,2,5), (1,3,7), (2,4,7)], [4]), follow=2, dur=1/4, amp=0.8, hard=PWhite(0.2,  0.7), velhard=var([0.4, 0.6, 0.5, 0.7], 8), oct=8, velocity=[PRand(35, 65), PRand(15, 40)], lofi=0.6, lofiwow=fs(16, 0.15, 0.4),lofiamp=0.5, lpf=sinvar([1800, 6000], 32), tape=0.25, tapewarm=0.4, shape=0.1, vowel=0.2, vowelf=0, vowelq=1).unison(3)",
+    "label": "a_stress from formypeople @ 88"
+  },
+  "B8": {
+    "code": "b2 >> abass(var([0,P^(-4,P*[2,-2,3],[0.5,0.25])],16), dur=PDur(7,11) | rest(1.25), valad=460, valadr=0.59, oct=PStep(8,4,3), valadt=PFrac().lmap(0,3).int(), cutoff=8400, rel=PWhite(0.01,0.2))",
+    "label": "abass from froots @ 76"
+  },
+  "A57": {
+    "code": "v1 >> viola([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], beat_dur=1, rate=1, blur=2, lpf=PRand(1200, 3000), hpf=300, amp=linvar([0, 0.5], 24)).unison(2) + (-7, PStep(5, 7, 0))",
+    "label": "viola from hajnal_174 @ 174"
+  },
+  "N57": {
+    "code": "s1 >> stretch(\"breakcore160_16\", sample=PRand(8), dur=P[16, 32], sus=[16, 32], rate=PWhite(-1, 1), lpf=2200, amp=0.4, formant=PRand(4))",
+    "label": "stretch from hajnal_174 @ 174"
+  },
+  "A13": {
+    "code": "v1 >> viola([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], beat_dur=1, rate=1, blur=2, lpf=PRand(1200, 3000), hpf=300, amp=0.4).unison(2) + (-7, PStep(5, 7, 0))",
+    "label": "viola from hajnal_174 @ 87"
+  },
+  "F13": {
+    "code": "l1 >> loop(\"breakcore160_16\", dur=16, sample=PRand(64), sbrk=fperlin(32, 0.4, 1.0), sbrkdur=PWhite(-4, 40), sbrkmix=1.0, t_reset=PRand(9), decimate=fi(48, 0.2, 0.9), decbits=PRand(0, 8), decrate=fb(8, 2000, 8000), multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=2000, mchifreq=4000, octafuz=fi(32, 0.2, 1.5), chopwave=PRand(8), amp=1.0)",
+    "label": "loop from hajnal_174 @ 87"
+  },
+  "B13": {
+    "code": "b1 >> dbass([0, 0, -5, 0, -7, 0, 7, 0, -3, 0, 0, -5], dur=PDur(7, 8), oct=4, sus=PDur(7, 8)*0.7, hpf=80, cutoff=fb(8, 800, 3000), rq=0.35, dist2=fb(24, 0.6, 1.8), tubedrive=0.8, tubewarm=0.5, hpr=0.2, subenh=0.7, subhfreq=80, subhgain=1.5, dynfuzz=0.18, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=0.7, amp=1.2)",
+    "label": "dbass from hajnal_174 @ 87"
+  },
+  "C13": {
+    "code": "a1 >> play(\"x-(--)x\", dur=1, sample=var(P[0:10], 64), crush=fb(8, 2, 8), amp=PBern(8)*0.8).often(\"stutter\", PRand(8), rate=4).unison(3).often(\"amen\")",
+    "label": "play from hajnal_174 @ 87"
+  },
+  "M13": {
+    "code": "m1 >> compperc(PRand([0, 3, 5, 7, 10, 12, -2, -5, 14]), dur=PDur(var([5, 7, 11, 13], [8, 4, 4, 4]), 8), sus=0.08, amp=0.6, tone=0.4, noise=0.5, body=0.3, metal=0.6, ring=0.5, comp=0.6, hpf=900, cheapverb=0.5, pan=PRand([-0.6, -0.25, 0.25, 0.6]))",
+    "label": "compperc from hajnal_174 @ 87"
+  },
+  "E13": {
+    "code": "h1 >> play(\"-(--)-(--)-([-=])-\", dur=1/4, sample=PStep(8, 1, 3), rate=PWhite(0.95, 2.0), amp=PWhite(0.4, 0.65), pan=PWhite(-0.5, 0.5), tremolo=fb(16, 0.3, 0.8), tremolomix=0.7, formant=PRand(8)).degrade(0.15)",
+    "label": "play from hajnal_174 @ 87"
+  },
+  "N13": {
+    "code": "s1 >> stretch(\"breakcore160_16\", sample=PRand(8), dur=P[8, 16, 32], sus=[8, 16, 32], rate=PWhite(-2, 2), lpf=fb(24, 800, 4400), amp=0.35, formant=PRand(8), spin=PRand([2, 4, 8]))",
+    "label": "stretch from hajnal_174 @ 87"
+  },
+  "G32": {
+    "code": "f4 >> pluck(PArp([0,2,5],4), dur=1/4, lpf=3200, vol=0.3, fx2=1, fx1=1, root=var(P[1:12]), sus=1, pan=1).unison(4)",
+    "label": "pluck from improble @ 125"
+  },
+  "H32": {
+    "code": "b1 >> rsin(5 +var([IV, VI, III, VI]), octafuz=0, fx1=0, dur=1/4, sus=1/4)",
+    "label": "rsin from improble @ 125"
+  },
+  "N56": {
+    "code": "l3 >> loop(\"gscreechvar16\", dur=16, sample=PRand(55), hpf=var([0, 7000], [cyH, cyL]), mverb=.3)",
+    "label": "loop from insaneOnSixtyFour 172 @ 172"
+  },
+  "H56": {
+    "code": "s1 >> rave(Pvar([var([14,18],[15,1]), PSaw(cyH*2)*14], [cyH, cyL]), dur=var([1/2,1],[15,1]), glide=PWhite(0.0,2.0), oct=(5,4,5), eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=.56, ebflutter=125, ebsat=0.6, hpf=500, high=2).unison(3)",
+    "label": "rave from insaneOnSixtyFour 172 @ 172"
+  },
+  "L56": {
+    "code": "h7 >>loop(\"oldies8\", dur=8, drcomp=.5, drive=0, wshape=0,  wgain=1, wmix=0.5, sample=14, rate=0.8, eb=0.75, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=15, ebflutter=150, ebsat=0.3, amp=PZero(8,7)*2)",
+    "label": "loop from insaneOnSixtyFour 172 @ 172"
+  },
+  "G50": {
+    "code": "d3 >> faim(melody_notes, dur=melody_durs, amp=melody_amps, oct=PStep(8, (4.01, 4), 4), sus=d3.dur + PWhite(1, 2), pan=PWhite(-0.5, 0.5)).human(80)",
+    "label": "faim from lemmings @ 160"
+  },
+  "B50": {
+    "code": "d4 >> lbass(bass_pattern_1 | bass_pattern_2 | bass_pattern_3 | bass_pattern_3, oct=6, dur=1, amp=1, cutoff=linvar([4000, 8000], [4, 2]), leg=4)",
+    "label": "lbass from lemmings @ 160"
+  },
+  "M50": {
+    "code": "d5 >> bell(bell_notes, lpf=4000, lpr=0.04, dur=bell_durs, amp=bell_amps, vol=0.5).unison(4)",
+    "label": "bell from lemmings @ 160"
+  },
+  "H50": {
+    "code": "d2 >> donk(donk_notes_1 | donk_notes_2 | donk_notes_3 | donk_notes_4, dur=donk_durs_1 | donk_durs_2 | donk_durs_3 | donk_durs_3, amp=donk_amps_1 | donk_amps_2 | donk_amps_3 | donk_amps_3, lpr=1, vol=1, lpf=4000, dist2=[0.2, 0.5]).unison(4)",
+    "label": "donk from lemmings @ 160"
+  },
+  "A55": {
+    "code": "d7 >> varicelle([9, 14, 16, 18, 21, 23, 26], dur=var([0.25, 0.5, 1], [8, 8, 4]), amp=linvar([0.6, 1], 12), oct=PRand([4, 5, 6]), room=0.7, mix=0.4, dist2=0.8)",
+    "label": "varicelle from lemmings @ 170"
+  },
+  "G60": {
+    "code": "d3 >> faim([18, 23, 26, 30, 33, 35], dur=0.125, amp=1.5, oct=7, sus=0.1, dist2=2, pan=PSine(16), lpf=12000).human(30).unison(8).only()",
+    "label": "faim from lemmings @ 180"
+  },
+  "B60": {
+    "code": "d4 >> lbass(P[(-25, -13, 0), (-30, -18, -6)].stutter(2), oct=6, dur=0.25, amp=1.5, cutoff=15000, leg=12, dist2=2.5, room=0.5, hpf=50)",
+    "label": "lbass from lemmings @ 180"
+  },
+  "H60": {
+    "code": "d2 >> donk(P[14, 18, 23, 26, 30, -60].shuffle(), dur=P[1/8, 1/6, 1/4].shuffle(), amp=1.5, lpf=12000, dist2=2, rate=PWhite(1, 1.5)).unison(8)",
+    "label": "donk from lemmings @ 180"
+  },
+  "A40": {
+    "code": "d7 >> varicelle([9, 11, 14, 18], dur=8, amp=linvar([0.6, 0.1], 32), oct=4, room=1, mix=1, sus=16)",
+    "label": "varicelle from lemmings @ 140"
+  },
+  "M40": {
+    "code": "d6 >> bell([(-18, -6, 6)], dur=16, amp=linvar([0.5, 0], 16), room=1, mix=1).unison(3)",
+    "label": "bell from lemmings @ 140"
+  },
+  "B40": {
+    "code": "e7 >> lbass([18, 14, 11, 6], oct=2, dur=16, amp=linvar([0.8, 0], 64), cutoff=linvar([2000, 500], 64), sus=32)",
+    "label": "lbass from lemmings @ 140"
+  },
+  "G40": {
+    "code": "d4 >> pluck([-18, -15, -13, -10], dur=var([8, 16], [16, 16]), amp=linvar([0.3, 0], 64), a=1, dist2=0.2, room=1, mix=1).unison(2)",
+    "label": "pluck from lemmings @ 140"
+  },
+  "F40": {
+    "code": "e2 >> loop(\"hiphop8\", dur=32, sample=1, dist2=linvar([1, 0], 32), rate=linvar([1, 0.5], 32), amp=linvar([0.5, 0], 32))",
+    "label": "loop from lemmings @ 140"
+  },
+  "L24": {
+    "code": "v4 >> noloop(\"lynchvoice8\", dur=16, sample=7, comp=1, fx2=1, trig=0, sus=16)",
+    "label": "noloop from lynch @ 108"
+  },
+  "G2": {
+    "code": "f1 >> faim([(0,12),15, P*(5,8,14), _, P*(3,7,12),_, P*(2,5,11),_, (0,12),15, P*((5,17),15,14),_, P*((3,15),14,12),_, (2,14), 11], dur=1.5, hpf=PRand(250,400), hpr=PWhite(0.2,0.5), sus=2.5, mverb=0, room=1, mix=0.3).gtr(1)",
+    "label": "faim from metro @ 65"
+  },
+  "C2": {
+    "code": "f4 >> play(\"<k..kk.><--(...[.-----])><..u>\", sample=(9,5,9), amp=1).human(40,0).every(14, \"stutter\", PRand(1,6), cycle=16, degree=PRand([\"u\",\"-\",\"k\"]), amp=PWhite(0.3,1))",
+    "label": "play from metro @ 65"
+  },
+  "G22": {
+    "code": "d1 >> a_daft([1,1,5,4,1,1,4,3,3,3,2,1,3,3,5,4,1,3,4,3,1,3,4,3,5,4,3,3,1,0,1,3,1,1,3,1,3,5,3,1,3,0,0,3,0,4,3,2,3,6,6,1,6,4,3,1,6,5,5,1,3,1,1,1,1], dur=1/4, sus=1/2, rate=12, cutoff=var([800, 1200, 1300, 4000, 1600, 3200], 8), resonance=0.1, punch=2, oct=PStutter([5,6,5,6,5,6,5,6,5,6,5,7,5,6,4],[2,6,2,4,6,13,2,6,2,6,2,6,2,2,4]), shapemix=1).unison(3)",
+    "label": "a_daft from midi_converted @ 105"
+  },
+  "C22": {
+    "code": "v0 >> compkick(tone=4.0, noise=3.0, comp=1, drive=0.2, ring=1, metal=3.5, body=0.4, bend=1.3, dur=1/4)",
+    "label": "compkick from midi_converted @ 105"
+  },
+  "G10": {
+    "code": "d1 >> pluck([0,5,2,5,0,5,6,4,1,4,6,4], dur=1/2, oct=[6,5], amp=0.25)",
+    "label": "pluck from midi_converted @ 80"
+  },
+  "B22": {
+    "code": "d1 >> dbass(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([5,6,5,6,4,6,4,5,4,5],[1,3,1,3,1,7,1,7,1,7])).unison(3)",
+    "label": "dbass from midi_converted @ 105"
+  },
+  "B44": {
+    "code": "d1 >> dbass([2,4,0,5,1], dur=4, oct=[4,4,5,4,5]).unison(3)",
+    "label": "dbass from midi_converted @ 148"
+  },
+  "G44": {
+    "code": "b1 >> faim([(2,4),(4,6),(4,0),(2,5),(5,1)], dur=4, oct=5)",
+    "label": "faim from midi_converted @ 148"
+  },
+  "I26": {
+    "code": "e1 >> klank(b1.degree[0], fx2=1, rate=linvar([8, 16], 64), oct=(3, 5), dur=P*[4, 8, 12], lpf=linvar([400,4800],128), lpr=0.05, amp=0.5,bpm = 80 + PWhite(-20, 20))",
+    "label": "klank from mmxx @ 113"
+  },
+  "B56": {
+    "code": "s4 >> pbass(dur=var([1/2,P[1, 1/3,1/3,1/3]],[32,0]),  oct=4, valad=linvar([1500, 2500], [64,0]), hpf=75, hpr=.2, echo=0)",
+    "label": "pbass from multicore 172 @ 172"
+  },
+  "M56": {
+    "code": "o5 >> space(PTime(-7,7), dur=P[P*[3,7,15],1], rate=1, rq=0.5, mverb=.3, hpf=400, amp=1, rgate=.8, rgaterate=2, rgatewave=3, beat_dur=1).unison(3, .5) + [0, PGauss()]",
+    "label": "space from multicore 172 @ 172"
+  },
+  "A56": {
+    "code": "k3 >> pianovel(P[var([0, -2, -4, P+(-3,[6,7])], 8) ,0, 2, 3, 5, 3], dur=P[1, 1, 1/2, 1/2, 1/2 ,1/2],velocity=PTime(50, 70),  oct=4, dafilter=200, dastart=120, darel=0.2, darq=0.5, datype=0, vol=0.8)",
+    "label": "pianovel from multicore 172 @ 172"
+  },
+  "H44": {
+    "code": "y8 >> four(linvar([0,2],64), fx2=0, tremolo=P*[2,4,8], amp=.8, mverb=0.5, shape=.5, pan=PWhite(-1, 1))",
+    "label": "four from nuance @ 148"
+  },
+  "H51": {
+    "code": "l8 >> plaitsX([var([0,3,5], 8),7,14,[15,17]], shape=.2, dur=1/2, lpf=PFr(400,2800), preset=(3,12), oct=(4,5,6)).gtr()",
+    "label": "plaitsX from nuance @ 163"
+  },
+  "B51": {
+    "code": "a1 >> lbass(var([0,3,5], 8), dur=1/2,oct=5, cutoff=PFr(400,3200)).gtr()",
+    "label": "lbass from nuance @ 163"
+  },
+  "F51": {
+    "code": "j5 >> loop(\"gbreak16\", dur=16, sbrk=[0,.5], sbrkdur=.5, comp=0)",
+    "label": "loop from nuance @ 163"
+  },
+  "C51": {
+    "code": "g2 >> play(\"<x.><..o.>\", sample=4, lpf=PFr(400,1000), lpr=var([.5,.1],[6,2,5,1]), bank=0, vol=0.6, hpf=0)",
+    "label": "play from nuance @ 163"
+  },
+  "L51": {
+    "code": "p5 >> noloop(\"oldies8\", dur=8, sample=var(PRand(88),32), comp=0, fx1=0, shape=.0, trig=0, mverb=0)",
+    "label": "noloop from nuance @ 163"
+  },
+  "N51": {
+    "code": "i4 >> loop(\"gscreecha16\", dur=16, sample=4, mverb=0.5, hpf=800)",
+    "label": "loop from nuance @ 163"
+  },
+  "M34": {
+    "code": "u3 >> compperc(tone=0.6, noise=4, comp=5,drive=4, ring=0.25, metal=12, body=0.4, bend=1.3)",
+    "label": "compperc from oldude @ 128"
+  },
+  "I34": {
+    "code": "r2 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [7, 5]), amp=0.8, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, \"shuffle\")",
+    "label": "organ from organ @ 128"
+  },
+  "K4": {
+    "code": "p1 >> industrialdrone([0, 4, 0, -3, 0], dur=PWhite(12, 32), sus=PWhite(16, 40), oct=4, amp=0.5, cutoff=linvar([320, 1800], 96), res=0.5, detune=0.4, noise=0.3, sub=0.4, feedback=0.35, cheapverb=0.75, cvdecay=4, miVerb=0.5, mverbfreeze=sinvar([0, 0.7], 48), stereowidth=0.85, hpf=90)",
+    "label": "industrialdrone from ostinato @ 68"
+  },
+  "A4": {
+    "code": "f1 >> sinepad([(0, 4, 7, 11), (0, 3, 7, 10), (-2, 2, 5, 9)], dur=PWhite(24, 56), sus=PWhite(28, 64), oct=6, amp=0.22, spectralfreeze=sinvar([0.3, 0.7], 40), freezerand=0.3, jpverb=0.7, jpsize=0.98, jpdamp=0.2, hpf=420, stereowidth=0.9)",
+    "label": "sinepad from ostinato @ 68"
+  },
+  "I55": {
+    "code": "a2 >> organ([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)",
+    "label": "organ from overload @ 170"
+  },
+  "D55": {
+    "code": "d5 >> play(\"o\", dur=4, echo=[0, 0.5], amp=1, sample=3, lpf=1200, hpf=400)",
+    "label": "play from overload @ 170"
+  },
+  "K55": {
+    "code": "d2 >> brown(dur=8, cut=1/2, room2=0.2, chop=4, damp2=0.2, fold=0.5, lofi=0.5, hpf=4000)",
+    "label": "brown from overload @ 170"
+  },
+  "L55": {
+    "code": "l2 >> noloop(\"vocalcrash8\", dur=[16, 8, 4, 2], lofi=1, start=0.5, rate=1, sample=4)",
+    "label": "noloop from overload @ 170"
+  },
+  "N55": {
+    "code": "l1 >> loop(\"gscreechb16\", dur=32, mverb=1)",
+    "label": "loop from overload @ 170"
+  },
+  "G15": {
+    "code": "f1 >> faim([var([0,3,5],[24,4,4]),[12,10,8,7,8]], dur=[1/2], sus=[1,1/2], echo=0, dist2=(0.8), oct=(4), slide=var([0,1],[7,1])).gtr(1)",
+    "label": "faim from postrock @ 90"
+  },
+  "M36": {
+    "code": "q1 >> compperc(dur=PDur(5,16), decay=0.17, metal=0.5, amp=1, pan=PWhite(-0.4,0.4))",
+    "label": "compperc from prechaos @ 132"
+  },
+  "J36": {
+    "code": "a1 >> acidline(var([seq], [16, 8, 8]), dur=var([0.25, 0.125, 0.25], [24, 4, 4]), cutoff=expvar([300, var([2000, 4000], [16, 16])], 8), res=linvar([0.4, 0.9], 16), drive=linvar([1.5, 4], 32), accent=var([P[0,0,1,0]*0.5, P[1,0,0,1]*0.6, P[0,1,0,1]*0.4], [12, 8, 12]), tubedrive=linvar([0.2, 0.7], 48), amp=var([0.6, 0.8, 0.5], [12, 4, 16]))",
+    "label": "acidline from prechaos @ 132"
+  },
+  "F37": {
+    "code": "d4 >> play(\"....u...\", dur=0.25, sample=3, amp=0.6)",
+    "label": "play from prechaos @ 134"
+  },
+  "A8": {
+    "code": "p1 >> pianovel([var([(P*[-2,-9],0,5),PRand([(-2.5,-1,5),(-2.5,5),(-5,2.5,-1,5)])],[6,12]),-1,0,-1,0,-1,P*[0,-5],PwRand([5,6,3,-1,P+[5,6,3]],[3,3,3,3,1])], oct=(4.99,5.01), dur=[1,1,1,1,1/2,1/2,1/2,1/2], delay=PWhite(-0.025,0.025), lpf=var(PRand(800,2800),12), lpr=PWhite(0.4,0.8), velhard=PWhite(0.5,0.7), velocity=PRand(38,var([80,60],[1,5])), amplify=var([0,1],[PRand(6),PRand(24)]), room=1, mix=PWhite(0,0.4)).sometimes(\"stutter\",amplify=1, velhard=(1, 0.1), oct=(5, 6), delay=0.125).sometimes(\"pivot\", 5)",
+    "label": "pianovel from radiocrash @ 76"
+  },
+  "N41": {
+    "code": "c9 >> loop(\"gscreecha16\", dur=16, sample=5).lclip(4)",
+    "label": "loop from rebelisme @ 142"
+  },
+  "A31": {
+    "code": "s1 >> soprano(0, oct=(4,5,[6,2]), dur=PDur([3, 8], [7, 15]), dfm=PRand(400,2400), dfmr=PWhite(0.2,0.8), dfmd=PWhite(12,16), rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1, sus=1/2,slide=PStep([12,8,3],1,0), room=0.7, mix=0.7, amp=0.5, amplify=var([0.3,0],[PRand(1,8),PRand(8,32)]), slidedelay=PWhite(0.7,0.9)).unison(3).every(32, \"dur.shuffle\")",
+    "label": "soprano from recorded_041155 @ 122"
+  },
+  "M31": {
+    "code": "t9 >> charm(PArp(var.cho,5), oct=(4, 5, 6), dur=1/4, top=linvar([200,10000],128), cutoff=linvar([500,2000],[PRand(24,36),PRand(2,12)]), res=PWhite(0.7,0.3), sus=PStep(PRand(4,16)[:16],0.5,0.25), amp=lininf(0, 0.65, 32), lpf=9000).unison(3)",
+    "label": "charm from recorded_041155 @ 122"
+  },
+  "B25": {
+    "code": "d2 >> acidbass([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 800, 600, 700], P*[1, 2, 4, 8]), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,\"stutter\",2,rate=0.5)",
+    "label": "acidbass from sandinmyshoes @ 110"
+  },
+  "F5": {
+    "code": "c0 >> play(\"v\", dur=1/2, lpf=PGauss(2000, 200), hpf=100, hpr=var([0.5, 0.2], 4),mverb=0.5, mverbdamp=0.1, mverbdiff=0.8, bpf=(3000, 2500), bpr=0.8, dist2=0.5, dist2mix=linvar([0.2, 1], [4, 2, 8]), dist2shape=1)",
+    "label": "play from scan @ 70"
+  },
+  "B5": {
+    "code": "c4 >> bass(amp=[1, 0, 1, 0, 1, 1, 0, 0], sus=[2, 0, 0, 0, 1/2, 1/2, 0, 0], dur=1/4, leg=4, dist2=0.4).unison(4)",
+    "label": "bass from scan @ 70"
+  },
+  "C5": {
+    "code": "c6 >> play(\"X...Oo..\", dur=1/4, sample=4, lpf=1200, hpf=50)",
+    "label": "play from scan @ 70"
+  },
+  "N58": {
+    "code": "w1 >> stretch(\"slaap16\", sample=1, dur=P[16,32,64], sus=[32,64], lpf=1800, amp=0.2, rate=PWhite(-1,1)).unison(4)",
+    "label": "stretch from slaap @ 176"
+  },
+  "F58": {
+    "code": "w2 >> loop(\"slaap4\", sample=2, formant=1, dur=12, hpr=0.1, hpf=4000, amp=0.2, room=1, mix=0.6, pan=(-1,1))",
+    "label": "loop from slaap @ 176"
+  },
+  "C58": {
+    "code": "a1 >> play(\"x-\", dur=1, sample=var(P[0:10],64), crush=0, amp=0.2).sometimes(\"stutter\", PRand(8), rate=4).unison(5).sometimes(\"amen\")",
+    "label": "play from slaap @ 176"
+  },
+  "A19": {
+    "code": "p1 >> pianovel(Pvar(PRand([list(VIIsus2),list(VIsus2),list(Vsus2),list(IVsus2)]),8), oct=[3,[4,5]], dur=1/2, velocity=PRand(50,79), mverb=.5, chop=0, mpf=var([900,400,2800,1235,180], [5,8,2,13])).every(16, \"rotate\")",
+    "label": "pianovel from smoothPiano @ 98"
+  },
+  "N30": {
+    "code": "s1 >> loop(\"sundrone16\", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.3)",
+    "label": "loop from space @ 120"
+  },
+  "E24": {
+    "code": "c1 >> click(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=linvar([40, 400], 128), drive=[PWhite(0.4,0.8),0.2], oct=(PwRand([3, 4, 5], [8, 1, 1]), PStep(9,5,4)), octer=1, mverb=0, leg=0,  octersub=2, octersubsub=var([2, PRand(15,22)], [15, 1]), triode=4, amp=0.5, amplify=1).unison(3).rarely(\"stutter\",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400).gtr(1)",
+    "label": "click from tabalynch @ 108"
+  },
+  "H24": {
+    "code": "c1 >> plaitsX(0,dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), preset=P*[2,11], mverb=0.5, leg=4, hpf=P*[4000, 800])",
+    "label": "plaitsX from tabalynch @ 108"
+  },
+  "N36": {
+    "code": "l1 >> loop(\"atmo8\", dur=8, sample=3, mverb=1)",
+    "label": "loop from toHappy @ 132"
+  },
+  "B11": {
+    "code": "i1 >> dbass([P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2]], lpr=0.1, oct=PStep(16, 5, (5, 4)), dur=8, amp=PCoin(1, 0, 0.25), crush=PWhite(0.1, 0.2), mix2=0, bits=0, fmod=4,lpf=4000, mid=4, spf=4, spfslide=4, chop=4, chopwave=1, chopmix=0.4, spfend=12200, hpf=0).every(8, \"shuffle\").unison(4)",
+    "label": "dbass from x86 @ 82"
+  },
+  "G11": {
+    "code": "i3 >> faim(var([[P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2]], (0, -2)]), dur=1/4, oct=5, amp=var([0, 1], [5, 7]), hpf=[400, 1600], chop=4, fmod=4, lpf=0).slider().solo(0)",
+    "label": "faim from x86 @ 82"
+  },
+  "F11": {
+    "code": "j0 >> loop(\"break16\", dur=8, dist2=(1), sample=4, amp=[0, 1, 0.5, 1, 1], shift=[0, 1], hpf=100, hpr=0.9)",
+    "label": "loop from x86 @ 82"
+  },
+  "C11": {
+    "code": "j2 >> play(\"[xBo[B+]]\", dur=j1.dur*PRand([1/2, 1, 2]), sample=5, lpf=4480, hpf=60, lpr=0.2, amp=0.8)",
+    "label": "play from x86 @ 82"
   }
 }

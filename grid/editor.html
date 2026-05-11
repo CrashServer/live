@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grid Cell Editor</title>
+<style>
+  :root {
+    --bg: #0f0f12;
+    --panel: #18181c;
+    --border: #2a2a30;
+    --text: #d4d4d8;
+    --muted: #71717a;
+    --accent: #4ade80;
+    --hover: #27272a;
+    --selected: #3f3f46;
+    --empty: #1f1f24;
+    --populated: #475569;
+    --running: #16a34a;
+    --error: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--text);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    height: 100vh; overflow: hidden;
+  }
+  .app { display: grid; grid-template-columns: 1fr 460px; height: 100vh; }
+
+  /* ===== left: grid ===== */
+  .grid-pane {
+    padding: 12px;
+    overflow: auto;
+    border-right: 1px solid var(--border);
+  }
+  .toolbar {
+    display: flex; gap: 8px; align-items: center;
+    margin-bottom: 12px; font-size: 11px;
+  }
+  .toolbar input, .toolbar select, .toolbar button {
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--border); padding: 4px 8px;
+    font: inherit; border-radius: 3px;
+  }
+  .toolbar button { cursor: pointer; }
+  .toolbar button:hover { background: var(--hover); }
+  .stats { color: var(--muted); margin-left: auto; }
+
+  .grid-wrap { display: flex; flex-direction: column; }
+  .grid-row { display: flex; align-items: center; height: 14px; }
+  .row-label {
+    width: 32px; color: var(--muted); font-size: 10px;
+    flex-shrink: 0; text-align: right; padding-right: 6px;
+  }
+  .col-header { display: flex; margin-left: 32px; height: 18px; }
+  .col-header span {
+    width: 18px; text-align: center; color: var(--muted);
+    font-size: 10px; flex-shrink: 0;
+  }
+  .cell {
+    width: 18px; height: 14px;
+    border: 1px solid var(--border);
+    margin: 0; padding: 0;
+    background: var(--empty);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .cell.populated { background: var(--populated); }
+  .cell.selected { outline: 1.5px solid var(--accent); outline-offset: -1px; z-index: 1; }
+  .cell:hover { background: var(--hover); }
+  .cell.populated:hover { background: #64748b; }
+
+  /* ===== right: editor ===== */
+  .editor-pane {
+    padding: 16px; display: flex; flex-direction: column; gap: 12px;
+    overflow: hidden;
+  }
+  .editor-pane h2 {
+    margin: 0 0 4px 0; font-size: 14px; font-weight: 600;
+    color: var(--accent);
+  }
+  .editor-pane h2 .coord-input {
+    background: transparent; color: var(--accent);
+    border: 1px dashed var(--border); padding: 2px 6px;
+    width: 80px; font: inherit; font-weight: 600;
+    border-radius: 3px;
+  }
+  .editor-pane label {
+    color: var(--muted); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 4px; display: block;
+  }
+  .editor-pane input[type=text], .editor-pane textarea {
+    width: 100%; background: var(--panel); color: var(--text);
+    border: 1px solid var(--border); padding: 8px;
+    font: inherit; border-radius: 3px;
+    resize: none;
+  }
+  .editor-pane textarea {
+    flex: 1; min-height: 280px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    line-height: 1.5;
+  }
+  .btn-row { display: flex; gap: 8px; }
+  .btn {
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--border); padding: 8px 14px;
+    cursor: pointer; font: inherit; border-radius: 3px;
+  }
+  .btn:hover { background: var(--hover); }
+  .btn.primary {
+    background: var(--accent); color: #0f0f12; border-color: var(--accent);
+    font-weight: 600;
+  }
+  .btn.primary:hover { background: #22c55e; }
+  .btn.danger { color: #ef4444; }
+  .btn.danger:hover { background: #450a0a; }
+
+  .status { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .status.ok { color: var(--accent); }
+  .status.err { color: var(--error); }
+
+  .hint {
+    background: var(--panel); padding: 8px; border-radius: 3px;
+    border: 1px solid var(--border); font-size: 10px; color: var(--muted);
+    line-height: 1.5;
+  }
+  .hint code {
+    background: var(--bg); padding: 1px 4px; border-radius: 2px;
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ LEFT: GRID ============ -->
+  <div class="grid-pane">
+    <div class="toolbar">
+      <input type="text" id="search" placeholder="filter by label or code..." style="width:240px">
+      <button id="reload-btn">reload</button>
+      <span class="stats" id="stats">- / -</span>
+    </div>
+    <div class="col-header" id="col-header"></div>
+    <div class="grid-wrap" id="grid-wrap"></div>
+  </div>
+
+  <!-- ============ RIGHT: EDITOR ============ -->
+  <div class="editor-pane">
+    <h2>cell <input class="coord-input" id="coord-input" value="" placeholder="B32"></h2>
+
+    <div>
+      <label>label</label>
+      <input type="text" id="label-input" placeholder="rolling sub-bass 120 BPM">
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column;">
+      <label>code</label>
+      <textarea id="code-input" spellcheck="false" placeholder="b1 >> dbass([0, 0, -2, 0], dur=1/2, oct=4, amp=0.8)"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn primary" id="save-btn">save (Ctrl+S)</button>
+      <button class="btn" id="test-btn" title="save + copy run command to clipboard">test</button>
+      <button class="btn danger" id="delete-btn">delete</button>
+    </div>
+    <div class="status" id="status"></div>
+
+    <div class="hint">
+      <strong>cols:</strong> A pad B bass C kick D snare E hat F loop G/H lead I stab J acid K texture L vocal M bell N atmo<br>
+      <strong>rows:</strong> 0-9=60-80 BPM, 10-19=80-100, 20-29=100-120, 30-39=120-140, 40-49=140-160, 50-59=160-180<br>
+      use <code>p1</code> in column A, <code>b1</code> in B, <code>k1</code> in C, etc. so cells stack cleanly.
+    </div>
+  </div>
+</div>
+
+<script>
+const COLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const ROWS = 100;
+let cells = {};
+let currentCoord = null;
+
+const $ = (id) => document.getElementById(id);
+
+async function loadCells() {
+  const r = await fetch("/api/cells");
+  cells = await r.json();
+  Object.keys(cells).forEach(k => { if (k.startsWith("_")) delete cells[k]; });
+  renderGrid();
+  updateStats();
+}
+
+function buildGrid() {
+  // column header (digits 0-9 repeat for each group of 10)
+  const colHeader = $("col-header");
+  colHeader.innerHTML = "";
+  for (let r = 0; r < 10; r++) {
+    const s = document.createElement("span");
+    s.textContent = r;
+    colHeader.appendChild(s);
+  }
+
+  const wrap = $("grid-wrap");
+  wrap.innerHTML = "";
+  for (const col of COLS) {
+    for (let group = 0; group < ROWS / 10; group++) {
+      const rowDiv = document.createElement("div");
+      rowDiv.className = "grid-row";
+      const rowLabel = document.createElement("div");
+      rowLabel.className = "row-label";
+      rowLabel.textContent = `${col}${group}_`;
+      rowDiv.appendChild(rowLabel);
+      for (let r = 0; r < 10; r++) {
+        const num = group * 10 + r;
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.coord = `${col}${num}`;
+        cell.title = `${col}${num}`;
+        cell.addEventListener("click", () => selectCell(cell.dataset.coord));
+        rowDiv.appendChild(cell);
+      }
+      wrap.appendChild(rowDiv);
+    }
+  }
+}
+
+function renderGrid() {
+  document.querySelectorAll(".cell").forEach(el => {
+    const coord = el.dataset.coord;
+    el.classList.toggle("populated", cells[coord] != null);
+    el.classList.toggle("selected", coord === currentCoord);
+    if (cells[coord]) {
+      el.title = `${coord} - ${cells[coord].label || ""}`;
+    } else {
+      el.title = `${coord} (empty)`;
+    }
+  });
+  applySearchFilter();
+}
+
+function applySearchFilter() {
+  const q = $("search").value.trim().toLowerCase();
+  if (!q) {
+    document.querySelectorAll(".cell").forEach(el => el.style.opacity = "1");
+    return;
+  }
+  document.querySelectorAll(".cell").forEach(el => {
+    const coord = el.dataset.coord;
+    const cell = cells[coord];
+    const hay = (cell ? (cell.label + " " + cell.code) : "").toLowerCase();
+    el.style.opacity = hay.includes(q) ? "1" : "0.18";
+  });
+}
+
+function updateStats() {
+  const total = Object.keys(cells).length;
+  $("stats").textContent = `${total} cells / 2600 capacity`;
+}
+
+function selectCell(coord) {
+  currentCoord = coord;
+  $("coord-input").value = coord;
+  const cell = cells[coord];
+  if (cell) {
+    $("label-input").value = cell.label || "";
+    $("code-input").value = cell.code || "";
+    setStatus(`loaded ${coord}`, "");
+  } else {
+    $("label-input").value = "";
+    $("code-input").value = "";
+    setStatus(`new cell ${coord}`, "");
+  }
+  document.querySelectorAll(".cell").forEach(el => {
+    el.classList.toggle("selected", el.dataset.coord === coord);
+  });
+}
+
+function setStatus(msg, kind) {
+  const el = $("status");
+  el.textContent = msg;
+  el.className = "status" + (kind ? " " + kind : "");
+}
+
+async function saveCell() {
+  const coord = $("coord-input").value.trim().toUpperCase();
+  if (!/^[A-Z]\d{1,2}$/.test(coord)) {
+    setStatus(`invalid coord '${coord}' - must be A0..Z99`, "err");
+    return;
+  }
+  const code = $("code-input").value;
+  const label = $("label-input").value;
+  const r = await fetch("/api/cells", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ coord, code, label }),
+  });
+  const data = await r.json();
+  if (data.ok) {
+    cells[coord] = { code, label };
+    currentCoord = coord;
+    renderGrid();
+    updateStats();
+    setStatus(`saved ${coord}`, "ok");
+  } else {
+    setStatus(`error: ${data.error || "unknown"}`, "err");
+  }
+}
+
+async function deleteCell() {
+  const coord = $("coord-input").value.trim().toUpperCase();
+  if (!cells[coord]) { setStatus(`${coord} not populated`, ""); return; }
+  if (!confirm(`delete ${coord}?`)) return;
+  const r = await fetch("/api/cells", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ coord, delete: true }),
+  });
+  const data = await r.json();
+  if (data.ok) {
+    delete cells[coord];
+    renderGrid();
+    updateStats();
+    setStatus(`deleted ${coord}`, "ok");
+    $("label-input").value = "";
+    $("code-input").value = "";
+  } else {
+    setStatus(`error: ${data.error || "unknown"}`, "err");
+  }
+}
+
+async function testCell() {
+  const coord = $("coord-input").value.trim().toUpperCase();
+  await saveCell();
+  const cmd = `compo.cell_reload(); compo.cell_run('${coord}', 16)`;
+  try {
+    await navigator.clipboard.writeText(cmd);
+    setStatus(`copied: ${cmd} - paste into webTroop`, "ok");
+  } catch (e) {
+    setStatus(`copy failed - run manually: ${cmd}`, "err");
+  }
+}
+
+// ===== wire up =====
+buildGrid();
+loadCells();
+
+$("save-btn").addEventListener("click", saveCell);
+$("delete-btn").addEventListener("click", deleteCell);
+$("test-btn").addEventListener("click", testCell);
+$("reload-btn").addEventListener("click", loadCells);
+$("search").addEventListener("input", applySearchFilter);
+$("coord-input").addEventListener("change", () => {
+  const c = $("coord-input").value.trim().toUpperCase();
+  if (/^[A-Z]\d{1,2}$/.test(c)) selectCell(c);
+});
+
+document.addEventListener("keydown", (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+    e.preventDefault();
+    saveCell();
+  }
+});
+</script>
+</body>
+</html>

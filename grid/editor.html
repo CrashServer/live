@@ -47,29 +47,53 @@
   .toolbar button:hover { background: var(--hover); }
   .stats { color: var(--muted); margin-left: auto; }
 
+  /* True 2D grid: 26 cols × 100 rows.
+     Each cell = 22×16 px. Width = 60 (row label) + 26*22 = 632 px. */
   .grid-wrap { display: flex; flex-direction: column; }
-  .grid-row { display: flex; align-items: center; height: 14px; }
+
+  /* column header: letter row + role-name row */
+  .col-header-letters,
+  .col-header-roles {
+    display: flex; margin-left: 60px; height: 16px;
+  }
+  .col-header-letters span,
+  .col-header-roles span {
+    width: 22px; text-align: center; flex-shrink: 0;
+  }
+  .col-header-letters span {
+    color: var(--text); font-size: 11px; font-weight: 600;
+  }
+  .col-header-roles span {
+    color: var(--muted); font-size: 8.5px; line-height: 1.1;
+    overflow: hidden;
+  }
+  .col-header-roles { height: 28px; margin-bottom: 4px; align-items: flex-start; }
+
+  /* each row = one tempo row (0..99) */
+  .grid-row {
+    display: flex; align-items: center; height: 16px;
+  }
   .row-label {
-    width: 32px; color: var(--muted); font-size: 10px;
+    width: 60px; color: var(--muted); font-size: 9px;
     flex-shrink: 0; text-align: right; padding-right: 6px;
+    white-space: nowrap; overflow: hidden;
   }
-  .col-header { display: flex; margin-left: 32px; height: 18px; }
-  .col-header span {
-    width: 18px; text-align: center; color: var(--muted);
-    font-size: 10px; flex-shrink: 0;
-  }
+  .grid-row.band-divider { margin-top: 4px; border-top: 1px dashed #2a2a30; }
+
   .cell {
-    width: 18px; height: 14px;
+    width: 22px; height: 16px;
     border: 1px solid var(--border);
     margin: 0; padding: 0;
     background: var(--empty);
     cursor: pointer;
     flex-shrink: 0;
+    transition: filter 0.1s;
   }
-  .cell.populated { background: var(--populated); }
-  .cell.selected { outline: 1.5px solid var(--accent); outline-offset: -1px; z-index: 1; }
-  .cell:hover { background: var(--hover); }
-  .cell.populated:hover { background: #64748b; }
+  .cell.populated { /* background set inline per column */ }
+  .cell.selected {
+    outline: 1.5px solid var(--accent); outline-offset: -1px; z-index: 1;
+  }
+  .cell:hover { filter: brightness(1.4); }
 
   /* ===== right: editor ===== */
   .editor-pane {
@@ -141,7 +165,8 @@
       <button id="reload-btn">reload</button>
       <span class="stats" id="stats">- / -</span>
     </div>
-    <div class="col-header" id="col-header"></div>
+    <div class="col-header-letters" id="col-header-letters"></div>
+    <div class="col-header-roles" id="col-header-roles"></div>
     <div class="grid-wrap" id="grid-wrap"></div>
   </div>
 
@@ -177,6 +202,43 @@
 <script>
 const COLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const ROWS = 100;
+
+// Role name + color per column (per the cells.json _meta convention).
+// Color is the populated-cell background; empty cells stay grey.
+const ROLES = {
+  A: { name: "pad",     color: "#4f6c8c" },
+  B: { name: "bass",    color: "#6b4a3e" },
+  C: { name: "kick",    color: "#9c3838" },
+  D: { name: "snare",   color: "#a05a2c" },
+  E: { name: "hat",     color: "#b8a832" },
+  F: { name: "loop",    color: "#8c4838" },
+  G: { name: "lead1",   color: "#3a8c8a" },
+  H: { name: "lead2",   color: "#3a6b8c" },
+  I: { name: "stab",    color: "#883c8c" },
+  J: { name: "acid",    color: "#4a8c3a" },
+  K: { name: "texture", color: "#5e5e6a" },
+  L: { name: "vocal",   color: "#a04880" },
+  M: { name: "bell",    color: "#5a8cb8" },
+  N: { name: "atmo",    color: "#6a4a8c" },
+  O: { name: "fx",      color: "#c88438" },
+  P: { name: "modular", color: "#3a9c5e" },
+  S: { name: "scene",   color: "#b88a3a" },
+};
+const DEFAULT_COLOR = "#3a3a40";
+function colorForCol(col) {
+  return (ROLES[col] && ROLES[col].color) || DEFAULT_COLOR;
+}
+function roleForCol(col) {
+  return (ROLES[col] && ROLES[col].name) || "";
+}
+
+// Tempo bands per row decade (visual hint in row labels)
+const TEMPO_BANDS = [
+  "60-80", "80-100", "100-120", "120-140",
+  "140-160", "160-180", "180-200",
+  "var", "var", "var",
+];
+
 let cells = {};
 let currentCoord = null;
 
@@ -191,48 +253,64 @@ async function loadCells() {
 }
 
 function buildGrid() {
-  // column header (digits 0-9 repeat for each group of 10)
-  const colHeader = $("col-header");
-  colHeader.innerHTML = "";
-  for (let r = 0; r < 10; r++) {
-    const s = document.createElement("span");
-    s.textContent = r;
-    colHeader.appendChild(s);
+  // Column header — two rows: letter A-Z + role name underneath
+  const letters = $("col-header-letters");
+  const roles = $("col-header-roles");
+  letters.innerHTML = "";
+  roles.innerHTML = "";
+  for (const col of COLS) {
+    const lspan = document.createElement("span");
+    lspan.textContent = col;
+    lspan.style.color = colorForCol(col);
+    lspan.title = roleForCol(col);
+    letters.appendChild(lspan);
+
+    const rspan = document.createElement("span");
+    rspan.textContent = roleForCol(col);
+    roles.appendChild(rspan);
   }
 
+  // Body — 100 rows tall × 26 cols wide
   const wrap = $("grid-wrap");
   wrap.innerHTML = "";
-  for (const col of COLS) {
-    for (let group = 0; group < ROWS / 10; group++) {
-      const rowDiv = document.createElement("div");
-      rowDiv.className = "grid-row";
-      const rowLabel = document.createElement("div");
-      rowLabel.className = "row-label";
-      rowLabel.textContent = `${col}${group}_`;
-      rowDiv.appendChild(rowLabel);
-      for (let r = 0; r < 10; r++) {
-        const num = group * 10 + r;
-        const cell = document.createElement("div");
-        cell.className = "cell";
-        cell.dataset.coord = `${col}${num}`;
-        cell.title = `${col}${num}`;
-        cell.addEventListener("click", () => selectCell(cell.dataset.coord));
-        rowDiv.appendChild(cell);
-      }
-      wrap.appendChild(rowDiv);
+  for (let row = 0; row < ROWS; row++) {
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "grid-row";
+    // Tempo band divider every 10 rows
+    if (row > 0 && row % 10 === 0) rowDiv.classList.add("band-divider");
+
+    const rowLabel = document.createElement("div");
+    rowLabel.className = "row-label";
+    const band = TEMPO_BANDS[Math.floor(row / 10)] || "";
+    rowLabel.textContent = `${row}  ${band}`;
+    rowLabel.title = `row ${row} — tempo band ${band} BPM`;
+    rowDiv.appendChild(rowLabel);
+
+    for (const col of COLS) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.dataset.coord = `${col}${row}`;
+      cell.title = `${col}${row}`;
+      cell.addEventListener("click", () => selectCell(cell.dataset.coord));
+      rowDiv.appendChild(cell);
     }
+    wrap.appendChild(rowDiv);
   }
 }
 
 function renderGrid() {
   document.querySelectorAll(".cell").forEach(el => {
     const coord = el.dataset.coord;
-    el.classList.toggle("populated", cells[coord] != null);
+    const col = coord[0];
+    const populated = cells[coord] != null;
+    el.classList.toggle("populated", populated);
     el.classList.toggle("selected", coord === currentCoord);
-    if (cells[coord]) {
-      el.title = `${coord} - ${cells[coord].label || ""}`;
+    if (populated) {
+      el.style.background = colorForCol(col);
+      el.title = `${coord} ${roleForCol(col)} — ${cells[coord].label || ""}`;
     } else {
-      el.title = `${coord} (empty)`;
+      el.style.background = "";
+      el.title = `${coord} ${roleForCol(col)} (empty)`;
     }
   });
   applySearchFilter();

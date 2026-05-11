@@ -2449,7 +2449,7 @@ class Compo():
         stop_after: None | 2 | 4 | 8 | 16 | 64 — beats after which created
                     players auto-stop. None = run forever.
         """
-        import sys
+        import sys, inspect, re
         cell = self.cell(coord)
         if cell is None:
             print(f"[grid] {coord} empty")
@@ -2465,11 +2465,37 @@ class Compo():
         except Exception:
             before = set()
 
-        # Exec in __main__ namespace (where users' p1, b1, ... etc. live)
+        # Find the user's namespace — the one where p1, b1, etc. were created.
+        # FoxDot's interactive shell exec's user code in its own globals which
+        # is NOT this Compo module's globals nor always __main__. Walk up the
+        # caller frames and pick the first one whose globals look "user-like"
+        # (contains pre-existing 2-char player bindings).
+        ns = None
         try:
-            ns = sys.modules['__main__'].__dict__
+            frame = inspect.currentframe()
+            for _ in range(8):
+                if frame is None:
+                    break
+                frame = frame.f_back
+                if frame is None:
+                    break
+                g = frame.f_globals
+                # Skip our own module's namespace
+                if g is globals():
+                    continue
+                # Score: number of 2-char [a-z]\d+ names present (player-like)
+                player_keys = sum(1 for k in g.keys()
+                                  if re.match(r'^[a-z]\d+$', k))
+                if player_keys >= 5:
+                    ns = g
+                    break
         except Exception:
-            ns = globals()
+            pass
+        if ns is None:
+            try:
+                ns = sys.modules['__main__'].__dict__
+            except Exception:
+                ns = globals()
 
         try:
             exec(code, ns)

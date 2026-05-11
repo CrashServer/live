@@ -66,6 +66,22 @@
     background: var(--bg-col-1, #2b2b2b);
 }
 
+/* drag-to-resize handle on the left edge */
+.grid-panel-resize {
+    position: absolute;
+    left: -3px; top: 0;
+    width: 6px; height: 100%;
+    cursor: ew-resize;
+    z-index: 1001;
+    background: transparent;
+    transition: background 0.15s;
+}
+.grid-panel-resize:hover,
+.grid-panel-resize.dragging {
+    background: var(--accent-col, #4ade80);
+    opacity: 0.5;
+}
+
 .grid-panel-status {
     padding: 4px 10px;
     font-size: 10px;

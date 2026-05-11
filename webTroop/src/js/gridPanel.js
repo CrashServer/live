@@ -77,10 +77,43 @@ function createGridPanel() {
     status.id = "gridPanelStatus";
     status.textContent = `editor @ ${EDITOR_URL}`;
 
+    // Resize handle on the left edge
+    const resizeHandle = document.createElement("div");
+    resizeHandle.className = "grid-panel-resize";
+    panel.appendChild(resizeHandle);
+
     panel.appendChild(header);
     panel.appendChild(iframe);
     panel.appendChild(status);
     document.body.appendChild(panel);
+
+    // Restore saved width (persisted across sessions)
+    const savedWidth = localStorage.getItem("gridPanelWidth");
+    if (savedWidth) panel.style.width = savedWidth;
+
+    // Drag-to-resize
+    let resizing = false;
+    resizeHandle.addEventListener("mousedown", (e) => {
+        resizing = true;
+        resizeHandle.classList.add("dragging");
+        document.body.style.cursor = "ew-resize";
+        document.body.style.userSelect = "none";
+        e.preventDefault();
+    });
+    document.addEventListener("mousemove", (e) => {
+        if (!resizing) return;
+        const w = window.innerWidth - e.clientX;
+        const clamped = Math.max(400, Math.min(window.innerWidth - 200, w));
+        panel.style.width = clamped + "px";
+    });
+    document.addEventListener("mouseup", () => {
+        if (!resizing) return;
+        resizing = false;
+        resizeHandle.classList.remove("dragging");
+        document.body.style.cursor = "";
+        document.body.style.userSelect = "";
+        localStorage.setItem("gridPanelWidth", panel.style.width);
+    });
 
     // Wire up close button
     document.getElementById("gridPanelClose").addEventListener("click", () => {

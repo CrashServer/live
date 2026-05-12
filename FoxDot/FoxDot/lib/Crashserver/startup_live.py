@@ -2536,25 +2536,34 @@ class Compo():
         except Exception:
             pass
 
-        # PASS 2: scan code for tokens that should resolve to FoxDot synths/
-        # patterns/utilities (svdk's custom synths like `alva`, `prof`, `dab`
-        # live in FoxDot.lib.Crashserver.crashSynthDefs — not in FoxDot's
-        # top-level namespace). For each still-missing token, walk every
-        # loaded sys.module looking for a binding.
-        synth_refs = set(re.findall(r'>>\s*([a-zA-Z_]\w*)', code))
-        player_refs = set(re.findall(r'\b([a-z]\d+)\s*(?:>>|\.)', code))
-        # Also bare function calls at line start (play, loop, attack, etc.)
-        func_refs = set(re.findall(r'(?:^|\n)\s*([a-zA-Z_]\w*)\s*\(', code))
-        all_refs = synth_refs | player_refs | func_refs
+        # PASS 2: collect ALL identifier tokens in the code (not just
+        # synths/players/line-start calls — also nested calls like
+        # amp=Pacc(6,4)*PBin(8), patterns like PRand/PWhite/var/melody,
+        # FX constants, anything). Then resolve each missing one by
+        # walking sys.modules.
+        all_tokens = set(re.findall(r'\b([A-Za-z_]\w*)\b', code))
 
-        missing_after_fd = [n for n in all_refs if n not in ns]
+        # Skip Python keywords + builtins (always available to exec)
+        import keyword, builtins
+        skip_names = set(keyword.kwlist) | set(dir(builtins))
+        skip_names |= {'True', 'False', 'None', 'self'}
+
+        missing_after_fd = [t for t in all_tokens
+                            if t not in skip_names and t not in ns]
+
         if missing_after_fd:
-            # Priority modules to check first (likely to have svdk customs)
+            # Priority modules to check first
             priority_mods = [
                 'FoxDot.lib.Crashserver.crashSynthDefs',
                 'FoxDot.lib.Crashserver.crashFX',
                 'FoxDot.lib.Crashserver.startup_live',
                 'FoxDot.lib.Custom.startup',
+                'FoxDot.lib.Patterns',
+                'FoxDot.lib.Patterns.Main',
+                'FoxDot.lib.Patterns.Generators',
+                'FoxDot.lib.TimeVar',
+                'FoxDot.lib.Scale',
+                'FoxDot.lib.Buffers',
                 '__main__',
             ]
             for mod_name in priority_mods:
@@ -2570,7 +2579,7 @@ class Compo():
                             missing_after_fd.remove(name)
                         except Exception:
                             pass
-            # Fallback: walk ALL loaded modules
+            # Fallback: walk ALL loaded modules in a single pass
             if missing_after_fd:
                 for mod_name, mod in list(sys.modules.items()):
                     if not missing_after_fd:
@@ -2578,17 +2587,25 @@ class Compo():
                     try:
                         if mod is None or not hasattr(mod, '__dict__'):
                             continue
+                        md = mod.__dict__
                         for name in list(missing_after_fd):
-                            if name in mod.__dict__:
-                                obj = mod.__dict__[name]
+                            if name in md:
+                                obj = md[name]
                                 if obj is not None:
                                     ns[name] = obj
                                     missing_after_fd.remove(name)
                     except Exception:
                         continue
 
-        if missing_after_fd:
-            print(f"[grid] {coord} warning: missing refs in namespace: {missing_after_fd}")
+        # Final diagnostic — only print things that look like real refs
+        # (capital-starting Pattern names, snake_case funcs, etc.) — skip
+        # noise like locals/single-char tokens.
+        likely_unresolved = [
+            t for t in missing_after_fd
+            if len(t) > 1 and not t[0].isdigit()
+        ]
+        if likely_unresolved:
+            print(f"[grid] {coord} warning: unresolved refs: {likely_unresolved}")
             print(f"[grid]   (picked ns score={best_score}, "
                   f"size={len(ns) if ns else 0} keys)")
 

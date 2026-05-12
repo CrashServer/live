@@ -295,7 +295,7 @@ def main():
         for p in files:
             all_scenes.extend(extract_scenes(p, src["name"]))
 
-        # tracks (per source, into assigned column(s) — paginated if >1 col)
+        # tracks (per source, into assigned column(s), 200 per col)
         src_tracks = []
         for p in files:
             t = analyze_track(p, src["name"])
@@ -304,11 +304,11 @@ def main():
         src_tracks.sort(key=lambda t: t["name"].lower())
         for col in src["tracks_cols"]:
             tracks_by_col.setdefault(col, [])
-        # paginate across the source's columns
+        # paginate across the source's columns, 200 per col
         for i, t in enumerate(src_tracks):
-            col_idx = i // 100
+            col_idx = i // 200
             if col_idx >= len(src["tracks_cols"]):
-                break  # overflow beyond allocated cols
+                break
             col = src["tracks_cols"][col_idx]
             tracks_by_col[col].append(t)
 
@@ -324,37 +324,47 @@ def main():
                 break
         print(f"tracks for col {col} ({src_name}): {len(ts)}")
 
-    # ---- dedupe atoms by coord; keep first proposal per (coord, code) ----
-    atoms_by_coord = defaultdict(list)
+    # ---- Atoms: spread variants across the 10 rows of each (col, decade) ----
+    # Each (col, decade) tempo-band holds up to 10 distinct atom variants.
+    # First-precise-row wins for the cell at its computed row; remaining
+    # variants fill empty rows in the decade in deterministic order.
+    atoms_by_decade = defaultdict(list)
     for a in all_atoms:
+        col = a["coord"][0]
+        row = int(a["coord"][1:])
+        decade = row // 10
         sig = a["code"][:160]
-        if not any(x["code"][:160] == sig for x in atoms_by_coord[a["coord"]]):
-            atoms_by_coord[a["coord"]].append(a)
+        if not any(x["code"][:160] == sig for x in atoms_by_decade[(col, decade)]):
+            atoms_by_decade[(col, decade)].append(a)
 
-    # ---- prepare proposals ----
     atom_proposals = {}
-    for coord, group in atoms_by_coord.items():
-        best = group[0]
-        body = {
-            "code": best["code"],
-            "label": best["label"],
-            "type": "atom",
-            "tempo": best.get("tempo"),
-            "key": best.get("key"),
-            "scale": best.get("scale"),
-            "root": best.get("root"),
-            "instrument": best.get("instrument"),
-            "source": best.get("source"),
-        }
-        atom_proposals[coord] = {k: v for k, v in body.items() if v is not None}
+    for (col, decade), group in sorted(atoms_by_decade.items()):
+        # Stable order: by (source, then alphabetical source-file label)
+        group.sort(key=lambda x: (x.get("source", ""), x.get("label", "")))
+        # Distribute up to 10 across rows decade*10 .. decade*10+9
+        for i, a in enumerate(group[:10]):
+            row = decade * 10 + i
+            coord = f"{col}{row}"
+            body = {
+                "code": a["code"],
+                "label": a["label"],
+                "type": "atom",
+                "tempo": a.get("tempo"),
+                "key": a.get("key"),
+                "scale": a.get("scale"),
+                "root": a.get("root"),
+                "instrument": a.get("instrument"),
+                "source": a.get("source"),
+            }
+            atom_proposals[coord] = {k: v for k, v in body.items() if v is not None}
 
-    # Scenes: sort, take first 200 (S0..S99, T0..T99)
+    # Scenes: 400-cell capacity across S0..S199 + T0..T199 (2 cols × 200 rows)
     all_scenes.sort(key=lambda s: (s["source_name"], s["source_file"], s["name"]))
     scene_proposals = {}
     for i, s in enumerate(all_scenes):
-        if i >= 200: break
-        col = "S" if i < 100 else "T"
-        row = i if i < 100 else i - 100
+        if i >= 400: break
+        col = "S" if i < 200 else "T"
+        row = i if i < 200 else i - 200
         coord = f"{col}{row}"
         track_name = Path(s["source_file"]).stem
         key = None
@@ -374,11 +384,11 @@ def main():
         }
         scene_proposals[coord] = {k: v for k, v in body.items() if v is not None}
 
-    # Tracks: per-column, first 100 per column already paginated above
+    # Tracks: per-column, up to 200 per column (rows 0-199)
     track_proposals = {}
     for col, ts in tracks_by_col.items():
         for i, t in enumerate(ts):
-            if i >= 100: break
+            if i >= 200: break
             coord = f"{col}{i}"
             label = t["name"]
             if t["tempo"]: label += f" @ {t['tempo']}"

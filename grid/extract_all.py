@@ -29,9 +29,11 @@ GRID_DIR = Path(__file__).resolve().parent
 CELLS_FILE = GRID_DIR / "cells.json"
 
 SOURCES = [
-    {"name": "codeBank",        "dir": Path.home() / "live" / "codeBank",   "tracks_col": "Q"},
-    {"name": "Téléchargements", "dir": Path.home() / "Téléchargements",     "tracks_col": "R"},
-    {"name": "Musique",         "dir": Path.home() / "Musique",             "tracks_col": "U"},
+    {"name": "codeBank",        "dir": Path.home() / "live" / "codeBank",   "tracks_cols": ["Q"]},
+    {"name": "Téléchargements", "dir": Path.home() / "Téléchargements",     "tracks_cols": ["R"]},
+    {"name": "Musique",         "dir": Path.home() / "Musique",             "tracks_cols": ["U"]},
+    {"name": "DriveCodebase",   "dir": Path("/run/media/svdk/storage/DRIVE/300_CrashServer/39_CODEBASE/391_FOXDOT"),
+                                                                            "tracks_cols": ["V", "W", "X", "Y", "Z"]},
 ]
 
 # --- regex + classifier (mirrored from extract_from_codebank.py) ---
@@ -293,19 +295,33 @@ def main():
         for p in files:
             all_scenes.extend(extract_scenes(p, src["name"]))
 
-        # tracks (per source, into assigned column)
-        col = src["tracks_col"]
-        tracks_by_col.setdefault(col, [])
+        # tracks (per source, into assigned column(s) — paginated if >1 col)
+        src_tracks = []
         for p in files:
             t = analyze_track(p, src["name"])
             if t and t["lines"] > 5:
-                tracks_by_col[col].append(t)
+                src_tracks.append(t)
+        src_tracks.sort(key=lambda t: t["name"].lower())
+        for col in src["tracks_cols"]:
+            tracks_by_col.setdefault(col, [])
+        # paginate across the source's columns
+        for i, t in enumerate(src_tracks):
+            col_idx = i // 100
+            if col_idx >= len(src["tracks_cols"]):
+                break  # overflow beyond allocated cols
+            col = src["tracks_cols"][col_idx]
+            tracks_by_col[col].append(t)
 
     print()
     print(f"total atoms found:  {len(all_atoms)}")
     print(f"total scenes found: {len(all_scenes)}")
     for col, ts in tracks_by_col.items():
-        src_name = next(s["name"] for s in SOURCES if s["tracks_col"] == col)
+        # find which source owns this column
+        src_name = None
+        for s in SOURCES:
+            if col in s["tracks_cols"]:
+                src_name = s["name"]
+                break
         print(f"tracks for col {col} ({src_name}): {len(ts)}")
 
     # ---- dedupe atoms by coord; keep first proposal per (coord, code) ----
@@ -358,10 +374,9 @@ def main():
         }
         scene_proposals[coord] = {k: v for k, v in body.items() if v is not None}
 
-    # Tracks: per-column, first 100 in alpha order
+    # Tracks: per-column, first 100 per column already paginated above
     track_proposals = {}
     for col, ts in tracks_by_col.items():
-        ts.sort(key=lambda t: t["name"].lower())
         for i, t in enumerate(ts):
             if i >= 100: break
             coord = f"{col}{i}"

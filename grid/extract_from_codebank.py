@@ -155,31 +155,44 @@ def bpm_to_row(bpm):
 
 PLAYER_RE = re.compile(r'^([a-z]\d+)\s*>>\s*([a-zA-Z_]+)\s*\(')
 BPM_RE = re.compile(r'Clock\.bpm\s*=\s*(?:lininf\s*\(\s*)?([0-9]+)')
+SCALE_RE = re.compile(r'Scale\.default\s*=\s*["\']([^"\']+)')
+ROOT_RE = re.compile(r'Root\.default\s*=\s*["\']?([A-Za-z#b0-9]+)')
 
 
 def extract_from_file(path):
-    """Return list of {coord, code, label, source, synth, bpm}."""
+    """Return list of dicts with rich metadata per atom.
+    Captured fields: coord, code, label, source, synth, tempo, scale, root,
+    key, instrument, type, player_name."""
     cells = []
     text = path.read_text(errors='replace')
     current_bpm = None
+    current_scale = None
+    current_root = None
 
     for lineno, line in enumerate(text.splitlines(), 1):
-        # Update current BPM context from `Clock.bpm = ...` lines
+        # Update BPM context
         m = BPM_RE.search(line)
         if m:
             current_bpm = int(m.group(1))
             continue
+        # Update Scale context
+        sm = SCALE_RE.search(line)
+        if sm:
+            current_scale = sm.group(1)
+        # Update Root context
+        rm = ROOT_RE.search(line)
+        if rm:
+            current_root = rm.group(1).strip('"\'')
+        # Both updates can co-exist on same line as a player call — only
+        # skip the line if it's a STANDALONE clock/scale/root statement.
+        # The check below (is it a player declaration?) decides whether
+        # the line itself becomes a cell.
 
-        # Strip comments & whitespace
         stripped = line.split('#', 1)[0].strip()
         if not stripped:
             continue
-
-        # Skip ~name lines (one-shot triggers, not persistent players)
         if stripped.startswith('~'):
             continue
-
-        # Player declaration?
         pm = PLAYER_RE.match(stripped)
         if not pm:
             continue
@@ -187,33 +200,35 @@ def extract_from_file(path):
         player_name = pm.group(1)
         synth = pm.group(2)
 
-        # Classify column
         col = SYNTH_TO_COL.get(synth)
         if col is None:
             if synth in ("play", "loop", "noloop", "stretch"):
                 col = classify_sample_player(stripped, synth)
             if col is None:
-                # Unknown synth — record for unclassified
                 cells.append({
-                    "coord": None,
-                    "code": stripped,
+                    "coord": None, "code": stripped,
                     "label": f"unknown synth: {synth}",
                     "source": f"{path.name}:{lineno}",
-                    "synth": synth,
-                    "bpm": current_bpm,
+                    "synth": synth, "tempo": current_bpm,
+                    "scale": current_scale, "root": current_root,
                     "unclassified": True,
                 })
                 continue
 
-        # Map BPM to row
         row = bpm_to_row(current_bpm)
         coord = f"{col}{row}"
-
-        # Label: synth + source track + BPM
         track_name = path.stem
         label = f"{synth} from {track_name}"
         if current_bpm:
             label += f" @ {current_bpm}"
+
+        key = None
+        if current_root and current_scale:
+            key = f"{current_root} {current_scale}"
+        elif current_root:
+            key = current_root
+        elif current_scale:
+            key = current_scale
 
         cells.append({
             "coord": coord,
@@ -221,7 +236,12 @@ def extract_from_file(path):
             "label": label,
             "source": f"{path.name}:{lineno}",
             "synth": synth,
-            "bpm": current_bpm,
+            "tempo": current_bpm,
+            "scale": current_scale,
+            "root": current_root,
+            "key": key,
+            "instrument": synth,
+            "type": "atom",
             "player_name": player_name,
             "unclassified": False,
         })
@@ -299,7 +319,9 @@ def main():
                 "label": c["label"],
                 "source": c["source"],
                 "synth": c["synth"],
-                "bpm": c["bpm"],
+                "tempo": c.get("tempo"),
+                "key": c.get("key"),
+                "instrument": c.get("instrument"),
             } for c in group]
             for coord, group in sorted(deduped.items())
         },
@@ -321,16 +343,41 @@ def main():
 
         added = 0
         skipped_occupied = 0
+        enriched_existing = 0
         for coord, group in deduped.items():
-            if coord in existing:
-                skipped_occupied += 1
-                continue
-            # Take the first proposal at this coord
             best = group[0]
-            existing[coord] = {
+            cell_body = {
                 "code": best["code"],
                 "label": best["label"],
+                "type": "atom",
+                "tempo": best.get("tempo"),
+                "key": best.get("key"),
+                "scale": best.get("scale"),
+                "root": best.get("root"),
+                "instrument": best.get("instrument"),
             }
+            # Strip None values for cleanliness
+            cell_body = {k: v for k, v in cell_body.items() if v is not None}
+
+            if coord in existing:
+                # ENRICH only — add any missing metadata fields without
+                # overwriting code/label or existing fields. Keeps user
+                # edits intact.
+                cur = existing[coord]
+                changed = False
+                for k, v in cell_body.items():
+                    if k in ("code", "label"):
+                        continue  # preserve user edits
+                    if k not in cur:
+                        cur[k] = v
+                        changed = True
+                if changed:
+                    enriched_existing += 1
+                else:
+                    skipped_occupied += 1
+                continue
+            # Add new
+            existing[coord] = cell_body
             added += 1
 
         # Write back atomically
@@ -340,8 +387,9 @@ def main():
             json.dump(existing, tf, indent=2, ensure_ascii=False)
             tmp = tf.name
         os.replace(tmp, CELLS_FILE)
-        print(f"\nmerged into cells.json: +{added} new, {skipped_occupied} coords "
-              f"already occupied (kept as-is)")
+        print(f"\nmerged into cells.json: +{added} new, "
+              f"{enriched_existing} enriched (metadata added), "
+              f"{skipped_occupied} coords kept as-is")
         print(f"  -> run `compo.cell_reload()` in your FoxDot session")
 
 

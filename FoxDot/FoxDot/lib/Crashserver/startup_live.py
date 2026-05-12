@@ -2465,37 +2465,82 @@ class Compo():
         except Exception:
             before = set()
 
-        # Find the user's namespace — the one where p1, b1, etc. were created.
-        # FoxDot's interactive shell exec's user code in its own globals which
-        # is NOT this Compo module's globals nor always __main__. Walk up the
-        # caller frames and pick the first one whose globals look "user-like"
-        # (contains pre-existing 2-char player bindings).
-        ns = None
+        # Find FoxDot's interactive shell namespace.
+        # Aggregate candidates: walk up to 20 caller frames + __main__ + the
+        # FoxDot package's module globals. Score each by presence of known
+        # FoxDot symbols (Clock, Server, Scale) and EmptyPlayer placeholders
+        # for common 2-char names (p0, p1, b1, k1, d1, h1, a1). Pick highest
+        # score.
+        own = globals()
+        candidates = []
         try:
             frame = inspect.currentframe()
-            for _ in range(8):
+            for _ in range(20):
                 if frame is None:
                     break
                 frame = frame.f_back
                 if frame is None:
                     break
                 g = frame.f_globals
-                # Skip our own module's namespace
-                if g is globals():
+                if g is own:
                     continue
-                # Score: number of 2-char [a-z]\d+ names present (player-like)
-                player_keys = sum(1 for k in g.keys()
-                                  if re.match(r'^[a-z]\d+$', k))
-                if player_keys >= 5:
-                    ns = g
-                    break
+                if g not in candidates:
+                    candidates.append(g)
         except Exception:
             pass
+        try:
+            mg = sys.modules['__main__'].__dict__
+            if mg is not own and mg not in candidates:
+                candidates.append(mg)
+        except Exception:
+            pass
+        try:
+            import FoxDot as _fd
+            if hasattr(_fd, '__dict__') and _fd.__dict__ is not own:
+                if _fd.__dict__ not in candidates:
+                    candidates.append(_fd.__dict__)
+        except Exception:
+            pass
+
+        ns = None
+        best_score = -1
+        for cand in candidates:
+            if not isinstance(cand, dict):
+                continue
+            score = 0
+            for sym in ('Clock', 'Server', 'Scale', 'Root', 'Player'):
+                if sym in cand:
+                    score += 5
+            # presence of EmptyPlayer placeholders
+            for k in ('p0', 'p1', 'b1', 'k1', 'd1', 'd2', 'h1', 'a1', 's1'):
+                if k in cand:
+                    score += 1
+            if score > best_score:
+                best_score = score
+                ns = cand
+
         if ns is None:
+            ns = own
+
+        # Verify required player names are present; if not, attempt to
+        # populate them from the FoxDot module before exec.
+        needed = set(re.findall(r'\b([a-z]\d+)\s*>>', code))
+        missing = [n for n in needed if n not in ns]
+        if missing:
+            # try to import the names from FoxDot
             try:
-                ns = sys.modules['__main__'].__dict__
+                import FoxDot as _fd
+                for name in missing:
+                    if hasattr(_fd, name):
+                        ns[name] = getattr(_fd, name)
             except Exception:
-                ns = globals()
+                pass
+            still_missing = [n for n in needed if n not in ns]
+            if still_missing:
+                print(f"[grid] {coord} warning: missing player vars in namespace: {still_missing}")
+                print(f"[grid]   (picked ns score={best_score}, "
+                      f"id={hex(id(ns)) if ns else 'none'}; "
+                      f"size={len(ns) if ns else 0} keys)")
 
         try:
             exec(code, ns)

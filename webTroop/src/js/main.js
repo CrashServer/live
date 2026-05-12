@@ -223,6 +223,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
   });
 
+  // Insert text into the main CodeMirror editor at the cursor, no evaluation.
+  // Used by gridPanel.js when the user clicks "paste" in the grid editor.
+  EventEmitter.on("paste_to_editor", (code) => {
+    if (!code) return;
+    const pos = editor.getCursor();
+    editor.replaceRange(code + "\n", pos);
+    // Move cursor to end of inserted block so user can keep typing
+    editor.focus();
+  });
+
   //Gestion des logs FoxDot pour la console
   wsServer.onmessage = (event) => {
     try {

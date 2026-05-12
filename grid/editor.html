@@ -125,11 +125,12 @@
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
     line-height: 1.5;
   }
-  .btn-row { display: flex; gap: 8px; }
+  .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
   .btn {
     background: var(--panel); color: var(--text);
-    border: 1px solid var(--border); padding: 8px 14px;
+    border: 1px solid var(--border); padding: 7px 12px;
     cursor: pointer; font: inherit; border-radius: 3px;
+    font-size: 11px;
   }
   .btn:hover { background: var(--hover); }
   .btn.primary {
@@ -139,6 +140,19 @@
   .btn.primary:hover { background: #22c55e; }
   .btn.danger { color: #ef4444; }
   .btn.danger:hover { background: #450a0a; }
+  .btn.play {
+    background: #1e3a2e; color: #86efac; border-color: #14532d;
+    min-width: 56px; text-align: center;
+  }
+  .btn.play:hover { background: #14532d; color: #bbf7d0; }
+  .btn.play-inf {
+    background: #3a2e1e; color: #fcd34d; border-color: #532d14;
+  }
+  .btn.play-inf:hover { background: #532d14; color: #fde68a; }
+  .btn.paste {
+    background: #1e2e3a; color: #93c5fd; border-color: #14304b;
+  }
+  .btn.paste:hover { background: #14304b; color: #bfdbfe; }
 
   .status { font-size: 11px; color: var(--muted); margin-top: 4px; }
   .status.ok { color: var(--accent); }
@@ -186,8 +200,14 @@
 
     <div class="btn-row">
       <button class="btn primary" id="save-btn">save (Ctrl+S)</button>
-      <button class="btn" id="test-btn" title="save + copy run command to clipboard">test</button>
       <button class="btn danger" id="delete-btn">delete</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn paste" id="paste-btn" title="paste cell code into webTroop editor without evaluating">paste</button>
+      <button class="btn play" data-beats="8"  title="run for 8 beats then auto-stop">▶ 8b</button>
+      <button class="btn play" data-beats="16" title="run for 16 beats then auto-stop">▶ 16b</button>
+      <button class="btn play" data-beats="32" title="run for 32 beats then auto-stop">▶ 32b</button>
+      <button class="btn play play-inf" data-beats="0" title="run continuously (no auto-stop)">▶ ∞</button>
     </div>
     <div class="status" id="status"></div>
 
@@ -406,14 +426,19 @@ async function deleteCell() {
   }
 }
 
-async function testCell() {
+// Play cell for `beats` beats (0 = continuous, no auto-stop)
+async function playCell(beats) {
   const coord = $("coord-input").value.trim().toUpperCase();
+  if (!/^[A-Z]\d{1,2}$/.test(coord)) {
+    setStatus(`invalid coord '${coord}'`, "err");
+    return;
+  }
   await saveCell();
-  const cmd = `compo.cell_reload(); compo.cell_run('${coord}', 16)`;
+  const cmd = beats > 0
+    ? `compo.cell_reload(); compo.cell_run('${coord}', ${beats})`
+    : `compo.cell_reload(); compo.cell_run('${coord}')`;
+  const label = beats > 0 ? `${beats}b` : "∞";
 
-  // If embedded in webTroop (parent window exists), ask it to fire the code
-  // directly via its WebSocket. Wait briefly for ack; fall back to clipboard
-  // if no ack within 400ms (standalone-mode, or parent doesn't listen).
   if (window.parent !== window) {
     const acked = await new Promise((resolve) => {
       const onAck = (e) => {
@@ -430,17 +455,54 @@ async function testCell() {
       }, 400);
     });
     if (acked) {
-      setStatus(`fired ${coord} (16b) via webTroop`, "ok");
+      setStatus(`fired ${coord} (${label}) via webTroop`, "ok");
       return;
     }
   }
-
-  // Standalone fallback: copy to clipboard
   try {
     await navigator.clipboard.writeText(cmd);
-    setStatus(`copied: ${cmd} - paste into webTroop`, "ok");
+    setStatus(`copied (${label}): ${cmd}`, "ok");
   } catch (e) {
     setStatus(`copy failed - run manually: ${cmd}`, "err");
+  }
+}
+
+// Paste cell code into webTroop editor without evaluating
+async function pasteCellToWebtroop() {
+  const coord = $("coord-input").value.trim().toUpperCase();
+  const code = $("code-input").value;
+  if (!code.trim()) {
+    setStatus(`cell ${coord} is empty`, "err");
+    return;
+  }
+  // Save first so the editor reflects current text
+  await saveCell();
+
+  if (window.parent !== window) {
+    const acked = await new Promise((resolve) => {
+      const onAck = (e) => {
+        if (e.data && e.data.type === "gridPasteAck") {
+          window.removeEventListener("message", onAck);
+          resolve(true);
+        }
+      };
+      window.addEventListener("message", onAck);
+      window.parent.postMessage({ type: "gridPaste", code, coord }, "*");
+      setTimeout(() => {
+        window.removeEventListener("message", onAck);
+        resolve(false);
+      }, 400);
+    });
+    if (acked) {
+      setStatus(`pasted ${coord} into webTroop (no eval)`, "ok");
+      return;
+    }
+  }
+  try {
+    await navigator.clipboard.writeText(code);
+    setStatus(`copied ${coord} code to clipboard`, "ok");
+  } catch (e) {
+    setStatus(`copy failed`, "err");
   }
 }
 
@@ -450,7 +512,13 @@ loadCells();
 
 $("save-btn").addEventListener("click", saveCell);
 $("delete-btn").addEventListener("click", deleteCell);
-$("test-btn").addEventListener("click", testCell);
+$("paste-btn").addEventListener("click", pasteCellToWebtroop);
+document.querySelectorAll(".btn.play").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const beats = parseInt(btn.dataset.beats, 10) || 0;
+    playCell(beats);
+  });
+});
 $("reload-btn").addEventListener("click", loadCells);
 $("search").addEventListener("input", applySearchFilter);
 $("coord-input").addEventListener("change", () => {

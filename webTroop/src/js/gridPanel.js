@@ -28,7 +28,7 @@ const EDITOR_URL = "http://localhost:1235";
 // EventEmitter('send_foxdot') bridge that main.js wires to wsServer.
 
 window.addEventListener("message", (e) => {
-    if (!e.data || e.data.type !== "gridTest") return;
+    if (!e.data) return;
     // Origin check — accept only the editor server we know
     try {
         const url = new URL(e.origin);
@@ -36,18 +36,28 @@ window.addEventListener("message", (e) => {
     } catch (_) {
         return;
     }
-    const { code, coord } = e.data;
-    if (!code) return;
 
-    // Forward to FoxDot via the shared send_foxdot bus
-    EventEmitter.emit("send_foxdot", code);
-    console.log(`[gridPanel] fired ${coord} via send_foxdot`);
-
-    // Ack back to the iframe so it can update its status
-    try {
-        e.source.postMessage({ type: "gridTestAck", coord }, e.origin);
-    } catch (err) {
-        console.warn("[gridPanel] ack failed:", err);
+    if (e.data.type === "gridTest") {
+        const { code, coord } = e.data;
+        if (!code) return;
+        EventEmitter.emit("send_foxdot", code);
+        console.log(`[gridPanel] fired ${coord} via send_foxdot`);
+        try {
+            e.source.postMessage({ type: "gridTestAck", coord }, e.origin);
+        } catch (err) {
+            console.warn("[gridPanel] ack failed:", err);
+        }
+    } else if (e.data.type === "gridPaste") {
+        const { code, coord } = e.data;
+        if (!code) return;
+        // Insert into webTroop's main CodeMirror editor without evaluating
+        EventEmitter.emit("paste_to_editor", code);
+        console.log(`[gridPanel] pasted ${coord} into editor`);
+        try {
+            e.source.postMessage({ type: "gridPasteAck", coord }, e.origin);
+        } catch (err) {
+            console.warn("[gridPanel] ack failed:", err);
+        }
     }
 });
 

@@ -2522,13 +2522,7 @@ class Compo():
         if ns is None:
             ns = own
 
-        # Inject everything public from FoxDot's module into the picked
-        # namespace (only the keys that aren't already there). This covers:
-        #   - synth functions  (faim, pianovel, dbass, compkick, ...)
-        #   - player placeholders (p0..z99 as EmptyPlayer)
-        #   - utilities  (var, P, PRand, PWhite, melody, follow, ...)
-        #   - constants  (Clock, Server, Scale, Root, ...)
-        # This is "from FoxDot import *" applied non-destructively.
+        # PASS 1: inject everything public from FoxDot's module
         try:
             import FoxDot as _fd
             for attr_name in dir(_fd):
@@ -2542,15 +2536,59 @@ class Compo():
         except Exception:
             pass
 
-        # Diagnostic: scan code for tokens that look like player/synth refs
-        # and report any that still aren't bound — useful when a cell uses
-        # custom svdk synths defined outside FoxDot's main module.
+        # PASS 2: scan code for tokens that should resolve to FoxDot synths/
+        # patterns/utilities (svdk's custom synths like `alva`, `prof`, `dab`
+        # live in FoxDot.lib.Crashserver.crashSynthDefs — not in FoxDot's
+        # top-level namespace). For each still-missing token, walk every
+        # loaded sys.module looking for a binding.
         synth_refs = set(re.findall(r'>>\s*([a-zA-Z_]\w*)', code))
         player_refs = set(re.findall(r'\b([a-z]\d+)\s*(?:>>|\.)', code))
-        all_refs = synth_refs | player_refs
-        still_missing = [n for n in all_refs if n not in ns]
-        if still_missing:
-            print(f"[grid] {coord} warning: missing refs in namespace: {still_missing}")
+        # Also bare function calls at line start (play, loop, attack, etc.)
+        func_refs = set(re.findall(r'(?:^|\n)\s*([a-zA-Z_]\w*)\s*\(', code))
+        all_refs = synth_refs | player_refs | func_refs
+
+        missing_after_fd = [n for n in all_refs if n not in ns]
+        if missing_after_fd:
+            # Priority modules to check first (likely to have svdk customs)
+            priority_mods = [
+                'FoxDot.lib.Crashserver.crashSynthDefs',
+                'FoxDot.lib.Crashserver.crashFX',
+                'FoxDot.lib.Crashserver.startup_live',
+                'FoxDot.lib.Custom.startup',
+                '__main__',
+            ]
+            for mod_name in priority_mods:
+                if not missing_after_fd:
+                    break
+                mod = sys.modules.get(mod_name)
+                if mod is None or not hasattr(mod, '__dict__'):
+                    continue
+                for name in list(missing_after_fd):
+                    if name in mod.__dict__:
+                        try:
+                            ns[name] = mod.__dict__[name]
+                            missing_after_fd.remove(name)
+                        except Exception:
+                            pass
+            # Fallback: walk ALL loaded modules
+            if missing_after_fd:
+                for mod_name, mod in list(sys.modules.items()):
+                    if not missing_after_fd:
+                        break
+                    try:
+                        if mod is None or not hasattr(mod, '__dict__'):
+                            continue
+                        for name in list(missing_after_fd):
+                            if name in mod.__dict__:
+                                obj = mod.__dict__[name]
+                                if obj is not None:
+                                    ns[name] = obj
+                                    missing_after_fd.remove(name)
+                    except Exception:
+                        continue
+
+        if missing_after_fd:
+            print(f"[grid] {coord} warning: missing refs in namespace: {missing_after_fd}")
             print(f"[grid]   (picked ns score={best_score}, "
                   f"size={len(ns) if ns else 0} keys)")
 

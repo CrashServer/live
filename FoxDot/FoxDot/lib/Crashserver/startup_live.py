@@ -2522,25 +2522,37 @@ class Compo():
         if ns is None:
             ns = own
 
-        # Verify required player names are present; if not, attempt to
-        # populate them from the FoxDot module before exec.
-        needed = set(re.findall(r'\b([a-z]\d+)\s*>>', code))
-        missing = [n for n in needed if n not in ns]
-        if missing:
-            # try to import the names from FoxDot
-            try:
-                import FoxDot as _fd
-                for name in missing:
-                    if hasattr(_fd, name):
-                        ns[name] = getattr(_fd, name)
-            except Exception:
-                pass
-            still_missing = [n for n in needed if n not in ns]
-            if still_missing:
-                print(f"[grid] {coord} warning: missing player vars in namespace: {still_missing}")
-                print(f"[grid]   (picked ns score={best_score}, "
-                      f"id={hex(id(ns)) if ns else 'none'}; "
-                      f"size={len(ns) if ns else 0} keys)")
+        # Inject everything public from FoxDot's module into the picked
+        # namespace (only the keys that aren't already there). This covers:
+        #   - synth functions  (faim, pianovel, dbass, compkick, ...)
+        #   - player placeholders (p0..z99 as EmptyPlayer)
+        #   - utilities  (var, P, PRand, PWhite, melody, follow, ...)
+        #   - constants  (Clock, Server, Scale, Root, ...)
+        # This is "from FoxDot import *" applied non-destructively.
+        try:
+            import FoxDot as _fd
+            for attr_name in dir(_fd):
+                if attr_name.startswith('_'):
+                    continue
+                if attr_name not in ns:
+                    try:
+                        ns[attr_name] = getattr(_fd, attr_name)
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+        # Diagnostic: scan code for tokens that look like player/synth refs
+        # and report any that still aren't bound — useful when a cell uses
+        # custom svdk synths defined outside FoxDot's main module.
+        synth_refs = set(re.findall(r'>>\s*([a-zA-Z_]\w*)', code))
+        player_refs = set(re.findall(r'\b([a-z]\d+)\s*(?:>>|\.)', code))
+        all_refs = synth_refs | player_refs
+        still_missing = [n for n in all_refs if n not in ns]
+        if still_missing:
+            print(f"[grid] {coord} warning: missing refs in namespace: {still_missing}")
+            print(f"[grid]   (picked ns score={best_score}, "
+                  f"size={len(ns) if ns else 0} keys)")
 
         try:
             exec(code, ns)

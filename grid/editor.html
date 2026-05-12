@@ -26,7 +26,56 @@
     font-size: 12px;
     height: 100vh; overflow: hidden;
   }
-  .app { display: grid; grid-template-columns: 1fr 460px; height: 100vh; }
+  .app { display: grid; grid-template-columns: 180px 1fr 460px; height: 100vh; }
+
+  /* ===== left: filter sidebar ===== */
+  .filter-pane {
+    padding: 12px; overflow-y: auto;
+    border-right: 1px solid var(--border);
+    background: #131318;
+    font-size: 11px;
+  }
+  .filter-pane h3 {
+    margin: 0 0 8px 0; font-size: 11px;
+    color: var(--accent); text-transform: uppercase;
+    letter-spacing: 0.05em; font-weight: 600;
+  }
+  .filter-group { margin-bottom: 12px; }
+  .filter-group > label {
+    display: block; color: var(--muted); margin-bottom: 4px;
+    font-size: 10px;
+  }
+  .filter-group select,
+  .filter-group input[type=number],
+  .filter-group input[type=text] {
+    width: 100%; background: var(--panel); color: var(--text);
+    border: 1px solid var(--border); padding: 4px 6px;
+    font: inherit; border-radius: 3px;
+  }
+  .filter-tempo-row { display: flex; gap: 4px; align-items: center; }
+  .filter-tempo-row input { flex: 1; }
+  .filter-type-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filter-type-row label {
+    cursor: pointer; padding: 3px 8px; border-radius: 3px;
+    background: var(--panel); border: 1px solid var(--border);
+    color: var(--muted); user-select: none;
+  }
+  .filter-type-row label.active {
+    color: #0f0f12; background: var(--accent); border-color: var(--accent);
+  }
+  .filter-type-row input { display: none; }
+  .filter-clear-btn {
+    width: 100%; margin-top: 6px;
+    background: var(--panel); color: var(--muted);
+    border: 1px solid var(--border); padding: 4px;
+    cursor: pointer; font: inherit; font-size: 10px;
+    border-radius: 3px;
+  }
+  .filter-clear-btn:hover { color: var(--text); background: var(--hover); }
+  .filter-count {
+    color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    font-size: 10px;
+  }
 
   /* ===== left: grid ===== */
   .grid-pane {
@@ -172,7 +221,54 @@
 <body>
 <div class="app">
 
-  <!-- ============ LEFT: GRID ============ -->
+  <!-- ============ LEFT: FILTERS ============ -->
+  <div class="filter-pane">
+    <h3>filters</h3>
+    <div class="filter-count" id="filter-count">- / -</div>
+
+    <div class="filter-group">
+      <label>type</label>
+      <div class="filter-type-row" id="filter-type">
+        <label data-type="atom">  <input type="checkbox" value="atom"  checked> atom</label>
+        <label data-type="scene"> <input type="checkbox" value="scene" checked> scene</label>
+        <label data-type="track"> <input type="checkbox" value="track" checked> track</label>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>tempo (bpm)</label>
+      <div class="filter-tempo-row">
+        <input type="number" id="filter-tempo-min" placeholder="min" min="40" max="220">
+        <span style="color: var(--muted)">–</span>
+        <input type="number" id="filter-tempo-max" placeholder="max" min="40" max="220">
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>key</label>
+      <select id="filter-key">
+        <option value="">— any —</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label>instrument / synth</label>
+      <select id="filter-instrument">
+        <option value="">— any —</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label>source</label>
+      <select id="filter-source">
+        <option value="">— any —</option>
+      </select>
+    </div>
+
+    <button class="filter-clear-btn" id="filter-clear-btn">clear all filters</button>
+  </div>
+
+  <!-- ============ MIDDLE: GRID ============ -->
   <div class="grid-pane">
     <div class="toolbar">
       <input type="text" id="search" placeholder="filter by label or code..." style="width:240px">
@@ -191,6 +287,37 @@
     <div>
       <label>label</label>
       <input type="text" id="label-input" placeholder="rolling sub-bass 120 BPM">
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+      <div>
+        <label>tempo</label>
+        <input type="number" id="meta-tempo" placeholder="120">
+      </div>
+      <div>
+        <label>key</label>
+        <input type="text" id="meta-key" placeholder="E minor">
+      </div>
+      <div>
+        <label>type</label>
+        <select id="meta-type" style="width:100%; background: var(--panel); color: var(--text); border: 1px solid var(--border); padding: 7px 6px; font: inherit; border-radius: 3px;">
+          <option value="">—</option>
+          <option value="atom">atom</option>
+          <option value="scene">scene</option>
+          <option value="track">track</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+      <div>
+        <label>instrument</label>
+        <input type="text" id="meta-instrument" placeholder="dbass">
+      </div>
+      <div>
+        <label>source</label>
+        <input type="text" id="meta-source" placeholder="codeBank">
+      </div>
     </div>
 
     <div style="flex: 1; display: flex; flex-direction: column;">
@@ -268,8 +395,35 @@ async function loadCells() {
   const r = await fetch("/api/cells");
   cells = await r.json();
   Object.keys(cells).forEach(k => { if (k.startsWith("_")) delete cells[k]; });
+  rebuildFilterOptions();
   renderGrid();
   updateStats();
+}
+
+function rebuildFilterOptions() {
+  // Populate key/instrument/source dropdowns from the loaded cells
+  const keys = new Set();
+  const insts = new Set();
+  const sources = new Set();
+  for (const c of Object.values(cells)) {
+    if (c.key && c.key.length < 30) keys.add(c.key);
+    if (c.instrument) insts.add(c.instrument);
+    if (c.source) sources.add(c.source);
+  }
+  function fill(id, vals) {
+    const sel = $(id);
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">— any —</option>';
+    [...vals].sort().forEach(v => {
+      const o = document.createElement("option");
+      o.value = v; o.textContent = v;
+      sel.appendChild(o);
+    });
+    if ([...vals].includes(cur)) sel.value = cur;
+  }
+  fill("filter-key", keys);
+  fill("filter-instrument", insts);
+  fill("filter-source", sources);
 }
 
 function buildGrid() {
@@ -338,16 +492,43 @@ function renderGrid() {
 
 function applySearchFilter() {
   const q = $("search").value.trim().toLowerCase();
-  if (!q) {
-    document.querySelectorAll(".cell").forEach(el => el.style.opacity = "1");
-    return;
-  }
+  const tMin = parseInt($("filter-tempo-min").value, 10);
+  const tMax = parseInt($("filter-tempo-max").value, 10);
+  const fKey = $("filter-key").value;
+  const fInst = $("filter-instrument").value;
+  const fSrc = $("filter-source").value;
+  const allowedTypes = new Set(
+    [...document.querySelectorAll("#filter-type input:checked")].map(i => i.value)
+  );
+  let matched = 0;
   document.querySelectorAll(".cell").forEach(el => {
     const coord = el.dataset.coord;
     const cell = cells[coord];
-    const hay = (cell ? (cell.label + " " + cell.code) : "").toLowerCase();
-    el.style.opacity = hay.includes(q) ? "1" : "0.18";
+    if (!cell) {
+      // empty cells: dim if any filter active
+      const anyFilter = q || tMin || tMax || fKey || fInst || fSrc
+                        || allowedTypes.size < 3;
+      el.style.opacity = anyFilter ? "0.10" : "1";
+      return;
+    }
+    let ok = true;
+    if (q) {
+      const hay = ((cell.label || "") + " " + (cell.code || "")).toLowerCase();
+      if (!hay.includes(q)) ok = false;
+    }
+    if (ok && !isNaN(tMin) && (cell.tempo == null || cell.tempo < tMin)) ok = false;
+    if (ok && !isNaN(tMax) && (cell.tempo == null || cell.tempo > tMax)) ok = false;
+    if (ok && fKey && cell.key !== fKey) ok = false;
+    if (ok && fInst && cell.instrument !== fInst) ok = false;
+    if (ok && fSrc && cell.source !== fSrc) ok = false;
+    if (ok && allowedTypes.size < 3) {
+      const type = cell.type || "atom";
+      if (!allowedTypes.has(type)) ok = false;
+    }
+    el.style.opacity = ok ? "1" : "0.18";
+    if (ok) matched++;
   });
+  $("filter-count").textContent = `${matched} matching / ${Object.keys(cells).length} total`;
 }
 
 function updateStats() {
@@ -362,10 +543,20 @@ function selectCell(coord) {
   if (cell) {
     $("label-input").value = cell.label || "";
     $("code-input").value = cell.code || "";
+    $("meta-tempo").value = cell.tempo ?? "";
+    $("meta-key").value = cell.key ?? "";
+    $("meta-type").value = cell.type ?? "";
+    $("meta-instrument").value = cell.instrument ?? "";
+    $("meta-source").value = cell.source ?? "";
     setStatus(`loaded ${coord}`, "");
   } else {
     $("label-input").value = "";
     $("code-input").value = "";
+    $("meta-tempo").value = "";
+    $("meta-key").value = "";
+    $("meta-type").value = "";
+    $("meta-instrument").value = "";
+    $("meta-source").value = "";
     setStatus(`new cell ${coord}`, "");
   }
   document.querySelectorAll(".cell").forEach(el => {
@@ -385,17 +576,41 @@ async function saveCell() {
     setStatus(`invalid coord '${coord}' - must be A0..Z99`, "err");
     return;
   }
-  const code = $("code-input").value;
-  const label = $("label-input").value;
+  const body = {
+    coord,
+    code: $("code-input").value,
+    label: $("label-input").value,
+  };
+  // Optional metadata fields — only include if non-empty
+  const tempo = $("meta-tempo").value.trim();
+  const key = $("meta-key").value.trim();
+  const type = $("meta-type").value.trim();
+  const inst = $("meta-instrument").value.trim();
+  const src = $("meta-source").value.trim();
+  if (tempo) body.tempo = parseInt(tempo, 10);
+  if (key) body.key = key;
+  if (type) body.type = type;
+  if (inst) body.instrument = inst;
+  if (src) body.source = src;
+
   const r = await fetch("/api/cells", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ coord, code, label }),
+    body: JSON.stringify(body),
   });
   const data = await r.json();
   if (data.ok) {
-    cells[coord] = { code, label };
+    cells[coord] = {
+      code: body.code, label: body.label,
+      tempo: body.tempo, key: body.key, type: body.type,
+      instrument: body.instrument, source: body.source,
+    };
+    // Strip undefined for consistency with server format
+    Object.keys(cells[coord]).forEach(k => {
+      if (cells[coord][k] === undefined) delete cells[coord][k];
+    });
     currentCoord = coord;
+    rebuildFilterOptions();
     renderGrid();
     updateStats();
     setStatus(`saved ${coord}`, "ok");
@@ -513,6 +728,33 @@ loadCells();
 $("save-btn").addEventListener("click", saveCell);
 $("delete-btn").addEventListener("click", deleteCell);
 $("paste-btn").addEventListener("click", pasteCellToWebtroop);
+
+// Filter sidebar wiring
+["filter-tempo-min", "filter-tempo-max", "filter-key", "filter-instrument",
+ "filter-source"].forEach(id => {
+  $(id).addEventListener("input", applySearchFilter);
+  $(id).addEventListener("change", applySearchFilter);
+});
+document.querySelectorAll("#filter-type input").forEach(cb => {
+  cb.addEventListener("change", () => {
+    cb.closest("label").classList.toggle("active", cb.checked);
+    applySearchFilter();
+  });
+  cb.closest("label").classList.toggle("active", cb.checked);
+});
+$("filter-clear-btn").addEventListener("click", () => {
+  $("filter-tempo-min").value = "";
+  $("filter-tempo-max").value = "";
+  $("filter-key").value = "";
+  $("filter-instrument").value = "";
+  $("filter-source").value = "";
+  $("search").value = "";
+  document.querySelectorAll("#filter-type input").forEach(cb => {
+    cb.checked = true;
+    cb.closest("label").classList.add("active");
+  });
+  applySearchFilter();
+});
 document.querySelectorAll(".btn.play").forEach(btn => {
   btn.addEventListener("click", () => {
     const beats = parseInt(btn.dataset.beats, 10) || 0;

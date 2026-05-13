@@ -96,6 +96,20 @@ SYNTH_TO_COL = {
     "radio": "L",
     # loop F (special)
     "breakcore": "F",
+    # additions from log_sessions analysis (live-session synth coverage)
+    "omi": "A", "waves": "A",                # soft FM pad
+    "war": "H", "doom": "H", "doomSynth": "H", "a_gheavy": "H",  # aggressive lead
+    "combs": "M", "ikea": "M",               # comb/perc textures
+    "dblbass": "B", "elmbass": "B",          # extra bass synths
+    "eeri": "K", "pink": "K", "pulse": "K",  # ambient/drone textures
+    "organx": "I",                            # organ variant → stab col
+    "sampiano": "A", "swell": "A", "star": "A",  # more pads
+    "sitar": "G", "prophet": "G", "wavetable": "G",  # more leads
+    "virus": "H", "splaffer": "H",                    # lead 2 family
+    "bounce": "B",                                    # bass
+    "snick": "D",                                     # snare-like
+    "cringe": "M", "latoo": "M", "sos": "M",          # textures/perc
+    "pasha": "K",                                     # ambient
 }
 
 

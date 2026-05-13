@@ -58,6 +58,12 @@ window.addEventListener("message", (e) => {
         } catch (err) {
             console.warn("[gridPanel] ack failed:", err);
         }
+    } else if (e.data.type === "gridReload") {
+        // Cell was saved/deleted in the iframe — pull the new cells.json
+        // into FoxDot's in-memory grid so the next cell_run() sees it.
+        const { coord, kind } = e.data;
+        EventEmitter.emit("send_foxdot", "compo.cell_reload()");
+        console.log(`[gridPanel] auto-reload after ${kind} ${coord}`);
     }
 });
 
@@ -207,38 +213,66 @@ function wireRecButtons() {
     const stemsBtn = document.getElementById("recStems");
     if (!codeBtn || !stemsBtn) return;
 
+    // Local state mirrors the FoxDot-side recording state. We toggle on
+    // click optimistically but always defer to the authoritative __REC_*
+    // markers when they arrive from server.js via EventBus.
     let codeRecording = false;
     let stemsRecording = false;
 
+    const setCodeUi = (on, label) => {
+        codeRecording = on;
+        codeBtn.classList.toggle("recording-active", on);
+        codeBtn.textContent = on ? (label || "Recording…") : "Start";
+    };
+    const setStemsUi = (on, label) => {
+        stemsRecording = on;
+        stemsBtn.classList.toggle("recording-active", on);
+        stemsBtn.textContent = on ? (label || "Recording…") : "Start";
+    };
+
     codeBtn.addEventListener("click", () => {
-        codeRecording = !codeRecording;
-        if (codeRecording) {
-            codeBtn.classList.add("recording-active");
-            codeBtn.textContent = "Recording…";
+        if (!codeRecording) {
+            setCodeUi(true, "Recording…");
             EventEmitter.emit("send_foxdot", "compo.rec()");
         } else {
-            codeBtn.classList.remove("recording-active");
-            codeBtn.textContent = "Start";
+            setCodeUi(false);
             EventEmitter.emit("send_foxdot", "compo.rec_stop()");
         }
     });
 
     stemsBtn.addEventListener("click", () => {
-        stemsRecording = !stemsRecording;
-        if (stemsRecording) {
+        if (!stemsRecording) {
             const bars = parseInt(document.getElementById("recStemsBars").value, 10) || 16;
             const session = document.getElementById("recStemsSession").value.trim() || "scene";
             const variation = document.getElementById("recStemsVariation").value.trim() || "v1";
             const cmd = `compo.rec_stems(bars=${bars}, session="${session}", variation="${variation}")`;
-            stemsBtn.classList.add("recording-active");
-            stemsBtn.textContent = `Recording ${bars}b…`;
+            setStemsUi(true, `Recording ${bars}b…`);
             EventEmitter.emit("send_foxdot", cmd);
-            // Auto-revert after (bars+1)*4 beats — we don't know BPM live so
-            // just listen for any user click to stop or reset on next click.
         } else {
-            stemsBtn.classList.remove("recording-active");
-            stemsBtn.textContent = "Start";
+            setStemsUi(false);
             EventEmitter.emit("send_foxdot", "compo.stem_stop()");
+        }
+    });
+
+    // Auto-sync with authoritative state from server.js (which parses
+    // __REC_START__ / __REC_STOP__ / __STEMS_START__ / __STEMS_STOP__
+    // out of FoxDot's stdout). This means:
+    //   - the code-rec button auto-reverts when compo.rec_stop() is called
+    //     from anywhere (script eval, keyboard shortcut, etc.)
+    //   - the stems button auto-reverts when the scheduled stop fires
+    //     after `bars` beats (no need to click again)
+    EventEmitter.on("rec_state", (msg) => {
+        if (msg.recording) {
+            setCodeUi(true, msg.bpm ? `Recording @${msg.bpm}` : "Recording…");
+        } else {
+            setCodeUi(false);
+        }
+    });
+    EventEmitter.on("stems_state", (msg) => {
+        if (msg.recording) {
+            setStemsUi(true, `Recording ${msg.bars}b (${msg.players}p)`);
+        } else {
+            setStemsUi(false);
         }
     });
 }

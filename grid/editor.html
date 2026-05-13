@@ -685,6 +685,7 @@ async function saveCell() {
     renderGrid();
     updateStats();
     setStatus(`saved ${coord}`, "ok");
+    notifyParentReload(coord, "save");
   } else {
     setStatus(`error: ${data.error || "unknown"}`, "err");
   }
@@ -707,9 +708,20 @@ async function deleteCell() {
     setStatus(`deleted ${coord}`, "ok");
     $("label-input").value = "";
     $("code-input").value = "";
+    notifyParentReload(coord, "delete");
   } else {
     setStatus(`error: ${data.error || "unknown"}`, "err");
   }
+}
+
+// Tell the parent frame (webTroop) that the grid changed so FoxDot can
+// run `compo.cell_reload()`. Standalone-mode: window.parent === window,
+// so this is a no-op (the user must reload manually).
+function notifyParentReload(coord, kind) {
+  if (window.parent === window) return;
+  try {
+    window.parent.postMessage({ type: "gridReload", coord, kind }, "*");
+  } catch (_) { /* silent */ }
 }
 
 // Play cell for `beats` beats (0 = continuous, no auto-stop)

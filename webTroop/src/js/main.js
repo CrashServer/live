@@ -271,6 +271,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       else if (message.type === "rec_script") {
         functionUtils.insertAttackContent(editor, message.content);
       }
+      // FoxDot-side code-recording state changed — relay to button via EventBus
+      else if (message.type === "rec_state") {
+        EventEmitter.emit("rec_state", message);
+      }
+      // FoxDot-side stem-recording state changed
+      else if (message.type === "stems_state") {
+        EventEmitter.emit("stems_state", message);
+      }
     } catch (error) {}
   };
 

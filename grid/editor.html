@@ -348,7 +348,7 @@
 
 <script>
 const COLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const ROWS = 200;
+const ROWS = 400;
 
 // Role name + color per column (per the cells.json _meta convention).
 // Color is the populated-cell background; empty cells stay grey.
@@ -604,7 +604,7 @@ function applySearchFilter() {
 
 function updateStats() {
   const total = Object.keys(cells).length;
-  $("stats").textContent = `${total} cells / 2600 capacity`;
+  $("stats").textContent = `${total} cells / ${COLS.length * ROWS} capacity`;
 }
 
 function selectCell(coord) {

@@ -219,7 +219,7 @@ def build_proposals(atoms, existing):
     for col, lst in by_col.items():
         # Sort by tempo (so rows roughly correlate to tempo)
         lst.sort(key=lambda a: (a["tempo"] or 999, -a["length"]))
-        row_iter = (r for r in range(200) if r not in occupied[col])
+        row_iter = (r for r in range(400) if r not in occupied[col])
         for a in lst:
             try:
                 row = next(row_iter)

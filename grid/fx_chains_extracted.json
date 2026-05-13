@@ -1,0 +1,227 @@
+{
+  "_help": "curated fx-chain presets",
+  "proposed": {
+    "P129": {
+      "code": "p1 >> sinepad([0,3,5,7], dur=4, sus=4, amp=0.5, shimmer=0.4, room=0.6, atk=2)",
+      "label": "chain: shimmer bloom (shimmer+room+atk)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P130": {
+      "code": "p1 >> pianovel([(0,3,7),(2,5,9)], dur=2, sus=1.5, amp=0.5, tape=0.5, tapedrive=0.3, drift=0.2)",
+      "label": "chain: tape warmth (tape+drift+tape drive)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P131": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/4, sus=0.2, amp=0.6, dist2=0.3, lpf=1800, chorus=0.4)",
+      "label": "chain: distorted lead (dist2+lpf+chorus)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P132": {
+      "code": "p1 >> war([0,3,5], dur=1/4, sus=0.2, amp=0.6, dynfuzz=0.4, crush=4, room=0.5)",
+      "label": "chain: industrial fuzz (dynfuzz+crush+room)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P133": {
+      "code": "p1 >> klank([(0,3,7)], dur=2, sus=1.5, amp=0.5, echo=0.4, echotime=0.5, room=0.6, lpf=linvar([800,3200],8))",
+      "label": "chain: dub space (echo+room+lpf sweep)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P134": {
+      "code": "p1 >> pianovel([(0,3,7)], dur=2, sus=1.5, amp=0.5, tape=0.4, crush=6, lpf=1200, bits=10)",
+      "label": "chain: vinyl lofi (tape+crush+lpf+bits)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P135": {
+      "code": "l1 >> loop(\"choir16\", dur=16, amp=0.5, timeStretchFx=0.5, chop=8, shimmer=0.3)",
+      "label": "chain: granular cloud (timeStretchFx+chop+shimmer)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P136": {
+      "code": "b1 >> tb303([0,3,0,5], dur=1/4, oct=4, cutoff=linvar([400,2800],8), drive=0.3, chorus=0.4, amp=0.7)",
+      "label": "chain: acid wobble (lpf sweep+drive+chorus)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P137": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/4, sus=0.3, amp=0.6, shape=sinvar([0,0.4],8), drive=0.2)",
+      "label": "chain: breathing dist (sinvar shape)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P138": {
+      "code": "p1 >> sinepad([0,3,5,7], dur=4, sus=4, amp=0.5, octclean=1, room=0.5)",
+      "label": "chain: octclean shimmer (octclean+room)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P139": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/4, sus=0.3, amp=0.6, shape=(p1.degree==0)*0.5)",
+      "label": "chain: conditional shape on root",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P140": {
+      "code": "b1 >> dbass([0,0,3,0], dur=1/2, oct=4, sus=0.4, amp=linvar([0.2,0.9],[3,1])*0.7)",
+      "label": "chain: pumping sidechain (amp linvar)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P141": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/4, sus=0.3, amp=0.6, lpf=sinvar([400,3200],8), hpf=sinvar([100,800],4))",
+      "label": "chain: filter pingpong (sinvar lpf+hpf)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P142": {
+      "code": "p1 >> bell([0,3,5,7], dur=1/4, sus=0.4, amp=0.5, ring=0.6, lpf=2400)",
+      "label": "chain: ringmod metallic (ring+lpf)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P143": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/2, sus=0.4, amp=0.6, formant=2, chorus=0.3)",
+      "label": "chain: formant vowel (formant+chorus)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P144": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/4, sus=0.3, amp=0.5, drive=0.3, shape=0.2, crush=6)",
+      "label": "chain: multistage drive (drive+shape+crush)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P145": {
+      "code": "p1 >> dab([0,3,5,7,5,3], dur=1/4, oct=5, lpf=linvar([800,4000],8), res=0.7, drive=0.3, chorus=0.4, amp=0.6)",
+      "label": "chain: psy lead chain (lpf+res+drive+chorus)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P146": {
+      "code": "p1 >> bell([0,4,7,11], dur=2, sus=1.5, amp=0.4, cheapverb=0.7, lpf=2400, oct=6)",
+      "label": "chain: ghostly verb (cheapverb high+lpf)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P147": {
+      "code": "p1 >> pluck([0,3,5,7,3,5,7,0], dur=1/8, sus=0.1, amp=linvar([0.3,0.7],[1,1]), lpf=linvar([1200,6000],32))",
+      "label": "chain: trance arp (lpf sweep+sidechain+pluck)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P148": {
+      "code": "l1 >> loop(\"vocalcrash8\", dur=8, sample=PRand(4), chop=PRand(2,8), amp=0.5, room=0.5)",
+      "label": "chain: vocal chop (chop+stretch+room)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P149": {
+      "code": "s1 >> loop(\"amen8\", dur=PDur(5,8), sample=PRand(4), chop=PRand(2,8), crush=PRand(2,8), amp=0.6)",
+      "label": "chain: amen mangler (crush+chop+rate var)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P150": {
+      "code": "p1 >> ethpad([0,3,5,7], dur=16, sus=16, amp=0.4, freeze=1, cheapverb=0.5)",
+      "label": "chain: freeze drone (freeze+cheapverb)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P151": {
+      "code": "p1 >> svdk([0,3,5,7], dur=2, sus=1.5, amp=0.5, doppler=0.5, room=0.4)",
+      "label": "chain: doppler swoop (doppler+room)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P152": {
+      "code": "p1 >> combs([0,3,5,7], dur=1/4, sus=0.4, vibrate=4, depth=0.6, regen=-2, amp=0.5)",
+      "label": "chain: comb resonator (combs+pluck)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P153": {
+      "code": "p1 >> pluck([0], dur=1/4, sus=0.2, amp=0.5, fbdelay=0.6, lpf=1800, oct=5)",
+      "label": "chain: fbdelay self-osc (fbdelay+lpf)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P154": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/4, sus=0.3, amp=0.5, krush=0.4, bits=8, coarse=4)",
+      "label": "chain: krush+lofi (krush+bits+coarse)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P155": {
+      "code": "p1 >> sawbass([0,0,3,0], dur=1/4, oct=4, mpf=600, mpr=3.8, drive=0.2, amp=0.7)",
+      "label": "chain: MoogFF resonant (mpf+mpr)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P156": {
+      "code": "p1 >> sawbass([0,0,3,0], dur=1/4, oct=4, dfm=800, dfmr=0.2, dfmd=1.5, amp=0.7)",
+      "label": "chain: DFM1 filter (dfm)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P157": {
+      "code": "s1 >> play(\"X.o.\", dur=1/4, striate=8, amp=0.7)",
+      "label": "chain: striate sample (striate)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P158": {
+      "code": "p1 >> pluck([0,3,5,7], dur=1/4, sus=0.3, amp=0.6, pshift=7)",
+      "label": "chain: pshift detune (pshift)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P159": {
+      "code": "b1 >> dbass([0,3,5,2], dur=1, oct=4, sus=0.8, glide=1, glidedur=0.2, amp=0.7)",
+      "label": "chain: glide portamento (glide+sus)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P160": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/4, sus=0.3, amp=0.6, envdist=0.4, drive=0.2)",
+      "label": "chain: envdist envelope follower",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P161": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/2, sus=0.4, amp=0.6, formant=linvar([0,4],16))",
+      "label": "chain: formant filter sweep (formant linvar)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P162": {
+      "code": "p1 >> pluck([0,3,5,7], dur=1/4, sus=0.3, amp=0.6, multicrush=4)",
+      "label": "chain: multicrush bit reduction",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P163": {
+      "code": "p1 >> svdk([0,3,5,7], dur=1/4, sus=0.3, amp=0.5, decimate=0.4, drive=0.3)",
+      "label": "chain: decimate harsh (decimate+drive)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P164": {
+      "code": "b1 >> dbass([0,0,3,0], dur=1/2, oct=4, sus=0.4, amp=0.7, drcomp=0.5)",
+      "label": "chain: drcomp pumping (drcomp)",
+      "type": "atom",
+      "source": "fx-chains"
+    },
+    "P165": {
+      "code": "l1 >> svdk([0,3,5,7], dur=1/4, sus=0.3, amp=0.8, comp=0.5)",
+      "label": "chain: comp limiter (comp)",
+      "type": "atom",
+      "source": "fx-chains"
+    }
+  }
+}

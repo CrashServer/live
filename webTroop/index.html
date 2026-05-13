@@ -134,6 +134,22 @@
                     <button id="recording" class="configButton">Start</button>
                     <!--<div id="recording" class="simple-text h10"></div>-->
                 </fieldset>
+                <fieldset class="info-row">
+                    <legend>Rec Code</legend>
+                    <button id="recordCode" class="configButton" title="compo.rec() / compo.rec_stop()">Start</button>
+                </fieldset>
+                <fieldset class="info-row">
+                    <legend>Rec Stems</legend>
+                    <div style="display:flex; gap:4px; align-items:center;">
+                        <input id="recStemsBars"      type="number" value="16" min="1" max="256"
+                               title="bars" style="width:42px; padding:2px 4px; background:#222; color:#ccc; border:1px solid #444; border-radius:3px;">
+                        <input id="recStemsSession"   type="text"   value="scene"
+                               title="session name" style="width:64px; padding:2px 4px; background:#222; color:#ccc; border:1px solid #444; border-radius:3px;">
+                        <input id="recStemsVariation" type="text"   value="v1"
+                               title="variation tag" style="width:48px; padding:2px 4px; background:#222; color:#ccc; border:1px solid #444; border-radius:3px;">
+                        <button id="recStems" class="configButton" title="compo.rec_stems(...) / compo.stem_stop()">Start</button>
+                    </div>
+                </fieldset>
             </section>
         </div>
         <div id="editor-container">

@@ -200,14 +200,59 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
+// ===== Rec Code + Rec Stems buttons (wired to compo.* via send_foxdot) =====
+
+function wireRecButtons() {
+    const codeBtn = document.getElementById("recordCode");
+    const stemsBtn = document.getElementById("recStems");
+    if (!codeBtn || !stemsBtn) return;
+
+    let codeRecording = false;
+    let stemsRecording = false;
+
+    codeBtn.addEventListener("click", () => {
+        codeRecording = !codeRecording;
+        if (codeRecording) {
+            codeBtn.classList.add("recording-active");
+            codeBtn.textContent = "Recording…";
+            EventEmitter.emit("send_foxdot", "compo.rec()");
+        } else {
+            codeBtn.classList.remove("recording-active");
+            codeBtn.textContent = "Start";
+            EventEmitter.emit("send_foxdot", "compo.rec_stop()");
+        }
+    });
+
+    stemsBtn.addEventListener("click", () => {
+        stemsRecording = !stemsRecording;
+        if (stemsRecording) {
+            const bars = parseInt(document.getElementById("recStemsBars").value, 10) || 16;
+            const session = document.getElementById("recStemsSession").value.trim() || "scene";
+            const variation = document.getElementById("recStemsVariation").value.trim() || "v1";
+            const cmd = `compo.rec_stems(bars=${bars}, session="${session}", variation="${variation}")`;
+            stemsBtn.classList.add("recording-active");
+            stemsBtn.textContent = `Recording ${bars}b…`;
+            EventEmitter.emit("send_foxdot", cmd);
+            // Auto-revert after (bars+1)*4 beats — we don't know BPM live so
+            // just listen for any user click to stop or reset on next click.
+        } else {
+            stemsBtn.classList.remove("recording-active");
+            stemsBtn.textContent = "Start";
+            EventEmitter.emit("send_foxdot", "compo.stem_stop()");
+        }
+    });
+}
+
 // ===== Bootstrap on DOM ready =====
 
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
         createGridPanel();
         injectToggle();
+        wireRecButtons();
     });
 } else {
     createGridPanel();
     injectToggle();
+    wireRecButtons();
 }

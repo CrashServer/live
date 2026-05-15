@@ -142,8 +142,8 @@ class _LoopPlayer:
     def __ne__(self, other):
         return other not in self.names
 
-class _OnsetPlayer:
-    names = ("onset")
+class _WaveTablePlayer:
+    names = ("wavetable")
     def __eq__(self, other):
         return other in self.names
     def __ne__(self, other):
@@ -158,8 +158,8 @@ class _MidiPlayer:
 
 SamplePlayer = _SamplePlayer()
 LoopPlayer   = _LoopPlayer()
-OnsetPlayer   = _OnsetPlayer()
 MidiPlayer   = _MidiPlayer()
+WaveTablePlayer = _WaveTablePlayer()
 
 
 # OSC Information

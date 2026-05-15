@@ -577,6 +577,7 @@ export const foxdotAutocomplete = {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
             filteredLoops = filteredLoops.filter(loop => !loop.displayText.startsWith('AKWF'));
+            filteredLoops = filteredLoops.filter(loop => !loop.displayText.startsWith('WT'));
             const loopMatch = line.match(/loop|gsynth|splaffer|splitter|breakcore\("([^"]*)"/);
             const durMatch = line.match(/dur=(\d+(\.\d+)?|\d+\/\d+)/);
             const loopStart = loopMatch ? token.start : token.start;
@@ -591,15 +592,13 @@ export const foxdotAutocomplete = {
         else if (wavetablePattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
             const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
             let filteredLoops = this.loopList.filter(loop => loop.displayText.includes(prefix));
-            filteredLoops = filteredLoops.filter(loop => loop.displayText.startsWith('AKWF'));
+            filteredLoops = filteredLoops.filter(loop => loop.displayText.startsWith('AKWF') || loop.displayText.startsWith('WT'));
             const loopMatch = line.match(/loop\("([^"]*)"/);
-            const durMatch = line.match(/dur=(\d+(\.\d+)?|\d+\/\d+)/);
             const loopStart = loopMatch ? token.start : token.start;
-            const loopEnd = durMatch ? durMatch.index + durMatch[0].length : cursorPosition;
             return {
               list: filteredLoops.length > 0 ? filteredLoops.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.loopList.sort((a, b) => a.displayText.localeCompare(b.displayText)),
               from: CodeMirror.Pos(cursor.line, loopStart + (prefix.length === 0 ? 1 : 0)),
-              to: CodeMirror.Pos(cursor.line, loopEnd),
+              to: CodeMirror.Pos(cursor.line, cursorPosition),
             }
         }
         // pbuild() — suggest genres and params inside parentheses

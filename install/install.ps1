@@ -224,10 +224,8 @@ function Get-GitHubLatestAsset($repo, $pattern) {
 
 function Install-Extension($name, $repo, $pattern) {
     $dest = "$SC_EXTS\$name"
-    if (Test-Path $dest) {
-        Ok "$name already installed" "ext_$name"
-        return
-    }
+    # Remove stale dir first — Copy-Item into existing dir creates a subdir
+    if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
     Info "Downloading $name Windows binaries..."
     $url = Get-GitHubLatestAsset $repo $pattern
     if (-not $url) {

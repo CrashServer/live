@@ -260,6 +260,8 @@ install_extension() {
     STATUS["ext_${name}"]="source missing"
     return
   fi
+  # Remove stale dest first — cp -r into an existing dir creates a subdir
+  [ -d "$dest" ] && rm -rf "$dest"
   info "Copying ${name}..."
   if cp -r "$src" "$dest"; then
     ok "${name} installed" "ext_${name}"

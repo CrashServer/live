@@ -1,0 +1,56 @@
+b1 >> tekno(gen("techno", "bass"), dur=0.5, oct=3)                                                                                      
+
+g = gen("techno", "bass")
+
+b1 >> tekno(g, dur=0.5, oct=3, sus=g.sus, amp=g.amp)                                                                                    
+
+b1 >> tekno(gen("techno", "bass", seed=42), dur=0.5, oct=3)                                                                             
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> tekno(dur=0.5, oct=3).pgen("techno", "bass")        
+
+b1 >> tekno(dur=0.5, oct=3).pgen("techno", "bass")        
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> tekno(dur=0.5, oct=3, tcut=fb(16, 400, 2000), tgrit=0.5, subenh=0.6).pgen("techno", "bass", 8)                                    
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 16, fill=4), dur=0.25, amp=Pacc("fourfloor"), shape=0.3)
+
+d2 >> play(pbuild("techno", 1, seed=7).hat, dur=0.25, amp=PSwing(0.2), hpf=6000)
+
+b1 >> tekno(dur=0.5, oct=3, tcut=fb(16, 400, 2000), tgrit=0.6, tsub=0.8).pgen("techno", "bass", 8)                                      
+
+p1 >> svdk(dur=0.25, oct=5, cutoff=1200, grit=0.3).pgen("techno", "lead", 8)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> grandpiano(dur=4, oct=5, vel=0.4, bright=0.3, body=0.8, pedal=1).pgen("ambient", "lead")
+
+p1 >> grandpiano(dur=4, oct=5, vel=0.4, bright=0.3, body=0.8, pedal=1).pgen("ambient", "lead")
+
+p1 >> grandpiano(dur=4, oct=5, vel=0.4, bright=0.3, body=0.8, pedal=1).pgen("ambient", "lead")
+
+p1 >> grandpiano(dur=4, oct=5, vel=0.4, bright=0.3, body=0.8, pedal=1).pgen("ambient", "lead")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> grandpiano(dur=4, oct=5, vel=0.4, bright=0.3, body=0.8, pedal=1).pgen("ambient", "lead")
+
+Clock.clear()
+soff()
+Server.clearFx()
+

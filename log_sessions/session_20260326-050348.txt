@@ -1,0 +1,944 @@
+d1 >> play(pbuild("techno", evolve=8, fill=4, density=0.8, swing=0.1, arc="wave", drift=0.6, seed=42), dur=0.25)                        
+
+d1 >> play(pbuild("techno", evolve=8, fill=4, sample=1, density=0.8, swing=0.1, arc="wave", drift=0.6, seed=42), dur=0.25)                        
+
+d1 >> play(pbuild("techno", evolve=8, fill=4, sample=2, density=0.8, swing=0.1, arc="wave", drift=0.6, seed=42), dur=0.25)                        
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno"), dur=0.25)                                                                                                  
+
+d1 >> play(pbuild("dnb"), dur=0.25)                                                                                                     
+
+d1 >> play(pbuild("ebm"), dur=0.25)                                                                                                     
+
+d1 >> play(pbuild("ebm", rate=2), dur=0.25)                                                                                                     
+
+d1 >> play(pbuild("ebm", rate=12), dur=0.25)                                                                                                     
+
+d1 >> play(pbuild("ebm", rate=1), dur=0.25)                                                                                                     
+
+d1 >> play(pat("t1"), dur=0.25)
+
+d1 >> play(pat("e3"), dur=0.25)                                                                                                         
+
+d1 >> play(pat("d2"), dur=0.25)
+
+d1 >> play(pat("d2"), dur=PDur(3, 8))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", evolve=8, fill=4, sample=2, density=0.8, swing=0.1, arc="wave", drift=0.6, seed=42), dur=0.25)                        
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=2)
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=4)
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=6)
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=8)
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=8, csweep=0.5, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=8, csweep=0.5, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", evolve=8, fill=4, sample=2, density=0.8, swing=0.1, arc="wave", drift=0.6, seed=42), dur=0.25)                        
+
+d1 >> play(pbuild("e", rate=1), dur=0.25)                                                                                                     
+
+d1 >> play(pbuild("ebm", rate=1), dur=0.25)                                                                                                     
+
+d1 >> play(pat("b3"), rate=1, dur=0.25)                                                                                                     
+
+m6 >> play(pbuild("breaks"))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m6 >> play(pbuild("breaks"))
+
+Clock.bpm = 170
+
+m6 >> play(pbuild("breaks"), sample=4)
+
+m6 >> play(pbuild("breaks"), sample=3)
+
+m6 >> play(pbuild("breaks"), sample=6)
+
+m6 >> play(pbuild("breaks"), sample=6, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno"), dur=0.25)
+
+d1 >> play(pbuild("dnb"), dur=0.25)
+
+d1 >> play(pbuild("ebm"), dur=0.25)
+
+d1 >> play(pat("t1"), dur=0.25)
+
+d1 >> play(pat("e3"), dur=0.25)
+
+d1 >> play(pat("d2"), dur=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", evolve=8, fill=4, density=0.8, swing=0.1, arc="wave", drift=0.6, seed=42), dur=0.25)
+
+d1 >> play(pbuild("techno", evolve=1, fill=4, density=0.8, swing=0.1, arc="wave", drift=0.6, seed=42), dur=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno").kick, dur=0.25, shape=0.8)
+
+d2 >> play(pbuild("techno").hat, dur=0.25, amp=PSwing(0.2))
+
+d1 >> play(pbuild("techno", kick="X   X X X   X   "), dur=0.25)
+
+d1 >> play(pbuild("techno", hat="dnb"), dur=0.25)
+
+d1 >> play(pbuild("techno", mute="hat"), dur=0.25)
+
+d1 >> play(pbuild("techno", kick="X   X X X   X   "), dur=0.25)
+
+d1 >> play(pbuild("techno", kick="X   X X X   X   "), dur=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", kick="X   X X X   X   "), dur=0.25)
+
+d1 >> play(pbuild("techno", kick="X   X X X   X   ", hat="-"), dur=0.25)
+
+d1 >> play(pbuild("techno", hat="dnb"), dur=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(var([pbuild("techno"), pbuild("ebm")], 8), dur=0.25)
+
+d1 >> play(pbuild("techno", density=linvar([0.3, 1], 32)), dur=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(var([pbuild("techno"), pbuild("ebm")], 8), dur=0.25)
+
+v9 >> dbass(ft(4, 0, 4))
+
+v9 >> dbass(ft(4, 0, 4), dur=1/4)
+
+v9 >> dbass(ft(4, 0, 4), dur=1/2)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=1)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.2, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.3, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=201, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=202, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=203, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=204, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=205, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=206, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=207, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=208, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=209, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=210, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=211, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=212, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=213, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=214, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=215, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=216, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=217, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=218, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=219, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=220, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=221, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=222, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=223, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=224, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=225, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=226, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=227, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=228, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=229, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=230, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=231, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=232, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=233, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=234, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=235, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=236, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=237, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=238, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=239, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=240, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=241, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=242, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=243, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=244, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=245, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=246, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=247, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=248, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=249, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=250, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=251, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=252, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=253, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=254, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=255, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=256, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=257, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=258, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=259, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=260, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=261, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=262, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=263, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=264, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=265, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=266, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=267, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=268, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=269, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=270, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=271, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=272, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=273, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=274, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=275, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=276, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=277, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=278, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=279, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=280, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=281, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=282, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=283, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=284, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=285, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=286, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=287, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=288, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=289, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=290, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=291, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=292, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=293, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=294, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.4, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+g8 >> play("X '")
+
+g8 >> play("X ")
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.5, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.6, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.7, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.8, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=0.9, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.0, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.1, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.2, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.3, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.4, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.5, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.6, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.7, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.8, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=1.9, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.0, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.1, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.2, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.3, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.4, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.5, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.6, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.7, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.8, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=2.9, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.0, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.1, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.2, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.3, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.4, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.5, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.6, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.7, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.8, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=3.9, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.0, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.1, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.2, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.3, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.4, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.5, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.6, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.7, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.8, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=4.9, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.0, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.1, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.2, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.3, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.4, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.5, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.6, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.7, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.8, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=5.9, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.0, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.1, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.2, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.3, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.4, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.5, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.6, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.7, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.8, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=6.9, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.0, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.1, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.2, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.3, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.4, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.5, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=295, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=296, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=297, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=298, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=299, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=300, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=301, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=401, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=501, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=601, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=701, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=801, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=901, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1001, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1101, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1201, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1301, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1401, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1501, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1601, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1701, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1801, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1901, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=2001, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=2101, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=2001, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1901, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1801, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1701, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1601, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1501, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1401, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1301, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1201, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1101, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=1001, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=901, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=801, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=701, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=601, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=501, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=401, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=301, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=201, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=199, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=198, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=197, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=196, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=197, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=198, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=199, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=201, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=202, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=203, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=204, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=205, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=206, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=207, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=208, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=209, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=210, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=211, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=212, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=213, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=214, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=215, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=216, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=217, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=218, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=219, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=218, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=217, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=216, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=215, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=216, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=217, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=218, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=219, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9.solo()
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=220, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=221, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=222, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=223, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=224, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=225, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=226, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=227, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=228, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=229, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=230, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=231, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=232, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=233, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=234, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=235, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=236, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=237, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=238, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=239, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=240, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=241, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=242, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=243, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=244, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=245, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=246, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=247, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=247, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=246, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=245, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=244, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=243, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=242, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=241, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=240, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=241, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=242, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=243, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=244, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=245, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=246, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=247, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=248, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=249, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=250, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=251, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=252, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=253, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=254, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=255, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=256, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=257, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=256, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=255, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=254, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=253, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=252, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=251, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=250, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=251, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=252, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=253, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=254, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=255, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=256, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=257, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=258, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=259, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=260, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=261, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=262, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=263, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=264, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=265, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=266, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=267, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=268, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=267, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=266, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=265, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=264, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=263, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=262, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=261, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=260, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=259, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=258, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=257, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=256, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=255, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=254, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=253, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=252, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=251, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=250, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=251, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=252, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=253, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=254, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=255, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=256, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=257, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=258, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=259, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=260, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=261, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=262, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=261, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=260, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=259, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=258, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=257, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=256, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=255, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=254, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=253, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=252, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=251, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=250, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9.stop()
+
+v9.stop()
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=250, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=251, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=252, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=253, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=254, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=255, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=256, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=257, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=258, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=259, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=260, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=261, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=262, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=263, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=262, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=261, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=260, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=259, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v9 >> cbass(ft(4, 0, 4), dur=1/2, follow=4, csweep=7.6, cswfreq=258, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+

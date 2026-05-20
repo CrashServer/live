@@ -1,0 +1,355 @@
+### ===== DAFT PUNK — Harder Better Faster Stronger =====
+Clock.bpm = 105
+Scale.default = Scale.major
+Root.default = "C#"
+d1 >> a_daft([1,1,5,4,1,1,4,3,3,3,2,1,3,3,5,4,1,3,4,3,1,3,4,3,5,4,3,3,1,0,1,3,1,1,3,1,3,5,3,1,3,0,0,3,0,4,3,2,3,6,6,1,6,4,3,1,6,5,5,1,3,1,1,1,1], dur=1/4, sus=1/2, rate=12, cutoff=var([800, 1200, 1300, 4000, 1600, 3200], 8), resonance=0.1, punch=2, oct=PStutter([5,6,5,6,5,6,5,6,5,6,5,7,5,6,4],[2,6,2,4,6,13,2,6,2,6,2,6,2,2,4]), shapemix=1).unison(3).every(16,"stutter",4)
+v0 >> compkick(tone=4.0, noise=3.0, comp=1, drive=0.2, ring=1, metal=3.5, body=0.4, bend=1.3, dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 123
+
+Scale.default = Scale.mixolydian
+
+Root.default = "D"
+
+d2 >> a_daft([4,4,4,4,5,6,6,6,6,0,1,1,1,1,2,1,0,5,5,4,3], cutoff=linvar([2000, 6000], 32), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, dur=PStutter([1,1/2,1/4,3/2,1,1/2,1/4,3/2,1,1/2,1],[3,1,1,1,2,1,1,1,3,6,1]), sus=PStutter([1/2,1/4,1/2,1/4,1/2,1/4,1],[4,1,4,1,4,6,1]), oct=PStutter([5,6,6],[5,12,4]), mverb=0.1).unison(4)
+
+d2 >> a_daft([4,4,4,4,5,6,6,6,6,0,1,1,1,1,2,1,0,5,5,4,3], cutoff=linvar([2000, 6000], 32), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, dur=PStutter([1,1/2,1/4,3/2,1,1/2,1/4,3/2,1,1/2,1],[3,1,1,1,2,1,1,1,3,6,1]), sus=PStutter([1/2,1/4,1/2,1/4,1/2,1/4,1],[4,1,4,1,4,6,1]), shape=sinvar([0,0.4],16), oct=PStutter([5,6,6],[5,12,4]), mverb=0.1).unison(4)
+
+d2 >> a_daft([4,4,4,4,5,6,6,6,6,0,1,1,1,1,2,1,0,5,5,4,3], cutoff=linvar([2000, 6000], 32), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, dur=PStutter([1,1/2,1/4,3/2,1,1/2,1/4,3/2,1,1/2,1],[3,1,1,1,2,1,1,1,3,6,1]), sus=PStutter([1/2,1/4,1/2,1/4,1/2,1/4,1],[4,1,4,1,4,6,1]), shape=sinvar([0,0.4],16), oct=PStutter([5,6,6],[5,12,4]), mverb=0.1).unison(4)
+
+d3>> varsaw([3,2,3,3,4,3,2,3,5,3], dur=PDur(10,16)*2, vocod=2, voccarr=0.5, vocbw=0.7, vowel=1, vowelf=5, vowelq=3) 
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 110
+
+Scale.default = Scale.chromatic
+
+Root.default = "C"
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, resonbank=0.8, rbfreq=var([300, 400, 500, 600, 650, 700, 800], 8), rbdecay=0.5, rbspread=1.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, resonbank=0.8, rbfreq=var([300, 400, 500, 600, 650, 700, 800], 8), rbdecay=0.5, rbspread=1.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 800], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 800, 600, 700], P*[1, 2, 4, 8]), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 600], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=1200, subhgain=1, leg=8, vadiodc=0.5, tape=1.6, tapedrive=32, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=6, tapewarm=1.8, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[5,6,5,5,6,5], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=0.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 600], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,7,5,2], dur=1/4, oct=[4,5,5,4,5,4], vadiod=4500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1, tapedrive=2, tube=0.8, tubegain=1.9, echo=0.25, fbdelay=0.5, fshift=4, fphase=0, fmix=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=1.7, tubebias=0.1, tapewarm=0.5, tapewobble=1.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d3 >> cbass([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[5,5,5,6,6,6], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+x9 >> play("X-o-", dur=1/4, amp=4, rate=1, sample=18, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/1, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+x9 >> play("[.].X.", dur=1/4, amp=4, rate=1, sample=18, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).only()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 80
+
+Scale.default = Scale.mixolydian
+
+Root.default = "D"
+
+d1 >> cbass([0,5,2,5,0,5,6,4,1,4,6,4], dur=1/2, oct=[6,5], amp=0.5).unison(3)
+
+d2 >> cbass([(5,0,2),(4,6,1)], dur=3, sus=2, amp=0.5, follow=4)
+
+d3 >> cbass([0,5,2,5,0,5,6,4,1,4,6,4], dur=1/2, oct=[5,6], amp=0.7)
+
+d4 >> cbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=0.5)
+
+b1 >> cbass([2,2,4,1,1,3,5,6,0,1,2,4,5,6,0,1,2,2,3,1,1,4,5,6,0,1,2,3,4,5,4,3,2,0], dur=PStutter([2,1/2,2,1/2,1,1/2,1,2,1/2,2,1/2,1,1/2,1/4,2],[1,2,1,6,1,4,1,1,2,1,8,2,1,2,1]), sus=PStutter([1/2,1/8,1,1/2,1/8,1,1/2,1/8,1/2,1,1/2,1/8,2],[8,2,1,2,2,1,8,2,2,2,1,2,1]), oct=PStutter([7,5,6,5,6,7,5,6],[6,1,4,2,3,6,1,11]), amp=0.5)
+
+b2 >> tb304([5,6,0,1,2,4,5,6,0,1,2,2,3,1,1,4,5,6,0,1,2,3,4,5,4,3,2,0], dur=PStutter([1/2,1,1/2,1,2,1/2,2,1/2,1,1/2,1/4,1/3,2],[4,1,4,1,1,2,1,8,2,1,1,1,1]), sus=PStutter([1/2,1/8,1,1/2,1/8,1,3/4,1/2,1/8,1/2,1,1/2,1/8,2],[2,2,1,2,2,1,6,2,2,2,2,1,2,1]), oct=PStutter([4,5,4,5,7,4,5,6],[1,4,2,3,6,1,10,1]), amp=0.5)
+
+p1 >> pluck([0,0,2,6,6,1,0,0,1,6,6,1], dur=[2,1/2,1/2], sus=1/2, oct=6, amp=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 105
+
+Scale.default = Scale.major
+
+Root.default = "C#"
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d2 >> dbass([3,2,3,4,5,4,5,3,4,3,2,3,4,5,1,2,3,1,5,0,5,0,5,5,5,5,3,2], dur=[2,1/4,2,1/4,2,2,3/2,2,1/4,4,8,2,1/4,3/2,1/4,1/4,3/2,3,1/4,1/4,3/2,3/2,1/2,1/4,1/4,1,2,1/4], sus=1/4, oct=PStutter([5,4,5,6,5,6,5,6,5],[6,1,7,4,1,1,1,1,6])).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+
+Scale.default = Scale.mixolydian
+
+Root.default = "C"
+
+d1 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d2 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d1 >> a_gesa(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7)
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 148
+
+Scale.default = Scale.major
+
+Root.default = "C"
+
+d1 >> dbass([2,4,0,5,1], dur=4, oct=[4,4,5,4,5]).unison(3)
+
+d2 >> tb304(PRand([0,1,2,3,4,5,6]), dur=PRand([1,1/2,3/2]), sus=3/2, oct=PRand([3,4,5]))
+
+d3 >> tb305([2,4,0,5,1], dur=4, oct=4)
+
+b1 >> faim([(2,4),(4,6),(4,0),(2,5),(5,1)], dur=4, oct=5)
+
+b2 >> cs80([(2,6),(4,6),(4,0),(2,0),(5,1),(6,2),(6,1),(0,2),(0,2),(1,3),(2,4),(1,4),(2,4),(5,5),(1,5)], dur=4, oct=PStutter([5,6,5,6],[7,6,1,1]), fatk=0.75, fdec=0.5, fsus=0.4, frel=1.0, cutoff=200, detune=0.002, vibspeed=0.1, vibdepth=0.004, glide=0.8, glidedur=0.015)
+
+p1 >> faim(Pvar([(1,1),P[(1,1),(0,0)],(0,0),(1,1)],[1.5,1,1.5,4]), dur=PStutter([1/2,1/4,1/2,1/4,1/2,1/4,1/2,1/4,1/2,1/4],[1,1,1,1,2,1,1,1,5,8]), sus=PStutter([1/2,1/4,1/2,1/4],[1,4,1,16]), oct=6)
+
+p2 >> pluck(PwRand([(1,1),(0,0),(2,6)],[247,75,1]), dur=PRand([1/2,1/4]), sus=1/4, oct=[3,5])
+
+d4 >> faim(Pvar([P[2,4,0,5,1,2,2,2,2,2,2,2,2,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,1,1,1],P[1,1,1,1,1,2,2,2,2,2,2,2,2,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,1,1,1]],[37.5,580]), dur=PStutter([4,1/2,1/4],[5,1199,1]), sus=PStutter([1/2,1/4],[5,1200]), oct=7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 68
+Scale.default = "dorian"
+Root.default = "D"
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+
+p1 >> industrialdrone([0, 4, 0, -3, 0], dur=PWhite(12, 32), sus=PWhite(16, 40), oct=4, amp=0.5, cutoff=linvar([320, 1800], 96), res=0.5, detune=0.4, noise=0.3, sub=0.4, feedback=0.35, cheapverb=0.75, cvdecay=4, miVerb=0.5, mverbfreeze=sinvar([0, 0.7], 48), stereowidth=0.85, hpf=90)
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.35, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, jpdamp=0.3, hpf=220, stereowidth=0.82)
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=6, amp=0.18, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+m1 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+
+f1 >> sinepad([(0, 4, 7, 11), (0, 3, 7, 10), (-2, 2, 5, 9)], dur=PWhite(24, 56), sus=PWhite(28, 64), oct=6, amp=0.22, spectralfreeze=sinvar([0.3, 0.7], 40), freezerand=0.3, jpverb=0.7, jpsize=0.98, jpdamp=0.2, hpf=420, stereowidth=0.9)
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.35, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+#@bed
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+p1 >> industrialdrone([0, 4, 0, -3, 0], dur=PWhite(12, 32), sus=PWhite(16, 40), oct=4, amp=0.5, cutoff=linvar([320, 1800], 96), res=0.5, detune=0.4, noise=0.3, sub=0.4, feedback=0.35, cheapverb=0.75, cvdecay=4, miVerb=0.5, mverbfreeze=sinvar([0, 0.7], 48), stereowidth=0.85, hpf=90)
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.35, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, jpdamp=0.3, hpf=220, stereowidth=0.82)
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=6, amp=0.18, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+m1 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+f1 >> sinepad([(0, 4, 7, 11), (0, 3, 7, 10), (-2, 2, 5, 9)], dur=PWhite(24, 56), sus=PWhite(28, 64), oct=6, amp=0.22, spectralfreeze=sinvar([0.3, 0.7], 40), freezerand=0.3, jpverb=0.7, jpsize=0.98, jpdamp=0.2, hpf=420, stereowidth=0.9)
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+f1 >> sinepad([(0, 4, 7, 11), (0, 3, 7, 10), (-2, 2, 5, 9)], dur=PWhite(24, 56), sus=PWhite(28, 64), oct=6, amp=0.22, spectralfreeze=sinvar([0.3, 0.7], 40), freezerand=0.3, jpverb=0.7, jpsize=0.98, jpdamp=0.2, hpf=420, stereowidth=0.9)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+f1 >> sinepad([(0, 4, 7, 11), (0, 3, 7, 10), (-2, 2, 5, 9)], dur=PWhite(24, 56), sus=PWhite(28, 64), oct=6, amp=0.22, spectralfreeze=sinvar([0.3, 0.7], 40), freezerand=0.3, jpverb=0.7, jpsize=0.98, jpdamp=0.2, hpf=420, stereowidth=0.9)
+
+f1 >> sinepad([(0, 4, 7, 11), (0, 3, 7, 10), (-2, 2, 5, 9)], dur=PWhite(24, 56), sus=PWhite(28, 64), oct=6, amp=0.7, spectralfreeze=sinvar([0.3, 0.7], 40), freezerand=0.3, jpverb=0.7, jpsize=0.98, jpdamp=0.2, hpf=420, stereowidth=0.9)
+
+m1 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=6, amp=0.18, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.18, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.1, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+r1.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.35, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, jpdamp=0.3, hpf=220, stereowidth=0.82)
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+
+m1 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+f1 >> sinepad([(0, 4, 7, 11), (0, 3, 7, 10), (-2, 2, 5, 9)], dur=PWhite(24, 56), sus=PWhite(28, 64), oct=6, amp=0.7, spectralfreeze=sinvar([0.3, 0.7], 40), freezerand=0.3, jpverb=0.7, jpsize=0.98, jpdamp=0.2, hpf=420, stereowidth=0.9)
+
+f1.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.35, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, jpdamp=0.3, hpf=220, stereowidth=0.82)
+m1 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+f1.stop()
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.1, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.2, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.3, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.4, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.4, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+p1 >> industrialdrone([0, 4, 0, -3, 0], dur=PWhite(12, 32), sus=PWhite(16, 40), oct=4, amp=0.5, cutoff=linvar([320, 1800], 96), res=0.5, detune=0.4, noise=0.3, sub=0.4, feedback=0.35, cheapverb=0.75, cvdecay=4, miVerb=0.5, mverbfreeze=sinvar([0, 0.7], 48), stereowidth=0.85, hpf=90)
+
+hn >> plaitsX(PMarkov(), dur=PWhite(0.15, 2.5), sus=PWhite(0.1, 1.8), oct=6, amp=0.5, preset=var([3, 7, 5, 11], PRand([4, 8, 16])), porta=PRand([0, 0.2, 0.5]), harm=linvar([0.3, 0.7], 32), timbre=sinvar([0.3, 0.8], PWhite(4, 12)), hpf=400, jpverb=0.55, jpsize=0.9, jpdamp=0.3, stereowidth=0.85)
+
+hn >> plaitsX(melody(), dur=PWhite(0.08, 1.5), sus=PWhite(0.05, 1.2), oct=6, amp=0.55, preset=PRand([0, 2, 6, 9]), cutoff=sinvar([800, 4500], PWhite(3, 10)), hpf=350, fbdelay=0.35, fbtime=PRand([0.125, 0.1875, 0.25]), fbfeed=0.55, fbcutoff=4000, fbspread=0.08, beat_dur=1, jpverb=0.45, stereowidth=0.85)
+
+hn >> alva(PMarkov(), dur=PWhite(0.5, 4), sus=PWhite(0.3, 3), oct=5, amp=0.45, mod=sinvar([0.2, 0.8], PWhite(8, 20)), vib=linvar([0, 0.4], 32), hpf=300, jpverb=0.6, jpsize=0.92, jpdamp=0.4, tape=0.3, tapedrive=1.2, stereowidth=0.88)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+hn >> alva(PMarkov(), dur=PWhite(0.5, 4), sus=PWhite(0.3, 3), oct=5, amp=0.45, mod=sinvar([0.2, 0.8], PWhite(8, 20)), vib=linvar([0, 0.4], 32), hpf=300, jpverb=0.6, jpsize=0.92, jpdamp=0.4, tape=0.3, tapedrive=1.2, stereowidth=0.88)
+
+hn >> prof(PRand([0, 2, 4, 5, 7, 9, 11, 12]), dur=PWhite(0.2, 2), sus=PWhite(0.15, 1.5), oct=5, amp=0.5, hpf=300, tape=0.35, tapedrive=1.3, jpverb=0.55, jpsize=0.9, jpdamp=0.35, stereowidth=0.85)
+
+hn >> glitcher(PWhite(0, 14), dur=PWhite(0.05, 0.6), sus=PWhite(0.03, 0.4), oct=6, amp=0.5, len=PWhite(0.1, 2), henA=PRand([1.2, 1.4, 1.6, 1.8]), henB=PRand([0.2, 0.3, 0.4]), hpf=500, jpverb=0.45, jpsize=0.85, jpdamp=0.35, stereowidth=0.85, pan=PRand([-0.8, -0.4, 0, 0.4, 0.8]))
+
+hn >> braids(melody(), dur=PWhite(0.2, 2.5), sus=PWhite(0.15, 2), oct=6, amp=0.45, model=PRand([0, 8, 17, 23, 29, 41]), timbre=sinvar([0.3, 0.8], PWhite(4, 12)), color=linvar([0.2, 0.8], 24), decim=PRand([0, 4, 8]), hpf=350, jpverb=0.55, jpsize=0.92, jpdamp=0.3, stereowidth=0.88)
+
+hn >> scatter(PRand([0, 3, 7, 10, 2, 5]), dur=PWhite(0.2, 1.8), sus=PWhite(0.1, 0.8), oct=6, amp=0.5, rate=PWhite(0.5, 8), resonbank=0.85, rbfreq=PRand([150, 200, 300, 500, 800]), rbdecay=PWhite(0.3, 1.2), rbspread=PRand([0.3, 1, 1.5, 2.5]), hpf=400, jpverb=0.6, jpsize=0.9, stereowidth=0.88)
+
+hn >> rave(PWhite(0, 14), dur=PWhite(0.1, 1.2), sus=PWhite(0.08, 0.8), oct=6, amp=0.35, hpf=400, jpverb=0.55, jpsize=0.9, jpdamp=0.35, stereowidth=0.9, pan=PRand([-0.7, -0.3, 0.3, 0.7]))
+
+hn >> virus(PWhite(0, 12), dur=PWhite(0.08, 0.8), sus=PWhite(0.05, 0.4), oct=6, amp=0.4, len=PWhite(0.2, 1.5), mod1=PRand([0.3, 0.5, 0.7, 0.9]), mod2=PRand([0.2, 0.4, 0.6]), hpf=500, jpverb=0.5, jpsize=0.88, stereowidth=0.85, pan=PRand([-0.7, 0.7]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+hn >> virus(PWhite(0, 12), dur=PWhite(0.08, 0.8), sus=PWhite(0.05, 0.4), oct=6, amp=0.4, len=PWhite(0.2, 1.5), mod1=PRand([0.3, 0.5, 0.7, 0.9]), mod2=PRand([0.2, 0.4, 0.6]), hpf=500, jpverb=0.5, jpsize=0.88, stereowidth=0.85, pan=PRand([-0.7, 0.7]))
+
+hn >> fmsynth(PMarkov(), dur=PWhite(0.3, 2.5), sus=PWhite(0.2, 2), oct=5, amp=0.4, index=sinvar([2, 12], PWhite(4, 16)), hpf=300, tape=0.3, tapedrive=1.3, jpverb=0.6, jpsize=0.92, jpdamp=0.35, stereowidth=0.85)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+hn >> alva(PMarkov(), dur=PWhite(0.5, 4), sus=PWhite(0.3, 3), oct=5, amp=0.45, mod=sinvar([0.2, 0.8], PWhite(8, 20)), vib=linvar([0, 0.4], 32), hpf=300, jpverb=0.6, jpsize=0.92, jpdamp=0.4, tape=0.3, tapedrive=1.2, stereowidth=0.88)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+hn >> plaitsX(melody(), dur=PWhite(0.08, 1.5), sus=PWhite(0.05, 1.2), oct=6, amp=0.55, preset=PRand([0, 2, 6, 9]), cutoff=sinvar([800, 4500], PWhite(3, 10)), hpf=350, fbdelay=0.35, fbtime=PRand([0.125, 0.1875, 0.25]), fbfeed=0.55, fbcutoff=4000, fbspread=0.08, beat_dur=1, jpverb=0.45, stereowidth=0.85)
+
+hn >> prof(PRand([0, 2, 4, 5, 7, 9, 11, 12]), dur=PWhite(0.2, 2), sus=PWhite(0.15, 1.5), oct=5, amp=0.5, hpf=300, tape=0.35, tapedrive=1.3, jpverb=0.55, jpsize=0.9, jpdamp=0.35, stereowidth=0.85)
+
+hn.stop()
+
+hn >> glitcher(PWhite(0, 14), dur=PWhite(0.05, 0.6), sus=PWhite(0.03, 0.4), oct=6, amp=0.5, len=PWhite(0.1, 2), henA=PRand([1.2, 1.4, 1.6, 1.8]), henB=PRand([0.2, 0.3, 0.4]), hpf=500, jpverb=0.45, jpsize=0.85, jpdamp=0.35, stereowidth=0.85, pan=PRand([-0.8, -0.4, 0, 0.4, 0.8]))
+
+m1 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.35, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, jpdamp=0.3, hpf=220, stereowidth=0.82)
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+
+m1 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+hn >> plaitsX(PMarkov(), dur=PWhite(0.15, 2.5), sus=PWhite(0.1, 1.8), oct=6, amp=0.5, preset=var([3, 7, 5, 11], PRand([4, 8, 16])), porta=PRand([0, 0.2, 0.5]), harm=linvar([0.3, 0.7], 32), timbre=sinvar([0.3, 0.8], PWhite(4, 12)), hpf=400, jpverb=0.55, jpsize=0.9, jpdamp=0.3, stereowidth=0.85)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

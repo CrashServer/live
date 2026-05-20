@@ -1,5 +1,5 @@
 SynthDef.new(\wavetable,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0.0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=1.0, buf=0, wtpos=0, sample=0, detune=0.2, cutoff=8000, rq=1.0, wtdist=0|
+{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0.0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, wide=1.0, buf=0, wtpos=0, sample=0, detune=0.2, cutoff=8000, rq=0.8, wtdist=0|
 var osc, env;
 sus = sus * blur;
 freq = In.kr(bus, 1);

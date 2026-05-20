@@ -1,0 +1,412 @@
+d1 >> dbass(dur=1, amp=fi())              # 0→1 over 16 beats
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, degree=ff())            # 16 fractal values 0-1                                                                      
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fi())
+
+d1 >> dbass(dur=1/4, amp=fi())
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1/4, lpf=fi(8))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fi(32, 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass([0,2,4,5], dur=PDur(5,8), amp=fi(16), lpf=fi(32, 200, 6000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fo())
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fo(32, 200, 8000))
+
+d1 >> dbass(dur=1/4, lpf=fo(32, 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass([0,2,4], dur=1, amp=fo(16), lpf=fo(32, 4000, 200))
+
+d1 >> dbass([0,2,4], dur=1/4, amp=fo(16), lpf=fo(32, 4000, 200))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fb(4))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fb(8, 400, 4000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> keys([0,2,4,7], dur=4, sus=4, lpf=fb(16, 800, 6000), amp=0.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fe(16, 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass([0,0,3,5], dur=PDur(3,8), lpf=fe(32, 200, 8000), amp=fe(16, 0.2, 0.8))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, pan=fs(16, -1, 1))
+
+d1 >> dbass(dur=0.5, lpf=fs(8, 400, 4000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass([0,0,3,5,3], dur=PDur(5,8), lpf=fs(8, 600, 3000), amp=0.7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fr())
+
+d1 >> dbass(dur=1/4, amp=fr())
+
+d1 >> dbass(dur=1/4, amp=fr(4))
+
+d1 >> dbass(dur=1/4, amp=fr(8))
+
+d1 >> dbass(dur=1/4, amp=fr(8), dist=0.2, tmp=0)
+
+d1 >> dbass(dur=1/4, amp=fr(8), dist=0.3, tmp=0)
+
+d1 >> dbass(dur=1/4, amp=fr(8), dist=0.4, tmp=0)
+
+d1 >> dbass(dur=1/4, amp=fr(8), dist=0.3, tmp=0)
+
+d1 >> dbass(dur=1/4, amp=fr(8), dist=0.4, tmp=0)
+
+d1 >> dbass(dur=1/4, amp=fr(8), dist=0.3, tmp=0)
+
+d1 >> dbass(degree=fr(8, 0, 7), dur=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fr([4, 8], [0, 4], [3, 7]), dur=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fr(8, 0, 7), dur=PDur(5,8), amp=fr(8, 0.3, 0.8))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fw(), dur=0.5)
+
+d1 >> dbass(degree=fw(), dur=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fw(8, 2, 12), dur=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> pluck(degree=fw(16, 1, 7), dur=PDur(5,8), oct=5, sus=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fd(), dur=1)
+
+d1 >> dbass(degree=fd(), dur=1/4)
+
+d1 >> dbass(degree=fd() * 2, dur=1/4)
+
+d1 >> dbass(degree=fd() * 4, dur=1/4)
+
+d1 >> dbass(degree=fd() * 8, dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fd(), dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, lpf=fd(16, 100, 4000))
+
+d1 >> dbass(dur=0.25, lpf=fd(16, 100, 4000))
+
+d1 >> dbass(dur=0.25, lpf=fd(16, 1000, 4000))
+
+d1 >> dbass(dur=0.25, lpf=fd(16, 1000, 40000))
+
+d1 >> dbass(dur=0.25, lpf=fd(16, 1000, 2000))
+
+d1 >> dbass(dur=0.25, lpf=fd(16, 100, 2000))
+
+d1 >> dbass(dur=0.25, lpf=fd(16, 400, 2000))
+
+d1 >> dbass(dur=0.25, lpf=fd(16, 800, 2000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass([0,0,3,5], dur=PDur(5,8), lpf=fd(32, 100, 4000)+2000)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fg(), dur=0.5)
+
+d1 >> dbass(degree=fg(), dur=0.125)
+
+d1 >> dbass(degree=fg(), dur=0.25)
+
+d1 >> dbass(degree=fg([4, 8], [0, 5], [0.5, 1]), dur=0.5)
+
+d1 >> dbass(degree=fg([4, 8], [0, 5], [0.5, 1]), dur=0.25)
+
+d1 >> pluck(degree=fg(16, 3, 1.5), dur=PDur(5,8), oct=5)
+
+d1 >> dbass(degree=ft(), dur=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=ft(8, 0, 12), dur=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=ft(8, 0, 4), dur=0.5)
+
+d1 >> dbass(degree=ft(8, 0, 4), dur=0.25)
+
+d1 >> dbass(degree=ft(8, 0, 4), dur=0.25).unison(4)
+
+d1 >> pluck(degree=ft(16, 0, 7), dur=PDur(3,8), oct=5, sus=0.3)
+
+d1 >> pluck(degree=ft(16, 0, 7), dur=PDur(5,8), oct=5, sus=0.3)
+
+d1 >> pluck(degree=ft(16, 0, 7), dur=PDur(5,8)*2, oct=5, sus=0.3)
+
+d1 >> pluck(degree=ft(16, 0, 7), dur=PDur(5,8)*1/2, oct=5, sus=0.3)
+
+d1 >> pluck(degree=ft(16, 0, 7), dur=PDur(5,8)*1, oct=5, sus=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fc())
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.25, amp=fc(8, 0, 0.8))
+
+b1 >> play("x", dur=0.25, amp=fc(16, 0.2, 0.8))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, amp=fq())
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, lpf=fq(16, 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, amp=fq())
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, lpf=fq(16, 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.25, lpf=fq([8, 16], 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> pluck(degree=fq(8, 0, 7), dur=0.5, oct=5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, amp=fz())
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fi(8))
+
+d1 >> dbass(dur=1/4, lpf=fi(8))
+
+~d1 >> dbass(dur=1/4, lpf=fi(8))
+
+d1 >> dbass(dur=1/4, lpf=fi(8))
+
+e1 >> dbass(dur=1/4, lpf=fi(8))
+
+e1 >> dbass(dur=1/4, lpf=fi(8))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fi(32, 200, 8000))
+
+d1 >> dbass(dur=1/4, lpf=fi(32, 200, 8000))
+
+d1 >> dbass([0,2,4,5], dur=PDur(5,8), amp=fi(16), lpf=fi(32, 200, 6000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fo())
+
+d1 >> dbass(dur=1/4, amp=fo())
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fo(32, 200, 8000))
+
+d1 >> dbass(dur=1/4, lpf=fo(32, 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass([0,2,4], dur=1, amp=fo(16), lpf=fo(32, 4000, 200))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fb(4))
+
+d1 >> dbass(dur=1/4, amp=fb(4))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fb(8, 400, 4000))
+
+d1 >> dbass(dur=1/4, lpf=fb(8, 400, 4000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> keys([0,2,4,7], dur=4, sus=4, lpf=fb(16, 800, 6000), amp=0.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fe(16, 200, 8000))
+
+d1 >> dbass(dur=1/4, lpf=fe(16, 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, pan=fs(16, -1, 1))
+
+d1 >> dbass([0,0,3,5,3], dur=PDur(5,8), lpf=fs(8, 600, 3000), amp=0.7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fen(16, 200, 8000))
+
+d1 >> dbass(dur=1, lpf=fen(16, (200, 1200), 8000))
+
+d1 >> dbass(dur=1/4, lpf=fen(16, (200, 1200), 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fr([4, 8], [0, 4], [3, 7]), dur=0.5)
+
+d1 >> dbass(degree=fr([4, 8], [0, 4], [3, 7]), dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

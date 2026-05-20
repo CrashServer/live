@@ -1,0 +1,20 @@
+Root.default='C'
+
+Scale.default="minor"
+
+Clock.bpm = lininf(130, 172, 128)
+
+Clock.bpm = lininf(130, 172, 128)
+
+b1 >> dbass(var([0, -2, 0.5], 8), formant=var([0, 0.1], [24, 8]), formantmix=PWhite(0, 0.3), oct=(5, 6, [4, 3]) + var([0, 1], [14, 2]) + PwRand([0, 1, 1.25], [30, 1, 1]), rate=linvar([1.2, 0.3], [32]), fmod=linvar([0, 1], [128]), scale=Scale.chromatic, drive=var([0, (0.1, 0)], [12, 4]), dur=1/2, rgate=0.25, rgaterate=12, leg=0, rgatewave=0, beat_dur=1, amp=0.8, tube=0.3, tubegain=1.5, tubewarm=0.6, tubebias=0.1, hpf=linvar([100, 400], 8)).unison(3).every(8, "stutter", slide=0.01, lpf=linvar([4000, 8000], 16))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+n3 >> blip()
+
+Clock.clear()
+soff()
+Server.clearFx()
+

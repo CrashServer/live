@@ -1,0 +1,2292 @@
+d1 >> play(pbuild("techno"), dur=0.25)
+
+d1 >> play(pbuild("techno", 4), dur=0.25)
+
+d1 >> play(pbuild("techno", 16, fill=4), dur=0.25)
+
+d1 >> play(pbuild("techno", 1), dur=0.25)
+
+d1 >> play(pbuild("techno", 1).kick, dur=0.25)
+
+d1 >> play(pbuild("industrial", 8, fill=4), dur=0.25, shape=0.4, triode=0.3)
+
+d1 >> play(pbuild("industrial", 2, fill=4), dur=0.25, shape=0.4, triode=0.3)
+
+a5 >> play(pat("d4"))
+
+a5 >> play(pat("h2"))
+
+a5 >> play(pat("h2"), dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a5 >> play(pat("h2"), dur=1/4)
+
+d1 >> play(pbuild("techno", 16, fill=4), dur=0.25)
+
+d1 >> play(pbuild("techno", 1), dur=0.25)
+
+d1 >> play(pbuild("industrial", 4), dur=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno"), dur=0.25)                                                                                                
+
+d1 >> play(pbuild("ebm"), dur=0.25)                                                                                                     
+
+d1 >> play(pbuild("dnb"), dur=0.25)                                                                                                     
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 1), dur=0.25)                 
+
+d1 >> play(pbuild("techno", 4), dur=0.25)                                                                                               
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno"), dur=0.25)       # 8 bars, each bar mutates  
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=4)       # 8 bars, each bar mutates  
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=5)       # 8 bars, each bar mutates  
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=6)       # 8 bars, each bar mutates  
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=6)       # 8 bars, each bar mutates  
+
+d1 >> play(pbuild("ebm"), dur=0.25)          # 8 bars evolving ebm                                                                      
+
+d1 >> play(pbuild("dnb"), dur=0.25)          # 8 bars evolving dnb                                                                      
+
+d1 >> play(pbuild("house"), dur=0.25)        # 8 bars evolving house                                                                    
+
+d1 >> play(pbuild("breaks"), dur=0.25)       # 8 bars evolving breaks                                                                   
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("halftime"), dur=0.25)     # 8 bars evolving halftime                                                                 
+
+d1 >> play(pbuild("afro"), dur=0.25)         # 8 bars evolving afro                                                                     
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 1), dur=0.25)    # STATIC — 1 bar, no evolution, loops same bar
+
+d1 >> play(pbuild("techno", 4), dur=0.25)    # 4 bars evolving, short loop                                                              
+
+d1 >> play(pbuild("techno"), dur=0.25)       # 8 bars evolving (default)                                                                
+
+d1 >> play(pbuild("techno", 8, fill=4), dur=0.25)   # evolves 8 bars, fill on bar 4 and 8                                               
+
+d1 >> play(pbuild("techno", 16, fill=4), dur=0.25)  # evolves 16 bars, fill every 4th bar                                               
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25)  # evolves 16 bars, fill every 8th bar                                               
+
+d1 >> play(pbuild("dnb", 8, fill=4), dur=0.25)      # dnb with fills                                                                    
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pat("t1"), dur=0.25)    # techno groove 1      
+
+d1 >> play(pat("t2"), dur=0.25)    # techno groove 1      
+
+d1 >> play(pat("t3"), dur=0.25)    # techno groove 1      
+
+d1 >> play(pat("t2"), dur=0.25)    # techno groove 1      
+
+d1 >> play(pat("t1"), dur=0.25)    # techno groove 1      
+
+d1 >> play(pat("t3"), dur=0.25)    # techno groove 3                                                                                    
+
+d1 >> play(pat("e2"), dur=0.25)    # ebm groove 2                                                                                       
+
+d1 >> play(pat("d4"), dur=0.25)    # dnb groove 4                                                                                       
+
+d1 >> play(pat("h1"), dur=0.25)    # house groove 1                                                                                     
+
+d1 >> play(pat("b2"), dur=0.25)    # breaks groove 2                                                                                    
+
+d1 >> play(pat("i3"), dur=0.25)    # industrial groove 3
+
+d1 >> play(pat("hf1"), dur=0.25)   # halftime groove 1                                                                                  
+
+d1 >> play(pat("rg1"), dur=0.25)   # reggae groove 1      
+
+d1 >> play(pat("af2"), dur=0.25)   # afro groove 2                                                                                      
+
+d1 >> play(pbuild("techno"), dur=0.25, amp=Pacc("fourfloor"))                       # evolving + accented                               
+
+d1 >> play(pbuild("techno"), dur=0.25, amp=Pacc("ghost"), delay=PSwing(0.05))       # evolving + ghost + swing                          
+
+d1 >> play(pbuild("house", 1), dur=0.25, amplify=PSwing(0.15))                      # static + swing feel                               
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 8, fill=4), dur=0.25, shape=0.4, spring=0.2)                       # evolving + spring verb                 
+
+d1 >> play(pbuild("industrial"), dur=0.25, triode=0.4, csweep=0.3, cswfreq=400)                # evolving + comb sweep                  
+
+d1 >> play(pbuild("ebm", 1), dur=0.25, vocod=0.3, voccarr=0.2)                                # static + vocoder                        
+
+d1 >> play(pbuild("breaks", 16), dur=0.25, sblur=var([0, 0.4], [12, 4]))                      # evolving + spectral blur                
+
+d1 >> play(pbuild("dnb"), dur=0.25, gdel=0.3, gdeltime=0.75, gdelfb=0.4)                      # evolving + granular delay               
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 16, fill=4, seed=7), dur=0.25, amp=Pacc("fourfloor"), shape=0.3)   # 16 bars evolving, fill every 4         
+
+d2 >> play(pbuild("techno", 1, seed=7).hat, dur=0.25, amp=PSwing(0.2), hpf=6000)               # static hat layer, swung                
+
+b1 >> tekno([0, 0, 5, 0, 7, 0, 3, 0], dur=0.5, oct=3, tcut=400, tenv=5000, tdec=0.3, trez=0.6, tgrit=0.5, tsub=0.8)                     
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d2 >> play(pbuild("techno", 1, seed=7).hat, dur=0.25, amp=PSwing(0.2), hpf=6000)               # static hat layer, swung                
+
+b1 >> tekno([0, 0, 5, 0, 7, 0, 3, 0], dur=0.5, oct=3, tcut=400, tenv=5000, tdec=0.3, trez=0.6, tgrit=0.5, tsub=0.8)                     
+
+p1 >> svdk([0, 2, 4], dur=4, oct=4, sus=4, grit=0.2, harm=0.7, cutoff=1200, drift=0.6, fenv=0.1)                     
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("halftime", 1), dur=0.25, vowel=0.5, vowelf=sinvar([0, 4], 16))              # static + vowel morph                   
+
+d1 >> play(pbuild("techno"), dur=0.25, doppler=0.4, dopspd=0.25)                               # evolving + doppler                     
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno"), dur=0.25, amp=Pacc("ghost"), delay=PSwing(0.05))       # evolving + ghost + swing                          
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pat("e2"), dur=0.25)    # ebm groove 2                                                                                       
+
+d1 >> play(pat("d4"), dur=0.25)    # dnb groove 4                                                                                       
+
+d1 >> play(pat("h1"), dur=0.25)    # house groove 1                                                                                     
+
+d1 >> play(pat("b2"), dur=0.25)    # breaks groove 2                                                                                    
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", hat="----------------"), dur=0.25)     # 16th hats                                                          
+
+d1 >> play(pbuild("techno", hat="e "), dur=0.25)     # 16th hats                                                          
+
+d1 >> play(pbuild("techno", hat="e ", kick="X "), dur=0.25)     # 16th hats                                                          
+
+d1 >> play(pbuild("techno", hat="e ", kick="e "), dur=0.25)     # 16th hats                                                          
+
+d1 >> play(pbuild("techno", hat="e ", kick="f "), dur=0.25)     # 16th hats                                                          
+
+d1 >> play(pbuild("techno", hat="e ", kick="K "), dur=0.25)     # 16th hats                                                          
+
+d1 >> play(pbuild("techno", hat="e ", kick="w "), dur=0.25)     # 16th hats                                                          
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", kick="X   X X X   X   "), dur=0.25)   # custom kick                                                         
+
+d1 >> play(pbuild("techno", kick="X   e X X   X   "), dur=0.25)   # custom kick                                                         
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", seed=7), dur=0.25)    # different but also reproducible                                                     
+
+d1 >> play(pbuild("techno", seed=42), dur=0.25)   # always same 8-bar pattern                                                           
+
+d1 >> play(pbuild("dnb", 8, mute="hat"), dur=0.25)        # dnb evolving, no hats                                                       
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("dnb", 8, mute="hat"), dur=0.25)        # dnb evolving, no hats                                                       
+
+d1 >> play(pbuild("techno", mute="kick,perc"), dur=0.25)  # hats + snare only
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", mute="kick,perc"), dur=0.25)  # hats + snare only
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", mute="snare"), dur=0.25)      # no snare                                                                    
+
+d1 >> play(pbuild("techno", mute="hat"), dur=0.25)        # no hats — kick + snare only                                                 
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 16, density=0.7), dur=0.25)   # 16 bars, 70% density
+
+Clock.bpm = 170
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("dnb", 8, fill=4), dur=0.25)      # dnb with fills                                                                    
+
+d1 >> play(pbuild("dnb", 8, fill=2), dur=0.25)      # dnb with fills                                                                    
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, )      # dnb with fills                                                                    
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=4)      # dnb with fills                                                                    
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=4, csweep=0.2, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=4, csweep=0.1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=4, csweep=0.1, cswfreq=20, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=4, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=5, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=7, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=8, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=9, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=10, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=11, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=10, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=4, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.2, gdelsprd=0.5, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.3, gdelsprd=0.5, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.4, gdelsprd=0.5, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.5, gdelsprd=0.5, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.4, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.3, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.2, gdelfb=0.3, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.2, gdelfb=0.4, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.2, gdelfb=0.5, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=1, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.2, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=0.2, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.2, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=0.3, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.2, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.2, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.3, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.4, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=1,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=3,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=4,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=5,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=6,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=7,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=8,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=9,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=10,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=11,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=12,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=13,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=14,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=15,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=16,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=17,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=18,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=19,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=20,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=21,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=22,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=23,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=24,gdel=0.4, gdeltime=0.01, gdelsize=0.1, gdelsprd=0.6, gdelfb=0.6, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=24)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=24)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=5)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sidechain=1, sidechain_atk=0.05, sidechain_rel=0.1, thresh=0.006)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sidechain=0.2, sidechain_atk=0.05, sidechain_rel=0.1, thresh=0.006)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sidechain=0, sidechain_atk=0.05, sidechain_rel=0.1, thresh=0.006)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, mu=0)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, mu=1)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, mu=0)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=.1, sbluramt=4)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=0.2, sbluramt=4)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=0.3, sbluramt=4)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=0.4, sbluramt=4)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=0.5, sbluramt=4)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=0.6, sbluramt=4)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=0.5, sbluramt=4)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=0.4, sbluramt=4)
+
+d1 >> play(pbuild("dnb", 8, fill=0), dur=0.25, sample=2, sblur=0.3, sbluramt=4)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25)  # evolves 16 bars, fill every 8th bar                                               
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=4).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=20, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.4, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.6, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.7, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.8, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.9, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=1.0, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=1.1, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=1.2, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=1.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=1.4, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=1.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.6, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.7, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.8, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.9, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.0, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.1, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.2, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.3, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.4, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.6, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.7, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.8, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=1.9, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.0, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.1, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.2, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.3, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.4, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.6, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.7, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.8, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=2.9, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.0, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.1, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.2, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.3, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.4, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.6, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.7, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.8, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=3.9, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=4.0, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=4.1, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=4.2, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=4.3, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=4.4, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=4.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=4.6, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=4.7, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d2 >> play(pbuild("industrial", density=0.3), dur=0.25)   # very sparse                                                                 
+
+d3 >> play(pbuild("techno", 16, density=0.7), dur=0.25)   # 16 bars, 70% density
+
+d4 >> play(pbuild("house", 1), dur=0.25, amplify=PSwing(0.15))                      # static + swing feel                               
+
+d4 >> play(pbuild("house", 1), dur=0.25, amplify=PSwing(0.15), sample=4)                      # static + swing feel                               
+
+d4 >> play(pbuild("house", 1), dur=0.25, amplify=PSwing(0.15), sample=5)                      # static + swing feel                               
+
+d4 >> play(pbuild("house", 1), dur=0.25, amplify=PSwing(0.15), sample=6)                      # static + swing feel                               
+
+d4 >> play(pbuild("house", 1), dur=0.25, amplify=1, sample=6)                      # static + swing feel                               
+
+d1 >> play(pbuild("techno", seed=7), dur=0.25)    # different but also reproducible                                                     
+
+d4 >> play(pbuild("house", 1), dur=0.25, amplify=1, sample=6)                      # static + swing feel                               
+
+d1 >> play(pbuild("techno", kick="X   e X X   X   "), dur=0.25)   # custom kick                                                         
+
+d1 >> play(pbuild("techno", hat="e ", kick="w "), dur=0.25)     # 16th hats                                                          
+
+d1 >> play(pbuild("techno", 1, seed=1).kick, dur=0.25, shape=0.8)       # just kick                                                     
+
+d2 >> play(pbuild("techno", 1, seed=1).snare, dur=0.25, spring=0.3)     # just snare                                                    
+
+d3 >> play(pbuild("techno", 1, seed=1).hat, dur=0.25, amp=PSwing(0.2))  # just hat                                                      
+
+d4 >> play(pbuild("techno", 1, seed=1).perc, dur=0.25, sblur=0.3)       # just perc                                                     
+
+d1 >> play(pbuild("techno", mute="hat"), dur=0.25)        # no hats — kick + snare only                                                 
+
+d1 >> play(pbuild("techno", mute="snare"), dur=0.25)      # no snare                                                                    
+
+d1 >> play(pbuild("techno", mute="kick,perc"), dur=0.25)  # hats + snare only
+
+d1 >> play(pbuild("dnb", 8, mute="hat"), dur=0.25)        # dnb evolving, no hats                                                       
+
+d1 >> play(pbuild("techno", seed=42), dur=0.25)   # always same 8-bar pattern                                                           
+
+d1 >> play(pbuild("techno", seed=7), dur=0.25)    # different but also reproducible                                                     
+
+d4 >> play(pbuild("house", 1), dur=0.25, amplify=1, sample=6)                      # static + swing feel                               
+
+d1 >> play(pbuild("techno", kick="X   e X X   X   "), dur=0.25)   # custom kick                                                         
+
+d1 >> play(pbuild("techno", hat="e ", kick="w "), dur=0.25)     # 16th hats                                                          
+
+d1 >> play(pbuild("ebm", snare="    *   o   *   "), dur=0.25)     # custom snare                                                        
+
+d1 >> play(pbuild("techno", hat="dnb"), dur=0.25)                  # hat style from dnb genre                                           
+
+d1 >> play(pbuild("techno", 1, seed=1).kick, dur=0.25, shape=0.8)       # just kick                                                     
+
+d2 >> play(pbuild("techno", 1, seed=1).snare, dur=0.25, spring=0.3)     # just snare                                                    
+
+d3 >> play(pbuild("techno", 1, seed=1).hat, dur=0.25, amp=PSwing(0.2))  # just hat                                                      
+
+                                                                                                                                          
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d2 >> play(pbuild("industrial", density=0.3), dur=0.25)   # very sparse                                                                 
+
+d2 >> play(pbuild("industrial", density=0.3), dur=0.25, rate=2)                                                                
+
+d2 >> play(pbuild("industrial", density=0.3), dur=0.25, rate=4)
+
+d2 >> play(pbuild("industrial", density=0.6), dur=0.25, rate=4)
+
+d2 >> play(pbuild("industrial", density=0.6), dur=0.25, rate=4, shape=1)
+
+d2 >> play(pbuild("industrial", density=0.6), dur=0.25, rate=4, shape=1, dist2=1, dist2mix=1, dist2shape=0.1)
+
+d2 >> play(pbuild("industrial", density=0.7), dur=0.25, rate=4, shape=1, dist2=1, dist2mix=1, dist2shape=0.1)
+
+d2 >> play(pbuild("industrial", density=0.8), dur=0.25, rate=4, shape=1, dist2=1, dist2mix=1, dist2shape=0.1)
+
+d2 >> play(pbuild("industrial", density=0.9), dur=0.25, rate=4, shape=1, dist2=1, dist2mix=1, dist2shape=0.1)
+
+d2 >> play(pbuild("industrial", density=0.8), dur=0.25, rate=4, shape=1, dist2=1, dist2mix=1, dist2shape=0.1)
+
+d1 >> play(pbuild("techno", 16, fill=4), dur=0.25)  # evolves 16 bars, fill every 4th bar                                               
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 1), dur=0.25)    # STATIC — 1 bar, no evolution, loops same bar
+
+d1 >> play(pbuild("techno", 4), dur=0.25)    # 4 bars evolving, short loop                                                              
+
+d1 >> play(pbuild("techno"), dur=0.25)       # 8 bars evolving (default)                                                                
+
+d1 >> play(pbuild("techno", 32), dur=0.25)   # 32 bars evolving, very long arc                                                          
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d2 >> play(pbuild("industrial", density=0.8), dur=0.25, rate=4, shape=1, dist2=1, dist2mix=1, dist2shape=0.1)
+
+d1 >> play(pbuild("techno", 16, fill=4), dur=0.25)  # evolves 16 bars, fill every 4th bar                                               
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.3, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.4, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.5, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.6, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.7, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.6, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.5, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.4, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.3, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.3, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.4, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.5, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=4, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=12, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=170, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=20, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=100, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.4, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.6, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.7, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.8, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.9, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.0, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.1, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.2, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.4, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.6, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.7, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.8, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=1.9, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=4, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.6).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.7).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.8).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.9).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.0).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.1).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.2).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.3).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.4).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.6).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.7).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.8).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.9).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.0).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.1).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.2).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.3).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.4).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.3).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.2).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.1).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=2.0).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.9).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.8).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.7).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.6).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.4).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.3).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.2).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.1).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=1.0).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.9).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.8).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.7).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.6).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=400, cswdepth=0.3, cswrate=12, cswdecay=0.5).unison(3)
+
+g1 >> play("X ")
+
+g1 >> play("X ", amp=4)
+
+g1 >> play("X ", amp=5)
+
+g1 >> play("X ", amp=6)
+
+g1 >> play("X ", amp=7)
+
+g1 >> play("X ", amp=8)
+
+g1 >> play("X ", amp=9)
+
+g1 >> play("X ", amp=10)
+
+g1 >> play("X ", amp=11)
+
+g1 >> play("X ", amp=12)
+
+g1 >> play("X ", amp=11)
+
+g1 >> play("X ", amp=10)
+
+g1 >> play("X ", amp=9)
+
+g1 >> play("X ", amp=8)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=100, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=20, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.125, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.5, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.6, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.7, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.8, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.9, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.5, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.6, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.7, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.8, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1.9, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.5, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.6, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.7, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.8, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=2.9, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.5, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.6, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.7, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.8, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=3.9, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.5, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.6, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.7, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.8, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4.9, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.5, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.6, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.7, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.8, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=5.9, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=6.0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=6.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=6.2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=6.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.78, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=2, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.3, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.4, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.5, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.6, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.7, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.8, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.9, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.0, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.1, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.3, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.4, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.5, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.6, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.7, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.8, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=1.9, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=2.0, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.25, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.5, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.5, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 8, fill=4), dur=0.25)   # evolves 8 bars, fill on bar 4 and 8                                               
+
+d1 >> play(pbuild("techno", 8, fill=4), dur=0.25)   # evolves 8 bars, fill on bar 4 and 8                                               
+
+d1 >> play(pbuild("techno", 32), dur=0.25)   # 32 bars evolving, very long arc                                                          
+
+d1 >> play(pbuild("techno", 16), dur=0.25)   # 16 bars evolving, longer journey                                                         
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.5, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.5, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.5, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.5, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.5, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.4, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.6, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.7, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.8, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.9, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=1.0, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=1.0, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=1.0, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=1.0, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.9, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.8, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.7, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.6, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter")
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+ascii_gen("jamming")
+
+ascii_gen("jamming")
+
+ascii_gen("jamming")
+
+ascii_gen("jamming")
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=6)       # 8 bars, each bar mutates  
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("breaks"), dur=0.25)       # 8 bars evolving breaks                                                                   
+
+d1 >> play(pbuild("industrial"), dur=0.25)   # 8 bars evolving industrial                                                               
+
+d1 >> play(pbuild("reggae"), dur=0.25)       # 8 bars evolving reggae
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 8, fill=4), dur=0.25)   # evolves 8 bars, fill on bar 4 and 8                                               
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+d1 >> play(pbuild("techno"), dur=0.25, amp=Pacc("ghost"), delay=PSwing(0.05))       # evolving + ghost + swing                          
+
+d1 >> play(pbuild("techno"), dur=0.25, amp=Pacc("fourfloor"))                       # evolving + accented                               
+
+d2 >> play(pbuild("techno", 1, seed=7).hat, dur=0.25, amp=PSwing(0.2), hpf=6000)               # static hat layer, swung                
+
+b1 >> tekno([0, 0, 5, 0, 7, 0, 3, 0], dur=0.5, oct=3, tcut=400, tenv=5000, tdec=0.3, trez=0.6, tgrit=0.5, tsub=0.8)                     
+
+p1 >> svdk([0, 2, 4], dur=4, oct=4, sus=4, grit=0.2, harm=0.7, cutoff=1200, drift=0.6, fenv=0.1)                     
+
+p1.stop()
+
+b1 >> tekno([0, 0, 5, 0, 7, 0, 3, 0], dur=0.5, oct=4, tcut=400, tenv=5000, tdec=0.3, trez=0.6, tgrit=0.5, tsub=0.8)                     
+
+b1 >> tekno([0, 0, 5, 0, 7, 0, 3, 0], dur=0.5, oct=3, tcut=400, tenv=5000, tdec=0.3, trez=0.6, tgrit=0.5, tsub=0.8)                     
+
+b1 >> tekno([0, 0, 5, 0, 7, 0, 3, 0], dur=0.5, oct=3, tcut=400, amp=4, tenv=5000, tdec=0.3, trez=0.6, tgrit=0.5, tsub=0.8)                     
+
+b1 >> tekno([0, 0, 5, 0, 7, 0, 3, 0], dur=0.5, oct=3, tcut=400, amp=2, tenv=5000, tdec=0.3, trez=0.6, tgrit=0.5, tsub=0.8)                     
+
+d1 >> play(pbuild("techno", 16, fill=4, seed=7), dur=0.25, amp=Pacc("fourfloor"), shape=0.3)   # 16 bars evolving, fill every 4         
+
+d2.stop()
+
+b1.stop()
+
+d1 >> play(pbuild("halftime", 1), dur=0.25, vowel=0.5, vowelf=sinvar([0, 4], 16))              # static + vowel morph                   
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1.stop()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=1, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.5, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.25, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.25, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.25, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.25, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.0, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.0, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.0, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.6, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.7, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.8, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.9, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.1, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.2, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.4, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.6, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.7, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=1.8, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.6, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.7, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.8, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.9, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=1.0, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=1.1, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=1.2, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=1.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=1.3, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.5, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.6, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=71, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=72, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=73, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=74, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=75, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=0.6, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=0.7, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=0.8, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=0.9, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.6, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.7, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.8, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.7, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.6, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("halftime", 1), dur=0.25, vowel=0.5, vowelf=sinvar([0, 4], 16))            
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=24, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+drop()
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=6)       # 8 bars, each bar mutates  
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=0.7, csweep=0.2, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.2, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.3, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.4, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.5, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.7, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.8, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.9, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=1.0, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.9, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.8, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.7, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=80, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=81, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=82, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=83, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=84, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=85, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=86, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=87, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=86, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=85, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=84, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=83, cswdepth=0.5, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=83, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=84, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=85, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=86, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=87, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=88, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=89, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=90, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=91, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=92, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=92, cswdepth=0.6, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=92, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=92, cswdepth=0.8, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=92, cswdepth=0.9, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=92, cswdepth=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=92, cswdepth=1.1, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=83, cswdepth=0.5, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.6, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.0, csweep=0.6, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.0, csweep=0.0, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.0, csweep=0.0, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.0, csweep=0.0, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.1, csweep=0.0, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.2, csweep=0.0, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.3, csweep=0.0, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.3, csweep=0.1, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.3, csweep=0.2, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.3, csweep=0.3, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=83, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+drop()
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.5, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.6, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=4.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=0.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+v7 >> play("X ", amp=4)
+
+v7 >> play("X ", amp=8)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+v7 >> play("X ", amp=4)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.4, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.5, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.6, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.8, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.9, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=20, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+d1 >> play(pbuild("halftime", 1), dur=0.25, vowel=0.5, vowelf=sinvar([0, 4], 16))            
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=6)       # 8 bars, each bar mutates  
+
+d1 >> play(pbuild("ebm"), dur=0.25)          # 8 bars evolving ebm                                                                      
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=120, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+t3 >> play("..o.", amp=4)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=120, cswdepth=0.8, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=120, cswdepth=0.9, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.8, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.6, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.9, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.8, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.7, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.6, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.4, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.2, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.1, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=1.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=0.9, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=0.8, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=0.7, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=0.6, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=0.4, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.4, cswfreq=120, cswdepth=1.0, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.3, cswfreq=120, cswdepth=1.0, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.2, cswfreq=120, cswdepth=1.0, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.1, cswfreq=120, cswdepth=1.0, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, cswdepth=1.0, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, cswdepth=0.9, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, cswdepth=0.8, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, cswdepth=0.7, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, cswdepth=0.6, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, cswdepth=0.5, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, cswdepth=0.4, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.1, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.2, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.3, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.4, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.5, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.6, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.7, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.8, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=0.9, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.0, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.1, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.3, cswrate=0.3, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.3, cswrate=0.3, cswdecay=0.6).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.3, cswrate=0.3, cswdecay=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.3, cswrate=0.3, cswdecay=0.8).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.3, cswrate=0.3, cswdecay=0.9).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.3, cswrate=0.3, cswdecay=1.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.3, cswrate=0.3, cswdecay=1.1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.3, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.4, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.5, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.6, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.7, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.8, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=0.9, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=1.0, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=1.1, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=1.2, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=1.3, cswrate=0.3, cswdecay=1.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.5, csweep=0.0, cswfreq=120, rfreq=50, resonz=1.2, cswdepth=1.3, cswrate=0.3, cswdecay=1.2).unison(3)
+
+v7 >> play("X ", amp=8)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.7, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.8, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.2, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.3, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=2.0, cswdecay=0.5).unison(3)
+
+v7 >> play("X ", amp=8)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.8, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.4).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.3).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3).every(4, "stutter", 8)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.9, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.8, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.3, csweep=0.4, cswfreq=70, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.4, csweep=0.4, cswfreq=70, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.5, csweep=0.4, cswfreq=70, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.6, csweep=0.4, cswfreq=70, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=0.7, csweep=0.4, cswfreq=70, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=70, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=69, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=68, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=67, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=66, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=65, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=120, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=140, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.6, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.7, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.8, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=0.9, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.0, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.1, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.2, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.3, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.4, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.5, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.6, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.7, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.8, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.9, rbspread=1.0, cswrate=1.9, cswdecay=0.2).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.9, rbspread=1.0, cswrate=1.9, cswdecay=0.1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.9, rbspread=1.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.2, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.3, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.4, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.5, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.6, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.7, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.8, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.9, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=1.0, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=1.1, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=1.2, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=1.3, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=6)       # 8 bars, each bar mutates  
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=1.2, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=1.1, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=1.0, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.9, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.8, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.7, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.6, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.6, rbfreq=200, rbdecay=1.9, rbspread=4.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.6, rbfreq=200, rbdecay=1.9, rbspread=2.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.6, rbfreq=200, rbdecay=1.9, rbspread=1.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.6, rbfreq=200, rbdecay=1.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.6, rbfreq=200, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=210, cswdepth=0.7, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=0.7, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=0.7, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=0.8, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=0.9, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.0, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.1, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.2, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.3, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.5, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.6, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.7, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.8, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=1.9, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.0, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.1, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.2, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.3, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.5, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.6, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.7, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.8, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=2.9, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.0, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.1, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.2, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.3, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.5, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.6, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.7, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.8, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=3.9, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.0, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.1, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.2, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.3, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.5, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.6, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.7, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.8, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=4.9, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.0, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.1, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.2, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.3, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.5, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.6, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.7, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.8, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=5.9, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=6.0, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=6.1, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=6.2, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=6.3, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.7, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.8, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=0.9, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.0, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.1, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.2, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.3, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.4, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.5, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.6, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.7, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.8, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=1.9, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.0, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.1, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.2, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.3, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.4, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.5, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.6, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.7, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.8, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=2.9, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.0, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.1, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.2, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.3, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.4, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.5, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.6, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.7, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.8, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=3.9, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.0, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.1, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.2, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.3, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.4, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.5, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.6, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.7, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.8, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4.9, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.0, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.1, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.2, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.3, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.4, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.5, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.6, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.7, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.8, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=5.9, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.0, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.1, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.2, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.3, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.4, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.5, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.6, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.7, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.8, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=6.9, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=7.0, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=7.1, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=7.2, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+v7 >> play("X ", amp=8)
+
+d1 >> play(pbuild("breaks"), dur=0.25)       # 8 bars evolving breaks                                                                   
+
+d1 >> play(pbuild("house"), dur=0.25)        # 8 bars evolving house                                                                    
+
+d1 >> play(pbuild("dnb"), dur=0.25)          # 8 bars evolving dnb                                                                      
+
+d1 >> play(pbuild("techno", 8, fill=4), dur=0.25)   # evolves 8 bars, fill on bar 4 and 8                                               
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=4, sbluramt=7.2, csweep=0.4, cswfreq=1210, cswdepth=6.4, resonbank=0.6, rbfreq=70, rbdecay=0.9, rbspread=0.0, cswrate=1.9, cswdecay=0.0, rgate=0.5, rgaterate=4, rgatewave=1, beat_dur=1).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=4, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=5, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=6, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=7, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=8, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=9, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=10, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.5, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.6, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.7, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.6, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.5, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.4, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.3, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.2, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=71, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=72, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=73, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=74, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=75, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=76, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=77, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=78, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=79, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=80, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=81, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=82, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=83, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=84, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=85, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=86, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=87, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=88, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=89, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=90, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=91, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=92, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=93, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=94, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=95, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=96, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=97, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=98, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=99, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=100, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=101, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=102, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=103, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=104, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=105, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=106, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=107, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=108, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=109, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=110, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=111, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=112, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=113, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=114, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=115, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=116, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=117, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=118, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.3, cswfreq=118, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.4, cswfreq=118, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.5, cswfreq=118, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.6, cswfreq=118, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.7, cswfreq=118, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=118, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

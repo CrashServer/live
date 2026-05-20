@@ -1,0 +1,514 @@
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=fb(32, 0, 0.5), sbluramt=fs(16, 1, 4), csweep=fb(24, 0.1, 0.4), cswfreq=fs(16,50, 120), cswdepth=fb(32, 0.2, 0.8), cswrate=fe(64, 0.05, 0.3), cswdecay=fs(24, 0.2, 0.6), gdel=fb(32, 0, 0.2), gdeltime=fs(16, 0.005, 0.03), gdelsize=fb(24, 0.1, 0.4), gdelsprd=fs(32, 0.5, 2), gdelfb=fb(16, 0.1, 0.5)).unison(3).every(4, "stutter", 8)
+
+d1.stop()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+d1 >> play(pbuild("halftime", 1), dur=0.25, vowel=0.5, vowelf=sinvar([0, 4], 16))            
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+d1 >> play(pbuild("halftime", 1), dur=0.25, vowel=0.5, vowelf=sinvar([0, 4], 16))            
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+d1 >> play(pbuild("ebm"), dur=0.25)          # 8 bars evolving ebm                                                                      
+
+d1 >> play(pbuild("techno"), dur=0.25, sample=6)       # 8 bars, each bar mutates  
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+d1 >> play(pbuild("industrial"), dur=0.25)   # 8 bars evolving industrial                                                               
+
+d1 >> play(pbuild("reggae"), dur=0.25)       # 8 bars evolving reggae
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+d1 >> play(pbuild("techno", 16), dur=0.25)   # 16 bars evolving, longer journey                                                         
+
+d2 >> play(pbuild("industrial", density=0.8), dur=0.25, rate=4, shape=1, dist2=1, dist2mix=1, dist2shape=0.1)
+
+d1 >> play(pbuild("techno", 16, fill=4), dur=0.25)  # evolves 16 bars, fill every 4th bar                                               
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+d2.stop()
+
+d2 >> play(pbuild("industrial", density=0.8), dur=0.25, rate=4, shape=1, dist2=1, dist2mix=1, dist2shape=0.1)
+
+d1 >> play(pbuild("techno", 16, fill=4), dur=0.25)  # evolves 16 bars, fill every 4th bar                     
+
+d2 >> play(pbuild("techno", 1, seed=7).hat, dur=0.25, amp=PSwing(0.2), hpf=6000)               # static hat layer, swung                
+
+b1 >> tekno([0, 0, 5, 0, 7, 0, 3, 0], dur=0.5, oct=3, tcut=400, amp=2, tenv=5000, tdec=0.3, trez=0.6, tgrit=0.5, tsub=0.8)                     
+
+p1 >> svdk([0, 2, 4], dur=4, oct=4, sus=4, grit=0.2, harm=0.7, cutoff=1200, drift=0.6, fenv=0.1)                     
+
+p1.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.0, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.0, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.2, cswrate=0.5, cswdecay=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+v1 >> play("x ")
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+v1 >> play("X ")
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=4, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+v1 >> play("X ", amp=4)
+
+v1 >> play("X ", amp=4)
+
+v1 >> play("X ", amp=12)
+
+v1 >> play("X ", amp=12, sample=4)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=0, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0, spwarp=0.0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0, spwarp=0.0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.0).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0, spwarp=0.0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.0).unison(3)
+
+rec_stop()
+
+storageAttack.compileAttack()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.0, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5).unison(3)
+
+_seq_schedule(64, 1774506742307)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.0, sample=11, sbluramt=0.3, csweep=0.2, cswfreq=70, cswdepth=0.2, cswrate=0.5, cswdecay=0.5).unison(3)
+
+_seq_schedule(16, 1774506774331)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(16, 1774506782343)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(32, 1774506790355)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+v1 >> play("x ")
+
+_seq_schedule(16, 1774506806362)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(16, 1774506814385)
+
+_seq_cancel()
+v1 >> play("X ")
+
+_seq_schedule(16, 1774506822399)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506830401)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506834411)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506838425)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506842449)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(16, 1774506846465)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506854482)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506858495)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=4, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(4, 1774506862529)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506864537)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506868555)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(16, 1774506872571)
+
+_seq_cancel()
+v1 >> play("X ", amp=4)
+v1 >> play("X ", amp=4)
+
+_seq_schedule(8, 1774506880580)
+
+_seq_cancel()
+v1 >> play("X ", amp=12)
+
+_seq_schedule(16, 1774506884584)
+
+_seq_cancel()
+v1 >> play("X ", amp=12, sample=4)
+
+_seq_schedule(4, 1774506892586)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(4, 1774506894589)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=0, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(4, 1774506896604)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506898616)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0, spwarp=0.0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+_seq_schedule(8, 1774506902633)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0, spwarp=0.0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.0).unison(3)
+
+_seq_schedule(8, 1774506906643)
+
+_seq_cancel()
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0, spwarp=0.0, spwstr=1, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.0).unison(3)
+
+_seq_schedule(16, 1774506910653)
+
+_seq_cancel()
+rec_stop()
+
+_seq_schedule(16, 1774506918665)
+
+_seq_cancel()
+_seq_endfade(16)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=10, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=0, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=10, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=11, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=12, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=13, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=12, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=11, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.26, sblur=10, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=1.5, spwarp=0.4, spwstr=2, spwshift=1, gdel=0.1, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("@S33d 143")
+
+attack("@S33d 143")
+##### attack@@S33d 143.btr:~$ #####
+Clock.bpm=143
+Root.default="C#"
+Scale.default="zhi"
+
+Clock.bpm=143
+
+Root.default="C#"
+
+Root.default="C#"
+
+l1 >> loop("wardrum16", dur=16, amp=1, sample=var(PRand(99), [32, 32]), drcomp=0, hpf=120)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec()
+
+l1 >> loop("wardrum16", dur=16, amp=1, sample=var(PRand(99), [32, 32]), drcomp=0, hpf=120)
+
+Clock.bpm=143
+
+Root.default="C#"
+
+Scale.default="zhi"
+
+rec_stop()
+
+storageAttack.compileAttack()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec()
+Clock.bpm=143
+Root.default="C#"
+Scale.default="zhi"
+l1 >> loop("wardrum16", dur=16, amp=1, sample=var(PRand(99), [32, 32]), drcomp=0, hpf=120, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+l1 >> loop("wardrum16", dur=16, amp=1, sample=var(PRand(99), [32, 32]), drcomp=0, hpf=120, rgate=0, rgaterate=4, rgatewave=0, beat_dur=1)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec_stop()
+
+storageAttack.compileAttack()
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb304(PTime(), oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.4, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.5, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=3, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=4, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=5, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=6, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=5, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=4, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=3, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.2, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.3, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.4, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.5, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.6, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=1, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.6, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.7, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.8, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=10, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.4, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.6, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.7, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.8, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.5, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.6, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.7, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.8, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.9, cswdecay=0.5, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.9, cswdecay=0.6, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.9, cswdecay=0.7, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.9, cswdecay=0.8, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+s1 >> tb305(PTime(), oct=6, eb=0.9, csweep=0.1, cswfreq=80, cswdepth=0.9, cswrate=0.9, cswdecay=0.9, ebfeed=0, ebmix=0.6, ebmode=1, ebwow=0.7, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> swiss(var([0,-2, 2, 5], [16]), dur=1/2, oct=3, rate=1.4, rq=0.1, cutoff=3000, saw=2, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])
+
+b1 >> svdk(var([0,-2, 2, 5], [16]), dur=1/2, oct=3, rate=1.4, rq=0.1, cutoff=3000, saw=2, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b2 >> svdk(var([0,-2, 2, 5], [16]), dur=1/2, oct=3, rate=1.4, rq=0.1, cutoff=3000, saw=2, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])
+
+b1 >> swiss(var([0,-2, 2, 5], [16]), dur=1/2, oct=3, rate=1.4, rq=0.1, cutoff=3000, saw=2, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])
+
+b2 >> svdk(var([0,-2, 2, 5], [16]), dur=1/2, oct=3, rate=1.4, rq=0.1, cutoff=3000, saw=0, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])
+
+b2 >> svdk(var([0,-2, 2, 5], [16]), dur=1/2, oct=4, rate=1.4, rq=0.1, cutoff=3000, saw=0, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])
+
+b2 >>  lbass(PStep(8,P[1:16],var([0,-2, 2, 5], [16])), glide=0.3, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2,cutoff=2610, tone=0.7, rq=0.9, detune=0.3, amp=0.8, hpf=120).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> swiss(var([0,-2, 2, 5], [16]), dur=1/2, oct=3, rate=1.4, rq=0.1, cutoff=3000, saw=2, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b2 >>  lbass(PStep(8,P[1:16],var([0,-2, 2, 5], [16])), glide=0.3, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2,cutoff=2610, tone=0.7, rq=0.9, detune=0.3, amp=0.8, hpf=120).unison(3)
+
+attack("@S33d 143")
+

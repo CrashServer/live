@@ -1,0 +1,2478 @@
+b4 >> dbass()
+
+Server.record()
+
+Server.stopRecording()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("darkChill 92")
+
+rec()
+
+Clock.bpm=92
+Scale.default="minor"
+
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+Server.record()
+
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60).unison(2)
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, chop=4, chopmix=0.5).unison(2)
+
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, chop=4, chopmix=0.5, resonbank=0.01, rbfreq=200, rbdecay=0.5, rbspread=1.0).unison(2)
+
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+drop()
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+j1 >> tb305(P[1, 19, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+e0 >> play("X", amp=2, transient=1.0, transattack=2, transsustain=.5, transtime=0.02).sometimes("stutter")
+
+e0.stop()
+
+j5 >> play("j", dur=16, sample=PRand(404), mverb=.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+j5.stop()
+
+j1.stop()
+
+rec_stop()
+
+storageAttack.compileAttack()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm=92
+
+Scale.default="minor"
+
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+Server.stopRecording()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(16, 1773114386526)
+
+_seq_cancel()
+Server.record()
+
+_seq_schedule(16, 1773114396978)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773114407415)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60).unison(2)
+
+_seq_schedule(16, 1773114417866)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, chop=4, chopmix=0.5).unison(2)
+
+_seq_schedule(4, 1773114428311)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+Server.record()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(16, 1773114438282)
+
+Server.stopRecording()
+
+_seq_cancel()
+
+_seq_schedule(16, 1773114448730)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773114459167)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60).unison(2)
+
+_seq_schedule(16, 1773114469628)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, chop=4, chopmix=0.5).unison(2)
+
+_seq_schedule(4, 1773114480087)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(32, 1773114482698)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, chop=4, chopmix=0.5, resonbank=0.01, rbfreq=200, rbdecay=0.5, rbspread=1.0).unison(2)
+
+_seq_schedule(4, 1773114503580)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(16, 1773114506193)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(16, 1773114516633)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(16, 1773114527076)
+
+_seq_cancel()
+drop()
+
+_seq_schedule(8, 1773114537542)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+_seq_schedule(16, 1773114542765)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+attack("darkChill 92")
+
+rec()
+
+Clock.bpm=92
+Scale.default="minor"
+
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60).unison(2)
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+d6.stop()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=4, sus=4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=2, sus=2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1, sus=1, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+o9.stop()
+
+m0.stop()
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.25, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+r3.stop()
+
+e0 >> play("X", amp=2, transient=1.0, transattack=2, transsustain=.5, transtime=0.02).sometimes("stutter")
+
+e0.stop()
+
+rec_stop()
+
+storageAttack.compileAttack()
+
+rec_stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+j1 >> a_gesa2(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gesa2(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gesa2(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gesa3(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_daftlead(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+j1 >> a_cy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.4, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.5, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.6, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.7, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.6, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.5, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.4, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, shape=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, shape=0.6, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, shape=0.7, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, shape=0.8, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, shape=0.0, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gheavy(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_fantom(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,2500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+d6.stop()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1, sus=1, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+f8.stop()
+
+f9.stop()
+
+r3.stop()
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, sus=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j5 >> play("j", dur=16, sample=PRand(404), mverb=.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+o9.stop()
+
+j5.stop()
+
+# 
+
+j5 >> play("j", dur=16, sample=PRand(404), mverb=.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.2, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec()
+
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5)
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5).solo(8)
+
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 ).only()
+
+rec_stop()
+
+storageAttack.compileAttack()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(8, 1773115129347)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(8, 1773115134578)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(8, 1773115139828)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773115145055)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(32, 1773115150285)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115171176)
+
+_seq_cancel()
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773115176398)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+_seq_schedule(16, 1773115179028)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(16, 1773115189477)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115199929)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115205153)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+_seq_schedule(16, 1773115210376)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773115220819)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773115231260)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5)
+
+_seq_schedule(16, 1773115241699)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5).solo(8)
+
+_seq_schedule(16, 1773115252141)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(4, 1773115262582)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773115265197)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115267814)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773115273041)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773115278264)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 ).only()
+
+_seq_schedule(16, 1773115288706)
+
+_seq_cancel()
+rec_stop()
+
+_seq_schedule(16, 1773115299258)
+
+_seq_cancel()
+_seq_endfade(16)
+
+attack("darkChill 92")
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(8, 1773115437466)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(8, 1773115442705)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(8, 1773115447941)
+
+Clock.bpm=192
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773115451433)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(32, 1773115453943)
+
+Clock.bpm=92
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(8, 1773115464485)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(8, 1773115469710)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(8, 1773115474943)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773115480173)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(32, 1773115485400)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115506280)
+
+_seq_cancel()
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773115511502)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+_seq_schedule(16, 1773115514121)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(16, 1773115524573)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115535027)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115540254)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+_seq_schedule(16, 1773115545476)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773115555926)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773115566368)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5)
+
+_seq_schedule(16, 1773115576815)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5).solo(8)
+
+_seq_schedule(16, 1773115587255)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(4, 1773115597702)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773115600311)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115602923)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773115608148)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773115613375)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 ).only()
+
+_seq_schedule(16, 1773115623818)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(8, 1773115703335)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(8, 1773115708567)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(8, 1773115713803)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773115719049)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(32, 1773115724276)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115745215)
+
+_seq_cancel()
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773115750441)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+_seq_schedule(16, 1773115753072)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(16, 1773115763515)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115773963)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115779187)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+_seq_schedule(16, 1773115784411)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773115794866)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+j5.stop()
+
+_seq_schedule(16, 1773115805306)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5)
+
+_seq_schedule(16, 1773115815771)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5).solo(8)
+
+_seq_schedule(16, 1773115826214)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(4, 1773115836653)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773115839266)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115841879)
+
+_seq_cancel()
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773115847101)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773115857539)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773115862762)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 ).only()
+
+_seq_schedule(16, 1773115873211)
+
+_seq_cancel()
+_seq_end(16)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(8, 1773115886252)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(8, 1773115891480)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(8, 1773115896715)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773115901948)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(32, 1773115907177)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115928068)
+
+_seq_cancel()
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773115933289)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+_seq_schedule(16, 1773115935911)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(16, 1773115946358)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115956805)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773115962029)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+_seq_schedule(16, 1773115967253)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773115977703)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+j5.stop()
+
+_seq_schedule(16, 1773115988143)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5)
+
+_seq_schedule(16, 1773115998600)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12], oct=var([5,6],[20,PRand(2,12)]), dur=P*[1/4, 1/4, 1/8, 1/8, 1/2], cutoff=linvar([30,800], [44]),
+rq=PFr(0.1, .6),
+wave=linvar([0.1,0.9],[55]),
+beef=1,
+envmod=linvar([30,200], [64, 64]),
+eb=0.5, ebfeed=0.7, ebmix=0.4,
+ebmode=1,
+ebwow=0.3, ebflutter=0.5, ebsat=0.5,
+dist2=PWhite(0, 0.4))
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5).solo(8)
+
+_seq_schedule(16, 1773116009043)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12], oct=var([5,6],[20,PRand(2,12)]), dur=P*[1/4, 1/4, 1/8, 1/8, 1/2], cutoff=linvar([30,800], [44]), rq=PFr(0.1, .6), wave=linvar([0.1,0.9],[55]), beef=1, envmod=linvar([30,200], [64, 64]),eb=0.5, ebfeed=0.7, ebmix=0.4,
+ebmode=1, ebwow=0.3, ebflutter=0.5, ebsat=0.5,dist2=PWhite(0, 0.4))
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(4, 1773116019484)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12], oct=var([5,6],[20,PRand(2,12)]), dur=P*[1/4, 1/4, 1/8, 1/8, 1/2], cutoff=linvar([30,800], [44]), rq=PFr(0.1, .6), wave=linvar([0.1,0.9],[55]), beef=1, envmod=linvar([30,200], [64, 64]),eb=0.5, ebfeed=0.7, ebmix=0.4,ebmode=1, ebwow=0.3, ebflutter=0.5, ebsat=0.5,dist2=PWhite(0, 0.4))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+o9 >> viola([6,3,P*[4,2,5,1]],
+dur=[P*[1,2,4,8], P*[2,4],P*[8,12,16]],
+beat_dur=1, rate=PWhite(0.98,1.02),
+mverb=0.9, a=1.2,
+blur=linvar([1,4],[32]),
+lpf=linvar([800,4000],[48]),
+hpf=PRand(200,500),
+amp=linvar([0.4,0.8],[32])).unison(3) + (-7, PStep(5,7,0), PStep(3,10,0))
+
+r3 >> loop("breakcore160_16",
+dur=var([8,4,2],[48,8,8]),
+sample=var(PRand(66), [48,16,8]),
+sbrk=P*[0.25,0.5,1,1.5,2],
+sbrkdur=P*[0.25,0.5,1,2,4],
+sbrkmix=linvar([0.3,0.8],[32]),
+hpf=linvar([200,800],[32]),
+high=linvar([1,3],[32]),
+vol=0.8, drcomp=.7)
+
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+o9 >> viola([6,3,P*[4,2,5,1]], dur=[P*[1,2,4,8], P*[2,4],P*[8,12,16]], beat_dur=1, rate=PWhite(0.98,1.02), mverb=0.9, a=1.2,blur=linvar([1,4],[32]),
+lpf=linvar([800,4000],[48]),hpf=PRand(200,500), amp=linvar([0.4,0.8],[32])).unison(3) + (-7, PStep(5,7,0), PStep(3,10,0))
+
+_seq_schedule(32, 1773116160638)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=var([8,4,2],[48,8,8]), sample=var(PRand(66), [48,16,8]), sbrk=P*[0.25,0.5,1,1.5,2], sbrkdur=P*[0.25,0.5,1,2,4],sbrkmix=linvar([0.3,0.8],[32]), hpf=linvar([200,800],[32]), high=linvar([1,3],[32]),vol=0.8, drcomp=.7)
+
+_seq_schedule(16, 1773116181523)
+
+_seq_cancel()
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(16, 1773116191969)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(8, 1773116202420)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(8, 1773116207651)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773116212883)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(32, 1773116218105)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116238989)
+
+_seq_cancel()
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773116244213)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+_seq_schedule(16, 1773116246830)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(16, 1773116257281)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116267719)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116272942)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+_seq_schedule(16, 1773116278162)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+o9 >> viola([6,3,P*[4,2,5,1]], dur=[P*[1,2,4,8], P*[2,4],P*[8,12,16]], beat_dur=1, rate=PWhite(0.98,1.02), mverb=0.9, a=1.2,blur=linvar([1,4],[32]),
+lpf=linvar([800,4000],[48]),hpf=PRand(200,500), amp=linvar([0.4,0.8],[32])).unison(3) + (-7, PStep(5,7,0), PStep(3,10,0))
+
+_seq_schedule(32, 1773116279633)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=var([8,4,2],[48,8,8]), sample=var(PRand(66), [48,16,8]), sbrk=P*[0.25,0.5,1,1.5,2], sbrkdur=P*[0.25,0.5,1,2,4],sbrkmix=linvar([0.3,0.8],[32]), hpf=linvar([200,800],[32]), high=linvar([1,3],[32]),vol=0.8, drcomp=.7)
+
+_seq_schedule(16, 1773116300512)
+
+_seq_cancel()
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(16, 1773116310957)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(8, 1773116321402)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(8, 1773116326641)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773116331876)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(32, 1773116337098)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773116357977)
+
+_seq_cancel()
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(8, 1773116368416)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+_seq_schedule(16, 1773116373643)
+
+_seq_cancel()
+~r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(16, 1773116384086)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116394540)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116399765)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+_seq_schedule(16, 1773116404988)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773116415437)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+j5.stop()
+
+_seq_schedule(16, 1773116425879)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5)
+
+_seq_schedule(16, 1773116436333)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5).solo(8)
+
+_seq_schedule(16, 1773116446771)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(4, 1773116457211)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773116459823)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116462435)
+
+_seq_cancel()
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773116467657)
+
+_seq_cancel()
+j1.stop()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(32, 1773116478102)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773116498984)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 ).only()
+
+_seq_schedule(16, 1773116509423)
+
+_seq_cancel()
+_seq_end(16)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+o9 >> viola([6,3,P*[4,2,5,1]], dur=[P*[1,2,4,8], P*[2,4],P*[8,12,16]], beat_dur=1, rate=PWhite(0.98,1.02), mverb=0.9, a=1.2,blur=linvar([1,4],[32]),
+lpf=linvar([800,4000],[48]),hpf=PRand(200,500), amp=linvar([0.4,0.8],[32])).unison(3) + (-7, PStep(5,7,0), PStep(3,10,0))
+
+_seq_schedule(32, 1773116546621)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=var([8,4,2],[48,8,8]), sample=var(PRand(66), [48,16,8]), sbrk=P*[0.25,0.5,1,1.5,2], sbrkdur=P*[0.25,0.5,1,2,4],sbrkmix=linvar([0.3,0.8],[32]), hpf=linvar([200,800],[32]), high=linvar([1,3],[32]),vol=0.8, drcomp=.7)
+
+_seq_schedule(16, 1773116567511)
+
+_seq_cancel()
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(16, 1773116577957)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773116588409)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(16, 1773116598861)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm=92
+Scale.default="minor"
+o9 >> viola([6,3,P*[4,2,5,1]], dur=[P*[1,2,4,8], P*[2,4],P*[8,12,16]], beat_dur=1, rate=PWhite(0.98,1.02), mverb=0.9, a=1.2,blur=linvar([1,4],[32]),
+lpf=linvar([800,4000],[48]),hpf=PRand(200,500), amp=linvar([0.4,0.8],[32])).unison(3) + (-7, PStep(5,7,0), PStep(3,10,0))
+
+_seq_schedule(32, 1773116605448)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=var([8,4,2],[48,8,8]), sample=var(PRand(66), [48,16,8]), sbrk=P*[0.25,0.5,1,1.5,2], sbrkdur=P*[0.25,0.5,1,2,4],sbrkmix=linvar([0.3,0.8],[32]), hpf=linvar([200,800],[32]), high=linvar([1,3],[32]),vol=0.8, drcomp=.7)
+
+_seq_schedule(16, 1773116626332)
+
+_seq_cancel()
+d6 >> play("8..(8.)", dur=1, wshape=5, wgain=1, wmix=0.5, stereowidth=1, swfreq=100, swnarrow=1.5, swwide=1.5)
+
+_seq_schedule(16, 1773116636779)
+
+r3 >> loop("breakcore160_16", dur=var([8,4,6],[48,8,8]), sample=var(PRand(66), [48,16,8]), sbrk=P*[0.25,0.5,1,1.5,2], sbrkdur=P*[0.25,0.5,1,2,4],sbrkmix=linvar([0.3,0.8],[32]), hpf=linvar([200,800],[32]), high=linvar([1,3],[32]),vol=0.8, drcomp=.7)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773116647223)
+
+_seq_cancel()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+
+_seq_schedule(16, 1773116657673)
+
+_seq_cancel()
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(8, 1773116668119)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(32, 1773116673341)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773116694223)
+
+_seq_cancel()
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(8, 1773116704666)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+
+_seq_schedule(16, 1773116709916)
+
+_seq_cancel()
+~r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(16, 1773116720361)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116730804)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116736027)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 )
+
+_seq_schedule(16, 1773116741255)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773116751702)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+j5.stop()
+
+_seq_schedule(16, 1773116762144)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5)
+
+_seq_schedule(16, 1773116772590)
+
+_seq_cancel()
+j1 >> a_gesa(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([6,7],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,1200], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3, dist2=0.5).solo(8)
+
+_seq_schedule(16, 1773116783027)
+
+_seq_cancel()
+r3 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [64, 64]),sbrk=P*[0.5,1,1.5], sbrkdur=P*[0.5,1,4], sbrkmix=.5, hpf=200, high=2, vol=0.8, drcomp=.5)
+
+_seq_schedule(4, 1773116793470)
+
+_seq_cancel()
+f8 >> play(P["xx...x..[.x]x...x.."].replace("x", "x"), dur=1/2, sample=9)
+f9 >> play(P["..U[.U][.U]..U[.U].U[.U][.U]..U"], dur=1/2, sample=9, fbdelay=0.5, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).sometimes("stutter", PRand(4,16), fbfeed=PWhite(.7, .9))
+
+_seq_schedule(4, 1773116796081)
+
+_seq_cancel()
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/2, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(8, 1773116798694)
+
+_seq_cancel()
+
+j1 >> tb305(P[1, 9, 8, 11, 11, 8, 0, 11, 8, 5, [9,_], 9, 7, 4, 8, 12],oct=var([5,6],[20,PRand(2,12)]), dur=1/4, cutoff=linvar([30,500], [88]), rq=PFr(0.2, .9), wave=linvar([0.1,0.9],[55]),beef=1, envmod=linvar([10,100], [64, 64]), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.35, ebsat=0.3)
+
+_seq_schedule(16, 1773116803919)
+
+_seq_cancel()
+j1.stop()
+m0 >> cbass(var([0, -2, -4], [32]), dur=8, cutoff=PRand(180,415), rq=0.9, boost=1.5, detune=0.01, follow=2, slide=PWhite(0,3), slidedelay=0.5, hpf=60, rgate=0.5).unison(2)
+o9 >> viola([6,3,P*[4,2,5]], dur=[P*[2,4,8], P*[2,4],P*[8,12]], beat_dur=1, rate=1, mverb=0.8, a=0.75, blur=2, lpf=PRand(1200,3000), hpf=300, amp=0.6).unison(2) + (-7,PStep(5, 7,0))
+
+_seq_schedule(32, 1773116814363)
+
+_seq_cancel()
+u9 >> play(".(.{..u})u.", sample=6, dur=1, rate=[1.43,-.4], mverb=.5, hpf=400, fbdelay=[0.5], fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).human(20, 10,5)
+t0 >> play("d", dur=1/2, amp=[1, PFr(0.2,1)], rate=PWhite(1,3), pan=PWhite(-1,1), mverb=.2).human(50,0, 15).often("stutter", PRand(16))
+
+_seq_schedule(16, 1773116835245)
+
+_seq_cancel()
+j5 >> play("j", dur=16, sample=PRand(404), mverb=0.1, wshape=3,rate=0.9, drcomp=.5, amp=2, hpf=300, high=2).unison(2,.125,40,.5 ).only()
+
+_seq_schedule(16, 1773116845685)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+attack("@S33d 143")
+
+##### attack@@S33d 143.clt:~$ #####
+Clock.bpm=143
+Root.default="C#"
+Scale.default="zhi"
+
+l1 >> loop("wardrum16", dur=16, amp=1, sample=var(PRand(99), [32, 32]), drcomp=0, hpf=120)
+
+s1 >> tb305(PTime(), oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2, cutoff=linvar([200,900],[33,44]), rq=0.9, wave=linvar([-1.4, 1.4], [55, 55]), beef=2, envmod=90, glide=0, bits=8, crush=0)#.solo(-32)
+
+b1 >> swiss(var([0,-2, 2, 5], [16]), dur=1/2, oct=3, rate=1.4, rq=0.1, cutoff=3000, saw=2, pulse=1, sin=2, pw=0.52, hpf=[120, 0]) + var([0, PGauss()], [7, 1])
+
+b2 >>  lbass(PStep(8,P[1:16],var([0,-2, 2, 5], [16])), glide=0.3, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2,cutoff=2610, tone=0.7, rq=0.9, detune=0.3, amp=0.8, hpf=120).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b2 >>  lbass(PStep(8,P[1:16],var([0,-2, 2, 5], [16])), glide=0.3, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2,cutoff=2610, tone=0.7, rq=0.9, detune=0.3, amp=0.8, hpf=120).unison(3)
+
+b2 >>  fbass(PStep(8,P[1:16],var([0,-2, 2, 5], [16])), glide=0.3, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2,cutoff=2610, tone=0.7, rq=0.9, detune=0.3, amp=0.8, hpf=120).unison(3)
+
+attack("Pump 122")
+
+d2 >> dbass((0, 4, 4, ([7.5, 0, 4], [0, 0, 0, 4, 4, 0])),pumper=linvar([0.3, 0.9], 64), pumprate=0.9, transient=var([1, 2, 4, 8], 8), transattack=var([0.5, 2], [[6, 7], [2, 1]]), multicrush=1, combres=5.0, oct=5, fbdelay=0.7, fbtime=0.3, fbfeed=0.44, stereowidth=8, dur=1/2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("R_UBRAIN 88")
+
+Clock.bpm=88
+
+l4 >> loop("rageambi16", dur=16, hpf=300)
+
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2)
+
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2, lpflfo=4)
+
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2, lpflfo=0)
+
+x9 >> loop("ragegtr16", dur=32, lpf=1400, wshape=2.0, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+l5 >> loop("rageambi16", dur=24, hpf=300, formant=0.2)
+
+x0 >> loop("ragegtr16", dur=16, lpf=1400, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+
+e4 >> waves(melody(), dur=4, oct=6, rate=PRand(1,9), fx2=1, chop=4, chopwave=5).slider()
+
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+
+l5.fshit=2
+
+l5.fshift=2
+
+l4.fshift=1
+
+l4.fshift=1.1
+
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+
+k4 >> ethpad(dur=8,oct=(6, 5, var([4, 7], [28, 4])), fx2=1).unison(4)
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=.2, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.3, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.4, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.5, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.6, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.5, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.4, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.3, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.2, wshape=4)
+
+Clock.bpm=88*2
+
+attack("horrDrum")
+
+o7 >> play("k.", amp=4).sometimes("stutter")
+
+b5 >> loop("rock16", hpf=400, dur=16, wshape=1, wtype=5, wmix=0.5, sample=var(PRand(909), 32), amp=PwRand([0,1],[40,60])).lclip(var([16,4],16))
+
+b5.stop()
+
+o7.stop()
+
+# attack("horrDrum")
+
+attack("gruve")
+
+s1 >> play(".s", dur=1/2, echo=0.23, high=2)
+
+d1 >> play("x.", sample=(4,0), amp=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm=88
+
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2)
+
+x9 >> loop("ragegtr16", dur=32, lpf=1400, wshape=2.0, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+x9 >> loop("ragegtr16", dur=32, lpf=1400, wshape=2.0, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+l5 >> loop("rageambi16", dur=24, hpf=300, formant=0.2)
+
+x0 >> loop("ragegtr16", dur=16, lpf=1400, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+l4.chop=4
+
+x9.sbrk=0.5
+
+l4.chop=16
+
+l4.lpf=400
+
+l4.lpf=200
+
+x9.stop()
+
+l5.stop()
+
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+
+e4 >> waves(melody(), dur=4, oct=6, rate=PRand(1,9), fx2=1, chop=4, chopwave=5).slider()
+
+d6 >> play("X " , sample=5, amp=x0.sample==12)
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+
+k4 >> ethpad(dur=8,oct=(6, 5, var([4, 7], [28, 4])), fx2=1).unison(4)
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.2, wshape=4)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.2, wshape=4, dist2=0, dist2mix=1, dist2shape=0.1)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.2, wshape=4, dist2=0.2, dist2mix=1, dist2shape=0.1)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.2, wshape=4, dist2=0.3, dist2mix=1, dist2shape=0.1)
+
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.2, wshape=4, dist2=0.4, dist2mix=1, dist2shape=0.1)
+
+h5 >> noloop("vocalcrash8", dur=8,pos=PWhite(0, 1), room=0.1, ratelfo=0, ratelfoadd=0.5, ratelfomul=0.5,  start=PWhite(0, 1), sample=PRand(8), trig=0, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+h5 >> noloop("noizebeat16", dur=16,pos=PWhite(0, 1), room=0.1, ratelfo=0, ratelfoadd=0.5, ratelfomul=0.5,  start=PWhite(0, 1), sample=PRand(8), trig=0, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec()
+
+Clock.bpm=88
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2)
+x9 >> loop("ragegtr16", dur=32, lpf=1400, wshape=2.0, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+l5 >> loop("rageambi16", dur=24, hpf=300, formant=0.2)
+x0 >> loop("ragegtr16", dur=16, lpf=1400, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+l4.chop=16
+x9.sbrk=0.5
+
+l4.lpf=200
+
+x9.stop()
+
+l5.stop()
+
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+e4 >> waves(melody(), dur=4, oct=6, rate=PRand(1,9), fx2=1, chop=4, chopwave=5).slider()
+
+d6 >> play("X " , sample=5, amp=x0.sample==12)
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+
+k4 >> ethpad(dur=8,oct=(6, 5, var([4, 7], [28, 4])), fx2=1).unison(4)
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.2, wshape=4, dist2=0.4, dist2mix=1, dist2shape=0.1)
+
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2)
+
+x9 >> loop("ragegtr16", dur=32, lpf=1400, wshape=2.0, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2)
+
+l5 >> loop("rageambi16", dur=24, hpf=300, formant=0.2)
+x0 >> loop("ragegtr16", dur=16, lpf=1400, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+Clock.bpm=88*2
+
+# hmanize hihat
+h3 >> play("-", dur=1/4, high=2).human(60,6,3)
+h4 >> play("d", dur=PDur(3,12,0,1/3))
+
+# little groove snare
+n1 >> play("<..o.><..*.>", bank=0, rate=1, delay=PWhite(-0.05,.05)*0, sample=3)
+n2 >> play("r", sample=4, dur=PDur(5,16,0,1/2), delay=0, dist2=PFr(0.5,1)).sometimes("stutter")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec_stop()
+
+storageAttack.compileAttack()
+
+_seq_cancel()
+Clock.bpm=88
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2)
+x9 >> loop("ragegtr16", dur=32, lpf=1400, wshape=2.0, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+_seq_schedule(32, 1773117585572)
+
+_seq_cancel()
+l5 >> loop("rageambi16", dur=24, hpf=300, formant=0.2)
+x0 >> loop("ragegtr16", dur=16, lpf=1400, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+_seq_schedule(16, 1773117606394)
+
+_seq_cancel()
+l4.chop=16
+x9.sbrk=0.5
+
+_seq_schedule(8, 1773117617324)
+
+_seq_cancel()
+l4.lpf=200
+
+_seq_schedule(8, 1773117622780)
+
+_seq_cancel()
+x9.stop()
+
+_seq_schedule(8, 1773117628238)
+
+_seq_cancel()
+l5.stop()
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+e4 >> waves(melody(), dur=4, oct=6, rate=PRand(1,9), fx2=1, chop=4, chopwave=5).slider()
+
+_seq_schedule(32, 1773117633701)
+
+_seq_cancel()
+d6 >> play("X " , sample=5, amp=x0.sample==12)
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+
+_seq_schedule(8, 1773117655547)
+
+_seq_cancel()
+k4 >> ethpad(dur=8,oct=(6, 5, var([4, 7], [28, 4])), fx2=1).unison(4)
+q2 >> dbass(var([0, -2],16), dur=1/2 ,lpf=400, rate=0.2, wshape=4, dist2=0.4, dist2mix=1, dist2shape=0.1)
+
+_seq_schedule(16, 1773117661031)
+
+_seq_cancel()
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2)
+x9 >> loop("ragegtr16", dur=32, lpf=1400, wshape=2.0, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+l4 >> loop("rageambi16", dur=16, hpf=300, formant=0.2)
+
+_seq_schedule(16, 1773117671961)
+
+_seq_cancel()
+l5 >> loop("rageambi16", dur=24, hpf=300, formant=0.2)
+x0 >> loop("ragegtr16", dur=16, lpf=1400, sample=var([[8, 12], 9, 14], [8, 7, 1])).lclip(var([0.5, 1, 2], [8, 4, 2]))
+
+_seq_schedule(8, 1773117682893)
+
+_seq_cancel()
+Clock.bpm=88*2
+
+_seq_schedule(16, 1773117688358)
+
+_seq_cancel()
+# hmanize hihat
+h3 >> play("-", dur=1/4, high=2).human(60,6,3)
+h4 >> play("d", dur=PDur(3,12,0,1/3))
+
+_seq_schedule(4, 1773117694785)
+
+_seq_cancel()
+# little groove snare
+n1 >> play("<..o.><..*.>", bank=0, rate=1, delay=PWhite(-0.05,.05)*0, sample=3)
+n2 >> play("r", sample=4, dur=PDur(5,16,0,1/2), delay=0, dist2=PFr(0.5,1)).sometimes("stutter")
+
+_seq_schedule(4, 1773117696166)
+
+_seq_cancel()
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_schedule(8, 1773117697553)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+attack("turbulence 120")
+
+Clock.bpm = 120
+
+Root.default=var([0,[1,8]],[14,2])
+
+d1.feed=0
+
+d1 >> play("x.",  amp=0.1, feed=var(PRand([0,0.125,0.25,0.5,0.75]),16), feedfreq=[[0,PRand(500)],0], sample=4, tanh=[15], chop=var(PRand(8), 16), lpf=0, hpf=d1.feed.map({0:0, 0.125:75, 0.25: 100, 0.5:125, 0.75:255})).strum(8)
+
+s1 >> abass(PWhite(-0.2,0.2), amp=0.2, fmod=[0,PRand(8)], oct=[4,[5,6]], dur=[1/2,1.5,1/4,1/4,1/4,1/4,1/2,1/2], dfm=d1.feed.map({0:linvar([2800,4640],16), 0.125:linvar([1664,2400],16), 0.25:linvar([1180,1664],[16,0]), 0.5:linvar([808,1180],[16,0]), 0.75:linvar([606,808],[16,0])}, default=2600), dfmr=PWhite(0.2,1), dfmd=1, sus=PWhite(1/8,1),slide=PStep([12,4,3],PRand(8),0), slidedelay=PWhite(0.2,0.9)).unison(3).every(32, "dur.shuffle")
+
+s1 >> abass(PWhite(-0.2,0.2), amp=0.3, fmod=[0,PRand(8)], oct=[4,[5,6]], dur=[1/2,1.5,1/4,1/4,1/4,1/4,1/2,1/2], dfm=d1.feed.map({0:linvar([2800,4640],16), 0.125:linvar([1664,2400],16), 0.25:linvar([1180,1664],[16,0]), 0.5:linvar([808,1180],[16,0]), 0.75:linvar([606,808],[16,0])}, default=2600), dfmr=PWhite(0.2,1), dfmd=1, sus=PWhite(1/8,1),slide=PStep([12,4,3],PRand(8),0), slidedelay=PWhite(0.2,0.9)).unison(3).every(32, "dur.shuffle")
+
+s1 >> abass(PWhite(-0.2,0.2), amp=0.4, fmod=[0,PRand(8)], oct=[4,[5,6]], dur=[1/2,1.5,1/4,1/4,1/4,1/4,1/2,1/2], dfm=d1.feed.map({0:linvar([2800,4640],16), 0.125:linvar([1664,2400],16), 0.25:linvar([1180,1664],[16,0]), 0.5:linvar([808,1180],[16,0]), 0.75:linvar([606,808],[16,0])}, default=2600), dfmr=PWhite(0.2,1), dfmd=1, sus=PWhite(1/8,1),slide=PStep([12,4,3],PRand(8),0), slidedelay=PWhite(0.2,0.9)).unison(3).every(32, "dur.shuffle")
+
+s1 >> abass(PWhite(-0.2,0.2), amp=0.5, fmod=[0,PRand(8)], oct=[4,[5,6]], dur=[1/2,1.5,1/4,1/4,1/4,1/4,1/2,1/2], dfm=d1.feed.map({0:linvar([2800,4640],16), 0.125:linvar([1664,2400],16), 0.25:linvar([1180,1664],[16,0]), 0.5:linvar([808,1180],[16,0]), 0.75:linvar([606,808],[16,0])}, default=2600), dfmr=PWhite(0.2,1), dfmd=1, sus=PWhite(1/8,1),slide=PStep([12,4,3],PRand(8),0), slidedelay=PWhite(0.2,0.9)).unison(3).every(32, "dur.shuffle")
+
+s1 >> abass(PWhite(-0.2,0.2), amp=0.6, fmod=[0,PRand(8)], oct=[4,[5,6]], dur=[1/2,1.5,1/4,1/4,1/4,1/4,1/2,1/2], dfm=d1.feed.map({0:linvar([2800,4640],16), 0.125:linvar([1664,2400],16), 0.25:linvar([1180,1664],[16,0]), 0.5:linvar([808,1180],[16,0]), 0.75:linvar([606,808],[16,0])}, default=2600), dfmr=PWhite(0.2,1), dfmd=1, sus=PWhite(1/8,1),slide=PStep([12,4,3],PRand(8),0), slidedelay=PWhite(0.2,0.9)).unison(3).every(32, "dur.shuffle")
+
+d2 >> play("<x ><..O.>", amp=var([0, 1], 32), sample=4)
+
+d2 >> play("<x ><..O.>", amp=var([0, 1], 32), sample=4)
+o1 >> play("--C--{-[-c][---]}C", amp=1+d2.amp/2, sample=7, lpf=linvar([40,20000,20000],[32,32,0]), lpr=linvar([1,0.1,0.5],[32,32,0]), pan=[PWhite(-1,1),0,PWhite(-1,1)], room=PWhite(0,1), mix=PWhite(0,0.7))
+o2 >> play("O", amp=1, rate=var([PWhite(0.5,3),1],32), pan=PWhite(0,0.4), sample=4, room=1, mix=.3).fill()
+
+t1 >> tb303(s1.degree, amp=0.8, oct=PStep(16,[5,[4,6]],3), dur=PDur(var([8,[7,PRand(5,10)]],[6,2]),8), cutoff=5400*d1.feed + 500, top=linvar([400,5500],24), res=PWhite(0.1,0.3), sus=1/8).unison(2)
+
+s2 >> star(amp=0.2,bend=PStep([2,4,8],PWhite(0,3),0), benddelay=PWhite(0.4,0.9), oct=(6,7), dur=d2.amp.map({0:8}, default=1), chop=16+16*d1.feed,  drive=0.2+(s2.bend*0.1), lpf=expvar([6800,1480],[48,16]), lpr=PWhite(0.2,0.8)).unison(3,0.25,99)
+
+t1 >> tb303(s1.degree, amp=0.9, oct=PStep(16,[5,[4,6]],3), dur=PDur(var([8,[7,PRand(5,10)]],[6,2]),8), cutoff=5400*d1.feed + 500, top=linvar([400,5500],24), res=PWhite(0.1,0.3), sus=1/8).unison(2)
+
+attack("Tie fight")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m8 >> blip(PTime(), dur=1/4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, detune=0.01, tone=1.0, beef=0.9, fdecay=1, mod=0.8, fx2=1, fx1=1, scale=Scale.chromatic, vol=var([0,1],[PRand(32)], 4))
+
+m8 >> guit(PTime(), dur=1, valad=3000, valadr=0.3, valadd=5, valadt=0, valadc=0.2, detune=0.01, tone=1.0, drift=0.5, rgate=1.5, beef=0.9, fdecay=1, mod=0.8, fx2=1, fx1=1, scale=Scale.chromatic, amp=var([0,1],[PRand(16), 4]))
+
+d3 >> eeri(rate=-4, glitch=1.4, glitchrate=1, glitchdepth=4, glitchcrush=5.0, glitchchance=0.9, beat_dur=1, tape=1, tapedrive=2.1, tapewarm=0.5, tapewobble=2.8, dur=4, sbrk=0.4, valad=500, valadr=0.3, valadd=5, valadt=4, valadc=0.2, hpf=300, fshift=2, fphase=0, fmix=0.5, xbitrot=0.5, rotbits=8, rotrate=0.5, rotjitter=0.1)
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x"), sample=10, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, freeze=[0, 0, 1, 0])
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("organsav")
+
+attack("organsav")
+##### attack@organsav.xcd:~$ #####
+Clock.bpm = 128
+Root.default = "E"
+Scale.default = Scale.minor
+
+~r1 >> organ(P[var([0, -2, -3, -4], 8), 2, PStep(8, 5, 4), 2], dur=var([PDur(4, 8), PDur([5, 3, 6], 8)],
+             [5, 7]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+r2 >> organ(P[var([0, -2, -3, -4], 8), 2, PStep(8, 5, 4), 2], dur=var([4, PDur(4, 8)], [7, 5]), amp=0.8, crush=1, crush_=4,
+            crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+r3 >> bell(P[var([0, -2, -3, -4], 8), 4, PStep(4, 6, 8), 2], dur=var([4, PDur(4, 8)], [9, 3]), amp=0.6, crush=1, crush_=4, crush_d=2,
+           mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+r4 >> bell(P*[var([0, -2, -3, -4], 8), 2, PStep(8, 5, 4), 2], dur=var([4, PDur(4, 8)], [11, 6]), amp=0.5, crush=1, crush_=4, crush_d=2,
+           mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+c2 >> cbass(var([0, -4, -2, -3], 8), dur=1/2, cutoff=40, follow=PFr(1, 4, 555)).unison(2) + (0, var([0, 7], [4, 1]))
+
+r2 >> varsaw(oct=(3, PStep(4, 5, 6), 5), cut=4, cutmix=0.2, lpf=(800, linvar(
+    [400, 12000], 128)), dur=[6, 2], sus=[4, 8], lpr=0.1, a=0.5).unison(3)
+
+c2 >> cbass(var([0, -4, -2, -3], 8), dur=1/2, cutoff=40, follow=PFr(1, 4, 555)).unison(2) + (0, var([0, 7], [4, 1]))
+
+r2 >> varsaw(oct=(3, PStep(4, 5, 6), 5), cut=4, cutmix=0.2, lpf=(800, linvar(
+    [400, 12000], 128)), dur=[6, 2], sus=[4, 8], lpr=0.1, a=0.5).unison(3)
+
+d1 >> play("x", sample=4, amp=PBin(344))
+h3 >> play("s", valad=PFr(1000, 3000)).sometimes("stutter", PRand(16))
+n2 >> play("..*.", echo=P*[0, PRand([0.125, 0.5, 0.75])], mverb=0.9, hpf=2000)
+
+h3.hpf = 4000
+h3.stop()
+
+b8 >> lbass(var([0, -2, linvar([-2, 0], [8, 0])], [16, 8, 8]), dur=var([1/2, 1/4], [24, 8]),
+            cutoff=PFr(4000, 12000), detune=0.9, tone=PFr(0.16, 0.9), dist2=0, oct=var([5, lininf(5, 6, 8)], [24, 8]))
+
+r1 >> dab([-2, PWalk(8, 1, 1), -3, _, _, [0, 0, 3]], leg=4,
+          echo=0.25, dur=1/4, oct=PStep(4, [5, 6], [5, 7]))
+s1 >> klank(dur=8, oct=(3, 4, 6)).unison(3)  # progressif
+
+s2 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 8) * 2).slider()
+r1 >> dbass()
+r2 >> donk()
+r3 >> donk()
+
+r4.oct = 7
+r4 >> lbass()
+q1 >> play("[--]", sample=5)
+x1 >> play("x.", sample=var([5, 2], [24, 8]), amp=4, lpf=0)
+x2 >> play("u ", sample=3, dur=4, amp=2)
+
+p1 >> play("<E ><p >", sample=0, dur=PDur([3, 5], 8), amp=PWhite(
+    2, 1), hpf=220, chop=1/2, leg=PWhite(15), pan=PWhite(-1, 1), fx2=1)
+
+r4 >> dab(dur=PDur(var([4, [5, 3, 8]], [6, 2]), 8), leg=(
+    [0, 5]), cutoff=400, dist2=0.4, hpf=1000, hpr=0.1)
+
+s3 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 5) *
+            2, drive=linvar([0.02, 0.04], 32)).stop()
+k4 >> lapin(([-4, -3], 4), oct=(3, 4), shape=0.4, fdistfreq=4000, dur=8, lpf=4000,
+            fdist=1, hpf=200, bpf=0, lofi=1, amp=PCoin(0.2, 0, 0.25)).unison(2).slider().solo(0)
+
+x4 >> play("..o.")
+
+r3 >> varsaw()
+r1 >> varsaw(mverb=0, dur=PDur(var([4, [5, 3, 8]], [6, 2]), 8), oct=3)
+r2 >> donk(mverb=0, dur=PDur(var([4, [5, 3, 8]], [6, 2]), 8), oct=4)
+
+r4 >> dbass(dur=var([1/2, 1/4, 2]), amp=2, shape=[0.2, 0.5])
+
+r1 >> dbass(dafilter=PWhite(0.1, 0.1)[:32], lpf=var([400, linvar([400, 3200], 64)], [16, 8]), lpr=0.1, dur=var(
+    [1/2, 1/4], [6, 2]), oct=var([6, 7, (3, 4, 5), (3, 4, 6), (4, 5, 6, 7), 3]), mpf=linvar([200, 3200], PRand(8)))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("David Lynch Code")
+
+Scale.default="minor"
+
+Clock.bpm=108
+
+rec()
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2) # apples
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbkr=0.5) # apples
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbrk=0.5) # apples
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbrk=0.1) # apples
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbrk=1) # apples
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbrk=0.5, t_reset=0, sbrkdur=0.1, sbrkmix=1.0) # apples
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbrk=0.5, t_reset=0, sbrkdur=0.1, sbrkmix=0.5) # apples
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0) # robot fight
+
+h5 >> loop("dune_8", dur=8, sample=PRand(8), tanh=.2) 
+
+h5.stop()
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+c7.stop()
+
+rec_stop()
+
+storageAttack.compileAttack()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec()
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbrk=0.5, t_reset=0, sbrkdur=0.1, sbrkmix=0.5) # apples
+
+w2 >> splaffer("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbrk=0.5, t_reset=0, sbrkdur=0.1, sbrkmix=0.5) # apples
+
+r0 >> loop("dune_16", dur=16, sample=0)
+
+r1 >> loop("dune_16", dur=16, sample=1, delay=4, a=.1)
+
+r2 >> loop("dune_16", dur=16, sample=2, delay=8, a=.1)
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+r1.stop()
+
+r0.stop()
+
+r2.stop()
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0) # intro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+r6.stop()
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1) # 2 INtro
+
+v9.stop()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+u4 >> loop("losthighway16", dur=16, sample=3) # ambijazz
+
+w1.stop()
+
+o6 >> loop("jazzb8", dur=8, sample=2)
+
+c5 >> loop("jazzguitar8", dur=8)
+
+w2.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+u4 >> loop("losthighway16", dur=16, sample=3) # ambijazz
+
+o6 >> loop("jazzb8", dur=8, sample=2)
+
+o6 >> loop("jazzb8", dur=8, sample=3)
+
+o6 >> loop("jazzb8", dur=8, sample=3).lclip(2)
+
+c5 >> loop("jazzguitar8", dur=8)
+
+c5 >> loop("jazzguitar8", dur=8, hpf=400)
+
+c5.stop()
+
+j3 >> loop("losthighway8", dur=8, sample=1) # putaSpell bass
+
+j3.stop()
+
+j3 >> loop("losthighway8", dur=8, sample=0) # duub
+
+j3.stop()
+
+z4.stop()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=0) # goodDay instru
+
+z4 >> loop("lynchcrazy8", dur=6, sample=0) # goodDay instru
+
+z4.stop()
+
+z4 >> loop("lynchcrazy16", dur=16, sample=0) # goodDay vocal
+
+z4.stop()
+
+u4 >> loop("lynchcrazy16", dur=16, sample=3) # so glad
+
+u4.stop()
+
+u4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+u4 >> loop("lynchcrazy16", dur=16, sample=5) # heaven
+
+u5 >> loop("lynchcrazy16", dur=16, sample=5) # heaven
+
+u4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2, sbrk=0.5, t_reset=0, sbrkdur=0.1, sbrkmix=0.5) # apples
+
+w1.stop()
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+b0 >> loop("losthighway32", dur=32) # piano sax
+
+b0.stop()
+
+j4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+x4 >> loop("twinpeaks16", dur=16, sample=6) # lanoire
+
+i1 >> loop("gbreak16", dur=16, fx=1)
+
+i1.stop()
+
+s7 >> loop("lynchvoice8", dur=8, sample=8, comp=0, rate=1, chop=2, chopi=.5)
+
+s7.stop()
+
+s7 >> loop("lynchvoice8", dur=8, sample=8, comp=0, rate=1, chop=2, chopi=.5)
+
+u4 >> loop("lynchcrazy16", dur=16, sample=2) # low beat
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+u4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+u5 >> loop("lynchcrazy16", dur=16, sample=5) # heaven
+
+u5 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5) # heaven
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+j4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+u5.stop()
+
+x4 >> loop("twinpeaks16", dur=16, sample=6) # lanoire
+
+x4 >> loop("twinpeaks16", dur=16, sample=6, shimmer=1, shimsize=0.8, shimpitch=0.5, shimmix=0.5) # lanoire
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5) # heaven
+
+x4.stop()
+
+x5 >> loop("mulholland8", dur=8, sample=2, chop=2, chopi=0) # swing jazz
+
+x5.stop()
+
+j3 >> loop("losthighway8", dur=8, sample=2) # insensatez
+
+j3.stop()
+
+x4 >> loop("twinpeaks16", dur=16, sample=3) # love
+
+x4.stop()
+
+r4 >> loop("dune8", dur=8, sample=0, chop=0, chopwave=2, shift=(.25,.5,0,1.5,1.75)) # ambi montee
+
+r4.stop()
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5) 
+
+j4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+u4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+j4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+x4 >> loop("twinpeaks16", dur=16, sample=6, shimmer=1, shimsize=0.8, shimpitch=0.5, shimmix=0.5) # lanoire
+
+x4 >> loop("twinpeaks16", dur=16, sample=6, shimmer=1, shimsize=0.8, shimpitch=0.5, shimmix=0.5) # lanoire
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5) 
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5).lclip(var([0.25, 0.5, 1, 2, 0.5, 2])) 
+
+x4 >> loop("twinpeaks16", dur=16, sample=6, shimmer=1, shimsize=0.8, shimpitch=0.5, shimmix=0.5) # lanoire
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5).lclip(0)
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+c7.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0) # hoop
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0) # perfectDrugsTakem 
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0) 
+
+j4.stop()
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0) 
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5).lclip(0)
+
+z4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+u4 >> loop("losthighway16", dur=16, sample=0) # eye
+
+u4.stop()
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+z4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5).lclip(0)
+
+j4.stop()
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0) # intro
+
+v8.stop()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+z4.stop()
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+z4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+z4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+z4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+u4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+o6 >> loop("jazzb8", dur=8, sample=3).lclip(2)
+
+u4 >> loop("losthighway16", dur=16, sample=3) # ambijazz
+
+u4.stop()
+
+u4 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+u4 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+u5 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+u5 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+z4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+u4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x4 >> loop("twinpeaks16", dur=16, sample=5) # dark ambi laura
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+x4 >> loop("twinpeaks16", dur=16, sample=6, shimmer=1, shimsize=0.8, shimpitch=0.5, shimmix=0.5) # lanoire
+
+x5 >> loop("twinpeaks16", dur=16, sample=6, shimmer=1, shimsize=0.8, shimpitch=0.5, shimmix=0.5) # lanoire
+
+x4 >> loop("twinpeaks16", dur=16, sample=5) # dark ambi laura
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x4 >> loop("twinpeaks16", dur=16, sample=5) # dark ambi laura
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+z4.stop()
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0) 
+
+j4.stop()
+
+x4 >> loop("twinpeaks16", dur=16, sample=5) # dark ambi laura
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+o7 >> breakcore("break155sk_8", dur=8, rate=1.0, pos=0, sample=0, core=1, brk=12)
+
+o7.stop()
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+z4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+x4.dur=8
+
+x4.lclip(4)
+
+x4.lclip(2)
+
+z4.stop()
+
+u4.fshift=2
+
+u4.fshift=2
+
+u4.fshift=4
+
+x4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+z4 >> loop("losthighway8", dur=8, sample=4) # groove 
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+u5 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+x5 >> loop("twinpeaks16", dur=16, sample=6, shimmer=1, shimsize=0.8, shimpitch=0.5, shimmix=0.5) # lanoire
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5).lclip(var([0.25, 0.5, 1, 2, 0.5, 2])) 
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+z4 >> loop("losthighway8", dur=8, sample=4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x4 >> loop("twinpeaks16", dur=16, sample=5) # dark ambi laura
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+x4.dur=8
+
+x4.lclip(2)
+
+u4.fshift=4
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+z4 >> loop("losthighway8", dur=8, sample=4)
+
+u4.stop()
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=5) # stone electro
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=6) # stone electro
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=7) # stone electro
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=6) # stone electro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x4 >> loop("twinpeaks16", dur=16, sample=5) # dark ambi laura
+
+z4 >> loop("losthighway8", dur=8, sample=4)
+
+z4 >> loop("losthighway8", dur=8, sample=4)
+
+u4.stop()
+
+x4.dur=8
+
+i8 >> loop("hiphop16", dur=16, room=.1, sample=2)
+
+x4.lclip(2)
+
+u4.fshift=4
+
+u4 >> loop("losthighway16", dur=16, sample=1) # eye
+
+x4.lclip(2)
+
+u4.fshift=4
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+z4 >> loop("losthighway8", dur=8, sample=4)
+
+u4.stop()
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=6) # stone electro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+z4.stop()
+
+u5 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+u5 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+r3 >> play("<x.><.><....>", sample=0, amp=2).sometimes("stutter")
+
+j4 >> loop("lynchcrazy16", dur=16, sample=5, mverb=0.5).lclip(var([0.25, 0.5, 1, 2, 0.5, 2])) 
+
+z4 >> loop("lynchcrazy8", dur=8, sample=1, shape=0, comp=1, chop=0, chopi=0) # hoop
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+h5 >> loop("dune_8", dur=8, sample=PRand(8), tanh=.2) 
+
+r4 >> loop("dune8", dur=8, sample=0, chop=0, chopwave=2, shift=(.25,.5,0,1.5,1.75)) # ambi montee
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+u2 >> loop("dune_16", dur=16)
+
+u2 >> loop("dune_16", dur=16, shimmer=0.5, shimsize=0.8, shimpitch=0.5, shimmix=0.5)
+
+u2 >> loop("dune_16", dur=16, shimmer=0.5, shimsize=0.8, shimpitch=0.5, shimmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+b3 >> loop("dune_16", dur=16, sample=1)
+
+b3 >> loop("dune_16", dur=16, sample=2)
+
+b3 >> loop("dune_16", dur=16, sample=3)
+
+b3 >> loop("dune_16", dur=16, sample=4)
+
+b3 >> loop("dune16", dur=16, sample=4)
+
+b4 >> loop("dune16", dur=16, sample=4, low=4, high=0)
+
+b4 >> loop("dune16", dur=16, sample=5, low=4, high=0)
+
+b4 >> loop("dune16", dur=16, sample=5, low=3, high=0)
+
+b4 >> loop("dune16", dur=16, sample=5, low=2, high=0)
+
+b4 >> loop("dune16", dur=16, sample=5, low=1, high=0)
+
+b4 >> loop("dune16", dur=16, sample=5, low=1, high=0, a=0.2)
+
+b4 >> loop("dune16", dur=16, sample=5, low=1, high=0, a=0.2, fshift=1)
+
+b3 >> loop("dune16", dur=16, sample=4, a=0.1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b3 >> loop("dune16", dur=16, sample=4, a=0.0)
+
+b4 >> loop("dune16", dur=16, sample=5, a=0.0)
+
+b4 >> loop("dune16", dur=16, sample=6, a=0.0)
+
+b4 >> loop("dune16", dur=16, sample=1, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=1, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=2, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=3, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=4, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=5, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=6, a=0.0)
+
+~b4 >> loop("dune_8", dur=8, sample=6, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=6, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=7, a=0.0)
+
+b4 >> loop("dune_8", dur=8, sample=7, a=0.0, mverb=0.5)
+
+b4 >> loop("dune_8", dur=8, sample=8, a=0.0, mverb=0.5)
+
+b4 >> loop("dune_8", dur=8, sample=9, a=0.0, mverb=0.5)
+
+b4 >> loop("dune_8", dur=8, sample=10, a=0.0, mverb=0.5)
+
+b4 >> loop("dune_8", dur=8, sample=3, a=0.0, mverb=0.5)
+
+~b4 >> loop("dune_8", dur=8, sample=3, mverb=0.5)
+
+b4 >> loop("dune_8", dur=8, sample=3, mverb=0.5)
+
+u2 >> loop("dune_16", dur=16, shimmer=0.5, shimsize=0.8, shimpitch=0.5, shimmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+b4 >> loop("dune16", dur=16, sample=5, low=1, high=0, a=0.2, fshift=1)
+
+d2 >> loop("dune8", dur=8)
+
+d2 >> loop("dune8", dur=8, sample=1)
+
+d2 >> loop("dune8", dur=8, sample=1, mverb=0.5)
+
+d2 >> loop("dune8", dur=8, sample=2, mverb=0.5)
+
+d2 >> loop("dune8", dur=8, sample=3, mverb=0.5)
+
+b4.stop()
+
+b4 >> loop("dune_8", dur=8, sample=3, mverb=0.5)
+
+~b4 >> loop("dune_8", dur=8, sample=3, mverb=0.5)
+
+b4 >> loop("dune_8", dur=8, sample=3, mverb=0.5)
+
+d2 >> loop("dune8", dur=8, sample=3, mverb=0.5)
+
+d2 >> loop("dune8", dur=8, sample=4, mverb=0.5)
+
+d2 >> loop("dune8", dur=8, sample=3, mverb=0.5)
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+s8 >> loop("dune8", dur=8, sample=1)
+
+s8 >> loop("dune8", dur=8, sample=1, mverb=0.5)
+
+s8.stop()
+
+r3 >> play("<x.><.><....>", sample=0, amp=2).sometimes("stutter")
+
+z4 >> loop("losthighway8", dur=8, sample=4)
+
+u5 >> loop("lynchcrazy32", dur=32, sample=0) # noahs ark
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+z4 >> loop("losthighway8", dur=8, sample=4)
+
+~x4 >> loop("lynchcrazy16", dur=16, sample=6) # stone electro
+
+Clock.clear()
+soff()
+Server.clearFx()
+

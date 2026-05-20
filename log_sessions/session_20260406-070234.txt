@@ -1,0 +1,1040 @@
+_seq_cancel()
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+_seq_schedule(32, 1775451803495)
+
+Clock.bpm = 66
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1775451831381)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1775451838669)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1775451845968)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1775451853246)
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4, rfreq=50, resonz=0.1)
+
+_seq_cancel()
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, hpf=100).often("stutter", oct=P*[4, 4,5, 6])
+
+_seq_schedule(16, 1775451867826)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.4)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(32, 1775451882398)
+
+_seq_cancel()
+d1.stop()
+p1.stop()
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.9, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c3 >> faim([0, 1, 7], dur=1/2, oct=7, beef=1,  dist2=0.2, amp=0.8, leg=0)
+
+_seq_schedule(16, 1775451911519)
+
+_seq_cancel()
+c5.stop()
+c4.stop()
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=1300, envdist=0.8, envdistgain=2, leg=0, envdistsens=0.7, envdistattack=0.020)
+r1 >> vati([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=6,cutoff=linvar([800, 4000], 8), amp=1.7, leg=0)
+c4.amp=lininf(0.3, 0, 16)
+
+_seq_schedule(8, 1775451926087)
+
+_seq_cancel()
+c3.stop() #
+c4.stop()
+
+r1 >> plaitsX([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=5,cutoff=linvar([800, 4000], 8), amp=1.2, leg=0)
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=1.0, hpf=200, fbdelay=0.5)
+r1 >> plaitsX([0, _, 0, 2, 3, _, 5, 3], dur=0.25, oct=5,    cutoff=3500, amp=0.93, leg=0.5)
+t1.stop()
+
+_seq_schedule(8, 1775451933394)
+
+_seq_cancel()
+Root.default = 0
+d1.stop()
+a1.stop()
+p1.stop() #
+
+_seq_schedule(8, 1775451940720)
+
+_seq_cancel()
+c5.stop()
+s1 >> play("..o...o.", dur=0.25, sample=14, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+p2.stop() #
+s2 >> play("e", dur=0.25, sample=3, amp=var([0, 0.5], [30, 2]))
+
+_seq_schedule(8, 1775451948035)
+
+_seq_cancel()
+s2.degree = var(["e", "oooo[oo]oo"], [30, 2])
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.81, mverb=0.2)
+p2 >> ethpad([0, 1, 7], dur=8, oct=6, attack=3, release=4,  amp=0.71, room=0.9, mix=0.6)
+c3 >> faim([0, 1, 6, 7], dur=var([1/2, 1/4], [7, 1]), oct=5, beef=1, dist2=0.5, amp=var([0.9, 0.5, 0], [8, 8, 2]), leg=0)
+
+_seq_schedule(16, 1775451955357)
+
+_seq_cancel()
+t1.stop()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+r1 >> plaits([0, _, 11, _, 6, 1, _, 7], dur=var([0.25, 1/6], [14, 2]), oct=5, cutoff=linvar([800, 5000], 8), amp=var([0.48, 2.0], [16, 16]), leg=0).unison(4)
+
+_seq_schedule(8, 1775451969924)
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=3, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.56, room=0.7, mix=0.5)
+r1.stop()
+
+_seq_schedule(8, 1775451977206)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, room=0.9, mix=0.6)
+a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.3,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1775451984490)
+
+_seq_cancel()
+drop()
+
+_seq_schedule(8, 1775451991771)
+
+_seq_cancel()
+Clock.bpm = 132
+c5 >> faim([0, 1, 6], dur=4, oct=6, beef=1, amp=0.9,   fshift=linvar([-20, 20], 16), fmix=0.3)
+
+_seq_schedule(8, 1775451999049)
+
+_seq_cancel()
+c4.stop()
+d1 >> industrialdrone([0], dur=16, oct=6, feedback=0.5, amp=0.3)
+
+_seq_schedule(8, 1775452003862)
+
+_seq_cancel()
+p1 >> ethpad(r1.degree, dur=8, oct=5, attack=2, amp=0.2, room=0.9)
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=1, dark=0.7)
+r2 >> vati([0, 1, 3, 6, 7, 11, 12, 6], dur=0.25, oct=var([5, 6], [16, 16]), cutoff=3000, amp=var([0, 1.0], [16, 16]), leg=0)
+b1 >> plaitsX(var([[0,0,0,3,0,0,5,0], [0,1,2,3,4,5,6,7]], [16, 16]),  dur=0.25, oct=6, amp=P[0.8, 0.3, 0.5, 0.6], lpf=900, shape=0)
+
+_seq_schedule(8, 1775452007520)
+
+_seq_cancel()
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=1, crush=4)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
+
+_seq_schedule(128, 1775452011193)
+
+_seq_cancel()
+c1.stop()
+b1.stop()
+p1.stop()
+
+_seq_schedule(8, 1775452069403)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+
+_seq_schedule(16, 1775452073062)
+
+_seq_cancel()
+b1.stop()
+s1.stop()
+p1.stop()
+c4.stop()
+r1.stop()
+r3.stop()
+b1.stop()
+
+_seq_schedule(8, 1775452080344)
+
+_seq_cancel()
+Group(k1, s1, s2, h1).solo()
+
+_seq_schedule(8, 1775452084036)
+
+_seq_cancel()
+c5 >> faim([0, 6, 12, 1, 7], dur=2, oct=3, beef=2,  dist2=0.8, amp=1.2, leg=2, room=0.6, mix=0.4)
+b1 >> dbass([0, 0, 0, 0, 0, 0, 0, 0], dur=1/8, oct=5, amp=P[1, 0.4, 0.7, 0.4], lpf=1200, shape=0)
+r1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+s2.stop()
+r1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+r2 >> vati([11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0], dur=1/6, oct=6,  cutoff=5000, amp=0.9, leg=0)
+
+_seq_schedule(32, 1775452087675)
+
+_seq_cancel()
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=6, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0, lpf=1800)
+n1 >> noise(dur=8, amp=linvar([0, 0.4], 8), hpf=2000, lpf=8000)
+
+_seq_schedule(32, 1775452102242)
+
+_seq_cancel()
+c6.oct=(4, 3)
+
+c5.oct=4
+r2.oct=4
+
+_seq_schedule(32, 1775452116809)
+
+Scale.default = "minor"
+
+Scale.default = "major"
+
+_seq_cancel()
+b1.stop()
+Clock.bpm = 66
+
+_seq_schedule(32, 1775452131359)
+
+_seq_cancel()
+c5 >> faim([0, 3, 6, 9], dur=2, oct=3, beef=2, dist2=0.6, amp=1.0, leg=1, room=0.5)
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=3)
+
+_seq_schedule(32, 1775452159528)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+attack("Tio 132")
+
+Clock.bpm =132
+
+q3 >> compkick(0, punch=0.5, comp=16, release=0.35, click=1.0,drive=0.4, sub=1, tape=1, tapedrive=2, body=0.2, echo=0, tone=0.0, oct=3,)
+
+n7 >> prof(rate=linvar( [.01, .7], 128), oct=3, dur=8, valad=700, valadr=0.3, valadd=5, valadt=0, valadc=0.2, fx2=.4, eb=0.5, ebfeed=0.25, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, fx1=.1)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, amp=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, amp=0.3, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.3, amp=0.3, hpf=150).chroma().unison(3)
+
+n7 >> prof(rate=linvar( [.01, .7], 128), oct=3, dur=8, valad=700, valadr=0.3, valadd=5, valadt=0, valadc=0.2, fx2=.4, eb=0.5, ebfeed=0.25, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, fx1=.1)
+
+cr >> creep(var([7,5],[4,4])+P[0,0,12,0], dur=2, rate=linvar([0.5,2],16), hpf=400, mverb=0.6, amp=0.25)
+
+p1 >> prof([0,2,4,5,7,5,4,2], dur=0.5, cutoff=linvar([2000,6000],16), rq=0.4, rate=0.5, phase=0.5, mverb=0.4, amp=0.33)
+
+p1.stop()
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.3, amp=0.4, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.3, amp=0.5, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.3, amp=0.6, hpf=150).chroma().unison(3)
+
+sb >> hardstab([([0, 0, 0, 4, 1],4,7)], dur=4, fbdelay=PWhite(0.1, 0.9), fbtime=0.75, fbfeed=0.3, fbcutoff=2000, amp=0.3, gate=0.6)
+
+b3 >> loop("electrodrum8", dur=8, sbrk=PStep(4,0.25,0), t_reset=0, sbrkdur=0.5, sbrkmix=1.0, sample=2, drcomp=.5)
+
+b3.stop()
+
+hv >> hoover([(0,4,7)], dur=32, porta=1.5, portadur=0.3, tubedrive=0.5, tubewarm=0.4, amp=0.4, sus=6)
+
+sb >> hardstab([([0, 0, 0, 4, 1],4,7)], dur=4, fbdelay=PWhite(0.1, 0.9), fbtime=0.75, fbfeed=0.3, fbcutoff=2000, amp=0.3, gate=0.6)
+
+dl >> darklead(P[0,2,4,7,9,7,4,2], dur=0.25, cutoff=linvar([1500,5000],8), detune=0.01, drive=1.5, sub=0.2, fbdelay=0.3, fbtime=0.5, fbfeed=0.35, oct=4, amp=0.125).sometimes("degree.add", 7)
+
+d2 >> play("-", sample=5, dur=0.25, amp=P[0.4,0.15,0.3,0.15], hpf=4000)
+d3 >> play("..C.", sample=2, dur=0.5, amp=0.55)
+
+dp >> darkpad([(0,4,7),(0,3,7)], dur=var([8,8],[8,8]), dark=0.6, movement=linvar([0.2,0.6],32), cutoff=linvar([600,1500],16), pumper=0.4, pumprate=1, amp=0.4)
+
+px >> plaitsX(var([P[0,2,4],P[4,5,7],P[7,9,11]],[8,8,8]), dur=0.5, preset=var([9,10,11],[8,8,8]), oct=(4,5), chopmix=linvar([0,0.5],16), chopwave=(2,3), mverb=0.4, amp=0.55)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+q3 >> compkick(0, punch=0.5, comp=16, release=0.35, click=1.0,drive=0.4, sub=1, tape=1, tapedrive=2, body=0.2, echo=0, tone=0.0, oct=3,)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.3, amp=0.3, hpf=150).chroma().unison(3)
+
+k0 >> a_daftlead([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_daftlead([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, amp=0.5, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_daftlead([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, amp=0.1, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_daftlead([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, amp=0.2, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 2], [1, 2, 4]),cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_daftlead([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=5, rgate=0.2, stut=0.2, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+k0 >> a_daftlead([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=3, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=3, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1.stop()
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=5, rgate=0.2, stut=0.2, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.2, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4>> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=3, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=3, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=4, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 4), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 5), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.2, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.3, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.4, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.5, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 5), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.5, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 2], [1, 2, 4]),cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.5, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.5, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 5), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 5), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+~k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 5), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 5), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.5, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.5, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.5, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, amp=0.5, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 5), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 5), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 4), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.2).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.3).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.4).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.5).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.6).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.7).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.8).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k4.stop()
+
+k0.oct=4
+
+k0.oct=(4, 3)
+
+k0.oct=(4, 4)
+
+k0.oct=(4, 5)
+
+k0.oct=(4, 5)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 4), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 2], [1, 2, 4]),cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 4), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 4), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k4.stop()
+
+k0.oct=(4, 5)
+
+k0.stop()
+
+k1.stop()
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> dbass([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=3, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=5, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/2, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/4, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/4, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k4.stop()
+
+k0
+
+k4.stop()
+
+k0.oct=(4, 5)
+
+k1.stop()
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 2], [1, 2, 4]),cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.5)
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 2], [1, 2, 4]),cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.3)
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 1], [1, 2, 4]),cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.3)
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 1/2], [1, 2, 4]),cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.3)
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 1/2], [1, 2, 4]), oct=3, cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.3)
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 1/2], [1, 2, 4]), oct=4, cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 4), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/4, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k1.stop()
+
+k4.stop()
+
+o1 >> svdk([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 1/2], [1, 2, 4]), oct=4, cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.3)
+
+d0.oct=3
+
+k0.oct=3
+
+k0.shape=0
+
+k0.stop()
+
+k1.stop()
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/4, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+o1 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]],noise=0.3, sus=var([1/2, 1/4, 1/2], [1, 2, 4]), oct=4, cutoff=800, dur=(1/4, 1/2), res=0.5,track=1, fenv=0.3, slide=0.05, 
+body=0.5,drift=0.3, harm=0.2, amp=0.3)
+k0.oct=3
+k0.shape=0
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 124
+
+k4 >> cbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, oct=(4, 4), lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> a_gesa2([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.2, stut=0.1, stutrate=1, stutlen=0.04, t_reset=0, rgaterate=1, oct=(7, 6), rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P*[16, 19, 20], PRand([0, 20, 19, 16])], sus=var([1/3, 1/2, 1/2, 1/8, 1/2], [8, 1, 1/2]), delay=PLife(0.5), dur=1/4, rgate=0.2, stut=0.1, stutrate=1, stutlen=0.1, t_reset=0, rgaterate=1, rgatewave=0, beat_dur=1, lpf=linvar([1200, 6400], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k0 >> dbass([0, 0, 0, P[16, 19, [20, (20, 0), (19,20), 20]]], sus=var([1/3, 1/2, 1/4], [1, 2, 4]), dur=(1/4, 1/2), rgate=0.6, stut=0.1, stutrate=var([2, 4, 4], 8), stutlen=0.06, t_reset=0, rgaterate=2, rgatewave=0, beat_dur=1, lpf=linvar([4000, 3200], 128), lpr=0.2, hpf=150).chroma().unison(3)
+
+k1 >> blip([0, 0, 0, P[16, 19, 20]], sus=var([1/3, 1/2, 1/1], 8), dur=1/4, leg=4, oct=4, rgate=0.2, stut=0.1, stutrate=4, stutlen=0.04, t_reset=0, rgaterate=4, rgatewave=0, beat_dur=1, lpf=linvar([1400, 3200], 128), lpr=0.2, shape=0.9).chroma().unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("SAINT 120")
+
+Root.default='C'
+
+Scale.default="minor"
+
+Scale.default="minor"
+
+Scale.default="minor"
+
+Clock.bpm = lininf(120, 170, 128)
+
+b1 >> lbass(var([0, -2, 0.5], 8), formant=var([0, 0.1], [24, 8]), formantmix=PWhite(0, 0.3), oct=(6, 5, [4, 3]) + var([0, 1], [14, 2]) + PwRand([0, 1, 1.25], [30, 1, 1]), rate=linvar([1.2, 0.3], [32]), fmod=linvar([0, 1], [128]), scale=Scale.chromatic, drive=var([0, (0.1, 0)], [12, 4]), dur=1/2, amp=0.5, mverb=0, mverbdamp=[0.2, 1], mverbdiff=[1, 0.4], hpf=linvar([100, 400], 8)).unison(4).every(8, "stutter", slide=0.01, lpf=linvar([4000, 8000], 16))
+
+b3 >> soprano((b1.degree, 0), dur=PRand(1,8), blur=PWhite(0,4),decay=PRand(4), oct=(3,4,PStep(7,6,5)), drive=PWhite(0,0.1), sus=PRand(16), atk=PRand(4), room=0.5, mix=0.5, amplify=0.5, spin=0).unison(2)
+
+b1.rate=lininf(1, 0.1, 32)
+
+b1.mverb=0.0
+
+b1.lpr=lininf(1, 0.1, 64)
+
+b1.slide=var([0, 1], [28, 4])
+
+b1.degree=0.5
+
+b1.chop=var([0, 1, 1/2], [12, 2, 2])
+
+b4 >> play("(#....)..(...~)", rate=PWhite(-1,4)*0.25).unison(3, 1,99)
+
+b5 >> play("@", sample=2, hpf=4000).fill(0)
+
+b6 >> play("-", dur=1/2, amp=0.5, sample=(var([3, 4], [4, 4]), 3), glide=1,shift=var([0, 2], [24, 8]), pshift=0).slider()
+
+b7 >> play(var(["-.--", "[--]"], 8), sample=1, rate=0.5, formant=0.4, hpf=7000)
+
+b1.dur=lininf(1/2, 1/4, 16)
+
+b8 >> dbass(var([0, -2, 0.5], 8), oct=(6, 5) + var([0, 1], [14, 2]), rate=linvar([1.2, 0.3], [64]), scale=Scale.chromatic, dur=1/2, amp=1, hpf=100).slider().unison(4).solo(0)
+
+b1.lpf=linvar([3200, 1600], 128)
+
+b1.amp=0.8
+
+e1 >> play("# ", dur=4, rate=(-1, 2)).unison(2).after(4, "stop")
+e2 >> play("# ", sample=(1,4), dur=4, rate=(-1, 1)).after(8, "stop")
+e3 >> play("& ", sample=5, rate=-2, shift=4, dur=4).after(32, "stop")
+e4 >> play("#k", sample=(1,4), dur=4, rate=(-1, 1), mverb=1, room2=0.5,  chop=0.25, chopmix=[0.5, 0], damp2=0.9, revsus=1).after(4, "stop")
+
+e1 >> play("# ", dur=4, rate=(-1, 2)).unison(2).after(4, "stop")
+e2 >> play("# ", sample=(1,4), dur=4, rate=(-1, 1)).after(8, "stop")
+e3 >> play("& ", sample=5, rate=-2, shift=4, dur=4).after(32, "stop")
+e4 >> play("#k", sample=(1,4), dur=4, rate=(-1, 1), mverb=1, room2=0.5,  chop=0.25, chopmix=[0.5, 0], damp2=0.9, revsus=1).after(4, "stop")
+
+l7 >> play("X ")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("antenna 61")
+
+Clock.bpm = 122/2;
+
+Scale.default = Scale.minor
+
+Root.default = "F#"
+
+e0 >> plaits(melody(),dur=(1/2, P[1/2, 1/4, 1], 4, 2, 1/2, 1/2), engine=var([5, 7, 3], 8), drive=0, mverb=0.1, oct=3, amp=0.1, vol=0.5, pan=PWhite(linvar([-0.5, 0.5])))
+
+e0 >> plaits(melody(),dur=(1/2, 1/4), engine=(1, 4), drive=0, mverb=0.8, oct=5)
+
+e1 >> bass(melody()[:8],dur=var([1/4, 2],[13, 3]), a=PWhite(0, 1), drive=0, amp=0.7, mverb=0.8).unison(2).every(13, "offmul", 2)
+
+e0.every(4, "shuffle")
+
+e1 >> bass(melody(),dur=1/4, oct=5, drive=0, mverb=0.8).unison(0)
+
+e1 >> bass(melody(),dur=1/4, drive=linvar([0, 0.02], 32), mverb=0.8).unison(0)
+
+g2 >> bass(melody() + var([7, 3, [4, 0]]),dur=var([1/4, 1/2]), drive=0, vol=0.5, mverb=0.1).unison(0)
+
+e3 >> lbass(dur=1/2, oct=4, drive=0, mverb=0.8, amp=1, delay=var([0, 0.5]))
+
+e0.engine = var([1, 4, 11], [8, 4, 4])
+
+e0.engine = var([1, 4, 11], [8, 4, 4])
+
+e0.dur = var([(1/2, 1/4), (1/2, 1/4, 1)], [12, 4])
+
+e1.oct = var([5, 4], [12, 4])
+
+g2.delay = var([0, 0.25], [8, 8])
+
+g2.mverb = linvar([0.1, 0.5], 32)
+
+e3.lpf = linvar([800, 3000], 48)
+
+e3.hpf=1200
+
+Root.default = "E"
+
+e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))
+
+e0.mverb = linvar([0.8, 0.3], 16)
+
+e1.dur = var([1/4, (1/4, 1/2)], [8, 8])
+
+g2.degree = melody() + var([7, 3, [4, 0], 5], [4, 4, 4, 4])
+
+e3.delay = var([0, 0.5, 0.25], [8, 4, 4])
+
+l1 >> loop("cinambi8", dur=8, sample=var([3, 5], [8, 8]), amp=var([0, 0.35], [16, 16]), hpf=400, mverb=0.4)
+
+e0.dur = var([(1/2, 1/4), 2, 4], [8, 4, 4])
+
+e0.engine = var([11, 5, 3], [4, 4, 8])
+
+e1.lpf = linvar([4000, 1200], 32)
+
+g2.vol = linvar([0.5, 0.3], 32)
+
+e3.oct = var([4, 5], [12, 4])
+
+e3.fbelay=0.5
+
+e4.oct = var([6, 5, 6], [4, 4, 8])
+
+e4.amp = linvar([0.4, 0.6], 32)
+
+Root.default = "F#"
+
+e0.engine = var([1, 4, 11], [8, 4, 4])
+
+e0.dur = var([(1/2, 1/4), (1/2, 1/4, 1)], [12, 4])
+
+e1.drive = linvar([0.02, 0.08], 64)
+
+e1.oct = var([5, 4], [12, 4])
+
+g2.delay = var([0, 0.25], [8, 8])
+
+g2.mverb = linvar([0.1, 0.5], 32)
+
+e3.drive = linvar([1, 0.3], 32)
+
+e3.lpf = linvar([800, 3000], 48)
+
+Root.default = "E"
+
+e1.drive = linvar([0.03, 0.08], 64)
+
+e1.drive = linvar([0.04, 0.08], 64)
+
+e1.drive = linvar([0.05, 0.08], 64)
+
+e1.drive = linvar([0.06, 0.08], 64)
+
+e1.drive = linvar([0.07, 0.08], 64)
+
+e1.drive = linvar([0.08, 0.08], 64)
+
+e1.drive = linvar([0.09, 0.08], 64)
+
+e1.drive = linvar([0.10, 0.08], 64)
+
+e1.drive = linvar([0.11, 0.08], 64)
+
+e1.drive = linvar([0.12, 0.08], 64)
+
+e1.drive = linvar([0.13, 0.08], 64)
+
+e1.drive = linvar([0.14, 0.08], 64)
+
+e1.drive = linvar([0.15, 0.08], 64)
+
+e1.drive = linvar([0.16, 0.08], 64)
+
+e1.drive = linvar([0.17, 0.08], 64)
+
+Root.default = "E"
+
+e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))
+
+e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))
+e0.mverb = linvar([0.8, 0.3], 16)
+
+e1.dur = var([1/4, (1/4, 1/2)], [8, 8])
+
+g2.degree = melody() + var([7, 3, [4, 0], 5], [4, 4, 4, 4])
+
+e3.delay = var([0, 0.5, 0.25], [8, 4, 4])
+
+l1 >> loop("cinambi8", dur=8, sample=var([3, 5], [8, 8]), amp=var([0, 0.35], [16, 16]), hpf=400, mverb=0.4)
+
+e0.dur = var([(1/2, 1/4), 2, 4], [8, 4, 4])
+
+e0.engine = var([11, 5, 3], [4, 4, 8])
+
+e1.drive = linvar([0.08, 0.15], 48)
+
+e1.lpf = linvar([4000, 1200], 32)
+
+g2.vol = linvar([0.5, 0.3], 32)
+
+e3.oct = var([4, 3], [12, 4])
+
+e4.oct = var([6, 5, 6], [4, 4, 8])
+
+e4.amp = linvar([0.4, 0.6], 32)
+
+Root.default = "F#"
+
+e0.dur = 4
+
+e0.mverb = linvar([0.3, 0.9], 32)
+
+e0.amp = linvar([0.5, 0.1], 48)
+
+e1.lpf = linvar([1200, 400], 48)
+
+e1.drive = linvar([0.15, 0], 48)
+
+e1.mverb = linvar([0.8, 0.95], 32)
+
+g2.amp = linvar([0.5, 0], 48)
+
+e4.lpf = linvar([2400, 300], 32)
+
+e4.amp = linvar([0.6, 0], 32)
+
+l1.amp = linvar([0.35, 0], 32)
+
+e0.dur = 4
+e0.mverb = linvar([0.3, 0.9], 32)
+e0.amp = linvar([0.5, 0.1], 48)
+e1.lpf = linvar([1200, 400], 48)
+e1.drive = linvar([0.15, 0], 48)
+e1.mverb = linvar([0.8, 0.95], 32)
+g2.amp = linvar([0.5, 0], 48)
+e4.lpf = linvar([2400, 300], 32)
+e4.amp = linvar([0.6, 0], 32)
+l1.amp = linvar([0.35, 0], 32)
+e3.lpf = linvar([3000, 400], 64)
+e3.mverb = linvar([0.8, 0.95], 48)
+e3.amp = linvar([1, 0.3], 64)
+
+attack("totoBan 173")
+
+f8 >> loop("beats8", dur=8, sample=5)
+
+c1 >> loop("berlin8", dur=8, sample=4)
+
+m0 >> loop("cinambi8", dur=8, sample=5)
+
+v3 >> loop("circlebreak16", dur=16, sample=7, comp=1, sbrk=.5, sbrkdur=.5)
+
+Clock.bpm = 122/2;
+Scale.default = Scale.minor
+Root.default = "F#"
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+rec()
+
+Clock.bpm = 122/2;
+Scale.default = Scale.minor
+Root.default = "F#"
+e0 >> plaits(melody(),dur=(1/2, P[1/2, 1/4, 1], 4, 2, 1/2, 1/2), engine=var([5, 7, 3], 8), drive=0, mverb=0.1, oct=3, amp=0.1, vol=0.5, pan=PWhite(linvar([-0.5, 0.5])))
+
+e0 >> plaits(melody(),dur=(1/2, 1/4), engine=(1, 4), drive=0, mverb=0.8, oct=5)
+
+e1 >> bass(melody()[:8],dur=var([1/4, 2],[13, 3]), a=PWhite(0, 1), drive=0, amp=0.7, mverb=0.8).unison(2).every(13, "offmul", 2)
+
+e0.every(4, "shuffle")
+
+e1 >> bass(melody(),dur=1/4, oct=5, drive=0, mverb=0.8).unison(0)
+
+e1 >> bass(melody()[:8],dur=var([1/4, 2],[13, 3]), a=PWhite(0, 1), drive=0, amp=0.7, mverb=0.8).unison(2).every(13, "offmul", 2)
+
+e1 >> bass(melody()[:8],dur=var([1/4, 2],[13, 3]), a=PWhite(0, 1), drive=0, amp=0.7, mverb=0.8).unison(2).every(13, "offmul", 2)
+
+e1 >> bass(melody(),dur=1/4, drive=linvar([0, 0.02], 32), mverb=0.8).unison(0)
+
+g2 >> bass(melody() + var([7, 3, [4, 0]]),dur=var([1/4, 1/2]), drive=0, vol=0.5, mverb=0.1).unison(0)
+
+e3 >> lbass(dur=1/2, oct=4, drive=0, mverb=0.8, amp=1, delay=var([0, 0.5]))
+
+e3 >> lbass(dur=1/2, oct=4, drive=0, mverb=0.8, amp=1, delay=var([0, 0.5]))
+
+e3 >> lbass(dur=1/2, oct=4, drive=0, mverb=0.8, amp=1, delay=var([0, 0.5]))
+
+e3 >> lbass(dur=1/2, oct=4, drive=0.1, mverb=0.8, amp=1, delay=var([0, 0.5]))
+
+e0.engine = var([1, 4, 11], [8, 4, 4])
+
+e3 >> lbass(dur=1/2, oct=4, drive=[0, 0.1,0, 0], mverb=0.8, amp=1, delay=var([0, 0.5]))
+
+e0.engine = var([1, 4, 11], [8, 4, 4])
+
+e0.dur = var([(1/2, 1/4), (1/2, 1/4, 1)], [12, 4])
+
+e1.oct = var([5, 4], [12, 4])
+
+g2.delay = var([0, 0.25], [8, 8])
+
+g2.mverb = linvar([0.1, 0.5], 32)
+
+e3.lpf = linvar([800, 3000], 48)
+
+e3.hpf=1200
+
+e3.lpf = linvar([800, 3000], 48)
+
+Root.default = "E"
+
+e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))
+
+e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))
+e0.mverb = linvar([0.8, 0.3], 16)
+e1.dur = var([1/4, (1/4, 1/2)], [8, 8])
+g2.degree = melody() + var([7, 3, [4, 0], 5], [4, 4, 4, 4])
+e3.delay = var([0, 0.5, 0.25], [8, 4, 4])
+l1 >> loop("cinambi8", dur=8, sample=var([3, 5], [8, 8]), amp=var([0, 0.35], [16, 16]), hpf=400, mverb=0.4)
+e0.dur = var([(1/2, 1/4), 2, 4], [8, 4, 4])
+e0.engine = var([11, 5, 3], [4, 4, 8])
+e1.lpf = linvar([4000, 1200], 32)
+g2.vol = linvar([0.5, 0.3], 32)
+e3.oct = var([4, 5], [12, 4])
+e3.fbelay=0.5
+e4.oct = var([6, 5, 6], [4, 4, 8])
+e4.amp = linvar([0.4, 0.6], 32)
+Root.default = "F#"
+
+# --- phase 2: signal bleeds through — texture + harmonic widening ---
+e0.engine = var([1, 4, 11], [8, 4, 4])
+e0.dur = var([(1/2, 1/4), (1/2, 1/4, 1)], [12, 4])
+e1.drive = linvar([0.17, 0.08], 64)
+e1.oct = var([5, 4], [12, 4])
+g2.delay = var([0, 0.25], [8, 8])
+g2.mverb = linvar([0.1, 0.5], 32)
+e3.drive = linvar([1, 0.3], 32)
+e3.lpf = linvar([800, 3000], 48)
+
+Root.default = "E"
+
+e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))
+
+e4 >> karp(melody(), dur=PDur(5, 8), oct=var([5, 6], [8, 8]), lpf=linvar([600, 2400], 32), mverb=0.6, amp=var([0, 0.4], [16, 16]), delay=var([0, 0.5], [12, 4]))
+e0.mverb = linvar([0.8, 0.3], 16)
+
+e1.dur = var([1/4, (1/4, 1/2)], [8, 8])
+g2.degree = melody() + var([7, 3, [4, 0], 5], [4, 4, 4, 4])
+e3.delay = var([0, 0.5, 0.25], [8, 4, 4])
+
+l1 >> loop("cinambi8", dur=8, sample=var([3, 5], [8, 8]), amp=var([0, 0.35], [16, 16]), hpf=400, mverb=0.4)
+e0.dur = var([(1/2, 1/4), 2, 4], [8, 4, 4])
+e0.engine = var([11, 5, 3], [4, 4, 8])
+e1.drive = linvar([0.08, 0.15], 48)
+e1.lpf = linvar([4000, 1200], 32)
+g2.vol = linvar([0.5, 0.3], 32)
+e3.oct = var([4, 3], [12, 4])
+e4.oct = var([6, 5, 6], [4, 4, 8])
+e4.amp = linvar([0.4, 0.6], 32)
+Root.default = "F#"
+
+e0.dur = 4
+e0.mverb = linvar([0.3, 0.9], 32)
+e0.amp = linvar([0.5, 0.1], 48)
+e1.lpf = linvar([1200, 400], 48)
+e1.drive = linvar([0.15, 0], 48)
+e1.mverb = linvar([0.8, 0.95], 32)
+g2.amp = linvar([0.5, 0], 48)
+e4.lpf = linvar([2400, 300], 32)
+e4.amp = linvar([0.6, 0], 32)
+l1.amp = linvar([0.35, 0], 32)
+e3.lpf = linvar([3000, 400], 64)
+e3.mverb = linvar([0.8, 0.95], 48)
+e3.amp = linvar([1, 0.3], 64)
+
+Clock.bpm=173
+f8 >> loop("beats8", dur=8, sample=5)
+c1 >> loop("berlin8", dur=8, sample=4)
+m0 >> loop("cinambi8", dur=8, sample=5)
+v3 >> loop("circlebreak16", dur=16, sample=7, comp=1, sbrk=.5, sbrkdur=.5)
+b4 >> loop("nbvarp16", dur=32, sample=5, hpf=120)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

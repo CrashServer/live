@@ -1,0 +1,52 @@
+compo.cell_reload(); compo.cell_run('F7', 8)
+
+compo.cell_reload(); compo.cell_run('F6', 8)
+
+a0 >> loop("cosmic16", dur=16, sample=2, tube=1, hpf=(300, PRand([400, 300])), room2=1, revsus=18, shift=var([(0.5, 1), 1], [4, 4]), beat_dur=1).unison(2)
+
+a0.stop()
+
+compo.cell_reload(); compo.cell_run('G30', 8)
+
+compo.cell_reload(); compo.cell_run('G30', 8)
+
+t5 >> faim((0, 4), oct=(3,4),amp=0.4, hpf=120, dur=2, echo=[0,PWhite(1.5,1.75)], echomix=PWhite(0,0.9), lpf=[0,PRand(500,4813)]).unison(3)
+
+b6 >> play("..X.", shape=0.5, dist2=0.5, dist2lfo=PRand(10), mverb=0.5, echo=var([0, 0.5], [2, 4]), amp=PBin())
+
+b6.stop()
+
+compo.cell_reload(); compo.cell_run('F54', 8)
+
+p3 >> loop("hiphop16", dur=16,pos=0, room=0.1, sample=0)
+
+s2 >> plaitsX(oct=(5,6), dur=[1,1.5,1/2,1/2,1,1,1/2,1], dfm=PRand(100,1200), dfmr=PWhite(0.1,0.6), dfmd=PWhite(14,20), sus=2/3, slide=PStep([6,3,1],1,0), amplify=var([0.2,0],[PRand(4,12),PRand(16,48)]), mverb=0.7, slidedelay=PWhite(0.8,0.95)).unison(3).every(48, "dur.shuffle")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+compo.cell_reload(); compo.cell_run('B41', 8)
+
+b2 >>  lbass(PStep(8,P[1:16],var([0,-2, 2, 5], [16])), glide=0.3, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2,cutoff=2610, tone=0.7, rq=0.9, detune=0.3, amp=0.8, hpf=120).unison(3)
+
+b2 >>  lbass(PStep(8,P[1:16],var([0,-2, 2, 5], [16])), glide=0.3, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, dur=1/2,cutoff=2610, tone=0.7, rq=0.9, detune=0.3, amp=0.8, hpf=120).unison(3)
+
+c1 >> play("  c ", dur=8, amp=0.35, echo=0.5, room=1, mix=0.75)
+
+d0 >> play(".{...u}..u...", sample=5, hpf=var(PRand(4000)+10), rate=(.5,2)).sometimes("stutter")
+
+f8 >> faim(PArp([0,1,0.5],11) + PGauss(0, 0.2) + P[0, 0, 0, [0.1, 0.1]], oct=(4, 5), beef=(1,0), dur=PDur(var([4,[5,3,8]],[6,2]),8), sus=f1.dur*PWhite(0.5,1), lpf=0, amp=0.5)
+
+x1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5, cutoff=linvar([2000, 8000], 4), amp=var([0, 0.6, 0, 0.8], [16, 8, 8, 32]), leg=0, crush=4)
+
+x1.stop()
+
+compo.cell_reload(); compo.cell_run('F42', 8)
+
+w6 >> loop("circlebreak16", dur=16, sample=7, comp=0, vol=1, fx=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

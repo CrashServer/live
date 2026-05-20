@@ -1,0 +1,18 @@
+d8 >> a_bassry(rate=1, distortion=10, cutoff=700, resonance=0.6, pattern=0, swing=0.1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+compo.cell_reload()
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1], sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+compo.rec()
+
+compo.rec_stop()
+

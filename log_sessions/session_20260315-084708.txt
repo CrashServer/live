@@ -1,0 +1,150 @@
+d1 >> dbass(dur=1, amp=fi())              # 0→1 over 16 beats
+
+d1 >> dbass(dur=1, amp=fi(8))             # 0→1 over 8 beats                                                                            
+
+d1 >> dbass(dur=1, amp=fi(2))             # 0→1 over 8 beats                                                                            
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fi(32, 200, 8000)) # 200→8000 over 32 beats                                                                      
+
+d1 >> dbass(dur=1, lpf=fi(8, [200,400], [4000,8000]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(8, [200,400], [4000,8000]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(8, [200,4000], [4000,8000]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(8, [200,4000], [4000,800]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(8, [200,40], [4000,800]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(8, [200,4000], [4000,800]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(8, [200,4000], [4,800]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(8, [200,4000], [4,80000]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(8, [200,4000], [4,8000]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(4, [200,4000], [4,8000]))  # alternates fade targets                                                        
+
+d1 >> dbass(dur=1/4, lpf=fi(32, [200,4000], [4,8000]))  # alternates fade targets                                                        
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fo())              # 1→0 over 16 beats                                                                           
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+#fo — fade out (linvar b→a, one-shot)                                       d1 >> dbass(dur=1, amp=fo())              # 1→0 over 16 beats                d1 >> dbass(dur=1, amp=fo(8))             # 1→0 over 8 beats                                                                            
+
+#fo — fade out (linvar b→a, one-shot)                                       d1 >> dbass(dur=1, amp=fo())              # 1→0 over 16 beats                d1 >> dbass(dur=1, amp=fo(8))             # 1→0 over 8 beats                                                                            
+
+d1 >> dbass(dur=1, amp=fo(8))             # 1→0 over 8 beats                                                                            
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fo(16, 200, 6000)) # 6000→200 over 16 beats
+
+d1 >> dbass(dur=1/4, lpf=fo(16, 200, 6000)) # 6000→200 over 16 beats
+
+d1 >> dbass(dur=1, lpf=fo(8, [200,800], [6000,3000]))  # alternates                                                                     
+
+d1 >> dbass(dur=1/4, lpf=fo(8, [200,800], [6000,3000]))  # alternates                                                                     
+
+d1 >> dbass(dur=1, amp=fb())              # 0↔1 loop, 16 beats each way                                                                 
+
+d1 >> dbass(dur=1, amp=fb(4))             # 0↔1 loop, 4 beats each way                                                                  
+
+d1 >> dbass(dur=1, lpf=fb(8, 400, 4000))  # 400↔4000, 8 beats each way                                                                  
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fb(8, [400,1000], [4000,8000]))  # alternating sweep targets                                                     
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fe())              # 0→1 exponential over 16 beats                                                               
+
+d1 >> dbass(dur=1, amp=fe(8))             # faster exponential rise                                                                     
+
+d1 >> dbass(dur=1/4, amp=fe(8))             # faster exponential rise                                                                     
+
+d1 >> dbass(dur=1, lpf=fe(16, 100, 8000)) # exponential filter open (slow start, fast end)   
+
+d1 >> dbass(dur=1/4, lpf=fe(16, 100, 8000)) # exponential filter open (slow start, fast end)   
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fe(8, [100,500], [4000,8000]))                                     
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, amp=fs())              # 0↔1 sine, 16 beat period                                                                    
+
+d1 >> dbass(dur=1/4, amp=fs())              # 0↔1 sine, 16 beat period                                                                    
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1/4, lpf=fs(8, [400,1000], [4000,6000]))  # alternating sine targets                                                      
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, degree=fr(8, 0, 7))     # 8 random values 0-7                                                                        
+
+d1 >> dbass(dur=1/4, degree=fr(8, 0, 7))     # 8 random values 0-7                                                                        
+
+d1 >> dbass(dur=1, degree=fr([4,8], 0, 7)) # 4 random then 8 random, all 0-7
+
+d1 >> dbass(dur=1/4, degree=fr([4,8], 0, 7)) # 4 random then 8 random, all 0-7
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, degree=fg())            # 16 values, mean=0, spread=1                                                                
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, degree=fg(8))           # 8 gaussian values                                                                          
+
+d1 >> dbass(dur=1/4, degree=fg(8))           # 8 gaussian values                                                                          
+
+d1 >> dbass(dur=1/4, degree=fg(8)).unison(4)           # 8 gaussian values                                                                          
+
+d1 >> dbass(dur=1/4, degree=fg(8)).unison(5)           # 8 gaussian values                                                                          
+
+d1 >> dbass(dur=1/4, degree=fg(8)).unison(6)           # 8 gaussian values                                                                          
+
+d1 >> dbass(dur=1/4, amp=Pacc(5), degree=fg(8)).unison(6)           # 8 gaussian values                                                                          
+
+d1 >> dbass(dur=1/4, amp=Pacc(5) *4, degree=fg(8)).unison(6)           # 8 gaussian values                                                                          
+
+d1 >> dbass(dur=1/4, amp=Pacc(4) *4, degree=fg(8)).unison(6)           # 8 gaussian values                                                                          
+
+d1 >> dbass(dur=1/4, amp=Pacc(2, 4) *4, degree=fg(8)).unison(6)           # 8 gaussian values                                                                          
+
+d1.stop()
+

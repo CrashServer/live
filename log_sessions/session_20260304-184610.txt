@@ -1,0 +1,2299 @@
+g3 >> play("xGx", sample=1, dur=4, mverb=0.5)
+
+Clock.bpm = 170
+
+Root.default = var([3, 8, 4, 11], 4)
+
+g3 >> play("xGx", sample=1, dur=4, mverb=0.5)
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "{ou:}")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3.mverb=0
+
+g7 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=2, amp=0.7, cut=PWhite(0.5, 1), fbdelay=var(P*[0, 0.25, 0.02, 0, 0]), fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=PRand(20), dur=1/2, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g4 >> play("-", sample=7,  rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]), tube=0.5, tubegain=1.5, tubewarm=0.6, tubebias=0.1)
+
+g5 >> play(PRand("fff".replace("f", "{o--}")), rate=1, sample=PRand(20), dur=1/4, amp=0.6, lpf=0, leg=200, rgate=0.5, krush=P*[0,8]).sometimes("stutter").slider()
+
+g6 >> play("x ", sample=4, dur=PDur([0, 0, 3], 8), rate=[2, 4], hpf=4000, shift=0.5)
+
+a4 >> play(".//.", dur=4, sample=5, rate=[-0.5, 0.25, -0.125], chop=4, hpf=1400, mverb=0.5, echo=0.5, delay=PRand([0.25, 0.5, 0.75]))
+
+g_all.rate=var([12, linvar([12, -12])], [2, 4])
+
+g_all.shift=var([0,  linvar([PCoin(12, 1, 0.25), PCoin(1, 12, 0.25), 24])], [48, 4])
+
+g_all.dur=var([1/4, linvar([PCoin(1, 1/8, 0.25), PCoin(1/8, 1, 0.25)], 16)], [24, 4])
+
+g5.rate=[1, 1, 1.2, 1]
+
+g5.sample=PRand(8)
+
+g_all.dur=1/2
+
+g_all.rate=1
+
+g5.drive=0.2
+
+e3 >> loop("dubstepdrum32", dur=32, sample=PRand(8)).lclip(var(P*[0.5, 0.25, 1, 2, 4]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "{ou:}")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3 >> play("xGx", sample=1, dur=4, mverb=0.5)
+
+g3 >> play("xGx", sample=1, dur=4, mverb=0.5)
+
+g3.mverb=0
+
+g7 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=2, amp=0.7, cut=PWhite(0.5, 1), fbdelay=var(P*[0, 0.25, 0.02, 0, 0]), fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=PRand(20), dur=1/2, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g7 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=2, amp=0.7, cut=PWhite(0.5, 1), fbdelay=var(P*[0, 0.25, 0.02, 0, 0]), fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=PRand(20), dur=1/2, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g4 >> play("-", sample=7,  rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]), tube=0.5, tubegain=1.5, tubewarm=0.6, tubebias=0.1)
+
+g4 >> play("-", sample=7,  rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]), tube=0.5, tubegain=1.5, tubewarm=0.6, tubebias=0.1)
+
+g5 >> play(PRand("fff".replace("f", "{o--}")), rate=1, sample=PRand(20), dur=1/4, amp=0.6, lpf=0, leg=200, rgate=0.5, krush=P*[0,8]).sometimes("stutter").slider()
+
+g6 >> play("x ", sample=4, dur=PDur([0, 0, 3], 8), rate=[2, 4], hpf=4000, shift=0.5)
+
+a4 >> play(".//.", dur=4, sample=5, rate=[-0.5, 0.25, -0.125], chop=4, hpf=1400, mverb=0.5, echo=0.5, delay=PRand([0.25, 0.5, 0.75]))
+
+g_all.rate=var([12, linvar([12, -12])], [2, 4])
+
+g_all.shift=var([0,  linvar([PCoin(12, 1, 0.25), PCoin(1, 12, 0.25), 24])], [48, 4])
+
+g_all.dur=var([1/4, linvar([PCoin(1, 1/8, 0.25), PCoin(1/8, 1, 0.25)], 16)], [24, 4])
+
+g_all.rate=var([1, PWalk(8, 4, 1)], PRand(16))
+
+o2 >> play("XxO.Xx(.0).",lpf=0, sample=(3, 4))
+
+o3 >> play("x ", shape=4, amp=2)
+
+a5 >> play("[--]", sample=PCoin(13, 4, 0.5), amp=2, lpf=0, shape=0.1)
+
+o2.stop()
+
+o3.stop()
+
+a5.stop()
+
+g_all.rate=var([12, linvar([12, -12])], [2, 4])
+
+g_all.shift=var([0,  linvar([PCoin(12, 1, 0.25), PCoin(1, 12, 0.25), 24])], [48, 4])
+
+g_all.dur=var([1/4, linvar([PCoin(1, 1/8, 0.25), PCoin(1/8, 1, 0.25)], 16)], [24, 4])
+
+g_all.rate=var([1, PWalk(8, 4, 1)], PRand(16))
+
+l3 >> loop("bass8", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=8, beat_stretch=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+g3 >> play("xGx", sample=1, dur=4, mverb=0.5)
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "{ou:}")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+l6 >> play("x ", resonbank=0.01, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.02, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.03, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.04, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.05, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.06, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.07, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.08, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.09, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.10, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.11, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.12, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.13, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.14, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.15, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.16, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.17, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.18, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.19, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.20, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.21, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.22, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.23, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.24, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.25, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.26, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.27, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.28, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.29, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.30, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.31, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.32, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.33, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.34, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.35, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.36, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=201, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=202, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=203, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=204, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=205, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=206, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=207, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=208, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=209, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=210, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=211, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=212, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=213, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=214, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=215, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=216, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=217, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=218, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=219, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=220, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=221, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=222, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=223, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=224, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=225, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=226, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=227, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=228, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=229, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=230, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=231, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=232, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=233, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=234, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=235, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=236, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=237, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=238, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=239, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=240, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=241, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=242, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=243, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=244, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=245, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=246, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=247, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=248, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=249, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=250, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=251, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=252, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=253, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=254, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=255, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=256, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=257, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=258, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=259, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=260, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=261, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=262, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=263, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=264, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=265, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=266, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=267, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=268, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=269, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=270, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=271, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=272, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=273, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=274, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=275, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=276, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=277, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=278, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=279, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=280, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=281, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=282, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=283, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=284, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=285, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=286, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=285, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=284, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=283, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=282, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=281, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=280, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=279, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=278, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=277, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=276, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=275, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=274, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=273, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=272, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=271, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=270, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=269, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=268, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=267, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=266, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=265, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=264, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=263, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=262, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=261, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=260, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=259, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=258, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=257, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=256, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=255, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=254, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=253, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=252, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=251, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=250, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=249, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=248, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=247, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=246, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=245, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=244, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=243, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=242, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=241, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=240, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=239, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=238, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=237, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=236, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=235, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=234, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=233, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=232, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=231, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=230, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=229, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=228, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=227, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=226, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=225, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.37, rbfreq=224, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.31, rbfreq=224, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.01, rbfreq=224, rbdecay=0.5, rbspread=1.0)
+
+l6 >> play("x ", resonbank=0.1, rbfreq=224, rbdecay=0.5, rbspread=1.0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+e3 >> play("x", amp=Pacc(2))
+
+e3 >> play("x", amp=Pacc(4))
+
+e3 >> play("x", amp=Pacc(4, 2))
+
+e3 >> play("x", amp=Pacc(2, 4))
+
+e3 >> play("x", amp=Pacc(3, 4))
+
+e3 >> play("x", amp=Pacc(4, 4))
+
+e3 >> play("x", amp=Pacc(4, 5))
+
+e3 >> play("x", amp=Pacc(2))
+
+e3 >> play("x", amp=Pacc(3))
+
+e3 >> play("x", amp=Pacc(4))
+
+print(Pacc())
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.2))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.1))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.2))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.3))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.4))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.3))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.2))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.1))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.0))
+
+e3 >> play("x", amp=Pacc(4), delay=PSwing(0.1))
+
+e3.stop()
+
+x2 >> breakcore("break8", sample=2, dur=8, chaos=9,
+                stutter=0, glitch_rate=.1)
+
+d6 >> play("<x.><..o.><->", sample=9, hpf=(50,0, PRand(400, 9500)), hpr=(0.4,0.5,0.5), amp=1).often("stutter", PRand(6), hpf=400)
+
+x2.stop()
+
+b6.stop()
+
+y7 >> loop("breakcore160_16", dur=16,sample=var(PRand(9009), [64, 64]), sbrk=0.5, sbrkdur=PWhite(-4, 30), sbrkmix=1.0,t_reset=PRand(9), decimate=0, decbits=PRand(0,6), decrate=4000, decsmooth=0, octclean=P*[0,PWhite()], ocsub=0.5, ocup=PWhite(0, 2))
+
+y5 >> loop("breakcore155_16", dur=16,sample=var(PRand(9009), [64, 64]), sbrk=0.5, sbrkdur=PWhite(-4, 30), sbrkmix=1.0,t_reset=PRand(9), decimate=0, octclean=P*[0,PWhite()], ocsub=0.5, ocup=PWhite(0, 2))
+
+h5 >> svdk(expvar([0, P[7,14]], [4,0]), dur=PDur([4,5],8), oct=PStep(8,4,3), sus=expvar([1/8, 1/4], [32,0]),track=4,  noise=expvar([0.3, 10], [64,0]), harm=.9, hpf=PFr(210,500), hpr=.2, amp=0.7)
+
+y5 >> loop("breakcore155_16", dur=16,sample=var(PRand(9009), [64, 64]), sbrk=0.5, sbrkdur=PWhite(-4, 30), sbrkmix=1.0,t_reset=PRand(9), decimate=0, octclean=P*[0,PWhite()], ocsub=0.5, ocup=PWhite(0, 2))
+
+h5 >> svdk(expvar([0, P[7,14]], [4,0]), dur=PDur([4,5],8), oct=PStep(8,4,3), sus=expvar([1/8, 1/4], [32,0]),track=4,  noise=expvar([0.3, 10], [64,0]), harm=.9, hpf=PFr(210,500), hpr=.2, amp=0.7)
+
+s4 >> pbass(dur=var([1/2,P[1, 1/3,1/3,1/3]],[32,0]),  oct=4, valad=linvar([1500, 2500], [64,0]), hpf=75, hpr=.2, echo=0)
+
+s4 >> pbass(dur=var([1/2,P[1, 1/3,1/3,1/3]],[32,0]),  oct=4, valad=linvar([1500, 2500], [64,0]), hpf=75, hpr=.2, echo=0)
+
+o5 >> space(PTime(-7,7), dur=P[P*[3,7,15],1], rate=1, rq=0.5, mverb=.3, hpf=400, amp=1, rgate=.8, rgaterate=2, rgatewave=3, beat_dur=1).unison(3, .5) + [0, PGauss()]
+
+o5 >> space(PTime(-7,7), dur=P[P*[3,7,15],1], rate=1, rq=0.5, mverb=.3, hpf=400, amp=1, rgate=.8, rgaterate=2, rgatewave=3, beat_dur=1).unison(3, .5) + [0, PGauss()]
+
+k3 >> pianovel(P[var([0, -2, -4, P+(-3,[6,7])], 8) ,0, 2, 3, 5, 3], dur=P[1, 1, 1/2, 1/2, 1/2 ,1/2],velocity=PTime(50, 70),  oct=4, dafilter=200, dastart=120, darel=0.2, darq=0.5, datype=0, vol=0.8)
+
+k3.solo()
+
+y7.stop()
+
+k3 >> pianovel(P[var([0, -2, -4, P+(-3,[6,7])], 8) ,0, 2, 3, 5, 3], dur=P[1, 1, 1/2, 1/2, 1/2 ,1/2],velocity=PTime(50, 70),  oct=4, dafilter=200, dastart=120, darel=0.2, darq=0.5, datype=0, vol=0.8)
+
+unsolo()
+
+k3 >> pianovel(P[var([0, -2, -4, P+(-3,[6,7])], 8) ,0, 2, 3, 5, 3], dur=P[1, 1, 1/2, 1/2, 1/2 ,1/2],velocity=PTime(50, 70),  oct=4, dafilter=200, dastart=20, darel=0.2, darq=0.5, datype=0, vol=0.8)
+
+k3 >> pianovel(P[var([0, -2, -4, P+(-3,[6,7])], 8) ,0, 2, 3, 5, 3], dur=P[1, 1, 1/2, 1/2, 1/2 ,1/2],velocity=PTime(50, 70),  oct=4, dafilter=200, dastart=420, darel=0.2, darq=0.5, datype=0, vol=0.8)
+
+k3 >> pianovel(P[var([0, -2, -4, P+(-3,[6,7])], 8) ,0, 2, 3, 5, 3], dur=P[1, 1, 1/2, 1/2, 1/2 ,1/2],velocity=PTime(50, 70),  oct=4, dafilter=250, dastart=420, darel=0.2, darq=0.5, datype=0, vol=0.8)
+
+attack("umami 170")
+
+attack("umami 170")
+
+Clock.bpm = 170
+
+Clock.bpm = 172
+
+Root.default = var([3, 8, 4, 11], 4)
+
+Root.default = 0
+
+g3 >> play("xGx", sample=1, dur=4, mverb=0.5)
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+g3 >> play("xGx", sample=1, dur=4, mverb=0.5)
+
+g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g3.mverb=0
+
+g7 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=2, amp=0.7, cut=PWhite(0.5, 1), sample=PRand(20), dur=1/2, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g4 >> play("-", sample=7,  rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]))
+
+g5 >> play(PRand("fff".replace("f", "{o--}")), rate=1, sample=PRand(20), dur=1/4, amp=0.6, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+g6 >> play("o ", sample=4, dur=PDur([0, 0, 3], 8), rate=[2, 4], hpf=4000, shift=0.5)
+
+a4 >> play(".//.", dur=4, sample=5, rate=[-0.5, 0.25, -0.125], chop=4, hpf=1400, mverb=0.5, echo=0.5, delay=PRand([0.25, 0.5, 0.75]))
+
+g_all.rate=var([12, linvar([12, -12])], [2, 4])
+
+g_all.shift=var([0,  linvar([PCoin(12, 1, 0.25), PCoin(1, 12, 0.25), 24])], [48, 4])
+
+g_all.dur=var([1/4, linvar([PCoin(1, 1/8, 0.25), PCoin(1/8, 1, 0.25)], 16)], [24, 4])
+
+g_all.rate=var([1, PWalk(8, 4, 1)], PRand(16))
+
+g_all.dur=var([1/4, 4], PRand(16))
+
+g5.degree="b"
+
+g5.rate=[1, 1, 1.2, 1]
+
+g5.sample=PRand(8)
+
+g_all.dur=1/2
+
+g_all.rate=1
+
+g5.drive=0.2
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("overload 170")
+
+l0 >> loop("cyber32", dur=32, sample=PRand(32))
+
+l3 >> loop("bass8", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=8, beat_stretch=0)
+
+l0 >> loop("ragedrone32", pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=0, dur=1/2, beat_stretch=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a3 >> keys([3, (3, [4, var([3, 14], [15, 1])])], slide=0.05,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a2 >> organ([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=0, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6).unison(2)
+
+attack("umami 170")
+
+~g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([200, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6, hpf=170, hpr=.1).unison(2)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([20, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6, hpf=170, hpr=.1).unison(2)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([70, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6, hpf=170, hpr=.1).unison(2)
+
+a1 >> sawbass([3, (3, [4, 3])], dur=1/2, oct=(4, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=[0.5, 0.1], lpf=1600, bpf=linvar([170, 1600, 32], [16, 8, 32]), shape=PTri(0, 1), high=1, mid=4, low=0.1, vol=0.6, hpf=170, hpr=.1).unison(2)
+
+attack("epicdevo 66")
+
+attack("epicdevo 66")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Scale.default = "chromatic"
+
+Scale.default = "chromatic"
+
+Clock.bpm = 66
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.35, mverb=0.2)
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.2)
+
+a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=0, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=0.8, shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4)
+
+d1.stop()
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c3 >> faim([0, 1, 7], dur=1/2, oct=7, beef=1,         dist2=0.2, amp=0.8, leg=0)
+
+c5.stop()
+
+c4.stop()
+
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=1300, envdist=0.8, envdistgain=2, leg=4, envdistsens=1, envdistattack=0.070)
+
+r1 >> vati([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=6,cutoff=linvar([800, 4000], 8), amp=1.7, leg=0)
+
+prophet = SynthDef("prophet")
+
+r1 >> prophet([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=5,cutoff=linvar([800, 4000], 8), amp=0.7, leg=0)
+
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=1.0, hpf=200, fbdelay=0.5)
+
+r1 >> prophet([0, _, 0, 2, 3, _, 5, 3], dur=0.25, oct=5,    cutoff=3500, amp=0.93, leg=0.5)
+
+Root.default = 0
+
+d1.stop()
+
+a1.stop()
+
+c5.stop()
+
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s2 >> play("e", dur=0.25, sample=3, amp=var([0, 0.5], [30, 2]))
+
+s2.degree = var(["e", "oooo[oo]oo"], [30, 2])
+
+Scale.default = "chromatic"
+
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.81, mverb=0.2)
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=6, attack=3, release=4,  amp=0.71, room=0.9, mix=0.6)
+
+c3 >> faim([0, 1, 6, 7], dur=var([1/2, 1/4], [7, 1]), oct=5, beef=1, dist2=0.5, amp=var([0.9, 0.5, 0], [8, 8, 2]), leg=0)
+
+t1.stop()
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+
+r1 >> plaits([0, _, 11, _, 6, 1, _, 7], dur=var([0.25, 1/6], [14, 2]), oct=5, cutoff=linvar([800, 5000], 8), amp=var([0.48, 2.0], [16, 16]), leg=0).unison(4)
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+p1 >> darkpad([0, 6], dur=8, oct=3, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.35, room=0.7, mix=0.5)
+
+r1.stop()
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, room=0.9, mix=0.6)
+
+a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.3,  amp=linvar([0, 0.3], 16))
+
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=4, crush=4)
+
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=4, crush=4)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
+Clock.bpm = 132
+p1 >> ethpad(r1.degree, dur=8, oct=5, attack=2, amp=0.2, room=0.9)
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=1, dark=0.7)
+r2 >> vati([0, 1, 3, 6, 7, 11, 12, 6], dur=0.25, oct=var([5, 6], [16, 16]), cutoff=3000, amp=var([0, 1.0], [16, 16]), leg=0)
+b1 >> plaitsX(var([[0,0,0,3,0,0,5,0], [0,1,2,3,4,5,6,7]], [16, 16]),  dur=0.25, oct=6, amp=P[0.8, 0.3, 0.5, 0.6], lpf=900, shape=0)
+
+c5 >> faim([0, 1, 6], dur=4, oct=6, beef=1, amp=0.9,   fshift=linvar([-20, 20], 16), fmix=0.3)
+c4.stop()
+d1 >> industrialdrone([0], dur=16, oct=6, feedback=0.5, amp=0.3)
+
+k4 >> play("....C.", amp=1, fbdelay=0.5, lpf=12000, glitch=0.5)
+l5 >> compkick(punch=12, comp=8, release=0.35, click=1,drive=0.5, sub=1, oct=4, body=1, tone=6)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
+
+l5 >> a_bd()
+
+r1.dur=16
+
+m4 >> play("[--]")
+
+c4.stop()
+r1.stop()
+r3.stop()
+b1.stop()
+
+s1.stop()
+
+c5 >> faim([0, 6, 12, 1, 7], dur=2, oct=3, beef=2,  dist2=0.8, amp=1.2, leg=2, room=0.6, mix=0.4)
+b1 >> dbass([0, 0, 0, 0, 0, 0, 0, 0], dur=1/8, oct=5, amp=P[1, 0.4, 0.7, 0.4], lpf=1200, shape=0)
+r1 >> prophet([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+r2 >> vati([11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0], dur=1/6, oct=6,  cutoff=5000, amp=0.9, leg=0)
+
+Clock.bpm = 66
+
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=6, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0)
+
+n1 >> noise(dur=8, amp=linvar([0, 0.4], 8), hpf=2000, lpf=8000)
+
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+
+p1.stop()
+
+Group(k1, s1, s2, h1).solo()
+
+s1.stop()
+
+c5 >> faim([0, 3, 6, 9], dur=2, oct=3, beef=2, dist2=0.6, amp=1.0, leg=1, room=0.5)
+
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+k6 >> play("c.{cC}.", sample=7, tanh=0.2, formant=1, dur=2, amp=2, leg=8, echo=0.456)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("W ", drive=0, dur=4, bpf=80, bpr=0.9, amp=PMorse("thisiskickistooloud"),vol=0.5, slide=[0, -4], rate=var([1, linvar([1, 0.2], 4)])).unison(4)
+
+d8 >> play("@ ", dur=PDur(1, 15, 4), echo=0.25)
+
+d2 >> brown(dur=8, cut=1/2, room2=0.2, chop=4, damp2=0.2, fold=0.5, lofi=0.5, hpf=4000)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+z9 >> fmsynth(index = 3)
+
+z9 >> fmsynth(oct=3, index = 3)
+
+z9 >> fmsynth(oct=3, index=2)
+
+z9 >> fmsynth(oct=3, index=1)
+
+z9 >> fmsynth(oct=3, index=.1)
+
+z9 >> fmsynth(oct=3, index=0.2)
+
+z9 >> fmsynth(oct=3, index=0.3)
+
+z9 >> fmsynth(oct=3, index=0.4)
+
+z9 >> fmsynth(oct=3, index=(0.4,4))
+
+z9 >> fmsynth(oct=3, index=(0.4,.5))
+
+z9 >> fmsynth(oct=3, index=(0.4,0.6))
+
+z9 >> fmsynth(oct=3, index=(0.4,0.7))
+
+z9 >> fmsynth(oct=3, index=(0.4,0.8))
+
+z9 >> fmsynth(oct=3, index=(0.4,0.9))
+
+z9 >> fmsynth(oct=3, index=(0.4,1.0))
+
+z9 >> fmsynth(oct=3, index=(0.4,1.1))
+
+z9 >> fmsynth(oct=3, index=(2.4,1.1))
+
+z9 >> fmsynth(oct=(3,4), index=(2.4,1.1))
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1))
+
+Clock.bpm = 170
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=120, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=119, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=118, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=117, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=116, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=115, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=114, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=113, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=103, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=93, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=83, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(2.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(22.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(21.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(20.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(19.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(18.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(17.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(16.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(15.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(14.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(13.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(12.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(11.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(10.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(9.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(8.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(7.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(6.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(5.4,1.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,4), dur=1/2, index=(5.4,2.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(PTime(), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(PTime(0, .5), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=73, hpr=.3)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=74, hpr=.3)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=75, hpr=.3)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=76, hpr=.3)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=77, hpr=.3)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=78, hpr=.3)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=78, hpr=0.2)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=78, hpr=0.1)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=178, hpr=0.1)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=188, hpr=0.1)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=198, hpr=0.1)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=208, hpr=0.1)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=218, hpr=0.1)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=228, hpr=0.1)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=238, hpr=0.1)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=238, hpr=0.2)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=228, hpr=0.2)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=218, hpr=0.2)
+
+y7 >> play("L.", cut=1, bank=1, dur=4)
+
+y7 >> play("L.", cut=1, bank=1, dur=4, lpf=400)
+
+y7 >> play("L.", cut=1, bank=1, dur=4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L.", cut=1, sample=1, bank=1, dur=4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L.", cut=1, sample=2, bank=1, dur=4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L.", cut=0, sample=2, bank=1, dur=4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L.", cut=0, sample=PRand(9), bank=1, dur=4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L.", cut=0, sample=PRand(9), bank=1, dur=4, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L.", cut=0, sample=PRand(9), bank=1, dur=4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L.", cut=0, sample=PRand(9), bank=1, dur=4, valad=1500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L.", cut=0, sample=PRand(9), bank=1, dur=4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L(...l)", cut=0, sample=PRand(9), bank=1, dur=4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L(...l)", cut=0, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2,lpf=0, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.3, valadd=5, valadt=1, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.3, valadd=5, valadt=2, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.3, valadd=5, valadt=3, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.3, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.2, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.1, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.2, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.3, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.4, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.5, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.6, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.7, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.8, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=1.0, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=4, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=3, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=2, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=1, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=0, valadc=0.2, )
+
+c6 >> play("X.", lpf=400, dur=1)
+
+c6 >> play("X.", lpf=400, dur=1, amp=3)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=218, hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.5)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, à]), hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.5)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.5)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=[30, linvar([30, 218], [54, 0])], hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.5)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.5)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.6)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.7)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.8)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=1.5, cvdamp=0.9)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=2.5, cvdamp=0.9)
+
+y7.stop()
+
+c6 >> play("X.", lpf=1400, dur=1, amp=3)
+
+c6 >> play("X.", lpf=400, dur=1, amp=3)
+
+c6 >> play("X@", lpf=400, dur=1, amp=3)
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3)
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,2])
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,2])
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,1])
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,2])
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,3])
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,4])
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,5])
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,6])
+
+c6 >> play("X@", lpf=1400, dur=1, amp=3, sample=[0,5])
+
+c6 >> play("X(...@)", lpf=1400, dur=1, amp=3, sample=[0,5])
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=0, valadc=0.2, )
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=0, valadc=0.2, cheapverb=1, cvdecay=1.5, cvdamp=0.5)
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=0, valadc=0.2, cheapverb=.5, cvdecay=1.5, cvdamp=0.5)
+
+y7 >> play("L(...l)", cut=1, sample=PRand(9), bank=1, dur=1, valad=500, valadr=0.9, valadd=5, valadt=0, valadc=0.2, cheapverb=.5, cvdecay=1.5, cvdamp=0.5, dynfuzz=0.5, dfgain=1, dfatk=0.005, dfdec=0.3, dftone=0.6)
+
+z9 >> fmsynth(PTime(0, .5, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=2.5, cvdamp=0.9, pan=PWhite(-1,1))
+
+y6 >> snick(dur=1/4, cut=.1, rate=0.5)
+
+y6 >> snick(dur=1/4, cut=0.2, rate=0.5)
+
+y6 >> snick(dur=1/4, cut=0.3, rate=0.5)
+
+y6 >> snick(dur=1/4, cut=0.4, rate=0.5)
+
+y6 >> snick(dur=1/4, cut=0.5, rate=0.5)
+
+y6.solo()
+
+y6 >> snick(dur=1/4, cut=0.6, rate=0.5)
+
+y6 >> snick(dur=1/4, cut=0.7, rate=0.5)
+
+y6 >> snick(dur=1/4, cut=0.8, rate=0.5)
+
+y6 >> snick(dur=1/4, cut=0.9, rate=0.5)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=0.5)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=0.6)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=0.7)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=0.8)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=0.9)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=1.0)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=1.1)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=1.2)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=1.3)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=-1.3)
+
+y6 >> snick(dur=PDur(3,8), cut=0.9, rate=1.3)
+
+y6 >> snick(dur=PDur(3,8), cut=0.8, rate=1.3)
+
+y6 >> snick(dur=PDur(3,8), cut=0.7, rate=1.3)
+
+y6 >> snick(dur=PDur(3,8), cut=0.6, rate=1.3)
+
+y6 >> snick(dur=PDur([3,5],8), cut=0.6, rate=1.3)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=0.6, rate=1.3)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=0.5, rate=1.3)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=0.4, rate=1.3)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=0.3, rate=1.3)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=0.2, rate=1.3)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=0.3, rate=1.3)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=PFr(0.3, 1), rate=1.3)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=PFr(0.1, 1), rate=1.3)
+
+unsolo()
+
+Server.addFx(lofi=.2)
+
+Server.addFx(lofi=0.3)
+
+Server.addFx(lofi=0.4)
+
+Server.addFx(lofi=0.4, position=0.2)
+
+Server.addFx(lofi=0.4, position=0.2)
+
+Server.addFx(lofi=0.4, position=0.3)
+
+Server.addFx(lofi=0.4, position=0.4)
+
+Server.addFx(lofi=0.4, position=0.5)
+
+Server.addFx(lofi=0.4, position=0.5, sus=1)
+
+Server.addFx(lofi=0.4, position=0.6, sus=1)
+
+Server.addFx(lofi=0.4, position=0.7, sus=1)
+
+Server.addFx(lofi=0.4, position=0.6, sus=1)
+
+Server.addFx(lofi=0.4, position=0, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=1, tstretchsize=0.2, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=.1, tstretchsize=0.2, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=0.2, tstretchsize=0.2, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=0.3, tstretchsize=0.2, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=0.3, tstretchsize=0.3, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=0.3, tstretchsize=0.4, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=0.3, tstretchsize=0.5, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=0.3, tstretchsize=0.6, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=0.3, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0.4, tstretch=0.4, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0.5, tstretch=0.4, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0.6, tstretch=0.4, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0.7, tstretch=0.4, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0.8, tstretch=0.4, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0.8, tstretch=0.3, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0.8, tstretch=0.2, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0, tstretch=0.2, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0, tstretch=0.1, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0, tstretch=0, tstretchsize=0.7, sus=1)
+
+Server.addFx(lofi=0, tstretch=0, tstretchsize=0.7, sus=1, vol=.8)
+
+Server.addFx(lofi=0, tstretch=0, tstretchsize=0.7, sus=1, vol=0.7)
+
+Server.addFx(lofi=0, tstretch=0, tstretchsize=0.7, sus=1, vol=0.6)
+
+Server.addFx(lofi=0, tstretch=0, tstretchsize=0.7, sus=1, vol=0.5)
+
+Server.addFx(lofi=0, tstretch=0, tstretchsize=0.7, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, tstretch=0, tstretchsize=0.7, sus=1, vol=0.3)
+
+Server.addFx(lofi=0, tstretch=0, tstretchsize=0.7, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=1.5, cvdamp=0.5, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.5, cvdamp=0.5, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=1.5, cvdamp=0.5, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=15, cvdamp=0.5, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=15, cvdamp=0.5, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=15, cvdamp=0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=15, cvdamp=0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=15, cvdamp=0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=15, cvdamp=0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=15, cvdamp=0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=15, cvdamp=0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=15, cvdamp=-0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=15, cvdamp=-0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=-15, cvdamp=-0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=-15, cvdamp=-0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=-15, cvdamp=-0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=-15, cvdamp=-0.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=-1, cvdecay=-15, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=-15, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=-15, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=-15, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=-15, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=-15, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=-150, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0, cvdecay=-150, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.15, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.25, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.35, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.45, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.55, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.65, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.75, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.85, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=1.95, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.50, cvdamp=2.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.40, cvdamp=2.05, sus=1, vol=0.4)
+
+Server.clearFx()
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.40, cvdamp=2.05, sus=1, vol=0.4)
+
+Server.clearFx()
+
+Server.addFx(lofi=0, cheapverb=1, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=.1, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0.2, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0.3, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0.4, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0.5, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.9, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.8, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.7, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.6, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.5, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.4, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.5, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.6, cheapverb=0.6, cvdecay=1.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.9, cheapverb=0.6, cvdecay=.40, cvdamp=.05, sus=1, vol=0.4)
+
+Server.addFx(lofi=0.9, cheapverb=0.6, cvdecay=.40, cvdamp=.5, sus=1, vol=0.4)
+
+y6 >> play("!", dur=PDur([3,5],8), cut=PFr(0.1, 1), rate=1.3)
+
+Server.addFx(lofi=0.9, cheapverb=0.7, cvdecay=.40, cvdamp=.5, sus=1, vol=0.4)
+
+Server.addFx(lofi=0, cheapverb=0.7, cvdecay=.40, cvdamp=.5, sus=1, vol=0.4)
+
+Server.clearFx()
+
+z9 >> fmsynth(PTime(0, 0.6, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=2.5, cvdamp=0.9, pan=PWhite(-1,1))
+
+z9 >> fmsynth(PTime(0, 0.7, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=2.5, cvdamp=0.9, pan=PWhite(-1,1))
+
+z9 >> fmsynth(PTime(0, 0.8, .1), oct=(3,PStep(8,5,4)), dur=1/2, index=(5.4,2.1), hpf=linvar([30, 218], [54, 0]), hpr=0.2, cheapverb=0.5, cvdecay=2.5, cvdamp=0.9, pan=PWhite(-1,1))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.6, high=1, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)                   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.8, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.9, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.0, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.1, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.2, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.3, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.4, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.5, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.6, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.8, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=1.9, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.0, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.1, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.2, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.3, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.4, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.5, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.6, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.8, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=2.9, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=3.0, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=3.1, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=3.2, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=3.3, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=3.4, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=3.5, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=3.6, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=3.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d4 >> play("x", dur=0.5, mverb=1, rate=2, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0, cheapverb=PBin(8), cvdecay=1.5, cvdamp=0.5, amp=Pacc(6, 4), amplify=PLife(0.5), hpf=3200, echo=0.25, sample=6, resonbank=0.1, rbfreq=36, rbdecay=0.5, rbspread=1, glitch=0.5, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)    
+
+d8 >> play(".-u-", dur=0.25, amp=Pacc(4))
+d6 >> play("..U:", rfreq=8000, resonz=0.4, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.11, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+d3 >> play("s", dur=0.5, sample=2, amp=0.56, amplify=PFDur((3,8),(5,16)), octclean=0.4, ocsub=0.7, ocup=0, hpf=100, lpf=4000, delay=PSwing(0.06))
+
+d5 >> play("-", dur=0.25, sample=2, amp=0.9, amplify=PEuclid(7,16), hpf=6000, cheapverb=0.7, cvdecay=3, cvdamp=0.3, pan=0.3)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, rate=1, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 122;
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 3, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 4, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 5, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 3, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 4, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 5, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 3])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 4])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 5])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 6])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 7])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 8])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 9])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [12, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.3, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.4, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.5, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.6, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.7, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.9, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.1, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.3, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.4, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.5, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.6, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.7, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.8, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=1.9, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.2, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.3, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.5, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.6, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.7, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.8, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.9, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=1.0, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("x-", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=1.0, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x:", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=2.0, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 6, 3], [3, 6, 10])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x@", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("{xxx@}", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("{xxx@}", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=50, lpr=0.1).unison(4)
+
+d1 >> play("{xxx@}", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("{xxx@}", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxo}", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxx&}", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxq}", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.2, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.3, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d8 >> play(".-u-", dur=0.25, amp=Pacc(4))
+
+d6 >> play("..U:", rfreq=8000, resonz=0.4, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.11, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.2, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.3, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=50, hpr=0.1).unison(4)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(4)
+
+d7 >> a_hhat(tone=8000, metallic=1, distortion=2, open=1)               
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(4, .5)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(3, .5)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(4, .5)
+
+d7 >> a_hhat(tone=8000, metallic=1, distortion=2, open=[0, 1])               
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(5, .5)
+
+d7 >> a_hhat(tone=8000, metallic=1, distortion=2, open=[0, 1, 1])               
+
+k4 >> play("K ", sample=7, amp=2)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.1, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(5, .5)
+
+k4 >> play("K ", sample=7, amp=3)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(5, .5)
+
+d1 >> play("{xxxw}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.3, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(5, .5)
+
+k4 >> play("K ", sample=7, amp=1)
+
+d8 >> play(".-u-", dur=0.25, amp=Pacc(4))
+d6 >> play("..U:", rfreq=8000, resonz=0.4, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.11, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+d1 >> play("{xxxk}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.3, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(5, .5)
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(6, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(7, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(6, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(2, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("{xxxk}", cut=1, amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.3, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.4, dfgain=1, dfatk=0.015, dfdec=0.4, dftone=.2, hpf=0, hpr=0.1).unison(5, .5).sometimes("stutter")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+v7 >> cringe()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("Dr Drone")
+
+y8 >> rsin(a=.5, blur=4, dur=32, oct=(PWhite(3,5.5),PWhite(3,5.5),PWhite(3,5.5),PWhite(3,5.5)), para1=(PRand(0, 100),PRand(0, 100),PRand(0, 100),PRand(0, 100)), rsing=(PRand(0,5),PRand(0,5),PRand(0,5),PRand(0,10)), delay=(0,2,4,6), valad=(PRand(200,500),PRand(20,500),PRand(200,500),PRand(200,1000)), valadr=0.3, valadd=5, valadt=0, valadc=0.2, mverb=.9)
+
+attack("XRuns - 144")
+
+Clock.bpm=144
+
+Root.default = 2
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Scale.default="minor"
+
+p6 >> choir(h4.degree[0],dur=8,  atk=1, rel=1, bendc=0.1, vow=PTuple(PWhite(0.0, 5.0), 3), oct=(3,4,5), fx2=1, amp=1, hpf=140, high=1.2) + PWhite(-0.1,.1)
+
+Clock.bpm=144
+Root.default = 2
+Scale.default="minor"
+
+p6 >> choir(h4.degree[0],dur=8,  atk=1, rel=1, bendc=0.1, vow=PTuple(PWhite(0.0, 5.0), 3), oct=(3,4,5), fx2=1, amp=1, hpf=140, high=1.2) + PWhite(-0.1,.1)
+
+h4 >> dbass([(0, 2, 5), (0, 5, 6), (2, 5, 9), (0, 2, 6)], mverb=0.2, dur=8, sus=8, glide=0.15, amp=var([1, 0.8], [8, 8]), oct=var([6, (6, 7)], 8), cutoff=12200, vib=2, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, rgate=0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2])
+
+h4 >> dbass([(0, 5, 12), (2, 6, 12), (0, 2, 9), (5, 6, 12)],  chop=4, chopmix=0.5, glide=0.25,  rgate=1)
+
+p6.hpf=1200
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1], sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+h4 >> dbass([0, 11, 4, 0, 2, 4, 5, 0], dur=[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1], sus=2, amp=var([1, 0.8], [8, 8]), oct=var([6, (6, 7)], 8), cutoff=12200, vib=2, pan=PWhite(-0.6, 0.6), hpf=800, fbdelay=0.25, glide=0, rgate=0)
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1], sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+p6.hpf=1200
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), hpf=240, rate=PWhite(1, 1.04)).sometimes("stutter", PRand(8))
+p0 >> play("{[--][---]}:", dur=1/2, pan=PWhite(-.5,.5), sample=0, hpf=1400, hpr=PFr(0.1, 0.4, 404, 32), lofi=0 ).human(40, 2)
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1], sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+p6 >> choir(h4.degree[0],oct=(3,4,6)) + PWhite(-0.1,.1)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.01, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.02, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.03, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.04, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.05, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+p6.stop()
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.06, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.07, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.08, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.09, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.10, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.11, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.12, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.13, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.14, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.15, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.16, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.17, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.18, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.19, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.20, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.21, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.22, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.23, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.24, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.25, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.26, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.27, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.28, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.29, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.30, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.31, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.32, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.33, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.34, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.35, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.36, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.37, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.38, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.39, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.40, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.41, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+p1 >> pluck(P(var([0, -2], 32),var([P*[3,5], 4, 2], 8)), dur=PDur([4,5], 8), lpf=0, sus=2, blur=2, chop=4, fmod=2, rate=2,  hpf=PFr(150,4000), oct=PStep(16,P+(6,[3,4]),5), cutoff=1300, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, amp=1).unison(3)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.42, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.43, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.44, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.45, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.46, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.47, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.48, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.49, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.50, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.51, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.52, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.53, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.54, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.55, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.56, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.57, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.58, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.59, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.60, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.61, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.62, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.63, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.64, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.65, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.66, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.67, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.68, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.69, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.70, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+p1.stop()
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.71, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.72, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.73, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.74, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.75, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.76, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.77, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.78, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.79, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=201, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=202, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=203, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=204, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=205, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=206, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=207, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=208, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=209, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=210, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=211, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=212, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=213, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=214, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=215, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=216, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=217, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=218, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=219, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=220, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=221, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=222, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=223, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=224, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=225, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=226, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=227, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=228, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=229, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=230, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=231, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=232, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=233, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=234, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=235, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=236, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=237, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=238, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=239, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=240, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=241, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=242, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=243, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=244, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=245, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=246, rbdecay=0.5, rbspread=1.0)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.80, rbfreq=247, rbdecay=0.5, rbspread=1.0)
+
+p1 >> pluck(P(var([0, -2], 32),var([P*[3,5], 4, 2], 8)), dur=PDur([4,5], 8), lpf=0, sus=2, blur=2, chop=4, fmod=2, rate=2,  hpf=PFr(150,4000), oct=PStep(16,P+(6,[3,4]),5), cutoff=1300, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, amp=1).unison(3)
+
+j3 >> dbass(var([0,[2, -2]], 16), dur=1/2, oct=(4,5), rate=0.5, valad=800, valadr=0.3, valadd=15, valadt=0, valadc=0.2, hpf=(0, expvar([85,PRand(200,500)],33)), lpr=0.09,  bell=0.5, bellf=3000, bellq=0.9).unison(3) + var([0, PGauss(0, 4)], [14,2], resonbank=0.0, rbfreq=247, rbdecay=0.5, rbspread=1.0)
+
+q1 >> cbass(7, dur=PDur(var(P*[4,5,7,8], [32]),8), cutoff=10, rq=0.2, rgate=0.5, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1,  oct=5, hpf=200, bell=0.5, bellf=3000, bellq=0.9, pan=expvar([-.9,.9], 13))
+
+p1 >> pluck(P(var([0, -2], 32),var([P*[3,5], 4, 2], 8)), dur=PDur([4,5], 8), lpf=0, sus=2, blur=2, chop=4, fmod=2, rate=2,  hpf=PFr(150,4000), oct=PStep(16,P+(6,[3,4]),5), cutoff=1300, tape=0.6, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, amp=1).unison(3)
+
+p1.dur=1/2
+
+p1.oct=PStep(1,P+(6,[3,4]),5)
+
+p1 >> pluck(P(var([0, -2], 32),var([P*[3,5], 4, 2], 8)), dur=PDur([4,5], 8), lpf=0, sus=2, blur=2, chop=4, fmod=2, rate=2,  hpf=PFr(150,4000), oct=PStep(16,P+(6,[3,4]),5), cutoff=1300, tape=0.6, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, amp=1).unison(3)
+
+p1 >> pluck(P(var([0, -2], 32),var([P*[3,5], 4, 2], 8)), dur=PDur([4,5], 8), lpf=0, sus=2, blur=2, chop=4, fmod=2, rate=2,  hpf=PFr(150,4000), oct=PStep(16,P+(6,[3,4]),5), cutoff=1300, tape=0.6, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, amp=1).unison(3)
+
+f2 >> play("k.", sample=0, amp=1, delay=var([0, PWhite(0,.2)], [7,1]), rate=PwRand([1, -1], [19, 1]), hpf=50, hpr=0.5)
+
+q1 >> cbass(7, dur=PDur(var(P*[4,5,7,8], [32]),8), cutoff=10, rq=0.2, rgate=0.5, boost=1.5, detune=0.01, follow=linvar([1, 8], 41), tanh=0.1,  oct=5, hpf=200, bell=0.5, bellf=3000, bellq=0.9, pan=expvar([-.9,.9], 13))
+
+s1 >> play("<x(...x)><..o.>", sample=(1,9), drcomp=0.2, mverb=(0,.1), vol=1, amp=([1,.2],2), hpf=(50, 300), hpr=(0.5, .9)).sometimes("stutter")
+
+s1 >> play("<x(...x)><..o.>", sample=(1,9), drcomp=0.2, mverb=(0,.1), vol=1, amp=([1,.2],2), hpf=(50, 300), hpr=(0.5, .9)).sometimes("stutter")
+
+j3.a = [0.7,0]
+
+o5 >> play("7...", bank=0, sample=PRand(909), cut=1, pan=PWhite(-1,1))
+
+z8 >> play(".(...[o.])..(..(.([o.])))", sample=5, bank=1, hpf=440, amp=1, fbdelay=0.15, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02).sometimes("stutter", PRand(2,6), amp=PWhite(0.3,0.6), rgate=0.5)
+
+o5 >> play("7...", bank=0, sample=PRand(909), cut=1, pan=PWhite(-1,1), echo=0.5, amp=2)
+
+o5 >> play("7...", bank=0, sample=PRand(909), cut=1, pan=PWhite(-1,1), echo=0.5, amp=0)
+
+p1 >> pluck(P(var([0, -2], 32),var([[3,5,6], 4, 2], 8)), dur=1, lpf=0, sus=4, blur=4, chop=0, fmod=0, rate=1, hpf=linvar([150,2000],32), oct=PStep(16,P+(6,[3,4]),5), cutoff=linvar([1300,400],32), tape=1.0, tapedrive=0.8, tapewarm=0.8, vol=1.3, tapewobble=0.5, eb=0.5, ebfeed=0.7, ebmix=0.5, ebmode=1, ebwow=0.2, ebflutter=0.2, ebsat=0.2, amp=linvar([1,0.5],32)).unison(3)
+
+~h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6), hpf=200, mverb=0.2, fbdelay=0.0, pong=0.5, a=0.2, pongtime=1,rgate=0)
+
+h4.dur=4
+
+h4.dur=2
+
+h4.dur=1
+
+h4.dur=8
+
+Root.default=var( [2, 2*PWhite(0,1)], [3.5, 0.5])
+
+j3.dur=4
+
+Root.default=var( [2, 2*PWhite(0,1)], [3.5, 0.5])
+
+s2.stop()
+
+Root.default=var( [2, 2*PWhite(0,1)], [3.5, 0.5])
+
+Clock.bpm = 77
+
+Root.default=var( [2, 2*PWhite(0,1)], [3.5, 0.5])
+
+Root.default=var( [2, 2*PWhite(0,1)], [3.5, 0.5])
+
+Root.default=var( [2, 2*PWhite(0,1)], [3.5, 0.5])
+
+Root.default=var([2, 2*PWhite(0,1)], [3.5, 0.5])
+
+Root.default=var([2, 2*PWhite(0,1)], [3.5, 0.5])
+
+Root.default = lininf(0, -7, 16)
+
+h4.stop()
+
+o5 >> play("7...", bank=0, sample=PRand(909), cut=1, pan=PWhite(-1,1), echo=0.5, amp=0)
+
+p1 >> pluck(P(var([0, -2], 32),var([[3,5,6], 4, 2], 8)), dur=1, lpf=0, sus=4, blur=4, chop=0, fmod=0, rate=1, hpf=linvar([150,2000],32), oct=PStep(16,P+(6,[3,4]),5), cutoff=linvar([1300,400],32), tape=1.0, tapedrive=0.8, tapewarm=0.8, vol=1.3, tapewobble=0.5, eb=0.5, ebfeed=0.7, ebmix=0.5, ebmode=1, ebwow=0.2, ebflutter=0.2, ebsat=0.2, amp=linvar([1,0.5],32)).unison(3)
+
+Server.addFx(tremolo=.2, beat_dur=1, tremolomix=1)
+
+Server.addFx(tremolo=0.3, beat_dur=1, tremolomix=1)
+
+Server.addFx(tremolo=0.4, beat_dur=1, tremolomix=1)
+
+Server.addFx(tremolo=0.5, beat_dur=1, tremolomix=1)
+
+Server.addFx(tremolo=0.6, beat_dur=1, tremolomix=1)
+
+Server.addFx(tremolo=0.7, beat_dur=1, tremolomix=1)
+
+Server.addFx(tremolo=0.7, beat_dur=1, tremolomix=0.2)
+
+Server.addFx(tremolo=0.7, beat_dur=1, tremolomix=0.3)
+
+Server.clearFx()
+
+q1.stop()
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]) , dur=1/4, vol=0.5, fenv=0.2, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])
+
+j3.a = [0.2,0]
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64])).lclip(0)
+
+j3.a = [0.2,0]
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64])).lclip(2)
+
+f2 >> play("X.", sample=0, dur=1/4, amp=1, delay=0, rate=1, hpf=0)
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5).lclip(2)
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1/2, sus=1, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5, sbrkdur=4).lclip(2)
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5, sbrkdur=4).lclip(1)
+
+p0.stop()
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1/2, sus=1, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5, sbrkdur=4).lclip(2)
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5, sbrkdur=4).lclip(0.125)
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5, sbrkdur=4).lclip(0.5)
+
+o5.stop()
+
+o5.stop()
+
+# 
+
+z8.stop()
+
+# ~h4 >> dbass([0,3,5,0,3,5,7,0], dur=[21,0.5,0.5,1,0.5,0.5,1,1], sus=2, amp=var([1,0.8],[8,8]), oct=var([6, (6, 7)], 8), cutoff=12200, vol=1, vib=2, pan=PWhite(-0.6, 0.6), hpf=200, mverb=0.2, fbdelay=0.0, pong=0.5, a=0.2, pongtime=1,rgate=0)
+
+h4.stop()
+
+h4.stop()
+
+p1.stop()
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5, sbrkdur=PWhite(0, 4)).lclip(0.5)
+
+y8 >> rsin(a=.5, blur=4, dur=32, oct=(PWhite(3,5.5),PWhite(3,5.5),PWhite(3,5.5),PWhite(3,5.5)), para1=(PRand(0, 100),PRand(0, 100),PRand(0, 100),PRand(0, 100)), rsing=(PRand(0,5),PRand(0,5),PRand(0,5),PRand(0,10)), delay=(0,2,4,6), valad=(PRand(200,500),PRand(20,500),PRand(200,500),PRand(200,1000)), valadr=0.3, valadd=5, valadt=0, valadc=0.2, mverb=.9)
+
+y8.stop()
+
+f2 >> play("X.", sample=0, dur=1/4, amp=1, delay=0, rate=1, hpf=0)
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1/2, sus=1, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]) + Pvar([0, 2]), dur=1/4, sus=1/8, rel=0.2, vol=0.5, fenv=0.2, oct=PStep([16,8,4,4], 5,4), track=0.5,res=linvar([0.5, 0.9],44), cutoff=linvar([260,1200], [24, 8]), a=[0.5,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]) + Pvar([0, 2, (0, 3)]), dur=1/4, sus=1/8, rel=0.2, vol=0.5, fenv=0.2, oct=PStep([16,8,4,4], 5,4), track=0.5,res=linvar([0.5, 0.9],44), cutoff=linvar([260,1200], [24, 8]), a=[0.5,0])
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1/2, sus=1, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=4, a=0.3)
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]) + Pvar([0, 2, (0, 3)]), dur=1/4, sus=1/8, rel=0.2, vol=0.5, fenv=0.2, oct=PStep([16,8,4,4], 5,4), track=0.5,res=linvar([0.5, 0.9],44), cutoff=linvar([260,1200], [24, 8]), a=[0.5,0])
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1/2, sus=1, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0.5, rgate=4, a=0.3)
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5, sbrkdur=PWhite(0, 4)).lclip()
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]) + Pvar([0, 2, (0, 3)]), dur=1/4, sus=1/8, rel=0.2, vol=0.5, fenv=0.2, oct=PStep([16,8,4,4], 5,5), track=0.5,res=linvar([0.5, 0.9],44), cutoff=linvar([260,1200], [24, 8]), a=[0.5,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]) + Pvar([0, 2, (0, 3)]), dur=1/4, sus=1/8, rel=0.2, vol=0.5, fenv=0.2, oct=PStep([16,8,4,4], 5,6), track=0.5,res=linvar([0.5, 0.9],44), cutoff=linvar([260,1200], [24, 8]), a=[0.5,0])
+
+k8 >> loop("breakcore160_16", dur=8, sample=var([PRand(808)], [64, 64]), sbrk=.5, sbrkdur=PWhite(0, 4), drcomp=.5).lclip()
+
+s1.stop()
+
+y3 >> loop("dubstepdrum32", dur=32)
+
+s1 >> play("<x(...x)><..o.>", sample=(1,9), drcomp=0.2, mverb=(0,.1), vol=1, amp=([1,.2],2), hpf=(50, 300), hpr=(0.5, .9)).sometimes("stutter")
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]) , dur=1/4, vol=0.5, fenv=0.2, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])
+
+Server.addFx(sbrk=0.5)
+
+Server.addFx(sbrk=0.5)
+
+Server.addFx(sbrk=0.0)
+
+Server.addFx(cheapverb=0.5, cvdecay=1.5, cvdamp=0.5)
+
+Server.addFx(cheapverb=0.5, cvdecay=1.5, cvdamp=0.5)
+
+Server.addFx(cheapverb=0.9, cvdecay=1.5, cvdamp=0.5)
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.3, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])
+
+Server.addFx(cheapverb=0.0, cvdecay=1.5, cvdamp=0.5)
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.4, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.5, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.6, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.6, oct=(4,5), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.6, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])
+
+Server.addFx(cheapverb=1.0, cvdecay=1.5, cvdamp=0.5)
+
+Server.clearFx()
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.6, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.6,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.6, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.7,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.6, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.,0])
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.6, oct=(4), cutoff=linvar([260, 2200], [24, 8]), a=[0.8,0])
+
+Server.addFx(tstop=1, tstoptime=128)
+
+Server.addFx(cheapverb=1.0, cvdecay=1.5, cvdamp=0.5)
+
+Server.clearFx()
+
+Server.addFx(tstop=1, tstoptime=128)
+
+Server.addFx(cheapverb=1.0, cvdecay=1.5, cvdamp=0.5)
+
+f2 >> play("X.", sample=0, dur=1/4, amp=1, delay=0.25, rate=1, hpf=50, hpr=.1)
+
+f2 >> play("X.", sample=0, dur=1/4, amp=1, delay=0.25, rate=1, hpf=50, hpr=.1)
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1], sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+~f2 >> play("X.", sample=0, dur=1/4, amp=1, delay=0.25, rate=1, hpf=50, hpr=.1)
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1], sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3, cheapverb=0, tstop=0)
+
+y8 >> rsin(a=.5, blur=4, dur=32, oct=(PWhite(3,5.5),PWhite(3,5.5),PWhite(3,5.5),PWhite(3,5.5)), para1=(PRand(0, 100),PRand(0, 100),PRand(0, 100),PRand(0, 100)), rsing=(PRand(0,5),PRand(0,5),PRand(0,5),PRand(0,10)), delay=(0,2,4,6), valad=(PRand(200,500),PRand(20,500),PRand(200,500),PRand(200,1000)), valadr=0.3, valadd=5, valadt=0, valadc=0.2, mverb=.9)
+
+Server.addFx(tstop=0, tstoptime=128)
+
+s2 >> play("<-[--]>", sample=7, pan=PWhite(-1,1), hpf=240, rate=PWhite(1, 1.04)).sometimes("stutter", PRand(8))
+p0 >> play("{[--][---]}:", dur=1/2, pan=PWhite(-.5,.5), sample=0, hpf=1400, hpr=PFr(0.1, 0.4, 404, 32), lofi=0 ).human(40, 2)
+
+Server.clearFx()
+
+Server.addFx(sbrk=0.0)
+
+Server.clearFx()
+
+Server.addFx(sbrk=0.0)
+
+Server.clearFx()
+
+Server.addFx(sbrk=0.5)
+
+Server.clearFx()
+
+Server.addFx(sbrk=0.5)
+
+Server.clearFx()
+
+k5 >> combs(vibrate=2, depth=0.8, regen= -3.0, sweep=8, rq=0.9, nharm=2)
+
+Server.addFx(sbrk=0.5, sbrkdur=6)
+
+Server.clearFx()
+
+Server.addFx(sbrk=0.5, sbrkdur=16)
+
+Server.clearFx()
+
+Server.addFx(sbrk=0.5, sbrkdur=16, sus=4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

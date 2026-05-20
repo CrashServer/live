@@ -1,0 +1,354 @@
+Clock.clear()
+soff()
+Server.clearFx()
+
+e9 >> play("X ",rate=1.0, pos=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+e9 >> play("X ",rate=1.0, pos=0, lpf=400)
+
+e9 >> play("X ",rate=2.0, pos=0, lpf=800)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+e9 >> play("X ",rate=1.0, pos=0, lpf=400)
+
+_seq_schedule(4, 1773916093436)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0, lpf=800)
+
+_seq_schedule(4, 1773916095457)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0)
+
+_seq_schedule(4, 1773916097459)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0)
+
+_seq_schedule(4, 1773916099463)
+
+_seq_cancel()
+_seq_schedule(1, 1773916101466)
+
+_seq_cancel()
+e9 >> play("X ",rate=1.0, pos=0, lpf=400)
+
+_seq_schedule(4, 1773916101966)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0, lpf=800)
+
+_seq_schedule(4, 1773916103970)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0)
+
+_seq_schedule(4, 1773916105972)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0)
+
+_seq_schedule(4, 1773916107975)
+
+_seq_cancel()
+_seq_schedule(1, 1773916109977)
+
+_seq_cancel()
+e9 >> play("X ",rate=4.0, pos=0, lpf=400)
+_seq_schedule(4, 1773916110479)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0, lpf=800)
+_seq_schedule(4, 1773916112482)
+
+e9 >> play("X ",rate=4.0, pos=0, lpf=400)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0)
+_seq_schedule(4, 1773916114483)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0)
+
+_seq_schedule(4, 1773916116484)
+
+_seq_cancel()
+_seq_schedule(1, 1773916118487)
+
+e9 >> play("X ",rate=4.0, shape=1, pos=0, lpf=400)
+
+e9 >> play("X ",rate=2.0, shape=0.5, pos=0, lpf=800)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, shape=0.5, pos=0, lpf=800)
+_seq_schedule(4, 1773916128153)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0)
+_seq_schedule(4, 1773916130155)
+
+_seq_cancel()
+e9 >> play("X ",rate=2.0, pos=0)
+
+_seq_schedule(4, 1773916132156)
+
+_seq_cancel()
+_seq_schedule(1, 1773916134158)
+
+_seq_cancel()
+e9 >> play("X ",rate=4.0, shape=1, pos=0, lpf=400)
+_seq_schedule(4, 1773916134659)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+attack("epicdevo 66")
+
+_seq_cancel()
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+_seq_schedule(32, 1773916154590)
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1773916170614)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1773916174638)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1773916178655)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1773916182663)
+
+c5 >> faim([0, 1, 6], dur=4, oct=4, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=4, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1773916189487)
+
+_seq_cancel()
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=0, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+_seq_schedule(16, 1773916197491)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(32, 1773916205523)
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1773916206675)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1773916210679)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1773916216009)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1773916220019)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1773916224032)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=4, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1773916228040)
+
+_seq_cancel()
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=0, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+_seq_schedule(16, 1773916236052)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(32, 1773916244072)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+d1 >> dbass()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("insaneOnSixtyFour 172")
+
+attack("insaneOnSixtyFour 172")
+
+Clock.bpm=172
+
+Scale.default="minor"
+
+Root.default="D"
+
+cyH = 64
+
+cyL = 64
+
+l1 >> loop("wardrum16", dur=16,sample=var(PRand([18,23]), [cyH]),drcomp=.5, amp=var([0.5, 1], [cyH, cyL]), hpf=120)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+l1 >> loop("wardrum16", dur=16,sample=var(PRand([18,23]), [cyH]),drcomp=.5, amp=var([0.5, 1], [cyH, cyL]), hpf=120)
+
+~l2 >> loop("rockriff_16", dur=16, sample=2, low=1, chop=var([0,P*[2,4,8]], [cyH, cyL]), chopi=var(PRand([0, .25, .5, .75]), [32]), mid=1.2, hpf=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("trap")
+
+d0 >> play(".{...u}..u...", sample=5, hpf=var(PRand(4000)+10), rate=(.5,2)).sometimes("stutter")
+d1 >> play(".{...c}..c...", sample=5, mverb=0, flanger=0, chorus=var(PWhite(0, 1)), amp=P*[0, 1], rate=(P*[.5,.5,.5,-1],2))
+d2 >> play("v.....(...{v.})(...{.v}))", cut=2, sample=8, hpf=50, drive=(0,var(PWhite(0,0.2)))).sometimes("stutter")
+d3 >> play("v.....(...{v[vv].}).", sample=8, delay=0.5, hpf=400, amp=var([0, 1], [28, 4]))
+d4 >> play("(...(.p)).((p.).(p.).)((p.).(p.).)", dur=1/4, sample=4, crush=8,bits=8)
+d5 >> play("-{-[--]}-.-{[---][--]}(-.)(-[----])", sample=2, amp=PCoin(PWhite(0, 1),0,0.5), hpf=6000, pan=PWhite(-1,1)).sometimes("amen").sometimes("bubble").sometimes("stutter", PRand(16), rate=PWhite(-1,5))
+d6 >> play("---.-{[---][--]}(-.)(-[----])", hpf=5000, sample=10, amp=PCoin(PWhite(0, 1), 0, 0.5), pan=PWhite(-1,1)).sometimes("amen").sometimes("bubble")
+d7 >> play("---.-{[---][--]}(-.)(-[----])", pan=PWhite(-1, 1), hpf=4000, amp=PCoin(PWhite(0, 1), 0, 0.5), sample=8).sometimes("amen").sometimes("bubble").every(4, "shuffle")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("biases_are_bells 124")
+
+Clock.bpm = 122;
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.6, high=1, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)                   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d4 >> play("x", dur=0.5, mverb=1, rate=2, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0, cheapverb=PBin(8), cvdecay=1.5, cvdamp=0.5, amp=Pacc(6, 4), amplify=PLife(0.5), hpf=3200, echo=0.25, sample=6, resonbank=0.1, rbfreq=36, rbdecay=0.5, rbspread=1, glitch=0.5, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)    
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 55, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 78, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)   
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+n9 >> loop("psybass32", dur=32)
+
+n9 >> loop("psybass32", dur=32, sample=1)
+
+Clock.bpm = 130
+
+n9 >> loop("psybass32", dur=32, sample=1)
+
+n9 >> loop("psybass32", dur=32, sample=2)
+
+n1 >> loop("psybass16", dur=16)
+
+n9.stop()
+
+n1 >> loop("psybass16", dur=16, sample=1)
+
+n1 >> loop("psybass16", dur=16, sample=4)
+
+n1 >> loop("psybass16", dur=16, sample=5)
+
+n1 >> loop("psybass16", dur=16, sample=6)
+
+n1 >> loop("psybass16", dur=16, sample=7)
+
+n1 >> loop("psybass16", dur=16, sample=8)
+
+n1 >> loop("psybass16", dur=16, sample=9)
+
+n1 >> loop("psybass16", dur=16, sample=10)
+
+n1 >> loop("psybass16", dur=16, sample=11)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("R_Psy")
+
+i5 >> loop("psydrum32", dur=32, sample=var(PRand(202),64))
+
+i0 >> loop("psybass32", dur=32,pos=0, amp=1, room=0.1, sample=var(PRand(808),64), beat_stretch=1, looping=1.0, drcomp=0.1, mverb=0.1)
+
+Clock.bpm=168
+
+z4 >> loop("psych32", dur=32, sample=PRand(111), fx1=0, fx=0, hpf=200, mverb=0.2)
+
+i0.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+r7 >> a_cy(bright=1, distortion=1.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

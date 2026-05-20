@@ -1,0 +1,92 @@
+i7 >> dbass()
+
+i7 >> dbass(lpf=400)
+
+i7 >> dbass(lpf=200)
+
+i7 >> dbass(lpf=100)
+
+i7 >> dbass(lpf=2400)
+
+i7 >> dbass(lpf=2400, lpr=0.1)
+
+i7 >> dbass(lpf=0, lpr=0.1, hpf=400)
+
+i7 >> dbass(lpf=0, lpr=0.1, hpf=4000)
+
+i7 >> dbass(lpf=0, lpr=0.1, hpf=400)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("epicdevo 66")
+
+attack("epicdevo 66")
+
+attack("epicdevo 66")
+
+_seq_cancel()
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+_seq_schedule(32, 1773612815384)
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1773612831413)
+
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1773612835467)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1773612839505)
+
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1773612843509)
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=0, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+attack("spacesounds  120")
+
+s4 >> loop("solrot16", dur=8, amp=1.0, lpf=800, bpf=800, hpf=2400, mverb=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+q1 >> loop("quake8", dur=8, amp=0.8, lpf=1200, tape=0.6, echo=0.5, tapedrive=0.6)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+q1 >> loop("quake8", dur=8, amp=0.8, lpf=1200, tape=0.6, echo=0.5, tapedrive=0.6)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s2 >> loop("centauri16", dur=8, amp=0.7, cheapverb=0.6, fshift=2, hpf=1600)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

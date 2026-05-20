@@ -33,7 +33,7 @@ def cmd_exists(name):
 
 def pip_pkg(name):
     import importlib
-    pkg = name.replace("-","_").replace("python_rtmidi","rtmidi")
+    pkg = name.replace("-","_").replace("python_rtmidi","rtmidi").replace("pyRFC3339","pyrfc3339").replace("edn_format","edn_format")
     try:
         importlib.import_module(pkg)
         return True

@@ -57,17 +57,39 @@ function Install-Winget($id, $name) {
 if ($SkipSystem) {
     Skip "System packages skipped" "system_packages"
 } elseif (Confirm-Step "Install system packages (SuperCollider, Python, Node, Git)?") {
-    Install-Winget "PKGID.SuperCollider"   "SuperCollider"
-    Install-Winget "Python.Python.3.12"    "Python 3.12"
-    Install-Winget "OpenJS.NodeJS.LTS"     "Node.js LTS"
-    Install-Winget "Git.Git"               "Git"
+    Install-Winget "SuperCollider.SuperCollider" "SuperCollider"
+    Install-Winget "Python.Python.3.12"          "Python 3.12"
+    Install-Winget "OpenJS.NodeJS.LTS"           "Node.js LTS"
+    Install-Winget "Git.Git"                     "Git"
 } else {
     Skip "System packages skipped" "system_packages"
 }
 
-# Refresh PATH
+# Refresh PATH (machine + user, plus common Python install locations)
 $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" +
             [System.Environment]::GetEnvironmentVariable("PATH", "User")
+# Explicitly add Python paths in case winget just installed it
+$pyPaths = @(
+    "$env:LOCALAPPDATA\Programs\Python\Python312",
+    "$env:LOCALAPPDATA\Programs\Python\Python312\Scripts",
+    "$env:APPDATA\Python\Python312\Scripts"
+)
+foreach ($p in $pyPaths) { if (Test-Path $p) { $env:PATH = "$p;$env:PATH" } }
+
+# Resolve Python executable (handles 'python', 'python3', 'py' launcher)
+$script:PYTHON = $null
+foreach ($cmd in @("python", "python3", "py")) {
+    if (Get-Command $cmd -ErrorAction SilentlyContinue) {
+        $ver = & $cmd --version 2>&1
+        if ($ver -match "Python 3\.") { $script:PYTHON = $cmd; break }
+    }
+}
+if (-not $script:PYTHON) {
+    Warn "Python 3 not found on PATH. Install Python 3.12 from python.org and re-run."
+    $script:PYTHON = "python"  # fallback, steps will fail verbosely
+} else {
+    Info "Using Python: $($script:PYTHON) ($(& $script:PYTHON --version 2>&1))"
+}
 
 # =============================================================
 #  2. PYTHON PACKAGES
@@ -81,18 +103,18 @@ $PYTHON_REQUIRED = @(
 )
 
 Info "Installing FoxDot Python package (editable)..."
-$r = pip install -e "$REPO_DIR\FoxDot" --quiet 2>&1
+$r = & $script:PYTHON -m pip install -e "$REPO_DIR\FoxDot" --quiet 2>&1
 if ($LASTEXITCODE -eq 0) { Ok "FoxDot Python package" "foxdot_python" }
 else                      { Fail "FoxDot Python package failed" "foxdot_python"; Write-Host $r }
 
 Info "Installing required Python dependencies..."
-$r = pip install @PYTHON_REQUIRED --quiet 2>&1
+$r = & $script:PYTHON -m pip install $PYTHON_REQUIRED --quiet 2>&1
 if ($LASTEXITCODE -eq 0) { Ok "Python required packages" "python_required" }
 else                      { Fail "Python required packages (partial?)" "python_required"; Write-Host $r }
 
 if ($Optional) {
     Info "Installing optional packages (librosa, opencv)..."
-    $r = pip install librosa opencv-python --quiet 2>&1
+    $r = & $script:PYTHON -m pip install librosa opencv-python --quiet 2>&1
     if ($LASTEXITCODE -eq 0) { Ok "Python optional packages" "python_optional" }
     else                      { Warn "Optional packages failed — non-critical" }
 } else {

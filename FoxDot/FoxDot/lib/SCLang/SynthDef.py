@@ -129,7 +129,7 @@ class SynthDefBaseClass(object):
         Def += "{}\n".format(self.get_base_class_variables())
         Def += "{}\n".format(self.get_base_class_behaviour())
         Def += "{}".format(self.get_custom_behaviour())
-        stereo_synth = ["play2", "loop", "noloop"]
+        stereo_synth = ["play2", "loop", "noloop", "wavetable"]
         if self.name in stereo_synth:
             Def += "osc = Splay.ar(osc, level:1,spread:wide, center:pan, levelComp: true);\n"
         else:
@@ -355,6 +355,16 @@ class SampleSynthDef(SynthDefBaseClass):
         self.base.append("rate = In.kr(bus, 1);")
         self.base.append("rate = if(ratelfo<=0, rate, rate * SinOsc.kr(ratelfo, 0, ratelfomul, ratelfoadd));")
 
+# WaveTable SynthDef
+class WTSynthDef(SynthDefBaseClass):
+    def __init__(self, *args, **kwargs):
+        SynthDefBaseClass.__init__(self, *args, **kwargs)
+        self.buf = self.new_attr_instance("buf")
+        self.defaults['buf']  = 0
+        self.defaults['wide'] = 1.0
+        self.defaults['rate'] = 0.0
+        self.base.append("freq = In.kr(bus, 1);")
+        self.base.append("freq = freq/2;")
 
 # SynthDef from sc file
 class FileSynthDef(SynthDefBaseClass):

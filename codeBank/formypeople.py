@@ -105,3 +105,12 @@ b5 >> loop("hiphop16", dur=16)
 rec_stop()
 
 #@endfade(16)
+
+Clock.bpm = 88
+Scale.default = "minor"
+Root.default = "E"
+p1 >> pianovel([4, 5, 7, 5, 4, 2, 0, -3], dur=[2, 1, 1, 2, 1, 0.5, 0.5, 2], oct=4, velocity=PRand(45, 65), hard=PWhite(0.4, 0.7), velhard=PWhite(0.3, 0.5), lofi=0.7, lofiwow=0.5, lofiamp=0.5, cheapverb=0.4, cvdecay=2.5, hpf=200, amp=linvar([0, 0.5], 16))
+a1 >> a_stress(var([(2, 4, 7), (-3, 0, 4), (-2, 1, 4), (0, 2, 4)], 4), follow=2, dur=1/4, oct=8, velhard=var([0.4, 0.6, 0.5, 0.7], 8), lofiwow=fs(16, 0.15, 0.4), tape=0.3, tapewarm=0.4, shape=0.1, vowel=0.2, vowelf=0, vowelq=1, hpf=240, amp=linvar([0, 0.4], 16)).unison(3)
+p1 >> pianovel([4, 5, 7, 5, 4, 2, 0, -3, 7, 5, 4, 2], dur=[2, 1, 1, 2, 1, 0.5, 0.5, 2, 1, 1, 2, 2], oct=4, velocity=PRand(50, 70), hard=PWhite(0.4, 0.7), velhard=PWhite(0.3, 0.5), lofi=0.7, lofiwow=0.5, lofiamp=0.5, cheapverb=0.4, cvdecay=2.5, hpf=200, amp=0.5)
+b1 >> dbass(var([2, 2, 1, 1, 0, 0, 1, 2], 4), dur=4, oct=4, sus=3.5, lpf=300, subenh=0.5, subhfreq=80, subhgain=1.2, tape=0.4, tapedrive=1.2, hpf=35, amp=linvar([0, 0.7], 16)).unison(3)
+m1 >> soft(melody(), dur=PDur(3, 8), oct=6, sus=var([1, 2, 0.5], [4, 4, 8]), lpf=linvar([1200, 3500], 48), lofi=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1, lofiwow=0.8, tape=0.2, hpf=400, amp=linvar([0, 0.35], 24))

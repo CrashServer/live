@@ -1,5 +1,5 @@
 SynthDef.new(\dsaw,
-{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, rate=0.5, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, detune=8, cutoff=800, rq=0.5|
+{|amp=1, sus=1, pan=0, freq=0, vib=0, fmod=0, bus=0, blur=1, beat_dur=1, atk=0.01, decay=0.01, rel=0.01, peak=1, level=0.8, detune=8, cutoff=800, rq=0.5|
 	var osc, osc1, osc2, env;
 	var nvoices1 = 5, nvoices2 = 7;
 	sus = sus * blur;

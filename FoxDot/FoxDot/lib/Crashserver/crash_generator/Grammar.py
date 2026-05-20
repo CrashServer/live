@@ -37,7 +37,7 @@ if __name__ != "__main__":
 	FOXDOT_SND  = config["sample_path"]
 	if not isdir(FOXDOT_SND):
 		print("Could not find _loop_ in sample_path : ", FOXDOT_SND)
-	
+
 	#PATTERN LIST & Exclude
 	patternNames = {name: obj for name, obj in vars(Sequences).items() \
 				if (type(obj) == FunctionType and name.startswith("P"))}
@@ -47,12 +47,12 @@ if __name__ != "__main__":
 		for k in patternExclude: del patternNames[k]
 	except:
 		pass
-	
+
 	#SYNTH LIST & Exclude
 	synthdefNames = [i for i in SynthDefs]
 	synthExclude = ['video', 'loop', 'stretch', 'gsynth', 'breakcore', 'splitter', 'splaffer', 'play1', 'play2', 'audioin', 'onset', 'noloop', "wavetable"]
-	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise', 
-					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs", 
+	penible_synth = ['glitchbass', 'crackle', 'crunch', 'dustV', 'brown', 'fuzz', 'glitcher', 'gray', 'grat', 'hnoise',
+					'latoo', 'pink', 'saw', 'scratch', 'viola', 'bnoise', 'twang', "noise", "rsin", "rave", "virus", "combs",
 					"plaits", "braids", "arpy", "orient", "elmbass", "rhodes", "lfnoise", "bounce", 'quin', 'cringe', 'swiss']
 	#penible_synth = ['gray']
 	synthExclude += penible_synth
@@ -68,25 +68,26 @@ if __name__ != "__main__":
 	BANK_LEN = [item for item in os.listdir(FOXDOT_SND) if item.isdigit()]
 	for bankNbr in BANK_LEN:
 		loopNames += sorted([fn.rsplit(".", 1)[0] for fn in os.listdir(os.path.join(FOXDOT_SND, str(bankNbr), '_loop_'))])
-	
+
 	loopExclude = [".directory", "recin", "xmas", "voicetxt", "os4", "os16", "os32", "atmobis8", "__init__", "serverVoice", "onsetDict", "slaap", ""]
-	
-	# Remove all loops that start with "AKWF"
-	loopNames = [loop for loop in loopNames if not loop.startswith("AKWF")]
+
+	# Remove all loops that start with "AKWF and WT"
+	loopNames = [loop for loop in loopNames if not loop.startswith("AKWF") ]
+	loopNames = [loop for loop in loopNames if not loop.startswith("WT") ]
 	for loopxclude in loopExclude:
 		try:
 			loopNames.remove(loopxclude)
 		except:
 			pass
-	
-	fxExclude = ["coarse", "dist", "formant", "shape", "drive", "disto", "tanh", "octafuz", "krush", 
+
+	fxExclude = ["coarse", "dist", "formant", "shape", "drive", "disto", "tanh", "octafuz", "krush",
 				"drop", "triode", "squiz", "fold", "bpf", "ringz", "shift"]
 	for fxclude in fxExclude:
 		try:
 			del fxdict[fxclude]
 		except:
-			pass	
-# Generic actions	
+			pass
+# Generic actions
 
 def GENERATE_PATTERN(_min=1, _max=9):
 	pat = choice(list(patternNames.values()))
@@ -96,7 +97,7 @@ def GENERATE_PATTERN(_min=1, _max=9):
 	else:
 		args = []
 		for i in range(n):
-			args.append(str(patternInputs[pat.__name__][i](_min, _max)))        
+			args.append(str(patternInputs[pat.__name__][i](_min, _max)))
 	return pat.__name__ + "({})".format(", ".join(args))
 
 def GENERATE_LIST(_min=1, _max=9, length=6):
@@ -169,7 +170,7 @@ def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
 				for argmt in randArgs:
 					if argmt not in ["atk", "decay", "rel"]:
 						para_min = synthParam[argmt][0]
-						para_max = synthParam[argmt][1]	
+						para_max = synthParam[argmt][1]
 						if random() < 0.2:
 							synth_arg[argmt] = GENERATE_VARLIST(para_min, para_max, 8)
 						else:
@@ -188,10 +189,10 @@ def GENERATE_SYNTH_ARGS(synthName, synthArgsDict=synthArgs):
 
 
 def GENERATE_CHAR():
-	### Generate a character LIST 
+	### Generate a character LIST
 	try:
 		rnd_char_list = []
-		#clr_list = ["1","2","3","4","?","!", "\\"] 
+		#clr_list = ["1","2","3","4","?","!", "\\"]
 		clr_list = []
 		clr_nonalpha = [x for x in nonalpha.keys()]
 		for i in clr_list:
@@ -201,10 +202,10 @@ def GENERATE_CHAR():
 				if random() > 0.7:
 					rnd_char_list.append(choice(list(clr_nonalpha)))
 				else:
-					rnd_char_list.append(choice(list(alpha.upper())+list(alpha))) 
+					rnd_char_list.append(choice(list(alpha.upper())+list(alpha)))
 			else:
-				rnd_char_list.append(".")               
-		return "".join(rnd_char_list)    
+				rnd_char_list.append(".")
+		return "".join(rnd_char_list)
 	except Exception as e:
 		print("generate char : ", e)
 
@@ -214,7 +215,7 @@ def GENERATE_PARA():
 	try:
 		args = []
 		player_merge = {**player_para, **player_para2}
-		paraPlayer = choice([p for p in player_merge.keys()]) 
+		paraPlayer = choice([p for p in player_merge.keys()])
 		for i in range(len(player_merge[paraPlayer])):
 			args.append(player_merge[paraPlayer][i]())
 		return f'"{paraPlayer}"' + '{}'.format(",".join(args))
@@ -238,7 +239,7 @@ def GENERATE_DUR(dur=None):
 		if dur == None:
 			dur = choice([1,2,4])
 		if type(dur) == str:
-			dur = f"{dur}.sus" 
+			dur = f"{dur}.sus"
 		return f'(PChain(krhytm)[:16]*{str(dur)}).limit(sum,16).limit(len,20)'
 	except Exception as e:
 		print("generate dur : ", e)
@@ -300,7 +301,7 @@ patternInputs = {
 
 # parameters
 player_time_para = {
-	"often": [_para_player], 
+	"often": [_para_player],
 	"sometimes": [_para_player],
 	"rarely": [_para_player],
 	"every" : [_int, _para_player],
@@ -314,8 +315,8 @@ player_para = {
 	"slider": [_null],
 	"penta": [_null],
 	"reverse": [_null],
-	"shuffle": [_null], 
-	"degrade":[_null], 
+	"shuffle": [_null],
+	"degrade":[_null],
 	"offbeat":[_null],
 	"fill": [_null]
 	}
@@ -328,7 +329,7 @@ player_para2 = {
 # Utils
 
 def remap_pattern(pat, oMin, oMax):
-	''' remap a pattern, keep original range ''' 
+	''' remap a pattern, keep original range '''
 	try:
 		pmin = min(pat)
 		pmax = max(pat)
@@ -345,7 +346,7 @@ def remap(x, oMin, oMax, nMin, nMax):
 		if oldRange == 0:
 			newValue = nMin
 		else:
-			newRange = (nMax - nMin)  
+			newRange = (nMax - nMin)
 			newValue = (((x - oMin) * newRange) / oldRange) + nMin
 		if type(nMin) == int:
 			return int(newValue)
@@ -355,9 +356,9 @@ def remap(x, oMin, oMax, nMin, nMax):
 		print("remap : ", e)
 
 def checkPattern(pat =""):
-	''' limit a pattern len output < 20, avoid P[1,1,1,1,...,1,1,1,1] error ''' 
+	''' limit a pattern len output < 20, avoid P[1,1,1,1,...,1,1,1,1] error '''
 	if pat != "":
 		patlen = len(eval(pat))
 		if patlen > 20:
-			pat += ".limit(len, 20)" 
+			pat += ".limit(len, 20)"
 	return pat

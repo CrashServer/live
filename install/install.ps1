@@ -33,6 +33,7 @@ $REPO_DIR    = Split-Path -Parent $PSScriptRoot
 $SC_QUARKS   = "$env:APPDATA\SuperCollider\downloaded-quarks"
 $SC_EXTS     = "$env:APPDATA\SuperCollider\Extensions"
 $SAMPLE_PATH = "$env:USERPROFILE\UltimateSamples"
+$VENV_DIR    = "$REPO_DIR\venv"
 
 Write-Host "`nCrashServer — Full Windows Installer" -ForegroundColor White
 Write-Host "  Repo:      $REPO_DIR"
@@ -102,19 +103,30 @@ $PYTHON_REQUIRED = @(
     "setuptools", "monotonic"
 )
 
-Info "Installing FoxDot Python package (editable)..."
-$r = & $script:PYTHON -m pip install -e "$REPO_DIR\FoxDot" --quiet 2>&1
+# Create venv
+if (Test-Path "$VENV_DIR\Scripts\python.exe") {
+    Ok "venv already exists at $VENV_DIR" "venv"
+} else {
+    Info "Creating Python venv at $VENV_DIR..."
+    & $script:PYTHON -m venv $VENV_DIR
+    if ($LASTEXITCODE -eq 0) { Ok "venv created" "venv" }
+    else { Fail "venv creation failed" "venv"; exit 1 }
+}
+$VENV_PIP = "$VENV_DIR\Scripts\pip.exe"
+
+Info "Installing FoxDot Python package into venv (editable)..."
+$r = & $VENV_PIP install -e "$REPO_DIR\FoxDot" --quiet 2>&1
 if ($LASTEXITCODE -eq 0) { Ok "FoxDot Python package" "foxdot_python" }
 else                      { Fail "FoxDot Python package failed" "foxdot_python"; Write-Host $r }
 
-Info "Installing required Python dependencies..."
-$r = & $script:PYTHON -m pip install $PYTHON_REQUIRED --quiet 2>&1
+Info "Installing required Python dependencies into venv..."
+$r = & $VENV_PIP install $PYTHON_REQUIRED --quiet 2>&1
 if ($LASTEXITCODE -eq 0) { Ok "Python required packages" "python_required" }
 else                      { Fail "Python required packages (partial?)" "python_required"; Write-Host $r }
 
 if ($Optional) {
     Info "Installing optional packages (librosa, opencv)..."
-    $r = & $script:PYTHON -m pip install librosa opencv-python --quiet 2>&1
+    $r = & $VENV_PIP install librosa opencv-python --quiet 2>&1
     if ($LASTEXITCODE -eq 0) { Ok "Python optional packages" "python_optional" }
     else                      { Warn "Optional packages failed — non-critical" }
 } else {

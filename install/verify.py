@@ -31,9 +31,18 @@ def check(label, passed, detail="", warn=False):
 def cmd_exists(name):
     return shutil.which(name) is not None
 
+VENV_PYTHON = REPO / ("venv/Scripts/python.exe" if sys.platform == "win32" else "venv/bin/python")
+
 def pip_pkg(name):
+    # Check within venv if present, else current interpreter
+    pkg = name.replace("-","_").replace("python_rtmidi","rtmidi").replace("pyRFC3339","pyrfc3339")
+    if VENV_PYTHON.exists():
+        result = subprocess.run(
+            [str(VENV_PYTHON), "-c", f"import {pkg}"],
+            capture_output=True
+        )
+        return result.returncode == 0
     import importlib
-    pkg = name.replace("-","_").replace("python_rtmidi","rtmidi").replace("pyRFC3339","pyrfc3339").replace("edn_format","edn_format")
     try:
         importlib.import_module(pkg)
         return True
@@ -58,8 +67,9 @@ jack_ok = cmd_exists("jackd") or cmd_exists("pipewire")
 check("JACK / PipeWire", jack_ok, "jackd or pipewire found" if jack_ok else "not found")
 
 # =============================================================
-section("Python packages")
+section("Python venv + packages")
 # =============================================================
+check("venv exists", VENV_PYTHON.exists(), str(VENV_PYTHON) if VENV_PYTHON.exists() else "run install.sh to create")
 REQUIRED = [
     "websockets", "rtmidi", "pyfiglet", "pyperclip", "LinkToPy",
     "requests", "numpy", "edn_format", "ply", "pyrfc3339", "pytz",

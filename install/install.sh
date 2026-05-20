@@ -45,6 +45,9 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SC_QUARKS="$HOME/.local/share/SuperCollider/downloaded-quarks"
 SC_EXTENSIONS="$HOME/.local/share/SuperCollider/Extensions"
 SAMPLE_PATH="$HOME/UltimateSamples"
+VENV_DIR="${REPO_DIR}/venv"
+VENV_PIP="${VENV_DIR}/bin/pip"
+VENV_PYTHON="${VENV_DIR}/bin/python"
 
 echo -e "\n${BOLD}CrashServer — Full Installer${NC}"
 echo -e "  Repo:     ${REPO_DIR}"
@@ -99,9 +102,9 @@ for cmd in sclang python3 pip3 node npm git; do
 done
 
 # =============================================================
-#  2. PYTHON PACKAGES
+#  2. PYTHON VIRTUAL ENVIRONMENT + PACKAGES
 # =============================================================
-section "2 / 7 — Python packages"
+section "2 / 7 — Python venv + packages"
 
 PYTHON_REQUIRED=(
   websockets
@@ -124,15 +127,28 @@ PYTHON_OPTIONAL=(
   opencv-python    # webcam feature (webcam.py)
 )
 
-info "Installing FoxDot Python package (editable)..."
-if pip3 install -e "${REPO_DIR}/FoxDot" --quiet; then
+# Create venv if not already present
+if [ -d "${VENV_DIR}" ]; then
+  ok "venv already exists at ${VENV_DIR}" "venv"
+else
+  info "Creating Python venv at ${VENV_DIR}..."
+  if python3 -m venv "${VENV_DIR}"; then
+    ok "venv created" "venv"
+  else
+    fail "venv creation failed — check python3-venv is installed" "venv"
+    exit 1
+  fi
+fi
+
+info "Installing FoxDot Python package into venv (editable)..."
+if "${VENV_PIP}" install -e "${REPO_DIR}/FoxDot" --quiet; then
   ok "FoxDot Python package installed" "foxdot_python"
 else
   fail "FoxDot Python package failed" "foxdot_python"
 fi
 
-info "Installing required Python dependencies..."
-if pip3 install "${PYTHON_REQUIRED[@]}" --quiet; then
+info "Installing required Python dependencies into venv..."
+if "${VENV_PIP}" install "${PYTHON_REQUIRED[@]}" --quiet; then
   ok "Python required packages installed" "python_required"
 else
   fail "Python required packages failed" "python_required"
@@ -140,7 +156,7 @@ fi
 
 if $OPTIONAL; then
   info "Installing optional Python packages (librosa, opencv)..."
-  if pip3 install "${PYTHON_OPTIONAL[@]}" --quiet; then
+  if "${VENV_PIP}" install "${PYTHON_OPTIONAL[@]}" --quiet; then
     ok "Python optional packages installed" "python_optional"
   else
     warn "Some optional packages failed — non-critical"

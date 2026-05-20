@@ -1,7 +1,7 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { spawn } from 'child_process';
 import path from 'path';
-import { promises as fs } from 'fs';
+import { promises as fs, existsSync } from 'fs';
 import { SerialPort } from 'serialport';
 
 // Fonction pour charger le fichier de configuration
@@ -234,8 +234,12 @@ function processArduinoData(data, foxdot) {
     console.log('Arduino désactivé dans la configuration.');
   }
 
-  // Lancer FoxDot
-  const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
+  // Lancer FoxDot — use venv python if available, fallback to system python
+  const venvPython = process.platform === 'win32'
+    ? path.join(__dirname, '..', 'venv', 'Scripts', 'python.exe')
+    : path.join(__dirname, '..', 'venv', 'bin', 'python');
+  const pythonExe = existsSync(venvPython) ? venvPython : 'python3';
+  const foxdot = spawn(pythonExe, ['-m', 'FoxDot', '-p'], {
     cwd: config.FOXDOT_PATH,
     env: {...process.env, PYTHONUNBUFFERED: '1'}
   });

@@ -35,7 +35,7 @@ k1 >> compkick(dur=1, oct=3,
 
 # Snare — backbeat 2 & 4; echoBoy eb=0.75 adds a
 # dotted-8th ghost snare that bleeds across the bar
-s1 >> play(". . . . o . . . . . . . o . . . ", dur=1/4, sample=0,
+s1 >> play(". . . . o . . . ", dur=1/4, sample=0,
            amp=var([0.85, 0.85, 0.9, 0.8, 0.95, 0.4], secs),
            eb=var([0, 0.75, 0.75, 0.75, 0.75, 0.5], secs),
            ebfeed=0.35,
@@ -47,7 +47,7 @@ l1 >> play("X . x . X x . X . x X . x . X . ", dur=1/2, sample=1,
            shape=0.12)
 
 # Tight 16th perc — adds rhythmic density in drops
-t1 >> play("t . t . t . t . t . t . t . t . ", dur=1/4,
+t1 >> play("t . ", dur=1/4,
            amp=var([0, 0, 0.28, 0.2, 0.32, 0], secs),
            eb=var([0, 0, 0.25, 0.25, 0.25, 0], secs),
            ebfeed=0.2, ebmix=0.3)

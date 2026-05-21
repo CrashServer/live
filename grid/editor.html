@@ -229,9 +229,10 @@
     <div class="filter-group">
       <label>type</label>
       <div class="filter-type-row" id="filter-type">
-        <label data-type="atom">  <input type="checkbox" value="atom"  checked> atom</label>
-        <label data-type="scene"> <input type="checkbox" value="scene" checked> scene</label>
-        <label data-type="track"> <input type="checkbox" value="track" checked> track</label>
+        <label data-type="atom">    <input type="checkbox" value="atom"    checked> atom</label>
+        <label data-type="starter"> <input type="checkbox" value="starter" checked> starter</label>
+        <label data-type="scene">   <input type="checkbox" value="scene"   checked> scene</label>
+        <label data-type="track">   <input type="checkbox" value="track"   checked> track</label>
       </div>
     </div>
 
@@ -245,10 +246,8 @@
     </div>
 
     <div class="filter-group">
-      <label>key</label>
-      <select id="filter-key">
-        <option value="">— any —</option>
-      </select>
+      <label>key / scale (contains)</label>
+      <input type="text" id="filter-key" placeholder="minor / D minor / …">
     </div>
 
     <div class="filter-group">
@@ -271,7 +270,8 @@
   <!-- ============ MIDDLE: GRID ============ -->
   <div class="grid-pane">
     <div class="toolbar">
-      <input type="text" id="search" placeholder="filter by label or code..." style="width:240px">
+      <input type="text" id="search" placeholder="filter by label or code..." style="width:220px">
+      <input type="number" id="jump-row" placeholder="row" min="0" max="399" style="width:60px" title="jump to row (Enter)">
       <button id="reload-btn">reload</button>
       <span class="stats" id="stats">- / -</span>
     </div>
@@ -303,6 +303,7 @@
         <select id="meta-type" style="width:100%; background: var(--panel); color: var(--text); border: 1px solid var(--border); padding: 7px 6px; font: inherit; border-radius: 3px;">
           <option value="">—</option>
           <option value="atom">atom</option>
+          <option value="starter">starter</option>
           <option value="scene">scene</option>
           <option value="track">track</option>
         </select>
@@ -467,12 +468,9 @@ async function loadCells() {
 }
 
 function rebuildFilterOptions() {
-  // Populate key/instrument/source dropdowns from the loaded cells
-  const keys = new Set();
   const insts = new Set();
   const sources = new Set();
   for (const c of Object.values(cells)) {
-    if (c.key && c.key.length < 30) keys.add(c.key);
     if (c.instrument) insts.add(c.instrument);
     if (c.source) sources.add(c.source);
   }
@@ -487,7 +485,6 @@ function rebuildFilterOptions() {
     });
     if ([...vals].includes(cur)) sel.value = cur;
   }
-  fill("filter-key", keys);
   fill("filter-instrument", insts);
   fill("filter-source", sources);
 }
@@ -565,20 +562,18 @@ function applySearchFilter() {
   const q = $("search").value.trim().toLowerCase();
   const tMin = parseInt($("filter-tempo-min").value, 10);
   const tMax = parseInt($("filter-tempo-max").value, 10);
-  const fKey = $("filter-key").value;
+  const fKey = $("filter-key").value.trim().toLowerCase();
   const fInst = $("filter-instrument").value;
   const fSrc = $("filter-source").value;
-  const allowedTypes = new Set(
-    [...document.querySelectorAll("#filter-type input:checked")].map(i => i.value)
-  );
+  const allTypeBoxes = [...document.querySelectorAll("#filter-type input")];
+  const allowedTypes = new Set(allTypeBoxes.filter(i => i.checked).map(i => i.value));
+  const typeFilterActive = allowedTypes.size < allTypeBoxes.length;
   let matched = 0;
   document.querySelectorAll(".cell").forEach(el => {
     const coord = el.dataset.coord;
     const cell = cells[coord];
     if (!cell) {
-      // empty cells: dim if any filter active
-      const anyFilter = q || tMin || tMax || fKey || fInst || fSrc
-                        || allowedTypes.size < 3;
+      const anyFilter = q || !isNaN(tMin) || !isNaN(tMax) || fKey || fInst || fSrc || typeFilterActive;
       el.style.opacity = anyFilter ? "0.10" : "1";
       return;
     }
@@ -589,10 +584,11 @@ function applySearchFilter() {
     }
     if (ok && !isNaN(tMin) && (cell.tempo == null || cell.tempo < tMin)) ok = false;
     if (ok && !isNaN(tMax) && (cell.tempo == null || cell.tempo > tMax)) ok = false;
-    if (ok && fKey && cell.key !== fKey) ok = false;
+    // Key: contains-match so "minor" matches "D minor", "A minor", etc.
+    if (ok && fKey && !(cell.key || "").toLowerCase().includes(fKey)) ok = false;
     if (ok && fInst && cell.instrument !== fInst) ok = false;
     if (ok && fSrc && cell.source !== fSrc) ok = false;
-    if (ok && allowedTypes.size < 3) {
+    if (ok && typeFilterActive) {
       const type = cell.type || "atom";
       if (!allowedTypes.has(type)) ok = false;
     }
@@ -855,7 +851,40 @@ document.addEventListener("keydown", (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key === "s") {
     e.preventDefault();
     saveCell();
+    return;
   }
+  if (["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)) {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") return;
+    if (!currentCoord) return;
+    e.preventDefault();
+    const col = currentCoord[0];
+    const row = parseInt(currentCoord.slice(1), 10);
+    const ci = COLS.indexOf(col);
+    let nc = col, nr = row;
+    if (e.key === "ArrowLeft")  nc = COLS[Math.max(0, ci - 1)];
+    if (e.key === "ArrowRight") nc = COLS[Math.min(COLS.length - 1, ci + 1)];
+    if (e.key === "ArrowUp")    nr = Math.max(0, row - 1);
+    if (e.key === "ArrowDown")  nr = Math.min(ROWS - 1, row + 1);
+    const next = `${nc}${nr}`;
+    selectCell(next);
+    const el = document.querySelector(`.cell[data-coord="${next}"]`);
+    if (el) el.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+});
+
+$("jump-row").addEventListener("keydown", (e) => {
+  if (e.key !== "Enter") return;
+  const row = parseInt($("jump-row").value, 10);
+  if (isNaN(row) || row < 0 || row >= ROWS) return;
+  let coord = null;
+  for (const col of COLS) {
+    if (cells[`${col}${row}`]) { coord = `${col}${row}`; break; }
+  }
+  if (!coord) coord = `A${row}`;
+  selectCell(coord);
+  const el = document.querySelector(`.cell[data-coord="${coord}"]`);
+  if (el) el.scrollIntoView({ block: "center", inline: "nearest" });
+  $("jump-row").value = "";
 });
 </script>
 </body>

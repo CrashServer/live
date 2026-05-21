@@ -92,10 +92,19 @@ class Handler(BaseHTTPRequestHandler):
             cells.pop(coord, None)
             action = "deleted"
         else:
-            cells[coord] = {
-                "code": payload.get("code", ""),
-                "label": payload.get("label", ""),
-            }
+            # Merge: preserve existing metadata, overlay any sent fields.
+            # Empty-string values from the UI are treated as "keep existing"
+            # for metadata fields; code and label are always written.
+            existing = cells.get(coord, {})
+            updated = dict(existing)
+            updated["code"]  = payload.get("code", "")
+            updated["label"] = payload.get("label", "")
+            for field in ("tempo", "key", "type", "instrument", "source",
+                          "scale", "root"):
+                v = payload.get(field)
+                if v is not None and v != "":
+                    updated[field] = v
+            cells[coord] = updated
             action = "saved"
 
         # Atomic write

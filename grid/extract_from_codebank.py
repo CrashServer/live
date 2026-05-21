@@ -31,7 +31,8 @@ SYNTH_TO_COL = {
     "pianovel": "A", "varsaw": "A", "sinepad": "A", "ethpad": "A",
     "darkpad": "A", "pad2": "A", "soprano": "A", "choir": "A",
     "viola": "A", "varicelle": "A", "keys": "A", "a_vpad": "A",
-    "a_poly": "A",
+    "a_poly": "A", "pasha": "A", "waves": "A", "prophet": "A",
+    "pads": "A", "angel": "A",
 
     # Bass (B)
     "dbass": "B", "lbass": "B", "cbass": "B", "ebass": "B",
@@ -39,7 +40,7 @@ SYNTH_TO_COL = {
     "superbass": "B", "abass": "B", "bbass": "B", "pbass": "B",
     "glitchbass": "B", "acidbass": "B", "wobble": "B",
     "bass": "B", "jbass": "B", "dafbass": "B", "dbss": "B",
-    "a_xbass": "B", "a_bassry": "B",
+    "a_xbass": "B", "a_bassry": "B", "reese": "B",
 
     # Kick (C) — compkick + drum synthesizers
     "compkick": "C", "prodrums": "C", "a_bd": "C",
@@ -59,16 +60,19 @@ SYNTH_TO_COL = {
     "soft": "G", "svdk": "G", "a_glead": "G", "a_vlead": "G",
     "a_daftlead": "G", "a_daft": "G", "a_wave": "G",
     "donorgan": "G", "donorganpat": "G",
+    "splitter": "G", "total": "G", "sitar": "G", "dirt": "G",
+    "twang": "G", "snick": "G", "arpymod": "G", "latoo": "G",
 
     # Lead 2 / aux modular (H)
     "plaitsX": "H", "plaits": "H", "cs80": "H", "braids": "H",
     "rave": "H", "rsin": "H", "four": "H", "donk": "H",
     "a_gesa": "H", "a_gesa2": "H", "a_gesa3": "H", "a_fantom": "H",
-    "ews": "H",
+    "ews": "H", "gesa": "H",
 
     # Chord stab (I)
     "hardstab": "I", "hoover": "I", "klank": "I", "organ": "I",
     "stress": "I", "a_stress": "I", "a_stab": "I", "stab": "I",
+    "juno": "I",
 
     # Acid (J)
     "tb303": "J", "tb304": "J", "tb305": "J", "acidline": "J",
@@ -77,6 +81,8 @@ SYNTH_TO_COL = {
     # Texture (K)
     "industrialdrone": "K", "noise": "K", "brown": "K", "drone": "K",
     "ambi": "K", "drift": "K", "angst": "K",
+    "sos": "K", "ikea": "K", "glitcher": "K", "splaffer": "K",
+    "eeri": "K", "war": "K", "pink": "K",
 
     # Bell/percussive metallic (M)
     "bell": "M", "bell2": "M", "gong": "M", "glass": "M",
@@ -84,6 +90,7 @@ SYNTH_TO_COL = {
     "crackle": "M", "blip": "M", "space": "M", "spaceMmm": "M",
     "dopple": "M", "cluster": "M", "foghorn": "M", "horn": "M",
     "zap": "M", "growl": "M", "gsynth": "M", "dub": "M",
+    "bellmod": "M", "star": "M",
 
     # Special: radio voice (L)
     "radio": "L",

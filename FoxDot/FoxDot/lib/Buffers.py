@@ -627,7 +627,7 @@ class SplafferSynthDef(SampleSynthDef):
 class WavetableSynthDef(WTSynthDef):
     def __init__(self):
         WTSynthDef.__init__(self, "wavetable")
-        self.phase = self.new_attr_instance("phase")
+        self.degree = self.new_attr_instance("degree")
         self.sample = self.new_attr_instance("sample")
         self.filename = self.new_attr_instance("filename")
         self.detune = self.new_attr_instance("detune")
@@ -635,17 +635,18 @@ class WavetableSynthDef(WTSynthDef):
         self.rq = self.new_attr_instance("rq")
         self.wtdist = self.new_attr_instance("wtdist")
 
-        self.defaults['wtpos']   = 0
+        self.defaults['degree'] = 0
         self.defaults['sample'] = 0
         self.defaults['detune'] = 0.2
+        self.defaults['wtpos']   = 0
         self.defaults['cutoff'] = 8000
         self.defaults['rq'] = 0.8
         self.defaults['wtdist'] = 0
 
         self.base.append("detune = 1 + (detune/100);")
-        self.base.append("osc = MultiWtOsc.arOscs(freq: freq, wtPos: Select.ar(K2A.ar((rate > 0)), [K2A.ar(wtpos), LFTri.ar(rate).range(wtpos, 254.999)]), squeeze: wtdist, wtOffset: 0, bufnum: buf, wtSize: 2048, numTables: 8, ratio: 2, numOscs: 5, detune: detune, interpolation: 2, hardSync: 0, phaseMod: 0);")
+        self.base.append("osc = MultiWtOsc.arOscs(freq: freq, wtPos: Select.ar(K2A.ar((rate > 0)), [K2A.ar(wtpos), LFTri.ar(1 / (sus * rate) * 0.5, 0).range(wtpos,255)]), squeeze: wtdist, wtOffset: 0, bufnum: buf, wtSize: 2048, numTables: 8, ratio: 2, numOscs: 5, detune: detune, interpolation: 2, hardSync: 0, phaseMod: 0);")
         self.base.append("env = EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 2);")
-        self.base.append("osc = osc * env;")
+        self.base.append("osc = osc * env * 0.5;")
         self.base.append("osc = HPF.ar(osc, 20);")
         self.base.append("osc = RLPF.ar(osc, cutoff, rq);")
         self.base.append("osc = LeakDC.ar(osc);")

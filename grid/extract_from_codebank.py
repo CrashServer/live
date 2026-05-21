@@ -32,7 +32,7 @@ SYNTH_TO_COL = {
     "darkpad": "A", "pad2": "A", "soprano": "A", "choir": "A",
     "viola": "A", "varicelle": "A", "keys": "A", "a_vpad": "A",
     "a_poly": "A", "pasha": "A", "waves": "A", "prophet": "A",
-    "pads": "A", "angel": "A",
+    "pads": "A",
 
     # Bass (B)
     "dbass": "B", "lbass": "B", "cbass": "B", "ebass": "B",

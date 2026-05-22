@@ -53,7 +53,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   const config = await configRequest.json();
 
   // Connexion aux serveurs
-  const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
+  // wsServer wraps the main WS with reconnect so .send() is always safe to call.
+  let _wsServerSocket = null;
+  let _wsServerDelay = 2000;
+  const wsServer = {
+    get readyState() { return _wsServerSocket ? _wsServerSocket.readyState : WebSocket.CLOSED; },
+    send(data) {
+      if (_wsServerSocket && _wsServerSocket.readyState === WebSocket.OPEN) _wsServerSocket.send(data);
+    },
+  };
+  function _connectWsServer() {
+    _wsServerSocket = new WebSocket(`ws://${config.HOST_IP}:1234`);
+    _wsServerSocket.onopen    = () => { _wsServerDelay = 2000; };
+    _wsServerSocket.onmessage = (event) => wsServerOnMessage(event);
+    _wsServerSocket.onclose   = () => setTimeout(_connectWsServer, _wsServerDelay = Math.min(_wsServerDelay * 1.5, 30000));
+    _wsServerSocket.onerror   = () => _wsServerSocket.close();
+  }
+  _connectWsServer();
+
   let foxdotWs = null;
   let activeSequence = null; // {id, currentIndex} for #@ section sequencing
 
@@ -234,7 +251,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   //Gestion des logs FoxDot pour la console
-  wsServer.onmessage = (event) => {
+  function wsServerOnMessage(event) {
     try {
       const message = JSON.parse(event.data);
       if (message.type === "foxdot_log") {
@@ -280,7 +297,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         EventEmitter.emit("stems_state", message);
       }
     } catch (error) {}
-  };
+  }
 
   // Reset du chrono lors du clic sur le chrono
   chrono.addEventListener("click", () => functionUtils.resetChrono(wsServer));
@@ -564,6 +581,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // Gestion de l'autocomplétion
+  // Tracks whether the static category drill-down hint is currently open.
+  // The main hint self-updates on typing; the static one doesn't — we need to
+  // replace it with the main (filtered) hint when the user starts typing letters.
+  let _attackStaticHintOpen = false;
+
   editor.setOption("hintOptions", {
     hint: (cm) => {
       return foxdotAutocomplete.hint(cm, CodeMirror);
@@ -587,12 +609,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (categoryItems) {
               handle.close();
               setTimeout(() => {
+                _attackStaticHintOpen = true;
                 cm.showHint({
                   hint: () => categoryItems,
                   completeSingle: false,
                   extraKeys: {
                     Left: function (cm, handle) {
                       // Retour aux catégories
+                      _attackStaticHintOpen = false;
                       handle.close();
                       setTimeout(() => {
                         cm.showHint();
@@ -613,6 +637,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           selectedItem.displayText &&
           selectedItem.displayText.includes("Retour aux catégories")
         ) {
+          _attackStaticHintOpen = false;
           handle.close();
           setTimeout(() => {
             cm.showHint();
@@ -620,6 +645,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       },
     },
+  });
+
+  // Re-trigger filtered hints when typing letters inside attack/lost/fire/compose/sections.
+  // Three cases handled:
+  //   1. No hint open → open it with filtered results
+  //   2. Main hint open → CodeMirror's own update() handles filtering; skip our call
+  //   3. Static category drill-down open → replace it with filtered main hint
+  const _ATTACK_CTX_RE = /(lost|attack|fire|compose|sections)\([^)]*$/;
+  editor.on("inputRead", function(cm, change) {
+    if (!change.text || change.text.length !== 1) return;
+    if (!/[a-zA-Z_0-9]/.test(change.text[0])) return;
+    const cursor = cm.getCursor();
+    const beforeCursor = cm.getLine(cursor.line).slice(0, cursor.ch);
+    if (!_ATTACK_CTX_RE.test(beforeCursor)) return;
+    if (!cm.state.completionActive || _attackStaticHintOpen) {
+      _attackStaticHintOpen = false;
+      cm.showHint({ completeSingle: false });
+    }
+  });
+
+  // Backspace: re-trigger so the filter updates as the user narrows back.
+  editor.on("keyHandled", function(cm, name) {
+    if (name !== "Backspace" && name !== "Delete") return;
+    const cursor = cm.getCursor();
+    const beforeCursor = cm.getLine(cursor.line).slice(0, cursor.ch);
+    if (_ATTACK_CTX_RE.test(beforeCursor)) {
+      setTimeout(() => cm.showHint({ completeSingle: false }), 0);
+    }
   });
 
   // Ajouter l'écouteur d'awareness
@@ -657,9 +710,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
+  let _foxDotDelay = 2000;
   function foxDotWs() {
     foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
     foxdotWs.onopen = () => {
+      _foxDotDelay = 2000;
       foxdotWs.send(JSON.stringify({ type: "get_autocomplete" }));
     };
     foxdotWs.onmessage = (event) => {
@@ -765,14 +820,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Erreur lors de la réception de message FoxDot:", error);
       }
     };
-    foxdotWs.onclose = (e) => {
-      console.log(
-        "Socket is closed. Reconnect will be attempted in 1 second.",
-        e.reason,
-      );
-      setTimeout(function () {
-        foxDotWs();
-      }, 1000);
+    foxdotWs.onclose = () => {
+      setTimeout(foxDotWs, _foxDotDelay = Math.min(_foxDotDelay * 1.5, 30000));
     };
     foxdotWs.onerror = (err) => {
       console.error(

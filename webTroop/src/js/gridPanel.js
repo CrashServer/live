@@ -81,7 +81,7 @@ function createGridPanel() {
         <span class="spacer"></span>
         <button id="gridPanelReload" title="reload iframe">reload</button>
         <button id="gridPanelExternal" title="open in new tab">↗</button>
-        <button class="close-btn" id="gridPanelClose" title="close (Ctrl+G)">×</button>
+        <button class="close-btn" id="gridPanelClose" title="close (Ctrl+Shift+Y)">×</button>
     `;
 
     const iframe = document.createElement("iframe");
@@ -107,20 +107,25 @@ function createGridPanel() {
     const savedWidth = localStorage.getItem("gridPanelWidth");
     if (savedWidth) panel.style.width = savedWidth;
 
-    // Drag-to-resize
+    // Drag-to-resize.
+    // Key: disable pointer-events on the iframe while dragging so it doesn't
+    // swallow mousemove events when the cursor moves over it (which broke
+    // dragging inward / making the panel smaller).
     let resizing = false;
     resizeHandle.addEventListener("mousedown", (e) => {
         resizing = true;
         resizeHandle.classList.add("dragging");
         document.body.style.cursor = "ew-resize";
         document.body.style.userSelect = "none";
+        iframe.style.pointerEvents = "none";
         e.preventDefault();
     });
     document.addEventListener("mousemove", (e) => {
         if (!resizing) return;
         const w = window.innerWidth - e.clientX;
-        const clamped = Math.max(400, Math.min(window.innerWidth - 200, w));
+        const clamped = Math.max(320, Math.min(window.innerWidth - 200, w));
         panel.style.width = clamped + "px";
+        _syncMainMargin(clamped);
     });
     document.addEventListener("mouseup", () => {
         if (!resizing) return;
@@ -128,6 +133,7 @@ function createGridPanel() {
         resizeHandle.classList.remove("dragging");
         document.body.style.cursor = "";
         document.body.style.userSelect = "";
+        iframe.style.pointerEvents = "";
         localStorage.setItem("gridPanelWidth", panel.style.width);
     });
 
@@ -146,6 +152,18 @@ function createGridPanel() {
         window.open(EDITOR_URL, "_blank");
     });
 
+    // Forward current webTroop theme to iframe on load, and on every theme change.
+    function sendTheme() {
+        const cls = document.documentElement.className || "";
+        const match = cls.match(/(\S+-theme)/);
+        const theme = match ? match[1] : "dark";
+        try { iframe.contentWindow.postMessage({ type: "setTheme", theme }, "*"); } catch (_) {}
+    }
+    iframe.addEventListener("load", sendTheme);
+    new MutationObserver(sendTheme).observe(document.documentElement, {
+        attributes: true, attributeFilter: ["class"]
+    });
+
     // Probe the server: if unreachable, hint at how to start it
     fetch(EDITOR_URL + "/api/cells", { method: "HEAD", mode: "no-cors" })
         .catch(() => {
@@ -162,6 +180,13 @@ function toggleGridPanel(force) {
     } else {
         panel.classList.toggle("visible", force);
     }
+    const open = panel.classList.contains("visible");
+    _syncMainMargin(open ? (parseInt(panel.style.width) || 920) : 0);
+}
+
+function _syncMainMargin(width) {
+    const mc = document.getElementById("main-container");
+    if (mc) mc.style.marginRight = width ? width + "px" : "";
 }
 
 // ===== Toggle button injection into the config panel =====
@@ -194,8 +219,8 @@ function injectToggle() {
 // ===== Keyboard shortcut =====
 
 document.addEventListener("keydown", (e) => {
-    // Ctrl+G (or Cmd+G) toggles the panel
-    if ((e.ctrlKey || e.metaKey) && (e.key === "g" || e.key === "G") && !e.shiftKey) {
+    // Ctrl+Shift+Y toggles the panel — Ctrl+G is taken by CodeMirror findNext
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "y" || e.key === "Y")) {
         e.preventDefault();
         const wasVisible = document
             .getElementById("gridPanel")

@@ -4,19 +4,41 @@
 <meta charset="UTF-8">
 <title>Grid Cell Editor</title>
 <style>
+  /* ── default theme: matches webTroop dark ── */
   :root {
-    --bg: #0f0f12;
-    --panel: #18181c;
-    --border: #2a2a30;
-    --text: #d4d4d8;
-    --muted: #71717a;
-    --accent: #4ade80;
-    --hover: #27272a;
-    --selected: #3f3f46;
-    --empty: #1f1f24;
-    --populated: #475569;
-    --running: #16a34a;
-    --error: #dc2626;
+    --bg:       #2b2b2b;
+    --panel:    #333333;
+    --border:   #555555;
+    --text:     #ECDFCC;
+    --muted:    #9a9285;
+    --accent:   #4ade80;
+    --hover:    #3c3c3c;
+    --selected: #484848;
+    --empty:    #242424;
+    --populated:#4a5568;
+    --running:  #4ade80;
+    --error:    #dc2626;
+  }
+  /* ── theme variants forwarded from webTroop via postMessage ── */
+  :root.cyberpunk-theme {
+    --bg: #0a0a16; --panel: #1a1a2e; --border: #ff2e97;
+    --text: #00ff9f; --muted: #666688; --accent: #00f6ff;
+    --hover: #1f1f3a; --selected: #252545; --empty: #0d0d1f; --populated: #2a2a4a;
+  }
+  :root.synthwave-theme {
+    --bg: #241734; --panel: #2a1b3d; --border: #ff00ff;
+    --text: #ff71ce; --muted: #8855aa; --accent: #b967ff;
+    --hover: #2f2045; --selected: #3a2558; --empty: #1e1229; --populated: #3d2460;
+  }
+  :root.forest-theme {
+    --bg: #1a2f1a; --panel: #233d23; --border: #4a7a4a;
+    --text: #c8e6c8; --muted: #7a9a7a; --accent: #86efac;
+    --hover: #2a3e2a; --selected: #304530; --empty: #1e2e1e; --populated: #3a5a3a;
+  }
+  :root.light-theme {
+    --bg: #f5f5f5; --panel: #e8e8e8; --border: #cccccc;
+    --text: #333333; --muted: #777777; --accent: #16a34a;
+    --hover: #dddddd; --selected: #d0d0d0; --empty: #eeeeee; --populated: #aabbcc;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -143,6 +165,20 @@
     outline: 1.5px solid var(--accent); outline-offset: -1px; z-index: 1;
   }
   .cell:hover { filter: brightness(1.4); }
+
+  /* Attack cells — gold top-border + corner triangle marker */
+  .cell.is-attack {
+    border-top: 3px solid #f59e0b;
+    position: relative;
+  }
+  .cell.is-attack::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    border-style: solid;
+    border-width: 0 6px 6px 0;
+    border-color: transparent #f59e0b transparent transparent;
+  }
 
   /* ===== right: editor ===== */
   .editor-pane {
@@ -617,6 +653,7 @@ function renderGrid() {
     const populated = cell != null;
     el.classList.toggle("populated", populated);
     el.classList.toggle("selected", coord === currentCoord);
+    el.classList.toggle("is-attack", populated && /\battack\s*\(/.test(cell.code || ""));
     if (populated) {
       el.style.background = colorForCell(cell, col);
       // Tooltip includes tempo + source so the color mapping is discoverable
@@ -1077,6 +1114,15 @@ $("jump-row").addEventListener("keydown", (e) => {
   const el = document.querySelector(`.cell[data-coord="${coord}"]`);
   if (el) el.scrollIntoView({ block: "center", inline: "nearest" });
   $("jump-row").value = "";
+});
+
+// Receive theme name from webTroop parent (gridPanel.js forwards it via postMessage)
+window.addEventListener("message", (e) => {
+  if (!e.data || e.data.type !== "setTheme") return;
+  const theme = e.data.theme || "dark";
+  const root = document.documentElement;
+  root.className = root.className.replace(/\S+-theme/g, "").trim();
+  if (theme !== "dark") root.classList.add(theme);
 });
 </script>
 </body>

@@ -92,94 +92,95 @@ if (savedWidth) {
     crashPanel.style.width = savedWidth;
 }
 
-const ws = new WebSocket(`ws://${config.HOST_IP}:20000`);
-const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
+// Reconnecting WebSocket wrapper with exponential backoff.
+// Starts at 2 s, caps at 30 s.  Proxy keeps .send() / .readyState safe to call
+// even while the underlying socket is down.
+function makeReconnectingWs(url, onmessage, label) {
+    let socket = null;
+    let delay = 2000;
 
-ws.onopen = function() {
-    console.log('CrashPanel WebSocket connection opened');
-};
+    const proxy = {
+        get readyState() { return socket ? socket.readyState : WebSocket.CLOSED; },
+        send(data) {
+            if (socket && socket.readyState === WebSocket.OPEN) socket.send(data);
+        },
+    };
 
-wsServer.onopen = function() {
-    console.log('CrashPanel connection to main server opened');
-};
-
-ws.onmessage = function(event) {
-    const data = JSON.parse(event.data);
-
-    switch(data.type) {
-        case 'scale':
-            document.getElementById('scale').textContent = data.scale;
-            updatePianoKeys(data.scale, document.getElementById('root').textContent);
-            break;
-        case 'root':
-            document.getElementById('root').textContent = data.root;
-            updatePianoKeys(document.getElementById('scale').textContent, data.root);
-            break;
-        case 'cpu':
-            updateCpu(data.cpu);
-            // Transmettre les données CPU au serveur principal pour l'Arduino
-            if (wsServer.readyState === WebSocket.OPEN) {
-                wsServer.send(JSON.stringify({
-                    type: 'cpu_data',
-                    cpu: data.cpu
-                }));
-            }
-            break;
-        case 'bpm':
-            document.getElementById('bpm').textContent = data.bpm;
-            break;
-        case 'serverState':
-            updateCrashPanelTitle(data.serverState);
-            break;
-        case 'beat':
-            updateBeat(data.beat);
-            break;
-        case 'chrono':
-            document.getElementById('chrono').textContent = formatTime(data.chrono);
-            break;
-        case 'players':
-            formatPlayers(data.players)
-            break;
-        case 'masterFx':
-            const masterFxContainer = document.getElementById('masterFx');
-            masterFxContainer.innerHTML = '';
-            Object.keys(data.masterFx).forEach((fx, index) => {
-                const fxDiv = document.createElement('span');
-                fxDiv.className = 'master-fx-item';
-                fxDiv.textContent = `${fx}`;
-                masterFxContainer.appendChild(fxDiv);
-            });
-            // masterFxContainer.style.height = masterFxContainer.scrollHeight + 'px';
-            break;
-        // case 'pdj':
-        //     const pdjContainer = document.getElementById('pdj')
-        //     pdjContainer.textContent = data.intitule + " - " + data.plat;
-        //     pdjContainer.style.height = pdjContainer.scrollHeight + 'px';
-        //     break;
-        case 'help':
-            const helpContainer = document.getElementById('help')
-            helpContainer.textContent = data.help;
-            helpContainer.style.height = helpContainer.scrollHeight + 'px';
-            break;
-        case 'sceneName':
-            formatSceneName(data.sceneName);
-            break;
-        // case 'gameData':
-        //     createGameTable(data.gameData);
-        //     break;
-        default:
-            break;
-            // console.log('Unknown message type:', data.type);
+    function connect() {
+        socket = new WebSocket(url);
+        socket.onopen    = () => { delay = 2000; };
+        socket.onmessage = onmessage;
+        socket.onclose   = () => setTimeout(connect, delay = Math.min(delay * 1.5, 30000));
+        socket.onerror   = () => socket.close();
     }
-};
+    connect();
+    return proxy;
+}
 
-ws.onclose = function() {
-    console.log('WebSocket Crashpanel connection closed');
-};
+// FoxDot WebSocket (port 20000) — BPM, CPU, beat, players, root, scale, etc.
+const ws = makeReconnectingWs(
+    `ws://${config.HOST_IP}:20000`,
+    function(event) {
+        const data = JSON.parse(event.data);
+        switch (data.type) {
+            case 'scale':
+                document.getElementById('scale').textContent = data.scale;
+                updatePianoKeys(data.scale, document.getElementById('root').textContent);
+                break;
+            case 'root':
+                document.getElementById('root').textContent = data.root;
+                updatePianoKeys(document.getElementById('scale').textContent, data.root);
+                break;
+            case 'cpu':
+                updateCpu(data.cpu);
+                wsServer.send(JSON.stringify({ type: 'cpu_data', cpu: data.cpu }));
+                break;
+            case 'bpm':
+                document.getElementById('bpm').textContent = data.bpm;
+                break;
+            case 'serverState':
+                updateCrashPanelTitle(data.serverState);
+                break;
+            case 'beat':
+                updateBeat(data.beat);
+                break;
+            case 'chrono':
+                document.getElementById('chrono').textContent = formatTime(data.chrono);
+                break;
+            case 'players':
+                formatPlayers(data.players);
+                break;
+            case 'masterFx': {
+                const masterFxContainer = document.getElementById('masterFx');
+                masterFxContainer.innerHTML = '';
+                Object.keys(data.masterFx).forEach(fx => {
+                    const fxDiv = document.createElement('span');
+                    fxDiv.className = 'master-fx-item';
+                    fxDiv.textContent = fx;
+                    masterFxContainer.appendChild(fxDiv);
+                });
+                break;
+            }
+            case 'help': {
+                const helpContainer = document.getElementById('help');
+                helpContainer.textContent = data.help;
+                helpContainer.style.height = helpContainer.scrollHeight + 'px';
+                break;
+            }
+            case 'sceneName':
+                formatSceneName(data.sceneName);
+                break;
+            default:
+                break;
+        }
+    }
+);
 
-ws.onerror = function(error) {
-    console.error('WebSocket CrashPanel error:', error);
-};
+// webTroop main server (port 1234) — used to forward CPU data to Arduino
+const wsServer = makeReconnectingWs(
+    `ws://${config.HOST_IP}:1234`,
+    null
+);
 
 document.getElementById('root').addEventListener('click', () => {
     const pianoRoll = document.getElementById('piano-roll');

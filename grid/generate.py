@@ -45,17 +45,6 @@ ARC_DEFAULT = [
 ]
 # Default total: 208 bars = 832 beats
 
-# Column priority for max_players trimming (lower = kept longer)
-COL_PRIORITY = {
-    "C": 1, "B": 2, "D": 3, "E": 4, "G": 5,
-    "H": 6, "I": 7, "A": 8, "J": 9, "K": 10,
-    "F": 11, "M": 12, "N": 13, "L": 14,
-}
-
-def _top_cols(cols, n):
-    """Return up to n columns sorted by COL_PRIORITY (keep highest-priority)."""
-    return sorted(cols, key=lambda c: COL_PRIORITY.get(c, 99))[:n]
-
 # Extension cycle inserted before outro for longer tracks
 _EXTEND_CYCLE = [
     ("break_x",  16, ["C", "B"]),
@@ -77,6 +66,8 @@ _FOURTH_UP = {
 }
 
 PLAYER_RE = re.compile(r'^([a-z][a-z]?\d+)\s*>>', re.MULTILINE)
+# Matches bare player-stop lines like "s1 >> None" — filtered out of cell code
+_STOP_LINE_RE = re.compile(r'^[a-z][a-z]?\d+\s*>>\s*None\s*$')
 
 
 # ── key / tempo helpers ──────────────────────────────────────────────────────
@@ -161,8 +152,13 @@ def simplify(code):
     return code
 
 def clean_lines(code):
-    """Strip indentation, drop blank lines, return list of non-empty lines."""
-    return [l.strip() for l in code.splitlines() if l.strip()]
+    """Strip indentation, drop blank lines and bare stop-patterns from cell code."""
+    lines = []
+    for l in code.splitlines():
+        l = l.strip()
+        if l and not _STOP_LINE_RE.match(l):
+            lines.append(l)
+    return lines
 
 
 # ── cell selection ────────────────────────────────────────────────────────────
@@ -200,12 +196,9 @@ def find_cell(cells, col, key, tempo, used, rng, avoid_types=("starter",)):
 def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28, max_players=5):
     """
     Generate a #@-sectioned CrashServer attack from grid cells.
-
     Returns (code_string, meta_dict).
-    code_string: storageAttack.add("gen_...", \"\"\"...\"\"\") + compo.play(...)
     """
     rng = random.Random(rng_seed)
-    # Filter to usable cells only
     cells = {
         k: v for k, v in cells.items()
         if not k.startswith("_") and v.get("code", "").strip()
@@ -232,10 +225,19 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28, m
         for _ in range(reps):
             arc[outro_idx:outro_idx] = _EXTEND_CYCLE
 
+    # col_freq: how many arc sections each column appears in.
+    # Used for organic eviction — columns that appear rarely are evicted first.
+    col_freq = {}
+    for _, _, t in arc:
+        if t:
+            for c in t:
+                col_freq[c] = col_freq.get(c, 0) + 1
+
     # ── Section loop ──
-    sections = []   # [(name, bars, [code_lines])]
-    active   = {}   # {col: {"coord": str, "players": [str]}}
-    used     = set()
+    sections    = []   # [(name, bars, [code_lines])]
+    active      = {}   # {col: {"coord": str, "players": [str], "bars_played": int}}
+    used        = set()
+    bars_so_far = 0
     did_root_shift = False
     first_section  = True
     root_str, scale_str = cur_key[0] or "C", cur_key[1] or "minor"
@@ -256,18 +258,15 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28, m
                 root_str   = new_root
                 code_lines.append(f'Root.default = "{root_str}"')
                 did_root_shift = True
-                # Force melodic/harmonic cols to swap to fit new root
                 for col in active:
                     if col in ("G", "H", "A", "I"):
                         active[col]["_force_swap"] = True
 
-        # Apply max_players: keep only the highest-priority columns
-        effective = _top_cols(target_cols, max_players) if max_players else list(target_cols)
-
-        cols_remove = [c for c in active if c not in effective]
-        cols_add    = [c for c in effective if c not in active]
+        # Arc-driven removes: cols no longer wanted by this section
+        cols_remove = [c for c in list(active) if c not in target_cols]
+        cols_add    = [c for c in target_cols if c not in active]
         cols_swap   = [
-            c for c in effective if c in active and (
+            c for c in target_cols if c in active and (
                 active[c].pop("_force_swap", False) or (
                     c != "C" and rng.random() < swap_prob
                 )
@@ -275,11 +274,24 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28, m
         ]
         cols_swap = [c for c in cols_swap if c not in cols_add]
 
-        # Stop removed players — all on one line, using .stop()
+        # Collect all stops: arc-driven removes first
         stops = []
         for col in cols_remove:
             stops.extend(active[col]["players"])
             del active[col]
+
+        # Organic eviction: for each incoming col, if we're at max_players,
+        # stop the active col with lowest arc-frequency (tiebreak: played longest).
+        if max_players:
+            for col in cols_add:
+                if len(active) >= max_players:
+                    victim = min(
+                        active.keys(),
+                        key=lambda c: (col_freq.get(c, 0), -active[c].get("bars_played", 0))
+                    )
+                    stops.extend(active[victim]["players"])
+                    del active[victim]
+
         if stops:
             code_lines.append("; ".join(f"{p}.stop()" for p in stops))
 
@@ -292,7 +304,7 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28, m
             code    = simplify(cell.get("code", "").strip())
             players = extract_players(code) or [COL_PLAYER.get(col, "x1")]
 
-            # Remap primary player name to canonical convention for this column.
+            # Remap primary player name to canonical convention for this column
             canonical = COL_PLAYER.get(col)
             if canonical and players and players[0] != canonical:
                 old_name = players[0]
@@ -307,7 +319,7 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28, m
 
             code_lines.extend(clean_lines(code))
             used.add(coord)
-            active[col] = {"coord": coord, "players": players}
+            active[col] = {"coord": coord, "players": players, "bars_played": bars_so_far}
 
         # Prepend Clock/Root/Scale to first non-empty section
         if first_section and code_lines:
@@ -319,6 +331,7 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28, m
             first_section = False
 
         sections.append((sec_name, sec_bars, code_lines))
+        bars_so_far += sec_bars
 
     # ── Assemble output ──
     ts    = datetime.now().strftime("%Y%m%d_%H%M")

@@ -75,22 +75,24 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json({"error": f"bad json: {e}"}, status=400)
                 return
             try:
-                from generate import generate as _gen
-            except ImportError:
                 import sys as _sys
-                _sys.path.insert(0, str(GRID_DIR))
+                if str(GRID_DIR) not in _sys.path:
+                    _sys.path.insert(0, str(GRID_DIR))
                 from generate import generate as _gen
-            try:
-                cells = json.loads(CELLS_FILE.read_text())
-            except Exception:
-                cells = {}
-            code, meta = _gen(
-                cells,
-                seed_coord=payload.get("seed"),
-                bars=payload.get("bars"),
-                rng_seed=payload.get("rng_seed"),
-            )
-            self._send_json({"ok": True, "code": code, "meta": meta})
+                try:
+                    cells = json.loads(CELLS_FILE.read_text())
+                except Exception:
+                    cells = {}
+                code, meta = _gen(
+                    cells,
+                    seed_coord=payload.get("seed"),
+                    bars=payload.get("bars"),
+                    rng_seed=payload.get("rng_seed"),
+                )
+                self._send_json({"ok": True, "code": code, "meta": meta})
+            except Exception as e:
+                import traceback
+                self._send_json({"error": str(e), "trace": traceback.format_exc()}, status=500)
             return
 
         if p != "/api/cells":

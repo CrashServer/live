@@ -978,7 +978,13 @@ async function runGenerate() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-    const data = await r.json();
+    const text = await r.text();
+    let data;
+    try { data = JSON.parse(text); }
+    catch (_) {
+      $("gen-output").value = `# server error (HTTP ${r.status}):\n${text.slice(0, 400)}`;
+      return;
+    }
 
     if (!data.ok) {
       $("gen-output").value = `# error: ${data.error || "unknown"}`;

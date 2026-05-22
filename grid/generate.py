@@ -262,11 +262,13 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28):
         # Deduplicate (a col can't be in both add and swap)
         cols_swap = [c for c in cols_swap if c not in cols_add]
 
-        # Silence removed players
+        # Silence removed players — all on one line to keep output compact
+        silences = []
         for col in cols_remove:
-            for pname in active[col]["players"]:
-                code_lines.append(f"{pname} >> None")
+            silences.extend(active[col]["players"])
             del active[col]
+        if silences:
+            code_lines.append("; ".join(f"{p} >> None" for p in silences))
 
         # Emit new or swapped cells
         for col in cols_add + cols_swap:
@@ -285,12 +287,11 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28):
                 code = re.sub(r'\b' + re.escape(old_name) + r'\b', canonical, code)
                 players = [canonical] + players[1:]
 
-            # Silence any displaced players on swap
+            # Silence any displaced players on swap (same one-liner style)
             if col in active:
-                old_p = set(active[col]["players"])
-                new_p = set(players)
-                for pname in old_p - new_p:
-                    code_lines.append(f"{pname} >> None")
+                displaced = set(active[col]["players"]) - set(players)
+                if displaced:
+                    code_lines.append("; ".join(f"{p} >> None" for p in displaced))
 
             code_lines.extend(clean_lines(code))
             used.add(coord)

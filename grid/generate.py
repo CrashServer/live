@@ -45,6 +45,17 @@ ARC_DEFAULT = [
 ]
 # Default total: 208 bars = 832 beats
 
+# Column priority for max_players trimming (lower = kept longer)
+COL_PRIORITY = {
+    "C": 1, "B": 2, "D": 3, "E": 4, "G": 5,
+    "H": 6, "I": 7, "A": 8, "J": 9, "K": 10,
+    "F": 11, "M": 12, "N": 13, "L": 14,
+}
+
+def _top_cols(cols, n):
+    """Return up to n columns sorted by COL_PRIORITY (keep highest-priority)."""
+    return sorted(cols, key=lambda c: COL_PRIORITY.get(c, 99))[:n]
+
 # Extension cycle inserted before outro for longer tracks
 _EXTEND_CYCLE = [
     ("break_x",  16, ["C", "B"]),
@@ -186,7 +197,7 @@ def find_cell(cells, col, key, tempo, used, rng, avoid_types=("starter",)):
 
 # ── main generator ────────────────────────────────────────────────────────────
 
-def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28):
+def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28, max_players=5):
     """
     Generate a #@-sectioned CrashServer attack from grid cells.
 
@@ -250,25 +261,27 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28):
                     if col in ("G", "H", "A", "I"):
                         active[col]["_force_swap"] = True
 
-        cols_remove = [c for c in active if c not in target_cols]
-        cols_add    = [c for c in target_cols if c not in active]
+        # Apply max_players: keep only the highest-priority columns
+        effective = _top_cols(target_cols, max_players) if max_players else list(target_cols)
+
+        cols_remove = [c for c in active if c not in effective]
+        cols_add    = [c for c in effective if c not in active]
         cols_swap   = [
-            c for c in target_cols if c in active and (
+            c for c in effective if c in active and (
                 active[c].pop("_force_swap", False) or (
                     c != "C" and rng.random() < swap_prob
                 )
             )
         ]
-        # Deduplicate (a col can't be in both add and swap)
         cols_swap = [c for c in cols_swap if c not in cols_add]
 
-        # Silence removed players — all on one line to keep output compact
-        silences = []
+        # Stop removed players — all on one line, using .stop()
+        stops = []
         for col in cols_remove:
-            silences.extend(active[col]["players"])
+            stops.extend(active[col]["players"])
             del active[col]
-        if silences:
-            code_lines.append("; ".join(f"{p} >> None" for p in silences))
+        if stops:
+            code_lines.append("; ".join(f"{p}.stop()" for p in stops))
 
         # Emit new or swapped cells
         for col in cols_add + cols_swap:
@@ -280,18 +293,17 @@ def generate(cells, seed_coord=None, bars=None, rng_seed=None, swap_prob=0.28):
             players = extract_players(code) or [COL_PLAYER.get(col, "x1")]
 
             # Remap primary player name to canonical convention for this column.
-            # Prevents cross-column name collisions (e.g. a bass cell using s1).
             canonical = COL_PLAYER.get(col)
             if canonical and players and players[0] != canonical:
                 old_name = players[0]
                 code = re.sub(r'\b' + re.escape(old_name) + r'\b', canonical, code)
                 players = [canonical] + players[1:]
 
-            # Silence any displaced players on swap (same one-liner style)
+            # Stop any displaced players on swap
             if col in active:
                 displaced = set(active[col]["players"]) - set(players)
                 if displaced:
-                    code_lines.append("; ".join(f"{p} >> None" for p in displaced))
+                    code_lines.append("; ".join(f"{p}.stop()" for p in displaced))
 
             code_lines.extend(clean_lines(code))
             used.add(coord)

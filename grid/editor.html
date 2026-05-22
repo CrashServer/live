@@ -395,6 +395,11 @@
       <span style="color:var(--muted);font-size:10px;margin-left:4px">208 = ~7 min @ 130 BPM  ·  +80 per extra cycle</span>
     </div>
     <div class="modal-row">
+      <label>max players</label>
+      <input type="number" id="gen-max" value="5" min="2" max="12" style="width:60px;flex:none;">
+      <span style="color:var(--muted);font-size:10px;margin-left:4px">simultaneous players (priority: kick > bass > snare > hat > lead…)</span>
+    </div>
+    <div class="modal-row">
       <label>rng seed</label>
       <input type="number" id="gen-rng" placeholder="random" style="width:80px;flex:none;">
       <span style="color:var(--muted);font-size:10px;margin-left:4px">set for reproducible output</span>
@@ -969,7 +974,8 @@ async function runGenerate() {
   $("gen-save-btn").disabled = true;
 
   try {
-    const body = { bars };
+    const maxPlayers = parseInt($("gen-max").value, 10) || 5;
+    const body = { bars, max_players: maxPlayers };
     if (seed) body.seed = seed;
     if (rng_seed !== undefined) body.rng_seed = rng_seed;
 

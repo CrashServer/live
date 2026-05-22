@@ -88,6 +88,7 @@ class Handler(BaseHTTPRequestHandler):
                     seed_coord=payload.get("seed"),
                     bars=payload.get("bars"),
                     rng_seed=payload.get("rng_seed"),
+                    max_players=payload.get("max_players", 5),
                 )
                 self._send_json({"ok": True, "code": code, "meta": meta})
             except Exception as e:

@@ -216,8 +216,8 @@ class Handler(BaseHTTPRequestHandler):
             except Exception as e:
                 errors.append(f"{filename}: {e}")
                 continue
-            if len(code.strip().splitlines()) < 3:
-                continue  # skip near-empty files
+            if len(code.strip().splitlines()) < 2:
+                continue  # skip blank files
 
             if filename in file_to_coord:
                 coord = file_to_coord[filename]

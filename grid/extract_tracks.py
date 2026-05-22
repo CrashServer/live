@@ -77,8 +77,8 @@ def main():
         except Exception as e:
             print(f"  failed: {p.name}: {e}")
 
-    # Filter out unusably-small or empty tracks
-    tracks = [t for t in tracks if t["lines"] > 5]
+    # Filter out effectively empty files (blank or single-line stubs)
+    tracks = [t for t in tracks if t["lines"] > 1]
 
     # Stable sort: by name (alphabetical), so Q0 == first alphabetically
     tracks.sort(key=lambda t: t["name"].lower())

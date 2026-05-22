@@ -117,6 +117,20 @@
   }
   .attacks-count { color: #a37520; font-weight: normal; }
   .attacks-header .spacer { flex: 1; }
+  .attacks-tabs {
+    display: flex; flex-direction: row; gap: 3px;
+    padding: 4px 10px 0; overflow-x: auto; flex-shrink: 0;
+    scrollbar-width: none;
+  }
+  .attacks-tabs::-webkit-scrollbar { display: none; }
+  .attacks-tab {
+    font-size: 9px; padding: 2px 8px; border-radius: 10px;
+    border: 1px solid #3d2e10; background: transparent;
+    color: #a37520; cursor: pointer; white-space: nowrap;
+    font-family: ui-monospace, monospace; transition: all 0.1s;
+  }
+  .attacks-tab:hover { background: #241808; color: #f59e0b; }
+  .attacks-tab.active { background: #3d2e10; color: #f59e0b; border-color: #f59e0b; }
   .attacks-cards {
     display: flex; flex-direction: row; gap: 5px;
     padding: 6px 10px 8px; overflow-x: auto;
@@ -438,6 +452,7 @@
         <button class="btn" id="sync-codebank-btn" style="font-size:10px;padding:3px 8px;margin-right:4px"
                 title="re-read all codeBank/*.py files into cells">⟳ sync files</button>
       </div>
+      <div class="attacks-tabs" id="attacks-tabs"></div>
       <div class="attacks-cards" id="attacks-cards"></div>
     </div>
 
@@ -830,27 +845,78 @@ function updateStats() {
 // ── Attacks panel ────────────────────────────────────────────────────────────
 
 let _attacksOpen = true;
+let _attacksFilter = "all";
 
 function renderAttacks() {
   const container = $("attacks-cards");
+  const tabsEl    = $("attacks-tabs");
   if (!container) return;
 
-  const attackCells = Object.entries(cells)
+  const allAttacks = Object.entries(cells)
     .filter(([, v]) => v && typeof v === "object" && v.source_file)
-    .sort(([, a], [, b]) => (a.label || "").localeCompare(b.label || ""));
+    .sort(([, a], [, b]) => {
+      const na = a.source_file.replace(/\.py$/i, "").toLowerCase();
+      const nb = b.source_file.replace(/\.py$/i, "").toLowerCase();
+      return na.localeCompare(nb);
+    });
 
-  $("attacks-count").textContent = `(${attackCells.length})`;
+  $("attacks-count").textContent = `(${allAttacks.length})`;
+
+  // ── build category tabs ──────────────────────────────────────────────────
+  const catSet = new Set();
+  let hasUncategorized = false;
+  for (const [, cell] of allAttacks) {
+    if (cell.attack_category) catSet.add(cell.attack_category);
+    else hasUncategorized = true;
+  }
+  const cats = ["all", ...Array.from(catSet).sort()];
+  if (hasUncategorized && catSet.size > 0) cats.push("—");  // "uncategorized" bucket
+
+  // Only re-render tabs when the category set changes (avoids losing focus)
+  const tabKey = cats.join("|");
+  if (tabsEl.dataset.tabKey !== tabKey) {
+    tabsEl.dataset.tabKey = tabKey;
+    tabsEl.innerHTML = "";
+    for (const cat of cats) {
+      const tab = document.createElement("button");
+      tab.className = "attacks-tab" + (cat === _attacksFilter ? " active" : "");
+      tab.textContent = cat === "—" ? "other" : cat;
+      tab.dataset.cat = cat;
+      tab.addEventListener("click", () => {
+        _attacksFilter = cat;
+        renderAttacks();
+      });
+      tabsEl.appendChild(tab);
+    }
+  } else {
+    // Just update active state
+    tabsEl.querySelectorAll(".attacks-tab").forEach(t => {
+      t.classList.toggle("active", t.dataset.cat === _attacksFilter);
+    });
+  }
+
+  // Ensure filter is valid (category may have been removed)
+  if (_attacksFilter !== "all" && _attacksFilter !== "—" && !catSet.has(_attacksFilter)) {
+    _attacksFilter = "all";
+  }
+
+  // ── filter cards ──────────────────────────────────────────────────────────
+  const visible = allAttacks.filter(([, cell]) => {
+    if (_attacksFilter === "all") return true;
+    if (_attacksFilter === "—")   return !cell.attack_category;
+    return cell.attack_category === _attacksFilter;
+  });
 
   container.innerHTML = "";
-  for (const [coord, cell] of attackCells) {
+  for (const [coord, cell] of visible) {
     const card = document.createElement("div");
     card.className = "attack-card" + (coord === currentCoord ? " selected" : "");
     card.dataset.coord = coord;
 
     const nameEl = document.createElement("div");
     nameEl.className = "attack-card-name";
-    nameEl.textContent = cell.label || cell.source_file.replace(/\.py$/, "") || coord;
-    nameEl.title = cell.label || "";
+    nameEl.textContent = cell.source_file.replace(/\.py$/i, "");
+    nameEl.title = cell.label || cell.source_file;
 
     const metaEl = document.createElement("div");
     metaEl.className = "attack-card-meta";
@@ -887,8 +953,10 @@ function renderAttacks() {
 
 function _initAttacksPanel() {
   $("attacks-toggle").addEventListener("click", (e) => {
-    if (e.target.closest("#sync-codebank-btn")) return; // let button handle it
+    if (e.target.closest("#sync-codebank-btn")) return;
     _attacksOpen = !_attacksOpen;
+    const show = _attacksOpen ? "" : "none";
+    $("attacks-tabs").style.display  = _attacksOpen ? "flex" : "none";
     $("attacks-cards").style.display = _attacksOpen ? "flex" : "none";
     $("attacks-icon").textContent = _attacksOpen ? "▾" : "▸";
   });

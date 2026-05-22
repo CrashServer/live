@@ -216,6 +216,37 @@
     background: var(--bg); padding: 1px 4px; border-radius: 2px;
     color: var(--accent);
   }
+
+  /* ===== Generate modal ===== */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 100;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; padding: 20px; width: 560px; max-width: 95vw;
+    display: flex; flex-direction: column; gap: 12px;
+    max-height: 90vh; overflow: hidden;
+  }
+  .modal h3 { margin: 0; font-size: 13px; color: var(--accent); }
+  .modal-row { display: flex; gap: 8px; align-items: center; font-size: 11px; }
+  .modal-row label { color: var(--muted); white-space: nowrap; width: 80px; }
+  .modal-row input {
+    flex: 1; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); padding: 5px 8px;
+    font: inherit; border-radius: 3px;
+  }
+  .modal-output {
+    flex: 1; font-family: ui-monospace, monospace; font-size: 10.5px;
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 8px; resize: none; min-height: 220px; max-height: 380px;
+    overflow-y: auto; white-space: pre; tab-size: 2;
+  }
+  .modal-meta { font-size: 10px; color: var(--muted); }
+  .modal-btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
 </style>
 </head>
 <body>
@@ -273,6 +304,7 @@
       <input type="text" id="search" placeholder="filter by label or code..." style="width:220px">
       <input type="number" id="jump-row" placeholder="row" min="0" max="399" style="width:60px" title="jump to row (Enter)">
       <button id="reload-btn">reload</button>
+      <button id="generate-btn" style="background:#1e2a3a;color:#7dd3fc;border-color:#1e3a5f;">generate ▸</button>
       <span class="stats" id="stats">- / -</span>
     </div>
     <div class="col-header-letters" id="col-header-letters"></div>
@@ -343,6 +375,43 @@
       <strong>cols:</strong> A pad B bass C kick D snare E hat F loop G/H lead I stab J acid K texture L vocal M bell N atmo<br>
       <strong>rows:</strong> 0-9=60-80 BPM, 10-19=80-100, 20-29=100-120, 30-39=120-140, 40-49=140-160, 50-59=160-180<br>
       use <code>p1</code> in column A, <code>b1</code> in B, <code>k1</code> in C, etc. so cells stack cleanly.
+    </div>
+  </div>
+</div>
+
+<!-- ============ GENERATE MODAL ============ -->
+<div class="modal-overlay" id="gen-modal">
+  <div class="modal">
+    <h3>generate track from grid</h3>
+
+    <div class="modal-row">
+      <label>seed cell</label>
+      <input type="text" id="gen-seed" placeholder="auto (random anchor)" style="width:90px;flex:none;">
+      <span style="color:var(--muted);font-size:10px;margin-left:4px">key + tempo come from this cell</span>
+    </div>
+    <div class="modal-row">
+      <label>target bars</label>
+      <input type="number" id="gen-bars" value="208" min="80" max="2000" style="width:80px;flex:none;">
+      <span style="color:var(--muted);font-size:10px;margin-left:4px">208 = ~7 min @ 130 BPM  ·  +80 per extra cycle</span>
+    </div>
+    <div class="modal-row">
+      <label>rng seed</label>
+      <input type="number" id="gen-rng" placeholder="random" style="width:80px;flex:none;">
+      <span style="color:var(--muted);font-size:10px;margin-left:4px">set for reproducible output</span>
+    </div>
+
+    <div class="modal-btn-row">
+      <button class="btn primary" id="gen-run-btn">generate</button>
+      <button class="btn" id="gen-close-btn">cancel</button>
+    </div>
+
+    <textarea class="modal-output" id="gen-output" readonly placeholder="generated attack code will appear here…"></textarea>
+    <div class="modal-meta" id="gen-meta"></div>
+
+    <div class="modal-btn-row">
+      <button class="btn paste" id="gen-copy-btn" disabled>copy</button>
+      <button class="btn play" id="gen-eval-btn" disabled>evaluate in webTroop</button>
+      <button class="btn" id="gen-save-btn" disabled style="background:#1e2a1e;color:#86efac;border-color:#14532d;">save to codeBank</button>
     </div>
   </div>
 </div>
@@ -869,6 +938,117 @@ document.addEventListener("keydown", (e) => {
     selectCell(next);
     const el = document.querySelector(`.cell[data-coord="${next}"]`);
     if (el) el.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+});
+
+// ===== Generate modal =====
+
+function openGenModal() {
+  // Pre-fill seed from current selection
+  if (currentCoord) $("gen-seed").value = currentCoord;
+  $("gen-modal").classList.add("open");
+  $("gen-run-btn").focus();
+}
+
+function closeGenModal() {
+  $("gen-modal").classList.remove("open");
+}
+
+async function runGenerate() {
+  const seed    = $("gen-seed").value.trim().toUpperCase() || undefined;
+  const bars    = parseInt($("gen-bars").value, 10) || 208;
+  const rngRaw  = $("gen-rng").value.trim();
+  const rng_seed = rngRaw ? parseInt(rngRaw, 10) : undefined;
+
+  $("gen-run-btn").textContent = "generating…";
+  $("gen-run-btn").disabled = true;
+  $("gen-output").value = "";
+  $("gen-meta").textContent = "";
+  $("gen-copy-btn").disabled = true;
+  $("gen-eval-btn").disabled = true;
+  $("gen-save-btn").disabled = true;
+
+  try {
+    const body = { bars };
+    if (seed) body.seed = seed;
+    if (rng_seed !== undefined) body.rng_seed = rng_seed;
+
+    const r = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const data = await r.json();
+
+    if (!data.ok) {
+      $("gen-output").value = `# error: ${data.error || "unknown"}`;
+      return;
+    }
+
+    $("gen-output").value = data.code;
+    const m = data.meta;
+    $("gen-meta").textContent =
+      `${m.sections} sections · ${m.bars} bars · ${m.line_count} lines · ` +
+      `${m.cells_used} cells used · ${m.key} ${m.tempo} BPM`;
+    $("gen-copy-btn").disabled = false;
+    $("gen-eval-btn").disabled = false;
+    $("gen-save-btn").disabled = false;
+    $("gen-save-btn").dataset.name = m.name;
+  } catch (e) {
+    $("gen-output").value = `# fetch error: ${e.message}`;
+  } finally {
+    $("gen-run-btn").textContent = "generate";
+    $("gen-run-btn").disabled = false;
+  }
+}
+
+$("generate-btn").addEventListener("click", openGenModal);
+$("gen-close-btn").addEventListener("click", closeGenModal);
+$("gen-modal").addEventListener("click", (e) => {
+  if (e.target === $("gen-modal")) closeGenModal();
+});
+$("gen-run-btn").addEventListener("click", runGenerate);
+
+$("gen-copy-btn").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText($("gen-output").value);
+    $("gen-copy-btn").textContent = "copied!";
+    setTimeout(() => ($("gen-copy-btn").textContent = "copy"), 1500);
+  } catch (_) { setStatus("copy failed", "err"); }
+});
+
+$("gen-eval-btn").addEventListener("click", async () => {
+  const code = $("gen-output").value;
+  if (!code.trim()) return;
+  if (window.parent !== window) {
+    window.parent.postMessage({ type: "evaluate_code", code, userName: "grid-gen" }, "*");
+    $("gen-eval-btn").textContent = "sent!";
+    setTimeout(() => ($("gen-eval-btn").textContent = "evaluate in webTroop"), 1800);
+  } else {
+    await navigator.clipboard.writeText(code);
+    $("gen-eval-btn").textContent = "copied (paste in webTroop)";
+    setTimeout(() => ($("gen-eval-btn").textContent = "evaluate in webTroop"), 2500);
+  }
+});
+
+$("gen-save-btn").addEventListener("click", async () => {
+  const code = $("gen-output").value;
+  const name = ($("gen-save-btn").dataset.name || "gen_track") + ".py";
+  if (window.parent !== window) {
+    window.parent.postMessage({ type: "save_file", filename: name, content: code }, "*");
+    $("gen-save-btn").textContent = `saved: ${name}`;
+    setTimeout(() => ($("gen-save-btn").textContent = "save to codeBank"), 2000);
+  } else {
+    await navigator.clipboard.writeText(code);
+    $("gen-save-btn").textContent = "copied";
+    setTimeout(() => ($("gen-save-btn").textContent = "save to codeBank"), 2000);
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && $("gen-modal").classList.contains("open")) {
+    closeGenModal();
+    return;
   }
 });
 

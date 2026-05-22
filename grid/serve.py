@@ -65,11 +65,37 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         p = urlparse(self.path).path
+        length = int(self.headers.get("Content-Length", 0))
+        body = self.rfile.read(length).decode("utf-8")
+
+        if p == "/api/generate":
+            try:
+                payload = json.loads(body) if body.strip() else {}
+            except Exception as e:
+                self._send_json({"error": f"bad json: {e}"}, status=400)
+                return
+            try:
+                from generate import generate as _gen
+            except ImportError:
+                import sys as _sys
+                _sys.path.insert(0, str(GRID_DIR))
+                from generate import generate as _gen
+            try:
+                cells = json.loads(CELLS_FILE.read_text())
+            except Exception:
+                cells = {}
+            code, meta = _gen(
+                cells,
+                seed_coord=payload.get("seed"),
+                bars=payload.get("bars"),
+                rng_seed=payload.get("rng_seed"),
+            )
+            self._send_json({"ok": True, "code": code, "meta": meta})
+            return
+
         if p != "/api/cells":
             self.send_error(404)
             return
-        length = int(self.headers.get("Content-Length", 0))
-        body = self.rfile.read(length).decode("utf-8")
         try:
             payload = json.loads(body)
         except Exception as e:

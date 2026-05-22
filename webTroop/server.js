@@ -235,6 +235,7 @@ function processArduinoData(data, foxdot) {
   }
 
   // Lancer FoxDot — use venv python if available, fallback to system python
+  const __dirname = path.dirname(new URL(import.meta.url).pathname);
   const venvPython = process.platform === 'win32'
     ? path.join(__dirname, '..', 'venv', 'Scripts', 'python.exe')
     : path.join(__dirname, '..', 'venv', 'bin', 'python');

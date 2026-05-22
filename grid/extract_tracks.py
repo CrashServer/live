@@ -87,7 +87,7 @@ def main():
 
     proposals = {}
     for i, t in enumerate(tracks):
-        if i >= 100:
+        if i >= 400:
             break
         coord = f"Q{i}"
         label_parts = [t["name"]]
@@ -105,24 +105,20 @@ def main():
             "scale": t["scale"],
             "root": t["root"],
             "source": t["source"],
+            "source_file": t["source"],  # t["source"] = path.name in analyze_track
         }
 
-    overflow = tracks[100:]
     out = {
         "_help": (
             "Full codeBank tracks as type='track' cells in column Q. "
-            "Each cell's code is the entire track. Useful for jumping to "
-            "a known scene/jam. Run with `compo.cell_run('Q0')` (no auto-"
-            "stop — these are long compositions)."
+            "Each cell's code is the entire .py file. source_file links "
+            "back to the originating filename for two-way sync."
         ),
         "proposed": proposals,
-        "overflow_count": len(overflow),
-        "overflow_sample": [t["name"] for t in overflow[:20]],
+        "total": len(proposals),
     }
     OUT_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False))
     print(f"wrote {len(proposals)} track proposals to {OUT_FILE}")
-    if overflow:
-        print(f"  ({len(overflow)} more tracks beyond Q99)")
 
     if merge:
         existing = {}
@@ -130,13 +126,19 @@ def main():
             existing = json.loads(CELLS_FILE.read_text())
 
         added = 0
-        skipped_occupied = 0
+        patched = 0
+        skipped = 0
         for coord, proposal in proposals.items():
-            if coord in existing:
-                skipped_occupied += 1
-                continue
-            # Strip None values for cleanliness
             body = {k: v for k, v in proposal.items() if v is not None and k != "source"}
+            if coord in existing:
+                cell = existing[coord]
+                if not cell.get("source_file") and proposal.get("source_file"):
+                    # Back-fill source_file onto existing cell (migration step)
+                    cell["source_file"] = proposal["source_file"]
+                    patched += 1
+                else:
+                    skipped += 1
+                continue
             existing[coord] = body
             added += 1
 
@@ -145,8 +147,8 @@ def main():
             json.dump(existing, tf, indent=2, ensure_ascii=False)
             tmp = tf.name
         os.replace(tmp, CELLS_FILE)
-        print(f"merged into cells.json: +{added} tracks, "
-              f"{skipped_occupied} Q-coords kept as-is")
+        print(f"merged into cells.json: +{added} new, {patched} patched source_file, "
+              f"{skipped} unchanged")
         print(f"  -> run `compo.cell_reload()` in your FoxDot session")
 
 

@@ -99,6 +99,60 @@
     font-size: 10px;
   }
 
+  /* ===== attacks panel ===== */
+  .attacks-panel {
+    border-bottom: 1px solid #3d2e10;
+    background: #130e05;
+    flex-shrink: 0;
+  }
+  .attacks-header {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 10px; cursor: pointer;
+    user-select: none;
+  }
+  .attacks-collapse-icon { color: #f59e0b; font-size: 10px; width: 10px; }
+  .attacks-title {
+    color: #f59e0b; font-weight: 600; font-size: 11px;
+    font-family: ui-monospace, monospace;
+  }
+  .attacks-count { color: #a37520; font-weight: normal; }
+  .attacks-header .spacer { flex: 1; }
+  .attacks-cards {
+    display: flex; flex-direction: row; gap: 5px;
+    padding: 6px 10px 8px; overflow-x: auto;
+  }
+  .attacks-cards:empty::after {
+    content: "no cells with source_file — run ⟳ sync files";
+    color: #5a4010; font-size: 10px; font-family: ui-monospace, monospace;
+    padding: 4px 0;
+  }
+  .attack-card {
+    min-width: 115px; max-width: 145px;
+    background: #1a1005; border: 1px solid #3d2e10;
+    border-top: 2px solid #f59e0b;
+    border-radius: 3px; padding: 5px 7px;
+    cursor: pointer; flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 2px;
+    transition: background 0.1s;
+  }
+  .attack-card:hover { background: #241808; }
+  .attack-card.selected { background: #3d2e10; border-color: #f59e0b; }
+  .attack-card-name {
+    font-size: 10px; font-weight: 600; color: var(--text);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .attack-card-meta {
+    font-size: 9px; color: #a37520;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .attack-card-badges { display: flex; gap: 3px; align-items: center; flex-wrap: wrap; margin-top: 1px; }
+  .attack-badge {
+    font-size: 8px; padding: 1px 4px;
+    background: #3d2e10; color: #fcd34d;
+    border-radius: 2px; line-height: 1.4; white-space: nowrap;
+  }
+  .attack-badge.is-attack-badge { background: #142010; color: #86efac; }
+
   /* ===== left: grid ===== */
   .grid-pane {
     padding: 12px;
@@ -166,7 +220,7 @@
   }
   .cell:hover { filter: brightness(1.4); }
 
-  /* Attack cells — gold top-border + corner triangle marker */
+  /* Attack cells — gold top-border + top-right triangle */
   .cell.is-attack {
     border-top: 3px solid #f59e0b;
     position: relative;
@@ -178,6 +232,37 @@
     border-style: solid;
     border-width: 0 6px 6px 0;
     border-color: transparent #f59e0b transparent transparent;
+  }
+
+  /* codeBank cells — sky-blue left border + bottom-left dot */
+  .cell.from-codebank {
+    border-left: 3px solid #38bdf8;
+    position: relative;
+  }
+  .cell.from-codebank::before {
+    content: "";
+    position: absolute;
+    bottom: 2px; left: 2px;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: #38bdf8;
+  }
+
+  /* codeBank extra fields in editor pane */
+  .codebank-section {
+    background: #130e05; border: 1px solid #3d2e10;
+    border-radius: 3px; padding: 8px 10px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .codebank-section label { color: #f59e0b; font-size: 10px; font-weight: 600; }
+  .codebank-section .cb-row { display: flex; gap: 8px; align-items: center; }
+  .codebank-section input[type="text"] {
+    flex: 1; background: var(--bg); color: var(--text);
+    border: 1px solid #3d2e10; padding: 5px 8px;
+    font: inherit; border-radius: 3px; font-size: 11px;
+  }
+  .codebank-source-file {
+    font-size: 9px; color: #a37520; font-family: ui-monospace, monospace;
   }
 
   /* ===== right: editor ===== */
@@ -343,6 +428,19 @@
       <button id="generate-btn" style="background:#1e2a3a;color:#7dd3fc;border-color:#1e3a5f;">generate ▸</button>
       <span class="stats" id="stats">- / -</span>
     </div>
+
+    <!-- ── Attacks panel ── -->
+    <div class="attacks-panel" id="attacks-panel">
+      <div class="attacks-header" id="attacks-toggle">
+        <span class="attacks-collapse-icon" id="attacks-icon">▾</span>
+        <span class="attacks-title">attacks <span class="attacks-count" id="attacks-count"></span></span>
+        <span class="spacer"></span>
+        <button class="btn" id="sync-codebank-btn" style="font-size:10px;padding:3px 8px;margin-right:4px"
+                title="re-read all codeBank/*.py files into cells">⟳ sync files</button>
+      </div>
+      <div class="attacks-cards" id="attacks-cards"></div>
+    </div>
+
     <div class="col-header-letters" id="col-header-letters"></div>
     <div class="col-header-roles" id="col-header-roles"></div>
     <div class="grid-wrap" id="grid-wrap"></div>
@@ -386,6 +484,19 @@
       <div>
         <label>source</label>
         <input type="text" id="meta-source" placeholder="codeBank">
+      </div>
+    </div>
+
+    <!-- codeBank-specific fields: shown only when cell has source_file -->
+    <div class="codebank-section" id="codebank-section" style="display:none">
+      <label>⚡ codebank attack</label>
+      <div class="codebank-source-file" id="codebank-source-file"></div>
+      <div class="cb-row">
+        <label style="color:var(--muted);font-size:11px;white-space:nowrap">
+          <input type="checkbox" id="meta-is-attack" style="margin-right:4px">
+          is attack
+        </label>
+        <input type="text" id="meta-attack-category" placeholder="category (e.g. industrial, tekno, ambient)">
       </div>
     </div>
 
@@ -653,7 +764,8 @@ function renderGrid() {
     const populated = cell != null;
     el.classList.toggle("populated", populated);
     el.classList.toggle("selected", coord === currentCoord);
-    el.classList.toggle("is-attack", populated && /\battack\s*\(/.test(cell.code || ""));
+    el.classList.toggle("is-attack",      populated && /\battack\s*\(/.test(cell.code || ""));
+    el.classList.toggle("from-codebank",  populated && cell.source === "codeBank");
     if (populated) {
       el.style.background = colorForCell(cell, col);
       // Tooltip includes tempo + source so the color mapping is discoverable
@@ -667,6 +779,7 @@ function renderGrid() {
     }
   });
   applySearchFilter();
+  renderAttacks();
 }
 
 function applySearchFilter() {
@@ -714,6 +827,99 @@ function updateStats() {
   $("stats").textContent = `${total} cells / ${COLS.length * ROWS} capacity`;
 }
 
+// ── Attacks panel ────────────────────────────────────────────────────────────
+
+let _attacksOpen = true;
+
+function renderAttacks() {
+  const container = $("attacks-cards");
+  if (!container) return;
+
+  const attackCells = Object.entries(cells)
+    .filter(([, v]) => v && typeof v === "object" && v.source_file)
+    .sort(([, a], [, b]) => (a.label || "").localeCompare(b.label || ""));
+
+  $("attacks-count").textContent = `(${attackCells.length})`;
+
+  container.innerHTML = "";
+  for (const [coord, cell] of attackCells) {
+    const card = document.createElement("div");
+    card.className = "attack-card" + (coord === currentCoord ? " selected" : "");
+    card.dataset.coord = coord;
+
+    const nameEl = document.createElement("div");
+    nameEl.className = "attack-card-name";
+    nameEl.textContent = cell.label || cell.source_file.replace(/\.py$/, "") || coord;
+    nameEl.title = cell.label || "";
+
+    const metaEl = document.createElement("div");
+    metaEl.className = "attack-card-meta";
+    const parts = [];
+    if (cell.tempo) parts.push(`♩${cell.tempo}`);
+    if (cell.key)   parts.push(cell.key);
+    metaEl.textContent = parts.join(" · ") || coord;
+
+    card.appendChild(nameEl);
+    card.appendChild(metaEl);
+
+    if (cell.attack_category || cell.is_attack) {
+      const badges = document.createElement("div");
+      badges.className = "attack-card-badges";
+      if (cell.attack_category) {
+        const b = document.createElement("span");
+        b.className = "attack-badge";
+        b.textContent = cell.attack_category;
+        badges.appendChild(b);
+      }
+      if (cell.is_attack) {
+        const b = document.createElement("span");
+        b.className = "attack-badge is-attack-badge";
+        b.textContent = "⚡";
+        badges.appendChild(b);
+      }
+      card.appendChild(badges);
+    }
+
+    card.addEventListener("click", () => selectCell(coord));
+    container.appendChild(card);
+  }
+}
+
+function _initAttacksPanel() {
+  $("attacks-toggle").addEventListener("click", (e) => {
+    if (e.target.closest("#sync-codebank-btn")) return; // let button handle it
+    _attacksOpen = !_attacksOpen;
+    $("attacks-cards").style.display = _attacksOpen ? "flex" : "none";
+    $("attacks-icon").textContent = _attacksOpen ? "▾" : "▸";
+  });
+
+  $("sync-codebank-btn").addEventListener("click", async () => {
+    const btn = $("sync-codebank-btn");
+    btn.disabled = true;
+    btn.textContent = "syncing…";
+    try {
+      const r = await fetch("/api/codebank/sync", { method: "POST" });
+      const data = await r.json();
+      if (data.ok) {
+        btn.textContent = `✓ +${data.created} upd:${data.updated}`;
+        // Reload cells so the panel refreshes
+        const cr = await fetch("/api/cells");
+        cells = await cr.json();
+        renderGrid();
+        renderAttacks();
+        updateStats();
+      } else {
+        btn.textContent = `✗ error`;
+        console.error("[attacks] sync error:", data);
+      }
+    } catch (err) {
+      btn.textContent = `✗ fail`;
+      console.error("[attacks] sync fail:", err);
+    }
+    setTimeout(() => { btn.textContent = "⟳ sync files"; btn.disabled = false; }, 3000);
+  });
+}
+
 function selectCell(coord) {
   currentCoord = coord;
   $("coord-input").value = coord;
@@ -726,6 +932,14 @@ function selectCell(coord) {
     $("meta-type").value = cell.type ?? "";
     $("meta-instrument").value = cell.instrument ?? "";
     $("meta-source").value = cell.source ?? "";
+    // codeBank-specific fields
+    const hasSrcFile = !!cell.source_file;
+    $("codebank-section").style.display = hasSrcFile ? "" : "none";
+    if (hasSrcFile) {
+      $("codebank-source-file").textContent = `↳ codeBank/${cell.source_file}`;
+      $("meta-is-attack").checked = !!cell.is_attack;
+      $("meta-attack-category").value = cell.attack_category || "";
+    }
     setStatus(`loaded ${coord}`, "");
   } else {
     $("label-input").value = "";
@@ -735,11 +949,21 @@ function selectCell(coord) {
     $("meta-type").value = "";
     $("meta-instrument").value = "";
     $("meta-source").value = "";
+    $("codebank-section").style.display = "none";
     setStatus(`new cell ${coord}`, "");
   }
   document.querySelectorAll(".cell").forEach(el => {
     el.classList.toggle("selected", el.dataset.coord === coord);
   });
+  // Highlight the matching attack card (if panel is open)
+  document.querySelectorAll(".attack-card").forEach(card => {
+    card.classList.toggle("selected", card.dataset.coord === coord);
+  });
+  // Scroll the attack card into view if attacks panel is open
+  const activeCard = document.querySelector(`.attack-card[data-coord="${coord}"]`);
+  if (activeCard && _attacksOpen) {
+    activeCard.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+  }
 }
 
 function setStatus(msg, kind) {
@@ -770,6 +994,15 @@ async function saveCell() {
   if (type) body.type = type;
   if (inst) body.instrument = inst;
   if (src) body.source = src;
+
+  // codeBank fields: preserve source_file; pass is_attack + category
+  const existingCell = cells[coord] || {};
+  if (existingCell.source_file) {
+    body.source_file = existingCell.source_file;
+    body.is_attack = $("meta-is-attack").checked;
+    const cat = $("meta-attack-category").value.trim();
+    if (cat) body.attack_category = cat;
+  }
 
   const r = await fetch("/api/cells", {
     method: "POST",
@@ -914,6 +1147,7 @@ async function pasteCellToWebtroop() {
 // ===== wire up =====
 buildGrid();
 loadCells();
+_initAttacksPanel();
 
 $("save-btn").addEventListener("click", saveCell);
 $("delete-btn").addEventListener("click", deleteCell);

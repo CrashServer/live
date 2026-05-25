@@ -1,65 +1,42 @@
-# ─────────────────────────────────────────────────────────────
-# sediment.py  —  138 BPM / C minor / dark techno
-#
-# Core concept: sinvar as single metabolic rate.
-#   lpf and dfamt both oscillate on a 64-beat sinvar so the
-#   arrangement breathes as one organism. dynfuzz on svdk keys
-#   to section amp — peaks gritty, breakdown clean.
-#   plaitsX preset=11 (chord engine) for thick mid-pad.
-#
-# Arc (bars):
-#    0–24   intro      kick + sub, static
-#   24–56   groove     hats enter, lead barely audible
-#   56–80   peak       dynfuzz opens, filter climbs
-#   80–96   break      pad + sub only, long tails
-#   96–128  return     groove resumes, tighter drive
-# ─────────────────────────────────────────────────────────────
+# svdkdirtyJam 134
+# aggressive
 
-Clock.bpm = 138
-Scale.default = "minor"
-Root.default = "C"
+b6 >> play("X.", amp=3, sample=8)
+s0 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.15, oct=4, grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.7, lofi=0)
 
-secs = [96, 128, 96, 64, 128]
+z8 >> play("x.", sample=8, amp=3, hpf=60, lpr=.2).sometimes("stutter", PRand(4))
 
-k1 >> compkick(dur=1, oct=3,
-               amp=var([0.9, 0.92, 0.95, 0.5, 0.92], secs),
-               drive=var([0.15, 0.28, 0.38, 0.08, 0.28], secs),
-               room=0.1, mix=0.1)
+# Server.addFx(dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0)
 
-s1 >> play(". . . . o . . . ", dur=1/4,
-           amp=var([0, 0.7, 0.78, 0.5, 0.7], secs),
-           room=0.18, mix=0.25)
+i5 >> play()
 
-h1 >> play("- . - . - - . - ", dur=1/4,
-           amp=var([0, 0.48, 0.55, 0.28, 0.48], secs),
-           sample=2)
+drop()
 
-h2 >> play("- . . . - . . - ", dur=1/4,
-           amp=var([0, 0.32, 0.4, 0.2, 0.32], secs),
-           sample=1)
+s_all.r=0
 
-b1 >> dbass([0, -2, 3, 0], dur=[2, 2, 2, 2], oct=5,
-            amp=var([0.85, 0.88, 0.92, 0.65, 0.88], secs),
-            lpf=sinvar([350, 1400], 64),
-            sus=var([1.9, 2.0, 2.2, 1.6, 2.0], secs),
-            room=0.2, mix=0.2)
 
-n1 >> svdk([0, 3, 0, 5, 7, 5, 0, -2], dur=1/4, oct=4,
-           amp=var([0, 0.52, 0.62, 0.38, 0.52], secs),
-           dynfuzz=var([0, 0.5, 0.72, 0, 0.52], secs),
-           dfmix=var([0, 0.38, 0.55, 0, 0.38], secs),
-           dfamt=sinvar([0.2, 0.85], 32),
-           lpf=linvar([700, 4500], 128),
-           sus=var([0.1, 0.12, 0.08, 0.15, 0.12], secs),
-           shape=0.18)
+y2 >> play(pbuild("industrial", kick="X   [Xx] X X   X   "), rate=1)
+# y0 >> play(pbuild("breaks", fill=4), lpf=3800)
 
-p1 >> plaitsX([0, -2, 3, 5], dur=[4, 4, 4, 4], oct=5, preset=11,
-              amp=var([0, 0.28, 0.32, 0.48, 0.28], secs),
-              cheapverb=0.72, cvdecay=4.5,
-              lpf=linvar([500, 2200], 96))
+y1 >> play(pbuild("techno"), lpf=0, sample=7, wshape=0.8, wgain=1, wmix=0.5, amp=2.1)
 
-m1 >> juno([(0,2,4), rest(0), (3,5,7), rest(0), (2,4,6), rest(0)], dur=2, oct=4,
-           amp=var([0, 0.42, 0.5, 0.32, 0.42], secs),
-           shape=sinvar([0, 0.28], 16),
-           cheapverb=0.5, cvdecay=2.0,
-           lpf=var([700, 1100, 2800, 500, 1100], secs))
+
+
+
+s4 >> svdk([3,2,5,3, 3,0,3,8], dur=0.25, sus=0.17, oct=5, grit=sinvar([3, 7], 8), cutoff=0,  res=0.6, body=1.0, harm=1.0, noise=1.0, lofi=0)
+
+n2 >> play("i", sample=1, bank=2, dur=var([.5, .75/2, .25], [12, 4]), pan=PWhite(-1,1), )
+n3 >> play("..i.", sample=5, bank=2, dur=.5, pan=PWhite(-1,1), wshape=8, wgain=1, wmix=0.5, drcomp=.5, bell=0.5, bellf=3500, bellq=0.9).sometimes("stutter")
+
+
+~s1 >> svdk([0,1,3,0, 5,5,4,1], dur=0.25, sus=0.15, oct=(5, 5.07), grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.2)
+
+s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5)
+
+# s2 >> svdk([0], dur=4, sus=4, grit=1.2, low=2, glide=0, noise=0, oct=4, res=0.9, cutoff=1200, body=1, drift=0.1, harm=1.2, slide=0.4)
+
+g2 >> play("[--]", amp=2)
+s1.oct=4
+s5 >> play("..C.", amp=2)
+s4.oct=4
+s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5)

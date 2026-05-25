@@ -15,6 +15,18 @@ const todoList = document.querySelector('.todo-list');
 const showTodo = config.showTodo ?? false;
 const recordButton = document.getElementById('recording');
 
+// Cached WS-update targets (queried once, not on every message)
+const _elScale     = document.getElementById('scale');
+const _elRoot      = document.getElementById('root');
+const _elBpm       = document.getElementById('bpm');
+const _elChrono    = document.getElementById('chrono');
+const _elMasterFx  = document.getElementById('masterFx');
+const _elHelp      = document.getElementById('help');
+const _elCpu       = document.getElementById('cpu');
+const _elSceneName = document.getElementById('sceneName');
+const _elSceneTime = document.getElementById('sceneTime');
+const _elPlayers   = document.getElementById('players');
+
 let isResizing = false;
 let startX;
 let startWidth;
@@ -56,7 +68,7 @@ document.addEventListener('mousemove', function(e) {
     if (!isResizing) return;
     const width = startWidth + (e.clientX - startX);
     crashPanel.style.width = `${width}px`;
-});
+}, { passive: true });
 
 document.addEventListener('mouseup', function() {
     if (isResizing) {
@@ -124,19 +136,19 @@ const ws = makeReconnectingWs(
         const data = JSON.parse(event.data);
         switch (data.type) {
             case 'scale':
-                document.getElementById('scale').textContent = data.scale;
-                updatePianoKeys(data.scale, document.getElementById('root').textContent);
+                _elScale.textContent = data.scale;
+                updatePianoKeys(data.scale, _elRoot.textContent);
                 break;
             case 'root':
-                document.getElementById('root').textContent = data.root;
-                updatePianoKeys(document.getElementById('scale').textContent, data.root);
+                _elRoot.textContent = data.root;
+                updatePianoKeys(_elScale.textContent, data.root);
                 break;
             case 'cpu':
                 updateCpu(data.cpu);
                 wsServer.send(JSON.stringify({ type: 'cpu_data', cpu: data.cpu }));
                 break;
             case 'bpm':
-                document.getElementById('bpm').textContent = data.bpm;
+                _elBpm.textContent = data.bpm;
                 break;
             case 'serverState':
                 updateCrashPanelTitle(data.serverState);
@@ -145,26 +157,26 @@ const ws = makeReconnectingWs(
                 updateBeat(data.beat);
                 break;
             case 'chrono':
-                document.getElementById('chrono').textContent = formatTime(data.chrono);
+                _elChrono.textContent = formatTime(data.chrono);
                 break;
             case 'players':
                 formatPlayers(data.players);
                 break;
             case 'masterFx': {
-                const masterFxContainer = document.getElementById('masterFx');
-                masterFxContainer.innerHTML = '';
+                _elMasterFx.innerHTML = '';
+                const frag = document.createDocumentFragment();
                 Object.keys(data.masterFx).forEach(fx => {
                     const fxDiv = document.createElement('span');
                     fxDiv.className = 'master-fx-item';
                     fxDiv.textContent = fx;
-                    masterFxContainer.appendChild(fxDiv);
+                    frag.appendChild(fxDiv);
                 });
+                _elMasterFx.appendChild(frag);
                 break;
             }
             case 'help': {
-                const helpContainer = document.getElementById('help');
-                helpContainer.textContent = data.help;
-                helpContainer.style.height = helpContainer.scrollHeight + 'px';
+                _elHelp.textContent = data.help;
+                _elHelp.style.height = _elHelp.scrollHeight + 'px';
                 break;
             }
             case 'sceneName':
@@ -182,9 +194,9 @@ const wsServer = makeReconnectingWs(
     null
 );
 
-document.getElementById('root').addEventListener('click', () => {
-    const pianoRoll = document.getElementById('piano-roll');
-    pianoRoll.classList.toggle('hidden');
+const _elPianoRoll = document.getElementById('piano-roll');
+_elRoot.addEventListener('click', () => {
+    _elPianoRoll.classList.toggle('hidden');
 });
 
 
@@ -194,20 +206,21 @@ function formatTime(seconds) {
     return `${minutes}:${remainingSeconds}`;
 }
 
+const _beatDivs = {};
 function updateBeat(actualbeat) {
-    const beatInterval = [8,16,32,64]
+    const beatInterval = [8,16,32,64];
     beatInterval.forEach(beatInter => {
         const beat = Math.ceil(actualbeat % beatInter);
-        const beatDiv = document.getElementById(`beat-${beatInter}`)
-        const progressPercent = (beat / beatInter) * 100
-        beatDiv.style.background = `linear-gradient(to right, var(--beat-col-2) ${progressPercent}%, var(--beat-col-1) ${progressPercent}%)`;
-        beatDiv.textContent = `${beat}/${beatInter}`;
-
+        const progressPercent = (beat / beatInter) * 100;
+        const div = _beatDivs[beatInter] || (_beatDivs[beatInter] = document.getElementById(`beat-${beatInter}`));
+        if (!div) return;
+        div.style.background = `linear-gradient(to right, var(--beat-col-2) ${progressPercent}%, var(--beat-col-1) ${progressPercent}%)`;
+        div.textContent = `${beat}/${beatInter}`;
     });
 }
 
 function updateCpu(usagePercent){
-    const cpuDiv = document.getElementById("cpu")
+    const cpuDiv = _elCpu;
     // Définir les couleurs de la plage
     const green = "#515b54";
     const orange = "#FFAA44";
@@ -273,7 +286,7 @@ function formatPlayers(message) {
     // Vérifier si un ou plusieurs joueurs ont `solo` à `true`
     const hasSolo = players.some(p => p.solo);
 
-    const playersDiv = document.getElementById('players');
+    const playersDiv = _elPlayers;
     const currentPlayerIds = new Set(players.map(p => p.id));
     const previousPlayerIds = new Set(previousPlayersState.keys());
 
@@ -297,7 +310,7 @@ function formatPlayers(message) {
         `).join('');
 
         // Réattacher les event listeners
-        document.querySelectorAll('.player-line').forEach(line => {
+        playersDiv.querySelectorAll('.player-line').forEach(line => {
             line.addEventListener('click', (e) => {
                 const playerId = e.currentTarget.dataset.playerId;
                 EventEmitter.emit('send_foxdot', `${playerId}.stop()`);
@@ -401,7 +414,7 @@ function checkAllTodos() {
 function formatSceneName(nameScene) {
     if (nameScene !== sceneName) {
         sceneName = nameScene;
-        document.getElementById('sceneName').textContent = nameScene;
+        _elSceneName.textContent = nameScene;
         if (sceneIntervalId !== null) {
             clearInterval(sceneIntervalId);
         }
@@ -410,9 +423,8 @@ function formatSceneName(nameScene) {
         sceneIntervalId = setInterval(() => {
             const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
             const color = getDurationColor(elapsedTime/60);
-            const sceneTimeDiv = document.getElementById('sceneTime');
-            sceneTimeDiv.style.color = color;
-            sceneTimeDiv.textContent = formatTime(elapsedTime);
+            _elSceneTime.style.color = color;
+            _elSceneTime.textContent = formatTime(elapsedTime);
         }, 1000);
     }
 }

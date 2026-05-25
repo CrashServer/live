@@ -21,7 +21,7 @@ export const logsUtils = {
     // Redimensionnement de la console
     this.separator.addEventListener('mousedown', (e) => {
       this.isResizing = true;
-      document.addEventListener('mousemove', this.resize.bind(this));
+      document.addEventListener('mousemove', this.resize.bind(this), { passive: true });
       document.addEventListener('mouseup', this.stopResize.bind(this));
     });
 
@@ -29,7 +29,7 @@ export const logsUtils = {
     if (this.editorResizeHandle) {
       this.editorResizeHandle.addEventListener('mousedown', (e) => {
         this.isResizingEditors = true;
-        document.addEventListener('mousemove', this.resizeEditors.bind(this));
+        document.addEventListener('mousemove', this.resizeEditors.bind(this), { passive: true });
         document.addEventListener('mouseup', this.stopResizeEditors.bind(this));
         e.preventDefault();
       });
@@ -127,22 +127,39 @@ export const logsUtils = {
   },
 
 
+  _logQueue: [],
+  _logFlushTimer: null,
+
   // Ajout des logs dans la console
   appendLog(message, color) {
-    const entry = document.createElement('pre');
-    entry.className = 'log-entry';
-    if (color){
-      entry.style.color = color;
-    }
     if (message.includes('Traceback')) {
       message = this.formatErrorMessage(message);
-      entry.classList.add('error-log');
     }
-    else if (!message.includes('>>')) {
-      entry.classList.add('help');
+    this._logQueue.push({ message, color });
+    if (!this._logFlushTimer) {
+      this._logFlushTimer = setTimeout(() => this._flushLogs(), 50);
     }
-    entry.textContent = message;
-    this.logs.insertBefore(entry, logs.firstChild);
+  },
+
+  _flushLogs() {
+    this._logFlushTimer = null;
+    if (!this._logQueue.length) return;
+    const frag = document.createDocumentFragment();
+    for (const { message, color } of this._logQueue) {
+      const entry = document.createElement('pre');
+      entry.className = 'log-entry';
+      if (color) entry.style.color = color;
+      if (message.includes('Traceback')) {
+        entry.classList.add('error-log');
+      } else if (!message.includes('>>')) {
+        entry.classList.add('help');
+      }
+      entry.textContent = message;
+      frag.appendChild(entry);
+    }
+    this._logQueue = [];
+    // prepend all queued entries in one DOM write
+    this.logs.insertBefore(frag, this.logs.firstChild);
     this.logs.scrollTop = 0;
   },
 

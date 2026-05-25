@@ -38,9 +38,40 @@ import {
 import "codemirror/lib/codemirror.css";
 import "codemirror/addon/hint/show-hint.css";
 import "codemirror/addon/dialog/dialog.css";
+import "codemirror/addon/fold/foldcode.js";
+import "codemirror/addon/fold/foldgutter.js";
+import "codemirror/addon/fold/foldgutter.css";
 import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
+import { setupCellDial } from "./cellDial.js";
+
+// ---- #@ / #@#@ fold range finder (registered at module level) ----------
+// #@#@  → track header: folds to next #@#@ or EOF
+// #@    → section:      folds to next #@ / #@#@ or EOF
+CodeMirror.registerHelper("fold", "foxdot-sections", (cm, start) => {
+  const line = cm.getLine(start.line);
+  if (!line) return;
+  const t         = line.trimStart();
+  const isTrack   = t.startsWith("#@#@");
+  const isSection = !isTrack && t.startsWith("#@");
+  if (!isTrack && !isSection) return;
+
+  const last = cm.lastLine();
+  for (let i = start.line + 1; i <= last; i++) {
+    const l          = cm.getLine(i).trimStart();
+    const nextTrack  = l.startsWith("#@#@");
+    const nextSect   = !nextTrack && l.startsWith("#@");
+    if (isTrack && nextTrack)
+      return { from: CodeMirror.Pos(start.line, line.length),
+               to:   CodeMirror.Pos(i - 1, cm.getLine(i - 1).length) };
+    if (isSection && (nextTrack || nextSect))
+      return { from: CodeMirror.Pos(start.line, line.length),
+               to:   CodeMirror.Pos(i - 1, cm.getLine(i - 1).length) };
+  }
+  return { from: CodeMirror.Pos(start.line, line.length),
+           to:   CodeMirror.Pos(last, cm.getLine(last).length) };
+});
 
 const LINES_TO_SHOW = 20; // pretext number of lines to show
 
@@ -104,9 +135,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     fixedGutter: false,
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
-    gutters: ["CodeMirror-linenumbers"],
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    foldGutter: { rangeFinder: CodeMirror.fold["foxdot-sections"], updateViewportThrottle: 400 },
     keyMap: "sublime",
   });
+
+  setupCellDial(editor);
 
   const otherUserDoc = editor.getDoc().linkedDoc({ shareHist: false });
   const otherEditor = CodeMirror(document.getElementById("other-editor"), {
@@ -487,6 +521,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         activeSequence = null;
       }
     },
+    "Ctrl-Shift-F": (cm) => {
+      // Fold all #@#@ track headers → skeleton view of the live set
+      const rf = CodeMirror.fold["foxdot-sections"];
+      cm.operation(() => {
+        for (let i = 0; i < cm.lineCount(); i++) {
+          if (cm.getLine(i).trimStart().startsWith("#@#@"))
+            cm.foldCode(CodeMirror.Pos(i, 0), { rangeFinder: rf }, "fold");
+        }
+      });
+    },
+    "Ctrl-Alt-F": (cm) => {
+      // Unfold everything
+      const rf = CodeMirror.fold["foxdot-sections"];
+      cm.operation(() => {
+        for (let i = 0; i < cm.lineCount(); i++)
+          cm.foldCode(CodeMirror.Pos(i, 0), { rangeFinder: rf }, "unfold");
+      });
+    },
+    "Ctrl-Shift-J": () => {
+      if (!activeSequence) return;
+      wsServer.send(JSON.stringify({
+        type: 'evaluate_code',
+        code: '_seq_cancel()\n'
+      }));
+      activeSequence = null;
+    },
     "Ctrl-Space": "autocomplete",
     "Ctrl-S": (cm) => {
       functionUtils.saveEditorContent(cm, wsServer);
@@ -518,6 +578,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
     "Ctrl-Alt-J": (cm) => {
       functionUtils.previousJump(cm);
+    },
+    "Ctrl-J": (cm) => {
+      if (!activeSequence) return;
+      const sections = functionUtils.findAllSections(cm);
+      const section = sections[activeSequence.currentIndex];
+      if (!section) return;
+      cm.setCursor({ line: section.line, ch: 0 });
+      cm.scrollIntoView({ line: section.line, ch: 0 }, 150);
     },
     "Ctrl-Enter": (cm) => {
       evaluateCode(cm, false);
@@ -885,43 +953,46 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Gestion de l'envoi de code en temps réel
+  // Throttled: cursor moves fire many times per second while typing/navigating.
+  // We only need ~10 updates/sec for the visual display — 100ms is imperceptible.
+  let _cursorActivityTimer = null;
   editor.on("cursorActivity", (cm) => {
-    // Récupérer les infos utilisateur depuis awareness
-    const userState = awareness.getLocalState();
-    const userName = userState?.user?.name || "Anonymous";
+    if (_cursorActivityTimer) return;
+    _cursorActivityTimer = setTimeout(() => {
+      _cursorActivityTimer = null;
 
-    // Récupérer la position du curseur et extraire une fenêtre de lignes
-    const cursor = cm.getCursor();
-    const currentLine = cm.getLine(cursor.line);
-    const windowData = getLineWindow(cm, LINES_TO_SHOW, userName);
+      const userState = awareness.getLocalState();
+      const userName = userState?.user?.name || "Anonymous";
+      const cursor = cm.getCursor();
+      const currentLine = cm.getLine(cursor.line);
+      const windowData = getLineWindow(cm, LINES_TO_SHOW, userName);
 
-    // Préparer le message avec fenêtre de lignes au lieu du code complet
-    const message = {
-      type: `${userName}InstantCode`,
-      position: cursor.ch,
-      code: currentLine,
-      windowLines: windowData.windowLines,        // Fenêtre de lignes autour du curseur
-      windowStartLine: windowData.windowStartLine, // Numéro de la première ligne de la fenêtre
-      windowEndLine: windowData.windowEndLine,     // Numéro de la dernière ligne de la fenêtre
-      currentLineNumber: cursor.line + 1,
-    };
-
-    // envoyer le message dans le live other player display
-    try {
-      awareness.setLocalStateField("otherInstantCode", {
-        user: userName,
-        code: currentLine,
+      const message = {
+        type: `${userName}InstantCode`,
         position: cursor.ch,
-        line: cursor.line + 1,
+        code: currentLine,
         windowLines: windowData.windowLines,
         windowStartLine: windowData.windowStartLine,
         windowEndLine: windowData.windowEndLine,
-      });
-    } catch (error) {}
+        currentLineNumber: cursor.line + 1,
+      };
 
-    if (foxdotWs.readyState === WebSocket.OPEN) {
-      foxdotWs.send(JSON.stringify(message));
-    }
+      try {
+        awareness.setLocalStateField("otherInstantCode", {
+          user: userName,
+          code: currentLine,
+          position: cursor.ch,
+          line: cursor.line + 1,
+          windowLines: windowData.windowLines,
+          windowStartLine: windowData.windowStartLine,
+          windowEndLine: windowData.windowEndLine,
+        });
+      } catch (error) {}
+
+      if (foxdotWs.readyState === WebSocket.OPEN) {
+        foxdotWs.send(JSON.stringify(message));
+      }
+    }, 100);
   });
 
   // Gestion de l'activation/désactivation du serveur dans CrashPanel

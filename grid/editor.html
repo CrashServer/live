@@ -915,8 +915,8 @@ function renderAttacks() {
 
     const nameEl = document.createElement("div");
     nameEl.className = "attack-card-name";
-    nameEl.textContent = cell.source_file.replace(/\.py$/i, "");
-    nameEl.title = cell.label || cell.source_file;
+    nameEl.textContent = cell.label || cell.source_file.replace(/\.py$/i, "");
+    nameEl.title = cell.source_file;
 
     const metaEl = document.createElement("div");
     metaEl.className = "attack-card-meta";

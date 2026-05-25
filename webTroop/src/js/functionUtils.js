@@ -262,6 +262,8 @@ export const functionUtils = {
     // beats is null when no number is given (play forever)
     parseSectionTag(lineText) {
         const trimmed = lineText.trim();
+        // #@#@ is a track header for folding — not a sequencer section
+        if (trimmed.startsWith('#@#@')) return null;
         const specialTypes = { end: 'end', endfade: 'endfade', loop: 'loop', clear: 'clear' };
 
         // Try with args: #@name(...)
@@ -328,6 +330,19 @@ export const functionUtils = {
             if (tag) sections.push({ line: i, ...tag });
         }
         return sections;
+    },
+
+    // Return all #@#@ track headers in document order
+    findAllTracks(cm) {
+        const tracks = [];
+        for (let i = 0; i < cm.lineCount(); i++) {
+            const t = cm.getLine(i).trim();
+            if (t.startsWith('#@#@')) {
+                const name = t.replace(/^#@#@\s*/, '') || `Track ${tracks.length + 1}`;
+                tracks.push({ line: i, name });
+            }
+        }
+        return tracks;
     },
 
     // Get the content and the position of a block

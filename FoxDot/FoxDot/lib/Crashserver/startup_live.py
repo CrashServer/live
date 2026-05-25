@@ -42,8 +42,13 @@ except:
 #########################
 
 
+wsServer = None  # set at startup; guard against exec stopping before WebsocketServer init
+
 def sendAttack(msg=""):
     ''' send attack to webTroop '''
+    if wsServer is None:
+        print("sendAttack: wsServer not initialised yet")
+        return
     message = {
         "type": "attack",
         "content": msg
@@ -934,38 +939,38 @@ try:
 
         def sendScale(self):
             ''' send Scale to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     msg = json.dumps({"type": "scale", "scale": str(Scale.default.name)})
                     asyncio.run(wsServer.sendWebsocket(msg))
-                    sleep(self.bpmTime*10)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.bpmTime*10)
 
         def sendRoot(self):
             ''' send Root to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     msg = json.dumps({"type": "root", "root": str(Root.default)})
                     asyncio.run(wsServer.sendWebsocket(msg))
-                    sleep(self.bpmTime*10)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.bpmTime*10)
 
         def sendBeat(self):
             ''' send Clock.beat to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     msg = json.dumps({"type": "beat", "beat": Clock.beat})
                     asyncio.run(wsServer.sendWebsocket(msg))
-                    sleep(self.beatTime)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.beatTime)
 
         def sendPlayer(self):
             ''' send active player to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     self.addPlayerTurn()
                     playerListCount = []
                     soloPlayers = [p.name for p in Clock.solo.data]
@@ -977,46 +982,44 @@ try:
                         else:
                             name = k.synthdef
                         playerListCount.append(json.dumps({"player": player, "name": name, "duration": duration, "solo": player in soloPlayers}))
-                    # playerListCount = [
-                    #     f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
                     msg = json.dumps({"type": "players", "players": playerListCount})
                     asyncio.run(wsServer.sendWebsocket(msg))
-                    sleep(self.plyTime)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.plyTime)
 
         def sendMasterFx(self):
             ''' send Master FX to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     masterFx = Server.listFx()
                     msg = json.dumps({"type": "masterFx", "masterFx": masterFx})
                     asyncio.run(wsServer.sendWebsocket(msg))
-                    sleep(self.bpmTime*8)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.bpmTime*8)
 
         def sendPdj(self):
             ''' send platdujour to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     intitule, plat = self.pdj.choix()
                     msg = json.dumps({"type": "pdj", "intitule": intitule, "plat": plat})
                     asyncio.run(wsServer.sendWebsocket(msg))
-                    sleep(self.pdjTime)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.pdjTime)
 
         def sendChrono(self):
             ''' send ChronoTime to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     elapsedTime = time() - self.timeInit
                     msg = json.dumps({"type": "chrono", "chrono": elapsedTime})
                     asyncio.run(wsServer.sendWebsocket(msg))
-                    sleep(self.chronoTime)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.chronoTime)
 
         def addPlayerTurn(self):
             ''' add one to player dictionnary turn '''
@@ -1076,7 +1079,7 @@ class WebsocketServer():
         self.websocket_started_event = threading.Event()
         self.websocket_thread = threading.Thread(target=self.start_websocket_server, daemon=True)
         self.websocket_thread.start()
-        self.websocket_started_event.wait()
+        self.websocket_started_event.wait(timeout=5)
         # bpm send
         self.sendBpm_thread = threading.Thread(target=self.send_bpm_periodically, daemon=True)
         self.sendBpm_thread.start()
@@ -1094,7 +1097,7 @@ class WebsocketServer():
         self.wsClients.add(websocket)
         try:
             async for message in websocket:
-                await asyncio.gather(*[client.send(message) for client in self.wsClients])
+                await asyncio.gather(*[client.send(message) for client in self.wsClients], return_exceptions=True)
                 data = json.loads(message)
                 if data["type"] == "serverToggle":
                     if not serverActive:
@@ -1149,9 +1152,15 @@ class WebsocketServer():
     def send_bpm_periodically(self):
         ''' Send bpm to websocket server every second '''
         while True:
-            bpm = int(Clock.get_bpm())
-            asyncio.run(self.sendWebsocket(json.dumps({"type": "bpm", "bpm": bpm})))
-            sleep(60/bpm)
+            try:
+                bpm = int(Clock.get_bpm())
+                if bpm <= 0:
+                    bpm = 120
+                asyncio.run(self.sendWebsocket(json.dumps({"type": "bpm", "bpm": bpm})))
+                sleep(60 / bpm)
+            except Exception as e:
+                print(f"send_bpm error: {e}")
+                sleep(1)
 
     async def sendFoxdotAutocomplete(self):
         ''' Send FoxDot autocomplete data to websocket server '''
@@ -1215,12 +1224,22 @@ class WebsocketServer():
     def sendServerState(self):
         ''' Send server state to websocket server '''
         while True:
-            asyncio.run(self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 1 if serverActive else 0})))
+            try:
+                asyncio.run(self.sendWebsocket(json.dumps({"type": "serverState", "serverState": 1 if serverActive else 0})))
+            except Exception:
+                pass
             sleep(1.1)
 
-wsServer = WebsocketServer(config["HOST_IP"], config["FOXDOT_WS_PORT"])
-crashpanel = CrashPanelWs()
-crashpanel.start()
+try:
+    wsServer = WebsocketServer(config["HOST_IP"], config["FOXDOT_WS_PORT"])
+except Exception as e:
+    print(f"WebsocketServer init failed: {e}")
+
+try:
+    crashpanel = CrashPanelWs()
+    crashpanel.start()
+except Exception as e:
+    print(f"CrashPanelWs init failed: {e}")
 
 # French cut
 try:

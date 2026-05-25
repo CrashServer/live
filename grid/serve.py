@@ -24,9 +24,31 @@ EDITOR_HTML = GRID_DIR / "editor.html"
 CODEBANK_DIR = Path.home() / "live" / "codeBank"
 PORT = 1235
 
-_BPM_RE   = __import__("re").compile(r'Clock\.bpm\s*=\s*(?:lininf\s*\(\s*)?([0-9]+)')
-_SCALE_RE = __import__("re").compile(r'Scale\.default\s*=\s*["\']([^"\']+)')
-_ROOT_RE  = __import__("re").compile(r'Root\.default\s*=\s*["\']?([A-Za-z#b0-9]+)')
+import re as _re
+_BPM_RE   = _re.compile(r'Clock\.bpm\s*=\s*(?:lininf\s*\(\s*)?([0-9]+)')
+_SCALE_RE = _re.compile(r'Scale\.default\s*=\s*["\']([^"\']+)')
+_ROOT_RE  = _re.compile(r'Root\.default\s*=\s*["\']?([A-Za-z#b0-9]+)')
+
+
+def _parse_header(code):
+    """Return (name, category) from first two comment lines of a codeBank file."""
+    name = cat = None
+    ci = 0
+    for line in code.strip().splitlines()[:6]:
+        s = line.strip()
+        if not s.startswith('#'):
+            break
+        content = s.lstrip('#').strip()
+        if not content:
+            continue
+        ci += 1
+        if ci == 1:
+            m = _re.match(r'^(.+?)(?:\s+[—–]\s+.*|\s+\d+\s*$)', content)
+            name = (m.group(1) if m else _re.sub(r'\s+\d+$', '', content)).strip() or None
+        elif ci == 2:
+            cat = content
+            break
+    return name, cat
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -222,6 +244,11 @@ class Handler(BaseHTTPRequestHandler):
             if filename in file_to_coord:
                 coord = file_to_coord[filename]
                 cells[coord]["code"] = code
+                name, category = _parse_header(code)
+                if name:
+                    cells[coord]["label"] = name
+                if category:
+                    cells[coord]["attack_category"] = category
                 updated_count += 1
             else:
                 coord = _next_free_q()
@@ -229,16 +256,18 @@ class Handler(BaseHTTPRequestHandler):
                     errors.append(f"{filename}: no free Q slot (grid full)")
                     continue
                 tempo, scale, root, key = _extract_meta(code)
+                name, category = _parse_header(code)
                 cells[coord] = {
-                    "code": code,
-                    "label": py_file.stem,
-                    "type": "track",
-                    "source": "codeBank",
-                    "source_file": filename,
-                    "tempo": tempo,
-                    "key": key,
-                    "scale": scale,
-                    "root": root,
+                    "code":            code,
+                    "label":           name or py_file.stem,
+                    "type":            "track",
+                    "source":          "codeBank",
+                    "source_file":     filename,
+                    "attack_category": category,
+                    "tempo":           tempo,
+                    "key":             key,
+                    "scale":           scale,
+                    "root":            root,
                 }
                 file_to_coord[filename] = coord
                 created_count += 1

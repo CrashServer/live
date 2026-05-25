@@ -1,42 +1,26 @@
-# svdkdirtyJam 134
-# aggressive
+# Tie fight
 
-b6 >> play("X.", amp=3, sample=8)
-s0 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.15, oct=4, grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.7, lofi=0)
+o1 >> 
 
-z8 >> play("x.", sample=8, amp=3, hpf=60, lpr=.2).sometimes("stutter", PRand(4))
+\          /
+  \oo/
+  /oo\
+/          \
 
-# Server.addFx(dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0)
+<<!oo!>>
 
-i5 >> play()
+# m8 >> blip(PTime(), dur=1/4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, detune=0.01, tone=1.0, beef=0.9, fdecay=1, mod=0.8, fx2=1, fx1=1, scale=Scale.chromatic, vol=var([0,1],[PRand(32)], 4))
 
-drop()
-
-s_all.r=0
-
-
-y2 >> play(pbuild("industrial", kick="X   [Xx] X X   X   "), rate=1)
-# y0 >> play(pbuild("breaks", fill=4), lpf=3800)
-
-y1 >> play(pbuild("techno"), lpf=0, sample=7, wshape=0.8, wgain=1, wmix=0.5, amp=2.1)
+# m8 >> guit(PTime(), dur=1, valad=3000, valadr=0.3, valadd=5, valadt=0, valadc=0.2, detune=0.01, tone=1.0, drift=0.5, rgate=1.5, beef=0.9, fdecay=1, mod=0.8, fx2=1, fx1=1, scale=Scale.chromatic, amp=var([0,1],[PRand(16), 4]))
 
 
-
-
-s4 >> svdk([3,2,5,3, 3,0,3,8], dur=0.25, sus=0.17, oct=5, grit=sinvar([3, 7], 8), cutoff=0,  res=0.6, body=1.0, harm=1.0, noise=1.0, lofi=0)
-
-n2 >> play("i", sample=1, bank=2, dur=var([.5, .75/2, .25], [12, 4]), pan=PWhite(-1,1), )
-n3 >> play("..i.", sample=5, bank=2, dur=.5, pan=PWhite(-1,1), wshape=8, wgain=1, wmix=0.5, drcomp=.5, bell=0.5, bellf=3500, bellq=0.9).sometimes("stutter")
-
-
-~s1 >> svdk([0,1,3,0, 5,5,4,1], dur=0.25, sus=0.15, oct=(5, 5.07), grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.2)
-
-s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5)
-
-# s2 >> svdk([0], dur=4, sus=4, grit=1.2, low=2, glide=0, noise=0, oct=4, res=0.9, cutoff=1200, body=1, drift=0.1, harm=1.2, slide=0.4)
-
-g2 >> play("[--]", amp=2)
-s1.oct=4
-s5 >> play("..C.", amp=2)
-s4.oct=4
-s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5)
+# d3 >> eeri(rate=-4, glitch=1.4, glitchrate=1, glitchdepth=4, glitchcrush=5.0, glitchchance=0.9, beat_dur=1, tape=1, tapedrive=2.1, tapewarm=0.5, tapewobble=2.8, dur=4, sbrk=0.4, valad=500, valadr=0.3, valadd=5, valadt=4, valadc=0.2, hpf=300, fshift=2, fphase=0, fmix=0.5, xbitrot=0.5, rotbits=8, rotrate=0.5, rotjitter=0.1)
+# l4 >> play('X ', amp=2)
+# g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x"), sample=10, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, freeze=[0, 0, 1, 0])
+# l3 >> loop("drumglitch32", pos=0, cut=0, dur=32, sample=12)
+# u7 >> loop("ragedrum32",PRand(33), dur=32, sample=4, drcomp=.5, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=121, amp=PFr(0,1)*4, ring=1.3, ringl=500, ringh=3500).lclip(2)
+j1 >> play("UU", rate=[-2,1], eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, amp=4, dur=4, mverb=0.8, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=1, echo=P*[0.5,.25, .125], echomix=0.5, beat_dur=1, echotime=1)
+o6 >> play("3", rate=0.4, dur=8,fx1=1)
+lo.stop(32)
+u7.stop(32)
+m8 >> guit(PTime(), dur=1/4, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2, detune=0.01, tone=1.0, beef=0.9, fdecay=1, mod=0.8, fx2=1, fx1=1, scale=Scale.chromatic, vol=var([0,1],[PRand(32), 4]))

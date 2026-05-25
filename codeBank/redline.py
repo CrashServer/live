@@ -1,63 +1,14 @@
-# ─────────────────────────────────────────────────────────────
-# redline.py  —  87 BPM / A minor / boom bap
-#
-# Core concept: sample= variation as drum texture.
-#   s1 and h1/h2 use sample=var() so the same pattern character
-#   hits different sample banks per section — the kit evolves
-#   without the pattern changing.
-#   m1 has delay=0.5: chord stabs land on the 8th-note off-beat,
-#   classic hip-hop placement. Sus is short so they chop and decay.
-#   b1 walks in 16th notes for jazz-inflected motion.
-#
-# Arc (bars):
-#    0–16   intro      kick + bass only
-#   16–40   verse 1    kit enters, sample bank 0
-#   40–56   hook       chords and melody in, sample bank 1
-#   56–88   verse 2    sample bank shifts again, denser bass walk
-#   88–104  outro      melody drops, bass trails
-# ─────────────────────────────────────────────────────────────
+# smoothPiano 98
+# interlude
 
-Clock.bpm = 87
-Scale.default = "minor"
-Root.default = "A"
+Clock.bpm=98
+Scale.default="mixolydian"
+Root.default=var(P*[0,4,8],[32,55,15])
 
-secs = [64, 96, 64, 128, 64]
+p1 >> pianovel(Pvar(PRand([list(VIIsus2),list(VIsus2),list(Vsus2),list(IVsus2)]),8), oct=[3,[4,5]], dur=1/2, velocity=PRand(50,79), mverb=.5, chop=0, mpf=var([900,400,2800,1235,180], [5,8,2,13])).every(16, "rotate")
 
-k1 >> compkick(dur=1, oct=3,
-               amp=var([0.88, 0.9, 0.88, 0.92, 0.5], secs),
-               drive=var([0.18, 0.22, 0.2, 0.25, 0.08], secs),
-               room=0.2, mix=0.25)
+p2 >> pianovel(p1.degree[0], dur=[6,2], oct=[3,4], mpf=800)
 
-s1 >> play(". . . . o . . . ", dur=1/4,
-           amp=var([0, 0.72, 0.68, 0.75, 0.35], secs),
-           sample=var([0, 0, 1, 2, 0], secs),
-           room=0.35, mix=0.45)
+p3 >> pianovel(PChords(), dur=[12,4], oct=[5,(5,6),5], room=1, mix=0.3, velocity=PRand(59,99), pan=(-1,1))
 
-h1 >> play("- . ", dur=1/4,
-           amp=var([0, 0.32, 0.35, 0.35, 0.15], secs),
-           sample=var([0, 1, 1, 2, 0], secs))
-
-h2 >> play(". . . . - . . . ", dur=1/4,
-           amp=var([0, 0.38, 0.42, 0.4, 0.2], secs),
-           sample=var([0, 1, 2, 2, 0], secs))
-
-b1 >> dbass([0, 3, 5, 3, 0, -2, 3, 0,
-             5, 3, 0, 5, 7, 5, 3, 0], dur=1/4, oct=5,
-            amp=var([0.82, 0.85, 0.82, 0.88, 0.4], secs),
-            sus=var([0.5, 0.55, 0.5, 0.58, 0.3], secs),
-            lpf=var([500, 600, 500, 700, 300], secs),
-            room=0.2, mix=0.28)
-
-m1 >> juno([(0,2,4), rest(0), (3,5,7), rest(0),
-            (2,4,6), rest(0), (6,1,3), rest(0)], dur=1, oct=4,
-           amp=var([0, 0.38, 0.42, 0.42, 0.18], secs),
-           delay=0.5,
-           sus=0.4,
-           room=0.4, mix=0.5,
-           lpf=linvar([800, 3000], 64))
-
-n1 >> pluck([0, 3, 5, 7, 5, 3, 0, 3], dur=1/2, oct=5,
-            amp=var([0, 0, 0.38, 0.42, 0.22], secs),
-            sus=var([0.6, 0.6, 0.8, 1.0, 0.5], secs),
-            room=0.3, mix=0.4,
-            lpf=linvar([2000, 5000], 64))
+rb >> play("<(v...)(v..(.v))(...(.v))(..v.)><(.r)...><-.><.+><...(.(.:))>", dur=1/2, sample=(2,PStep(9,5,9),0,1,3), lpf=linvar([780,17800],[128]), room=PStep(13,1,0), mix=0.7).sometimes("stutter", PRand(2,4))

@@ -24,38 +24,62 @@ GRID_DIR = Path.home() / "live" / "grid"
 CELLS_FILE = GRID_DIR / "cells.json"
 OUT_FILE = GRID_DIR / "tracks_extracted.json"
 
-BPM_RE = re.compile(r'Clock\.bpm\s*=\s*(?:lininf\s*\(\s*)?([0-9]+)')
+BPM_RE   = re.compile(r'Clock\.bpm\s*=\s*(?:lininf\s*\(\s*)?([0-9]+)')
 SCALE_RE = re.compile(r'Scale\.default\s*=\s*["\']([^"\']+)')
-ROOT_RE = re.compile(r'Root\.default\s*=\s*["\']?([A-Za-z#b0-9]+)')
+ROOT_RE  = re.compile(r'Root\.default\s*=\s*["\']?([A-Za-z#b0-9]+)')
+
+
+def parse_header(code):
+    """Return (name, category) from the first two comment lines.
+
+    Format:  # <name> [bpm]        ← line 1
+             # <category>          ← line 2 (optional)
+    """
+    name = cat = None
+    ci = 0
+    for line in code.strip().splitlines()[:6]:
+        s = line.strip()
+        if not s.startswith('#'):
+            break
+        content = s.lstrip('#').strip()
+        if not content:
+            continue
+        ci += 1
+        if ci == 1:
+            # Name = everything before — or a trailing bare number
+            m = re.match(r'^(.+?)(?:\s+[—–]\s+.*|\s+\d+\s*$)', content)
+            name = (m.group(1) if m else re.sub(r'\s+\d+$', '', content)).strip() or None
+        elif ci == 2:
+            cat = content
+            break
+    return name, cat
 
 
 def analyze_track(path):
-    """Return {code, tempo, scale, root, key, name, source, lines, bytes}."""
+    """Return {code, tempo, scale, root, key, name, category, source, lines, bytes}."""
     text = path.read_text(errors='replace')
-    bpms = BPM_RE.findall(text)
+    bpms   = BPM_RE.findall(text)
     scales = SCALE_RE.findall(text)
-    roots = ROOT_RE.findall(text)
-    # Primary = first occurrence (typically the initial setting)
-    tempo = int(bpms[0]) if bpms else None
-    scale = scales[0] if scales else None
-    root = roots[0].strip('"\'') if roots else None
-    key = None
-    if root and scale:
-        key = f"{root} {scale}"
-    elif root:
-        key = root
-    elif scale:
-        key = scale
+    roots  = ROOT_RE.findall(text)
+    tempo  = int(bpms[0]) if bpms else None
+    scale  = scales[0] if scales else None
+    root   = roots[0].strip('"\'') if roots else None
+    key    = None
+    if root and scale: key = f"{root} {scale}"
+    elif root:         key = root
+    elif scale:        key = scale
+    name, category = parse_header(text)
     return {
-        "code": text,
-        "tempo": tempo,
-        "scale": scale,
-        "root": root,
-        "key": key,
-        "name": path.stem,
-        "source": path.name,
-        "lines": text.count("\n") + 1,
-        "bytes": len(text),
+        "code":     text,
+        "tempo":    tempo,
+        "scale":    scale,
+        "root":     root,
+        "key":      key,
+        "name":     name or path.stem,
+        "category": category,
+        "source":   path.name,        # filename (used as source_file)
+        "lines":    text.count("\n") + 1,
+        "bytes":    len(text),
     }
 
 
@@ -90,22 +114,17 @@ def main():
         if i >= 400:
             break
         coord = f"Q{i}"
-        label_parts = [t["name"]]
-        if t["tempo"]:
-            label_parts.append(f"@ {t['tempo']}")
-        if t["key"]:
-            label_parts.append(t["key"])
-        label = " ".join(label_parts) + f" ({t['lines']}L)"
         proposals[coord] = {
-            "code": t["code"],
-            "label": label,
-            "type": "track",
-            "tempo": t["tempo"],
-            "key": t["key"],
-            "scale": t["scale"],
-            "root": t["root"],
-            "source": t["source"],
-            "source_file": t["source"],  # t["source"] = path.name in analyze_track
+            "code":            t["code"],
+            "label":           t["name"],      # clean name from header comment
+            "type":            "track",
+            "tempo":           t["tempo"],
+            "key":             t["key"],
+            "scale":           t["scale"],
+            "root":            t["root"],
+            "source":          "codeBank",
+            "source_file":     t["source"],    # filename.py
+            "attack_category": t["category"],  # from 2nd comment line
         }
 
     out = {
@@ -129,12 +148,25 @@ def main():
         patched = 0
         skipped = 0
         for coord, proposal in proposals.items():
-            body = {k: v for k, v in proposal.items() if v is not None and k != "source"}
+            body = {k: v for k, v in proposal.items() if v is not None}
             if coord in existing:
                 cell = existing[coord]
+                changed = False
+                # Back-fill source_file
                 if not cell.get("source_file") and proposal.get("source_file"):
-                    # Back-fill source_file onto existing cell (migration step)
                     cell["source_file"] = proposal["source_file"]
+                    changed = True
+                # Back-fill label (replace auto-generated "(NL)" labels or missing)
+                if proposal.get("label") and (
+                    not cell.get("label") or re.search(r'\(\d+L\)$', cell.get("label", ""))
+                ):
+                    cell["label"] = proposal["label"]
+                    changed = True
+                # Back-fill attack_category if not yet set
+                if proposal.get("attack_category") and not cell.get("attack_category"):
+                    cell["attack_category"] = proposal["attack_category"]
+                    changed = True
+                if changed:
                     patched += 1
                 else:
                     skipped += 1

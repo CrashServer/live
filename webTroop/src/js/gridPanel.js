@@ -126,7 +126,7 @@ function createGridPanel() {
         const clamped = Math.max(320, Math.min(window.innerWidth - 200, w));
         panel.style.width = clamped + "px";
         _syncMainMargin(clamped);
-    });
+    }, { passive: true });
     document.addEventListener("mouseup", () => {
         if (!resizing) return;
         resizing = false;

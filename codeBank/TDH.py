@@ -1,9 +1,11 @@
-# TDH 170
+# trap
+# Drums
 
-Clock.bpm = 170
-a4 >> blip(0, dur=16, fbdelay=0.5, oct=4, sus=8, wshape=0, fx1=0, mverb=0.5, slide=PRand(1, 12), slidedelay=PWhite(0.3,0.7)).unison(4, .5)
-y1 >> plaitsX([0,[P+[7,5], P+[1,2,PRand(8),7]]], preset=(11,12), dur=16, oct=(2,3,PStep(5,5,4)), dfm=PRand(900,5200)*1, dfmd=1, tremolo=PStep(8,4,0), tremolo_=0.5, dfmr=0.79, fdecay=1, mverb=0.8, amp=1, fx2=0.5, shimmer=1)
-p1 >> plaits(P[0,5,6,10], dur=1/4, tape=1, tapedrive=2, oct=(3,5), harm=0.0, timbre=0.8, morph=0.94, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.5) + var([0,7],11)
-p2 >> plaits(P[-2,4,6,7], dur=1/2, oct=(3,5), tape=1, tapedrive=3, harm=0.2, timbre=0.8, morph=0.24, engine=1, fdecay=1.8, cutoff=9000, bright=PFr(0.9,0.99), aux=0, porta=0.09, dist2=0.4) + var([0,[PWalk(8, 1, 1)]],7)
-i0 >> bellmod(PWhite(-4,4), mverb=.8, dur=PWhite(1/4, 1/8), lag = 10, s1=1, s2=PWhite(0,.3), s3=PWhite(0,.3), pong=0.25, beat_dur=1, pongtime=2).end(16,PRand(0,4))
-p6 >> loop("junglecool16", dur=16, sample=PRand(909), sbrk=P*[0, PWhite(.2, 2)])
+d0 >> play(".{...u}..u...", sample=5, hpf=var(PRand(4000)+10), rate=(.5,2)).sometimes("stutter")
+d1 >> play(".{...c}..c...", sample=5, mverb=0, flanger=0, chorus=var(PWhite(0, 1)), amp=P*[0, 1], rate=(P*[.5,.5,.5,-1],2))
+d2 >> play("v.....(...{v.})(...{.v}))", cut=2, sample=8, hpf=50, drive=(0,var(PWhite(0,0.2)))).sometimes("stutter")
+d3 >> play("v.....(...{v[vv].}).", sample=8, delay=0.5, hpf=400, amp=var([0, 1], [28, 4]))
+d4 >> play("(...(.p)).((p.).(p.).)((p.).(p.).)", dur=1/4, sample=4, crush=8,bits=8)
+d5 >> play("-{-[--]}-.-{[---][--]}(-.)(-[----])", sample=2, amp=PCoin(PWhite(0, 1),0,0.5), hpf=6000, pan=PWhite(-1,1)).sometimes("amen").sometimes("bubble").sometimes("stutter", PRand(16), rate=PWhite(-1,5))
+d6 >> play("---.-{[---][--]}(-.)(-[----])", hpf=5000, sample=10, amp=PCoin(PWhite(0, 1), 0, 0.5), pan=PWhite(-1,1)).sometimes("amen").sometimes("bubble")
+d7 >> play("---.-{[---][--]}(-.)(-[----])", pan=PWhite(-1, 1), hpf=4000, amp=PCoin(PWhite(0, 1), 0, 0.5), sample=8).sometimes("amen").sometimes("bubble").every(4, "shuffle")

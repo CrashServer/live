@@ -1,10 +1,15 @@
-# style_Rock 130
-Clock.bpm =130
-Scale.default="minor"
-Root.default = "E"
+# third 133
+# launch
 
-b1 >> pbass(var([0, 0, 7], [2, 1, 1]),dur=1/2, oct=PStep(4,4,3), valad=500, valadr=linvar([0.1, 0.8], [32, 0]), valadd=25, valadt=0, valadc=0.3, drive=0.1, rate=0.9, hpf=30)
-e3 >> guit((P*[0,-2], P*[2,10,12,3],P*[5,7]), dur=var(P*[1, 1/2, 8], 8), oct=(5,6), rate=0.4, drive=0.5, mod=.4, amp=0.3, echo=0, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
-k1 >> play("<k(...(...k))..><..u.><-><.s.>", drcomp=.5).sometimes("stutter")
-k2 >> play("{tTmM}").fill()
-b9 >> soprano((0,2,7), dur=4, amp=0.6, mverb=.7)
+Clock.bpm = 133;
+Root.default = "D#"
+k0 >> dbass([3, 4, 4, 8, 4, 7, 4, [4, 5]], scale=Scale.chromatic, dur=1/3, rate=([4, 2, 1, 0.5], 0.1), lpf=1200, hpf=[1200, 400, 300, 600], lpr=0.4, lofi=PSine(256) + 0.5).every(5, "stutter", rate=0.25, oct=6)
+d2 >> dbass([3, 4, 4, 8, 4, 7, 4, 4], oct=P[5, 6], scale=Scale.chromatic, flanger=[0.7, 0.9, 0.8, 0.7], dur=var([1/3, 2/3], [15, 6]), echo=1/3).unison(4).sometimes("shuffle").sometimes("amen").sometimes("stutter", 4, oct=6, shape=1)
+k0 >> play("-", dur=2, sample=8, echo=0.33, lpf=500)
+e1 >> play("x ", sample=4, hpf=40, amp=0.8, lpf=4000, mverb=(0, 0.1))
+k0 >> dbass([3, 4, 4, 8, 4, 7, 4, [4, 5]], scale=Scale.chromatic, dur=1/3, rate=([4, 2, 1, 0.5], 0.1), lpf=1200, hpf=[1200, 400, 300, 600], lpr=0.4, lofi=PSine(256) + 0.5).every(5, "stutter", rate=0.25, oct=6, resonbank=0.1, csweep=0.4, cswfreq=230, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, rbfreq=70, rbdecay=0.5, rbspread=1.0)
+e1 >> play("x ", sample=4, hpf=40, amp=1, lpf=4000, mverb=(0, 0.1))
+d2 >> dbass([3, 4, 4, 8, 4, 7, 4, 4], oct=P[5, 6], scale=Scale.chromatic, vowel=fi(16, 1, 4), vowelf=2, vowelq=1, flanger=[0.7, 0.9, 0.8, 0.7], dur=var([1/3, 2/3], [15, 6]), echo=1/3).unison(4).sometimes("shuffle").sometimes("amen").sometimes("stutter", 4, oct=6, shape=1)
+
+
+

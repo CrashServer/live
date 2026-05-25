@@ -19,11 +19,11 @@ import CodeMirror from 'codemirror';
   var wordOperators = wordRegexp(["and", "or", "not", "is"]);
   var commonKeywords = ["ascii_gen", "connect", "attack", "lost", "psynth", "ploop", "psample","pfx", "pshort", "PMorse", "unsolo", "soloRnd", "gtr", "chroma", "porta", "morph", "trim", "genArp", "masterAll", "voice_count", "random_bpm_var", "random_bpm", "setseed", "unison", "human", "fill", "brk", "renv", "darker", "lighter", "switch", "clone", "drop", "drop_bpm", "melody", "chaos", "once", "start", "norm", "clamp", "lmap", "drummer", 'Clock', "Scale", 'Root',];
   var commonBuiltins = ['PRand', 'PWhite', 'PxRand', 'PwRand', 'PChain', 'PZ12', 'PTree', 'PWalk', 'PDelta', 'PSquare', 'PIndex', 'PFibMod', 'PShuf', 'PAlt', 'PStretch', 'PPairs', 'PZip', 'PZip2', 'PStutter', 'PSq', 'P10', 'PStep', 'PSum', 'PRange', 'PTri', 'PSine', 'PEuclid', 'PEuclid2', 'PBern', 'PBeat', 'PDur', 'PDelay', 'PStrum', 'PQuicken', 'PRhythm', 'PJoin', 'linvar', 'var', 'expvar', 'sinvar', 'Pvar', "PBin", "PSaw", "PTime", "PTimebin", "PFrac", "PFr", "lininf", "expinf", "linbpm", "linmod", "PDrum", "PChords", "PGauss", "PLog", "PTrir", "PCoin", "PChar", "PMarkov", "PZero", "PBool","PRy"];
-  // for each of commonKeywords and commonBuiltins, add a '()' at the end of the word
-  commonKeywords = commonKeywords.map(function(word) { return word + '()'; });
-  commonBuiltins = commonBuiltins.map(function(word) { return word + '()'; });
+  // Autocomplete hints include '()' suffix; syntax highlighting uses bare names
+  var hintKeywords = commonKeywords.map(function(word) { return word + '()'; });
+  var hintBuiltins = commonBuiltins.map(function(word) { return word + '()'; });
 
-  CodeMirror.registerHelper("hintWords", "python", commonKeywords.concat(commonBuiltins).concat(["exec", "print"]));
+  CodeMirror.registerHelper("hintWords", "python", hintKeywords.concat(hintBuiltins).concat(["exec", "print"]));
 
   function top(state) {
     return state.scopes[state.scopes.length - 1];

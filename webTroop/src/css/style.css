@@ -245,6 +245,36 @@ body {
   left: -0.5rem !important;
 }
 
+/* ---- Fold gutter ---- */
+.CodeMirror-foldgutter {
+  width: 18px;
+}
+.CodeMirror-foldgutter-open,
+.CodeMirror-foldgutter-folded {
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding-right: 2px;
+  transition: color 0.1s;
+}
+.CodeMirror-foldgutter-open:hover,
+.CodeMirror-foldgutter-folded:hover {
+  color: #44aaff;
+}
+/* The folded-range ellipsis marker */
+.CodeMirror-foldmarker {
+  color: #44aaff;
+  background: #1a2233;
+  border: 1px solid #2a3a55;
+  border-radius: 3px;
+  font-size: 10px;
+  padding: 0 5px;
+  margin-left: 4px;
+  cursor: pointer;
+  font-family: monospace;
+}
+
 /* Synchronisation des gutters pour les éditeurs split - utilise des unités relatives */
 /* #editor .CodeMirror-gutters,
 #other-editor .CodeMirror-gutters {

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrashServer Reference</title>
+<style>
+  :root {
+    --bg: #0e0e10;
+    --surface: #17171b;
+    --border: #2a2a32;
+    --accent: #c792ea;
+    --accent2: #82aaff;
+    --accent3: #c3e88d;
+    --accent4: #f78c6c;
+    --accent5: #89ddff;
+    --text: #d4d4d8;
+    --muted: #6b7280;
+    --code-bg: #1a1a22;
+    --tag-bg: #1f1f2e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    padding: 2.5rem 3rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.4rem;
+    margin-bottom: 2rem;
+  }
+  header h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+  header .subtitle {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  h2 .icon { opacity: 0.7; font-style: normal; }
+
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent2);
+    margin: 1.1rem 0 0.5rem;
+  }
+
+  p { margin: 0.4rem 0 0.7rem; color: var(--text); }
+
+  /* ── CODE ── */
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.82em;
+    background: var(--code-bg);
+    color: var(--accent5);
+    padding: 0.12em 0.4em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+    overflow-x: auto;
+    margin: 0.6rem 0 1rem;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.8em;
+    line-height: 1.6;
+  }
+  pre .cm { color: var(--muted); }
+  pre .kw { color: var(--accent); }
+  pre .fn { color: var(--accent2); }
+  pre .st { color: var(--accent3); }
+  pre .nu { color: var(--accent4); }
+  pre .co { color: #546e7a; font-style: italic; }
+  pre .op { color: #89ddff; }
+
+  /* ── TABLES ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.6rem 0 1rem;
+    font-size: 0.85em;
+  }
+  thead th {
+    background: var(--tag-bg);
+    color: var(--muted);
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td {
+    padding: 0.45rem 0.75rem;
+    border-bottom: 1px solid #1f1f28;
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: #1a1a22; }
+  td:first-child { white-space: nowrap; }
+  td code { font-size: 0.9em; }
+
+  /* ── TAGS ── */
+  .tag {
+    display: inline-block;
+    font-size: 0.72em;
+    font-weight: 600;
+    padding: 0.15em 0.55em;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .tag-python { background: #1a2e1a; color: var(--accent3); }
+  .tag-js     { background: #1a1a00; color: #ffcb6b; }
+  .tag-key    { background: #1a1a2e; color: var(--accent2); }
+  .tag-new    { background: #2e1a1a; color: var(--accent4); }
+
+  kbd {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78em;
+    background: var(--tag-bg);
+    color: var(--accent2);
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 0.1em 0.5em;
+    white-space: nowrap;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: #0e1a0e;
+    border-left: 3px solid var(--accent3);
+    border-radius: 0 6px 6px 0;
+    padding: 0.65rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.85em;
+    color: #a8c890;
+  }
+  .callout.info {
+    background: #0e0e1e;
+    border-left-color: var(--accent2);
+    color: #9ab8e0;
+  }
+  .callout.warn {
+    background: #1e120e;
+    border-left-color: var(--accent4);
+    color: #e0a090;
+  }
+
+  /* ── SYNTH CARD ── */
+  .synth-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.9rem;
+  }
+  .synth-card h4 {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .synth-card .desc { color: var(--muted); font-size: 0.82em; margin-bottom: 0.6rem; }
+  .synth-params { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
+  .param-chip {
+    font-family: monospace;
+    font-size: 0.78em;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.15em 0.55em;
+    color: var(--accent5);
+  }
+  .param-chip .default { color: var(--accent4); }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.4rem;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 2rem;
+  }
+  .toc a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85em;
+    line-height: 1.9;
+  }
+  .toc a:hover { color: var(--accent2); }
+  .toc-title {
+    grid-column: 1/-1;
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; color: #111; padding: 1.5cm; max-width: none; font-size: 11px; }
+    :root {
+      --bg: #fff; --surface: #f5f5f5; --border: #ddd;
+      --accent: #7c3aed; --accent2: #2563eb; --accent3: #16a34a;
+      --accent4: #ea580c; --accent5: #0891b2;
+      --text: #111; --muted: #666; --code-bg: #f0f0f0; --tag-bg: #e8e8e8;
+    }
+    a { color: inherit; text-decoration: none; }
+    .toc { display: none; }
+    section { page-break-inside: avoid; }
+    pre { border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CrashServer Reference</h1>
+  <div class="subtitle">compo · recording · multitrack stems · sequencer (#@) · new synths · editor shortcuts — svdk / 2026</div>
+</header>
+
+<nav class="toc">
+  <div class="toc-title">Contents</div>
+  <a href="#shortcuts">Editor keyboard shortcuts</a>
+  <a href="#inline">Inline syntax shortcuts</a>
+  <a href="#sections">Section sequencer (#@ / #@#@)</a>
+  <a href="#seqtags">Section tag types</a>
+  <a href="#compo">compo — composition engine</a>
+  <a href="#rec">compo.rec / rec_stop</a>
+  <a href="#stems">compo.rec_stems — multitrack stems</a>
+  <a href="#cells">compo.cell_* — grid cells</a>
+  <a href="#setlist">compo.setlist / fire</a>
+  <a href="#synths">New synths: reese &amp; juno</a>
+  <a href="#patterns">PSwing · Pacc · PLife patterns</a>
+  <a href="#autorec">autoRec — param automation</a>
+  <a href="#server-rec">Server audio recording</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════ SHORTCUTS ══ -->
+<section id="shortcuts">
+  <h2><i class="icon">⌨</i> Editor keyboard shortcuts</h2>
+
+  <table>
+    <thead><tr><th>Key</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><kbd>Ctrl-Enter</kbd></td><td>Evaluate current block (single line)</td></tr>
+      <tr><td><kbd>Ctrl-Alt-Enter</kbd></td><td>Evaluate multi-line block (from blank-line-bounded region)</td></tr>
+      <tr><td><kbd>Ctrl-;</kbd></td><td>Stop clock — runs <code>Clock.clear() · soff() · Server.clearFx()</code> and cancels any active section sequence</td></tr>
+      <tr><td><kbd>Ctrl-Shift-J</kbd></td><td>Cancel active section sequence (does not stop players)</td></tr>
+      <tr><td><kbd>Ctrl-J</kbd></td><td>Jump cursor to the currently-running #@ section</td></tr>
+      <tr><td><kbd>Ctrl-Shift-F</kbd></td><td>Fold all <code>#@#@</code> track headers → skeleton view</td></tr>
+      <tr><td><kbd>Ctrl-Alt-F</kbd></td><td>Unfold everything</td></tr>
+      <tr><td><kbd>Alt-X</kbd></td><td>Toggle comment on current line, then evaluate</td></tr>
+      <tr><td><kbd>Ctrl-Alt-X</kbd></td><td>Toggle comment on entire block, then evaluate</td></tr>
+      <tr><td><kbd>Alt-S</kbd></td><td>Solo the player on the current line</td></tr>
+      <tr><td><kbd>Ctrl-Alt-S</kbd></td><td>Un-solo all players (<code>unsolo()</code>)</td></tr>
+      <tr><td><kbd>Alt-O</kbd></td><td>Solo-drop: solo current player, auto-unsolo after 64 beats</td></tr>
+      <tr><td><kbd>Alt-R</kbd></td><td>Reset player (prefixes line with <code>~</code>, re-evaluates)</td></tr>
+      <tr><td><kbd>Alt-J</kbd></td><td>Jump to other collaborator's cursor position</td></tr>
+      <tr><td><kbd>Ctrl-Alt-J</kbd></td><td>Jump back to previous position</td></tr>
+      <tr><td><kbd>Alt-Up / Alt-Down</kbd></td><td>Increment/decrement number under cursor by 1, evaluate, autoRec capture</td></tr>
+      <tr><td><kbd>Ctrl-Up / Ctrl-Down</kbd></td><td>Increment/decrement number under cursor by 10, evaluate, autoRec capture</td></tr>
+      <tr><td><kbd>Alt-T</kbd></td><td>Toggle autoRec (param automation recorder)</td></tr>
+      <tr><td><kbd>Alt-A</kbd></td><td>Randomize value under cursor</td></tr>
+      <tr><td><kbd>Alt-I</kbd></td><td>Show definition tooltip for symbol under cursor</td></tr>
+      <tr><td><kbd>Alt-F</kbd></td><td>Find (persistent search bar)</td></tr>
+      <tr><td><kbd>Ctrl-G</kbd></td><td>Find next</td></tr>
+      <tr><td><kbd>Ctrl-S</kbd></td><td>Save selection to <code>codeBank/</code> (uses first <code>#comment</code> as filename)</td></tr>
+      <tr><td><kbd>Ctrl-Space</kbd></td><td>Trigger autocomplete (synths, effects, attacks, loops)</td></tr>
+      <tr><td><kbd>Alt-P</kbd></td><td>Toggle piano-roll panel</td></tr>
+      <tr><td><kbd>Ctrl-Left / Right</kbd></td><td>Move cursor to previous/next comma (navigate params)</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Cancel autoRec if armed; otherwise close tooltips</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════════════════ INLINE SYNTAX ══ -->
+<section id="inline">
+  <h2><i class="icon">✦</i> Inline syntax shortcuts</h2>
+  <p>These are expanded by the editor <em>before</em> sending to FoxDot, so they work in any evaluated block or #@ section.</p>
+
+  <table>
+    <thead><tr><th>You type</th><th>FoxDot receives</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>?8</code></td>
+        <td><code>PFr(0, 8)</code></td>
+        <td>Integer range → PFr (integer random)</td>
+      </tr>
+      <tr>
+        <td><code>2?8</code></td>
+        <td><code>PFr(2, 8)</code></td>
+        <td>Explicit low–high integer random</td>
+      </tr>
+      <tr>
+        <td><code>0.5?1.0</code></td>
+        <td><code>PWhite(0.5, 1.0)</code></td>
+        <td>Float range → PWhite</td>
+      </tr>
+      <tr>
+        <td><code>[0,3,5]!8</code></td>
+        <td><code>var([0,3,5], [8, 8])</code></td>
+        <td>List → time-variant value, plays for 8 beats</td>
+      </tr>
+      <tr>
+        <td><code>PWhite(0,1)!4</code></td>
+        <td><code>var(PWhite(0,1), [4, 4])</code></td>
+        <td>Any expression → var() wrapper</td>
+      </tr>
+      <tr>
+        <td><code># p1 >> dbass(...)</code></td>
+        <td><code>p1.stop()</code></td>
+        <td>Commented-out player line → stop that player</td>
+      </tr>
+      <tr>
+        <td><code>_ p1 >> dbass(...)</code></td>
+        <td><code>p1.stop()</code></td>
+        <td>Same with underscore prefix</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    <strong>Tip:</strong> Use <kbd>Alt-X</kbd> to comment a player line and immediately stop it in one keystroke.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ SECTION SEQUENCER ══ -->
+<section id="sections">
+  <h2><i class="icon">§</i> Section sequencer — <code>#@</code> and <code>#@#@</code></h2>
+
+  <p>Two-level document structure for organising a live set into tracks and sequenced sections.</p>
+
+  <h3>#@#@ — Track header (fold only)</h3>
+  <p>Marks the start of a logical track. Pressing <kbd>Ctrl-Shift-F</kbd> folds all track headers to give a skeleton overview. Not a sequencer section — evaluating a <code>#@#@</code> line does nothing.</p>
+
+<pre>#@#@ Bass
+b1 >> reese(...)
+
+#@#@ Drums
+d1 >> play("X . X .")</pre>
+
+  <h3>#@ — Section tag (fold + sequence)</h3>
+  <p>Placing the cursor on a <code>#@</code> line and pressing <kbd>Ctrl-Enter</kbd> evaluates the code block beneath it <em>and</em> schedules automatic advance to the next section after the specified beat count.</p>
+
+<pre><span class="co"># Basic: play intro, advance to 'build' after 32 beats</span>
+#@intro(32)
+b1 >> dbass([0,3,5], oct=4, amp=0.8)
+
+<span class="co"># No beat count: plays forever, no auto-advance</span>
+#@peak
+b1 >> reese([0,-2], amp=1.2)
+
+<span class="co"># Multiple targets with weights (loop section)</span>
+#@loop(16, verse:3, chorus:1)
+
+<span class="co"># Terminator sections</span>
+#@end(8)       <span class="co"># stop all players after 8 beats</span>
+#@endfade(16)  <span class="co"># fade all amps to 0 over 16 beats, then stop</span>
+#@clear        <span class="co"># Clock.clear() immediately</span></pre>
+
+  <div class="callout info">
+    <strong>Cancel mid-sequence:</strong> <kbd>Ctrl-Shift-J</kbd> cancels the pending auto-advance without stopping players. <kbd>Ctrl-;</kbd> cancels and stops everything.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ SECTION TAG TYPES ══ -->
+<section id="seqtags">
+  <h2><i class="icon">◈</i> Section tag reference</h2>
+
+  <table>
+    <thead><tr><th>Tag syntax</th><th>Type</th><th>Behaviour</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>#@name(32)</code></td>
+        <td>section</td>
+        <td>Execute code below; auto-advance to next <code>#@</code> after 32 beats</td>
+      </tr>
+      <tr>
+        <td><code>#@name</code></td>
+        <td>section</td>
+        <td>Execute code; no auto-advance (plays forever until manually moved)</td>
+      </tr>
+      <tr>
+        <td><code>#@loop(16, a:2, b:1)</code></td>
+        <td>loop</td>
+        <td>Execute optional code; after 16 beats jump to section <code>a</code> (weight 2) or <code>b</code> (weight 1) at random</td>
+      </tr>
+      <tr>
+        <td><code>#@end(8)</code></td>
+        <td>end</td>
+        <td>Schedule <code>Clock.clear()</code> 8 beats from now</td>
+      </tr>
+      <tr>
+        <td><code>#@end</code></td>
+        <td>end</td>
+        <td><code>Clock.clear()</code> immediately</td>
+      </tr>
+      <tr>
+        <td><code>#@endfade(16)</code></td>
+        <td>endfade</td>
+        <td>Ramp all player amps to 0 over 16 beats via <code>linvar</code>, then <code>Clock.clear()</code></td>
+      </tr>
+      <tr>
+        <td><code>#@clear</code></td>
+        <td>clear</td>
+        <td><code>Clock.clear()</code> — same as <code>#@end</code> without delay</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Python-side helpers (exposed to FoxDot namespace)</h3>
+  <table>
+    <thead><tr><th>Function</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>_seq_cancel()</code></td><td>Invalidate pending sequence (no-op if nothing pending)</td></tr>
+      <tr><td><code>_seq_schedule(beats, id)</code></td><td>Schedule <code>__SEQ_NEXT__</code> callback — internal, called by JS</td></tr>
+      <tr><td><code>_seq_end(beats)</code></td><td>Schedule <code>Clock.clear()</code> after N beats</td></tr>
+      <tr><td><code>_seq_endfade(beats)</code></td><td>Fade all players to 0 over N beats, then clear</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════════════════ COMPO ══ -->
+<section id="compo">
+  <h2><i class="icon">◉</i> compo — composition engine</h2>
+  <p><code>compo</code> is a singleton of the <code>Compo</code> class, available in the FoxDot namespace.</p>
+  <p>It wraps the <code>codeBank/</code> attack files (each named script = one "attack"), providing timed execution, section navigation, recording, multitrack stems, and a grid registry.</p>
+
+  <h3>compo.fire — execute an attack by section</h3>
+<pre><span class="fn">compo.fire</span>(<span class="st">"edge93"</span>)                          <span class="co"># run entire file</span>
+<span class="fn">compo.fire</span>(<span class="st">"edge93"</span>, <span class="st">"intro"</span>)               <span class="co"># run intro section, plays forever</span>
+<span class="fn">compo.fire</span>(<span class="st">"edge93"</span>, <span class="st">"intro"</span>, dur=<span class="nu">32</span>)        <span class="co"># run intro, stop players after 32 beats</span>
+<span class="fn">compo.fire</span>(<span class="st">"edge93"</span>, <span class="st">"intro"</span>, seq=<span class="kw">True</span>)     <span class="co"># auto-advance through sections</span>
+<span class="fn">compo.fire</span>(<span class="st">"edge93"</span>, <span class="st">"intro"</span>, seq=<span class="kw">True</span>, dur=<span class="nu">64</span>)  <span class="co"># auto-advance, override all timings</span></pre>
+
+  <p>Section names in the attack file are delimited by <code>#@name(beats)</code> tags (same syntax as the editor sequencer). Special terminator sections: <code>loop</code>, <code>clear</code>, <code>end</code>, <code>endfade</code>.</p>
+
+  <h3>compo.sections — inspect a file</h3>
+<pre><span class="fn">compo.sections</span>(<span class="st">"edge93"</span>)
+<span class="co"># → intro(32) -> build -> peak(16) -> end(8)</span></pre>
+
+  <h3>compo.compose — paste into editor + auto-play</h3>
+<pre><span class="fn">compo.compose</span>(<span class="st">"edge93"</span>)              <span class="co"># paste code into editor</span>
+<span class="fn">compo.compose</span>(<span class="st">"edge93"</span>, <span class="st">"intro"</span>)    <span class="co"># paste + immediately start from 'intro'</span></pre>
+
+  <h3>compo.reload — refresh attack library</h3>
+<pre><span class="fn">compo.reload</span>()   <span class="co"># re-reads all codeBank/ files</span></pre>
+</section>
+
+<!-- ══════════════════════════════════════════════ REC ══ -->
+<section id="rec">
+  <h2><i class="icon">⏺</i> compo.rec / rec_stop — composition recording</h2>
+
+  <p>Records all code evaluations in the session and generates a replay script with <code>#@section</code> markers, ready to commit to <code>codeBank/</code>.</p>
+
+<pre><span class="fn">compo.rec</span>()       <span class="co"># start recording; new section after 4-beat pause (default)</span>
+<span class="fn">compo.rec</span>(<span class="nu">1</span>)      <span class="co"># precise — new section after 1-beat pause</span>
+<span class="fn">compo.rec</span>(<span class="nu">8</span>)      <span class="co"># loose — new section after 8-beat pause</span>
+
+<span class="fn">compo.rec_stop</span>()              <span class="co"># auto-name: recorded_HHMMSS.py</span>
+<span class="fn">compo.rec_stop</span>(<span class="st">"my_session"</span>)  <span class="co"># saved as codeBank/my_session.py</span></pre>
+
+  <div class="callout">
+    <strong>How sections work:</strong> Any pause &gt; <code>gap</code> beats between evaluations starts a new <code>#@section</code> in the output file. BPM is captured at rec start and embedded in the script header.
+  </div>
+
+  <h3>setlist — queue a planned performance</h3>
+<pre><span class="fn">compo.setlist</span>([
+    (<span class="st">"edge93"</span>, <span class="st">"intro"</span>, <span class="nu">32</span>),
+    (<span class="st">"hearme"</span>, <span class="st">"part3"</span>, <span class="nu">64</span>),
+    (<span class="st">"antenna"</span>, <span class="st">"peak"</span>,  <span class="nu">16</span>),
+])
+
+<span class="fn">compo.skip</span>()     <span class="co"># jump to next entry now</span>
+<span class="fn">compo.back</span>()     <span class="co"># go back one entry</span>
+<span class="fn">compo.current</span>()  <span class="co"># print current position in setlist</span></pre>
+</section>
+
+<!-- ══════════════════════════════════════════════ STEMS ══ -->
+<section id="stems">
+  <h2><i class="icon">🎚</i> compo.rec_stems — multitrack stems</h2>
+
+  <p>Routes each active FoxDot player to its own private SC audio bus and records a separate <code>.wav</code> file per player. All stems start on the next bar boundary and run for exactly the same duration.</p>
+
+<pre><span class="co"># Basic: record all active players, 16 bars, scene "forest", variation "calm"</span>
+<span class="fn">compo.rec_stems</span>()
+
+<span class="co"># Full options</span>
+<span class="fn">compo.rec_stems</span>(
+    bars=<span class="nu">16</span>,              <span class="co"># loop length in bars (4 beats per bar)</span>
+    session=<span class="st">"forest"</span>,    <span class="co"># scene name prefix for filenames</span>
+    variation=<span class="st">"combat"</span>,  <span class="co"># intensity tag for filenames</span>
+    players=<span class="kw">None</span>,         <span class="co"># None = autodiscover from Clock.playing</span>
+    output_dir=<span class="st">"./stems"</span>, <span class="co"># destination folder (created if absent)</span>
+    tail_bars=<span class="nu">2</span>,           <span class="co"># extra bars for reverb tail</span>
+    bus_start=<span class="nu">32</span>,          <span class="co"># first private SC audio bus</span>
+)
+
+<span class="co"># Explicit player list</span>
+<span class="fn">compo.rec_stems</span>(players=[<span class="st">'p1'</span>, <span class="st">'b1'</span>, <span class="st">'d1'</span>], bars=<span class="nu">8</span>)
+
+<span class="co"># Stop early</span>
+<span class="fn">compo.stem_stop</span>()</pre>
+
+  <p><strong>Output files:</strong> <code>{output_dir}/{session}__{playername}__{variation}.wav</code></p>
+  <p><strong>Example:</strong> <code>stems/forest__p1__combat.wav</code>, <code>stems/forest__b1__combat.wav</code></p>
+
+  <div class="callout">
+    <strong>How routing works:</strong> Each player gets <code>p.output = N</code> (a private SC bus). A <code>\stemDiskOut</code> synth writes that bus to disk; a <code>\stemTap</code> mirrors it to master so you still hear everything while recording. Player output is restored when stems stop.
+  </div>
+
+  <div class="callout warn">
+    <strong>Bus conflict:</strong> Default <code>bus_start=32</code> assumes 16 outputs + 2 inputs (= 18 private buses start). With 32 we have comfortable headroom. If you change SC output config, adjust <code>bus_start</code> accordingly.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ CELLS ══ -->
+<section id="cells">
+  <h2><i class="icon">⊞</i> compo.cell_* — grid registry</h2>
+
+  <p>A 2D grid of short FoxDot snippets stored in <code>grid/cells.json</code>, addressable by <code>COL+ROW</code> coordinate (A0..Z99). Columns = role, rows = tempo bands. Live-editable from the grid panel in the UI.</p>
+
+<pre><span class="co"># Inspect</span>
+<span class="fn">compo.cells_list</span>()        <span class="co"># all populated cells</span>
+<span class="fn">compo.cells_list</span>(<span class="st">'B'</span>)     <span class="co"># all column-B cells</span>
+<span class="fn">compo.cells_list</span>(<span class="st">'B3'</span>)   <span class="co"># B30..B39</span>
+<span class="fn">compo.cell_display</span>(<span class="st">'B32'</span>) <span class="co"># print code for B32</span>
+
+<span class="co"># Run</span>
+<span class="fn">compo.cell_run</span>(<span class="st">'B32'</span>)       <span class="co"># run cell code, players play forever</span>
+<span class="fn">compo.cell_run</span>(<span class="st">'B32'</span>, <span class="nu">16</span>)   <span class="co"># run, auto-stop new players after 16 beats</span>
+
+<span class="co"># Reload after editing cells.json on disk</span>
+<span class="fn">compo.cell_reload</span>()</pre>
+
+  <h3>Column conventions</h3>
+  <table>
+    <thead><tr><th>Col</th><th>Role</th><th>Col</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>Pad / atmosphere</td><td>E</td><td>Lead / melody</td></tr>
+      <tr><td>B</td><td>Bass</td><td>F</td><td>FX / texture</td></tr>
+      <tr><td>C</td><td>Kick / low perc</td><td>G</td><td>Groove / loop</td></tr>
+      <tr><td>D</td><td>Snare / high perc</td><td>H</td><td>Harmony / chord</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════════════════ SETLIST / FIRE ══ -->
+<section id="setlist">
+  <h2><i class="icon">▶</i> compo.fire — section special terminators</h2>
+
+  <p>These section names have reserved behaviour when used inside an attack file with <code>compo.fire(name, ..., seq=True)</code>:</p>
+
+  <table>
+    <thead><tr><th>Section name</th><th>Behaviour</th></tr></thead>
+    <tbody>
+      <tr><td><code>loop</code></td><td>Execute optional code; jump to weighted-random target section. Use <code>#@loop(beats, a:2, b:1)</code> in the file.</td></tr>
+      <tr><td><code>clear</code></td><td>Stop all players accumulated during this fire sequence</td></tr>
+      <tr><td><code>end</code></td><td>If beats set: schedule <code>Clock.clear()</code>. Otherwise: immediate clear.</td></tr>
+      <tr><td><code>endfade</code></td><td>Ramp all players to amp=0 via <code>linvar</code>, then <code>Clock.clear()</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════════════════ SYNTHS ══ -->
+<section id="synths">
+  <h2><i class="icon">🎛</i> New synths</h2>
+
+  <div class="synth-card">
+    <h4>reese <span class="tag tag-new">new</span> <span class="tag tag-python">bass</span></h4>
+    <p class="desc">DnB Reese bass — two detuned saws producing acoustic beating, sub sine for depth, tanh saturation. Stereo: each channel blends the two saws differently.</p>
+    <div class="synth-params">
+      <span class="param-chip">detune=<span class="default">0.022</span></span>
+      <span class="param-chip">cutoff=<span class="default">1200</span></span>
+      <span class="param-chip">rq=<span class="default">0.65</span></span>
+      <span class="param-chip">atk=<span class="default">0.01</span></span>
+      <span class="param-chip">rel=<span class="default">0.1</span></span>
+      <span class="param-chip">amp=<span class="default">1</span></span>
+      <span class="param-chip">sus=<span class="default">1</span></span>
+      <span class="param-chip">pan=<span class="default">0</span></span>
+    </div>
+<pre><span class="co"># Classic DnB Reese</span>
+b1 <span class="op">>></span> <span class="fn">reese</span>([<span class="nu">0</span>,<span class="nu">-2</span>,<span class="nu">0</span>,<span class="nu">5</span>], oct=<span class="nu">4</span>, detune=<span class="nu">0.03</span>, cutoff=<span class="nu">800</span>, amp=<span class="nu">0.9</span>)
+
+<span class="co"># Modulate cutoff for wobble</span>
+b1 <span class="op">>></span> <span class="fn">reese</span>([<span class="nu">0</span>], oct=<span class="nu">4</span>, cutoff=<span class="fn">sinvar</span>([<span class="nu">400</span>,<span class="nu">2000</span>], <span class="nu">8</span>), detune=<span class="nu">0.025</span>)</pre>
+    <div class="callout">
+      <strong>oct=4 minimum.</strong> Below oct 4 the beating loses body and becomes aliased. Typical range oct 4–5.
+    </div>
+  </div>
+
+  <div class="synth-card">
+    <h4>juno <span class="tag tag-new">new</span> <span class="tag tag-python">pad</span></h4>
+    <p class="desc">Roland Juno-106 style — DCO with saw↔square crossfade, stereo chorus via detuned pairs, sub sine, LP filter. Warm analogue pads and plucks.</p>
+    <div class="synth-params">
+      <span class="param-chip">shape=<span class="default">0.0</span> (0=saw, 1=square)</span>
+      <span class="param-chip">cutoff=<span class="default">3200</span></span>
+      <span class="param-chip">rq=<span class="default">0.7</span></span>
+      <span class="param-chip">chorus=<span class="default">0.004</span></span>
+      <span class="param-chip">atk=<span class="default">0.02</span></span>
+      <span class="param-chip">rel=<span class="default">0.15</span></span>
+      <span class="param-chip">amp=<span class="default">1</span></span>
+      <span class="param-chip">sus=<span class="default">1</span></span>
+    </div>
+<pre><span class="co"># Warm pad — square wave, open filter</span>
+p1 <span class="op">>></span> <span class="fn">juno</span>([<span class="nu">0</span>,<span class="nu">2</span>,<span class="nu">4</span>,<span class="nu">7</span>], oct=<span class="nu">5</span>, shape=<span class="nu">0.8</span>, cutoff=<span class="nu">2400</span>, sus=<span class="nu">2</span>)
+
+<span class="co"># Bright pluck — saw, filter sweep</span>
+p1 <span class="op">>></span> <span class="fn">juno</span>([<span class="nu">0</span>,<span class="nu">3</span>,<span class="nu">5</span>], shape=<span class="nu">0.0</span>, cutoff=<span class="fn">linvar</span>([<span class="nu">600</span>,<span class="nu">4000</span>], <span class="nu">16</span>), sus=<span class="nu">0.3</span>)
+
+<span class="co"># Wide chorus pad</span>
+p1 <span class="op">>></span> <span class="fn">juno</span>([<span class="nu">0</span>,<span class="nu">4</span>], oct=<span class="nu">5</span>, chorus=<span class="nu">0.012</span>, shape=<span class="nu">0.5</span>, amp=<span class="nu">0.7</span>, sus=<span class="nu">4</span>)</pre>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ PATTERNS ══ -->
+<section id="patterns">
+  <h2><i class="icon">〜</i> Pattern library — PSwing, Pacc, PLife</h2>
+
+  <!-- PSwing -->
+  <h3>PSwing — swing / shuffle timing</h3>
+  <p>Returns a <code>Pattern</code> of multipliers alternating between <code>1.0</code> (on-beat) and <code>1.0 - amount</code> (off-beat), with subtle per-step variation. Multiply any timing or amplitude param by it.</p>
+
+  <table>
+    <thead><tr><th>Param</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>amount</code></td><td><code>0.1</code></td><td>Swing depth. 0.0 = flat, 1.0 = maximum contrast</td></tr>
+      <tr><td><code>steps</code></td><td><code>8</code></td><td>Pattern length (must be even)</td></tr>
+    </tbody>
+  </table>
+
+<pre><span class="co"># Shuffle feel on dur — offbeats slightly shorter</span>
+d1 <span class="op">>></span> <span class="fn">play</span>(<span class="st">"X-o-X-o-"</span>, dur=<span class="nu">0.5</span>*<span class="fn">PSwing</span>(<span class="nu">0.25</span>))
+
+<span class="co"># Softer offbeats via amplify</span>
+d1 <span class="op">>></span> <span class="fn">play</span>(<span class="st">"X . o ."</span>, amplify=<span class="fn">PSwing</span>(<span class="nu">0.3</span>))
+
+<span class="co"># Delay offbeats slightly (adds timing feel)</span>
+b1 <span class="op">>></span> <span class="fn">reese</span>([<span class="nu">0</span>,<span class="nu">-2</span>], delay=<span class="fn">PSwing</span>(<span class="nu">0.15</span>))
+
+<span class="co"># Longer steps — 16-step pattern</span>
+p1 <span class="op">>></span> <span class="fn">juno</span>([<span class="nu">0</span>,<span class="nu">2</span>,<span class="nu">4</span>], amplify=<span class="fn">PSwing</span>(<span class="nu">0.2</span>, steps=<span class="nu">16</span>))</pre>
+
+  <div class="callout warn">
+    <strong>Cannot be multiplied as a pattern</strong> — <code>Pacc("ghost") * 0.7</code> does not work. Use <code>intensity</code> param on Pacc, or just use the raw value. PSwing likewise: pass as-is or multiply a scalar by it (<code>0.5 * PSwing(0.2)</code> is fine).
+  </div>
+
+  <p><strong>Internal variation:</strong> off-beat multipliers cycle through <code>[1.0, 0.85, 0.95, 0.75]</code> of <code>amount</code> — consecutive off-beats are not identical, giving a more human feel.</p>
+
+  <!-- Pacc -->
+  <h3>Pacc — accent patterns for amplify</h3>
+  <p>Returns a 16-step (or custom length) amplitude accent pattern. Values are relative (0.0–1.0 range, where 1.0 = full accent).</p>
+
+  <table>
+    <thead><tr><th>Param</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>ptype</code></td><td><code>0</code></td><td>Pattern type — integer 0–6 or name string (see below)</td></tr>
+      <tr><td><code>steps</code></td><td><code>16</code></td><td>Pattern length</td></tr>
+      <tr><td><code>intensity</code></td><td><code>1.0</code></td><td>Contrast depth. 0.0 = flat (all 0.7), 1.0 = full contrast</td></tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead><tr><th>#</th><th>Name</th><th>Description</th><th>Accent positions (16 steps)</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td><code>backbeat</code></td><td>Accents on beats 2 and 4</td><td>· · · · ★ · · · · · · · ★ · · ·</td></tr>
+      <tr><td>1</td><td><code>fourfloor</code></td><td>Four on the floor</td><td>★ · · · ★ · · · ★ · · · ★ · · ·</td></tr>
+      <tr><td>2</td><td><code>offbeat</code></td><td>Accents on the "and"</td><td>· · ★ · · · ★ · · · ★ · · · ★ ·</td></tr>
+      <tr><td>3</td><td><code>ghost</code></td><td>Strong downbeats + ghost notes</td><td>★ ° ° ° ▸ ° ° ° ★ ° ° ° ▸ ° ° °</td></tr>
+      <tr><td>4</td><td><code>synco</code></td><td>Syncopated — accents off the grid</td><td>· · ★ · · ★ · · ★ · · · ★ · · ★</td></tr>
+      <tr><td>5</td><td><code>tresillo</code></td><td>3+3+2 grouping (Afro-Cuban)</td><td>★ · · ★ · · ★ · ★ · · ★ · · ★ ·</td></tr>
+      <tr><td>6</td><td><code>halftime</code></td><td>Accent every other bar</td><td>★ · ▸ · ▸ · ▸ · ▸ · · · ▸ · · ·</td></tr>
+    </tbody>
+  </table>
+
+<pre><span class="co"># By name</span>
+d1 <span class="op">>></span> <span class="fn">play</span>(<span class="st">"X . o . X . o ."</span>, amp=<span class="fn">Pacc</span>(<span class="st">"ghost"</span>))
+d1 <span class="op">>></span> <span class="fn">play</span>(<span class="st">"X . o . X . o ."</span>, amp=<span class="fn">Pacc</span>(<span class="st">"tresillo"</span>))
+
+<span class="co"># By number with shorter pattern</span>
+d1 <span class="op">>></span> <span class="fn">play</span>(<span class="st">"X . o ."</span>, amp=<span class="fn">Pacc</span>(<span class="nu">3</span>, steps=<span class="nu">8</span>))
+
+<span class="co"># Subtle ghost notes — half intensity</span>
+d1 <span class="op">>></span> <span class="fn">play</span>(<span class="st">"X . o . X . o ."</span>, amp=<span class="fn">Pacc</span>(<span class="st">"ghost"</span>, intensity=<span class="nu">0.4</span>))
+
+<span class="co"># Tresillo on a melodic player</span>
+p1 <span class="op">>></span> <span class="fn">juno</span>([<span class="nu">0</span>,<span class="nu">2</span>,<span class="nu">4</span>,<span class="nu">7</span>], amplify=<span class="fn">Pacc</span>(<span class="st">"tresillo"</span>))</pre>
+
+  <!-- PLife -->
+  <h3>PLife — cellular automaton generator</h3>
+  <p>Generates values using Wolfram 1D elementary cellular automata. The <code>chaos</code> parameter selects the rule — low = ordered, high = unpredictable. Output is continuous (float or int, depending on <code>low</code>/<code>high</code> types). Extends <code>GeneratorPattern</code> so it runs indefinitely.</p>
+
+  <table>
+    <thead><tr><th>Param</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>chaos</code></td><td><code>0.0</code></td><td>0.0 = linear/constant, 1.0 = maximum chaos</td></tr>
+      <tr><td><code>low</code></td><td><code>0</code></td><td>Minimum output value</td></tr>
+      <tr><td><code>high</code></td><td><code>1</code></td><td>Maximum output value</td></tr>
+      <tr><td><code>steps</code></td><td><code>16</code></td><td>Automaton grid width / repetition period</td></tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead><tr><th>chaos range</th><th>Wolfram rule</th><th>Character</th></tr></thead>
+    <tbody>
+      <tr><td>0.0</td><td>rule 0</td><td>All zeros — perfectly constant (returns <code>high</code>)</td></tr>
+      <tr><td>~0.15</td><td>rule 254</td><td>Nearly all ones — very steady</td></tr>
+      <tr><td>~0.3</td><td>rule 90</td><td>XOR / Sierpiński — moderate complexity, fractal</td></tr>
+      <tr><td>~0.5</td><td>rule 110</td><td>Edge of chaos — complex structured patterns</td></tr>
+      <tr><td>~0.7</td><td>rule 150</td><td>Chaotic with recurring structure</td></tr>
+      <tr><td>~0.85–1.0</td><td>rule 30</td><td>Highly chaotic — effectively random-feeling</td></tr>
+    </tbody>
+  </table>
+
+<pre><span class="co"># Slowly evolving amp — very ordered</span>
+p1 <span class="op">>></span> <span class="fn">juno</span>([<span class="nu">0</span>,<span class="nu">2</span>,<span class="nu">4</span>], amplify=<span class="fn">PLife</span>(<span class="nu">0.3</span>))
+
+<span class="co"># Random-ish filter sweep</span>
+p1 <span class="op">>></span> <span class="fn">juno</span>([<span class="nu">0</span>,<span class="nu">4</span>], lpf=<span class="fn">PLife</span>(<span class="nu">0.7</span>, <span class="nu">400</span>, <span class="nu">4000</span>))
+
+<span class="co"># Integer output: scale degrees 0-7</span>
+p1 <span class="op">>></span> <span class="fn">svdk</span>(<span class="fn">PLife</span>(<span class="nu">0.5</span>, <span class="nu">0</span>, <span class="nu">7</span>), oct=<span class="nu">5</span>)
+
+<span class="co"># Octave hopping</span>
+b1 <span class="op">>></span> <span class="fn">reese</span>([<span class="nu">0</span>,<span class="nu">-2</span>], oct=<span class="fn">PLife</span>(<span class="nu">0.4</span>, <span class="nu">4</span>, <span class="nu">6</span>))
+
+<span class="co"># Combine: evolving amp + filter</span>
+p1 <span class="op">>></span> <span class="fn">juno</span>([<span class="nu">0</span>,<span class="nu">2</span>,<span class="nu">4</span>,<span class="nu">7</span>],
+         amplify=<span class="fn">PLife</span>(<span class="nu">0.5</span>, <span class="nu">0.3</span>, <span class="nu">1.0</span>),
+         cutoff=<span class="fn">PLife</span>(<span class="nu">0.6</span>, <span class="nu">800</span>, <span class="nu">5000</span>))</pre>
+
+  <div class="callout info">
+    <strong>Float vs int:</strong> if both <code>low</code> and <code>high</code> are <code>int</code>, output is rounded to int (good for <code>degree</code>, <code>oct</code>). If either is <code>float</code>, output is continuous (good for <code>amp</code>, <code>lpf</code>, <code>cutoff</code>).
+  </div>
+  <div class="callout info">
+    <strong>steps:</strong> controls the automaton grid width — larger = longer before patterns repeat, smaller = tighter cycling. Default 16 aligns with a standard bar.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ AUTOREC ══ -->
+<section id="autorec">
+  <h2><i class="icon">⏺</i> autoRec — param automation recorder</h2>
+
+  <p>Records number changes on a single player line as you nudge values with <kbd>Alt-Up/Down</kbd> or <kbd>Ctrl-Up/Down</kbd>, then converts the sequence into a FoxDot <code>var()</code> or <code>linvar()</code> expression.</p>
+
+  <h3>Workflow</h3>
+  <ol style="padding-left:1.2rem; margin:0.5rem 0 0.8rem; line-height:2.2">
+    <li>Place cursor on a player line</li>
+    <li>Press <kbd>Alt-T</kbd> — recording armed (indicator shows in UI)</li>
+    <li>Use <kbd>Alt-Up / Down</kbd> or <kbd>Ctrl-Up / Down</kbd> to change values and evaluate live</li>
+    <li>Press <kbd>Alt-T</kbd> again — recording stops, the line is rewritten with <code>var()</code> expressions</li>
+    <li>Press <kbd>Esc</kbd> to cancel and restore the original values</li>
+  </ol>
+
+  <div class="callout info">autoRec tracks named params (e.g. <code>cutoff=800</code>) and positional values. Multiple params on one line can be recorded simultaneously.</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ SERVER REC ══ -->
+<section id="server-rec">
+  <h2><i class="icon">💾</i> Server audio recording</h2>
+
+  <p>Records the full SuperCollider master output to a <code>.wav</code> file.</p>
+
+<pre><span class="co"># Via Python in FoxDot</span>
+<span class="fn">Server.record</span>()                     <span class="co"># start, default path</span>
+<span class="fn">Server.record</span>(<span class="st">"./recordings/set1"</span>)  <span class="co"># start, custom path</span>
+<span class="fn">Server.stopRecording</span>()              <span class="co"># stop</span></pre>
+
+  <div class="callout">
+    The old bare <code>rec()</code> / <code>rec_stop()</code> API (seen in some archived scripts) is stale. Use <code>compo.rec()</code> for session capture or <code>Server.record()</code> for raw audio.
+  </div>
+</section>
+
+<footer style="margin-top:3rem; padding-top:1rem; border-top:1px solid var(--border); color:var(--muted); font-size:0.78em;">
+  CrashServer · svdk · 2026 — generated from <code>startup_live.py</code>, <code>main.js</code>, <code>functionUtils.js</code>, <code>reese.scd</code>, <code>juno.scd</code>
+</footer>
+
+</body>
+</html>

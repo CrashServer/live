@@ -896,7 +896,7 @@ if __name__ != "__main__":
             """
             if nbloop > 0:
                 totalTime = playTime + dropTime
-                clkPly = Clock.playing
+                clkPly = list(Clock.playing)  # snapshot — avoid Clock thread mutation during iteration
                 if len(clkPly) > 1:
                     for p in clkPly:
                         p.amplify = 1
@@ -909,14 +909,15 @@ if __name__ != "__main__":
                             range(0, len(clkPly)), randint(1, len(clkPly)-1))
                         print(f"Drop loop left : {nbloop}")
                     if rndPlayerIndex:
+                        now = Clock.now()
                         for i in rndPlayerIndex:
                             clkPly[i].amplify = var(
-                                [1, 0], [playTime, dropTime])
+                                [1, 0], [playTime, dropTime], start=now)
                 nbloop -= 1
                 Clock.future(totalTime, drop, args=(
                     playTime, dropTime, nbloop))
             else:
-                for p in Clock.playing:
+                for p in list(Clock.playing):
                     p.amplify = 1
                 return
 

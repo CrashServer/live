@@ -24,9 +24,16 @@ if [ -n "$1" ]; then
     sclang "$TMPSCRIPT"
     rm "$TMPSCRIPT"
 else
-    # Full compile
+    # Full compile — generate script dynamically so paths work from any location
     echo "Compiling all SynthDefs..."
-    sclang scripts/compile.scd
+    TMPSCRIPT=$(mktemp /tmp/sc_compile_all_XXXX.scd)
+    echo "~outDir = \"$(pwd)/synthdefs/compiled/\";" > "$TMPSCRIPT"
+    for SCD in synthdefs/src/synths/*.scd synthdefs/src/fx/*.scd; do
+        [ -f "$SCD" ] && echo "\"$(pwd)/$SCD\".load;" >> "$TMPSCRIPT"
+    done
+    echo "0.exit;" >> "$TMPSCRIPT"
+    sclang "$TMPSCRIPT"
+    rm "$TMPSCRIPT"
 fi
 
 echo "Done. Compiled files:"

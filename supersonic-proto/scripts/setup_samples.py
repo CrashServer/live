@@ -1,27 +1,36 @@
 #!/usr/bin/env python3
 """
 Create samples/ directory with symlinks to the UltimateSamples bank.
-Run once: python3 scripts/setup_samples.py
+Run once: python3 scripts/setup_samples.py [--sample-path /path/to/UltimateSamples] [--bank 0]
 """
-import json, os, re, sys
+import argparse, json, os, re, sys
+
+parser = argparse.ArgumentParser(description='Set up WebFoxDot sample symlinks')
+parser.add_argument('--sample-path', help='Path to UltimateSamples root directory')
+parser.add_argument('--bank', default='0', help='Sample bank subdirectory (default: 0)')
+args = parser.parse_args()
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.join(SCRIPT_DIR, '..')
 SAMPLES_DIR = os.path.join(PROJECT_DIR, 'samples')
 
-# Read sample_path from webTroop/crash_config.json
-config_path = os.path.join(PROJECT_DIR, '..', 'webTroop', 'crash_config.json')
-try:
-    config = json.load(open(os.path.realpath(config_path)))
-    SAMPLE_ROOT = config.get('sample_path', '')
-except Exception:
-    SAMPLE_ROOT = os.path.expanduser('~/UltimateSamples')
+# Priority: CLI arg > webTroop/crash_config.json > ~/UltimateSamples
+if args.sample_path:
+    SAMPLE_ROOT = os.path.expanduser(args.sample_path)
+else:
+    config_path = os.path.join(PROJECT_DIR, '..', 'webTroop', 'crash_config.json')
+    try:
+        config = json.load(open(os.path.realpath(config_path)))
+        SAMPLE_ROOT = config.get('sample_path', '')
+    except Exception:
+        SAMPLE_ROOT = os.path.expanduser('~/UltimateSamples')
 
-BANK = '0'
+BANK = args.bank
 BANK_DIR = os.path.join(SAMPLE_ROOT, BANK)
 
 if not os.path.isdir(BANK_DIR):
     print(f"Bank dir not found: {BANK_DIR}")
+    print(f"Tried: {SAMPLE_ROOT}/{BANK}")
     sys.exit(1)
 
 MAX_PER_DIR = 8  # max sample indices per character

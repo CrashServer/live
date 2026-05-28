@@ -272,7 +272,43 @@ chorus_rate:  { scParam: 'chorus_rate',  default: 0.5,  desc: 'Mod rate Hz' },`)
         ${step(4, 'Add a row to the Functions tab in <code>js/ui/docs.js</code> → <code>FUNCTIONS</code> array.')}
     `);
 
-    return deploy + newSynth + newFX + newFn;
+    const supersonic = section('SuperSonic WASM engine', `
+        ${note('Pre-built files in <code>lib/dist/</code> are committed to the repo. <strong>You do not need Emscripten or any C++ toolchain for normal use.</strong>')}
+
+        <div class="docs-sub-title">What's in lib/dist/</div>
+        <table class="docs-table"><tbody>
+            <tr><td class="docs-key">supersonic.js</td><td>JS wrapper + OSC transport (115K, bundled with esbuild)</td></tr>
+            <tr><td class="docs-key">wasm/scsynth-nrt.wasm</td><td>scsynth C++ engine compiled to WebAssembly via Emscripten (1.4MB)</td></tr>
+            <tr><td class="docs-key">workers/</td><td>AudioWorklet processor + OSC in/out workers</td></tr>
+        </tbody></table>
+
+        <div class="docs-sub-title" style="margin-top:12px">Upgrade via npm (easiest)</div>
+        ${code(`npm install supersonic-scsynth@latest
+cp -r node_modules/supersonic-scsynth/dist/supersonic.js lib/dist/
+cp -r node_modules/supersonic-scsynth/dist/wasm/         lib/dist/wasm/
+cp -r node_modules/supersonic-scsynth/dist/workers/      lib/dist/workers/`)}
+        ${note('After upgrading, check the SuperSonic changelog. You may need to recompile SynthDefs if the WASM API changed between versions.')}
+
+        <div class="docs-sub-title" style="margin-top:12px">Build from source (needs Emscripten + Node.js)</div>
+        ${step(1, 'Install Emscripten SDK (activate it in every build shell):')}
+        ${code(`git clone https://github.com/emscripten-core/emsdk.git
+cd emsdk && ./emsdk install latest && ./emsdk activate latest
+source ./emsdk_env.sh`)}
+        ${step(2, 'Clone SuperSonic and build:')}
+        ${code(`git clone https://github.com/samaaron/supersonic
+cd supersonic && npm install && npm run build
+# output → dist/`)}
+        ${step(3, 'Copy output into WebFoxDot:')}
+        ${code(`cp dist/supersonic.js     lib/dist/
+cp -r dist/wasm/          lib/dist/wasm/
+cp -r dist/workers/       lib/dist/workers/`)}
+        <div class="docs-sub-title" style="margin-top:12px">Build via Docker (no local toolchain needed)</div>
+        ${code(`cd supersonic
+docker build -t supersonic-build .
+docker run --rm -v "$(pwd)/out:/app/dist" supersonic-build`)}
+    `);
+
+    return deploy + supersonic + newSynth + newFX + newFn;
 }
 
 function buildFunctions() {

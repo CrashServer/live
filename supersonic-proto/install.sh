@@ -355,6 +355,83 @@ if [ "${SKIP_SAMPLES:-false}" = false ]; then
 fi
 
 # ══════════════════════════════════════════════════════════════════════════════
+section "STEP 3b — SuperSonic WASM engine"
+# ══════════════════════════════════════════════════════════════════════════════
+
+explain "WebFoxDot uses SuperSonic — an open-source port of the SuperCollider"
+explain "audio engine (scsynth) compiled to WebAssembly. It runs entirely in the"
+explain "browser as an AudioWorklet: no server-side audio, no plugins."
+explain ""
+explain "The pre-built files are already included in lib/dist/:"
+explain "  supersonic.js              — JS wrapper + OSC transport (115K)"
+explain "  wasm/scsynth-nrt.wasm      — scsynth compiled to WASM (1.4MB)"
+explain "  workers/                   — AudioWorklet + OSC routing workers"
+explain ""
+explain "You DO NOT need Emscripten or any C++ toolchain for normal use."
+explain "These files were compiled from: github.com/samaaron/supersonic  v0.67.2"
+echo ""
+
+WASM_FILE="$PROJECT_DIR/lib/dist/wasm/scsynth-nrt.wasm"
+JS_FILE="$PROJECT_DIR/lib/dist/supersonic.js"
+
+if [ -f "$WASM_FILE" ] && [ -f "$JS_FILE" ]; then
+    WASM_SIZE=$(du -h "$WASM_FILE" | cut -f1)
+    ok "scsynth-nrt.wasm  ($WASM_SIZE)"
+    ok "supersonic.js"
+    ok "Workers: $(ls "$PROJECT_DIR/lib/dist/workers/" | wc -l) files"
+else
+    fail "lib/dist/ files missing — the repo may be incomplete."
+    info "Re-clone or copy the lib/dist/ directory from a working install."
+fi
+
+echo ""
+echo -e "  ${BOLD}To upgrade SuperSonic to a newer version:${RESET}"
+echo ""
+echo -e "  ${DIM}Option A — npm (easiest):${RESET}"
+echo -e "    npm install supersonic-scsynth@latest"
+echo -e "    cp -r node_modules/supersonic-scsynth/dist/* lib/dist/"
+echo ""
+echo -e "  ${DIM}Option B — build from source (needs Emscripten + Node.js):${RESET}"
+echo -e "    git clone https://github.com/samaaron/supersonic"
+echo -e "    cd supersonic"
+echo -e "    source ~/emsdk/emsdk_env.sh    # activate Emscripten"
+echo -e "    npm install && npm run build"
+echo -e "    cp -r dist/* /path/to/webfoxdot/lib/dist/"
+echo ""
+echo -e "  ${DIM}Option C — Docker (no local toolchain needed):${RESET}"
+echo -e "    cd supersonic"
+echo -e "    docker build -t supersonic-build ."
+echo -e "    docker run --rm -v \$(pwd)/dist:/app/dist supersonic-build"
+echo ""
+
+if ask_yn "Check for a newer supersonic-scsynth on npm?" "n"; then
+    if cmd_exists npm; then
+        LATEST=$(npm show supersonic-scsynth version 2>/dev/null || echo "unavailable")
+        CURRENT="0.67.2"
+        if [ "$LATEST" = "$CURRENT" ]; then
+            ok "Already on latest: v${CURRENT}"
+        elif [ "$LATEST" = "unavailable" ]; then
+            warn "Could not reach npm registry."
+        else
+            warn "Newer version available: v${LATEST}  (current: v${CURRENT})"
+            echo ""
+            if ask_yn "Upgrade to v${LATEST} now? (copies to lib/dist/)"; then
+                step "Installing supersonic-scsynth@${LATEST}..."
+                cd "$PROJECT_DIR"
+                npm install "supersonic-scsynth@${LATEST}"
+                cp -r node_modules/supersonic-scsynth/dist/supersonic.js lib/dist/
+                cp -r node_modules/supersonic-scsynth/dist/wasm/         lib/dist/wasm/
+                cp -r node_modules/supersonic-scsynth/dist/workers/      lib/dist/workers/
+                ok "SuperSonic upgraded to v${LATEST}."
+                warn "You may need to recompile SynthDefs if the WASM API changed."
+            fi
+        fi
+    else
+        warn "npm not found — install Node.js to check for updates."
+    fi
+fi
+
+# ══════════════════════════════════════════════════════════════════════════════
 section "STEP 4 — Compile SynthDefs"
 # ══════════════════════════════════════════════════════════════════════════════
 

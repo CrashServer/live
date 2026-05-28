@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebFoxDot</title>
+  <link rel="stylesheet" href="lib/codemirror/codemirror.min.css">
+  <link rel="stylesheet" href="lib/codemirror/show-hint.css">
+  <link rel="stylesheet" href="lib/codemirror/foldgutter.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ── Left: editor column ───────────────────────────────────────────── -->
+  <div id="editor-container">
+
+    <div id="toolbar">
+      <span id="status-dot"></span>
+      <span class="title">WebFoxDot</span>
+      <button id="btn-boot">boot</button>
+      <button id="btn-run"  disabled>run  Ctrl+↵</button>
+      <button id="btn-stop" disabled>stop all</button>
+      <div id="bpm-wrap">BPM <input id="bpm-input" type="number" value="120" min="20" max="300"></div>
+      <span id="synth-status"></span>
+      <div style="flex:1"></div>
+      <select id="theme-select">
+        <option value="dark">Dark</option>
+        <option value="cyberpunk">Cyberpunk</option>
+        <option value="synthwave">Synthwave</option>
+      </select>
+      <button id="docs-toggle-btn" title="documentation (F1)">?</button>
+      <button id="panel-toggle-btn" title="toggle sidebar">⊟</button>
+    </div>
+
+    <!-- ── Docs overlay (inside editor-container for absolute positioning) ── -->
+    <div id="docs-panel" class="hidden">
+      <div id="docs-header">
+        <button class="docs-tab active" data-tab="shortcuts">Shortcuts</button>
+        <button class="docs-tab" data-tab="synths">Synths</button>
+        <button class="docs-tab" data-tab="fx">FX</button>
+        <button class="docs-tab" data-tab="patterns">Patterns</button>
+        <button class="docs-tab" data-tab="functions">Functions</button>
+        <button class="docs-tab" data-tab="guide">Guide</button>
+        <button id="docs-close">✕</button>
+      </div>
+      <div id="docs-body"></div>
+    </div>
+
+    <div id="editor-wrap"></div>
+
+    <div id="log-handle"></div>
+    <div id="log"></div>
+
+  </div>
+
+  <!-- ── Right: crashpanel ─────────────────────────────────────────────── -->
+  <div id="crash-panel">
+    <div id="cp-header">
+      <div class="cp-title">WebFoxDot</div>
+      <div class="cp-subtitle">scsynth ▸ WASM</div>
+    </div>
+
+    <div class="cp-section">
+      <h3>Clock</h3>
+      <div id="cp-beat">—</div>
+      <div id="cp-beat-sub" style="text-align:center;font-size:9px;color:var(--text-2);margin-bottom:4px;">◦◦◦◦</div>
+      <div class="cp-row">
+        <span class="cp-label">BPM</span>
+        <span class="cp-value green" id="cp-bpm-val">120</span>
+      </div>
+      <button id="cp-tap">tap tempo</button>
+    </div>
+
+    <div class="cp-section">
+      <h3>Scale</h3>
+      <select class="cp-select" id="cp-scale-sel"></select>
+      <h3 style="margin-top:6px">Root</h3>
+      <select class="cp-select" id="cp-root-sel"></select>
+    </div>
+
+    <div class="cp-section" style="flex:1;overflow-y:auto;min-height:0">
+      <h3>Players</h3>
+      <div id="cp-players"></div>
+    </div>
+  </div>
+
+  <!-- ── Scripts — load order matters ─────────────────────────────────── -->
+  <script src="lib/codemirror/codemirror.min.js"></script>
+  <script src="lib/codemirror/python.min.js"></script>
+  <script src="lib/codemirror/overlay.js"></script>
+  <script src="lib/codemirror/show-hint.js"></script>
+  <script src="lib/codemirror/matchbrackets.js"></script>
+  <script src="lib/codemirror/closebrackets.js"></script>
+  <script src="lib/codemirror/active-line.js"></script>
+  <script src="lib/codemirror/comment.js"></script>
+  <script src="lib/codemirror/foldcode.js"></script>
+  <script src="lib/codemirror/foldgutter.js"></script>
+  <script src="js/editor/foxdot_mode.js"></script>
+
+  <script type="module">
+    import { SuperSonic }     from './lib/dist/supersonic.js';
+    import { Clock }          from './js/engine/clock.js';
+    import { Player, setSuperSonic, PLAYER_GROUP, FX_GROUP,
+             drop as _dropFn, unsolo as _unsoloFn } from './js/engine/player.js';
+    import { Scale, Root }    from './js/engine/scale.js';
+    import { SYNTH_DEFS, makeSynth } from './js/synths/registry.js';
+    import { PRand, PWhite, PWalk, PDur, PPing,
+             PStutter, PAlt, PShuf, PBern, PCoin,
+             PEuclid, PRange, PStep, PSine, PTri,
+             PChain, PMarkov } from './js/patterns/sequences.js';
+    import { _var, _linvar, _sinvar, _expvar, setClockRef } from './js/patterns/timevars.js';
+    import { loadSamples, PlayStringCall } from './js/engine/sampler.js';
+    import { transpile, applyRenames }   from './js/editor/transpiler.js';
+    import { triggerAutocomplete }       from './js/editor/autocomplete.js';
+    import { incrementValue, stopPlayerAtCursor,
+             soloPlayerAtCursor, soloDropAtCursor } from './js/editor/keybindings.js';
+    import { initCrashPanel }            from './js/ui/crashpanel.js';
+    import { initDocs, toggleDocs }      from './js/ui/docs.js';
+
+    // ── Log ──────────────────────────────────────────────────────────────────
+    const logEl = document.getElementById('log');
+    function log(msg, type = 'info') {
+        const d = document.createElement('div');
+        d.className = 'log-' + type;
+        d.textContent = `[${new Date().toLocaleTimeString('fr-FR')}] ${msg}`;
+        logEl.appendChild(d);
+        logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    // ── Clock + TimeVar ───────────────────────────────────────────────────────
+    const clock = new Clock();
+    clock._onBpm = (bpm) => {
+        const inp = document.getElementById('bpm-input');
+        if (inp && Number(inp.value) !== bpm) inp.value = bpm;
+        log(`Clock.bpm = ${bpm}`, 'ok');
+    };
+    setClockRef(clock);
+
+    // ── Eval context ──────────────────────────────────────────────────────────
+    const SYNTHS = Object.fromEntries(Object.keys(SYNTH_DEFS).map(n => [n, makeSynth(n)]));
+
+    const ScaleProxy = new Proxy(Scale, {
+        set(t, k, v) { t[k] = v; if (k === 'default') log(`Scale.default = ${JSON.stringify(v)}`, 'ok'); return true; }
+    });
+    const RootProxy = new Proxy(Root, {
+        set(t, k, v) { t[k] = v; if (k === 'default') log(`Root.default = ${v}`, 'ok'); return true; }
+    });
+
+    function __p(name) { return clock.getPlayer(name, Player); }
+
+    function runCode(raw) {
+        let js = transpile(raw.trim());
+        js = applyRenames(js);
+        log(`eval: ${raw.trim().split('\n')[0].slice(0, 70)}`, 'eval');
+        const ctx = {
+            Clock: new Proxy(clock, {
+                set(t, k, v) { if (k === 'bpm') t.bpm = v; else t[k] = v; return true; }
+            }),
+            Scale: ScaleProxy,
+            Root:  RootProxy,
+            __p,
+            ...SYNTHS,
+            PRand, PWhite, PWalk, PDur, PPing,
+            PStutter, PAlt, PShuf, PBern, PCoin,
+            PEuclid, PRange, PStep, PSine, PTri,
+            PChain, PMarkov,
+            _var, _linvar, _sinvar, _expvar,
+            rest:   () => null,
+            play:   (pattern, opts = {}) => new PlayStringCall(pattern, opts),
+            print:  (...a) => log(a.join(' ')),
+            drop:   (playTime = 14, dropTime = 2, nbloop = 1) => _dropFn(clock, playTime, dropTime, nbloop),
+            unsolo: () => _unsoloFn(clock),
+        };
+        try {
+            new Function(...Object.keys(ctx), js)(...Object.values(ctx));
+        } catch (e) {
+            log(`Error: ${e.message}`, 'error');
+            console.error('transpiled:\n' + js, e);
+        }
+    }
+
+    // ── Block runner ──────────────────────────────────────────────────────────
+    function runBlockAtCursor() {
+        const cursor = editor.getCursor();
+        let s = cursor.line, e = cursor.line;
+        const n = editor.lineCount();
+        while (s > 0 && editor.getLine(s - 1).trim()) s--;
+        while (e < n - 1 && editor.getLine(e + 1).trim()) e++;
+        const block = editor.getRange({ line: s, ch: 0 }, { line: e, ch: editor.getLine(e).length }).trim();
+        if (block) {
+            flashLines(s, e);
+            runCode(block);
+        }
+    }
+
+    function runSelected() {
+        const sel = editor.getSelection().trim();
+        if (sel) {
+            const from = editor.getCursor('from');
+            const to   = editor.getCursor('to');
+            flashLines(from.line, to.line);
+            runCode(sel);
+        } else {
+            runBlockAtCursor();
+        }
+    }
+
+    // ── Flash highlight ───────────────────────────────────────────────────────
+    function flashLines(from, to) {
+        const marks = [];
+        for (let i = from; i <= to; i++) {
+            marks.push(editor.addLineClass(i, 'background', 'flash-highlight'));
+        }
+        setTimeout(() => marks.forEach((_, i) => editor.removeLineClass(from + i, 'background', 'flash-highlight')), 350);
+    }
+
+    // ── Boot ─────────────────────────────────────────────────────────────────
+    const SYNTHDEFS_TO_LOAD = [
+        'fd_dbass', 'fd_saw', 'fd_sine', 'fd_rsin', 'fd_donk', 'fd_sampler', 'fd_fx_chain',
+    ];
+
+    async function bootAudio() {
+        const dot = document.getElementById('status-dot');
+        const btn = document.getElementById('btn-boot');
+        dot.className = 'booting';
+        btn.disabled = true;
+        btn.textContent = 'booting…';
+        log('Booting scsynth WASM…');
+        try {
+            const sc = new SuperSonic({
+                baseURL:         './lib/dist/',
+                synthdefBaseURL: './synthdefs/compiled/',
+            });
+            await sc.init();
+            log('scsynth started ✓', 'ok');
+
+            // Group 1 (DefaultGroup) is NOT auto-created in this WASM build — use group 0 (RootNode).
+            // PLAYER_GROUP head of RootNode, FX_GROUP after PLAYER_GROUP.
+            sc.send('/g_new', PLAYER_GROUP, 0, 0);
+            sc.send('/g_new', FX_GROUP,     3, PLAYER_GROUP);
+            log(`  groups created: playerGroup=${PLAYER_GROUP}, fxGroup=${FX_GROUP}`, 'ok');
+
+            const synthStatus = document.getElementById('synth-status');
+            for (const name of SYNTHDEFS_TO_LOAD) {
+                synthStatus.textContent = `loading ${name}…`;
+                try {
+                    await sc.loadSynthDef(name);
+                    log(`  ${name} ✓`, 'ok');
+                } catch (e) {
+                    log(`  ${name} FAILED: ${e.message}`, 'error');
+                    console.error(`loadSynthDef ${name}:`, e);
+                }
+            }
+            synthStatus.textContent = 'loading samples…';
+            try {
+                await loadSamples(sc, (done, total) => {
+                    synthStatus.textContent = `samples ${done}/${total}…`;
+                });
+                log('  samples loaded ✓', 'ok');
+            } catch (e) {
+                log(`  samples FAILED: ${e.message}`, 'error');
+                console.error('loadSamples:', e);
+            }
+            synthStatus.textContent = '';
+
+            setSuperSonic(sc);
+            clock.start();
+
+            dot.className = 'ready';
+            btn.textContent = 'booted';
+            btn.classList.add('booted');
+            document.getElementById('btn-run').disabled  = false;
+            document.getElementById('btn-stop').disabled = false;
+            log('Ready. Clock running.', 'ok');
+        } catch (e) {
+            log(`Boot failed: ${e.message}`, 'error');
+            console.error(e);
+            document.getElementById('status-dot').className = '';
+            btn.disabled = false;
+            btn.textContent = 'retry boot';
+        }
+    }
+
+    // ── Editor ────────────────────────────────────────────────────────────────
+    const INITIAL_CODE = `# WebFoxDot  |  Ctrl+Enter: run  |  Alt+X: comment+stop  |  Alt+S: solo  |  Alt+O: soloDrop(8)  |  Ctrl+;: stop all  |  Alt+↑↓: nudge value
+
+Clock.bpm = 120
+Scale.default = "minor"
+Root.default = 0
+
+p1 >> dbass([0, -3, 0, 4], oct=3, amp=0.9, dur=1, cutoff=linvar([400, 2000], [8, 8]), rq=0.4)
+
+# b1 >> play("X  o X  o", amp=0.9, dur=0.5)
+
+# p2 >> saw([0, 4, 7, 4], oct=4, amp=0.6, dur=0.5, cutoff=2000, reverb=0.3)
+
+# p3 >> rsin([0, 0, 7, 5], oct=4, amp=0.5, cutoff=var([800, 2400], [4, 4]), rq=0.08)
+
+# p4 >> donk([0], oct=3, amp=0.9, dur=0.5)
+
+# p1.every(8, 'stutter', 4)
+# drop(14, 2)
+`;
+
+    const editor = CodeMirror(document.getElementById('editor-wrap'), {
+        value:            INITIAL_CODE,
+        mode:             'foxdot',
+        lineNumbers:      true,
+        tabSize:          2,
+        indentWithTabs:   false,
+        lineWrapping:     false,
+        autofocus:        true,
+        matchBrackets:    true,
+        autoCloseBrackets:true,
+        styleActiveLine:  true,
+        extraKeys: {
+            'Ctrl-Enter':     () => runSelected(),
+            'Cmd-Enter':      () => runSelected(),
+            'Ctrl-Space':     (cm) => triggerAutocomplete(cm),
+            'Alt-Up':         (cm) => incrementValue(cm,  1,  runBlockAtCursor),
+            'Alt-Down':       (cm) => incrementValue(cm, -1,  runBlockAtCursor),
+            'Shift-Alt-Up':   (cm) => incrementValue(cm,  10, runBlockAtCursor),
+            'Shift-Alt-Down': (cm) => incrementValue(cm, -10, runBlockAtCursor),
+            'Alt-X':          (cm) => stopPlayerAtCursor(cm, clock, runBlockAtCursor),
+            'Alt-S':          (cm) => soloPlayerAtCursor(cm, clock),
+            'Alt-O':          (cm) => soloDropAtCursor(cm, clock, 8),
+            'Ctrl-;':         ()   => clock.clear(),
+            'Ctrl-/':         (cm) => cm.execCommand('toggleComment'),
+        },
+    });
+
+    // ── UI wiring ─────────────────────────────────────────────────────────────
+    document.getElementById('btn-boot').onclick  = bootAudio;
+    document.getElementById('btn-run').onclick   = runSelected;
+    document.getElementById('btn-stop').onclick  = () => clock.clear();
+    document.getElementById('bpm-input').oninput = (e) => { clock.bpm = Number(e.target.value); };
+
+    // ── Crashpanel ────────────────────────────────────────────────────────────
+    initCrashPanel(clock);
+
+    // ── Docs ──────────────────────────────────────────────────────────────────
+    initDocs();
+    document.getElementById('docs-toggle-btn').onclick = toggleDocs;
+    document.addEventListener('keydown', e => { if (e.key === 'F1') { e.preventDefault(); toggleDocs(); } });
+
+    log('WebFoxDot loaded. Click "boot" to start audio.', 'info');
+  </script>
+</body>
+</html>

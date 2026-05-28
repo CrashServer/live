@@ -77,6 +77,9 @@ a_vene.add()
 abass = FileSynthDef("abass")
 abass.add()
 
+xbass = FileSynthDef("xbass")
+xbass.add()
+
 acidbass = FileSynthDef("acidbass")
 acidbass.add()
 

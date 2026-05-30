@@ -498,6 +498,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Ctrl-G": "findNext",
     "Ctrl-Alt-Left": "goLineStart",
     "Ctrl-Alt-Right": "goLineEnd",
+    "Shift-Alt-Right": "selectBetweenBrackets",
     "Ctrl-Left": (cm) => {
       functionUtils.goToPreviousComma(cm);
     },

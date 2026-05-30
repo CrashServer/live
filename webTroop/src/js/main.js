@@ -440,18 +440,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     activeSequence = { id: seqId, currentIndex: currentIdx };
   }
 
+  const stopClockAndSequence = () => {
+    functionUtils.stopClock(wsServer);
+    if (activeSequence) {
+      wsServer.send(JSON.stringify({
+        type: 'evaluate_code',
+        code: '_seq_cancel()\n'
+      }));
+      activeSequence = null;
+    }
+  };
+
   // Gestion de CTRL+ENTER
   editor.setOption("extraKeys", {
-    "Ctrl-;": () => {
-      functionUtils.stopClock(wsServer);
-      if (activeSequence) {
-        wsServer.send(JSON.stringify({
-          type: 'evaluate_code',
-          code: '_seq_cancel()\n'
-        }));
-        activeSequence = null;
-      }
-    },
+    "Ctrl-,": stopClockAndSequence,  // Chromium
+    "Ctrl-;": stopClockAndSequence,  // Firefox
     "Ctrl-Space": "autocomplete",
     "Ctrl-S": (cm) => {
       functionUtils.saveEditorContent(cm, wsServer);

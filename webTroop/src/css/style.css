@@ -99,6 +99,26 @@ body {
   height: 100vh;
 }
 
+html {
+  scrollbar-color: var(--border-col-1) var(--bg-col-1);
+  scrollbar-width: auto;
+}
+
+::-webkit-scrollbar {
+  width: 1rem;
+  height: 4rem;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-col-1);
+  border: 1px solid var(--border-col-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-col-1);
+  border: 1px solid var(--border-col-2);
+  height: 2rem;
+  border-radius: 0.5rem;
+}
+
 #main-container {
   display: flex;
   flex-direction: row;

@@ -644,7 +644,7 @@ class WavetableSynthDef(WTSynthDef):
         self.defaults['wtdist'] = 0
 
         self.base.append("detune = 1 + (detune/100);")
-        self.base.append("osc = MultiWtOsc.arOscs(freq: freq, wtPos: Select.ar(K2A.ar((rate > 0)), [K2A.ar(wtpos), LFTri.ar(1 / (sus * rate) * 0.5, 0).range(wtpos,255)]), squeeze: wtdist, wtOffset: 0, bufnum: buf, wtSize: 2048, numTables: 8, ratio: 2, numOscs: 5, detune: detune, interpolation: 2, hardSync: 0, phaseMod: 0);")
+        self.base.append("osc = MultiWtOsc.arOscs(freq: freq, wtPos: Select.ar(K2A.ar((rate > 0)), [K2A.ar(wtpos), LFTri.ar(1 / (sus * rate) * 0.25, 0).range(wtpos,255)]), squeeze: wtdist, wtOffset: 0, bufnum: buf, wtSize: 2048, numTables: 8, ratio: 2, numOscs: 5, detune: detune, interpolation: 2, hardSync: 0, phaseMod: 0);")
         self.base.append("env = EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 2);")
         self.base.append("osc = osc * env * 0.5;")
         self.base.append("osc = HPF.ar(osc, 20);")

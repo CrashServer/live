@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     keyMap: "sublime",
   });
 
-  setupCellDial(editor);
+  setupCellDial(editor, () => functionUtils.findAllSections(editor));
 
   const otherUserDoc = editor.getDoc().linkedDoc({ shareHist: false });
   const otherEditor = CodeMirror(document.getElementById("other-editor"), {
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (videoCodeResult) {
       var [videoCode, startLine] = videoCodeResult;
       var endLine = startLine;
-      foxdotWs.send(
+      if (foxdotWs?.readyState === WebSocket.OPEN) foxdotWs.send(
         JSON.stringify({
           type: "sceneName",
           sceneName: videoCode,
@@ -385,7 +385,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }),
       );
 
-      foxdotWs.send(
+      if (foxdotWs?.readyState === WebSocket.OPEN) foxdotWs.send(
         JSON.stringify({
           type: `${userName}Code`,
           code: blockCode,
@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }));
 
     // Send to CrashOS visuals
-    foxdotWs.send(JSON.stringify({
+    if (foxdotWs?.readyState === WebSocket.OPEN) foxdotWs.send(JSON.stringify({
       type: `${userName}Code`,
       code: sectionCode
     }));
@@ -531,8 +531,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
     },
-    "Ctrl-Alt-F": (cm) => {
-      // Unfold everything
+    "Ctrl-Alt-U": (cm) => {
+      // Unfold everything (Ctrl+Alt+F was taken by find/search)
       const rf = CodeMirror.fold["foxdot-sections"];
       cm.operation(() => {
         for (let i = 0; i < cm.lineCount(); i++)

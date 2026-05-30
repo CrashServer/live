@@ -86,7 +86,7 @@ function createGridPanel() {
 
     const iframe = document.createElement("iframe");
     iframe.id = "gridPanelFrame";
-    iframe.src = EDITOR_URL;
+    // Lazy-loaded on first open — don't load editor until panel is actually used
 
     const status = document.createElement("div");
     status.className = "grid-panel-status";
@@ -164,12 +164,6 @@ function createGridPanel() {
         attributes: true, attributeFilter: ["class"]
     });
 
-    // Probe the server: if unreachable, hint at how to start it
-    fetch(EDITOR_URL + "/api/cells", { method: "HEAD", mode: "no-cors" })
-        .catch(() => {
-            status.className = "grid-panel-status err";
-            status.textContent = `editor server unreachable — run: python3 /home/svdk/live/grid/serve.py`;
-        });
 }
 
 function toggleGridPanel(force) {
@@ -181,6 +175,23 @@ function toggleGridPanel(force) {
         panel.classList.toggle("visible", force);
     }
     const open = panel.classList.contains("visible");
+
+    // Lazy-load: only fetch the editor on first open
+    if (open) {
+        const iframe = document.getElementById("gridPanelFrame");
+        const status = document.getElementById("gridPanelStatus");
+        if (iframe && !iframe.src) {
+            iframe.src = EDITOR_URL;
+            fetch(EDITOR_URL + "/api/cells", { method: "HEAD", mode: "no-cors" })
+                .catch(() => {
+                    if (status) {
+                        status.className = "grid-panel-status err";
+                        status.textContent = `editor server unreachable — run: python3 grid/serve.py`;
+                    }
+                });
+        }
+    }
+
     _syncMainMargin(open ? (parseInt(panel.style.width) || 920) : 0);
 }
 

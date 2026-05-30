@@ -117,11 +117,13 @@ export const functionUtils = {
 
     // Check if the code to evaluate is a player and if it is, stop it
     ifPlayerStop(codeToEvaluate) {
-        const playerPattern = /^[#_]\s*([a-zA-Z]\d+|[a-zA-Z]{2})\s*>>|^#\s*[a-zA-Z]\d+\s*\.\w+\s*=\s*\d+/;
+        const playerPattern = /^[#_]\s*~?\s*([a-zA-Z]\d+|[a-zA-Z]{2})\s*>>|^#\s*[a-zA-Z]\d+\s*\.\w+\s*=\s*\d+/;
         const match = codeToEvaluate.trim().match(playerPattern);
 
         if (match) {
-            const player = match[1].replace(/^[_#]\s?/, '')
+          const player = match[1];
+          console.log("Stopping player:", player);
+
             return `${player}.stop()`;
         }
         return codeToEvaluate;

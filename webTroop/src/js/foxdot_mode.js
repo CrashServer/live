@@ -92,8 +92,9 @@ import CodeMirror from 'codemirror';
     function tokenBaseInner(stream, state, inFormat) {
       if (stream.eatSpace()) return null;
 
-      // Handle Comments
-      if (!inFormat && stream.match(/^#.*/)) return "comment";
+      // Handle Comments (catch # and ~#)
+      if (!inFormat && stream.match(/^(#|~\#).*/)) return "comment";
+      // if (!inFormat && stream.match(/^(~)#.*/)) return "comment";
 
       // Handle Number Literals
       if (stream.match(/^[0-9\.]/, false)) {

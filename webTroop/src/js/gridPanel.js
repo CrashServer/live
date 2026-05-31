@@ -181,13 +181,25 @@ function toggleGridPanel(force) {
         const iframe = document.getElementById("gridPanelFrame");
         const status = document.getElementById("gridPanelStatus");
         if (iframe && !iframe.src) {
-            iframe.src = EDITOR_URL;
+            // Probe the grid server before loading the iframe — gives a clear
+            // error instead of a blank browser "connection refused" page.
             fetch(EDITOR_URL + "/api/cells", { method: "HEAD", mode: "no-cors" })
+                .then(() => {
+                    iframe.src = EDITOR_URL;
+                    if (status) {
+                        status.className = "grid-panel-status";
+                        status.textContent = `editor @ ${EDITOR_URL}`;
+                    }
+                })
                 .catch(() => {
                     if (status) {
                         status.className = "grid-panel-status err";
-                        status.textContent = `editor server unreachable — run: python3 grid/serve.py`;
+                        status.textContent = `grid server not running — start it with:  python3 grid/serve.py`;
                     }
+                    // Show a helpful placeholder instead of a blank iframe
+                    iframe.srcdoc = `<body style="margin:0;background:#111;color:#666;font-family:monospace;font-size:12px;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center">
+                        <div><div style="font-size:22px;margin-bottom:12px">grid server offline</div>
+                        <div style="color:#444">python3 grid/serve.py</div></div></body>`;
                 });
         }
     }

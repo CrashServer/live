@@ -22,7 +22,10 @@
 import { EventEmitter } from "./eventBus.js";
 import "../css/cellDial.css";
 
-const GRID_API  = "http://localhost:1235/api/cells";
+// Use relative URL so it goes through Vite's proxy (/api → localhost:1235).
+// When the grid server is not running the proxy falls back to serving
+// cells.json from disk (configured in vite.config.js).
+const GRID_API  = "/api/cells";
 const CACHE_TTL = 30_000;
 const PAGE_SIZE = 7;
 const NS = "http://www.w3.org/2000/svg";

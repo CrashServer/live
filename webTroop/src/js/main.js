@@ -539,7 +539,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Ctrl-Alt-J": (cm) => {
       functionUtils.previousJump(cm);
     },
-    "Alt-Shift-J": (cm) => {
+    "Ctrl-Alt-G": (cm) => {
       if (!activeSequence) return;
       const sections = functionUtils.findAllSections(cm);
       const idx = Math.min(activeSequence.currentIndex, sections.length - 1);

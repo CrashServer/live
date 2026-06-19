@@ -539,6 +539,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Ctrl-Alt-J": (cm) => {
       functionUtils.previousJump(cm);
     },
+    "Alt-Shift-J": (cm) => {
+      if (!activeSequence) return;
+      const sections = functionUtils.findAllSections(cm);
+      const idx = Math.min(activeSequence.currentIndex, sections.length - 1);
+      if (idx < 0 || !sections[idx]) return;
+      const line = sections[idx].line;
+      cm.setCursor({ line, ch: 0 });
+      cm.scrollIntoView({ line, ch: 0 }, 150);
+    },
     "Ctrl-Enter": (cm) => {
       evaluateCode(cm, false);
     },

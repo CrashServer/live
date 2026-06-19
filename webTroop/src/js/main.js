@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         activeSequence = null;
       }
     },
-    "Ctrl-Shift-,": (cm) => {
+    "Ctrl-Alt-W": (cm) => {
       cm.operation(() => {
         for (let i = 0; i < cm.lineCount(); i++) {
           if (cm.getLine(i).trimStart().startsWith("#@#@"))

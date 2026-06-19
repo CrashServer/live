@@ -36,6 +36,8 @@ import {
 } from "./foxdotDefinitions.js";
 
 import "codemirror/addon/fold/foldcode.js";
+import "codemirror/addon/fold/foldgutter.js";
+import "codemirror/addon/fold/foldgutter.css";
 import "codemirror/lib/codemirror.css";
 import "codemirror/addon/hint/show-hint.css";
 import "codemirror/addon/dialog/dialog.css";
@@ -43,10 +45,10 @@ import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
 
-// ---- #@ / #@#@ fold range finder (registered at module level) ----------
-// #@#@  → track header: folds to next #@#@ or EOF
-// #@    → section:      folds to next #@ / #@#@ or EOF
-CodeMirror.registerHelper("fold", "foxdot-sections", (cm, start) => {
+// ---- #@ / #@#@ fold range finder ----------------------------------------
+// Store in a const so keybindings can reference it directly (avoids relying
+// on CodeMirror.fold["foxdot-sections"] alias which isn't guaranteed in ESM).
+const foxdotFoldFinder = (cm, start) => {
   const line = cm.getLine(start.line);
   if (!line) return;
   const t         = line.trimStart();
@@ -56,9 +58,9 @@ CodeMirror.registerHelper("fold", "foxdot-sections", (cm, start) => {
 
   const last = cm.lastLine();
   for (let i = start.line + 1; i <= last; i++) {
-    const l          = cm.getLine(i).trimStart();
-    const nextTrack  = l.startsWith("#@#@");
-    const nextSect   = !nextTrack && l.startsWith("#@");
+    const l         = cm.getLine(i).trimStart();
+    const nextTrack = l.startsWith("#@#@");
+    const nextSect  = !nextTrack && l.startsWith("#@");
     if (isTrack && nextTrack)
       return { from: CodeMirror.Pos(start.line, line.length),
                to:   CodeMirror.Pos(i - 1, cm.getLine(i - 1).length) };
@@ -68,7 +70,8 @@ CodeMirror.registerHelper("fold", "foxdot-sections", (cm, start) => {
   }
   return { from: CodeMirror.Pos(start.line, line.length),
            to:   CodeMirror.Pos(last, cm.getLine(last).length) };
-});
+};
+CodeMirror.registerHelper("fold", "foxdot-sections", foxdotFoldFinder);
 
 const LINES_TO_SHOW = 20; // pretext number of lines to show
 
@@ -115,7 +118,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     fixedGutter: false,
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
-    gutters: ["CodeMirror-linenumbers"],
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    foldGutter: { rangeFinder: foxdotFoldFinder },
     keyMap: "sublime",
   });
 
@@ -490,19 +494,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     },
     "Ctrl-Shift-,": (cm) => {
-      const rf = CodeMirror.fold["foxdot-sections"];
       cm.operation(() => {
         for (let i = 0; i < cm.lineCount(); i++) {
           if (cm.getLine(i).trimStart().startsWith("#@#@"))
-            cm.foldCode(CodeMirror.Pos(i, 0), { rangeFinder: rf }, "fold");
+            cm.foldCode(CodeMirror.Pos(i, 0), foxdotFoldFinder, "fold");
         }
       });
     },
     "Ctrl-Alt-U": (cm) => {
-      const rf = CodeMirror.fold["foxdot-sections"];
       cm.operation(() => {
         for (let i = 0; i < cm.lineCount(); i++)
-          cm.foldCode(CodeMirror.Pos(i, 0), { rangeFinder: rf }, "unfold");
+          cm.foldCode(CodeMirror.Pos(i, 0), foxdotFoldFinder, "unfold");
       });
     },
     "Ctrl-Space": "autocomplete",

@@ -36,8 +36,6 @@ import {
 } from "./foxdotDefinitions.js";
 
 import "codemirror/addon/fold/foldcode.js";
-import "codemirror/addon/fold/foldgutter.js";
-import "codemirror/addon/fold/foldgutter.css";
 import "codemirror/lib/codemirror.css";
 import "codemirror/addon/hint/show-hint.css";
 import "codemirror/addon/dialog/dialog.css";
@@ -117,8 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     fixedGutter: false,
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
-    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-    foldGutter: { rangeFinder: CodeMirror.fold["foxdot-sections"], updateViewportThrottle: 400 },
+    gutters: ["CodeMirror-linenumbers"],
     keyMap: "sublime",
   });
 
@@ -492,7 +489,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         activeSequence = null;
       }
     },
-    "Ctrl-Shift-F": (cm) => {
+    "Ctrl-Shift-,": (cm) => {
       const rf = CodeMirror.fold["foxdot-sections"];
       cm.operation(() => {
         for (let i = 0; i < cm.lineCount(); i++) {

@@ -35,12 +35,42 @@ import {
   updateDefinitions,
 } from "./foxdotDefinitions.js";
 
+import "codemirror/addon/fold/foldcode.js";
+import "codemirror/addon/fold/foldgutter.js";
+import "codemirror/addon/fold/foldgutter.css";
 import "codemirror/lib/codemirror.css";
 import "codemirror/addon/hint/show-hint.css";
 import "codemirror/addon/dialog/dialog.css";
 import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
+
+// ---- #@ / #@#@ fold range finder (registered at module level) ----------
+// #@#@  → track header: folds to next #@#@ or EOF
+// #@    → section:      folds to next #@ / #@#@ or EOF
+CodeMirror.registerHelper("fold", "foxdot-sections", (cm, start) => {
+  const line = cm.getLine(start.line);
+  if (!line) return;
+  const t         = line.trimStart();
+  const isTrack   = t.startsWith("#@#@");
+  const isSection = !isTrack && t.startsWith("#@");
+  if (!isTrack && !isSection) return;
+
+  const last = cm.lastLine();
+  for (let i = start.line + 1; i <= last; i++) {
+    const l          = cm.getLine(i).trimStart();
+    const nextTrack  = l.startsWith("#@#@");
+    const nextSect   = !nextTrack && l.startsWith("#@");
+    if (isTrack && nextTrack)
+      return { from: CodeMirror.Pos(start.line, line.length),
+               to:   CodeMirror.Pos(i - 1, cm.getLine(i - 1).length) };
+    if (isSection && (nextTrack || nextSect))
+      return { from: CodeMirror.Pos(start.line, line.length),
+               to:   CodeMirror.Pos(i - 1, cm.getLine(i - 1).length) };
+  }
+  return { from: CodeMirror.Pos(start.line, line.length),
+           to:   CodeMirror.Pos(last, cm.getLine(last).length) };
+});
 
 const LINES_TO_SHOW = 20; // pretext number of lines to show
 
@@ -87,7 +117,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     fixedGutter: false,
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
-    gutters: ["CodeMirror-linenumbers"],
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    foldGutter: { rangeFinder: CodeMirror.fold["foxdot-sections"], updateViewportThrottle: 400 },
     keyMap: "sublime",
   });
 
@@ -453,8 +484,30 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Gestion de CTRL+ENTER
   editor.setOption("extraKeys", {
-    "Ctrl-,": stopClockAndSequence,  // Chromium
-    "Ctrl-;": stopClockAndSequence,  // Firefox
+    "Ctrl-,": stopClockAndSequence,  // Chromium — full stop (Clock.clear + soff)
+    "Ctrl-;": stopClockAndSequence,  // Firefox — full stop (Clock.clear + soff)
+    "Alt-,": () => {                 // cancel #@ sequencer only, sound keeps playing
+      if (activeSequence) {
+        wsServer.send(JSON.stringify({ type: 'evaluate_code', code: '_seq_cancel()\n' }));
+        activeSequence = null;
+      }
+    },
+    "Ctrl-Shift-F": (cm) => {
+      const rf = CodeMirror.fold["foxdot-sections"];
+      cm.operation(() => {
+        for (let i = 0; i < cm.lineCount(); i++) {
+          if (cm.getLine(i).trimStart().startsWith("#@#@"))
+            cm.foldCode(CodeMirror.Pos(i, 0), { rangeFinder: rf }, "fold");
+        }
+      });
+    },
+    "Ctrl-Alt-U": (cm) => {
+      const rf = CodeMirror.fold["foxdot-sections"];
+      cm.operation(() => {
+        for (let i = 0; i < cm.lineCount(); i++)
+          cm.foldCode(CodeMirror.Pos(i, 0), { rangeFinder: rf }, "unfold");
+      });
+    },
     "Ctrl-Space": "autocomplete",
     "Ctrl-S": (cm) => {
       functionUtils.saveEditorContent(cm, wsServer);

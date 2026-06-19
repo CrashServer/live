@@ -1417,31 +1417,47 @@ class Player(Repeatable):
     def update_player_key_relation(self, item):
         """ Called during 'now' to update any Players that a player key is related to before using that value """
 
-        # If this *is* the parent, just get the current value
+        # Guard against infinite recursion caused by circular follow() dependencies
+        # (e.g. p1 follows p2.degree while p2 follows p1.degree in the same queue block).
+        # The key tracks which (player, attr) pair self is currently resolving.
+        guard_key = (id(item.player), item.attr)
+        if not hasattr(self, '_pkr_guard'):
+            self._pkr_guard = set()
+        if guard_key in self._pkr_guard:
+            return item.now()
+        self._pkr_guard.add(guard_key)
 
-        if item.parent is self:
+        try:
 
-            self.update_player_key(item.attr, self.now(item.attr), 0)
+            # If this *is* the parent, just get the current value
 
-        # If the parent is in the same queue block, make sure its values are up-to-date
+            if item.parent is self:
 
-        elif self.queue_block is not None:
+                self.update_player_key(item.attr, self.now(item.attr), 0)
 
-            # Try and find the item in the queue block
+            # If the parent is in the same queue block, make sure its values are up-to-date
 
-            try:
+            elif self.queue_block is not None:
 
-                queue_item = self.queue_block[item.player]
+                # Try and find the item in the queue block
 
-            except KeyError:
+                try:
 
-                queue_item = None
+                    queue_item = self.queue_block[item.player]
 
-            # Update the parent with an up-to-date value
+                except KeyError:
 
-            if queue_item is not None and queue_item.called is False:
+                    queue_item = None
 
-                item.player.update_player_key(item.attr, item.player.now(item.attr), 0)
+                # Update the parent with an up-to-date value
+
+                if queue_item is not None and queue_item.called is False:
+
+                    item.player.update_player_key(item.attr, item.player.now(item.attr), 0)
+
+        finally:
+
+            self._pkr_guard.discard(guard_key)
 
         return item.now()
 

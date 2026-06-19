@@ -86,7 +86,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Connexion aux serveurs
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
   let foxdotWs = null;
-  let activeSequence = null; // {id, currentIndex} for #@ section sequencing
+  let activeSequence = null; // {id, currentIndex, name} for #@ section sequencing
+
+  const updateSeqWidget = (seq) => {
+    const dot = document.getElementById('seqDot');
+    const label = document.getElementById('seqLabel');
+    if (!dot) return;
+    if (!seq) {
+      dot.className = 'seq-dot off';
+      label.textContent = '—';
+    } else {
+      dot.className = 'seq-dot on';
+      label.textContent = seq.name || `#${seq.currentIndex + 1}`;
+    }
+  };
 
   // Récupération des éléments du DOM
   const chrono = document.getElementById("chrono");
@@ -278,6 +291,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             evaluateSection(editor, nextSection.line);
           } else {
             activeSequence = null; // no more sections, keep playing
+            updateSeqWidget(null);
           }
         }
       }
@@ -388,6 +402,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         code: cmd
       }));
       activeSequence = null;
+      updateSeqWidget(null);
       awareness.setLocalStateField('flash', {
         lineStart: sectionLine, lineEnd: sectionLine, timestamp: Date.now()
       });
@@ -422,7 +437,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         type: 'evaluate_code',
         code: cmd
       }));
-      activeSequence = { id: loopSeqId, currentIndex: targetIdx - 1 };
+      activeSequence = { id: loopSeqId, currentIndex: targetIdx - 1, name: allSections[targetIdx]?.name || 'loop' };
+      updateSeqWidget(activeSequence);
       awareness.setLocalStateField('flash', {
         lineStart: sectionLine, lineEnd: sectionLine, timestamp: Date.now()
       });
@@ -469,7 +485,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Store sequence state
-    activeSequence = { id: seqId, currentIndex: currentIdx };
+    activeSequence = { id: seqId, currentIndex: currentIdx, name: tag.name };
+    updateSeqWidget(activeSequence);
   }
 
   const stopClockAndSequence = () => {
@@ -480,6 +497,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         code: '_seq_cancel()\n'
       }));
       activeSequence = null;
+      updateSeqWidget(null);
     }
   };
 
@@ -491,6 +509,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (activeSequence) {
         wsServer.send(JSON.stringify({ type: 'evaluate_code', code: '_seq_cancel()\n' }));
         activeSequence = null;
+        updateSeqWidget(null);
       }
     },
     "Ctrl-Alt-W": (cm) => {
@@ -608,6 +627,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         removeAllTooltips();
       }
     },
+  });
+
+  // #@ sequencer widget buttons
+  document.getElementById('seqJump')?.addEventListener('click', () => {
+    if (!activeSequence) return;
+    const sections = functionUtils.findAllSections(editor);
+    const idx = Math.min(activeSequence.currentIndex, sections.length - 1);
+    if (idx < 0 || !sections[idx]) return;
+    const line = sections[idx].line;
+    editor.setCursor({ line, ch: 0 });
+    editor.scrollIntoView({ line, ch: 0 }, 150);
+    editor.focus();
+  });
+  document.getElementById('seqStop')?.addEventListener('click', () => {
+    if (activeSequence) {
+      wsServer.send(JSON.stringify({ type: 'evaluate_code', code: '_seq_cancel()\n' }));
+      activeSequence = null;
+      updateSeqWidget(null);
+    }
   });
 
   // Gestion de l'autocomplétion

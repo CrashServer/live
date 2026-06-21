@@ -617,6 +617,7 @@ export const foxdotAutocomplete = {
                     { text: 'mute="hat"', displayText: 'mute — silence layers' },
                     { text: 'mute="snare"', displayText: 'mute="snare"' },
                     { text: 'mute="kick"', displayText: 'mute="kick"' },
+                    { text: 'mute=["perc", "hat"]', displayText: 'mute=["perc", "hat"]' },
                     { text: 'seed=42', displayText: 'seed — reproducible pattern' },
                     { text: 'kick="X   X X X   X   "', displayText: 'kick — override kick' },
                     { text: 'hat="----------------"', displayText: 'hat — override hat' },

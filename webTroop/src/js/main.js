@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let foxdotWs = null;
   let activeSequence = null; // {id, currentIndex} for #@ section sequencing
 
+  const isPretext = config["PRETEXT"] ?? false;
   // Récupération des éléments du DOM
   const chrono = document.getElementById("chrono");
 
@@ -830,31 +831,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Récupérer la position du curseur et extraire une fenêtre de lignes
     const cursor = cm.getCursor();
     const currentLine = cm.getLine(cursor.line);
-    const windowData = getLineWindow(cm, LINES_TO_SHOW, userName);
 
-    // Préparer le message avec fenêtre de lignes au lieu du code complet
-    const message = {
-      type: `${userName}InstantCode`,
-      position: cursor.ch,
-      code: currentLine,
-      windowLines: windowData.windowLines,        // Fenêtre de lignes autour du curseur
-      windowStartLine: windowData.windowStartLine, // Numéro de la première ligne de la fenêtre
-      windowEndLine: windowData.windowEndLine,     // Numéro de la dernière ligne de la fenêtre
-      currentLineNumber: cursor.line + 1,
-    };
-
-    // envoyer le message dans le live other player display
-    try {
-      awareness.setLocalStateField("otherInstantCode", {
-        user: userName,
-        code: currentLine,
+    let message = {};
+    if (isPretext) {
+      const windowData = getLineWindow(cm, LINES_TO_SHOW, userName);
+      message = {
+        type: `${userName}InstantCode`,
         position: cursor.ch,
-        line: cursor.line + 1,
-        windowLines: windowData.windowLines,
-        windowStartLine: windowData.windowStartLine,
-        windowEndLine: windowData.windowEndLine,
-      });
-    } catch (error) {}
+        code: currentLine,
+        windowLines: windowData.windowLines,        // Fenêtre de lignes autour du curseur
+        windowStartLine: windowData.windowStartLine, // Numéro de la première ligne de la fenêtre
+        windowEndLine: windowData.windowEndLine,     // Numéro de la dernière ligne de la fenêtre
+        currentLineNumber: cursor.line + 1,
+      };
+
+      try {
+        awareness.setLocalStateField("otherInstantCode", {
+          user: userName,
+          code: currentLine,
+          position: cursor.ch,
+          line: cursor.line + 1,
+          windowLines: windowData.windowLines,
+          windowStartLine: windowData.windowStartLine,
+          windowEndLine: windowData.windowEndLine,
+        });
+      } catch (error) {}
+    } else {
+      message = {
+        type: `${userName}InstantCode`,
+        position: cursor.ch,
+        code: currentLine,
+      };
+
+      try {
+          awareness.setLocalStateField("otherInstantCode", {
+            user: userName,
+            code: currentLine,
+            position: cursor.ch,
+            line: cursor.line + 1,
+          });
+      } catch (error) {}
+    }
 
     if (foxdotWs.readyState === WebSocket.OPEN) {
       foxdotWs.send(JSON.stringify(message));

@@ -74,11 +74,11 @@ vi.amp = linvar([0.3, 0], 8)
 cx.amp = linvar([0.25, 0], 8)
 ml.amp = linvar([0.45, 0.15], 16)
 
-# second guitar voice — angel texture (shimmer)
-al >> angel([0,4,5,3], oct=6, dur=4,
-            sus=5, amp=sinvar([0,0.12],16), rq=0.4,
-            room=0.99, mix=0.95,
-            shimmer=0.4)
+# second guitar voice — high sinepad shimmer
+al >> sinepad([0,4,5,3], oct=6, dur=4,
+              sus=5, amp=sinvar([0,0.12],16),
+              room=0.99, mix=0.95,
+              shimmer=0.4)
 
 #@ outro(48)
 

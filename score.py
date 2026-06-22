@@ -84,11 +84,11 @@ ch >> choir([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4,
             room=0.99, mix=0.95,
             lpf=linvar([800,3000],32))
 
-# angel — overtone shimmer above choir
-al >> angel([0,3,5,4], oct=6, dur=4,
-            sus=6, amp=sinvar([0.05,0.22],16), rq=0.35,
-            room=0.99, mix=0.95,
-            shimmer=0.5)
+# sinepad — overtone shimmer above choir
+al >> sinepad([0,3,5,4], oct=6, dur=4,
+              sus=6, amp=sinvar([0.05,0.22],16),
+              room=0.99, mix=0.95,
+              shimmer=0.5)
 
 # celesta high sparkle (Harry Potter / Hedwig feel)
 cl >> bell2([7,9,12,7,5,3,7,9,12], oct=6,

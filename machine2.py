@@ -9,7 +9,7 @@ d2 >> play("X.X.X...X.X.X...", dur=0.25, amp=0.75, sample=4, hpf=60)
 ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
 
 # doom sub — infrasonic floor under the jbass
-dm >> doom([0,-7,0,-5,0,-7,-12,-7], oct=2, dur=0.5, sus=0.45, amp=0.95, dist2=0.5, lpf=sinvar([80,400],8))
+dm >> subbass([0,-7,0,-5,0,-7,-12,-7], oct=2, dur=0.5, sus=0.45, amp=0.95, dist2=0.5, lpf=sinvar([80,400],8))
 
 # crunch — mid grit, euclidean offset
 cr >> crunch([0,-5,0,-7,-5,-7,0,-5], oct=5, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))

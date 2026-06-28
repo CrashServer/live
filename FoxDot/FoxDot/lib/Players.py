@@ -1421,11 +1421,15 @@ class Player(Repeatable):
         # (e.g. p1 follows p2.degree while p2 follows p1.degree in the same queue block).
         # The key tracks which (player, attr) pair self is currently resolving.
         guard_key = (id(item.player), item.attr)
-        if not hasattr(self, '_pkr_guard'):
-            self._pkr_guard = set()
-        if guard_key in self._pkr_guard:
+        # Use __dict__ directly: Player.__setattr__/__getattr__ would otherwise
+        # treat `_pkr_guard` as a musical attribute (asStream it into self.attr
+        # and hand back a PlayerKey, which has no .add()).
+        guard = self.__dict__.get('_pkr_guard')
+        if guard is None:
+            guard = self.__dict__['_pkr_guard'] = set()
+        if guard_key in guard:
             return item.now()
-        self._pkr_guard.add(guard_key)
+        guard.add(guard_key)
 
         try:
 
@@ -1457,7 +1461,7 @@ class Player(Repeatable):
 
         finally:
 
-            self._pkr_guard.discard(guard_key)
+            guard.discard(guard_key)
 
         return item.now()
 

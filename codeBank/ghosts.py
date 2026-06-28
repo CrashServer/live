@@ -1,4 +1,5 @@
-#
+# ghosts 120
+# live2026
 
 Clock.bpm = 120
 Scale.default = Scale.mixolydian

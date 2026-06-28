@@ -134,6 +134,10 @@ html {
   width: 100%;
   /* flex-grow: 1; */
   height: 100vh;
+  /* Allow this flex item to shrink below its content's intrinsic width.
+     Without this, CodeMirror's gutter widening on scroll (2->3 digit line
+     numbers, fixedGutter:false) pushes the .crash-panel sidebar narrower. */
+  min-width: 0;
 }
 
 #main-editor-wrapper {

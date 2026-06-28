@@ -570,6 +570,20 @@ class Player(Repeatable):
 
         except KeyError:
 
+            # Referencing a valid attribute of a player that hasn't played yet
+            # (e.g. `echotime=a1.dur` before `a1 >> ...`) used to raise and break
+            # the *referencing* player. Hand back a default key of 0 instead; it
+            # updates live once the parent player starts.
+            if name in Player.get_attributes() or name in Player.envelope_keywords:
+
+                self.update_player_key(name, 0, 0)
+
+                if name not in self.accessed_keys:
+
+                    self.accessed_keys.append(name)
+
+                return self.__dict__[name]
+
             err = "Player Object has no attribute '{}'".format(name)
 
             raise AttributeError(err)

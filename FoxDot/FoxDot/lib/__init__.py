@@ -230,7 +230,9 @@ FoxDot = _util()
 
 # Create a clock and define functions
 
-_ = None
+# `_` is a rest: write it in a degree or dur pattern to silence that step
+# while keeping the rhythm. e.g. pluck([0, _, 2, _], dur=1/4)
+_ = rest()
 
 logging.basicConfig(level=logging.ERROR)
 when.set_namespace(FoxDotCode) # experimental

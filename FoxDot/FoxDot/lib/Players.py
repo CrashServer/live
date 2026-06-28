@@ -725,7 +725,7 @@ class Player(Repeatable):
 
         # Play the note
 
-        if not isinstance(self.event["dur"], rest):
+        if not isinstance(self.event["dur"], rest) and not isinstance(self.event.get("degree"), rest):
 
             try:
 
@@ -1696,6 +1696,12 @@ class Player(Repeatable):
         if ("amp" in packet) and ("amplify" in packet):
 
             packet["amp"] = packet["amp"] * packet["amplify"]
+
+        # Drop rest voices, e.g. `_` used inside a chord such as (0, _, 4)
+
+        if isinstance(packet.get("degree"), rest):
+
+            return
 
         # Send compiled messages
 

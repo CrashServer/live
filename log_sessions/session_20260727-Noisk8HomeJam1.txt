@@ -1,0 +1,72 @@
+z3 >> loop("rockdrum16", dur=16, sample=0, sbrk =0, t_reset=0, sbrkdur=0.25, sbrkmix=1.0, wshape=4, wgain=1, wmix=0.5, lofi=0).lclip(0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=5200, rq=0.3, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=4200, rq=0.3, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=3200, rq=0.3, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=2200, rq=0.3, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.3, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.5, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, P+(6,6.5)] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, P+(6,6.6)] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, P+(6,6.7)] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, P+(6,6.8)] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, P+(6,12)] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, P^(6,12)] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, P^(6,12,.125)] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6 >> juno([-4, 1,2, P^(6,12,.25)] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+m6.stop()
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2], [8, 8, 16]), sample=6, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+z4 >> play("x.", sample=3)  
+
+m6 >> juno([-4, 1,2, 6] , hpf=800, dur=1/4, sus=1/8, oct=P+(4,6), junoshape=0.7, cutoff=1200, rq=0.4, junochorus=0.014, mverb=.4)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,1], [8]), sample=6, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,-1], [8]), sample=6, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,-1], [8]), sample=5, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,-1], [8]), sample=6, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,-1], [8]), sample=7, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,-1], [8]), sample=8, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,-1], [8]), sample=9, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,-1], [8]), sample=8, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+o2 >> wavetable("WT_Analog", oct=(4,5), dur=1/2, a=[0.4, 0], rate=0, degree=var([0, 2, -2,-1], [8]), sample=7, r=0, rc=3, detune=0.2, wtpos=0, cutoff=5000, rq=0.1, wtdist=0, wshape=0, wgain=1, wmix=0.5, mverb=0, amp=1.0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+

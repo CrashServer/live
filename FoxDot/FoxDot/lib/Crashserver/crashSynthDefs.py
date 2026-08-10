@@ -332,6 +332,9 @@ piano.add()
 pianovel = FileSynthDef("pianovel")
 pianovel.add()
 
+piacon = FileSynthDef("piacon")
+piacon.add()
+
 pink = FileSynthDef("pink")
 pink.add()
 

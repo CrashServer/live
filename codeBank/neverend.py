@@ -1,3 +1,6 @@
+# neverend 110
+# live2026_aube
+
 Clock.bpm = 110
 Scale.default = Scale.chromatic
 Root.default = "C"

@@ -22,6 +22,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const consoleToggle = document.getElementById('consoleToggle');
     const guttersToggle = document.getElementById('guttersToggle');
     const audiovizToggle = document.getElementById('audiovizToggle');
+    const bloomToggle = document.getElementById('bloomToggle');
     const consoleElement = document.getElementById('logPanel');
     const logs = document.getElementById('logs');
     const themeSelect = document.getElementById('themeSelect');
@@ -98,6 +99,12 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         const audioVizEnabled = savedAudioVizState !== 'false';
         audiovizToggle.checked = audioVizEnabled;
         toggleAudioViz(audioVizEnabled);
+
+        // Charger l'état du visualiseur bloom
+        const savedBloomState = localStorage.getItem(getStorageKey('bloomEnabled'));
+        const bloomEnabled = savedBloomState !== 'false';
+        bloomToggle.checked = bloomEnabled;
+        toggleBloom(bloomEnabled);
 
         // Charger le thème d'interface
         const savedInterfaceTheme = localStorage.getItem(getStorageKey('selectedInterfaceTheme')) || 'dark';
@@ -378,6 +385,26 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         const enabled = e.target.checked;
         toggleAudioViz(enabled);
     });
+
+    /// BLOOM
+    bloomToggle.addEventListener('change', (e) => {
+        const enabled = e.target.checked;
+        toggleBloom(enabled);
+    });
+
+    function toggleBloom(enabled) {
+        const crashPanel = document.getElementById('crashPanel');
+        const editorContainer = document.getElementById('editor-container');
+        if (enabled) {
+            crashPanel.classList.add('ac-bloom');
+            editorContainer.classList.add('ac-bloom');
+        } else {
+            crashPanel.classList.remove('ac-bloom');
+            editorContainer.classList.remove('ac-bloom');
+        }
+        // Sauvegarder la préférence
+        localStorage.setItem(getStorageKey('bloomEnabled'), enabled.toString());
+    }
 
     // Gestion du mode spectateur
     function toggleSpectatorMode(enabled) {

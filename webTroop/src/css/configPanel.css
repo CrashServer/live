@@ -105,7 +105,7 @@
     grid-template-columns: 2fr 1fr;
     margin-bottom: 1rem;
 }
-  
+
 /* Container for the toggle */
 .toggle-switch {
     position: relative;
@@ -125,8 +125,9 @@
 .slider {
     position: absolute;
     cursor: pointer;
-    background-color: var(--text-col-1);
-    border-radius: 20px;
+    background-color: var(--bg-col-1);
+    border: 2px solid var(--text-col-2);
+    border-radius: 4px;
     width: 100%;
     height: 100%;
     transition: background-color 0.3s;
@@ -138,11 +139,10 @@
     position: absolute;
     height: 20px;
     width: 20px;
-    left: 0px;
-    /* bottom: 2px; */
+    left: 2px;
+    top: 2px;
+    margin: 0px;
     background-color: var(--text-col-1);
-    border: 2px solid var(--bg-col-2);
-    border-radius: 50%;
     transition: transform 0.3s;
 }
 
@@ -172,17 +172,17 @@ button.configButton:hover {
 
 /* Modal */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1000; 
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
-  
+
 /* Contenu de la modal */
 .modal-content {
     background-color: var(--bg-col-1);
@@ -238,4 +238,3 @@ span#closeModal.close:focus {
     border-radius: 4px;
     color: var(--text-col-2);
 }
-  

@@ -351,11 +351,13 @@ function getDurationColor(totalMinutes) {
 
 // Update the title of the crash panel
 function updateCrashPanelTitle (serverState) {
-    if (serverState) {
+    const isActive = document.getElementById('crashPanelTitle').classList.contains('server-active');
+    
+    if (serverState && !isActive) {
       crashPanelTitle.textContent = 'Server Activated';
       crashPanelTitle.classList.add('server-active');
-    } else {
-        crashPanelTitle.textContent = 'CrashPanel';
+    } else if (!serverState && isActive) {
+        crashPanelTitle.textContent = 'CRASHPANEL';
         crashPanelTitle.classList.remove('server-active');
     }
   };

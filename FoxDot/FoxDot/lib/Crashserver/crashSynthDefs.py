@@ -549,12 +549,6 @@ subbass2.add()
 acidline = FileSynthDef("acidline")
 acidline.add()
 
-juno = FileSynthDef("juno")
-juno.add()
-
-reese = FileSynthDef("reese")
-reese.add()
-
 # arpy — vanilla FoxDot pluck (LPF'd impulse train). The .scd has always been
 # here but was only ever a commented-out draft in lib/SCLang/_SynthDefs.py,
 # on every branch — never an active FileSynthDef registration anywhere in

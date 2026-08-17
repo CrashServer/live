@@ -542,3 +542,28 @@ subbass2.add()
 
 acidline = FileSynthDef("acidline")
 acidline.add()
+
+juno = FileSynthDef("juno")
+juno.add()
+
+reese = FileSynthDef("reese")
+reese.add()
+
+# arpy — vanilla FoxDot pluck (LPF'd impulse train). The .scd has always been
+# here but was only ever a commented-out draft in lib/SCLang/_SynthDefs.py,
+# on every branch — never an active FileSynthDef registration anywhere in
+# this repo's history, so `arpy(...)` would NameError. Registering it here
+# alongside juno/reese since it's a complete, working synth, just unwired.
+arpy = FileSynthDef("arpy")
+arpy.add()
+
+# dtclap / dthihat — deep-techno 808/909-style clap and hihat (see the
+# header comments in their own .scd files: "Based on TR-808/909 synthesis
+# from Attack Magazine" / "Sound on Sound"). Complete, working synths with
+# no active registration anywhere in this repo's history — same unwired
+# situation as arpy above.
+dtclap = FileSynthDef("dtclap")
+dtclap.add()
+
+dthihat = FileSynthDef("dthihat")
+dthihat.add()

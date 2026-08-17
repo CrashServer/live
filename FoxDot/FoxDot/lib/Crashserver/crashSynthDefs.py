@@ -269,6 +269,9 @@ ikea.add()
 jbass = FileSynthDef("jbass")
 jbass.add()
 
+juno = FileSynthDef("juno")
+juno.add()
+
 karp = FileSynthDef("karp")
 karp.add()
 
@@ -376,6 +379,9 @@ rave.add()
 
 razz = FileSynthDef("razz")
 razz.add()
+
+reese = FileSynthDef("reese")
+reese.add()
 
 ripple = FileSynthDef("ripple")
 ripple.add()

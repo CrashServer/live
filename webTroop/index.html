@@ -10,12 +10,12 @@
     <div id="main-container">
         <div class="crash-panel" id="crashPanel">
             <header>
-                <h1 id="crashPanelTitle">CrashPanel</h1>
+                <h1 id="crashPanelTitle">CRASHPANEL</h1>
             </header>
 
             <section class="todo-list">
                 <fieldset class="info-row">
-                    <legend id="todoTitle">Todo List</legend>
+                    <legend id="todoTitle">TODO</legend>
                     <div id="todo-container" class="simple-text">
                         <div class="todo-item">
                             <input type="checkbox" id="todo-1" class="todo-checkbox">
@@ -51,15 +51,15 @@
 
             <section class="foxdot-info">
                     <fieldset class="info-row">
-                        <legend>Bpm</legend>
+                        <legend>BPM</legend>
                         <div class="info-text" id="bpm">000</div>
                     </fieldset>
                     <fieldset class="info-row">
-                        <legend>Scale</legend>
+                        <legend>SCALE</legend>
                         <div class="info-text" id="scale">Major</div>
                     </fieldset>
                     <fieldset class="info-row">
-                        <legend>Root</legend>
+                        <legend>ROOT</legend>
                         <div class="info-text" id="root">0</div>
                     </fieldset>
             </section>
@@ -73,14 +73,14 @@
 
             <section class="crashometre">
                 <fieldset class="info-row">
-                    <legend>Chrono</legend>
+                    <legend>CHRONO</legend>
                     <div class="info-text" id="chrono">00:00</div>
                 </fieldset>
             </section>
 
             <section class="beat">
                 <fieldset class="info-row">
-                    <legend>Beat</legend>
+                    <legend>BEAT</legend>
                     <div>
                         <div class="beat-steps" id="beat-8">0/8</div>
                         <div class="beat-steps" id="beat-16">0/16</div>
@@ -92,7 +92,7 @@
 
             <section class="master-fx">
                 <fieldset class="info-row">
-                    <legend>Master FX</legend>
+                    <legend>MASTER FX</legend>
                     <div id="masterFx" class="simple-text h10"></div>
                 </fieldset>
             </section>
@@ -106,7 +106,7 @@
 
             <section class="players">
                 <fieldset class="info-row">
-                    <legend>Players</legend>
+                    <legend>PLAYERS</legend>
                     <div id="players" class="simple-text">
 
                     </div>
@@ -115,7 +115,7 @@
 
             <section class="sceneName">
                 <fieldset class="info-row">
-                    <legend>Scene Name</legend>
+                    <legend>SCENE</legend>
                     <div class="simple-text h20 sceneInfo">
                     <span id="sceneName">xxx</span><span id="sceneTime">00:00</span></div>
                 </fieldset>
@@ -123,7 +123,7 @@
 
             <section class="help">
                 <fieldset class="info-row">
-                    <legend>Help</legend>
+                    <legend>HELP</legend>
                     <div id="help" class="simple-text h40"></div>
                 </fieldset>
             </section>
@@ -146,9 +146,8 @@
 
             <section class="record">
                 <fieldset class="info-row">
-                    <legend>Record</legend>
+                    <legend>RECORD</legend>
                     <button id="recording" class="configButton">Start</button>
-                    <!--<div id="recording" class="simple-text h10"></div>-->
                 </fieldset>
             </section>
         </div>
@@ -171,7 +170,7 @@
             </div>
             <button id="configButton"><img src="/src/images/gear.svg"></button>
             <div id="configPanel" class="config-panel">
-                <h3>Crash Config</h3>
+                <h3>CRASH CONFIG</h3>
                 <div class="config-group">
                     <div class="input-group">
                         <input type="color" id="userColor" value="#2196f3">
@@ -179,7 +178,7 @@
                         <button id="validatePlayerName" class="configButton">Valider</button>
                     </div>
                     <div class="input-group">
-                        <label>Mode Spectateur</label>
+                        <label>SPECTATOR</label>
                         <label class="toggle-switch">
                             <input type="checkbox" id="spectatorModeToggle"/>
                             <span class="slider"></span>
@@ -187,10 +186,10 @@
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="themeSelect">Theme:</label>
+                    <label for="themeSelect">THEME</label>
                     <select id="themeSelect">
                         <option>🟩 green-terminal</option>
-                        <option>🟨 amber-terminal</option>
+                        <option selected>🟨 amber-terminal</option>
                         <option>⬜ white-terminal</option>
                         <option>⬛ transparent-terminal</option>
                         <option>🟦 blue-terminal</option>
@@ -220,7 +219,7 @@
                         <option>liquibyte</option>
                         <option>lucario</option>
                         <option>material</option>
-                        <option selected>material-darker</option>
+                        <option>material-darker</option>
                         <option>material-palenight</option>
                         <option>material-ocean</option>
                         <option>mbo</option>
@@ -255,7 +254,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="fontSelect">Font:</label>
+                    <label for="fontSelect">FONT</label>
                     <select id="fontSelect">
                         <option value="monospace">Monospace</option>
                         <option value="Courier New">Courier New</option>
@@ -267,23 +266,23 @@
                         <option value="TerminalGrotesque">Terminal Grotesque</option>
                         <option value="BluuNextBold">Bluu next bold</option>
                         <option value="InterBlack">Inter Black</option>
-                        <option value="retroTerminal">Retro Terminal</option>
+                        <option value="retroTerminal" selected>Retro Terminal</option>
                     </select>
                 </div>
                 <div class="input-group">
-                        <label for="fontSizeSelect">Font: </label>
-                        <input type="range" min="12" max="128" value="16" step="1" id="fontSizeSlider"><span id="fontSizeValue">16</span>
+                        <label for="fontSizeSelect">EDITOR</label>
+                        <input type="range" min="12" max="128" value="24" step="1" id="fontSizeSlider"><span id="fontSizeValue">16</span>
                 </div>
                 <div class="input-group">
-                        <label for="fontInterfaceSizeSelect">Interface: </label>
-                        <input type="range" min="12" max="64" value="16" step="1" id="fontInterfaceSizeSlider"><span id="fontInterfaceSizeValue">16</span>
+                        <label for="fontInterfaceSizeSelect">INTERFACE</label>
+                        <input type="range" min="12" max="64" value="20" step="1" id="fontInterfaceSizeSlider"><span id="fontInterfaceSizeValue">16</span>
                 </div>
 
                 <div class="input-group">
-                    <label>Theme interface</label>
+                    <label>THEME INTERFACE</label>
                     <select id="themeInterfaceSelector">
                         <option value="green-terminal">🟩 Green Terminal</option>
-                        <option value="amber-terminal">🟨 Amber Terminal</option>
+                        <option value="amber-terminal" selected>🟨 Amber Terminal</option>
                         <option value="white-terminal">⬜ White Terminal</option>
                         <option value="blue-terminal">🟦 Blue Terminal</option>
                         <option value="dark">Dark Theme</option>
@@ -302,42 +301,49 @@
 
                 <div class="toggle-group">
                     <div class="toggle-item">
-                        <label>Toggle Crash Panel</label>
+                        <label>CRASH PANEL</label>
                         <label class="toggle-switch">
                             <input type="checkbox" id="crashPanelToggle" checked/>
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="toggle-item">
-                        <label>Toggle Split Screen</label>
+                        <label>SPLIT SCREEN</label>
                         <label class="toggle-switch">
                             <input type="checkbox" id="splitScreenToggle" checked/>
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="toggle-item">
-                        <label>Toggle Console</label>
+                        <label>CONSOLE</label>
                         <label class="toggle-switch">
                             <input type="checkbox" id="consoleToggle" checked/>
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="toggle-item">
-                        <label>Toggle Gutters</label>
+                        <label>GUTTERS</label>
                         <label class="toggle-switch">
                             <input type="checkbox" id="guttersToggle" checked/>
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="toggle-item">
-                        <label>Toggle Audio-Visualisation</label>
+                        <label>AUDIO VIZ</label>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="audiovizToggle" checked/>
+                            <input type="checkbox" id="audiovizToggle" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <label>BLOOM</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="bloomToggle" />
                             <span class="slider"></span>
                         </label>
                     </div>
                 </div>
-                <button id="openModalBtn" class="configButton">Afficher les raccourcis clavier</button>
+                <button id="openModalBtn" class="configButton">KEYBOARD SHORTCUT</button>
             </div>
         </div>
     </div>

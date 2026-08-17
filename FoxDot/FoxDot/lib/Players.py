@@ -1823,7 +1823,7 @@ class Player(Repeatable):
             bank = kwargs.get("bank", event["bank"])
             buf = self.samples.loadBufferMono(self.filename, sample)
 
-            if degree is None:
+            if degree == None:
                 freq, midinote = None, None
             else:
                 freq, midinote = get_freq_and_midi(degree, octave, root, scale)
@@ -1842,7 +1842,7 @@ class Player(Repeatable):
             root   = kwargs.get("root", event["root"])
             scale  = kwargs.get("scale", self.scale)
 
-            if degree is None:
+            if degree == None:
                 freq, midinote = None, None
             else:
                 freq, midinote = get_freq_and_midi(degree, octave, root, scale)

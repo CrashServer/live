@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
   let foxdotWs = null;
   let activeSequence = null; // {id, currentIndex, name} for #@ section sequencing
+  let lastAttackInsert = { content: null, time: 0 }; // dedupe guard for attack() double paste
 
   const updateSeqWidget = (seq) => {
     const dot = document.getElementById('seqDot');
@@ -756,9 +757,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             awareness.getLocalState().attackRequest.attackRequestName ===
             awareness.getLocalState().user.name
           ) {
-            functionUtils.insertAttackContent(editor, message.content);
-            // Reset to prevent duplicate inserts from multiple WS deliveries
+            // Dedupe: skip if the exact same content was just inserted
+            // (multiple WS deliveries / stale connections can re-fire this)
+            const now = Date.now();
+            const isDuplicate =
+              lastAttackInsert.content === message.content &&
+              now - lastAttackInsert.time < 3000;
+            // Reset immediately to shrink the race window before any WS re-delivery
             awareness.setLocalStateField("attackRequest", { attackRequestName: "" });
+            if (!isDuplicate) {
+              lastAttackInsert = { content: message.content, time: now };
+              functionUtils.insertAttackContent(editor, message.content);
+            }
           }
         } else if (message.type === "autocomplete") {
           const { loops, fxList, synthList, attackList } =

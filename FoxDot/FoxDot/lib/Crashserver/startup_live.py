@@ -1094,7 +1094,14 @@ class WebsocketServer():
         self.wsClients.add(websocket)
         try:
             async for message in websocket:
-                await asyncio.gather(*[client.send(message) for client in self.wsClients])
+                results = await asyncio.gather(
+                    *[client.send(message) for client in self.wsClients],
+                    return_exceptions=True
+                )
+                # Prune any client whose send failed (stale/closed connection)
+                dead = [c for c, r in zip(list(self.wsClients), results) if isinstance(r, Exception)]
+                for c in dead:
+                    self.wsClients.discard(c)
                 data = json.loads(message)
                 if data["type"] == "serverToggle":
                     if not serverActive:

@@ -567,3 +567,21 @@ dtclap.add()
 
 dthihat = FileSynthDef("dthihat")
 dthihat.add()
+
+# ── AdLib / OPL2 FM family (authentic YM3812 / HERAD "Dune" voices) ────────────
+# Real chip feedback (SinOscFB) + the four OPL operator waveforms + enveloped FM
+# index, unfiltered. adlib = flexible 2-op; adlead/adbass/adbell/addrone = presets.
+adlib = FileSynthDef("adlib")
+adlib.add()
+
+adlead = FileSynthDef("adlead")
+adlead.add()
+
+adbass = FileSynthDef("adbass")
+adbass.add()
+
+adbell = FileSynthDef("adbell")
+adbell.add()
+
+addrone = FileSynthDef("addrone")
+addrone.add()

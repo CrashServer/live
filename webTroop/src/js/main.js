@@ -566,7 +566,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("piano-roll").classList.toggle("hidden");
     },
     "Alt-T": (cm) => {
-      recUtils.autoRecToggle(cm, evaluateCode);
+      // No evaluateCode: the recorder writes the line but never evaluates it,
+      // so the user decides when the change is heard.
+      recUtils.autoRecToggle(cm);
     },
     "Alt-Up": (cm) => {
       functionUtils.incrementValue(cm, 1);
@@ -599,7 +601,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
     Esc: (cm) => {
       if (recUtils._autoRec.armed) {
-        recUtils.autoRecCancel(cm, evaluateCode);
+        recUtils.autoRecCancel(cm);
       } else {
         removeAllTooltips();
       }

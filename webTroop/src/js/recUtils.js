@@ -1,27 +1,45 @@
 export const recUtils = {
   // === AUTOMATION RECORDER ===
+  // Minimum beats between two extremes. The beat readout is integer-only, so
+  // two nudges inside the same beat used to yield `linvar([a, b], 0)`.
+  _AUTOREC_MIN_DUR: 0.5,
+
   _autoRec: {
       armed: false,
       startTime: 0,
       recordings: {},  // { paramName: [{time, value}, ...] }
-      cursorLine: null,
+      marker: null,    // CodeMirror bookmark pinning the armed line
+      originalLine: null,
+  },
+
+  // The line this recording is pinned to. Uses a bookmark rather than a line
+  // number so a collaborator inserting/removing lines above cannot make us
+  // overwrite somebody else's line.
+  _autoRecLine() {
+      const m = this._autoRec.marker;
+      if (!m) return null;
+      const pos = m.find();
+      return pos ? (pos.line !== undefined ? pos.line : pos.from.line) : null;
   },
 
   autoRecToggle(cm, evaluateFn) {
       const rec = this._autoRec;
       if (!rec.armed) {
-          // ARM — start recording
+          // ARM — start recording, pinned to the cursor's line
+          const line = cm.getCursor().line;
           rec.armed = true;
           rec.startTime = performance.now();
           rec.recordings = {};
-          rec.cursorLine = cm.getCursor().line;
-          rec.originalLine = cm.getLine(rec.cursorLine);
+          if (rec.marker) rec.marker.clear();
+          rec.marker = cm.setBookmark({ line: line, ch: 0 }, { insertLeft: true });
+          rec.originalLine = cm.getLine(line);
           this._autoRecShowIndicator(true);
       } else {
-          // DISARM — stop, convert, replace
+          // DISARM — stop, convert, write (no evaluation: the user decides when)
           rec.armed = false;
           this._autoRecShowIndicator(false);
-          this._autoRecFinalize(cm, evaluateFn);
+          this._autoRecFinalize(cm);
+          if (rec.marker) { rec.marker.clear(); rec.marker = null; }
       }
   },
 
@@ -30,49 +48,39 @@ export const recUtils = {
       if (!rec.armed) return;
       rec.armed = false;
       this._autoRecShowIndicator(false);
-      // Restore params to their first recorded values
-      const line = cm.getLine(rec.cursorLine);
-      let newLine = line;
-      // Sort position-based in reverse to avoid offset shifts
-      const params = Object.keys(rec.recordings).sort((a, b) => {
-          const posA = a.startsWith('@pos') ? parseInt(a.slice(4)) : -1;
-          const posB = b.startsWith('@pos') ? parseInt(b.slice(4)) : -1;
-          return posB - posA;
-      });
-      for (const param of params) {
-          const firstVal = rec.recordings[param][0];
-          const lastVal = rec.recordings[param][rec.recordings[param].length - 1];
-          if (!firstVal) continue;
-          if (param.startsWith('@pos')) {
-              // Use exact position from last capture to find current value
-              const start = lastVal.charStart;
-              const end = lastVal.charEnd;
-              if (start >= 0 && end <= newLine.length) {
-                  newLine = newLine.substring(0, start) + firstVal.value + newLine.substring(end);
-              }
-          } else {
-              const regex = new RegExp(param + '\\s*=\\s*[\\d.\\-]+');
-              newLine = newLine.replace(regex, param + '=' + firstVal.value);
+      // Restore the line exactly as it was when we armed, rather than trying to
+      // patch individual params back with a regex.
+      const target = this._autoRecLine();
+      if (target !== null && rec.originalLine !== null) {
+          const line = cm.getLine(target);
+          if (line !== undefined && line !== rec.originalLine) {
+              cm.operation(() => {
+                  cm.replaceRange(rec.originalLine,
+                      { line: target, ch: 0 },
+                      { line: target, ch: line.length }
+                  );
+              });
           }
       }
-      if (newLine !== line) {
-          cm.replaceRange(newLine,
-              { line: rec.cursorLine, ch: 0 },
-              { line: rec.cursorLine, ch: line.length }
-          );
-          if (evaluateFn) evaluateFn(cm, false);
-      }
+      if (rec.marker) { rec.marker.clear(); rec.marker = null; }
       rec.recordings = {};
+      rec.originalLine = null;
   },
 
   autoRecCapture(cm) {
       const rec = this._autoRec;
       if (!rec.armed) return;
 
-      // Track current cursor line (may shift if others add/remove lines)
-      rec.cursorLine = cm.getCursor().line;
-
+      // Only record edits on the line we armed on. Previously any nudge
+      // retargeted the recording, so touching a second line folded both sets of
+      // captures into whichever line was edited last.
+      const target = this._autoRecLine();
       const cursor = cm.getCursor();
+      if (target === null || cursor.line !== target) {
+          this._autoRecShowIndicator(true, 'off-line');
+          return;
+      }
+
       const line = cm.getLine(cursor.line);
 
       // Find number boundaries at cursor
@@ -142,9 +150,19 @@ export const recUtils = {
           charEnd: numEnd,
           isDurationArg: isDurationArg,
       });
+      this._autoRecShowIndicator(true);
   },
 
-  _autoRecShowIndicator(show) {
+  // Match `param=` only when it is a whole word, so nudging `cutoff` cannot
+  // rewrite `fbcutoff`, `feed` cannot hit `fbfeed`, `mix` cannot hit `mverbmix`.
+  _autoRecParamRe(param, withTimeVar) {
+      const value = withTimeVar
+          ? '(?:(?:linvar|sinvar|expvar|var)\\([^()]*(?:\\([^()]*\\)[^()]*)*\\)|[\\d.\\-]+)'
+          : '[\\d.\\-]+';
+      return new RegExp('(^|[^A-Za-z0-9_])' + param + '\\s*=\\s*' + value);
+  },
+
+  _autoRecShowIndicator(show, state) {
       let el = document.getElementById('autorec-indicator');
       if (show) {
           if (!el) {
@@ -156,18 +174,38 @@ export const recUtils = {
               document.head.appendChild(style);
               document.body.appendChild(el);
           }
-          el.textContent = '● REC';
+          // Say what is actually being captured, so it is not a black box.
+          const rec = this._autoRec;
+          const names = Object.keys(rec.recordings || {});
+          const pts = names.reduce((n, k) => n + rec.recordings[k].length, 0);
+          const shown = names.map(n => (n.startsWith('@pos') ? 'value' : n));
+          if (state === 'off-line') {
+              el.textContent = '● REC — other line, ignored';
+              el.style.background = '#a60';
+          } else {
+              el.textContent = names.length
+                  ? `● REC ${shown.join(', ')} (${pts})`
+                  : '● REC — nudge a number';
+              el.style.background = '#e33';
+          }
           el.style.display = 'block';
       } else if (el) {
           el.style.display = 'none';
       }
   },
 
-  _autoRecFinalize(cm, evaluateFn) {
+  _autoRecFinalize(cm) {
       const rec = this._autoRec;
       const recordings = rec.recordings;
       const paramNames = Object.keys(recordings);
       if (paramNames.length === 0) return;
+
+      const target = this._autoRecLine();
+      if (target === null) {
+          console.warn('autoRec: armed line no longer exists — nothing written');
+          rec.recordings = {};
+          return;
+      }
 
       // Sort position-based keys in reverse order so replacements don't shift offsets
       const sorted = paramNames.sort((a, b) => {
@@ -176,7 +214,8 @@ export const recUtils = {
           return posB - posA; // reverse: replace from right to left
       });
 
-      const line = cm.getLine(rec.cursorLine);
+      const line = cm.getLine(target);
+      if (line === undefined) { rec.recordings = {}; return; }
       let newLine = line;
 
       for (const param of sorted) {
@@ -196,19 +235,29 @@ export const recUtils = {
                   newLine = newLine.substring(0, start) + converted + newLine.substring(end);
               }
           } else {
-              // Named param: replace "param=VALUE" or "param=expression"
-              const regex = new RegExp(param + '\\s*=\\s*(?:(?:linvar|sinvar|expvar|var)\\([^)]*(?:\\([^)]*\\))?[^)]*\\)|[\\d.\\-]+)');
-              newLine = newLine.replace(regex, param + '=' + converted);
+              // Named param: whole-word match so we cannot clobber a longer
+              // param that ends with this name (cutoff vs fbcutoff).
+              const regex = this._autoRecParamRe(param, true);
+              if (!regex.test(newLine)) {
+                  console.warn(`autoRec: ${param} not found on the armed line — skipped`);
+                  continue;
+              }
+              newLine = newLine.replace(regex, (m, lead) => lead + param + '=' + converted);
           }
       }
 
       if (newLine !== line) {
-          cm.replaceRange(newLine,
-              { line: rec.cursorLine, ch: 0 },
-              { line: rec.cursorLine, ch: line.length }
-          );
-          if (evaluateFn) evaluateFn(cm, false);
+          // One undo step; no evaluation — the change is visible and the user
+          // evaluates it themselves when ready.
+          cm.operation(() => {
+              cm.replaceRange(newLine,
+                  { line: target, ch: 0 },
+                  { line: target, ch: line.length }
+              );
+          });
+          cm.setCursor({ line: target, ch: Math.min(newLine.length, line.length) });
       }
+      rec.recordings = {};
   },
 
   _autoRecRoundValue(val) {
@@ -255,7 +304,9 @@ export const recUtils = {
       const durations = [];
       for (let i = 1; i < unique.length; i++) {
           const raw = this._autoRecBeatDelta(unique[i - 1].time, unique[i].time);
-          durations.push(raw);
+          // The beat readout is whole beats, so nudges inside one beat give 0.
+          // A TimeVar with a 0 duration is meaningless, so clamp it.
+          durations.push(Math.max(raw, this._AUTOREC_MIN_DUR));
       }
       const vals = unique.map(u => u.value);
 

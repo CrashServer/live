@@ -6,7 +6,7 @@ SynthDef.new(\fuzz,
 	freq = [freq, freq+fmod];
 	freq=(freq / 2);
 	amp=(amp / 3);
-	osc=LFSaw.ar(LFSaw.kr(freq, 0, freq, (freq * 2)));
+	osc=DPW4Saw.ar(LFSaw.kr(freq, 0, freq, (freq * 2)));
 	env=EnvGen.ar(Env(times: [(sus * 0.8), 0.01],levels: [(amp * 1), (amp * 1), (amp * 0.01)],curve: 'step'), doneAction: 0);
 	osc=(osc * env);
 	osc = Mix(osc) * 0.5;

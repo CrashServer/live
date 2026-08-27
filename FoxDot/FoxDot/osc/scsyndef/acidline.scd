@@ -17,7 +17,7 @@ SynthDef.new(\acidline,
 		filterEnv = EnvGen.ar(Env.perc(0.001, sus * 0.5, 1 + accent, -8));
 
 		// Saw oscillator
-		osc = LFSaw.ar(freq);
+		osc = DPW4Saw.ar(freq);
 
 		// Add some harmonics
 		osc = osc + (LFPulse.ar(freq, width: 0.5).bipolar * 0.3);

@@ -24,9 +24,9 @@ sub = LPF.ar(sub, 400);
 
 // === MAIN OSCILLATORS — Moog/Prophet inspired ===
 // Osc 1: Saw with analog drift (not linear detune)
-osc = LFSaw.ar(freqSlide * (1 + (LFNoise2.kr(0.3) * 0.002)));
+osc = DPW4Saw.ar(freqSlide * (1 + (LFNoise2.kr(0.3) * 0.002)));
 // Osc 2: Saw slightly detuned with its own drift
-main = LFSaw.ar(freqSlide * (1.005 + (LFNoise2.kr(0.25) * 0.002)));
+main = DPW4Saw.ar(freqSlide * (1.005 + (LFNoise2.kr(0.25) * 0.002)));
 
 // === HARD SYNC — Subsequent 37 style ===
 // Sync oscillator: slave freq is higher, synced to master
@@ -38,7 +38,7 @@ main = XFade2.ar(main, syncOsc, tsync.clip(0, 2) - 1);
 // === CROSS MODULATION — Analog Four style ===
 // Osc1 frequency-modulates Osc2
 xmod = osc * txmod * freqSlide;
-main = LFSaw.ar(freqSlide * 1.005 + xmod) * (1 - tsync.clip(0, 1)) + (main * tsync.clip(0, 1));
+main = DPW4Saw.ar(freqSlide * 1.005 + xmod) * (1 - tsync.clip(0, 1)) + (main * tsync.clip(0, 1));
 
 // === PULSE with PWM ===
 pw = SinOsc.kr(rate * 0.7).range(tpw.clip(0.05, 0.95) * 0.6, tpw.clip(0.05, 0.95));

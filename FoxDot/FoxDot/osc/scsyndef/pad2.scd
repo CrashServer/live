@@ -8,7 +8,7 @@ SynthDef.new(\pad2,
 	freq = [freq, freq+fmod];
 	ampEnv= EnvGen.ar(Env([0, peak, level, level, 0], [atk, decay, max((atk + decay + rel), sus - (atk + decay + rel)), rel], curve:\sin), doneAction: 2);
 	freq = { freq * LFNoise2.kr(1,0.01,1) }!12;
-	gen = LFSaw.ar(freq: freq, mul: ampEnv);
+	gen = DPW4Saw.ar(freq: freq, mul: ampEnv);
 	modf = LFCub.kr(1/12, mul: ampEnv).range(1, 1+rate);
 	modrq = LFNoise2.kr(1/8, mul: ampEnv).range(0.1,1.0);
 	osc = RLPF.ar(gen, freq * modf, modrq, ampEnv);

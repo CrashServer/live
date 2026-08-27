@@ -11,12 +11,12 @@ SynthDef.new(\juno, {
     // DCO: saw <-> square crossfade (shape 0=saw, 1=square)
     // Two layers detuned slightly apart for stereo chorus
     sigL = XFade2.ar(
-        LFSaw.ar(freq * (1 - junochorus)),
+        DPW4Saw.ar(freq * (1 - junochorus)),
         Pulse.ar(freq * (1 - junochorus), 0.5),
         junoshape.linlin(0, 1, -1, 1)
     );
     sigR = XFade2.ar(
-        LFSaw.ar(freq * (1 + junochorus)),
+        DPW4Saw.ar(freq * (1 + junochorus)),
         Pulse.ar(freq * (1 + junochorus), 0.5),
         junoshape.linlin(0, 1, -1, 1)
     );

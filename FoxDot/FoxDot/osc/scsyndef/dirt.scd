@@ -6,7 +6,7 @@ SynthDef.new(\dirt,
 	freq = [freq, freq+fmod];
 	freq=(freq / 4);
 	amp=(amp / 2);
-	osc=((LFSaw.ar(freq, mul: amp) + VarSaw.ar((freq + 1), width: (0.85 + rate), mul: amp)) + SinOscFB.ar((freq - 1), mul: (amp / 2)));
+	osc=((DPW4Saw.ar(freq, mul: amp) + VarSaw.ar((freq + 1), width: (0.85 + rate), mul: amp)) + SinOscFB.ar((freq - 1), mul: (amp / 2)));
 	env=EnvGen.ar(Env.perc(attackTime: 0.01,releaseTime: sus,level: amp,curve: 0), doneAction: 0);
 	osc=(osc * env);
 	osc = Mix(osc) * 0.5;

@@ -10,9 +10,9 @@ SynthDef.new(\darklead,
 		env = EnvGen.ar(Env.perc(atk, sus + rel, 1, -4), doneAction: 2);
 
 		// Detuned saws
-		osc1 = LFSaw.ar(freq);
-		osc2 = LFSaw.ar(freq * (1 + detune));
-		osc3 = LFSaw.ar(freq * (1 - detune));
+		osc1 = DPW4Saw.ar(freq);
+		osc2 = DPW4Saw.ar(freq * (1 + detune));
+		osc3 = DPW4Saw.ar(freq * (1 - detune));
 
 		// Pulse for width
 		sig = ((osc1 + osc2 + osc3) * 0.25) + (LFPulse.ar(freq, width: width).bipolar * 0.2);

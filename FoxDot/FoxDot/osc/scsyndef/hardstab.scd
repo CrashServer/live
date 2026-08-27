@@ -14,11 +14,11 @@ SynthDef.new(\hardstab,
 
 		// Detuned saws
 		oscs = Mix.ar([
-			LFSaw.ar(freq),
-			LFSaw.ar(freq * (1 + detune)),
-			LFSaw.ar(freq * (1 - detune)),
-			LFSaw.ar(freq * 2) * 0.3,
-			LFSaw.ar(freq * 2 * (1 + detune)) * 0.3
+			DPW4Saw.ar(freq),
+			DPW4Saw.ar(freq * (1 + detune)),
+			DPW4Saw.ar(freq * (1 - detune)),
+			DPW4Saw.ar(freq * 2) * 0.3,
+			DPW4Saw.ar(freq * 2 * (1 + detune)) * 0.3
 		]) * 0.25;
 
 		// Add pulse

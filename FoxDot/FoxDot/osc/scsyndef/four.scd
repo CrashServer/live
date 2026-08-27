@@ -5,7 +5,7 @@ SynthDef.new(\four,
 	
 	freq = [freq, freq+fmod];
 
-	osc = SinOsc.ar([1,2,4,8],mul:0.5) * LFSaw.ar([freq,freq*1.02,freq*(fmod + 0.99),freq*1.01]);
+	osc = SinOsc.ar([1,2,4,8],mul:0.5) * DPW4Saw.ar([freq,freq*1.02,freq*(fmod + 0.99),freq*1.01]);
 	osc = OnePole.ar(osc, SinOsc.ar(0.1).range(-0.9,0.9));
 	osc = LPF.ar(osc,SinOsc.kr(rate).range(110,8100));
 	osc = AllpassN.ar(osc,0.133, 0.133, 1);

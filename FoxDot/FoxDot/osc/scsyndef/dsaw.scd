@@ -9,13 +9,13 @@ SynthDef.new(\dsaw,
 	osc1 = {
 		var m = 2**(12/1200).rand2;
 		var lfo = SinOsc.ar(Rand(0, 3)).range(0,1);
-		DelayC.ar(LFSaw.ar(m * freq/2), 0.02, ExpRand(0.001, freq.reciprocal) * lfo);
+		DelayC.ar(DPW4Saw.ar(m * freq/2), 0.02, ExpRand(0.001, freq.reciprocal) * lfo);
 	}.dup(nvoices1);
 
 	osc2 = {
 		var m = 2**(detune/1200).rand2;
 		var lfo = SinOsc.ar(Rand(0, 3)).range(0,1);
-		DelayC.ar(LFSaw.ar(m * freq), 0.02, ExpRand(0.001, freq.reciprocal) * lfo);
+		DelayC.ar(DPW4Saw.ar(m * freq), 0.02, ExpRand(0.001, freq.reciprocal) * lfo);
 	}.dup(nvoices2);
 
 

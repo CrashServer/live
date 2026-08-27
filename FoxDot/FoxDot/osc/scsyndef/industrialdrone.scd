@@ -12,9 +12,9 @@ SynthDef.new(\industrialdrone,
 
 		// Detuned saws
 		osc1 = Mix.ar([
-			LFSaw.ar(freq),
-			LFSaw.ar(freq * (1 + detune)),
-			LFSaw.ar(freq * (1 - detune))
+			DPW4Saw.ar(freq),
+			DPW4Saw.ar(freq * (1 + detune)),
+			DPW4Saw.ar(freq * (1 - detune))
 		]) * 0.25;
 
 		// Feedback FM

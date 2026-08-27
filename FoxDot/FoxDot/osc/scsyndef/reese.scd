@@ -9,8 +9,8 @@ SynthDef.new(\reese, {
     freq = freq + fmod;
 
     // Two detuned saws — acoustic beating between them is the Reese character
-    osc1 = LFSaw.ar(freq * (1 - detune));
-    osc2 = LFSaw.ar(freq * (1 + detune));
+    osc1 = DPW4Saw.ar(freq * (1 - detune));
+    osc2 = DPW4Saw.ar(freq * (1 + detune));
 
     // Sub sine for depth
     sub = SinOsc.ar(freq * 0.5, 0, 0.5);

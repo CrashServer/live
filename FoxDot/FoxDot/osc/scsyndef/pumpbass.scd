@@ -22,9 +22,9 @@ SynthDef.new(\pumpbass,
 		subOsc = subOsc * subEnv * sub;
 
 		// === BODY - detuned saws ===
-		osc1 = LFSaw.ar(freq * pitchEnv);
-		osc2 = LFSaw.ar(freq * pitchEnv * 1.005);
-		osc3 = LFSaw.ar(freq * pitchEnv * 0.995);
+		osc1 = DPW4Saw.ar(freq * pitchEnv);
+		osc2 = DPW4Saw.ar(freq * pitchEnv * 1.005);
+		osc3 = DPW4Saw.ar(freq * pitchEnv * 0.995);
 		bodyOsc = ((osc1 + osc2 + osc3) * 0.2) * bodyEnv * body;
 
 		// === GROWL - feedback FM ===

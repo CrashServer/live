@@ -3,7 +3,7 @@ SynthDef.new(\ladder,
 	var osc, env;
 	freq = In.kr(bus, 1);
 	freq = [freq, freq+fmod];
-	osc = MoogLadder.ar(LFSaw.ar(freq),  LinExp.kr(LFCub.kr(rate, 1*pi), -1, 1, 180, 8500), 0.75); 
+	osc = MoogLadder.ar(DPW4Saw.ar(freq),  LinExp.kr(LFCub.kr(rate, 1*pi), -1, 1, 180, 8500), 0.75); 
 	env=EnvGen.ar(Env.new([1, 1], [1, 1]), doneAction:1);
 	// env=EnvGen.ar(Env(times: [(sus / 2), (sus / 2)],levels: [0, amp, 0],curve: 'lin'), doneAction: 0);
 	osc=(osc * env);

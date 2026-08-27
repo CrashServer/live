@@ -8,9 +8,9 @@ SynthDef.new(\dopple,
 
 	freq = [freq, freq+fmod];
 	ffreq = Sweep.kr(Impulse.kr(1/(rate+0.001), 1/(rate+0.001))) * 10000;
-	osc1 = LFSaw.ar(freq * 1 + (0.04 * [1,-1]));
-	osc2 = LFSaw.ar(freq * 0.99);
-	osc3 = LFSaw.ar(freq * 1 );
+	osc1 = DPW4Saw.ar(freq * 1 + (0.04 * [1,-1]));
+	osc2 = DPW4Saw.ar(freq * 0.99);
+	osc3 = DPW4Saw.ar(freq * 1 );
 	env=EnvGen.ar(Env(times: [(sus / 2), (sus / 2)],levels: [0, amp, 0],curve: 'lin'), doneAction: 0);
 	osc = osc1 + osc2 + osc3;
 	osc = (osc*50).tanh;

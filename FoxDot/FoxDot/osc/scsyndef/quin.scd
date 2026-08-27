@@ -7,7 +7,7 @@ SynthDef.new(\quin,
 	amp=(amp * 3);
 	freq=(freq * [1, 1.01]);
 	osc=(Klank.ar(`[[1, 2, 4, 2], [100, 50, 0, 10], [1, 5, 0, 1]], Impulse.ar(freq).dup, freq) / 5000);
-	osc=(osc * LFSaw.ar((freq * (1 + rate))));
+	osc=(osc * DPW4Saw.ar((freq * (1 + rate))));
 	env=EnvGen.ar(Env.perc(attackTime: 0.01,releaseTime: sus,level: amp,curve: 1), doneAction: 0);
 	osc=(osc * env);
 	osc = Mix(osc) * 0.5;

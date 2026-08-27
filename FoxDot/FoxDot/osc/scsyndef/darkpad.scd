@@ -8,11 +8,11 @@ freq = freq.clip(20, 10000);
 
 env = EnvGen.ar(Env([0, 1, 1, 0], [atk, sus, rel], [-4, 0, -4]), doneAction: 2);
 
-osc1 = LFSaw.ar(freq);
-osc2 = LFSaw.ar(freq * (1 + detune));
-osc3 = LFSaw.ar(freq * (1 - detune));
-osc4 = LFSaw.ar(freq * (1 + (detune * 2))) * 0.5;
-osc5 = LFSaw.ar(freq * (1 - (detune * 2))) * 0.5;
+osc1 = DPW4Saw.ar(freq);
+osc2 = DPW4Saw.ar(freq * (1 + detune));
+osc3 = DPW4Saw.ar(freq * (1 - detune));
+osc4 = DPW4Saw.ar(freq * (1 + (detune * 2))) * 0.5;
+osc5 = DPW4Saw.ar(freq * (1 - (detune * 2))) * 0.5;
 osc6 = LFTri.ar(freq) * 0.4;
 
 sig = (osc1 + osc2 + osc3 + osc4 + osc5 + osc6) * 0.12;

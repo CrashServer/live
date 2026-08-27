@@ -20,7 +20,7 @@ SynthDef.new(\acidline,
 		osc = DPW4Saw.ar(freq);
 
 		// Add some harmonics
-		osc = osc + (LFPulse.ar(freq, width: 0.5).bipolar * 0.3);
+		osc = osc + (Pulse.ar(freq, 0.5) * 0.3);
 
 		// Pre-filter drive
 		osc = (osc * (1 + beef * 0.5)).tanh;

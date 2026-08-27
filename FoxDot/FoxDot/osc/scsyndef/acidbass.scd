@@ -22,7 +22,7 @@ SynthDef.new(\acidbass, {
 		curve: [-1 * curve, curve],
 		bias: 1 // env sweeps from 1 to 2.pow(filterRange) and back
 	).kr(gate: gate, doneAction: 2);
-	osc = LFPulse.ar(freq: freq, width: width.clip(0.09,0.99)).range(-1, 1);
+	osc = Pulse.ar(freq, width.clip(0.09,0.99));
 	osc = RLPF.ar(osc, freq * filterEnv, rq);
 	osc = HPF.ar(osc, 40);
 	osc = osc * ampEnv * amp * 2;

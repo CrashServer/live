@@ -15,7 +15,7 @@ SynthDef.new(\darklead,
 		osc3 = DPW4Saw.ar(freq * (1 - detune));
 
 		// Pulse for width
-		sig = ((osc1 + osc2 + osc3) * 0.25) + (LFPulse.ar(freq, width: width).bipolar * 0.2);
+		sig = ((osc1 + osc2 + osc3) * 0.25) + (Pulse.ar(freq, width) * 0.2);
 
 		// Sub
 		subOsc = SinOsc.ar(freq * 0.5) * sub;

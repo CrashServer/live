@@ -22,7 +22,7 @@ SynthDef.new(\hardstab,
 		]) * 0.25;
 
 		// Add pulse
-		oscs = oscs + (LFPulse.ar(freq, width: 0.3).bipolar * 0.2);
+		oscs = oscs + (Pulse.ar(freq, 0.3) * 0.2);
 
 		// Feedback layer
 		oscs = oscs + (SinOscFB.ar(freq, feedback * 2) * feedback * 0.3);

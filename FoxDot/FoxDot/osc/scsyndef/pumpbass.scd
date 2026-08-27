@@ -32,7 +32,7 @@ SynthDef.new(\pumpbass,
 		sig = sig * env;
 
 		// === PULSE for grit ===
-		sig = sig + (LFPulse.ar(freq * pitchEnv * 1.003, width: 0.35).bipolar * 0.25 * env);
+		sig = sig + (Pulse.ar(freq * pitchEnv * 1.003, 0.35) * 0.25 * env);
 
 		// Mix all
 		sig = (subOsc * 0.5) + (bodyOsc * 0.35) + sig;

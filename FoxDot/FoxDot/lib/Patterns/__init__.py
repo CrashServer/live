@@ -76,6 +76,7 @@ from .PGroups    import *
 from .Generators import *
 from .Generative import *
 from .Grooves    import *
+from .Advanced   import *
 from .PlayString import *
 from .Parse      import *
 from .Utils      import *

@@ -272,75 +272,64 @@ export const recUtils = {
   },
 
   _autoRecConvert(points, isDurationArg = false) {
+      const MIN = this._AUTOREC_MIN_DUR;
       const values = points.map(p => this._autoRecRoundValue(p.value));
-      const min = Math.min(...values);
-      const max = Math.max(...values);
 
-      // No real change — return static
-      if (max - min < 0.01) return String(values[0]);
-
-      // Find peaks and valleys with their timestamps
-      const extremes = [{ value: values[0], time: points[0].time }];
-      for (let i = 1; i < values.length - 1; i++) {
-          const prev = values[i - 1];
-          const curr = values[i];
-          const next = values[i + 1];
-          if ((curr >= prev && curr >= next && curr > prev) ||
-              (curr <= prev && curr <= next && curr < prev)) {
-              const last = extremes[extremes.length - 1];
-              if (Math.abs(curr - last.value) > (max - min) * 0.15) {
-                  extremes.push({ value: curr, time: points[i].time });
-              }
+      // Collapse runs of the same value, keeping the moment it was SET.
+      // Every distinct value the user passed through is preserved: the old
+      // peak/valley filter threw away the middle of any one-way gesture, so a
+      // 400 -> 800 -> 1200 -> 1600 staircase collapsed to [400, 1600].
+      const steps = [];
+      for (let i = 0; i < values.length; i++) {
+          if (!steps.length || values[i] !== steps[steps.length - 1].value) {
+              steps.push({ value: values[i], time: points[i].time });
           }
       }
-      extremes.push({ value: values[values.length - 1], time: points[points.length - 1].time });
+      if (steps.length === 1) return String(steps[0].value);
 
-      // Deduplicate consecutive same values (keep latest timestamp)
-      const unique = [extremes[0]];
-      for (let i = 1; i < extremes.length; i++) {
-          if (extremes[i].value !== unique[unique.length - 1].value) {
-              unique.push(extremes[i]);
-          }
+      // Dwell of each value = time until the next change. The final value is
+      // held until the last capture.
+      const lastTime = points[points.length - 1].time;
+      const durs = [];
+      for (let i = 0; i + 1 < steps.length; i++) {
+          durs.push(Math.max(this._autoRecBeatDelta(steps[i].time, steps[i + 1].time), MIN));
+      }
+      // The final value has no "next change" to measure against. Its dwell is
+      // whatever is left after the last change; if that is ~0 (the recording
+      // stopped on the change itself) reuse the typical dwell so the list loops
+      // evenly instead of flashing past the last value.
+      const tail = this._autoRecBeatDelta(steps[steps.length - 1].time, lastTime);
+      const typical = durs.length
+          ? durs.slice().sort((a, b) => a - b)[Math.floor(durs.length / 2)]
+          : MIN;
+      durs.push(tail > MIN ? tail : typical);
+
+      let vals = steps.map(s => s.value);
+      // A TimeVar list wraps, so a gesture that returns to its starting value
+      // does not need that value repeated at the end.
+      if (vals.length > 2 && vals[0] === vals[vals.length - 1]) {
+          vals = vals.slice(0, -1);
+          durs.pop();
       }
 
-      // Compute durations between extremes and snap to musical grid
-      const durations = [];
-      for (let i = 1; i < unique.length; i++) {
-          const raw = this._autoRecBeatDelta(unique[i - 1].time, unique[i].time);
-          // Guard against a zero-length segment; with the fractional beat feed
-          // this is now rare rather than the common case.
-          durations.push(Math.max(raw, this._AUTOREC_MIN_DUR));
-      }
-      const vals = unique.map(u => u.value);
+      // Duration argument: no TimeVars allowed there, plain list only.
+      if (isDurationArg) return `[${vals.join(', ')}]`;
 
-      // Duration arg position — no TimeVars allowed, plain list only
-      if (isDurationArg) {
-          if (vals.length === 1) return String(vals[0]);
-          return `[${vals.join(', ')}]`;
-      }
+      // Ramp or step? Rapid successive nudges read as one sweep; values set
+      // and then left alone are discrete changes. Emitting linvar for the
+      // latter turned a hard switch into a slow glide.
+      const gaps = durs.slice(0, -1);
+      const median = gaps.length
+          ? gaps.slice().sort((a, b) => a - b)[Math.floor(gaps.length / 2)]
+          : durs[0];
+      const isSweep = vals.length >= 3 && median < 1;
+      const fn = isSweep ? 'linvar' : 'var';
 
-      // Detect shape
-      if (vals.length === 2) {
-          return `linvar([${vals[0]}, ${vals[1]}], ${durations[0]})`;
-      }
-
-      if (vals.length === 3 && Math.abs(vals[0] - vals[2]) < (max - min) * 0.1) {
-          // Symmetric — sinvar
-          const totalDur = durations[0] + durations[1];
-          return `sinvar([${vals[0]}, ${vals[1]}], ${totalDur})`;
-      }
-
-      // Check if all durations are the same (within tolerance)
-      const avgDur = durations.reduce((a, b) => a + b, 0) / durations.length;
-      const allSame = durations.every(d => Math.abs(d - avgDur) < 0.3);
-
-      if (allSame) {
-          // Equal spacing — single duration value
-          return `linvar([${vals.join(', ')}], ${durations[0]})`;
-      }
-
-      // Varied timing — use duration array
-      return `linvar([${vals.join(', ')}], [${durations.join(', ')}])`;
+      const round2 = (n) => Math.round(n * 100) / 100;
+      const allSame = durs.every(d => Math.abs(d - durs[0]) < 0.05);
+      const durPart = allSame ? String(round2(durs[0]))
+                              : `[${durs.map(round2).join(', ')}]`;
+      return `${fn}([${vals.join(', ')}], ${durPart})`;
   },
 
   // Plus utilisé pour le moment, à voir si on snap ou pas sachant qu'on récupère que des entiers de beat.

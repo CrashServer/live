@@ -8,7 +8,7 @@ if __name__ != "__main__":
         import pickle
         import time
         import json
-        from random import randint, sample
+        from random import randint, sample, choice
 
         from .Settings import FOXDOT_ROOT, SAMPLES_BANK
         from .Buffers import alpha, nonalpha
@@ -430,6 +430,41 @@ if __name__ != "__main__":
                         ppat += i
                         ppat += "\n"
                     sendAttack(ppat)
+
+        def find_scale(notes, quiet=False):
+            ''' Print every scale in Scale.library() containing all `notes`.
+                Returns the list of matching names.
+                e.g. `find_scale([0, 3, 7])`      — which scales hold a minor triad
+                     `find_scale([0, 2, 3, 5, 7])` '''
+            matches = []
+            for name, scale in Scale.library().items():
+                try:
+                    if all(elem in scale for elem in notes):
+                        matches.append(name)
+                except TypeError:
+                    continue
+            if not quiet:
+                print(", ".join(matches) if matches else "no scale contains those notes")
+            return matches
+
+        def gen_khsor(n=1):
+            ''' Random drum string, one character per role:
+                kick / closed hat / snare / open hat / ride / rim / perc.
+                Only characters that resolve in the loaded sample map are used —
+                `h` is finger snaps, `H` is a clap and `7` maps to nothing, so
+                none of them appear here.
+                e.g. `d1 >> play(gen_khsor())`
+                     `d1 >> play(gen_khsor(4), dur=1/4)` '''
+            roles = (
+                ["v", "V", "x", "X"],           # kick
+                ["-", ":"],                     # closed hat
+                ["o", "O", "u", "i", "I"],      # snare
+                ["=", ":"],                     # open hat
+                ["~", "#"],                     # ride / crash
+                ["r", "p", "d"],                # rim / metal / woodblock
+                ["+", "^", "m", "M", "K"],      # perc
+            )
+            return "".join("".join(choice(r) for r in roles) for _ in range(int(n)))
 
         @loop_pattern_func
         def PBal(n, k, style=0, dur=0.25, start=0):

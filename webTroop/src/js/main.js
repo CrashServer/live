@@ -89,6 +89,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   let activeSequence = null; // {id, currentIndex, name} for #@ section sequencing
   let lastAttackInsert = { content: null, time: 0 }; // dedupe guard for attack() double paste
 
+  // Send only on an OPEN socket — .send() on a CONNECTING/CLOSED socket throws
+  // InvalidStateError and aborts the rest of the caller (flash effect, etc.)
+  const safeSend = (ws, payload) => {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return false;
+    try {
+      ws.send(typeof payload === "string" ? payload : JSON.stringify(payload));
+      return true;
+    } catch (e) {
+      console.warn("WS send failed:", e.message);
+      return false;
+    }
+  };
+
   const updateSeqWidget = (seq) => {
     const dot = document.getElementById('seqDot');
     const label = document.getElementById('seqLabel');
@@ -262,12 +275,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   logsUtils.initResize(editor, otherEditor);
 
   EventEmitter.on("send_foxdot", (command) => {
-    wsServer.send(
-      JSON.stringify({
-        type: "evaluate_code",
-        code: command,
-      }),
-    );
+    safeSend(wsServer, { type: "evaluate_code", code: command });
   });
 
   //Gestion des logs FoxDot pour la console
@@ -328,23 +336,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (videoCodeResult) {
       var [videoCode, startLine] = videoCodeResult;
       var endLine = startLine;
-      foxdotWs.send(
-        JSON.stringify({
-          type: "sceneName",
-          sceneName: videoCode,
-        }),
-      );
+      safeSend(foxdotWs, { type: "sceneName", sceneName: videoCode });
     }
     const isServerFxCode = functionUtils.isServerFxCode(cm);
     if (isServerFxCode) {
       var [serverFxCode, startLine] = isServerFxCode;
       var endLine = startLine;
-      wsServer.send(
-        JSON.stringify({
-          type: "evaluate_code",
-          code: "Server.clearFx()",
-        }),
-      );
+      safeSend(wsServer, { type: "evaluate_code", code: "Server.clearFx()" });
     } else {
       var [blockCode, startLine, endLine] = functionUtils.getCodeAndCheckStop(
         cm,
@@ -355,21 +353,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       const userName = userState.user.name;
       const userColor = userState.user.color;
       // Envoyer le code
-      wsServer.send(
-        JSON.stringify({
-          type: "evaluate_code",
-          code: blockCode,
-          userColor: userColor,
-          userName: userName,
-        }),
-      );
+      safeSend(wsServer, {
+        type: "evaluate_code",
+        code: blockCode,
+        userColor: userColor,
+        userName: userName,
+      });
 
-      foxdotWs.send(
-        JSON.stringify({
-          type: `${userName}Code`,
-          code: blockCode,
-        }),
-      );
+      safeSend(foxdotWs, { type: `${userName}Code`, code: blockCode });
     }
 
     // Flash effect
@@ -399,10 +390,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       } else {
         cmd += `Clock.clear()\n`;
       }
-      wsServer.send(JSON.stringify({
-        type: 'evaluate_code',
-        code: cmd
-      }));
+      safeSend(wsServer, { type: 'evaluate_code', code: cmd });
       activeSequence = null;
       updateSeqWidget(null);
       awareness.setLocalStateField('flash', {
@@ -435,10 +423,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       let cmd = '_seq_cancel()\n';
       if (loopCode.trim()) cmd += loopCode + '\n';
       cmd += `_seq_schedule(${delay}, ${loopSeqId})\n`;
-      wsServer.send(JSON.stringify({
-        type: 'evaluate_code',
-        code: cmd
-      }));
+      safeSend(wsServer, { type: 'evaluate_code', code: cmd });
       activeSequence = { id: loopSeqId, currentIndex: targetIdx - 1, name: allSections[targetIdx]?.name || 'loop' };
       updateSeqWidget(activeSequence);
       awareness.setLocalStateField('flash', {
@@ -466,17 +451,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Send as single message to avoid race conditions
-    wsServer.send(JSON.stringify({
-      type: 'evaluate_code',
-      code: cmd,
-      userName, userColor
-    }));
+    safeSend(wsServer, { type: 'evaluate_code', code: cmd, userName, userColor });
 
     // Send to CrashOS visuals
-    foxdotWs.send(JSON.stringify({
-      type: `${userName}Code`,
-      code: sectionCode
-    }));
+    safeSend(foxdotWs, { type: `${userName}Code`, code: sectionCode });
 
     // Flash effect on section block
     const endLine = (currentIdx < allSections.length - 1)
@@ -494,10 +472,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const stopClockAndSequence = () => {
     functionUtils.stopClock(wsServer);
     if (activeSequence) {
-      wsServer.send(JSON.stringify({
-        type: 'evaluate_code',
-        code: '_seq_cancel()\n'
-      }));
+      safeSend(wsServer, { type: 'evaluate_code', code: '_seq_cancel()\n' });
       activeSequence = null;
       updateSeqWidget(null);
     }
@@ -509,7 +484,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Ctrl-;": stopClockAndSequence,  // Firefox — full stop (Clock.clear + soff)
     "Alt-,": () => {                 // cancel #@ sequencer only, sound keeps playing
       if (activeSequence) {
-        wsServer.send(JSON.stringify({ type: 'evaluate_code', code: '_seq_cancel()\n' }));
+        safeSend(wsServer, { type: 'evaluate_code', code: '_seq_cancel()\n' });
         activeSequence = null;
         updateSeqWidget(null);
       }
@@ -644,7 +619,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   document.getElementById('seqStop')?.addEventListener('click', () => {
     if (activeSequence) {
-      wsServer.send(JSON.stringify({ type: 'evaluate_code', code: '_seq_cancel()\n' }));
+      safeSend(wsServer, { type: 'evaluate_code', code: '_seq_cancel()\n' });
       activeSequence = null;
       updateSeqWidget(null);
     }
@@ -747,7 +722,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function foxDotWs() {
     foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
     foxdotWs.onopen = () => {
-      foxdotWs.send(JSON.stringify({ type: "get_autocomplete" }));
+      safeSend(foxdotWs, { type: "get_autocomplete" });
     };
     foxdotWs.onmessage = (event) => {
       try {
@@ -982,16 +957,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch (error) {}
     }
 
-    if (foxdotWs.readyState === WebSocket.OPEN) {
-      foxdotWs.send(JSON.stringify(message));
-    }
+    safeSend(foxdotWs, message);
   });
 
   // Gestion de l'activation/désactivation du serveur dans CrashPanel
   crashPanelTitle.addEventListener("click", () => {
-    if (foxdotWs.readyState === WebSocket.OPEN) {
-      foxdotWs.send(JSON.stringify({ type: "serverToggle" }));
-    }
+    safeSend(foxdotWs, { type: "serverToggle" });
 
     crashPanelTitle.classList.toggle("loading");
     setTimeout(() => {

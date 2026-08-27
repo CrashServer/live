@@ -194,6 +194,10 @@ function formatTime(seconds) {
 }
 
 function updateBeat(actualbeat) {
+    // Publish the raw fractional beat. The DOM readout below rounds it to
+    // whole beats for display; consumers that need real timing (the Alt+T
+    // automation recorder) must not have to scrape that back out.
+    EventEmitter.emit('beat', actualbeat);
     const beatInterval = [8,16,32,64]
     beatInterval.forEach(beatInter => {
         const beat = Math.ceil(actualbeat % beatInter);

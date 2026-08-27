@@ -1,8 +1,11 @@
+import { EventEmitter } from './eventBus.js';
+
 export const recUtils = {
   // === AUTOMATION RECORDER ===
-  // Minimum beats between two extremes. The beat readout is integer-only, so
-  // two nudges inside the same beat used to yield `linvar([a, b], 0)`.
-  _AUTOREC_MIN_DUR: 0.5,
+  // Floor for a segment length, in beats. Timing now comes from FoxDot's
+  // fractional Clock beat, so this only guards a genuine zero-length segment
+  // (two captures in the same 100 ms tick) rather than every sub-beat gesture.
+  _AUTOREC_MIN_DUR: 0.125,
 
   _autoRec: {
       armed: false,
@@ -304,8 +307,8 @@ export const recUtils = {
       const durations = [];
       for (let i = 1; i < unique.length; i++) {
           const raw = this._autoRecBeatDelta(unique[i - 1].time, unique[i].time);
-          // The beat readout is whole beats, so nudges inside one beat give 0.
-          // A TimeVar with a 0 duration is meaningless, so clamp it.
+          // Guard against a zero-length segment; with the fractional beat feed
+          // this is now rare rather than the common case.
           durations.push(Math.max(raw, this._AUTOREC_MIN_DUR));
       }
       const vals = unique.map(u => u.value);
@@ -356,13 +359,24 @@ export const recUtils = {
       return best;
   },
 
+  // Fractional beat, fed straight from FoxDot's Clock (~10 Hz) via the event
+  // bus. Falls back to the rounded DOM readout only if no beat has arrived.
+  _beatNow: null,
+
   _autoRecGetCurrentBeat() {
-      // Read current beat from beat-64 div (format: "27/64")
+      if (this._beatNow !== null) return this._beatNow;
+      // Fallback: the beat-64 div is whole beats only ("27/64")
       const beatEl = document.getElementById('beat-64');
       if (!beatEl) return 0;
-      const beatText = beatEl.textContent.trim();
-      const beatValue = parseInt(beatText.split('/')[0], 10);
-      return beatValue;
+      return parseInt(beatEl.textContent.trim().split('/')[0], 10) || 0;
+  },
+
+  _autoRecInit() {
+      if (this._beatSubscribed) return;
+      this._beatSubscribed = true;
+      EventEmitter.on('beat', (b) => {
+          if (typeof b === 'number' && isFinite(b)) this._beatNow = b;
+      });
   },
 
   _autoRecBeatDelta(beatStart, beatEnd, cycleSize = 64) {

@@ -274,6 +274,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Configuration des logs
   logsUtils.initResize(editor, otherEditor);
 
+  // Feed the automation recorder the fractional beat from FoxDot's Clock
+  recUtils._autoRecInit();
+
   EventEmitter.on("send_foxdot", (command) => {
     safeSend(wsServer, { type: "evaluate_code", code: command });
   });

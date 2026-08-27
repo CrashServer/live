@@ -7,6 +7,15 @@ export const recUtils = {
   // (two captures in the same 100 ms tick) rather than every sub-beat gesture.
   _AUTOREC_MIN_DUR: 0.125,
 
+  // Onsets are snapped to this grid (in beats) and captures landing in the
+  // same slot collapse to the value settled on. Raise it for chunkier,
+  // more musical automation; lower it to follow the gesture more literally.
+  _AUTOREC_GRID: 0.5,
+
+  // Hard ceiling on how many values an expression may contain. Anything
+  // busier is simplified, keeping the turning points that carry the shape.
+  _AUTOREC_MAX_POINTS: 8,
+
   _autoRec: {
       armed: false,
       startTime: 0,
@@ -156,6 +165,35 @@ export const recUtils = {
       this._autoRecShowIndicator(true);
   },
 
+  // Ramer-Douglas-Peucker: drop points that sit close to the line between
+  // their neighbours, so a long even ramp keeps its ends rather than every
+  // intermediate nudge, while genuine turning points survive.
+  _autoRecSimplify(pts, tol) {
+      if (pts.length < 3) return pts;
+      const t0 = pts[0].time, t1 = pts[pts.length - 1].time;
+      const vs = pts.map(p => p.value);
+      const vMin = Math.min(...vs), vMax = Math.max(...vs);
+      const tSpan = (t1 - t0) || 1, vSpan = (vMax - vMin) || 1;
+      const nx = p => (p.time - t0) / tSpan;
+      const ny = p => (p.value - vMin) / vSpan;
+
+      const rdp = (list) => {
+          if (list.length < 3) return list;
+          const a = list[0], b = list[list.length - 1];
+          const ax = nx(a), ay = ny(a), bx = nx(b), by = ny(b);
+          const dx = bx - ax, dy = by - ay;
+          const den = Math.hypot(dx, dy) || 1;
+          let worst = 0, idx = -1;
+          for (let i = 1; i < list.length - 1; i++) {
+              const d = Math.abs(dy * (nx(list[i]) - ax) - dx * (ny(list[i]) - ay)) / den;
+              if (d > worst) { worst = d; idx = i; }
+          }
+          if (worst <= tol || idx < 0) return [a, b];
+          return rdp(list.slice(0, idx + 1)).slice(0, -1).concat(rdp(list.slice(idx)));
+      };
+      return rdp(pts);
+  },
+
   // Match `param=` only when it is a whole word, so nudging `cutoff` cannot
   // rewrite `fbcutoff`, `feed` cannot hit `fbfeed`, `mix` cannot hit `mverbmix`.
   _autoRecParamRe(param, withTimeVar) {
@@ -279,17 +317,35 @@ export const recUtils = {
       // Every distinct value the user passed through is preserved: the old
       // peak/valley filter threw away the middle of any one-way gesture, so a
       // 400 -> 800 -> 1200 -> 1600 staircase collapsed to [400, 1600].
-      const steps = [];
+      // Snap onsets to the grid; captures inside one slot collapse to the
+      // value settled on there. This is what keeps a burst of arrow-key
+      // nudges from becoming a dozen near-identical steps.
+      const grid = this._AUTOREC_GRID;
+      const slots = new Map();
       for (let i = 0; i < values.length; i++) {
-          if (!steps.length || values[i] !== steps[steps.length - 1].value) {
-              steps.push({ value: values[i], time: points[i].time });
-          }
+          slots.set(Math.round(points[i].time / grid) * grid, values[i]);
       }
+      let steps = [...slots.entries()]
+          .sort((a, b) => a[0] - b[0])
+          .map(([time, value]) => ({ time, value }));
+
+      // Drop repeats so a held value is one entry, not many.
+      steps = steps.filter((s, i) => i === 0 || s.value !== steps[i - 1].value);
       if (steps.length === 1) return String(steps[0].value);
+
+      // Still busy? Simplify until it fits, keeping the turning points.
+      let tol = 0.06;
+      while (steps.length > this._AUTOREC_MAX_POINTS && tol < 1) {
+          steps = this._autoRecSimplify(steps, tol);
+          steps = steps.filter((s, i) => i === 0 || s.value !== steps[i - 1].value);
+          tol *= 1.8;
+      }
 
       // Dwell of each value = time until the next change. The final value is
       // held until the last capture.
-      const lastTime = points[points.length - 1].time;
+      // Grid the end time too: comparing a gridded onset with a raw end time
+      // could run backwards, and beatDelta then wrapped it to ~64 beats.
+      const lastTime = Math.round(points[points.length - 1].time / grid) * grid;
       const durs = [];
       for (let i = 0; i + 1 < steps.length; i++) {
           durs.push(Math.max(this._autoRecBeatDelta(steps[i].time, steps[i + 1].time), MIN));
@@ -298,7 +354,7 @@ export const recUtils = {
       // whatever is left after the last change; if that is ~0 (the recording
       // stopped on the change itself) reuse the typical dwell so the list loops
       // evenly instead of flashing past the last value.
-      const tail = this._autoRecBeatDelta(steps[steps.length - 1].time, lastTime);
+      const tail = Math.max(0, lastTime - steps[steps.length - 1].time);
       const typical = durs.length
           ? durs.slice().sort((a, b) => a - b)[Math.floor(durs.length / 2)]
           : MIN;
@@ -318,11 +374,14 @@ export const recUtils = {
       // Ramp or step? Rapid successive nudges read as one sweep; values set
       // and then left alone are discrete changes. Emitting linvar for the
       // latter turned a hard switch into a slow glide.
-      const gaps = durs.slice(0, -1);
-      const median = gaps.length
-          ? gaps.slice().sort((a, b) => a - b)[Math.floor(gaps.length / 2)]
-          : durs[0];
-      const isSweep = vals.length >= 3 && median < 1;
+      // Judge sweep-vs-step from how the gesture was PLAYED, not from how many
+      // points survived simplification: a smooth ramp reduces to two points but
+      // is still a glide, and emitting var() for it would step instead.
+      const span = Math.max(
+          this._autoRecBeatDelta(points[0].time, points[points.length - 1].time),
+          MIN);
+      const perBeat = points.length / span;
+      const isSweep = perBeat >= 2;
       const fn = isSweep ? 'linvar' : 'var';
 
       const round2 = (n) => Math.round(n * 100) / 100;

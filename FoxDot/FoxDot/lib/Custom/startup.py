@@ -286,10 +286,36 @@ if __name__ != "__main__":
             return PGroup(sorted_chord)
 
         @PatternMethod
+        @loop_pattern_method
         def exp(self, n=16):
-            """ Extend pattern to n value """
-            return self | n - sum(self)
+            """ Extend or short a pattern to match n = sum(self.Pattern)
+                >>> P[1,2,4].exp(8)
+                P[1, 2, 4, 1]
+                >>> P[1,2,4].exp(6)
+                P[1, 2, 3]
+                >>> P[1,2,4].exp(P[6,8])
+                P[1, 2, 3, 1, 2, 4, 1]
+            """
+            width = len(self.data)
+            laps  = LCM(*[len(item) for item in self.data if isinstance(item, metaPattern)])
 
+            result = self.new([])
+
+            for lap in range(laps):
+                total = 0
+                for idx in range(width):
+                    value = self.getitem(lap * width + idx)
+                    if total + value >= n:
+                        result.append(n - total)
+                        total = n
+                        break
+                    result.append(value)
+                    total += value
+                else:
+                    if total < n:
+                        result.append(n - total)
+
+            return result
     except Exception as e:
         print(f'Pattern method problem : {e}')
 
@@ -1082,6 +1108,7 @@ try:
             self.every(durloop, "drummer", durloop, durPlyr)
 except:
     print("Error importing drumRockPattern", sys.exc_info()[0])
+
 
 # @player_method
 # def basser(self, duration=64, markdur=2):

@@ -103,7 +103,7 @@ async function calculateFontSize(allText) {
         containerDimensions.width,
         containerDimensions.height
     );
-    console.log(`Calculated optimal font size: ${optimalSize}px for ${lineCount} lines`);
+    // console.log(`Calculated optimal font size: ${optimalSize}px for ${lineCount} lines`);
 
     if (optimalSize) {
         applyFontSize(optimalSize);
@@ -117,7 +117,7 @@ function handleWindowResize() {
     containerDimensions = null;
     lastCalculatedFontSize = null;
     lastLineCount = null;
-    console.log('Window resized - container dimensions will be recalculated');
+    //console.log('Window resized - container dimensions will be recalculated');
 }
 
 const codeContainer = document.getElementById('code-container');

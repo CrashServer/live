@@ -662,13 +662,358 @@ pfx = print_fx
 psynth = print_synth
 pvideo = print_video
 
-def chaos(chaosInt=1, plyrType=None):
-    ''' Generate some random players '''
-    chaosText = ""
-    for i in range(chaosInt):
-        chaosText += add_player(True, plyrType)
-        chaosText += "\n"
-    sendAttack(chaosText)
+##########################################
+###   CHAOS - RANDOM CODE GENERATOR    ###
+##########################################
+
+# fxdict groups that only mean anything on a sample-based player
+_chaosFxSampleOnly = ("position", "sbrk", "sample_atk")
+# CPU-hungry - cheapverb/room cover the same ground for a fraction of the cost
+_chaosFxNever = ("mverb",)
+# distortion on play() sounds bad - grit on drums stays with shape/crush
+_chaosFxNoDrums = ("dist", "dist2", "disto", "octafuz", "krush", "triode",
+                   "tanh", "fold", "squiz", "clouds")
+# custom fx missing from fxdict - only offered when actually loaded
+_chaosFxExtra = {
+    "cheapverb": {"cheapverb": [0.1, 1.0], "cvdecay": [0.2, 0.9]},
+    "shimmer": {"shimmer": [0.1, 1.0], "shimsize": [0.2, 0.9], "shimmix": [0.1, 0.8]},
+    "tape": {"tape": [0.2, 1.0], "tapedrive": [0.2, 0.9]},
+}
+_chaosAccents = ("backbeat", "fourfloor", "offbeat", "ghost",
+                 "synco", "tresillo", "halftime")
+_chaosNotes = ("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B")
+
+
+def _chaosNum(lo, hi):
+    ''' One static value inside a range, int or float to match the range '''
+    if isinstance(lo, float) or isinstance(hi, float):
+        return str(GENERATE_RDM(lo, hi, 2))
+    return str(randint(int(lo), int(hi)))
+
+
+def _chaosMove(lo, hi):
+    ''' A continuously moving value - the f-family and TimeVar shortcuts '''
+    n = choice([8, 16, 32, 64])
+    a, b = _chaosNum(lo, hi), _chaosNum(lo, hi)
+    step = GENERATE_RDM(0.1, 0.8, 2)
+    hold = choice([4, 8, 16])
+    return choice([
+        f"fs({n}, {a}, {b})",
+        f"fb({n}, {a}, {b})",
+        f"fi({n}, {a}, {b})",
+        f"fo({n}, {a}, {b})",
+        f"fe({n}, {a}, {b})",
+        f"fh({hold}, {a}, {b})",
+        f"fperlin({n}, {a}, {b})",
+        f"fd({n}, {step}, {b})",
+        f"linvar([{a}, {b}], {n})",
+        f"sinvar([{a}, {b}], {n})",
+        f"expvar([{a}, {b}], {n})",
+        f"var([{a}, {b}], [{hold}, {choice([2, 4, 8])}])",
+    ])
+
+
+def _chaosSeq(lo, hi):
+    ''' A stepped value - pattern generators rather than smooth movement '''
+    n = choice([4, 8, 16])
+    a, b = _chaosNum(lo, hi), _chaosNum(lo, hi)
+    opts = [f"fr({n}, {a}, {b})", f"fg({n}, {a}, {b})", f"ft({n}, {a}, {b})",
+            f"fc({n}, {a}, {b})", f"fz({n}, {a}, {b})", f"fq({n}, {a}, {b})",
+            f"PLife({GENERATE_RDM(0.2, 0.9, 2)}, {a}, {b})"]
+    if isinstance(lo, int) and isinstance(hi, int) and int(hi) - int(lo) >= 2:
+        opts += [f"fxr({n}, {int(lo)}, {int(hi)})", f"fw({n}, 1, {int(hi)})"]
+    return choice(opts)
+
+
+def _chaosValue(lo, hi, moveProb=35, seqProb=25):
+    ''' Static, stepped or moving - weighted so nothing sits still for long '''
+    r = randint(0, 99)
+    if r < moveProb:
+        return _chaosMove(lo, hi)
+    if r < moveProb + seqProb:
+        return _chaosSeq(lo, hi)
+    return _chaosNum(lo, hi)
+
+
+def _chaosFxPool(playerType="synth"):
+    ''' The fx groups that make sense on this kind of player '''
+    pool = {k: v for k, v in fxdict.items() if k not in _chaosFxNever}
+    for name, spec in _chaosFxExtra.items():
+        try:
+            if name in FxList:
+                pool[name] = spec
+        except Exception:
+            pass
+    drop = []
+    if playerType == "synth":
+        drop = list(_chaosFxSampleOnly)
+    elif playerType == "drum":
+        drop = list(_chaosFxNoDrums) + list(_chaosFxSampleOnly)
+    for k in drop:
+        pool.pop(k, None)
+    return pool
+
+
+def _chaosFx(playerType="synth", nbr=None):
+    ''' `name=value` fragments for a couple of fx groups '''
+    pool = _chaosFxPool(playerType)
+    if not pool:
+        return []
+    if nbr is None:
+        nbr = randint(1, 3)
+    out = []
+    for name in sample(list(pool), min(nbr, len(pool))):
+        args = list(pool[name].items())
+        keep = args[:1]          # the group's main arg, always
+        if len(args) > 1:        # then at most two of its companions
+            keep += sample(args[1:], randint(0, min(2, len(args) - 1)))
+        for arg, rng in keep:
+            out.append(f"{arg}={_chaosValue(rng[0], rng[1])}")
+    return out
+
+
+def _chaosBeatString():
+    ''' A pulse string for PBeat - real syncopation, not straight quarters '''
+    return "".join(choice(["x", "x", " ", "."]) for _ in range(choice([8, 16])))
+
+
+def _chaosDur(playerType="synth"):
+    ''' A duration pattern drawn from the whole rhythm toolkit '''
+    n, k = randint(3, 7), choice([8, 16])
+    opts = [
+        f"PDur({n}, {k})",
+        f"PBal({n}, {k}, style={randint(0, 7)})",
+        f"PRy(16, {choice([2, 3, 4])}, {GENERATE_RDM(0, 0.2, 2)})",
+        f"PSum({n}, {choice([4, 8])})",
+        f'PBeat("{_chaosBeatString()}")',
+        f"P{GENERATE_LIST(1, 4, 5)}/{choice([2, 4])}",
+        f"var({GENERATE_LIST(1, 4, 4)}, {choice([8, 16])})/{choice([2, 4])}",
+        f"SDur({choice([8, 16, 32])})",
+        str(choice([1 / 4, 1 / 2, 3 / 4, 1, 2])),
+    ]
+    if playerType == "drum":
+        opts.append(f"PDur({n}, {k}, {randint(0, 4)})")
+    return choice(opts)
+
+
+def _chaosSus():
+    ''' sus is phrasing, never a flat constant '''
+    return choice([
+        GENERATE_FLOAT_LIST(0.2, 2, 4),
+        f"PDur({randint(3, 5)}, 8)*{choice([1, 2])}",
+        f"PSwing({GENERATE_RDM(0.1, 0.4, 2)})",
+        _chaosMove(0.2, 2.0),
+        str(GENERATE_RDM(0.2, 2, 2)),
+    ])
+
+
+def _chaosAmp():
+    ''' Accent shapes rather than a single level '''
+    return choice([
+        f'Pacc("{choice(_chaosAccents)}")',
+        f'Pacc("{choice(_chaosAccents)}", intensity={GENERATE_RDM(0.4, 1.0, 2)})',
+        f"PBern({choice([8, 16])}, {GENERATE_RDM(0.4, 0.9, 2)})",
+        str(GENERATE_AMPLIFY()),
+        _chaosMove(0.3, 1.0),
+        str(GENERATE_RDM(0.5, 1.0, 2)),
+    ])
+
+
+def _chaosDegree(playerType="synth"):
+    ''' Degrees / drum chars from the generative pattern classes '''
+    if playerType == "drum":
+        kick = choice(sorted_sample["kick_sample"])
+        return choice([
+            f'"{GENERATE_CHAR()}"',
+            f'"{gen_khsor(choice([1, 2, 4]))}"',
+            f'PEuclid2({randint(3, 7)}, {choice([8, 16])}, ".", "{kick}")',
+        ])
+    n = choice([4, 8, 16])
+    return choice([
+        f"melody()[:{n}]",
+        str(gen_arp()),
+        f"PLife({GENERATE_RDM(0.2, 0.9, 2)}, 0, 7)",
+        f"fxr({n}, 0, 7)",
+        f"fw({n}, 1, 7)",
+        "PChain2(chords)",
+        f"PMarkov()[:{choice([4, 8])}]",
+        f"P{GENERATE_LIST(0, 7, 5)}",
+        f"var({GENERATE_LIST(0, 7, 4)}, {choice([4, 8, 16])})",
+        f"PWalk({n})",
+        f"P*{GENERATE_LIST(0, 7, 4)}",
+        f"P*{GENERATE_TUPLE(0, 7, 3)}",
+        f"P^({GENERATE_INTEGER(0, 7)}, {GENERATE_INTEGER(0, 7)}, {choice([0.25, 0.5])})",
+    ])
+
+
+def _chaosMethods(playerType="synth"):
+    ''' Trailing player methods - voicing, groove, evolution '''
+    out = ""
+    if playerType != "loop" and randint(0, 100) < 55:
+        out += f".unison({randint(2, 5)}, {GENERATE_RDM(0.05, 0.5, 2)})"
+    if randint(0, 100) < 45:
+        out += f".human({randint(10, 50)}, {randint(2, 12)}, {randint(0, 15)})"
+    if randint(0, 100) < 40:
+        out += f".{gen_player_param()}"
+    if randint(0, 100) < 20:
+        out += f".start({choice([8, 16, 32])})"
+    return out
+
+
+def _chaosSynthLine(withFx=True):
+    ''' `xy >> synth(...)` - degree, rhythm, sustain, movement, fx '''
+    base = generate_random_synth_player() or {}
+    name = base.get("player") or generate_player_name()
+    synth = base.get("synth") or choice(synthdefNames)
+    degree = base.get("degree") if randint(0, 100) < 35 else None
+    dur = base.get("dur") if randint(0, 100) < 30 else None
+    parts = [degree or _chaosDegree("synth"),
+             f"dur={dur or _chaosDur('synth')}",
+             f"oct={choice([4, 4, 5, 5, 6])}",
+             f"sus={_chaosSus()}",
+             f"amp={_chaosAmp()}"]
+    if withFx:
+        synthArgs = list((GENERATE_SYNTH_ARGS(synth) or {}).items())
+        if synthArgs and randint(0, 100) < 60:
+            for arg, val in sample(synthArgs, min(2, len(synthArgs))):
+                parts.append(f"{arg}={val}")
+        parts += _chaosFx("synth")
+    return name, f"{name} >> {synth}({', '.join(parts)}){_chaosMethods('synth')}"
+
+
+def _chaosDrumLine(withFx=True):
+    ''' `xy >> play(...)` - style patterns, euclid gates, groove accents '''
+    base = choices([generate_drum_style_player(), generate_random_drum_player()],
+                   [probAddStyleDrum, probAddRandomDrum])[0] or {}
+    name = base.get("player") or generate_player_name()
+    pat = base.get("degree")
+    degree = f'"{pat}"' if pat and randint(0, 100) < 55 else _chaosDegree("drum")
+    dur = base.get("dur") if randint(0, 100) < 35 else None
+    parts = [degree,
+             f"dur={dur or _chaosDur('drum')}",
+             f"sample={GENERATE_INTEGER(0, 99)}",
+             f"amp={_chaosAmp()}"]
+    if randint(0, 100) < 30:
+        parts.append(f"rate={_chaosValue(-1, 4)}")
+    if withFx:
+        parts += _chaosFx("drum")
+    return name, f"{name} >> play({', '.join(parts)}){_chaosMethods('drum')}"
+
+
+def _chaosLoopLine(withFx=True):
+    ''' `xy >> loop(...)` - sample loops with position and break movement '''
+    base = generate_random_loop_player() or {}
+    name = base.get("player") or generate_player_name()
+    loopName = base.get("degree") or choice(loopNames)
+    dur = base.get("dur") or choice([4, 8, 16])
+    parts = [f'"{loopName}"',
+             f"dur={dur}",
+             f"sample={GENERATE_INTEGER(0, 99)}",
+             f"amp={GENERATE_RDM(0.6, 1.6, 2)}"]
+    if randint(0, 100) < 40:
+        parts.append(f"position={_chaosValue(0.0, 1.0)}")
+    if withFx:
+        parts += _chaosFx("loop")
+    return name, f"{name} >> loop({', '.join(parts)}){_chaosMethods('loop')}"
+
+
+def _chaosModLine(name, playerType="synth"):
+    ''' A follow-up line acting on a player the block already started '''
+    opts = []
+    try:
+        filType, filFreq = gen_filter()
+        if filFreq != "0":
+            opts.append(f"{name}.{filType}={filFreq}")
+    except Exception:
+        pass
+    try:
+        opts.append(f"{name}.{gen_player_param()}")
+    except Exception:
+        pass
+    try:
+        attr = gen_player_attributes(playerType)
+        if attr:
+            opts.append(f"{name}.{attr[0]}={attr[1]}")
+    except Exception:
+        pass
+    fx = _chaosFx(playerType, 1)
+    if fx:
+        opts.append(f"{name}.{fx[0]}")
+    opts.append(f"{name}.amplify=PFDur(({randint(3, 5)}, 8), ({randint(3, 7)}, 16))")
+    opts.append(f'{name}.every({choice([4, 8, 16])}, "{choice(["stutter", "shuffle", "reverse", "jump", "offbeat"])}")')
+    opts.append(f"{name}.sus={_chaosSus()}")
+    if playerType != "drum":
+        opts.append(f"{name}.degree={_chaosDegree('synth')}")
+    return choice(opts)
+
+
+def _chaosEventLine():
+    ''' A master-level move - the add_event() family rendered as text '''
+    dropT = randint(dropTimeMin, dropTimeMax)
+    lo, hi = freqs["lpf"]
+    return choice([
+        f"drop({dropT}, {max(1, dropTimeMax - dropT)}, {dropLoop})",
+        f"drop_bpm({choice([16, 32, 64])}, {randint(2, 5)}, {choice([2, 4, 8])})",
+        f"Master().lpf={GENERATE_FREQLIST(lo, hi, 4)}",
+        f"Master().hpf={GENERATE_FREQLIST(lo, int(hi / 3), 4)}",
+        f"linbpm({randint(changeBpmMin, changeBpmMax)}, {randint(32, 128)})",
+        f'Root.default = "{choice(_chaosNotes)}"',
+        f"Root.default += {choice([-2, -1, 1, 2])}",
+        "darker()",
+        "lighter()",
+        f"soloRnd({choice([8, 16])})",
+    ])
+
+
+def _chaosHeader():
+    ''' bpm / scale / root, so the block lands somewhere on purpose '''
+    scales = [s for s in Scale.names() if s != "freq"]
+    return [f"Clock.bpm = {randint(changeBpmMin, changeBpmMax)}",
+            f'Scale.default = "{choice(scales)}"',
+            f'Root.default = "{choice(_chaosNotes)}"']
+
+
+def chaos(chaosInt=1, plyrType=None, fx=1, mod=1, evt=0, header=0):
+    ''' Generate a block of random live coding code and send it to the editor.
+        `chaosInt` : how many players to generate
+        `plyrType` : "synth", "drum" or "loop" - None picks per player
+        `fx`       : weave synth args and fx into the player lines
+        `mod`      : how many follow-up lines acting on those players
+        `evt`      : how many master events (drop, filter sweep, root shift)
+        `header`   : prepend bpm / scale / root
+        e.g. `chaos(4)`
+             `chaos(3, "drum")`
+             `chaos(6, header=1, evt=2, mod=3)` '''
+    lines = []
+    try:
+        if header:
+            lines += _chaosHeader()
+        builders = {"synth": _chaosSynthLine,
+                    "drum": _chaosDrumLine,
+                    "loop": _chaosLoopLine}
+        made = []
+        for _ in range(int(chaosInt)):
+            pType = plyrType or choices(["synth", "drum", "loop"],
+                                        [probAddSynth, probAddDrum, probAddLoop])[0]
+            try:
+                name, line = builders.get(pType, _chaosSynthLine)(bool(fx))
+            except Exception as err:
+                print(f"chaos {pType} problem : {err}")
+                continue
+            if line and name not in [m[0] for m in made]:
+                made.append((name, pType))
+                lines.append(line)
+        if mod and made:
+            for name, pType in sample(made, min(len(made), max(1, int(mod)))):
+                lines.append(_chaosModLine(name, pType))
+        for _ in range(int(evt)):
+            lines.append(_chaosEventLine())
+    except Exception as err:
+        print("chaos problem : ", err)
+    if not lines:
+        print("chaos generated nothing - is the crash generator loaded?")
+        return
+    sendAttack("\n".join(lines))
 
 
 

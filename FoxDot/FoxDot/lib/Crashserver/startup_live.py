@@ -917,6 +917,7 @@ try:
             self.plyTime = 1.0  # time cycle send player
             # self.pdjTime = 60  # time cycle send PlatduJour
             self.chronoTime = 1.0  # time cycle send chrono
+            self.params = {} # params dict to send to websocket
 
             self.playerCounter = {}
 
@@ -928,6 +929,7 @@ try:
             self.threadBeat = Thread(target=self.sendBeat, daemon=True)
             self.threadPlayer = Thread(target=self.sendPlayer, daemon=True)
             self.threadMasterFx = Thread(target=self.sendMasterFx, daemon=True)
+            self.threadParams = Thread(target=self.sendParams, daemon=True)
             # self.threadPdj = Thread(target=self.sendPdj, daemon=True)
             self.threadChrono = Thread(target=self.sendChrono, daemon=True)
             # self.threadVideoIndex = Thread(target=self.sendVideoIndex, daemon=True)
@@ -1007,6 +1009,29 @@ try:
             except:
                 pass
 
+        def sendParams(self):
+            ''' send params to OSC server '''
+            try:
+                while self.isrunning:
+                    msg = json.dumps({"type": "params", "params": self.params},
+                                     default=self.to_json_safe,
+                                     allow_nan=False)
+                    asyncio.run(wsServer.sendWebsocket(msg))
+                    sleep(self.bpmTime*4)
+            except Exception as e:
+                print("sendParams problem : ", e)
+
+        def to_json_safe(self, obj):
+            # Pattern : on le transforme en liste de valeurs
+            if isinstance(obj, Pattern):
+                return [self.to_json_safe(v) for v in obj]
+            # TimeVar : on prend sa valeur courante
+            if isinstance(obj, TimeVar):
+                return self.to_json_safe(obj.now())
+            if isinstance(obj, (int, float, str, bool)) or obj is None:
+                return obj
+            return str(obj)
+
         def sendChrono(self):
             ''' send ChronoTime to OSC server '''
             try:
@@ -1040,6 +1065,10 @@ try:
             msg = json.dumps({"type": "help", "helpType": helpType, "help": txt})
             asyncio.run(wsServer.sendWebsocket(msg))
 
+        def setParam(self, param, index="param1"):
+            ''' add param to send to websocket '''
+            self.params[index] = param
+
         def stop(self):
             self.isrunning = False
 
@@ -1050,6 +1079,7 @@ try:
             self.threadBeat.start()
             self.threadPlayer.start()
             self.threadMasterFx.start()
+            self.threadParams.start()
             # self.threadPdj.start()
             self.threadChrono.start()
             # self.threadVideoIndex.start()

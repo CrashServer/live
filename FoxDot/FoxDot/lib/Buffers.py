@@ -262,6 +262,18 @@ class BufferManager(object):
             return nil
         return self._allocateAndLoad(samplepath)
 
+    def getSamplePathFromSymbol(self, symbol, bank, index=0):
+        """ Get sample path from a symbol """
+        if symbol.isspace():
+            return None
+        dirname = symbolToDir(symbol, bank)
+        if dirname is None:
+            return None
+        samplepath = self._findSample(dirname, index)
+        if samplepath is None:
+            return None
+        return os.path.splitext(os.path.basename(samplepath))[0]
+
     def getBuffer(self, bufnum):
         """ Get buffer information from the buffer number """
         return self._buffers[bufnum]

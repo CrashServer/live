@@ -1,5 +1,33 @@
 # Changelog CrashServer 
 
+## 20-oct-2026
+- add a function to send specific OSC message to crashPanel (20000 port). 
+Example:
+```python
+v3 >> blip(PRand(-6, 6), dur=PDur(3,8), pan=PWhite(-1,1))
+crashpanel.setParam(v3.degree, "note")
+crashpanel.setParam(v3.dur, "dur")
+crashpanel.setParam(v3.pan, "pan")
+```
+
+this will send this kinf of message to the osc server:
+```json
+{
+   "type": "params",
+   "params": {
+      "note": "-4",
+      "dur": "0.75",
+      "pan": "0.7560685571260823"
+   }
+}	
+```
+
+- add a function to get the actualy name of a sample, to be used with the previous function :
+```python
+g6 >> play("v", sample=PRand(19), bank=1)
+crashpanel.setParam(Samples.getSamplePathFromSymbol("v", 1, g6.sample), "voix")
+```
+
 ## 03-mars-2026
 added Pacc, PSwing (on delays) and PFDur()
 
@@ -132,4 +160,4 @@ added Pacc, PSwing (on delays) and PFDur()
   - send midi CC message with `MidiOut(channel=8, cc=11, value=127)`
 
 ## external: software & hardware
-  - control the fxpedal Mod Dwarf with midi CC. 
+  - control the fxpedal Mod Dwarf with midi CC.

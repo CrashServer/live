@@ -72,7 +72,7 @@ fx.save()
 
 
 
-fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0, "fm_sin_i":1}, order=0, tag="modulation")
+fx = FxList.new("fm_sin", "FrequencyModulationSine", {"fm_sin":0.98, "fm_sin_i":0.5}, order=0, tag="modulation")
 fx.add("osc = osc + (SinOsc.kr(osc*fm_sin, 0, fm_sin_i * osc))")
 fx.save()
 

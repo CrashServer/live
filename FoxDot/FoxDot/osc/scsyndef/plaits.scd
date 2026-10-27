@@ -4,7 +4,7 @@ SynthDef.new(\plaits,
 	sus = sus * blur;
 	freq = In.kr(bus, 1);
 	env = EnvGen.ar(Env.adsr(atk, decay, 1, rel), timeScale: sus, doneAction: 2);
-	osc = MiPlaits.ar(freq.cpsmidi, engine: engine.clip(0,15), harm: harm, timbre: timbre, trigger:env, morph: morph, fm_mod: porta, timb_mod: 0.5, morph_mod: 0.5, decay: sus*fdecay, lpg_colour: bright);
+	osc = MiPlaits.ar(freq.cpsmidi, engine: engine.clip(0,23), harm: harm, timbre: timbre, trigger:env, morph: morph, fm_mod: porta, timb_mod: 0.5, morph_mod: 0.5, decay: sus*fdecay, lpg_colour: bright);
 
 	osc = RLPF.ar(osc*env, cutoff, rq);
 	osc = Select.ar(aux, [osc, osc[0]!2, osc[1]!2]);

@@ -80,6 +80,7 @@ CodeMirror.registerHelper("fold", "foxdot-sections", foxdotFoldFinder);
 
 const LINES_TO_SHOW = 20; // pretext number of lines to show
 import "../css/visualMode.css";
+import { patternLog } from "./patternLog.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Récupération de la configuration
@@ -286,11 +287,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     yUndoManager,
   });
 
-  // Initialize visual mode with the editor (before configPanel so loadUserSettings can enable/disable)
+  // Initialize visual mode with editor
   visualMode.init(editor);
 
+  // Initialize pattern log (text-based visualization)
+  patternLog.init('pattern-log');
+
   // Configuration du panneau de configuration
-  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor, visualMode);
+  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor, visualMode, patternLog);
 
   // Initialiser l'analyseur audio (sera géré par le configPanel)
   const audioVizContainer = document.getElementById("audio-viz");
@@ -418,6 +422,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       lineEnd: endLine,
       timestamp: Date.now(),
     });
+
+    // Trigger visual mode flash
+    visualMode.triggerFlash();
   }
 
   // Section sequencing: evaluate a #@ section and schedule next
@@ -853,6 +860,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             foxdotAutocomplete.getFxCategories();
           foxdotAutocomplete.synthCategories =
             foxdotAutocomplete.getSynthCategories();
+
+          // Load drum patterns from server
+          foxdotAutocomplete.loadDrumPatterns();
+
+          // Load synth patterns from server
+          foxdotAutocomplete.loadSynthPatterns();
 
           // Construire les définitions dynamiques pour les synths
           // Ne garder que ceux dont displayText se termine par '_' (signature avec paramètres)

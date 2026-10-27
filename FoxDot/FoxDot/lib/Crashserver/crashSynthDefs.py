@@ -194,6 +194,9 @@ donk.add()
 dsaw = FileSynthDef("dsaw")
 dsaw.add()
 
+doom = FileSynthDef("doom")
+doom.add()
+
 dub = FileSynthDef("dub")
 dub.add()
 
@@ -588,3 +591,23 @@ adbell.add()
 
 addrone = FileSynthDef("addrone")
 addrone.add()
+
+# neuroreese - Neurofunk reese bass
+neuroreese = FileSynthDef("neuroreese")
+neuroreese.add()
+
+# foghorn - Dark droning sub bass
+foghorn = FileSynthDef("foghorn")
+foghorn.add()
+
+# darksnare - Professional dark snare
+darksnare = FileSynthDef("darksnare")
+darksnare.add()
+
+# glitchstab - Glitchy stab synth
+glitchstab = FileSynthDef("glitchstab")
+glitchstab.add()
+
+# subkick - Deep punchy kick drum
+subkick = FileSynthDef("subkick")
+subkick.add()

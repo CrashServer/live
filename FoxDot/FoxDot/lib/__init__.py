@@ -23,12 +23,13 @@ from .SCLang._SynthDefs import *
 from .ServerManager import *
 from .SCLang import SynthDefs, Env, SynthDef, CompiledSynthDef
 from .Root import Root
-from .Scale import Scale
+from .Scale import Scale, Tuning
 from .Crashserver.et_tunings import *
 try:
     from .VideoControl import VidCtrl, YouTubeController
 except ImportError as e:  # needs websocket-client; never block FoxDot boot over video control
     print(f"VideoControl disabled: {e}")
+from .SynthPatterns import env, e, mel, m, arp, chord, chords, envs, mels, ENVELOPES, MELODIES, CHORDS
 
 # stdlib imports
 

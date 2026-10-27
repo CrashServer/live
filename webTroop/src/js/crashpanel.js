@@ -1,6 +1,7 @@
 import { EventEmitter } from './eventBus.js';
 import { playersList, updatePlayersList, toggleRecording } from './functionUtils.js';
 import { visualMode } from './visualMode.js';
+import { patternLog } from './patternLog.js';
 
 const configRequest = await fetch('../../crash_config.json' );
   if (!configRequest.ok) {
@@ -52,6 +53,7 @@ recordButton.addEventListener('click', () => {
     }
 });
 
+// Video window - opened via FoxDot command
 if (!showTodo) {
     todoList.style.display = 'none';
 }
@@ -156,7 +158,11 @@ const ws = makeReconnectingWs(
                 break;
             case 'beat':
                 updateBeat(data.beat);
-                if (data.playerSteps) visualMode.setPlayerSteps(data.playerSteps);
+                patternLog.setBeat(data.beat);
+                if (data.playerSteps) {
+                    visualMode.setPlayerSteps(data.playerSteps);
+                    patternLog.setPlayerSteps(data.playerSteps);
+                }
                 break;
             case 'chrono':
                 _elChrono.textContent = formatTime(data.chrono);
@@ -171,6 +177,7 @@ const ws = makeReconnectingWs(
                         parsedPlayers[p.player] = p;
                     }
                     visualMode.setPlayers(parsedPlayers);
+                    patternLog.setPlayers(Object.values(parsedPlayers));
                 } catch (_) {}
                 break;
             case 'masterFx': {

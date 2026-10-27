@@ -1,3 +1,24 @@
+/*
+    svdk - Raw rolling bass inspired by Daft Punk "Rollin' & Scratchin'"
+
+    Juno-106 + Boss MT-2 Metal Zone: saw + noise + resonant filter + heavy distortion
+    With solid low-end body, stereo movement, and harmonic control
+
+    Parameters:
+        grit    (0-1)   : Clean → MT-2 cranked distortion
+        noise   (0-1)   : Noise amount
+        cutoff  (100-8000): Filter cutoff
+        res     (0-1)   : Resonance
+        track   (0-2)   : Keyboard tracking on filter
+        fenv    (0-1)   : Filter envelope depth
+        slide   (0-0.5) : Portamento/glide
+        body    (0-1)   : Low-end weight/thickness
+        drift   (0-1)   : Stereo movement (0=static, 1=wide slow drift)
+        harm    (0-1)   : Upper harmonics (2nd, 3rd, 5th)
+
+    CrashServer 2026
+*/
+
 SynthDef.new(\svdk, {
     |bus=0, amp=1, sus=1, pan=0, freq=0, fmod=0,
      atk=0.01, rel=0.1, blur=1, beat_dur=1,

@@ -437,6 +437,20 @@ fx = FxList.new('room', 'reverb', {'room': 0, 'mix': 0.1}, order=2, tag="reverb"
 fx.add("osc = FreeVerb.ar(osc, mix, room)")
 fx.save()
 
+# --- Dark DnB Effects ---
+
+# Gatecrush: Rhythmic gate + bitcrush for glitchy stutters
+fx = FxList.new('gatecrush', 'gatecrush', {'gatecrush': 0, 'gcrate': 8, 'gcbits': 6, 'gcdepth': 0.5, 'beat_dur': 1}, order=2, tag="glitch")
+fx.load()
+
+# Darkverb: Dark filtered reverb for atmospherics
+fx = FxList.new('darkverb', 'darkverb', {'darkverb': 0, 'dvdecay': 3, 'dvdamp': 0.8, 'dvcut': 2000}, order=2, tag="reverb")
+fx.load()
+
+# Resample: Granular pitch/time stretcher for glitchy textures
+fx = FxList.new('resample', 'resample', {'resample': 0, 'rsrate': 0.5, 'rsgrains': 8, 'rsjitter': 0.1, 'beat_dur': 1}, order=2, tag="glitch")
+fx.load()
+
 # fx = FxList.new("formant", "formantFilter", {"formant": 0}, order=2)
 # fx.add("formant = (formant % 8) + 1")
 # fx.add("osc = Formlet.ar(osc, formant * 200, ((formant % 5 + 1)) / 1000, (formant * 1.5) / 600).tanh")

@@ -35,6 +35,8 @@ import {
   updateDefinitions,
 } from "./foxdotDefinitions.js";
 import { visualMode } from "./visualMode.js";
+import { midiController } from "./midiController.js";
+import { midiMapping } from "./midiMapping.js";
 
 import "codemirror/addon/fold/foldcode.js";
 import "codemirror/addon/fold/foldgutter.js";
@@ -48,6 +50,7 @@ import "codemirror/addon/fold/foldgutter.css";
 import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
+import "../css/midiWidgets.css";
 import { setupCellDial } from "./cellDial.js";
 
 // ---- #@ / #@#@ fold range finder ----------------------------------------
@@ -89,6 +92,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     throw new Error(`HTTP error! status: ${configRequest.status}`);
   }
   const config = await configRequest.json();
+
+  // MIDI controller: started in the background so a Web MIDI permission
+  // prompt (or no device) never blocks the editor from loading.
+  const midiReady = midiController.init().catch(() => false);
 
   // Connexion aux serveurs
   // wsServer wraps the main WS with reconnect so .send() is always safe to call.
@@ -291,6 +298,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Binding YJS avec CodeMirror
   const binding = new CodemirrorBinding(ytext, editor, provider.awareness, {
     yUndoManager,
+  });
+
+  // MIDI mapping: a knob change rewrites the mapped value and re-evaluates that line
+  midiReady.then((ok) => {
+    if (!ok) {
+      console.warn("MIDI controller not available");
+      return;
+    }
+    midiMapping.init(editor, midiController);
+    midiMapping.onChange((line) => {
+      const cursor = editor.getCursor();
+      editor.setCursor({ line: line, ch: cursor.ch });
+      evaluateCode(editor, false);
+    });
   });
 
   // Initialize visual mode with editor
@@ -692,6 +713,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Ctrl-Alt-J": (cm) => {
       functionUtils.previousJump(cm);
     },
+    // MIDI CC mapping toggles (midiMapping.js)
+    "Alt-1": () => midiMapping.toggleMapping(91),
+    "Alt-2": () => midiMapping.toggleMapping(93),
+    "Alt-3": () => midiMapping.toggleMapping(63),
+    "Alt-4": () => midiMapping.toggleMapping(5),
+    "Alt-5": () => midiMapping.toggleMapping(73),
+    "Alt-6": () => midiMapping.toggleMapping(75),
+    "Alt-7": () => midiMapping.toggleMapping(70),
+    "Alt-8": () => midiMapping.toggleMapping(72),
     "Ctrl-Alt-G": (cm) => {
       if (!activeSequence) return;
       const sections = functionUtils.findAllSections(cm);

@@ -1,0 +1,213 @@
+{
+  "_help": "curated composition starters (multi-line scenes)",
+  "proposed": {
+    "S200": {
+      "code": "Clock.bpm = 72\nScale.default = \"minor\"\nRoot.default = \"C\"\np1 >> sinepad([0,2,4,7], dur=8, sus=8, amp=linvar([0,0.4],32), lpf=sinvar([400,2400],16), shimmer=0.3)\np2 >> ethpad([(0,3,7),(2,5,9)], dur=16, sus=16, amp=0.2, cheapverb=0.5)\nb1 >> subbass([0,0,-3,0], dur=2, oct=2, sus=1.5, amp=0.4, tape=0.2)\nm1 >> bell(PRand([0,2,4,7,9]), dur=PDur(3,8), sus=0.3, amp=0.3, oct=6, cheapverb=0.5)",
+      "label": "starter: ambient bloom",
+      "type": "scene",
+      "tempo": 72,
+      "key": "C minor",
+      "source": "composition-starters"
+    },
+    "S201": {
+      "code": "Clock.bpm = 174\nScale.default = \"minor\"\nRoot.default = \"D\"\nd1 >> play(\"X.o.X.o-\", dur=1/2, sample=2, amp=0.8)\nb1 >> subbass([0,0,3,0,0,5,0,0], dur=1/2, oct=3, sus=0.4, amp=0.8, drive=0.2)\ns1 >> loop(\"amen8\", dur=8, sample=PRand(4), amp=0.6, chop=4)\np1 >> klank([(0,3,7)], dur=4, sus=3, amp=0.3, cheapverb=0.5)\nl1 >> pluck(melody({0:[3,5], 3:[5,7], 5:[7,3], 7:[0,3]}), dur=1/4, oct=5, amp=0.5)",
+      "label": "starter: dnb classic",
+      "type": "scene",
+      "tempo": 174,
+      "key": "D minor",
+      "source": "composition-starters"
+    },
+    "S202": {
+      "code": "Clock.bpm = 130\nScale.default = \"minor\"\nRoot.default = \"A\"\nk1 >> compkick([1,_,_,_], dur=1/2, amp=0.8)\nh1 >> play(\"-\", dur=1/4, amp=PSeq([0.3,0.5,0.3,0.5]))\nb1 >> tb303([0,0,3,0,0,5,0,-2], dur=1/4, oct=4, cutoff=linvar([500,2400],8), res=0.7, drive=0.3, amp=0.7)\nd1 >> play(\"X.o.\", dur=1/2, sample=4, amp=0.6)\nc1 >> klank([(0,3,7)], dur=4, sus=3, amp=0.3)",
+      "label": "starter: acid jam",
+      "type": "scene",
+      "tempo": 130,
+      "key": "A minor",
+      "source": "composition-starters"
+    },
+    "S203": {
+      "code": "Clock.bpm = 132\nScale.default = \"minor\"\nRoot.default = \"F\"\nk1 >> compkick([1], dur=1/2, amp=0.9)\nh1 >> play(\"-\", dur=1/2, amp=0.5, sample=1)\nb1 >> dbass([0,0,0,3,0,0,5,0], dur=1/2, oct=4, sus=0.4, drive=0.3, lpf=linvar([400,2000],32), amp=0.7)\np1 >> hardstab([(0,3,7)], dur=PDur(3,8), sus=0.2, amp=0.4)\nn1 >> loop(\"indus32\", dur=32, amp=0.3, mverb=0.4)",
+      "label": "starter: berlin techno",
+      "type": "scene",
+      "tempo": 132,
+      "key": "F minor",
+      "source": "composition-starters"
+    },
+    "S204": {
+      "code": "Clock.bpm = 88\nScale.default = \"minor\"\nRoot.default = \"A\"\nd1 >> play(\"X.o.\", dur=1/2, sample=8, amp=0.7, tape=0.4, tapedrive=0.3)\nb1 >> pumpbass([0,0,3,0], dur=1/2, oct=4, sus=0.4, amp=0.7, lpf=800)\np1 >> pianovel([(0,3,7),(2,5,9)], dur=4, sus=3, amp=0.4, tape=0.5, cheapverb=0.4)\nl1 >> pluck(melody({0:[2,3,5], 3:[0,5,7], 5:[3,7,9]}), dur=PDur(3,8), oct=5, amp=0.4)",
+      "label": "starter: lofi hip hop",
+      "type": "scene",
+      "tempo": 88,
+      "key": "A minor",
+      "source": "composition-starters"
+    },
+    "S205": {
+      "code": "Clock.bpm = 128\nScale.default = \"minor\"\nRoot.default = \"E\"\nk1 >> compkick([1], dur=1/2, amp=0.9, drive=0.2)\nb1 >> dbass([0,0,3,0], dur=1/4, oct=4, sus=0.3, drive=0.4, shape=0.3, amp=0.7)\nl1 >> war([0,0,3,5,3,0], dur=1/4, oct=5, cutoff=1200, beef=4, amp=0.6)\nn1 >> loop(\"metaldrum16\", dur=16, sample=PRand(4), amp=0.4, drive=0.3)\na1 >> doom([(0,3,7)], dur=8, sus=8, amp=0.3, cheapverb=0.5)",
+      "label": "starter: industrial",
+      "type": "scene",
+      "tempo": 128,
+      "key": "E minor",
+      "source": "composition-starters"
+    },
+    "S206": {
+      "code": "Clock.bpm = 138\nScale.default = \"minor\"\nRoot.default = \"C#\"\nk1 >> compkick([1], dur=1/2, amp=0.9)\nb1 >> dbass([0,0,0,0], dur=1/2, oct=3, sus=0.3, amp=0.6, leg=0.5)\np1 >> supersaw([0,3,5,7], dur=1/8, sus=0.15, amp=linvar([0.3,0.7],32), lpf=linvar([800,8000],32))\nc1 >> klank([(0,3,7)], dur=2, sus=1.8, amp=0.4)\nh1 >> play(\"-\", dur=1/4, amp=0.4)",
+      "label": "starter: trance build",
+      "type": "scene",
+      "tempo": 138,
+      "key": "C# minor",
+      "source": "composition-starters"
+    },
+    "S207": {
+      "code": "Clock.bpm = 66\nScale.default = \"minor\"\nRoot.default = \"E\"\nb1 >> subbass([0,0,-5,0], dur=8, oct=2, sus=7.5, drive=0.5, amp=0.6, fuzz=0.3)\np1 >> doom([(0,3,7)], dur=16, sus=16, amp=0.4, drive=0.4, cheapverb=0.6)\nn1 >> loop(\"ragedrone16\", dur=16, amp=0.4, mverb=0.5)\nd1 >> play(\"X...\", dur=4, sample=2, amp=0.6, room=0.7)",
+      "label": "starter: drone metal",
+      "type": "scene",
+      "tempo": 66,
+      "key": "E minor",
+      "source": "composition-starters"
+    },
+    "S208": {
+      "code": "Clock.bpm = 96\nScale.default = \"minor\"\nRoot.default = \"B\"\nd1 >> play(PEuclid2(5,16,\"X\",\".\"), dur=1/4, amp=0.7, crush=PRand(2,8), bits=PRand(6,12))\nb1 >> dbass(PWalk(8,[-5,5,1]), dur=PDur(3,8), oct=4, sus=0.3, amp=0.7)\nl1 >> pluck(PLife(16, chaos=0.6), dur=1/4, sus=0.2, oct=5, amp=0.5)\nn1 >> loop(\"dnbfx16\", dur=PDur(5,8), amp=0.4, chop=PRand(2,8))",
+      "label": "starter: glitch IDM",
+      "type": "scene",
+      "tempo": 96,
+      "key": "B minor",
+      "source": "composition-starters"
+    },
+    "S209": {
+      "code": "Clock.bpm = 120\nScale.default = \"major\"\nRoot.default = \"G\"\nd1 >> play(\"X\", dur=PBal(\"clave\", 16)/2, amp=0.7)\nh1 >> play(\"-\", dur=PBal(\"rumba\", 16)/2, amp=0.5)\nb1 >> dbass([0,0,3,5], dur=PBal(\"reggae\", 8)/2, oct=4, sus=0.4, amp=0.7)\nl1 >> pluck([0,2,4,7], dur=PBal(\"salsa\", 8)/2, sus=0.3, amp=0.6)",
+      "label": "starter: polyrhythm jam",
+      "type": "scene",
+      "tempo": 120,
+      "key": "G major",
+      "source": "composition-starters"
+    },
+    "S210": {
+      "code": "Clock.bpm = 60\nScale.default = \"minor\"\nRoot.default = \"C#\"\ns1 >> loop(\"sundrone16\", dur=16, amp=0.5, shimmer=0.4, cheapverb=0.6)\ns2 >> loop(\"whitedwarf16\", dur=16, amp=0.3, mverb=0.5)\nb1 >> subbass([0], dur=16, oct=2, sus=15, amp=0.3, tape=0.3)\nm1 >> bell([0,4,7,11], dur=PDur(3,16), sus=0.5, oct=6, amp=0.3, cheapverb=0.6)\np1 >> sinepad([(0,3,7),(2,5,9)], dur=32, sus=32, amp=0.2, lpf=sinvar([800,3200],16))",
+      "label": "starter: spaceMmm ambient",
+      "type": "scene",
+      "tempo": 60,
+      "key": "C# minor",
+      "source": "composition-starters"
+    },
+    "S211": {
+      "code": "Clock.bpm = 145\nScale.default = \"minor\"\nRoot.default = \"E\"\nk1 >> compkick([1], dur=1/2, amp=0.9)\nb1 >> psybass([0], dur=1/4, oct=4, sus=0.2, cutoff=linvar([400,2800],8), res=0.7, amp=0.7)\nl1 >> dab([0,3,5,7,3,0,2,5], dur=1/4, oct=5, amp=0.6, lpf=linvar([600,4800],16))\nc1 >> hardstab([(0,3,7)], dur=PDur(3,8), sus=0.2, amp=0.5)\nn1 >> loop(\"psyfx16\", dur=16, amp=0.3, chop=4)",
+      "label": "starter: psy goa",
+      "type": "scene",
+      "tempo": 145,
+      "key": "E minor",
+      "source": "composition-starters"
+    },
+    "S212": {
+      "code": "Clock.bpm = 160\nScale.default = \"minor\"\nRoot.default = \"D\"\nd1 >> play(\"X.o.X.o.\", dur=PEuclid(5,8)/2, amp=0.8, sample=2)\nb1 >> subbass(P[0,0,3,_,0,5,_,3], dur=1/2, oct=2, sus=0.4, amp=0.8)\ns1 >> loop(\"vocalcrash8\", dur=8, sample=PRand(4), amp=0.5, chop=8)\nc1 >> klank([(0,3,7)], dur=4, sus=3.5, amp=0.3)",
+      "label": "starter: footwork 160",
+      "type": "scene",
+      "tempo": 160,
+      "key": "D minor",
+      "source": "composition-starters"
+    },
+    "S213": {
+      "code": "Clock.bpm = 172\nScale.default = \"minor\"\nRoot.default = \"F\"\nd1 >> play(PEuclid2(7,16,\"X.\",\"o-\"), dur=1/4, amp=0.8, crush=PRand(2,8))\ns1 >> loop(\"amen8\", dur=PDur(5,8), sample=PRand(4), chop=PRand(2,8), amp=0.6)\nb1 >> dbass(PWalk(8,[-5,5,1]), dur=PDur(3,8), oct=4, sus=0.2, drive=0.3, amp=0.7)\nl1 >> war(PRand([0,3,5,7]), dur=1/8, oct=5, beef=6, amp=0.5)",
+      "label": "starter: breakcore frantic",
+      "type": "scene",
+      "tempo": 172,
+      "key": "F minor",
+      "source": "composition-starters"
+    },
+    "S214": {
+      "code": "Clock.bpm = 80\nScale.default = \"minor\"\nRoot.default = \"G\"\nk1 >> compkick([1,_,_,_], dur=1/2, amp=0.9)\nd1 >> play(\"..o.\", dur=1/2, amp=0.6, room=0.7, sample=4)\nb1 >> dbass([0,0,3,0], dur=1/2, oct=3, sus=0.4, amp=0.7, dub=0.5)\np1 >> klank([(0,3,7)], dur=4, sus=3, amp=0.4, echo=0.3, echotime=0.5)\nl1 >> pluck([0,3,5,7], dur=PDur(3,8), sus=0.3, oct=5, amp=0.4, echo=0.4)",
+      "label": "starter: dub 80",
+      "type": "scene",
+      "tempo": 80,
+      "key": "G minor",
+      "source": "composition-starters"
+    },
+    "T200": {
+      "code": "Clock.bpm = 174\nScale.default = \"minor\"\nRoot.default = \"A\"\nd1 >> play(\"X.o.X.o-\", dur=1/2, amp=0.8, sample=2)\nb1 >> subbass([0,0,3,0], dur=1/2, oct=2, sus=0.4, amp=0.8)",
+      "label": "starter: DnB skeleton (minimal)",
+      "type": "scene",
+      "tempo": 174,
+      "key": "A minor",
+      "source": "composition-starters"
+    },
+    "T201": {
+      "code": "Clock.bpm = 132\nScale.default = \"minor\"\nRoot.default = \"F\"\nk1 >> compkick([1], dur=1/2, amp=0.9)\nh1 >> play(\"-\", dur=1/2, amp=0.5)\nb1 >> dbass([0,0,3,0], dur=1/4, oct=4, sus=0.3, amp=0.7)",
+      "label": "starter: Techno skeleton",
+      "type": "scene",
+      "tempo": 132,
+      "key": "F minor",
+      "source": "composition-starters"
+    },
+    "T202": {
+      "code": "Clock.bpm = 92\nScale.default = \"minor\"\nRoot.default = \"D\"\nd1 >> play(\"X.o.\", dur=1/2, sample=8, amp=0.7)\nb1 >> pumpbass([0,0,3,0], dur=1/2, oct=4, sus=0.4, amp=0.7)",
+      "label": "starter: Hip-hop skeleton",
+      "type": "scene",
+      "tempo": 92,
+      "key": "D minor",
+      "source": "composition-starters"
+    },
+    "T203": {
+      "code": "Clock.bpm = 174\nScale.default = \"minor\"\nRoot.default = \"C\"\nd1 >> play(\"X-o-X-o-\", dur=1/4, amp=0.7, sample=2)\nb1 >> subbass([0,0,_,3,0,_,5,0], dur=1/4, oct=3, sus=0.2, amp=0.8, drive=0.3)\ns1 >> loop(\"amen8\", dur=8, amp=0.5, sample=PRand(4))",
+      "label": "starter: Drum'n'bass roller",
+      "type": "scene",
+      "tempo": 174,
+      "key": "C minor",
+      "source": "composition-starters"
+    },
+    "T204": {
+      "code": "Clock.bpm = 60\nScale.default = \"minor\"\nRoot.default = \"E\"\np1 >> sinepad([0,2,4,7], dur=16, sus=16, amp=0.4, shimmer=0.4)\nb1 >> subbass([0], dur=8, oct=2, sus=8, amp=0.3)",
+      "label": "starter: Ambient drone",
+      "type": "scene",
+      "tempo": 60,
+      "key": "E minor",
+      "source": "composition-starters"
+    },
+    "T205": {
+      "code": "Clock.bpm = 130\nScale.default = \"minor\"\nRoot.default = \"A\"\nb1 >> tb303([0,0,3,0,5,0,_,-2], dur=1/4, oct=4, cutoff=linvar([500,2400],16), res=0.7, amp=0.7)",
+      "label": "starter: Acid 303 only",
+      "type": "scene",
+      "tempo": 130,
+      "key": "A minor",
+      "source": "composition-starters"
+    },
+    "T206": {
+      "code": "Clock.bpm = 138\nScale.default = \"minor\"\nRoot.default = \"E\"\nc1 >> hoover([(0,3,7)], dur=PDur(3,8), sus=0.3, amp=0.7, drive=0.3)",
+      "label": "starter: Hoover stab loop",
+      "type": "scene",
+      "tempo": 138,
+      "key": "E minor",
+      "source": "composition-starters"
+    },
+    "T207": {
+      "code": "Clock.bpm = 170\nScale.default = \"minor\"\nRoot.default = \"B\"\nb1 >> dbass([0,0,3,0,5,0], dur=1/4, oct=3, sus=0.2, drive=0.4, chorus=0.3, amp=0.8)",
+      "label": "starter: Reese bass",
+      "type": "scene",
+      "tempo": 170,
+      "key": "B minor",
+      "source": "composition-starters"
+    },
+    "T208": {
+      "code": "Clock.bpm = 140\nScale.default = \"minor\"\nRoot.default = \"G\"\ns1 >> loop(\"amen8\", dur=8, sample=PRand(8), chop=4, amp=0.7)",
+      "label": "starter: Breakbeat alone",
+      "type": "scene",
+      "tempo": 140,
+      "key": "G minor",
+      "source": "composition-starters"
+    },
+    "T209": {
+      "code": "Clock.bpm = 72\nScale.default = \"minor\"\nRoot.default = \"F#\"\np1 >> sinepad([(0,3,7),(2,5,9),(5,9,0)], dur=16, sus=16, amp=linvar([0,0.6],32), shimmer=0.4, cheapverb=0.5)",
+      "label": "starter: Pad swell only",
+      "type": "scene",
+      "tempo": 72,
+      "key": "F# minor",
+      "source": "composition-starters"
+    },
+    "T210": {
+      "code": "Clock.bpm = 100\nScale.default = \"major\"\nRoot.default = \"C\"\nl1 >> plaitsX(melody({0:[2,4], 2:[4,5], 4:[5,7], 5:[7,9], 7:[0,4]}), dur=1/4, oct=5, preset=3, amp=0.6)",
+      "label": "starter: Plaits FM lead",
+      "type": "scene",
+      "tempo": 100,
+      "key": "C major",
+      "source": "composition-starters"
+    }
+  }
+}

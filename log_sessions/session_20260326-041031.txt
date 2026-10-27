@@ -1,0 +1,882 @@
+b1 >> tekno([0, 0, 5, 0], dur=0.5, oct=2, tsub=1, tcut=200, tenv=1500, tdec=0.3, tgrit=0.2)                                             
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> tekno([0, 3, 5, 7], dur=0.25, oct=3, tsync=1.5, tcut=400, tenv=6000, tdec=0.2, trez=0.8, tgrit=0.6)                               
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> tekno([0, 0, 7, 5], dur=0.5, oct=3, txmod=0.5, tcut=600, tenv=3000, tdec=0.4, tgrit=0.5)                                          
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> tekno([0, 2, 3, 7], dur=0.25, oct=4, tsync=2, tfold=0.6, tcut=1200, tenv=5000, tdec=0.15, trez=0.7, tgrit=0.8, tsub=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> tekno([0, 12, 7, 3], dur=0.5, oct=5, tsync=3, txmod=0.3, tfold=0.8, tcut=2000, tenv=8000, tdec=0.1, trez=0.6, tgrit=1, tsub=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> tekno([0, 3, 5, 7], dur=0.5, oct=3, tsync=linvar([0, 2], 32), txmod=sinvar([0, 0.5], 24), tcut=linvar([200, 1500], 64),  trez=sinvar([0.3, 0.8], 16), tenv=var([3000, 6000], 8), tdec=var([0.15, 0.5], [4, 12]), tgrit=var([0.3, 0.9], [8, 8]), tfold=var([0,      0.5], [12, 4]))                                           
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.2, oct=4, cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])            
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, sus=1/8, rel=0.2, vol=0.5, fenv=0.2, oct=PStep([16,8,4,4], 5, 4), track=0.5, res=linvar([0.5, 0.9], 44), cutoff=linvar([260, 1200], [24, 8]), a=[0.5,0])                                                             
+
+h5 >> svdk(expvar([0, P[7,14]], [4,0]), dur=PDur([4,5],8), oct=PStep(8,4,3), sus=expvar([1/8, 1/4], [32,0]), track=4, noise=expvar([0.3, 10], [64,0]), harm=.9, hpf=PFr(210,500), hpr=.2, amp=0.7)                                                                              
+
+h5.stop()
+
+b1 >> svdk([0, 0, 3, 0, 5, 0, 7, 5], dur=0.5, oct=3, body=0.9, cutoff=300, fenv=0.5, grit=0.3, drift=0.5, res=0.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> svdk([0, 0, 3, 0, 5, 0, 7, 5], dur=0.5, oct=3, body=0.9, cutoff=300, fenv=0.5, grit=0.3, drift=0.5, res=0.4)
+
+b1 >> svdk([0, 3, 5, 7, 0, 3, 7, 10], dur=0.25, oct=4, cutoff=linvar([200, 1800], 16), res=0.85, track=2, fenv=0.6, grit=0.7, noise=0,    harm=0.5, sus=1/8, rel=0.1)                                                                                                             
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> svdk([0, 2, 4], dur=4, oct=4, sus=4, grit=0.1, harm=0.8, noise=0.1, cutoff=1200, res=0.3, drift=0.8, body=0.3, fenv=0.1)
+
+s1 >> svdk(var([0, 4, 7, 11], 2), dur=0.5, oct=5, grit=1, res=0.9, cutoff=linvar([400, 3000], 8), track=3, harm=0.9, noise=0.5,  fenv=0.8, body=0, drift=0.1)                                                                                                            
+
+s1 >> svdk(var([0, 4, 7, 11], 2), dur=0.5, oct=3, grit=1, res=0.9, cutoff=linvar([400, 3000], 8), track=3, harm=0.9, noise=0.5,  fenv=0.8, body=0, drift=0.1)                                                                                                            
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk(var([0, 4, 7, 11], 2), dur=0.5, oct=3, grit=1, res=0.9, cutoff=linvar([400, 3000], 8), track=3, harm=0.9, noise=0.5,  fenv=0.8, body=0, drift=0.1)                                                                                                            
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> svdk([0, 0, 5, 3], dur=0.5, oct=3, cutoff=var([300, 1500, 300, 2000], [8, 4, 12, 4]), grit=var([0.3, 0.8], [12, 4]), body=0.7,  res=sinvar([0.2, 0.7], 16), fenv=0.4, tape=var([0, 0.5], [8, 8]), tapedrive=1.2)                                                        
+
+n1 >> svdk(dur=PDur(3,8), oct=4, noise=linvar([0.5, 8], 32), grit=0.6, cutoff=linvar([100, 3000], 16), res=0.5, harm=0, body=0, sus=0.1,   rel=0.05)      
+
+b1 >> tekno([0, 0, 3, 0, 5, 0, 7, 5], dur=0.25, oct=4, tsub=0, tcut=2000, tenv=2000, tdec=3.5, tgrit=1.6)                                 
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, sus=1/8, rel=0.2, vol=0.5, fenv=0.2, oct=PStep([16,8,4,4], 5, 4), track=0.5, res=linvar([0.5, 0.9], 44), cutoff=linvar([260, 1200], [24, 8]), a=[0.5,0])                                                             
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, vol=0.5, fenv=0.2, oct=4, cutoff=linvar([260, 2200], [24, 8]), a=[0.5,0])            
+
+p2 >> svdk(var([0,4,2,3,1], [8,4,4,2,2]), dur=1/4, sus=1/8, rel=0.2, vol=0.5, fenv=0.2, oct=PStep([16,8,4,4], 5, 4), track=0.5, res=linvar([0.5, 0.9], 44), cutoff=linvar([260, 1200], [24, 8]), a=[0.5,0])                                                             
+
+b1 >> svdk([0, 0, 3, 0, 5, 0, 7, 5], dur=0.5, oct=3, body=0.9, cutoff=300, fenv=0.5, grit=0.3, drift=0.5, res=0.4)
+
+b1 >> svdk([0, 0, 3, 0, 5, 0, 7, 5], dur=0.5, oct=4, body=0.9, cutoff=300, fenv=0.5, grit=0.3, drift=0.5, res=0.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+h5.stop()
+b1 >> svdk([0,0,-2,0,0,0,3,0], dur=Pvar([[0.5,0.5,1,0.5,0.25,0.25,0.5,0.5], [0.25]*8], 16),
+      oct=3, sus=0.8, grit=linvar([0.4, 0.9], 32),
+      cutoff=linvar([400, 2500], 16), res=sinvar([0.4, 0.7], 8),
+      body=0.9, harm=var([0.1, 0.4], 16), drift=0.4,
+      lpf=4000, triode=0.3)                                                            
+  # Deep bass — body cranked, low cutoff, slow drift                                                                                      
+b1 >> svdk([0, 0, 3, 0, 5, 0, 7, 5], dur=0.5, oct=4, body=0.9, cutoff=300, fenv=0.5, grit=0.3, drift=0.5, res=0.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+h5.stop()
+b1 >> svdk([0,0,-2,0,0,0,3,0], dur=Pvar([[0.5,0.5,1,0.5,0.25,0.25,0.5,0.5], [0.25]*8], 16),
+      oct=3, sus=0.8, grit=linvar([0.4, 0.9], 32),
+      cutoff=linvar([400, 2500], 16), res=sinvar([0.4, 0.7], 8),
+      body=0.9, harm=var([0.1, 0.4], 16), drift=0.4,
+      lpf=4000, triode=0.3)                                                            
+  # Deep bass — body cranked, low cutoff, slow drift                                                                                      
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> svdk([0,rest,0,rest, 0,0,rest,0], dur=0.25, sus=0.1, oct=4, grit=1, cutoff=900, body=0.6, harm=0.5, amp=0.7)
+
+p1 >> svdk([0,rest,0,rest, 0,0,rest,[-2,0]], dur=0.25, sus=0.12, oct=4, grit=1, cutoff=1000, body=0.65, harm=0.6)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> svdk([0], dur=8, sus=8, oct=4, grit=0.9, cutoff=linvar([300,4000],8), body=0.8, noise=0.5, drift=0.6, harm=0.4)
+
+p1 >> svdk([0,0,0,2, 0,0,0,-3, 0,2,0,5, 0,-2,0,0], dur=0.25, sus=0.12, oct=4, grit=1, cutoff=var([700,1400],2), body=0.7, harm=0.8)
+
+p1 >> svdk([0,rest,-2,rest, 3,rest,0,rest], dur=0.5, sus=0.35, oct=4, grit=0.7, cutoff=800, body=0.5, harm=0.4)
+
+p1 >> svdk([0,-2], dur=2, sus=1.8, oct=4, grit=linvar([0.4,0.8],8), cutoff=linvar([400,1200],8), body=0.7, drift=0.5)
+
+p1 >> svdk([0,0,-2,0, 3,3,0,0], dur=0.25, sus=0.2, oct=4, grit=0.8, cutoff=900, body=0.6, harm=0.5)
+
+b1 >> svdk([0], dur=16, sus=16, oct=3, grit=linvar([0.5,1],16), noise=linvar([0.3,0.9],16), res=linvar([0.4,0.8],16), cutoff=linvar([150,5000],16), body=0.7, fenv=0, drift=0.6)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> svdk([0], dur=16, sus=16, oct=3, grit=linvar([0.5,1],16), noise=linvar([0.3,0.9],16), res=linvar([0.4,0.8],16), cutoff=linvar([150,5000],16), body=0.7, fenv=0, drift=0.6)
+
+b1 >> svdk([0,0,0,0, 0,0,-2,0], dur=0.25, sus=0.18, oct=3, grit=0.8, cutoff=var([500,800,600,1000],4), body=0.85, harm=0.3, res=0.5)
+
+b1 >> svdk([0,0,0,0, 0,0,-2,0], dur=0.25, sus=0.18, oct=3, grit=0.8, cutoff=var([500,800,600,1000],4), body=0.85, harm=0.3, res=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> svdk([0,0,3,0, 5,5,3,0, 0,0,7,0, 5,3,0,-2], dur=0.25, sus=0.15, oct=4, grit=1, cutoff=var([800,1200],2), body=0.7, harm=0.7, octafuz=0.3, octamix=0.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> svdk([0, 0, 5, 3], dur=0.5, oct=3, cutoff=var([300, 1500, 300, 2000], [8, 4, 12, 4]), grit=var([0.3, 0.8], [12, 4]), body=0.7,  res=sinvar([0.2, 0.7], 16), fenv=0.4, tape=var([0, 0.5], [8, 8]), tapedrive=1.2)                                                        
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("<X o x o><[--]>", mbcomp=0.1, mbcxlo=1200, mbcxhi=30, mbcrat=12, mbcatk=0.01, mbcrel=0.1)
+
+b1 >> dbass(dur=1, mbcomp=0.6, mbcrat=5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> dbass(dur=1, mbcomp=0.6, mbcrat=5)
+
+b1 >> dbass(dur=1, mbcomp=0.7, mbcrat=5)
+
+b1 >> dbass(dur=1, mbcomp=0.8, mbcrat=5)
+
+b1 >> dbass(dur=1, mbcomp=0.9, mbcrat=5)
+
+b1 >> dbass(dur=1, mbcomp=1.0, mbcrat=5)
+
+b1 >> dbass(dur=1, mbcomp=1.1, mbcrat=5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("X.o.x.o.", mbcomp=0.7, mbcxlo=120, mbcxhi=4000, mbcrat=4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("X o x o", spring=0.9, sprdecay=0.8, sprtens=0.7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("W ", gdel=1.0, dur=1/2, gdeltime=0.01, gdelsize=0.001, gdelfb=0.2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> saw(dur=1, vocod=0.8, voccarr=linvar([0, 1], 16))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> pluck(dur=0.5, vocod=0.6, voccarr=0.8, vocbw=0.2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> play("	X o x o", vocod=4, voccarr=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> swell(dur=4, sgate=0.6, sgthresh=0.5, sgmode=1)
+
+d1 >> play("X o x o", sgate=0.1, sgthresh=0.5, sgmode=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> pluck(dur=0.5, spwarp=0.5, spwstr=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> dbass(spwarp=1, spwstr=linvar([0.5, 3], 32))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> pads(dur=4, spwarp=0.4, spwstr=1.2, spwshift=sinvar([0, 8], 16))
+
+p1 >> pluck(dur=0.5, csweep=0.3, cswfreq=400, cswdepth=0.5, cswrate=2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> pluck(dur=2, doppler=0.7, dopspd=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> pads(dur=4, doppler=0.5, dopspd=sinvar([0.1, 1], 32))
+
+p1 >> dbass(dur=4, doppler=0.5, dopspd=sinvar([0.1, 1], 32))
+
+b1 >> dbass(dur=1, vowel=0.6, vowelf=sinvar([0, 4], 8), vowelq=2)
+
+s1 >> saw(dur=1, vowel=0.7, vowelf=[0, 2, 4], vowelq=3)
+
+s1 >> saw(dur=1, vowel=1, vowelf=linvar([0, 4], 16))
+
+b1 >> tekno([0, 0, 5, 0], dur=0.5, oct=2, tsub=1, tcut=200, tenv=1500, tdec=0.3, tgrit=0.2)                                             
+
+p1 >> svdk([0,0,3,0, 5,5,3,0, 0,0,7,0, 5,3,0,-2], dur=0.25, sus=0.15, oct=4, grit=1, cutoff=var([800,1200],2), body=0.7, harm=0.7, octafuz=0.3, octamix=0.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p2 >> tb303([0,2,3,5,7,5,3,2], dur=0.125, oct=var([3,4], 4),
+      amp=0.6, sus=0.2, slide=var([0, 0.1], 2),
+      cutoff=linvar([400, 4000], 4), res=linvar([0.5, 0.9], 8),
+      dafilter=0.6, dffreq=linvar([300, 2000], 4),
+      dist=0.4, echo=0.3, echomix=0.2, echotime=3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> svdk([0,0,-2,0,0,0,3,0], dur=Pvar([[0.5,0.5,1,0.5,0.25,0.25,0.5,0.5], [0.25]*8], 16),
+      oct=3, sus=0.8, grit=linvar([0.4, 0.9], 32),
+      cutoff=linvar([400, 2500], 16), res=sinvar([0.4, 0.7], 8),
+      body=0.9, harm=var([0.1, 0.4], 16), drift=0.4,
+      lpf=4000, triode=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=8, sus=8, grit=0.7, noise=0.2, oct=4, res=0.6, cutoff=linvar([300, 2000], 8), body=0.8, drift=0.8, harm=0.3)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0,-2], dur=[2,1/4], sus=s1.dur, grit=1, noise=0.5, oct=5, res=0.3, cutoff=1500, body=0.7, drift=0.4, harm=0.5).unison(4)
+
+s1 >> svdk([0,-2], dur=[2,1/4], sus=s1.dur, grit=1, noise=0.5, oct=5, res=0.3, cutoff=1500, body=0.7, drift=0.4, harm=0.5).unison(4)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0,-2], dur=[2,1/4], sus=s1.dur, grit=1, noise=0.5, oct=5, res=0.3, cutoff=1500, body=0.7, drift=0.4, harm=0.5).unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.4, oct=3, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.5, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.6, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.7, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.8, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.9, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.0, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.1, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.2, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.3, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.5, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.6, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.7, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.8, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=1.9, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.0, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.1, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.2, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.3, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.5, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.6, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.7, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.8, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=2.9, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.0, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.1, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.2, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.3, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4, tstretch=1, tstretchsize=0.2, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4,mbcomp=0, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4,mbcomp=1, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4,mbcomp=2, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4,mbcomp=2, mbcxlo=12200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4,  oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+~s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4,  oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=3.4,  oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.4, oct=3, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.6, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.5, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.5, sprdecay=1.5, sprdamp=0.5, sprtens=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.4, sprdecay=1.5, sprdamp=0.5, sprtens=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.2, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.4, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.5, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.6, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.7, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.8, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.8, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.8, cswrate=4, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.8, cswrate=128, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=200, cswdepth=0.8, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=20, cswdepth=0.8, cswrate=0.5, cswdecay=0.5)
+
+e2 >> play("X ")
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=5, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=20, cswdepth=0.8, cswrate=0.5, cswdecay=0.5)
+
+s1 >> svdk([0,-2], dur=[2,1/4], sus=s1.dur, grit=1, noise=0.5, oct=5, res=0.3, cutoff=1500, body=0.7, drift=0.4, harm=0.5).unison(4)
+
+s1 >> svdk([0,-2], dur=4, sus=3.5, grit=0.8, noise=0.2, oct=3,  res=0.5, cutoff=600, body=0.9, drift=0.6, harm=0.4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=5, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=20, cswdepth=0.8, cswrate=0.5, cswdecay=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=8, sus=8, grit=0.7, noise=0.2, oct=4, res=0.6, cutoff=linvar([300, 2000], 8), body=0.8, drift=0.8, harm=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+f1 >> noisehit(PRand([0,2,4]), dur=4, amp=0.35,
+      sus=0.1, lpf=3000, hpf=500,
+      dubd=0.6, dublen=0.375, dubfeed=0.5,
+      room=0.4, mix=0.35)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=8, sus=8, grit=0.7, noise=0.2, oct=4, res=0.6, cutoff=linvar([300, 2000], 8), body=0.8, drift=0.8, harm=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=4, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+e1 >> a_gesa([0,0,-2,0], dur=0.5, sus=0.4, oct=6, distortion=12, amp=0.8)
+
+a1 >> space([0,2,4], dur=4, oct=4, amp=0.25,    lpf=linvar([1000, 2500], 16), room=0.6, mix=0.5,     shimmer=0.4, shimsize=0.8)
+
+h1 >> play(".-.-", dur=0.25, amp=0.3, hpf=6000)
+
+h1.stop()
+
+l1 >> darklead([0,rest,rest,3, rest,rest,0,rest], dur=0.5, sus=0.3, oct=5, amp=0.45, hpf=500)
+
+b1 >> a_gesa([0], dur=8, sus=8, oct=2, distortion=8, cutoff=linvar([200,1200],8), amp=0.6)
+
+b2 >> svdk([0,-2], dur=4, sus=4, oct=3, grit=linvar([0.4,1],16), body=1, cutoff=linvar([200,2500],16), drift=0.7, noise=0.3)
+
+b2.stop()
+
+b1 >> a_gesa([0,0,-2,0, 0,0,3,-2], dur=0.5, sus=0.35, oct=2, distortion=15)
+
+b1 >> a_gesa([0,0,-2,0, 0,0,3,-2], dur=0.5, sus=0.35, oct=3, distortion=15)
+
+b1 >> a_gesa([0,0,-2,0, 0,0,3,-2], dur=0.5, sus=0.35, oct=4, distortion=15)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> svdk([0,0,3,0, 5,5,3,0, 0,0,7,0, 5,3,0,-2], dur=0.25, sus=0.15, oct=4, grit=1, cutoff=var([800,1200],2), body=0.7, harm=0.7, octafuz=0.3, octamix=0.4)
+
+Root.default = "E"
+
+b1 >> tb303([0,0,0,3, 0,0,-2,0, 0,0,0,5, -2,0,3,0], dur=0.25, sus=0.2, oct=4, cutoff=linvar([400,2000],8), amp=0.8)
+
+p1 >> svdk([0,rest,0,rest, 0,0,rest,0], dur=0.25, sus=0.1, oct=4, grit=1, cutoff=900, body=0.6, harm=0.5, amp=0.7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> svdk([0,0,0,2, 0,0,0,-3, 0,2,0,5, 0,-2,0,0], dur=0.25, sus=0.12, oct=4, grit=1, cutoff=var([700,1400],2), body=0.7, harm=0.8)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=5, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15, spring=0.3, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, csweep=0.1, cswfreq=20, cswdepth=0.8, cswrate=0.5, cswdecay=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=8, sus=8, grit=0.7, noise=0.2, oct=4, res=0.6, cutoff=linvar([300, 2000], 8), body=0.8, drift=0.8, harm=0.3)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=5, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=5, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> svdk([0], dur=4, sus=4, grit=0.4, noise=0.4, oct=5, res=0.7, cutoff=400, body=1, drift=0.7, harm=0.6, slide=0.15)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=1, shimsize=0.8, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=2, shimsize=0.8, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=0.8, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=0.9, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=1.0, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=1.1, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=1.2, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=1.3, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=1.4, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=1.5, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=1.6, shimpitch=0.5, shimmix=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=3, shimsize=1.6, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=2, shimsize=1.6, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=1, shimsize=1.6, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, pos=0, shimmer=0, shimsize=1.6, shimpitch=0.5, shimmix=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.2, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.2, cswfreq=20, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.2, cswfreq=120, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.2, cswfreq=[120, 200], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.2, cswfreq=[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.2, cswfreq=P[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.4, cswfreq=P[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.5, cswfreq=P[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.6, cswfreq=P[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.5, cswfreq=P[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.4, cswfreq=P[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.4, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.5, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.6, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.7, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.5)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.5, rgate=0.6, rgaterate=4, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.5, rgate=0.7, rgaterate=4, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.5, rgate=0.8, rgaterate=4, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.5, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.6, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.7, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], mbcomp=1, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], mbcomp=1, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+v2 >> plaitsX(ff())
+
+v2 >> plaitsX(ff(4, 1, 8))
+
+~v2 >> plaitsX(ff(4, 1, 8))
+
+v2 >> plaitsX(ff(4, 1, 8))
+
+v2 >> plaitsX(fi(4, 1, 8))
+
+~v2 >> plaitsX(fi(4, 1, 8))
+
+v2 >> plaitsX(fi(4, 1, 8))
+
+c2 >> plaitsX(fi(4, 1, 8))
+
+c2 >> plaitsX(fi(4, 1, 8), amp=4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=6)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=7)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=7, csweep=1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=7, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=8, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=9, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=10, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=11, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=12, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=13, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=14, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=15, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(4)
+
+c7 >> play("X ", rate=1.0, csweep=0.3, cswfreq=P[120, 200, 400], mbcomp=1, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.0, cswfreq=P[120, 200, 400], mbcomp=1, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.4, cswfreq=P[120, 200, 400], mbcomp=1, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=3000, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=0.4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8,tstretch=1, tstretchsize=0.2, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8,tstretch=1, tstretchsize=0.3, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8,tstretch=1, tstretchsize=0.4, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8,tstretch=1, tstretchsize=0.5, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8,tstretch=1, tstretchsize=0.6, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8,tstretch=1, tstretchsize=0.7, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8,tstretch=1, tstretchsize=0.8, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c7 >> play("X ", rate=1.0, csweep=4, cswfreq=P[120, 200, 400], mbcomp=0, mbcxlo=200, mbcxhi=300, mbcrat=3, mbcatk=0.01, mbcrel=0.1, cswdepth=0.8, cswrate=0.5, cswdecay=0.8,tstretch=1, tstretchsize=0.9, rgate=0.8, rgaterate=1, rgatewave=0, beat_dur=1)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=0.6, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=0.7, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=0.8, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=0.9, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.0, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.1, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.2, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.3, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.4, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.5, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.6, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.7, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.8, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=1.9, cswdecay=0.5).unison(4)
+
+c2 >> plaitsX(fi(4, 1, 8), amp=16, csweep=1, sblur=1, sbluramt=1, cswfreq=200, cswdepth=0.3, cswrate=2.0, cswdecay=0.5).unison(4)
+
+v0 >> dblbass(vel = 1.0, freqdev = 4, op1mul = 0.5, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.0, freqdev = 4, op1mul = 0.5, amp=12, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.0, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.1, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.2, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.3, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.4, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.5, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.6, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.7, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.8, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=1, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=2, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=3, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=4, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+c7.stop()
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.6, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.7, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.8, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 0.9, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.0, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.1, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.2, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.3, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.4, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.5, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.6, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 0.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 0.4, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 0.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 0.6, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 0.7, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 0.8, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 0.9, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.0, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.1, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.2, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.3, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.4, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.6, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.7, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.8, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 0.9, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 1.0, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 1.1, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 1.2, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 1.3, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 1.4, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 1.5, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 1.6, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+c2.stop()
+
+v0 >> dblbass(vel = 1.9, freqdev = 4, op1mul = 1.6, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 5, op1mul = 1.6, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 6, op1mul = 1.6, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 7, op1mul = 1.6, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 8, op1mul = 1.6, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+
+v0 >> dblbass(vel = 1.9, freqdev = 9, op1mul = 1.6, amp=24, op2mul = 0.5, op3mul = 1.7, spread = 1, subAmp = 1.5, cutoff=3000, rq=0.5,doppler=5, dopspd=0.5, dopdist=1.0)
+

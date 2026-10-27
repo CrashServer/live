@@ -41,9 +41,13 @@ import "codemirror/addon/fold/foldgutter.css";
 import "codemirror/lib/codemirror.css";
 import "codemirror/addon/hint/show-hint.css";
 import "codemirror/addon/dialog/dialog.css";
+import "codemirror/addon/fold/foldcode.js";
+import "codemirror/addon/fold/foldgutter.js";
+import "codemirror/addon/fold/foldgutter.css";
 import "../css/style.css";
 import "../css/crashpanel.css";
 import "../css/configPanel.css";
+import { setupCellDial } from "./cellDial.js";
 
 // ---- #@ / #@#@ fold range finder ----------------------------------------
 // Store in a const so keybindings can reference it directly (avoids relying
@@ -84,7 +88,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   const config = await configRequest.json();
 
   // Connexion aux serveurs
-  const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
+  // wsServer wraps the main WS with reconnect so .send() is always safe to call.
+  let _wsServerSocket = null;
+  let _wsServerDelay = 2000;
+  const wsServer = {
+    get readyState() { return _wsServerSocket ? _wsServerSocket.readyState : WebSocket.CLOSED; },
+    send(data) {
+      if (_wsServerSocket && _wsServerSocket.readyState === WebSocket.OPEN) _wsServerSocket.send(data);
+    },
+  };
+  function _connectWsServer() {
+    _wsServerSocket = new WebSocket(`ws://${config.HOST_IP}:1234`);
+    _wsServerSocket.onopen    = () => { _wsServerDelay = 2000; };
+    _wsServerSocket.onmessage = (event) => wsServerOnMessage(event);
+    _wsServerSocket.onclose   = () => setTimeout(_connectWsServer, _wsServerDelay = Math.min(_wsServerDelay * 1.5, 30000));
+    _wsServerSocket.onerror   = () => _wsServerSocket.close();
+  }
+  _connectWsServer();
+
   let foxdotWs = null;
   let activeSequence = null; // {id, currentIndex, name} for #@ section sequencing
   let lastAttackInsert = { content: null, time: 0 }; // dedupe guard for attack() double paste
@@ -147,9 +168,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     singleCursorHeightPerLine: false,
     styleActiveLine: true,
     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-    foldGutter: { rangeFinder: foxdotFoldFinder },
+    foldGutter: { rangeFinder: foxdotFoldFinder, updateViewportThrottle: 400 },
     keyMap: "sublime",
   });
+
+  setupCellDial(editor, () => functionUtils.findAllSections(editor));
 
   const otherUserDoc = editor.getDoc().linkedDoc({ shareHist: false });
   const otherEditor = CodeMirror(document.getElementById("other-editor"), {
@@ -281,8 +304,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     safeSend(wsServer, { type: "evaluate_code", code: command });
   });
 
+  // Insert text into the main CodeMirror editor at the cursor, no evaluation.
+  // Used by gridPanel.js when the user clicks "paste" in the grid editor.
+  EventEmitter.on("paste_to_editor", (code) => {
+    if (!code) return;
+    const pos = editor.getCursor();
+    editor.replaceRange(code + "\n", pos);
+    // Move cursor to end of inserted block so user can keep typing
+    editor.focus();
+  });
+
   //Gestion des logs FoxDot pour la console
-  wsServer.onmessage = (event) => {
+  function wsServerOnMessage(event) {
     try {
       const message = JSON.parse(event.data);
       if (message.type === "foxdot_log") {
@@ -320,8 +353,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       else if (message.type === "rec_script") {
         functionUtils.insertAttackContent(editor, message.content);
       }
+      // FoxDot-side code-recording state changed — relay to button via EventBus
+      else if (message.type === "rec_state") {
+        EventEmitter.emit("rec_state", message);
+      }
+      // FoxDot-side stem-recording state changed
+      else if (message.type === "stems_state") {
+        EventEmitter.emit("stems_state", message);
+      }
     } catch (error) {}
-  };
+  }
 
   // Reset du chrono lors du clic sur le chrono
   chrono.addEventListener("click", () => functionUtils.resetChrono(wsServer));
@@ -631,6 +672,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // Gestion de l'autocomplétion
+  // Tracks whether the static category drill-down hint is currently open.
+  // The main hint self-updates on typing; the static one doesn't — we need to
+  // replace it with the main (filtered) hint when the user starts typing letters.
+  let _attackStaticHintOpen = false;
+
   editor.setOption("hintOptions", {
     hint: (cm) => {
       return foxdotAutocomplete.hint(cm, CodeMirror);
@@ -654,12 +700,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (categoryItems) {
               handle.close();
               setTimeout(() => {
+                _attackStaticHintOpen = true;
                 cm.showHint({
                   hint: () => categoryItems,
                   completeSingle: false,
                   extraKeys: {
                     Left: function (cm, handle) {
                       // Retour aux catégories
+                      _attackStaticHintOpen = false;
                       handle.close();
                       setTimeout(() => {
                         cm.showHint();
@@ -680,6 +728,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           selectedItem.displayText &&
           selectedItem.displayText.includes("Retour aux catégories")
         ) {
+          _attackStaticHintOpen = false;
           handle.close();
           setTimeout(() => {
             cm.showHint();
@@ -687,6 +736,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       },
     },
+  });
+
+  // Re-trigger filtered hints when typing letters inside attack/lost/fire/compose/sections.
+  // Three cases handled:
+  //   1. No hint open → open it with filtered results
+  //   2. Main hint open → CodeMirror's own update() handles filtering; skip our call
+  //   3. Static category drill-down open → replace it with filtered main hint
+  const _ATTACK_CTX_RE = /(lost|attack|fire|compose|sections)\([^)]*$/;
+  editor.on("inputRead", function(cm, change) {
+    if (!change.text || change.text.length !== 1) return;
+    if (!/[a-zA-Z_0-9]/.test(change.text[0])) return;
+    const cursor = cm.getCursor();
+    const beforeCursor = cm.getLine(cursor.line).slice(0, cursor.ch);
+    if (!_ATTACK_CTX_RE.test(beforeCursor)) return;
+    if (!cm.state.completionActive || _attackStaticHintOpen) {
+      _attackStaticHintOpen = false;
+      cm.showHint({ completeSingle: false });
+    }
+  });
+
+  // Backspace: re-trigger so the filter updates as the user narrows back.
+  editor.on("keyHandled", function(cm, name) {
+    if (name !== "Backspace" && name !== "Delete") return;
+    const cursor = cm.getCursor();
+    const beforeCursor = cm.getLine(cursor.line).slice(0, cursor.ch);
+    if (_ATTACK_CTX_RE.test(beforeCursor)) {
+      setTimeout(() => cm.showHint({ completeSingle: false }), 0);
+    }
   });
 
   // Ajouter l'écouteur d'awareness
@@ -724,9 +801,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
+  let _foxDotDelay = 2000;
   function foxDotWs() {
     foxdotWs = new WebSocket(`ws://${config.HOST_IP}:${config.FOXDOT_WS_PORT}`);
     foxdotWs.onopen = () => {
+      _foxDotDelay = 2000;
       safeSend(foxdotWs, { type: "get_autocomplete" });
     };
     foxdotWs.onmessage = (event) => {
@@ -841,14 +920,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Erreur lors de la réception de message FoxDot:", error);
       }
     };
-    foxdotWs.onclose = (e) => {
-      console.log(
-        "Socket is closed. Reconnect will be attempted in 1 second.",
-        e.reason,
-      );
-      setTimeout(function () {
-        foxDotWs();
-      }, 1000);
+    foxdotWs.onclose = () => {
+      setTimeout(foxDotWs, _foxDotDelay = Math.min(_foxDotDelay * 1.5, 30000));
     };
     foxdotWs.onerror = (err) => {
       console.error(
@@ -912,57 +985,64 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Gestion de l'envoi de code en temps réel
+  // Throttled: cursor moves fire many times per second while typing/navigating.
+  // We only need ~10 updates/sec for the visual display — 100ms is imperceptible.
+  let _cursorActivityTimer = null;
   editor.on("cursorActivity", (cm) => {
-    // Récupérer les infos utilisateur depuis awareness
-    const userState = awareness.getLocalState();
-    const userName = userState?.user?.name || "Anonymous";
+    if (_cursorActivityTimer) return;
+    _cursorActivityTimer = setTimeout(() => {
+      _cursorActivityTimer = null;
 
-    // Récupérer la position du curseur et extraire une fenêtre de lignes
-    const cursor = cm.getCursor();
-    const currentLine = cm.getLine(cursor.line);
+      const userState = awareness.getLocalState();
+      const userName = userState?.user?.name || "Anonymous";
 
-    let message = {};
-    if (isPretext) {
-      const windowData = getLineWindow(cm, LINES_TO_SHOW, userName);
-      message = {
-        type: `${userName}InstantCode`,
-        position: cursor.ch,
-        code: currentLine,
-        windowLines: windowData.windowLines,        // Fenêtre de lignes autour du curseur
-        windowStartLine: windowData.windowStartLine, // Numéro de la première ligne de la fenêtre
-        windowEndLine: windowData.windowEndLine,     // Numéro de la dernière ligne de la fenêtre
-        currentLineNumber: cursor.line + 1,
-      };
+      // Récupérer la position du curseur et extraire une fenêtre de lignes
+      const cursor = cm.getCursor();
+      const currentLine = cm.getLine(cursor.line);
 
-      try {
-        awareness.setLocalStateField("otherInstantCode", {
-          user: userName,
-          code: currentLine,
+      let message = {};
+      if (isPretext) {
+        const windowData = getLineWindow(cm, LINES_TO_SHOW, userName);
+        message = {
+          type: `${userName}InstantCode`,
           position: cursor.ch,
-          line: cursor.line + 1,
-          windowLines: windowData.windowLines,
-          windowStartLine: windowData.windowStartLine,
-          windowEndLine: windowData.windowEndLine,
-        });
-      } catch (error) {}
-    } else {
-      message = {
-        type: `${userName}InstantCode`,
-        position: cursor.ch,
-        code: currentLine,
-      };
+          code: currentLine,
+          windowLines: windowData.windowLines,        // Fenêtre de lignes autour du curseur
+          windowStartLine: windowData.windowStartLine, // Numéro de la première ligne de la fenêtre
+          windowEndLine: windowData.windowEndLine,     // Numéro de la dernière ligne de la fenêtre
+          currentLineNumber: cursor.line + 1,
+        };
 
-      try {
+        try {
           awareness.setLocalStateField("otherInstantCode", {
             user: userName,
             code: currentLine,
             position: cursor.ch,
             line: cursor.line + 1,
+            windowLines: windowData.windowLines,
+            windowStartLine: windowData.windowStartLine,
+            windowEndLine: windowData.windowEndLine,
           });
-      } catch (error) {}
-    }
+        } catch (error) {}
+      } else {
+        message = {
+          type: `${userName}InstantCode`,
+          position: cursor.ch,
+          code: currentLine,
+        };
 
-    safeSend(foxdotWs, message);
+        try {
+            awareness.setLocalStateField("otherInstantCode", {
+              user: userName,
+              code: currentLine,
+              position: cursor.ch,
+              line: cursor.line + 1,
+            });
+        } catch (error) {}
+      }
+
+      safeSend(foxdotWs, message);
+    }, 100);
   });
 
   // Gestion de l'activation/désactivation du serveur dans CrashPanel

@@ -1,0 +1,230 @@
+d1 >> dbass(dur=0.5, amp=fperlin())
+
+d1 >> dbass(dur=1/4, amp=fperlin())
+
+d1 >> dbass(dur=1/4, amp=fperlin() * 2)
+
+d1 >> dbass(dur=1/4, amp=fperlin(8, 4, 2) * 2)
+
+d1 >> dbass(dur=1/4, amp=fperlin(8, 12, 2) * 2)
+
+d1 >> dbass(dur=1/4, amp=fperlin(8, 1, 2) * 2)
+
+d1 >> dbass(dur=1/4, amp=fperlin(8, 1, 4) * 2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.25, lpf=fperlin(32, 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, lpf=fperlin(32, 200, 8000, 1))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, lpf=fperlin(32, 200, 8000, 6))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# Musique : pad avec filtre qui dérive organiquement
+p1 >> keys([0,2,4,7], dur=4, sus=4,
+    lpf=fperlin(32, 800, 6000), amp=fperlin(32, 0.2, 0.6), oct=5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# Mélodie Perlin — contour mélodique naturel
+d1 >> pluck(degree=fperlin(16, 0, 7), dur=PDur(5,8), oct=5,
+    lpf=fperlin(32, 400, 4000, 1))  # filtre très lisse (1 octave)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> keys(degree=fperlin(16, (0, 0), (5, 9)), dur=1, sus=2, oct=5)
+
+d1 >> keys(degree=fperlin(16, (0, 0), (5, 9)), dur=1/4, sus=2, oct=5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> pluck(degree=fr(8, (0, 3), (4, 7)), dur=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fw(), dur=0.25)
+
+d1 >> dbass(degree=fw(4), dur=0.25)
+
+d1 >> dbass(degree=fw(4, 1, 8), dur=0.25)
+
+d1 >> dbass(degree=fw(4, (1, 2), 8), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 1, 2), dur=0.5)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 1, 2), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 1, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 3, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 4, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 5, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 6, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 5, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 4, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 3, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 2, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 1, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(5, 2, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(1, 2, 4), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(1, 2, 1), dur=0.25)
+
+d1 >> dbass(degree=fw(8, 2, 12) * ft(1, 4, 1), dur=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> pluck(degree=fw(16, 1, 7), dur=PDur(5,8), oct=5, sus=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass([0,0,3,5], dur=PDur(5,8), lpf=fd(32, 100, 4000)+2000)
+
+d1 >> pluck(degree=fg(16, 3, 1.5), dur=PDur(5,8), oct=5)
+
+d1 >> pluck(degree=ft(16, 0, 7), dur=PDur(3,8), oct=5, sus=0.3)
+
+d1 >> pluck(degree=ft(16, 0, 7), dur=1/4, oct=5, sus=0.3)
+
+d1 >> dbass(dur=1, amp=fc())
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.25, lpf=fq([8, 16], 200, 8000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> pluck(degree=fq(8, 0, 7), dur=0.5, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, 7), dur=1/2, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, 7), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, 7), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, [4, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, [5, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, [6, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, [7, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, [8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq(8, 0, [6, 8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq([8, 2], 0, [6, 8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq([4, 2], 0, [6, 8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq([4, 2], 2, [6, 8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq([4, 2], 4, [6, 8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq([4, 2], 7, [6, 8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq([4, 2], 0, [6, 8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq([4, 2], -12, [6, 8, 7]), dur=1/4, oct=5)
+
+d1 >> pluck(degree=fq([4, 2], -12, [6, 8, 7]), dur=1/4, oct=5).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -12, [6, 8, 7]), dur=1/4, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -12, [6, 8, 7]), dur=1/4, oct=4).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -12, [6, 8, 7]), dur=1/4, sus=1/2, oct=4).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -12, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], 2, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], 4, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -4, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -5, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -3, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -2, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -1, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, [2, 3]], -6, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, sus=1/2, oct=3).unison(4)
+
+d1 >> pluck(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, lpf=400, sus=1/2, oct=3).unison(4)
+
+d1 >> cbass(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, lpf=400, sus=1/2, oct=3).unison(4)
+
+d1 >> cbass(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, lpf=400, sus=1/2, oct=4).unison(4)
+
+d1 >> cbass(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, lpf=400, sus=1/2, oct=5).unison(4)
+
+d1 >> cbass(degree=fq([4, 2], -6, [6, 8, 7]), dur=1/4, lpf=1200, sus=1/2, oct=5).unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, amp=fz())
+
+d1 >> pluck(degree=fxr(16, 0, 7), dur=PDur(5,8), oct=5, sus=0.5,    lpf=fb(16, 800, 4000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=0.5, lpf=fperlin(32, 200, 8000, 1))
+

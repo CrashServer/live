@@ -1,0 +1,419 @@
+# =============================================================
+#  CrashServer / live2027_grid — Full Windows Installer
+#  Run in PowerShell as Administrator:
+#    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+#    .\install\install.ps1 [-SkipSystem] [-SkipSamples] [-Optional] [-Yes]
+# =============================================================
+param(
+    [switch]$SkipSystem,
+    [switch]$SkipSamples,
+    [switch]$Optional,
+    [switch]$Yes
+)
+
+$ErrorActionPreference = "Continue"
+
+# ── Colors ───────────────────────────────────────────────────
+function Ok($msg, $key)   { Write-Host "  [OK] $msg" -ForegroundColor Green;  $script:STATUS[$key] = "ok" }
+function Fail($msg, $key) { Write-Host "  [!!] $msg" -ForegroundColor Red;    $script:STATUS[$key] = "FAILED" }
+function Skip($msg, $key) { Write-Host "  [->] $msg" -ForegroundColor Yellow; $script:STATUS[$key] = "skipped" }
+function Info($msg)       { Write-Host "  [ ] $msg"  -ForegroundColor Cyan }
+function Warn($msg)       { Write-Host "  [?] $msg"  -ForegroundColor Yellow }
+function Section($msg)    { Write-Host "`n=== $msg ===" -ForegroundColor Cyan }
+
+function Confirm-Step($msg) {
+    if ($Yes) { return $true }
+    $reply = Read-Host "  [?] $msg [y/N]"
+    return ($reply -match '^[Yy]$')
+}
+
+$script:STATUS = @{}
+
+$REPO_DIR    = Split-Path -Parent $PSScriptRoot
+$SC_QUARKS   = "$env:APPDATA\SuperCollider\downloaded-quarks"
+$SC_EXTS     = "$env:APPDATA\SuperCollider\Extensions"
+$SAMPLE_PATH = "$env:USERPROFILE\UltimateSamples"
+$VENV_DIR    = "$REPO_DIR\venv"
+
+Write-Host "`nCrashServer — Full Windows Installer" -ForegroundColor White
+Write-Host "  Repo:      $REPO_DIR"
+Write-Host "  SC quarks: $SC_QUARKS"
+Write-Host "  Samples:   $SAMPLE_PATH`n"
+
+# =============================================================
+#  1. SYSTEM PACKAGES (winget)
+# =============================================================
+Section "1 / 7 — System packages"
+
+function Install-Winget($id, $name) {
+    Info "Installing $name via winget..."
+    $result = winget install --id $id --silent --accept-package-agreements --accept-source-agreements 2>&1
+    if ($LASTEXITCODE -eq 0 -or $result -match "already installed") {
+        Ok "$name installed" "pkg_$name"
+    } else {
+        Fail "$name install failed — install manually" "pkg_$name"
+    }
+}
+
+if ($SkipSystem) {
+    Skip "System packages skipped" "system_packages"
+} elseif (Confirm-Step "Install system packages (SuperCollider, Python, Node, Git, git-lfs)?") {
+    Install-Winget "SuperCollider.SuperCollider" "SuperCollider"
+    Install-Winget "Python.Python.3.12"          "Python 3.12"
+    Install-Winget "OpenJS.NodeJS.LTS"           "Node.js LTS"
+    Install-Winget "Git.Git"                     "Git"
+    Install-Winget "GitHub.GitLFS"               "git-lfs"
+} else {
+    Skip "System packages skipped" "system_packages"
+}
+# Activate git-lfs regardless
+git lfs install 2>$null | Out-Null
+
+# Refresh PATH (machine + user, plus common Python install locations)
+$env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" +
+            [System.Environment]::GetEnvironmentVariable("PATH", "User")
+# Explicitly add Python paths in case winget just installed it
+$pyPaths = @(
+    "$env:LOCALAPPDATA\Programs\Python\Python312",
+    "$env:LOCALAPPDATA\Programs\Python\Python312\Scripts",
+    "$env:APPDATA\Python\Python312\Scripts"
+)
+foreach ($p in $pyPaths) { if (Test-Path $p) { $env:PATH = "$p;$env:PATH" } }
+
+# Resolve Python executable (handles 'python', 'python3', 'py' launcher)
+$script:PYTHON = $null
+foreach ($cmd in @("python", "python3", "py")) {
+    if (Get-Command $cmd -ErrorAction SilentlyContinue) {
+        $ver = & $cmd --version 2>&1
+        if ($ver -match "Python 3\.") { $script:PYTHON = $cmd; break }
+    }
+}
+if (-not $script:PYTHON) {
+    Warn "Python 3 not found on PATH. Install Python 3.12 from python.org and re-run."
+    $script:PYTHON = "python"  # fallback, steps will fail verbosely
+} else {
+    Info "Using Python: $($script:PYTHON) ($(& $script:PYTHON --version 2>&1))"
+}
+
+# =============================================================
+#  2. PYTHON PACKAGES
+# =============================================================
+Section "2 / 7 — Python packages"
+
+$PYTHON_REQUIRED = @(
+    "websockets", "python-rtmidi", "pyfiglet", "pyperclip", "LinkToPy",
+    "requests", "numpy", "edn-format", "ply", "pyRFC3339", "pytz",
+    "setuptools", "monotonic"
+)
+
+# Create venv
+if (Test-Path "$VENV_DIR\Scripts\python.exe") {
+    Ok "venv already exists at $VENV_DIR" "venv"
+} else {
+    Info "Creating Python venv at $VENV_DIR..."
+    & $script:PYTHON -m venv $VENV_DIR
+    if ($LASTEXITCODE -eq 0) { Ok "venv created" "venv" }
+    else { Fail "venv creation failed" "venv"; exit 1 }
+}
+$VENV_PIP = "$VENV_DIR\Scripts\pip.exe"
+
+Info "Installing FoxDot Python package into venv (editable)..."
+$r = & $VENV_PIP install -e "$REPO_DIR\FoxDot" --quiet 2>&1
+if ($LASTEXITCODE -eq 0) { Ok "FoxDot Python package" "foxdot_python" }
+else                      { Fail "FoxDot Python package failed" "foxdot_python"; Write-Host $r }
+
+Info "Installing required Python dependencies into venv..."
+$r = & $VENV_PIP install $PYTHON_REQUIRED --quiet 2>&1
+if ($LASTEXITCODE -eq 0) { Ok "Python required packages" "python_required" }
+else                      { Fail "Python required packages (partial?)" "python_required"; Write-Host $r }
+
+if ($Optional) {
+    Info "Installing optional packages (librosa, opencv)..."
+    $r = & $VENV_PIP install librosa opencv-python --quiet 2>&1
+    if ($LASTEXITCODE -eq 0) { Ok "Python optional packages" "python_optional" }
+    else                      { Warn "Optional packages failed — non-critical" }
+} else {
+    Skip "Optional packages skipped (pass -Optional to include)" "python_optional"
+}
+
+# =============================================================
+#  3. NODE PACKAGES
+# =============================================================
+Section "3 / 7 — Node packages"
+
+$nodeVer = (node --version 2>$null) -replace 'v(\d+).*','$1'
+if ([int]$nodeVer -ge 18) {
+    Ok "Node $(node --version)" "node_version"
+} else {
+    Warn "Node $nodeVer < 18 (or not found)"
+    if (Confirm-Step "Install Node 20 LTS via winget?") {
+        Install-Winget "OpenJS.NodeJS.LTS" "Node.js LTS"
+        $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH","Machine") + ";" +
+                    [System.Environment]::GetEnvironmentVariable("PATH","User")
+        Ok "Node $(node --version) installed" "node_version"
+    } else {
+        Fail "Node < 18 — npm steps will fail" "node_version"
+    }
+}
+
+Info "webTroop npm install..."
+Push-Location "$REPO_DIR\webTroop"
+npm install --silent
+if ($LASTEXITCODE -eq 0) { Ok "webTroop npm install" "node_webroop" }
+else                      { Fail "webTroop npm install failed" "node_webroop" }
+Pop-Location
+
+Info "hub npm install..."
+Push-Location "$REPO_DIR\hub"
+npm install --silent
+if ($LASTEXITCODE -eq 0) { Ok "hub npm install" "node_hub" }
+else                      { Fail "hub npm install failed" "node_hub" }
+Pop-Location
+
+# =============================================================
+#  4. SUPERCOLLIDER QUARKS
+# =============================================================
+Section "4 / 7 — SuperCollider quarks"
+
+New-Item -ItemType Directory -Force -Path $SC_QUARKS | Out-Null
+
+function Install-Quark($name, $url) {
+    $dest = "$SC_QUARKS\$name"
+    if (Test-Path $dest) {
+        Info "$name already present — pulling latest..."
+        git -C $dest pull --quiet
+        Ok "$name updated" "quark_$name"
+    } else {
+        Info "Cloning $name..."
+        git clone --depth 1 --quiet $url $dest
+        if ($LASTEXITCODE -eq 0) { Ok "$name installed" "quark_$name" }
+        else                      { Fail "$name clone failed" "quark_$name" }
+    }
+}
+
+Install-Quark "BatLib"            "https://github.com/supercollider-quarks/BatLib"
+Install-Quark "Feedback"          "https://github.com/supercollider-quarks/Feedback"
+Install-Quark "miSCellaneous_lib" "https://github.com/dkmayer/miSCellaneous_lib"
+Install-Quark "ddwWavetableSynth" "https://github.com/jamshark70/ddwWavetableSynth"
+
+$foxdotQuark = "$SC_QUARKS\FoxDot"
+if (-not (Test-Path $foxdotQuark)) {
+    Info "Cloning FoxDot SC quark..."
+    git clone --depth 1 --quiet "https://github.com/Qirky/FoxDotQuark" $foxdotQuark
+    if ($LASTEXITCODE -eq 0) { Ok "FoxDot SC quark cloned" "quark_FoxDot_clone" }
+    else                      { Fail "FoxDot SC quark clone failed" "quark_FoxDot_clone" }
+} else {
+    Ok "FoxDot SC quark already present" "quark_FoxDot_clone"
+}
+
+Info "Patching FoxDot.sc..."
+Copy-Item "$REPO_DIR\config\FoxDot.sc" "$foxdotQuark\FoxDot.sc" -Force
+if ($LASTEXITCODE -eq 0) { Ok "FoxDot.sc patched" "foxdot_sc_patch" }
+else                      { Fail "FoxDot.sc patch failed" "foxdot_sc_patch" }
+
+# =============================================================
+#  5. SUPERCOLLIDER EXTENSIONS
+# =============================================================
+Section "5 / 7 — SuperCollider extensions"
+
+New-Item -ItemType Directory -Force -Path $SC_EXTS | Out-Null
+
+# NOTE: The bundled extensions in config/SC_Extensions/ are Linux .so binaries.
+# On Windows, .dll versions must be downloaded from the GitHub releases pages:
+#   mi-UGens:     https://github.com/v7b1/mi-UGens/releases
+#   PortedPlugins: https://github.com/madskjeldgaard/portedplugins/releases
+#   Open303:      https://github.com/schollz/open303/releases
+
+function Get-GitHubLatestAsset($repo, $pattern) {
+    try {
+        $rel = Invoke-RestMethod "https://api.github.com/repos/$repo/releases/latest"
+        $asset = $rel.assets | Where-Object { $_.name -match $pattern } | Select-Object -First 1
+        return $asset.browser_download_url
+    } catch { return $null }
+}
+
+function Install-Extension($name, $repo, $pattern) {
+    $dest = "$SC_EXTS\$name"
+    # Remove stale dir first — Copy-Item into existing dir creates a subdir
+    if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
+    Info "Downloading $name Windows binaries..."
+    $url = Get-GitHubLatestAsset $repo $pattern
+    if (-not $url) {
+        Warn "$name: could not find Windows release. Download manually from: https://github.com/$repo/releases"
+        $script:STATUS["ext_$name"] = "manual install needed"
+        return
+    }
+    $zip = "$env:TEMP\$name.zip"
+    Invoke-WebRequest $url -OutFile $zip
+    Expand-Archive $zip -DestinationPath "$SC_EXTS\" -Force
+    Remove-Item $zip
+    Ok "$name installed" "ext_$name"
+}
+
+Install-Extension "mi-UGens"      "v7b1/mi-UGens"              "win"
+Install-Extension "PortedPlugins" "madskjeldgaard/portedplugins" "Win"
+Install-Extension "Open303"       "schollz/open303"             "[Ww]in"
+
+# =============================================================
+#  6. SAMPLES
+# =============================================================
+Section "6 / 7 — Samples"
+
+function Clone-SampleBank($bank) {
+    $dest = "$SAMPLE_PATH\$bank"
+    if (Test-Path $dest) {
+        Ok "Sample bank $bank already present" "samples_$bank"
+    } else {
+        Info "Cloning sample bank $bank (may take a long time — several GB)..."
+        git clone --depth 1 --quiet "https://github.com/CrashServer/$bank" $dest
+        if ($LASTEXITCODE -eq 0) { Ok "Sample bank $bank downloaded" "samples_$bank" }
+        else                      { Fail "Sample bank $bank download failed" "samples_$bank" }
+    }
+}
+
+if ($SkipSamples) {
+    Skip "Samples skipped" "samples_0"
+    $script:STATUS["samples_1"] = "skipped"; $script:STATUS["samples_2"] = "skipped"
+} elseif (Test-Path $SAMPLE_PATH) {
+    Ok "Samples directory already present at $SAMPLE_PATH" "samples_0"
+    $script:STATUS["samples_1"] = "ok (existing)"; $script:STATUS["samples_2"] = "ok (existing)"
+} elseif (Confirm-Step "Download samples from GitHub (~8 GB total — banks 0, 1, 2)?") {
+    New-Item -ItemType Directory -Force -Path $SAMPLE_PATH | Out-Null
+    Clone-SampleBank "0"; Clone-SampleBank "1"; Clone-SampleBank "2"
+} else {
+    Skip "Samples skipped" "samples_0"
+    $script:STATUS["samples_1"] = "skipped"; $script:STATUS["samples_2"] = "skipped"
+}
+
+# =============================================================
+#  7. CONFIGURATION
+# =============================================================
+Section "7 / 7 — Configuration"
+
+$configFile = "$REPO_DIR\webTroop\crash_config.json"
+
+$lanIP = (Get-NetIPAddress -AddressFamily IPv4 |
+          Where-Object { $_.IPAddress -notmatch '^127\.' -and $_.PrefixOrigin -ne 'WellKnown' } |
+          Select-Object -First 1).IPAddress
+
+if (Test-Path $configFile) {
+    $cfg = Get-Content $configFile | ConvertFrom-Json
+    if ($cfg.HOST_IP -ne $lanIP -and $lanIP) {
+        Info "HOST_IP changed: $($cfg.HOST_IP) → $lanIP — updating..."
+        $cfg.HOST_IP = $lanIP
+        $cfg | ConvertTo-Json -Depth 5 | Set-Content $configFile
+        Ok "HOST_IP updated to $lanIP" "config"
+    } else {
+        Ok "crash_config.json up to date (HOST_IP=$($cfg.HOST_IP))" "config"
+    }
+} else {
+    $config = @{
+        HOST_IP         = $lanIP
+        FOXDOT_PATH     = "$REPO_DIR\FoxDot" -replace '\\','/'
+        sample_path     = $SAMPLE_PATH -replace '\\','/'
+        FOXDOT_WS_PORT  = 20000
+        freesoundApiKey = "REPLACE_WITH_YOUR_KEY"
+        SC_CPU_PORT     = 2887
+        showTodo        = 0
+        ARDUINO         = 0
+    }
+    $config | ConvertTo-Json | Set-Content $configFile
+    Ok "crash_config.json generated (HOST_IP=$lanIP)" "config"
+    Warn "Edit crash_config.json and set your freesoundApiKey"
+}
+
+# =============================================================
+#  SUMMARY
+# =============================================================
+# =============================================================
+#  Generate start.ps1
+# =============================================================
+Section "Generating start.ps1"
+
+$startScript = @"
+# CrashServer launcher — generated by install.ps1
+# Usage: .\start.ps1
+`$REPO_DIR = Split-Path -Parent `$PSScriptRoot
+`$VENV_PYTHON = "`$REPO_DIR\venv\Scripts\python.exe"
+`$LOG_DIR = "`$REPO_DIR\logs"
+New-Item -ItemType Directory -Force -Path `$LOG_DIR | Out-Null
+
+`$cfg = Get-Content "`$REPO_DIR\webTroop\crash_config.json" | ConvertFrom-Json
+`$HOST_IP = `$cfg.HOST_IP
+
+`$jobs = @()
+Write-Host "Starting CrashServer..." -ForegroundColor Cyan
+
+`$jobs += Start-Job -ScriptBlock {
+    Set-Location "`$using:REPO_DIR\webTroop"
+    `$env:HOST="0.0.0.0"; `$env:PORT="4444"; `$env:YPERSISTENCE="./dbDir"
+    node ./node_modules/y-websocket/bin/server.cjs
+}
+Write-Host "  [OK] y-websocket" -ForegroundColor Green
+
+`$jobs += Start-Job -ScriptBlock { Set-Location "`$using:REPO_DIR\webTroop"; node server.js }
+Write-Host "  [OK] server.js" -ForegroundColor Green
+
+`$jobs += Start-Job -ScriptBlock { Set-Location "`$using:REPO_DIR\webTroop"; npm run dev }
+Write-Host "  [OK] vite" -ForegroundColor Green
+
+Write-Host ""
+Write-Host "  Web UI: http://`${HOST_IP}:3000" -ForegroundColor Cyan
+Write-Host "  Open SuperCollider IDE and load: `$REPO_DIR\config\startuplive.scd"
+Write-Host "  Press Ctrl+C to stop`n"
+
+try { `$jobs | Wait-Job | Out-Null }
+finally { `$jobs | Stop-Job; `$jobs | Remove-Job }
+"@
+
+Set-Content "$REPO_DIR\start.ps1" $startScript
+Ok "start.ps1 generated" "start_sh"
+
+Write-Host "`n=== Installation Summary ===" -ForegroundColor Cyan
+
+$keys = @(
+    "system_packages","foxdot_python","python_required","python_optional",
+    "node_version","node_webroop","node_hub",
+    "quark_BatLib","quark_Feedback","quark_miSCellaneous_lib","quark_ddwWavetableSynth",
+    "quark_FoxDot_clone","foxdot_sc_patch",
+    "ext_mi-UGens","ext_PortedPlugins","ext_Open303",
+    "samples_0","samples_1","samples_2","config"
+)
+
+$allOk = $true
+foreach ($key in $keys) {
+    $val = if ($script:STATUS.ContainsKey($key)) { $script:STATUS[$key] } else { "not run" }
+    if ($val -eq "ok" -or $val -match "existing") {
+        Write-Host "  [OK] ${key}: $val" -ForegroundColor Green
+    } elseif ($val -match "skip") {
+        Write-Host "  [->] ${key}: $val" -ForegroundColor Yellow
+    } elseif ($val -eq "FAILED") {
+        Write-Host "  [!!] ${key}: $val" -ForegroundColor Red
+        $allOk = $false
+    } else {
+        Write-Host "  [?]  ${key}: $val" -ForegroundColor Yellow
+    }
+}
+
+Write-Host ""
+if ($allOk) {
+    Write-Host "All done! Run: python install\verify.py" -ForegroundColor Green
+} else {
+    Write-Host "Completed with issues. Check FAILED items above." -ForegroundColor Yellow
+}
+
+Write-Host "`n!!! REQUIRED: Recompile SuperCollider class library !!!" -ForegroundColor Red
+Write-Host "  New quarks + extensions are invisible until you do this." -ForegroundColor Red
+Write-Host "  In SuperCollider IDE: Language > Recompile Class Library (Ctrl+Shift+L)`n" -ForegroundColor Yellow
+
+Write-Host "Next steps:"
+Write-Host "  1. [REQUIRED] Recompile SC class library (see above)"
+Write-Host "  2. Open config\startuplive.scd in SuperCollider IDE"
+Write-Host "  3. Run: .\start.ps1"
+Write-Host "  4. Set freesoundApiKey in webTroop\crash_config.json (optional)"
+
+# Auto-run verifier
+Write-Host "`nRunning post-install verification...`n" -ForegroundColor Cyan
+$venvPy = "$REPO_DIR\venv\Scripts\python.exe"
+if (Test-Path $venvPy) { & $venvPy "$REPO_DIR\install\verify.py" }
+else { python "$REPO_DIR\install\verify.py" }

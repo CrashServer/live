@@ -1,0 +1,20 @@
+p1 >> pianovel([0, 2, 5, 7], dur=1, oct=5, amp=0.6)
+
+b1 >> dbass([0, 0, -2, 0], dur=2, oct=4, sus=1.5, amp=0.8)
+
+k1 >> compkick(0, dur=1, oct=3, amp=1.0)
+
+s1 >> play("..o.", dur=1/2, sample=3, amp=0.7)
+
+h1 >> click(0, dur=1/4, amp=Pacc(6, 4), rate=18, hpf=5200)
+
+p1 >> pianovel([0, 2, 5, 7, 9, 12], dur=1/2, oct=5, amp=0.8)
+
+b1 >> dbass([0, 0, -2, 0, -3, 0], dur=1, oct=4, sus=0.5, amp=1.0, dist2=0.6)
+
+k1 >> compkick(0, dur=1/2, oct=3, amp=1.2, click=0.8)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

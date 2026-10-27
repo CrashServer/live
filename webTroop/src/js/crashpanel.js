@@ -15,6 +15,18 @@ const todoList = document.querySelector('.todo-list');
 const showTodo = config.showTodo ?? false;
 const recordButton = document.getElementById('recording');
 
+// Cached WS-update targets (queried once, not on every message)
+const _elScale     = document.getElementById('scale');
+const _elRoot      = document.getElementById('root');
+const _elBpm       = document.getElementById('bpm');
+const _elChrono    = document.getElementById('chrono');
+const _elMasterFx  = document.getElementById('masterFx');
+const _elHelp      = document.getElementById('help');
+const _elCpu       = document.getElementById('cpu');
+const _elSceneName = document.getElementById('sceneName');
+const _elSceneTime = document.getElementById('sceneTime');
+const _elPlayers   = document.getElementById('players');
+
 let isResizing = false;
 let startX;
 let startWidth;
@@ -56,7 +68,7 @@ document.addEventListener('mousemove', function(e) {
     if (!isResizing) return;
     const width = startWidth + (e.clientX - startX);
     crashPanel.style.width = `${width}px`;
-});
+}, { passive: true });
 
 document.addEventListener('mouseup', function() {
     if (isResizing) {
@@ -92,98 +104,99 @@ if (savedWidth) {
     crashPanel.style.width = savedWidth;
 }
 
-const ws = new WebSocket(`ws://${config.HOST_IP}:20000`);
-const wsServer = new WebSocket(`ws://${config.HOST_IP}:1234`);
+// Reconnecting WebSocket wrapper with exponential backoff.
+// Starts at 2 s, caps at 30 s.  Proxy keeps .send() / .readyState safe to call
+// even while the underlying socket is down.
+function makeReconnectingWs(url, onmessage, label) {
+    let socket = null;
+    let delay = 2000;
 
-ws.onopen = function() {
-    console.log('CrashPanel WebSocket connection opened');
-};
+    const proxy = {
+        get readyState() { return socket ? socket.readyState : WebSocket.CLOSED; },
+        send(data) {
+            if (socket && socket.readyState === WebSocket.OPEN) socket.send(data);
+        },
+    };
 
-wsServer.onopen = function() {
-    console.log('CrashPanel connection to main server opened');
-};
-
-ws.onmessage = function(event) {
-    const data = JSON.parse(event.data);
-
-    switch(data.type) {
-        case 'scale':
-            document.getElementById('scale').textContent = data.scale;
-            updatePianoKeys(data.scale, document.getElementById('root').textContent);
-            break;
-        case 'root':
-            document.getElementById('root').textContent = data.root;
-            updatePianoKeys(document.getElementById('scale').textContent, data.root);
-            break;
-        case 'cpu':
-            updateCpu(data.cpu);
-            // Transmettre les données CPU au serveur principal pour l'Arduino
-            if (wsServer.readyState === WebSocket.OPEN) {
-                wsServer.send(JSON.stringify({
-                    type: 'cpu_data',
-                    cpu: data.cpu
-                }));
-            }
-            break;
-        case 'bpm':
-            document.getElementById('bpm').textContent = data.bpm;
-            break;
-        case 'serverState':
-            updateCrashPanelTitle(data.serverState);
-            break;
-        case 'beat':
-            updateBeat(data.beat);
-            break;
-        case 'chrono':
-            document.getElementById('chrono').textContent = formatTime(data.chrono);
-            break;
-        case 'players':
-            formatPlayers(data.players)
-            break;
-        case 'masterFx':
-            const masterFxContainer = document.getElementById('masterFx');
-            masterFxContainer.innerHTML = '';
-            Object.keys(data.masterFx).forEach((fx, index) => {
-                const fxDiv = document.createElement('span');
-                fxDiv.className = 'master-fx-item';
-                fxDiv.textContent = `${fx}`;
-                masterFxContainer.appendChild(fxDiv);
-            });
-            // masterFxContainer.style.height = masterFxContainer.scrollHeight + 'px';
-            break;
-        // case 'pdj':
-        //     const pdjContainer = document.getElementById('pdj')
-        //     pdjContainer.textContent = data.intitule + " - " + data.plat;
-        //     pdjContainer.style.height = pdjContainer.scrollHeight + 'px';
-        //     break;
-        case 'help':
-            const helpContainer = document.getElementById('help')
-            helpContainer.textContent = data.help;
-            helpContainer.style.height = helpContainer.scrollHeight + 'px';
-            break;
-        case 'sceneName':
-            formatSceneName(data.sceneName);
-            break;
-        // case 'gameData':
-        //     createGameTable(data.gameData);
-        //     break;
-        default:
-            break;
-            // console.log('Unknown message type:', data.type);
+    function connect() {
+        socket = new WebSocket(url);
+        socket.onopen    = () => { delay = 2000; };
+        socket.onmessage = onmessage;
+        socket.onclose   = () => setTimeout(connect, delay = Math.min(delay * 1.5, 30000));
+        socket.onerror   = () => socket.close();
     }
-};
+    connect();
+    return proxy;
+}
 
-ws.onclose = function() {
-    console.log('WebSocket Crashpanel connection closed');
-};
+// FoxDot WebSocket (port 20000) — BPM, CPU, beat, players, root, scale, etc.
+const ws = makeReconnectingWs(
+    `ws://${config.HOST_IP}:20000`,
+    function(event) {
+        const data = JSON.parse(event.data);
+        switch (data.type) {
+            case 'scale':
+                _elScale.textContent = data.scale;
+                updatePianoKeys(data.scale, _elRoot.textContent);
+                break;
+            case 'root':
+                _elRoot.textContent = data.root;
+                updatePianoKeys(_elScale.textContent, data.root);
+                break;
+            case 'cpu':
+                updateCpu(data.cpu);
+                wsServer.send(JSON.stringify({ type: 'cpu_data', cpu: data.cpu }));
+                break;
+            case 'bpm':
+                _elBpm.textContent = data.bpm;
+                break;
+            case 'serverState':
+                updateCrashPanelTitle(data.serverState);
+                break;
+            case 'beat':
+                updateBeat(data.beat);
+                break;
+            case 'chrono':
+                _elChrono.textContent = formatTime(data.chrono);
+                break;
+            case 'players':
+                formatPlayers(data.players);
+                break;
+            case 'masterFx': {
+                _elMasterFx.innerHTML = '';
+                const frag = document.createDocumentFragment();
+                Object.keys(data.masterFx).forEach(fx => {
+                    const fxDiv = document.createElement('span');
+                    fxDiv.className = 'master-fx-item';
+                    fxDiv.textContent = fx;
+                    frag.appendChild(fxDiv);
+                });
+                _elMasterFx.appendChild(frag);
+                break;
+            }
+            case 'help': {
+                _elHelp.textContent = data.help;
+                _elHelp.style.height = _elHelp.scrollHeight + 'px';
+                break;
+            }
+            case 'sceneName':
+                formatSceneName(data.sceneName);
+                break;
+            default:
+                break;
+        }
+    }
+);
 
-ws.onerror = function(error) {
-    console.error('WebSocket CrashPanel error:', error);
-};
+// webTroop main server (port 1234) — used to forward CPU data to Arduino
+const wsServer = makeReconnectingWs(
+    `ws://${config.HOST_IP}:1234`,
+    null
+);
 
-document.getElementById('root').addEventListener('click', () => {
-    const pianoRoll = document.getElementById('piano-roll');
-    pianoRoll.classList.toggle('hidden');
+const _elPianoRoll = document.getElementById('piano-roll');
+_elRoot.addEventListener('click', () => {
+    _elPianoRoll.classList.toggle('hidden');
 });
 
 
@@ -193,24 +206,25 @@ function formatTime(seconds) {
     return `${minutes}:${remainingSeconds}`;
 }
 
+const _beatDivs = {};
 function updateBeat(actualbeat) {
     // Publish the raw fractional beat. The DOM readout below rounds it to
     // whole beats for display; consumers that need real timing (the Alt+T
     // automation recorder) must not have to scrape that back out.
     EventEmitter.emit('beat', actualbeat);
-    const beatInterval = [8,16,32,64]
+    const beatInterval = [8,16,32,64];
     beatInterval.forEach(beatInter => {
         const beat = Math.ceil(actualbeat % beatInter);
-        const beatDiv = document.getElementById(`beat-${beatInter}`)
-        const progressPercent = (beat / beatInter) * 100
-        beatDiv.style.background = `linear-gradient(to right, var(--beat-col-2) ${progressPercent}%, var(--beat-col-1) ${progressPercent}%)`;
-        beatDiv.textContent = `${beat}/${beatInter}`;
-
+        const progressPercent = (beat / beatInter) * 100;
+        const div = _beatDivs[beatInter] || (_beatDivs[beatInter] = document.getElementById(`beat-${beatInter}`));
+        if (!div) return;
+        div.style.background = `linear-gradient(to right, var(--beat-col-2) ${progressPercent}%, var(--beat-col-1) ${progressPercent}%)`;
+        div.textContent = `${beat}/${beatInter}`;
     });
 }
 
 function updateCpu(usagePercent){
-    const cpuDiv = document.getElementById("cpu")
+    const cpuDiv = _elCpu;
     // Définir les couleurs de la plage
     const green = "#515b54";
     const orange = "#FFAA44";
@@ -276,7 +290,7 @@ function formatPlayers(message) {
     // Vérifier si un ou plusieurs joueurs ont `solo` à `true`
     const hasSolo = players.some(p => p.solo);
 
-    const playersDiv = document.getElementById('players');
+    const playersDiv = _elPlayers;
     const currentPlayerIds = new Set(players.map(p => p.id));
     const previousPlayerIds = new Set(previousPlayersState.keys());
 
@@ -300,7 +314,7 @@ function formatPlayers(message) {
         `).join('');
 
         // Réattacher les event listeners
-        document.querySelectorAll('.player-line').forEach(line => {
+        playersDiv.querySelectorAll('.player-line').forEach(line => {
             line.addEventListener('click', (e) => {
                 const playerId = e.currentTarget.dataset.playerId;
                 EventEmitter.emit('send_foxdot', `${playerId}.stop()`);
@@ -406,7 +420,7 @@ function checkAllTodos() {
 function formatSceneName(nameScene) {
     if (nameScene !== sceneName) {
         sceneName = nameScene;
-        document.getElementById('sceneName').textContent = nameScene;
+        _elSceneName.textContent = nameScene;
         if (sceneIntervalId !== null) {
             clearInterval(sceneIntervalId);
         }
@@ -415,9 +429,8 @@ function formatSceneName(nameScene) {
         sceneIntervalId = setInterval(() => {
             const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
             const color = getDurationColor(elapsedTime/60);
-            const sceneTimeDiv = document.getElementById('sceneTime');
-            sceneTimeDiv.style.color = color;
-            sceneTimeDiv.textContent = formatTime(elapsedTime);
+            _elSceneTime.style.color = color;
+            _elSceneTime.textContent = formatTime(elapsedTime);
         }, 1000);
     }
 }

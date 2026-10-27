@@ -1,0 +1,391 @@
+/* cellDial.css — Radial cell picker  (Ctrl+Shift+G) */
+
+#cellDial {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#cellDial.hidden { display: none; }
+
+.cell-dial-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+/* ── Panel ─────────────────────────────────────────────── */
+.cell-dial-panel {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-col-1);
+  border: 1px solid var(--border-col-1);
+  border-radius: 2px;
+  width: 420px;
+  max-width: 96vw;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.85);
+  font-family: monospace;
+  overflow: hidden;
+}
+
+/* ── Domain tabs ───────────────────────────────────────── */
+.cd-tabs {
+  display: flex;
+  background: var(--bg-col-2);
+  border-bottom: 1px solid var(--border-col-2);
+  flex-shrink: 0;
+}
+
+.cd-tab {
+  flex: 1;
+  padding: 6px 0 5px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--border-col-1);
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.1s;
+  margin-bottom: -1px;
+}
+.cd-tab:hover { color: var(--text-col-2); }
+.cd-tab.active {
+  color: var(--col-full-blue);
+  border-bottom-color: var(--col-full-blue);
+}
+
+/* ── Ring wrap ─────────────────────────────────────────── */
+.cd-ring-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 0 10px;
+  flex-shrink: 0;
+}
+
+.cell-dial-ring {
+  width: 260px;
+  height: 260px;
+  display: block;
+  overflow: visible;
+}
+.cell-dial-ring.hidden { display: none; }
+
+/* ── Ring slices ───────────────────────────────────────── */
+.ring-slice {
+  fill: var(--col-full-blue);
+  cursor: pointer;
+  transition: opacity 0.08s, fill 0.08s;
+}
+.ring-slice:hover       { fill: var(--col-full-blue); opacity: 0.78 !important; }
+.ring-slice.ring-active { fill: var(--flash-col);     opacity: 1 !important; }
+
+.ring-label {
+  fill: var(--text-col-1);
+  font-family: monospace;
+  pointer-events: none;
+  opacity: 0.8;
+}
+.ring-label-active {
+  fill: var(--bg-col-1);
+  opacity: 1;
+  font-weight: 700;
+}
+
+/* ALL-domain ring outlines */
+.ring-outline-outer {
+  stroke: var(--border-col-2);
+  stroke-width: 1;
+}
+.ring-outline-inner {
+  stroke: var(--border-col-2);
+  stroke-width: 0.5;
+  stroke-dasharray: 4 3;
+}
+
+/* ── Ring center text ──────────────────────────────────── */
+.rct-key {
+  fill: var(--col-full-blue);
+  font-family: monospace;
+  font-size: 26px;
+  font-weight: 700;
+}
+.rct-role {
+  fill: var(--border-col-1);
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.rct-count {
+  fill: var(--text-col-2);
+  font-family: monospace;
+  font-size: 10px;
+  opacity: 0.7;
+}
+.rct-domain {
+  fill: var(--border-col-2);
+  font-family: monospace;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+}
+
+/* ── Cell dots ─────────────────────────────────────────── */
+.ring-dot {
+  fill: var(--flash-col);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* ── Context chips (BPM / key from editor) ─────────────── */
+.cd-ctx-chips {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 0 12px 10px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.cd-ctx-chips.hidden { display: none; }
+
+.cd-chip {
+  background: var(--bg-col-2);
+  border: 1px solid var(--border-col-2);
+  border-radius: 2px;
+  color: var(--border-col-1);
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+  white-space: nowrap;
+}
+.cd-chip:hover {
+  color: var(--text-col-1);
+  border-color: var(--border-col-1);
+}
+.cd-chip.active {
+  background: var(--col-full-blue);
+  border-color: var(--col-full-blue);
+  color: var(--bg-col-1);
+  font-weight: 700;
+}
+
+/* ── Parts button list (PARTS domain) ──────────────────── */
+.cd-parts-list {
+  width: 260px;
+  max-height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 4px 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-col-2) transparent;
+}
+.cd-parts-list.hidden { display: none; }
+
+.cd-part-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  background: var(--bg-col-2);
+  border: 1px solid transparent;
+  border-radius: 1px;
+  padding: 6px 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.08s, border-color 0.08s;
+}
+.cd-part-btn:hover   { border-color: var(--border-col-2); background: var(--bg-col-2); }
+.cd-part-btn.active  { border-color: var(--col-full-blue); background: var(--bg-col-2); }
+
+.cd-part-name {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--text-col-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.cd-part-btn.active .cd-part-name { color: var(--col-full-blue); font-weight: 700; }
+
+.cd-part-beats {
+  font-family: monospace;
+  font-size: 9px;
+  color: var(--border-col-1);
+  flex-shrink: 0;
+}
+
+.cd-parts-empty {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--border-col-1);
+  text-align: center;
+  padding: 20px 10px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── Search row ────────────────────────────────────────── */
+.cd-search-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 5px;
+  border-top: 1px solid var(--border-col-2);
+  border-bottom: 1px solid var(--border-col-2);
+  flex-shrink: 0;
+}
+
+.cd-prompt {
+  color: var(--col-full-blue);
+  font-size: 15px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.cd-filter-tag {
+  font-size: 10px;
+  font-family: monospace;
+  color: var(--bg-col-1);
+  background: var(--col-full-blue);
+  padding: 1px 6px;
+  border-radius: 1px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+.cd-filter-tag.hidden { display: none; }
+
+.cell-dial-search {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-col-1);
+  font-family: monospace;
+  font-size: 12px;
+  caret-color: var(--col-full-blue);
+  min-width: 0;
+}
+.cell-dial-search::placeholder { color: var(--border-col-1); }
+
+.cd-count {
+  font-size: 9px;
+  color: var(--border-col-1);
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+/* ── Results ───────────────────────────────────────────── */
+.cd-results {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.cd-empty {
+  padding: 14px 12px;
+  font-size: 11px;
+  color: var(--border-col-1);
+  font-family: monospace;
+  font-style: italic;
+}
+
+.cd-item {
+  display: flex;
+  align-items: baseline;
+  padding: 3px 12px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow: hidden;
+  border-bottom: 1px solid transparent;
+}
+.cd-item:hover,
+.cd-item.active { background: var(--bg-col-2); }
+.cd-item.active  { border-bottom-color: var(--border-col-2); }
+
+.cdi-num {
+  width: 1.2ch;
+  flex-shrink: 0;
+  color: var(--border-col-1);
+  font-size: 9px;
+  opacity: 0.55;
+}
+.cdi-sel {
+  width: 1.2ch;
+  flex-shrink: 0;
+  color: var(--col-full-blue);
+  font-size: 13px;
+}
+.cdi-coord {
+  width: 3.5ch;
+  flex-shrink: 0;
+  color: var(--col-full-blue);
+  font-weight: 700;
+  font-size: 10px;
+}
+.cdi-role {
+  width: 6ch;
+  flex-shrink: 0;
+  color: var(--border-col-1);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.cdi-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-col-2);
+  font-size: 11px;
+}
+.cdi-meta {
+  width: 8ch;
+  flex-shrink: 0;
+  text-align: right;
+  color: var(--border-col-1);
+  font-size: 9px;
+  margin-left: 6px;
+}
+.cdi-score {
+  width: 8ch;
+  flex-shrink: 0;
+  margin-left: 6px;
+  color: var(--col-full-blue);
+  font-size: 10px;
+  opacity: 0.55;
+  letter-spacing: -0.08em;
+}
+.cd-item.active .cdi-score { opacity: 1; }
+
+/* ── Footer ────────────────────────────────────────────── */
+.cd-footer {
+  padding: 4px 12px 5px;
+  font-size: 9px;
+  font-family: monospace;
+  color: var(--border-col-1);
+  border-top: 1px solid var(--border-col-2);
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}

@@ -1,0 +1,240 @@
+k0 >> dbass([3, 4, 4, 8, 4, 7, 4, [4, 5]], scale=Scale.chromatic, dur=1/3, rate=([4, 2, 1, 0.5], 0.1), lpf=1200, hpf=[1200, 400, 300, 600], lpr=0.4, lofi=PSine(256) + 0.5).every(5, "stutter", rate=0.25, oct=6)
+
+k0 >> dbass([3, 4, 4, 8, 4, 7, 4, [4, 5]], scale=Scale.chromatic, dur=1/3, rate=([4, 2, 1, 0.5], 0.1), lpf=1200, hpf=[1200, 400, 300, 600], lpr=0.4, lofi=PSine(256) + 0.5).every(5, "stutter", rate=0.25, oct=6)
+
+k0 >> dbass([3, 4, 4, 8, 4, 7, 4, [4, 5]], scale=Scale.chromatic, dur=1/3, rate=([4, 2, 1, 0.5], 0.1), lpf=1200, hpf=[1200, 400, 300, 600], lpr=0.4, lofi=PSine(256) + 0.5).every(5, "stutter", rate=0.25, oct=6)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+i4 >> play("X ")
+
+i4 >> play("X ", amp=PTimebin())
+
+i4 >> play("X ", amp=PTimebin(), dur=1/2)
+
+i4 >> play("X ", amp=PTimebin(), dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin()], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.5], dur=1/4)
+
+i4 >> play("X ", amp=(2, PTimebin() * 0.5), dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.5], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.4], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.3], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.2], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.3], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.4], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.5], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.6], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.7], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.8], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.9], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 1.0], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 1.1], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 1.0], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.9], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.8], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.7], dur=1/4)
+
+i4 >> play("X ", amp=[2, PTimebin() * 0.6], dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+h6 >> play("X ", amp=PLife(2))
+
+h6 >> play("X ", amp=PLife(2)*4)
+
+h6 >> play("X ", dur=PLife(2)*4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+h6 >> play("X ")
+
+h6 >> play("X ")
+
+h6 >> play("X ", dur=1/4)
+
+h6 >> play("X ", dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+a1 >> play("X ")
+
+a1.stop()
+
+Clock.bpm = 133
+
+d1 >> dbass()
+
+d4 >> dbass()
+
+d4 >> dbass(dur=1/4, )
+
+d4 >> dbass(dur=1/4, lpf=400)
+
+d1 >> dbass()
+
+d1.stop()
+
+d1.stop()
+
+q4 >> play("X ge")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("[WIP] VoodooPeople 149")
+
+s6 >> play("X ")
+
+s6.stop()
+
+d1 >> dbass ()
+
+d1 >> dbass ()
+
+d1 >> dbass (dist2=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 132
+
+_seq_cancel()
+b3 >> prodrums([0, 3, 7, 10, 12, 7], voice=4, dur=PDur(3, 8), layer1_amp=0.6, layer2_amp=0.7, layer3_amp=0.4, body_tone=var([3500, 3000, 4200], [6, 1, 1]), harmonic=1.5, fm_amount=1.7, fm_ratio=12.5, echo=0.5, tube=0.1, waveform=var([1, 6], 12), texture=11, decay=var([0.4, 0.2], 8), attack=0.1, mid_sat=0.8, high_sat=1.0, amp=0.55, scale=Scale.minor, oct=6, pan=PSine(8) * 0.3)
+
+_seq_schedule(32, 1776925383774)
+
+_seq_cancel()
+b1 >> prodrums([0, 3, 5], voice=4, dur=0.5, layer1_amp=0.9, layer2_amp=1.0, layer3_amp=1.0, body_tone=1901, harmonic=0.9, fm_amount=PFr(0, 4, 32, 16), waveform=0, decay=0.4,low_gain=0.4,  low_sat=1.2,    mid_gain=0.5,  amp=0.8, fm_ratio=var([1, 2, 4, 8, 16], PRand(8)),  scale=Scale.minor, oct=PStep(12, 4, 5))
+
+_seq_schedule(16, 1776925398363)
+
+_seq_cancel()
+b1 >> prodrums([0, 3, 5], voice=4, dur=0.5, layer1_amp=0.9, layer2_amp=1.0, layer3_amp=1.0, body_tone=1901, harmonic=0.9, fm_amount=PFr(0, 4, 32, 16), waveform=0, decay=0.4,low_gain=0.4,  low_sat=1.2,    mid_gain=0.5,  amp=0.9, fm_ratio=var([1, 2, 4, 8, 16], PRand(8)),  scale=Scale.minor, oct=PStep(12, 4, 5))
+
+_seq_schedule(16, 1776925405678)
+
+_seq_cancel()
+b3 >> prodrums([0, 3, 7, 10, 12, var([7, 12, 13], [12, 1, 1])], voice=4, dur=PDur(3, 8), layer1_amp=0.5, layer2_amp=0.4, layer3_amp=0.4, body_tone=var([3500, 3000, 4200], [6, 1, 1]), harmonic=1.7, fm_amount=3, fm_ratio=0.5, waveform=var([1, 6], 12), texture=0,  decay=var([0.4, 0.2], 8), attack=0.1, echo=0.5, mid_sat=0.8, high_sat=1.0, amp=0.55, scale=Scale.minor, oct=(6, 5), pan=PSine(8) * 0.3)
+
+_seq_schedule(32, 1776925412976)
+
+_seq_cancel()
+b3 >> prodrums([0, 3, 7, 10, 12, var([7, 12, 13], [12, 1, 1])], voice=4, dur=PDur(3, 8), layer1_amp=0.5, layer2_amp=0.4, layer3_amp=0.4, body_tone=var([3500, 3000, 4200], [6, 1, 1]), harmonic=1.7, fm_amount=var([3,24], [7, 3]), fm_ratio=0.5, waveform=var([1, 6], 12), texture=17,  decay=var([0.4, 0.2], 8), attack=0.1, echo=0.5, mid_sat=0.8, high_sat=1.0, amp=0.55, scale=Scale.minor, oct=(6, 5), pan=PSine(8) * 0.3)
+b3 >> prodrums([0, 3, 7, 10, 12, var([7, 12, 13], [12, 1, 1])], voice=4, dur=PDur(3, 8), layer1_amp=0.5, layer2_amp=0.4, layer3_amp=0.4, body_tone=var([3500, 3000, 4200], [6, 1, 1]), harmonic=1.7, fm_amount=var([3,24], [7, 3]), fm_ratio=0.5, waveform=var([1, 6], 12), texture=17,  decay=var([0.4, 0.2], 8), attack=0.1, echo=0.5, mid_sat=0.8, high_sat=1.0, amp=0.55, scale=Scale.minor, oct=(6, 5), pan=PSine(8) * 0.3)
+
+_seq_schedule(16, 1776925427548)
+
+_seq_cancel()
+b5 >> prodrums([12, 10, 7, 5], voice=4, dur=var([0.25, 0.5], [3, 1]), layer1_amp=1, layer2_amp=1.1, layer3_amp=0.56, body_tone=var([3100, 2800, 200], 4), harmonic=1.8, fm_amount=1.35, waveform=8, texture=var([2, 0], 8), decay=0.25, attack=0.01, mid_gain=0.65,  high_gain=1, amp=0.8, scale=Scale.minor, oct=6).every(8, 'reverse')
+
+_seq_schedule(32, 1776925434879)
+
+_seq_cancel()
+p4 >> cs80([12, 15, 17, 19], dur=0.25, amp=0.445, oct=6, sus=0.2, lpf=linvar([3000, 5000], 16), room=0.3, pan=PSine(12) * 0.5, scale=Scale.minor)
+
+_seq_schedule(32, 1776925449476)
+
+_seq_cancel()
+b3 >> prodrums([0, [3, 7,12], 7, 10, 12, var([7, 12, 13], [12, 1, 1])], voice=4, dur=PDur(3, 8), layer1_amp=0.5, layer2_amp=0.4, layer3_amp=0.4, body_tone=var([3500, 3000, 4200], [6, 1, 1]), harmonic=1.7, fm_amount=var([3,24], [7, 3]), fm_ratio=2, waveform=var([1, 6], 12), texture=6, leg=1,  decay=var([0.4, 0.2], 8), attack=0.1, echo=0.25, mid_sat=0.8, high_sat=1.0, amp=0.8, scale=Scale.minor, oct=(6, 5), pan=PSine(8) * 0.3)
+
+_seq_schedule(16, 1776925464040)
+
+_seq_cancel()
+p3 >> dbass([0, 3, 5, 7], dur=PDur(5, 8), amp=0.9, oct=5, decay=0.3, hpf=200, hpr=0.5, room=0.1, tape=1, tapedrive=1, dist2=0.3,scale=Scale.minor, csweep=0.2, resonbank=0.15, rbfreq=[60, 65, 70, 120, 150, 210], rbdecay=0.6, rbspread=1.0, cswfreq=[75, 78, 90, 95], cswdepth=0.3, cswrate=0.5, cswdecay=0.5).every(8, 'reverse').unison(2)
+
+_seq_schedule(256, 1776925471337)
+
+_seq_cancel()
+b6 >> prodrums([0, 3, 7, 5, PWalk(8, 1, 1)], voice=(4), dur=0.25, layer1_amp=1, layer2_amp=0.5, layer3_amp=0.3, body_tone=linvar([500, 900, 1400], 16), harmonic=2, fm_amount=1.2, hpf=200, fm_ratio=var([2, 2.5, 3], 4), waveform=6, texture=lininf(0, 42, 128), decay=0.2, mid_sat=var([0.6, 2.5], [16, 4]), amp=0.75,  scale=Scale.minor, oct=4, fshift=0, leg=0)
+
+_seq_schedule(32, 1776925587726)
+
+_seq_cancel()
+b7 >> cbass(b6.degree, dur=0.25, follow=4, lpf=1200, leg=4, hpf=1000)
+p3 >> cbass([0, 3, 5, 7], dur=PDur(5, 8), amp=0.9, oct=5, decay=0.3, hpf=200, hpr=0.5, follow=4, room=0.2, dist2=0.2,scale=Scale.minor).every(8, 'reverse')
+
+_seq_schedule(8, 1776925602322)
+
+_seq_cancel()
+p8 >> pianovel([0, 13, 7, [10, 12, 9]], dur=4, amp=1.2, oct=(5, 4), sus=3, room=0.4, verb=0.5, scale=Scale.minor)
+
+_seq_schedule(64, 1776925605980)
+
+_seq_cancel()
+Root.default=var([0, 4, 0, [5, 4]], [24,8])
+p4.stop()
+b3.lpf=400
+p4.hpf=1600
+
+_seq_schedule(16, 1776925635104)
+
+_seq_cancel()
+Root.default=0
+p8 >> pianovel(var([[0,3,7,[10,12]],[3,7,10,[14,15]],[-2,2,5,[10,12]],[0,5,7,[12,15]],[5,7,10,[14,17]],[-3,0,3,[7,10]]],[8,8,4,8,4,4]), dur=var([4,2,8],[16,8,8]), amp=var([0.6,0.75,0.5],[12,4,16]), oct=var([(5,6),(4,5),(5,3)],[16,8,8]), sus=var([3,5,2],[12,8,12]), amplify=1.5, room=linvar([0.3,0.6],32), verb=linvar([0.4,0.7],48), scale=Scale.minor)
+
+_seq_schedule(32, 1776925642385)
+
+_seq_cancel()
+p9 >> pianovel(var([P[0,2,3,5,7,5,3,2],P[7,10,12,10,7,5,3,0],P[3,5,7,10,12,10,7,5],P[0,3,7,12,10,7,3,0],P[5,7,10,14,12,10,7,5]],[8,8,8,4,4]), dur=var([0.5,0.25,1],[12,4,16]), amp=var([0.5,0.65,0.4],[8,4,20]), oct=var([6,5,6],[16,8,8]), sus=0.4, room=0.4, verb=0.5, pan=sinvar([-0.4,0.4],16), amplify=1.5, scale=Scale.minor).every(16,'reverse')
+p5 >> marimba([7, 5, 3, 0], dur=var([0.5, 1], [3, 1]), amp=0.6, oct=6, decay=0.4, room=0.25, pan=var([-0.3, 0.3], 2), scale=Scale.minor).every(16, 'stutter', 4)
+
+_seq_schedule(32, 1776925656949)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.2, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776926213398)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7, combres=0.6, combfreq=var([300, 450, 500]), combdecay=0.3, combspread=0.1)
+_seq_schedule(16, 1776926220800)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+_seq_schedule(32, 1776926228199)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7, combres=0.5, combfreq=var([200, 300, 200, 250, 1200]), combdecay=0.7, combspread=0.2)
+_seq_schedule(32, 1776926242970)
+

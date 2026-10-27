@@ -1,7 +1,7 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { spawn } from 'child_process';
 import path from 'path';
-import { promises as fs } from 'fs';
+import { promises as fs, existsSync } from 'fs';
 import { SerialPort } from 'serialport';
 
 // Fonction pour charger le fichier de configuration
@@ -234,8 +234,13 @@ function processArduinoData(data, foxdot) {
     console.log('Arduino désactivé dans la configuration.');
   }
 
-  // Lancer FoxDot
-  const foxdot = spawn('python', ['-m', 'FoxDot', '-p'], {
+  // Lancer FoxDot — use venv python if available, fallback to system python
+  const __dirname = path.dirname(new URL(import.meta.url).pathname);
+  const venvPython = process.platform === 'win32'
+    ? path.join(__dirname, '..', 'venv', 'Scripts', 'python.exe')
+    : path.join(__dirname, '..', 'venv', 'bin', 'python');
+  const pythonExe = existsSync(venvPython) ? venvPython : 'python3';
+  const foxdot = spawn(pythonExe, ['-m', 'FoxDot', '-p'], {
     cwd: config.FOXDOT_PATH,
     env: {...process.env, PYTHONUNBUFFERED: '1'}
   });
@@ -348,6 +353,9 @@ foxdot.stdout.on('data', (data) => {
       recordingStartTime = Date.now();
       recordingEvents = [];
       console.log(`Recording started at ${recordingBpm} BPM, section gap: ${recordingSectionGap} beats`);
+      wss.clients.forEach(c => {
+        if (c.readyState === 1) c.send(JSON.stringify({ type: 'rec_state', recording: true, bpm: recordingBpm }));
+      });
       return;
     }
 
@@ -357,6 +365,33 @@ foxdot.stdout.on('data', (data) => {
       isRecording = false;
       const rawName = recStopMatch[1].trim();
       processRecording(rawName, recordingBpm, recordingEvents);
+      wss.clients.forEach(c => {
+        if (c.readyState === 1) c.send(JSON.stringify({ type: 'rec_state', recording: false }));
+      });
+      return;
+    }
+
+    // Detect stem-recording markers — format: __STEMS_START__:session:variation:Nb:Np
+    const stemsStartMatch = logMessage.match(/__STEMS_START__:([^:\s]+):([^:\s]+):(\d+)b:(\d+)p/);
+    if (stemsStartMatch) {
+      const [, session, variation, bars, players] = stemsStartMatch;
+      wss.clients.forEach(c => {
+        if (c.readyState === 1) c.send(JSON.stringify({
+          type: 'stems_state', recording: true,
+          session, variation, bars: parseInt(bars), players: parseInt(players),
+        }));
+      });
+      return;
+    }
+    const stemsStopMatch = logMessage.match(/__STEMS_STOP__:([^:\s]+):([^:\s]+):(\d+)b/);
+    if (stemsStopMatch) {
+      const [, session, variation, bars] = stemsStopMatch;
+      wss.clients.forEach(c => {
+        if (c.readyState === 1) c.send(JSON.stringify({
+          type: 'stems_state', recording: false,
+          session, variation, bars: parseInt(bars),
+        }));
+      });
       return;
     }
 

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrashOS Hub</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; color: #0f0; font-family: 'Courier New', monospace; font-size: 12px; }
+
+#header { padding: 6px 12px; border-bottom: 1px solid #1a1a1a; display: flex; justify-content: space-between; align-items: center; }
+#header h1 { font-size: 13px; letter-spacing: 2px; }
+#status-bar { display: flex; gap: 16px; font-size: 11px; }
+.status-item { color: #555; }
+.status-item span { color: #0f0; }
+.status-item.warn span { color: #fa0; }
+.status-item.err span { color: #f00; }
+.status-item.ok span { color: #0f0; }
+
+#main { display: grid; grid-template-columns: 1fr 320px; grid-template-rows: auto auto 1fr 180px; height: calc(100vh - 32px); }
+
+/* ── Location Bar ── */
+#location-bar { grid-column: 1 / -1; padding: 6px 12px; border-bottom: 1px solid #1a1a1a; display: flex; gap: 8px; align-items: center; }
+#location-bar input { background: #111; border: 1px solid #222; color: #0f0; font-family: inherit; font-size: 12px; padding: 3px 8px; width: 200px; }
+#location-bar input:focus { border-color: #0f0; outline: none; }
+#location-bar button { background: #111; border: 1px solid #222; color: #0f0; font-family: inherit; font-size: 11px; padding: 3px 10px; cursor: pointer; }
+#location-bar button:hover { border-color: #0f0; }
+#location-results { display: flex; gap: 4px; flex-wrap: wrap; }
+.loc-result { background: #111; border: 1px solid #1a1a1a; padding: 2px 8px; font-size: 10px; cursor: pointer; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.loc-result:hover { border-color: #0f0; color: #0f0; }
+#location-status { font-size: 10px; color: #555; }
+.loc-coord { color: #0af; font-size: 10px; margin-left: 8px; }
+
+/* ── Live Data Bar ── */
+#data-bar { grid-column: 1 / -1; padding: 6px 12px; border-bottom: 1px solid #1a1a1a; display: flex; gap: 20px; flex-wrap: wrap; }
+.data-cell { display: flex; gap: 4px; }
+.data-cell .label { color: #555; }
+.data-cell .value { color: #0f0; font-weight: bold; }
+.data-cell .value.off { color: #f00; }
+
+/* ── Network View ── */
+#network { padding: 12px; overflow-y: auto; }
+.node { background: #111; border: 1px solid #1a1a1a; margin-bottom: 8px; }
+.node-header { padding: 6px 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #0a0a0a; cursor: pointer; }
+.node-header:hover { background: #151515; }
+.node-name { font-weight: bold; font-size: 12px; }
+.node-role { font-size: 10px; color: #555; text-transform: uppercase; padding: 1px 6px; border: 1px solid #222; }
+.node-body { padding: 6px 10px; font-size: 11px; }
+.node-signals { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+.sig { font-size: 9px; padding: 1px 5px; border: 1px solid #222; cursor: pointer; user-select: none; }
+.sig.on { border-color: #0a0; color: #0f0; }
+.sig.off { border-color: #111; color: #333; }
+.sig:hover { border-color: #555; }
+.node-stats { color: #333; font-size: 10px; margin-top: 4px; }
+
+/* Source nodes (inputs to hub) */
+.node.source { border-left: 3px solid #0af; }
+.node.source .node-role { color: #0af; border-color: #0af; }
+/* Output nodes (hub sends to) */
+.node.output { border-left: 3px solid #fa0; }
+.node.output .node-role { color: #fa0; border-color: #fa0; }
+.node.output.renderer { border-left-color: #0f0; }
+.node.output.lights { border-left-color: #f0f; }
+.node.output.game { border-left-color: #f00; }
+.node.output.public { border-left-color: #a0f; }
+
+/* ── Signal Activity ── */
+#signals-panel { border-left: 1px solid #1a1a1a; padding: 8px; overflow-y: auto; }
+.panel-title { font-size: 10px; color: #555; letter-spacing: 1px; margin-bottom: 6px; border-bottom: 1px solid #1a1a1a; padding-bottom: 3px; }
+.signal-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-bottom: 1px solid #0a0a0a; }
+.signal-name { font-size: 11px; }
+.signal-rate { font-size: 10px; color: #555; }
+.signal-bar { width: 60px; height: 3px; background: #111; display: inline-block; vertical-align: middle; margin-left: 4px; }
+.signal-fill { height: 100%; background: #0f0; transition: width 0.3s; }
+
+#players-section { margin-top: 12px; }
+.player-row { display: flex; justify-content: space-between; padding: 2px 0; font-size: 11px; }
+.player-name { color: #0af; }
+.player-synth { color: #fa0; }
+.player-user { color: #555; font-size: 9px; }
+
+/* ── Log ── */
+#log-panel { grid-column: 1 / -1; border-top: 1px solid #1a1a1a; padding: 6px 12px; overflow-y: auto; font-size: 11px; }
+.log-line { padding: 1px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.log-line .ts { color: #222; margin-right: 6px; }
+.log-line .src { color: #0af; margin-right: 4px; }
+.log-line .sig { color: #fa0; margin-right: 4px; border: none; padding: 0; font-size: 11px; cursor: default; }
+.log-line .msg { color: #555; }
+
+/* ── Render Control ── */
+.render-btn { background: #111; border: 1px solid #222; color: #0f0; font-family: inherit; font-size: 9px; padding: 2px 6px; cursor: pointer; white-space: nowrap; }
+.render-btn:hover { border-color: #0f0; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>CRASHOS HUB</h1>
+  <div id="status-bar"></div>
+</div>
+
+<div id="main">
+  <div id="data-bar"></div>
+  <div id="location-bar"></div>
+  <div id="network"></div>
+  <div id="signals-panel">
+    <div class="panel-title">SIGNALS</div>
+    <div id="signal-list"></div>
+    <div class="panel-title" style="margin-top:12px">PLAYERS</div>
+    <div id="players-list"></div>
+    <div class="panel-title" style="margin-top:12px">RENDERERS</div>
+    <div id="renderer-tabs"></div>
+    <div class="panel-title" style="margin-top:12px">DATA FEEDS</div>
+    <div id="feeds-list"></div>
+  </div>
+  <div id="log-panel">
+    <div class="panel-title">SIGNAL LOG</div>
+    <div id="log"></div>
+  </div>
+</div>
+
+<script>
+const HUB_URL = `ws://${location.hostname}:${location.port || 1235}`;
+const SIGNALS = ['beat','audio','code','grid','phase','players','public','public_raw','data_feeds','stats','lights','game','render'];
+let ws = null;
+let hubState = { bpm: '?', beat: 0, cpu: 0, root: '?', scale: '?', serverActive: false, chrono: 0, sceneName: '', masterFx: {} };
+let clients = [];
+let players = {};
+let directRenderers = [];
+let signalActivity = {};
+SIGNALS.forEach(s => signalActivity[s] = { count: 0, lastTs: 0, rate: 0 });
+
+// ── Sources (inputs to hub) ──
+const sources = [
+  { name: 'FoxDot', role: 'source', desc: 'SuperCollider engine', signals: ['bpm','beat','cpu','scale','root','serverState','chrono','players','masterFx','sceneName'], connected: false },
+  { name: 'webTroop', role: 'source', desc: 'Code IDE server', signals: ['foxdot_log','cpu_data','seq_next','compose_start','rec_script'], connected: false },
+  { name: 'Feeds', role: 'source', desc: 'External data', signals: ['news','wifi','osm','mastodon','crypto','seismic','space_weather'], connected: true },
+];
+
+function connect() {
+  ws = new WebSocket(HUB_URL);
+  ws.onopen = () => {
+    ws.send(JSON.stringify({ type: 'identify', role: 'control', name: 'hub_ui' }));
+  };
+  ws.onmessage = (e) => {
+    try { handleMessage(JSON.parse(e.data)); } catch {}
+  };
+  ws.onclose = () => setTimeout(connect, 2000);
+}
+
+function handleMessage(msg) {
+  switch (msg.type) {
+    case 'welcome': break;
+
+    case 'beat':
+      hubState.bpm = msg.bpm || hubState.bpm;
+      hubState.beat = msg.beat || 0;
+      hubState.cpu = msg.cpu || hubState.cpu;
+      hubState.crowdEnergy = msg.crowdEnergy || 0;
+      hubState.audio = msg.audio || hubState.audio;
+      tickSignal('beat');
+      break;
+
+    case 'code':
+      tickSignal('code');
+      if (msg.event === 'eval') {
+        hubState.stats = hubState.stats || {};
+        hubState.stats.evals = (hubState.stats.evals || 0) + 1;
+        addLog(msg.userName || 'eval', 'code', (msg.code || '').split('\n')[0].slice(0, 100));
+      }
+      if (msg.event === 'scale') hubState.scale = msg.scale;
+      if (msg.event === 'root') hubState.root = msg.root;
+      if (msg.event === 'serverState') hubState.serverActive = msg.active;
+      if (msg.event === 'masterFx') hubState.masterFx = msg.masterFx;
+      if (msg.event === 'scene') hubState.sceneName = msg.sceneName;
+      break;
+
+    case 'players':
+      tickSignal('players');
+      players = msg.players || {};
+      renderPlayers();
+      break;
+
+    case 'render':
+      tickSignal('render');
+      addLog('render', 'render', JSON.stringify(msg).slice(0, 100));
+      break;
+
+    case 'stats':
+      tickSignal('stats');
+      if (msg.clients) { clients = msg.clients; }
+      if (msg.renderers) { directRenderers = msg.renderers; }
+      if (msg.clients || msg.renderers) renderNetwork();
+      if (msg.event === 'renderer_state') {
+        rendererState[msg.renderer] = msg;
+        updateRendererPanel(msg);
+      }
+      hubState.stats = { ...hubState.stats, evals: msg.evals, lines: msg.lines, publicEvents: msg.publicEvents, uptime: msg.uptime };
+      break;
+
+    case 'grid':
+      tickSignal('grid');
+      hubState.grid = msg.grid;
+      break;
+
+    case 'phase':
+      tickSignal('phase');
+      hubState.phase = msg.phase;
+      break;
+
+    case 'lights':
+      tickSignal('lights');
+      break;
+
+    case 'public':
+      tickSignal('public');
+      if (msg.event === 'vote') addLog('public', 'public', `vote: ${JSON.stringify(msg.votes)}`);
+      if (msg.event === 'tap') addLog('public', 'public', `tap energy=${msg.energy?.toFixed(2)}`);
+      break;
+
+    case 'data_feeds':
+      tickSignal('data_feeds');
+      if (msg.feed) {
+        addLog('feed', msg.feed, JSON.stringify(msg).slice(0, 120));
+        storeFeedData(msg);
+      }
+      break;
+
+    case 'game':
+      tickSignal('game');
+      addLog('game', 'game', msg.event || '');
+      break;
+
+    default:
+      if (msg.type !== 'subscriptions') addLog('hub', msg.type, JSON.stringify(msg).slice(0, 80));
+  }
+  renderDataBar();
+  renderStatusBar();
+}
+
+function tickSignal(name) {
+  const s = signalActivity[name];
+  if (!s) return;
+  const now = Date.now();
+  if (s.lastTs) s.rate = 1000 / (now - s.lastTs);
+  s.count++;
+  s.lastTs = now;
+  renderSignals();
+}
+
+// ── Render: Status Bar ──
+function renderStatusBar() {
+  const foxdotOk = hubState.bpm !== '?';
+  const webtroopOk = (hubState.stats?.evals || 0) > 0 || signalActivity.code.count > 0;
+  const el = document.getElementById('status-bar');
+  el.innerHTML = `
+    <div class="status-item ${foxdotOk ? 'ok' : 'err'}">foxdot: <span>${foxdotOk ? 'connected' : 'waiting'}</span></div>
+    <div class="status-item ${webtroopOk ? 'ok' : 'warn'}">webtroop: <span>${webtroopOk ? 'active' : 'idle'}</span></div>
+    <div class="status-item">clients: <span>${clients.length}</span></div>
+    <div class="status-item">uptime: <span>${hubState.stats?.uptime ? Math.floor(hubState.stats.uptime/60000) + 'm' : '0m'}</span></div>
+  `;
+}
+
+// ── Render: Data Bar (live values) ──
+function renderDataBar() {
+  const el = document.getElementById('data-bar');
+  const fx = hubState.masterFx ? Object.keys(hubState.masterFx).join(' ') : '';
+  el.innerHTML = `
+    <div class="data-cell"><span class="label">bpm</span> <span class="value">${hubState.bpm}</span></div>
+    <div class="data-cell"><span class="label">beat</span> <span class="value">${hubState.beat}</span></div>
+    <div class="data-cell"><span class="label">cpu</span> <span class="value">${(hubState.cpu * 100).toFixed(0)}%</span></div>
+    <div class="data-cell"><span class="label">root</span> <span class="value">${hubState.root}</span></div>
+    <div class="data-cell"><span class="label">scale</span> <span class="value">${hubState.scale}</span></div>
+    <div class="data-cell"><span class="label">server</span> <span class="value ${hubState.serverActive ? '' : 'off'}">${hubState.serverActive ? 'ON' : 'OFF'}</span></div>
+    <div class="data-cell"><span class="label">scene</span> <span class="value">${hubState.sceneName || '-'}</span></div>
+    <div class="data-cell"><span class="label">evals</span> <span class="value">${hubState.stats?.evals || 0}</span></div>
+    <div class="data-cell"><span class="label">lines</span> <span class="value">${hubState.stats?.lines || 0}</span></div>
+    <div class="data-cell"><span class="label">fx</span> <span class="value">${fx || '-'}</span></div>
+    <div class="data-cell"><span class="label">audio</span> <span class="value" style="color:hsl(${120 - (hubState.audio?.level||0)*120},100%,50%)">${((hubState.audio?.level||0)*100).toFixed(0)}%</span></div>
+  `;
+}
+
+// ── Render: Network (sources + output clients) ──
+function renderNetwork() {
+  const el = document.getElementById('network');
+  let html = '<div class="panel-title">SOURCES (input to hub)</div>';
+
+  sources.forEach(s => {
+    html += `<div class="node source">
+      <div class="node-header"><span class="node-name">${s.name}</span><span class="node-role">${s.desc}</span></div>
+      <div class="node-body">
+        <div style="color:#555;font-size:10px">emits: ${s.signals.join(', ')}</div>
+      </div>
+    </div>`;
+  });
+
+  html += '<div class="panel-title" style="margin-top:12px">RENDERERS (direct)</div>';
+
+  if (directRenderers.length === 0) {
+    html += '<div style="color:#333;padding:8px">no renderers configured</div>';
+  }
+  directRenderers.forEach(r => {
+    html += `<div class="node output renderer" style="border-left-color:${r.connected?'#0f0':'#f00'}">
+      <div class="node-header">
+        <span class="node-name">${r.name}</span>
+        <span class="node-role" style="color:${r.connected?'#0f0':'#f00'}">${r.connected?'connected':'disconnected'}</span>
+      </div>
+      <div class="node-body">
+        <div style="color:#555;font-size:10px">${r.url || '?'}</div>
+        ${r.scene_a ? `<div style="color:#0af;font-size:10px">scene: ${r.scene_a}</div>` : ''}
+        ${r.connected ? `<button class="render-btn" style="margin-top:4px" onclick="window.open('/renderer/${r.name}','_blank')">OPEN CONTROLLER</button>` : ''}
+      </div>
+    </div>`;
+  });
+
+  // Add renderer form
+  html += `<div style="margin:6px 0;display:flex;gap:4px">
+    <input id="add-renderer-name" placeholder="name" style="background:#111;border:1px solid #222;color:#0f0;font-family:inherit;font-size:10px;padding:2px 4px;width:80px">
+    <input id="add-renderer-url" placeholder="ws://host:port" style="background:#111;border:1px solid #222;color:#0f0;font-family:inherit;font-size:10px;padding:2px 4px;flex:1">
+    <button onclick="addRenderer()" style="background:#111;border:1px solid #222;color:#0f0;font-family:inherit;font-size:10px;padding:2px 6px;cursor:pointer">+</button>
+  </div>`;
+
+  html += '<div class="panel-title" style="margin-top:12px">CLIENTS (WS)</div>';
+
+  const outputs = clients.filter(c => c.role !== 'control');
+  if (outputs.length === 0) {
+    html += '<div style="color:#333;padding:8px">no WS clients connected</div>';
+  }
+  outputs.forEach(c => {
+    const roleClass = c.role || '';
+    html += `<div class="node output ${roleClass}">
+      <div class="node-header">
+        <span class="node-name">${c.name}</span>
+        <span class="node-role">${c.role}</span>
+      </div>
+      <div class="node-body">
+        <div class="node-signals">
+          ${SIGNALS.map(s => `<span class="sig ${c.subscriptions.includes(s) ? 'on' : 'off'}" onclick="toggleSub('${c.name}','${s}',${!c.subscriptions.includes(s)})">${s}</span>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+function toggleSub(name, signal, add) {
+  if (!ws) return;
+  ws.send(JSON.stringify({ type: 'subscribe_client', target: name, [add ? 'add' : 'remove']: [signal] }));
+}
+
+// ── Render: Signal Activity ──
+function renderSignals() {
+  const el = document.getElementById('signal-list');
+  el.innerHTML = SIGNALS.map(s => {
+    const a = signalActivity[s];
+    const age = Date.now() - a.lastTs;
+    const active = age < 5000;
+    const barWidth = Math.min(100, a.rate * 10);
+    return `<div class="signal-row">
+      <span class="signal-name" style="color:${active ? '#0f0' : '#333'}">${s}</span>
+      <span>
+        <span class="signal-rate">${a.count}</span>
+        <span class="signal-bar"><span class="signal-fill" style="width:${barWidth}%"></span></span>
+      </span>
+    </div>`;
+  }).join('');
+}
+
+// ── Render: Players ──
+function renderPlayers() {
+  const el = document.getElementById('players-list');
+  const entries = Object.entries(players);
+  if (entries.length === 0) {
+    el.innerHTML = '<div style="color:#333">no active players</div>';
+    return;
+  }
+  el.innerHTML = entries.map(([name, p]) => {
+    const synth = typeof p === 'object' ? p.synth : p;
+    const user = typeof p === 'object' ? p.user : '';
+    return `<div class="player-row">
+      <span class="player-name">${name}</span>
+      <span class="player-synth">${synth || '?'}</span>
+      ${user ? `<span class="player-user">${user}</span>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── Log ──
+const MAX_LOG = 80;
+function addLog(from, signal, text) {
+  const el = document.getElementById('log');
+  const now = new Date().toLocaleTimeString('en-GB', { hour12: false });
+  const line = document.createElement('div');
+  line.className = 'log-line';
+  line.innerHTML = `<span class="ts">${now}</span><span class="src">${from}</span><span class="sig">[${signal}]</span><span class="msg">${text}</span>`;
+  el.appendChild(line);
+  while (el.children.length > MAX_LOG) el.removeChild(el.children[0]);
+  el.scrollTop = el.scrollHeight;
+}
+
+// ── Feed Data ──
+const feedData = {};
+
+function storeFeedData(msg) {
+  feedData[msg.feed] = msg;
+  renderFeeds();
+}
+
+let feedStatus = [];
+let rssSources = [];
+let mastodonData = { keywords: [], instance: '' };
+
+async function loadFeedStatus() {
+  try {
+    const [f, r, m] = await Promise.all([fetch('/api/feeds'), fetch('/api/rss'), fetch('/api/mastodon')]);
+    feedStatus = await f.json();
+    rssSources = await r.json();
+    mastodonData = await m.json();
+    renderFeeds();
+  } catch {}
+}
+
+async function mastodonAction(action, keyword) {
+  if (!keyword || !keyword.trim()) return;
+  try {
+    await fetch('/api/mastodon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, keyword: keyword.trim() }),
+    });
+    document.getElementById('mastodon-kw').value = '';
+    setTimeout(loadFeedStatus, 300);
+  } catch {}
+}
+
+async function rssAction(action, url) {
+  if (!url || !url.trim()) return;
+  try {
+    await fetch('/api/rss', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, url: url.trim() }),
+    });
+    document.getElementById('rss-url').value = '';
+    setTimeout(loadFeedStatus, 300);
+  } catch {}
+}
+
+async function feedAction(action, name, interval) {
+  try {
+    await fetch('/api/feed', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, name, interval }),
+    });
+    setTimeout(loadFeedStatus, 500);
+  } catch {}
+}
+
+function renderFeeds() {
+  const el = document.getElementById('feeds-list');
+
+  // Feed config controls
+  let html = feedStatus.map(f => {
+    const age = f.lastRun ? Math.floor((Date.now() - f.lastRun) / 1000) : '?';
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid #0a0a0a">
+      <span style="color:${f.enabled ? '#0af' : '#333'};font-size:10px;cursor:pointer" onclick="feedAction('${f.enabled ? 'disable' : 'enable'}','${f.name}')">${f.name}</span>
+      <span style="font-size:9px;color:#333">${f.interval}s | ${age}s ago
+        <span style="cursor:pointer;color:#555;margin-left:4px" onclick="feedAction('trigger','${f.name}')" title="run now">&#x25B6;</span>
+      </span>
+    </div>`;
+  }).join('');
+
+  // RSS sources
+  if (rssSources.length) {
+    html += '<div style="margin-top:6px;border-top:1px solid #111;padding-top:4px">';
+    html += '<div style="color:#555;font-size:9px;margin-bottom:2px">RSS SOURCES</div>';
+    html += rssSources.map(url => {
+      const short = url.replace(/https?:\/\//, '').replace(/\/.*/, '');
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:1px 0">
+        <span style="font-size:9px;color:#0af;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px" title="${url}">${short}</span>
+        <span style="cursor:pointer;color:#f00;font-size:9px" onclick="rssAction('remove','${url}')">&times;</span>
+      </div>`;
+    }).join('');
+    html += '</div>';
+  }
+  html += `<div style="display:flex;gap:3px;margin-top:4px">
+    <input id="rss-url" placeholder="RSS feed URL" style="background:#111;border:1px solid #222;color:#0f0;font-family:inherit;font-size:9px;padding:2px 4px;flex:1">
+    <button onclick="rssAction('add',document.getElementById('rss-url').value)" style="background:#111;border:1px solid #222;color:#0f0;font-family:inherit;font-size:9px;padding:2px 4px;cursor:pointer">+</button>
+  </div>`;
+
+  // Mastodon keywords
+  html += `<div style="margin-top:6px;border-top:1px solid #1a1a1a;padding-top:4px">
+    <div style="color:#0af;font-size:9px;margin-bottom:2px">MASTODON KEYWORDS ${mastodonData.instance ? '(' + mastodonData.instance + ')' : ''}</div>`;
+  if (mastodonData.keywords && mastodonData.keywords.length) {
+    html += mastodonData.keywords.map(kw => {
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:1px 0">
+        <span style="font-size:9px;color:#c0f">${kw}</span>
+        <span style="cursor:pointer;color:#f00;font-size:9px" onclick="mastodonAction('remove','${kw}')">&times;</span>
+      </div>`;
+    }).join('');
+  }
+  html += `<div style="display:flex;gap:3px;margin-top:4px">
+    <input id="mastodon-kw" placeholder="keyword" style="background:#111;border:1px solid #222;color:#0f0;font-family:inherit;font-size:9px;padding:2px 4px;flex:1">
+    <button onclick="mastodonAction('add',document.getElementById('mastodon-kw').value)" style="background:#111;border:1px solid #222;color:#0f0;font-family:inherit;font-size:9px;padding:2px 4px;cursor:pointer">+</button>
+  </div></div>`;
+
+  // Feed data
+  const entries = Object.entries(feedData);
+  if (entries.length) {
+    html += '<div style="margin-top:6px;border-top:1px solid #1a1a1a;padding-top:4px">';
+    html += entries.map(([name, data]) => {
+      let detail = '';
+      switch (name) {
+        case 'osm':
+          detail = `${data.buildings} buildings, ${data.roads || '?'} roads`; break;
+        case 'wifi':
+          detail = `${(data.networks||[]).length} networks`;
+          detail += (data.networks || []).slice(0, 20).map(n =>
+            `<div style="display:flex;justify-content:space-between;font-size:9px"><span>${n.ssid || '(hidden)'}</span><span style="color:#333">${n.signal}% ${n.security||'open'}</span></div>`).join(''); break;
+        case 'news':
+          detail = (data.headlines || []).slice(0, 3).map(h => `<div style="color:#555">${h.slice(0, 50)}</div>`).join(''); break;
+        case 'mastodon':
+          detail = `<span style="color:#c0f">#${data.keyword}</span> `;
+          detail += (data.posts || []).slice(0, 3).map(p => `<div style="color:#555;font-size:9px">@${p.author}: ${p.text.slice(0, 80)}</div>`).join(''); break;
+        case 'seismic':
+          detail = data.count > 0 ? (data.quakes || []).slice(0, 2).map(q => `<div style="color:#fa0">M${q.mag} ${q.place}</div>`).join('') : 'quiet'; break;
+        case 'location':
+          detail = `${data.city}`; break;
+        default:
+          detail = JSON.stringify(data).slice(0, 60);
+      }
+      return `<div style="margin:2px 0"><span style="color:#0af;font-size:9px">${name}:</span> <span style="font-size:9px">${detail}</span></div>`;
+    }).join('');
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+}
+
+// ── Location ──
+let currentLocation = null;
+
+function renderLocationBar() {
+  const el = document.getElementById('location-bar');
+  el.innerHTML = `
+    <span style="color:#555">VENUE:</span>
+    <input id="city-input" type="text" placeholder="city name or lat,lon" onkeydown="if(event.key==='Enter')searchCity()">
+    <button onclick="searchCity()">search</button>
+    <button onclick="useGPS()">GPS</button>
+    <div id="location-results"></div>
+    <span id="location-status">${currentLocation ? currentLocation.city + ' (' + currentLocation.lat.toFixed(4) + ', ' + currentLocation.lon.toFixed(4) + ')' : 'no location set'}</span>
+  `;
+}
+
+async function searchCity() {
+  const input = document.getElementById('city-input').value.trim();
+  if (!input) return;
+
+  // Check if it's coordinates
+  const coordMatch = input.match(/^(-?\d+\.?\d*)\s*,\s*(-?\d+\.?\d*)$/);
+  if (coordMatch) {
+    setVenueLocation(parseFloat(coordMatch[1]), parseFloat(coordMatch[2]), input);
+    return;
+  }
+
+  document.getElementById('location-status').textContent = 'searching...';
+  try {
+    const r = await fetch(`/api/geocode?city=${encodeURIComponent(input)}`);
+    const results = await r.json();
+    const el = document.getElementById('location-results');
+    if (results.length === 0) {
+      el.innerHTML = '<span style="color:#f00;font-size:10px">no results</span>';
+      return;
+    }
+    // Store results globally, reference by index
+    window._geoResults = results;
+    el.innerHTML = results.map((r, i) =>
+      `<span class="loc-result" onclick="pickGeoResult(${i})">${r.name.split(',').slice(0,2).join(',')}</span>`
+    ).join('');
+  } catch (e) {
+    document.getElementById('location-status').textContent = 'search failed: ' + e.message;
+  }
+}
+
+function pickGeoResult(i) {
+  const r = window._geoResults[i];
+  if (r) setVenueLocation(r.lat, r.lon, r.name.split(',').slice(0,2).join(',').trim());
+}
+
+function pickLocation(lat, lon, name) {
+  setVenueLocation(lat, lon, name);
+}
+
+function useGPS() {
+  if (!navigator.geolocation) {
+    document.getElementById('location-status').textContent = 'GPS not available';
+    return;
+  }
+  document.getElementById('location-status').textContent = 'getting GPS...';
+  navigator.geolocation.getCurrentPosition(
+    pos => setVenueLocation(pos.coords.latitude, pos.coords.longitude, 'GPS location'),
+    err => { document.getElementById('location-status').textContent = 'GPS error: ' + err.message; }
+  );
+}
+
+async function setVenueLocation(lat, lon, city) {
+  try {
+    const r = await fetch('/api/set_location', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lat, lon, city }),
+    });
+    const result = await r.json();
+    if (result.ok) {
+      currentLocation = { lat, lon, city };
+      document.getElementById('location-results').innerHTML = '';
+      document.getElementById('location-status').textContent = `${city} (${lat.toFixed(4)}, ${lon.toFixed(4)}) — fetching OSM + Mastodon...`;
+      addLog('hub', 'location', `set to ${city} (${lat.toFixed(4)}, ${lon.toFixed(4)})`);
+    }
+  } catch (e) {
+    document.getElementById('location-status').textContent = 'error: ' + e.message;
+  }
+}
+
+async function addRenderer() {
+  const name = document.getElementById('add-renderer-name')?.value.trim();
+  const url = document.getElementById('add-renderer-url')?.value.trim();
+  if (!name || !url) return;
+  try {
+    await fetch('/api/add_renderer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, url }),
+    });
+    addLog('hub', 'renderer', `added ${name} at ${url}`);
+  } catch (e) {
+    addLog('hub', 'error', e.message);
+  }
+}
+
+// ── Renderer Tabs ──
+let rendererState = {};
+
+function updateRendererPanel(state) {
+  renderRendererTabs();
+}
+
+function renderRendererTabs() {
+  const el = document.getElementById('renderer-tabs');
+  if (!directRenderers.length) {
+    el.innerHTML = '<div style="color:#333;font-size:10px">no renderers</div>';
+    return;
+  }
+  el.innerHTML = directRenderers.map(r => `
+    <div style="margin-bottom:4px">
+      <span style="color:${r.connected ? '#0f0' : '#f00'};font-size:10px">${r.name}</span>
+      <span style="color:#333;font-size:9px">${r.scene_a || ''}</span>
+      ${r.connected ? `<a href="/renderer/${r.name}" target="_blank" style="color:#0af;font-size:9px;margin-left:4px">controller</a>` : ''}
+    </div>
+  `).join('');
+}
+
+function sendRender(params) {
+  if (!ws) return;
+  ws.send(JSON.stringify({ type: 'render', ...params }));
+  addLog('ui', 'render', JSON.stringify(params));
+}
+
+// ── Init ──
+renderDataBar();
+renderStatusBar();
+renderNetwork();
+renderSignals();
+renderLocationBar();
+renderRendererTabs();
+connect();
+loadFeedStatus();
+setInterval(loadFeedStatus, 10000);
+</script>
+</body>
+</html>

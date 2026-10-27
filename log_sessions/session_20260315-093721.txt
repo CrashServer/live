@@ -1,0 +1,311 @@
+d1 >> dbass(dur=1, oct=fh(8, 4, 5))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(degree=fl(16, 1.0, 7), dur=0.5)
+
+d1 >> dbass(degree=fl(16, 1.0, 7), dur=0.25)
+
+d1 >> dbass(degree=fl(16, 1.0, 7), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.0, 7), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.3, 7), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.4, 7), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.5, 7), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.6, 7), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.6, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.7, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.8, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.9, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.0, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.1, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.2, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.3, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.4, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.5, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.4, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.3, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.2, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.1, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 1.0, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.9, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.8, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.7, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.6, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.5, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.4, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.3, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.2, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.1, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.0, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.1, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.2, 12), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(32, 0.2, 4), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(4, 0.2, 4), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(5, 0.2, 4), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(6, 0.2, 4), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(7, 0.2, 4), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(7, 0.2, 5), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(7, 0.2, 6), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(7, 0.2, 7), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(7, 0.2, 8), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(7, 0.3, 8), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(7, 0.2, 8), dur=0.25).unison(4)
+
+d1 >> dbass(degree=fl(7, 0.2, 8), lpf=1200, dur=0.25).unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> pluck(degree=fl(32, 0.7, 7), dur=PDur(5,8), oct=5, lpf=fb(16, 800, 4000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=1, lpf=fh(4, [200, 800, 2000, 4000]))
+
+d1 >> dbass(dur=1/4, lpf=fh(4, [200, 800, 2000, 4000]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("spacesounds  120")
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.3)
+
+#workinprogress
+Clock.bpm = 120
+Scale.default = "minor"
+Root.default = "C#"
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.4)
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.5)
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.6)
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.7)
+
+q1 >> loop("quake8", dur=8, amp=0.8, lpf=1200, tape=0.6, echo=0.5, tapedrive=0.6)
+
+s3 >> loop("whitedwarf16", dur=16, amp=0.9, hpf=1200, rgate=0.2, chop=4, mverb=0.0).lclip(4)
+
+s4 >> loop("solrot16", dur=8, amp=1.0, lpf=800, bpf=800, hpf=2400, mverb=0.5)
+
+p1 >> sinepad(dur=PDur(3,8), degree=[0, 2, 4], oct=6, amp=linvar([0.5, 1], 16), sus=var([0.5, 1, 1], 8), atk=0.2, lpf=linvar([800, 3000], 64), mverb=0.2, hpf=1800).unison(3)
+
+s2 >> loop("centauri16", dur=8, amp=0.7, cheapverb=0.6, fshift=2, hpf=1600)
+
+r3 >> loop("spherics16", dur=16, amp=0.8, lpf=linvar([400, 6000], 32)).unison(5)
+
+z6 >> ikea(hhat=0.1, sn=0.1, harm=0, mverb=0.5, a=0.5, dur=8, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+s4 >> loop("sundrone16", dur=8, amp=1, shimmer=0.5, shimmix=0.4, fshift=1, hpf=1200)
+
+s5 >> loop("sundrone16", dur=8, delay=4, echo=2, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, amp=1, shimmer=0.5, shimmix=0.4, fshift=1, hpf=1200)
+
+b0 >> play("X ", dur=4, mverb=0.5, lpf=200)
+
+p2 >> organ(dur=PDur(3,8), degree=[0, 2, 4], oct=4, amp=linvar([0.5, 1], 16), sus=var([1, 0.5, 1], 8), atk=0.2, lpf=linvar([800, 3000], 64), mverb=0.7).only()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+Scale.default = "minor"
+Root.default = "C#"
+
+s1 >> loop("sundrone16", dur=16, amp=fi(32, 0, 0.6), shimmer=fi(32, 0.1, 0.5), shimmix=fb(16, 0.2, 0.4))
+
+q1 >> loop("quake8", dur=8, amp=0.4, lpf=fbn(32, 80, 250), tape=0.3, tapedrive=fb(16, 0.2, 0.5))
+
+s3 >> loop("whitedwarf16", dur=16, amp=fi(16, 0.2, 0.45), mverb=0.3, mverbfreeze=fh(8, [0, 0, 0.4, 0.8]))
+
+s4 >> loop("solrot16", dur=16, amp=fi(16, 0.15, 0.35), cheapverb=fb(24, 0.3, 0.7))
+
+p1 >> sinepad(dur=PDur(3,8), degree=[0, 2, 4], oct=5, amp=fi(16, 0, 0.25), sus=fperlin(8, 1, 4), atk=1, lpf=fb(32, 800, 3200), mverb=0.5)
+
+r3 >> loop("spherics16", dur=16, amp=fi(16, 0.1, 0.35), lpf=fb(32, 400, 6000))
+
+s1 >> loop("sundrone16", dur=16, amp=0.5, shimmer=fs(8, 0.3, 0.6), shimmix=0.4, fshift=fb(32, 1, 3))
+
+s2 >> loop("centauri16", dur=16, amp=0.35, cheapverb=0.6, fshift=fb(32, -3, -1))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 140
+Scale.default = "chromatic"
+Root.default = "D"
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16, cutoff=linvar([300, 900], 32), feedback=0.4, noise=0.15, amp=linvar([0, 0.45], 32))
+
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=6, atk=3, rel=3, cutoff=linvar([400, 1400], 32), dark=PWhite(0.5, 0.9), detune=0.04, amp=linvar([0, 0.35], 32), mverb=0.3)
+
+c1 >> faim([0, 1, 6], dur=4, oct=3, beef=1.5, amp=0.7, fshift=linvar([-15, 15], 16), fmix=0.3)
+
+b1 >> prodrums([0, 6, 12, 7], voice=4, dur=PDur(3, 8), layer1_amp=0.6, layer2_amp=0.5, layer3_amp=0.3, body_tone=var([3500, 2800, 4200], [6, 1, 1]), harmonic=1.5, fm_amount=1.7, fm_ratio=0.5, waveform=var([1, 6], 12), texture=11, decay=var([0.4, 0.2], 8), attack=0.1, mid_sat=0.8, amp=0.45, oct=6, pan=PSine(8) * 0.3)
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4, amp=linvar([0, 0.4], 16), mverb=0.2)
+
+a1 >> acidline([0, 0, 3, 0, 5, 0, 0, 3], dur=0.25, cutoff=linvar([400, 2400], 8), res=linvar([0.5, 0.85], 4), drive=2.5, accent=P[0, 0, 1, 0]*0.5, tubedrive=0.4, amp=0.5, oct=4)
+
+k1 >> play("X", dur=0.5, sample=5, amp=P[0.9, 0.4, 0.6, 0.4], resonbank=0.2, rbfreq=[47, 50, 57, 62], rbdecay=0.5, rbspread=1, dynfuzz=0.1, dfgain=1, dftone=2, lpf=300)
+
+h1 >> play("{---=}", rate=PWhite(1, 3), pan=PWhite(-1, 1), hpf=4000, amp=0.3).sometimes("stutter", PRand(15))
+
+s1 >> play("..o.", sample=5, dur=0.5, amp=0.7, hpf=200)
+
+d1 >> industrialdrone([0], dur=16, oct=3, sus=16, cutoff=linvar([200, 600], 16), feedback=0.6, noise=0.05, amp=0.3)
+
+b1 >> prodrums([0, 3, 7, 5, PWalk(8, 1, 1)], voice=4, dur=0.25, layer1_amp=1, layer2_amp=1.2, layer3_amp=0.8, body_tone=linvar([500, 1400], 16), harmonic=0.7, fm_amount=3.1, fm_ratio=var([2, 2.5, 3], 4), waveform=6, texture=10, decay=0.3, mid_sat=1.6, amp=0.6, oct=4)
+
+a1 >> acidline(var([P[0, 0, 3, 0, 5, 0, 0, 3], P[0, 3, 5, 7, 10, 7, 5, 3]], [16, 16]), dur=var([0.25, 0.125], [24, 8]), cutoff=expvar([300, 4000], 8), res=linvar([0.4, 0.9], 16), drive=linvar([1.5, 4], 32), accent=var([P[0, 0, 1, 0]*0.5, P[1, 0, 0, 1]*0.6], [12, 4]), tubedrive=linvar([0.2, 0.7], 48), amp=0.6)
+
+e1 >> ews(PTrir(0, 8), dur=2, sus=2, squiz=0.8, rel=0.2, oct=PWhite(2, 3), amp=0.5)
+
+j1 >> cs80([0, 0, 0.5, 3], dur=0.5, oct=(3, PStep(4, 3, 4)), amp=var([0.3, 0.5], [16, 16]), cutoff=linvar([400, 5000], 8), shape=0.1, shimmer=linvar([0, 0.5], 32), shimsize=0.8, shimmix=0.4)
+
+k1 >> play("X", dur=0.5, sample=5, amp=P[1, 0.5, 0.7, 0.5], resonbank=0.3, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.15, dfgain=1.5, dftone=3, lpf=400)
+
+h2 >> play("-", sample=5, dur=0.25, amp=P[0.4, 0.15, 0.3, 0.15], hpf=4000)
+
+d2 >> play("..C.", sample=2, dur=0.5, amp=0.5)
+
+c1 >> faim(([0, 1, 7], 0), dur=0.5, oct=4, beef=2, amp=0.8, chorus2=1, chorus2rate=0.7, hpf=100, dist2=0.3).often("stutter", oct=P*[4, 4, 5, 6])
+
+Clock.bpm = var([140, 135], [16, 16])
+
+d1.stop()
+
+c1.stop()
+
+a1.stop()
+
+h1.stop()
+
+h2.stop()
+
+e1.stop()
+
+v1 >> viola([6, 3, P*[4, 2, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], beat_dur=1, rate=1, mverb=0.8, blur=2, lpf=PRand(1200, 3000), hpf=300, amp=0.5).unison(2) + (-7, PStep(5, 7, 0))
+
+p1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]), oct=3, amp=0.6, dark=0.7)
+
+p3 >> ethpad([0, 7], dur=8, oct=6, attack=3, release=4, amp=0.35, room=0.9, mix=0.6)
+
+b2 >> prodrums([0, 3, 7, 10, 12, 7], voice=4, dur=PDur(3, 8), layer1_amp=0.4, layer2_amp=0.3, layer3_amp=0.2, body_tone=var([3500, 3000], [6, 2]), harmonic=2.5, fm_amount=1, fm_ratio=4, waveform=var([3, 6], 12), texture=4, decay=0.5, echo=0.5, amp=0.3, oct=(6, 5), pan=PSine(8) * 0.3)
+
+Clock.bpm = 170
+
+Scale.default = "minor"
+
+l1 >> loop("breakcore160_16", dur=8, sample=var(PRand(66), [32, 32]), sbrk=P*[0.5, 1, 1.5], sbrkdur=P*[0.5, 1, 4], sbrkmix=0.5, hpf=200, high=2, drcomp=0.5)
+
+r1 >> rave(Pvar([var([14, 18], [15, 1]), PSaw(128)*14], [64, 64]), dur=var([0.5, 1], [15, 1]), glide=PWhite(0.0, 2.0), oct=(5, 4, 5), eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.56, ebflutter=125, ebsat=0.6, hpf=500, high=2, amp=0.7).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16, cutoff=linvar([300, 900], 32), feedback=0.4, noise=0.15, amp=linvar([0, 0.45], 32))
+
+_seq_cancel()
+# -- Industrial drone bed --
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16, cutoff=linvar([300, 900], 32), feedback=0.4, noise=0.15, amp=linvar([0, 0.45], 32))
+# -- Darkpad creeps in --
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=6, atk=3, rel=3, cutoff=linvar([400, 1400], 32), dark=PWhite(0.5, 0.9), detune=0.04, amp=linvar([0, 0.35], 32), mverb=0.3)
+
+_seq_schedule(32, 1773601905700)
+
+_seq_cancel()
+# -- faim bass growl --
+c1 >> faim([0, 1, 6], dur=4, oct=3, beef=1.5, amp=0.7, fshift=linvar([-15, 15], 16), fmix=0.3)
+# -- Prodrums as pitched percussion, melodic --
+b1 >> prodrums([0, 6, 12, 7], voice=4, dur=PDur(3, 8), layer1_amp=0.6, layer2_amp=0.5, layer3_amp=0.3, body_tone=var([3500, 2800, 4200], [6, 1, 1]), harmonic=1.5, fm_amount=1.7, fm_ratio=0.5, waveform=var([1, 6], 12), texture=11, decay=var([0.4, 0.2], 8), attack=0.1, mid_sat=0.8, amp=0.45, oct=6, pan=PSine(8) * 0.3)
+# -- ethpad high shimmer --
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4, amp=linvar([0, 0.4], 16), mverb=0.2)
+
+_seq_schedule(32, 1773601917040)
+
+_seq_cancel()
+# -- Scale shift to minor for melodic content --
+Scale.default = "minor"
+# -- Acid emerges --
+a1 >> acidline([0, 0, 3, 0, 5, 0, 0, 3], dur=0.25, cutoff=linvar([400, 2400], 8), res=linvar([0.5, 0.85], 4), drive=2.5, accent=P[0, 0, 1, 0]*0.5, tubedrive=0.4, amp=0.5, oct=4)
+# -- Drums: kick with resonbank --
+k1 >> play("X", dur=0.5, sample=5, amp=P[0.9, 0.4, 0.6, 0.4], resonbank=0.2, rbfreq=[47, 50, 57, 62], rbdecay=0.5, rbspread=1, dynfuzz=0.1, dfgain=1, dftone=2, lpf=300)
+h1 >> play("{---=}", rate=PWhite(1, 3), pan=PWhite(-1, 1), hpf=4000, amp=0.3).sometimes("stutter", PRand(15))
+s1 >> play("..o.", sample=5, dur=0.5, amp=0.7, hpf=200)
+# -- Industrial drone drops to sub --
+d1 >> industrialdrone([0], dur=16, oct=3, sus=16, cutoff=linvar([200, 600], 16), feedback=0.6, noise=0.05, amp=0.3)
+# -- prodrums get heavier --
+b1 >> prodrums([0, 3, 7, 5, PWalk(8, 1, 1)], voice=4, dur=0.25, layer1_amp=1, layer2_amp=1.2, layer3_amp=0.8, body_tone=linvar([500, 1400], 16), harmonic=0.7, fm_amount=3.1, fm_ratio=var([2, 2.5, 3], 4), waveform=6, texture=10, decay=0.3, mid_sat=1.6, amp=0.6, oct=4)
+
+_seq_schedule(32, 1773601928436)
+
+_seq_cancel()
+# -- Acid goes wild --
+a1 >> acidline(var([P[0, 0, 3, 0, 5, 0, 0, 3], P[0, 3, 5, 7, 10, 7, 5, 3]], [16, 16]), dur=var([0.25, 0.125], [24, 8]), cutoff=expvar([300, 4000], 8), res=linvar([0.4, 0.9], 16), drive=linvar([1.5, 4], 32), accent=var([P[0, 0, 1, 0]*0.5, P[1, 0, 0, 1]*0.6], [12, 4]), tubedrive=linvar([0.2, 0.7], 48), amp=0.6)
+# -- ews experimental texture underneath --
+e1 >> ews(PTrir(0, 8), dur=2, sus=2, squiz=0.8, rel=0.2, oct=PWhite(2, 3), amp=0.5)
+# -- cs80 lead cuts through --
+j1 >> cs80([0, 0, 0.5, 3], dur=0.5, oct=(3, PStep(4, 3, 4)), amp=var([0.3, 0.5], [16, 16]), cutoff=linvar([400, 5000], 8), shape=0.1, shimmer=linvar([0, 0.5], 32), shimsize=0.8, shimmix=0.4)
+# -- Drums intensify --
+k1 >> play("X", dur=0.5, sample=5, amp=P[1, 0.5, 0.7, 0.5], resonbank=0.3, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.15, dfgain=1.5, dftone=3, lpf=400)
+h2 >> play("-", sample=5, dur=0.25, amp=P[0.4, 0.15, 0.3, 0.15], hpf=4000)
+d2 >> play("..C.", sample=2, dur=0.5, amp=0.5)
+# -- faim gets aggressive --
+c1 >> faim(([0, 1, 7], 0), dur=0.5, oct=4, beef=2, amp=0.8, chorus2=1, chorus2rate=0.7, hpf=100, dist2=0.3).often("stutter", oct=P*[4, 4, 5, 6])
+
+_seq_schedule(32, 1773601939849)
+

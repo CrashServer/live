@@ -1,0 +1,288 @@
+p1 >> pianovel([0, 2, 5, 7], dur=1, oct=5, amp=0.6, output=32)                                                                                                                        
+
+compo.rec_stems()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+compo.rec_stems(bars=16, session="forest", variation="calm")   
+
+p1 >> pianovel([0, 2, 5, 7], dur=1, oct=5, amp=0.6)                                                                                                                                   
+
+p1 >> pianovel([0, 2, 5, 7], dur=1, oct=5, amp=0.6)                                                                                                                                   
+
+b1 >> dbass([0, 0, -2, 0], dur=2, oct=4, sus=1.5, amp=0.8)                                                                                                                            
+
+compo.rec_stems(bars=16, session="forest", variation="calm")   
+
+p1 >> pianovel([0, 2, 5, 7], dur=1, oct=4, amp=0.6)                                                                                                                                   
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("glitch")
+
+attack("glitch")
+
+attack("abyss — heavy dirty rumbling dark techno")
+
+Clock.bpm = 135
+Scale.default = "minor"
+Root.default = "G"
+
+d1 >> compkick(0, dur=1, oct=3, amp=1.05, punch=0.95, comp=0.95, click=0.5, sub=0.9, body=0.8, tone=0.45)
+
+b1 >> subbass([0, 0, -5, 0], dur=8, sus=8, oct=4, amp=1.8, lpf=220, lpr=0.25, hpf=40, tape=0.5, tapedrive=1.5)
+
+h1 >> click(0, dur=1/4, sus=0.014, amp=Pacc("ghost"), amplify=0.2, rate=18, hpf=5200, pan=PRand([-0.35, 0.35]))
+
+m1 >> darkpad([0, -5], dur=16, sus=17, oct=5, amp=0.45, cutoff=linvar([600, 3200], 48), res=0.4, detune=0.35, dark=0.7, sub=0.4, cheapverb=0.65, cvdecay=2.5, hpf=180)
+
+h1 >> click(0, dur=1/4, sus=0.014, amp=Pacc("ghost"), amplify=0.25, rate=18, hpf=5200, pan=PRand([-0.35, 0.35]))
+
+compo.rec_stems(bars=16, session="forest", variation="calm")   
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> compkick(0, dur=1, oct=3, amp=1.05, punch=0.95, comp=0.95, click=0.5, sub=0.9, body=0.8, tone=0.45)
+
+b1 >> subbass([0, 0, -5, 0], dur=8, sus=8, oct=4, amp=1.8, lpf=220, lpr=0.25, hpf=40, tape=0.5, tapedrive=1.5)
+
+h1 >> click(0, dur=1/4, sus=0.014, amp=Pacc("ghost"), amplify=0.2, rate=18, hpf=5200, pan=PRand([-0.35, 0.35]))
+
+t1 >> compperc(PRand([0, 5, 7, 12, -3]), dur=PDur(7, 16), sus=0.08, amp=0.32, tone=0.35, noise=0.55, body=0.25, metal=0.45, ring=0.4, comp=0.5, hpf=900, cheapverb=0.45, cvdecay=1.8, pan=PRand([-0.55, -0.2, 0.2, 0.55]))
+
+compo.rec_stems(bars=16, session="forest", variation="calm")   
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("twoheadedstate 68")
+
+Clock.bpm = 68
+
+Scale.default = "dorian"
+
+Root.default = "D"
+
+Clock.bpm = 68
+Scale.default = "dorian"
+Root.default = "D"
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.4, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.125, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+m3 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.35, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, jpdamp=0.3, hpf=220, stereowidth=0.82)
+
+m2 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+
+compo.rec_stems(bars=16, session="ambient", variation="calm")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+g5 >> dbass(dur=1/.2)
+
+compo.rec_stems(bars=16, session="ambient", variation="calm")
+
+g5 >> dbass(dur=1/4)
+
+g5 >> dbass(dur=1/4, hpf=1200)
+
+g5 >> dbass(dur=1/4, hpf=1600)
+
+g5 >> dbass(dur=1/4, hpf=1700)
+
+g5 >> dbass(dur=1/4, hpf=1800)
+
+g5 >> dbass(dur=1/4, hpf=1900)
+
+g5 >> dbass(dur=1/4, hpf=2000)
+
+g5 >> dbass(dur=1/4, hpf=2100)
+
+g5 >> dbass(dur=1/4, hpf=2200)
+
+g5 >> dbass(dur=1/4, hpf=2300)
+
+g5 >> dbass(dur=1/4, hpf=2400)
+
+g5 >> dbass(dur=1/4, hpf=2500)
+
+g5 >> dbass(dur=1/4, hpf=2600)
+
+g5 >> dbass(dur=1/4, hpf=2700)
+
+g5 >> dbass(dur=1/4, hpf=2800)
+
+g5 >> dbass(dur=1/4, hpf=2900)
+
+g5 >> dbass(dur=1/4, hpf=3000)
+
+g5 >> dbass(dur=1/4, hpf=3100)
+
+g5 >> dbass(dur=1/4, hpf=3200)
+
+g5 >> dbass(dur=1/4, hpf=3300)
+
+g5 >> dbass(dur=1/4, hpf=3400)
+
+g5 >> dbass(dur=1/4, hpf=3500)
+
+g5 >> dbass(dur=1/4, hpf=3600)
+
+g5 >> dbass(dur=1/4, hpf=3700)
+
+g5 >> dbass(dur=1/4, hpf=3800)
+
+g5 >> dbass(dur=1/4, hpf=3900)
+
+g5 >> dbass(dur=1/4, hpf=4000)
+
+g5 >> dbass(dur=1/4, hpf=4100)
+
+g5 >> dbass(dur=1/4, hpf=4200)
+
+g5 >> dbass(dur=1/4, hpf=4300)
+
+g5 >> dbass(dur=1/4, hpf=4400)
+
+g5 >> dbass(dur=1/4, hpf=4500)
+
+g5 >> dbass(dur=1/4, hpf=4600)
+
+g5 >> dbass(dur=1/4, hpf=4700)
+
+g5 >> dbass(dur=1/4, hpf=4800)
+
+g5 >> dbass(dur=1/4, hpf=4900)
+
+g5 >> dbass(dur=1/4, hpf=5000)
+
+g5 >> dbass(dur=1/4, hpf=5100)
+
+g5 >> dbass(dur=1/4, hpf=5200)
+
+g5 >> dbass(dur=1/4, hpf=5300)
+
+g5 >> dbass(dur=1/4, hpf=5400)
+
+g5 >> dbass(dur=1/4, hpf=5500)
+
+g5 >> dbass(dur=1/4, hpf=5600)
+
+g5 >> dbass(dur=1/4, hpf=5700)
+
+g5 >> dbass(dur=1/4, hpf=5800)
+
+g5 >> dbass(dur=1/4, hpf=5900)
+
+g5 >> dbass(dur=1/4, hpf=6000)
+
+g5 >> dbass(dur=1/4, hpf=6100)
+
+g5 >> dbass(dur=1/4, hpf=6200)
+
+g5 >> dbass(dur=1/4, hpf=6300)
+
+g5 >> dbass(dur=1/4, hpf=6400)
+
+g5 >> dbass(dur=1/4, hpf=6500)
+
+g5 >> dbass(dur=1/4, hpf=6600)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.5)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.4)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.3)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.4)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.5)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.6)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.7)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.8)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9, bpf=4000)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9, bpf=4000, chop=4)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9, bpf=4000, chop=0)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9, bpf=4000, chop=0, wshape=0.2, wgain=1, wmix=0.5)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9, bpf=4000, chop=0, wshape=0.3, wgain=1, wmix=0.5)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9, bpf=4000, chop=0, wshape=0.4, wgain=1, wmix=0.5)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9, bpf=4000, chop=0, wshape=0.5, wgain=1, wmix=0.5)
+
+g5 >> dbass(dur=1/4, hpf=6600, hpr=0.9, bpf=4000, chop=0, wshape=0.6, wgain=1, wmix=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.future(Clock.bar_length() - (Clock.now() % Clock.bar_length()), lambda: (
+      p1 >> pianovel([0, 2, 5, 7], dur=1, oct=5, amp=0.6, output=32),                                                                                                                   
+      b1 >> dbass([0, 0, -2, 0], dur=2, oct=4, sus=1.5, amp=0.8, output=34),
+      compo.rec_stems(bars=16, session="forest", variation="calm"),                                                                                                                     
+  ))    
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.future(Clock.bar_length() - (Clock.now() % Clock.bar_length()), lambda: (
+      p1 >> pianovel([0, 2, 5, 7], dur=1, oct=5, amp=0.6, output=32),                                                                                                                   
+      b1 >> dbass([0, 0, -2, 0], dur=2, oct=4, sus=1.5, amp=0.8, output=34),
+      compo.rec_stems(bars=16, session="forest", variation="calm"),                                                                                                                     
+  ))    
+
+compo.stem_stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.future(Clock.bar_length() - (Clock.now() % Clock.bar_length()), lambda: (
+      p1 >> pianovel([0, 2, 5, 7], dur=1, oct=5, amp=0.6, output=32),                                                                                                                   
+      b1 >> dbass([0, 0, -2, 0], dur=2, oct=4, sus=1.5, amp=0.8, output=34),
+      compo.rec_stems(bars=16, session="forest", variation="calm"),                                                                                                                     
+  ))    
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+compo.stem_stop()
+

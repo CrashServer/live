@@ -1,0 +1,33 @@
+n3 >> loop("metalgtr8", dur=8)
+
+j5 >> loop("metaldrum16", dur=16, sample=7, drcomp=0.5, shape=.2)
+
+var.note = melody()[:8]
+
+n7 >> guit(var.note, oct=(2), beef=0.8, tone=1.0, detune=0.05, fdecay=1, dur=1/2, fx2=0.7, fx1=0).unison(5)
+
+k4 >> play("k(-k)u(-u[uu])", sample=4)
+
+p7 >> loop("metalgtr8", dur=8, sample=12, sbrk=0, mverb=0)
+
+n3.stop()
+
+p7 >> loop("metalgtr8", dur=7, sample=12, sbrk=0, mverb=0)
+
+p7 >> loop("metalgtr8", dur=8, sample=12, sbrk=0, mverb=0)
+
+p7 >> loop("metalgtr8", dur=8, sample=13, sbrk=0, mverb=0)
+
+p7 >> loop("metalgtr16", dur=8, sample=13, sbrk=0, mverb=0)
+
+Clock.bpm=140
+
+p7 >> loop("metalgtr16", dur=16, sample=13, sbrk=0, mverb=0)
+
+p7 >> loop("metalgtr16", dur=16, sample=13, sbrk=0, mverb=0.4)
+
+k4.stop()
+
+Clock.clear()
+soff()
+

@@ -1,0 +1,34 @@
+d1 >> blip(dur=0.5).gen("techno", "bass")          # gen sets everything
+
+d1 >> blip(dur=0.5).gen("techno", "bass")          # gen sets everything
+
+d1 >> dbass(dur=0.5).gen("techno", "bass")          # gen sets everything
+
+d1 >> dbass(dur=0.25).gen("techno", "bass")          # gen sets everything
+
+d1 >> dbass(dur=0.25).gen("techno", "bass").unison(4)
+
+d1 >> dbass(dur=0.25).gen("techno", "bass").unison(4)
+
+d1 >> dbass(dur=0.25).gen("techno", "bass").unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> tekno(dur=0.5, oct=3).gen("techno", "bass")                                                                                       
+
+b1 >> tekno(4, dur=0.5).gen("techno", "bass")             
+
+b1 >> tekno(gp("tb3"), dur=0.5, oct=3)                                                                                                  
+
+b1 >> tekno(dur=0.5, oct=3).gen("techno", "bass", 8)
+
+b1 >> tekno(dur=0.5, oct=3).gen("techno", "bass", seed=42)
+
+b1 >> tekno(dur=0.5, oct=3).gen("metal", "lead").chroma().unison(3)                                                                     
+
+Clock.clear()
+soff()
+Server.clearFx()
+

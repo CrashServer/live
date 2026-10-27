@@ -1,0 +1,1884 @@
+p1 >> industrialdrone([0, 4, 0, -3, 0], dur=PWhite(12, 32), sus=PWhite(16, 40), oct=4, amp=0.5, cutoff=linvar([320, 1800], 96), res=0.5, detune=0.4, noise=0.3, sub=0.4, feedback=0.35, cheapverb=0.75, cvdecay=4, miVerb=0.5, mverbfreeze=sinvar([0, 0.7], 48), stereowidth=0.85, hpf=90)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> industrialdrone([0, 4, 0, -3, 0], dur=PWhite(12, 32), sus=PWhite(16, 40), oct=4, amp=0.5, cutoff=linvar([320, 1800], 96), res=0.5, detune=0.4, noise=0.3, sub=0.4, feedback=0.35, cheapverb=0.75, cvdecay=4, miVerb=0.5, mverbfreeze=sinvar([0, 0.7], 48), stereowidth=0.85, hpf=90)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+a9 >> a_xbass(rate=1, distortion=8, cutoff=800, resonance=0.7, attack=0.01, rhythmType=0, tempo=120, accent=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+b1 >> subbass([0, 0, 0, 4, 0, 0, -3, 0], dur=PWhite(6, 16), sus=PWhite(8, 24), oct=4, amp=1.3, lpf=260, lpr=0.3, hpf=35, tape=0.4, tapedrive=1.2, pan=0)
+
+r1 >> bell(PRand([0, 4, 7, 11, 2, 9]), dur=PWhite(6, 20), sus=PWhite(4, 12), oct=5, amp=0.4, cheapverb=0.75, cvdecay=4, jpverb=0.6, jpsize=0.98, jpdamp=0.25, hpf=600, pan=PRand([-0.75, -0.35, 0.35, 0.75]))
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+m1.stop()
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.35, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, jpdamp=0.3, hpf=220, stereowidth=0.82)
+
+m1.stop()
+
+m1 >> pad2([(0, 1, 4), (0, 3, 6), (0, 1, 7), (-1, 2, 5)], dur=PWhite(16, 40), sus=PWhite(20, 48), oct=5, amp=0.42, cutoff=linvar([600, 2400], 96), cheapverb=0.8, cvdecay=3.5, jpverb=0.5, jpsize=0.95, hpf=240, stereowidth=0.82)
+
+m1.stop()
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.25, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+g1 >> gong(PRand([0, 4, 7, 11]), dur=PWhite(18, 48), sus=PWhite(12, 30), oct=5, amp=0.5, cheapverb=0.8, cvdecay=5, jpverb=0.65, jpsize=0.98, hpf=300, pan=PRand([-0.6, 0.6]))
+
+g1.stop()
+
+hn >> plaitsX(PMarkov(), dur=PWhite(0.15, 2.5), sus=PWhite(0.1, 1.8), oct=6, amp=0.5, preset=var([3, 7, 5, 11], PRand([4, 8, 16])), porta=PRand([0, 0.2, 0.5]), harm=linvar([0.3, 0.7], 32), timbre=sinvar([0.3, 0.8], PWhite(4, 12)), hpf=400, jpverb=0.55, jpsize=0.9, jpdamp=0.3, stereowidth=0.85)
+
+hn.stop()
+
+hn >> plaitsX(melody(), dur=PWhite(0.08, 1.5), sus=PWhite(0.05, 1.2), oct=6, amp=0.55, preset=PRand([0, 2, 6, 9]), cutoff=sinvar([800, 4500], PWhite(3, 10)), hpf=350, fbdelay=0.35, fbtime=PRand([0.125, 0.1875, 0.25]), fbfeed=0.55, fbcutoff=4000, fbspread=0.08, beat_dur=1, jpverb=0.45, stereowidth=0.85)
+
+hn.stop()
+
+hn >> braids(melody(), dur=PWhite(0.2, 2.5), sus=PWhite(0.15, 2), oct=6, amp=0.45, model=PRand([0, 8, 17, 23, 29, 41]), timbre=sinvar([0.3, 0.8], PWhite(4, 12)), color=linvar([0.2, 0.8], 24), decim=PRand([0, 4, 8]), hpf=350, jpverb=0.55, jpsize=0.92, jpdamp=0.3, stereowidth=0.88)
+
+hn.stop()
+
+hn >> rave(PWhite(0, 14), dur=PWhite(0.1, 1.2), sus=PWhite(0.08, 0.8), oct=6, amp=0.35, hpf=400, jpverb=0.55, jpsize=0.9, jpdamp=0.35, stereowidth=0.9, pan=PRand([-0.7, -0.3, 0.3, 0.7]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+hn >> glitcher(PWhite(0, 14), dur=PWhite(0.05, 0.6), sus=PWhite(0.03, 0.4), oct=6, amp=0.5, len=PWhite(0.1, 2), henA=PRand([1.2, 1.4, 1.6, 1.8]), henB=PRand([0.2, 0.3, 0.4]), hpf=500, jpverb=0.45, jpsize=0.85, jpdamp=0.35, stereowidth=0.85, pan=PRand([-0.8, -0.4, 0, 0.4, 0.8]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+f1 >> omi(fmamp=0.1, fmrate=200, fb=0, xfb=0.1, cutoff=5000, rq=0.5)
+
+f1 >> omi(fmamp=0.1, fmrate=200, fb=0, xfb=0.2, cutoff=5000, rq=0.5)
+
+f1 >> omi(fmamp=0.1, fmrate=200, fb=0, xfb=0.3, cutoff=5000, rq=0.5)
+
+f1 >> omi(fmamp=0.1, fmrate=200, fb=0, xfb=0.4, cutoff=5000, rq=0.5)
+
+f1 >> omi(fmamp=0.1, fmrate=200, fb=0, xfb=0.4, cutoff=5000, rq=0.5, lpflfo=4)
+
+l7 >> play("X '")
+
+l7 >> play("X ")
+
+l7 >> play("X ", lpf=400)
+
+l7 >> play("X ", lpf=0)
+
+x0 >> dbass(dur=1/4)
+
+x0 >> dbass(dur=1/4, amp=4)
+
+x0 >> dbass(dur=1/4, amp=12)
+
+x0 >> dbass(dur=1/4, amp=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> play("x ", amp=0)
+
+p1 >> play("x ", amp=1)
+
+p1 >> play("x ", amp=1, dur=1/4)
+
+p1 >> play("x ", amp=1, dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("Liquid 174")
+
+d1 >> play("x..x.x..x...x.x.", sample=var([0, 3, 8], [16, 8, 8]), amp=var([1.2, 1.4, 1.1], [8, 4, 4]), rate=var([1, 0.95, 1.05], [12, 2, 2]))
+
+d2 >> play("....b.....s.....", sample=var([12, 18, 25], [8, 4, 4]), amp=var([0.9, 1.1, 0.8], [6, 5, 5]), chop=var([0, 2, 4], [12, 2, 2]), rate=var([1, 1.1, 0.9], [8, 4, 4]))
+
+Clock.bpm = 174
+
+d3 >> play("..s...s.s.s...s.", sample=var([15, 20, 30], [8, 4, 4]), amp=var([0.4, 0.6, 0.3], [4, 6, 6]), dur=1/2, hpf=var([0, 6000], [7, 1]), pan=var([(-0.5, 0.5), 0], [8, 8]))
+
+d4 >> play("h.h.h.h.h.h.h.h.", sample=var([1, 1, 2], [6, 5, 5]), amp=var([0.5, 0.7, 0.4], [4, 4, 8]), dur=1/2, hpf=4000, pan=var([(-0.3, 0.3), 0], [4, 12])).after(8, "stop")
+
+d5 >> play("c...............c...............", sample=var([5, 8, 12], [8, 4, 4]), amp=1.0, dur=1, mverb=0.6, pan=var([(-0.8, 0.8), 0], [16, 16]))
+
+d6 >> play("....r.......r...", sample=var([18, 22, 28], [8, 4, 4]), amp=0.6, dur=1, hpf=4000, echo=var([0, 0.125], [7, 1]), pan=0.6)
+
+d6 >> play("....r.......r...", sample=var([18, 22, 28], [8, 4, 4]), amp=0.6, dur=1, hpf=4000, echo=var([0, 0.125], [7, 1]), pan=0.6)
+
+d2 >> play("bb..s......bb..ss...sb", rate=PWhite(1, 1.04), dist2=PWhite(0, 0.8))
+
+d7 >> play("........u.......u.......+.......+.......", sample=var([25, 30, 35], [6, 5, 5]), dur=var([1, 1/2], [12, 4]), amp=var([0.7, 0.9], [8, 8]), lpf=var([0, 5000], [15, 1]))
+
+b1 >> dbass(var([0, -12, -5, -7], 4), dur=var([1/2, 1/4, 3/4], [8, 4, 4]), oct=6, amp=var([1.2, 1.5, 1.0], [4, 6, 6]), lpf=var([200, 400], [8, 8]), slide=var([0, 1], [25, 1]), dist2=0.5).unison(4)
+
+b1.stop()
+
+p1 >> ethpad(var([0, 4, 7, 5], [8, 8, 8, 8]), dur=8, oct=(6, 4), amp=0.5, mverb=0.8, lpf=var([2000, 3000], [16, 16]), attack=2, decay=4, pan=var([(-0.6, 0.6)], [32]))
+
+l4 >> loop("break32", dur=32).lclip(4)
+
+d1 >> play("x..x..x.", sample=0, amp=1.2)
+
+d1 >> play("x..x.x..", sample=3, amp=1.1)
+d2 >> play("..:.:..:", sample=4, amp=0.9, rate=1.1)
+d3 >> play("--.--.--", sample=5, pan=PWhite(-0.5, 0.5))
+
+d2 >> play("..s...s.", sample=10, amp=0.6, lpf=2000)
+d3 >> play("-.-.-.--", sample=11, rate=(0.9, 1.1))
+d1 >> play("x..x...x", sample=12, amp=1.2)
+
+b1 >> war(var([0, -12, -5, -7], [4, 4, 4, 4]), dur=var([1/2, 1/4, 3/4], [8, 4, 4]), oct=7, amp=var([1.2, 1.5, 1.0], [4, 6, 6]), lpf=var([200, 400], [8, 8]), slide=var([0, 1], [15, 1]), dist2=0.5).unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> war(var([0, -12, -5, -7], [4, 4, 4, 4]), dur=var([1/2, 1/4, 3/4], [8, 4, 4]), oct=7, amp=var([1.2, 1.5, 1.0], [4, 6, 6]), lpf=var([200, 400], [8, 8]), slide=var([0, 1], [15, 1]), dist2=0.5).unison(4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("deep berlin — hypnotic techno 7-part journey")
+
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0.85, comp=0.9, click=0.65, sub=0.75, body=0.65, tone=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0.85, comp=0.9, click=0.65, sub=0.75, body=0.65, tone=0.5)
+d2 >> click(0, dur=1/2, sus=0.04, amp=[0, 0.35], rate=14, hpf=2400, pan=0.1)
+
+_seq_schedule(32, 1776570343734)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, sub=0.75, body=0.55, growl=0.4, pumper=0.55, pumprate=4, tape=0.4, tapedrive=1.4)
+
+_seq_schedule(32, 1776570354817)
+
+_seq_cancel()
+s1 >> hardstab([(0,3,7), (0,3,7), (-2,1,5), (0,3,7)], dur=var([4,2,4,2],4), sus=[0.12, 0.18, 0.1, 0.15], oct=5, amp=0.5, cutoff=2200, res=0.45, comp=5, detune=0.015, fold=0.3, feedback=0.25, hpf=180, dubdelay=0.55, dublen=0.375, dubfeed=0.72, jpverb=0.6, jpsize=0.92, jpdamp=0.35, stereowidth=0.85)
+
+_seq_schedule(32, 1776570365863)
+
+_seq_cancel()
+h1 >> space(PRand([0,3,5,7,10]), dur=PDur(3,8), sus=0.35, oct=6, amp=0.3, rq=0.04, cheapverb=0.6, cvdecay=2.2, hpf=600, pan=PRand([-0.6,-0.3,0.3,0.6]))
+g1 >> sawbass([-7, -7, -10, -7], dur=var([8,4,12,8],4), sus=[1.4, 0.9, 1.8, 1.1], oct=4, amp=0.45, cutoff=sinvar([450,900],16), rq=0.35, fuzz=0.55, fuzzgain=1.8, fuzztone=0.5, fuzzoctave=0.2, tape=0.4, tapedrive=1.6, dubdelay=0.35, dublen=0.25, dubfeed=0.55, pumper=0.4, pumprate=4)
+
+_seq_schedule(32, 1776570376999)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776570463185)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570470281)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570473986)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.4, tapedrive=1.7)
+
+_seq_schedule(8, 1776570477713)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570481424)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.1, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570485161)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=4, tone=0.5, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_schedule(16, 1776570488863)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=36, tone=[0.6, 0.8, 0.6, 0.6])
+
+_seq_schedule(8, 1776570496265)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.65, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570499962)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.66, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(4, 1776570507357)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.67, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570509322)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.68, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570516729)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570530788)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570538174)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570541896)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570545600)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=8, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(4, 1776570552995)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+m1 >> darkpad([0, -5], dur=16, sus=17, oct=5, amp=0.8, cutoff=linvar([600, 3200], 48), res=0.4, detune=0.35, dark=0.7, sub=0.6, cheapverb=0.65, cvdecay=2.5, hpf=180, csweep=0.2, cswfreq=200, cswdepth=0.1, cswrate=0.5, cswdecay=0.5, vowel=1, vowelf=1, vowelq=1)
+
+_seq_schedule(8, 1776570554850)
+
+_seq_cancel()
+d2 >> click(0, dur=1/2, sus=0.1, amp=[0, 0.35], rate=24, hpf=2400, pan=0.1, leg=1, mverb=0.5)
+
+_seq_schedule(8, 1776570558565)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570562276)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570569687)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570573397)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([2, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570577108)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=2, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570584512)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=24, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570591913)
+
+_seq_cancel()
+~d1 >> compkick(PRand([0, 5, 7, 12]), dur=1, oct=4, amp=0.40, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=12, mverb=0.5, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570595624)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=6, amp=2, cutoff=sinvar([500, 1100], 32), res=0.1, sub=0, body=8, growl=0.2, pumper=.1, pumprate=0, tape=1.7, tapedrive=1.4)
+
+_seq_schedule(16, 1776570603032)
+
+_seq_cancel()
+e1 >> compperc(PRand([0, 5, 7, 12]), dur=PDur(5, 16), sus=0.38, amp=4, tone=4, noise=4, body=1.5, metal=1.9, ring=0.35, comp=0.4, hpf=100, cheapverb=0.4, pan=PRand([-0.5, -0.2, 0.2, 0.5]))
+
+_seq_schedule(4, 1776570610426)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570612303)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+e9 >> tb304([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1,amp=4, shape=0, shapemix=0.5, oct=6, hpf=1200, mverb=0.2)
+
+_seq_schedule(16, 1776570616003)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570623430)
+
+_seq_cancel()
+h2 >> click(0, dur=1/4, sus=0.015, amp=Pacc("ghost")*4, rate=18, hpf=5500, pan=PRand([-0.3, 0.3]))
+r7 >> play("X ", lpf=[800, 1600, 400, 0])
+e9.amp=0.6
+_seq_schedule(8, 1776570627138)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(8, 1776570631034)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.8, tapedrive=1)
+
+_seq_schedule(16, 1776570634735)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.9, tapedrive=1)
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=1, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+_seq_schedule(16, 1776570642148)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.1, tapedrive=1)
+
+_seq_schedule(16, 1776570649572)
+
+_seq_cancel()
+o1 >> play()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.2, tapedrive=1)
+_seq_schedule(4, 1776570656963)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.4, tapedrive=1)
+
+_seq_schedule(16, 1776570658871)
+
+o1 >> play("U.")
+
+o1 >> play("U....")
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.3, tapedrive=1)
+e9 >> tb303([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=1, shape=0, shapemix=0.0, oct=6, hpf=2701, mverb=0.5)
+g8 >> play("[--]", hpf=12200, sample=15, echo=0.5, gdel=0.2, gdeltime=0.125, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.9)
+_seq_schedule(8, 1776570666269)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(28, 1776570669988)
+
+o1 >> play("U...")
+
+o1 >> play("U...", echo=0.5)
+
+o1 >> play("U...", echo=0.5, sample=4)
+
+o1 >> play("U...", echo=0.5, sample=5)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -5, -5, 0, 0, -7, -5], dur=PDur(5,8), sus=PDur(5,8)*0.75, oct=4, amp=1.8, cutoff=sinvar([380, 900], 32), res=0.6, sub=0.0, body=1.2, growl=0, tape=0.9, tapedrive=0.8, hpf=55)
+
+_seq_schedule(16, 1776570682923)
+
+o1 >> play("U...", echo=0.5, sample=6)
+
+o1 >> play("U...", echo=0.5, sample=6, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+m1.stop()
+_seq_schedule(4, 1776570690327)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(16, 1776570692204)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(16, 1776570699597)
+
+o1 >> play("U.u.", echo=0.5, sample=6, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("U.u.", echo=0.5, sample=7, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("U.u.", echo=0.5, sample=8, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+f7 >> play("k ", dur=1/4)
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=6, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776570707002)
+
+o1 >> play("U.u.", echo=0.5, sample=9, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570714493)
+
+o1 >> play("U.u.", echo=0.5, sample=10, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570718208)
+
+o1 >> play("U.u.", echo=0.5, sample=11, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570721912)
+
+o1 >> play("U.:.", echo=0.5, sample=11, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("U.:.", echo=0.5, sample=12, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=7, amp=2, cutoff=linvar([700, 1600], 32), res=0.4, sub=0.0, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, rgaterate=4, rgatewave=1, drift=1, driftspeed=1, driftdepth=1, driftsmooth=0.5, beat_dur=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.0, tapedrive=0)
+
+_seq_schedule(8, 1776570725615)
+
+o1 >> play("U.:.", echo=0.5, sample=13, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570729330)
+
+o1 >> play("U.:.", echo=0.5, sample=14, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=6, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+r7 >> play("X ", lpf=[800, 1600, 400, 0]).stop()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+o1 >> play("U.:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:u].:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:o].:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:U].:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:-].:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:L].:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:l].:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[::].:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:[::]].:.", echo=0.5, sample=15, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:[::]].:.", echo=0.5, sample=16, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:[u:]].:.", echo=0.5, sample=16, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:[O:]].:.", echo=0.5, sample=16, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[:[o]].:.", echo=0.5, sample=16, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[.[o]].:", echo=0.5, sample=16, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[.[c]].:", echo=0.5, sample=16, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[.[C]].:", echo=0.5, sample=16, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play("[.[C]].:", echo=0.5, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[C]:", echo=0.5, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[C]:...", echo=0.5, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[C]:...", echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[C]:...", echo=0.5, fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[C]:...", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[C]:.C.", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[C]:.c.", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+g8 >> play("[--]", hpf=12200, sample=15, echo=0.5, gdel=0.2, gdeltime=0.125, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.9)
+
+f7 >> play("k ", dur=1/4)
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=6, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776570849309)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570856712)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570860421)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.4, tapedrive=1.7)
+
+_seq_schedule(8, 1776570864349)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570868063)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.1, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776570871768)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=4, tone=0.5, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_schedule(16, 1776570875478)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=36, tone=[0.6, 0.8, 0.6, 0.6])
+
+_seq_schedule(8, 1776570882880)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.65, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570886577)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.66, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(4, 1776570893970)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.67, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570895831)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.68, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570903223)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570906919)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570914313)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570918021)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570921734)
+
+d1 >> compkick(0.5, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+d1 >> compkick(2, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_cancel()
+d1 >> compkick(2, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570927499)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570929185)
+
+_seq_cancel()
+d1 >> compkick(2, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570936584)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570940284)
+
+d1 >> compkick([2, 2, 1, 1], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570943982)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570946651)
+
+_seq_cancel()
+d1 >> compkick([2, 2, 1, 1, 2, 0.5], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570954060)
+
+d1 >> compkick([2, 2, 1, 1, 2, 0.5], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570957761)
+
+d1 >> compkick([2, 2, 1, 1, 2, 4], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+d1 >> compkick([2, 2, 1, 1, 2, 14], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570961459)
+
+d1 >> compkick([2, 2, 1, 1], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570963390)
+
+_seq_cancel()
+d1 >> compkick([2, 2, 1, 1], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570970781)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570974505)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570978208)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776570980578)
+
+_seq_cancel()
+d1 >> compkick([2], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776570987987)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776570991689)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776570995391)
+
+d1 >> compkick(2, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=8, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(4, 1776571002782)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+m1 >> darkpad([0, -5], dur=16, sus=17, oct=5, amp=0.8, cutoff=linvar([600, 3200], 48), res=0.4, detune=0.35, dark=0.7, sub=0.6, cheapverb=0.65, cvdecay=2.5, hpf=180, csweep=0.2, cswfreq=200, cswdepth=0.1, cswrate=0.5, cswdecay=0.5, vowel=1, vowelf=1, vowelq=1)
+
+_seq_schedule(8, 1776571004660)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571006346)
+
+_seq_cancel()
+d1 >> compkick(var([2, 0], 8), dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571010096)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=8, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(4, 1776571017513)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+m1 >> darkpad([0, -5], dur=16, sus=17, oct=5, amp=0.8, cutoff=linvar([600, 3200], 48), res=0.4, detune=0.35, dark=0.7, sub=0.6, cheapverb=0.65, cvdecay=2.5, hpf=180, csweep=0.2, cswfreq=200, cswdepth=0.1, cswrate=0.5, cswdecay=0.5, vowel=1, vowelf=1, vowelq=1)
+
+_seq_schedule(8, 1776571019393)
+
+_seq_cancel()
+d2 >> click(0, dur=1/2, sus=0.1, amp=[0, 0.35], rate=24, hpf=2400, pan=0.1, leg=1, mverb=0.5)
+
+_seq_schedule(8, 1776571023094)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571026802)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571034226)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571037932)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([2, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571041648)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=2, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571049051)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=24, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571056477)
+
+_seq_cancel()
+~d1 >> compkick(PRand([0, 5, 7, 12]), dur=1, oct=4, amp=0.40, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=12, mverb=0.5, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571060192)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=6, amp=2, cutoff=sinvar([500, 1100], 32), res=0.1, sub=0, body=8, growl=0.2, pumper=.1, pumprate=0, tape=1.7, tapedrive=1.4)
+
+_seq_schedule(16, 1776571067600)
+
+_seq_cancel()
+e1 >> compperc(PRand([0, 5, 7, 12]), dur=PDur(5, 16), sus=0.38, amp=4, tone=4, noise=4, body=1.5, metal=1.9, ring=0.35, comp=0.4, hpf=100, cheapverb=0.4, pan=PRand([-0.5, -0.2, 0.2, 0.5]))
+
+_seq_schedule(4, 1776571074993)
+
+_seq_cancel()
+d1 >> compkick(2, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571076856)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+e9 >> tb304([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1,amp=4, shape=0, shapemix=0.5, oct=6, hpf=1200, mverb=0.2)
+
+_seq_schedule(16, 1776571080552)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571087962)
+
+_seq_cancel()
+h2 >> click(0, dur=1/4, sus=0.015, amp=Pacc("ghost")*4, rate=18, hpf=5500, pan=PRand([-0.3, 0.3]))
+r7 >> play("X ", lpf=[800, 1600, 400, 0])
+e9.amp=0.6
+_seq_schedule(8, 1776571091686)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(8, 1776571095404)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.8, tapedrive=1)
+
+_seq_schedule(16, 1776571099149)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.9, tapedrive=1)
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=1, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+_seq_schedule(16, 1776571106545)
+
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=0, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.1, tapedrive=1)
+
+_seq_schedule(16, 1776571113942)
+
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=10, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=1, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=2, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+_seq_cancel()
+o1 >> play("U...", echo=0.5, sample=6, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.2, tapedrive=1)
+_seq_schedule(4, 1776571121334)
+
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=1, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.4, tapedrive=1)
+
+_seq_schedule(16, 1776571123197)
+
+_seq_cancel()
+o1 >> play(".[C]:.c.", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.3, tapedrive=1)
+e9 >> tb303([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=1, shape=0, shapemix=0.0, oct=6, hpf=2701, mverb=0.5)
+g8 >> play("[--]", hpf=12200, sample=15, echo=0.5, gdel=0.2, gdeltime=0.125, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.9)
+
+_seq_schedule(8, 1776571130589)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(28, 1776571134303)
+
+o1 >> play(".[C]:...", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[o]:...", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[o]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -5, -5, 0, 0, -7, -5], dur=PDur(5,8), sus=PDur(5,8)*0.75, oct=4, amp=1.8, cutoff=sinvar([380, 900], 32), res=0.6, sub=0.0, body=1.2, growl=0, tape=0.9, tapedrive=0.8, hpf=55)
+
+_seq_schedule(16, 1776571147241)
+
+o1 >> play(".[O]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=17, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+m1.stop()
+_seq_schedule(4, 1776571154631)
+
+o1 >> play(".[O]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=18, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(16, 1776571156493)
+
+o1 >> play(".[O]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=19, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[O]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=20, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+o1 >> play(".[O]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=21, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(16, 1776571163882)
+
+o1 >> play(".[O]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=22, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+f7 >> play("k ", dur=1/4)
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=6, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776571171301)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571178732)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571182443)
+
+~d1 >> compkick(2, dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571186148)
+
+_seq_cancel()
+~d1 >> compkick(2, dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571187477)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571194883)
+
+_seq_cancel()
+~d1 >> compkick(2, dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571195297)
+
+~d1 >> compkick(4, dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571202712)
+
+~d1 >> compkick(8, dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+~d1 >> compkick(4, dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571206409)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=7, amp=2, cutoff=linvar([700, 1600], 32), res=0.4, sub=0.0, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, rgaterate=4, rgatewave=1, drift=1, driftspeed=1, driftdepth=1, driftsmooth=0.5, beat_dur=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.0, tapedrive=0)
+
+_seq_schedule(8, 1776571210112)
+
+~d1 >> compkick(var([4, 2], [6, 2]), dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_cancel()
+~d1 >> compkick(var([4, 2], [6, 2]), dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571213759)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571221188)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571224889)
+
+~d1 >> compkick(var([4, 2], [7, 1]), dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_cancel()
+~d1 >> compkick(var([4, 2], [7, 1]), dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571226479)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571233897)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571237599)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=7, amp=2, cutoff=linvar([700, 1600], 32), res=0.4, sub=0.0, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, rgaterate=4, rgatewave=1, drift=1, driftspeed=1, driftdepth=1, driftsmooth=0.5, beat_dur=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.0, tapedrive=0)
+
+_seq_schedule(8, 1776571241298)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571244998)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=6, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+r7 >> play("X ", lpf=[800, 1600, 400, 0]).stop()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+a6 >> play("V ")
+
+a6 >> play("V ", amp=4)
+
+a6 >> play("V ", amp=2)
+
+a6 >> play("V ", amp=2, sample=4)
+
+a6 >> play("V ", amp=2, sample=2)
+
+attack("epicdevo 66")
+
+s2 >> play("e", dur=0.25, sample=3, amp=var([0, 0.5], [30, 2]))
+
+s2.degree = var(["e", "oooo[oo]oo"], [30, 2])
+
+s1 >> play("..o...o.", dur=0.25, sample=14, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=7, amp=2, cutoff=linvar([700, 1600], 32), res=0.4, sub=0.0, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, rgaterate=4, rgatewave=1, drift=1, driftspeed=1, driftdepth=1, driftsmooth=0.5, beat_dur=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.0, tapedrive=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776571324037)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571331458)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571335159)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.4, tapedrive=1.7)
+
+_seq_schedule(8, 1776571338867)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571342566)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.1, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571346268)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=4, tone=0.5, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_schedule(16, 1776571349967)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=36, tone=[0.6, 0.8, 0.6, 0.6])
+
+_seq_schedule(8, 1776571357365)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.65, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776571361062)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.66, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(4, 1776571368456)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.67, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776571370312)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.68, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776571377703)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776571381401)
+
+_seq_cancel()
+d1 >> compkick([2], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776571388793)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571392492)
+
+_seq_cancel()
+d1 >> compkick(var([2, 0], 8), dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571396197)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=8, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(4, 1776571403605)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+m1 >> darkpad([0, -5], dur=16, sus=17, oct=5, amp=0.8, cutoff=linvar([600, 3200], 48), res=0.4, detune=0.35, dark=0.7, sub=0.6, cheapverb=0.65, cvdecay=2.5, hpf=180, csweep=0.2, cswfreq=200, cswdepth=0.1, cswrate=0.5, cswdecay=0.5, vowel=1, vowelf=1, vowelq=1)
+
+_seq_schedule(8, 1776571405460)
+
+_seq_cancel()
+d2 >> click(0, dur=1/2, sus=0.1, amp=[0, 0.35], rate=24, hpf=2400, pan=0.1, leg=1, mverb=0.5)
+
+_seq_schedule(8, 1776571409172)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571412912)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571420340)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571424053)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([2, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571427770)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=2, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571435169)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=24, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571442569)
+
+_seq_cancel()
+~d1 >> compkick(PRand([0, 5, 7, 12]), dur=1, oct=4, amp=0.40, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=12, mverb=0.5, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571446286)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=6, amp=2, cutoff=sinvar([500, 1100], 32), res=0.1, sub=0, body=8, growl=0.2, pumper=.1, pumprate=0, tape=1.7, tapedrive=1.4)
+
+_seq_schedule(16, 1776571453690)
+
+_seq_cancel()
+e1 >> compperc(PRand([0, 5, 7, 12]), dur=PDur(5, 16), sus=0.38, amp=4, tone=4, noise=4, body=1.5, metal=1.9, ring=0.35, comp=0.4, hpf=100, cheapverb=0.4, pan=PRand([-0.5, -0.2, 0.2, 0.5]))
+
+_seq_schedule(4, 1776571461079)
+
+_seq_cancel()
+d1 >> compkick(2, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571462939)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+e9 >> tb304([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1,amp=4, shape=0, shapemix=0.5, oct=6, hpf=1200, mverb=0.2)
+
+_seq_schedule(16, 1776571466639)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571474044)
+
+_seq_cancel()
+h2 >> click(0, dur=1/4, sus=0.015, amp=Pacc("ghost")*4, rate=18, hpf=5500, pan=PRand([-0.3, 0.3]))
+r7 >> play("X ", lpf=[800, 1600, 400, 0])
+e9.amp=0.6
+
+_seq_schedule(16, 1776571477762)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(8, 1776571485166)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.8, tapedrive=1)
+
+_seq_schedule(16, 1776571488862)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.9, tapedrive=1)
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=1, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+_seq_schedule(16, 1776571496253)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.1, tapedrive=1)
+
+_seq_schedule(16, 1776571503644)
+
+_seq_cancel()
+o1 >> play("U...", echo=0.5, sample=6, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.2, tapedrive=1)
+_seq_schedule(4, 1776571511095)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.4, tapedrive=1)
+
+_seq_schedule(16, 1776571512944)
+
+_seq_cancel()
+o1 >> play(".[O]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=22, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.3, tapedrive=1)
+e9 >> tb303([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=1, shape=0, shapemix=0.0, oct=6, hpf=2701, mverb=0.5)
+g8 >> play("[--]", hpf=12200, sample=15, echo=0.5, gdel=0.2, gdeltime=0.125, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.9)
+
+_seq_schedule(8, 1776571520336)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(28, 1776571524042)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -5, -5, 0, 0, -7, -5], dur=PDur(5,8), sus=PDur(5,8)*0.75, oct=4, amp=1.8, cutoff=sinvar([380, 900], 32), res=0.6, sub=0.0, body=1.2, growl=0, tape=0.9, tapedrive=0.8, hpf=55)
+
+_seq_schedule(16, 1776571536970)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+m1.stop()
+_seq_schedule(4, 1776571544363)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(16, 1776571546227)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(16, 1776571553619)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+f7 >> play("k ", dur=1/4)
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=6, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776571561012)
+
+_seq_cancel()
+~d1 >> compkick(var([4, 2], [7, 1]), dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776571568423)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776571575839)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571579543)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=7, amp=2, cutoff=linvar([700, 1600], 32), res=0.4, sub=0.0, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, rgaterate=4, rgatewave=1, drift=1, driftspeed=1, driftdepth=1, driftsmooth=0.5, beat_dur=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.0, tapedrive=0)
+
+_seq_schedule(8, 1776571583243)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776571586940)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=6, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+r7 >> play("X ", lpf=[800, 1600, 400, 0]).stop()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+a6 >> play("V ", amp=2, sample=2)
+
+s1 >> play("..o...o.", dur=0.25, sample=14, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+s2 >> play("e", dur=0.25, sample=3, amp=var([0, 0.5], [30, 2]))
+s2.degree = var(["e", "oooo[oo]oo"], [30, 2])
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.2, tapedrive=1)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.1, tapedrive=1)
+
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=1, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.9, tapedrive=1)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.8, tapedrive=1)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1, lpf=3200, lpr=0.2)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1, lpf=3200, lpr=0.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1, lpf=3200, lpr=0.2)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1, lpf=3200, lpr=0.1)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1, lpf=3200, lpr=0.1)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1, lpf=3200, lpr=0.1, wshape=1, wgain=1, wmix=0.5)
+
+z4 >> play("X ", amp=4)
+
+z4 >> play("X ", amp=1)
+
+z4.stop()
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1, lpf=3200, lpr=0.1, wshape=1, wgain=1, wmix=0.5).only()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776577778371)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776577785786)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776577789483)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.4, tapedrive=1.7)
+
+_seq_schedule(8, 1776577793181)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776577796882)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.1, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776577800580)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=4, tone=0.5, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_schedule(16, 1776577804288)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=36, tone=[0.6, 0.8, 0.6, 0.6])
+
+_seq_schedule(8, 1776577811687)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.65, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776577815384)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.66, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(4, 1776577822777)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.67, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776577824634)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.68, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776577832027)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776577835727)
+
+_seq_cancel()
+d1 >> compkick([2], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776577843124)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776577846823)
+
+_seq_cancel()
+d1 >> compkick(var([2, 0], 8), dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776577850520)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=8, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(4, 1776577857920)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+m1 >> darkpad([0, -5], dur=16, sus=17, oct=5, amp=0.8, cutoff=linvar([600, 3200], 48), res=0.4, detune=0.35, dark=0.7, sub=0.6, cheapverb=0.65, cvdecay=2.5, hpf=180, csweep=0.2, cswfreq=200, cswdepth=0.1, cswrate=0.5, cswdecay=0.5, vowel=1, vowelf=1, vowelq=1)
+
+_seq_schedule(8, 1776577859775)
+
+_seq_cancel()
+d2 >> click(0, dur=1/2, sus=0.1, amp=[0, 0.35], rate=24, hpf=2400, pan=0.1, leg=1, mverb=0.5)
+
+_seq_schedule(8, 1776577863489)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776577867199)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776577874605)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776577878315)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([2, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776577882027)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=2, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776577889426)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=24, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776577896838)
+
+_seq_cancel()
+~d1 >> compkick(PRand([0, 5, 7, 12]), dur=1, oct=4, amp=0.40, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=12, mverb=0.5, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776577900543)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=6, amp=2, cutoff=sinvar([500, 1100], 32), res=0.1, sub=0, body=8, growl=0.2, pumper=.1, pumprate=0, tape=1.7, tapedrive=1.4)
+
+_seq_schedule(16, 1776577907943)
+
+_seq_cancel()
+e1 >> compperc(PRand([0, 5, 7, 12]), dur=PDur(5, 16), sus=0.38, amp=4, tone=4, noise=4, body=1.5, metal=1.9, ring=0.35, comp=0.4, hpf=100, cheapverb=0.4, pan=PRand([-0.5, -0.2, 0.2, 0.5]))
+
+_seq_schedule(4, 1776577915336)
+
+_seq_cancel()
+d1 >> compkick(2, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776577917199)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+e9 >> tb304([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1,amp=4, shape=0, shapemix=0.5, oct=6, hpf=1200, mverb=0.2)
+
+_seq_schedule(16, 1776577920898)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776577928303)
+
+_seq_cancel()
+h2 >> click(0, dur=1/4, sus=0.015, amp=Pacc("ghost")*4, rate=18, hpf=5500, pan=PRand([-0.3, 0.3]))
+r7 >> play("X ", lpf=[800, 1600, 400, 0])
+e9.amp=0.6
+
+_seq_schedule(16, 1776577932018)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(8, 1776577939432)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.8, tapedrive=1)
+
+_seq_schedule(16, 1776577943133)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.9, tapedrive=1)
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=1, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+_seq_schedule(16, 1776577950528)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.1, tapedrive=1)
+
+_seq_schedule(16, 1776577957919)
+
+_seq_cancel()
+o1 >> play("U...", echo=0.5, sample=6, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.2, tapedrive=1)
+_seq_schedule(4, 1776577965310)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.4, tapedrive=1)
+
+_seq_schedule(16, 1776577967164)
+
+_seq_cancel()
+o1 >> play(".[O]..", echo=0.5, fbdelay=1, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sample=22, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.3, tapedrive=1)
+e9 >> tb303([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=1, shape=0, shapemix=0.0, oct=6, hpf=2701, mverb=0.5)
+g8 >> play("[--]", hpf=12200, sample=15, echo=0.5, gdel=0.2, gdeltime=0.125, gdelsize=0.1, gdelsprd=0.5, gdelfb=0.9)
+
+_seq_schedule(8, 1776577974556)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(28, 1776577978261)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -5, -5, 0, 0, -7, -5], dur=PDur(5,8), sus=PDur(5,8)*0.75, oct=4, amp=1.8, cutoff=sinvar([380, 900], 32), res=0.6, sub=0.0, body=1.2, growl=0, tape=0.9, tapedrive=0.8, hpf=55)
+
+_seq_schedule(16, 1776577991189)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+m1.stop()
+_seq_schedule(4, 1776577998581)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(16, 1776578000437)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=6, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(16, 1776578007835)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+f7 >> play("k ", dur=1/4)
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=6, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776578015225)
+
+_seq_cancel()
+~d1 >> compkick(var([4, 2], [7, 1]), dur=1, oct=3, amp=1, punch=2, comp=0.1, click=10, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776578022632)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776578030039)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776578033739)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=7, amp=2, cutoff=linvar([700, 1600], 32), res=0.4, sub=0.0, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, rgaterate=4, rgatewave=1, drift=1, driftspeed=1, driftdepth=1, driftsmooth=0.5, beat_dur=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.0, tapedrive=0)
+
+_seq_schedule(8, 1776578037436)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776578041139)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(16, 1776578043206)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776578050601)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776578054298)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.4, tapedrive=1.7)
+
+_seq_schedule(8, 1776578057997)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776578061694)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=4000, fbspread=0.1, beat_dur=1, rgaterate=4, rgatewave=1, growl=0.1, pumper=0.0, pumprate=0, tape=0.2, tapedrive=1.7)
+
+_seq_schedule(8, 1776578065394)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=4, tone=0.5, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+_seq_schedule(16, 1776578069091)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=0.9, click=0.65, sub=1, body=36, tone=[0.6, 0.8, 0.6, 0.6])
+
+_seq_schedule(8, 1776578076490)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.65, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776578080186)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.66, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(4, 1776578087579)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.67, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776578089431)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.68, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776578096825)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.70, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(16, 1776578100527)
+
+_seq_cancel()
+d1 >> compkick([2], dur=1, oct=3, amp=0.95, punch=2, comp=var([1, 0], [28, 4]), click=0.75, sub=1, body=36, tone=0.5, echo=0.5)
+
+_seq_schedule(8, 1776578107922)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=2, comp=1, click=0, sub=1, body=34, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776578111624)
+
+_seq_cancel()
+d1 >> compkick(var([2, 0], 8), dur=1, oct=3, amp=0.95, punch=0, comp=1, click=12, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776578115320)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0, comp=1, click=8, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=1000, fbspread=0.20, beat_dur=1, sub=0, body=16, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(4, 1776578122715)
+
+_seq_cancel()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+m1 >> darkpad([0, -5], dur=16, sus=17, oct=5, amp=0.8, cutoff=linvar([600, 3200], 48), res=0.4, detune=0.35, dark=0.7, sub=0.6, cheapverb=0.65, cvdecay=2.5, hpf=180, csweep=0.2, cswfreq=200, cswdepth=0.1, cswrate=0.5, cswdecay=0.5, vowel=1, vowelf=1, vowelq=1)
+
+_seq_schedule(8, 1776578124565)
+
+_seq_cancel()
+d2 >> click(0, dur=1/2, sus=0.1, amp=[0, 0.35], rate=24, hpf=2400, pan=0.1, leg=1, mverb=0.5)
+
+_seq_schedule(8, 1776578128279)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776578131983)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776578139379)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776578143089)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([2, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776578146792)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=2, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=36, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776578154192)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=24, tone=linvar([1, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776578161599)
+
+_seq_cancel()
+~d1 >> compkick(PRand([0, 5, 7, 12]), dur=1, oct=4, amp=0.40, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=1, body=12, mverb=0.5, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(16, 1776578165303)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=6, amp=2, cutoff=sinvar([500, 1100], 32), res=0.1, sub=0, body=8, growl=0.2, pumper=.1, pumprate=0, tape=1.7, tapedrive=1.4)
+
+_seq_schedule(16, 1776578172700)
+
+_seq_cancel()
+e1 >> compperc(PRand([0, 5, 7, 12]), dur=PDur(5, 16), sus=0.38, amp=4, tone=4, noise=4, body=1.5, metal=1.9, ring=0.35, comp=0.4, hpf=100, cheapverb=0.4, pan=PRand([-0.5, -0.2, 0.2, 0.5]))
+
+_seq_schedule(4, 1776578180093)
+
+_seq_cancel()
+d1 >> compkick(2, dur=1, oct=3, amp=0.95, punch=6, comp=.2, click=14, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776578181966)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+e9 >> tb304([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1,amp=4, shape=0, shapemix=0.5, oct=6, hpf=1200, mverb=0.2)
+
+_seq_schedule(16, 1776578185669)
+
+_seq_cancel()
+~d1 >> compkick(0, dur=1, oct=3, amp=1, punch=9, comp=1, click=48, fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, sub=0, body=36, mverb=0.0, tone=linvar([0.5, 1.1], 32), echo=0.5)
+
+_seq_schedule(8, 1776578193079)
+
+_seq_cancel()
+h2 >> click(0, dur=1/4, sus=0.015, amp=Pacc("ghost")*4, rate=18, hpf=5500, pan=PRand([-0.3, 0.3]))
+r7 >> play("X ", lpf=[800, 1600, 400, 0])
+e9.amp=0.6
+
+_seq_schedule(16, 1776578196791)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.7, tapedrive=1)
+
+_seq_schedule(8, 1776578204201)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.8, tapedrive=1)
+
+_seq_schedule(16, 1776578207899)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=1.9, tapedrive=1)
+e9 >> plaitsX([0, 0, 3, 0, _, 0, 5, 0, 0, _, 0, 3], dur=1/4, amp=4, shape=1, shapemix=0.5, oct=6, hpf=1200, mverb=0.5)
+
+_seq_schedule(16, 1776578215300)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.1, tapedrive=1)
+
+_seq_schedule(16, 1776578222691)
+
+_seq_cancel()
+o1 >> play("U...", echo=0.5, sample=6, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.2, tapedrive=1)
+_seq_schedule(4, 1776578230084)
+
+_seq_cancel()
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(15,16), sus=PDur(5,8)*0.8, oct=5, amp=1, cutoff=sinvar([500, 1100], 32), res=0.05, sub=0, body=16, growl=0.0, pumper=0.1, pumprate=3, tape=2.4, tapedrive=1)
+
+_seq_schedule(16, 1776578231939)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+

@@ -1288,38 +1288,38 @@ try:
 
         def sendScale(self):
             ''' send Scale to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     msg = json.dumps({"type": "scale", "scale": str(Scale.default.name)})
                     wsServer.send(msg)
-                    sleep(self.bpmTime*10)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.bpmTime*10)
 
         def sendRoot(self):
             ''' send Root to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     msg = json.dumps({"type": "root", "root": str(Root.default)})
                     wsServer.send(msg)
-                    sleep(self.bpmTime*10)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.bpmTime*10)
 
         def sendBeat(self):
             ''' send Clock.beat to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     msg = json.dumps({"type": "beat", "beat": Clock.beat})
                     wsServer.send(msg)
-                    sleep(self.beatTime)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.beatTime)
 
         def sendPlayer(self):
             ''' send active player to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     self.addPlayerTurn()
                     playerListCount = []
                     soloPlayers = [p.name for p in Clock.solo.data]
@@ -1331,35 +1331,33 @@ try:
                         else:
                             name = k.synthdef
                         playerListCount.append(json.dumps({"player": player, "name": name, "duration": duration, "solo": player in soloPlayers}))
-                    # playerListCount = [
-                    #     f'{k} {divmod(v, 60)[0]:02d}:{divmod(v, 60)[1]:02d}' for k, v in self.playerCounter.items()]
                     msg = json.dumps({"type": "players", "players": playerListCount})
                     wsServer.send(msg)
-                    sleep(self.plyTime)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.plyTime)
 
         def sendMasterFx(self):
             ''' send Master FX to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     masterFx = Server.listFx()
                     msg = json.dumps({"type": "masterFx", "masterFx": masterFx})
                     wsServer.send(msg)
-                    sleep(self.bpmTime*8)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.bpmTime*8)
 
         def sendPdj(self):
             ''' send platdujour to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     intitule, plat = self.pdj.choix()
                     msg = json.dumps({"type": "pdj", "intitule": intitule, "plat": plat})
                     wsServer.send(msg)
-                    sleep(self.pdjTime)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.pdjTime)
 
         def sendParams(self):
             ''' send params to OSC server '''
@@ -1368,7 +1366,7 @@ try:
                     msg = json.dumps({"type": "params", "params": self.params},
                                      default=self.to_json_safe,
                                      allow_nan=False)
-                    asyncio.run(wsServer.sendWebsocket(msg))
+                    wsServer.send(msg)
                     sleep(self.bpmTime*4)
             except Exception as e:
                 print("sendParams problem : ", e)
@@ -1386,14 +1384,14 @@ try:
 
         def sendChrono(self):
             ''' send ChronoTime to OSC server '''
-            try:
-                while self.isrunning:
+            while self.isrunning:
+                try:
                     elapsedTime = time() - self.timeInit
                     msg = json.dumps({"type": "chrono", "chrono": elapsedTime})
                     wsServer.send(msg)
-                    sleep(self.chronoTime)
-            except:
-                pass
+                except Exception:
+                    pass
+                sleep(self.chronoTime)
 
         def addPlayerTurn(self):
             ''' add one to player dictionnary turn '''
@@ -1584,9 +1582,15 @@ class WebsocketServer():
     def send_bpm_periodically(self):
         ''' Send bpm to websocket server every second '''
         while True:
-            bpm = int(Clock.get_bpm())
-            self.send(json.dumps({"type": "bpm", "bpm": bpm}))
-            sleep(60/bpm)
+            try:
+                bpm = int(Clock.get_bpm())
+                if bpm <= 0:
+                    bpm = 120
+                self.send(json.dumps({"type": "bpm", "bpm": bpm}))
+                sleep(60 / bpm)
+            except Exception as e:
+                print(f"send_bpm error: {e}")
+                sleep(1)
 
     async def sendFoxdotAutocomplete(self):
         ''' Send FoxDot autocomplete data to websocket server '''
@@ -1650,7 +1654,10 @@ class WebsocketServer():
     def sendServerState(self):
         ''' Send server state to websocket server '''
         while True:
-            self.send(json.dumps({"type": "serverState", "serverState": 1 if serverActive else 0}))
+            try:
+                self.send(json.dumps({"type": "serverState", "serverState": 1 if serverActive else 0}))
+            except Exception:
+                pass
             sleep(1.1)
 
 try:
@@ -1659,8 +1666,12 @@ except Exception as e:
     wsServer = None
     print(f"!! WebsocketServer failed to start on port {config['FOXDOT_WS_PORT']}: {e}")
     print("!! attack()/autocomplete/crashpanel will not reach webTroop")
-crashpanel = CrashPanelWs()
-crashpanel.start()
+
+try:
+    crashpanel = CrashPanelWs()
+    crashpanel.start()
+except Exception as e:
+    print(f"CrashPanelWs init failed: {e}")
 
 # French cut
 try:
@@ -2220,6 +2231,7 @@ class Compo():
         self._fire_players = set()
         self._setlist_data = []
         self._setlist_index = 0
+        self._stem_session = None
 
     def _extract_players(self, code):
         """Extract player names (e.g. p1, d1, j12) from code."""
@@ -2502,6 +2514,637 @@ class Compo():
         """
         name_str = name if name else ""
         print(f"__REC_STOP__:{name_str}")
+
+    # ============================================================
+    # STEM RECORDING (video_game branch)
+    # Captures each FoxDot player to its own .wav stem for adaptive
+    # game audio (vertical-remix layering). Player gets routed to a
+    # private SC bus via player.output=N; \stemDiskOut writes the bus
+    # to disk; \stemTap mirrors the bus to master so user still hears.
+    # All stems are synced to the next bar boundary and run for the
+    # same wallclock duration regardless of internal cycle lengths.
+    # ============================================================
+
+    def rec_stems(self, bars=16, session="scene", variation="v1",
+                  players=None, output_dir=None, tail_bars=0, bus_start=32):
+        """Record each active player to its own .wav file, synced + same length.
+
+        bars: int  -- loop length in bars (4 beats per bar)
+        session: str -- scene name (e.g. 'forest', 'cave')
+        variation: str -- intensity tag (e.g. 'calm', 'tense', 'combat')
+        players: None | list -- player names ['p1','b1'] or refs [p1,b1].
+                                None = autodiscover all 2-char Player instances.
+        output_dir: str -- defaults to './stems'
+        tail_bars: int -- extra bars past loop for tail-fold post-process (0=hard cut)
+        bus_start: int -- first private audio bus to route to (default 32). Must be
+                          >= numOutputBusChannels + numInputBusChannels. With the
+                          default FoxDot.sc (16 out + 2 in), private busses start
+                          at 18; we use 32 for comfortable headroom.
+
+        Files land as: {output_dir}/{session}__{playername}__{variation}.wav
+
+        Starts on the next bar boundary so loops align cleanly. Stops after
+        (bars + tail_bars) * 4 beats and restores each player.output to its
+        original value.
+        """
+        import os, re
+
+        if self._stem_session is not None:
+            print("[rec_stems] Already running. Call compo.stem_stop() first.")
+            return
+
+        output_dir = output_dir or "./stems"
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Discover players
+        discovered = self._discover_stem_players(players)
+        if not discovered:
+            print("[rec_stems] No active players. Pass players=['p1','b1',...]")
+            return
+
+        # Assign a private bus per player (stereo pairs from bus_start upward).
+        # ROUTING: we set p.output=N, which FoxDot recognizes as the 'output'
+        # FX (registered in crashFX.py via FxList.new('output','output', ...)).
+        # That spawns a \output synth in the player's effect chain doing
+        # `Out.ar(output, In.ar(bus, 2))` — it reads the player's internal
+        # bus and copies the signal to bus N, leaving the synth's own freq
+        # controls untouched. \stemDiskOut and \stemTap then operate on bus N.
+        bus_map = {name: bus_start + 2*i for i, (name, _) in enumerate(discovered)}
+        needs_routing = list(discovered)
+
+        # Build file paths
+        paths = {
+            name: os.path.abspath(
+                os.path.join(output_dir, f"{session}__{name}__{variation}.wav"))
+            for name, _ in discovered
+        }
+
+        # Save each player's pre-existing output value (if any), so we can
+        # restore. If 'output' wasn't in attr before, we'll delete it on stop.
+        original_outputs = {}
+        for name, p in discovered:
+            try:
+                if 'output' in p.attr:
+                    original_outputs[name] = p.attr['output']
+                else:
+                    original_outputs[name] = None
+            except Exception:
+                original_outputs[name] = None
+
+        self._stem_session = {
+            'discovered': discovered,
+            'bus_map': bus_map,
+            'paths': paths,
+            'original_outputs': original_outputs,
+            'needs_routing': needs_routing,
+            'session': session,
+            'variation': variation,
+            'bars': bars,
+            'tail_bars': tail_bars,
+        }
+
+        # Defer to next bar boundary for clean phase alignment
+        beats_to_bar = self._beats_to_next_bar()
+        print(f"__STEMS_START__:{session}:{variation}:{bars}b:{len(discovered)}p")
+        print(f"  scheduling start in {beats_to_bar:.2f} beats (next bar)")
+        for name, p in discovered:
+            print(f"  {name} -> bus {bus_map[name]} -> {paths[name]}")
+        Clock.future(beats_to_bar, self._stem_start_actual)
+
+    def _user_namespaces(self):
+        """Return list of namespaces where user-coded players might live.
+        Order: caller's globals (2 frames up) > __main__ > this module's globals.
+        webTroop pipes user code into an exec that runs in __main__; the caller
+        of compo.rec_stems() is usually that exec's frame."""
+        import inspect, sys
+        out = []
+        try:
+            frame = inspect.currentframe()
+            # Walk up a few frames to find user-coded namespace
+            for _ in range(6):
+                if frame is None:
+                    break
+                frame = frame.f_back
+                if frame is None:
+                    break
+                g = frame.f_globals
+                if g not in out:
+                    out.append(g)
+        except Exception:
+            pass
+        try:
+            mg = sys.modules['__main__'].__dict__
+            if mg not in out:
+                out.append(mg)
+        except Exception:
+            pass
+        gl = globals()
+        if gl not in out:
+            out.append(gl)
+        return out
+
+    def _discover_stem_players(self, players):
+        """Returns list of (name, player_ref) tuples for ACTIVE players.
+
+        Strategy: trust Clock.playing as the source of truth (only actually
+        playing players). Reverse-look-up the variable name via identity
+        check across namespaces. Avoids touching EmptyPlayer placeholders
+        FoxDot pre-creates in __main__ for all 2-char names — those have
+        a callable-like __getattr__ that triggers TypeError when probed.
+        """
+        import re
+
+        namespaces = self._user_namespaces()
+
+        def find_name(ref):
+            for ns in namespaces:
+                try:
+                    keys = list(ns.keys())
+                except Exception:
+                    continue
+                for var_name in keys:
+                    if not re.match(r'^[a-z]\d+$', var_name):
+                        continue
+                    try:
+                        if ns[var_name] is ref:
+                            return var_name
+                    except Exception:
+                        continue
+            return None
+
+        # --- autodiscover from Clock.playing ---
+        if players is None:
+            try:
+                active = list(Clock.playing)
+            except Exception as e:
+                print(f"  [rec_stems] couldn't read Clock.playing: {e}")
+                return []
+            if not active:
+                print("  [rec_stems] Clock.playing is empty — no players running")
+                return []
+            discovered = []
+            for p in active:
+                name = find_name(p)
+                discovered.append((name or f"x{len(discovered)}", p))
+            return discovered
+
+        if not players:
+            return []
+
+        # --- explicit list of names ---
+        if isinstance(players[0], str):
+            out = []
+            for n in players:
+                p = None
+                for ns in namespaces:
+                    try:
+                        if n in ns:
+                            p = ns[n]
+                            break
+                    except Exception:
+                        continue
+                if p is None:
+                    print(f"  [rec_stems] skip '{n}' (not found)")
+                    continue
+                if type(p).__name__ == 'EmptyPlayer':
+                    print(f"  [rec_stems] skip '{n}' (EmptyPlayer placeholder — not yet played)")
+                    continue
+                out.append((n, p))
+            return out
+
+        # --- explicit list of Player refs ---
+        out = []
+        for i, p in enumerate(players):
+            out.append((find_name(p) or f'p{i}', p))
+        return out
+
+    def _beats_to_next_bar(self):
+        """Beats until next bar boundary (assumes 4/4)."""
+        try:
+            bar_len = Clock.bar_length()
+            now = Clock.now()
+            rem = bar_len - (now % bar_len)
+            if rem < 0.1:
+                rem = bar_len
+            return rem
+        except Exception:
+            return 4.0
+
+    def _stem_start_actual(self):
+        """Fire actual stem recording (deferred to bar boundary)."""
+        if self._stem_session is None:
+            return
+        s = self._stem_session
+
+        # Build OSC payload: bus, path, bus, path, ...
+        payload = []
+        for name, _ in s['discovered']:
+            payload.append(s['bus_map'][name])
+            payload.append(s['paths'][name])
+
+        # Send /foxdot_stems_start to SC
+        try:
+            from FoxDot.lib.OSC3 import OSCMessage
+            msg = OSCMessage("/foxdot_stems_start")
+            for item in payload:
+                msg.append(item)
+            Server.sclang.send(msg)
+        except Exception as e:
+            print(f"[stems] OSC send failed: {e}")
+            self._stem_session = None
+            return
+
+        # Re-route via the 'output' FX. `p.output = N` runs through Player's
+        # normal __setattr__ — since 'output' isn't in __vars, it lands in
+        # self.attr and gets sent to SC on each /s_new. FoxDot recognizes
+        # 'output' as a registered FX (FxList.new('output','output',...) in
+        # crashFX.py:660) and spawns the \output SynthDef in the player's
+        # FX chain, which does `Out.ar(N, In.ar(bus, 2))` — copies the
+        # post-FX signal to bus N. The player's own bus and control signals
+        # (freq via In.kr, ReplaceOut.ar(bus, osc)) stay intact.
+        for name, p in s['needs_routing']:
+            try:
+                p.output = s['bus_map'][name]
+            except Exception as e:
+                print(f"  [stems] failed to route {name}: {e}")
+
+        total_beats = (s['bars'] + s['tail_bars']) * 4
+        print(f"[stems] recording for {total_beats} beats ({s['bars']}b + {s['tail_bars']}b tail)")
+        Clock.future(total_beats, self._stem_stop_actual)
+
+    def _stem_stop_actual(self):
+        """Stop stem recording session and restore player.output values."""
+        if self._stem_session is None:
+            return
+        s = self._stem_session
+
+        try:
+            from FoxDot.lib.OSC3 import OSCMessage
+            msg = OSCMessage("/foxdot_stems_stop")
+            Server.sclang.send(msg)
+        except Exception as e:
+            print(f"[stems] OSC stop send failed: {e}")
+
+        # Restore each player's output: if they had one before, set back to
+        # that; otherwise delete the attr so the default (bus 0 / no \output
+        # FX synth) returns. This mutation runs through __setattr__ which is
+        # fine — 'output' is in attr, not __vars.
+        for name, p in s['needs_routing']:
+            orig = s['original_outputs'].get(name)
+            try:
+                if orig is None:
+                    if 'output' in p.attr:
+                        del p.attr['output']
+                else:
+                    p.output = orig
+            except Exception:
+                pass
+
+        print(f"__STEMS_STOP__:{s['session']}:{s['variation']}:{s['bars']}b")
+        self._stem_session = None
+
+    def stem_stop(self):
+        """Force-stop the active stem recording session immediately."""
+        self._stem_stop_actual()
+
+    # ============================================================
+    # GRID REGISTRY (grid_registry branch)
+    # 2D grid of short, role-focused snippets addressable by
+    # COL+ROW coordinate (A0..Z99). Stored externally in
+    # ~/live/grid/cells.json so an editor tool can manage them
+    # without touching code.
+    #
+    # Conventions:
+    #   columns A..Z = role (A=pad, B=bass, C=kick, D=snare, ...)
+    #   rows 0..99   = tempo bands (0-9: 60-80 BPM, 10-19: 80-100,
+    #                  20-29: 100-120, 30-39: 120-140, ...)
+    #   each cell's code should use the column-canonical player
+    #   name so cross-column stacking is automatic.
+    #
+    # Three actions per cell, exposed via compo.cell_*:
+    #   compo.cell_display(coord)     -> print code (for inspection)
+    #   compo.cell_run(coord)         -> run code, players forever
+    #   compo.cell_run(coord, 8)      -> run code, auto-stop after 8 beats
+    #
+    # The webTroop UI sends these as method calls; the user can
+    # also call them directly in a session.
+    # ============================================================
+
+    GRID_CELLS_PATH = "/home/svdk/live/grid/cells.json"
+
+    def _cells_load_if_needed(self):
+        """Lazy-load the cells JSON. Re-reads from disk if file mtime changed."""
+        import os, json
+        try:
+            path = self.GRID_CELLS_PATH
+            mtime = os.path.getmtime(path)
+        except OSError:
+            print(f"[grid] cells file not found at {self.GRID_CELLS_PATH}")
+            self._cells = {}
+            self._cells_mtime = 0
+            return
+        if not hasattr(self, '_cells') or getattr(self, '_cells_mtime', 0) != mtime:
+            try:
+                with open(path) as f:
+                    raw = json.load(f)
+                # strip _meta from the working dict
+                self._cells = {k: v for k, v in raw.items() if not k.startswith('_')}
+                self._cells_mtime = mtime
+                print(f"[grid] loaded {len(self._cells)} cells")
+            except Exception as e:
+                print(f"[grid] load failed: {e}")
+                self._cells = {}
+                self._cells_mtime = 0
+
+    def cell_reload(self):
+        """Force reload cells.json from disk."""
+        self._cells_mtime = 0
+        self._cells_load_if_needed()
+
+    def cell(self, coord):
+        """Return the cell dict at coord (e.g. 'B32'), or None."""
+        self._cells_load_if_needed()
+        return self._cells.get(coord)
+
+    def cells_list(self, prefix=None):
+        """Print all populated cells, optionally filtered by coord prefix.
+
+        compo.cells_list()      -> all cells
+        compo.cells_list('B')   -> all column-B cells
+        compo.cells_list('B3')  -> B30..B39
+        """
+        self._cells_load_if_needed()
+        keys = sorted(self._cells.keys(),
+                      key=lambda k: (k[0], int(k[1:]) if k[1:].isdigit() else 0))
+        if prefix:
+            keys = [k for k in keys if k.startswith(prefix)]
+        for k in keys:
+            cell = self._cells[k]
+            label = cell.get('label', '<no label>')
+            print(f"  {k:>4}  {label}")
+        print(f"  ({len(keys)} cells)")
+
+    def cell_display(self, coord):
+        """Print a cell's code (for inspection)."""
+        cell = self.cell(coord)
+        if cell is None:
+            print(f"[grid] {coord} empty")
+            return
+        print(f"# {coord}: {cell.get('label', '')}")
+        print(cell.get('code', ''))
+
+    def cell_run(self, coord, stop_after=None):
+        """Run a grid cell, optionally auto-stopping its created players after N beats.
+
+        coord: 'B32' style address
+        stop_after: None | 2 | 4 | 8 | 16 | 64 — beats after which created
+                    players auto-stop. None = run forever.
+        """
+        import sys, inspect, re
+        cell = self.cell(coord)
+        if cell is None:
+            print(f"[grid] {coord} empty")
+            return
+        code = cell.get('code', '')
+        if not code:
+            print(f"[grid] {coord} has no code")
+            return
+
+        # Snapshot active players before exec
+        try:
+            before = set(id(p) for p in Clock.playing)
+        except Exception:
+            before = set()
+
+        # Find FoxDot's interactive shell namespace.
+        # Aggregate candidates: walk up to 20 caller frames + __main__ + the
+        # FoxDot package's module globals. Score each by presence of known
+        # FoxDot symbols (Clock, Server, Scale) and EmptyPlayer placeholders
+        # for common 2-char names (p0, p1, b1, k1, d1, h1, a1). Pick highest
+        # score.
+        own = globals()
+        candidates = []
+        try:
+            frame = inspect.currentframe()
+            for _ in range(20):
+                if frame is None:
+                    break
+                frame = frame.f_back
+                if frame is None:
+                    break
+                g = frame.f_globals
+                if g is own:
+                    continue
+                if g not in candidates:
+                    candidates.append(g)
+        except Exception:
+            pass
+        try:
+            mg = sys.modules['__main__'].__dict__
+            if mg is not own and mg not in candidates:
+                candidates.append(mg)
+        except Exception:
+            pass
+        try:
+            import FoxDot as _fd
+            if hasattr(_fd, '__dict__') and _fd.__dict__ is not own:
+                if _fd.__dict__ not in candidates:
+                    candidates.append(_fd.__dict__)
+        except Exception:
+            pass
+
+        ns = None
+        best_score = -1
+        for cand in candidates:
+            if not isinstance(cand, dict):
+                continue
+            score = 0
+            for sym in ('Clock', 'Server', 'Scale', 'Root', 'Player'):
+                if sym in cand:
+                    score += 5
+            # presence of EmptyPlayer placeholders
+            for k in ('p0', 'p1', 'b1', 'k1', 'd1', 'd2', 'h1', 'a1', 's1'):
+                if k in cand:
+                    score += 1
+            if score > best_score:
+                best_score = score
+                ns = cand
+
+        if ns is None:
+            ns = own
+
+        # PASS 1: inject everything public from FoxDot's module
+        try:
+            import FoxDot as _fd
+            for attr_name in dir(_fd):
+                if attr_name.startswith('_'):
+                    continue
+                if attr_name not in ns:
+                    try:
+                        ns[attr_name] = getattr(_fd, attr_name)
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+        # PASS 2: collect ALL identifier tokens in the code (not just
+        # synths/players/line-start calls — also nested calls like
+        # amp=Pacc(6,4)*PBin(8), patterns like PRand/PWhite/var/melody,
+        # FX constants, anything). Then resolve each missing one by
+        # walking sys.modules.
+        all_tokens = set(re.findall(r'\b([A-Za-z_]\w*)\b', code))
+
+        # Skip Python keywords + builtins (always available to exec)
+        import keyword, builtins
+        skip_names = set(keyword.kwlist) | set(dir(builtins))
+        skip_names |= {'True', 'False', 'None', 'self'}
+
+        missing_after_fd = [t for t in all_tokens
+                            if t not in skip_names and t not in ns]
+
+        if missing_after_fd:
+            # Priority modules to check first
+            priority_mods = [
+                'FoxDot.lib.Crashserver.crashSynthDefs',
+                'FoxDot.lib.Crashserver.crashFX',
+                'FoxDot.lib.Crashserver.startup_live',
+                'FoxDot.lib.Custom.startup',
+                'FoxDot.lib.Patterns',
+                'FoxDot.lib.Patterns.Main',
+                'FoxDot.lib.Patterns.Generators',
+                'FoxDot.lib.TimeVar',
+                'FoxDot.lib.Scale',
+                'FoxDot.lib.Buffers',
+                '__main__',
+            ]
+            for mod_name in priority_mods:
+                if not missing_after_fd:
+                    break
+                mod = sys.modules.get(mod_name)
+                if mod is None or not hasattr(mod, '__dict__'):
+                    continue
+                for name in list(missing_after_fd):
+                    if name in mod.__dict__:
+                        try:
+                            ns[name] = mod.__dict__[name]
+                            missing_after_fd.remove(name)
+                        except Exception:
+                            pass
+            # Fallback: walk ALL loaded modules in a single pass
+            if missing_after_fd:
+                for mod_name, mod in list(sys.modules.items()):
+                    if not missing_after_fd:
+                        break
+                    try:
+                        if mod is None or not hasattr(mod, '__dict__'):
+                            continue
+                        md = mod.__dict__
+                        for name in list(missing_after_fd):
+                            if name in md:
+                                obj = md[name]
+                                if obj is not None:
+                                    ns[name] = obj
+                                    missing_after_fd.remove(name)
+                    except Exception:
+                        continue
+
+        # Final diagnostic — only print things that look like real refs
+        # (capital-starting Pattern names, snake_case funcs, etc.) — skip
+        # noise like locals/single-char tokens.
+        likely_unresolved = [
+            t for t in missing_after_fd
+            if len(t) > 1 and not t[0].isdigit()
+        ]
+        if likely_unresolved:
+            print(f"[grid] {coord} warning: unresolved refs: {likely_unresolved}")
+            print(f"[grid]   (picked ns score={best_score}, "
+                  f"size={len(ns) if ns else 0} keys)")
+
+        try:
+            exec(code, ns)
+            label = cell.get('label', '')
+            tag = f" -> stop in {stop_after}b" if stop_after else ""
+            print(f"[grid] {coord} fired ({label}){tag}")
+        except Exception as e:
+            print(f"[grid] {coord} exec error: {e}")
+            return
+
+        if stop_after is None:
+            return
+
+        # Find newly-active players
+        try:
+            new_players = [p for p in Clock.playing if id(p) not in before]
+        except Exception:
+            new_players = []
+
+        if not new_players:
+            return
+
+        # Schedule auto-stop
+        def _stop_them():
+            for p in new_players:
+                try:
+                    p.stop()
+                except Exception:
+                    pass
+            print(f"[grid] {coord} auto-stopped {len(new_players)} player(s)")
+
+        try:
+            Clock.future(stop_after, _stop_them)
+        except Exception as e:
+            print(f"[grid] schedule stop failed: {e}")
+
+    def cell_save(self, coord, code, label=""):
+        """Save a cell back to disk (atomic write). Used by the editor.
+
+        compo.cell_save("B32", "b1 >> dbass(...)", label="rolling sub")
+        """
+        import json, os, tempfile
+        path = self.GRID_CELLS_PATH
+        # load fresh (don't trample concurrent edits)
+        try:
+            with open(path) as f:
+                raw = json.load(f)
+        except Exception:
+            raw = {}
+        raw[coord] = {"code": code, "label": label}
+        # atomic write
+        try:
+            d = os.path.dirname(path)
+            with tempfile.NamedTemporaryFile('w', dir=d, delete=False, suffix='.json') as tf:
+                json.dump(raw, tf, indent=2, ensure_ascii=False)
+                tmp = tf.name
+            os.replace(tmp, path)
+            self.cell_reload()
+            print(f"[grid] saved {coord}")
+        except Exception as e:
+            print(f"[grid] save failed: {e}")
+
+    def cell_delete(self, coord):
+        """Remove a cell."""
+        import json, os, tempfile
+        path = self.GRID_CELLS_PATH
+        try:
+            with open(path) as f:
+                raw = json.load(f)
+        except Exception:
+            print(f"[grid] load failed")
+            return
+        if coord not in raw:
+            print(f"[grid] {coord} not found")
+            return
+        del raw[coord]
+        try:
+            d = os.path.dirname(path)
+            with tempfile.NamedTemporaryFile('w', dir=d, delete=False, suffix='.json') as tf:
+                json.dump(raw, tf, indent=2, ensure_ascii=False)
+                tmp = tf.name
+            os.replace(tmp, path)
+            self.cell_reload()
+            print(f"[grid] deleted {coord}")
+        except Exception as e:
+            print(f"[grid] delete failed: {e}")
 
 compo = Compo()
 

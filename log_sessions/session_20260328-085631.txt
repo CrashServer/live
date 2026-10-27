@@ -1,0 +1,1405 @@
+attack("epicdevo 66")
+
+_seq_cancel()
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+_seq_schedule(32, 1774684605952)
+
+Clock.bpm = 66
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1774684627252)
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1774684634540)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1774684641825)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1774684664043)
+
+_seq_cancel()
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=0, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+_seq_schedule(16, 1774684671670)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(32, 1774684676858)
+
+_seq_cancel()
+d1.stop()
+p1.stop()
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+c3 >> faim([0, 1, 7], dur=1/2, oct=7, beef=1,         dist2=0.2, amp=0.8, leg=0)
+
+_seq_schedule(16, 1774684685507)
+
+_seq_cancel()
+c5.stop()
+c4.stop()
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=1300, envdist=0.8, envdistgain=2, leg=0, envdistsens=0.7, envdistattack=0.020)
+r1 >> vati([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=6,cutoff=linvar([800, 4000], 8), amp=1.7, leg=0)
+
+_seq_schedule(8, 1774684689838)
+
+_seq_cancel()
+c3.stop() #
+c4.stop()
+r1 >> plaitsX([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=5,cutoff=linvar([800, 4000], 8), amp=1.2, leg=0)
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=1.0, hpf=200, fbdelay=0.5)
+r1 >> plaitsX([0, _, 0, 2, 3, _, 5, 3], dur=0.25, oct=5,    cutoff=3500, amp=0.93, leg=0.5)
+t1.stop()
+
+_seq_schedule(8, 1774684693059)
+
+_seq_cancel()
+Root.default = 0
+d1.stop()
+a1.stop()
+p1.stop() #
+
+_seq_schedule(8, 1774684696141)
+
+_seq_cancel()
+c5.stop()
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+p2.stop() #
+s2 >> play("e", dur=0.25, sample=3, amp=var([0, 0.5], [30, 2]))
+
+_seq_schedule(8, 1774684698951)
+
+_seq_cancel()
+s2.degree = var(["e", "oooo[oo]oo"], [30, 2])
+Scale.default = "chromatic"
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.81, mverb=0.2)
+p2 >> ethpad([0, 1, 7], dur=8, oct=6, attack=3, release=4,  amp=0.71, room=0.9, mix=0.6)
+c3 >> faim([0, 1, 6, 7], dur=var([1/2, 1/4], [7, 1]), oct=5, beef=1, dist2=0.5, amp=var([0.9, 0.5, 0], [8, 8, 2]), leg=0)
+
+_seq_schedule(16, 1774684704638)
+
+_seq_cancel()
+t1.stop()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+r1 >> plaits([0, _, 11, _, 6, 1, _, 7], dur=var([0.25, 1/6], [14, 2]), oct=5, cutoff=linvar([800, 5000], 8), amp=var([0.48, 2.0], [16, 16]), leg=0).unison(4)
+
+_seq_schedule(8, 1774684709118)
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=3, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.56, room=0.7, mix=0.5)
+r1.stop()
+
+_seq_schedule(8, 1774684713296)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, room=0.9, mix=0.6)
+a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.3,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1774684719482)
+
+_seq_cancel()
+Clock.bpm = 132
+c5 >> faim([0, 1, 6], dur=4, oct=6, beef=1, amp=0.9,   fshift=linvar([-20, 20], 16), fmix=0.3)
+
+_seq_schedule(8, 1774684722174)
+
+_seq_cancel()
+c4.stop()
+d1 >> industrialdrone([0], dur=16, oct=6, feedback=0.5, amp=0.3)
+
+_seq_schedule(8, 1774684727031)
+
+_seq_cancel()
+p1 >> ethpad(r1.degree, dur=8, oct=5, attack=2, amp=0.2, room=0.9)
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=1, dark=0.7)
+r2 >> vati([0, 1, 3, 6, 7, 11, 12, 6], dur=0.25, oct=var([5, 6], [16, 16]), cutoff=3000, amp=var([0, 1.0], [16, 16]), leg=0)
+b1 >> plaitsX(var([[0,0,0,3,0,0,5,0], [0,1,2,3,4,5,6,7]], [16, 16]),  dur=0.25, oct=6, amp=P[0.8, 0.3, 0.5, 0.6], lpf=900, shape=0)
+
+_seq_schedule(8, 1774684730693)
+
+_seq_cancel()
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=1, crush=4)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
+
+_seq_schedule(16, 1774684734368)
+
+_seq_cancel()
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=1, crush=4)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
+
+_seq_schedule(128, 1774684740781)
+
+p1.dur=8
+
+p2.dur=8
+
+p2.dur=16
+
+p1.dur=16
+
+_seq_cancel()
+c1.stop()
+
+_seq_schedule(8, 1774684798967)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+
+p1.dur=16
+p2.dur=16
+
+_seq_schedule(16, 1774684802610)
+
+a1.dur=16
+
+_seq_cancel()
+b1.stop()
+s1.stop()
+p1.stop()
+c4.stop()
+r1.stop()
+r3.stop()
+b1.stop()
+
+_seq_schedule(8, 1774684809899)
+
+_seq_cancel()
+Group(k1, s1, s2, h1).solo()
+
+_seq_schedule(8, 1774684813632)
+
+_seq_cancel()
+c5 >> faim([0, 6, 12, 1, 7], dur=2, oct=3, beef=2,  dist2=0.8, amp=1.2, leg=2, room=0.6, mix=0.4)
+b1 >> dbass([0, 0, 0, 0, 0, 0, 0, 0], dur=1/8, oct=5, amp=P[1, 0.4, 0.7, 0.4], lpf=1200, shape=0)
+r1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+s2.stop()
+r1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+r2 >> vati([11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0], dur=1/6, oct=6,  cutoff=5000, amp=0.9, leg=0)
+
+_seq_schedule(16, 1774684817271)
+
+_seq_cancel()
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=6, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0, lpf=1800)
+n1 >> noise(dur=8, amp=linvar([0, 0.4], 8), hpf=2000, lpf=8000)
+
+_seq_schedule(8, 1774684824567)
+
+_seq_cancel()
+c6.oct=(4, 3)
+
+_seq_schedule(4, 1774684828220)
+
+_seq_cancel()
+b1.stop()
+Clock.bpm = 66
+
+_seq_schedule(8, 1774684830041)
+
+_seq_cancel()
+c5 >> faim([0, 3, 6, 9], dur=2, oct=3, beef=2, dist2=0.6, amp=1.0, leg=1, room=0.5)
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=3)
+
+_seq_schedule(4, 1774684837326)
+
+_seq_cancel()
+c9 >> faim([7,6,1,0], dur=PDur(3,8), oct=5, beef=1, amp=var([0, 0.7], [16, 16]), dist2=0.1, leg=0.5)
+
+_seq_schedule(4, 1774684840989)
+
+_seq_cancel()
+p4 >> darkpad(0, dur=32, oct=2, sus=32, dark=0.95, amp=linvar([0, 0.6], 16), cheapverb=0.8, cvdecay=8, cvdamp=0.8).only()
+c9 >> faim([7,6,1,0], dur=PDur(3,8), oct=5, beef=1, amp=var([0, 0.7], [16, 16]), dist2=0.1, leg=0.5)
+
+_seq_schedule(8, 1774684844639)
+
+_seq_cancel()
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=2, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0, lpf=1800)
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.81, mverb=0.2)
+Clock.bpm = 132
+
+_seq_schedule(16, 1774684852064)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+_seq_schedule(8, 1774684861074)
+
+p4 >> darkpad(0, dur=32, oct=2, sus=32, dark=0.95, amp=linvar([0, 0.6], 16), mverb=1, cheapverb=0.8, cvdecay=8, cvdamp=0.8).only()
+
+_seq_cancel()
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(4, 1774684864720)
+
+_seq_cancel()
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=4000, envdist=0.8, envdistgain=2, leg=4, envdistsens=1, envdistattack=0.020, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(8, 1774684866556)
+
+_seq_cancel()
+p4 >> darkpad(0, dur=32, oct=2, sus=32, dark=0.95, amp=linvar([0, 0.6], 16), mverb=1, cheapverb=0.8, cvdecay=8, cvdamp=0.8).only()
+c9 >> faim([7,6,1,0], dur=PDur(3,8), oct=5, beef=1, amp=var([0, 0.7], [16, 16]), dist2=0.1, leg=0.5)
+
+_seq_schedule(8, 1774684867533)
+
+_seq_cancel()
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=2, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0, lpf=1800)
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.81, mverb=0.2)
+Clock.bpm = 132
+
+_seq_schedule(16, 1774684871192)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+_seq_schedule(8, 1774684878503)
+
+_seq_cancel()
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(4, 1774684882148)
+
+_seq_cancel()
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=4000, envdist=0.8, envdistgain=2, leg=4, envdistsens=1, envdistattack=0.020, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(8, 1774684883978)
+
+_seq_cancel()
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=0)
+g0 >> svdk(dur=8,lpf=800)
+
+_seq_schedule(8, 1774684887626)
+
+_seq_cancel()
+m7 >> loop("dubstepdrum32", dur=32)
+
+_seq_schedule(4, 1774684891292)
+
+_seq_cancel()
+c4.degree=0
+c4.degree=2
+c6 >> play("..C.")
+l9 >> play("[--]")
+
+_seq_schedule(8, 1774684893125)
+
+_seq_cancel()
+l0 >> play("X ")
+
+_seq_schedule(16, 1774684896773)
+
+_seq_cancel()
+l9 >> play("[--]", hpf=1200)
+l9 >> play("[--]", hpf=1300)
+l9 >> play("[--]", hpf=2100)
+
+_seq_schedule(16, 1774684904075)
+
+_seq_cancel()
+~d8 >> loop("elephant16", dur=16, sample=4, tape=0, lpr=0, lpf=0)
+
+_seq_schedule(4, 1774684911352)
+
+_seq_cancel()
+p4.stop()
+p1.stop()
+c1.stop()
+b1.stop()
+c4.stop()
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=0.5)
+~d8 >> loop("elephant16", dur=16, sample=4, tape=0, lpr=0, lpf=0)
+
+_seq_schedule(16, 1774684913196)
+
+attack("epicdevo 66")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 66
+
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=0, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=1, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=2, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=3, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=4, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=5, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=6, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=7, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=8, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=9, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=10, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=11, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=12, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=13, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=14, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=15, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=16, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=17, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=18, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=19, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=20, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=1, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=1, chorus2rate=0.7, hpf=100, chorus2depth=0, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, chorus2=0, chorus2rate=0.7, hpf=100, chorus2depth=0, chorus2mode=1).often("stutter", oct=P*[4, 4,5, 6])
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, hpf=100).often("stutter", oct=P*[4, 4,5, 6])
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.6)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.7)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.8)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.9)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=1.0)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.9)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.8)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.7)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.6)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.4)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.3)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.4)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.6)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.7)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.6)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.4)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.6)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.7)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.8)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.7)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.6)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.4)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.3)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.4)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.2, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.2, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+d1.stop()
+
+p1.stop()
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=1, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.2, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.5, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.6, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.7, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.7, vowelf=1, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.7, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.8, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.9, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c3 >> faim([0, 1, 7], dur=1/2, oct=7, beef=1,         dist2=0.2, amp=0.8, leg=0)
+
+c5.stop()
+
+c4.stop()
+
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=1300, envdist=0.8, envdistgain=2, leg=0, envdistsens=0.7, envdistattack=0.020)
+
+r1 >> vati([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=6,cutoff=linvar([800, 4000], 8), amp=1.7, leg=0)
+
+v4.amp=lininf(0.3, 0, 16)
+
+c4.amp=lininf(0.3, 0, 16)
+
+c4.stop()
+
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.9, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c4.stop()
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+r1 >> vati([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=6,cutoff=linvar([800, 4000], 8), amp=1.7, leg=0)
+
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=1300, envdist=0.8, envdistgain=2, leg=0, envdistsens=0.7, envdistattack=0.020)
+
+c4.stop()
+
+c3.stop() #
+
+r1 >> plaitsX([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=5,cutoff=linvar([800, 4000], 8), amp=1.2, leg=0)
+
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=1.0, hpf=200, fbdelay=0.5)
+
+r1 >> plaitsX([0, _, 0, 2, 3, _, 5, 3], dur=0.25, oct=5,    cutoff=3500, amp=0.93, leg=0.5)
+
+t1.stop()
+
+Root.default = 0
+
+d1.stop()
+
+a1.stop()
+
+p1.stop() #
+
+c5.stop()
+
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s1 >> play("..o...o.", dur=0.25, sample=6, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s1 >> play("..o...o.", dur=0.25, sample=7, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s1 >> play("..o...o.", dur=0.25, sample=8, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+p2.stop() #
+
+s2 >> play("e", dur=0.25, sample=3, amp=var([0, 0.5], [30, 2]))
+
+s2.degree = var(["e", "oooo[oo]oo"], [30, 2])
+
+Scale.default = "chromatic"
+
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.81, mverb=0.2)
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=6, attack=3, release=4,  amp=0.71, room=0.9, mix=0.6)
+
+c3 >> faim([0, 1, 6, 7], dur=var([1/2, 1/4], [7, 1]), oct=5, beef=1, dist2=0.5, amp=var([0.9, 0.5, 0], [8, 8, 2]), leg=0)
+
+c3 >> faim([0, 1, 6, 7], dur=var([1/2, 1/4], [7, 1]), oct=5, beef=1, dist2=0.5, amp=var([0.9, 0.5, 0], [8, 8, 2]), leg=0)
+
+t1.stop()
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+
+r1 >> plaits([0, _, 11, _, 6, 1, _, 7], dur=var([0.25, 1/6], [14, 2]), oct=5, cutoff=linvar([800, 5000], 8), amp=var([0.48, 2.0], [16, 16]), leg=0).unison(4)
+
+p1 >> darkpad([0, 6], dur=8, oct=3, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.56, room=0.7, mix=0.5)
+
+r1.stop()
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, room=0.9, mix=0.6)
+
+a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.3,  amp=linvar([0, 0.3], 16))
+
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, room=0.9, mix=0.6)
+
+a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.3,  amp=linvar([0, 0.3], 16))
+
+drop()
+
+Clock.bpm = 132
+
+c5 >> faim([0, 1, 6], dur=4, oct=6, beef=1, amp=0.9,   fshift=linvar([-20, 20], 16), fmix=0.3)
+
+c4.stop()
+
+d1 >> industrialdrone([0], dur=16, oct=6, feedback=0.5, amp=0.3)
+
+#@part19(8)
+p1 >> ethpad(r1.degree, dur=8, oct=5, attack=2, amp=0.2, room=0.9)
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=1, dark=0.7)
+r2 >> vati([0, 1, 3, 6, 7, 11, 12, 6], dur=0.25, oct=var([5, 6], [16, 16]), cutoff=3000, amp=var([0, 1.0], [16, 16]), leg=0)
+b1 >> plaitsX(var([[0,0,0,3,0,0,5,0], [0,1,2,3,4,5,6,7]], [16, 16]),  dur=0.25, oct=6, amp=P[0.8, 0.3, 0.5, 0.6], lpf=900, shape=0)
+
+#@part20(16)
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=1, crush=4)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
+
+s1 >> play("..o...o.", dur=0.25, sample=9, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s1 >> play("..o...o.", dur=0.25, sample=10, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s1 >> play("..o...o.", dur=0.25, sample=11, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s1 >> play("..o...o.", dur=0.25, sample=12, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s1 >> play("..o...o.", dur=0.25, sample=13, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+s1 >> play("..o...o.", dur=0.25, sample=14, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+
+#@part20(16)
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=1, crush=4)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
+
+c1.stop()
+
+b1.stop()
+
+p1.stop()
+
+p2.stop()
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+
+_seq_cancel()
+b1.stop()
+s1.stop()
+p1.stop()
+c4.stop()
+r1.stop()
+r3.stop()
+b1.stop()
+
+_seq_schedule(8, 1774685408786)
+
+_seq_cancel()
+Group(k1, s1, s2, h1).solo()
+
+_seq_schedule(8, 1774685411742)
+
+_seq_cancel()
+c5 >> faim([0, 6, 12, 1, 7], dur=2, oct=3, beef=2,  dist2=0.8, amp=1.2, leg=2, room=0.6, mix=0.4)
+b1 >> dbass([0, 0, 0, 0, 0, 0, 0, 0], dur=1/8, oct=5, amp=P[1, 0.4, 0.7, 0.4], lpf=1200, shape=0)
+r1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+s2.stop()
+r1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+r2 >> vati([11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0], dur=1/6, oct=6,  cutoff=5000, amp=0.9, leg=0)
+
+_seq_schedule(16, 1774685415310)
+
+_seq_cancel()
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=6, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0, lpf=1800)
+n1 >> noise(dur=8, amp=linvar([0, 0.4], 8), hpf=2000, lpf=8000)
+
+_seq_schedule(8, 1774685422622)
+
+_seq_cancel()
+c6.oct=(4, 3)
+
+_seq_schedule(4, 1774685426272)
+
+_seq_cancel()
+b1.stop()
+Clock.bpm = 66
+
+_seq_schedule(8, 1774685428096)
+
+_seq_cancel()
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=6, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0, lpf=1800)
+n1 >> noise(dur=8, amp=linvar([0, 0.4], 8), hpf=2000, lpf=8000)
+
+_seq_schedule(32, 1774685430446)
+
+c5.oct=4
+
+_seq_cancel()
+c6.oct=(4, 3)
+
+_seq_schedule(32, 1774685459549)
+
+r2.oct=4
+
+_seq_cancel()
+c5 >> faim([0, 3, 6, 9], dur=2, oct=3, beef=2, dist2=0.6, amp=1.0, leg=1, room=0.5)
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=3)
+
+_seq_schedule(32, 1774685469222)
+
+_seq_cancel()
+c9 >> faim([7,6,1,0], dur=PDur(3,8), oct=5, beef=1, amp=var([0, 0.7], [16, 16]), dist2=0.1, leg=0.5)
+
+_seq_schedule(32, 1774685471795)
+
+_seq_cancel()
+b1.stop()
+Clock.bpm = 66
+
+_seq_schedule(32, 1774685473980)
+
+_seq_cancel()
+c5 >> faim([0, 3, 6, 9], dur=2, oct=3, beef=2, dist2=0.6, amp=1.0, leg=1, room=0.5)
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=3)
+
+_seq_schedule(32, 1774685475091)
+
+_seq_cancel()
+c9 >> faim([7,6,1,0], dur=PDur(3,8), oct=5, beef=1, amp=var([0, 0.7], [16, 16]), dist2=0.1, leg=0.5)
+
+_seq_schedule(32, 1774685476426)
+
+_seq_cancel()
+p4 >> darkpad(0, dur=32, oct=2, sus=32, dark=0.95, amp=linvar([0, 0.6], 16), cheapverb=0.8, cvdecay=8, cvdamp=0.8).only()
+c9 >> faim([7,6,1,0], dur=PDur(3,8), oct=5, beef=1, amp=var([0, 0.7], [16, 16]), dist2=0.1, leg=0.5)
+
+_seq_schedule(8, 1774685477359)
+
+_seq_cancel()
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=2, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0, lpf=1800)
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.81, mverb=0.2)
+Clock.bpm = 132
+
+_seq_schedule(32, 1774685484767)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+_seq_schedule(16, 1774685488347)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+_seq_schedule(32, 1774685489809)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.5)
+
+_seq_schedule(32, 1774685494185)
+
+_seq_cancel()
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(32, 1774685499412)
+
+_seq_cancel()
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=4000, envdist=0.8, envdistgain=2, leg=4, envdistsens=1, envdistattack=0.020, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(64, 1774685513972)
+
+i1 >> play("C...")
+
+i1 >> play("C..")
+
+i1 >> play("C...")
+
+i1 >> play("C.c.")
+
+i1 >> play("c.c.")
+
+i1 >> play("c.[cc].")
+
+_seq_cancel()
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=0)
+g0 >> svdk(dur=8,lpf=800)
+
+_seq_schedule(32, 1774685536973)
+
+i1.stop()
+
+_seq_cancel()
+m7 >> loop("dubstepdrum32", dur=32)
+
+_seq_schedule(16, 1774685545955)
+
+_seq_cancel()
+c4.degree=0
+c4.degree=2
+c6 >> play("..C.")
+l9 >> play("[--]")
+
+_seq_schedule(64, 1774685550210)
+
+_seq_cancel()
+m7 >> loop("dubstepdrum32", dur=32)
+
+_seq_schedule(64, 1774685552689)
+
+c6 >> play("..C.")
+
+_seq_cancel()
+c4.degree=0
+c4.degree=2
+c6 >> play("..C.")
+l9 >> play("[--]")
+
+_seq_schedule(64, 1774685557697)
+
+_seq_cancel()
+l0 >> play("X ")
+
+_seq_schedule(64, 1774685561613)
+
+_seq_cancel()
+l9 >> play("[--]", hpf=1200)
+l9 >> play("[--]", hpf=1300)
+l9 >> play("[--]", hpf=2100)
+
+_seq_schedule(64, 1774685567076)
+
+_seq_cancel()
+~d8 >> loop("elephant16", dur=16, sample=4, tape=0, lpr=0, lpf=0)
+
+_seq_schedule(32, 1774685573687)
+
+_seq_cancel()
+p4.stop()
+p1.stop()
+c1.stop()
+b1.stop()
+c4.stop()
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=0.5)
+~d8 >> loop("elephant16", dur=16, sample=4, tape=0, lpr=0, lpf=0)
+
+_seq_schedule(16, 1774685577934)
+
+_seq_cancel()
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(32, 1774685584535)
+
+_seq_cancel()
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=4000, envdist=0.8, envdistgain=2, leg=4, envdistsens=1, envdistattack=0.020, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(64, 1774685587422)
+
+_seq_cancel()
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=0)
+g0 >> svdk(dur=8,lpf=800)
+
+_seq_schedule(32, 1774685591341)
+
+_seq_cancel()
+m7 >> loop("dubstepdrum32", dur=32)
+
+_seq_schedule(64, 1774685593603)
+
+_seq_cancel()
+c4.degree=0
+c4.degree=2
+c6 >> play("..C.")
+l9 >> play("[--]")
+
+_seq_schedule(64, 1774685595108)
+
+_seq_cancel()
+p4.stop()
+p1.stop()
+c1.stop()
+b1.stop()
+c4.stop()
+p4 >> loop("dnbfx16", dur=16, dist2=0.5, sample=[1, 3, 0], amp=0.5)
+~d8 >> loop("elephant16", dur=16, sample=4, tape=0, lpr=0, lpf=0)
+
+_seq_schedule(16, 1774685600377)
+
+_seq_cancel()
+c6.stop()
+
+_seq_schedule(4, 1774685604269)
+
+_seq_cancel()
+k1.stop()
+k1.stop()
+
+_seq_schedule(8, 1774685605737)
+
+_seq_cancel()
+s1.stop()
+
+_seq_schedule(8, 1774685608130)
+
+_seq_cancel()
+g0.lpf=400
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+_seq_schedule(8, 1774685609008)
+
+g0.lpf=400
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+_seq_cancel()
+l9.stop()
+
+_seq_schedule(4, 1774685612660)
+
+_seq_cancel()
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, high=0.0, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+_seq_schedule(8, 1774685614496)
+
+_seq_cancel()
+l9.stop()
+
+_seq_schedule(4, 1774685615196)
+
+_seq_cancel()
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, high=0.0, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+_seq_schedule(8, 1774685617022)
+
+_seq_cancel()
+g0.lpf=400
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+_seq_schedule(32, 1774685618122)
+
+_seq_cancel()
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, high=0.0, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+_seq_schedule(32, 1774685624103)
+
+d8.stop()
+
+_seq_cancel()
+c9.stop()
+p1.stop()
+c6.stop()
+c1.stop()
+c4.stop()
+b1.stop()
+g0.stop()
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+_seq_schedule(16, 1774685631257)
+
+_seq_cancel()
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+_seq_schedule(8, 1774685638609)
+
+_seq_cancel()
+d4 >> play("x", dur=0.5, mverb=1, rate=2, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0, cheapverb=PBin(8), cvdecay=1.5, cvdamp=0.5, amp=Pacc(6, 4), amplify=PLife(0.5), hpf=3200, echo=0.25, sample=6, resonbank=0.1, rbfreq=36, rbdecay=0.5, rbspread=1, glitch=0.5, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+l0.stop()
+d8 >> play(".-u-", dur=0.25, amp=Pacc(4))
+d6 >> play("..U:", rfreq=8000, resonz=0.4, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.11, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+_seq_schedule(8, 1774685642251)
+
+_seq_cancel()
+c9.stop()
+p1.stop()
+c6.stop()
+c1.stop()
+c4.stop()
+b1.stop()
+g0.stop()
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+_seq_schedule(64, 1774685643998)
+
+_seq_cancel()
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+_seq_schedule(64, 1774685653607)
+
+_seq_cancel()
+d4 >> play("x", dur=0.5, mverb=1, rate=2, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0, cheapverb=PBin(8), cvdecay=1.5, cvdamp=0.5, amp=Pacc(6, 4), amplify=PLife(0.5), hpf=3200, echo=0.25, sample=6, resonbank=0.1, rbfreq=36, rbdecay=0.5, rbspread=1, glitch=0.5, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+l0.stop()
+d8 >> play(".-u-", dur=0.25, amp=Pacc(4))
+d6 >> play("..U:", rfreq=8000, resonz=0.4, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.11, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+_seq_schedule(8, 1774685655526)
+
+d6 >> play("..U:", rfreq=8000, resonz=0.4, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.11, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+_seq_cancel()
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+_seq_schedule(8, 1774685659191)
+
+_seq_cancel()
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+_seq_schedule(64, 1774685661919)
+
+_seq_cancel()
+d4 >> play("x", dur=0.5, mverb=1, rate=2, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0, cheapverb=PBin(8), cvdecay=1.5, cvdamp=0.5, amp=Pacc(6, 4), amplify=PLife(0.5), hpf=3200, echo=0.25, sample=6, resonbank=0.1, rbfreq=36, rbdecay=0.5, rbspread=1, glitch=0.5, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+l0.stop()
+d8 >> play(".-u-", dur=0.25, amp=Pacc(4))
+d6 >> play("..U:", rfreq=8000, resonz=0.4, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.11, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+_seq_schedule(64, 1774685669801)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+_seq_cancel()
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+_seq_schedule(64, 1774685680531)
+
+_seq_cancel()
+d4 >> play("x", dur=0.5, mverb=1, rate=2, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0, cheapverb=PBin(8), cvdecay=1.5, cvdamp=0.5, amp=Pacc(6, 4), amplify=PLife(0.5), hpf=3200, echo=0.25, sample=6, resonbank=0.1, rbfreq=36, rbdecay=0.5, rbspread=1, glitch=0.5, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+d3 >> play("s", dur=0.5, sample=2, amp=0.56, amplify=PFDur((3,8),(5,16)), octclean=0.4, ocsub=0.7, ocup=0, hpf=100, lpf=4000, delay=PSwing(0.06))
+d5 >> play("-", dur=0.25, sample=2, amp=0.9, amplify=PEuclid(7,16), hpf=6000, cheapverb=0.7, cvdecay=3, cvdamp=0.3, pan=0.3)
+
+_seq_schedule(16, 1774685681584)
+
+_seq_cancel()
+q3 >> compkick(0, punch=0.5, comp=16, release=0.35, click=1.0,drive=0.4, sub=1, tape=1, tapedrive=2, body=0.2, echo=0, tone=0.0, oct=3,)
+
+p4.stop()
+
+d1.stop()
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+d1.rate=2
+
+d1.rate=4
+
+d1.rate=1
+
+d1.lpf=400
+
+d1.lpf=100
+
+d1.lpf=1200
+
+d1.lpf=0
+
+d1.lpf=0
+
+d1.sbrk=0.5
+
+d1.sbrk=0.1
+
+d1.sbrk=0.8
+
+d1.only()
+
+d1.sbrk=0.2
+
+d1.hpf=1200
+
+d1.hpf=3200
+
+d1.hpf=1600
+
+f9 >> play("X ")
+
+f9 >> play("X[kk]")
+
+attack("replay-function 92")
+
+m2 >> alva(dur=PDur([5, 3, 7, 5, 9, 5, 6], 12), sus=0.76, fbdelay=var([0, 0, 0.5, 0.25, 0, 0]), gate=0.1, gaterate=1, gatewave=1, leg=PRand(8)[:13], glitch=0.0, oct=(3, 4), tube=1,fshift=var([0, 1, 2, 4, 0], PRand([1,2,4,8])), shimmer=0, shimsize=0, shimpitch=var([1, 1.5, 2], PRand(32)), shimmix=0, tape=0, fbfeed=0.9, fbtime=0.5, tapedrive=4, drift=0, envdist=0, lpf=var([4000, 2000, 1000],[13, 2, 1]), lpr=0.1, mu=4)
+
+m2 >> alva(dur=PDur([5, 3, 7, 5, 9, 5, 6], 12), sus=0.76, fbdelay=var([0, 0, 0.5, 0.25, 0, 0]), gate=0.1, gaterate=1, gatewave=1, leg=PRand(8)[:13], glitch=0.0, oct=(3, 4), tube=1,fshift=var([0, 1, 2, 4, 0], PRand([1,2,4,8])), shimmer=0, shimsize=0, shimpitch=var([1, 1.5, 2], PRand(32)), shimmix=0, tape=0, fbfeed=0.9, fbtime=0.5, tapedrive=4, drift=0, envdist=0, lpf=var([4000, 2000, 1000],[13, 2, 1]), lpr=0.1, mu=4)
+
+o8 >> loop("circledrum16", dur=16, amp=4, tape=1)
+
+d1.only()
+
+d1.hpf=1600
+
+m2 >> alva(dur=PDur([5, 3, 7, 5, 9, 5, 6], 12), sus=0.76, fbdelay=var([0, 0, 0.5, 0.25, 0, 0]), gate=0.1, gaterate=1, gatewave=1, leg=PRand(8)[:13], glitch=0.0, oct=(3, 4), tube=1,fshift=var([0, 1, 2, 4, 0], PRand([1,2,4,8])), shimmer=0, shimsize=0, shimpitch=var([1, 1.5, 2], PRand(32)), shimmix=0, tape=0, fbfeed=0.9, fbtime=0.5, tapedrive=4, drift=0, envdist=0, lpf=var([4000, 2000, 1000],[13, 2, 1]), lpr=0.1, mu=4)
+
+o8 >> loop("circledrum16", dur=16, amp=4, tape=1)
+
+d1.hpf=6400
+
+j1 >> alva([12, 11, 1, 0.5, 4, _, 4, _], oct=(4, 5, 6), dur=PDur(3, 8), shape=j1.degree==2,shift=j1.degree==1,dist2=j1.degree==0.5,mverb=(j1.degree==4)/4, echo=0.5, leg=12, mod=0.1, hpf=0).unison(4)
+
+o1 >> loop("dubstepbass32", dur=32, amp=1).lclip(var([0.25, 0.5]))
+
+j2 >> bass(dur=1/2, amp=j1.degree==4, oct=(6, 7), leg=40)
+
+j1.dur=PDur([3, 5], 8)
+
+j1.oct=2 # 4
+
+j4 >> alva(dur=2, shape=2, a=0.5, hpf=linvar([20, 1500], 32), lpr=0.1)
+
+m2.degree=8
+
+m2.degree=0
+
+drop()
+
+y3 >> play("..C.", amp=4, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+k9 >> play("{X.X.[XX].X.[XXX]}", amp=4, sample=4, lpf=620, lpr=0.2, formant=1)
+
+b2 >> prodrums([0, 3, 7, 10, 12, 7], voice=4, dur=PDur(3, 8), layer1_amp=0.4, layer2_amp=0.3, layer3_amp=0.2, body_tone=var([3500, 3000], [6, 2]), harmonic=2.5, fm_amount=1, fm_ratio=4, waveform=var([3, 6], 12), texture=4, decay=0.5, echo=0.5, amp=0.3, oct=(6, 5), pan=PSine(8) * 0.3)
+
+d1.only()
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+~d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 57, 50, 62, 69], rbdecay=[0.6, 0.2, 0.6, 0.6, 0.6, 0.7, 0.2], pong=0, rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.1, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(5, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, high=0.0, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(4, 8), sample=5, dur=1/4, resonbank=0.2, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=2, lpf=0, lpr=0.1).unison(4)
+
+d1 >> play("x", amp=Pacc(3, 8), sample=5, dur=1/4, resonbank=0.8, rbfreq=[47, 50, 50, 47, 50, 62, 69], rbdecay=[0.6, 0.6, 0.6, 0.6, 0.6, 0.7, 0.2], rbspread=(1, var([1, 2, 3], [12, 2, 2])), dynfuzz=0.1, dfgain=1, dfatk=0.015, dfdec=0.7, dftone=3, lpf=linvar([2000, 4000], [32,0]), lpr=0.1).unison(4)
+
+#@part54(16)
+d4 >> play("x", dur=0.5, mverb=1, rate=2, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0, cheapverb=PBin(8), cvdecay=1.5, cvdamp=0.5, amp=Pacc(6, 4), amplify=PLife(0.5), hpf=3200, echo=0.25, sample=6, resonbank=0.1, rbfreq=36, rbdecay=0.5, rbspread=1, glitch=0.5, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+d3 >> play("s", dur=0.5, sample=2, amp=0.56, amplify=PFDur((3,8),(5,16)), octclean=0.4, ocsub=0.7, ocup=0, hpf=100, lpf=4000, delay=PSwing(0.06))
+d5 >> play("-", dur=0.25, sample=2, amp=0.9, amplify=PEuclid(7,16), hpf=6000, cheapverb=0.7, cvdecay=3, cvdamp=0.3, pan=0.3)
+
+q3 >> compkick(0, punch=0.5, comp=16, release=0.35, click=1.0,drive=0.4, sub=1, tape=1, tapedrive=2, body=0.2, echo=0, tone=0.0, oct=3,)
+
+d1.only()
+
+d1.hpf=600
+
+d1.hpf=700
+
+d1.hpf=800
+
+d1.hpf=900
+
+d1.hpf=1000
+
+d1.hpf=1100
+
+d1.hpf=1200
+
+d1.hpf=1300
+
+d1.hpf=1400
+
+d1.hpf=1500
+
+d1.hpf=1600
+
+d1.hpf=1700
+
+d1.hpf=1800
+
+b2 >> prodrums([0, 3, 7, 10, 12, 7], voice=4, dur=PDur(3, 8), layer1_amp=0.4, layer2_amp=0.3, layer3_amp=0.2, body_tone=var([3500, 3000], [6, 2]), harmonic=2.5, fm_amount=1, fm_ratio=4, waveform=var([3, 6], 12), texture=4, decay=0.5, echo=0.5, amp=0.3, oct=(6, 5), pan=PSine(8) * 0.3)
+
+v1 >> viola([6, 3, P*[4, 2, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], beat_dur=1, rate=1, mverb=0.8, blur=2, lpf=PRand(1200, 3000), hpf=300, amp=0.5).unison(2) + (-7, PStep(5, 7, 0))
+
+p1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]), oct=3, amp=0.6, dark=0.7)
+
+a1 >> acidline(var([P[0, 0, 3, 0, 5, 0, 0, 3], P[0, 3, 5, 7, 10, 7, 5, 3]], [16, 16]), dur=var([0.25, 0.125], [24, 8]), cutoff=expvar([300, 4000], 8), res=linvar([0.4, 0.9], 16), drive=linvar([1.5, 0.2], 32), lpf=1200, accent=var([P[0, 0, 1, 0]*0.5, P[1, 0, 0, 1]*0.6], [12, 4]), tubedrive=linvar([0.2, 0.7], 48), amp=0.6)
+
+p3 >> ethpad([0, 7], dur=8, oct=6, attack=3, release=4, amp=0.35, room=0.9, mix=0.6)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+_seq_schedule(32, 1774686070254)
+
+Clock.bpm = 66
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1774686094104)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1774686101390)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1774686108676)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1774686115956)
+
+_seq_cancel()
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, hpf=100).often("stutter", oct=P*[4, 4,5, 6])
+
+_seq_schedule(16, 1774686130511)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.4)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(32, 1774686145085)
+
+_seq_cancel()
+d1.stop()
+p1.stop()
+c4 >> ssaw(linvar([8, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.5, vowel=0.9, vowelf=0, vowelq=1, amp=0.3, leg=0, rgate=0.5, sus=1/4)
+
+c3 >> faim([0, 1, 7], dur=1/2, oct=7, beef=1,  dist2=0.2, amp=0.8, leg=0)
+
+_seq_schedule(16, 1774686174195)
+
+_seq_cancel()
+c5.stop()
+c4.stop()
+b1 >> dbass([0, 0, 0, 3, 0, 0, 5, 0], dur=0.25, oct=6,amp=P[0.8, 0.3, 0.5, 0.6], lpf=1300, envdist=0.8, envdistgain=2, leg=0, envdistsens=0.7, envdistattack=0.020)
+r1 >> vati([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=6,cutoff=linvar([800, 4000], 8), amp=1.7, leg=0)
+c4.amp=lininf(0.3, 0, 16)
+
+_seq_schedule(8, 1774686188773)
+
+_seq_cancel()
+c3.stop() #
+c4.stop()
+
+r1 >> plaitsX([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=5,cutoff=linvar([800, 4000], 8), amp=1.2, leg=0)
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=1.0, hpf=200, fbdelay=0.5)
+r1 >> plaitsX([0, _, 0, 2, 3, _, 5, 3], dur=0.25, oct=5,    cutoff=3500, amp=0.93, leg=0.5)
+t1.stop()
+
+_seq_schedule(8, 1774686196093)
+
+_seq_cancel()
+Root.default = 0
+d1.stop()
+a1.stop()
+p1.stop() #
+
+_seq_schedule(8, 1774686203395)
+
+_seq_cancel()
+c5.stop()
+s1 >> play("..o...o.", dur=0.25, sample=14, amp=var([0.8, 0.9, 0], [16, 14, 2]), hpf=200, fbdelay=0.5, rgate=0.2)
+p2.stop() #
+s2 >> play("e", dur=0.25, sample=3, amp=var([0, 0.5], [30, 2]))
+
+_seq_schedule(8, 1774686210709)
+
+_seq_cancel()
+s2.degree = var(["e", "oooo[oo]oo"], [30, 2])
+p1 >> darkpad([0, 6], dur=8, oct=5, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.81, mverb=0.2)
+p2 >> ethpad([0, 1, 7], dur=8, oct=6, attack=3, release=4,  amp=0.71, room=0.9, mix=0.6)
+c3 >> faim([0, 1, 6, 7], dur=var([1/2, 1/4], [7, 1]), oct=5, beef=1, dist2=0.5, amp=var([0.9, 0.5, 0], [8, 8, 2]), leg=0)
+
+_seq_schedule(16, 1774686218022)
+
+_seq_cancel()
+t1.stop()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+r1 >> plaits([0, _, 11, _, 6, 1, _, 7], dur=var([0.25, 1/6], [14, 2]), oct=5, cutoff=linvar([800, 5000], 8), amp=var([0.48, 2.0], [16, 16]), leg=0).unison(4)
+
+_seq_schedule(8, 1774686232593)
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=3, sus=8, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=0.6,  detune=0.02, amp=0.56, room=0.7, mix=0.5)
+r1.stop()
+
+_seq_schedule(8, 1774686239875)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, room=0.9, mix=0.6)
+a1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.3,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1774686247161)
+
+_seq_cancel()
+drop()
+
+_seq_schedule(8, 1774686254444)
+
+_seq_cancel()
+Clock.bpm = 132
+c5 >> faim([0, 1, 6], dur=4, oct=6, beef=1, amp=0.9,   fshift=linvar([-20, 20], 16), fmix=0.3)
+
+_seq_schedule(8, 1774686261722)
+
+_seq_cancel()
+c4.stop()
+d1 >> industrialdrone([0], dur=16, oct=6, feedback=0.5, amp=0.3)
+
+_seq_schedule(8, 1774686266805)
+
+_seq_cancel()
+p1 >> ethpad(r1.degree, dur=8, oct=5, attack=2, amp=0.2, room=0.9)
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=1, dark=0.7)
+r2 >> vati([0, 1, 3, 6, 7, 11, 12, 6], dur=0.25, oct=var([5, 6], [16, 16]), cutoff=3000, amp=var([0, 1.0], [16, 16]), leg=0)
+b1 >> plaitsX(var([[0,0,0,3,0,0,5,0], [0,1,2,3,4,5,6,7]], [16, 16]),  dur=0.25, oct=6, amp=P[0.8, 0.3, 0.5, 0.6], lpf=900, shape=0)
+
+_seq_schedule(8, 1774686270460)
+
+_seq_cancel()
+x1 >> play("X", dur=var([rest(32), 0.5], [30, 2]), sample=8, amp=1, crush=4)
+l5 >> compkick(punch=1.2, comp=8, release=0.35, click=3,drive=0.5, sub=1, oct=4, body=0.6, tone=4)
+
+_seq_schedule(16, 1774686274116)
+
+_seq_cancel()
+c1.stop()
+b1.stop()
+p1.stop()
+
+_seq_schedule(8, 1774686281414)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)),   amp=var([0.3, 0.5], [16, 16]),          cutoff=linvar([400, 5000], 8), shape=0.1)
+
+_seq_schedule(16, 1774686285110)
+
+_seq_cancel()
+b1.stop()
+s1.stop()
+p1.stop()
+c4.stop()
+r1.stop()
+r3.stop()
+b1.stop()
+
+_seq_schedule(8, 1774686292394)
+
+_seq_cancel()
+Group(k1, s1, s2, h1).solo()
+
+_seq_schedule(8, 1774686296086)
+
+_seq_cancel()
+c5 >> faim([0, 6, 12, 1, 7], dur=2, oct=3, beef=2,  dist2=0.8, amp=1.2, leg=2, room=0.6, mix=0.4)
+b1 >> dbass([0, 0, 0, 0, 0, 0, 0, 0], dur=1/8, oct=5, amp=P[1, 0.4, 0.7, 0.4], lpf=1200, shape=0)
+r1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+s2.stop()
+r1 >> plaitsX([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], dur=1/6, oct=5,  cutoff=linvar([2000, 8000], 4), amp=0.8, leg=0, crush=4)
+r2 >> vati([11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0], dur=1/6, oct=6,  cutoff=5000, amp=0.9, leg=0)
+
+_seq_schedule(32, 1774686299725)
+
+_seq_cancel()
+c6 >> cs80([0, 1, 6], dur=var([1, 1/4], [3, 1]), oct=6, cutoff=6000, amp=0.7, crush=3, dist2=0.5, leg=0, lpf=1800)
+n1 >> noise(dur=8, amp=linvar([0, 0.4], 8), hpf=2000, lpf=8000)
+
+_seq_schedule(32, 1774686314309)
+
+_seq_cancel()
+c6.oct=(4, 3)
+
+c5.oct=4
+r2.oct=4
+
+_seq_schedule(32, 1774686328885)
+
+_seq_cancel()
+b1.stop()
+Clock.bpm = 66
+
+_seq_schedule(32, 1774686343438)
+
+_seq_cancel()
+c5 >> faim([0, 3, 6, 9], dur=2, oct=3, beef=2, dist2=0.6, amp=1.0, leg=1, room=0.5)
+k1 >> play("X...", dur=0.5, sample=4, amp=1.3, shape=0.8)
+s1 >> play("..o.", dur=0.5, sample=5, amp=1.0, crush=3)
+
+_seq_schedule(32, 1774686371391)
+

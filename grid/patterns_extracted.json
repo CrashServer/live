@@ -1,0 +1,581 @@
+{
+  "_help": "curated pattern-recipe atoms",
+  "proposed": {
+    "F300": {
+      "code": "d1 >> play(\"X\", dur=PEuclid(3,8)/2, amp=PEuclid(3,8)*0.8)",
+      "label": "pattern: PEuclid(3,8) tresillo",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F301": {
+      "code": "d1 >> play(\"X\", dur=PEuclid(5,8)/2, amp=PEuclid(5,8)*0.8)",
+      "label": "pattern: PEuclid(5,8) cinquillo",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F302": {
+      "code": "d1 >> play(\"X\", dur=PEuclid(7,16)/2, amp=PEuclid(7,16)*0.8)",
+      "label": "pattern: PEuclid(7,16) complex",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F303": {
+      "code": "d1 >> play(\"X\", dur=PEuclid(3,16)/2, amp=PEuclid(3,16)*0.8)",
+      "label": "pattern: PEuclid(3,16) sparse",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F304": {
+      "code": "d1 >> play(\"X\", dur=PEuclid(9,16)/2, amp=PEuclid(9,16)*0.8)",
+      "label": "pattern: PEuclid(9,16) dense",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F305": {
+      "code": "d1 >> play(\"X\", dur=PEuclid(5,12)/2, amp=PEuclid(5,12)*0.8)",
+      "label": "pattern: PEuclid(5,12) 12-bar",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F306": {
+      "code": "d1 >> play(\"X.o-\", dur=PFDur((3,16),(5,16),(7,16))/2, amp=0.8)",
+      "label": "pattern: PFDur layered fill (3,5,7 in 16)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F307": {
+      "code": "d1 >> play(\"X.o-\", dur=PBal(\"clave\", 16)/2, amp=0.8)",
+      "label": "pattern: PBal 'clave' groove",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F308": {
+      "code": "d1 >> play(\"X.o-\", dur=PBal(\"rumba\", 16)/2, amp=0.8)",
+      "label": "pattern: PBal 'rumba' groove",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F309": {
+      "code": "d1 >> play(\"X.o-\", dur=PBal(\"reggae\", 16)/2, amp=0.8)",
+      "label": "pattern: PBal 'reggae' groove",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F310": {
+      "code": "d1 >> play(\"X.o-\", dur=PBal(\"swing\", 16)/2, amp=0.8)",
+      "label": "pattern: PBal 'swing' groove",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F311": {
+      "code": "d1 >> play(\"X.o-\", dur=PBal(\"salsa\", 16)/2, amp=0.8)",
+      "label": "pattern: PBal 'salsa' groove",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F312": {
+      "code": "d1 >> play(\"X.o-\", dur=PBal(\"cumbia\", 16)/2, amp=0.8)",
+      "label": "pattern: PBal 'cumbia' groove",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F313": {
+      "code": "d1 >> play(\"X.o-\", dur=PBal(\"quick\", 16)/2, amp=0.8)",
+      "label": "pattern: PBal 'quick' groove",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F314": {
+      "code": "d1 >> play(\"X.o-\", dur=PBal(\"polyrhythm\", 16)/2, amp=0.8)",
+      "label": "pattern: PBal 'polyrhythm' groove",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F315": {
+      "code": "d1 >> play(\"X x X x X x X x \", dur=1/4, amp=Pacc(\"backbeat\"))",
+      "label": "pattern: Pacc 'backbeat' accents",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F316": {
+      "code": "d1 >> play(\"X x X x X x X x \", dur=1/4, amp=Pacc(\"four-on-floor\"))",
+      "label": "pattern: Pacc 'four-on-floor' accents",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F317": {
+      "code": "d1 >> play(\"X x X x X x X x \", dur=1/4, amp=Pacc(\"offbeat\"))",
+      "label": "pattern: Pacc 'offbeat' accents",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F318": {
+      "code": "d1 >> play(\"X x X x X x X x \", dur=1/4, amp=Pacc(\"ghost\"))",
+      "label": "pattern: Pacc 'ghost' accents",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "F319": {
+      "code": "p1 >> svdk(PRand(0,12), dur=1/4, sus=0.3).penta()",
+      "label": "pattern: .penta() pentatonic filter",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G208": {
+      "code": "p1 >> pluck(PEuclid2(5,8,0,7), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PEuclid2(5,8,0,7) pitch",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G209": {
+      "code": "p1 >> pluck(PEuclid2(7,16,0,12), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PEuclid2(7,16,0,12) pitch",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G210": {
+      "code": "p1 >> pluck(PEuclid2(3,8,-7,7), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PEuclid2(3,8,-7,7) pitch",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G211": {
+      "code": "p1 >> pluck(PLife(16, chaos=0.0), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PLife chaos=0.0 (wolfram-0)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G212": {
+      "code": "p1 >> pluck(PLife(16, chaos=0.2), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PLife chaos=0.2 (wolfram-90)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G213": {
+      "code": "p1 >> pluck(PLife(16, chaos=0.4), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PLife chaos=0.4 (wolfram-110)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G214": {
+      "code": "p1 >> pluck(PLife(16, chaos=0.6), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PLife chaos=0.6 (wolfram-150)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G215": {
+      "code": "p1 >> pluck(PLife(16, chaos=0.8), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PLife chaos=0.8 (wolfram-30)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G216": {
+      "code": "p1 >> pluck(PLife(16, chaos=1.0), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PLife chaos=1.0 (wolfram-254)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G217": {
+      "code": "l1 >> pluck(melody({0:[2,4], 2:[0,4], 4:[2,0,7], 7:[4,5]}), dur=1/2, sus=0.4)",
+      "label": "pattern: melody() Markov pentatonic",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G218": {
+      "code": "l1 >> svdk(melody({0:[2], 2:[4], 4:[5], 5:[7], 7:[9], 9:[0]}), dur=1/4, oct=5)",
+      "label": "pattern: melody() Markov ascending",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G219": {
+      "code": "p1 >> pluck(PStutter([0,2,4,7], 3), dur=1/4, sus=0.3, amp=0.7)",
+      "label": "pattern: PStutter([0,2,4], 3) repeat",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G220": {
+      "code": "l1 >> pluck(PRand([0,2,4,5,7]), dur=1/4, sus=0.3, amp=0.6)",
+      "label": "pattern: PRand pentatonic pluck",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G221": {
+      "code": "l1 >> svdk(PWalk(8, [-7,7,1]), dur=1/2, sus=0.5, amp=0.6)",
+      "label": "pattern: PWalk(-7,7,1) gentle melody",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G222": {
+      "code": "p1 >> svdk(PShuf([0,2,4,5,7,9]), dur=1/2, sus=0.4, amp=0.6)",
+      "label": "pattern: PShuf([0,2,4,5,7]) randomized order",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G223": {
+      "code": "p1 >> pluck(PAlt([0,2,4], [7,5,4]), dur=1/4, sus=0.3, amp=0.6)",
+      "label": "pattern: PAlt(A,B) alternating phrase",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G224": {
+      "code": "p1 >> pluck(PIndex([0,2,4,5,7,9,11], PRand(0,7)), dur=1/4)",
+      "label": "pattern: PIndex into chord pool",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G225": {
+      "code": "p1 >> svdk(PRange(0,8), dur=1/4, sus=0.3, amp=0.6)",
+      "label": "pattern: PRange(0,8) ramp",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G226": {
+      "code": "p1 >> svdk(PTri(0,8), dur=1/4, sus=0.3, amp=0.6)",
+      "label": "pattern: PTri(0,8) triangle wave",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G227": {
+      "code": "p1 >> pluck([P*(0,2,4), 5, 7], dur=1/4, sus=0.3, amp=0.6)",
+      "label": "pattern: P* stutter (0,2,4)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G228": {
+      "code": "p1 >> pluck([P^(0,2,0.5), 4, 5], dur=1/4, sus=0.3, amp=0.6)",
+      "label": "pattern: P^ delay (0,2,0.5)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G229": {
+      "code": "p1 >> pluck([0,2,4,7], dur=1/4, sus=0.3).every(8, \"shuffle\")",
+      "label": "pattern: .every(8, 'shuffle') periodic mutation",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G230": {
+      "code": "p1 >> pluck([0,2,4,7], dur=1/4, sus=0.3).every(4, \"amp\", 1.5)",
+      "label": "pattern: .every(4, 'amp', 1.5) accent every 4",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G231": {
+      "code": "p1 >> svdk([0,2,4,7], dur=1/2, sus=0.4, amp=0.5).unison(3)",
+      "label": "pattern: .unison(3) detuned cluster",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G232": {
+      "code": "p1 >> pluck([0,2,4,7], dur=1/4).sometimes(\"stutter\", 4)",
+      "label": "pattern: .sometimes('stutter', 4) random stutter",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G233": {
+      "code": "d1 >> play(\"X.o.\", dur=1/2).rarely(\"amen\")",
+      "label": "pattern: .rarely('amen') rare break swap",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G234": {
+      "code": "d1 >> play(\"X.o.\", dur=1/2).often(\"drop\")",
+      "label": "pattern: .often('drop') frequent silence",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "G235": {
+      "code": "p1 >> svdk([0,2,4,7], dur=1/2, sus=0.4, shape=p1.degree==2, amp=0.6)",
+      "label": "pattern: Conditional shape: shape=p1.degree==2",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "B224": {
+      "code": "b1 >> dbass([0,0,3,0], dur=PFDur((3,8),(5,8))/2, oct=4, sus=0.3)",
+      "label": "pattern: PFDur dense bass density",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "B225": {
+      "code": "b1 >> dbass(PZip([0,0,3,0], [0,2,4,7]), dur=1/4, oct=4, sus=0.3)",
+      "label": "pattern: PZip bass+rhythm zip",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "B226": {
+      "code": "b1 >> dbass(var([0,-3,-5,-2], 8), dur=1/2, oct=4, sus=0.4, amp=0.7)",
+      "label": "pattern: var() chord progression",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "B227": {
+      "code": "b1 >> dbass(Pvar([P[0,0,3,0], P[0,3,5,3]], 8), dur=1/2, oct=4)",
+      "label": "pattern: Pvar() pattern of patterns",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "B228": {
+      "code": "b1 >> dbass([0], dur=1/2, oct=4, degree=follow(p1), amp=0.7)",
+      "label": "pattern: follow() chord progression",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "E200": {
+      "code": "h1 >> play(\"-\", dur=1/4, delay=PSwing(0.1, 8), amp=0.5)",
+      "label": "pattern: PSwing(0.1) hat shuffle",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "E201": {
+      "code": "h1 >> play(\"-\", dur=1/4, delay=PSwing(0.15, 8), amp=0.5)",
+      "label": "pattern: PSwing(0.15) hat shuffle",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "E202": {
+      "code": "h1 >> play(\"-\", dur=1/4, delay=PSwing(0.2, 8), amp=0.5)",
+      "label": "pattern: PSwing(0.2) hat shuffle",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "E203": {
+      "code": "h1 >> play(\"-\", dur=1/4, delay=PSwing(0.25, 8), amp=0.5)",
+      "label": "pattern: PSwing(0.25) hat shuffle",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "E204": {
+      "code": "h1 >> play(\"-\", dur=1/4, delay=PSwing(0.3, 8), amp=0.5)",
+      "label": "pattern: PSwing(0.3) hat shuffle",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "E205": {
+      "code": "h1 >> play(PStutter(\"-\", 3), dur=1/12, amp=0.5)",
+      "label": "pattern: PStutter hat triplet feel",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "I167": {
+      "code": "c1 >> klank(PChords([I, V, VI, IV]), dur=4, sus=3.5, amp=0.6)",
+      "label": "pattern: PChords I-V-vi-IV",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "I168": {
+      "code": "c1 >> klank(PChords([II, V, I]), dur=2, sus=1.8, amp=0.6)",
+      "label": "pattern: PChords ii-V-I jazz",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "I169": {
+      "code": "c1 >> klank([(0,2,4), (3,5,7), (-1,2,5)], dur=2, sus=1.8, amp=0.6)",
+      "label": "pattern: Chord tuple (0,2,4)",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "M261": {
+      "code": "m1 >> bell(PWhite(0,12), dur=1/2, sus=0.4, amp=0.5)",
+      "label": "pattern: PWhite(0,12) chromatic scatter",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "M262": {
+      "code": "p1 >> bell(PFibMod(8, 12), dur=1/2, sus=0.4, amp=0.6)",
+      "label": "pattern: PFibMod(8, 12) Fibonacci series",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "A207": {
+      "code": "p1 >> sinepad([0,2,4,7], dur=1/2, sus=0.5, amp=PSine(16)*0.5+0.5)",
+      "label": "pattern: PSine(16) shape modulation",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "A208": {
+      "code": "p1 >> sinepad([0,2,4,7], dur=1/2, sus=0.5, amp=PTri(16)*0.5+0.5)",
+      "label": "pattern: PTri(16) shape modulation",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "A209": {
+      "code": "p1 >> sinepad([0,2,4,7], dur=1/2, sus=0.5, amp=PSquare(16)*0.5+0.5)",
+      "label": "pattern: PSquare(16) shape modulation",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "A210": {
+      "code": "p1 >> sinepad([0,2,4], dur=4, sus=4, lpf=linvar([400,4000], 16))",
+      "label": "pattern: linvar() smooth filter sweep",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "A211": {
+      "code": "p1 >> sinepad([0,2,4], dur=4, sus=4, lpf=sinvar([400,4000], 8))",
+      "label": "pattern: sinvar() filter LFO",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "A212": {
+      "code": "p1 >> sinepad([0,2,4], dur=4, sus=4, lpf=expvar([200,8000], 16))",
+      "label": "pattern: expvar() exp ramp",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K139": {
+      "code": "Clock.bpm = 88",
+      "label": "pattern: Tempo set to 88",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K140": {
+      "code": "Clock.bpm = 120",
+      "label": "pattern: Tempo set to 120",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K141": {
+      "code": "Clock.bpm = 132",
+      "label": "pattern: Tempo set to 132",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K142": {
+      "code": "Clock.bpm = 140",
+      "label": "pattern: Tempo set to 140",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K143": {
+      "code": "Clock.bpm = 160",
+      "label": "pattern: Tempo set to 160",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K144": {
+      "code": "Clock.bpm = 174",
+      "label": "pattern: Tempo set to 174",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K145": {
+      "code": "Clock.bpm = 180",
+      "label": "pattern: Tempo set to 180",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K146": {
+      "code": "Scale.default = \"minor\"",
+      "label": "pattern: Scale → minor",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K147": {
+      "code": "Scale.default = \"major\"",
+      "label": "pattern: Scale → major",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K148": {
+      "code": "Scale.default = \"minorPentatonic\"",
+      "label": "pattern: Scale → minorPentatonic",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K149": {
+      "code": "Scale.default = \"majorPentatonic\"",
+      "label": "pattern: Scale → majorPentatonic",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K150": {
+      "code": "Scale.default = \"dorian\"",
+      "label": "pattern: Scale → dorian",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K151": {
+      "code": "Scale.default = \"phrygian\"",
+      "label": "pattern: Scale → phrygian",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K152": {
+      "code": "Scale.default = \"harmonicMinor\"",
+      "label": "pattern: Scale → harmonicMinor",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K153": {
+      "code": "Scale.default = \"melodicMinor\"",
+      "label": "pattern: Scale → melodicMinor",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K154": {
+      "code": "Scale.default = \"chromatic\"",
+      "label": "pattern: Scale → chromatic",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K155": {
+      "code": "Scale.default = \"wholeTone\"",
+      "label": "pattern: Scale → wholeTone",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K156": {
+      "code": "Root.default = \"C\"",
+      "label": "pattern: Root → C",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K157": {
+      "code": "Root.default = \"D\"",
+      "label": "pattern: Root → D",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K158": {
+      "code": "Root.default = \"E\"",
+      "label": "pattern: Root → E",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K159": {
+      "code": "Root.default = \"F\"",
+      "label": "pattern: Root → F",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K160": {
+      "code": "Root.default = \"G\"",
+      "label": "pattern: Root → G",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K161": {
+      "code": "Root.default = \"A\"",
+      "label": "pattern: Root → A",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K162": {
+      "code": "Root.default = \"B\"",
+      "label": "pattern: Root → B",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K163": {
+      "code": "Root.default = \"C#\"",
+      "label": "pattern: Root → C#",
+      "type": "atom",
+      "source": "pattern-recipes"
+    },
+    "K164": {
+      "code": "Root.default = \"F#\"",
+      "label": "pattern: Root → F#",
+      "type": "atom",
+      "source": "pattern-recipes"
+    }
+  }
+}

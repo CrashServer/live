@@ -1,0 +1,634 @@
+Root.default = "C#"
+
+Scale.default = Scale.major
+
+### ===== DAFT PUNK — Harder Better Faster Stronger =====
+Clock.bpm = 105
+Scale.default = Scale.major
+Root.default = "C#"
+d1 >> a_daft([1,1,5,4,1,1,4,3,3,3,2,1,3,3,5,4,1,3,4,3,1,3,4,3,5,4,3,3,1,0,1,3,1,1,3,1,3,5,3,1,3,0,0,3,0,4,3,2,3,6,6,1,6,4,3,1,6,5,5,1,3,1,1,1,1], dur=1/4, sus=1/2, rate=12, cutoff=var([800, 1200, 1300, 4000, 1600, 3200], 8), resonance=0.1, punch=2, oct=PStutter([5,6,5,6,5,6,5,6,5,6,5,7,5,6,4],[2,6,2,4,6,13,2,6,2,6,2,6,2,2,4]), shapemix=1).unison(3).every(16,"stutter",4)
+v0 >> compkick(tone=4.0, noise=3.0, comp=1, drive=0.2, ring=1, metal=3.5, body=0.4, bend=1.3, dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+### ===== DAFT PUNK — Around the World =====
+Clock.bpm = 123
+Scale.default = Scale.mixolydian
+Root.default = "D"
+
+d2 >> a_daft([4,4,4,4,5,6,6,6,6,0,1,1,1,1,2,1,0,5,5,4,3], cutoff=linvar([2000, 6000], 32), fbdelay=0.5, fbtime=0.25, fbfeed=0.7,  fbcutoff=3000, fbspread=0.02, beat_dur=1, dur=PStutter([1,1/2,1/4,3/2,1,1/2,1/4,3/2,1,1/2,1],[3,1,1,1,2,1,1,1,3,6,1]), sus=PStutter([1/2,1/4,1/2,1/4,1/2,1/4,1],[4,1,4,1,4,6,1]), oct=PStutter([5,6,6],[5,12,4]), mverb=0.1).unison(4)
+
+d2 >> a_daft([4,4,4,4,5,6,6,6,6,0,1,1,1,1,2,1,0,5,5,4,3], cutoff=linvar([2000, 6000], 32), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, dur=PStutter([1,1/2,1/4,3/2,1,1/2,1/4,3/2,1,1/2,1],[3,1,1,1,2,1,1,1,3,6,1]), sus=PStutter([1/2,1/4,1/2,1/4,1/2,1/4,1],[4,1,4,1,4,6,1]), shape=sinvar([0,0.4],16), oct=PStutter([5,6,6],[5,12,4]), mverb=0.1).unison(4)
+
+Clock.bpm = 111
+
+Scale.default = Scale.dorian
+
+Root.default = "C"
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d4 >> a_daft([4,3,4,6,1,0,1,3,6,5,6,1,4,5,6], dur=PStutter([2,1/2,3,1/2,3,1/2,3,1],[1,3,1,3,1,3,1,2]), sus=PStutter([3/2,1/4,2,1/4,2,1/4,2,3/4],[1,3,1,3,1,3,1,2]), oct=PStutter([5,4,5,4],[8,3,1,3]), mverb=0.2, sgate=0.5, sgthresh=1, sgmode=0, rgate=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=0).unison(3)
+
+d5 >> a_daft([4,3,4,6,1,0,1,3,6,5,6,1,4,5,6], dur=PStutter([2,1/2,3,1/2,3,1/2,3,1],[1,3,1,3,1,3,1,2]), sus=PStutter([3/2,1/4,2,1/4,2,1/4,2,3/4],[1,3,1,3,1,3,1,2]), oct=PStutter([6,5,6,5],[8,3,1,3]), cutoff=4000)
+
+d4 >> a_daft([4,3,4,6,1,0,1,3,6,5,6,1,4,5,6], dur=PStutter([2,1/2,3,1/2,3,1/2,3,1],[1,3,1,3,1,3,1,2]), sus=PStutter([3/2,1/4,2,1/4,2,1/4,2,3/4],[1,3,1,3,1,3,1,2]), oct=PStutter([5,4,5,4],[8,3,1,3]), mverb=0.2, sgate=0.5, sgthresh=1, sgmode=0, rgate=0.5, fbdelay=0.5, lpf=var([800,4000,800,2000],[16,8,8,16]), fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=0).unison(3)
+
+b1 >> play("x", sample=4, dur=[1/2,3/4,3/4,1,1], sus=1/2, dist=0.0).unison(3)
+
+p2>>faim(4, dur=1/2, sus=1, oct=3, tanh=0.4, tanhmix=0.5) 
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 96
+
+Scale.default = Scale.major
+
+Root.default = "C"
+
+d1 >> dbass(Pvar([(0,5),P[(0,5),(6,4)],(6,4)],[5,1,2]), dur=1/2, rate=0.5, oct=PStutter([5,4],[11,5])).unison(3)
+
+d2 >> dbass([4,5,6,2], dur=[1,3], sus=[1,3/4], oct=[6,6,6,7])
+
+d3 >> plaitsX(Pvar([(0,5),P[(0,5),(6,4)],(6,4)],[5,1,2]), dur=1/2, oct=PStutter([6,4],[11,5]))
+
+d1 >> cs80(Pvar([(0,5),P[(0,5),(6,4)],(6,4)],[5,1,2]), tape=var([0,0.3],32), dur=1/2, oct=PStutter([5,4],[11,5])).unison(2,0.01)
+
+~v4 >> compkick(dur=PDur(3,8), comp=1, body=0.6)
+
+~v4 >> compkick(dur=PDur(3,8), comp=1, body=0.6)
+
+Root.default=var([0,-2,5],16)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 110
+
+Scale.default = Scale.chromatic
+
+Root.default = "C"
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, resonbank=0.8, rbfreq=var([300, 400, 500, 600, 650, 700, 800], 8), rbdecay=0.5, rbspread=1.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 800], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 800, 600, 700], P*[1, 2, 4, 8]), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+
+#@intro(32)
+# Establish pulse — compkick + offbeat hat only
+d1 >> compkick(0, dur=1, amp=0.95,
+               punch=0.75, comp=0.9, click=0.55, drive=1.6,
+               sub=0.7, body=0.6, tone=0.5)
+d2 >> play("-h-h-h-H", dur=1/2, amp=0.45,
+           rate=1.25, room=0.25, hpf=400)
+
+#@sub(32)
+# Rolling sub bassline — mono, sidechained, breathing filter
+b1 >> a_xbass([0, 0, -3, 0, 0, -5, 0, 0],
+            dur=PDur(5, 8),
+            sus=PDur(5, 8) * 0.8,
+            oct=4, amp=0.85,
+            distortion=6, cutoff=sinvar([500, 1100], 32),
+            resonance=0.5, attack=0.005,
+            pumper=0.55, pumprate=4, pumpattack=0.003, pumprel=0.18,
+            tape=0.3, tapedrive=1.3)
+
+#@sub(32)
+# Rolling sub bassline — mono, sidechained, breathing filter
+b1 >> a_xbass([0, 0, -3, 0, 0, -5, 0, 0],
+            dur=PDur(5, 8),
+            sus=PDur(5, 8) * 0.8,
+            oct=4, amp=0.2,
+            distortion=6, cutoff=sinvar([500, 1100], 32),
+            resonance=0.5, attack=0.005,
+            pumper=0.55, pumprate=4, pumpattack=0.003, pumprel=0.18,
+            tape=0.3, tapedrive=1.3)
+
+#@sub(32)
+# Rolling sub bassline — mono, sidechained, breathing filter
+b1 >> a_xbass([0, 0, -3, 0, 0, -5, 0, 0],
+            dur=PDur(5, 8),
+            sus=PDur(5, 8) * 0.8,
+            oct=4, amp=2.2,
+            distortion=6, cutoff=sinvar([500, 1100], 32),
+            resonance=0.5, attack=0.005,
+            pumper=0.55, pumprate=4, pumpattack=0.003, pumprel=0.18,
+            tape=0.3, tapedrive=1.3)
+
+#@sub(32)
+# Rolling sub bassline — mono, sidechained, breathing filter
+b1 >> a_xbass([0, 0, -3, 0, 0, -5, 0, 0],
+            dur=PDur(5, 8),
+            sus=PDur(5, 8) * 0.8,
+            oct=5, amp=2.2,
+            distortion=6, cutoff=sinvar([500, 1100], 32),
+            resonance=0.5, attack=0.005,
+            pumper=0.55, pumprate=4, pumpattack=0.003, pumprel=0.18,
+            tape=0.3, tapedrive=1.3)
+
+#@stab(32)
+# Dub techno stab — short note, massive reverb tail, dub delay
+# Chord motion: Im → Im → bVII → Im (classic minor progression)
+s1 >> hardstab([(0, 3, 7), (0, 3, 7), (-2, 1, 5), (0, 3, 7)],
+               dur=var([4, 2, 4, 2], 4),
+               sus=[0.12, 0.18, 0.1, 0.15],
+               oct=5, amp=0.5,
+               cutoff=2200, res=0.45,
+               comp=5, drive=2.5, detune=0.015, fold=0.25,
+               hpf=180,
+               dubdelay=0.55, dublen=0.375, dubwidth=0.12, dubfeed=0.72,
+               jpverb=0.6, jpsize=0.92, jpdamp=0.35, jpmix=0.45,
+               stereowidth=0.85, swfreq=280)
+
+#@stab(32)
+# Dub techno stab — short note, massive reverb tail, dub delay
+# Chord motion: Im → Im → bVII → Im (classic minor progression)
+s1 >> hardstab([(0, 3, 7), (0, 3, 7), (-2, 1, 5), (0, 3, 7)],
+               dur=var([4, 2, 4, 2], 4),
+               sus=[0.12, 0.18, 0.1, 0.15],
+               oct=5, amp=1,
+               cutoff=2200, res=0.45,
+               comp=5, drive=2.5, detune=0.015, fold=0.25,
+               hpf=180,
+               dubdelay=0.55, dublen=0.375, dubwidth=0.12, dubfeed=0.72,
+               jpverb=0.6, jpsize=0.92, jpdamp=0.35, jpmix=0.45,
+               stereowidth=0.85, swfreq=280)
+
+#@detail(32)
+# Industrial detail — metallic resonbank pings + sparse gheavy growl
+h1 >> a_stress(PRand([0, 3, 5, 7, 10]),
+              dur=PDur(3, 8),
+              sus=0.25, oct=6, amp=0.3,
+              phase=0.4, cutoff=linvar([1800, 3800], 24), rq=0.4,
+              resonbank=0.7, rbfreq=1400, rbdecay=0.55, rbspread=1.35,
+              cheapverb=0.6, cvdecay=2.2,
+              hpf=600, pan=PRand([-0.6, -0.3, 0.3, 0.6]))
+
+# Occasional distorted growl — every 8 or 12 beats, breathes
+g1 >> a_gheavy([-7, -7, -10, -7],
+             dur=var([8, 4, 12, 8], 4),
+             sus=[1.4, 0.9, 1.8, 1.1],
+             oct=5, amp=0.45,
+             drive=var([9, 13], [12, 4]), cutoff=sinvar([450, 900], 16),
+             bitcrush=8,
+             dubdelay=0.35, dublen=0.25, dubfeed=0.55,
+             pumper=0.4, pumprate=4)
+
+# Occasional distorted growl — every 8 or 12 beats, breathes
+g1 >> a_gheavy([-7, -7, -10, -7],
+             dur=var([8, 4, 12, 8], 4),
+             sus=[1.4, 0.9, 1.8, 1.1],
+             oct=6, amp=0.45,
+             drive=var([9, 13], [12, 4]), cutoff=sinvar([450, 900], 16),
+             bitcrush=8,
+             dubdelay=0.35, dublen=0.25, dubfeed=0.55,
+             pumper=0.4, pumprate=4)
+
+# Occasional distorted growl — every 8 or 12 beats, breathes
+g1 >> a_gheavy([-7, -7, -10, -7],
+             dur=var([8, 4, 12, 8], 4),
+             sus=[1.4, 0.9, 1.8, 1.1],
+             oct=6, amp=1,
+             drive=var([9, 13], [12, 4]), cutoff=sinvar([450, 900], 16),
+             bitcrush=8,
+             dubdelay=0.35, dublen=0.25, dubfeed=0.55,
+             pumper=0.4, pumprate=4)
+
+# Occasional distorted growl — every 8 or 12 beats, breathes
+g1 >> a_gheavy([-7, -7, -10, -7],
+             dur=var([8, 4, 12, 8], 4),
+             sus=[1.4, 0.9, 1.8, 1.1],
+             oct=6, amp=2,
+             drive=var([9, 13], [12, 4]), cutoff=sinvar([450, 900], 16),
+             bitcrush=8,
+             dubdelay=0.35, dublen=0.25, dubfeed=0.55,
+             pumper=0.4, pumprate=4)
+
+d1.amp = 0
+
+d2.amp = linvar([0.45, 0.15, 0.25], [16, 32, 16])
+
+b1.amp = linvar([0.85, 0, 0.3], [8, 40, 16])
+
+# Drone emerges — dark industrial bed, filter sweeps up over 48 beats
+p1 >> industrialdrone([0, -5, 0, 3],
+                       dur=16, sus=17, oct=4, amp=0.5,
+                       cutoff=linvar([280, 2400], 48), res=0.55, drive=2.5,
+                       detune=0.35, noise=0.25, sub=0.45, feedback=0.3,
+                       cheapverb=0.75, cvdecay=3.5,
+                       miVerb=0.5, mverbfreeze=linvar([0, 0.7, 0], [24, 16, 24]),
+                       stereowidth=0.85)
+
+# Drone emerges — dark industrial bed, filter sweeps up over 48 beats
+p1 >> industrialdrone([0, -5, 0, 3],
+                       dur=16, sus=17, oct=5, amp=1,
+                       cutoff=linvar([280, 2400], 48), res=0.55, drive=2.5,
+                       detune=0.35, noise=0.25, sub=0.45, feedback=0.3,
+                       cheapverb=0.75, cvdecay=3.5,
+                       miVerb=0.5, mverbfreeze=linvar([0, 0.7, 0], [24, 16, 24]),
+                       stereowidth=0.85)
+
+s1.djf = linvar([0.18, 0.68], 56)
+
+s1.amp = linvar([0.35, 0.8], 48)
+
+s1.jpsize = linvar([0.92, 0.98], 48)
+
+g1.amp = linvar([0.45, 0.15, 0.55], [16, 24, 24])
+
+Root.default = "G"
+
+d1 >> compkick(0, dur=1, amp=1.0,
+               punch=0.9, comp=0.95, click=0.65, drive=2.2,
+               sub=0.8, body=0.7, tone=0.55)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> a_xbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3],
+            dur=PDur(7, 12),
+            sus=PDur(7, 12) * 0.85,
+            oct=4, amp=0.9,
+            distortion=9, cutoff=linvar([700, 1600], 32),
+            resonance=0.6, attack=0.004,
+            pumper=0.6, pumprate=4,
+            tape=0.45, tapedrive=1.4)
+
+b1 >> a_xbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3],
+            dur=PDur(7, 12),
+            sus=PDur(7, 12) * 0.85,
+            oct=5, amp=0.9,
+            distortion=9, cutoff=linvar([700, 1600], 32),
+            resonance=0.6, attack=0.004,
+            pumper=0.6, pumprate=4,
+            tape=0.45, tapedrive=1.4)
+
+d1 >> compkick(0, dur=1, amp=1.0,
+               punch=0.9, comp=0.95, click=0.65, drive=2.2,
+               sub=0.8, body=0.7, tone=0.55)
+d2 >> play("-h-[hh]-h-H", dur=1/2, amp=0.55,
+           rate=1.3, room=0.3, hpf=420)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0.75, comp=0.9, click=0.55, drive=1.6, sub=0.7, body=0.6, tone=0.5)
+
+d2 >> click(0, dur=1/2, sus=0.04, amp=[0, 0.35], rate=14, hpf=2400, pan=0.1)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=3, sub=0.7, body=0.5, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=3, sub=0.7, body=0.5, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0, sub=0.7, body=0.5, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=0.5, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=0.6, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=0.7, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=0.8, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=0.9, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.0, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.1, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.2, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.3, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.4, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.5, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.6, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.7, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.8, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=1.9, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.0, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.1, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.2, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.3, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.4, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.5, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.6, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.7, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.8, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=2.9, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.0, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.1, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.2, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.3, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.4, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.5, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.6, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.7, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.8, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=3.9, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.0, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.1, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.2, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.3, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.4, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.5, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.6, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.7, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.8, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=4.9, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.0, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.1, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=0.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=0.4, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=0.5, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=0.6, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=0.7, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=0.8, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=0.9, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.0, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.1, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.2, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.4, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.5, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.6, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.7, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.8, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=1.9, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.0, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.1, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.2, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.4, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.5, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.6, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.7, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.8, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=2.9, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.0, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.1, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.2, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.4, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.5, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.6, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.7, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.8, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=3.9, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=4.0, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=4.1, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=4.2, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=4.3, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=4.4, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=5.2, growl=4.5, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.2,sub=0.7, body=0.2, growl=4.5, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.0,sub=0.7, body=0.2, growl=4.5, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.1,sub=0.7, body=0.2, growl=4.5, pumper=0.55, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.1,sub=0.7, body=0.2, growl=4.5, pumper=4, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.1,sub=0.7, body=0.2, growl=4.5, pumper=0.1, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.1,sub=0.7, body=0.2, growl=4.5, pumper=100, pumprate=4, tape=0.3, tapedrive=1.3)
+
+b1 >> pumpbass([0, 0, -3, 0, 0, -5, 0, 0], dur=PDur(5,8), sus=PDur(5,8)*0.8, oct=4, amp=0.8, cutoff=sinvar([500, 1100], 32), res=0.5, drive=0.1,sub=0.7, body=0.2, growl=4.5, pumper=0.1, pumprate=4, tape=0.3, tapedrive=1.3)
+
+s1 >> hardstab([(0,3,7), (0,3,7), (-2,1,5), (0,3,7)], dur=var([4,2,4,2],4), sus=[0.12, 0.18, 0.1, 0.15], oct=5, amp=0.5, cutoff=2200, res=0.45, comp=5, drive=2.5, detune=0.015, fold=0.25, hpf=180, dubdelay=0.55, dublen=0.375, dubfeed=0.72, jpverb=0.6, jpsize=0.92, jpdamp=0.35, stereowidth=0.85)
+
+s1.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+n9 >> play("X ", pumper=0.5, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=0.6, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=0.7, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=0.8, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=0.9, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.0, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.1, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.2, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.3, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.4, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.5, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.6, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.7, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.8, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=1.9, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.0, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.1, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.2, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.3, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.4, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.5, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.6, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.7, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.8, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=2.9, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=3.0, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=3.1, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=3.2, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+n9 >> play("X ", pumper=3.3, pumprate=4, pumpattack=0.005, pumprel=0.2, pumpcurve=-4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Root.default = "G"
+
+d1 >> compkick(0, dur=1, oct=3, amp=1.0, punch=0.9, comp=0.95, click=0.65, drive=2.2, sub=0.8, body=0.7, tone=0.55)
+
+d2 >> click(0, dur=1/2, sus=0.04, amp=[0, 0.42, 0, 0.38], rate=15, hpf=2600, pan=[0.1, -0.1])
+
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=4, amp=0.85, cutoff=linvar([700, 1600], 32), res=0.6, drive=4, sub=0.75, body=0.6, growl=0.4, pumper=0.6, pumprate=4, tape=0.45, tapedrive=1.4)
+
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=4, amp=0.85, cutoff=linvar([700, 1600], 32), res=0.6, drive=0, sub=0.75, body=0.6, growl=0.4, pumper=0.6, pumprate=4, tape=0.45, tapedrive=1.4)
+
+s1 >> hardstab([(0,3,7), (0,3,7), (-2,1,5), (3,7,10), (0,3,7), (-4,-1,3), (0,3,7), (-2,1,5)], dur=var([4,2,2,2,4],3.5), sus=[0.11, 0.16, 0.09, 0.13], oct=5, amp=0.75, cutoff=2800, res=0.5, comp=6, drive=3.2, detune=0.02, fold=0.35, feedback=0.25, hpf=200, dubdelay=0.62, dublen=0.375, dubfeed=0.78, jpverb=0.55, jpsize=0.9, jpdamp=0.35, stereowidth=0.92)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s1 >> hardstab([(0,3,7), (0,3,7), (-2,1,5), (3,7,10), (0,3,7), (-4,-1,3), (0,3,7), (-2,1,5)], dur=var([4,2,2,2,4],3.5), sus=[0.11, 0.16, 0.09, 0.13], oct=5, amp=0.75, cutoff=2800, res=0.5, comp=6, drive=3.2, detune=0.02, fold=0.35, feedback=0.25, hpf=200, dubdelay=0.62, dublen=0.375, dubfeed=0.7)
+
+s1 >> hardstab([(0,3,7), (0,3,7), (-2,1,5), (3,7,10), (0,3,7), (-4,-1,3), (0,3,7), (-2,1,5)], dur=var([4,2,2,2,4],3.5), sus=[0.11, 0.16, 0.09, 0.13], oct=5, amp=0.75, cutoff=2800, res=0.5, comp=1, drive=3.2, detune=0.02, fold=0.35, feedback=0.25, hpf=200, dubdelay=0.62, dublen=0.375, dubfeed=0.7)
+
+s1 >> hardstab([(0,3,7), (0,3,7), (-2,1,5), (3,7,10), (0,3,7), (-4,-1,3), (0,3,7), (-2,1,5)], dur=var([4,2,2,2,4],3.5), sus=[0.11, 0.16, 0.09, 0.13], oct=5, amp=0.75, cutoff=2800, res=0.5, comp=1, drive=3.2, detune=0.02, fold=0.0, feedback=0.25, hpf=200, dubdelay=0.62, dublen=0.375, dubfeed=0.7)
+
+s1 >> hardstab([(0,3,7), (0,3,7), (-2,1,5), (3,7,10), (0,3,7), (-4,-1,3), (0,3,7), (-2,1,5)], dur=var([4,2,2,2,4],3.5), sus=[0.11, 0.16, 0.09, 0.13], oct=5, amp=0.75, cutoff=2800, res=0.5, comp=0, drive=3.2, detune=0.02, fold=0.0, feedback=0.25, hpf=200, dubdelay=0.62, dublen=0.375, dubfeed=0.7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+g1 >> a_gheavy([-7, -7, -5, -10, -7, -3, -7, -5], dur=var([4,2,2,4],[6,4,4,2]), sus=[0.9, 0.6, 1.2, 0.8], oct=5, amp=0.6, drive=linvar([12, 16], 32), cutoff=sinvar([400, 1100], 16), bitcrush=var([6,10],[12,4]), dubdelay=0.45, dublen=0.25, pumper=0.5, pumprate=4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0.85, comp=0.9, click=0.65, sub=0.75, body=0.65, tone=0.5)
+
+Clock.bpm = 130
+Scale.default = "minor"
+Root.default = "E"
+
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=0.85, comp=0.9, click=0.65, sub=0.75, body=0.65, tone=0.5)
+

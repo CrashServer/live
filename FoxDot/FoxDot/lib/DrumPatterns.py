@@ -843,3 +843,89 @@ def pkit(genre="techno", **kwargs):
 def genres():
     """List available genres"""
     return list(_genres.keys())
+
+
+# ── Pattern helpers (ported from yt_patterns) ────────────────────────────────
+# Turn a drum pattern into rhythm data for melodic players.
+# `name` can be a pat() code ("t1"), a list of codes (concatenated) or a raw play string.
+
+HITS = set("xXKkvgVWoOuUcCrR#^*")   # kicks, snares, claps
+FILLS = set("-=:~sSeE.+t")          # hats, shakers, ghost/fill hits
+
+
+def p(code):
+    """Alias for pat()"""
+    return pat(code)
+
+
+def _resolve(name):
+    if isinstance(name, (list, tuple)):
+        return "".join(_resolve(n) for n in name)
+    if name in _named_patterns:
+        return str(_named_patterns[name])
+    return str(name)
+
+
+def _hit_chars(hits_only, chars):
+    if chars is not None:
+        return set(chars)
+    return HITS if hits_only else HITS | FILLS
+
+
+def phits(name, hits_only=True, chars=None):
+    """Step indexes where hits occur. e.g. phits("t1") -> [0, 4, 8, 12]"""
+    hit = _hit_chars(hits_only, chars)
+    return [i for i, c in enumerate(_resolve(name)) if c in hit]
+
+
+def ppat(name, hits_only=True, chars=None, base=0.25):
+    """Drum pattern -> dur list, so a melodic player follows the drum rhythm.
+    e.g. b1 >> bass([0, 3, 5], dur=ppat("d2"))"""
+    pattern = _resolve(name)
+    pos = phits(pattern, hits_only, chars)
+    if len(pos) <= 1:
+        return [len(pattern) * base]
+    durs = [(b - a) * base for a, b in zip(pos, pos[1:])]
+    durs.append((len(pattern) - pos[-1] + pos[0]) * base)
+    return durs
+
+
+def pamp(name, hits_only=True, chars=None, amp_on=1, amp_off=0):
+    """Drum pattern -> amp list (amp_on on hits, amp_off elsewhere).
+    e.g. p1 >> pluck([0, 2, 4], dur=1/4, amp=pamp("t1"))"""
+    hit = _hit_chars(hits_only, chars)
+    return [amp_on if c in hit else amp_off for c in _resolve(name)]
+
+
+def patterns():
+    """Print all named patterns, grouped by genre prefix"""
+    for code in sorted(_named_patterns, key=lambda c: (c.rstrip("0123456789"), int(c[len(c.rstrip("0123456789")):] or 0))):
+        print(f"  {code:6} {str(_named_patterns[code])}")
+
+
+def export_json(filepath=None):
+    """Export named patterns + pbuild genres for the webTroop autocomplete
+    (webTroop/public/drumPatterns.json). CLI: python -m FoxDot.lib.DrumPatterns [path]"""
+    import json
+    names = {"t": "Techno", "e": "EBM", "d": "DnB", "h": "House", "b": "Breaks",
+             "hf": "Halftime", "i": "Industrial", "rg": "Reggae", "af": "Afro"}
+    data = {"patterns": [], "groups": [], "categories": {}}
+    for code in sorted(_named_patterns):
+        s = str(_named_patterns[code])
+        cat = names.get(code.rstrip("0123456789"), "Other")
+        data["patterns"].append({"code": code, "pattern": s, "preview": s[:24] + ("..." if len(s) > 24 else ""),
+                                 "category": cat, "length": len(s)})
+        data["categories"].setdefault(cat, []).append(code)
+    for g in genres():
+        data["groups"].append({"code": g, "items": [g], "preview": f'pbuild("{g}")', "category": "pbuild genres"})
+        data["categories"].setdefault("pbuild genres", []).append(g)
+    if filepath:
+        with open(filepath, "w") as f:
+            json.dump(data, f, indent=2)
+        print(f"Exported to {filepath}")
+    return data
+
+
+if __name__ == "__main__":
+    import sys
+    export_json(sys.argv[1] if len(sys.argv) > 1 else None)

@@ -78,7 +78,7 @@ const foxdotFoldFinder = (cm, start) => {
 };
 CodeMirror.registerHelper("fold", "foxdot-sections", foxdotFoldFinder);
 
-const LINES_TO_SHOW = 20; // pretext number of lines to show
+const LINES_TO_SHOW = 40; // pretext number of lines to show
 import "../css/visualMode.css";
 import { patternLog } from "./patternLog.js";
 

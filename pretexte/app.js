@@ -26,9 +26,9 @@ import { enableFlow, disableFlow, tickFlow, renderFlow } from './engine/flowrend
 /* ─── Font-fit config (unchanged from baseline) ─────────────────────────── */
 const FONT_CONFIG = {
     MIN_FONT_SIZE: 6,
-    MAX_FONT_SIZE: 200,
+    MAX_FONT_SIZE: 500,
     FONT_FAMILY: 'InterBlack, Courier New, monospace',
-    LINE_HEIGHT_MULTIPLIER: 0.8
+    LINE_HEIGHT_MULTIPLIER: 1.1
 };
 
 let lastCalculatedFontSize = null;
@@ -42,8 +42,8 @@ async function calculateOptimalFontSize(text, containerWidth, containerHeight) {
         let maxSize = FONT_CONFIG.MAX_FONT_SIZE;
         let optimalSize = minSize;
         const lineHeightMultiplier = FONT_CONFIG.LINE_HEIGHT_MULTIPLIER;
-        const padding = 80;
-        const availableHeight = containerHeight - padding * 4;
+        const padding = 20;
+        const availableHeight = containerHeight - padding * 3;
         const availableWidth  = containerWidth  - padding;
 
         for (let i = 0; i < 20; i++) {
@@ -129,6 +129,9 @@ function connectWebSocket() {
 
         ws.onopen = () => { console.log('✓ WebSocket connecté'); updateStatus(true); };
 
+        // Coalesce bursts of InstantCode messages into one render per frame
+        let renderPending = false;
+
         ws.onmessage = (event) => {
             try {
                 const message = JSON.parse(event.data);
@@ -148,7 +151,13 @@ function connectWebSocket() {
                         p.cursorCh          = message.position || 0;
                         p.lastUpdate        = Date.now();
                         lastUpdatedPlayer   = playerType;
-                        renderCode();
+                        if (!renderPending) {
+                            renderPending = true;
+                            requestAnimationFrame(() => {
+                                renderCode();
+                                renderPending = false;
+                            });
+                        }
                     }
                 }
             } catch (error) {
@@ -171,24 +180,34 @@ function mergePlayerWindows() {
     const svdk = players.svdkInstantCode;
     const lineMap = new Map();
 
-    if (zbdm.windowLines) {
-        zbdm.windowLines.split('\n').forEach((text, index) => {
-            const lineNum = zbdm.windowStartLine + index;
-            if (!lineMap.has(lineNum)) lineMap.set(lineNum, { text, from: [] });
-            if (!lineMap.get(lineNum).from.includes('zbdm')) lineMap.get(lineNum).from.push('zbdm');
-        });
-    }
-    if (svdk.windowLines) {
-        svdk.windowLines.split('\n').forEach((text, index) => {
-            const lineNum = svdk.windowStartLine + index;
-            if (!lineMap.has(lineNum)) lineMap.set(lineNum, { text, from: [] });
-            else if (lastUpdatedPlayer === 'svdkInstantCode') lineMap.get(lineNum).text = text;
-            if (!lineMap.get(lineNum).from.includes('svdk')) lineMap.get(lineNum).from.push('svdk');
-        });
-    }
+    // indexOf scan instead of split('\n'): no throwaway arrays on every keystroke
+    const processLines = (windowLines, startLine, playerName) => {
+        if (!windowLines) return;
+        let currentIndex = 0;
+        let lineNum = startLine;
+        while (currentIndex < windowLines.length) {
+            let nextIndex = windowLines.indexOf('\n', currentIndex);
+            if (nextIndex === -1) nextIndex = windowLines.length;
+            const text = windowLines.substring(currentIndex, nextIndex);
+            let lineObj = lineMap.get(lineNum);
+            if (!lineObj) {
+                lineObj = { text, from: new Set() };
+                lineMap.set(lineNum, lineObj);
+            } else if (lastUpdatedPlayer === `${playerName}InstantCode`) {
+                lineObj.text = text;   // overlap: last player who typed wins
+            }
+            lineObj.from.add(playerName);
+            currentIndex = nextIndex + 1;
+            lineNum++;
+        }
+    };
 
-    const sortedLineNums = [...lineMap.keys()].sort((a, b) => a - b);
-    return sortedLineNums.map(n => ({ lineNumber: n, text: lineMap.get(n).text, from: lineMap.get(n).from }));
+    processLines(zbdm.windowLines, zbdm.windowStartLine, 'zbdm');
+    processLines(svdk.windowLines, svdk.windowStartLine, 'svdk');
+
+    return Array.from(lineMap.entries())
+        .sort((a, b) => a[0] - b[0])
+        .map(([lineNumber, data]) => ({ lineNumber, text: data.text, from: Array.from(data.from) }));
 }
 
 /* Focus cone: active line biggest (1.0), lines fall off to 0.55 at distance 5+.

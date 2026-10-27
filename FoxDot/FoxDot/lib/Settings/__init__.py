@@ -69,6 +69,7 @@ FOXDOT_BUFFERS_FILE = os.path.realpath(FOXDOT_ROOT + "/osc/Buffers.scd")
 FOXDOT_EFFECTS_FILE = os.path.realpath(FOXDOT_ROOT + "/osc/Effects.scd")
 FOXDOT_INFO_FILE    = os.path.realpath(FOXDOT_ROOT + "/osc/Info.scd")
 FOXDOT_RECORD_FILE  = os.path.realpath(FOXDOT_ROOT + "/osc/Record.scd")
+FOXDOT_ANALYZER_FILE = os.path.realpath(FOXDOT_ROOT + "/osc/AudioAnalyzer.scd")
 FOXDOT_TEMP_FILE    = os.path.realpath(FOXDOT_ROOT + "/lib/Workspace/tmp/tempfile.txt")
 
 # If the tempfile doesn't exist, create it
@@ -136,7 +137,7 @@ class _SamplePlayer:
         return other not in self.names
 
 class _LoopPlayer:
-    names = ("loop", "gsynth", 'stretch', 'breakcore', 'splitter', 'splaffer', 'noloop')
+    names = ("loop", "gsynth", 'stretch', 'breakcore', 'splitter', 'splaffer', 'noloop', 'grainX', 'livePlay')
     def __eq__(self, other):
         return other in self.names
     def __ne__(self, other):

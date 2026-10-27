@@ -34,6 +34,7 @@ import {
   removeAllTooltips,
   updateDefinitions,
 } from "./foxdotDefinitions.js";
+import { visualMode } from "./visualMode.js";
 
 import "codemirror/addon/fold/foldcode.js";
 import "codemirror/addon/fold/foldgutter.js";
@@ -78,6 +79,7 @@ const foxdotFoldFinder = (cm, start) => {
 CodeMirror.registerHelper("fold", "foxdot-sections", foxdotFoldFinder);
 
 const LINES_TO_SHOW = 20; // pretext number of lines to show
+import "../css/visualMode.css";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Récupération de la configuration
@@ -284,8 +286,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     yUndoManager,
   });
 
+  // Initialize visual mode with the editor (before configPanel so loadUserSettings can enable/disable)
+  visualMode.init(editor);
+
   // Configuration du panneau de configuration
-  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor);
+  const configPanelControls = setupConfigPanel(awareness, editor, otherEditor, visualMode);
 
   // Initialiser l'analyseur audio (sera géré par le configPanel)
   const audioVizContainer = document.getElementById("audio-viz");

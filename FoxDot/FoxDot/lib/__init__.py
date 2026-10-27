@@ -11,6 +11,7 @@ FoxDotCode.namespace = globals()
 
 from .TempoClock import *
 from .Buffers import *
+
 from .Players import *
 from .Patterns import *
 from .Effects import *
@@ -22,7 +23,12 @@ from .SCLang._SynthDefs import *
 from .ServerManager import *
 from .SCLang import SynthDefs, Env, SynthDef, CompiledSynthDef
 from .Root import Root
-from .Scale import Scale, Tuning
+from .Scale import Scale
+from .Crashserver.et_tunings import *
+try:
+    from .VideoControl import VidCtrl, YouTubeController
+except ImportError as e:  # needs websocket-client; never block FoxDot boot over video control
+    print(f"VideoControl disabled: {e}")
 
 # stdlib imports
 
@@ -200,6 +206,48 @@ def Ramp(t=32, ramp_time=4):
     """ Returns a `linvar` that goes from 0 to 1 over the course of the last
         `ramp_time` bars of every `t` length cycle. """
     return linvar([0,0,1,0],[t-ramp_time, ramp_time, 0, 0])
+
+def ramp(param, start, end, dur=1):
+    """Return a dict for auto-ramping a parameter via the built-in control system.
+
+    Uses param_ (Line.kr target) and param_d (duration) controls that FoxDot
+    auto-generates for every FX parameter.
+
+        >>> d1 >> pluck(**ramp('lpf', 200, 8000, dur=0.5))
+
+    """
+    return {param: start, param + '_': end, param + '_d': dur}
+
+def lfo(param, rate, mul=1, add=1):
+    """Return a dict for LFO-modulating a parameter via the built-in control system.
+
+    Uses paramlfo (SinOsc rate), paramlfomul, and paramlfoadd controls that FoxDot
+    auto-generates for every FX parameter.
+
+        >>> d1 >> pluck(lpf=4000, **lfo('lpf', rate=4, mul=0.5))
+
+    """
+    return {param + 'lfo': rate, param + 'lfomul': mul, param + 'lfoadd': add}
+
+def mod(param, start=None, end=None, dur=1, rate=0, mul=1, add=1):
+    """Return a combined ramp + LFO dict for a parameter.
+
+    Merges ramp() and lfo() into one dict for convenience.
+
+        >>> d1 >> pluck(**mod('lpf', start=200, end=8000, rate=4, mul=0.2))
+
+    """
+    d = {}
+    if start is not None:
+        d[param] = start
+    if end is not None:
+        d[param + '_'] = end
+        d[param + '_d'] = dur
+    if rate > 0:
+        d[param + 'lfo'] = rate
+        d[param + 'lfomul'] = mul
+        d[param + 'lfoadd'] = add
+    return d
 
 def allow_connections(valid = True, *args, **kwargs):
     """ Starts a new instance of ServerManager.TempoServer and connects it with the clock. Default port is 57999 """

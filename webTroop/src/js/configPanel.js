@@ -1,4 +1,4 @@
-export function setupConfigPanel(awareness, editor, otherEditor) {
+export function setupConfigPanel(awareness, editor, otherEditor, visualMode) {
     const configButton = document.getElementById('configButton');
     const configPanel = document.getElementById('configPanel');
     const userNameInput = document.getElementById('userName');
@@ -25,6 +25,7 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
     const bloomToggle = document.getElementById('bloomToggle');
     const consoleElement = document.getElementById('logPanel');
     const logs = document.getElementById('logs');
+    const visualModeToggle = document.getElementById('visualModeToggle');
     const themeSelect = document.getElementById('themeSelect');
 
 
@@ -105,6 +106,16 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         const bloomEnabled = savedBloomState !== 'false';
         bloomToggle.checked = bloomEnabled;
         toggleBloom(bloomEnabled);
+        // Charger l'état du visual mode
+        const savedVisualMode = localStorage.getItem(getStorageKey('visualModeEnabled'));
+        const visualModeEnabled = savedVisualMode === 'true';
+        if (visualModeToggle) {
+            visualModeToggle.checked = visualModeEnabled;
+        }
+        if (visualMode) {
+            if (visualModeEnabled) visualMode.enable();
+            else visualMode.disable();
+        }
 
         // Charger le thème d'interface
         const savedInterfaceTheme = localStorage.getItem(getStorageKey('selectedInterfaceTheme')) || 'dark';
@@ -404,6 +415,18 @@ export function setupConfigPanel(awareness, editor, otherEditor) {
         }
         // Sauvegarder la préférence
         localStorage.setItem(getStorageKey('bloomEnabled'), enabled.toString());
+    }
+
+    // Gestion du visual mode
+    if (visualModeToggle) {
+        visualModeToggle.addEventListener('change', (e) => {
+            const enabled = e.target.checked;
+            if (visualMode) {
+                if (enabled) visualMode.enable();
+                else visualMode.disable();
+            }
+            localStorage.setItem(getStorageKey('visualModeEnabled'), enabled.toString());
+        });
     }
 
     // Gestion du mode spectateur

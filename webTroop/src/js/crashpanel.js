@@ -1,5 +1,6 @@
 import { EventEmitter } from './eventBus.js';
 import { playersList, updatePlayersList, toggleRecording } from './functionUtils.js';
+import { visualMode } from './visualMode.js';
 
 const configRequest = await fetch('../../crash_config.json' );
   if (!configRequest.ok) {
@@ -155,12 +156,22 @@ const ws = makeReconnectingWs(
                 break;
             case 'beat':
                 updateBeat(data.beat);
+                if (data.playerSteps) visualMode.setPlayerSteps(data.playerSteps);
                 break;
             case 'chrono':
                 _elChrono.textContent = formatTime(data.chrono);
                 break;
             case 'players':
                 formatPlayers(data.players);
+                // Forward parsed player data to visual mode
+                try {
+                    const parsedPlayers = {};
+                    for (const ply of data.players) {
+                        const p = JSON.parse(ply);
+                        parsedPlayers[p.player] = p;
+                    }
+                    visualMode.setPlayers(parsedPlayers);
+                } catch (_) {}
                 break;
             case 'masterFx': {
                 _elMasterFx.innerHTML = '';
@@ -188,10 +199,26 @@ const ws = makeReconnectingWs(
     }
 );
 
-// webTroop main server (port 1234) — used to forward CPU data to Arduino
+let videoWindow = null;
+
+function openVideoWindow(videoId) {
+    if (!videoWindow || videoWindow.closed) {
+        const url = videoId ? `/video.html?v=${videoId}` : '/video.html';
+        videoWindow = window.open(url, 'crashtroop-video', 'width=640,height=400,resizable=yes');
+    } else {
+        videoWindow.focus();
+    }
+}
+
+// webTroop main server (port 1234) — forwards CPU data to Arduino, receives yt_ video commands
 const wsServer = makeReconnectingWs(
     `ws://${config.HOST_IP}:1234`,
-    null
+    function(event) {
+        try {
+            const data = JSON.parse(event.data);
+            if (data.type === 'yt_open_window') openVideoWindow(data.videoId);
+        } catch (_) {}
+    }
 );
 
 const _elPianoRoll = document.getElementById('piano-roll');

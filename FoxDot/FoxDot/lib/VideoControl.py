@@ -6,8 +6,21 @@ Lazy connection: zero overhead until first command is used.
 
 import json
 import os
+import re
 import asyncio
 import websocket  # websocket-client (sync)
+
+_YT_ID = re.compile(r'^[a-zA-Z0-9_-]{11}$')
+_YT_URL = re.compile(r'(?:youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/|youtube\.com/shorts/)([a-zA-Z0-9_-]{11})')
+
+
+def _video_id(url_or_id):
+    """Accept a bare 11-char video ID or any common YouTube URL form."""
+    s = str(url_or_id).strip()
+    if _YT_ID.match(s):
+        return s
+    m = _YT_URL.search(s)
+    return m.group(1) if m else s
 
 # Lazy import — Clock is only available after FoxDot init
 _clock = None
@@ -74,7 +87,8 @@ class YouTubeController:
     # ─── Transport ────────────────────────────────────────────────
 
     def load(self, video_id):
-        """Open video popup window and load a YouTube video by ID."""
+        """Open video popup window and load a YouTube video by ID or URL."""
+        video_id = _video_id(video_id)
         self._send('yt_open_window', videoId=video_id)
         self._send('yt_load', videoId=video_id)
 
@@ -92,8 +106,7 @@ class YouTubeController:
 
     def stop(self):
         """Stop all beat-synced patterns and pause the video."""
-        self._patterns_running = False
-        self._pattern_id += 1
+        self.stop_patterns()
         self.pause()
 
     # ─── Effects ──────────────────────────────────────────────────
@@ -113,6 +126,54 @@ class YouTubeController:
     def unloop(self):
         """Remove loop region."""
         self._send('yt_unloop')
+
+    clear_loop = unloop
+
+    def jump(self, seconds):
+        """Seek and set the position as the base for scrub()."""
+        self._send('yt_jump', time=float(seconds))
+
+    def scrub(self, offset):
+        """Seek relative to the last jump()/seek() base, e.g. scrub(linvar([0, 2], 8))."""
+        self._send('yt_scrub', offset=float(offset))
+
+    def beat_loop(self, bars=1, start=0):
+        """Loop N bars (4/4 at the current Clock.bpm) starting at `start` seconds."""
+        length = bars * 4 * 60.0 / float(_get_clock().get_bpm())
+        self.loop(start, float(start) + length)
+
+    bloop = beat_loop
+
+    def unfreeze(self):
+        """Stop freeze/grain (and any beat-synced pattern) and resume playback."""
+        self.stop_patterns()
+        self.play()
+
+    def stop_patterns(self):
+        """Stop beat-synced patterns without pausing the video."""
+        self._patterns_running = False
+        self._pattern_id += 1
+
+    # ─── Shortcuts ────────────────────────────────────────────────
+
+    def go(self, seconds):
+        self.seek(seconds)
+
+    def speed(self, rate):
+        self.rate(rate)
+
+    def slow(self):
+        self.rate(0.5)
+
+    def fast(self):
+        self.rate(2)
+
+    def normal(self):
+        self.rate(1)
+
+    def __call__(self, seconds):
+        """VidCtrl(30) is VidCtrl.seek(30)."""
+        self.seek(seconds)
 
     # ─── Beat-synced patterns ─────────────────────────────────────
 

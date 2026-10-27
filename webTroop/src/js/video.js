@@ -8,6 +8,7 @@ let ws = null;
 let loopRegion = null;    // { start, end } or null
 let loopPollId = null;
 let statusIntervalId = null;
+let scrubBase = null;     // set by seek/jump, used by scrub
 
 // ─── Config ──────────────────────────────────────────────────
 
@@ -87,6 +88,21 @@ function handleCommand(data) {
         case 'yt_seek':
             if (player && typeof data.position === 'number') {
                 player.seekTo(data.position, true);
+                scrubBase = data.position;
+            }
+            break;
+
+        case 'yt_jump':
+            if (player && typeof data.time === 'number') {
+                scrubBase = Math.max(0, data.time);
+                player.seekTo(scrubBase, true);
+                setStatus(`→ ${formatTime(scrubBase)}`);
+            }
+            break;
+
+        case 'yt_scrub':
+            if (player && scrubBase !== null && typeof data.offset === 'number') {
+                player.seekTo(Math.max(0, scrubBase + data.offset), true);
             }
             break;
 
@@ -114,6 +130,7 @@ function handleCommand(data) {
             break;
 
         case 'yt_unloop':
+        case 'yt_clear_loop':
             loopRegion = null;
             document.getElementById('loop-indicator').classList.add('hidden');
             stopLoopPolling();

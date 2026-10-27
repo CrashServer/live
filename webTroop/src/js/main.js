@@ -189,6 +189,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   otherEditor.swapDoc(otherUserDoc);
 
+  // Track autocomplete state for collaborative editing
+  let autocompleteState = {
+    isOpen: false,
+    affectedByRemoteChange: false
+  };
+
   let otherUserCursorMark = null;
   let otherUserNameWidget = null;
 
@@ -292,6 +298,101 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Initialize pattern log (text-based visualization)
   patternLog.init('pattern-log');
+
+  // Track when user closes autocomplete manually
+  let wasHintOpenBeforeChange = false;
+
+  // Monitor hint visibility continuously for collaborative changes
+  editor.on('cursorActivity', (cm) => {
+    wasHintOpenBeforeChange = isHintWidgetVisible();
+  });
+
+  // Track when hint is shown
+  editor.on('shown-hint', (cm) => {
+    autocompleteState.isOpen = true;
+  });
+
+  // Hint closed by the user (Esc, pick, click away) → stop restoring it.
+  // Closes caused by an incoming remote edit are ignored (remotePending).
+  editor.on('endCompletion', () => {
+    if (!autocompleteState.remotePending) autocompleteState.isOpen = false;
+  });
+
+  // Helper function to check if hint widget is currently visible
+  const isHintWidgetVisible = () => {
+    const hintWidget = document.querySelector('.CodeMirror-hints');
+    return hintWidget && hintWidget.offsetParent !== null;
+  };
+
+  // Helper function to check if a remote change affects the autocomplete context
+  const doesRemoteChangeAffectAutocomplete = (changeObj, cursorLine, cursorCh) => {
+    if (cursorLine === null || cursorCh === null) {
+      return true;
+    }
+
+    // Get change details
+    const from = changeObj.from;
+    const to = changeObj.to;
+    
+    // If change is on the same line as cursor
+    if (from.line === cursorLine) {
+      // Check if the change overlaps with or is after cursor position
+      if (to.line === cursorLine && to.ch <= cursorCh) {
+        // Change is before cursor position on same line - doesn't affect autocomplete context
+        return false;
+      }
+      // Change overlaps with or is after cursor position on same line
+      return true;
+    }
+    
+    // If inserting/removing lines above the cursor
+    if (from.line < cursorLine) {
+      // Change is above cursor - doesn't affect the actual text/context at cursor position
+      // The autocomplete context remains valid
+      return false;
+    }
+    
+    // Change is below cursor - doesn't affect autocomplete context
+    return false;
+  };
+
+  // Handle remote changes - preserve autocomplete if it was open
+  editor.on('beforeChange', (cm, changeObj) => {
+    const isRemoteChange = changeObj.origin === 'y-codemirror';
+    
+    if (isRemoteChange) {
+      autocompleteState.remotePending = true;
+      const hintWasOpen = isHintWidgetVisible() || wasHintOpenBeforeChange || autocompleteState.isOpen;
+      
+      if (hintWasOpen) {
+        autocompleteState.isOpen = true;
+        
+        // Get current cursor position
+        const cursor = cm.getCursor();
+        
+        // Check if this change affects the autocomplete context
+        const affects = doesRemoteChangeAffectAutocomplete(changeObj, cursor.line, cursor.ch);
+        autocompleteState.affectedByRemoteChange = affects;
+      }
+    }
+  });
+
+  // Restore autocomplete after remote changes if it was open and not affected
+  editor.on('change', (cm, changeObj) => {
+    if (changeObj.origin === 'y-codemirror' && autocompleteState.isOpen && !autocompleteState.affectedByRemoteChange) {
+      // Delay to allow CodeMirror to process the change
+      setTimeout(() => {
+        if (!isHintWidgetVisible()) {
+          cm.showHint();
+        }
+      }, 50);
+    } else if (changeObj.origin === 'y-codemirror') {
+      autocompleteState.isOpen = false;
+    }
+    if (changeObj.origin === 'y-codemirror') {
+      setTimeout(() => { autocompleteState.remotePending = false; }, 60);
+    }
+  });
 
   // Configuration du panneau de configuration
   const configPanelControls = setupConfigPanel(awareness, editor, otherEditor, visualMode, patternLog);

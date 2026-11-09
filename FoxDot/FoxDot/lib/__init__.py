@@ -27,8 +27,19 @@ from .Scale import Scale, Tuning
 from .Crashserver.et_tunings import *
 try:
     from .VideoControl import VidCtrl, YouTubeController
-except ImportError as e:  # needs websocket-client; never block FoxDot boot over video control
-    print(f"VideoControl disabled: {e}")
+except ImportError as _err:  # needs websocket-client; never block FoxDot boot over video control
+    print(f"VideoControl disabled: {_err}")
+    _vid_msg = f"VidCtrl unavailable ({_err}) - install it: venv/bin/pip install websocket-client"
+
+    class _VidCtrlOff:
+        """ Stand-in so VidCtrl.x() explains what's missing instead of a NameError """
+        def __getattr__(self, name):
+            return lambda *args, **kwargs: print(_vid_msg)
+
+        def __call__(self, *args, **kwargs):
+            print(_vid_msg)
+
+    VidCtrl = _VidCtrlOff()
 from .SynthPatterns import env, e, mel, m, arp, chord, chords, envs, mels, ENVELOPES, MELODIES, CHORDS
 
 # stdlib imports

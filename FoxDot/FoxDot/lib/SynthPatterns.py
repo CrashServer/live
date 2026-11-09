@@ -338,7 +338,36 @@ CHORDS = {
 # FUNCTIONS
 # =============================================================================
 
-def env(name):
+def _resolve(name, lookup, dur=None):
+    """ Name, number, list or var -> pattern data.
+        "trance3" / 1         -> that pattern
+        [1, "trance3"]        -> the patterns played one after the other
+        [1, "trance3"], dur=8 -> switch whole patterns every 8 beats (Pvar; dur can be a list)
+        var([1, 3], 8)        -> same, numbers only: FoxDot's var splits strings into letters """
+    from .TimeVar import TimeVar, Pvar
+    if dur is not None and isinstance(name, (list, tuple, Pattern)):
+        return Pvar([_resolve(n, lookup) for n in name], dur)
+    if isinstance(name, TimeVar):
+        return Pvar([_resolve(v, lookup) for v in name.values], name.dur, start=name.start_time)
+    if isinstance(name, (list, tuple, Pattern)):
+        out = []
+        for n in name:
+            item = _resolve(n, lookup)
+            out.extend(item if isinstance(item, list) else [item])
+        return out
+    return lookup(name)
+
+
+def _numbered(table, name, default):
+    """ Name lookup, or a number: n -> the n-th entry as listed by mels()/envs()
+        (alphabetical, 1-based, wraps around so any integer works) """
+    if isinstance(name, (int, float)) and not isinstance(name, bool):
+        keys = sorted(table)
+        return table[keys[(int(name) - 1) % len(keys)]]
+    return table.get(name, default)
+
+
+def env(name, dur=None):
     """
     Look up an envelope pattern by name.
 
@@ -352,16 +381,19 @@ def env(name):
         s1 >> pluck([0,2,4], dur=1/4, sus=env("stab"))
         s1 >> saw([0], dur=1/4, amp=env("accent"))
         s1 >> bass([0], dur=1/4, lpf=env("wobble"))
+        s1 >> pluck([0], dur=1/4, sus=env(["stab", "swell"]))       # one after the other
+        s1 >> pluck([0], dur=1/4, sus=env(var([1, 4], 8)))          # numbers as listed by envs()
+        s1 >> pluck([0], dur=1/4, sus=env(["stab", "pump"], 8))      # switch every 8 beats
     """
-    return ENVELOPES.get(name, [1])
+    return _resolve(name, lambda n: _numbered(ENVELOPES, n, [1]), dur)
 
 
-def e(name):
+def e(name, dur=None):
     """Short alias for env()"""
-    return env(name)
+    return env(name, dur)
 
 
-def mel(name):
+def mel(name, dur=None):
     """
     Look up a melodic pattern by name.
 
@@ -375,16 +407,21 @@ def mel(name):
         b1 >> bass(mel("acid1"), dur=1/8)
         a1 >> pluck(mel("trance1"), dur=1/16)
         p1 >> pads(mel("prog1"), dur=4)
+        b1 >> bass(mel(["acid1", "acid2"]), dur=1/8)
+        b1 >> bass(mel(3), dur=1/8)                         # 3rd melody as listed by mels()
+        b1 >> bass(mel([1, 5], 8), dur=1/8)                 # switch every 8 beats
+        b1 >> bass(mel(var([1, 5], 8)), dur=1/8)            # same, with a var
+        b1 >> bass(mel(["tb1", "acid3"], 16), dur=1/8)          # switch every 16 beats
     """
-    return MELODIES.get(name, [0])
+    return _resolve(name, lambda n: _numbered(MELODIES, n, [0]), dur)
 
 
-def m(name):
+def m(name, dur=None):
     """Short alias for mel()"""
-    return mel(name)
+    return mel(name, dur)
 
 
-def arp(name):
+def arp(name, dur=None):
     """
     Look up an arpeggio pattern by name.
     Searches both MELODIES (arp*, trance*) patterns.
@@ -398,20 +435,24 @@ def arp(name):
     Examples:
         a1 >> pluck(arp("trance1"), dur=1/16)
         a1 >> saw(arp("arp8"), dur=1/8)
+        a1 >> pluck(arp(1), dur=1/4)                       # number -> arp1 (then trance1)
+        a1 >> pluck(arp([1, 2, "trance3"]), dur=1/4)       # one after the other
+        a1 >> pluck(arp([1, "trance3"], 8), dur=1/4)       # switch every 8 beats
+        a1 >> pluck(arp([1, 3], [12, 4]), dur=1/4)         # 12 beats arp1, 4 beats arp3
+        a1 >> pluck(arp(var([1, 3], 8)), dur=1/4)          # var works with numbers
     """
-    # First check direct match
-    if name in MELODIES:
-        return MELODIES[name]
-    # Try with "arp" prefix
-    if f"arp{name}" in MELODIES:
-        return MELODIES[f"arp{name}"]
-    # Try with "trance" prefix
-    if f"trance{name}" in MELODIES:
-        return MELODIES[f"trance{name}"]
+    return _resolve(name, _arp_one, dur)
+
+
+def _arp_one(name):
+    # Direct match, then "arp<name>", then "trance<name>"
+    for key in (name, f"arp{name}", f"trance{name}"):
+        if key in MELODIES:
+            return MELODIES[key]
     return [0, 2, 4, 7]  # Default arp
 
 
-def chord(name):
+def chord(name, dur=None):
     """
     Look up a chord or chord progression.
 
@@ -424,16 +465,22 @@ def chord(name):
     Examples:
         c1 >> keys(chord("maj7"), dur=4)
         c1 >> pads(chord("houseprog"), dur=4)
+        c1 >> pads(chord(["houseprog", "darkprog"]), dur=4)
+        c1 >> keys(chord(["maj7", "min7"], 8), dur=2)
     """
-    result = CHORDS.get(name, (0, 2, 4))
+    return _resolve(name, _chord_one, dur)
+
+
+def _chord_one(name):
+    result = _numbered(CHORDS, name, (0, 2, 4))
     if isinstance(result, list):
         return [PGroup(c) for c in result]
     return PGroup(result)
 
 
-def chords(name):
+def chords(name, dur=None):
     """Alias for chord(), typically used for progressions"""
-    return chord(name)
+    return chord(name, dur)
 
 
 def envs():
@@ -481,7 +528,7 @@ def envs():
         preview = str(vals[:6])
         if len(vals) > 6:
             preview = preview[:-1] + ", ...]"
-        print(f"  {key:12} {preview}")
+        print(f"  {sorted(ENVELOPES).index(key) + 1:3}  {key:12} {preview}")
 
 
 def mels():
@@ -530,7 +577,7 @@ def mels():
         preview = str(vals[:8])
         if len(vals) > 8:
             preview = preview[:-1] + ", ...]"
-        print(f"  {key:12} {preview}")
+        print(f"  {sorted(MELODIES).index(key) + 1:3}  {key:12} {preview}")
 
 
 # =============================================================================

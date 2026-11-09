@@ -71,7 +71,7 @@ section("Python venv + packages")
 # =============================================================
 check("venv exists", VENV_PYTHON.exists(), str(VENV_PYTHON) if VENV_PYTHON.exists() else "run install.sh to create")
 REQUIRED = [
-    "websockets", "rtmidi", "pyfiglet", "pyperclip", "LinkToPy",
+    "websockets", "websocket", "rtmidi", "pyfiglet", "pyperclip", "LinkToPy",
     "requests", "numpy", "edn_format", "ply", "pyrfc3339", "pytz",
     "setuptools", "monotonic"
 ]

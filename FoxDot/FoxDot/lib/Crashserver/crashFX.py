@@ -1468,6 +1468,7 @@ fx.save()
 
 fx = FxList.new('lpf','lowPassFilter', {'lpf': 0, 'lpr': 1}, order=2, tag="filter")
 fx.add('osc = RLPF.ar(osc, lpf, lpr)')
+fx.save()
 
 # === SPECTRAL PROCESSING FX (from granular-audioreactive; sblur/sgate already defined above) ===
 

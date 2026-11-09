@@ -760,7 +760,11 @@ def _chaosFx(playerType="synth", nbr=None):
     if not pool:
         return []
     if nbr is None:
-        nbr = randint(1, 3)
+        # Sparse on purpose (after soundDesign's measurements): 1-3 groups on every
+        # player stacked 10+ fx over a chaos(6) block and everything came out as the
+        # same distorted mush. Mostly one group, sometimes two, sometimes dry.
+        r = randint(0, 99)
+        nbr = 0 if r < 15 else 1 if r < 79 else 2
     out = []
     for name in sample(list(pool), min(nbr, len(pool))):
         args = list(pool[name].items())
@@ -768,8 +772,15 @@ def _chaosFx(playerType="synth", nbr=None):
         if len(args) > 1:        # then at most two of its companions
             keep += sample(args[1:], randint(0, min(2, len(args) - 1)))
         for arg, rng in keep:
-            out.append(f"{arg}={_chaosValue(rng[0], rng[1])}")
+            out.append(f"{arg}={_chaosValue(*_chaosNarrow(rng[0], rng[1]))}")
     return out
+
+
+def _chaosNarrow(lo, hi, keep=0.75):
+    ''' Drop the top quarter of a range: the extremes all sound alike '''
+    if isinstance(lo, int) and isinstance(hi, int):
+        return lo, max(lo + 1, lo + round((hi - lo) * keep)) if hi > lo else hi
+    return lo, lo + (hi - lo) * keep
 
 
 def _chaosBeatString():
@@ -1048,15 +1059,135 @@ def PMorse(text, point=1/4, tiret=3/4):
 
 def unsolo():
     ''' Unsolo all solo players'''
-    for p in Clock.playing:
-        p.solo(0)
+    # Reset directly: looping over Clock.playing left the solo stuck (and every
+    # new player muted) whenever nothing was playing at that moment.
+    Clock.solo.reset()
+
+_soloRnd_token = [0]
 
 def soloRnd(time=8, soloPlayer=None):
-    ''' solo a random player at time modulo '''
+    ''' Solo a random audible player at the next multiple of `time` beats,
+        for `time` beats, then unsolo.
+        e.g. `soloRnd()`, `soloRnd(16)`, `soloRnd(4, b1)` '''
     if not soloPlayer:
-        soloPlayer = sample(Clock.playing, 1)[0]
-    Clock.schedule(soloPlayer.solo, Clock.mod(time))
-    Clock.schedule(unsolo, Clock.mod(time) + time)
+        # Paused players (and ones scheduled to stop) stay in Clock.playing:
+        # soloing one of them gave `time` beats of silence.
+        audible = [p for p in Clock.playing if p.isplaying and not p.stopping]
+        if not audible:
+            print("soloRnd: no player is playing")
+            return
+        soloPlayer = choice(audible)
+    _soloRnd_token[0] += 1
+    start = Clock.mod(time)
+    Clock.schedule(soloPlayer.solo, start)
+    Clock.schedule(_soloRnd_end, start + time, args=(_soloRnd_token[0],))
+    return soloPlayer
+
+def _soloRnd_end(token):
+    # Only end our own solo: a newer soloRnd() must not be cut short
+    # by the unsolo of an earlier call.
+    if _soloRnd_token[0] == token:
+        unsolo()
+
+# ── Energy: arrangement by one number per section + one threshold per player ──
+# (after soundDesign's score.ts) A section has an energy 0..1; a player plays
+# only where energy >= its `enter`. Kick enters at 0, lead at 0.7 -> two scalars
+# instead of a mute matrix. The gate is a var on `amplify`, so it switches on bar
+# lines and the Clock runs the arrangement itself.
+
+_ENERGY_SHAPES = {
+    "flat":         lambda i, n, f: 1,
+    "build":        lambda i, n, f: f,
+    "arch":         lambda i, n, f: 1 - abs(f * 2 - 1),
+    "verse-chorus": lambda i, n, f: 0.35 if i % 2 == 0 else 1,
+    "drop":         lambda i, n, f: 0.15 if (n > 2 and i == n // 2) else f * 0.5 + 0.5,
+    "strip":        lambda i, n, f: 1 - f,
+}
+
+
+class _Energy:
+    ''' Section energy for the whole set. Players opt in with `p1.enter(0.7)`.
+        e.g. `Energy.shape("build", sections=4, bars=8)`  4 sections of 8 bars, looping
+             `Energy.shape("drop", 5, 8)`                   breakdown in the middle
+             `Energy.set(0.6)`                             manual macro, overrides the shape
+             `Energy.off()`                                every gated player plays
+        Shapes: flat, build, arch, verse-chorus, drop, strip '''
+
+    def __init__(self):
+        self.name, self.sections, self.bars = "flat", 1, 8
+        self.manual = None
+        self.players = {}
+
+    def levels(self):
+        ''' Energy per section, normalised so the busiest section is 1 '''
+        n = max(1, int(self.sections))
+        f = lambda i: 1 if n <= 1 else i / (n - 1)
+        raw = [_ENERGY_SHAPES[self.name](i, n, f(i)) for i in range(n)]
+        top = max(raw) or 1
+        return [round(v / top, 3) for v in raw]
+
+    def shape(self, name="build", sections=4, bars=8):
+        if name not in _ENERGY_SHAPES:
+            print(f"Energy: unknown shape '{name}'. Shapes: {', '.join(_ENERGY_SHAPES)}")
+            return self
+        self.name, self.sections, self.bars, self.manual = name, int(sections), int(bars), None
+        self._apply()
+        return self
+
+    def set(self, value):
+        ''' Manual energy 0..1 for everything, from the next bar '''
+        self.manual = max(0.0, min(1.0, float(value)))
+        self._apply()
+        return self
+
+    def off(self):
+        ''' Back to flat: every gated player plays '''
+        return self.shape("flat", 1, self.bars)
+
+    def gate(self, player, threshold):
+        if threshold is None or threshold <= 0:
+            self.players.pop(player, None)
+            Clock.schedule(setattr, Clock.next_bar(), args=(player, "amplify", 1))
+        else:
+            self.players[player] = float(threshold)
+            self._apply([player])
+
+    def _apply(self, players=None):
+        start = Clock.next_bar()
+        section_beats = self.bars * Clock.bar_length()
+        levels = self.levels()
+        for p in (players or list(self.players)):
+            thr = self.players.get(p)
+            if thr is None:
+                continue
+            if self.manual is not None:
+                value = 1 if self.manual >= thr else 0
+            elif len(levels) == 1:
+                value = 1 if levels[0] >= thr else 0
+            else:
+                value = var([1 if e >= thr else 0 for e in levels], section_beats, start=start)
+            Clock.schedule(setattr, start, args=(p, "amplify", value))
+
+    def __repr__(self):
+        if self.manual is not None:
+            return f"Energy manual {self.manual}  players: {self._who()}"
+        return f"Energy {self.name} x{self.sections} sections of {self.bars} bars {self.levels()}  players: {self._who()}"
+
+    def _who(self):
+        return ", ".join(f"{p.name}>={t}" for p, t in self.players.items()) or "none"
+
+
+Energy = _Energy()
+
+
+@player_method
+def enter(self, threshold=0.5):
+    ''' Play only when the section Energy is >= threshold (0 = always).
+        Uses `amplify`, so it replaces drop() / amplify on this player.
+        e.g. `d1.enter(0)`, `p1.enter(0.7)`, `p1.enter()` -> 0.5 '''
+    Energy.gate(self, threshold)
+    return self
+
 
 @player_method
 def gtr(self, strings=1):
@@ -1677,12 +1808,59 @@ class WebsocketServer():
                 print(f"send_bpm error: {e}")
                 sleep(1)
 
+    def collectFuncDocs(self, max_len=1500):
+        ''' Signature + docstring of every documented public function/class in the
+            FoxDot namespace, plus methods of VidCtrl/compo/crashpanel/Samples as
+            "VidCtrl.jump". Feeds Alt+I in webTroop, so new functions document themselves. '''
+        import inspect
+        ns = globals()
+
+        def entry(obj):
+            doc = inspect.getdoc(obj)
+            if not doc:
+                return None
+            try:
+                sig = str(inspect.signature(obj))
+            except (TypeError, ValueError):
+                sig = "(...)"
+            text = f"{sig}\r\n {doc}"
+            return text if len(text) <= max_len else text[:max_len] + " …"
+
+        docs = {}
+        for name, obj in list(ns.items()):
+            if name.startswith("_") or not (inspect.isfunction(obj) or inspect.isclass(obj)):
+                continue
+            try:
+                e = entry(obj)
+            except Exception:
+                continue
+            if e:
+                docs[name] = e
+        for owner in ("VidCtrl", "compo", "crashpanel", "Samples"):
+            obj = ns.get(owner)
+            if obj is None:
+                continue
+            for m in dir(type(obj)):
+                if m.startswith("_"):
+                    continue
+                if not callable(getattr(type(obj), m, None)):
+                    continue
+                meth = getattr(obj, m, None)  # bound: no 'self' in the signature
+                try:
+                    e = entry(meth)
+                except Exception:
+                    continue
+                if e:
+                    docs[f"{owner}.{m}"] = e
+        return docs
+
     async def sendFoxdotAutocomplete(self):
         ''' Send FoxDot autocomplete data to websocket server '''
         fxList = await self.sendFxDict()
         synthList = await self.sendSynthList()
         attackList = await self.sendAttackList()
-        combined_message = json.dumps({"type": "autocomplete", "autocomplete": {"loopList": loops, "fxList": fxList, "synthList": synthList, "attackList": attackList}})
+        funcDocs = self.collectFuncDocs()
+        combined_message = json.dumps({"type": "autocomplete", "autocomplete": {"loopList": loops, "fxList": fxList, "synthList": synthList, "attackList": attackList, "funcDocs": funcDocs}})
         await self.sendWebsocket(combined_message)
 
     async def sendLoopList(self):

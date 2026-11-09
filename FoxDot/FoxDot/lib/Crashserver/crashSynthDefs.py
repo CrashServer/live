@@ -592,6 +592,19 @@ adbell.add()
 addrone = FileSynthDef("addrone")
 addrone.add()
 
+# ── After soundDesign's archetypes (physical/stochastic models) ────────────────
+# fracture: self-exciting (Hawkes) crackle - branch = burstiness (0 rain .. 0.95 bursts)
+fracture = FileSynthDef("fracture")
+fracture.add()
+
+# bowed: bowed-string waveguide (sc3-plugins DWGBowedTor) - force = pressure, bowpos = position
+bowed = FileSynthDef("bowed")
+bowed.add()
+
+# membrane: modal drum head (Bessel modes) - strike centre..edge, tension drop, hardness, shell
+membrane = FileSynthDef("membrane")
+membrane.add()
+
 # neuroreese - Neurofunk reese bass
 neuroreese = FileSynthDef("neuroreese")
 neuroreese.add()

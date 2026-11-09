@@ -1046,6 +1046,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             updateDefinitions({
               synthDefs: dynamicSynthDefs,
               fxDefs: dynamicFxDefs,
+              funcDefs: message.autocomplete?.funcDocs || {},
             });
           } catch (e) {
             console.warn(

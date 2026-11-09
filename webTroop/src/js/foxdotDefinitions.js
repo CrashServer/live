@@ -375,9 +375,16 @@ let definitions = { ...func, ...fxList, ...synthList };
 // params:
 // - synthDefs: { [synthName: string]: "(param=..., ...)" }
 // - fxDefs:    { [fxName: string]: "param=..., ..." }  (optionnel)
-export function updateDefinitions({ synthDefs = {}, fxDefs = {} } = {}) {
+export function updateDefinitions({ synthDefs = {}, fxDefs = {}, funcDefs = {} } = {}) {
   // Normaliser: ne garder que des chaînes non vides
   const norm = (v) => (typeof v === 'string' && v.trim().length > 0 ? v : undefined);
+
+  // Docs des fonctions envoyées par FoxDot (signature + docstring, ex: "VidCtrl.jump", "ppat").
+  // Appliquées en premier : synths/fx gardent la priorité en cas de nom identique.
+  Object.entries(funcDefs).forEach(([name, doc]) => {
+    const v = norm(doc);
+    if (v) definitions[name] = v;
+  });
 
   // Fusion non destructive: les entrées dynamiques remplacent les statiques si collision
   Object.entries(synthDefs).forEach(([name, sig]) => {
@@ -403,7 +410,7 @@ function showDefinition(cm) {
   existingTooltips.forEach(tooltip => removeTooltip(tooltip));
 
   function findFunctionFromParentheses(line, pos) {
-    const functionPattern = /([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g;
+    const functionPattern = /((?:[a-zA-Z_][a-zA-Z0-9_]*\.)?[a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g;
     const functions = [];
     let match;
 
@@ -452,10 +459,20 @@ function showDefinition(cm) {
     lookupWord = parts[parts.length - 1];
   }
 
+  // obj.method sous le curseur (VidCtrl.jump, compo.rec_stems) : la doc qualifiée
+  // passe avant le nom seul, sinon "stop"/"play" pointeraient n'importe où.
+  const dotted = line.slice(0, token.end).match(/([A-Za-z_]\w*)\.([A-Za-z_]\w*)\s*$/);
+  if (dotted && definitions[`${dotted[1]}.${dotted[2]}`]) {
+    lookupWord = `${dotted[1]}.${dotted[2]}`;
+  }
+
   if (!definitions[lookupWord] || !lookupWord.match(/^[a-zA-Z_]/)) {
     const nearestFunction = findFunctionFromParentheses(line, cursorPos);
     if (nearestFunction) {
-      lookupWord = nearestFunction;
+      // "VidCtrl.jump" si documenté tel quel, sinon le nom seul ("jump", "pluck"…)
+      lookupWord = definitions[nearestFunction]
+        ? nearestFunction
+        : nearestFunction.split('.').pop();
     }
   }
 

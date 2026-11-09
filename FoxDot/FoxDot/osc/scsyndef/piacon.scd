@@ -21,7 +21,9 @@ SynthDef.new(\piacon,
 		[freq, freq * 2, freq * 3.001, freq * 4.02, freq * 5.04],
 		[1, 0.5, 0.32, 0.2, 0.12],
 		[sus * 2.2, sus * 1.6, sus * 1.1, 0.8, 0.5] ],
-		(pmono + hit) * 0.25) * sympa;
+		// Resonators driven at their own pitch gain roughly in proportion to
+		// their ring time: normalise by it so sympa stays a halo at any sus.
+		(pmono + hit) * (0.0005 / (sus * 2.2).max(0.3))) * sympa;
 
 	// --- fixed body / soundboard resonances (wooden grand character) ---
 	bodyres = Klank.ar(`[
@@ -37,7 +39,7 @@ SynthDef.new(\piacon,
 	son = son + (BPF.ar(son, 2800, 0.8) * tone * 0.5);
 
 	env = EnvGen.ar(Env(times: [sus], levels: [(amp * 1.5), (amp * 1.5)], curve: 'step'), doneAction: 0);
-	son = (son * env * 1.3);
+	son = (son * env * 0.5);  // was 1.3: ~10 dB hotter than pianovel
 	son = HPF.ar(son, 32);
 	son = LeakDC.ar(son);
 	ReplaceOut.ar(bus, Splay.ar(son, 1, 1, pan))},

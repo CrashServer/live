@@ -157,18 +157,23 @@ class YouTubeController:
     # ─── Shortcuts ────────────────────────────────────────────────
 
     def go(self, seconds):
+        """Alias of seek(). e.g. VidCtrl.go(30)"""
         self.seek(seconds)
 
     def speed(self, rate):
+        """Alias of rate(). e.g. VidCtrl.speed(0.75)"""
         self.rate(rate)
 
     def slow(self):
+        """Half-speed playback (rate 0.5)."""
         self.rate(0.5)
 
     def fast(self):
+        """Double-speed playback (rate 2)."""
         self.rate(2)
 
     def normal(self):
+        """Back to normal speed (rate 1)."""
         self.rate(1)
 
     def __call__(self, seconds):

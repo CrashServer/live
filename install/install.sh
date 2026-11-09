@@ -156,7 +156,7 @@ fi
 section "3 / 8 — Python venv + packages"
 
 PYTHON_REQUIRED=(
-  websockets python-rtmidi pyfiglet pyperclip LinkToPy
+  websockets websocket-client python-rtmidi pyfiglet pyperclip LinkToPy
   requests numpy edn-format ply pyRFC3339 pytz setuptools monotonic
 )
 PYTHON_OPTIONAL=(

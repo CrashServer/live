@@ -89,14 +89,22 @@ rythmMarkov = {
     0: [[0.5,0], [0.7,0.3]]
     }
 
-chords = {
+class _ChordMarkov(dict):
+    """ Markov table of chord transitions, used as PChain2(chords).
+        Also callable so it doesn't hide SynthPatterns.chords():
+        chords("houseprog") still returns the named progression. """
+    def __call__(self, name):
+        from ...SynthPatterns import chords as _named_chords
+        return _named_chords(name)
+
+chords = _ChordMarkov({
     I: [[I, II, III, IV, V, VI], [2,2,2,39,20,35]],
     II: [[I, II, III, IV, V, VI], [3,2,1,4,86,4]],
     III: [[I, II, III, IV, V, VI], [0,5,0,85,2,8]],
     IV: [[I, II, III, IV, V, VI], [20,1,1,1,76,1]],
     V: [[I, II, III, IV, V, VI], [70,1,2,13,1,14]],
     VI: [[I, II, III, IV, V, VI], [5,5,1,49,39,1]],
-    }
+    })
 
 synthType = {
     "pads" : ["ambi", "angst", "charm", "creep", "glass", "organ", "ripple", "sinepad", "soprano", "space", "swell", "total", "varsaw"],

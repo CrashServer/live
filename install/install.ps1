@@ -101,7 +101,7 @@ if (-not $script:PYTHON) {
 Section "2 / 7 — Python packages"
 
 $PYTHON_REQUIRED = @(
-    "websockets", "python-rtmidi", "pyfiglet", "pyperclip", "LinkToPy",
+    "websockets", "websocket-client", "python-rtmidi", "pyfiglet", "pyperclip", "LinkToPy",
     "requests", "numpy", "edn-format", "ply", "pyRFC3339", "pytz",
     "setuptools", "monotonic"
 )

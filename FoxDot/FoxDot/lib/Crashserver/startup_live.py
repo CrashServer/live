@@ -1245,16 +1245,28 @@ def _solar_players(spec):
     return out
 
 
+def _solar_value(x, i):
+    ''' A solar parameter for cycle i: a var's current value, a list/pattern's
+        i-th item (cycles through it), or the number itself '''
+    if hasattr(x, "now"):
+        return x.now()
+    if isinstance(x, (list, tuple, Pattern)):
+        return x[i % len(x)] if len(x) else 0
+    if hasattr(x, "__getitem__") and not isinstance(x, str):   # generator patterns: PRand, PWhite...
+        return x[i]
+    return x
+
+_solar_own = {}   # player -> its own conductor (p1.solar())
+
+
 @player_method
 def solar(self, on=14, off=2, depth=0):
     ''' This player alone breathes: `on` beats on, `off` beats at `depth`
         (0 silent, 0.3 ducked) on a grid of on+off beats. `p1.solar(0)` stops.
-        e.g. `p1 >> pluck([0, 2, 4]).solar(6, 2)` '''
-    if not on or not off:
-        _set_gate(self, "solar_own", None)
-        return self
-    start = Clock.mod(on + off)
-    _set_gate(self, "solar_own", var([1, depth], [on, off], start=start), start)
+        Every parameter can be a var, a list (one item per cycle) or a pattern.
+        e.g. `p1 >> pluck([0, 2, 4]).solar(6, 2)`, `p1.solar(var([14, 6], 32), 2)` '''
+    conductor = _solar_own.setdefault(self, _Solar(gate="solar_own"))
+    conductor(on, off, solo=0, who=[self], depth=depth)
     return self
 
 
@@ -1266,27 +1278,33 @@ class _Solar:
         who   : only these players breathe, e.g. who="p1 b1" (default: everything playing)
         mode  : "all" = everyone in the gap, "rnd" = a random subset each cycle
         depth : level in the gap, 0 silent .. 0.3 ducked
+        on/off/solo/depth can be a var (read each cycle), a list (one item per cycle)
+        or a pattern: solar(var([14, 6], 32), 2), solar([14, 30], 2), solar(14, PRand([1, 2, 4]))
         e.g. `solar()`, `solar(30, 2, solo=0)`, `solar(14, 2, keep="d1")`,
              `solar(6, 2, mode="rnd")`, `solar(14, 2, depth=0.25)`, `solar(0)` stops '''
 
-    def __init__(self):
-        self.cfg, self.token, self.last = None, 0, ([], [])
+    def __init__(self, gate="solar"):
+        self.gate, self.cfg, self.token, self.last, self.cycle = gate, None, 0, ([], []), 0
+        self.owned = set()   # players this conductor has gated: the only ones it may un-gate
 
     def __call__(self, on=14, off=2, solo=1, keep=None, who=None, mode="all", depth=0):
-        if not on or not off:
+        if isinstance(on, (int, float)) and isinstance(off, (int, float)) and (not on or not off):
             return self.stop()
         self.token += 1
-        self.cfg = dict(on=on, off=off, solo=max(0, int(solo)), keep=_solar_players(keep),
+        self.cycle = 0
+        self.cfg = dict(on=on, off=off, solo=solo, keep=_solar_players(keep),
                         who=_solar_players(who), mode=mode, depth=depth)
-        Clock.schedule(_Solar._tick, Clock.mod(on + off), args=(self, self.token))
+        first = max(0.25, _solar_value(on, 0) + _solar_value(off, 0))
+        Clock.schedule(_Solar._tick, Clock.mod(first), args=(self, self.token))
         return self
 
     def stop(self):
         ''' Stop the breathing: every player back to full level (same as solar(0)) '''
         self.token += 1
         self.cfg = None
-        for p in [p for p, g in _gates.items() if "solar" in g]:
-            _set_gate(p, "solar", None)
+        for p in list(self.owned):
+            _set_gate(p, self.gate, None)
+        self.owned.clear()
         return self
 
     def _tick(self, token):
@@ -1294,30 +1312,44 @@ class _Solar:
             return
         c = self.cfg
         now = Clock.now()
+        i, self.cycle = self.cycle, self.cycle + 1
+        on, off = float(_solar_value(c["on"], i)), float(_solar_value(c["off"], i))
+        solo = max(0, int(_solar_value(c["solo"], i)))
+        depth = float(_solar_value(c["depth"], i))
+        if on <= 0 or off <= 0:     # a var can switch the breathing off for a while
+            for p in list(self.owned):
+                _set_gate(p, self.gate, None, "now")
+            self.owned.clear()
+            self.last = ([], [])
+            Clock.schedule(_Solar._tick, now + ((max(on, 0) + max(off, 0)) or 4), args=(self, token))
+            return
         playing = [p for p in Clock.playing if p.isplaying and not p.stopping]
         pool = [p for p in (c["who"] or playing) if p in playing]
         # survivors: the kept ones first, then random picks up to `solo`
         survivors = [p for p in c["keep"] if p in pool]
         rest = [p for p in pool if p not in survivors]
-        extra = max(0, c["solo"] - len(survivors))
+        extra = max(0, solo - len(survivors))
         survivors += sample(rest, min(extra, len(rest)))
         candidates = [p for p in pool if p not in survivors]
         if c["mode"] == "rnd" and candidates:
             breathe = sample(candidates, randint(1, len(candidates)))
         else:
             breathe = candidates
-        gap = var([1, c["depth"]], [c["on"], c["off"]], start=now)
-        for p in set(pool) | {p for p, g in _gates.items() if "solar" in g}:
-            _set_gate(p, "solar", gap if p in breathe else None, "now")
+        gap = var([1, depth], [on, off], start=now)
+        for p in set(pool) | self.owned:
+            _set_gate(p, self.gate, gap if p in breathe else None, "now")
+        self.owned = set(breathe)
         self.last = (breathe, survivors)
-        Clock.schedule(_Solar._tick, now + c["on"] + c["off"], args=(self, token))
+        self.now_cfg = (on, off, solo, depth)
+        Clock.schedule(_Solar._tick, now + on + off, args=(self, token))
 
     def __repr__(self):
         if self.cfg is None:
             return "solar: off"
         c = self.cfg
         names = lambda ps: ", ".join(p.name for p in ps) or "-"
-        return (f"solar {c['on']}/{c['off']} mode={c['mode']} solo={c['solo']} depth={c['depth']}"
+        on, off, solo, depth = getattr(self, "now_cfg", (c["on"], c["off"], c["solo"], c["depth"]))
+        return (f"solar {on:g}/{off:g} mode={c['mode']} solo={solo} depth={depth:g}"
                 f"  | last cycle: pause={names(self.last[0])}  through it={names(self.last[1])}")
 
 

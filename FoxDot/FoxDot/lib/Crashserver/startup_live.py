@@ -1122,6 +1122,26 @@ def masterFx(name, remove=False):
         _one_fx_off.pop(n, None)
 
 
+def _one_fx_resume_hook():
+    ''' fx_hall() / fx_echo()... on an effect bypassed from the crashpanel turns it back on
+        (One updates a running effect in place, so otherwise it would stay paused) '''
+    one = _one_fx_module()
+    start = getattr(one, "_fx_start", None) if one is not None else None
+    if start is None or getattr(start, "_resumes_bypass", False):
+        return
+    original = one._fx_start
+
+    def _fx_start(name, *args, **kwargs):
+        if name in _one_fx_off and name in one._fx and one._fx[name][0] == _one_fx_off[name]:
+            masterFx("one:" + name)
+        return original(name, *args, **kwargs)
+
+    _fx_start._resumes_bypass = True
+    one._fx_start = _fx_start
+
+_one_fx_resume_hook()
+
+
 # ── Gates: several things can mute a player at once (Energy, solar, drop) ─────
 # Each sets a named gate; amplify becomes their product, so they combine instead of
 # overwriting each other (a var * a var is a time-varying product in FoxDot).

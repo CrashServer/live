@@ -6,7 +6,7 @@ rate = In.kr(bus, 1);
 rate = if(ratelfo<=0, rate, rate * SinOsc.kr(ratelfo, 0, ratelfomul, ratelfoadd));
 rate = (rate * (1-(beat_stretch>0))) + ((BufDur.kr(buf) / sus) * (beat_stretch>0));
 rate = if(ratelfo<=0, rate, rate * SinOsc.kr(ratelfo, 0, ratelfomul, ratelfoadd));
-clip = if(clip<=0, 1, (clip/sus)*0.5);
+clip = if(clip<=0, 1, (clip*beat_dur)/sus);
 osc = PlayBuf.ar(2, buf, BufRateScale.kr(buf) * rate, startPos: BufSampleRate.kr(buf) * pos, loop: looping);
 osc = osc * EnvGen.ar(Env([0,1,1,0],[0, (sus*clip), 0]));
 osc=(osc * amp);

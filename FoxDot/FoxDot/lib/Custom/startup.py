@@ -960,9 +960,12 @@ if __name__ != "__main__":
                 totalTime = playTime + dropTime
                 clkPly = list(Clock.playing)  # snapshot — avoid Clock thread mutation during iteration
                 n = len(clkPly)
+                # gates (Energy, solar) set amplify too: restore them instead of forcing 1
+                restore = globals().get("_restore_amplify", lambda p: setattr(p, "amplify", 1))
+                gate = globals().get("_gate_product", lambda p: 1)
                 if n > 0:
                     for p in clkPly:
-                        p.amplify = 1
+                        restore(p)
                     if nbloop == 1:
                         rndPlayerIndex = list(range(n))
                         print("Final Drop !!!")
@@ -973,13 +976,14 @@ if __name__ != "__main__":
                     now = Clock.now()
                     for i in rndPlayerIndex:
                         clkPly[i].amplify = var(
-                            [1, 0], [playTime, dropTime], start=now)
+                            [1, 0], [playTime, dropTime], start=now) * gate(clkPly[i])
                 nbloop -= 1
                 Clock.future(totalTime, drop, args=(
                     playTime, dropTime, nbloop))
             else:
+                restore = globals().get("_restore_amplify", lambda p: setattr(p, "amplify", 1))
                 for p in list(Clock.playing):
-                    p.amplify = 1
+                    restore(p)
                 return
 
         def drop_bpm(duree=32, nbr=0, end=4):

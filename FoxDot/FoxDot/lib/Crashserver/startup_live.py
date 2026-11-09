@@ -1089,6 +1089,39 @@ def _soloRnd_end(token):
     if _soloRnd_token[0] == token:
         unsolo()
 
+# ── Gates: several things can mute a player at once (Energy, solar, drop) ─────
+# Each sets a named gate; amplify becomes their product, so they combine instead of
+# overwriting each other (a var * a var is a time-varying product in FoxDot).
+_gates = {}   # player -> {gate name: number or var}
+
+def _gate_product(player):
+    v = 1
+    for g in _gates.get(player, {}).values():
+        v = g * v
+    return v
+
+def _apply_gates(player):
+    player.amplify = _gate_product(player)
+
+def _set_gate(player, name, value, at=None):
+    ''' value None removes the gate. Applied at beat `at` (next bar by default), or now if at == "now" '''
+    g = _gates.setdefault(player, {})
+    if value is None:
+        g.pop(name, None)
+    else:
+        g[name] = value
+    if not g:
+        _gates.pop(player, None)
+    if at == "now":
+        _apply_gates(player)
+    else:
+        Clock.schedule(_apply_gates, Clock.next_bar() if at is None else at, args=(player,))
+
+def _restore_amplify(player):
+    ''' amplify back to whatever the gates say (1 if none) - used by drop() '''
+    _apply_gates(player)
+
+
 # ── Energy: arrangement by one number per section + one threshold per player ──
 # (after soundDesign's score.ts) A section has an energy 0..1; a player plays
 # only where energy >= its `enter`. Kick enters at 0, lead at 0.7 -> two scalars
@@ -1127,6 +1160,8 @@ class _Energy:
         return [round(v / top, 3) for v in raw]
 
     def shape(self, name="build", sections=4, bars=8):
+        ''' Energy curve over `sections` sections of `bars` bars, looping, from the next bar.
+            Shapes: flat, build, arch, verse-chorus, drop, strip '''
         if name not in _ENERGY_SHAPES:
             print(f"Energy: unknown shape '{name}'. Shapes: {', '.join(_ENERGY_SHAPES)}")
             return self
@@ -1147,7 +1182,7 @@ class _Energy:
     def gate(self, player, threshold):
         if threshold is None or threshold <= 0:
             self.players.pop(player, None)
-            Clock.schedule(setattr, Clock.next_bar(), args=(player, "amplify", 1))
+            _set_gate(player, "energy", None)
         else:
             self.players[player] = float(threshold)
             self._apply([player])
@@ -1166,7 +1201,7 @@ class _Energy:
                 value = 1 if levels[0] >= thr else 0
             else:
                 value = var([1 if e >= thr else 0 for e in levels], section_beats, start=start)
-            Clock.schedule(setattr, start, args=(p, "amplify", value))
+            _set_gate(p, "energy", value, start)
 
     def __repr__(self):
         if self.manual is not None:
@@ -1183,10 +1218,110 @@ Energy = _Energy()
 @player_method
 def enter(self, threshold=0.5):
     ''' Play only when the section Energy is >= threshold (0 = always).
-        Uses `amplify`, so it replaces drop() / amplify on this player.
+        Combines with solar() and drop() (gates multiply); a hand-set amplify is replaced.
         e.g. `d1.enter(0)`, `p1.enter(0.7)`, `p1.enter()` -> 0.5 '''
     Energy.gate(self, threshold)
     return self
+
+
+# ── solar: the breath - every `on` beats, `off` beats of (almost) silence ─────
+# solar(14, 2): play 14 beats, pause 2, on a 16-beat grid so the gap always lands
+# just before the downbeat. By default ONE random player keeps going through the
+# pause (a lone hat or bassline across the hole); solo=0 for total silence.
+
+def _solar_players(spec):
+    ''' "d1 b1" / ["d1", b1] / b1 -> list of Player objects '''
+    if spec is None:
+        return []
+    if isinstance(spec, str):
+        spec = spec.replace(",", " ").split()
+    if not isinstance(spec, (list, tuple)):
+        spec = [spec]
+    out = []
+    for x in spec:
+        x = globals().get(x) if isinstance(x, str) else x
+        if x is not None:
+            out.append(x)
+    return out
+
+
+@player_method
+def solar(self, on=14, off=2, depth=0):
+    ''' This player alone breathes: `on` beats on, `off` beats at `depth`
+        (0 silent, 0.3 ducked) on a grid of on+off beats. `p1.solar(0)` stops.
+        e.g. `p1 >> pluck([0, 2, 4]).solar(6, 2)` '''
+    if not on or not off:
+        _set_gate(self, "solar_own", None)
+        return self
+    start = Clock.mod(on + off)
+    _set_gate(self, "solar_own", var([1, depth], [on, off], start=start), start)
+    return self
+
+
+class _Solar:
+    ''' solar(on=14, off=2, solo=1, keep=None, who=None, mode="all", depth=0)
+        Every on+off beats, the last `off` beats go (almost) silent.
+        solo  : how many random players keep playing through the pause (0 = total silence)
+        keep  : players that always play through it, e.g. keep="d1" (counts toward solo)
+        who   : only these players breathe, e.g. who="p1 b1" (default: everything playing)
+        mode  : "all" = everyone in the gap, "rnd" = a random subset each cycle
+        depth : level in the gap, 0 silent .. 0.3 ducked
+        e.g. `solar()`, `solar(30, 2, solo=0)`, `solar(14, 2, keep="d1")`,
+             `solar(6, 2, mode="rnd")`, `solar(14, 2, depth=0.25)`, `solar(0)` stops '''
+
+    def __init__(self):
+        self.cfg, self.token, self.last = None, 0, ([], [])
+
+    def __call__(self, on=14, off=2, solo=1, keep=None, who=None, mode="all", depth=0):
+        if not on or not off:
+            return self.stop()
+        self.token += 1
+        self.cfg = dict(on=on, off=off, solo=max(0, int(solo)), keep=_solar_players(keep),
+                        who=_solar_players(who), mode=mode, depth=depth)
+        Clock.schedule(_Solar._tick, Clock.mod(on + off), args=(self, self.token))
+        return self
+
+    def stop(self):
+        ''' Stop the breathing: every player back to full level (same as solar(0)) '''
+        self.token += 1
+        self.cfg = None
+        for p in [p for p, g in _gates.items() if "solar" in g]:
+            _set_gate(p, "solar", None)
+        return self
+
+    def _tick(self, token):
+        if token != self.token or self.cfg is None:
+            return
+        c = self.cfg
+        now = Clock.now()
+        playing = [p for p in Clock.playing if p.isplaying and not p.stopping]
+        pool = [p for p in (c["who"] or playing) if p in playing]
+        # survivors: the kept ones first, then random picks up to `solo`
+        survivors = [p for p in c["keep"] if p in pool]
+        rest = [p for p in pool if p not in survivors]
+        extra = max(0, c["solo"] - len(survivors))
+        survivors += sample(rest, min(extra, len(rest)))
+        candidates = [p for p in pool if p not in survivors]
+        if c["mode"] == "rnd" and candidates:
+            breathe = sample(candidates, randint(1, len(candidates)))
+        else:
+            breathe = candidates
+        gap = var([1, c["depth"]], [c["on"], c["off"]], start=now)
+        for p in set(pool) | {p for p, g in _gates.items() if "solar" in g}:
+            _set_gate(p, "solar", gap if p in breathe else None, "now")
+        self.last = (breathe, survivors)
+        Clock.schedule(_Solar._tick, now + c["on"] + c["off"], args=(self, token))
+
+    def __repr__(self):
+        if self.cfg is None:
+            return "solar: off"
+        c = self.cfg
+        names = lambda ps: ", ".join(p.name for p in ps) or "-"
+        return (f"solar {c['on']}/{c['off']} mode={c['mode']} solo={c['solo']} depth={c['depth']}"
+                f"  | last cycle: pause={names(self.last[0])}  through it={names(self.last[1])}")
+
+
+solar = _Solar()   # after the player method: the global name is the conductor, p1.solar() stays a method
 
 
 @player_method
@@ -1836,10 +1971,17 @@ class WebsocketServer():
                 continue
             if e:
                 docs[name] = e
-        for owner in ("VidCtrl", "compo", "crashpanel", "Samples"):
+        for owner in ("VidCtrl", "compo", "crashpanel", "Samples", "solar", "Energy"):
             obj = ns.get(owner)
             if obj is None:
                 continue
+            if owner not in docs and inspect.getdoc(type(obj)):
+                # a callable object (solar(14, 2)): its call signature + the class doc
+                try:
+                    sig = str(inspect.signature(obj)) if callable(obj) else ""
+                except (TypeError, ValueError):
+                    sig = ""
+                docs[owner] = f"{sig}\r\n {inspect.getdoc(type(obj))}"[:max_len]
             for m in dir(type(obj)):
                 if m.startswith("_"):
                     continue

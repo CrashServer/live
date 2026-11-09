@@ -213,6 +213,7 @@ class SCLangServerManager(ServerManager):
         self.global_fx_group = None
         self.global_fx_bus = None
         self.global_fx_nodes = {}
+        self.global_fx_bypassed = set()
         self.global_fx_initialized = False
 
         self.reset()
@@ -251,6 +252,7 @@ class SCLangServerManager(ServerManager):
         self.global_fx_group = None
         self.global_fx_bus = None
         self.global_fx_nodes = {}
+        self.global_fx_bypassed = set()
         self.global_fx_initialized = False
 
         # Load recorder OSCFunc
@@ -958,8 +960,10 @@ class SCLangServerManager(ServerManager):
         for effect_name in effects_to_remove:
             self.removeFx(effect_name)
 
-        # Update existing effects
+        # Update existing effects (asking for a bypassed one again turns it back on)
         for effect_name, params in effects_to_update.items():
+            if effect_name in self.global_fx_bypassed:
+                self.bypassFx(effect_name, False)
             node_id = self.global_fx_nodes[effect_name]
             # Build parameter list for /n_set
             param_list = []
@@ -1018,8 +1022,30 @@ class SCLangServerManager(ServerManager):
 
         return node_id
 
+    def bypassFx(self, fx_name, bypass=None):
+        """ Bypass a global effect without losing its settings: the node is paused, so the
+            dry mix passes through it. bypass=None toggles, True/False forces.
+            e.g. Server.bypassFx("lpf")  (clicking it in the crashpanel does this) """
+        if fx_name not in self.global_fx_nodes:
+            return self
+        if bypass is None:
+            bypass = fx_name not in self.global_fx_bypassed
+        msg = OSCMessage("/n_run")
+        msg.append([self.global_fx_nodes[fx_name], 0 if bypass else 1])
+        self.client.send(msg)
+        if bypass:
+            self.global_fx_bypassed.add(fx_name)
+        else:
+            self.global_fx_bypassed.discard(fx_name)
+        return self
+
+    def bypassedFx(self):
+        """ Names of the global effects currently bypassed """
+        return sorted(self.global_fx_bypassed)
+
     def removeFx(self, fx_name):
         """ Remove a global effect """
+        self.global_fx_bypassed.discard(fx_name)
         if fx_name in self.global_fx_nodes:
             node_id = self.global_fx_nodes[fx_name]
             msg = OSCMessage("/n_free")

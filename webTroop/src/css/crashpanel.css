@@ -276,6 +276,21 @@ textarea {
   padding: 0.2rem;
 }
 
+.master-fx-item {
+  cursor: pointer;
+  user-select: none;
+}
+
+.master-fx-item:hover {
+  border-color: var(--col-blue, currentColor);
+}
+
+/* bypassed: still in the chain, settings kept, not heard */
+.master-fx-item.off {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
 .todo-item {
   display: flex;
   align-items: center;

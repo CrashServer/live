@@ -181,12 +181,17 @@ const ws = makeReconnectingWs(
                 } catch (_) {}
                 break;
             case 'masterFx': {
+                const off = new Set(data.masterFxOff || []);
                 _elMasterFx.innerHTML = '';
                 const frag = document.createDocumentFragment();
                 Object.keys(data.masterFx).forEach(fx => {
                     const fxDiv = document.createElement('span');
-                    fxDiv.className = 'master-fx-item';
+                    fxDiv.className = 'master-fx-item' + (off.has(fx) ? ' off' : '');
+                    fxDiv.dataset.fx = fx;
                     fxDiv.textContent = fx;
+                    fxDiv.title = off.has(fx)
+                        ? `${fx} (bypassed): click to turn back on, shift-click to remove`
+                        : `${fx}: click to bypass, shift-click to remove`;
                     frag.appendChild(fxDiv);
                 });
                 _elMasterFx.appendChild(frag);
@@ -218,6 +223,18 @@ function openVideoWindow(videoId) {
 }
 
 // webTroop main server (port 1234) — forwards CPU data to Arduino, receives yt_ video commands
+// Master FX: click = bypass / restore (settings kept), shift-click = remove.
+// The list is rebuilt every refresh, so the click is handled once on the container.
+_elMasterFx.addEventListener('click', (e) => {
+    const item = e.target.closest('.master-fx-item');
+    if (!item || !item.dataset.fx) return;
+    const name = item.dataset.fx.replace(/[^\w:]/g, '');
+    const code = e.shiftKey ? `masterFx("${name}", remove=True)` : `masterFx("${name}")`;
+    wsServer.send(JSON.stringify({ type: 'evaluate_code', code }));
+    item.classList.toggle('off', !e.shiftKey && !item.classList.contains('off'));   // instant feedback until the next refresh
+    if (e.shiftKey) item.remove();
+});
+
 const wsServer = makeReconnectingWs(
     `ws://${config.HOST_IP}:1234`,
     function(event) {

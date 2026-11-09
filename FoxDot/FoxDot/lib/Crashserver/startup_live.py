@@ -1089,6 +1089,39 @@ def _soloRnd_end(token):
     if _soloRnd_token[0] == token:
         unsolo()
 
+# ── Master FX on/off from the crashpanel: click = bypass/restore, shift-click = remove ──
+_one_fx_off = {}   # One's effect name -> the node we paused (stale once fx_stop/fx_hall replace it)
+
+def _one_fx_module():
+    import sys
+    return sys.modules.get("FoxDot.lib.Crashserver.oneFX")
+
+def masterFx(name, remove=False):
+    ''' Bypass / restore a master effect, keeping its settings (remove=True deletes it).
+        Server.addFx ones by name ("lpf"), One's fx_hall/fx_echo... as "one:hall".
+        This is what clicking an effect in the crashpanel does (shift-click removes). '''
+    if not name.startswith("one:"):
+        return Server.removeFx(name) if remove else Server.bypassFx(name)
+    n, one = name[4:], _one_fx_module()
+    if one is None or n not in one._fx:
+        return
+    node = one._fx[n][0]
+    if remove:
+        _one_fx_off.pop(n, None)
+        one.fx_stop(n)
+        return
+    bypass = _one_fx_off.get(n) != node
+    from FoxDot.lib.OSC3 import OSCMessage
+    msg = OSCMessage("/n_run")
+    msg.append([node, 0 if bypass else 1])
+    Server.client.send(msg)
+    one._running(n, not bypass)   # One's synths then play dry instead of into a paused effect
+    if bypass:
+        _one_fx_off[n] = node
+    else:
+        _one_fx_off.pop(n, None)
+
+
 # ── Gates: several things can mute a player at once (Energy, solar, drop) ─────
 # Each sets a named gate; amplify becomes their product, so they combine instead of
 # overwriting each other (a var * a var is a time-varying product in FoxDot).
@@ -1724,8 +1757,15 @@ try:
             ''' send Master FX to OSC server '''
             while self.isrunning:
                 try:
-                    masterFx = Server.listFx()
-                    msg = json.dumps({"type": "masterFx", "masterFx": masterFx})
+                    masterFx = dict(Server.listFx())
+                    off = list(getattr(Server, "global_fx_bypassed", ()))
+                    one = _one_fx_module()
+                    if one is not None:   # One's fx_hall / fx_echo... run on the server too: show them
+                        for n, entry in list(one._fx.items()):
+                            masterFx["one:" + n] = entry[0]
+                        off += ["one:" + n for n, node in _one_fx_off.items()
+                                if n in one._fx and one._fx[n][0] == node]
+                    msg = json.dumps({"type": "masterFx", "masterFx": masterFx, "masterFxOff": off})
                     wsServer.send(msg)
                 except Exception:
                     pass

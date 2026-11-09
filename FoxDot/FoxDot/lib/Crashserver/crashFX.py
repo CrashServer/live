@@ -1509,4 +1509,16 @@ fx.save()
 
 fx.save()
 
+# === One's sends, for every synth ===
+# One's effects (fx_hall, fx_echo... in oneFX.py) listen on fixed buses. One's own synths
+# have tohall/toecho... inputs; these FX give every other synth the same sends, post-fx:
+#   m3 >> dopple(toecho=0.5)   feeds fx_echo like a One synth would.
+# On a synth that already has the input (One's synths) the FX is skipped by ServerManager,
+# so the send never happens twice. Buses: todrive 2, toduck 6, tohall 8, toecho 10, toaux 12, side 14.
+for _send, _bus in (("todrive", 2), ("toduck", 6), ("tohall", 8), ("toecho", 10), ("toaux", 12), ("side", 14)):
+    fx = FxList.new(_send, "oneSend_" + _send, {_send: 0}, order=2, tag="one sends")
+    fx.doc("Send to One's " + _send[2:] + " effect (bus " + str(_bus) + ")" if _send != "side" else "Feed fx_duck's sidechain (bus 14)")
+    fx.add("Out.ar(" + str(_bus) + ", osc * " + _send + ")")
+    fx.save()
+
 Effect.server.setFx(FxList)

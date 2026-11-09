@@ -2121,12 +2121,10 @@ class WebsocketServer():
             filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k.endswith('lfo') or k.endswith('lfomul') or k.endswith('lfoadd') or k == 'sus')}
             fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
             fx_json_list.append({'text': fx_text, 'displayText': fx_name + '_', 'tag': fxTag})
-        # One's sends are synth arguments, not FxList effects: offer them under 'x' too
+        # The sends (tohall, toecho...) are FxList effects now (crashFX.py, tag "one sends"),
+        # so they are listed above; dry only exists on One's own synths
         if _one_fx_module() is not None:
-            for send, value in (("tohall", 0.3), ("toecho", 0.3), ("todrive", 0.5), ("toduck", 1),
-                                ("toaux", 0.3), ("side", 1), ("dry", 1)):
-                fx_json_list.append({'text': f"{send}={value}", 'displayText': send + '_',
-                                     'tag': 'one sends (One synths)'})
+            fx_json_list.append({'text': "dry=1", 'displayText': 'dry_', 'tag': 'one sends'})
         fxDict = json.dumps({"type": "fxList", "fx": fx_json_list})
         return fx_json_list
         # await self.sendWebsocket(fxDict)

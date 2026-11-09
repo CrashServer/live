@@ -10,6 +10,7 @@ else:
     import Queue as queue
 
 import json
+import re
 import socket
 import sys
 import threading
@@ -540,7 +541,24 @@ class SCLangServerManager(ServerManager):
 
         return msg, node
 
-    def get_post_env_effect_nodes(self, node, bus, group_id, packet):
+    # One's sends (crashFX.py) - skipped on synths that have their own input of that name
+    ONE_SENDS = ("todrive", "toduck", "tohall", "toecho", "toaux", "side")
+    _synth_inputs = {}
+
+    def _synth_has_input(self, synthdef, name):
+        """ True if the synth's .scd declares an argument `name` (cached per synth) """
+        key = getattr(synthdef, "name", None)
+        if key not in self._synth_inputs:
+            try:
+                with open(synthdef.filename) as f:
+                    text = f.read()
+                head = text[text.index("|") + 1:text.index("|", text.index("|") + 1)]
+                self._synth_inputs[key] = set(re.findall(r"(\w+)\s*(?:=|,|$)", head))
+            except (AttributeError, OSError, ValueError):
+                self._synth_inputs[key] = set()
+        return name in self._synth_inputs[key]
+
+    def get_post_env_effect_nodes(self, node, bus, group_id, packet, synthdef=None):
 
         pkg = []
 
@@ -550,6 +568,10 @@ class SCLangServerManager(ServerManager):
         for fx in self.fxlist.order[2]:
 
             if fx in packet and packet[fx] != 0:
+
+                # a One synth sends by itself: the send FX would double it
+                if fx in self.ONE_SENDS and synthdef is not None and self._synth_has_input(synthdef, fx):
+                    continue
 
                 this_effect = self.prepare_effect(fx, packet)
 
@@ -668,7 +690,7 @@ class SCLangServerManager(ServerManager):
 
         # ORDER 2 (AUDIO EFFECTS)
 
-        pkg, this_node = self.get_post_env_effect_nodes(this_node, this_bus, group_id, packet)
+        pkg, this_node = self.get_post_env_effect_nodes(this_node, this_bus, group_id, packet, synthdef)
 
         # Remove player reference again after all effect functions
         if "self" in packet:

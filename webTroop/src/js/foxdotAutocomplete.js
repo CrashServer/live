@@ -1,4 +1,35 @@
 import { playersList } from "./functionUtils";
+import { oneWords } from "./oneWords.js";   // One's sounds, kit voices and effects (soundDesign/one/foxdot/install.sh writes it)
+
+// ---- One (soundDesign/one): its sounds after '>>', their settings inside the parentheses, its effects (fx_hall("…")) ----
+const ONE_FX = ["hall", "echo", "duck", "drive"];
+const oneSounds = new Map(oneWords.sounds.map((s) => [s.name, s]));
+const oneSynths = oneWords.sounds.map((s) => ({ text: `${s.name}()`, displayText: s.name, tag: s.tag }));
+const oneFxFunctions = [
+    ...ONE_FX.map((k) => ({ text: `fx_${k}("")`, displayText: `fx_${k} - One's ${k}` })),
+    { text: 'fx_aux("hall", "")', displayText: "fx_aux - a second effect on aux" },
+    { text: "fx_stop()", displayText: "fx_stop - stop One's effects" },
+    { text: "sound(sub_acid, )", displayText: "sound - a One sound of your own" },
+];
+const fmtNum = (v) => (typeof v === "number" ? String(Math.round(v * 1000) / 1000) : String(v));
+/** Inside a call: the called name and what is typed of the current argument (null when typing a value). */
+const oneCall = (before) => {
+    let depth = 0;
+    for (let i = before.length - 1; i >= 0; i--) {
+        const c = before[i];
+        if (c === ")" || c === "]") depth++;
+        else if (c === "(" || c === "[") {
+            if (depth) { depth--; continue; }
+            if (c === "[") return null;
+            const name = (before.slice(0, i).match(/([A-Za-z_][\w.]*)\s*$/) || [])[1];
+            const inside = before.slice(i + 1);
+            const arg = inside.split(",").pop();
+            if (/=/.test(arg)) return null;   // a value is being typed
+            return { name, inside, prefix: arg.trim(), argc: inside.split(",").length - 1 };
+        }
+    }
+    return null;
+};
 
 export const foxdotAutocomplete = {
     synths: [
@@ -244,6 +275,7 @@ export const foxdotAutocomplete = {
         { text: 'fperlin()', displayText: 'fperlin' },
     ],
     coolFunction: [
+        ...oneFxFunctions,
         { text: 'ascii_gen("Crash")', displayText: 'ascii_gen' },
         { text: 'connect()', displayText: 'connect' },
         { text: 'attack()', displayText: 'attack' },
@@ -699,6 +731,10 @@ export const foxdotAutocomplete = {
                 from: CodeMirror.Pos(cursor.line, 0),
                 to: CodeMirror.Pos(cursor.line, line.length)
             };
+        }
+        // One: a sound's settings, an effect's presets and settings
+        else if (this.oneHint(beforeCursor, cursor, CodeMirror)) {
+            return this.oneHint(beforeCursor, cursor, CodeMirror);
         }
         // loop suggestion
         else if (loopPattern.test(beforeCursor) && /^[^,)]*/.test(afterCursor)) {
@@ -1199,7 +1235,7 @@ export const foxdotAutocomplete = {
                     filteredSynths.push(this.createCategorySeparator(categoryKey, categoryKey, "synth"));
                 });
             } else {
-                filteredSynths = this.synths.filter(synth => synth.displayText.toLowerCase().startsWith(synthPrefix));
+                filteredSynths = [...this.synths, ...oneSynths].filter(synth => synth.displayText.toLowerCase().startsWith(synthPrefix));
 
                 // Si des parenthèses existent déjà, retirer les parenthèses du text des synths
                 if (hasParenthesesAfter) {
@@ -1237,6 +1273,44 @@ export const foxdotAutocomplete = {
             };
 
         }
+    },
+
+    /** One's words: inside sub_acid(…) its settings (with the preset's values), inside fx_hall(…) its presets, then its settings. */
+    oneHint: function(beforeCursor, cursor, CodeMirror) {
+        const call = oneCall(beforeCursor);
+        if (!call || !call.name) return null;
+        const at = (n) => ({ from: CodeMirror.Pos(cursor.line, cursor.ch - n), to: CodeMirror.Pos(cursor.line, cursor.ch) });
+        const snd = oneSounds.get(call.name.replace(/\.steps$/, ""));
+        if (snd) {
+            const p = call.prefix.toLowerCase();
+            const list = Object.entries(snd.args).filter(([k]) => k.startsWith(p) && !new RegExp(`\\b${k}\\s*=`).test(call.inside))
+                .map(([k, v]) => ({ text: `${k}=${fmtNum(v)}`, displayText: `${k}=${fmtNum(v)}` }));
+            return list.length ? { list, ...at(call.prefix.length) } : null;
+        }
+        const fx = /^fx_(hall|echo|duck|drive|aux)$/.exec(call.name);
+        if (!fx) return null;
+        const quoted = /^["']([^"']*)$/.exec(call.prefix);
+        if (call.argc === 0 || (fx[1] === "aux" && call.argc === 1)) {
+            // the first argument: a preset (fx_aux: the kind, then a preset)
+            if (fx[1] === "aux" && call.argc === 0) {
+                const q = (quoted ? quoted[1] : call.prefix).toLowerCase();
+                const list = ONE_FX.filter((k) => k.startsWith(q)).map((k) => ({ text: `"${k}"`, displayText: `${k}` }));
+                return list.length ? { list, ...at(call.prefix.length) } : null;
+            }
+            const kind = fx[1] === "aux" ? (/["'](\w+)["']/.exec(call.inside) || [])[1] : fx[1];
+            const presets = oneWords.fx[kind] ? oneWords.fx[kind].presets : [];
+            const q = (quoted ? quoted[1] : call.prefix).toLowerCase();
+            if (quoted || call.prefix === "") {
+                const list = presets.filter((x) => x.startsWith(q.replace(/[^a-z0-9]+/g, "_"))).map((x) => ({ text: `"${x}"`, displayText: `${x} (preset)` }));
+                if (list.length) return { list, ...at(call.prefix.length) };
+            }
+        }
+        const kind = fx[1] === "aux" ? (/["'](\w+)["']/.exec(call.inside) || [])[1] : fx[1];
+        const args = { ...(oneWords.fx[kind] ? oneWords.fx[kind].args : {}), into: '"hall"', send: 1, out: 1 };
+        const p = call.prefix.toLowerCase();
+        const list = Object.entries(args).filter(([k]) => k.startsWith(p) && !new RegExp(`\\b${k}\\s*=`).test(call.inside))
+            .map(([k, v]) => ({ text: `${k}=${fmtNum(v)}`, displayText: `${k}=${fmtNum(v)}` }));
+        return list.length ? { list, ...at(call.prefix.length) } : null;
     },
 
     // create separator for categories
@@ -1340,7 +1414,7 @@ export const foxdotAutocomplete = {
      * Get Synth categories from the Synth list
      */
     getSynthCategories: function() {
-        return this.getCategoriesFromList(this.synths, 'tag');
+        return this.getCategoriesFromList([...this.synths, ...oneSynths], 'tag');
     },
 
     // show elements of a category
@@ -1363,7 +1437,7 @@ export const foxdotAutocomplete = {
         }
         else if (categoryType === 'synth') {
             categoriesMap = this.synthCategories;
-            allItemsList = this.synths;
+            allItemsList = [...this.synths, ...oneSynths];
         }
         else if (categoryType === 'drum') {
             categoriesMap = this.drumCategories;

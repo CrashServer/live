@@ -624,3 +624,10 @@ glitchstab.add()
 # subkick - Deep punchy kick drum
 subkick = FileSynthDef("subkick")
 subkick.add()
+
+# ---- One's units (soundDesign/one/foxdot: installed by its install.sh; run it again to update) ----
+# Ported from One/Unreason's DSP and measured against it (see one/foxdot/README.md).
+for _n in ["berlin_chat", "berlin_clap", "berlin_kick", "berlin_ohat", "berlin_ride", "berlin_rim", "berlin_stab", "berlin_tom", "kit_bell", "kit_chat", "kit_clap", "kit_kick", "kit_ohat", "kit_rim", "kit_snare", "kit_tom", "one_chip", "one_fm", "one_fx_drive", "one_fx_echo", "one_fx_hall", "one_fx_squash", "one_riff", "one_sub", "riot_chat", "riot_crash", "riot_floor", "riot_kick", "riot_ohat", "riot_ride", "riot_snare", "riot_tom"]:
+    globals()[_n] = FileSynthDef(_n); globals()[_n].add()
+from .oneFX import *  # One's words: its presets (sub_acid, iron_floor.kick…), sound(), fx_hall()…, .steps()
+# ---- end of One's units ----

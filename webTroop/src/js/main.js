@@ -1048,6 +1048,16 @@ document.addEventListener("DOMContentLoaded", async () => {
               fxDefs: dynamicFxDefs,
               funcDefs: message.autocomplete?.funcDocs || {},
             });
+
+            // tout pattern P… documenté côté FoxDot et absent de la liste écrite à la main y entre tout seul
+            const knownPatterns = new Set(
+              foxdotAutocomplete.foxKeyword.map((k) => k.displayText.split(" ")[0]),
+            );
+            Object.keys(message.autocomplete?.funcDocs || {})
+              .filter((n) => /^P[A-Z]\w*$/.test(n) && !knownPatterns.has(n))
+              .forEach((n) =>
+                foxdotAutocomplete.foxKeyword.push({ text: `${n}()`, displayText: n }),
+              );
           } catch (e) {
             console.warn(
               "Impossible de mettre à jour les définitions dynamiques (synth/fx):",

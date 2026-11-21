@@ -247,6 +247,37 @@ export const foxdotAutocomplete = {
         { text: 'PQuicken()', displayText: 'PQuicken' },
         { text: 'PRhythm()', displayText: 'PRhythm' },
         { text: 'PJoin()', displayText: 'PJoin' },
+        // ---- live2026_riga : Advanced.py ----
+        { text: 'PGrowArp(0, max_notes=6, growth_rate=8)', displayText: 'PGrowArp - arpeggio that grows' },
+        { text: 'PPoly(3, 4)', displayText: 'PPoly - polyrhythm durations' },
+        { text: 'PPolyEuclid(3, 8, 5, 8, mode="merge")', displayText: 'PPolyEuclid - two euclids (dual: d1, d2 = ...)' },
+        { text: 'PPolyPhase([0, 2, 4], [1, 1.05])', displayText: 'PPolyPhase - Reich phasing' },
+        { text: 'PAdditive(2, 2, 3)', displayText: 'PAdditive - 2+2+3 durations' },
+        { text: 'PMelody(I, style=1, length=16)', displayText: 'PMelody - melody on a chord (style 0-5)' },
+        { text: 'PCircle(0, steps=8)', displayText: 'PCircle - circle of fifths' },
+        { text: 'PGroove("funk")', displayText: 'PGroove - funk afrobeat breakbeat techno dnb trap house' },
+        { text: 'PGroove("dnb", density=0.6)', displayText: 'PGroove density' },
+        { text: 'PClave("son")', displayText: 'PClave - son reverse rumba bossa' },
+        { text: 'PArticulation("staccato")', displayText: 'PArticulation - legato staccato tenuto marcato accent' },
+        { text: 'PSustain(PDur(5, 8), 0.5)', displayText: 'PSustain - sus from durations' },
+        // ---- live2026_riga : SynthPatterns (sus/amp envelopes, melodies, arps, chords) ----
+        { text: 'env("")', displayText: 'env - named envelope (sus/amp)' },
+        { text: 'mel("")', displayText: 'mel - named melody' },
+        { text: 'arp("")', displayText: 'arp - named arpeggio' },
+        { text: 'chord("")', displayText: 'chord - named chord' },
+        { text: 'chords("")', displayText: 'chords - named progression' },
+        { text: 'mel([1, 5], 8)', displayText: 'mel list+dur - switch every 8 beats' },
+        { text: 'mel(var([1, 5], 8))', displayText: 'mel var' },
+        // ---- live2026_riga : drum patterns as values ----
+        { text: 'p("")', displayText: 'p - named drum pattern (alias of pat)' },
+        { text: 'ppat("")', displayText: 'ppat - drum pattern -> dur' },
+        { text: 'pamp("")', displayText: 'pamp - drum pattern -> amp' },
+        { text: 'phits("")', displayText: 'phits - drum pattern -> hit steps' },
+        { text: 'gen_khsor(4)', displayText: 'gen_khsor - random kick/hat/snare/open' },
+        // ---- live2026_riga : modulate any fx parameter ----
+        { text: "**lfo('lpf', rate=4, mul=0.5)", displayText: 'lfo - sine on any fx param' },
+        { text: "**ramp('lpf', 200, 8000, dur=8)", displayText: 'ramp - fx param from a to b' },
+        { text: "**mod('lpf', start=200, end=8000, rate=4, mul=0.2)", displayText: 'mod - ramp + lfo' },
     ],
     fFamily: [
         { text: 'fi()', displayText: 'fi - linvarIn' },
@@ -318,6 +349,52 @@ export const foxdotAutocomplete = {
         { text: 'Server.clearFx()', displayText: 'Server.clearFx' },
         { text: 'Server.listFx()', displayText: 'Server.listFx' },
         { text: 'Server.debugFx()', displayText: 'Server.debugFx' },
+        // ---- live2026_riga ----
+        { text: 'Server.bypassFx("")', displayText: 'Server.bypassFx - master fx on/off, settings kept' },
+        { text: 'Server.bypassedFx()', displayText: 'Server.bypassedFx' },
+        { text: 'masterFx("")', displayText: 'masterFx - bypass a master fx ("lpf", "one:hall")' },
+        { text: 'masterFx("", remove=True)', displayText: 'masterFx remove' },
+        { text: 'find_scale([0, 3, 7])', displayText: 'find_scale - scales containing these notes' },
+        { text: 'envs()', displayText: 'envs - list named envelopes' },
+        { text: 'mels()', displayText: 'mels - list named melodies' },
+        { text: 'drum_patterns()', displayText: 'drum_patterns - list named drum patterns' },
+        { text: 'drum_genres()', displayText: 'drum_genres' },
+        { text: 'fx_hall("cathedral")', displayText: 'fx_hall - room plate cathedral' },
+        { text: 'fx_echo("slapback")', displayText: 'fx_echo - dub_throw slapback ping_1_4' },
+        { text: 'fx_drive("warm_tape")', displayText: 'fx_drive - warm_tape valve_crunch broken_speaker wavefolder' },
+        { text: 'fx_duck("pump_side")', displayText: 'fx_duck - glue pump_side drum_smash vocal_level' },
+        { text: 'fx_stop("echo")', displayText: 'fx_stop one - stop one effect' },
+        { text: 'compo.rec_stems(bars=8, session="", variation="")', displayText: 'compo.rec_stems - one wav per player' },
+        { text: 'compo.stem_stop()', displayText: 'compo.stem_stop' },
+        { text: 'compo.cell_run("", stop_after=16)', displayText: 'compo.cell_run - play a grid cell' },
+        { text: 'compo.cell_display("")', displayText: 'compo.cell_display' },
+        { text: 'compo.cell_save("", "", label="")', displayText: 'compo.cell_save' },
+        { text: 'compo.cell_delete("")', displayText: 'compo.cell_delete' },
+        { text: 'compo.cells_list()', displayText: 'compo.cells_list' },
+        { text: 'compo.cell_reload()', displayText: 'compo.cell_reload' },
+        { text: 'VidCtrl.load("")', displayText: 'VidCtrl.load - YouTube URL or id' },
+        { text: 'VidCtrl.play()', displayText: 'VidCtrl.play' },
+        { text: 'VidCtrl.pause()', displayText: 'VidCtrl.pause' },
+        { text: 'VidCtrl.stop()', displayText: 'VidCtrl.stop' },
+        { text: 'VidCtrl.seek(30)', displayText: 'VidCtrl.seek' },
+        { text: 'VidCtrl.jump(10)', displayText: 'VidCtrl.jump - relative seconds' },
+        { text: 'VidCtrl.scrub(1.5)', displayText: 'VidCtrl.scrub' },
+        { text: 'VidCtrl.rate(0.75)', displayText: 'VidCtrl.rate' },
+        { text: 'VidCtrl.slow()', displayText: 'VidCtrl.slow' },
+        { text: 'VidCtrl.fast()', displayText: 'VidCtrl.fast' },
+        { text: 'VidCtrl.normal()', displayText: 'VidCtrl.normal' },
+        { text: 'VidCtrl.stutter(0.25)', displayText: 'VidCtrl.stutter' },
+        { text: 'VidCtrl.loop(30, 32)', displayText: 'VidCtrl.loop' },
+        { text: 'VidCtrl.bloop(2, start=30)', displayText: 'VidCtrl.bloop - loop N bars' },
+        { text: 'VidCtrl.unloop()', displayText: 'VidCtrl.unloop' },
+        { text: 'VidCtrl.pos([30, 45, 60], dur=2)', displayText: 'VidCtrl.pos - position pattern' },
+        { text: 'VidCtrl.stut([0.25, 0.5], dur=1)', displayText: 'VidCtrl.stut - stutter pattern' },
+        { text: 'VidCtrl.rates([1, 0.5, 2], dur=4)', displayText: 'VidCtrl.rates - rate pattern' },
+        { text: 'VidCtrl.grain([30, 31, 32], size=0.25, dur=0.5)', displayText: 'VidCtrl.grain' },
+        { text: 'VidCtrl.freeze(40, dur=0.5)', displayText: 'VidCtrl.freeze' },
+        { text: 'VidCtrl.unfreeze()', displayText: 'VidCtrl.unfreeze' },
+        { text: 'VidCtrl.stop_patterns()', displayText: 'VidCtrl.stop_patterns' },
+        { text: 'VidCtrl(60)', displayText: 'VidCtrl(sec) - go to' },
     ],
     playerFunction: [
         { text: 'gtr()', displayText: 'gtr' },
@@ -700,7 +777,7 @@ export const foxdotAutocomplete = {
         const matchPlayer = beforeCursor.match(playerPattern);
         const isInsideParentheses = (beforeCursor.match(/\(/g) || []).length > (beforeCursor.match(/\)/g) || []).length;
         const afterLastClosingParenthesis = /.*\)\s*\./;
-        const loopPattern = /(loop|gsynth|splaffer|splitter|breakcore)\(([^,)]*)$/;
+        const loopPattern = /(loop|timestretch|gsynth|splaffer|splitter|breakcore)\(([^,)]*)$/;
         const wavetablePattern = /wavetable\(([^,)]*)$/;
         const lostPattern =/(lost|attack|fire|compose|sections)\([^)]*$/
         const pbuildPattern = /pbuild\(([^)]*)$/;
@@ -1166,7 +1243,7 @@ export const foxdotAutocomplete = {
         }
         // Fx, keyword, player function suggestion
         else if (isInsideParentheses) {
-            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z:]/g, "");
+            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z0-9_:]/g, "");
             let foxdotKeyword = [];
 
             // Fx suggestion
@@ -1214,7 +1291,7 @@ export const foxdotAutocomplete = {
         }
         // Synth suggestion
         else if (matchPlayer) {
-            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z]/g, "");
+            const prefix = token.string.slice(0, cursorPosition - token.start).replace(/[^a-zA-Z0-9_]/g, "");
             let filteredSynths = [];
 
             const synthPrefix = prefix.toLowerCase();
@@ -1264,11 +1341,12 @@ export const foxdotAutocomplete = {
             };
         }
         else {
-            const prefix = token.string.slice(0, cursorPosition).replace(/[^a-zA-Z]/g, "");
+            // the whole dotted name before the cursor: VidCtrl.j, compo.cell, Server.by, fx_h
+            const prefix = (beforeCursor.match(/[\w.]+$/) || [""])[0];
             const filteredCoolFunctions = this.coolFunction.filter(f => f.displayText.startsWith(prefix));
             return {
                 list: filteredCoolFunctions.length > 0 ? filteredCoolFunctions.sort((a, b) => a.displayText.localeCompare(b.displayText)) : this.coolFunction.sort((a, b) => a.displayText.localeCompare(b.displayText)),
-                from: CodeMirror.Pos(cursor.line, token.start),
+                from: CodeMirror.Pos(cursor.line, cursorPosition - prefix.length),
                 to: CodeMirror.Pos(cursor.line, cursorPosition),
             };
 

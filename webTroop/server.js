@@ -1,5 +1,6 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { spawn } from 'child_process';
+import * as crashlog from './crashlog.js';   // logs/live-AAAAMMJJ.log : stderr de FoxDot, sa sortie, scsynth qui tombe, le code joué
 import path from 'path';
 import { promises as fs, existsSync } from 'fs';
 import { SerialPort } from 'serialport';
@@ -246,6 +247,7 @@ function processArduinoData(data, foxdot) {
   });
 
 console.log('FoxDot démarré', foxdot.pid);
+crashlog.watch(foxdot, (t) => broadcastLog(t));
 
 // Écouter les données série de l'Arduino pour les commandes du bouton
 if (arduino && arduino.isOpen) {
@@ -278,6 +280,7 @@ wss.on('connection', (ws, req) => {
         if (logCode) {
           broadcastLog(`${(userName!=undefined) ? userName : ""}: ${logCode}\n`, userColor, attackRequest);
         }
+        crashlog.code(userName, data.code);
         foxdot.stdin.write(data.code + '\n' + '\n');
         // Capture code during recording
         if (isRecording && data.code) {

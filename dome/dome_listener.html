@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dome Listener</title>
+<style>
+:root {
+  --bg: #0b0d10;
+  --panel: rgba(16, 19, 24, 0.9);
+  --text: #e6e8eb;
+  --muted: #8b939e;
+  --line: #2a2f37;
+  --accent: #ffb347;
+  --top: #ff6b6b;
+  --quad: #ffd166;
+  --mid: #4ecdc4;
+  --low: #7b9cff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--text);
+  font: 13px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+#view { position: fixed; inset: 0; display: block; touch-action: none; cursor: grab; }
+#view:active { cursor: grabbing; }
+
+#panel { position: fixed; top: 12px; left: 12px; width: 280px; max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 24px); overflow-y: auto; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; backdrop-filter: blur(6px); }
+#panel header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px;
+  border-bottom: 1px solid var(--line); }
+#panel h1 { font-size: 14px; margin: 0; letter-spacing: .02em; }
+#panel .body { padding: 10px 12px 12px; display: grid; gap: 9px; }
+#panel.collapsed .body { display: none; }
+#panel.collapsed header { border-bottom: 0; }
+
+label.f { display: grid; grid-template-columns: 78px 1fr auto; align-items: center; gap: 8px; color: var(--muted); }
+label.f output { color: var(--text); font-variant-numeric: tabular-nums; min-width: 34px; text-align: right; }
+select, button { font: inherit; color: var(--text); background: #1b2028; border: 1px solid var(--line);
+  border-radius: 6px; padding: 5px 8px; }
+button { cursor: pointer; }
+button:hover, select:hover { border-color: #3c4450; }
+button.primary { background: var(--accent); color: #1a1205; border-color: var(--accent); font-weight: 600; padding: 8px; }
+button.primary.on { background: #2b313b; color: var(--text); border-color: #3c4450; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.seg button.sel { border-color: var(--accent); color: var(--accent); }
+.row { display: flex; flex-wrap: wrap; gap: 4px; }
+.row button { flex: 1 1 auto; padding: 4px 6px; }
+.sect { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin-top: 4px; }
+.help { color: var(--muted); font-size: 12px; margin: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--muted); }
+.legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+[hidden] { display: none !important; }
+#testOpts { display: grid; gap: 9px; }
+#liveStatus { color: var(--text); border-left: 2px solid var(--accent); padding-left: 8px; }
+
+#hud { position: fixed; left: 12px; bottom: 12px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 8px; padding: 6px 10px; font-variant-numeric: tabular-nums; color: var(--muted); pointer-events: none;
+  max-width: calc(100vw - 220px); }
+#hud b { color: var(--text); font-weight: 600; }
+#map { position: fixed; right: 12px; bottom: 12px; width: 180px; height: 180px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--panel); pointer-events: none; }
+
+@media (max-width: 600px) {
+  #panel { left: 16px; right: 16px; top: 16px; width: auto; max-height: 55vh; }
+  #map { width: 120px; height: 120px; right: 16px; bottom: 16px; }
+  #hud { left: 16px; bottom: 16px; max-width: calc(100vw - 168px); font-size: 11px; }
+}
+</style>
+</head>
+<body>
+<canvas id="view"></canvas>
+
+<div id="panel">
+  <header>
+    <h1>Dome Listener · 25 speakers</h1>
+    <button id="collapse" aria-label="Collapse panel">–</button>
+  </header>
+  <div class="body">
+    <div class="seg" id="sourceSeg">
+      <button data-v="test" class="sel">Browser test</button>
+      <button data-v="live">FoxDot live</button>
+    </div>
+    <p class="help" id="liveStatus" hidden></p>
+
+    <div id="testOpts">
+    <button id="start" class="primary">▶ Start audio</button>
+
+    <div class="sect">Test</div>
+    <div class="seg" id="modeSeg">
+      <button data-v="move" class="sel">Moving source</button>
+      <button data-v="check">Speaker check</button>
+    </div>
+    <label class="f">Sound
+      <select id="sound">
+        <option value="bursts">Noise bursts</option>
+        <option value="pluck">Pluck melody</option>
+        <option value="steady">Pink noise (steady)</option>
+        <option value="drone">Drone</option>
+      </select><span></span>
+    </label>
+    <label class="f">Tempo <input id="bpm" type="range" min="60" max="200" value="120"><output id="bpmO">120</output></label>
+
+    <div id="checkOpts" hidden>
+      <label class="f">Rings
+        <select id="ring">
+          <option value="all">All 1 → 25</option>
+          <option value="top">Top · 1</option>
+          <option value="quad">Top quad · 2–5</option>
+          <option value="mid">Middle 8 · 6–13</option>
+          <option value="low">Bottom 12 · 14–25</option>
+        </select><span></span>
+      </label>
+    </div>
+
+    <div id="moveOpts">
+      <label class="f">Motion
+        <select id="motion">
+          <option value="orbit">Orbit</option>
+          <option value="spiral">Spiral up/down</option>
+          <option value="jumps">Random jumps</option>
+          <option value="manual">Manual</option>
+        </select><span></span>
+      </label>
+      <label class="f" id="periodRow">Rev time <input id="period" type="range" min="2" max="40" value="10"><output id="periodO">10 s</output></label>
+      <label class="f" id="azRow" hidden>Azimuth <input id="az" type="range" min="-180" max="180" value="0"><output id="azO">0°</output></label>
+      <label class="f" id="elRow">Elevation <input id="el" type="range" min="0" max="90" value="15"><output id="elO">15°</output></label>
+      <label class="f">Spread <input id="spread" type="range" min="8" max="90" value="28"><output id="spreadO">28°</output></label>
+    </div>
+
+    </div>
+
+    <div class="sect">Room &amp; rendering</div>
+    <div class="seg" id="layoutSeg">
+      <button data-v="ideal" class="sel">Ideal dome</button>
+      <button data-v="real">Real positions</button>
+    </div>
+    <div class="seg" id="renderSeg">
+      <button data-v="equalpower" class="sel">2 speakers</button>
+      <button data-v="HRTF">Headphones</button>
+    </div>
+    <label class="f">Volume <input id="vol" type="range" min="0" max="100" value="60"><output id="volO">60</output></label>
+
+    <div class="sect">Jump to</div>
+    <div class="row">
+      <button data-pos="center">Sweet spot</button>
+      <button data-pos="edge">Edge</button>
+      <button data-pos="outside">Outside</button>
+      <button data-pos="lie">Lie down</button>
+      <button data-pos="above">Above</button>
+    </div>
+
+    <div class="legend">
+      <span><i style="background:var(--top)"></i>1 top</span>
+      <span><i style="background:var(--quad)"></i>2–5</span>
+      <span><i style="background:var(--mid)"></i>6–13</span>
+      <span><i style="background:var(--low)"></i>14–25</span>
+    </div>
+    <p class="help">Drag to look · <b>WASD</b> move · <b>Q/E</b> down/up · <b>Shift</b> faster · click a speaker to ping it.</p>
+    <p class="help">You are the camera. On 2 speakers you hear left/right and distance well, but height and front/back only weakly. Use headphones mode for better 3D.</p>
+  </div>
+</div>
+
+<div id="hud"></div>
+<canvas id="map"></canvas>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+// ---------- Dome data (azimuth°, elevation°, distance m) — from dome.txt ----------
+// az: 0 = front, + = right (Spat convention). el: 0 = ear height, 90 = zenith.
+const REAL = [
+  [0, 90, 3.5],
+  [-51.454, 46.375, 4.559], [51.454, 46.375, 4.559], [128.546, 46.375, 4.559], [-128.546, 46.375, 4.559],
+  [-48.152, 24.141, 5.355], [0, 33.892, 3.927], [48.152, 24.141, 5.355], [90, 31.033, 4.248],
+  [131.848, 24.141, 5.355], [-180, 33.892, 3.927], [-131.848, 24.141, 5.355], [-90, 31.033, 4.248],
+  [-41.717, 8.017, 5.736], [-8.187, 10.578, 4.358], [8.187, 10.578, 4.358], [41.717, 8.017, 5.736],
+  [76.149, 6.742, 6.814], [103.851, 6.742, 6.814], [138.283, 8.017, 5.736], [171.813, 10.578, 4.358],
+  [-171.813, 10.578, 4.358], [-138.283, 8.017, 5.736], [-103.851, 6.742, 6.814], [-76.149, 6.742, 6.814],
+];
+const IDEAL = [
+  [0, 90, 3.5],
+  ...[-45, 45, 135, -135].map(a => [a, 60, 3.5]),
+  ...[-45, 0, 45, 90, 135, 180, -135, -90].map(a => [a, 30, 3.5]),
+  ...[-45, -15, 15, 45, 75, 105, 135, 165, -165, -135, -105, -75].map(a => [a, 0, 3.5]),
+];
+const RINGS = {
+  top: [0],
+  quad: [1, 2, 3, 4],
+  mid: [5, 6, 7, 8, 9, 10, 11, 12],
+  low: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+};
+RINGS.all = [...RINGS.top, ...RINGS.quad, ...RINGS.mid, ...RINGS.low];
+const RING_OF = i => i === 0 ? 'top' : i <= 4 ? 'quad' : i <= 12 ? 'mid' : 'low';
+const RING_COLOR = { top: 0xff6b6b, quad: 0xffd166, mid: 0x4ecdc4, low: 0x7b9cff };
+const FLOOR_Y = -1.2;
+
+// Spat (x right, y front, z up) → three.js (x right, y up, -z front)
+const D2R = Math.PI / 180;
+function sph(az, el, d) {
+  const a = az * D2R, e = el * D2R;
+  return new THREE.Vector3(d * Math.cos(e) * Math.sin(a), d * Math.sin(e), -d * Math.cos(e) * Math.cos(a));
+}
+
+// ---------- State ----------
+const state = {
+  mode: 'move', sound: 'bursts', bpm: 120, ring: 'all',
+  motion: 'orbit', period: 10, az: 0, el: 15, spread: 28,
+  layout: 'ideal', render: 'equalpower', vol: 0.6, source: 'test',
+};
+const live = { ws: null, ok: false, levels: new Array(25).fill(0), lastLevels: 0, lastPose: '', lastSend: 0 };
+
+// ---------- Scene ----------
+const canvas = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b0d10);
+scene.fog = new THREE.Fog(0x0b0d10, 14, 40);
+const camera = new THREE.PerspectiveCamera(75, 1, 0.05, 200);
+camera.rotation.order = 'YXZ';
+let yaw = 0, pitch = 0;
+
+scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x202020, 0.9));
+const dl = new THREE.DirectionalLight(0xffffff, 0.6); dl.position.set(3, 8, 4); scene.add(dl);
+
+const grid = new THREE.GridHelper(30, 30, 0x2c323b, 0x1a1e24);
+grid.position.y = FLOOR_Y; scene.add(grid);
+const footprint = new THREE.Mesh(new THREE.RingGeometry(3.45, 3.5, 96),
+  new THREE.MeshBasicMaterial({ color: 0x3a414c, side: THREE.DoubleSide }));
+footprint.rotation.x = -Math.PI / 2; footprint.position.y = FLOOR_Y + 0.001; scene.add(footprint);
+// "front" marker on the floor
+const frontArrow = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.5, 3),
+  new THREE.MeshBasicMaterial({ color: 0xffb347 }));
+frontArrow.rotation.x = -Math.PI / 2; frontArrow.position.set(0, FLOOR_Y + 0.02, -4.2); scene.add(frontArrow);
+// sweet spot marker
+const spot = new THREE.Mesh(new THREE.CircleGeometry(0.25, 32), new THREE.MeshBasicMaterial({ color: 0x343b46 }));
+spot.rotation.x = -Math.PI / 2; spot.position.y = FLOOR_Y + 0.002; scene.add(spot);
+
+function makeLabel(text) {
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d');
+  g.fillStyle = 'rgba(10,12,15,0.85)'; g.beginPath(); g.arc(64, 64, 52, 0, Math.PI * 2); g.fill();
+  g.fillStyle = '#fff'; g.font = 'bold 60px system-ui, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillText(text, 64, 68);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), depthWrite: false }));
+  sp.scale.set(0.36, 0.36, 1);
+  return sp;
+}
+
+const speakers = RINGS.all.map(i => {
+  const ring = RING_OF(i);
+  const mat = new THREE.MeshStandardMaterial({ color: RING_COLOR[ring], emissive: RING_COLOR[ring],
+    emissiveIntensity: 0.08, roughness: 0.5 });
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.32, 0.22), mat);
+  mesh.userData.idx = i;
+  const label = makeLabel(String(i + 1));
+  scene.add(mesh, label);
+  return { i, ring, mesh, label, pos: new THREE.Vector3(), dir: new THREE.Vector3(), level: 0, pulse: 0 };
+});
+
+let ringLines = new THREE.Group(); scene.add(ringLines);
+function rebuildRingLines(data) {
+  scene.remove(ringLines);
+  ringLines = new THREE.Group();
+  for (const r of ['quad', 'mid', 'low']) {
+    const idx = [...RINGS[r]].sort((a, b) => data[a][0] - data[b][0]);
+    const pts = idx.map(i => speakers[i].pos);
+    const line = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts),
+      new THREE.LineBasicMaterial({ color: RING_COLOR[r], transparent: true, opacity: 0.25 }));
+    ringLines.add(line);
+  }
+  scene.add(ringLines);
+}
+
+const srcMarker = new THREE.Mesh(new THREE.SphereGeometry(0.16, 24, 16),
+  new THREE.MeshBasicMaterial({ color: 0xffb347 }));
+const srcHalo = new THREE.Mesh(new THREE.SphereGeometry(0.32, 24, 16),
+  new THREE.MeshBasicMaterial({ color: 0xffb347, transparent: true, opacity: 0.18, depthWrite: false }));
+srcMarker.add(srcHalo); scene.add(srcMarker);
+
+// ---------- Audio ----------
+let ctx = null, master, sourceBus, pinkBuf, running = false;
+const sGains = [], panners = [];
+let contNodes = [];
+let nextTime = 0, step = 0, checkPos = -1;
+const visQueue = [];
+
+function makePink(seconds) {
+  const n = Math.floor(ctx.sampleRate * seconds);
+  const buf = ctx.createBuffer(1, n, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+  for (let i = 0; i < n; i++) {
+    const w = Math.random() * 2 - 1;
+    b0 = 0.99886 * b0 + w * 0.0555179; b1 = 0.99332 * b1 + w * 0.0750759;
+    b2 = 0.96900 * b2 + w * 0.1538520; b3 = 0.86650 * b3 + w * 0.3104856;
+    b4 = 0.55000 * b4 + w * 0.5329522; b5 = -0.7616 * b5 - w * 0.0168980;
+    d[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * 0.5362) * 0.11;
+    b6 = w * 0.115926;
+  }
+  return buf;
+}
+
+function setPannerPos(p, v) {
+  const o = v.clone().negate().normalize(); // speakers aim at the centre
+  if (p.positionX) {
+    p.positionX.value = v.x; p.positionY.value = v.y; p.positionZ.value = v.z;
+    p.orientationX.value = o.x; p.orientationY.value = o.y; p.orientationZ.value = o.z;
+  } else { p.setPosition(v.x, v.y, v.z); p.setOrientation(o.x, o.y, o.z); }
+}
+
+function initAudio() {
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  pinkBuf = makePink(3);
+  master = ctx.createGain(); master.gain.value = state.vol;
+  const comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -12; comp.ratio.value = 4;
+  master.connect(comp).connect(ctx.destination);
+  sourceBus = ctx.createGain();
+  speakers.forEach((s, i) => {
+    const g = ctx.createGain(); g.gain.value = 0;
+    const p = ctx.createPanner();
+    p.panningModel = state.render; p.distanceModel = 'inverse';
+    p.refDistance = 3.5; p.maxDistance = 100; p.rolloffFactor = 1;
+    p.coneInnerAngle = 140; p.coneOuterAngle = 300; p.coneOuterGain = 0.35;
+    setPannerPos(p, s.pos);
+    sourceBus.connect(g).connect(p).connect(master);
+    sGains[i] = g; panners[i] = p;
+  });
+}
+
+function burst(t, dest) {
+  const s = ctx.createBufferSource(); s.buffer = pinkBuf;
+  const f = ctx.createBiquadFilter(); f.type = 'bandpass';
+  f.frequency.value = 500 + Math.random() * 3500; f.Q.value = 0.8;
+  const e = ctx.createGain();
+  e.gain.setValueAtTime(0, t);
+  e.gain.linearRampToValueAtTime(2.2, t + 0.003);
+  e.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+  s.connect(f).connect(e).connect(dest);
+  s.start(t, Math.random() * 2); s.stop(t + 0.22);
+}
+
+const PLUCK_NOTES = [50, 53, 55, 57, 60, 62, 65, 67, 69, 72];
+const PLUCK_PAT = [0, 4, 2, 5, 7, 4, 3, 9, 5, 2, 6, 4, 8, 5, 3, 1];
+function pluck(t, n) {
+  const m = PLUCK_NOTES[PLUCK_PAT[n % PLUCK_PAT.length]];
+  const freq = 440 * Math.pow(2, (m - 69) / 12);
+  const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = freq;
+  const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = 5;
+  lp.frequency.setValueAtTime(freq * 10, t);
+  lp.frequency.exponentialRampToValueAtTime(freq * 1.3, t + 0.35);
+  const e = ctx.createGain();
+  e.gain.setValueAtTime(0, t);
+  e.gain.linearRampToValueAtTime(0.45, t + 0.004);
+  e.gain.exponentialRampToValueAtTime(0.001, t + 0.7);
+  o.connect(lp).connect(e).connect(sourceBus);
+  o.start(t); o.stop(t + 0.75);
+}
+
+function startContinuous() {
+  stopContinuous();
+  const t = ctx.currentTime;
+  if (state.sound === 'steady') {
+    const s = ctx.createBufferSource(); s.buffer = pinkBuf; s.loop = true;
+    const g = ctx.createGain(); g.gain.value = 0.9;
+    s.connect(g).connect(sourceBus); s.start(t);
+    contNodes.push(s);
+  } else if (state.sound === 'drone') {
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.Q.value = 3;
+    const lfo = ctx.createOscillator(); lfo.frequency.value = 0.13;
+    const lfoAmt = ctx.createGain(); lfoAmt.gain.value = 600;
+    lfo.connect(lfoAmt).connect(lp.frequency);
+    const g = ctx.createGain(); g.gain.value = 0.18;
+    lp.connect(g).connect(sourceBus);
+    for (const f of [73.42, 73.8, 110.1, 146.6, 220.4]) {
+      const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = f;
+      o.connect(lp); o.start(t); contNodes.push(o);
+    }
+    lfo.start(t); contNodes.push(lfo);
+  }
+}
+function stopContinuous() {
+  for (const n of contNodes) { try { n.stop(); } catch (e) {} n.disconnect(); }
+  contNodes = [];
+}
+
+function scheduleEvent(t, n) {
+  if (state.mode === 'check' && n % 2 === 0) {
+    const list = RINGS[state.ring];
+    checkPos = (checkPos + 1) % list.length;
+    const idx = list[checkPos];
+    sGains.forEach((g, i) => g.gain.setTargetAtTime(i === idx ? 1 : 0, t, 0.004));
+    visQueue.push({ t, idx });
+  }
+  if (state.sound === 'bursts') burst(t, sourceBus);
+  else if (state.sound === 'pluck') pluck(t, n);
+}
+
+setInterval(() => {
+  if (!running) return;
+  const spb = 60 / state.bpm / 2; // 8th notes
+  while (nextTime < ctx.currentTime + 0.12) {
+    scheduleEvent(nextTime, step);
+    nextTime += spb; step++;
+  }
+}, 25);
+
+function resetGains() {
+  if (!ctx) return;
+  const t = ctx.currentTime;
+  sGains.forEach(g => { g.gain.cancelScheduledValues(t); g.gain.setTargetAtTime(0, t, 0.01); });
+  visQueue.length = 0; checkPos = -1;
+}
+
+function pingSpeaker(i) {
+  speakers[i].pulse = 1;
+  if (!ctx || state.source === 'live') return;
+  if (ctx.state === 'suspended') ctx.resume();
+  const t = ctx.currentTime + 0.01;
+  for (let k = 0; k < 3; k++) burst(t + k * 0.12, panners[i]);
+}
+
+function updateListener() {
+  const L = ctx.listener, P = camera.position;
+  const f = new THREE.Vector3(); camera.getWorldDirection(f);
+  const u = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);
+  if (L.positionX) {
+    const t = ctx.currentTime, k = 0.02;
+    L.positionX.setTargetAtTime(P.x, t, k); L.positionY.setTargetAtTime(P.y, t, k); L.positionZ.setTargetAtTime(P.z, t, k);
+    L.forwardX.setTargetAtTime(f.x, t, k); L.forwardY.setTargetAtTime(f.y, t, k); L.forwardZ.setTargetAtTime(f.z, t, k);
+    L.upX.setTargetAtTime(u.x, t, k); L.upY.setTargetAtTime(u.y, t, k); L.upZ.setTargetAtTime(u.z, t, k);
+  } else {
+    L.setPosition(P.x, P.y, P.z); L.setOrientation(f.x, f.y, f.z, u.x, u.y, u.z);
+  }
+}
+
+// ---------- Virtual source (what the dome would do: direction-based panning over 25 speakers) ----------
+const srcDir = sph(0, 15, 1);
+const jumpTarget = srcDir.clone();
+let phase = 0, jumpClock = 0;
+
+function updateSource(dt) {
+  phase += dt / state.period;
+  if (state.motion === 'orbit') srcDir.copy(sph(phase * 360, state.el, 1));
+  else if (state.motion === 'spiral') srcDir.copy(sph(phase * 360, 45 - 45 * Math.cos(phase * Math.PI / 2), 1));
+  else if (state.motion === 'manual') srcDir.copy(sph(state.az, state.el, 1));
+  else if (state.motion === 'jumps') {
+    jumpClock += dt;
+    if (jumpClock > state.period / 8) {
+      jumpClock = 0;
+      jumpTarget.copy(speakers[Math.floor(Math.random() * 25)].dir);
+    }
+    srcDir.lerp(jumpTarget, 1 - Math.exp(-dt * 10)).normalize();
+  }
+}
+
+function panGains() {
+  const s = state.spread * D2R;
+  const w = speakers.map(sp => {
+    const ang = Math.acos(Math.min(1, Math.max(-1, srcDir.dot(sp.dir))));
+    return Math.exp(-(ang * ang) / (2 * s * s));
+  });
+  const norm = 1 / Math.sqrt(w.reduce((a, b) => a + b * b, 0) || 1);
+  return w.map(x => x * norm);
+}
+
+// ---------- Layout ----------
+function applyLayout() {
+  const data = state.layout === 'real' ? REAL : IDEAL;
+  speakers.forEach((s, i) => {
+    s.pos.copy(sph(...data[i]));
+    s.dir.copy(s.pos).normalize();
+    s.mesh.position.copy(s.pos);
+    s.mesh.lookAt(0, 0, 0);
+    s.label.position.copy(s.pos).add(new THREE.Vector3(0, 0.3, 0));
+    if (panners[i]) setPannerPos(panners[i], s.pos);
+  });
+  rebuildRingLines(data);
+}
+applyLayout();
+
+// ---------- Camera / listener controls ----------
+const PRESETS = {
+  center: { p: [0, 0, 0], yaw: 0, pitch: 0 },
+  edge: { p: [2.6, 0, 0.8], yaw: 0.35, pitch: 0.05 },
+  outside: { p: [0, 1.2, 9.5], yaw: 0, pitch: -0.08 },
+  lie: { p: [0, FLOOR_Y + 0.3, 0], yaw: 0, pitch: 1.45 },
+  above: { p: [0, 8, 0.01], yaw: 0, pitch: -1.5 },
+};
+function jumpTo(name) {
+  const pr = PRESETS[name];
+  camera.position.set(...pr.p); yaw = pr.yaw; pitch = pr.pitch;
+}
+jumpTo('center');
+
+const keys = new Set();
+addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || (e.target.tagName === 'INPUT' && e.key.startsWith('Arrow'))) return;
+  keys.add(e.code);
+});
+addEventListener('keyup', e => keys.delete(e.code));
+addEventListener('blur', () => keys.clear());
+
+let drag = null;
+canvas.addEventListener('pointerdown', e => {
+  drag = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY };
+  canvas.setPointerCapture(e.pointerId);
+});
+canvas.addEventListener('pointermove', e => {
+  if (!drag) return;
+  yaw -= (e.clientX - drag.x) * 0.004;
+  pitch -= (e.clientY - drag.y) * 0.004;
+  pitch = Math.max(-1.55, Math.min(1.55, pitch));
+  drag.x = e.clientX; drag.y = e.clientY;
+});
+const ray = new THREE.Raycaster();
+canvas.addEventListener('pointerup', e => {
+  if (drag && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 5) {
+    const r = canvas.getBoundingClientRect();
+    ray.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), camera);
+    const hit = ray.intersectObjects(speakers.map(s => s.mesh))[0];
+    if (hit) pingSpeaker(hit.object.userData.idx);
+  }
+  drag = null;
+});
+
+function move(dt) {
+  const sp = (keys.has('ShiftLeft') || keys.has('ShiftRight') ? 5 : 1.6) * dt;
+  const f = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
+  const r = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
+  const p = camera.position;
+  if (keys.has('KeyW') || keys.has('ArrowUp')) p.addScaledVector(f, sp);
+  if (keys.has('KeyS') || keys.has('ArrowDown')) p.addScaledVector(f, -sp);
+  if (keys.has('KeyD') || keys.has('ArrowRight')) p.addScaledVector(r, sp);
+  if (keys.has('KeyA') || keys.has('ArrowLeft')) p.addScaledVector(r, -sp);
+  if (keys.has('KeyE')) p.y += sp;
+  if (keys.has('KeyQ')) p.y -= sp;
+  p.y = Math.max(FLOOR_Y + 0.15, p.y);
+}
+
+// ---------- Mini map (top view, front = up) ----------
+const map = document.getElementById('map');
+const mg = map.getContext('2d');
+function drawMap() {
+  const dpr = Math.min(devicePixelRatio, 2);
+  const W = map.clientWidth, H = map.clientHeight;
+  if (map.width !== W * dpr) { map.width = W * dpr; map.height = H * dpr; }
+  mg.setTransform(dpr, 0, 0, dpr, 0, 0);
+  mg.clearRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2, R = W / 2 - 10, sc = R / 5.5;
+  const X = v => cx + v.x * sc, Y = v => cy + v.z * sc;
+  mg.strokeStyle = '#2f3540'; mg.lineWidth = 1;
+  mg.beginPath(); mg.arc(cx, cy, 3.5 * sc, 0, Math.PI * 2); mg.stroke();
+  mg.fillStyle = '#8b939e'; mg.font = '10px system-ui'; mg.textAlign = 'center';
+  mg.fillText('front', cx, 11);
+  for (const s of speakers) {
+    const c = new THREE.Color(RING_COLOR[s.ring]);
+    const lv = Math.min(1, s.level + s.pulse);
+    mg.fillStyle = `rgba(${c.r * 255 | 0},${c.g * 255 | 0},${c.b * 255 | 0},${0.35 + 0.65 * lv})`;
+    mg.beginPath(); mg.arc(X(s.pos), Y(s.pos), 2.5 + 3 * lv, 0, Math.PI * 2); mg.fill();
+  }
+  if (state.mode === 'move') {
+    const sv = srcDir.clone().multiplyScalar(3.2);
+    mg.fillStyle = '#ffb347'; mg.beginPath(); mg.arc(X(sv), Y(sv), 3.5, 0, Math.PI * 2); mg.fill();
+  }
+  // listener
+  const p = camera.position;
+  let px = X(p) - cx, py = Y(p) - cy;
+  const pr = Math.hypot(px, py);
+  if (pr > R) { px *= R / pr; py *= R / pr; } // pin to edge when far outside
+  px += cx; py += cy;
+  const fx = -Math.sin(yaw), fz = -Math.cos(yaw);
+  mg.fillStyle = '#ffffff';
+  mg.beginPath();
+  mg.moveTo(px + fx * 9, py + fz * 9);
+  mg.lineTo(px - fx * 5 + fz * 5, py - fz * 5 - fx * 5);
+  mg.lineTo(px - fx * 5 - fz * 5, py - fz * 5 + fx * 5);
+  mg.closePath(); mg.fill();
+}
+
+// ---------- UI wiring ----------
+const $ = id => document.getElementById(id);
+function seg(id, key, onChange) {
+  $(id).addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    for (const x of $(id).children) x.classList.toggle('sel', x === b);
+    state[key] = b.dataset.v; onChange && onChange();
+  });
+}
+function slider(id, key, fmt, map = v => v, onChange) {
+  const el = $(id), out = $(id + 'O');
+  const upd = () => { state[key] = map(+el.value); out.textContent = fmt(+el.value); onChange && onChange(); };
+  el.addEventListener('input', upd); upd();
+}
+
+$('start').addEventListener('click', async () => {
+  if (!ctx) initAudio();
+  if (!running) {
+    await ctx.resume();
+    running = true; nextTime = ctx.currentTime + 0.05; step = 0;
+    startContinuous();
+    $('start').textContent = '■ Stop audio'; $('start').classList.add('on');
+  } else {
+    running = false; stopContinuous(); resetGains();
+    $('start').textContent = '▶ Start audio'; $('start').classList.remove('on');
+  }
+});
+$('collapse').addEventListener('click', () => {
+  const c = $('panel').classList.toggle('collapsed');
+  $('collapse').textContent = c ? '+' : '–';
+});
+
+seg('modeSeg', 'mode', () => {
+  $('checkOpts').hidden = state.mode !== 'check';
+  $('moveOpts').hidden = state.mode !== 'move';
+  resetGains();
+});
+seg('layoutSeg', 'layout', () => { applyLayout(); sendSpeakers(); });
+seg('renderSeg', 'render', () => panners.forEach(p => p.panningModel = state.render));
+$('sound').addEventListener('change', e => { state.sound = e.target.value; if (running) startContinuous(); });
+$('ring').addEventListener('change', e => { state.ring = e.target.value; checkPos = -1; });
+$('motion').addEventListener('change', e => {
+  state.motion = e.target.value;
+  $('azRow').hidden = state.motion !== 'manual';
+  $('elRow').hidden = !['orbit', 'manual'].includes(state.motion);
+  $('periodRow').hidden = state.motion === 'manual';
+});
+slider('bpm', 'bpm', v => v);
+slider('period', 'period', v => v + ' s');
+slider('az', 'az', v => v + '°');
+slider('el', 'el', v => v + '°');
+slider('spread', 'spread', v => v + '°');
+slider('vol', 'vol', v => v, v => v / 100, () => { if (master) master.gain.setTargetAtTime(state.vol, ctx.currentTime, 0.03); sendMonitorAmp(); });
+document.querySelectorAll('[data-pos]').forEach(b => b.addEventListener('click', () => jumpTo(b.dataset.pos)));
+
+// ---------- FoxDot live (SuperCollider renders, via dome/bridge.mjs) ----------
+const noteDots = [];
+const dotGeo = new THREE.SphereGeometry(0.12, 16, 12);
+function spawnNote(az, elev, spread) {
+  let d = noteDots.find(n => n.life <= 0);
+  if (!d) {
+    if (noteDots.length >= 96) return;
+    d = { mesh: new THREE.Mesh(dotGeo, new THREE.MeshBasicMaterial({ color: 0xffb347, transparent: true, depthWrite: false })), life: 0, size: 1 };
+    scene.add(d.mesh); noteDots.push(d);
+  }
+  d.mesh.position.copy(sph(az, elev, 3.0));
+  d.life = 1; d.size = 0.6 + spread / 40; d.mesh.visible = true;
+}
+function setLiveStatus(t) { $('liveStatus').textContent = t; }
+function bridgeURL() { return location.protocol.startsWith('http') ? `ws://${location.host}` : 'ws://localhost:8091'; }
+function connectLive() {
+  if (live.ws) return;
+  const ws = live.ws = new WebSocket(bridgeURL());
+  setLiveStatus('Connecting to bridge…');
+  ws.onopen = () => { live.ok = true; live.lastPose = ''; sendSpeakers(); sendMonitorAmp(); };
+  ws.onmessage = e => {
+    const m = JSON.parse(e.data);
+    if (m.type === 'levels') { live.levels = m.v; live.lastLevels = performance.now(); }
+    else if (m.type === 'note') spawnNote(m.az, m.elev, m.spread);
+  };
+  ws.onclose = () => {
+    live.ws = null; live.ok = false;
+    if (state.source === 'live') {
+      setLiveStatus('Bridge not reachable. Run: node dome/bridge.mjs');
+      setTimeout(connectLive, 2000);
+    }
+  };
+}
+function disconnectLive() {
+  if (live.ws) { const w = live.ws; live.ws = null; w.onclose = null; w.close(); }
+  live.ok = false;
+}
+function liveSend(m) { if (live.ok && live.ws && live.ws.readyState === 1) live.ws.send(JSON.stringify(m)); }
+// Dome/Spat coordinates for SC: x right, y front, z up
+function sendSpeakers() {
+  const pos = [];
+  for (const [a, e, d] of (state.layout === 'real' ? REAL : IDEAL)) { const v = sph(a, e, d); pos.push(v.x, -v.z, v.y); }
+  liveSend({ type: 'speakers', pos });
+}
+function sendMonitorAmp() { liveSend({ type: 'monitor', amp: state.vol * 1.6 }); }
+function sendPose(now) {
+  if (now - live.lastSend < 33) return;
+  const p = camera.position;
+  const pose = { type: 'listener', x: +p.x.toFixed(3), y: +(-p.z).toFixed(3), z: +p.y.toFixed(3),
+    yaw: +(-yaw / D2R).toFixed(2), pitch: +(pitch / D2R).toFixed(2) };
+  const key = JSON.stringify(pose);
+  if (key === live.lastPose) return;
+  live.lastPose = key; live.lastSend = now;
+  liveSend(pose);
+}
+seg('sourceSeg', 'source', () => {
+  const isLive = state.source === 'live';
+  $('testOpts').hidden = isLive; $('renderSeg').hidden = isLive; $('liveStatus').hidden = !isLive;
+  if (isLive) { if (running) $('start').click(); connectLive(); }
+  else disconnectLive();
+});
+
+// ---------- Loop ----------
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+const hud = $('hud');
+let last = performance.now(), activeCheck = -1;
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  move(dt);
+  camera.rotation.set(pitch, yaw, 0);
+  camera.updateMatrixWorld();
+  updateSource(dt);
+
+  if (state.source === 'live') {
+    srcMarker.visible = false;
+    const fresh = performance.now() - live.lastLevels < 1500;
+    speakers.forEach((s, i) => s.level = fresh ? Math.min(1, Math.sqrt(live.levels[i] || 0) * 1.8) : 0);
+    if (live.ok) {
+      sendPose(now);
+      setLiveStatus(fresh ? 'Live: SuperCollider is rendering the dome from your position.'
+        : 'Bridge connected, waiting for FoxDot. Run dome.start()');
+    }
+  } else if (state.mode === 'move') {
+    const g = panGains();
+    speakers.forEach((s, i) => s.level = g[i]);
+    if (ctx && running) {
+      const t = ctx.currentTime;
+      sGains.forEach((sg, i) => sg.gain.setTargetAtTime(g[i], t, 0.03));
+    }
+    srcMarker.visible = true;
+    srcMarker.position.copy(srcDir).multiplyScalar(3.2);
+  } else {
+    srcMarker.visible = false;
+    if (ctx) while (visQueue.length && visQueue[0].t <= ctx.currentTime) {
+      activeCheck = visQueue.shift().idx; speakers[activeCheck].pulse = 1;
+    }
+    speakers.forEach((s, i) => s.level = running && i === activeCheck ? 0.6 : 0);
+  }
+  if (ctx) updateListener();
+
+  for (const s of speakers) {
+    s.pulse *= Math.exp(-dt * 4);
+    const lv = Math.min(1.2, s.level + s.pulse);
+    s.mesh.material.emissiveIntensity = 0.08 + lv * 1.4;
+    s.mesh.scale.setScalar(1 + lv * 0.5);
+  }
+
+  for (const d of noteDots) {
+    if (d.life <= 0) continue;
+    d.life -= dt * 1.2;
+    d.mesh.visible = d.life > 0;
+    d.mesh.material.opacity = Math.max(0, d.life);
+    d.mesh.scale.setScalar(d.size * (2 - d.life));
+  }
+
+  drawMap();
+  renderer.render(scene, camera);
+
+  const p = camera.position;
+  const face = ((-yaw / D2R) % 360 + 540) % 360 - 180;
+  const dist = Math.hypot(p.x, p.z);
+  let hudTxt = `You: <b>${p.x.toFixed(1)}</b> right · <b>${(-p.z).toFixed(1)}</b> front · <b>${p.y.toFixed(1)}</b> up (m) · facing <b>${face.toFixed(0)}°</b> · <b>${dist.toFixed(1)} m</b> from centre`;
+  if (state.mode === 'check' && running && activeCheck >= 0) hudTxt += ` · speaker <b>${activeCheck + 1}</b>`;
+  if (state.source === 'live') hudTxt += live.ok ? ' · <b>FoxDot live</b>' : ' · <b>bridge offline</b>';
+  else if (!running) hudTxt += ' · <b>audio off</b>';
+  hud.innerHTML = hudTxt;
+
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

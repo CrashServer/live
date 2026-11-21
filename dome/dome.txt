@@ -1,0 +1,91 @@
+Et pour les infos sur le dôme :
+
+Voici les positions réelles des hp, en azimuth, élévation et distance en mètres :
+
+1 - centre haut
+
+0.0 90.0 3.5
+
+2-3-4-5 : 4 hp en haut
+
+-51.454 46.375 4.559
+51.454 46.375 4.559
+128.546 46.375 4.559
+-128.546 46.375 4.559
+
+6-7-8-9-10-11-12-13 : 8 hp au milieu
+
+-48.152 24.141 5.355
+0.0 33.892 3.927
+48.152 24.141 5.355
+90.0 31.033 4.248
+131.848 24.141 5.355
+-180.0 33.892 3.927
+-131.848 24.141 5.355
+-90.0 31.033 4.248
+
+14-15-16-17-18-19-20-21-22-23-24-25 : 12 hp en bas
+
+-41.717 8.017 5.736
+-8.187 10.578 4.358
+8.187 10.578 4.358
+41.717 8.017 5.736
+76.149 6.742 6.814
+103.851 6.742 6.814
+138.283 8.017 5.736
+171.813 10.578 4.358
+-171.813 10.578 4.358
+-138.283 8.017 5.736
+-103.851 6.742 6.814
+-76.149 6.742 6.814
+
+
+Ce n’est pas un vrai dôme, car plutôt étiré en forme de rectangle.
+
+Donc je trouve que c’est mieux de travailler avec des positions normalisés en forme idéale de dôme.
+Comme ça :
+
+1 - centre haut
+
+0. 90. 3.5
+
+2-3-4-5 : 4 hp en haut
+
+-45. 60. 3.5
+45. 60. 3.5
+135. 60. 3.5
+-135. 60. 3.5
+
+6-7-8-9-10-11-12-13 : 8 hp au milieu
+
+-45. 30. 3.5
+0. 30. 3.5
+45. 30. 3.5
+90. 30. 3.5
+135. 30. 3.5
+180. 30. 3.5
+-135. 30. 3.5
+-90. 30. 3.5
+
+14-15-16-17-18-19-20-21-22-23-24-25 : 12 hp en bas
+
+-45.  0. 3.5
+-15.  0. 3.5
+15.  0. 3.5
+45.  0. 3.5
+75.  0. 3.5
+105.  0. 3.5
+135.  0. 3.5
+165.  0. 3.5
+-165.  0. 3.5
+-135.  0. 3.5
+-105. 0. 3.5
+-75. 0. 3.5
+
+
+mais c’est surement plus intéressant dans le contexte de la musique algorithmique de traiter simplement des sorties comme des chiffres, dans des “couronnes” de hp.
+
+sortie 1 c’est le centre haut
+2-5 le quadri haut
+6-13 la couronne de 8 au milieu
+14-25 la couronne de 12 en bas

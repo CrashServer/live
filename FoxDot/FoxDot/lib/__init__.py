@@ -300,6 +300,10 @@ when.set_namespace(FoxDotCode) # experimental
 _Clock = Clock = TempoClock()
 
 update_foxdot_server(Server)
+
+# Dome spatialisation: dome.start() / dome.stop() (see lib/Dome.py)
+from .Dome import Dome as _Dome
+dome = Server.dome = _Dome(Server)
 update_foxdot_clock(Clock)
 instantiate_player_objects()
 

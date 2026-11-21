@@ -10,6 +10,7 @@ else:
     import Queue as queue
 
 import json
+import math
 import re
 import socket
 import sys
@@ -183,6 +184,7 @@ class ServerManager(object):
 class SCLangServerManager(ServerManager):
 
     fxlist    = None
+    _note_time = 0.0   # the note being built's time (get_bundle), for the fx LFOs' phase
     synthdefs = None
 
     def __init__(self, addr, osc_port, sclang_port):
@@ -596,22 +598,45 @@ class SCLangServerManager(ServerManager):
         effect = self.fxlist[name]
         for key in effect.args:
              data.append(key)
-             data.append(float(packet.get(key, effect.defaults[key])))
+             if key.endswith("lfophase"):
+                 data.append(self._lfo_phase(packet.get(key[:-5], 0)))
+             else:
+                 data.append(float(packet.get(key, effect.defaults[key])))
         return data
+
+    def _lfo_phase(self, rate):
+        """ An fx LFO (**lfo('lpf', rate)) starts each note where a sine running since forever would be at
+            that note's time, so it keeps turning across notes - otherwise every note restarts it at 0 and an LFO
+            slower than the notes never moves. """
+        try:
+            rate = float(rate)
+        except (TypeError, ValueError):
+            return 0.0
+        if rate <= 0:
+            return 0.0
+        return (2 * math.pi * rate * self._note_time) % (2 * math.pi)
 
     def get_exit_node(self, node, bus, group_id, packet):
 
         msg = OSCMessage("/s_new")
         node, last_node = self.nextnodeID(), node
 
-        # Always route to main output (bus 0) - global effects are handled by group ordering
-        osc_packet = ['makeSound', node, 1, group_id, 'bus', bus, 'out', 0, 'sus', float(packet["sus"])]
+        dome = getattr(self, 'dome', None)
+
+        if dome is not None and dome.active:
+            # Dome mode: pan onto the 25-channel dome bus (see lib/Dome.py)
+            osc_packet = ['makeSoundDome', node, 1, group_id, 'bus', bus, 'sus', float(packet["sus"])] + dome.exit_args(packet)
+        else:
+            # Always route to main output (bus 0) - global effects are handled by group ordering
+            osc_packet = ['makeSound', node, 1, group_id, 'bus', bus, 'out', 0, 'sus', float(packet["sus"])]
         msg.append( osc_packet )
 
         return msg, node
 
     def get_bundle(self, synthdef, packet, timestamp=0):
         """ Returns the OSC Bundle for a notew based on a Player's SynthDef, and event and effects dictionaries """
+
+        self._note_time = timestamp or time.time()   # for the fx LFOs' phase (prepare_effect)
 
         # Remove the Player object reference before processing, but keep a copy for effect node tracking
         player_ref = packet.get("self", None)

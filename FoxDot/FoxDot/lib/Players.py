@@ -228,7 +228,8 @@ class Player(Repeatable):
 
     # Base attributes
 
-    base_attributes = ('sus', 'fmod', 'pan', 'rate', 'amp', 'midinote', 'channel')
+    base_attributes = ('sus', 'fmod', 'pan', 'rate', 'amp', 'midinote', 'channel',
+                       'az', 'elev', 'dspread')  # dome spatialisation (lib/Dome.py)
 
     required_keys = ("amp", "sus")
 

@@ -1,19 +1,19 @@
 SynthDef.new(\drumBuss,
-{|bus, drumBuss, drumBuss_comp, drumBuss_drive, drumBuss_crunch, drumBuss_transients, drumBuss_boom, drumBuss_, drumBuss_d, drumBusslfo, drumBusslfomul, drumBusslfoadd, drumBuss_comp_, drumBuss_comp_d, drumBuss_complfo, drumBuss_complfomul, drumBuss_complfoadd, drumBuss_drive_, drumBuss_drive_d, drumBuss_drivelfo, drumBuss_drivelfomul, drumBuss_drivelfoadd, drumBuss_crunch_, drumBuss_crunch_d, drumBuss_crunchlfo, drumBuss_crunchlfomul, drumBuss_crunchlfoadd, drumBuss_transients_, drumBuss_transients_d, drumBuss_transientslfo, drumBuss_transientslfomul, drumBuss_transientslfoadd, drumBuss_boom_, drumBuss_boom_d, drumBuss_boomlfo, drumBuss_boomlfomul, drumBuss_boomlfoadd, sus|
+{|bus, drumBuss, drumBuss_comp, drumBuss_drive, drumBuss_crunch, drumBuss_transients, drumBuss_boom, drumBuss_, drumBuss_d, drumBusslfo, drumBusslfomul, drumBusslfoadd, drumBusslfophase, drumBuss_comp_, drumBuss_comp_d, drumBuss_complfo, drumBuss_complfomul, drumBuss_complfoadd, drumBuss_complfophase, drumBuss_drive_, drumBuss_drive_d, drumBuss_drivelfo, drumBuss_drivelfomul, drumBuss_drivelfoadd, drumBuss_drivelfophase, drumBuss_crunch_, drumBuss_crunch_d, drumBuss_crunchlfo, drumBuss_crunchlfomul, drumBuss_crunchlfoadd, drumBuss_crunchlfophase, drumBuss_transients_, drumBuss_transients_d, drumBuss_transientslfo, drumBuss_transientslfomul, drumBuss_transientslfoadd, drumBuss_transientslfophase, drumBuss_boom_, drumBuss_boom_d, drumBuss_boomlfo, drumBuss_boomlfomul, drumBuss_boomlfoadd, drumBuss_boomlfophase, sus|
 var osc,dry,transPresence,sustainPresence,boostAmt,transGain;
 osc = In.ar(bus, 2);
 drumBuss = if(drumBuss_<=0, drumBuss, Line.kr(drumBuss, drumBuss_, sus*drumBuss_d));
-drumBuss = if(drumBusslfo<=0, drumBuss, drumBuss * SinOsc.kr(drumBusslfo, 0, drumBusslfomul, drumBusslfoadd));
+drumBuss = if(drumBusslfo<=0, drumBuss, drumBuss * SinOsc.kr(drumBusslfo, drumBusslfophase, drumBusslfomul, drumBusslfoadd));
 drumBuss_comp = if(drumBuss_comp_<=0, drumBuss_comp, Line.kr(drumBuss_comp, drumBuss_comp_, sus*drumBuss_comp_d));
-drumBuss_comp = if(drumBuss_complfo<=0, drumBuss_comp, drumBuss_comp * SinOsc.kr(drumBuss_complfo, 0, drumBuss_complfomul, drumBuss_complfoadd));
+drumBuss_comp = if(drumBuss_complfo<=0, drumBuss_comp, drumBuss_comp * SinOsc.kr(drumBuss_complfo, drumBuss_complfophase, drumBuss_complfomul, drumBuss_complfoadd));
 drumBuss_drive = if(drumBuss_drive_<=0, drumBuss_drive, Line.kr(drumBuss_drive, drumBuss_drive_, sus*drumBuss_drive_d));
-drumBuss_drive = if(drumBuss_drivelfo<=0, drumBuss_drive, drumBuss_drive * SinOsc.kr(drumBuss_drivelfo, 0, drumBuss_drivelfomul, drumBuss_drivelfoadd));
+drumBuss_drive = if(drumBuss_drivelfo<=0, drumBuss_drive, drumBuss_drive * SinOsc.kr(drumBuss_drivelfo, drumBuss_drivelfophase, drumBuss_drivelfomul, drumBuss_drivelfoadd));
 drumBuss_crunch = if(drumBuss_crunch_<=0, drumBuss_crunch, Line.kr(drumBuss_crunch, drumBuss_crunch_, sus*drumBuss_crunch_d));
-drumBuss_crunch = if(drumBuss_crunchlfo<=0, drumBuss_crunch, drumBuss_crunch * SinOsc.kr(drumBuss_crunchlfo, 0, drumBuss_crunchlfomul, drumBuss_crunchlfoadd));
+drumBuss_crunch = if(drumBuss_crunchlfo<=0, drumBuss_crunch, drumBuss_crunch * SinOsc.kr(drumBuss_crunchlfo, drumBuss_crunchlfophase, drumBuss_crunchlfomul, drumBuss_crunchlfoadd));
 drumBuss_transients = if(drumBuss_transients_<=0, drumBuss_transients, Line.kr(drumBuss_transients, drumBuss_transients_, sus*drumBuss_transients_d));
-drumBuss_transients = if(drumBuss_transientslfo<=0, drumBuss_transients, drumBuss_transients * SinOsc.kr(drumBuss_transientslfo, 0, drumBuss_transientslfomul, drumBuss_transientslfoadd));
+drumBuss_transients = if(drumBuss_transientslfo<=0, drumBuss_transients, drumBuss_transients * SinOsc.kr(drumBuss_transientslfo, drumBuss_transientslfophase, drumBuss_transientslfomul, drumBuss_transientslfoadd));
 drumBuss_boom = if(drumBuss_boom_<=0, drumBuss_boom, Line.kr(drumBuss_boom, drumBuss_boom_, sus*drumBuss_boom_d));
-drumBuss_boom = if(drumBuss_boomlfo<=0, drumBuss_boom, drumBuss_boom * SinOsc.kr(drumBuss_boomlfo, 0, drumBuss_boomlfomul, drumBuss_boomlfoadd));
+drumBuss_boom = if(drumBuss_boomlfo<=0, drumBuss_boom, drumBuss_boom * SinOsc.kr(drumBuss_boomlfo, drumBuss_boomlfophase, drumBuss_boomlfomul, drumBuss_boomlfoadd));
 dry = osc;
 osc = Compander.ar(osc, osc, thresh: drumBuss_comp, slopeBelow: 1, slopeAbove: 4, clampTime: 0.01, relaxTime: 0.15);
 osc = osc + (drumBuss_drive * (((osc*(1+(4*drumBuss_drive))).tanh - osc) + (0.3*LPF.ar(osc,120))));

@@ -1,15 +1,15 @@
 SynthDef.new(\tapestop,
-{|bus, tstop, tstoptime, tstopcurve, tstopdir, sus, tstop_, tstop_d, tstoplfo, tstoplfomul, tstoplfoadd, tstoptime_, tstoptime_d, tstoptimelfo, tstoptimelfomul, tstoptimelfoadd, tstopcurve_, tstopcurve_d, tstopcurvelfo, tstopcurvelfomul, tstopcurvelfoadd, tstopdir_, tstopdir_d, tstopdirlfo, tstopdirlfomul, tstopdirlfoadd|
+{|bus, tstop, tstoptime, tstopcurve, tstopdir, sus, tstop_, tstop_d, tstoplfo, tstoplfomul, tstoplfoadd, tstoplfophase, tstoptime_, tstoptime_d, tstoptimelfo, tstoptimelfomul, tstoptimelfoadd, tstoptimelfophase, tstopcurve_, tstopcurve_d, tstopcurvelfo, tstopcurvelfomul, tstopcurvelfoadd, tstopcurvelfophase, tstopdir_, tstopdir_d, tstopdirlfo, tstopdirlfomul, tstopdirlfoadd, tstopdirlfophase|
 var osc,dry,rate,stopped,startRate,endRate;
 osc = In.ar(bus, 2);
 tstop = if(tstop_<=0, tstop, Line.kr(tstop, tstop_, sus*tstop_d));
-tstop = if(tstoplfo<=0, tstop, tstop * SinOsc.kr(tstoplfo, 0, tstoplfomul, tstoplfoadd));
+tstop = if(tstoplfo<=0, tstop, tstop * SinOsc.kr(tstoplfo, tstoplfophase, tstoplfomul, tstoplfoadd));
 tstoptime = if(tstoptime_<=0, tstoptime, Line.kr(tstoptime, tstoptime_, sus*tstoptime_d));
-tstoptime = if(tstoptimelfo<=0, tstoptime, tstoptime * SinOsc.kr(tstoptimelfo, 0, tstoptimelfomul, tstoptimelfoadd));
+tstoptime = if(tstoptimelfo<=0, tstoptime, tstoptime * SinOsc.kr(tstoptimelfo, tstoptimelfophase, tstoptimelfomul, tstoptimelfoadd));
 tstopcurve = if(tstopcurve_<=0, tstopcurve, Line.kr(tstopcurve, tstopcurve_, sus*tstopcurve_d));
-tstopcurve = if(tstopcurvelfo<=0, tstopcurve, tstopcurve * SinOsc.kr(tstopcurvelfo, 0, tstopcurvelfomul, tstopcurvelfoadd));
+tstopcurve = if(tstopcurvelfo<=0, tstopcurve, tstopcurve * SinOsc.kr(tstopcurvelfo, tstopcurvelfophase, tstopcurvelfomul, tstopcurvelfoadd));
 tstopdir = if(tstopdir_<=0, tstopdir, Line.kr(tstopdir, tstopdir_, sus*tstopdir_d));
-tstopdir = if(tstopdirlfo<=0, tstopdir, tstopdir * SinOsc.kr(tstopdirlfo, 0, tstopdirlfomul, tstopdirlfoadd));
+tstopdir = if(tstopdirlfo<=0, tstopdir, tstopdir * SinOsc.kr(tstopdirlfo, tstopdirlfophase, tstopdirlfomul, tstopdirlfoadd));
 dry = osc;
 startRate = Select.kr(tstopdir, [1, 0.1]);
 endRate = Select.kr(tstopdir, [0.1, 1]);

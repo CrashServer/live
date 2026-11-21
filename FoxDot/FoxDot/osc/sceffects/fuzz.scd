@@ -1,15 +1,15 @@
 SynthDef.new(\fuzz,
-{|bus, fuzz, fuzzgain, fuzztone, fuzzoctave, fuzz_, fuzz_d, fuzzlfo, fuzzlfomul, fuzzlfoadd, fuzzgain_, fuzzgain_d, fuzzgainlfo, fuzzgainlfomul, fuzzgainlfoadd, fuzztone_, fuzztone_d, fuzztonelfo, fuzztonelfomul, fuzztonelfoadd, fuzzoctave_, fuzzoctave_d, fuzzoctavelfo, fuzzoctavelfomul, fuzzoctavelfoadd, sus|
+{|bus, fuzz, fuzzgain, fuzztone, fuzzoctave, fuzz_, fuzz_d, fuzzlfo, fuzzlfomul, fuzzlfoadd, fuzzlfophase, fuzzgain_, fuzzgain_d, fuzzgainlfo, fuzzgainlfomul, fuzzgainlfoadd, fuzzgainlfophase, fuzztone_, fuzztone_d, fuzztonelfo, fuzztonelfomul, fuzztonelfoadd, fuzztonelfophase, fuzzoctave_, fuzzoctave_d, fuzzoctavelfo, fuzzoctavelfomul, fuzzoctavelfoadd, fuzzoctavelfophase, sus|
 var osc,dry,fuzzed,octaveUp,subHarm;
 osc = In.ar(bus, 2);
 fuzz = if(fuzz_<=0, fuzz, Line.kr(fuzz, fuzz_, sus*fuzz_d));
-fuzz = if(fuzzlfo<=0, fuzz, fuzz * SinOsc.kr(fuzzlfo, 0, fuzzlfomul, fuzzlfoadd));
+fuzz = if(fuzzlfo<=0, fuzz, fuzz * SinOsc.kr(fuzzlfo, fuzzlfophase, fuzzlfomul, fuzzlfoadd));
 fuzzgain = if(fuzzgain_<=0, fuzzgain, Line.kr(fuzzgain, fuzzgain_, sus*fuzzgain_d));
-fuzzgain = if(fuzzgainlfo<=0, fuzzgain, fuzzgain * SinOsc.kr(fuzzgainlfo, 0, fuzzgainlfomul, fuzzgainlfoadd));
+fuzzgain = if(fuzzgainlfo<=0, fuzzgain, fuzzgain * SinOsc.kr(fuzzgainlfo, fuzzgainlfophase, fuzzgainlfomul, fuzzgainlfoadd));
 fuzztone = if(fuzztone_<=0, fuzztone, Line.kr(fuzztone, fuzztone_, sus*fuzztone_d));
-fuzztone = if(fuzztonelfo<=0, fuzztone, fuzztone * SinOsc.kr(fuzztonelfo, 0, fuzztonelfomul, fuzztonelfoadd));
+fuzztone = if(fuzztonelfo<=0, fuzztone, fuzztone * SinOsc.kr(fuzztonelfo, fuzztonelfophase, fuzztonelfomul, fuzztonelfoadd));
 fuzzoctave = if(fuzzoctave_<=0, fuzzoctave, Line.kr(fuzzoctave, fuzzoctave_, sus*fuzzoctave_d));
-fuzzoctave = if(fuzzoctavelfo<=0, fuzzoctave, fuzzoctave * SinOsc.kr(fuzzoctavelfo, 0, fuzzoctavelfomul, fuzzoctavelfoadd));
+fuzzoctave = if(fuzzoctavelfo<=0, fuzzoctave, fuzzoctave * SinOsc.kr(fuzzoctavelfo, fuzzoctavelfophase, fuzzoctavelfomul, fuzzoctavelfoadd));
 dry = osc;
 osc = LPF.ar(osc, 6000);
 osc = Compander.ar(osc, osc, 0.2, 1, 0.6, 0.002, 0.05, 1.5);

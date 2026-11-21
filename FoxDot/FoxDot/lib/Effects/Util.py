@@ -65,6 +65,13 @@ import os.path
 from ..Settings import EFFECTS_DIR, SC3_PLUGINS
 from ..ServerManager import Server
 
+# Each fx parameter gets ramp (x_, x_d) and LFO (xlfo, xlfomul, xlfoadd, xlfophase) controls
+_CTRL_SUFFIXES = ("_", "_d", "lfo", "lfomul", "lfoadd", "lfophase")
+
+def _is_base_arg(arg):
+    """ A parameter of the effect itself, not one of the controls generated for it """
+    return not arg.endswith(_CTRL_SUFFIXES)
+
 class Effect:
     server=Server
     def __init__(self, foxdot_name, synthdef, args={}, control=False, tag="", useControl=True):
@@ -123,21 +130,24 @@ class Effect:
 
     def setControlArgs(self, args={}):
         for arg in args.copy().keys():
-            if arg not in ["sus"] and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo") and not arg.endswith("lfomul") and not arg.endswith("lfoadd"):
+            if arg not in ["sus"] and _is_base_arg(arg):
                 args.update({str(arg + "_"): 0})
                 args.update({str(arg + "_d"): 1})
                 args.update({str(arg + "lfo"): 0})
                 args.update({str(arg + "lfomul"): 1})
                 args.update({str(arg + "lfoadd"): 1})
+                args.update({str(arg + "lfophase"): 0})
         args.update({"sus": 1})
         return args
 
     def add_control(self):
         s = ""
         for a in self.args:
-            if a not in ["sus"] and not a.endswith("_") and not a.endswith("_d") and not a.endswith("lfo") and not a.endswith("lfomul") and not a.endswith("lfoadd"):
+            if a not in ["sus"] and _is_base_arg(a):
                 s += f"{a} = if({a}_<=0, {a}, Line.kr({a}, {a}_, sus*{a}_d));" + "\n"
-                s += f"{a} = if({a}lfo<=0, {a}, {a} * SinOsc.kr({a}lfo, 0, {a}lfomul, {a}lfoadd));" + "\n"
+                # {a}lfophase: where the sine is at this note's start (ServerManager.prepare_effect),
+                # so an LFO slower than the notes keeps running across them instead of restarting at 0
+                s += f"{a} = if({a}lfo<=0, {a}, {a} * SinOsc.kr({a}lfo, {a}lfophase, {a}lfomul, {a}lfoadd));" + "\n"
         return s
 
     def add_var(self, name):
@@ -252,23 +262,25 @@ class EffectManager(dict):
         for arg in args:
             if arg not in self.all_kw:
                 self.all_kw.append(arg)
-                if arg not in ["sus"] and useControl and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo") and not arg.endswith("lfomul") and not arg.endswith("lfoadd"):
+                if arg not in ["sus"] and useControl and _is_base_arg(arg):
                     self.all_kw.append(arg + "_")
                     self.all_kw.append(arg + "_d")
                     self.all_kw.append(arg + "lfo")
                     self.all_kw.append(arg + "lfomul")
                     self.all_kw.append(arg + "lfoadd")
+                    self.all_kw.append(arg + "lfophase")
 
             # Store the default value
 
             self.defaults[arg] = args[arg]
 
-            if arg not in ["sus"] and useControl and not arg.endswith("_") and not arg.endswith("_d") and not arg.endswith("lfo") and not arg.endswith("lfomul") and not arg.endswith("lfoadd"):
+            if arg not in ["sus"] and useControl and _is_base_arg(arg):
                 self.defaults[arg + "_"] = 0
                 self.defaults[arg + "_d"] = 1
                 self.defaults[arg + "lfo"] = 0
                 self.defaults[arg + "lfomul"] = 1
                 self.defaults[arg + "lfoadd"] = 1
+                self.defaults[arg + "lfophase"] = 0
 
         return self[foxdot_arg_name]
 

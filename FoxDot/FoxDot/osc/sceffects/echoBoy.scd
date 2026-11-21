@@ -1,21 +1,21 @@
 SynthDef.new(\echoBoy,
-{|bus, eb, ebfeed, ebmix, ebmode, ebwow, ebflutter, ebsat, sus, eb_, eb_d, eblfo, eblfomul, eblfoadd, ebfeed_, ebfeed_d, ebfeedlfo, ebfeedlfomul, ebfeedlfoadd, ebmix_, ebmix_d, ebmixlfo, ebmixlfomul, ebmixlfoadd, ebmode_, ebmode_d, ebmodelfo, ebmodelfomul, ebmodelfoadd, ebwow_, ebwow_d, ebwowlfo, ebwowlfomul, ebwowlfoadd, ebflutter_, ebflutter_d, ebflutterlfo, ebflutterlfomul, ebflutterlfoadd, ebsat_, ebsat_d, ebsatlfo, ebsatlfomul, ebsatlfoadd|
+{|bus, eb, ebfeed, ebmix, ebmode, ebwow, ebflutter, ebsat, sus, eb_, eb_d, eblfo, eblfomul, eblfoadd, eblfophase, ebfeed_, ebfeed_d, ebfeedlfo, ebfeedlfomul, ebfeedlfoadd, ebfeedlfophase, ebmix_, ebmix_d, ebmixlfo, ebmixlfomul, ebmixlfoadd, ebmixlfophase, ebmode_, ebmode_d, ebmodelfo, ebmodelfomul, ebmodelfoadd, ebmodelfophase, ebwow_, ebwow_d, ebwowlfo, ebwowlfomul, ebwowlfoadd, ebwowlfophase, ebflutter_, ebflutter_d, ebflutterlfo, ebflutterlfomul, ebflutterlfoadd, ebflutterlfophase, ebsat_, ebsat_d, ebsatlfo, ebsatlfomul, ebsatlfoadd, ebsatlfophase|
 var osc,delayed,feedback,delaytime,modulation,wowSig,flutterSig,leftDelay,rightDelay,filtered,saturated,ebhpf,eblpf,ebstereo;
 osc = In.ar(bus, 2);
 eb = if(eb_<=0, eb, Line.kr(eb, eb_, sus*eb_d));
-eb = if(eblfo<=0, eb, eb * SinOsc.kr(eblfo, 0, eblfomul, eblfoadd));
+eb = if(eblfo<=0, eb, eb * SinOsc.kr(eblfo, eblfophase, eblfomul, eblfoadd));
 ebfeed = if(ebfeed_<=0, ebfeed, Line.kr(ebfeed, ebfeed_, sus*ebfeed_d));
-ebfeed = if(ebfeedlfo<=0, ebfeed, ebfeed * SinOsc.kr(ebfeedlfo, 0, ebfeedlfomul, ebfeedlfoadd));
+ebfeed = if(ebfeedlfo<=0, ebfeed, ebfeed * SinOsc.kr(ebfeedlfo, ebfeedlfophase, ebfeedlfomul, ebfeedlfoadd));
 ebmix = if(ebmix_<=0, ebmix, Line.kr(ebmix, ebmix_, sus*ebmix_d));
-ebmix = if(ebmixlfo<=0, ebmix, ebmix * SinOsc.kr(ebmixlfo, 0, ebmixlfomul, ebmixlfoadd));
+ebmix = if(ebmixlfo<=0, ebmix, ebmix * SinOsc.kr(ebmixlfo, ebmixlfophase, ebmixlfomul, ebmixlfoadd));
 ebmode = if(ebmode_<=0, ebmode, Line.kr(ebmode, ebmode_, sus*ebmode_d));
-ebmode = if(ebmodelfo<=0, ebmode, ebmode * SinOsc.kr(ebmodelfo, 0, ebmodelfomul, ebmodelfoadd));
+ebmode = if(ebmodelfo<=0, ebmode, ebmode * SinOsc.kr(ebmodelfo, ebmodelfophase, ebmodelfomul, ebmodelfoadd));
 ebwow = if(ebwow_<=0, ebwow, Line.kr(ebwow, ebwow_, sus*ebwow_d));
-ebwow = if(ebwowlfo<=0, ebwow, ebwow * SinOsc.kr(ebwowlfo, 0, ebwowlfomul, ebwowlfoadd));
+ebwow = if(ebwowlfo<=0, ebwow, ebwow * SinOsc.kr(ebwowlfo, ebwowlfophase, ebwowlfomul, ebwowlfoadd));
 ebflutter = if(ebflutter_<=0, ebflutter, Line.kr(ebflutter, ebflutter_, sus*ebflutter_d));
-ebflutter = if(ebflutterlfo<=0, ebflutter, ebflutter * SinOsc.kr(ebflutterlfo, 0, ebflutterlfomul, ebflutterlfoadd));
+ebflutter = if(ebflutterlfo<=0, ebflutter, ebflutter * SinOsc.kr(ebflutterlfo, ebflutterlfophase, ebflutterlfomul, ebflutterlfoadd));
 ebsat = if(ebsat_<=0, ebsat, Line.kr(ebsat, ebsat_, sus*ebsat_d));
-ebsat = if(ebsatlfo<=0, ebsat, ebsat * SinOsc.kr(ebsatlfo, 0, ebsatlfomul, ebsatlfoadd));
+ebsat = if(ebsatlfo<=0, ebsat, ebsat * SinOsc.kr(ebsatlfo, ebsatlfophase, ebsatlfomul, ebsatlfoadd));
 ebhpf = 100;
 eblpf = 8000;
 ebstereo = 0.5;

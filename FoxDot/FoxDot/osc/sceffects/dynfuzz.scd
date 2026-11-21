@@ -1,17 +1,17 @@
 SynthDef.new(\dynfuzz,
-{|bus, dynfuzz, dfgain, dfatk, dfdec, dftone, dynfuzz_, dynfuzz_d, dynfuzzlfo, dynfuzzlfomul, dynfuzzlfoadd, dfgain_, dfgain_d, dfgainlfo, dfgainlfomul, dfgainlfoadd, dfatk_, dfatk_d, dfatklfo, dfatklfomul, dfatklfoadd, dfdec_, dfdec_d, dfdeclfo, dfdeclfomul, dfdeclfoadd, dftone_, dftone_d, dftonelfo, dftonelfomul, dftonelfoadd, sus|
+{|bus, dynfuzz, dfgain, dfatk, dfdec, dftone, dynfuzz_, dynfuzz_d, dynfuzzlfo, dynfuzzlfomul, dynfuzzlfoadd, dynfuzzlfophase, dfgain_, dfgain_d, dfgainlfo, dfgainlfomul, dfgainlfoadd, dfgainlfophase, dfatk_, dfatk_d, dfatklfo, dfatklfomul, dfatklfoadd, dfatklfophase, dfdec_, dfdec_d, dfdeclfo, dfdeclfomul, dfdeclfoadd, dfdeclfophase, dftone_, dftone_d, dftonelfo, dftonelfomul, dftonelfoadd, dftonelfophase, sus|
 var osc,dry,trig,env,driven,fuzzed;
 osc = In.ar(bus, 2);
 dynfuzz = if(dynfuzz_<=0, dynfuzz, Line.kr(dynfuzz, dynfuzz_, sus*dynfuzz_d));
-dynfuzz = if(dynfuzzlfo<=0, dynfuzz, dynfuzz * SinOsc.kr(dynfuzzlfo, 0, dynfuzzlfomul, dynfuzzlfoadd));
+dynfuzz = if(dynfuzzlfo<=0, dynfuzz, dynfuzz * SinOsc.kr(dynfuzzlfo, dynfuzzlfophase, dynfuzzlfomul, dynfuzzlfoadd));
 dfgain = if(dfgain_<=0, dfgain, Line.kr(dfgain, dfgain_, sus*dfgain_d));
-dfgain = if(dfgainlfo<=0, dfgain, dfgain * SinOsc.kr(dfgainlfo, 0, dfgainlfomul, dfgainlfoadd));
+dfgain = if(dfgainlfo<=0, dfgain, dfgain * SinOsc.kr(dfgainlfo, dfgainlfophase, dfgainlfomul, dfgainlfoadd));
 dfatk = if(dfatk_<=0, dfatk, Line.kr(dfatk, dfatk_, sus*dfatk_d));
-dfatk = if(dfatklfo<=0, dfatk, dfatk * SinOsc.kr(dfatklfo, 0, dfatklfomul, dfatklfoadd));
+dfatk = if(dfatklfo<=0, dfatk, dfatk * SinOsc.kr(dfatklfo, dfatklfophase, dfatklfomul, dfatklfoadd));
 dfdec = if(dfdec_<=0, dfdec, Line.kr(dfdec, dfdec_, sus*dfdec_d));
-dfdec = if(dfdeclfo<=0, dfdec, dfdec * SinOsc.kr(dfdeclfo, 0, dfdeclfomul, dfdeclfoadd));
+dfdec = if(dfdeclfo<=0, dfdec, dfdec * SinOsc.kr(dfdeclfo, dfdeclfophase, dfdeclfomul, dfdeclfoadd));
 dftone = if(dftone_<=0, dftone, Line.kr(dftone, dftone_, sus*dftone_d));
-dftone = if(dftonelfo<=0, dftone, dftone * SinOsc.kr(dftonelfo, 0, dftonelfomul, dftonelfoadd));
+dftone = if(dftonelfo<=0, dftone, dftone * SinOsc.kr(dftonelfo, dftonelfophase, dftonelfomul, dftonelfoadd));
 dry = osc;
 trig = Trig1.kr(Amplitude.kr(osc, 0.001, 0.05) > 0.02, 0.01);
 env = Decay2.kr(trig, dfatk, dfdec);

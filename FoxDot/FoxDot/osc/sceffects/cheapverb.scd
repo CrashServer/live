@@ -1,13 +1,13 @@
 SynthDef.new(\cheapverb,
-{|bus, cheapverb, cvdecay, cvdamp, cheapverb_, cheapverb_d, cheapverblfo, cheapverblfomul, cheapverblfoadd, cvdecay_, cvdecay_d, cvdecaylfo, cvdecaylfomul, cvdecaylfoadd, cvdamp_, cvdamp_d, cvdamplfo, cvdamplfomul, cvdamplfoadd, sus|
+{|bus, cheapverb, cvdecay, cvdamp, cheapverb_, cheapverb_d, cheapverblfo, cheapverblfomul, cheapverblfoadd, cheapverblfophase, cvdecay_, cvdecay_d, cvdecaylfo, cvdecaylfomul, cvdecaylfoadd, cvdecaylfophase, cvdamp_, cvdamp_d, cvdamplfo, cvdamplfomul, cvdamplfoadd, cvdamplfophase, sus|
 var osc,dry,src,c1,c2,c3,c4,wet,lpf;
 osc = In.ar(bus, 2);
 cheapverb = if(cheapverb_<=0, cheapverb, Line.kr(cheapverb, cheapverb_, sus*cheapverb_d));
-cheapverb = if(cheapverblfo<=0, cheapverb, cheapverb * SinOsc.kr(cheapverblfo, 0, cheapverblfomul, cheapverblfoadd));
+cheapverb = if(cheapverblfo<=0, cheapverb, cheapverb * SinOsc.kr(cheapverblfo, cheapverblfophase, cheapverblfomul, cheapverblfoadd));
 cvdecay = if(cvdecay_<=0, cvdecay, Line.kr(cvdecay, cvdecay_, sus*cvdecay_d));
-cvdecay = if(cvdecaylfo<=0, cvdecay, cvdecay * SinOsc.kr(cvdecaylfo, 0, cvdecaylfomul, cvdecaylfoadd));
+cvdecay = if(cvdecaylfo<=0, cvdecay, cvdecay * SinOsc.kr(cvdecaylfo, cvdecaylfophase, cvdecaylfomul, cvdecaylfoadd));
 cvdamp = if(cvdamp_<=0, cvdamp, Line.kr(cvdamp, cvdamp_, sus*cvdamp_d));
-cvdamp = if(cvdamplfo<=0, cvdamp, cvdamp * SinOsc.kr(cvdamplfo, 0, cvdamplfomul, cvdamplfoadd));
+cvdamp = if(cvdamplfo<=0, cvdamp, cvdamp * SinOsc.kr(cvdamplfo, cvdamplfophase, cvdamplfomul, cvdamplfoadd));
 dry = osc;
 src = HPF.ar(osc, 80);
 lpf = 2000 + ((1 - cvdamp) * 8000);

@@ -1,13 +1,13 @@
 SynthDef.new(\octclean,
-{|bus, octclean, ocsub, ocup, octclean_, octclean_d, octcleanlfo, octcleanlfomul, octcleanlfoadd, ocsub_, ocsub_d, ocsublfo, ocsublfomul, ocsublfoadd, ocup_, ocup_d, ocuplfo, ocuplfomul, ocuplfoadd, sus|
+{|bus, octclean, ocsub, ocup, octclean_, octclean_d, octcleanlfo, octcleanlfomul, octcleanlfoadd, octcleanlfophase, ocsub_, ocsub_d, ocsublfo, ocsublfomul, ocsublfoadd, ocsublfophase, ocup_, ocup_d, ocuplfo, ocuplfomul, ocuplfoadd, ocuplfophase, sus|
 var osc,dry,sub,up;
 osc = In.ar(bus, 2);
 octclean = if(octclean_<=0, octclean, Line.kr(octclean, octclean_, sus*octclean_d));
-octclean = if(octcleanlfo<=0, octclean, octclean * SinOsc.kr(octcleanlfo, 0, octcleanlfomul, octcleanlfoadd));
+octclean = if(octcleanlfo<=0, octclean, octclean * SinOsc.kr(octcleanlfo, octcleanlfophase, octcleanlfomul, octcleanlfoadd));
 ocsub = if(ocsub_<=0, ocsub, Line.kr(ocsub, ocsub_, sus*ocsub_d));
-ocsub = if(ocsublfo<=0, ocsub, ocsub * SinOsc.kr(ocsublfo, 0, ocsublfomul, ocsublfoadd));
+ocsub = if(ocsublfo<=0, ocsub, ocsub * SinOsc.kr(ocsublfo, ocsublfophase, ocsublfomul, ocsublfoadd));
 ocup = if(ocup_<=0, ocup, Line.kr(ocup, ocup_, sus*ocup_d));
-ocup = if(ocuplfo<=0, ocup, ocup * SinOsc.kr(ocuplfo, 0, ocuplfomul, ocuplfoadd));
+ocup = if(ocuplfo<=0, ocup, ocup * SinOsc.kr(ocuplfo, ocuplfophase, ocuplfomul, ocuplfoadd));
 dry = osc;
 sub = PitchShift.ar(osc, 0.1, 0.5, 0, 0.004);
 up = PitchShift.ar(osc, 0.05, 2.0, 0, 0.004);

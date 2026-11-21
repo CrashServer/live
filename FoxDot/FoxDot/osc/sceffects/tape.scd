@@ -1,15 +1,15 @@
 SynthDef.new(\tape,
-{|bus, tape, tapedrive, tapewarm, tapewobble, tape_, tape_d, tapelfo, tapelfomul, tapelfoadd, tapedrive_, tapedrive_d, tapedrivelfo, tapedrivelfomul, tapedrivelfoadd, tapewarm_, tapewarm_d, tapewarmlfo, tapewarmlfomul, tapewarmlfoadd, tapewobble_, tapewobble_d, tapewobblelfo, tapewobblelfomul, tapewobblelfoadd, sus|
+{|bus, tape, tapedrive, tapewarm, tapewobble, tape_, tape_d, tapelfo, tapelfomul, tapelfoadd, tapelfophase, tapedrive_, tapedrive_d, tapedrivelfo, tapedrivelfomul, tapedrivelfoadd, tapedrivelfophase, tapewarm_, tapewarm_d, tapewarmlfo, tapewarmlfomul, tapewarmlfoadd, tapewarmlfophase, tapewobble_, tapewobble_d, tapewobblelfo, tapewobblelfomul, tapewobblelfoadd, tapewobblelfophase, sus|
 var osc,dry,saturated,wobble;
 osc = In.ar(bus, 2);
 tape = if(tape_<=0, tape, Line.kr(tape, tape_, sus*tape_d));
-tape = if(tapelfo<=0, tape, tape * SinOsc.kr(tapelfo, 0, tapelfomul, tapelfoadd));
+tape = if(tapelfo<=0, tape, tape * SinOsc.kr(tapelfo, tapelfophase, tapelfomul, tapelfoadd));
 tapedrive = if(tapedrive_<=0, tapedrive, Line.kr(tapedrive, tapedrive_, sus*tapedrive_d));
-tapedrive = if(tapedrivelfo<=0, tapedrive, tapedrive * SinOsc.kr(tapedrivelfo, 0, tapedrivelfomul, tapedrivelfoadd));
+tapedrive = if(tapedrivelfo<=0, tapedrive, tapedrive * SinOsc.kr(tapedrivelfo, tapedrivelfophase, tapedrivelfomul, tapedrivelfoadd));
 tapewarm = if(tapewarm_<=0, tapewarm, Line.kr(tapewarm, tapewarm_, sus*tapewarm_d));
-tapewarm = if(tapewarmlfo<=0, tapewarm, tapewarm * SinOsc.kr(tapewarmlfo, 0, tapewarmlfomul, tapewarmlfoadd));
+tapewarm = if(tapewarmlfo<=0, tapewarm, tapewarm * SinOsc.kr(tapewarmlfo, tapewarmlfophase, tapewarmlfomul, tapewarmlfoadd));
 tapewobble = if(tapewobble_<=0, tapewobble, Line.kr(tapewobble, tapewobble_, sus*tapewobble_d));
-tapewobble = if(tapewobblelfo<=0, tapewobble, tapewobble * SinOsc.kr(tapewobblelfo, 0, tapewobblelfomul, tapewobblelfoadd));
+tapewobble = if(tapewobblelfo<=0, tapewobble, tapewobble * SinOsc.kr(tapewobblelfo, tapewobblelfophase, tapewobblelfomul, tapewobblelfoadd));
 dry = osc;
 osc = Compander.ar(osc, osc, 0.25, 1, 0.4, 0.002, 0.08, 1.4);
 wobble = SinOsc.kr(LFNoise1.kr(0.5).range(0.3, 1.5)).range(0.98, 1.02);

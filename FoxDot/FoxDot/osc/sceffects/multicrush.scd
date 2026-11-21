@@ -1,19 +1,19 @@
 SynthDef.new(\multicrush,
-{|bus, multicrush, mclowdrive, mcmiddrive, mchighdrive, mclofreq, mchifreq, multicrush_, multicrush_d, multicrushlfo, multicrushlfomul, multicrushlfoadd, mclowdrive_, mclowdrive_d, mclowdrivelfo, mclowdrivelfomul, mclowdrivelfoadd, mcmiddrive_, mcmiddrive_d, mcmiddrivelfo, mcmiddrivelfomul, mcmiddrivelfoadd, mchighdrive_, mchighdrive_d, mchighdrivelfo, mchighdrivelfomul, mchighdrivelfoadd, mclofreq_, mclofreq_d, mclofreqlfo, mclofreqlfomul, mclofreqlfoadd, mchifreq_, mchifreq_d, mchifreqlfo, mchifreqlfomul, mchifreqlfoadd, sus|
+{|bus, multicrush, mclowdrive, mcmiddrive, mchighdrive, mclofreq, mchifreq, multicrush_, multicrush_d, multicrushlfo, multicrushlfomul, multicrushlfoadd, multicrushlfophase, mclowdrive_, mclowdrive_d, mclowdrivelfo, mclowdrivelfomul, mclowdrivelfoadd, mclowdrivelfophase, mcmiddrive_, mcmiddrive_d, mcmiddrivelfo, mcmiddrivelfomul, mcmiddrivelfoadd, mcmiddrivelfophase, mchighdrive_, mchighdrive_d, mchighdrivelfo, mchighdrivelfomul, mchighdrivelfoadd, mchighdrivelfophase, mclofreq_, mclofreq_d, mclofreqlfo, mclofreqlfomul, mclofreqlfoadd, mclofreqlfophase, mchifreq_, mchifreq_d, mchifreqlfo, mchifreqlfomul, mchifreqlfoadd, mchifreqlfophase, sus|
 var osc,dry,low,mid,high,crushed;
 osc = In.ar(bus, 2);
 multicrush = if(multicrush_<=0, multicrush, Line.kr(multicrush, multicrush_, sus*multicrush_d));
-multicrush = if(multicrushlfo<=0, multicrush, multicrush * SinOsc.kr(multicrushlfo, 0, multicrushlfomul, multicrushlfoadd));
+multicrush = if(multicrushlfo<=0, multicrush, multicrush * SinOsc.kr(multicrushlfo, multicrushlfophase, multicrushlfomul, multicrushlfoadd));
 mclowdrive = if(mclowdrive_<=0, mclowdrive, Line.kr(mclowdrive, mclowdrive_, sus*mclowdrive_d));
-mclowdrive = if(mclowdrivelfo<=0, mclowdrive, mclowdrive * SinOsc.kr(mclowdrivelfo, 0, mclowdrivelfomul, mclowdrivelfoadd));
+mclowdrive = if(mclowdrivelfo<=0, mclowdrive, mclowdrive * SinOsc.kr(mclowdrivelfo, mclowdrivelfophase, mclowdrivelfomul, mclowdrivelfoadd));
 mcmiddrive = if(mcmiddrive_<=0, mcmiddrive, Line.kr(mcmiddrive, mcmiddrive_, sus*mcmiddrive_d));
-mcmiddrive = if(mcmiddrivelfo<=0, mcmiddrive, mcmiddrive * SinOsc.kr(mcmiddrivelfo, 0, mcmiddrivelfomul, mcmiddrivelfoadd));
+mcmiddrive = if(mcmiddrivelfo<=0, mcmiddrive, mcmiddrive * SinOsc.kr(mcmiddrivelfo, mcmiddrivelfophase, mcmiddrivelfomul, mcmiddrivelfoadd));
 mchighdrive = if(mchighdrive_<=0, mchighdrive, Line.kr(mchighdrive, mchighdrive_, sus*mchighdrive_d));
-mchighdrive = if(mchighdrivelfo<=0, mchighdrive, mchighdrive * SinOsc.kr(mchighdrivelfo, 0, mchighdrivelfomul, mchighdrivelfoadd));
+mchighdrive = if(mchighdrivelfo<=0, mchighdrive, mchighdrive * SinOsc.kr(mchighdrivelfo, mchighdrivelfophase, mchighdrivelfomul, mchighdrivelfoadd));
 mclofreq = if(mclofreq_<=0, mclofreq, Line.kr(mclofreq, mclofreq_, sus*mclofreq_d));
-mclofreq = if(mclofreqlfo<=0, mclofreq, mclofreq * SinOsc.kr(mclofreqlfo, 0, mclofreqlfomul, mclofreqlfoadd));
+mclofreq = if(mclofreqlfo<=0, mclofreq, mclofreq * SinOsc.kr(mclofreqlfo, mclofreqlfophase, mclofreqlfomul, mclofreqlfoadd));
 mchifreq = if(mchifreq_<=0, mchifreq, Line.kr(mchifreq, mchifreq_, sus*mchifreq_d));
-mchifreq = if(mchifreqlfo<=0, mchifreq, mchifreq * SinOsc.kr(mchifreqlfo, 0, mchifreqlfomul, mchifreqlfoadd));
+mchifreq = if(mchifreqlfo<=0, mchifreq, mchifreq * SinOsc.kr(mchifreqlfo, mchifreqlfophase, mchifreqlfomul, mchifreqlfoadd));
 dry = osc;
 low = LPF.ar(osc, mclofreq);
 mid = HPF.ar(LPF.ar(osc, mchifreq), mclofreq);

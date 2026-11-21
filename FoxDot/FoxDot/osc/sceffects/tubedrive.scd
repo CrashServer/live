@@ -1,15 +1,15 @@
 SynthDef.new(\tubedrive,
-{|bus, tube, tubegain, tubewarm, tubebias, tube_, tube_d, tubelfo, tubelfomul, tubelfoadd, tubegain_, tubegain_d, tubegainlfo, tubegainlfomul, tubegainlfoadd, tubewarm_, tubewarm_d, tubewarmlfo, tubewarmlfomul, tubewarmlfoadd, tubebias_, tubebias_d, tubebiaslfo, tubebiaslfomul, tubebiaslfoadd, sus|
+{|bus, tube, tubegain, tubewarm, tubebias, tube_, tube_d, tubelfo, tubelfomul, tubelfoadd, tubelfophase, tubegain_, tubegain_d, tubegainlfo, tubegainlfomul, tubegainlfoadd, tubegainlfophase, tubewarm_, tubewarm_d, tubewarmlfo, tubewarmlfomul, tubewarmlfoadd, tubewarmlfophase, tubebias_, tubebias_d, tubebiaslfo, tubebiaslfomul, tubebiaslfoadd, tubebiaslfophase, sus|
 var osc,dry,biased,saturated,harmonics,compressed;
 osc = In.ar(bus, 2);
 tube = if(tube_<=0, tube, Line.kr(tube, tube_, sus*tube_d));
-tube = if(tubelfo<=0, tube, tube * SinOsc.kr(tubelfo, 0, tubelfomul, tubelfoadd));
+tube = if(tubelfo<=0, tube, tube * SinOsc.kr(tubelfo, tubelfophase, tubelfomul, tubelfoadd));
 tubegain = if(tubegain_<=0, tubegain, Line.kr(tubegain, tubegain_, sus*tubegain_d));
-tubegain = if(tubegainlfo<=0, tubegain, tubegain * SinOsc.kr(tubegainlfo, 0, tubegainlfomul, tubegainlfoadd));
+tubegain = if(tubegainlfo<=0, tubegain, tubegain * SinOsc.kr(tubegainlfo, tubegainlfophase, tubegainlfomul, tubegainlfoadd));
 tubewarm = if(tubewarm_<=0, tubewarm, Line.kr(tubewarm, tubewarm_, sus*tubewarm_d));
-tubewarm = if(tubewarmlfo<=0, tubewarm, tubewarm * SinOsc.kr(tubewarmlfo, 0, tubewarmlfomul, tubewarmlfoadd));
+tubewarm = if(tubewarmlfo<=0, tubewarm, tubewarm * SinOsc.kr(tubewarmlfo, tubewarmlfophase, tubewarmlfomul, tubewarmlfoadd));
 tubebias = if(tubebias_<=0, tubebias, Line.kr(tubebias, tubebias_, sus*tubebias_d));
-tubebias = if(tubebiaslfo<=0, tubebias, tubebias * SinOsc.kr(tubebiaslfo, 0, tubebiaslfomul, tubebiaslfoadd));
+tubebias = if(tubebiaslfo<=0, tubebias, tubebias * SinOsc.kr(tubebiaslfo, tubebiaslfophase, tubebiaslfomul, tubebiaslfoadd));
 dry = osc;
 osc = Compander.ar(osc, osc, 0.3, 1, 0.5, 0.001, 0.06, 1.3);
 biased = osc + (tubebias * 0.15);

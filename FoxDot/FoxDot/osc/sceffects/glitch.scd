@@ -1,19 +1,19 @@
 SynthDef.new(\glitch,
-{|bus, glitch, glitchrate, glitchdepth, glitchcrush, glitchchance, beat_dur, glitch_, glitch_d, glitchlfo, glitchlfomul, glitchlfoadd, glitchrate_, glitchrate_d, glitchratelfo, glitchratelfomul, glitchratelfoadd, glitchdepth_, glitchdepth_d, glitchdepthlfo, glitchdepthlfomul, glitchdepthlfoadd, glitchcrush_, glitchcrush_d, glitchcrushlfo, glitchcrushlfomul, glitchcrushlfoadd, glitchchance_, glitchchance_d, glitchchancelfo, glitchchancelfomul, glitchchancelfoadd, beat_dur_, beat_dur_d, beat_durlfo, beat_durlfomul, beat_durlfoadd, sus|
+{|bus, glitch, glitchrate, glitchdepth, glitchcrush, glitchchance, beat_dur, glitch_, glitch_d, glitchlfo, glitchlfomul, glitchlfoadd, glitchlfophase, glitchrate_, glitchrate_d, glitchratelfo, glitchratelfomul, glitchratelfoadd, glitchratelfophase, glitchdepth_, glitchdepth_d, glitchdepthlfo, glitchdepthlfomul, glitchdepthlfoadd, glitchdepthlfophase, glitchcrush_, glitchcrush_d, glitchcrushlfo, glitchcrushlfomul, glitchcrushlfoadd, glitchcrushlfophase, glitchchance_, glitchchance_d, glitchchancelfo, glitchchancelfomul, glitchchancelfoadd, glitchchancelfophase, beat_dur_, beat_dur_d, beat_durlfo, beat_durlfomul, beat_durlfoadd, beat_durlfophase, sus|
 var osc,dry,glitched,trig,rate,shouldGlitch,crushed,pitched,bits;
 osc = In.ar(bus, 2);
 glitch = if(glitch_<=0, glitch, Line.kr(glitch, glitch_, sus*glitch_d));
-glitch = if(glitchlfo<=0, glitch, glitch * SinOsc.kr(glitchlfo, 0, glitchlfomul, glitchlfoadd));
+glitch = if(glitchlfo<=0, glitch, glitch * SinOsc.kr(glitchlfo, glitchlfophase, glitchlfomul, glitchlfoadd));
 glitchrate = if(glitchrate_<=0, glitchrate, Line.kr(glitchrate, glitchrate_, sus*glitchrate_d));
-glitchrate = if(glitchratelfo<=0, glitchrate, glitchrate * SinOsc.kr(glitchratelfo, 0, glitchratelfomul, glitchratelfoadd));
+glitchrate = if(glitchratelfo<=0, glitchrate, glitchrate * SinOsc.kr(glitchratelfo, glitchratelfophase, glitchratelfomul, glitchratelfoadd));
 glitchdepth = if(glitchdepth_<=0, glitchdepth, Line.kr(glitchdepth, glitchdepth_, sus*glitchdepth_d));
-glitchdepth = if(glitchdepthlfo<=0, glitchdepth, glitchdepth * SinOsc.kr(glitchdepthlfo, 0, glitchdepthlfomul, glitchdepthlfoadd));
+glitchdepth = if(glitchdepthlfo<=0, glitchdepth, glitchdepth * SinOsc.kr(glitchdepthlfo, glitchdepthlfophase, glitchdepthlfomul, glitchdepthlfoadd));
 glitchcrush = if(glitchcrush_<=0, glitchcrush, Line.kr(glitchcrush, glitchcrush_, sus*glitchcrush_d));
-glitchcrush = if(glitchcrushlfo<=0, glitchcrush, glitchcrush * SinOsc.kr(glitchcrushlfo, 0, glitchcrushlfomul, glitchcrushlfoadd));
+glitchcrush = if(glitchcrushlfo<=0, glitchcrush, glitchcrush * SinOsc.kr(glitchcrushlfo, glitchcrushlfophase, glitchcrushlfomul, glitchcrushlfoadd));
 glitchchance = if(glitchchance_<=0, glitchchance, Line.kr(glitchchance, glitchchance_, sus*glitchchance_d));
-glitchchance = if(glitchchancelfo<=0, glitchchance, glitchchance * SinOsc.kr(glitchchancelfo, 0, glitchchancelfomul, glitchchancelfoadd));
+glitchchance = if(glitchchancelfo<=0, glitchchance, glitchchance * SinOsc.kr(glitchchancelfo, glitchchancelfophase, glitchchancelfomul, glitchchancelfoadd));
 beat_dur = if(beat_dur_<=0, beat_dur, Line.kr(beat_dur, beat_dur_, sus*beat_dur_d));
-beat_dur = if(beat_durlfo<=0, beat_dur, beat_dur * SinOsc.kr(beat_durlfo, 0, beat_durlfomul, beat_durlfoadd));
+beat_dur = if(beat_durlfo<=0, beat_dur, beat_dur * SinOsc.kr(beat_durlfo, beat_durlfophase, beat_durlfomul, beat_durlfoadd));
 dry = osc;
 rate = glitchrate / beat_dur;
 trig = Impulse.kr(rate);

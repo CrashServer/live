@@ -1,15 +1,15 @@
 SynthDef.new(\envdist,
-{|bus, envdist, envdistgain, envdistsens, envdistattack, envdist_, envdist_d, envdistlfo, envdistlfomul, envdistlfoadd, envdistgain_, envdistgain_d, envdistgainlfo, envdistgainlfomul, envdistgainlfoadd, envdistsens_, envdistsens_d, envdistsenslfo, envdistsenslfomul, envdistsenslfoadd, envdistattack_, envdistattack_d, envdistattacklfo, envdistattacklfomul, envdistattacklfoadd, sus|
+{|bus, envdist, envdistgain, envdistsens, envdistattack, envdist_, envdist_d, envdistlfo, envdistlfomul, envdistlfoadd, envdistlfophase, envdistgain_, envdistgain_d, envdistgainlfo, envdistgainlfomul, envdistgainlfoadd, envdistgainlfophase, envdistsens_, envdistsens_d, envdistsenslfo, envdistsenslfomul, envdistsenslfoadd, envdistsenslfophase, envdistattack_, envdistattack_d, envdistattacklfo, envdistattacklfomul, envdistattacklfoadd, envdistattacklfophase, sus|
 var osc,dry,env,distAmount,distorted,lowDist,highDist;
 osc = In.ar(bus, 2);
 envdist = if(envdist_<=0, envdist, Line.kr(envdist, envdist_, sus*envdist_d));
-envdist = if(envdistlfo<=0, envdist, envdist * SinOsc.kr(envdistlfo, 0, envdistlfomul, envdistlfoadd));
+envdist = if(envdistlfo<=0, envdist, envdist * SinOsc.kr(envdistlfo, envdistlfophase, envdistlfomul, envdistlfoadd));
 envdistgain = if(envdistgain_<=0, envdistgain, Line.kr(envdistgain, envdistgain_, sus*envdistgain_d));
-envdistgain = if(envdistgainlfo<=0, envdistgain, envdistgain * SinOsc.kr(envdistgainlfo, 0, envdistgainlfomul, envdistgainlfoadd));
+envdistgain = if(envdistgainlfo<=0, envdistgain, envdistgain * SinOsc.kr(envdistgainlfo, envdistgainlfophase, envdistgainlfomul, envdistgainlfoadd));
 envdistsens = if(envdistsens_<=0, envdistsens, Line.kr(envdistsens, envdistsens_, sus*envdistsens_d));
-envdistsens = if(envdistsenslfo<=0, envdistsens, envdistsens * SinOsc.kr(envdistsenslfo, 0, envdistsenslfomul, envdistsenslfoadd));
+envdistsens = if(envdistsenslfo<=0, envdistsens, envdistsens * SinOsc.kr(envdistsenslfo, envdistsenslfophase, envdistsenslfomul, envdistsenslfoadd));
 envdistattack = if(envdistattack_<=0, envdistattack, Line.kr(envdistattack, envdistattack_, sus*envdistattack_d));
-envdistattack = if(envdistattacklfo<=0, envdistattack, envdistattack * SinOsc.kr(envdistattacklfo, 0, envdistattacklfomul, envdistattacklfoadd));
+envdistattack = if(envdistattacklfo<=0, envdistattack, envdistattack * SinOsc.kr(envdistattacklfo, envdistattacklfophase, envdistattacklfomul, envdistattacklfoadd));
 dry = osc;
 env = Amplitude.kr(osc, envdistattack, 0.08);
 env = (env * envdistsens * 8).clip(0, 1);

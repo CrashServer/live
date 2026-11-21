@@ -1,15 +1,15 @@
 SynthDef.new(\spring,
-{|bus, spring, sprdecay, sprdamp, sprtens, spring_, spring_d, springlfo, springlfomul, springlfoadd, sprdecay_, sprdecay_d, sprdecaylfo, sprdecaylfomul, sprdecaylfoadd, sprdamp_, sprdamp_d, sprdamplfo, sprdamplfomul, sprdamplfoadd, sprtens_, sprtens_d, sprtenslfo, sprtenslfomul, sprtenslfoadd, sus|
+{|bus, spring, sprdecay, sprdamp, sprtens, spring_, spring_d, springlfo, springlfomul, springlfoadd, springlfophase, sprdecay_, sprdecay_d, sprdecaylfo, sprdecaylfomul, sprdecaylfoadd, sprdecaylfophase, sprdamp_, sprdamp_d, sprdamplfo, sprdamplfomul, sprdamplfoadd, sprdamplfophase, sprtens_, sprtens_d, sprtenslfo, sprtenslfomul, sprtenslfoadd, sprtenslfophase, sus|
 var osc,dry,wet,cutoff;
 osc = In.ar(bus, 2);
 spring = if(spring_<=0, spring, Line.kr(spring, spring_, sus*spring_d));
-spring = if(springlfo<=0, spring, spring * SinOsc.kr(springlfo, 0, springlfomul, springlfoadd));
+spring = if(springlfo<=0, spring, spring * SinOsc.kr(springlfo, springlfophase, springlfomul, springlfoadd));
 sprdecay = if(sprdecay_<=0, sprdecay, Line.kr(sprdecay, sprdecay_, sus*sprdecay_d));
-sprdecay = if(sprdecaylfo<=0, sprdecay, sprdecay * SinOsc.kr(sprdecaylfo, 0, sprdecaylfomul, sprdecaylfoadd));
+sprdecay = if(sprdecaylfo<=0, sprdecay, sprdecay * SinOsc.kr(sprdecaylfo, sprdecaylfophase, sprdecaylfomul, sprdecaylfoadd));
 sprdamp = if(sprdamp_<=0, sprdamp, Line.kr(sprdamp, sprdamp_, sus*sprdamp_d));
-sprdamp = if(sprdamplfo<=0, sprdamp, sprdamp * SinOsc.kr(sprdamplfo, 0, sprdamplfomul, sprdamplfoadd));
+sprdamp = if(sprdamplfo<=0, sprdamp, sprdamp * SinOsc.kr(sprdamplfo, sprdamplfophase, sprdamplfomul, sprdamplfoadd));
 sprtens = if(sprtens_<=0, sprtens, Line.kr(sprtens, sprtens_, sus*sprtens_d));
-sprtens = if(sprtenslfo<=0, sprtens, sprtens * SinOsc.kr(sprtenslfo, 0, sprtenslfomul, sprtenslfoadd));
+sprtens = if(sprtenslfo<=0, sprtens, sprtens * SinOsc.kr(sprtenslfo, sprtenslfophase, sprtenslfomul, sprtenslfoadd));
 dry = osc;
 cutoff = 1000 + (sprtens * 6000);
 wet = AllpassC.ar(osc, 0.01, 0.0031, sprdecay * 0.3);

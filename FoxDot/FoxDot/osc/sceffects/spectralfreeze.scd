@@ -1,13 +1,13 @@
 SynthDef.new(\spectralfreeze,
-{|bus, freeze, freezemix, freezerand, freeze_, freeze_d, freezelfo, freezelfomul, freezelfoadd, freezemix_, freezemix_d, freezemixlfo, freezemixlfomul, freezemixlfoadd, freezerand_, freezerand_d, freezerandlfo, freezerandlfomul, freezerandlfoadd, sus|
+{|bus, freeze, freezemix, freezerand, freeze_, freeze_d, freezelfo, freezelfomul, freezelfoadd, freezelfophase, freezemix_, freezemix_d, freezemixlfo, freezemixlfomul, freezemixlfoadd, freezemixlfophase, freezerand_, freezerand_d, freezerandlfo, freezerandlfomul, freezerandlfoadd, freezerandlfophase, sus|
 var osc,dry,chain,frozen;
 osc = In.ar(bus, 2);
 freeze = if(freeze_<=0, freeze, Line.kr(freeze, freeze_, sus*freeze_d));
-freeze = if(freezelfo<=0, freeze, freeze * SinOsc.kr(freezelfo, 0, freezelfomul, freezelfoadd));
+freeze = if(freezelfo<=0, freeze, freeze * SinOsc.kr(freezelfo, freezelfophase, freezelfomul, freezelfoadd));
 freezemix = if(freezemix_<=0, freezemix, Line.kr(freezemix, freezemix_, sus*freezemix_d));
-freezemix = if(freezemixlfo<=0, freezemix, freezemix * SinOsc.kr(freezemixlfo, 0, freezemixlfomul, freezemixlfoadd));
+freezemix = if(freezemixlfo<=0, freezemix, freezemix * SinOsc.kr(freezemixlfo, freezemixlfophase, freezemixlfomul, freezemixlfoadd));
 freezerand = if(freezerand_<=0, freezerand, Line.kr(freezerand, freezerand_, sus*freezerand_d));
-freezerand = if(freezerandlfo<=0, freezerand, freezerand * SinOsc.kr(freezerandlfo, 0, freezerandlfomul, freezerandlfoadd));
+freezerand = if(freezerandlfo<=0, freezerand, freezerand * SinOsc.kr(freezerandlfo, freezerandlfophase, freezerandlfomul, freezerandlfoadd));
 dry = osc;
 chain = FFT(Array.fill(2, { LocalBuf(2048, 1) }), osc);
 chain = PV_MagFreeze(chain, freeze > 0.5);

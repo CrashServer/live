@@ -1,15 +1,15 @@
 SynthDef.new(\spectralMorph,
-{|bus, smorph, smorphmix, smorphrate, smorphfreeze, smorph_, smorph_d, smorphlfo, smorphlfomul, smorphlfoadd, smorphmix_, smorphmix_d, smorphmixlfo, smorphmixlfomul, smorphmixlfoadd, smorphrate_, smorphrate_d, smorphratelfo, smorphratelfomul, smorphratelfoadd, smorphfreeze_, smorphfreeze_d, smorphfreezelfo, smorphfreezelfomul, smorphfreezelfoadd, sus|
+{|bus, smorph, smorphmix, smorphrate, smorphfreeze, smorph_, smorph_d, smorphlfo, smorphlfomul, smorphlfoadd, smorphlfophase, smorphmix_, smorphmix_d, smorphmixlfo, smorphmixlfomul, smorphmixlfoadd, smorphmixlfophase, smorphrate_, smorphrate_d, smorphratelfo, smorphratelfomul, smorphratelfoadd, smorphratelfophase, smorphfreeze_, smorphfreeze_d, smorphfreezelfo, smorphfreezelfomul, smorphfreezelfoadd, smorphfreezelfophase, sus|
 var osc,dry,refBuf,refSig,chainA,chainB,morphed;
 osc = In.ar(bus, 2);
 smorph = if(smorph_<=0, smorph, Line.kr(smorph, smorph_, sus*smorph_d));
-smorph = if(smorphlfo<=0, smorph, smorph * SinOsc.kr(smorphlfo, 0, smorphlfomul, smorphlfoadd));
+smorph = if(smorphlfo<=0, smorph, smorph * SinOsc.kr(smorphlfo, smorphlfophase, smorphlfomul, smorphlfoadd));
 smorphmix = if(smorphmix_<=0, smorphmix, Line.kr(smorphmix, smorphmix_, sus*smorphmix_d));
-smorphmix = if(smorphmixlfo<=0, smorphmix, smorphmix * SinOsc.kr(smorphmixlfo, 0, smorphmixlfomul, smorphmixlfoadd));
+smorphmix = if(smorphmixlfo<=0, smorphmix, smorphmix * SinOsc.kr(smorphmixlfo, smorphmixlfophase, smorphmixlfomul, smorphmixlfoadd));
 smorphrate = if(smorphrate_<=0, smorphrate, Line.kr(smorphrate, smorphrate_, sus*smorphrate_d));
-smorphrate = if(smorphratelfo<=0, smorphrate, smorphrate * SinOsc.kr(smorphratelfo, 0, smorphratelfomul, smorphratelfoadd));
+smorphrate = if(smorphratelfo<=0, smorphrate, smorphrate * SinOsc.kr(smorphratelfo, smorphratelfophase, smorphratelfomul, smorphratelfoadd));
 smorphfreeze = if(smorphfreeze_<=0, smorphfreeze, Line.kr(smorphfreeze, smorphfreeze_, sus*smorphfreeze_d));
-smorphfreeze = if(smorphfreezelfo<=0, smorphfreeze, smorphfreeze * SinOsc.kr(smorphfreezelfo, 0, smorphfreezelfomul, smorphfreezelfoadd));
+smorphfreeze = if(smorphfreezelfo<=0, smorphfreeze, smorphfreeze * SinOsc.kr(smorphfreezelfo, smorphfreezelfophase, smorphfreezelfomul, smorphfreezelfoadd));
 dry = osc;
 refBuf = LocalBuf(SampleRate.ir * 0.25, 2).clear;
 RecordBuf.ar(osc, refBuf, run: (1 - smorphfreeze), loop: 1);

@@ -1,19 +1,19 @@
 SynthDef.new(\fbdelay,
-{|bus, fbdelay, fbtime, fbfeed, fbcutoff, fbspread, beat_dur, fbdelay_, fbdelay_d, fbdelaylfo, fbdelaylfomul, fbdelaylfoadd, fbtime_, fbtime_d, fbtimelfo, fbtimelfomul, fbtimelfoadd, fbfeed_, fbfeed_d, fbfeedlfo, fbfeedlfomul, fbfeedlfoadd, fbcutoff_, fbcutoff_d, fbcutofflfo, fbcutofflfomul, fbcutofflfoadd, fbspread_, fbspread_d, fbspreadlfo, fbspreadlfomul, fbspreadlfoadd, beat_dur_, beat_dur_d, beat_durlfo, beat_durlfomul, beat_durlfoadd, sus|
+{|bus, fbdelay, fbtime, fbfeed, fbcutoff, fbspread, beat_dur, fbdelay_, fbdelay_d, fbdelaylfo, fbdelaylfomul, fbdelaylfoadd, fbdelaylfophase, fbtime_, fbtime_d, fbtimelfo, fbtimelfomul, fbtimelfoadd, fbtimelfophase, fbfeed_, fbfeed_d, fbfeedlfo, fbfeedlfomul, fbfeedlfoadd, fbfeedlfophase, fbcutoff_, fbcutoff_d, fbcutofflfo, fbcutofflfomul, fbcutofflfoadd, fbcutofflfophase, fbspread_, fbspread_d, fbspreadlfo, fbspreadlfomul, fbspreadlfoadd, fbspreadlfophase, beat_dur_, beat_dur_d, beat_durlfo, beat_durlfomul, beat_durlfoadd, beat_durlfophase, sus|
 var osc,dry,delayed,leftDelay,rightDelay,fb,delTime;
 osc = In.ar(bus, 2);
 fbdelay = if(fbdelay_<=0, fbdelay, Line.kr(fbdelay, fbdelay_, sus*fbdelay_d));
-fbdelay = if(fbdelaylfo<=0, fbdelay, fbdelay * SinOsc.kr(fbdelaylfo, 0, fbdelaylfomul, fbdelaylfoadd));
+fbdelay = if(fbdelaylfo<=0, fbdelay, fbdelay * SinOsc.kr(fbdelaylfo, fbdelaylfophase, fbdelaylfomul, fbdelaylfoadd));
 fbtime = if(fbtime_<=0, fbtime, Line.kr(fbtime, fbtime_, sus*fbtime_d));
-fbtime = if(fbtimelfo<=0, fbtime, fbtime * SinOsc.kr(fbtimelfo, 0, fbtimelfomul, fbtimelfoadd));
+fbtime = if(fbtimelfo<=0, fbtime, fbtime * SinOsc.kr(fbtimelfo, fbtimelfophase, fbtimelfomul, fbtimelfoadd));
 fbfeed = if(fbfeed_<=0, fbfeed, Line.kr(fbfeed, fbfeed_, sus*fbfeed_d));
-fbfeed = if(fbfeedlfo<=0, fbfeed, fbfeed * SinOsc.kr(fbfeedlfo, 0, fbfeedlfomul, fbfeedlfoadd));
+fbfeed = if(fbfeedlfo<=0, fbfeed, fbfeed * SinOsc.kr(fbfeedlfo, fbfeedlfophase, fbfeedlfomul, fbfeedlfoadd));
 fbcutoff = if(fbcutoff_<=0, fbcutoff, Line.kr(fbcutoff, fbcutoff_, sus*fbcutoff_d));
-fbcutoff = if(fbcutofflfo<=0, fbcutoff, fbcutoff * SinOsc.kr(fbcutofflfo, 0, fbcutofflfomul, fbcutofflfoadd));
+fbcutoff = if(fbcutofflfo<=0, fbcutoff, fbcutoff * SinOsc.kr(fbcutofflfo, fbcutofflfophase, fbcutofflfomul, fbcutofflfoadd));
 fbspread = if(fbspread_<=0, fbspread, Line.kr(fbspread, fbspread_, sus*fbspread_d));
-fbspread = if(fbspreadlfo<=0, fbspread, fbspread * SinOsc.kr(fbspreadlfo, 0, fbspreadlfomul, fbspreadlfoadd));
+fbspread = if(fbspreadlfo<=0, fbspread, fbspread * SinOsc.kr(fbspreadlfo, fbspreadlfophase, fbspreadlfomul, fbspreadlfoadd));
 beat_dur = if(beat_dur_<=0, beat_dur, Line.kr(beat_dur, beat_dur_, sus*beat_dur_d));
-beat_dur = if(beat_durlfo<=0, beat_dur, beat_dur * SinOsc.kr(beat_durlfo, 0, beat_durlfomul, beat_durlfoadd));
+beat_dur = if(beat_durlfo<=0, beat_dur, beat_dur * SinOsc.kr(beat_durlfo, beat_durlfophase, beat_durlfomul, beat_durlfoadd));
 dry = osc;
 delTime = fbtime * beat_dur;
 fb = LocalIn.ar(2) * fbfeed;

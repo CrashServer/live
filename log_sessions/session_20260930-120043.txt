@@ -1,0 +1,154 @@
+ascii_gen("Crash")
+
+x1 >> play("x ")
+
+x1 >> play("x ", dur=4)
+
+x1 >> play("x ", dur=1/2)
+
+x1 >> play("x ", dur=1/2, hpf=200)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+w5 >> dbass(dur=4)
+
+w5 >> dbass(2, dur=4)
+
+w5 >> dbass((2, 4), dur=4)
+
+w5 >> dbass((2, 4), dur=4, hpf=200)
+
+x1 >> play("x ", dur=1/2, hpf=200)
+
+j4 >> sos(dur=4)
+
+w5 >> dbass((2, 4), dur=4, hpf=200)
+
+x1 >> play("x ", dur=1/2, hpf=200)
+
+j4 >> sos(dur=4)
+
+y0 >> blip(sur=4)
+
+y0 >> blip(sur=4, dur=1/4)
+
+y0 >> blip(sur=4, dur=1/4, hpf=4000)
+
+y0 >> blip(sur=4, dur=1/4, hpf=linvar([200, 1200]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+z2 >> play("-")
+
+z2 >> play("-", dur=4)
+
+z2 >> play("-", dur=4, hpf=200)
+
+z2 >> play("-", dur=4, hpf=2200)
+
+w5 >> dbass((2, 4), dur=4, hpf=200)
+
+w5 >> dbass((2, 4), dur=	4, hpf=200)
+
+w5 >> dbass((2, 4), dur=1, hpf=200)
+
+w5 >> dbass((2, 4), dur=1, hpf=200)
+
+w5 >> dbass((2, 4), dur=1/8, hpf=200)
+
+w5 >> dbass((3, 4), dur=1/8, hpf=200)
+
+w5 >> dbass((4, 4), dur=1/8, hpf=200)
+
+w5 >> dbass((5, 4), dur=1/8, hpf=200)
+
+w5 >> dbass((6, 4), dur=1/8, hpf=200)
+
+w5 >> dbass((7, 4), dur=1/8, hpf=200)
+
+w5 >> dbass((8, 4), dur=1/8, hpf=200)
+
+w5 >> dbass((9, 4), dur=1/8, hpf=200)
+
+w5 >> dbass((9, 16), dur=1/8, hpf=200)
+
+w5 >> dbass((9, 0), dur=1/8, hpf=200)
+
+w5 >> dbass((9, 0), dur=1/8, hpf=1200)
+
+w5 >> dbass((9, 0), dur=1/8, hpf=1200, lpf=400)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+w5 >> dbass((9, 0), dur=1/8, hpf=1200, lpf=400)
+
+w5 >> dbass((9, 0), dur=1/8, hpf=1200, lpf=400)
+
+w5 >> dbass((9, 0), dur=1/8, hpf=1200, lpf=400, amp=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+z4 >> dbass(dur=4)
+
+z4 >> dbass(dur=1/2)
+
+z4 >> dbass(3, dur=1/2)
+
+z4 >> dbass([2, 4],dur=1/2)
+
+l7 >> play("e")
+
+b3 >> play("e ")
+
+b3 >> play("e ", hpf=200)
+
+b3 >> play("e ", lpf=1200)
+
+b3 >> play("e ", hpf=400)
+
+b3 >> play("e ", hpf=400, mpf=200)
+
+b3 >> play("e ", hpf=400, mpf=200, amp=4)
+
+b3 >> play("e ", hpf=400, mpf=200, amp=0.1)
+
+b3 >> play("e ", hpf=400, mpf=200, amp=0.1, echo=0.5)
+
+b3 >> play("e ", hpf=400, mpf=200, amp=0.1, echo=0.5, dist2=0.5)
+
+b3 >> play("e ", hpf=400, mpf=200, amp=0.1, echo=0.5, dist2=4)
+
+b3 >> play("e ", hpf=400, mpf=200, amp=0.1, echo=0.5, dist2=[0.2, 0.5])
+
+b3 >> play("e ", hpf=400, mpf=200, amp=0.1, echo=0.5, dist2=[0.2, 0.5, 4])
+
+y0 >> blip(sur=4, dur=1/4, hpf=linvar([200, 1200]))
+
+y0.stop()
+
+t2 >> play("x ")
+
+t2.stop()
+
+t2 >> play("x ")
+
+z2.stop()
+
+z2 >> play("-", dur=4, hpf=2200)
+
+z2 >> play("-", dur=4, hpf=2200)
+
+z2.stop()
+

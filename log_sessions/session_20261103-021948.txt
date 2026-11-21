@@ -1,0 +1,120 @@
+Clock.bpm = 76
+
+one_fx_stop()
+
+one_fx("hall", "one_fx_hall", inb=2, outb=0, outamt=1, pre=60, size=2, decay=7, damp=3500, width=1, mix=1)
+
+snd_pad = dict(w1=0, oct1=0, w2=0, semi2=0, fine2=12, omix=0.5, noise=0, ftype=0, cutoff=1400, res=0.15, fenv=0.2, kbd=0.5, odrive=0.1, fatk=1.5, fdec=2, fsus=0.6, frel=2, aatk=1.2, adec=1, asus=0.9, arel=2.5, lw=1, lrate=0.25, lpitch=0.05, lcut=0.2, vel=0.6, level=-14, s1bus=2, s1amt=0.6)
+
+snd_sub = dict(w1=3, oct1=-1, w2=1, semi2=0, fine2=7, omix=0, noise=0, ftype=0, cutoff=300, res=0, fenv=0, kbd=0.5, odrive=0.2, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.08, lw=0, lrate=4, lpitch=0, lcut=0, vel=0.6, level=-10)
+
+p1 >> one_sub([(12, 19, 26, 28), (9, 16, 23, 24), (5, 12, 19, 21), (7, 14, 21, 23)], dur=8, sus=7.99, velo=0.78, oct=3, scale=Scale.chromatic, root=0, **snd_pad)  # Pad A
+
+s1 >> one_sub([12, 9, 5, 7], dur=8, sus=7.95, velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_sub)  # Sub A
+
+one_fx("hall", "one_fx_hall", inb=2, outb=0, outamt=1, pre=10, size=0.7, decay=1.8, damp=12000, width=1, mix=1)
+
+snd_reese = dict(w1=0, oct1=-1, w2=0, semi2=0, fine2=18, omix=0.5, noise=0, ftype=0, cutoff=900, res=0.2, fenv=0, kbd=0.5, odrive=0.3, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.2, lw=0, lrate=0.3, lpitch=0, lcut=0.15, vel=0.6, level=-6)
+
+snd_drums_snare = dict(sus=4, tune=2, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_kick = dict(sus=4, tune=0, dec=0.8, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_c_hat = dict(sus=4, tune=0, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_rim = dict(sus=4, tune=0, dec=1, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+r2 >> one_sub([4, 7, 4, 2, 0], dur=[5, 3, 5, 1, 2], sus=[4.99, 2.99, 4.99, 0.99, 1.99], velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_reese)  # Reese A
+
+d1 >> kit_kick(dur=[5/2, 3/4, 3/4], velo=[1, 0.75, 0.75], **snd_drums_kick)  # Drums kick
+
+d2 >> kit_snare(dur=2, delay=1, velo=1, **snd_drums_snare)  # Drums snare
+
+d4 >> kit_chat(dur=1/2, velo=0.75, **snd_drums_c_hat)  # Drums c.hat
+
+snd_reese = dict(w1=0, oct1=-1, w2=0, semi2=0, fine2=18, omix=0.5, noise=0, ftype=0, cutoff=900, res=0.2, fenv=0, kbd=0.5, odrive=0.3, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.2, lw=0, lrate=0.3, lpitch=0, lcut=0.15, vel=0.6, level=-6)
+
+Clock.clear()
+soff()
+
+Clock.bpm = 132
+
+one_fx_stop()
+
+snd_drums_kick = dict(sus=4, tune=0, dec=1, lvl=0, x=0.75, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_clap = dict(sus=4, tune=0, dec=1, lvl=-5, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_c_hat = dict(sus=4, tune=0, dec=1, lvl=-10, x=0.55, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_o_hat = dict(sus=4, tune=0, dec=0.9, lvl=-10, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+d1 >> berlin_kick(dur=1, velo=[1, 0.75, 0.75, 0.75], every=0.4545, **snd_drums_kick)  # Drums kick
+
+snd_drums_rim = dict(sus=4, tune=0, dec=1, lvl=-9, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+d2 >> berlin_clap(dur=2, delay=1, velo=0.75, **snd_drums_clap)  # Drums clap
+
+d3 >> berlin_chat(dur=1/4, velo=[1, 0.75, 0.75, 0.75], **snd_drums_c_hat)  # Drums c.hat
+
+d4 >> berlin_ohat(dur=1, delay=1/2, velo=0.75, **snd_drums_o_hat)  # Drums o.hat
+
+d5 >> berlin_rim(dur=[5/4, 11/4], delay=3/2, velo=0.75, **snd_drums_rim)  # Drums rim
+
+d5 >> berlin_rim(dur=[5/4, 11/4], delay=3/1, velo=0.75, **snd_drums_rim)  # Drums rim
+
+d5 >> berlin_rim(dur=[5/4, 11/4], delay=0, velo=0.75, **snd_drums_rim)  # Drums rim
+
+d4 >> berlin_ohat(dur=1, delay=1/2, velo=0.75, bitrot=0.5, rotbits=8, rotrate=0.5, rotjitter=0.1, **snd_drums_o_hat)  # Drums o.hat
+
+d4 >> berlin_ohat(dur=1, delay=1/2, velo=0.75, bitrot=0.4, rotbits=8, rotrate=0.5, rotjitter=0.1, **snd_drums_o_hat)  # Drums o.hat
+
+d4 >> berlin_ohat(dur=1, delay=1/2, velo=0.75, bitrot=0.3, rotbits=8, rotrate=0.5, rotjitter=0.1, **snd_drums_o_hat)  # Drums o.hat
+
+d4 >> berlin_ohat(dur=1, delay=1/2, velo=0.75, bitrot=0.2, rotbits=8, rotrate=0.5, rotjitter=0.1, **snd_drums_o_hat)  # Drums o.hat
+
+d4 >> berlin_ohat(dur=1, delay=1/2, velo=0.75, bitrot=0.1, rotbits=8, rotrate=0.5, rotjitter=0.1, **snd_drums_o_hat)  # Drums o.hat
+
+snd_drums_kick = dict(sus=4, tune=0, dec=1, lvl=0, x=0.75, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_clap = dict(sus=4, tune=0, dec=1, lvl=-5, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_c_hat = dict(sus=4, tune=1, dec=1, lvl=-10, x=0.55, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_c_hat = dict(sus=4, tune=2, dec=1, lvl=-10, x=0.55, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_o_hat = dict(sus=4, tune=1, dec=0.9, lvl=-10, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_o_hat = dict(sus=4, tune=2, dec=0.9, lvl=-10, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_rim = dict(sus=4, tune=1, dec=1, lvl=-9, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_rim = dict(sus=4, tune=2, dec=1, lvl=-9, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_rim = dict(sus=4, tune=2, dec=1, lvl=-9, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_rim = dict(sus=4, tune=2, dec=1, lvl=-9, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_rim = dict(sus=4, tune=3, dec=1, lvl=-9, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_rim = dict(sus=4, tune=4, dec=1, lvl=-9, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+snd_drums_rim = dict(sus=4, tune=5, dec=1, lvl=-9, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+d1 >> berlin_kick(dur=1, velo=[1, 0.75, 0.75, 0.75], every=0.4545, **snd_drums_kick)  # Drums kick
+
+d2 >> berlin_clap(dur=2, delay=1, velo=0.75, **snd_drums_clap)  # Drums clap
+
+d3 >> berlin_chat(dur=1/4, velo=[1, 0.75, 0.75, 0.75], **snd_drums_c_hat)  # Drums c.hat
+
+d4 >> berlin_ohat(dur=1, delay=1/2, velo=0.75, bitrot=0.1, rotbits=8, rotrate=0.5, rotjitter=0.1, **snd_drums_o_hat)  # Drums o.hat
+
+snd_drums_o_hat = dict(sus=1, tune=2, dec=0.9, lvl=-10, x=0.5, odrive=0.25, level=-4, oroom=0.4, rumble=0.7, rdec=2.6)
+
+d4 >> berlin_ohat(dur=1, delay=1/2, velo=0.75, bitrot=0.1, rotbits=8, rotrate=0.5, rotjitter=0.1, **snd_drums_o_hat)  # Drums o.hat
+
+d5 >> berlin_rim(dur=[5/4, 11/4], delay=0, velo=0.75, **snd_drums_rim)  # Drums rim
+
+Clock.clear()
+soff()
+

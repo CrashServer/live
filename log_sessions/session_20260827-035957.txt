@@ -1,0 +1,28 @@
+attack()
+
+k1 >> play("<X.><..o.><..U(.(...O))><[---]><(.:))><[++]>", lpf=3400, amp=2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("halal 174")
+
+Clock.bpm = 174
+Scale.default = "minor"
+Root.default = "C"
+
+v2 >> viola([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], beat_dur=1, rate=1, mverb=0.85, blur=0, lpf=PRand(1200, 3000), hpf=300, amp=linvar([0, 0.5], 24)).unison(2) + (-7, PStep(5, 7, 0))
+
+b9 >> bell2([0, 7, 12], dur=16, oct=5, amp=linvar([0, 0.55], 24), atk=4, sus=14, lpf=linvar([400, 2500], 64), room=0.7, mix=0.5, multicrush=1.5, mclowdrive=1.5, mcmiddrive=1.5, mchighdrive=2.5, mclofreq=1200, mchifreq=2800, tube=0.5, tubegain=1.0, tubewarm=0.8, hard=var([0, 1, 2, 4], 8), nharm=2, fmamt=[0, 1, 2, 4], fmratio=12, strike=1, shimmer=2.0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+l2 >> loop("electrodrum16", dur=16, sample=(6, 5), comp=1, multicrush=2, mclowdrive=1.5, mcmiddrive=2, mchighdrive=2, mclofreq=200, mchifreq=4000, csweep=0.1, cswfreq=20, cswdepth=0.3, cswrate=0.01, cswdecay=0.5, sbrk=PWhite(0.2, 0.8), bpf=fb(24, 200, 2400), bpr=0.3, amp=0.7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

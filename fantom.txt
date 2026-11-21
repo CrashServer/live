@@ -1,0 +1,75 @@
+# fantom — 120 bpm, C mixolydian
+# Bass-stack live progression: pure riff -> synth morph chain -> open up
+# -> violent complementary counterpoint -> peak -> resolve
+# Riff DNA: PStutter([1,4,5,6,5,6],[8,1,3,1,5,1])
+#   + 19-step dur [1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4]
+
+Clock.bpm = 120
+Scale.default = Scale.mixolydian
+Root.default = "C"
+
+
+# ============================================================
+# 1 — BASS STACK: dbass doubled + bbass feedback line
+# ============================================================
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+
+# ============================================================
+# 2 — MORPH CHAIN: dbass -> xbass -> gesa3 (run one at a time)
+# ============================================================
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+
+# ============================================================
+# 3 — OPEN UP: anchor bass breathes, drums + hats lock in
+# ============================================================
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1, shape=var([0,0.4],[12,4]), multicrush=sinvar([0,0.5],16), mclowdrive=1.5, mcmiddrive=2).unison(3)
+dk >> play("X.......X...X...", dur=0.25, amp=var([1,0.9,1,0.85],4), hpf=40)
+sn >> play("....o..o....o.oo", dur=0.25, amp=var([0.85,0.45,0.9,0.5],4), sample=2, hpf=200, cheapverb=0.15, cvdecay=0.5)
+ht >> play("i", dur=0.125, amp=PLife(0.5), hpf=8000, pan=sinvar([-0.25,0.25],8))
+
+
+# ============================================================
+# 4 — VIOLENT COUNTERPOINT: a_xbass up top, complementary notes
+# [8,7,5,4,2,4] descends as the riff ascends (contrary motion)
+# ============================================================
+
+lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+~lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+
+# ============================================================
+# 5 — PEAK: everything saturated, drums double, hats full chaos
+# ============================================================
+
+dk >> play("X...X...X.X.X.X.", dur=0.25, amp=var([1,0.9,1,0.85],4), hpf=40)
+sn >> play("....o..o....o.oo", dur=0.25, amp=var([0.9,0.5,0.95,0.55],4), sample=2, hpf=200, dynfuzz=0.2, cheapverb=0.15, cvdecay=0.5)
+ht >> play("i", dur=0.0625, amp=PLife(0.7), hpf=8000, pan=sinvar([-0.3,0.3],8))
+d3.shape = sinvar([0.3,0.7],8)
+d3.multicrush = sinvar([0.3,0.7],8)
+lp.fbfeed = sinvar([0.7,0.95],4)
+lp.pitchShift = var([0,1,0,-2,0,3,-4,0],4)
+
+
+# ============================================================
+# 6 — RESOLVE: kill the violence, leave the bass riff breathing
+# ============================================================
+
+# ~lp.stop()
+# lp.amp = linvar([0.55,0],16)
+# d2.stop()
+# d1.stop()
+# d3 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1, lpf=linvar([8000,400],24)).unison(3)
+# ht.amp = linvar([0.5,0],16)
+# sn.amp = linvar([0.6,0],16)
+# dk.amp = linvar([0.9,0],24)

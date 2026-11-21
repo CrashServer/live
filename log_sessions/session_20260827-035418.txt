@@ -1,0 +1,30 @@
+attack("A1 120")
+
+a1 >> play("c", dur=4, hpf=8000, leg=4, echotime=4, echo=0.5, echomix=0.25, pan=PWhite(-1, 1))
+
+a8 >> loop("futur8", dur=16, sample=4, amp=P[1, 1, 1, 0] / 1.5)
+
+a9 >> loop("berlin8", dur=8, sbrk=0.5, sample=2, echo=var([0, 0.5], [3, 1]), amp=P[0, 0, 0, 1] / 1.5)
+
+a4 >> loop("perc8", dur=8, sample=PRand(8), amp=1, hpf=4000, pan=PWhite(-1, 1)).lclip(0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack()
+
+attack()
+
+attack()
+
+attack()
+
+attack()
+
+attack()
+
+attack()
+
+attack()
+

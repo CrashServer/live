@@ -1,0 +1,106 @@
+v1 >> dbass()
+
+v1 >> dbass(0)
+
+v1 >> dbass(1)
+
+v1 >> dbass(2)
+
+v1 >> dbass(3)
+
+v1 >> dbass(4)
+
+v1 >> dbass(3)
+
+v1 >> dbass(2)
+
+v1 >> dbass(3)
+
+v1 >> dbass(4)
+
+v1 >> dbass(5)
+
+v1 >> dbass(6)
+
+v1 >> dbass(7)
+
+v1 >> dbass(6)
+
+v1 >> dbass(5)
+
+v1 >> dbass(linvar([1, 2, 3, 4, 3, 2, 3, 4, 5, 6, 7, 6, 5], [0.4, 0.4, 0.4, 0.6, 0.6, 2.01, 1.2, 0.8, 0.4, 0.4, 0.6, 0.4, 0.6]), dur=1/4)
+
+v1 >> dbass(linvar([1, 2, 3, 4, 3, 4, 4, 5, 6, 7, 6, 5], [0.4, 0.4, 0.4, 0.6, 0.6, 2.01, 1.2, 0.8, 0.4, 0.4, 0.6, 0.4, 0.6]), dur=1/4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+v1 >> dbass(5, mverb=0.5, dur=1/2)
+
+v1 >> dbass(5, mverb=0.6, dur=1/2)
+
+v1 >> dbass(5, mverb=0.7, dur=1/2)
+
+v1 >> dbass(5, mverb=0.8, dur=1/2)
+
+v1 >> dbass(5, mverb=0.7, dur=1/2)
+
+v1 >> dbass(5, mverb=0.6, dur=1/2)
+
+v1 >> dbass(5, mverb=0.5, dur=1/2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+i7 >> dbass()
+
+i7 >> dbass(0)
+
+i7 >> dbass(1)
+
+i7 >> dbass(2)
+
+i7 >> dbass(3)
+
+i7 >> dbass(2)
+
+i7 >> dbass(1)
+
+i7 >> dbass(linvar([1, 2, 3], 0.5))
+
+i7 >> dbass(linvar([1, 2, 3], 0.5), dur=1/4)
+
+i7 >> dbass(linvar([1, 2, 4], 0.5), dur=1/4)
+
+i7 >> dbass(linvar([1, 2, 5], 0.5), dur=1/4)
+
+i7 >> dbass(linvar([1, 2, 6], 0.5), dur=1/4)
+
+i7 >> dbass(linvar([1, 2, 5], 0.5), dur=1/4)
+
+i7 >> dbass(linvar([1, 2, 4], 0.5), dur=1/4)
+
+i7 >> dbass(linvar([1, 2, linvar([4, 6, 5], 0.5)], 0.5), dur=1/4)
+
+i7 >> dbass(linvar([1, 2, linvar([4, 6, 5], 0.5)], 0.5), dur=1/2)
+
+i7 >> dbass(linvar([1, 2, linvar([4, 6, 5], 0.5)], 0.5), dur=1/4)
+
+i7 >> dbass(linvar([1, 2, linvar([4, 6, 5], 0.5)], 0.5), dur=1/4, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+i7 >> dbass(linvar([1, 2, linvar([4, 6, 5], 0.5)], 0.5), dur=1/4, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+i7 >> dbass(linvar([1, 2, linvar([4, 6, 5], 0.5)], 0.5), dur=1/4, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=2000, mchifreq=3000)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+o3 >> a_xbass(rate=1, distortion=8, cutoff=800, resonance=0.7, attack=0.01, rhythmType=0, tempo=120, accent=0.5)
+

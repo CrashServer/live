@@ -1,0 +1,120 @@
+attack("trap")
+
+d0 >> play(".{...u}..u...", sample=5, hpf=var(PRand(4000)+10), rate=(.5,2)).sometimes("stutter")
+
+d1 >> play(".{...c}..c...", sample=5, mverb=0, flanger=0, chorus=var(PWhite(0, 1)), amp=P*[0, 1], rate=(P*[.5,.5,.5,-1],2))
+
+d2 >> play("v.....(...{v.})(...{.v}))", cut=2, sample=8, hpf=50, drive=(0,var(PWhite(0,0.2)))).sometimes("stutter")
+
+w3 >> play("z ", sample=3)
+
+w3.stop()
+
+w3 >> play("z ", sample=3, rate=-1)
+
+w3.stop()
+
+d4 >> play("(...(.p)).((p.).(p.).)((p.).(p.).)", dur=1/4, sample=4, crush=8,bits=8)
+
+d5 >> play("-{-[--]}-.-{[---][--]}(-.)(-[----])", sample=2, amp=PCoin(PWhite(0, 1),0,0.5), hpf=6000, pan=PWhite(-1,1)).sometimes("amen").sometimes("bubble").sometimes("stutter", PRand(16), rate=PWhite(-1,5))
+
+d6 >> play("---.-{[---][--]}(-.)(-[----])", hpf=5000, sample=10, amp=PCoin(PWhite(0, 1), 0, 0.5), pan=PWhite(-1,1)).sometimes("amen").sometimes("bubble")
+
+d6 >> play("---.-{[---][--]}(-.)(-[----])", hpf=5000, sample=10, amp=PCoin(PWhite(0, 1), 0, 0.5), pan=PWhite(-1,1)).sometimes("amen").sometimes("bubble")
+
+attack("for my people 88")
+
+p2 >> pianovel(var([(2,4,7),(2,4,7), (1,3,7),(1,3,6.5)], [4]),dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40, 60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+Clock.bpm = 88
+Scale.default="minor"
+Root.default="E"
+
+Clock.clear()
+soff()
+
+p2 >> pianovel(var([(2,4,7),(2,4,7), (1,3,7),(1,3,6.5)], [4]),dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40, 60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+p1 >> pianovel([4,5], dur=P[6,2], oct=5, velocity=PRand(60,80), hard=PWhite(0.6,0.8), velhard=PWhite(0.4, 0.6), lofi=0.7, lofiwow=0.5, lofiamp=0.5)
+
+p2 >> pianovel(var([(2,4,7),(2,4,7), (1,3,7),(1,3,6.5)], [4]),dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=3, velocity=[PRand(40, 60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+p2 >> pianovel(var([(2,4,7),(2,4,7), (1,3,7),(1,3,6.5)], [4]),dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40, 60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+q9 >> loop("hiphop16", dur=16, room=0.1, sample=0)
+
+q9 >> loop("hiphop16", dur=16, room=0.1, sample=0)
+
+e4 >> play("-", dur=1/2, amp=PBin(1664), sample=2, pan=PWhite(-1,1)).sometimes("stutter", PRand(2, 16)).human(40, 10)
+
+d4 >> play("<([vv].)...>")
+
+e4 >> play("...(...z)", sample=2)
+
+p2 >> pianovel(var([(2,4,7),(2,4,7), (1,3,7),(1,3,6.5)], [4]),dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40, 60), PRand(20,43)], lofi=linvar([0.6, 1, 0.4], 1), lofiwow=0.25, lofiamp=0.2)
+
+p1 >> pianovel([4,5], dur=P[6,2], oct=5, velocity=PRand(60,80), hard=PWhite(0.6,0.8), velhard=PWhite(0.4, 0.6), lofi=0.7, lofiwow=0.5, lofiamp=0.5, mverb=0.5)
+
+p2 >> pianovel(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5), (0,2,5), (0,2,5), (1,3,7), (2,4,7)], [4]), dur=1, amp=0.8, hard=PWhite(0.2, 0.7), velhard=0.6, oct=4, velocity=[PRand(40, 60), PRand(20, 43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5, lpf=sinvar([2000, 5000], 32))
+
+b1 >> dbass(var([2, 2, 1, 1, 0, 0, 1, 2], [4]), dur=4, oct=4, sus=3.5, amp=0.6, lpf=300, subenh=0.5, subhfreq=80)
+
+b1 >> dbass(var([2, 2, 1, 1, 0, 0, 1, 2], [4]), dur=4, oct=4, sus=3.5, amp=0.6, lpf=300, subenh=0.5, subhfreq=80).unison(3)
+
+d2 >> play("v.....(...{v.})(...{.v}))", cut=2, sample=8, hpf=50, drive=(0,var(PWhite(0,0.2)))).sometimes("stutter")
+
+d3 >> play("v.....(...{v[vv].}).", sample=8, delay=0.5, hpf=400, amp=var([0, 1], [28, 4]))
+
+d4 >> play("(...(.p)).((p.).(p.).)((p.).(p.).)", dur=1/4, sample=4, crush=8,bits=8)
+
+q9.lclip(2)
+
+q9.lclip(1)
+
+q9.lclip(0.5)
+
+j7 >> play("K ")
+
+j7 >> play("K ", amp=2)
+
+q9.lclip(1)
+
+q9 >> loop("hiphop16", dur=16, room=0.1, sample=0, tape=0.4, tapedrive=1, tapewarm=0.5)
+
+d4 >> play("(vV)..v...v...(vV)..", dur=0.5, amp=[0.9, 0.5, 0.7], sample=0)
+
+p2 >> dbass(dur=PDur(3, 8), resonbank=0.2, rbfreq=70, rbdecay=0.5, vocod=0.5, voccarr=0.5, vocbw=0.3, rbspread=1.0, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1).unison(3)
+
+e5 >> play("s", dur=1/4, amp=PWhite(0.05, 0.2), pan=PWhite(-1, 1), sample=1).human(40, 15)                                              
+
+e6 >> play("+", dur=1/8, amp=PWhite(0.02, 0.08), pan=PWhite(-1, 1), sample=PRand(0, 3), hpf=2000)
+
+p2 >> dbass(dynfuzz=0.3,dfgain=1, dfatk=0.015, dfdec=0.2, dftone=1.3, tanh=0.8).unison(3)
+
+p1 >> dbass()
+
+m6 >> play("X ")
+
+p3 >> a_stress(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5), (0,2,5), (0,2,5), (1,3,7), (2,4,7)], [4]), follow=2, dur=1/4, amp=0.8, hard=PWhite(0.2,  0.7), velhard=var([0.4, 0.6, 0.5, 0.7], 8), oct=8, velocity=[PRand(35, 65), PRand(15, 40)], lofi=0.6, lofiwow=fs(16, 0.15, 0.4),lofiamp=0.5, lpf=sinvar([1800, 6000], 32), tape=0.25, tapewarm=0.4, shape=0.1, vowel=0.2, vowelf=0, vowelq=1).unison(3)
+
+m6 >> play("X ").sometimes("stutter", 8)
+
+p2 >> dbass(p1.degree, dur=1/4)
+
+q9 >> loop("hiphop16", dur=16, room=0.1, sample=0)
+
+p3 >> play(":.o.",sample=8)
+
+Clock.clear()
+soff()
+
+d8 >> dbass(dur=4)
+
+d8 >> dbass(dur=4, amp=0.2)
+
+d8 >> dbass(dur=4, amp=0.2)
+
+u7 >> play("X ")
+
+u7.stop()
+

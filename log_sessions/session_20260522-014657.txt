@@ -1,0 +1,696 @@
+compo.cell_reload()
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=4, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+compo.cell_reload()
+
+n2 >> pluck([0, 5, 7, 3], dur=[2, 2, 2, 2], oct=6, amp=0.28, fbdelay=0.8, fbtime=0.75, fbfeed=0.65, fbcutoff=4000, fbspread=0.5, cheapverb=0.7, cvdecay=3.5)
+
+compo.cell_reload()
+
+n1 >> saw([0, 3, 5, 7, 5, 3, 0, -2, 0, 5, 7, 10, 7, 5, 3, 0], dur=1/8, oct=5, amp=0.5, eb=0.75, ebfeed=0.38, ebmix=0.38, ebsat=0.2, lpf=1200, sus=[0.15, 0.1, 0.2, 0.1, 0.15, 0.1, 0.3, 0.2, 0.15, 0.1, 0.2, 0.1, 0.15, 0.1, 0.25, 0.15], shape=0.15)
+
+n1.stop()
+
+compo.cell_reload()
+
+l1 >> loop("nshits16", dur=16, amp=0.7)
+
+n2.stop()
+
+compo.cell_reload()
+
+d3 >> a_daft([0, 1, 0.5, 4, 0, 0, 7, 4], dur=1/6, oct=6, dist2=0.4, crush=PRand(0, 8), amp=4.5)
+
+d3 >> a_daft([0, 1, 0.5, 4, 0, 0, 7, 4], dur=1/2, oct=6, dist2=0.4, crush=PRand(0, 8), amp=4.5)
+
+d3.stop()
+
+c4 >> dbass(0, dur=[1/3, 1/3, 1/6, 1/6], hpf=400, lpf=1700, hpr=0.2, dist2=1, sus=1/2, shape=0, oct=5, lofi=0, amp=0.7).unison(2)
+
+c4.stop()
+
+a4 >> play("q.q", amp=0.55, sample=7, dur=1/3, shape=2.2, lpf=linvar([800, 2000], 32), lpr=0.2)
+
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.7)
+
+compo.cell_reload()
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=4, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+v2 >> noloop("oldies8", dur=[24, 16, 12], sample=PRand(8), start=PRand([0, 0.25, 0.5]), trig=0, lofi=1, lofiwow=1, rate=PRand([0.5, 0.7, 0.85]), amp=0.4, mverb=0.92, room=0.95, mix=0.8, jpverb=0.75, jpsize=0.98, jpdamp=0.25, hpf=300, lpf=2800, pan=var([-0.4, 0.4], 32))
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=1.5, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.5, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+v2.stop()
+
+m2 >> pad2([(0, 2, 4), (-2, 1, 5), (0, 4, 7), (-4, -1, 3), (0, 3, 7)], dur=PWhite(16, 32), sus=PWhite(20, 40), oct=5, amp=0.4, cutoff=linvar([400, 2400], 96), cheapverb=0.9, cvdecay=4.5, jpverb=0.65, jpsize=0.97, jpdamp=0.3, hpf=220, stereowidth=0.88)
+
+m2.stop()
+
+r1 >> pianovel([4, 7, 11, 9, 4, 2, 0, 7], dur=P[8, 4, 4, 8, 4], echo=1, echotime=2, echomix=0.6, velocity=PRand(40, 60), oct=5, amp=0.45, mverb=0.92, jpverb=0.65, jpsize=0.97, jpdamp=0.3, hpf=300, lpf=3400)
+
+r1.stop()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+compo.cell_reload()
+
+b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)
+
+compo.cell_reload()
+
+x9 >> play("[Xx].X.", dur=1/4, amp=4, rate=1, sample=18, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+x9.stop()
+
+compo.cell_reload()
+
+x4 >> play("<X...><[----].[--]><..O.>",  dur=1/2, sample=4, hpf=150).every(16, "stutter", rate=2)
+
+compo.cell_reload()
+
+c1 >> hardstab([(0, 7, 12), (0, 6, 12), (-1, 5, 11), (0, 7, 12)], dur=PDur(7, 8), sus=[0.18, 0.35, 0.12, 0.4], oct=4, amp=0.85, cutoff=2400, res=0.5, comp=6, detune=0.025, fold=0.1, feedback=0.45, hpf=180, tubedrive=0.7, tubegain=2.2, tubewarm=0.6, tubebias=0.2, tape=0.55, tapedrive=1.7, fbdelay=0.16, fbtime=0.375, fbfeed=0.78, fbcutoff=3000, fbspread=0.02, beat_dur=1, wshape=5, wgain=1, wmix=0.4)
+
+c1.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+c1 >> hardstab([(0, 7, 12), (0, 6, 12), (-1, 5, 11), (0, 7, 12)], dur=PDur(7, 8), sus=[0.18, 0.35, 0.12, 0.4], oct=4, amp=0.85, cutoff=2400, res=0.5, comp=6, detune=0.025, fold=0.1, feedback=0.45, hpf=180, tubedrive=0.7, tubegain=2.2, tubewarm=0.6, tubebias=0.2, tape=0.55, tapedrive=1.7, fbdelay=0.16, fbtime=0.375, fbfeed=0.78, fbcutoff=3000, fbspread=0.02, beat_dur=1, wshape=5, wgain=1, wmix=0.4)
+
+c1.stop()
+
+c1 >> hardstab([(0, 7, 12), (0, 6, 12), (-1, 5, 11), (0, 7, 12)], dur=PDur(7, 8), sus=[0.18, 0.35, 0.12, 0.4], oct=4, amp=0.85, cutoff=2400, res=0.5, comp=6, detune=0.025, fold=0.1, feedback=0.45, hpf=180, tubedrive=0.7, tubegain=2.2, tubewarm=0.6, tubebias=0.2, tape=0.55, tapedrive=1.7, fbdelay=0.16, fbtime=0.375, fbfeed=0.78, fbcutoff=3000, fbspread=0.02, beat_dur=1, wshape=5, wgain=1, wmix=0.4)
+
+x4 >> play("<X...><[----].[--]><..O.>",  dur=1/2, sample=4, hpf=150).every(16, "stutter", rate=2)
+
+c1.stop()
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=4, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+a4 >> play("q.q", amp=0.55, sample=7, dur=1/3, shape=2.2, lpf=linvar([800, 2000], 32), lpr=0.2)
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.7)
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=4, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)
+x4 >> play("<X...><[----].[--]><..O.>",  dur=1/2, sample=4, hpf=150).every(16, "stutter", rate=2)
+
+compo.cell_reload()
+
+f4 >> karp(melody(),dur=PDur(11, 15), lpf=1200, amp=0.5, drive=linvar([0, 0], 32), mverb=0.0, delay=var([0, 0.5]), oct=PStep(5, 4, 5)).unison(2) + var([0, 2, 0, (0, 2)])
+
+f4 >> karp(melody(),dur=PDur(11, 15), lpf=1200, amp=2, drive=linvar([0, 0], 32), mverb=0.0, delay=var([0, 0.5]), oct=PStep(5, 4, 5)).unison(2) + var([0, 2, 0, (0, 2)])
+
+f4 >> karp(melody(),dur=PDur(11, 15), lpf=1200, amp=1, drive=linvar([0, 0], 32), mverb=0.0, delay=var([0, 0.5]), oct=PStep(5, 4, 5)).unison(2) + var([0, 2, 0, (0, 2)])
+
+f4.stop()
+
+compo.cell_reload()
+
+f3 >> varsaw(linvar([1, 2.4], [8, 0]), leg=PRand(2,8),oct=(linvar([6,6.2],[64,0]),linvar([5.2,5],[64,0])), dur=1/4, fx2=0.9, sus=linvar([1/8,1/4],[32,0]), lpf=PFr(1000,4000), vol=0.4).unison(4).human(80,0.5)
+
+v8 >> play("X ")
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=4, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+compo.cell_reload()
+
+l1 >> loop("flares16", dur=16, bank=2, amp=0.7)
+
+compo.cell_reload()
+
+s2 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 8)* 2, hpf=linvar([1200, 3200],32), hpr=0.1)
+
+compo.cell_reload()
+
+q8 >> play(".u..", rate=-1, lpf=PFr(1900,2000), drcomp=.5)
+
+compo.cell_reload()
+
+j4 >> loop("losthighway8", dur=16, sample=6, comp=0, shape=0, clouds=0.5, cpos=0.15, csize=0.25, cdens=0.14, ctex=0.9, cpitch=(-6, 6), cgain=2, cfb=0.2, cmode=0).lclip(4) # perfectDrugsTakem
+
+j4.stop()
+
+compo.cell_reload()
+
+u0 >> hoover(PStep(4,0,0), glide=1.2, glidedur=0.15, porta=0.1, portadur=1/4, dur=4, rel=0.06, decay=0.1, oct=(5,6,7), shape=0.0, tanh=0, valad=5500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5,.25)
+
+u0.stop()
+
+u0 >> hoover(PStep(4,0,0), glide=1.2, glidedur=0.15, porta=0.1, portadur=1/4, dur=4, rel=0.06, decay=0.1, oct=(5,6,7), shape=0.0, tanh=0, valad=5500, valadr=0.3, valadd=5, valadt=0, valadc=0.3).unison(5,.25)
+
+u0.stop()
+
+compo.cell_reload()
+
+a5 >> play("{{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{n[yyyN][xxxx]}} ", dur=PRand([1/2, 1/4]), sample=PRand(128), pan=PWhite(-1,1), lpf=PWhite(800, 8000), fx2=1, rate=PwRand([[-1, 0.2, 0.5, 1, 2],linvar([1, 4], 8),linvar([4, 1], 8),linvar([0.25, 4],8)],[16, 8, 4, 4]), echotime=PRand([0, 1, 2, 3, 4]),echo=PRand([0.25, 0, 0, 1, 2, 0.125, 0]), hpf=PWhite(40, 2000), amp=var([0, PWhite(0.0, 0.4)], [PRand([8, 16]), PRand([2, 4, 6])]))
+
+Server.addFx(lpf=400)
+
+Server.clearFx()
+
+compo.cell_reload()
+
+t1 >> mpluck([[0, 1, 2, 1, 0, 1 ,0, -1],-3], mverb=lininf(0,0.8,32), amp=0.70, oct=(PStep(8, 5, 6), 5, 7), pan=PWhite(-1,1), cut=1/2, dur=2, delay=0, hpf=400, fx2=1).unison(4)
+
+t1 >> mpluck([[0, 1, 2, 1, 0, 1 ,0, -1],-3], mverb=lininf(0,0.8,32), amp=1, oct=(PStep(8, 5, 6), 5, 7), pan=PWhite(-1,1), cut=1/2, dur=2, delay=0, hpf=400, fx2=1).unison(4)
+
+t1.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=4, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+a4 >> play("q.q", amp=0.55, sample=7, dur=1/3, shape=2.2, lpf=linvar([800, 2000], 32), lpr=0.2)
+
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.7)
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=4, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=4, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)
+
+m1.oct=5
+
+m1.oct=4
+x4 >> play("<X...><[----].[--]><..O.>",  dur=1/2, sample=4, hpf=150).every(16, "stutter", rate=2)
+
+f3 >> varsaw(linvar([1, 2.4], [8, 0]), leg=PRand(2,8),oct=(linvar([6,6.2],[64,0]),linvar([5.2,5],[64,0])), dur=1/4, fx2=0.9, sus=linvar([1/8,1/4],[32,0]), lpf=PFr(1000,4000), vol=0.4).unison(4).human(80,0.5)
+
+l1 >> loop("flares16", dur=16, bank=2, amp=0.7)
+
+l1 >> loop("flares16", dur=16, bank=0, amp=0.7)
+
+v8 >> play("X ")
+
+q8 >> play(".u..", rate=-1, lpf=PFr(1900,2000), drcomp=.5)
+
+s2 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 8)* 2, hpf=linvar([1200, 3200],32), hpr=0.1)
+
+f3 >> varsaw(linvar([1, 2.4], [8, 0]), leg=PRand(2,8),oct=(linvar([6,6.2],[64,0]),linvar([5.2,5],[64,0])), dur=1/8, fx2=0.9, sus=linvar([1/8,1/4],[32,0]), lpf=PFr(1000,4000), vol=0.4).unison(4).human(80,0.5)
+
+a5 >> play("{{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{n[yyyN][xxxx]}} ", dur=PRand([1/2, 1/4]), sample=PRand(128), pan=PWhite(-1,1), lpf=PWhite(800, 8000), fx2=1, rate=PwRand([[-1, 0.2, 0.5, 1, 2],linvar([1, 4], 8),linvar([4, 1], 8),linvar([0.25, 4],8)],[16, 8, 4, 4]), echotime=PRand([0, 1, 2, 3, 4]),echo=PRand([0.25, 0, 0, 1, 2, 0.125, 0]), hpf=PWhite(40, 2000), amp=var([0, PWhite(0.0, 0.4)], [PRand([8, 16]), PRand([2, 4, 6])]))
+
+m1.stop()
+
+a5 >> play("{{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{n[yyyN][xxxx]}} ", dur=PRand([1/2, 1/4]), sample=PRand(128), pan=PWhite(-1,1), lpf=PWhite(800, 8000), fx2=1, rate=PwRand([[-1, 0.2, 0.5, 1, 2],linvar([1, 4], 8),linvar([4, 1], 8),linvar([0.25, 4],8)],[16, 8, 4, 4]), echotime=PRand([0, 1, 2, 3, 4]),echo=PRand([0.25, 0, 0, 1, 2, 0.125, 0]), hpf=PWhite(40, 2000), amp=var([0, PWhite(0.0, 0.4)], [PRand([8, 16]), PRand([2, 4, 6])]))
+
+compo.cell_reload()
+
+p2 >> pianovel(amount=P[1, 2, 3, 4, 5, 6, 7, 8] * 100, amp=0.1, dur=0.1, detune=[0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 14, 15])
+
+p2 >> pianovel(amount=P[1, 2, 3, 4, 5, 6, 7, 8] * 100, amp=1, dur=0.1, detune=[0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 14, 15])
+
+p2.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=4, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+a4 >> play("q.q", amp=0.55, sample=7, dur=1/3, shape=2.2, lpf=linvar([800, 2000], 32), lpr=0.2)
+
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.7)
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=4, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)
+
+b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)
+m1.oct=5
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)
+m1.oct=5
+
+m1.oct=4
+x4 >> play("<X...><[----].[--]><..O.>",  dur=1/2, sample=4, hpf=150).every(16, "stutter", rate=2)
+
+f3 >> varsaw(linvar([1, 2.4], [8, 0]), leg=PRand(2,8),oct=(linvar([6,6.2],[64,0]),linvar([5.2,5],[64,0])), dur=1/4, fx2=0.9, sus=linvar([1/8,1/4],[32,0]), lpf=PFr(1000,4000), vol=0.4).unison(4).human(80,0.5)
+
+f3.stop()
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=5, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=6, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+p2.stop()
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=5, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=6, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=5, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=5, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=6, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=5, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=4, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=5, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=6, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=5, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+x4 >> play("<X...><[----].[--]><..O.>",  dur=1/2, sample=4, hpf=150).every(16, "stutter", rate=2)
+
+v8 >> play("X ")
+l1 >> loop("flares16", dur=16, bank=0, amp=0.7)
+q8 >> play(".u..", rate=-1, lpf=PFr(1900,2000), drcomp=.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=4, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+a4 >> play("q.q", amp=0.55, sample=7, dur=1/3, shape=2.2, lpf=linvar([800, 2000], 32), lpr=0.2)
+
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.7)
+
+a4 >> play("q.q", amp=PBin(16) * 0.55, sample=7, dur=1/3, shape=2.2, lpf=linvar([800, 2000], 32), lpr=0.2)
+
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.7)
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=4, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+l1.stop()
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)
+
+m1.oct=5
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.7)
+
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.5)
+
+m1.oct=4
+x4 >> play("<X...><[----].[--]><..O.>",  dur=1/2, sample=4, hpf=150).every(16, "stutter", rate=2)
+
+v2 >> play("i",dur=4)
+
+v2 >> play("i",dur=4, sample=4)
+
+v2 >> play("i",dur=4, sample=3)
+
+f3 >> varsaw(linvar([1, 2.4], [8, 0]), leg=PRand(2,8),oct=(linvar([6,6.2],[64,0]),linvar([5.2,5],[64,0])), dur=1/4, fx2=0.9, sus=linvar([1/8,1/4],[32,0]), lpf=PFr(1000,4000), vol=0.4).unison(4).human(80,0.5)
+
+f3.stop()
+
+v8 >> play("X ")
+l1 >> loop("flares16", dur=16, bank=0, amp=0.7)
+q8 >> play(".u..", rate=-1, lpf=PFr(1900,2000), drcomp=.5)
+
+s2 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 8)* 2, hpf=linvar([1200, 3200],32), hpr=0.1)
+
+f3 >> varsaw(linvar([1, 2.4], [8, 0]), leg=PRand(2,8),oct=(linvar([6,6.2],[64,0]),linvar([5.2,5],[64,0])), dur=1/8, fx2=0.9, sus=linvar([1/8,1/4],[32,0]), lpf=PFr(1000,4000), vol=0.4).unison(4).human(80,0.5)
+
+f3.stop()
+
+a5 >> play("{{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{nYNy}{n[yyyN][xxxx]}} ", dur=PRand([1/2, 1/4]), sample=PRand(128), pan=PWhite(-1,1), lpf=PWhite(800, 8000), fx2=1, rate=PwRand([[-1, 0.2, 0.5, 1, 2],linvar([1, 4], 8),linvar([4, 1], 8),linvar([0.25, 4],8)],[16, 8, 4, 4]), echotime=PRand([0, 1, 2, 3, 4]),echo=PRand([0.25, 0, 0, 1, 2, 0.125, 0]), hpf=PWhite(40, 2000), amp=var([0, PWhite(0.0, 0.4)], [PRand([8, 16]), PRand([2, 4, 6])]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+compo.cell_reload()
+
+h1 >> play("-(--)-(--)-([-=])-", dur=1/4, sample=PStep(8, 1, 3), rate=PWhite(0.95, 2.0), amp=PWhite(0.4, 0.65), pan=PWhite(-0.5, 0.5), tremolo=fb(16, 0.3, 0.8), tremolomix=0.7, formant=PRand(8)).degrade(0.15)
+
+compo.cell_reload()
+
+p1 >> cluster([0,2,4,7], dur=1/2, sus=0.4, amp=0.6)
+
+compo.cell_reload()
+
+d1.feed=var(P*[0,0.125],32)
+
+s2 >> plaitsX(oct=(5,6), dur=[1,1.5,1/2,1/2,1,1,1/2,1], dfm=PRand(100,1200), dfmr=PWhite(0.1,0.6), dfmd=PWhite(14,20), sus=2/3, slide=PStep([6,3,1],1,0), amplify=var([0.2,0],[PRand(4,12),PRand(16,48)]), mverb=0.7, slidedelay=PWhite(0.8,0.95)).unison(3).every(48, "dur.shuffle")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+compo.cell_reload()
+
+Clock.bpm = 166;
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+l5 >> lbass([0, 0.5, 3], dur=[1, 1/2, 1, 2], detune=0, oct=5, oscmix=0.3, delay=0.0, submix=0.8, cutoff=5600, rq=1.2, lpf=2200, lpr=0.1, leg=128, sus=1.0, a=0.01, tone=0.5).chroma()
+
+l7 >> alva(a=0.2, dist2=0.2, cut=1/2)
+
+l5.oct=(5, 6)
+
+l5.oct=5
+
+l4 >> play("x ", ban=1, dur=[1/2, 1, 1/4, 1/4])
+
+l4 >> play("x ", ban=1, dur=[1/2, 1, 1/4, 1/4])
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+l5.degree=0.5
+
+l4.dur=1/4
+
+l5 >> donk(echo=0.5)
+
+g1 >> a_gesa(dur=1/2)
+
+g1 >> a_gesa(dur=1/2)
+
+~g1 >> a_gesa(dur=1/2)
+
+g1 >> a_gesa(dur=1/2)
+
+c4 >> a_cy(amp=[0.5, 0, 0, 0.5], mverb=0.5, dur=[PDur(3, 8), 1/3], bright=0.5, echo=0.5)
+
+r5 >> a_bassry(dur=1/2, distortion=2, cutoff=3400, resonance=1, pattern=1, swing=0.5, mverb=0.1, r=0.5)
+
+l4.degree=lininf(0, 2, 127)
+
+l5 >> cbass(cutoff=200, rq=0.9, boost=1.5, detune=0.01, follow=2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 166;
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+l5 >> lbass([0, 0.5, 3], dur=[1, 1/2, 1, 2], detune=0, oct=5, oscmix=0.3, delay=0.0, submix=0.8, cutoff=5600, rq=1.2, lpf=2200, lpr=0.1, leg=128, sus=1.0, a=0.01, tone=0.5).chroma()
+
+l7 >> alva(a=0.2, dist2=0.2, cut=1/2)
+
+l5.oct=(5, 6)
+
+l5.oct=5
+
+x4 >> a_xbass(distortion=8, cutoff=3200, resonance=0.7, attack=0.01, 	rhythmType=1, tempo=120, accent=1, oct=6, amp=2)
+
+l4 >> play("x ", ban=1, dur=[1/2, 1, 1/4, 1/4])
+
+~l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+l4 >> play("x ", ban=1, dur=[1/2, 1, 1/4, 1/4])
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+l5.degree=0.5
+
+l4.dur=1/4
+
+c4 >> a_cy(amp=[0.5, 0, 0, 0.5], mverb=0.5, dur=[PDur(3, 8), 1/3], bright=0.5, echo=0.5)
+
+r5 >> a_bassry(dur=1/2, distortion=2, cutoff=3400, resonance=1, pattern=1, swing=0.5)
+
+r5.stop()
+
+h4.stop()
+
+s4 >> a_stress(([0, 1],32), dur=1/4, oct=3, filterFreq=linvar([100, 800], 128), resonance=linvar([0.1, 0.5], 32), distortion=4, attack=0.01, release=0.1)
+
+g3 >> a_gesa2(var([0, 8], [7, [1, 0.5]]),distortion=8, dur=1/4, cutoff=4000, complexity=0.8, probability=0.8, shuffle=1)
+
+b1 >> faim(var([0,0,-5,-3],[4,4,2,2]) + var([0,-7,0,5],[16,8,4,4]) + PStep(12,0,-2,3), dur=var([1/4,1/2,1/4],[4,2,2]), oct=5, cutoff=PFr(200,800) + PStep(4,0,600), fmod=PWhite(0,2), beef=2, lpf=600 + var([0,0,400],[14,2,2]),lpr=0.7, amp=1.2).gtr(2)
+
+b1.stop()
+
+p4 >> a_poly(dur=2,distortion=0, cutoff=4600, resonance=0.1, attack=0.01, poly1=1, poly2=2, polyMix=0.8, chaos=0.5)
+
+b5 >> faim(degree=[0,-2,0,3,0,5], dur=[0.25,0.25,0.5,0.25,0.25,0.5], amp=P[0.9,0.5,0.8,0.7,0.6,0.9], oct=3, distortion=15, cutoff=500, resonance=0.9, attack=0.001)
+
+b5.stop()
+
+b2 >> tb303(degree=[-2,-2,0,3], dur=0.25, amp=P[0.9,0.7,0.8,0.6], distortion=12, cutoff=600, resonance=0.8, attack=0.005, oct=5)
+
+b2.stop()
+
+b1 >> a_gesa(P[0,0,0,0,-5,-5,-3,-1,0,0,7,5,3,3,1,0], dur=P[1/2,1/4,1/4,1/2,1/4,1/4,1/2,1/2,1/4,1/4,1/2,1/4,1/4,1/4,1/2,1/2], oct=5, cutoff=PFr(1200,2800), dist2=4.0, fmod=PWhite(0,2), beef=2, lpf=4500, lpr=0.1, amp=1.2).gtr(2)
+
+b1.stop()
+
+p4 >> a_poly(dur=2,distortion=0, cutoff=4600, resonance=0.1, attack=0.01, poly1=1, poly2=2, polyMix=0.8, chaos=0.5)
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+l4 >> loop("rageambi16", dur=16, hpf=300)
+
+d6 >> play("X " , sample=5, amp=x0.sample==12)
+
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+
+l4.stop()
+
+d6 >> play("X " , sample=5, amp=x0.sample==12)
+
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+d6 >> play("X " , sample=5, amp=x0.sample==12)
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+
+h5 >> noloop("vocalcrash8", dur=8,pos=PWhite(0, 1), room=0.1, ratelfo=0, ratelfoadd=0.5, ratelfomul=0.5,  start=PWhite(0, 1), sample=PRand(8), trig=0, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.3)
+
+h5.stop()
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+l5 >> lbass([0, 0.5, 3], dur=[1, 1/2, 1, 2], detune=0, oct=5, oscmix=0.3, delay=0.0, submix=0.8, cutoff=5600, rq=1.2, lpf=2200, lpr=0.1, leg=128, sus=1.0, a=0.01, tone=0.5).chroma()
+
+l7 >> alva(a=0.2, dist2=0.2, cut=1/2)
+
+l5.oct=(5, 6)
+
+l5.oct=5
+
+x4 >> a_xbass(distortion=8, cutoff=3200, resonance=0.7, attack=0.01, 	rhythmType=1, tempo=120, accent=1, oct=6, amp=2)
+
+l4 >> play("x ", ban=1, dur=[1/2, 1, 1/4, 1/4])
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+c4 >> a_cy(amp=[0.5, 0, 0, 0.5], mverb=0.5, dur=[PDur(3, 8), 1/3], bright=0.5, echo=0.5)
+
+s4 >> a_stress(([0, 1],32), dur=1/4, oct=3, filterFreq=linvar([100, 800], 128), resonance=linvar([0.1, 0.5], 32), distortion=4, attack=0.01, release=0.1)
+
+p4 >> a_poly(dur=2,distortion=0, cutoff=4600, resonance=0.1, attack=0.01, poly1=1, poly2=2, polyMix=0.8, chaos=0.5)
+
+d6 >> play("X " , sample=5, amp=x0.sample==12)
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 166;
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+l5 >> lbass([0, 0.5, 3], dur=[1, 1/2, 1, 2], detune=0, oct=5, oscmix=0.3, delay=0.0, submix=0.8, cutoff=5600, rq=1.2, lpf=2200, lpr=0.1, leg=128, sus=1.0, a=0.01, tone=0.5).chroma()
+
+l7 >> alva(a=0.2, dist2=0.2, cut=1/2)
+
+l5.oct=(5, 6)
+
+l5.oct=5
+
+x4 >> a_xbass(distortion=8, cutoff=3200, resonance=0.7, attack=0.01, 	rhythmType=1, tempo=120, accent=1, oct=6, amp=2)
+
+l4 >> play("x ", ban=1, dur=[1/2, 1, 1/4, 1/4])
+
+l4 >> lbass(detune=0.3, oscmix=0.5, submix=0.5, cutoff=4500, rq=0.5, sus=1.5, a=lininf(0.4, 0.01, 32), tone=linvar([0.14, 0.7], 32))
+
+c4 >> a_cy(amp=[0.5, 0, 0, 0.5], mverb=0.5, dur=[PDur(3, 8), 1/3], bright=0.5, echo=0.5)
+
+s4 >> a_stress(([0, 1],32), dur=1/4, oct=3, filterFreq=linvar([100, 800], 128), resonance=linvar([0.1, 0.5], 32), distortion=4, attack=0.01, release=0.1)
+
+p4 >> a_poly(dur=2,distortion=0, cutoff=4600, resonance=0.1, attack=0.01, poly1=1, poly2=2, polyMix=0.8, chaos=0.5)
+
+d6 >> play("X " , sample=5, amp=x0.sample==12)
+d2 >> play("<---{-[--]=:#}><.:>", sample=7, high=2).sometimes("stutter", PRand(8), rate=PWhite(1,8))
+d3 >> play("..u(...{u[uu][.u]})", sample=(10,4))
+d5 >> loop("rock8", dur=8, sample=(3,7), drcomp=0.5)
+
+compo.cell_reload()
+
+b1 >> sawbass(P[0, 0, 12, 0, -2, 0, 7, 5], dur=PDur(var([5, 7], [16, 8]), 8), oct=4, sus=0.18, cutoff=expvar([400, 3200], [16, 4]), res=linvar([0.3, 0.85], 32), tubedrive=fb(24, 0.3, 1.4), tubewarm=0.5, hpf=80, csweep=0.25, cswfreq=PWhite(180, 600), cswdepth=0.4, cswrate=0.5, cswdecay=0.6, amp=0.85)
+
+b1.stop()
+
+l4.stop()
+
+x4.stop()
+
+l7.stop()
+
+l5.stop()
+
+l4.stop()
+
+p4.stop()
+
+c4.stop()
+
+s4.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m1 >> juno([(0,4,7), rest(0), (-2,3,7), rest(0)], dur=1/2, oct=4, amp=0.58, fbdelay=0.68, fbtime=0.75, fbfeed=0.38, fbcutoff=600, cutoff=500, shape=0.3, cheapverb=0.5, cvdecay=1.5)
+
+a4 >> play("q.q", amp=0.55, sample=7, dur=1/3, shape=2.2, lpf=linvar([800, 2000], 32), lpr=0.2)
+
+l1 >> loop("electrodrum16", dur=16, sample=(6, 6), comp=1, multicrush=3, mclowdrive=2, mcmiddrive=2.5, mchighdrive=3, mclofreq=200, mchifreq=4000, sbrk=PWhite(0.4, 1.0), bpf=fb(16, 200, 4000), bpr=0.5, spin=PRand([2, 4, 8, 16]), amp=0.7)
+
+g1 >> gong(PRand([0, 7, -5, 11]), dur=PWhite(12, 32), sus=PWhite(16, 36), oct=4, amp=0.25, cheapverb=0.9, cvdecay=7, jpverb=0.8, jpsize=0.99, jpdamp=0.2, hpf=300, pan=PRand([-0.6, 0.6]))
+
+b1 >> subbass([0, 0, -5, 0, -7, 0, -3, 0], dur=8, sus=8, oct=4, amp=0.6, lpf=220, lpr=0.2, hpf=35, tape=0.55, tapedrive=1.5, lofi=0.35, lofiwow=1, smooth=0.1)
+
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+b5 >> compkick([0,4,5,[2, PRand(-2,9)]], dur=1/2, cutoff=PFr(1900,4000), rq=0.6, rqd=0.5, detune=0.5, fdecay=2, rgate=0.5, oct=5, sub=0, amp=0.7, hpf=200, mverb=0.0, mverbmix=0.3).unison(3)
+m1.oct=5
+
+m1.oct=4
+x4 >> play("<X...><[----].[--]><..O.>",  dur=1/2, sample=4, hpf=150).every(16, "stutter", rate=2)
+
+f3 >> varsaw(linvar([1, 2.4], [8, 0]), leg=PRand(2,8),oct=(linvar([6,6.2],[64,0]),linvar([5.2,5],[64,0])), dur=1/4, fx2=0.9, sus=linvar([1/8,1/4],[32,0]), lpf=PFr(1000,4000), vol=0.4).unison(4).human(80,0.5)
+
+f3.stop()
+
+q8 >> play(".u..", rate=-1, lpf=PFr(1900,2000), drcomp=.5)
+
+s2 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 8)* 2, hpf=linvar([1200, 3200],32), hpr=0.1)
+
+s2.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+s1 >> sinepad([0,2,4], dur=8, oct=4, amp=0.25)
+
+compo.cell_reload()
+
+d2 >> play("--=-", sample=[2, 2, 1, 1], dur=1/4, delay=PWhite(-0.01, 0.01))
+
+compo.cell_reload()
+
+a4 >> abass([8, 4, 12], dur=8, lpf=3200, delay=0.5, sus=1/2, echo=0.25, echomix=2, mverb=0.3 + a4.degree==12, chop=0)
+
+a4.stop()
+
+compo.cell_reload()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+compo.cell_reload()
+
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, hpf=100).often("stutter", oct=P*[4, 4,5, 6])
+
+compo.cell_reload()
+
+r1 >> plaitsX([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=5,cutoff=linvar([800, 4000], 8), amp=1.2, leg=0)
+
+r1 >> plaitsX([12, 11, 10, 9, 7, 4, 3, 0], dur=1/4, oct=5,cutoff=linvar([800, 4000], 8), amp=1.2, leg=0)
+
+s1 >> play("..o...o.", dur=0.25, sample=5, amp=1.0, hpf=200, fbdelay=0.5)
+
+s1 >> play("..o..o.", dur=0.25, sample=5, amp=1.0, hpf=200, fbdelay=0.5)
+
+compo.cell_reload()
+
+compo.cell_reload()
+

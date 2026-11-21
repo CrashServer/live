@@ -1,0 +1,205 @@
+c4 >> dbass()
+
+c4 >> dbass(dur=1/4)
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+p1 >> plaitsX([0, 3, 7], dur=[4, 4, 8], oct=5, preset=4, amp=0.22, cheapverb=0.8, cvdecay=5.0, lpf=600)
+
+compo.cell_reload()
+
+b1 >> dbass([0, 0, -2, 0], dur=[2, 1, 1, 2], oct=5, amp=0.85, lpf=400, sus=1.8, room=0.2, mix=0.25)
+
+compo.cell_reload()
+
+k1 >> compkick(dur=1, oct=3, amp=0.85, drive=0.2, room=0.1, mix=0.15)
+
+c4.stop()
+
+compo.cell_reload()
+
+s1 >> play(". . . . o . . . ", dur=1/4, sample=0, amp=0.85, eb=0.75, ebfeed=0.35, ebmix=0.35)
+
+compo.cell_reload()
+
+t1 >> play("t . ", dur=1/4, amp=0.28, eb=0.25, ebfeed=0.2, ebmix=0.3)
+
+compo.cell_reload()
+
+l1 >> play("X . x . X x . X . x X . x . X . ", dur=1/2, sample=1, amp=0.75, shape=0.12)
+
+compo.cell_reload()
+
+n1 >> saw([0, 3, 5, 7, 5, 3, 0, -2, 0, 5, 7, 10, 7, 5, 3, 0], dur=1/8, oct=5, amp=0.5, eb=0.75, ebfeed=0.38, ebmix=0.38, ebsat=0.2, lpf=1200, sus=[0.15, 0.1, 0.2, 0.1, 0.15, 0.1, 0.3, 0.2, 0.15, 0.1, 0.2, 0.1, 0.15, 0.1, 0.25, 0.15], shape=0.15)
+
+n1.stop()
+
+compo.cell_reload()
+
+n2 >> pluck([0, 5, 7, 3], dur=[2, 2, 2, 2], oct=6, amp=0.28, fbdelay=0.8, fbtime=0.75, fbfeed=0.65, fbcutoff=4000, fbspread=0.5, cheapverb=0.7, cvdecay=3.5)
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+b3 >> bass([0, -2, 0, 3, 0, -2, 3, 5], dur=1/2, oct=5, amp=0.65, dubd=0.65, dublen=0.5, dubfeed=0.4, dubwidth=0.2, lpf=2500, sus=0.1)
+
+compo.cell_reload()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> plaitsX([0, -2, 3, 5], dur=[4, 4, 4, 4], oct=5, preset=11, amp=0.28, cheapverb=0.72, cvdecay=4.5, lpf=500)
+
+Clock.bpm = 138
+
+compo.cell_reload()
+
+b1 >> dbass([0, -2, 3, 0], dur=[2, 2, 2, 2], oct=5, amp=0.88, lpf=875.0, sus=2.0, room=0.2, mix=0.2)
+
+compo.cell_reload()
+
+k1 >> compkick(dur=1, oct=3, amp=0.92, drive=0.28, room=0.1, mix=0.1)
+
+compo.cell_reload()
+
+s1 >> play(". . . . o . . . ", dur=1/4, amp=0.7, room=0.18, mix=0.25)
+
+compo.cell_reload()
+
+h1 >> play("- . - . - - . - ", dur=1/4, amp=0.48, sample=2)
+
+compo.cell_reload()
+
+n1 >> svdk([0, 3, 0, 5, 7, 5, 0, -2], dur=1/4, oct=4, amp=0.52, dynfuzz=0.5, dfmix=0.38, dfamt=0.525, lpf=700, sus=0.12, shape=0.18)
+
+n1.stop()
+
+compo.cell_reload()
+
+m1 >> dbass([(0,2,4), rest(0), (3,5,7), rest(0), (2,4,6), rest(0)], dur=2, oct=4, amp=0.42, shape=0.14, cheapverb=0.5, cvdecay=2.0, lpf=1100)
+
+compo.cell_reload()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> plaitsX([0, 5, 3, 7], dur=[4, 4, 4, 4], oct=5, preset=4, amp=0.22, cheapverb=0.8, cvdecay=6.0, lpf=400)
+
+compo.cell_reload()
+
+b1 >> dbass([0, 3, 5, 3, 0, -1, 3, 5, 7, 5, 3, 5, 0, 5, 3, 0], dur=1/4, oct=5, amp=0.85, lpf=500, sus=0.55, tape=0.55, tapedrive=0.35)
+
+compo.cell_reload()
+
+k1 >> compkick(dur=1, oct=3, amp=0.88, drive=0.18, room=0.15, mix=0.2)
+
+compo.cell_reload()
+
+compo.cell_reload()
+
+n1 >> pluck([0, 3, 5, 7, 5, 3, 0, -1, 0, 5, 7, 9, 7, 5, 3, 0], dur=1/4, oct=5, amp=0.45, sus=0.7, tape=0.4, tapedrive=0.25, room=0.3, mix=0.35, lpf=1500)
+
+compo.cell_reload()
+
+m1 >> pluck([(0,2,4), (3,5,7), (2,4,6), (3,5,7)], dur=4, oct=4, amp=0.38, sus=3.5, tape=0.45, tapedrive=0.3, cheapverb=0.6, cvdecay=3.0, lpf=600)
+
+compo.cell_reload()
+
+p1 >> plaitsX([0, 5, 7, 3], dur=[4, 4, 4, 4], oct=5, preset=8, amp=0.25, cheapverb=0.65, cvdecay=3.0, lpf=600)
+
+compo.cell_reload()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 163
+Scale.default = "minor"
+Root.default = "F"
+
+secs = [64, 128, 96, 64]
+
+k1 >> compkick(dur=1, oct=3,               amp=var([0.92, 0.95, 0.98, 0.85], secs),
+               drive=var([0.2, 0.3, 0.42, 0.3], secs),
+               room=0.08, mix=0.1)
+
+l1 >> play("X . x . X x . X . x X . . x . . ", dur=1/2,
+           sample=var([0, 1, 2, 1], secs),
+           amp=var([0, 0.85, 0.9, 0.75], secs),
+           shape=var([0, 0.12, 0.2, 0.14], secs))
+
+l2 >> play("X x . X . x . X x . . X . x X . ", dur=1/2,
+           sample=var([1, 1, 2, 2], secs),
+           amp=var([0, 0, 0.72, 0], secs),
+           shape=var([0, 0, 0.18, 0], secs))
+
+b1 >> dbass([0, 0, 3, 0, -2, 0, 5, 3,
+             0, -2, 0, 5, 3, 0, 5, 7], dur=1/4, oct=4,
+            amp=var([0, 0.85, 0.9, 0.75], secs),
+            fbdelay=var([0, 0.62, 0.72, 0.65], secs),
+            fbtime=0.75,
+            fbfeed=var([0, 0.4, 0.55, 0.45], secs),
+            fbcutoff=var([1500, 2500, 4500, 3000], secs),
+            drive=var([0.2, 0.3, 0.42, 0.35], secs),
+            cutoff=var([800, 1500, 3500, 2000], secs),
+            sus=0.08, shape=0.15)
+
+b1 >> plaitsX([0, 0, 3, 0, -2, 0, 5, 3,
+             0, -2, 0, 5, 3, 0, 5, 7], dur=1/4, oct=4,
+            amp=var([0, 0.85, 0.9, 0.75], secs),
+            fbdelay=var([0, 0.62, 0.72, 0.65], secs),
+            fbtime=0.75,
+            fbfeed=var([0, 0.4, 0.55, 0.45], secs),
+            fbcutoff=var([1500, 2500, 4500, 3000], secs),
+            drive=var([0.2, 0.3, 0.42, 0.35], secs),
+            cutoff=var([800, 1500, 3500, 2000], secs),
+            sus=0.08, shape=0.15)
+
+b2 >> bass([0, 0, -2, 3], dur=[3, 1, 2, 2], oct=5,
+           amp=var([0.78, 0.8, 0.82, 0.65], secs),
+           lpf=linvar([500, 3000], 128),
+           sus=var([2.5, 2.8, 2.0, 1.5], secs),
+           shape=var([0.12, 0.15, 0.22, 0.18], secs))
+
+b1.stop()
+
+n1 >> saw([0, 7, 3, 10, 5, 12, 0, -2,
+           7, 3, 5, -3, 0, 8, 5, 3], dur=1/8, oct=5,
+          amp=var([0, 0.5, 0.58, 0.45], secs),
+          shape=var([0.12, 0.2, 0.32, 0.25], secs),
+          crush=var([0, 0, 0.45, 0.25], secs),
+          lpf=linvar([1200, 8000], 64),
+          sus=var([0.1, 0.08, 0.06, 0.1], secs))
+
+p1 >> plaitsX([0, 5, 7, 3], dur=[4, 4, 4, 4], oct=5, preset=8,
+              amp=var([0.3, 0.25, 0.18, 0.22], secs),
+              cheapverb=0.65, cvdecay=3.0,
+              lpf=linvar([600, 3000], 96))
+
+compo.cell_reload()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m2 >> darklead(melody()[:4],  drive=1.5, detune=0.006, width=0.5, sub=0.4)
+
+compo.cell_reload()
+
+m2 >> darklead(melody()[:4],  drive=1.5, detune=0.006, width=0.5, sub=0.4)
+
+d3 >> play("-", dur=PStutter([1/4,3/4,1/4,1,1/2,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1/4,1,3/4,1,1/4,3/4,1/4,3/4,1/4,3/4,1/4,1],[121,1,253,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,69,1,5,1,45,1,256,1]), delay=1/8)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

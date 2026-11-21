@@ -1,0 +1,55 @@
+Clock.bpm = 180
+
+one_dir = "/run/media/svdk/storage/DRIVE/500_Apps/SVDKAPP/soundDesign/renders/FOXDOT/octer storm 180/"
+
+fx_order("echo", "aux", "hall", "duck")
+
+fx_insert("clkf", "drive", "wavefolder", drive=0.6, tone=7000, mix=0.65, into="clkx")
+
+fx_insert("clkx", "crush", "8-bit console", rate=26040, mix=0.3, dry=0, toduck=1, tohall=0.12, toaux=0.05, toecho=0.12)
+
+fx_insert("nzx", "crush", "radio rot", mix=0.8, dry=0, toduck=1, tohall=0.15, toaux=0.1, toecho=0.25)
+
+fx_insert("shoutd", "drive", "broken speaker", drive=0.6, tone=3500, mix=0.6, dry=0, toduck=1, tohall=0.3, toaux=0.3, toecho=0.5)
+
+fx_echo(fb=0.55, tone=2800, out=0, into={"hall": 0.35, "duck": 0.7}, beat_dur=0.3333)
+
+fx_aux("hall", "cathedral", decay=9, damp=4000, width=0.5, out=0, into="duck")
+
+fx_duck(thr=-12, ratio=3, att=2, rel=117)
+
+k1 >> hardkick_rotterdam(PStutter([4, 9, 5, 7, 4, 9, 5, 7, 4], [1, 7, 8, 8, 12, 8, 8, 8, 12]), dur=PStutter([1, 1/2, 1/4], [30, 2, 4]), sus=PStutter([1, 1/2, 0.3375], [30, 2, 4]), gl=PStutter([0, 1/4], [32, 4]), velo=1, oct=2, scale=Scale.chromatic, root=0, level=-9, side=1, tohall=0.04, choke=1, ocut=1)  # Kick, as it is played
+
+c1 >> sub_stab(PStutter([21, 17, 29, 17, 29, 17, 31, 19, 16, 28, 16], [4, 4, 1, 8, 1, 8, 1, 5, 3, 1, 2]), dur=[2, 2, 2, 2, 1/2, 1/12, 1/12, 1/12, 1/12, 1/12, 7/12, 1, 1/12, 1/12, 1/12, 1/12, 1/12, 1/12, 1, 1/2, 1, 1/6, 1/6, 2/3, 1/2, 1, 1, 3/2, 3/2, 1, 3/2, 3/2, 1/2, 1, 1, 1/2, 1, 4], sus=PStutter([9/16, 3.6], [37, 1]), gl=PStutter([0.4, 0.058, 0.4, 0.058, 0.4, 0.117, 0.4, 0], [5, 6, 1, 6, 3, 3, 13, 1]), velo=PStutter([0.9, 1], [37, 1]), oct=4, scale=Scale.chromatic, root=0, w1=1, omix=0, cutoff=2400, res=0.5, fenv=0.7, odrive=0.6, fatk=0.001, fdec=0.06, aatk=0.001, adec=0.08, arel=0.05, level=-13, ins=insert("clkf"), choke=2, ocut=4)  # Click, as it is played
+
+t1 >> sub_bass(PStutter([9, 5, 7, 4], [4, 15, 6, 5]), dur=PStutter([2, 1/2, 1/12, 7/12, 1, 1/12, 5, 1, 3/2, 1, 3/2, 1/2, 1, 1/2, 5], [4, 1, 5, 1, 1, 6, 1, 1, 2, 1, 2, 1, 2, 1, 1]), sus=PStutter([3/2, 9/16, 1, 9/16, 3/2, 1, 9/16, 3/2, 9/16], [4, 15, 1, 1, 1, 1, 1, 1, 5]), gl=[0, 0, 0, 0, 1/2, 1/12, 0.017, 0.017, 0.017, 0.017, 0.017, 0.117, 1/12, 0.017, 0.017, 0.017, 0.017, 0.017, 0.017, 0, 0.2, 0, 0, 0.2, 0, 1/2, 0.1, 0.2, 0.2, 0.1], velo=0.9, oct=4, scale=Scale.chromatic, root=0, w1=0, omix=0.2, cutoff=380, res=0.25, odrive=0.35, level=-14, dry=0, toduck=1, tohall=0.02, choke=3, ocut=5)  # Tab bass, as it is played
+
+p7 >> foundry_tight_stab(dur=[6, 31/12, 1/4, 5/3, 1/4, 1/4, 5/2, 1, 5/2, 4, 7/2, 5/2, 5], velo=0.8, oroom=0.2, level=-10, ins=insert("nzx"), ocut=6, choke=84)  # Noise stab
+
+p8 >> foundry_tight_chat(dur=[9/2, 1/4, 3/4, 7/6, 1/4, 19/12, 4/3, 13/6, 4, 4, 5/2, 19/2], delay=4, velo=0.8, oroom=0.2, level=-10, ins=insert("nzx"), ocut=6, choke=85)  # Noise c.hat
+
+k1 >> hardkick_rotterdam(PStutter([9, 5, 7, 4, 9, 5, 7, 4], [7, 8, 8, 12, 8, 8, 8, 12]), dur=PStutter([1, 1/2, 1/4, 1, 1/2, 1/4, 5/4], [29, 2, 4, 30, 2, 3, 1]), delay=1, sus=PStutter([1, 1/2, 0.3375, 1, 1/2, 0.3375], [29, 2, 4, 30, 2, 4]), gl=PStutter([0, 1/4, 0, 1/4], [31, 4, 32, 4]), velo=1, oct=2, scale=Scale.chromatic, root=0, level=-7, side=1, tohall=0.04, choke=1, ocut=1)  # Kick, as it is played
+
+c1 >> sub_stab(PStutter([21, 17, 29, 17, 29, 17, 31, 19, 16, 28, 16, 21, 17, 29, 17, 29, 17, 31, 19, 16, 28, 16], [3, 4, 1, 8, 1, 8, 1, 5, 3, 1, 2, 4, 4, 1, 8, 1, 8, 1, 5, 3, 1, 2]), dur=[2, 2, 2, 1/2, 1/12, 1/12, 1/12, 1/12, 1/12, 7/12, 1, 1/12, 1/12, 1/12, 1/12, 1/12, 1/12, 1, 1/2, 1, 1/6, 1/6, 2/3, 1/2, 1, 1, 3/2, 3/2, 1, 3/2, 3/2, 1/2, 1, 1, 1/2, 1, 4, 2, 2, 2, 2, 1/2, 1/12, 1/12, 1/12, 1/12, 1/12, 7/12, 1, 1/12, 1/12, 1/12, 1/12, 1/12, 1/12, 1, 1/2, 1, 1/6, 1/6, 2/3, 1/2, 1, 1, 3/2, 3/2, 1, 3/2, 3/2, 1/2, 1, 1, 1/2, 1, 6], delay=2, sus=PStutter([9/16, 3.6, 9/16, 3.6], [36, 1, 37, 1]), gl=PStutter([0.4, 0.058, 0.4, 0.058, 0.4, 0.117, 0.4, 0, 0.4, 0.058, 0.4, 0.058, 0.4, 0.117, 0.4, 0], [4, 6, 1, 6, 3, 3, 13, 1, 5, 6, 1, 6, 3, 3, 13, 1]), velo=PStutter([0.9, 1, 0.9, 1], [36, 1, 37, 1]), oct=4, scale=Scale.chromatic, root=0, w1=1, omix=0, cutoff=2400, res=0.5, fenv=0.7, odrive=0.6, fatk=0.001, fdec=0.06, aatk=0.001, adec=0.08, arel=0.05, level=-11, ins=insert("clkf"), choke=2, ocut=4)  # Click, as it is played
+
+t1 >> sub_bass(PStutter([9, 5, 7, 4, 9, 5, 7, 4], [3, 15, 6, 5, 4, 15, 6, 5]), dur=[2, 2, 2, 1/2, 1/12, 1/12, 1/12, 1/12, 1/12, 7/12, 1, 1/12, 1/12, 1/12, 1/12, 1/12, 1/12, 5, 1, 3/2, 3/2, 1, 3/2, 3/2, 1/2, 1, 1, 1/2, 5, 2, 2, 2, 2, 1/2, 1/12, 1/12, 1/12, 1/12, 1/12, 7/12, 1, 1/12, 1/12, 1/12, 1/12, 1/12, 1/12, 5, 1, 3/2, 3/2, 1, 3/2, 3/2, 1/2, 1, 1, 1/2, 7], delay=2, sus=PStutter([3/2, 9/16, 1, 9/16, 3/2, 1, 9/16, 3/2, 9/16, 3/2, 9/16, 1, 9/16, 3/2, 1, 9/16, 3/2, 9/16], [3, 15, 1, 1, 1, 1, 1, 1, 5, 4, 15, 1, 1, 1, 1, 1, 1, 5]), gl=[0, 0, 0, 1/2, 1/12, 0.017, 0.017, 0.017, 0.017, 0.017, 0.117, 1/12, 0.017, 0.017, 0.017, 0.017, 0.017, 0.017, 0, 0.2, 0, 0, 0.2, 0, 1/2, 0.1, 0.2, 0.2, 0.1, 0, 0, 0, 0, 1/2, 1/12, 0.017, 0.017, 0.017, 0.017, 0.017, 0.117, 1/12, 0.017, 0.017, 0.017, 0.017, 0.017, 0.017, 0, 0.2, 0, 0, 0.2, 0, 1/2, 0.1, 0.2, 0.2, 0.1], velo=0.9, oct=4, scale=Scale.chromatic, root=0, w1=0, omix=0.2, cutoff=380, res=0.25, odrive=0.35, level=-12, dry=0, toduck=1, tohall=0.02, choke=3, ocut=5)  # Tab bass, as it is played
+
+d4 >> foundry_tight_clap(dur=PStutter([4, 1/4, 13/4], [7, 3, 1]), delay=3, velo=0.7, tohall=0.1, oroom=0.35, level=-6, ocut=2, choke=67)  # Kit clap
+
+d6 >> foundry_tight_chat(dur=PStutter([1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4], [15, 2, 6, 4, 3, 2, 2, 4, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 10, 1, 26]), velo=0.62, tohall=0.1, oroom=0.35, level=-6, ocut=2, choke=69)  # Kit c.hat
+
+p7 >> foundry_tight_stab(dur=[6, 31/12, 1/4, 5/3, 1/4, 1/4, 5/2, 1, 5/2, 4, 7/2, 5/2, 5], velo=0.8, oroom=0.2, level=-8, ins=insert("nzx"), ocut=6, choke=84)  # Noise stab
+
+p8 >> foundry_tight_chat(dur=[9/2, 1/4, 3/4, 7/6, 1/4, 19/12, 4/3, 13/6, 4, 4, 5/2, 19/2], delay=4, velo=0.8, oroom=0.2, level=-8, ins=insert("nzx"), ocut=6, choke=85)  # Noise c.hat
+
+r1 >> loop(one_dir + "r02_build.wav", one_pos(64, 16), dur=16, beat_stretch=0, amp=5.6301)  # the rendered part
+
+fx_bus(ovol=0, at="bar")
+
+one_cut(5)   # Tab bass: turned down
+
+k1 >> hardkick_rotterdam(PStutter([9, 5, 7, 4], [8, 10, 8, 14]), dur=PStutter([1, 1/2, 1/4, 1, 1/4], [15, 1, 2, 14, 8]), sus=PStutter([1, 1/2, 0.3375, 1, 0.3375], [15, 1, 2, 14, 8]), gl=PStutter([0, 1/4, 0, 1/4], [16, 2, 14, 8]), velo=1, oct=2, scale=Scale.chromatic, root=0, level=-4, side=1, tohall=0.04, choke=1, ocut=1, delay=0)  # Kick, as it is played
+
+Clock.clear()
+soff()
+

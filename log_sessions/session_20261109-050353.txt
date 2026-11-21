@@ -1,0 +1,194 @@
+Clock.bpm = 174
+Scale.default = "minor"
+Root.default = "C"
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1, sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+v2 >> choir([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], vowel=2, vowelf=0, vowelq=1, beat_dur=1, rate=1, mverb=0.85, blur=0, lpf=PRand(1200, 3000), hpf=300, amp=linvar([1, 0.5], 24)).unison(2) + (-7, PStep(5, 7, 0))
+
+b9 >> bell2([0, 7, 12], dur=16, oct=5, amp=linvar([0, 0.55], 24), atk=4, sus=14, lpf=linvar([400, 2500], 64), room=0.7, mix=0.5, multicrush=1.5, mclowdrive=1.5, mcmiddrive=1.5, mchighdrive=2.5, mclofreq=120, mchifreq=2800, tube=0.5, tubegain=1.0, tubewarm=0.8, hard=var([0, 1, 2, 4], 8), nharm=2, fmamt=[0, 1, 2, 4], fmratio=12, strike=1, shimmer=2.0)
+
+g3 >> play("xXx--[---]", sample=3,fbdelay=2, fbtime=1, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, leg=4, echo=4, echomix=0.5, echotime=4, beat_dur=1, amp=PWhite(0, 1), dur=1/4, mverb=0.5).after(4,"stop")
+
+solar(14, 2)
+
+g4 >> play("h", sample=4, rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]), shift=PRand([2, 4, 8]))
+
+e4 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=2, amp=0.7, cut=PWhite(0.5, 1), sample=PRand(20), dur=1/4, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+
+g4 >> play("h", sample=4, rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]), shift=PRand([2, 4, 8]))
+
+solar(14, 2)
+
+~g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+g5 >> play(PRand("fff".replace("f", "{o--}")), rate=1, sample=PRand(20), dur=1/4, amp=0.6, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+solar(14, 2)
+
+solar(12, 4)
+
+k6 >> play("c.{cC}.", sample=7, tanh=0.2, formant=1, dur=2, amp=2, leg=8, echo=0.456)
+
+s2 >> play("X ")
+
+rb >> play("<(X...)(v..(.//))(...(.v))(..v.)><(.r)...><-.><.+><...(.(.:))>",dur=1/2, amp=PBern(16), amplify=var([1,0],[14,1]), sample=6,pan=(0,-0.2,(-1,1),PWhite(-1,1),0.3)).human(20,5,0).often("stutter", PRand(16).rnd(2), delay=(0, 0.25), shape=0.2, mid=0, low=1.5, high=4).every(2, "shuffle")
+
+g4 >> play("-", sample=7,  rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]))
+g5 >> play(PRand("fff".replace("f", "{o--}")), rate=1, sample=PRand(20), dur=1/4, amp=0.6, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+h4.stop()
+rb >> play("<(X...)(v..(.//))(...(.v))(..v.)><(.r)...><-.><.+><...(.(.:))>",dur=1/2, amp=PBern(16), amplify=var([1,0],[14,1]), sample=6,pan=(0,-0.2,(-1,1),PWhite(-1,1),0.3)).human(20,5,0).often("stutter", PRand(16).rnd(2), delay=(0, 0.25), shape=0.2, mid=0, low=1.5, high=4).every(2, "shuffle")
+
+b2 >> cbass([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=4, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+g4 >> play("-", sample=7,  rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]))
+g5 >> play(PRand("fff".replace("f", "{o--}")), rate=1, sample=PRand(20), dur=1/4, amp=0.6, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+solar(12, 4)
+
+soloRnd()
+
+f6 >> play("o ", sample=4, dur=PDur([0, 0, 3], 8), rate=[2, 4], hpf=4000, shift=0.5)
+d1 >> play("W ", drive=0, dur=4, bpf=80, bpr=0.9, amp=PMorse("thisiskickistooloud"),vol=0.5, slide=[0, -4], rate=var([1, linvar([1, 0.2], 4)])).unison(4)
+b9.stop()
+l2 >> noloop("vocalcrash8", dur=[16, 8, 4, 2], lofi=1, start=0.5, rate=1, sample=PRand(8)).after(8, "stop")
+
+v2.stop()
+b9.stop()
+
+drop()
+
+g5 >> play("b ", resonbank=0.0, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+e1 >> play("Xx{x.x{--}.}")
+
+~g3 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), amp=0.4, cut=PWhite(0.1, 1), sample=PRand(20), dur=1/4, lpf=0, leg=20, krush=P*[0,2]).sometimes("stutter").slider()
+
+k6 >> play("c.{cC}.", sample=7, tanh=0.2, formant=1, dur=2, amp=2, leg=8, echo=0.456)
+k7 >> play("X ", amp=1)
+
+g4 >> loop("synth16", dur=16, delay=0, a=0, cut=0.125, leg=8)
+g5 >> loop("synth16", dur=16, a=0, pos=PWhite(0, 1), beat_stretch=0, rate=-1)
+
+b6 >> loop("ragegtr16", dur=16, delay=0, a=0, sample=PRand([0, 4]), cut=0.5, leg=8, hpf=200, mverb=0.5, amp=0.1).unison(3)
+
+k6 >> loop("nsbass8", fbdelay=0.5, fbtime=0.25, fbfeed=0.7, amp=PBin(16)*0.3, fbcutoff=3000, fbspread=0.02, beat_dur=1, pos=linvar([0, PWhite(0.0, 1.0)], [8, 4]), sample=1, dur=4, beat_stretch=0, lpf=3200, lpr=0.1).lclip(1).after(32, "stop")
+
+k7 >> loop("rock32", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=1/2, beat_stretch=0).lclip(2)
+
+k7 >> loop("rock32", dist2=0.4, pos=linvar([0, PWhite(0.0, 1.0)], [16, 4]), sample=PRand(32)[:16], dur=8, beat_stretch=0).lclip(2)
+
+Server.addFx(fbdelay=1, fshift=linvar([1, 12], 8))
+
+Server.addFx(lpf=3500, lpr=0.3)
+
+l_all.only()
+l5.stop()
+l6.mverb=0.5
+l6.amp=1.8
+l6.rgate=1
+g7 >> loop("synth16", dur=16, delay=0, a=0, cut=0.125, leg=8)
+g4 >> loop("circlebreak16", dur=16, amp=2)
+l4.sample=3
+l3.stop()
+
+unsolo()
+
+unsolo()
+
+Server.addFx(lpf=0)
+l4.delay=(0, 4)
+l4.shift=(0, 0.5)
+l3 >> loop("drumglitch32", pos=0, cut=0, dur=32, sample=12)
+
+g4 >> play("h", sample=4, rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]), shift=PRand([2, 4, 8]))
+g_all.rate=var([1, linvar([12, 1])], [28, 4])
+g_all.only()
+g5 >> play(PRand("fff".replace("f", "{o-}")), rate=1, sample=PRand(20), dur=1/4, amp=0.4, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+g_all.dubd=var([0.2, 0.1, 0.3, 0])
+g_all.shift=var([0,  linvar([PCoin(12, 1, 0.25), PCoin(1, 12, 0.25), 24])], [48, 4])
+g_all.dur=var([1/4, linvar([PCoin(1, 1/8, 0.25), PCoin(1/8, 1, 0.25)], 16)], [24, 4])
+
+g_all.hpf=1200
+g_all.hpf=0
+e1 >> play("%", dur=32, rate=-0.25)
+g_all.lpr=0.2
+
+g_all.rate=var([1, PWalk(8, 4, 1)], PRand(16))
+g_all.dur=var([1/4, 4], PRand(16))
+g_all.stop()
+
+v2 >> viola([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], beat_dur=1, rate=1, mverb=0.85, blur=0, lpf=PRand(1200, 3000), hpf=300, amp=linvar([0, 0.5], 24)).unison(2) + (-7, PStep(5, 7, 0))
+b9 >> bell2([0, 7, 12], dur=16, oct=5, amp=linvar([0, 0.55], 24), atk=4, sus=14, lpf=linvar([400, 2500], 64), room=0.7, mix=0.5, multicrush=1.5, mclowdrive=1.5, mcmiddrive=1.5, mchighdrive=2.5, mclofreq=1200, mchifreq=2800, tube=0.5, tubegain=1.0, tubewarm=0.8, hard=var([0, 1, 2, 4], 8), nharm=2, fmamt=[0, 1, 2, 4], fmratio=12, strike=1, shimmer=2.0)
+p1 >> ethpad([0, 1, 7], dur=8, oct=5, attack=4, release=4, amp=linvar([0, 0.32], 32), room=0.9, mix=0.6)
+
+b2 >> cbass([3, (3, [4, var([3, 14], [15, 1])])], slide=0.5,dur=[2, 1/2, 1, 1/2], oct=(7, var([5, 6], [24, 8]), linvar([5.99, 6.01])), scale=Scale.chromatic, drive=0, lpf=0, bpf=linvar([2000, 6200, 32], [16, 8, 32]), shape=0, high=4, mid=0.1, low=0.1, vol=0.8, chop=0).unison(8).spread(2)
+
+g4 >> play("-", sample=7,  rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]))
+g5 >> play(PRand("fff".replace("f", "{o--}")), rate=1, sample=PRand(20), dur=1/4, amp=0.6, lpf=0, leg=200, krush=P*[0,8]).sometimes("stutter").slider()
+
+fx_hall("cathedral")
+
+fx_hall("cathedral")
+
+Scale.default = Scale.major; Root.default = 2
+
+Clock.bpm = 72
+
+fx_hall("cathedral")
+
+fx_hall("cathedral")
+
+fx_hall("cathedral")
+
+Clock.clear()
+soff()
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+p1 >> sub_pad([(0, 2, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=8, oct=4, tohall=0.6)  # Pad A
+
+p1 >> sub_pad([(0, 0, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=8, oct=4, tohall=0.6)  # Pad A
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+s1 >> sub_bass([7, 5, 3, 4], dur=8, oct=2, level=-12)  # Sub A
+
+fx_stop()
+
+fx_hall("cathedral")
+
+fx_echo("")
+
+fx_echo("dub_throw")
+
+fx_stop()
+
+fx_echo("dub_throw")
+
+Clock.clear()
+soff()
+
+i3 >> dbass(dur=2)
+
+fx_stop()
+
+Clock.clear()
+soff()
+
+FoxDot.reload()
+
+i3 >> dbass(dur=2)
+
+Server.clearFx()
+
+Clock.clear()
+soff()
+
+i3 >> dbass(dur=2)
+
+Clock.clear()
+soff()
+
+Server.clearFx()
+

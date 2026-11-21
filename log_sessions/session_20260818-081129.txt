@@ -1,0 +1,561 @@
+g1 >> wavetable("WT_Metallic", rate=PTuple(PWhite(0.0,10.0), 3), degree=var(PTime(), [8]), dur=8, oct=(4,2,3), sample=var(PRand(999),64), detune=0.7, wtpos=0, cutoff=PRand(200,3000), rq=PTuple(PWhite(0.01,.1), 3), wtdist=.4, wshape=4, wgain=1, wmix=sinvar([0.4, 0.2], 2), amp=0.7, wide=1, mverb=PWhite(.2, 0.9), leg=PWhite(0,4), csweep=P*[0,0,0,0.5], cswfreq=PRand(20, 220), cswdepth=0.16, cswrate=PWhite(.015,.9), cswdecay=0.5, blur=P*[1,2,0.5]).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p9 >> wavetable("AKWF_distorted", dur=1/2, rate=0, degree=(0,var([-4, -5, -7], [16, 16]) ), sample=54, oct=[4], detune=0.5, wtpos=0, cutoff=800, rq=0.15, wtdist=0.2, blur=1, hpf=60, eb=0.25, ebfeed=0.7, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, wshape=4, wgain=1, wmix=0.5).unison(3)
+
+g1 >> wavetable("WT_Metallic", rate=PTuple(PWhite(0.0,10.0), 3), degree=var(PTime(), [8]), dur=8, oct=(4,2,3), sample=var(PRand(999),64), detune=0.7, wtpos=0, cutoff=PRand(200,3000), rq=PTuple(PWhite(0.01,.1), 3), wtdist=.4, wshape=4, wgain=1, wmix=sinvar([0.4, 0.2], 2), amp=0.7, wide=1, mverb=PWhite(.2, 0.9), leg=PWhite(0,4), csweep=P*[0,0,0,0.5], cswfreq=PRand(20, 220), cswdepth=0.16, cswrate=PWhite(.015,.9), cswdecay=0.5, blur=P*[1,2,0.5]).unison(3)
+
+g1.stop()
+
+p9.stop()
+
+#@ausklang(32)
+Root.default = "D"
+Scale.default = "minor"
+var.cho = var(PMarkov(I), 8)
+
+g1 >> wavetable("WT_Vocal", rate=0, degree=var.cho, dur=8, oct=(3, 4), sample=PRand(60), detune=0.3, wtpos=0, cutoff=linvar([2000, 600], 32), rq=0.3, wtdist=0.15, amp=linvar([0.4, 0.15], 32), mverb=0.5)
+
+bs.amp=linvar([0.3, 0], 32)
+tz.amp=linvar([0.3, 0], 32)
+p9.stop()
+
+g1.stop()
+bs.stop()
+tz.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 100
+Scale.default = "minor"
+Root.default = "D"
+var.cho = var(PMarkov(I), 8)
+
+g1 >> wavetable("WT_Analog", rate=0, degree=var.cho[0], dur=8, oct=(3, 4), sample=PRand(37), detune=0.3, wtpos=0, cutoff=linvar([600, 2000], 32), rq=0.3, wtdist=0.1, wide=1, amp=linvar([0, 0.35], 32), mverb=0.4)
+
+g1 >> wavetable("AKWF_hvoice", rate=PTuple(PWhite(0.0, 4.0), 3), degree=var.cho, dur=4, oct=(4, 5), sample=PRand(104), detune=0.5, wtpos=linvar([0, 200], 32), cutoff=PRand(800, 2400), rq=PTuple(PWhite(0.05, 0.2), 3), wtdist=0.3, wide=1, amp=linvar([0.3, 0.42], 32), eb=0.3, ebfeed=0.5, ebmix=0.35, ebmode=1, ebwow=0.15, ebflutter=0.2, ebsat=0.3).unison(3)
+
+#@granulat(32)
+p9 >> wavetable("AKWF_granular", rate=0.2, degree=PWalk(5, 2, 0), dur=1/2, oct=5, sample=PRand(44), detune=0.4, wtpos=sinvar([0, 255], 8), cutoff=1400, rq=0.2, wtdist=0.6, wide=1, blur=0.5, amp=linvar([0, 0.24], 32), csweep=0.2, cswfreq=300, cswdepth=0.3, cswrate=0.4, cswdecay=0.4)
+g1.amp=0.4
+
+#@wachstum(32)
+
+Root.default = "Bb"
+Scale.default = "major"
+var.cho = var(PMarkov(I), 8)
+g1 >> wavetable("WT_Growl", rate=sinvar([0, 0.5], 2), degree=var.cho[0] + 12, dur=6, oct=4, sample=PRand(21), detune=0.6, wtpos=linvar([0, 255], 32), cutoff=linvar([900, 3200], 32), rq=0.35, wtdist=0.4, wide=1, amp=linvar([0.42, 0.5], 32), mverb=0.5)
+p9 >> wavetable("AKWF_granular", rate=0.3, degree=var.cho[1], dur=1/2, oct=5, sample=PRand(44), detune=0.4, wtpos=sinvar([0, 255], 8), cutoff=1800, rq=0.25, wtdist=0.6, amp=0.28)
+
+#@wurzel(24)
+bs >> wavetable("AKWF_dbass", rate=0, degree=var.cho[0], dur=[3, 1/4, 1/4, 1/2, 1/4, 1/4], oct=2, sample=PRand(69), detune=0.15, wtpos=0, cutoff=800, rq=0.3, wtdist=0.1, amp=linvar([0, 0.5], 24))
+p9.amp=0.35
+
+g1 >> wavetable("AKWF_bitreduced", rate=PWhite(-0.5, 0.5), degree=var.cho[2], dur=1/4, oct=4, sample=PRand(68), detune=0.8, wtpos=PWhite(0, 255), cutoff=PRand(600, 3000), rq=0.5, wtdist=0.7, wshape=8, wgain=1.4, wmix=0.5, amp=0.4, eb=0.4, ebfeed=0.6, ebmix=0.4, ebmode=2, ebwow=0.3, ebflutter=0.4, ebsat=0.6)
+
+#@ausklang(32)
+Root.default = "D"
+Scale.default = "minor"
+var.cho = var(PMarkov(I), 8)
+g1 >> wavetable("WT_Vocal", rate=0, degree=var.cho, dur=8, oct=(3, 4), sample=PRand(60), detune=0.3, wtpos=0, cutoff=linvar([2000, 600], 32), rq=0.3, wtdist=0.15, amp=linvar([0.4, 0.15], 32), mverb=0.5)
+bs.amp=linvar([0.3, 0], 32)
+tz.amp=linvar([0.3, 0], 32)
+p9.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 128
+Scale.default = "minor"
+Root.default = "D"
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.4, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+chain = PChain2({0: [[-3, 1, -5], [0.5, 0.3, 0.2]], -3: [[1, -5, 0], [0.4, 0.4, 0.2]], 1: [[-5, 0, -3], [0.4, 0.3, 0.3]], -5: [[0, -3, 6], [0.5, 0.3, 0.2]], 6: [[1, -5], [0.6, 0.4]]})
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.4, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.5, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.6, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.7, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.8, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.7, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.6, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.5, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.4, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.3, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.2, wtdist=0.5, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.2, wtdist=1, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.2, 0.2), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.4, wtpos=PWhite(0, 255), cutoff=fb(16, 500, 2200), rq=0.2, wtdist=0, amp=linvar([0, 0.32], 32), bitrot=0.2, rotbits=10, rotrate=0.5, rotjitter=0.1)
+
+gb >> glitchbass(chain - 5, dur=1/4, cutoff=PTrir(300, 2400, 900), rq=0.5, mul=1, atk=0.001, decay=0.03, rel=0.05, amp=linvar([0, 0.45], 32)).unison(2)
+
+wt.amp=linvar([0.32, 0.42], 32)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+gc >> glitcher(0, len=12, sus=0.4, henA=linvar([2, 7], 24), rate=PWhite(0.5, 2.5), henB=0.5, t=1, amp=linvar([0, 0.35], 24))
+
+wt >> wavetable("AKWF_oscchip", rate=PWhite(-0.4, 0.4), degree=chain, dur=1/4, oct=5, sample=PRand(158), detune=0.5, wtpos=PWhite(0, 255), cutoff=fb(16, 800, 3200), rq=0.45, wtdist=0.6, amp=0.4, rgate=0.4, rgaterate=6, rgatewave=0, octclean=1, ocsub=0.4, ocup=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+wt >> wavetable("AKWF_vgame", rate=PWhite(-0.3, 0.3), degree=chain + 12, dur=[1/2, 1/4, 1/4], oct=5, sample=PRand(137), detune=0.6, wtpos=fb(16, 0, 255), cutoff=fb(16, 1200, 4200), rq=0.35, wtdist=0.55, amp=linvar([0, 0.5], 32), envdist=0.4, envdistgain=2.2, envdistsens=1, envdistattack=0.01, comp=0.4, comp_down=1, comp_up=0.8)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+bd >> a_bassry(distortion=3, cutoff=600, resonance=0.4, pattern=1, swing=0.06, dur=PDur(4, 4), amp=Pacc("fourfloor") * linvar([0, 0.7], 24)).human(15, 5, 0)
+
+ac >> tb303(0, dur=1/4, oct=3, wave=0, cutoff=linvar([300, 700], 24), rq=0.5, decay=0.6, top=1800, amp=linvar([0, 0.4], 24))
+
+hh >> click(0, dur=0.25, sus=0.04, oct=6, hpf=6000, triode=1, amp=Pacc("offbeat") * 0.28).human(10, 8, 10)
+
+ac >> tb303(0, dur=1/4, oct=3, wave=0, cutoff=linvar([300, 700], 24), rq=0.5, decay=0.6, top=1800, amp=linvar([0, 0.4], 24))
+
+bd >> a_bassry(distortion=3, cutoff=600, resonance=0.4, pattern=1, swing=0.06, dur=PDur(4, 4), amp=Pacc("fourfloor") * linvar([0, 0.7], 24)).human(15, 5, 0)
+
+hh >> click(0, dur=0.25, sus=0.04, oct=6, hpf=6000, triode=1, amp=Pacc("offbeat") * 0.28).human(10, 8, 10)
+
+tb >> tb304(ac.degree, dur=1/4, oct=4, atk=0.002, decay=0.15, rel=0.2, cutoff=fb(16, 200, 1200), rq=0.6, top=1400, fAtk=0.002, fDec=0.2, fSus=0.4, fRel=0.25, wave=0, amp=linvar([0, 0.32], 32))
+
+ac >> tb303([0, 3, 5, 7], dur=1/4, oct=3, wave=1, cutoff=fb(16, 600, 3000), rq=0.7, decay=0.9, top=2600, amp=0.55)
+
+tb >> tb304(ac.degree, dur=1/4, oct=4, atk=0.002, decay=0.12, rel=0.18, cutoff=fb(16, 400, 1800), rq=0.55, top=1600, fAtk=0.002, fDec=0.18, fSus=0.45, fRel=0.2, amp=0.34)
+
+chain = PChain2({0: [[3, 5, 7], [0.4, 0.4, 0.2]], 3: [[5, 0, 7], [0.4, 0.3, 0.3]], 5: [[7, 3, 0], [0.4, 0.3, 0.3]], 7: [[5, 0, 3], [0.4, 0.3, 0.3]]})
+
+td >> tb305(chain + 12, dur=[1/4, 1/4, 1/8, 1/8], oct=5, atk=0.001, decay=0.03, rel=0.15, cutoff=fb(16, 1000, 4200), rq=0.65, wave=0.6, beef=1.4, envmod=70, amp=linvar([0, 0.4], 32))
+
+ac >> tb303(0, dur=1/2, oct=3, wave=0, cutoff=1200, rq=fb(24, 0.9, 0.97), decay=1.2, top=2000, amp=0.4)
+
+td.amp=0.2
+
+ac >> tb303(0, dur=1, oct=2, wave=0, cutoff=linvar([1000, 300], 24), rq=0.5, decay=1, top=1800, amp=linvar([0.4, 0.15], 24))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 86
+Scale.default = "minor"
+Root.default = "E"
+
+am >> ambi(0, dur=8, sus=7, amp=linvar([0, 0.25], 24), djf=fb(24, 0, 0.4), djfq=0.3)
+
+cx >> combs(0, oct=4, dur=4, gate=1, vibrate=1, depth=0.5, regen=-5, sweep=ff(16, 3, 10), rq=0.8, nharm=2, amp=linvar([0, 0.15], 24))
+
+sig = PChain2({0: [[3, -2, 4], [0.5, 0.3, 0.2]], 3: [[-2, 0, 4], [0.4, 0.4, 0.2]], -2: [[0, 3, -5], [0.5, 0.3, 0.2]], 4: [[3, 0, -2], [0.4, 0.3, 0.3]], -5: [[-2, 0], [0.6, 0.4]]})
+
+ld >> a_vlead(sig, dur=[1, 1/2, 1/2, 1], oct=5, complexity=0.2, glitch=0.1, cutoff=linvar([1200, 3000], 24), amp=linvar([0, 0.2], 24))
+
+cl >> click(0, dur=1, oct=5, hpf=4000, triode=1, amp=linvar([0, 0.12], 24))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+br >> play(pbuild("halftime", evolve=8, fill=4), dur=0.25, amp=linvar([0, 0.4], 32), hpf=100).human(15, 6, 0)
+
+ld >> a_vlead(genArp(4, 8), dur=[1/2, 1/2, 1/4, 1/4], oct=5, complexity=0.35, glitch=0.2, cutoff=fb(16, 1500, 3500), amp=0.3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 123
+Scale.default = "minor"
+Root.default = "C#"
+cho = var(PChords(), 4)
+
+jn >> juno(cho, dur=4, sus=3.5, junoshape=var([0, 1], [16, 16]), cutoff=linvar([800, 3200], 24), rq=0.4, junochorus=linvar([0.002, 0.008], 24), amp=linvar([0, 0.4], 24))
+
+s1 >> a_wave(cho[1] + 12, dur=(1/4, 1/1), dist2=0.5, oct=(2, 2, 3), unison=0, wide=1.1, cutoff=linvar([1200, 4000], 24), rq=0.15, detune=0.1, lpf=linvar([2000, 7000], 24), fshift=linvar([0, 800], 24), fmix=[0.0, 0.15, 0.3], amp=linvar([0, 0.3], 24)).unison(4).chroma()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+jn >> juno(cho, dur=4, sus=3.5, junoshape=linvar([0.5, 1], 32), cutoff=linvar([1200, 4200], 32), rq=0.35, junochorus=0.01, amp=linvar([0.4, 0.55], 32))
+
+s1 >> a_wave(cho[1] + 12, dur=(1/4, 1/1), dist2=0.6, oct=(3, 3, 4), unison=0, wide=1.3, cutoff=linvar([2000, 6000], 32), rq=0.1, lpf=linvar([3500, 9000], 32), fshift=linvar([200, 1400], 32), fmix=[0.1, 0.25, 0.4], amp=linvar([0.3, 0.45], 32)).unison(4).chroma()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+jn >> juno(cho, dur=4, sus=3.5, junoshape=linvar([1, 0.3], 24), cutoff=linvar([4200, 1400], 24), rq=0.4, amp=linvar([0.5, 0.3], 24))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+Scale.default = "minor"
+Root.default = "D"
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), djfq=0.3, amp=linvar([0, 0.3], 32))
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([0, 0.35], 32), comp=0.4, comp_down=1, comp_up=0.8)
+
+rb >> reese(0, dur=[4, 4], oct=4, detune=0.015, cutoff=fb(16, 200, 500), rq=0.6, amp=linvar([0.3, 0.4], 32), tube=0.3, tubegain=1.2, tubewarm=0.4, pumper=0.4, pumprate=4)
+
+cx >> combs(0, oct=4, dur=4, gate=1, vibrate=1.5, depth=0.6, regen=-4, sweep=ff(16, 4, 16), rq=0.85, nharm=3, amp=linvar([0, 0.22], 32), spring=1, sprdecay=2, sprdamp=0.6, sprtens=0.4)
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.15, cutoff=600, rq=0.45, junochorus=0.008, djf=fb(24, 0.2, 0.7), djfq=0.35, amp=linvar([0.3, 0.4], 40), room=0.5, mix=0.4)
+
+kl >> klank(0, oct=3, dur=8, rate=fl(16, 0.3, 6), amp=linvar([0, 0.18], 32))
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.2, cutoff=fb(16, 500, 1400), rq=0.4, junochorus=0.009, djf=0.6, djfq=0.3, amp=0.4)
+
+rb >> reese(0, dur=[4, 4], oct=2, detune=0.02, cutoff=fb(16, 300, 700), rq=0.55, amp=0.5, tube=0.35, tubegain=1.3, tubewarm=0.45, pumper=0.5, pumprate=4)
+
+jn.vocod=0.15
+jn.voccarr=0.5
+jn.vocbw=0.4
+bd.amp=0.45
+cx.amp=0.36
+kl.amp=0.28
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=fb(16, 700, 250), rq=0.5, djf=fb(16, 0.6, 0.1), djfq=0.3, amp=linvar([0.4, 0.2], 32))
+
+attack("kit 132")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 132;
+
+kit = pkit("techno", seed=12)
+
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=10300, fbspread=0.4, beat_dur=1, spring=1, sprdecay=1.1, sprdamp=0.6, sprtens=0, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), djfq=0.3, amp=linvar([0, 0.3], 32))
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), djfq=0.3, amp=linvar([0, 1], 32))
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), djfq=0.3, amp=linvar([0.5, 1], 32))
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([0, 0.35], 32), comp=0.4, comp_down=1, comp_up=0.8)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([0, 1], 32), comp=0.4, comp_down=1, comp_up=0.8)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=0.4, comp_down=1, comp_up=0.8)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=0.1, comp_down=1, comp_up=0.8)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.8)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.1)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.2)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.3)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.4)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.6)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.7)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.8)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=1, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=0, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=2, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+rb >> reese(0, dur=[4, 4], oct=4, detune=0.015, cutoff=fb(16, 200, 500), rq=0.6, amp=linvar([0.3, 0.4], 32), tube=0.3, tubegain=1.2, tubewarm=0.4, pumper=0.4, pumprate=4)
+
+rb >> reese(0, dur=[4, 4], oct=5, detune=0.015, cutoff=fb(16, 200, 500), rq=0.6, amp=linvar([0.3, 0.4], 32), tube=0.3, tubegain=1.2, tubewarm=0.4, pumper=0.4, pumprate=4)
+
+rb >> reese(0, dur=[4, 4], oct=6, detune=0.015, cutoff=fb(16, 200, 500), rq=0.6, amp=linvar([0.3, 0.4], 32), tube=0.3, tubegain=1.2, tubewarm=0.4, pumper=0.4, pumprate=4)
+
+cx >> combs(0, oct=4, dur=4, gate=1, vibrate=1.5, depth=0.6, regen=-4, sweep=ff(16, 4, 16), rq=0.85, nharm=3, amp=linvar([0, 0.22], 32), spring=1, sprdecay=2, sprdamp=0.6, sprtens=0.4)
+
+cx.stop()
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.15, cutoff=600, rq=0.45, junochorus=0.008, djf=fb(24, 0.2, 0.7), djfq=0.35, amp=linvar([0.3, 0.4], 40), room=0.5, mix=0.4)
+
+jn.stop()
+
+rb.stop()
+
+rb >> reese(0, dur=[4, 4], oct=6, detune=0.015, cutoff=fb(16, 200, 500), rq=0.6, amp=linvar([0.3, 0.4], 32), tube=0.3, tubegain=1.2, tubewarm=0.4, pumper=0.4, pumprate=4)
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.2, cutoff=fb(16, 500, 1400), rq=0.4, junochorus=0.009, djf=0.6, djfq=0.3, amp=0.4)
+
+rb >> reese(0, dur=[4, 4], oct=2, detune=0.02, cutoff=fb(16, 300, 700), rq=0.55, amp=0.5, tube=0.35, tubegain=1.3, tubewarm=0.45, pumper=0.5, pumprate=4)
+
+jn.vocod=0.15
+jn.voccarr=0.5
+jn.vocbw=0.4
+bd.amp=0.45
+cx.amp=0.36
+kl.amp=0.28
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=fb(16, 700, 250), rq=0.5, djf=fb(16, 0.6, 0.1), djfq=0.3, amp=linvar([0.4, 0.2], 32))
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=fb(16, 700, 250), rq=0.5, djf=fb(16, 0.6, 0.1), djfq=0.3, amp=linvar([0.4, 0.2], 32))
+
+kl.stop()
+cx.amp=linvar([0.36, 0.1], 32)
+rb.amp=linvar([0.5, 0.15], 32)
+bd.amp=linvar([0.45, 0.1], 32)
+cl.amp=0.08
+
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=85, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=300, fbspread=0.4, beat_dur=1, spring=4, sprdecay=2, sprdamp=0.6, sprtens=0.5, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=85, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=300, fbspread=0.4, beat_dur=1, spring=4, sprdecay=2, sprdamp=0.6, sprtens=0.5, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+kit = pkit("techno", seed=19)
+
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=850, fbdelay=0.2, fbtime=0.25, fbfeed=0.7, fbcutoff=1300, fbspread=0.2, beat_dur=1, spring=4, sprdecay=1.5, sprdamp=0.1, sprtens=1, gdel=0.1, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), djfq=0.3, amp=linvar([0.5, 1], 32))
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=1200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), djfq=0.3, amp=linvar([0.5, 1], 32))
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=1, cutoff=1200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), djfq=0.3, amp=linvar([0.5, 1], 32))
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=1, cutoff=1200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), mverb=0.5, djfq=0.3, amp=linvar([0.5, 1], 32))
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1400, resonance=0.1, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1400, resonance=0.1, pattern=2, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1400, resonance=0.1, pattern=4, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1400, resonance=0.1, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1400, resonance=1, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1400, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=14000, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=140, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1040, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1040, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.8)
+
+bd >> a_bassry(distortion=2, cutoff=1040, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.7)
+
+bd >> a_bassry(distortion=2, cutoff=1040, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.7, leg=4)
+
+bd >> a_bassry(distortion=2, cutoff=1040, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.7, leg=4).unison(3)
+
+kit = pkit("techno", seed=19)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=850, fbdelay=0.2, fbtime=0.25, fbfeed=0.7, fbcutoff=1300, fbspread=0.2, beat_dur=1, spring=4, sprdecay=1.5, sprdamp=0.1, sprtens=1, gdel=0.1, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+kit = pkit("techno", seed=14)
+d1 >> play(kit.kick, dur=0.25, low=0, mid=linvar([4, 8], 32), lowfreq=85, leg=0, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=1300, fbspread=0.4, beat_dur=1, spring=0.7, sprdecay=1.8, sprdamp=0.6, sprtens=1, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=1, echo=0.5,shape=4, gdelfb=.1).unison(3)
+
+bd >> a_bassry(distortion=4, cutoff=400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=0, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.8)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.7)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.6)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.4)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=1, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=0, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=8, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=7, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=6, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=5, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=4, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+kit = pkit("techno", seed=4)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.14, rate=1, rgate=0.5, rgaterate=4, rgatewave=0, fbtime=0.119, fbfeed=1.0, fbcutoff=4100, fbspread=4, beat_dur=1, spring=4.7, sprdecay=1.8, sprdamp=0.3, sprtens=1.0, gdel=0.1, gdeltime=0.10,gdelsize=0.10, gdelsprd=0.2, echo=0.0, gdelfb=1.2).unison(3)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+kit = pkit("techno", seed=19)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.025, fbtime=0.79, fbfeed=1.0, fbcutoff=4100, fbspread=0.4, beat_dur=1, spring=0.7, sprdecay=1.8, sprdamp=0.3, sprtens=1.4, gdel=0.1, gdeltime=0.10,gdelsize=0.10, gdelsprd=0.1, echo=0.0, gdelfb=0.6).unison(3)
+d1 >> play(kit.kick, dur=0.25, low=0, mid=0, high=1, mverb=0.05, lowfreq=85, leg=0, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=1300, fbspread=0.4, beat_dur=1, spring=0.7, sprdecay=1.8, sprdamp=0.6, sprtens=1, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=1, echo=1,shape=4, gdelfb=.1).unison(3)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=40, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1, mcmiddrive=20, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=0, comp_down=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.025, fbtime=0.79, fbfeed=1.0, fbcutoff=4100, fbspread=0.4, beat_dur=1, spring=0.7, sprdecay=1.8, sprdamp=0.3, sprtens=1.4, gdel=0.1, gdeltime=0.10,gdelsize=0.10, gdelsprd=0.1, echo=0.0, gdelfb=0.6).unison(3)
+
+d1.rate=var([8, 0.5, 0], [8, 2, 6])
+kit = pkit("techno", seed=19)
+d2 >> play(kit.hat, dur=0.25, sblur=0.1, sbluramt=2, hpf=8000, shimmer=0.0, shimsize=0.8, shimpitch=0.5, shimmix=0.4, gdel=0.2,gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.5).unison(2)
+
+d2.dur=1/2
+
+drop()
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=85, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=300, fbspread=0.4, beat_dur=1, spring=4, sprdecay=1.8, sprdamp=0.6, sprtens=1, gdel=0, gdeltime=0.01,gdelsize=0.01, dist2=0.0, gdelsprd=0.1, gdelfb=.1).unison(3)
+d1.rate=1
+
+d2.stop()
+d1.shape=0
+
+kit = pkit("techno", seed=21)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=120, fbdelay=0.05, fbtime=0.3, fbfeed=0.4, fbcutoff=2000, fbspread=0.1, beat_dur=1, spring=0.6, sprdecay=1.2, sprdamp=0.7, sprtens=0.3, gdel=0, gdeltime=0.02, gdelsize=0.02, gdelsprd=0.2, gdelfb=0.1).unison(3)
+
+kit = pkit("techno", seed=33)
+d3 >> play(kit.kick, dur=0.25, low=0.2, lowfreq=310, fbdelay=0.12, fbtime=0.45, fbfeed=0.6, fbcutoff=5200, fbspread=0.5, beat_dur=1, spring=2.6, sprdecay=1.9, sprdamp=0.25, sprtens=0.9, gdel=0.3, gdeltime=0.05, gdelsize=0.04, gdelsprd=0.5, gdelfb=0.4).unison(3)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> abass(distortion=2, cutoff=400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+kit = pkit("techno", seed=21)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=120, fbdelay=0.05, fbtime=0.3, fbfeed=0.4, fbcutoff=2000, fbspread=0.1, beat_dur=1, spring=0.6, sprdecay=1.2, sprdamp=0.7, sprtens=0.3, gdel=0, gdeltime=0.02, gdelsize=0.02, gdelsprd=0.2, gdelfb=0.1).unison(3)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(oct=6,distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(oct=7,distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(oct=6,distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+bd >> a_bassry(oct=5,distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+kit = pkit("techno", seed=19)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=850, fbdelay=0.2, fbtime=0.25, fbfeed=0.7, fbcutoff=1300, fbspread=0.2, beat_dur=1, spring=4, sprdecay=1.5, sprdamp=0.1, sprtens=1, gdel=0.1, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+kit = pkit("techno", seed=12)
+
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=10300, fbspread=0.4, beat_dur=1, spring=1, sprdecay=1.1, sprdamp=0.6, sprtens=0, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=85, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=300, fbspread=0.4, beat_dur=1, spring=4, sprdecay=2, sprdamp=0.6, sprtens=0.5, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+bd >> a_bassry(distortion=2, cutoff=400, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.9)
+
+bd >> a_bassry(distortion=2, cutoff=1040, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.7, leg=4).unison(3)
+
+bd >> a_bassry(distortion=1, cutoff=1040, resonance=0.6, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, comp_up=0.7, leg=4).unison(3)
+
+kit = pkit("techno", seed=19)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=850, fbdelay=0.2, fbtime=0.25, fbfeed=0.7, fbcutoff=1300, fbspread=0.2, beat_dur=1, spring=4, sprdecay=1.5, sprdamp=0.1, sprtens=1, gdel=0.1, gdeltime=0.01,gdelsize=0.01, gdelsprd=0.1, gdelfb=.1).unison(3)
+
+kit = pkit("techno", seed=14)
+d1 >> play(kit.kick, dur=0.25, low=0, mid=linvar([4, 8], 32), lowfreq=85, leg=0, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=1300, fbspread=0.4, beat_dur=1, spring=0.7, sprdecay=1.8, sprdamp=0.6, sprtens=1, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=1, echo=0.5,shape=4, gdelfb=.1).unison(3)
+
+bd >> a_bassry(oct=5,distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+kit = pkit("techno", seed=4)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.14, rate=1, rgate=0.5, rgaterate=4, rgatewave=0, fbtime=0.119, fbfeed=1.0, fbcutoff=4100, fbspread=4, beat_dur=1, spring=4.7, sprdecay=1.8, sprdamp=0.3, sprtens=1.0, gdel=0.1, gdeltime=0.10,gdelsize=0.10, gdelsprd=0.2, echo=0.0, gdelfb=1.2).unison(3)
+
+kit = pkit("techno", seed=19)
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.025, fbtime=0.79, fbfeed=1.0, fbcutoff=4100, fbspread=0.4, beat_dur=1, spring=0.7, sprdecay=1.8, sprdamp=0.3, sprtens=1.4, gdel=0.1, gdeltime=0.10,gdelsize=0.10, gdelsprd=0.1, echo=0.0, gdelfb=0.6).unison(3)
+d1 >> play(kit.kick, dur=0.25, low=0, mid=0, high=1, mverb=0.05, lowfreq=85, leg=0, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=1300, fbspread=0.4, beat_dur=1, spring=0.7, sprdecay=1.8, sprdamp=0.6, sprtens=1, gdel=0, gdeltime=0.01,gdelsize=0.01, gdelsprd=1, echo=1,shape=4, gdelfb=.1).unison(3)
+
+~d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.14, rate=1, rgate=0.5, rgaterate=4, rgatewave=0, fbtime=0.119, fbfeed=1.0, fbcutoff=4100, fbspread=4, beat_dur=1, spring=4.7, sprdecay=1.1, sprdamp=0.9, sprtens=1.0, gdel=0.1, gdeltime=0.10,gdelsize=0.10, gdelsprd=0.2, echo=0.0, gdelfb=1.2).unison(3)
+
+bd >> a_bassry(distortion=4, cutoff=4000, resonance=0.3, pattern=3, swing=0, dur=4, amp=linvar([2, 1], 32), comp=4, comp_down=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, comp_up=0.5)
+
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=185, fbdelay=0.025, fbtime=0.79, fbfeed=1.0, fbcutoff=4100, fbspread=0.4, beat_dur=1, spring=0.7, sprdecay=1.8, sprdamp=0.3, sprtens=1.4, gdel=0.1, gdeltime=0.10,gdelsize=0.10, gdelsprd=0.1, echo=0.0, gdelfb=0.6).unison(3)
+
+kit = pkit("techno", seed=19)
+
+d1.rate=var([8, 0.5, 0], [8, 2, 6])
+kit = pkit("techno", seed=19)
+d2 >> play(kit.hat, dur=0.25, sblur=0.1, sbluramt=2, hpf=8000, shimmer=0.0, shimsize=0.8, shimpitch=0.5, shimmix=0.4, gdel=0.2,gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.5).unison(2)
+
+d2.dur=1/2
+
+drop()
+d3 >> play(kit.kick, dur=0.25, low=0, lowfreq=85, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=300, fbspread=0.4, beat_dur=1, spring=4, sprdecay=1.8, sprdamp=0.6, sprtens=1, gdel=0, gdeltime=0.01,gdelsize=0.01, dist2=0.0, gdelsprd=0.1, gdelfb=.1).unison(3)
+d1.rate=1
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Root.default = "D"
+
+Root.default = "D"
+
+jn >> juno(0, dur=8, sus=7.5, junoshape=0.1, cutoff=200, rq=0.5, junochorus=0.006, djf=fb(32, 0, 0.35), djfq=0.3, amp=linvar([0.5, 1], 32))
+

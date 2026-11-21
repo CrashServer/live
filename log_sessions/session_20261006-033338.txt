@@ -1,0 +1,858 @@
+a1 >> dbass(dur=1, lpf=100)
+
+a1 >> dbass(dur=1, lpf=400)
+
+a1 >> dbass(dur=1, lpf=100)
+
+a1 >> dbass(dur=1/2, lpf=100)
+
+a1 >> dbass(4, dur=1/2, lpf=100)
+
+a1 >> dbass([2, 4], dur=1/2, lpf=100)
+
+a1 >> dbass([2, 4], dur=1/2, lpf=100, hpf=3200)
+
+a1 >> dbass([2, 4], dur=1/2, lpf=100, hpf=320)
+
+a1 >> dbass([2, 4], dur=1/2, lpf=100, hpf=12320)
+
+a1 >> dbass([2, 4], dur=1/2, lpf=100, hpf=1220)
+
+a1 >> dbass([2, 4], dur=1/2, lpf=100, hpf=120)
+
+a1 >> dbass([2, 4], dur=1/2, lpf=100, hpf=10)
+
+a1 >> dbass([2, 4], dur=1/5, lpf=100, hpf=10)
+
+a1 >> dbass([2, 5], dur=1/5, lpf=100, hpf=10)
+
+a1 >> dbass([2, 6], dur=1/5, lpf=100, hpf=10)
+
+a1 >> dbass([2, 6, 4], dur=1/5, lpf=100, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/5, lpf=100, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/2, lpf=100, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/2, lpf=1400, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/2, lpf=1300, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/2, lpf=1200, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/2, lpf=1100, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/2, lpf=1000, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/2, lpf=900, hpf=10)
+
+a1 >> bass([2, 6, 4, 12], dur=1/2, lpf=900, hpf=10)
+
+a1 >> dbass([2, 6, 4, 12], dur=1/2, lpf=900, hpf=10)
+
+a1 >> abass([2, 6, 4, 12], dur=1/2, lpf=900, hpf=10)
+
+a1 >> bass([2, 6, 4, 12], dur=1/2, lpf=900, hpf=10)
+
+a1 >> abass([2, 6, 4, 12], dur=1/2, lpf=900, hpf=10)
+
+a1 >> bbass([2, 6, 4, 12], dur=1/2, lpf=900, hpf=10)
+
+a1 >> bbass([2, 6, 4, 12], dur=1/2, lpf=900, hpf=100)
+
+a1 >> bbass([2, 6, 4, 12], dur=1/2, dist2=0.5, lpf=900, hpf=100)
+
+a1 >> bbass([2, 6, 4, 12], dur=1/2, dist2=0.5, echo=0.5, lpf=900, hpf=100)
+
+a1 >> bbass([2, 6, 4, 12], dur=1/2, dist2=0.5, echo=0.125, lpf=900, hpf=100)
+
+a1 >> bbass([2, 6, 4, 12], dur=1/2, dist2=0.5, echo=1, lpf=900, hpf=100)
+
+a1 >> bbass([2, 6, 4, 12], dur=1/2, dist2=0.5, echo=4, lpf=900, hpf=100)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+chaos(8)
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+tn >> play("..6..X....", dur=PStutter(PEuclidR(3, 3, 2), 5), sample=81, amp=PBern(8, 0.68), phaser=0.35, phaserdepth=0.56).human(16, 8, 12).start(8)
+
+pf >> loop("noizebeat16", dur=16, sample=52, amp=1.43, position=0.67, echo=fb(32, 0.71, 0.88), echotime=0.32).human(36, 2, 9).rarely("unison" )
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+tn >> play("..6..X....", dur=PStutter(PEuclidR(3, 3, 2), 5), sample=81, amp=PBern(8, 0.68), phaser=0.35, phaserdepth=0.56).human(16, 8, 12).start(8)
+
+tn >> play("..6..X....", dur=PStutter(PEuclidR(3, 3, 2), 5), sample=81, amp=PBern(8, 0.68), phaser=0.35, phaserdepth=0.56).human(16, 8, 12).start(8)
+
+cn >> play("<....O.......O...><x.........x..x..>", dur=SDur(32), sample=72, amp=P[0, 0, 1, 0, 0, 1, 1, 1, 0, 1], rate=fo(16, 0, 1), lpf=PLife(0.7, 1801, 5569), lofi=expvar([0.73, 0.94], 32), chorus=fe(32, 0.56, 0.66), chorusrate=0.6).every(5, "jump" ,8).start(8)
+
+pf >> loop("noizebeat16", dur=16, sample=52, amp=1.43, position=0.67, echo=fb(32, 0.71, 0.88), echotime=0.32).human(36, 2, 9).rarely("unison" )
+
+cn.stop()
+
+gj >> play("<~.~.~.~.~.~.~.~.><.OO.OOO..OO.OOO.><v.......vv.....v>", dur=0.25, sample=70, amp=Pacc("backbeat", intensity=0.89), bits=2, tremolo=linvar([7, 8], 8), tremolomix=fz(16, 0.15, 0.79)).unison(3, 0.36).rarely("amen" )
+
+pf.stop()
+
+tn.stop()
+
+gj.stop()
+
+chaos(8)
+
+ac >> loop("nsmid16", dur=16, sample=14, amp=0.98, leg=fd(32, 0.28, 1.69), bend=2, flanger=PLife(0.51, 0.93, 0.68), flangermix=0.97, fdecay=fc(4, 0.05, 0.09)).human(24, 6, 5)
+
+ac.stop()
+
+dk >> loop("nbvarp16", dur=16, sample=80, amp=0.74, position=fz(4, 0.96, 0.32), tape=0.88).human(10, 9, 5).every(1, "fill" )
+
+dk.stop()
+
+kt >> loop("synth8", dur=8, sample=43, amp=0.9, position=0.77, pshift=fw(8, 1, 7), swell=0.31).human(49, 10, 6).rarely("unison" )
+
+kt.stop()
+
+tr >> a_cy(melody()[:4], dur=PBeat(".  xx.x."), oct=5, sus=PSwing(0.11), amp=Pacc("halftime", intensity=0.79), cheapverb=0.62, cvdecay=0.84).human(49, 9, 4)
+
+tr.stop()
+
+nh >> dthihat(melody()[:8], dur=SDur(32), oct=4, sus=PSwing(0.38), amp=PBern(16, 0.44), vol=1, bits=fc(4, 13, 10), crush=fperlin(8, 1, 6), shimmer=fd(32, 0.12, 0.27)).unison(4, 0.13).human(10, 11, 8).start(16)
+
+nh.stop()
+
+chaos(8)
+
+chaos(8)
+
+oq >> loop("perc32", dur=32, sample=18, amp=1.48, octer=fd(32, 0.8, 0.5), slidefrom=fxr(4, -7, 7), slidedelay=0.64)
+
+oq.stop()
+
+uu >> loop("drum4", dur=4, sample=16, amp=1.49, position=linvar([0.0, 0.36], 8), lpf=5413, octer=0.64, octersubsub=4, octersub=ft(16, 3, 0), sbrk=fd(16, 0.22, 0.53), sbrkdur=8)
+
+uu.stop()
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+
+rz >> play("SLUbF6", dur=PBeat(".x  .x x"), sample=85, amp=fs(32, 0.36, 0.33), vib=var([10, 3], [8, 8])).human(21, 2, 10).after(2, "unison" )
+
+rz.stop()
+
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+cz >> loop("lynchcrazy32", dur=32, sample=78, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+cz >> loop("lynchcrazy32", dur=32, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ph >> loop("jazza8", dur=16, sample=4, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+tn >> play("..6..X....", dur=PStutter(PEuclidR(3, 3, 2), 5), sample=81, amp=PBern(8, 0.68), phaser=0.35, phaserdepth=0.56).human(16, 8, 12).start(8)
+
+tn.stop()
+
+cz >> loop("lynchvoice8", dur=8, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+cz.stop()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+ph >> loop("jazza8", dur=16, sample=4, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+cz >> loop("lynchvoice8", dur=8, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+cz.stop()
+
+cz >> loop("lynchvoice8", dur=8, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+ph >> loop("jazza8", dur=16, sample=4, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+cz >> loop("lynchvoice8", dur=8, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+chaos(8)
+
+ng >> play(PEuclid2(7, 8, ".", "v"), dur=var([2, 4], 8)/4, sample=74, amp=Pacc("ghost"), ring=fd(16, 0.67, 0.14), pong=0.14, pongtime=ft(8, 0.85, 0.62), tape=fc(8, 0.97, 0.49)).human(35, 3, 5).sometimes("reverse" )
+
+zp >> loop("nspad16", dur=16, sample=94, amp=1.06, leg=0.43, tremolo=sinvar([0, 2], 32))
+
+zp.stop()
+
+ux >> loop("jazzkeys8", dur=16, sample=64, amp=1.27, position=0.19, chorus=fr(16, 2.83, 1.37), sample_atk=fo(64, 0.67, 0.79)).every(7, "jump" ,9)
+
+ux.stop()
+
+chaos(8)
+
+ke >> play("..\.Qu.\.", dur=PRhythm((4, 7, 9)), sample=16, amp=PBern(16, 0.75), tremolo=fr(16, 8, 4), tremolomix=expvar([0.38, 0.79], 16), lpf=13059, lpr=fo(16, 0.61, 0.6), ring=0.21, ringl=fc(4, 3554, 5790), ringh=1318).start(8)
+
+ke.stop()
+
+vu >> loop("solmodes16", dur=16, sample=10, amp=0.65, echo=0.93, echomix=fc(4, 0.3, 0.46), chorus=1.73, chorusrate=0.67)
+
+vu.stop()
+
+my >> loop("glitch8", dur=8, sample=67, amp=0.62, position=0.37, chop=fxr(16, 0, 10), chopwave=fs(32, 0, 0), chopmix=fr(16, 0.92, 0.36)).human(26, 6, 15).start(32)
+
+cl >> a_bassry(P^(7, 7, 0.25), dur=PSum(7, 4), oct=4, sus=[1.4, 0.78, 0.76, 1.49], amp=P[0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1], vol=1, chop=fc(8, 9, 5), chopi=0.49, chopmix=fe(32, 0.64, 0.32))
+
+cl.stop()
+
+my >> loop("glitch8", dur=8, sample=67, amp=1, position=0.37, chop=fxr(16, 0, 10), chopwave=fs(32, 0, 0), chopmix=fr(16, 0.92, 0.36)).human(26, 6, 15).start(32)
+
+my >> loop("glitch8", dur=8, sample=67, amp=1, position=0.37, chop=fxr(16, 0, 10), dist2=0.5, chopwave=fs(32, 0, 0), chopmix=fr(16, 0.92, 0.36)).human(26, 6, 15).start(32)
+
+my >> loop("glitch8", dur=8, sample=67, amp=1, position=0.37, chop=fxr(16, 0, 10), dist2=2, chopwave=fs(32, 0, 0), chopmix=fr(16, 0.92, 0.36)).human(26, 6, 15).start(32)
+
+ph >> loop("jazza8", dur=16, sample=4, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+cz >> loop("lynchvoice8", dur=8, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Server.record()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+ph >> loop("jazza8", dur=16, sample=4, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+cz >> loop("lynchvoice8", dur=8, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+my >> loop("glitch8", dur=8, sample=67, amp=1, position=0.37, chop=fxr(16, 0, 10), dist2=2, chopwave=fs(32, 0, 0), chopmix=fr(16, 0.92, 0.36)).human(26, 6, 15).start(32)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Server.stopRecording()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+Server.record()
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+Server.stopRecording()
+
+Server.record()
+
+ph >> loop("jazza8", dur=16, sample=4, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+Server.stopRecording()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+ph >> loop("jazza8", dur=16, sample=4, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+cz >> loop("lynchvoice8", dur=8, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+FoxDot.reload()
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+attack(32)
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+soloRnd()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(2)
+
+cz >> loop("lynchcrazy32", dur=4, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(2)
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(2)
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(1)
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(0.5)
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(4)
+
+cz.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(4)
+
+ph >> loop("jazza8", dur=16, sample=86, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, dist2=0.5, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+qo >> play("<k..k...k..k.....><....B.......B...>", dur=0.25, sample=6, dist2=0.2, amp=PBern(16, 0.5), valad=fd(16, 0.67, 3480)).unison(5, 0.24)
+
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+qo.stop()
+
+cz >> loop("lynchvoice8", dur=8, sample=7, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+ge >> play("<k......k........><....O.......O...>", dur=P[2, 3, 1, 2]/2, sample=42, amp=Pacc("offbeat"), lpf=864, lpr=fb(64, 0.51, 0.45), vib=fo(16, 10, 0), hpf=fxr(4, 100, 17000))
+
+ue >> loop("trap8", dur=8, sample=5, amp=0.72, position=0.35, pong=PLife(0.33, 0.95, 0.9), pongtime=fe(64, 0.73, 0.67), cheapverb=sinvar([0.28, 0.3], 16), cvdecay=linvar([0.23, 0.47], 8)).human(35, 10, 5).every(6, "degrade" )
+
+ph >> loop("jazza8", dur=16, sample=4, amp=1.49, position=0.36, spf=8767, sbrk=linvar([0.26, 0.23], 8), sbrkdur=var([8, 3], [16, 2]), slide=6).rarely("shuffle" )
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+qk >> play("C.J.", dur=var([3, 3, 4], 16)/2, sample=65, amp=Pacc("offbeat", intensity=0.94), echo=0.2, echomix=PLife(0.87, 0.55, 0.99), cheapverb=fg(8, 0.24, 0.8), cvdecay=0.73, chop=fr(4, 6, 7), chopwave=fo(16, 0, 5), chopmix=fg(8, 0.68, 0.2)).unison(3, 0.5).human(33, 9, 10).rarely("stutter" , )
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(4)
+
+ho >> play("<..T.............><....m.....m.....><............m.m.><WW....W.WW......>", dur=PRy(16, 4, 0.16), sample=15, amp=Pacc("offbeat", intensity=0.67), rate=2, flanger=fc(16, 0.58, 0.84), fdecay=fg(16, 0.05, 0.1), flangermix=PLife(0.75, 0.56, 0.6), bend=fxr(8, -7, 7))
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(8)
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397).lclip(16)
+
+attack()
+
+c4 >> loop("hiphop8", dur=16, sample=4)
+
+qk.stop()
+
+cz.stop()
+
+ho.stop()
+
+ge.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+c1 >> loop("cosmic16", dur=16, sample=3, hpf=40, amp=0.5).unison(4)
+
+c1.stop()
+
+p6 >> play("-")
+
+p6 >> play("-", lpf=400)
+
+p6 >> play("-", lpf=1200)
+
+p6 >> play("-", lpf=600)
+
+p6 >> play("-", lpf=linvar([200, 1200]))
+
+p6 >> play("-", lpf=linvar([200, 1200], 32))
+
+p6 >> play("-", lpf=linvar([200, 120], 32))
+
+c4 >> loop("hiphop8", dur=16, sample=4)
+
+c4 >> loop("hiphop8", dur=16, sample=4, mverb=0.01)
+
+z4 >> play("X ")
+
+z4 >> play("X ", lpf=400)
+
+z4 >> play("X ", lpf=100)
+
+c4 >> loop("hiphop8", dur=16, sample=4, mverb=0.01, drive=0.1)
+
+c4 >> loop("hiphop8", dur=16, sample=4, mverb=0.01, drive=0.2)
+
+c4 >> loop("hiphop8", dur=16, sample=4, mverb=0.01, drive=0.2).lclip(4)
+
+c4 >> loop("hiphop8", dur=16, sample=4, mverb=0.01, drive=0.2).lclip(1)
+
+c4 >> loop("hiphop8", dur=16, sample=4, mverb=0.01, drive=0.2).lclip(2)
+
+c0 >> loop("nsbreak16", sample=3, dur=16)
+
+c0 >> loop("nsbreak16", sample=3, dur=16, lpf=1200)
+
+z4 >> play("X ", lpf=100)
+c0 >> loop("nsbreak16", sample=3, dur=16, lpf=1200)
+
+c4 >> loop("hiphop8", dur=16, sample=4, mverb=0.01, drive=0.2).lclip(2)
+z4 >> play("X ", lpf=100)
+c0 >> loop("nsbreak16", sample=3, dur=16, lpf=1200)
+p6 >> play("-", lpf=linvar([200, 120], 32))
+
+c6 >> play("Pp", dur=PDur(3, 8), sample=2, hpf=PWhite(2000, 4000))
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+j5 >> faim(dur=4)
+
+j5 >> faim(0.5,dur=4)
+
+j5 >> faim(4,dur=4)
+
+j5 >> faim(12,dur=4)
+
+j5 >> faim([1, 2, 4],dur=4)
+
+j5 >> faim([1, 2, (4, 12)],dur=4)
+
+j5 >> faim([1, 2, (4, 12)],dur=1/2)
+
+j5 >> faim([1, 2, (4, 12)],dur=4)
+
+j5 >> faim([1, 2, (4, 12)],dur=4, mverb=0.5)
+
+j5 >> faim([1, 2, (4, 12)],dur=4, mverb=0.5, dist2=0.2)
+
+j5 >> faim([1, 2, (4, 12)],dur=4, mverb=0.4, dist2=0.2)
+
+j5 >> faim([1, 2, (4, 12)],dur=4, mverb=0.3, dist2=0.2)
+
+j5 >> faim([1, 2, (4, 12)],dur=4, mverb=0.2, dist2=0.2)
+
+j5 >> faim([1, 2, (4, 12)],dur=4, mverb=0.1, dist2=0.2)
+
+j5 >> faim([1, 2, (4, 12)],dur=4, mverb=0.0, dist2=0.2)
+
+j5 >> faim([1, 2, (4, 12)],dur=4, mverb=0.0, dist2=0.2, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0)
+
+h5 >> play("x ")
+
+h5 >> play("z ")
+
+h5 >> play("v ")
+
+h5 >> play("n ")
+
+h5 >> play("a ")
+
+h5 >> play("x ")
+
+h5 >> play("[xxx] ")
+
+h5 >> play("[xxx]")
+
+h5 >> play("[xxxxxx]xxx")
+
+h5 >> play("[xxxxxx]xxx")
+
+h5.stop()
+
+c0 >> loop("nsbreak16", sample=3, dur=16, lpf=1200)
+
+c6 >> play("Pp", dur=PDur(3, 8), sample=2, hpf=PWhite(2000, 4000))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+cz >> loop("lynchcrazy32", dur=32, sample=77, amp=1.26, ring=fi(64, 0.64, 0.58), ringl=fg(8, 12204, 685), ringh=14397)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+s8 >> dbass()
+
+s8.stop()
+
+s8 >> dbass()
+
+s8 >> dbass(dur=4)
+
+s8 >> dbass(dur=4)
+
+s8 >> dbass(2, dur=4)
+
+s8 >> dbass([2, 4], dur=4)
+
+s8 >> dbass([2, (4, 8)], dur=4)
+
+s8 >> dbass([2, (4, 8)], dur=4)
+
+s8 >> dbass([2, (4, 8)], dur=4, hpf=1200)
+
+s8 >> dbass([2, (4, 8)], dur=4, hpf=1200, dist2=0.5)
+
+s8 >> dbass([2, (4, 8)], dur=4, hpf=1200, dist2=0.5, lpf=400)
+
+s8 >> dbass([2, (4, 8)], dur=4, hpf=1200, dist2=0.5, lpf=1200)
+
+s8 >> dbass([2, (4, 8)], dur=4, hpf=1200, dist2=0.5, lpf=1200, lpr=0.1)
+
+s8 >> dbass([2, (4, 8)], dur=4, hpf=1200, dist2=0.5, lpf=1200, lpr=0.1, echo=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+n9 >> play("x ")
+
+n9 >> play("x ", hpf=200)
+
+n9 >> play("x ", hpf=200,amp=4)
+
+n9 >> play("x ", hpf=200,amp=4, echo=0.5)
+
+chaos(8)
+
+ub >> loop("electrodrum8", dur=8, sample=91, amp=1.31, position=0.41, slide=-3, slidedelay=0.66, flanger=fz(8, 0.59, 0.08), fdecay=fo(8, 0.0, 0.05), flangermix=fr(16, 0.5, 0.76), shimmer=fs(8, 0.9, 0.43), shimsize=0.86, shimmix=0.76).human(13, 10, 3).start(8)
+
+ky >> loop("ghperc16", dur=16, sample=87, amp=1.18, hpf=fs(8, 9508, 1063), hpr=0.22)
+
+uq >> loop("electrodrum32", dur=64, sample=60, amp=1.35, position=var([0.37, 0.04], [4, 8]), room=fh(8, 0.16, 0.7)).human(32, 12, 5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+chaos(8)
+
+sn >> loop("ragedrone32", dur=32, sample=17, amp=1.4, dist2=fi(16, 0.29, 0.98), dist2shape=0.14, bits=16, crush=sinvar([1, 8], 64)).human(33, 2, 3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(dur=4)
+
+d1 >> dbass(dur=4, amp=4)
+
+d1 >> dbass(2, dur=4, amp=4)
+
+d1 >> dbass([1, 4], dur=4, amp=4)
+
+d1 >> dbass([1, (2, 4)], dur=4, amp=4)
+
+d1 >> dbass([1, (2, 4)], echo=0.5,dur=4, amp=4)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass([1, (2, 4)], echo=0.5,dur=4, amp=4)
+
+d1 >> dbass([1, (2, 4)], echo=0.5,dur=1/2, amp=4)
+
+d1 >> dbass([12, (2, 4)], echo=0.5,dur=1/2, amp=4)
+
+d1 >> dbass([0.2, (0.1, 4)], echo=0.5,dur=1/2, amp=4)
+
+d1 >> dbass([0.2, (0.1, 4)], echo=0.125,dur=1/2, amp=4)
+
+d1 >> dbass([0.2, (0.1, 4)], echo=5,dur=1/2, amp=4)
+
+d1 >> dbass([0.2, (0.1, 4)], echo=5,dur=1/2, amp=4, dist2=0.5)
+
+d1 >> dbass([0.2, (0.1, 4)], echo=5,dur=1/2, amp=4, dist2=0.5, mverb=0.5)
+
+d1 >> dbass([0.2, (0.1, 4)], echo=5,dur=1/2, amp=4, dist2=0.5, mverb=PWhite(0, 1))
+
+d1 >> dbass([0.2, (0.1, 4)], echo=5,dur=1/2, amp=4, dist2=0.5, mverb=PWhite(0, 1))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> dbass()
+
+~d1 >> dbass(dur=2)
+
+~d1 >> dbass(dur=1/2)
+
+~d1 >> dbass([0], dur=1/2)
+
+~d1 >> dbass([1], dur=1/2)
+
+~d1 >> dbass([2], dur=1/2)
+
+~d1 >> dbass([3], dur=1/2)
+
+~d1 >> dbass([4], dur=1/2)
+
+~d1 >> dbass([4, 6], dur=1/2)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=4)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.2)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=12300)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=12300, lpf=400)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=12300, lpf=1400)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=0.5, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=0.5, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=0.5, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=4, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=3, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=2, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=1, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=0, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-1, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-2, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-3, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-4, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-5, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-4, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-3, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-2, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=-1, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=0, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=1, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=2, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=3, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=4, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=5, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=6, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=7, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=8, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=7, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=6, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=5, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=4, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=3, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=2, swfreq=300, swnarrow=0, swwide=1.5)
+
+~d1 >> dbass([4, [6, 2]], dur=1/2, mverb=0.5, dist2=0.5, chop=0.5, hpf=123, lpf=1400, mring=0.5, rstruct=0.1, rbright=0.8, rdamp=0.7, rpos=0, rmodel=1, rpoly=4, regg=0, rsus=2, stereowidth=1, swfreq=300, swnarrow=0, swwide=1.5)
+

@@ -1,0 +1,38 @@
+dome.start;
+
+p1 >> pluck([0,2,4,7], dur=1/4, az=linvar([-180,180],16), elev=10)   # circles the bottom ring
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+dome.start;
+
+dome.start;
+
+dome.start();
+
+p1 >> pluck([0,2,4,7], dur=1/4, az=linvar([-180,180],16), elev=10)   # circles the bottom ring
+
+b1 >> dbass([0,3], dur=2, elev=0, dspread=90)                         # wide and low
+
+s1 >> blip(P[0:8], az=[0,90,180,-90], elev=var([0,30,60,90],4))       # climbs to the top
+
+d1 >> play("x-o-", dspread=60)
+
+p1 >> pluck([0,2,4,7], dur=1/4, az=linvar([-180,180],4), elev=10)   # circles the bottom ring
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> pluck([0,2,4,7], dur=1/4, az=0, elev=linvar([0, 10], 8))   # circles the bottom ring
+
+p1 >> pluck([0,2,4,7], dur=1/4, az=0, elev=linvar([0, 10], 8))   # circles the bottom ring
+
+p1 >> pluck([0,2,4,7], dur=1/4, az=0, elev=linvar([0, 100], 8))   # circles the bottom ring
+
+Clock.clear()
+soff()
+Server.clearFx()
+

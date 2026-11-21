@@ -1,0 +1,317 @@
+p1 >> pbass([1, -4, 3, 3, 1, 13, 1, 4, 4, 1, 1, 1, 9, 9, 1, 1], dur=[1/2, 1/4, 1/2, 1/4, 1/4, 1, 1/4, 1, 1/2, 3/4, 1/2, 1/4, 1/2, 1/2, 1/2, 1/2], sus=1/4, oct=4, scale=Scale.chromatic, root=0, amp=0.8)  # pbass A
+
+Clock.clear()
+soff()
+
+t1 >> faim((-10, 9), dur=PStutter([2, 6], [13, 1]), delay=4, sus=2, oct=4, scale=Scale.chromatic, root=0, amp=0.5, pshift=0.125, mix=0.1, hpf=120, echomix=0.4059, echo=1.5493, lpf=2816)  # t5 (faim) part 1
+
+t2 >> faim((-10, 9), dur=2, oct=4, scale=Scale.chromatic, root=0, amp=0.5, pshift=0.125, mix=0.1, hpf=120, echomix=0.4059, echo=1.5493, lpf=2816)  # t5 (faim) part 2
+
+s1 >> soprano([(2, 14, -22), (2, 14, 26), (2, 14, -22), (2, 14, 26), (2, 14, -22), (2, 14, 26), (2, 14, -22), (2, 14, 26), (2, 14, -22)], dur=PStutter([3/4, 1/2, 111/4], [1, 7, 1]), delay=105/4, sus=1/2, oct=4, scale=Scale.chromatic, root=0, amp=0.15, slidedelay=0.7912, pshift=0.125, room=0.7, mix=0.7, dfm=1036, dfmr=0.4263, dfmd=13.7944)  # s1 (soprano) part 2
+
+t3 >> faim((-10, 9), dur=2, oct=4, scale=Scale.chromatic, root=0, amp=0.5, pshift=0.125, mix=0.1, hpf=120, echomix=0.4059, echo=1.5493, lpf=2816)  # t5 (faim) part 3
+
+s2 >> soprano([(-10, 2, 14), (-10, 2, -34)], dur=[1/2, 63/2], delay=125/4, sus=[1/2, 1/4], scale=Scale.chromatic, root=0, amp=0.15, slidedelay=0.7912, pshift=0.125, room=0.7, mix=0.7, dfm=1036, dfmr=0.4263, dfmd=13.7944)  # s1 (soprano) part 3
+
+c1 >> sub_pluck([(-17, -5, 7), (-10, 2, 14), (-2, 10, 22), (-17, -5, 7), (-5, 7, 19), (-17, -5, 7), (-2, 10, 22), (-10, 2, 14), (-17, -5, 7), (-10, 2, 14), (-2, 10, 22), (-17, -5, 7), (-5, 7, 19), (-17, -5, 7), (-2, 10, 22), (-10, 2, 14), (-15, -3, 9), (-8, 4, 16), (-12, 0, 12), (-15, -3, 9), (-3, 9, 21), (-15, -3, 9), (-12, 0, 12), (-8, 4, 16), (-15, -3, 9), (-8, 4, 16), (-12, 0, 12), (-15, -3, 9), (-3, 9, 21), (-15, -3, 9), (-12, 0, 12), (-8, 4, 16), (-15, -3, 9), (-8, 4, 16), (-12, 0, 12), (-15, -3, 9), (-3, 9, 21), (-15, -3, 9), (-12, 0, 12), (-8, 4, 16), (-15, -3, 9), (-8, 4, 16), (-12, 0, 12), (-15, -3, 9), (-3, 9, 21), (-15, -3, 9), (-12, 0, 12), (-8, 4, 16), (-19, -7, 5), (-12, 0, 12), (-3, 9, 21), (-19, -7, 5), (-7, 5, 17), (-19, -7, 5), (-3, 9, 21), (-12, 0, 12), (-19, -7, 5), (-12, 0, 12), (-3, 9, 21), (-19, -7, 5), (-7, 5, 17), (-19, -7, 5), (-3, 9, 21), (-12, 0, 12), (-19, -7, 5), (-12, 0, 12), (-3, 9, 21), (-19, -7, 5), (-7, 5, 17), (-19, -7, 5), (-3, 9, 21), (-12, 0, 12), (-19, -7, 5), (-12, 0, 12), (-3, 9, 21), (-19, -7, 5), (-7, 5, 17), (-19, -7, 5), (-3, 9, 21), (-12, 0, 12), (-17, -5, 7), (-10, 2, 14), (-2, 10, 22), (-17, -5, 7), (-5, 7, 19), (-17, -5, 7), (-2, 10, 22), (-10, 2, 14), (-17, -5, 7), (-10, 2, 14), (-2, 10, 22), (-17, -5, 7), (-5, 7, 19), (-17, -5, 7), (-2, 10, 22), (-10, 2, 14), (-17, -5, 7), (-10, 2, 14), (-2, 10, 22), (-17, -5, 7), (-5, 7, 19), (-17, -5, 7), (-2, 10, 22), (-10, 2, 14), (-17, -5, 7), (-10, 2, 14), (-2, 10, 22), (-17, -5, 7), (-5, 7, 19), (-17, -5, 7), (-2, 10, 22), (-10, 2, 14)], dur=PStutter([1/4, 17/4], [111, 1]), delay=4, sus=PStutter([1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4, 1/2, 1/4], [2, 1, 3, 1, 6, 1, 11, 1, 10, 1, 12, 1, 12, 1, 11, 1, 9, 1, 4, 1, 13, 1, 8]), velo=[0.1083, 0.1151, 0.1219, 0.1286, 0.1354, 0.1422, 0.149, 0.1557, 0.1625, 0.1693, 0.176, 0.1828, 0.1896, 0.1964, 0.2031, 0.2099, 0.2167, 0.2234, 0.2302, 0.237, 0.2438, 0.2505, 0.2573, 0.2641, 0.2708, 0.2776, 0.2844, 0.2911, 0.2979, 0.3047, 0.3115, 0.3182, 0.325, 0.3318, 0.3385, 0.3453, 0.3521, 0.3589, 0.3656, 0.3724, 0.3792, 0.3859, 0.3927, 0.3995, 0.4063, 0.413, 0.4198, 0.4266, 0.4333, 0.4401, 0.4469, 0.4536, 0.4604, 0.4672, 0.474, 0.4807, 0.4875, 0.4943, 0.501, 0.5078, 0.5146, 0.5214, 0.5281, 0.5349, 0.5417, 0.5484, 0.5552, 0.562, 0.5688, 0.5755, 0.5823, 0.5891, 0.5958, 0.6026, 0.6094, 0.6161, 0.6229, 0.6297, 0.6365, 0.6432, 0.65, 0.6568, 0.6635, 0.6703, 0.6771, 0.6839, 0.6906, 0.6974, 0.7042, 0.7109, 0.7177, 0.7245, 0.7313, 0.738, 0.7448, 0.7516, 0.7583, 0.7651, 0.7719, 0.7786, 0.7854, 0.7922, 0.799, 0.8057, 0.8125, 0.8193, 0.826, 0.8328, 0.8396, 0.8464, 0.8531, 0.8599], scale=Scale.chromatic, root=0, w1=3, w2=0, semi2=12, fine2=0, omix=0.3, cutoff=9000, res=0.2, fenv=0, kbd=1, aatk=0.01, adec=0.5, arel=0.15, lrate=3, lcut=0.25, level=-6.4988)  # t9 (charm) part 3
+
+t3.stop()
+
+t4 >> faim((-10, 9), dur=2, oct=4, scale=Scale.chromatic, root=0, amp=0.5, pshift=0.125, mix=0.1, hpf=120, echomix=0.4059, echo=1.5493, lpf=2816)  # t5 (faim) part 4
+
+s3 >> soprano([(-10, 2, 14), (-10, 2, -34)], dur=[1/4, 1/2, 1/2, 1/2, 1/2, 31/2, 1/2, 1/2, 1/2, 1/2, 1/2, 3/4, 1/2, 1/4, 1/2, 39/4], delay=1/4, sus=1/2, scale=Scale.chromatic, root=0, amp=0.15, slidedelay=0.7912, pshift=0.125, room=0.7, mix=0.7, dfm=1036, dfmr=0.4263, dfmd=13.7944)  # s1 (soprano) part 4
+
+Clock.clear()
+soff()
+
+d1 >> roll_call_kick(dur=1, velo=[1, 0.75, 0.75, 0.75], every=1)  # Drums kick
+
+d2 >> roll_call_clap(dur=4, delay=3, velo=0.75)  # Drums clap
+
+d3 >> roll_call_chat(dur=1/4, velo=[0.75, 0.75, 1, 0.75])  # Drums c.hat
+
+d6 >> roll_call_tom(dur=[7/4, 9/4], delay=7/4, velo=0.75)  # Drums tom
+
+d8 >> roll_call_ride(dur=1/2, velo=0.75)  # Drums ride
+
+Clock.clear()
+soff()
+
+Scale.default = Scale.major; Root.default = 0
+
+Clock.bpm = 150
+
+a1 >> chip_arp([(0, 2, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=2, sus=1.9, level=-9)  # Arp A
+
+d4 >> kit_tight_chat(dur=1/2, velo=0.75)  # Drums c.hat
+
+l1 >> chip_lead([0, 2, 4, 2, 5, 4, 2, 3, 2, 1, 0, 1], dur=PStutter([1/2, 1, 1/2, 2], [6, 1, 4, 1]), sus=PStutter([0.4625, 0.9625, 0.4625, 1.9625], [6, 1, 4, 1]), oct=6)  # Lead A
+
+b1 >> chip_bass([0, 7, 0, 7, -2, 5, -2, 5, -4, 3, -4, 3, -3, 4, -3, 4], dur=1/2, sus=0.175, oct=4)  # Bass A
+
+a1.stop()
+
+d1 >> kit_tight_kick(dur=[2, 1/2, 3/2], velo=[1, 0.75, 0.75])  # Drums kick
+
+d2 >> kit_tight_snare(dur=2, delay=1)  # Drums snare
+
+d4 >> kit_tight_chat(dur=1/2, velo=0.75)  # Drums c.hat
+
+l2 >> chip_lead([2, 4, 5, 4, 2, 1, 2, 0, 2, 4, 5, 7, 6, 5, 4, 5, 2], dur=[1/2, 1/4, 3/4, 1/4, 1/4, 1/2, 1/2, 1, 1/2, 1/4, 1/2, 1/4, 1/4, 1/4, 1/2, 1/2, 1], sus=[0.4625, 0.2125, 0.7125, 0.2125, 0.2125, 0.4625, 0.4625, 0.9625, 0.4625, 0.2125, 0.4625, 0.2125, 0.2125, 0.2125, 0.4625, 0.4625, 0.9625], oct=6)  # Lead B
+
+a1 >> chip_arp([(0, 2, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=2, sus=1.9, level=-9)  # Arp A
+
+b1 >> chip_bass([0, 7, 0, 7, -2, 5, -2, 5, -4, 3, -4, 3, -3, 4, -3, 4], dur=1/2, sus=0.175, oct=4)  # Bass A
+
+d1 >> kit_tight_kick(dur=[2, 1/2, 3/2], velo=[1, 0.75, 0.75])  # Drums kick
+
+d2 >> kit_tight_snare(dur=2, delay=1)  # Drums snare
+
+d4 >> kit_tight_chat(dur=1/2, velo=0.75)  # Drums c.hat
+
+d5 >> kit_tight_ohat(dur=1, delay=1/2, velo=0.75)  # Drums o.hat
+
+l1 >> chip_lead([0, 2, 4, 2, 5, 4, 2, 3, 2, 1, 0, 1], dur=PStutter([1/2, 1, 1/2, 2], [6, 1, 4, 1]), sus=PStutter([0.4625, 0.9625, 0.4625, 1.9625], [6, 1, 4, 1]), oct=6)  # Lead A
+
+b1 >> chip_bass([0, 7, 0, 7, -2, 5, -2, 5, -4, 3, -4, 3, -3, 4, -3, 4], dur=1/2, sus=0.175, oct=4)  # Bass A
+
+a1.stop()
+
+l2.stop()
+
+d1 >> kit_tight_kick(dur=[2, 1/2, 3/2], velo=[1, 0.75, 0.75])  # Drums kick
+
+d2 >> kit_tight_snare(dur=2, delay=1)  # Drums snare
+
+d4 >> kit_tight_chat(dur=1/2, velo=0.75)  # Drums c.hat
+
+d5.stop()
+
+#@s5_chorus2(32)
+l1.stop()
+l2 >> chip_lead([2, 4, 5, 4, 2, 1, 2, 0, 2, 4, 5, 7, 6, 5, 4, 5, 2], dur=[1/2, 1/4, 3/4, 1/4, 1/4, 1/2, 1/2, 1, 1/2, 1/4, 1/2, 1/4, 1/4, 1/4, 1/2, 1/2, 1], sus=[0.4625, 0.2125, 0.7125, 0.2125, 0.2125, 0.4625, 0.4625, 0.9625, 0.4625, 0.2125, 0.4625, 0.2125, 0.2125, 0.2125, 0.4625, 0.4625, 0.9625], oct=6)  # Lead B
+b1 >> chip_bass([0, 7, 0, 7, -2, 5, -2, 5, -4, 3, -4, 3, -3, 4, -3, 4], dur=1/2, sus=0.175, oct=4)  # Bass A
+a1 >> chip_arp([(0, 2, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=2, sus=1.9, level=-9)  # Arp A
+d1 >> kit_tight_kick(dur=[2, 1/2, 3/2], velo=[1, 0.75, 0.75])  # Drums kick
+d2 >> kit_tight_snare(dur=2, delay=1)  # Drums snare
+d4 >> kit_tight_chat(dur=1/2, velo=0.75)  # Drums c.hat
+d5 >> kit_tight_ohat(dur=1, delay=1/2, velo=0.75)  # Drums o.hat
+
+Clock.clear()
+soff()
+
+#@s1_glass(32)
+Clock.bpm = 72
+Scale.default = Scale.major; Root.default = 2
+fx_stop()
+fx_hall("cathedral")
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+#@s3_deep(32)
+g1.stop()
+p1 >> sub_pad([(0, 2, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=8, oct=4, tohall=0.6)  # Pad A
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+s1 >> sub_bass([7, 5, 3, 4], dur=8, oct=2, level=-12)  # Sub A
+
+#@s4_all(32)
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+p1 >> sub_pad([(0, 2, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=8, oct=4, tohall=0.6)  # Pad A
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+s1 >> sub_bass([7, 5, 3, 4], dur=8, oct=2, level=-12)  # Sub A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+#@s5_fade(32)
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+p1.stop()
+b1.stop()
+s1.stop()
+
+Clock.clear()
+soff()
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+_seq_cancel()
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+
+_seq_schedule(32, 1794192803396)
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+_seq_cancel()
+g1.stop()
+p1 >> sub_pad([(0, 2, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=8, oct=4, tohall=0.6)  # Pad A
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+s1 >> sub_bass([7, 5, 3, 4], dur=8, oct=2, level=-12)  # Sub A
+
+_seq_schedule(32, 1794192830066)
+
+Clock.bpm = 192
+
+_seq_cancel()
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+p1 >> sub_pad([(0, 2, 4), (-2, 0, 2), (-4, -2, 0), (-3, -1, 1)], dur=8, oct=4, tohall=0.6)  # Pad A
+b1 >> fm_bell([2, 4, 1, 7], dur=[8, 12, 6, 6], delay=4, sus=1/2, oct=6, level=-16, dry=0.5, tohall=0.7)  # Bell A
+s1 >> sub_bass([7, 5, 3, 4], dur=8, oct=2, level=-12)  # Sub A
+
+_seq_schedule(32, 1794192845985)
+
+Clock.clear()
+soff()
+
+_seq_cancel()
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+Clock.clear()
+soff()
+
+g1 >> fm_glass([(0, 4, 8, 9), (-2, 2, 7, 11), (-4, 0, 5, 9), (-3, 1, 6, 8)], dur=8, oct=4, tohall=0.5)  # Glass A
+
+b1.stop()
+
+Clock.clear()
+soff()
+
+nr >> neuroreese([0, 0, 3, -2], dur=[1, 0.5, 0.5, 2], oct=4, morph=linvar([0.2, 0.9], 16), cutoff=linvar([800, 4000], 32), modrate=4, moddepth=600, amp=0.6)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4, mverb=0.5).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1, mverb=0.5).unison(3)
+an >> addrone((0, 4), dur=8, hpf=1200, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5).unison(3)
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+Clock.clear()
+soff()
+
+_seq_cancel()
+~h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1, sus=2, preset=8, amp=var([1, 0.8], [8, 8]), oct=var(P*[5, 6, (6, 7)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, fbdelay=0.25, glide=0, rgate=0, a=0.3)
+
+_seq_schedule(32, 1794193704094)
+
+_seq_cancel()
+h4.slider()
+
+_seq_schedule(8, 1794193714142)
+
+_seq_cancel()
+v2 >> choir([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], vowel=2, vowelf=0, vowelq=1, beat_dur=1, rate=1, mverb=0.85, blur=0, lpf=PRand(1200, 3000), hpf=300, amp=linvar([1, 0.5], 24)).unison(2) + (-7, PStep(5, 7, 0))
+
+_seq_schedule(32, 1794193716648)
+
+Clock.bpm = 72
+
+v2 >> choir([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], vowel=2, vowelf=0, vowelq=1, beat_dur=1, rate=1, mverb=0.85, blur=0, lpf=PRand(1200, 3000), hpf=300, amp=linvar([1, 0.5], 24)).unison(2) + (-7, PStep(5, 7, 0))
+
+b9 >> bell2([0, 7, 12], dur=16, oct=5, amp=linvar([0, 0.55], 24), atk=4, sus=14, lpf=linvar([400, 2500], 64), room=0.7, mix=0.5, multicrush=1.5, mclowdrive=1.5, mcmiddrive=1.5, mchighdrive=2.5, mclofreq=120, mchifreq=2800, tube=0.5, tubegain=1.0, tubewarm=0.8, hard=var([0, 1, 2, 4], 8), nharm=2, fmamt=[0, 1, 2, 4], fmratio=12, strike=1, shimmer=2.0)
+
+g3 >> play("xXx--[---]", sample=3,fbdelay=2, fbtime=1, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, leg=4, echo=4, echomix=0.5, echotime=4, beat_dur=1, amp=PWhite(0, 1), dur=1/4, mverb=1).after(4,"stop")
+
+h4 >> plaitsX([0, 11, 4, 0, 2, 4, 5, 0], dur=P[21, 0.5, 0.5, 1, 0.5, 0.5, 1, 1]*1, sus=2, preset=6, amp=var([1, 0.8], [8, 8]), oct=var(P*[4, 5, (4, 6)], 8), cutoff=12200, vib=12, pan=PWhite(-0.6, 0.6), hpf=200, high=4, shape=0.2,eb=0.5, ebfeed=0.5, ebmix=1, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3, fbdelay=0.25, glide=0, a=0.3) + [-4, 0]
+
+g4 >> play("h", sample=4, rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]), shift=PRand([2, 4, 8]))
+
+#@part7(16)
+x4.stop()
+x5.stop()
+g4 >> play("h", sample=4, rate=linvar([PRand([1, 2, 4, 8, 16]), 1], PRand([1, 2, 4, 8])), dur=var([PRand([4, 16, 32]), 1/4]), shift=PRand([2, 4, 8]))
+
+_seq_cancel()
+b9 >> bell2([0, 7, 12], dur=16, oct=5, amp=linvar([0, 0.55], 24), atk=4, sus=14, lpf=linvar([400, 2500], 64), room=0.7, mix=0.5, multicrush=1.5, mclowdrive=1.5, mcmiddrive=1.5, mchighdrive=2.5, mclofreq=120, mchifreq=2800, tube=0.5, tubegain=1.0, tubewarm=0.8, hard=var([0, 1, 2, 4], 8), nharm=2, fmamt=[0, 1, 2, 4], fmratio=12, strike=1, shimmer=2.0)
+
+_seq_schedule(16, 1794193738677)
+
+#@part8(32)
+e4 >> play(PRand("Xx.G.xGg.xx.G[gg]x.x".replace("x", "o")), rate=2, amp=0.7, cut=PWhite(0.5, 1), sample=PRand(20), dur=1/4, lpf=0, leg=10, krush=0).sometimes("stutter").slider()
+h4.oct=4
+
+attack("hajnalfull - 174")
+

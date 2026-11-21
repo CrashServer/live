@@ -1,0 +1,377 @@
+fx_stop()
+
+Clock.bpm = 110
+
+d1 >> faim(PStutter([2, 14, 4, 5, 17, 2, (2, 14), 14, 4, 5, 17, 2, 14, 4, 5, 17, 2, (2, 14), 14, 4, 5, 17, 2, 14, 4, 5, 17, 2, (2, 14), 14, 4, 5, 17, 2, 14, 4, 5, 17, 2], [4, 2, 2, 2, 2, 5, 1, 1, 2, 2, 2, 4, 2, 2, 2, 2, 5, 1, 1, 2, 2, 2, 4, 2, 2, 2, 2, 5, 1, 1, 2, 2, 2, 4, 2, 2, 2, 2, 2]), dur=PStutter([1/2, 3, 1/4, 3/4, 1/4, 3/4, 1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4], [1, 1, 1, 1, 7, 1, 4, 1, 7, 1, 3, 1, 7, 1, 4, 1, 7, 1, 3, 1, 7, 1, 4, 1, 7, 1, 3, 1, 7, 1, 1, 1]), delay=1/2, sus=1/4, oct=4, scale=Scale.chromatic, root=0, tube=0.8, tape=1.2, vadiodc=0.5, echo=0.5, subenh=1, subhfreq=100, tubebias=0.1, fbfeed=0.7, tubegain=1.9, tapewobble=0.1, fbcutoff=3000, mix=0.1, tapedrive=2.2, fbspread=0.02, subhgain=2, tubewarm=0.6, tapewarm=0.5, vadiodd=1.8, fbdelay=0.5, vadiodr=0.4, vadiod=1500, fbtime=0.25)  # d2 (faim) b2
+
+fx_echo("dub throw")
+
+d2 >> faim([2, 2, 2, (2, 14), 14, 4, 4, 5, 5, 17, 17, 2, 2, 2, 2, 14, 14, 4, 4, 5, 5, 17, 17, 2, 2], dur=PStutter([1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4], [2, 1, 7, 1, 3, 1, 7, 1, 2]), sus=1/4, scale=Scale.chromatic, root=0, tube=0.8, tape=1.2, vadiodc=0.5, echo=0.5, subenh=1, subhfreq=100, tubebias=0.1, fbfeed=0.7, tubegain=1.9, tapewobble=0.1, fbcutoff=3000, mix=0.1, tapedrive=2.2, fbspread=0.02, subhgain=2, tubewarm=0.6, tapewarm=0.5, vadiodd=1.8, fbdelay=0.5, vadiodr=0.4, vadiod=1500, fbtime=0.25)  # d2 (faim) b3
+
+d1.stop()
+
+d3 >> faim([2, 2, 2, (2, 14), 14, 4, 4, 5, 5, -7, -7, 2, 2, 2, 2, 14, 14, 4, 4, 5, 5, -7, -7, 2, 2], dur=PStutter([1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4], [2, 1, 7, 1, 3, 1, 7, 1, 2]), sus=1/4, oct=4, scale=Scale.chromatic, root=0, tube=0.8, tape=1.2, vadiodc=0.5, echo=0.5, subenh=1, subhfreq=100, tubebias=0.1, fbfeed=0.7, tubegain=1.9, tapewobble=0.1, fbcutoff=3000, mix=0.1, tapedrive=2.2, fbspread=0.02, subhgain=2, tubewarm=0.6, tapewarm=0.5, vadiodd=1.8, fbdelay=0.5, vadiodr=0.4, vadiod=1500, fbtime=0.25)  # d2 (faim) b4
+
+Clock.clear()
+soff()
+
+j5 >> kit_boom_kick()
+
+fx_drive("valve_crunch")
+
+j5 >> kit_boom_kick(todrive=0.5)
+
+j5 >> kit_boom_kick(todrive=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.1)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.0)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.0, leg=4)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.1, leg=4)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.2, leg=4)
+
+fx_hall("plate")
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.2, leg=4, tohall=0.5)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.2, leg=4, tohall=0.4)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.2, leg=4, tohall=0.3)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.2, leg=4, tohall=0.2)
+
+fx_stop()
+
+fx_hall("plate")
+
+fx_drive("valve_crunch")
+
+fx_stop()
+
+y1 >> braids(timbre=0.5, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+i7 >> a_bd(click=1, punch=1, sub=1, distortion=3)
+
+i7 >> a_bd(click=1, punch=1, sub=1, distortion=0)
+
+i7 >> a_bd(click=1, punch=1, sub=1, distortion=0, amp=4)
+
+i7 >> a_bd(click=1, punch=2, sub=1, distortion=0, amp=4)
+
+i7 >> a_bd(click=1, punch=3, sub=1, distortion=0, amp=4)
+
+i7 >> a_bd(click=1, punch=4, sub=1, distortion=0, amp=4)
+
+i7 >> a_bd(click=4, punch=4, sub=1, distortion=0, amp=4)
+
+i7 >> a_bd(click=4, punch=4, sub=1, distortion=0, amp=40)
+
+i7 >> a_bd(click=4, punch=4, sub=1, distortion=1, amp=40)
+
+i7.stop()
+
+q2 >> dbass(PWalk(), rate=1, phase=0.9)
+
+fx_hall("room")
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.2, leg=4, tohall=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.3, leg=4, tohall=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.4, leg=4, tohall=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.5, leg=4, tohall=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.6, leg=4, tohall=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.7, leg=4, tohall=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.8, leg=4, tohall=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.2)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.3)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.4)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.5)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.6)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.7)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.8)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.9)
+
+j5 >> kit_boom_kick(dur=1/2, todrive=0.9, leg=4, tohall=0.0)
+
+y1 >> braids(timbre=0.5, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=0.6, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=0.7, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=0.8, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=0.9, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.0, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.1, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.2, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.3, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.4, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.5, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.6, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.7, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.8, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=1.9, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.0, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.1, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.2, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.3, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.4, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.5, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.6, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.7, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.8, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2.9, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.0, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.1, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.2, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.3, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.4, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.5, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.6, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.7, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.8, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=3.9, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.0, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.1, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.2, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.3, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.4, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.5, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.6, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.7, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=0.5, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=4, model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=40, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=400, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=4, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=0, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=1, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=2, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=3, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=4, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=5, bbits=0, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=5, bbits=1, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=5, bbits=2, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=5, bbits=3, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=4.8, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=0.8, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2700, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2600, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2500, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2400, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2300, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2200, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2100, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=2000, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1900, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1700, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1600, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1500, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1400, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1300, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1200, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1100, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=1000, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=900, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=800, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=700, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=600, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=500, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=400, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=300, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=299, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=298, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=297, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=296, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=295, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=294, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=293, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=294, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=295, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=296, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=297, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=298, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=299, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=300, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=301, rq=0.8, detune=0.125)
+
+y1 >> braids(timbre=2, color=[4, 2], model=1, decim=5, bbits=4, ws=0.2, cutoff=401, rq=0.8, detune=0.125)
+
+g1 >> riff_fuzz([0, 0, 0, 2, 3, 0, 0, -1, 0, 0, 0, 2, 3, 4, 3, 2], dur=[1, 1, 1, 1/2, 3/2, 1, 1, 1], sus=PStutter([0.975, 0.475, 1.475, 0.975], [3, 1, 1, 3]), oct=3)  # Guitar A
+
+b1 >> riff_bass([0, 0, 0, 2, 3, 0, 0, -1, 0, 0, 0, 2, 3, 4, 3, 2], dur=[1, 1, 1, 1/2, 3/2, 1, 1, 1], sus=PStutter([0.975, 0.475, 1.475, 0.975], [3, 1, 1, 3]), oct=2, gain=0.55)  # Bass A
+
+d1 >> riot_garage_kick(dur=[1/2, 1, 1/2], velo=0.65)  # Drums kick
+
+d2 >> riot_garage_snare(dur=2, delay=1)  # Drums snare
+
+d5 >> riot_garage_crash(dur=1/2, velo=0.65)  # Drums crash
+
+Clock.clear()
+soff()
+
+attack("dive the dice - 92")
+
+Clock.bpm=92
+Scale.default="minor"
+Root.default=1
+
+x8 >> lfnoise(rate=PWhite(0,1), cutoff=PRand(400, 4800), rq=0.8, vol=.2, dur=8, blur=2, mverb=.2)
+
+o8 >> faim([var([0, -1, -2],8), var([7, 9], 13), var([9, 8, 7, 5],6)], dur=P[1/2,1/2].exp(2), beef=2,  wshape=0, wgain=1, wmix=0.5, mverb=0.7, oct=(5,PStep(9, 7,6)), vol=.8, resonz=0.8, rfreq=410).unison(3)
+
+c1 >> dafbass(dur=PDur(var([1, 4,3,4,5,7],[1, 1, 1, .5]), 16), oct=(4,5), rate=P*[1,2] , valad=linvar([500,4000], [64]), valadr=linvar([.1, .9], [55]), valadd=PStep(16, PWhite(5, 55), 5), valadt=0, valadc=0.2,).unison(3)
+
+c1 >> dafbass(dur=PDur(var([1, 4,3,4,5,7],[1, 1, 1, .5]), 16), oct=(4,5), rate=P*[1,2] , valad=linvar([500,4000], [64]), valadr=linvar([.1, .9], [55]), valadd=PStep(16, PWhite(5, 55), 5), valadt=0, valadc=0.2,).unison(3)
+o8.resonz=0
+
+x5 >> play("-", dur=PDur(var([1, 4,3,9, 4,5,7],P*[1, 1, .5, 1/4, 1/8]), 8, 1), amp=1, rate=1/x5.dur, mverb=.2)
+
+solar(6, 2, mode="rnd")
+
+e7 >> play("x.", sample=3, fbdelay=expvar([0.1, .99], [64,0]), fbtime=0.25, fbfeed=0.8, fbcutoff=linvar([2000, 12000],[64,0]), fbspread=0.02, beat_dur=1, hpf=expvar([0, 0, 400],[32, 32, 0]) )
+c1.hpf=var([140, 0],[.25])
+
+a0 >> play(".(...{..c})c.", rate=[1, -.9,1, 1], sample=4, delay=[0, 0, PStep(PRand(2,8), PWhite(.01, .06),0), 0], mverb=0.2, mverbmix=0.2, mverbdamp=0.2, mverbdiff=0.625, hpf=400 )
+
+## More creepy
+o8 >> faim([var([0, -1, -2],8), var([7, 9], 13), var([9, 8, 7, 5],6)], dur=P[1/2,1/2].exp(1), beef=2,  wshape=3, wgain=1, wmix=0.5, mverb=0.7, oct=(5,PStep(9, 7,6)), vol=0.6).unison(3)
+o8 >> faim([var([0, -1, -2],8), var([7, 9], 13), var([9, 8, 7, 5],6)], dur=P[1/2,1/2].exp(1), beef=PFr(-1,2),  wshape=3, wgain=1.5, wmix=0.5, mverb=0.7, oct=(5,PStep(9, 7,6)), vol=0.6).unison(3)
+x2 >> play("X.", sample=0, amp=2)
+
+Clock.bpm=92
+Scale.default="minor"
+Root.default=1
+
+Clock.clear()
+soff()
+
+m3 >> dopple(rate=1)
+
+fx_echo("")
+
+fx_echo("slapback")
+
+m3 >> dopple(rate=1, toecho=0.5)
+
+Clock.clear()
+soff()
+
+fx_echo("slapback")
+

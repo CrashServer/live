@@ -1,0 +1,797 @@
+h7 >> play("X ")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+h7 >> play("X ")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack()
+
+o1 >> loop("dubstepbass32", dur=32, amp=1).lclip(var([0.25, 0.5]))
+
+h7 >> play("X ")
+
+j2 >> bass(dur=1/2, amp=j1.degree==4, oct=(6, 7), leg=40)
+
+j4 >> alva(dur=2, shape=2, a=0.5, hpf=linvar([20, 1500], 32), lpr=0.1)
+
+chaos(8)
+
+cs >> loop("metalsynth16", dur=16, sample=5)
+
+cs >> loop("metalsynth16", dur=16, sample=5, amp=2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("insaneOnSixtyFour 172")
+
+Clock.bpm=172
+Scale.default="minor"
+Root.default="D"
+cyH = 64
+cyL = 64
+
+l1 >> loop("wardrum16", dur=16,sample=var(PRand([18,23]), [cyH]),drcomp=.5, amp=var([0.5, 1], [cyH, cyL]), hpf=120)
+
+~l2 >> loop("rockriff_16", dur=16, sample=2, low=1, chop=var([0,P*[2,4,8]], [cyH, cyL]), chopi=var(PRand([0, .25, .5, .75]), [32]), mid=1.2, hpf=0)
+
+l3 >> loop("gscreechvar16", dur=16, sample=PRand(55), hpf=var([0, 7000], [cyH, cyL]), mverb=.3)
+d1 >> play("X", amp=Pvar([P[1,0],PTimebin()], [cyH, cyL]), mid=2).sometimes("stutter")
+d2 >> play("{---=}", rate=PFr(1.0,3.0), pan=PWhite(-1,1)).sometimes("stutter", PRand(15))
+
+l4 >> loop("jungleboy16", dur=16,sample=var(PRand(404), [cyH]), hpf=500, drcomp=var([0, .5],[cyH, cyL]))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+l4 >> loop("jungleboy16", dur=16,sample=var(PRand(404), [cyH]), hpf=500, drcomp=var([0, .5],[cyH, cyL]))
+
+d1 >> play("X", amp=Pvar([P[1,0],PTimebin()], [cyH, cyL]), mid=2).sometimes("stutter")
+
+d2 >> play("{---=}", rate=PFr(1.0,3.0), pan=PWhite(-1,1)).sometimes("stutter", PRand(15))
+
+s1 >> rave(Pvar([var([14,18],[15,1]), PSaw(cyH*2)*14], [cyH, cyL]), dur=var([1/2,1],[15,1]), glide=PWhite(0.0,2.0), oct=(5,4,5), eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=.56, ebflutter=125, ebsat=0.6, hpf=500, high=2).unison(3)
+
+s1.stop()
+
+m3 >> loop("ragegrowl16", dur=2, sample=(PRand(44),PRand(66)), amp=Pvar([P[1,0],P[0]], [cyH, cyL]), eb=0.25, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=.15, ebflutter=150, ebsat=0.3, mverb=.2, high=2, hpf=120)
+
+h7 >>loop("oldies8", dur=8, drcomp=.5, drive=0, wshape=0,  wgain=1, wmix=0.5, sample=14, rate=0.8, eb=0.75, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=15, ebflutter=150, ebsat=0.3, amp=PZero(8,7)*2)
+
+h7.stop()
+
+m3.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+j7 >> blip(rate=1, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0)
+
+j7.stop()
+
+chaos(8)
+
+chaos(8)
+
+oc >> wobble(P[9, 7, 0, 2], dur=PRy(16,3,0), oct=[6, 5, 3], wphase = [1000, 793, 199, 604, 78], cutoff = linvar([[2048, 5629],[5472, 10993]],[12, 17, 25, 17, 10]), ).unison(2)
+
+oc.stop()
+
+qf >> subbass([2, 2, 1, 7, 7, 0, 0, 4, 3, 2, 2, 4, 3, 3, 5, 4], dur=PDur(5,8), oct=[5, 6, 6, 4, 4], ).unison(2)
+
+j7 >> blip(rate=1, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+qf.stop()
+
+f2 >> ikea(dur=8)
+
+f2.stop()
+
+v2 >> ikea(hhat=0.1, sn=0.1, harm=0)
+
+v2 >> ikea(hhat=0.1, sn=0.2, harm=0)
+
+v2 >> ikea(hhat=0.1, sn=0.3, harm=0)
+
+d1 >> lapin(rate=1, dur=8)
+
+d1 >> lapin(rate=1, dur=8, echo=4)
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=8)
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=2, vib=4)
+
+tr >> play ("X ", )
+
+tr >> play ("X ",chop=2 )
+
+tr >> play ("X ",chop=0 )
+
+tr >> play ("X ",chop=0, vib=2 )
+
+tr >> play ("|X2| ",chop=0, vib=2 )
+
+tr >> play ("|X3| ",chop=0, vib=2 )
+
+tr >> play ("|X0| ",chop=0, vib=2 )
+
+tr >> play ("|X4| ",chop=0, vib=2 )
+
+drop()
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=2, vib=4, oct=4)
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=0 )
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=2, vib=4, oct=4, amp=1.5)
+
+yi >> play("[--]")
+
+yi >> play("[--] [--]", )
+
+Clock.bpm=127
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=0 )
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=1 )
+
+v2 >> ikea(hhat=0.1, sn=0.3, harm=0, amp=2)
+
+v2 >> ikea(hhat=0.1, sn=0.3, harm=0, amp=3)
+
+yi >> play("[--][--]", )
+
+yi >> play("[--][-i]", )
+
+yi >> play("[--] [-i]", )
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=1, dur=PDur(3,8) )
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=1, dur=PDur(5,8) )
+
+yi >> play("[--] [--]", )
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=2, vib=4, oct=5, amp=1.5)
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=2, vib=4, oct=6, amp=1.5)
+
+n6 >> tb304(cutoff=100, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0)
+
+n6 >> tb304(cutoff=100, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8))
+
+n6 >> tb304(cutoff=300, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8))
+
+n6 >> tb304(cutoff=600, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8))
+
+n6 >> tb304(cutoff=800, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8))
+
+n6 >> tb304(cutoff=900, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8))
+
+lp >> play (" |o3|", dur=2/2)
+
+n6 >> tb304(cutoff=900, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=4)
+
+n6 >> tb303(cutoff=900, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=4)
+
+n6 >> tb303(cutoff=900, rq=0.7, top=1500, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=5)
+
+n6 >> tb303(cutoff=900, rq=0.7, top=00, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=6)
+
+n6 >> tb303(cutoff=900, rq=0.7, top=00, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=4)
+
+yi >> play("[--] [--]", amp=0)
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=2, vib=4, oct=6, amp=2.5)
+
+v2 >> ikea(hhat=0.1, sn=0.3, harm=0, amp=0)
+
+rt >> acidbass ([0,pat("hf2"),0,-1],dur=.5, fbdelay=0.5, fbtime=0.25 , oct=6)
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=1, dur=PDur(1,8) )
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=1, dur=PDur(2,8) )
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=1, dur=PDur(3,8) )
+
+yi >> play("[--] [--]", amp=1)
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=2, vib=8, oct=6, amp=2.5)
+
+v2 >> ikea(hhat=0.1, sn=0.3, harm=0, amp=3)
+
+j7 >> cs80(fatk = 0.75, fdec = 0.5, fsus = 0.8, frel = 1.0, cutoff = 2200, detune = 0.002, vibspeed = 4, vibdepth = 0.015, glide = 0.8, glidedur = 0.015)
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=1, dur=PDur(5,8) )
+
+rt.stop()
+
+lp >> play (" |o3|", dur=2/2, amp=0)
+
+rt >> acidbass ([0,pat("hf2"),0,-1],dur=.5, fbdelay=0.5, fbtime=0.25 , oct=6)
+
+yi >> play("[--] [--]", amp=0)
+
+lp >> play (" |o2|", dur=2/2, amp=1)
+
+lp >> play ("|o2|", dur=2/2, amp=1)
+
+lp >> play (" |o2|", dur=2/2, amp=1)
+
+n6 >> tb303(cutoff=900, rq=0.7, top=00, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=5)
+
+n6 >> tb303(cutoff=900, rq=0.7, top=00, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=6)
+
+n6 >> tb303(cutoff=900, rq=0.7, top=00, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=8)
+
+d1 >> lapin(rate=1, dur=8, echo=4, tremolo=2, vib=8, oct=6, amp=0)
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=1, dur=PDur(4,8) )
+
+yi >> play("[--] [--]", amp=1)
+
+yi >> play("[--] [--]", amp=0)
+
+tr >> play ("|X4| ",chop=0, vib=2, amp=0, dur=PDur(4,8) )
+
+n6 >> tb303(cutoff=900, rq=0.7, top=00, fAtk=0.001, fDec=0.15, fSus=0.5, fRel=0.2, wave=0, dur=PDur(3,8), oct=8, amp=0)
+
+rt >> acidbass ([0,pat("hf2"),0,-1],dur=.5, fbdelay=0.5, fbtime=0.25 , oct=6, amp=0)
+
+lp >> play (" |o2|", dur=2/2, amp=0)
+
+j7 >> cs80(fatk = 0.75, fdec = 0.5, fsus = 0.8, frel = 1.0, cutoff = 2200, detune = 0.002, vibspeed = 4, vibdepth = 0.015, glide = 0.8, glidedur = 0.015, amp=0)
+
+f2 >> ikea(dur=8)
+
+f2 >> ikea(dur=8, shape=0.5)
+
+f2 >> ikea(dur=8, shape=1)
+
+f2 >> ikea(dur=8, shape=1).unison(3)
+
+f2 >> ikea(dur=8, shape=[1, 0, 0.5]).unison(3)
+
+f2 >> ikea(dur=8, shape=[1, 0, 0.5]).unison(3)
+
+f2 >> ikea(dur=8, shape=[1, 0, 0.5, 2]).unison(3)
+
+v2.stop()
+
+son()
+
+d1.stop()
+
+d1.stop()
+
+tr.stop()
+
+yi.stop()
+
+yi.stop()
+
+yi.stop()
+
+lp.stop()
+
+lp.stop()
+
+lp.stop()
+
+lp.stop()
+
+lp.stop()
+
+j7.stop()
+
+j7.stop()
+
+j7.stop()
+
+n6.stop()
+
+n6.stop()
+
+n6.stop()
+
+n6.stop()
+
+n6.stop()
+
+rt.stop()
+
+rt.stop()
+
+rt.stop()
+
+f2.stop()
+
+f2.stop()
+
+s1.stop()
+
+s2.stop()
+
+s3.stop()
+
+s5.stop()
+
+s4.stop()
+
+son()
+
+attack("David Lynch Code")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+w1 >> loop("losthighway4", dur=4, sample=0, mverb=0, comp=0, tanh=.2) # apples
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0) # robot fight
+
+r6 >> loop("dune8", dur=8, sample=1, hpf=0) # robot fight
+
+# Epic dance
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+h5 >> loop("dune_8", dur=8, sample=PRand(8), tanh=.2) 
+r4 >> loop("dune8", dur=8, sample=0, chop=0, chopwave=2, shift=(.25,.5,0,1.5,1.75)) # ambi montee
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+v8 >> loop("twinpeaks16", dur=16, chop=2, sample=0) # intro
+
+v9 >> loop("twinpeaks16", dur=16, chop=2, chopi=0.5, sample=1) # 2 INtro
+
+z4 >> loop("lynchcrazy8", dur=8, sample=2) # rise up down tempo
+
+c7 >> play("<k-><..><..u.>", sample=0, amp=1).sometimes("stutter", PRand(2))
+
+j3 >> loop("losthighway8", dur=8, sample=1).solo(32) # putaSpell bass
+
+j3 >> loop("losthighway8", dur=8, sample=1).only() # putaSpell bass
+
+j3 >> loop("losthighway8", dur=8, comp=0, comp_down=1, comp_up=0.8, sample=1).only()
+
+j3 >> loop("losthighway8", dur=8, comp=0.2, comp_down=1, comp_up=0.8, sample=1).only()
+
+j3 >> loop("losthighway8", dur=8, comp=0.5, comp_down=1, comp_up=0.8, sample=1).only()
+
+j3 >> loop("losthighway8", dur=8, comp=0.5, low=4, comp_down=1, comp_up=0.8, sample=1).only()
+
+j3 >> loop("losthighway8", dur=8, comp=0.5, low=4, comp_down=1, comp_up=0.8, sample=1).only()
+
+j3 >> loop("losthighway8", dur=8, comp=0.5, low=4, mid=4, comp_down=1, comp_up=0.8, sample=1).only()
+
+j3 >> loop("losthighway8", dur=8, comp=0.5, low=4, mid=4, comp_down=1, comp_up=0.8, sample=1).lclip(4)
+
+j3 >> loop("losthighway8", dur=8, comp=0.5, low=4, mid=4, comp_down=1, comp_up=0.8, sample=1).lclip(4)
+
+j3 >> loop("losthighway8", dur=8, comp=0.5, low=4, mid=4, comp_down=1, comp_up=0.8, sample=1).lclip(2)
+
+j3 >> loop("losthighway8", dur=8, comp=0.5, low=4, mid=4, comp_down=1, comp_up=0.8, sample=1).lclip(0)
+
+g4 >> loop("elephant16", dur=16, sample=1)
+
+g4.stop()
+
+j3.stop()
+
+x5 >> loop("mulholland8", dur=8, sample=2, chop=2, chopi=0) # swing jazz
+
+u4 >> loop("losthighway16", dur=16, sample=2) # heirate
+
+x5.stop()
+
+u4 >> loop("losthighway16", dur=16, sample=2, chop=4) # heirate
+
+u4 >> loop("losthighway16", dur=16, sample=2, chop=4,  chopmix=0.5) # heirate
+
+u4 >> loop("losthighway16", dur=16, sample=2, chop=4,  chopmix=0.1) # heirate
+
+u4 >> loop("losthighway16", dur=16, sample=2, chop=4,  chopmix=0.1) # heirate
+
+c7 >> play("<k-><..><..u.>", sample=0, amp=1).sometimes("stutter", PRand(2))
+
+c7.stop()
+
+c7 >> play("<k.><..><..u.>", sample=0, amp=2, comp=1, lpf=0).sometimes("stutter")
+
+son()
+
+attack("thunder 134")
+
+f1 >> dafbass([Pvar([P[4,7], P[5,8]],8),0], dur=1/4, oct=(6,4), dist2=[0.8,0.4], rate=[0,0], hpf=100, tape=1.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, tube=0.9, tubegain=1.5, tubewarm=0.6, tubebias=0.1).gtr(5).unison(3)
+
+f1 >> dafbass([Pvar([P[4,7], P[5,8]],8),0], dur=1/4, oct=(6,4), dist2=[0.8,0.4], rate=[0,0], hpf=100, tape=1.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, tube=0.9, tubegain=1.5, tubewarm=0.6, tubebias=0.1).gtr(5).unison(3).only()
+
+Clock.bpm=134
+
+d1 >> play("<k.k...k...k...k.><m.m.............><M.M.............><->", sample=(0,1,1,0), comp=0.8, mverb=0.8)
+
+f1 >> dafbass([P[12,10,9,10,9,7,9,5,7,4,5,4,5,4,5,4],0], dur=1/4, dist2=[0.8,0.4], oct=6).gtr(5)
+d1 >> play("<k.k...k...k...k.><m.m.............><M.M.............><->", sample=(0,1,1,0), comp=0.8, mverb=0.8)
+
+b1 >> dafbass(var(P*[2,-3,-1,-5],8), dur=1/4, dist2=0.8, rate=[2,4]).gtr(2)
+
+f1 >> dafbass([P[12,10,9,10,9,7,9,5,7,4,5,4,5,4,5,4],0], tape=1.5, tapedrive=1.9, tapewarm=0.5, tapewobble=0.1, dur=1/4, dist2=[0.8,0.4], tube=0.6, tubegain=2.0, tubewarm=0.5, tubebias=2.5, oct=5).gtr(5).unison(3)
+
+f1.stop()
+
+son()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+son()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+r5 >> dbass()
+
+l8 >> play("x")
+
+l8 >> play("x")
+
+l8 >> play("x")
+
+l8 >> play("x")
+
+l8 >> play("x")
+
+l8 >> play("x")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+x5 >> play("x")
+
+x5 >> play("x", amp=.2)
+
+attack()
+
+Clock.bpm = 110
+
+Root.default = "C"
+
+Root.default = "C"
+
+Clock.bpm = 144
+
+Clock.bpm = 120
+
+Clock.bpm = 120
+
+Clock.bpm = 120
+
+Clock.bpm = 120
+
+Clock.bpm = 120
+
+Clock.bpm = 120
+
+Clock.bpm = 120
+
+Clock.bpm = 120
+
+Clock.bpm = 120
+
+x5.stop()
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+i0 >> play("")
+
+Scale.default = "minor"
+Root.default = "C"
+
+Clock.bpm = 60
+
+oj >> pianovel([0,6,5,6], oct=3, dur=1, sus=0.88, amp=1, room=0.7, mix=0.6)
+
+pt >> pianovel([0,3,5,7,5,3,7,5], oct=5, dur=var([1,1,1,0.5,1,1,2,2],[1,1,1,1,1,1,1,2]), sus=var([0.8,0.8,0.8,0.4,0.8,0.8,1.5,1.5],[1,1,1,1,1,1,1,2]), amp=0.5, room=0.75, mix=0.65, pan=sinvar([-0.2,0.2],16))
+

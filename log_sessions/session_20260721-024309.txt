@@ -1,0 +1,298 @@
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+k4 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+p1 >> dbass()
+
+s4 >> dbass()
+
+s4 >> dbass()
+
+s4 >> dbass()
+
+chaos(8)
+
+attack()
+
+attack("epicdevo 66")
+
+_seq_cancel()
+
+_seq_schedule(32, 1784704438618)
+
+_seq_cancel()
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+_seq_schedule(32, 1784704439883)
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1784704455906)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1784704459935)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1784704463953)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1784704467970)
+
+_seq_cancel()
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, hpf=100).often("stutter", oct=P*[4, 4,5, 6])
+
+_seq_schedule(16, 1784704476007)
+
+attack("David Lynch Code")
+
+z4.stop()
+

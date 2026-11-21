@@ -1,0 +1,22 @@
+attack("lost ion run 126")
+
+Clock.bpm = 126
+
+Scale.default = Scale.dorian; Root.default = 9
+
+one_fx_stop()
+
+one_fx("echo", "one_fx_echo", inb=6, outb=2, outamt=0.4, out2b=0, out2amt=0.8, sync=1, div=7, ms=350, fb=0.5431, tone=2235.4561, mode=1, mix=1, beat_dur=0.4762)
+
+one_fx("hall", "one_fx_hall", inb=2, outb=0, outamt=1, pre=39.6245, size=1.5705, decay=4.9858, damp=6000, width=1, mix=1)
+
+b1.stop()
+
+b2.stop()
+
+a1.stop()
+
+a2.stop()
+
+d1 >> berlin_kick(dur=[1, 1, 1, 1], velo=[1, 0.75, 0.75, 0.75], sus=4, every=0.4762, tune=0, dec=0.75, lvl=0, x=0.4, odrive=0.1, level=-5, oroom=0.25, rumble=0, rdec=2.6, )  # Drums kick
+

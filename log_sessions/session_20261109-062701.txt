@@ -1,0 +1,644 @@
+nr >> neuroreese([0, 0, 3, -2], dur=[1, 0.5, 0.5, 2], oct=4, morph=linvar([0.2, 0.9], 16), cutoff=linvar([800, 4000], 32), modrate=4, moddepth=600, amp=0.6)
+
+dm >> doom([0, 0, 5, 3], dur=1/2, oct=4, pw=linvar([0.2, 0.8], 8), cutoff=2400, wnoise=0.1, amp=0.5)
+
+Clock.clear()
+soff()
+
+c4 >> kit_dirty_kick()
+
+c4 >> kit_dirty_kick(amp=0.5)
+
+c4 >> kit_dirty_kick(amp=0.5, velocity=0.5)
+
+c4 >> kit_dirty_kick(amp=0.5, velocity=0.1)
+
+c4 >> kit_dirty_kick(amp=0.5, velocity=0.9)
+
+c4 >> kit_dirty_kick(amp=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+c4 >> kit_dirty_kick(amp=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=400)
+
+c4 >> kit_dirty_kick(amp=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40)
+
+c5 >> kit_dirty_kick(amp=0.5, fbdelay=0.25, oct=6, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40)
+
+c5 >> kit_dirty_kick(amp=0.5, fbdelay=0.25, oct=7, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40)
+
+c5 >> kit_dirty_kick(amp=0.5, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40)
+
+c5 >> kit_dirty_kick(amp=0.5, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40, rate=2)
+
+c5 >> kit_dirty_kick(amp=0.5, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40)
+
+c5 >> kit_dirty_kick(amp=0.5, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.8, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40)
+
+c5 >> kit_dirty_kick(amp=0.5, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.9, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40)
+
+c6 >> kit_dirty_kick(amp=0.5, dur=2, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.9, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40)
+
+c6 >> kit_dirty_kick(amp=0.5, dur=2, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.9, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40, dist2=0.2)
+
+c6 >> kit_dirty_kick(amp=0.5, dur=2, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.9, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40, dist2=0.1)
+
+c6 >> kit_dirty_kick(amp=0.5, dur=2, fbdelay=0.25, oct=7, fbtime=0.5, fbfeed=0.9, fbcutoff=3000, fbspread=0.02, beat_dur=1, hpf=40, dist2=0.0)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=2, cswfreq=200)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=2, cswfreq=200)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=2, cswfreq=100)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=2, cswfreq=20)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=2, cswfreq=10)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=2, cswfreq=1)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=2, cswfreq=1)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=2, cswfreq=0.1)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=1, cswfreq=0.1)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, shape=0.2)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, shape=0)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.2)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.1)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.2)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.4)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.5)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.6)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.4, vadiodd=0.5, vadiodc=0.6)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.3, vadiodd=0.5, vadiodc=0.6)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.2, vadiodd=0.5, vadiodc=0.6)
+
+~c7 >> kit_dirty_kick(amp=0.8, dur=1/2, csweep=0, cswfreq=0.1, vadiod=500, vadiodr=0.1, vadiodd=0.5, vadiodc=0.6)
+
+k7 >> kit_boom_clap()
+
+k7 >> kit_boom_clap(dur=2)
+
+h6 >> acidline(rq=0.6, beef=2, accent=0, slide=0)
+
+h6 >> acidline(rq=0.6, disto=0, smooth=0.3, distomix=1, beef=2, accent=0, slide=0)
+
+h6 >> acidline(rq=0.6, disto=1, smooth=0.3, distomix=1, beef=2, accent=0, slide=0)
+
+h6 >> acidline(rq=0.6, disto=0.2, smooth=0.3, distomix=1, beef=2, accent=0, slide=0)
+
+Clock.clear()
+soff()
+
+fx_hall("cathedral", decay=7)
+
+p1 >> sub_pad([(0, 4, 8, 9), (-2, 2, 6, 7), (-4, 0, 4, 5), (-3, 1, 5, 6)], dur=8, oct=4, tohall=0.6)  # Pad A
+
+p1 >> sub_pad([(0, 4, 8, 9), (-2, 2, 6, 7), (-4, 0, 4, 5), (-3, 1, 5, 6)], dur=8, oct=4, tohall=0.6)  # Pad A
+
+s1 >> sub_bass([7, 5, 3, 4], dur=8, oct=2, level=-10)  # Sub A
+
+fx_hall("cathedral", decay=7)
+
+fx_hall("cathedral", decay=7)
+
+p1 >> sub_pad([(0, 4, 8, 9), (-2, 2, 6, 7), (-4, 0, 4, 5), (-3, 1, 5, 6)], dur=8, oct=4, tohall=0.6)  # Pad A
+
+s1 >> sub_bass([7, 5, 3, 4], dur=8, oct=2, level=-10)  # Sub A
+
+x4 >> loop("jazza8", dur=8)
+
+x4.stop()
+
+s1 >> sub_bass([7, 5, 3, 4], dur=8, oct=2, level=-10)  # Sub A
+
+fx_hall("cathedral", decay=7)
+
+fx_hall("cathedral", decay=8)
+
+fx_hall("cathedral", decay=9)
+
+Clock.clear()
+soff()
+
+z5 >> play("V ")
+
+z5 >> play("V ", bank=1)
+
+z5 >> play("V ", bank=1, sample=PRand(8))
+
+z5 >> play("V ", bank=1, sample=PRand(8), amp=0.5)
+
+p1 >> sub_pad([(0, 4, 8, 9), (-2, 2, 6, 7), (-4, 0, 4, 5), (-3, 1, 5, 6)], dur=8, oct=4, tohall=0.6)  # Pad A
+
+#   Clock.schedule(lambda: compo.fire("slow air 76", "s1_loop", seq=True), Clock.mod(32) - 1/16)
+
+z5 >> play("V ", bank=1, sample=PRand(8), amp=0.5)
+
+z5.stop()
+
+z5 >> play("V ", bank=1, sample=PRand(8), amp=0.5)
+
+z5.stop()
+
+z5 >> play("V ", bank=1, sample=PRand(8), amp=0.5)
+
+z5.stop()
+
+z5 >> play("V ", bank=1, sample=PRand(8), amp=0.5)
+
+z5.stop()
+
+z5 >> play("V ", bank=1, sample=PRand(8), amp=0.5)
+
+z5.stop()
+
+v5 >> loop("acid4", dur=4,rate=1.0, pos=0, sample=0)
+
+v5 >> loop("acid4", dur=4,rate=1.0, pos=0, sample=0).lclip(0.5)
+
+v5 >> loop("acid4", dur=4,rate=1.0, pos=0, sample=0).lclip(0.12)
+
+v5 >> loop("acid4", dur=4,rate=1.0, pos=0, sample=0).lclip(0.5)
+
+v5 >> loop("acid4", dur=4,rate=1.0, pos=0, sample=0).lclip(1)
+
+v5 >> loop("acid4", dur=4,rate=1.0, pos=0, sample=0).lclip(2)
+
+v5 >> loop("acid4", dur=4,rate=1.0, pos=0, sample=0).lclip(4)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+
+d1 >> play("x-o-x-o-", dur=1/2)
+
+b1 >> dbass([0, 0, 3, -2], dur=1, oct=5)
+
+p1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5)
+
+solar(14, 2)
+
+solar(14, 2, keep="d1")
+
+solar(30, 2, solo=0)
+
+solar(6, 2, mode="rnd")
+
+solar(14, 2, depth=0.25)
+
+so.solo()
+
+Clock.schedule(unsolo, Clock.mod(64))
+
+Energy.shape("build", sections=4, bars=4)
+
+d1.enter(0)
+
+Clock.clear()
+soff()
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=5)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=3)
+
+g2 >> blip([0, 2, 4], dur=PPoly(3, 4), oct=5)
+
+g1.stop()
+
+g2.stop()
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=5)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=3)
+
+g3.stop()
+
+g4 >> keys([0, 4, 7], dur=PAdditive(2, 2, 3), oct=5)
+
+g4.stop()
+
+g5 >> pluck(PMelody(I, style=1, length=16), dur=1/4, oct=5)
+
+Clock.clear()
+soff()
+
+g6 >> pads(PCircle(0, steps=8), dur=8, sus=7.5, oct=4)
+
+Clock.clear()
+soff()
+
+g7 >> play("-", dur=PGroove("funk", density=0.8))
+
+g8 >> play("x", dur=PClave("son"))
+
+Clock.clear()
+soff()
+
+g9 >> pluck([0, 2, 4, 7], dur=1/2, sus=PArticulation("staccato"), oct=5)
+
+Clock.clear()
+soff()
+
+u1durs, u2durs = PPolyEuclid(3, 8, 5, 8)
+
+u1 >> play("X", dur=u1durs)
+
+u2 >> play("o", dur=u2durs)
+
+Clock.clear()
+soff()
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env("stab"), amp=env("accent"))
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env(1), amp=env("accent"))
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env(2), amp=env("accent"))
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env(3), amp=env("accent"))
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env(4), amp=env("accent"))
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env(6), amp=env("accent"))
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env(1), amp=env("accent"))
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env("build16"), amp=env("accent"))
+
+Clock.clear()
+soff()
+
+m2 >> bass(mel("acid1"), dur=1/8, oct=4)
+
+m2 >> bass(mel("acid1"), dur=1/8, oct=5)
+
+Clock.clear()
+soff()
+
+m3 >> saw(arp("broken1"), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp("broken1"), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp("broken1"), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp("broken2"), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp("broken2"), dur=1/4, oct=5, amp=0.4)
+
+Clock.clear()
+soff()
+
+m4 >> keys(chords("houseprog"), dur=4, oct=5)
+
+Clock.clear()
+soff()
+
+m2 >> bass(mel(3), dur=1/8, oct=4, sus=env(2))
+
+Clock.clear()
+soff()
+
+m2 >> bass(mel([1, 5, "tb2"], 8), dur=1/8, oct=4)
+
+Clock.clear()
+soff()
+
+m3 >> saw(arp([1, "trance3"], 8), dur=1/16, oct=5, amp=0.4)
+
+Clock.clear()
+soff()
+
+m4 >> keys(chord(["maj7", "houseprog"], 8), dur=2, oct=5)
+
+Clock.clear()
+soff()
+
+b1 >> play(pat("d2"), dur=1/4)
+
+Clock.clear()
+soff()
+
+b2 >> play(p("af3"), dur=1/4)
+
+Clock.clear()
+soff()
+
+b3 >> play(gen_khsor(4), dur=1/4)
+
+Clock.clear()
+soff()
+
+k1 >> bass([0, 3, 5], dur=ppat("d2"), oct=4)
+
+Clock.clear()
+soff()
+
+k2 >> pluck([0, 2, 4, 7], dur=1/4, amp=pamp("t1"), oct=5)
+
+print(phits("d2"))
+
+Clock.clear()
+soff()
+
+r1 >> pluck([0, _, 2, _, 4, _, (0, _, 4), _], dur=1/4, oct=5)
+
+Clock.clear()
+soff()
+
+r2 >> blip([0, 4], dur=1, oct=5, echo=0.5, echotime=r3.dur)
+
+r3 >> pluck([7, 5], dur=1/2, oct=5)
+
+Clock.clear()
+soff()
+
+d1 >> play("x-o-", dur=1/2)
+
+drop(6, 2, 2)
+
+Clock.clear()
+soff()
+
+soloRnd(8)
+
+find_scale([0, 3, 7])
+
+find_scale([0, 3, 7])
+
+chaos(4, header=1, evt=2, mod=2)
+
+chaos(4, header=1, evt=2, mod=2)
+
+mm >> loop("ghperc16", dur=16, sample=10, amp=0.81, ring=fg(8, 0.76, 0.67), ringl=expvar([1473, 618], 16), ringh=sinvar([1822, 9973], 32), octer=fg(8, 0.69, 0.64), octersub=expvar([7, 4], 16), octersubsub=fw(16, 1, 8)).human(45, 5, 4).after(9, "offbeat" )
+
+iv >> loop("saturn8", dur=8, sample=76, amp=0.97, bend=linvar([3, 0], 8)).rarely("fill" )
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+l1 >> loop("jazza8", dur=16, sample=4).lclip(1)
+
+l1 >> loop("jazza8", dur=16, sample=4).lclip([1, 2, 4])
+
+t1 >> timestretch("jazza8", dur=8, stretchratio=2)
+
+Clock.clear()
+soff()
+
+VidCtrl.load("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
+VidCtrl.play()
+
+VidCtrl.load("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
+VidCtrl.stut([0.25, 0.5], dur=1)
+
+compo.cell_display("B32")
+
+compo.cell_run("B32", stop_after=16)
+
+compo.cell_run("B32", stop_after=16)
+
+compo.cells_list()
+
+compo.cell_reload()
+
+nr >> neuroreese([0, 0, 3, -2], dur=[1, 0.5, 0.5, 2], oct=4, morph=linvar([0.2, 0.9], 16), cutoff=linvar([800, 4000], 32), modrate=4, moddepth=600, amp=0.6)
+
+Clock.bpm = 112
+Scale.default = "minor"
+Root.default = 0
+
+Clock.clear()
+soff()
+
+gs >> glitchstab([(0, 4), (3, 7)], dur=PDur(3, 8), oct=5, glitchamt=0.6, bits=var([8, 4], 8), cutoff=4000, amp=0.5)
+
+Clock.clear()
+soff()
+
+sk >> subkick(0, dur=[1, 1, 1, 0.5, 0.5], oct=4, click=0.5, punch=0.8, subt=0.3)
+
+Clock.clear()
+soff()
+
+ds >> darksnare(0, dur=2, delay=1, oct=5, tone=0.4, snap=0.8, body=0.6, amp=0.7)
+
+Clock.clear()
+soff()
+
+dm >> doom([0, 0, 5, 3], dur=1/2, oct=4, pw=linvar([0.2, 0.8], 8), cutoff=2400, wnoise=0.1, amp=0.5)
+
+dm.stop()
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=5, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=5, feedback=1.2, index=4, vib=0.4, amp=0.4)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.4)
+
+Clock.clear()
+soff()
+
+pk >> piacon([(0, 2, 4), (3, 5, 7)], dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.6, amp=0.7)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.4)
+
+dc >> dtclap(0, dur=2, delay=1, oct=5, tone=1200, spread=3, snap=0.7, amp=0.6)
+
+dh >> dthihat(0, dur=1/4, oct=6, tone=8000, open=var([0, 0, 0, 1], 1), metallic=0.7, amp=PWhite(0.3, 0.6))
+
+xb >> xbass([0, 0, 3, -2], dur=1/2, oct=4, amp=0.5)
+
+Clock.clear()
+soff()
+
+mb >> membrane([0, 0, -3, 2], dur=[0.75, 0.75, 0.5, 2], oct=4, strike=PWhite(0, 1), tension=0.5, hardness=0.6, decay=0.8)
+
+bw >> bowed([0, 2, 4, 3], dur=2, oct=4, force=var([0.6, 1.4], 8), bowpos=0.1, atk=0.3, rel=0.5, amp=0.8)
+
+Clock.clear()
+soff()
+
+o1 >> sub_acid([0, 0, 3, 5, 0, 7, 5, 3], dur=1/4, oct=4)
+
+Clock.clear()
+soff()
+
+o2 >> fm_glass([(0, 4), (-2, 2)], dur=8, oct=5)
+
+o3 >> chip_arp([0, 4, 7, 12], dur=1/8, oct=5, amp=0.5)
+
+Clock.clear()
+soff()
+
+o4 >> riff_groove([0, 0, 3, 5], dur=1/2, oct=4, amp=0.6)
+
+Clock.clear()
+soff()
+
+macid = sound(sub_acid, cutoff=600, res=0.9)
+
+o1 >> macid([0, 3, 7, 3], dur=1/4, oct=4)
+
+Clock.clear()
+soff()
+
+k1 >> iron_floor.kick(dur=1)
+
+k2 >> iron_floor.clap(dur=2, delay=1)
+
+k3 >> iron_floor.c_hat(dur=1/4, velo=[1, 0.6])
+
+k4 >> riot.snare.steps("....X.......X..x", swing=0.6)
+
+k5 >> kit_tight.rim.steps("..x...x...x..x..")
+
+Clock.clear()
+soff()
+
+h3 >> riot_metal_snare()
+
+Clock.clear()
+soff()
+
+fx_hall("cathedral")
+
+fx_echo("slapback")
+
+fx_drive("warm tape")
+
+fx_duck("pump (side)")
+
+k1 >> iron_floor.kick(dur=1, side=1)
+
+o2 >> fm_glass([(0, 4), (-2, 2)], dur=8, oct=5, tohall=0.5, dry=0.6)
+
+o1 >> sub_acid([0, 0, 3, 5], dur=1/4, oct=4, todrive=0.6, toduck=1)
+
+m3 >> dopple([0, 4], dur=1, oct=5, rate=1, toecho=0.5, tohall=0.2)
+
+fx_hall("plate", decay=3.5)
+
+fx_stop("echo")
+
+fx_stop()
+
+Clock.clear()
+soff()
+
+d1 >> play("x-o-x-o=", dur=1/2, drumBuss=0.6, gatecrush=var([0, 1], [12, 4]), gcrate=8, gcbits=6)
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, duck=1, duckamt=0.8, darkverb=0.5, dvdecay=4, dvcut=1800)
+
+s2 >> blip([0, 4, 7], dur=1/2, oct=5, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+Clock.clear()
+soff()
+
+s3 >> pads((0, 2, 4), dur=8, oct=4, smorph=1, smorphmix=0.6, smorphfreeze=var([0, 1], 8))
+
+s4 >> saw([0, 3], dur=1, oct=4, resample=var([0, 1], [8, 8]), rsrate=0.5, rsgrains=8, rsjitter=0.1, amp=0.4)
+
+Clock.clear()
+soff()
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, lpf=2400, **lfo("lpf", rate=4, mul=0.5))
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, lpf=2400, **lfo("lpf", rate=1, mul=0.5))
+
+Clock.clear()
+soff()
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, lpf=2400, **lfo("lpf", rate=1, mul=0.5))
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, lpf=2400, **lfo("lpf", rate=0.5, mul=0.5))
+
+Clock.clear()
+soff()
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, lpf=2400, **lfo("lpf", rate=0.5, mul=0.5))
+
+s4 >> saw([0, 3], dur=1, oct=4, fold=0.4, amp=0.4)
+
+Clock.clear()
+soff()
+
+Server.addFx(lpf=900)
+
+Server.bypassFx("lpf")
+
+Server.bypassFx("lpf")
+
+print(Server.bypassedFx())
+
+masterFx("lpf")
+
+masterFx("lpf", remove=True)
+
+d1 >> play("x-o-x-o-", dur=1/2)
+
+b1 >> dbass([0, 0, 3, -2], dur=1, oct=5)
+
+p1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5)
+
+solar(14, 2)
+
+Energy.shape("build", sections=4, bars=4)
+
+d1 >> play("x-o-x-o-", dur=1/2)
+b1 >> dbass([0, 0, 3, -2], dur=1, oct=5)
+p1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5)
+
+Energy.shape("build", sections=4, bars=4)
+
+Energy.shape("build", sections=4, bars=4)
+
+d1.enter(0)
+
+b1.enter(0.3)
+
+p1.enter(0.7)
+
+print(Energy)
+
+Energy.shape("arch", 4, 4)
+
+Energy.shape("drop", 5, 4)
+
+Energy.set(0.5)
+
+Clock.clear()
+soff()
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=5)
+
+Clock.clear()
+soff()
+

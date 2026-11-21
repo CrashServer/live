@@ -1,0 +1,110 @@
+_seq_cancel()
+Clock.bpm = 174
+Root.default = "C"
+Scale.default = "minor"
+k1 >> play("x-", dur=1, sample=var(P[0:10],64), crush=0, amp=0.2).sometimes("stutter", PRand(8), rate=4).unison(5).sometimes("amen")
+b1 >> abass([0, 0, 0, -5, 0, 7, 0, -7], dur=PDur(7, 8), oct=4, sus=PDur(7, 8)*0.6, hpf=80, cutoff=fb(8, 600, 3400), rq=0.3, dist2=fb(24, 0.4, 1.4), tubedrive=0.6, tubewarm=0.5, hpr=0.7, subenh=0.5, subhfreq=80, subhgain=1.2, amp=1.1, glitch=0.2, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+
+_seq_schedule(64, 1779409492361)
+
+_seq_cancel()
+s1 >> play("s", amp=linvar([0.5, 1]), sample=0, dur=1/4, amplify=[0.76, 0.2, 0.4], lpf=PRand(8000,18000), pan=PWhite(-1,1)).human(40,.8)
+h1 >> play("[-]", amp=[0,[0,0,0,[0,1]],1,[0,0,0,[0,0,0,1]]], dur=1/4, sample=8, rate=PWhite(-0.5,3), hpf=180, vol=0.8, pan=PWhite(-1,1))
+
+_seq_schedule(64, 1779409515057)
+
+_seq_schedule(4, 1779409536458)
+
+_seq_cancel()
+p1 >> pianovel([4,5], dur=P[6,2], oct=5, velocity=PRand(60,80), hard=PWhite(0.6,0.8), velhard=PWhite(0.4, 0.6), lofi=0.3, lofiwow=0.5, lofiamp=0.5).unison(17)
+m1 >> a_stress([0, 0, 0, -5, 0, 7, 0, -7], dur=PDur(7, 8), oct=4, sus=PDur(7, 8)*0.6, hpf=80, cutoff=fb(8, 600, 3400), rq=0.3, dist2=fb(24, 0.4, 1.4), tubedrive=0.6, tubewarm=0.5, hpr=0.7, subenh=0.5, subhfreq=80, subhgain=1.2, amp=1.1, glitch=0.2, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+b1 >> cbass([0, 0, 0, -5, 0, 7, 0, -7], dur=PDur(7, 8), oct=3, leg=12, sus=PDur(7, 8)*0.6, hpf=80, cutoff=fb(8, 600, 3400), rq=0.3, dist2=fb(24, 0.4, 1.4), tubedrive=0.6, tubewarm=0.5, hpr=0.7, subenh=0.5, subhfreq=80, subhgain=1.2, amp=1.1, glitch=0.2, glitchrate=8, glitchdepth=0.5, glitchcrush=0.3, glitchchance=0.5, beat_dur=1)
+
+_seq_schedule(128, 1779409537845)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+_seq_cancel()
+Clock.bpm = 144
+Root.default = "C"
+Scale.default = "dorian"
+k1 >> play("X ", amp=2)
+b1 >> jbass(4, dur=1/2, amplify=1, amp=.8, echo=0.5, oct=4)
+
+_seq_schedule(64, 1779409609756)
+
+_seq_cancel()
+s1 >> play("u", amp=[0, 0, 1, 0], sample=4, dur=1/2)
+h1 >> play("-{-[--]}-.-{[---][--]}(-.)(-[----])", sample=2, amp=PCoin(PWhite(0, 1),0,0.5), hpf=6000, pan=PWhite(-1,1)).sometimes("amen").sometimes("bubble").sometimes("stutter", PRand(16), rate=PWhite(-1,5))
+b1 >> dbass([0,0,-1,7,7,-1], dur=[1/2,1/2,[rest(3)]], amp=1, oct=5, echo=0.25, sus=1.5)
+
+_seq_schedule(64, 1779409619489)
+
+_seq_cancel()
+n1 >> mpluck([[0, 1, 2, 1, 0, 1 ,0, -1],-3], mverb=lininf(0,0.8,32), amp=0.5, oct=(PStep(8, 5, 6), 5, 7), pan=PWhite(-1,1), cut=1/2, dur=2, delay=0, hpf=400).unison(4)
+b1 >> lbass([2, [2, 4], [2, 4, 8]],dur=1/4).unison(4)
+
+_seq_schedule(128, 1779409621585)
+
+_seq_cancel()
+p1 >> pianovel(( [[0, 1, 2, 1, 0, 1 ,0, -1],-3], 0), delay=[0, 0, (0, 1.5)], dur=2, velocity=[PRand(50,63),PRand(30,53)], hpf=120, amp=0.5,oct=[4, 5], lpf=8080, sus=0.3).unison(3).sometimes("stutter")
+m1 >> organ(P[-2,2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [8, 4]), amp=1, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle").stop()
+s1 >> play(".(o.[oo]).o(..(.o))", dur=1, hpf=[50, 100], sample=P*[0, 2,4], amp=0.7, echo=PRand([0.5,0.75]), mfp=6000, mverb=(0, 0.2, 0.6))
+
+_seq_schedule(128, 1779409623758)
+
+_seq_schedule(64, 1779409626908)
+
+_seq_cancel()
+s1 >> play("u", sample=6, bank=2, dur=PDur(5,8), pan=PWhite(-1,1), rate=var([1, [1.13, 1.2]],8), pong=0.5, beat_dur=1, pongtime=1, mverb=.9, hpf=1400).unison(3) # congas melodique
+h1 >> click(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=40, drive=[PWhite(0.4,0.8),0.2], oct=(3, PStep(9,5,4)), octer=1, octersub=2, octersubsub=var([2, PRand(15,2222)], [15, 1]), triode=4, amp=0.6, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400)
+n1 >> pluck(PEuclid2(5,8,0,7), dur=1/4, sus=0.3, amp=0.7)
+m1 >> klank([(0,2,4), (3,5,7), (-1,2,5)], dur=2, sus=1.8, amp=0.6)
+
+_seq_schedule(128, 1779409630540)
+
+_seq_cancel()
+p1 >> plaitsX([0, -2, 3, 5], dur=[4, 4, 4, 4], oct=5, preset=11, amp=0.28, cheapverb=0.72, cvdecay=4.5, lpf=500)
+t1 >> pulse(dur=1/2, rate=4, oct=(4,5), valad=500, valadr=0.3, valadd=50, valadt=0, valadc=0.1, ).unison(3).follow(b2).offbeat(0.9)
+s1 >> play(".u..", rate=-1, lpf=PFr(1900,2300), drcomp=.5)
+
+_seq_schedule(128, 1779409633126)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+
+Clock.bpm = 88
+
+Root.default = "E"
+
+Scale.default = "minor"
+
+k1 >> play("<k><@>", sample=(0,1), dur=1/4, amp=a2.amp > 1, hpf=40)
+
+b1 >> lbass(var([0, -2, linvar([-2,0],[8,0])], [16,8,8]), dur=var([1/2,1/4],[24,8]), cutoff=PFr(1200,5000), detune=0.1, hpf=140, tone=PFr(0.16,0.9), dist2=0.3, oct=var([5,lininf(5,6,8)],[24,8])).stop(32)
+
+s1 >> play("<..o.><..*.>", bank=0, rate=2, delay=PWhite(-0.05,.05)*0, sample=3, amp=12800)
+
+h1 >> play("-", dur=P[var(PRand([1/2, 1/4,1/8, 1/16, 1]), 1/2)]*2, pan=PWhite(-1,1), rate=PFr(1.0,2.0), valad=2500, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+b1 >> superbass(lininf(21,-7, 4), dur=PDur([4,7,5],8), cutoff=PFrac(0.6,0.3,16,1200, 2000), detune=0.5, oct=6, rq=lininf(0.1, 0.8, 4), amp=0.2, slide=0, a=0, crush=0, hpf=0, fdecay=6)
+
+p1 >> darkpad([2, 4, 7], follow=2, dur=1/2, amp=0.8, hard=PWhite(0.2,  0.7), velhard=0.6, oct=5, velocity=[PRand(35, 65), PRand(15, 40)], lofi=0.6, lofiwow=fs(16, 0.15, 0.4),lofiamp=0.5, lpf=3900.0, tape=0.25, tapewarm=0.4, shape=0.1, vowel=0.2, vowelf=0, vowelq=1).unison(3)
+
+p1 >> darkpad([2, 4, 7], follow=2, dur=1/2, amp=0.8, hard=PWhite(0.2,  0.7), velhard=0.6, oct=5, velocity=[PRand(35, 65), PRand(15, 40)], lofi=0.6, lofiwow=fs(16, 0.15, 0.4),lofiamp=0.5, lpf=3900.0, tape=0.25, tapewarm=0.4, shape=0.1, vowel=0.2, vowelf=0, vowelq=1).unison(3)
+
+p1 >> darkpad([2, 4, 7], follow=2, dur=1/2, amp=0.8, hard=PWhite(0.2,  0.7), velhard=0.6, oct=5, velocity=[PRand(35, 65), PRand(15, 40)], lofi=0.6, lofiwow=fs(16, 0.15, 0.4),lofiamp=0.5, lpf=3900.0, tape=0.25, tapewarm=0.4, shape=0.1, vowel=0.2, vowelf=0, vowelq=1).unison(3)
+
+m1 >> organ([1, var([_, [7, _, 7, (0, 4, 2)]]), 4, 1, 2], mverb=0.8, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0,dur=1/2, leg=0, scale=Scale.minor, oct=(var([5, 4, 6]), var([8,5,6, 7]))).unison(2).sometimes("shuffle")
+
+Clock.clear()
+soff()
+Server.clearFx()
+

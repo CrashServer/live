@@ -1,0 +1,14 @@
+Server.record()
+
+#@#@ TABATION
+Clock.bpm = 122
+Scale.default = "minor"
+Root.default = var([2, 5, 7, 2], [8, 4, 2, 8, 32])
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=6, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+Clock.clear()
+soff()
+
+Server.stopRecording()
+

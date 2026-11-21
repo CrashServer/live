@@ -1,0 +1,84 @@
+Clock.clear()
+soff()
+Server.clearFx()
+
+# flow — 110 bpm, G dorian, warm current
+Clock.bpm = 110
+Scale.default = "dorian"
+Root.default = "G"
+
+dk >> play("X.", dur=0.5, amp=var([1,0.9,1,0.88],4))
+
+# abass groove line
+ab >> abass([0,-7,0,-5,3,-7,0,-3], oct=4, dur=0.5,
+            sus=var([0.35,0.3,0.45,0.35],[4,4,4,4]),
+            amp=0.75, dubdelay=sinvar([0,0.2],16))
+
+# abass groove line
+ab >> abass([0,-7,0,-5,3,-7,0,-3], oct=4, dur=0.5,
+            sus=var([0.35,0.3,0.45,0.35],[4,4,4,4]),
+            amp=0.75, dubdelay=sinvar([0,0.5],16))
+
+# abass groove line
+ab >> abass([0,-7,0,-5,3,-7,0,-3], oct=4, dur=0.5,
+            sus=var([0.35,0.3,0.45,0.35],[4,4,4,4]),
+            amp=0.75, dubdelay=sinvar([0,0.2],16))
+
+# keys melodic figure — main hook
+ky >> keys([0,2,3,5,7,5,3,0], oct=5, dur=0.5,
+           sus=PRand([0.3,0.5,0.7,1],8), amp=0.45,
+           chorus=0.35, room=0.45, mix=0.35,
+           pan=sinvar([-0.3,0.3],8))
+
+# snare + ghost hits
+sn >> play("..o.", dur=0.5, amp=var([0.8,0.5,0.8,0.45],4),
+           cheapverb=0.2, cvdecay=0.7)
+
+ht >> play("i", dur=0.25, amp=Pacc(3,8),
+           hpf=7000, pan=PRand([-0.25,0,0.25],4))
+
+cl >> play("..u.", dur=0.5, amp=0.55, pan=-0.2,
+           cheapverb=0.15, cvdecay=0.5)
+
+# svdk chord comping — wide and warm
+sv >> svdk([(0,4,7),(-7,0,4),(2,5,9),(-5,-2,2)], oct=4,
+           dur=var([2,1.5,2,2.5],[8,4,8,4]),
+           sus=var([1.5,1,1.5,2],[8,4,8,4]), amp=0.3,
+           chorus=0.4, dubdelay=sinvar([0,0.3],32),
+           lpf=sinvar([1500,4000],32))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# karp pluck melody — Markov chain
+kp >> karp(melody(), oct=5,
+           dur=PRand([0.5,0.25,1,0.75],4),
+           sus=PRand([0.25,0.4,0.6],4), amp=0.35,
+           cheapverb=0.45, cvdecay=1.5,
+           pan=PRand([-0.4,0,0.4],4))
+
+tb >> tb303([0,-2,3,-2,0,5,-2,3], oct=4, dur=0.25,
+            sus=PRand([0.1,0.2,0.3,0.5],8), amp=0.45,
+            lpf=sinvar([400,3500],24), lpr=0.7,
+            dist2=linvar([0,0.4],32))
+
+#@#@ flow
+Clock.bpm = 140
+Scale.default = "phrygian"
+Root.default = "C"
+
+Clock.bpm = 72
+Scale.default = "minor"
+Root.default = "Bb"
+
+# pad foundation — long attack, sinvar breathing
+p1 >> pad2([-7,-5,0,2], oct=5, dur=8,
+           sus=sinvar([5,9],64), amp=sinvar([0.2,0.4],32),
+           room=0.95, mix=0.85,
+           lpf=sinvar([500,1800],48))
+
+Clock.clear()
+soff()
+Server.clearFx()
+

@@ -1,0 +1,188 @@
+#@#@ TABATION
+Clock.bpm = 122
+Scale.default = "minor"
+Root.default = var([2, 5, 7, 2], 16)
+
+p1 >> darkpad([0, -2], dur=8, sus=10, oct=5, amp=0.6,  cutoff=linvar([300, 1800], 48), res=0.3, detune=0.8, dark=0.8, cheapverb=0, cvdecay=0, hpf=120)
+
+l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=6, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16),   cheapverb=0.1, cvdecay=0.2).unison(2)
+
+l2 >> faim([0, -2, 4, 3, 0, 4, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.75,   oct=5, amp=0.75, atk=0.0015, decay=0.15, rel=0.5, peak=0.9, hpf=200, lpf=sinvar([1000, 9000], 32),   cheapverb=0, leg=8, cvdecay=0).unison(0)
+
+Root.default = var([2, 5, 7, 2], 16)
+
+p1 >> darkpad([0, -2], dur=8, sus=10, oct=5, amp=0.6,  cutoff=linvar([300, 1800], 48), res=0.3, detune=0.8, dark=0.8, cheapverb=0, cvdecay=0, hpf=120)
+
+l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=6, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16),   cheapverb=0.1, cvdecay=0.2).unison(2)
+
+l2 >> faim([0, -2, 4, 3, 0, 4, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.75,   oct=5, amp=0.75, atk=0.0015, decay=0.15, rel=0.5, peak=0.9, hpf=200, lpf=sinvar([1000, 9000], 32),   cheapverb=0, leg=8, cvdecay=0).unison(0)
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=8, growl=0.5,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=4, amp=0.45, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.45, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=7, amp=lininf(0, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), dist2=0.1, lpf=linvar([1500, 8000], 16),   cheapverb=0.1, cvdecay=0.2).unison(2)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.6, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+d3 >> a_hhat(0, dur=1/4, amp=Pacc("ghost")*2, beat_dur=0.25, blur=0.02, atk=0.001, decay=0.08, rel=0.05, hpf=6000)
+b1 >> pumpbass([0, -2, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+l2 >> plaitsX([0, -2, 3, 0, 4, 3, -2, 4], dur=PDur(7, 12), sus=PDur(7, 12)*0.7,   oct=6, amp=0.8, atk=0.02, rel=0.4, cutoff=sinvar([1000, 5000], 32), res=0.5,    drive=var([0.3, 0.7, 0.3, 1.0], [8, 8, 8, 8]),  fuzz=var([0, 0.5, 0.3, 0.8], [8, 4, 4, 4]),   cheapverb=0.4, cvdecay=1.5, hpf=250).unison(2)
+
+p1.stop()
+
+b1.stop()
+
+s1.stop()
+
+b1.stop()
+p1.stop()
+d1 >> compkick(0, dur=1, oct=3, amp=0.95, punch=3, comp=0.8, click=0.6, sub=1, body=20, tone=var([0.5, 1], [16, 16]), tape=0.3, tapedrive=1.5, tapewarm=0.4)
+
+p1 >> darkpad([0, -2, -5], dur=var([8, 4, 4], 16), sus=var([9, 5, 5], 16),    oct=6, amp=0.7, cutoff=linvar([500, 2800], 16), res=0.4,    detune=0.5, dark=0.9, shimmer=var([0, 0.5, 0, 0.7], [4, 4, 4, 4]),    cheapverb=0.6, cvdecay=4, hpf=100)
+
+l2 >> faim([0, -2, 4, 3, 0, 4, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.75,   oct=5, amp=0.75, atk=0.0015, decay=0.15, rel=0.5, peak=0.9, hpf=200, lpf=sinvar([1000, 9000], 32),   cheapverb=0, leg=8, cvdecay=0).unison(0)
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=8, growl=0.5,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=4, amp=0.45, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.45, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+Scale.default = Scale.mixolydian
+Root.default = "C"
+
+d2 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d1 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d4 >> a_gesa([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), multicrush=0.5, mclowdrive=4, mcmiddrive=2, mchighdrive=1.80, mclofreq=2000, mchifreq=3000)
+
+d5 >> a_gesa(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, shape=0.5)
+
+~g6 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d1 >> pianovel([4,2,0,2,4,5,4,2,1], dur=PDur(5,8), oct=4, sus=[1,1,2,1,1,1.5,1,1,2], amp=0.85, room=0.35, mix=0.25)
+
+d2 >> pianovel([0,2,4,2], dur=2, oct=5, sus=2.5, amp=0.45, room=0.4, mix=0.3)
+
+d3 >> bbass([0,0,5,4,0,0,3,4], dur=[1,1/2,1/2,1,1,1/2,1/2,1], oct=5, amp=0.6, lpf=linvar([500,2500],16))
+
+d4 >> a_gesa([0,3,5,3], dur=PDur(3,8), oct=4, sus=[0.4,0.6,0.4,1], multicrush=0.4, mclowdrive=3, mcmiddrive=2, mchighdrive=1.5, mclofreq=2000, mchifreq=3000, amp=0.7)
+
+d5 >> a_gesa([6,5,4,2], dur=[2,1,1,4], oct=6, sus=[2,1,1,3], shape=0.3, amp=0.5)
+
+~g6 >> a_xbass([0,0,3,4], dur=[1,1,1,1], oct=5, drive=0.1, amp=0.6).unison(3)
+
+d1 >> pianovel([(0,2,4),(1,3,5),(3,5,7),(4,6,8)], dur=[1,1,1,1], oct=4, sus=1.5, amp=0.9, room=0.45, mix=0.35)
+
+d2 >> pianovel([4,6,7,6,5,4,5,7], dur=[1/2,1/2,1,1/2,1/2,1,1/2,3/2], oct=5, sus=0.6, amp=0.6)
+
+d3 >> bbass(PStutter([0,4,5,3],[3,1,3,1]), dur=1/4, oct=5, amp=0.7, lpf=linvar([800,4500],16))
+
+d4 >> a_gesa([0,0,4,0,5,0,4,3,0,0,4,0,6,0,5,4], dur=1/4, oct=4, multicrush=0.6, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=2000, mchifreq=3000, amp=0.85).every(8,"stutter",2)
+
+d3.stop()
+
+d2.stop()
+
+d1.stop()
+
+d5 >> a_gesa([7,9,11,9,7,6,7,11], dur=[1/2,1/2,1,1/2,1/2,1,1/2,3/2], oct=6, sus=[0.5,0.5,1,0.5,0.5,1,0.5,1.5], shape=0.5, amp=0.55)
+
+g6 >> a_xbass([0,0,4,5], dur=[1,1,1,1], oct=4, drive=0.15, amp=0.7).unison(3)
+
+d1 >> pianovel([1,4,5,6,7,6,5,4], dur=PDur(7,12), oct=4, sus=PWhite(0.5,1.5))          # rising/falling sweep
+
+d1 >> pianovel(PStutter([5,4,2,1],[3,2,3,2]), dur=[3/4,1/2,3/4,1], oct=4)              # syncopated answer
+
+d5 >> a_gesa([6,7,9,7,6,5], dur=PDur(5,8), oct=6, sus=PRand([0.5,1,2]), shape=0.4)     # glassy counter
+
+d2 >> dbass([0,0,4,3], dur=[1,1,1,1], oct=5, drive=0.1).unison(2)                      # alt sub movement
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 132;
+
+Root.default = 6
+
+q3 >> compkick(0, punch=0.5, comp=16, release=0.35, click=1.0,drive=0.4, sub=1, tape=1, tapedrive=2, body=0.2, echo=0, tone=0.0, oct=3,)
+
+n7 >> prof(rate=linvar( [.01, .7], 128), oct=3, dur=8, valad=700, valadr=0.3, valadd=5, valadt=0, valadc=0.2, fx2=.4, eb=0.5, ebfeed=0.25, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3, fx1=.1)
+
+cr >> creep(var([7,5],[4,4])+P[0,0,12,0], dur=2, rate=linvar([0.5,2],16), hpf=400, mverb=0.6, amp=0.25)
+
+p1 >> prof([0,2,4,5,7,5,4,2], dur=0.5, cutoff=linvar([2000,6000],16), rq=0.4, rate=0.5, phase=0.5, mverb=0.4, amp=0.33)
+
+gz >> prof([(0,4,7)], dur=8, wave=linvar([0,60],64), cutoff=linvar([500,3000],32), res1=0.4, lfo1=1, rate1=0.25, depth1=2, oct=5, mverb=0.5, amp=0.5)
+
+dl >> darklead(P[0,2,4,7,9,7,4,2], dur=0.25, cutoff=linvar([1500,5000],8), detune=0.01, drive=1.5, sub=0.2, fbdelay=0.3, fbtime=0.5, fbfeed=0.35, oct=4, amp=0.125).sometimes("degree.add", 7)
+
+sb >> hardstab([([0, 0, 0, 4, 1],4,7)], dur=4, fbdelay=PWhite(0.1, 0.9), fbtime=0.75, fbfeed=0.3, fbcutoff=2000, amp=0.3, gate=0.6)
+
+hv >> hoover([(0,4,7)], dur=32, porta=1.5, portadur=0.3, tubedrive=0.5, tubewarm=0.4, amp=0.4, sus=6)
+
+b3 >> loop("electrodrum8", dur=8, sbrk=PStep(4,0.25,0), t_reset=0, sbrkdur=0.5, sbrkmix=1.0, sample=4, drcomp=.5)
+
+p1.oct=2
+
+gz.oct=3
+
+hv.stop()
+
+seq = var([P[0,0,3,0,5,0,0,3], P[0,2,5,2,7,5,2,0], P[-2,0,3,5,7,5,3,0], P[0,0,5,7,10,7,5,0]], [16, 16, 8, 24])
+
+chd = var([(0,4,7), (0,3,7), (-2,2,5), (2,5,9)], [12, 12, 8, 32])
+
+a1 >> acidline([0,0,3,0,5,0,0,3], dur=0.25, cutoff=linvar([400,2000],8), res=linvar([0.5,0.8],4), drive=2.5, accent=P[0,0,1,0]*0.5, tubedrive=0.4, amp=4.0)
+
+a1 >> acidline(var([seq], [16, 8, 8]), dur=var([0.25, 0.125, 0.25], [24, 4, 4]), cutoff=expvar([300, var([2000, 4000], [16, 16])], 8), res=linvar([0.4, 0.9], 16), drive=linvar([1.5, 4], 32), accent=var([P[0,0,1,0]*0.5, P[1,0,0,1]*0.6, P[0,1,0,1]*0.4], [12, 8, 12]), tubedrive=linvar([0.2, 0.7], 48), amp=var([0.6, 0.8, 0.5], [12, 4, 16]))
+
+d3 >> play("..C.", sample=2, dur=0.5, amp=0.55)
+
+d2 >> play("-", sample=5, dur=0.25, amp=P[0.4,0.15,0.3,0.15], hpf=4000)
+
+px >> plaitsX(var([P[0,2,4],P[4,5,7],P[7,9,11]],[8,8,8]), dur=0.5, preset=var([9,10,11],[8,8,8]), oct=(4,5), chopmix=linvar([0,0.5],16), chopwave=(2,3), mverb=0.4, amp=0.55)
+
+n7.stop()
+cr.stop()
+p1.stop()
+gz.stop()
+dl.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> click(dur=[1/2, 1/4, 1/2, (1/2, 1)], octer=0.6, oct=5, leg=0.2).every(6, "stutter", oct=3, shape=0.1, amp=1)
+
+b2 >> click(dur=P*[1/2, 1/4, 1/2, (1/2, 1)], oct=2, octer=0.2, tanh=0.1).every(6, "stutter", oct=3, shape=0.5, amp=1)
+
+b4 >> click([8, _, 4, 4, 2],dur=1, oct=(4, 5, PStep(2, 3, 6)), shape=0.2, amp=1)
+
+b3 >> click([8, _, 4, 4, 2],dur=[4, 1/2, 1/2, 3], oct=(1, 3), shape=0.2, amp=1)
+
+b1 >> click(dur=[1/2, 1/4, 1/2, (1/2, 1)], octer=0.6, lpf=linvar([400, 4000], 32), lpr=0.4).every(6, "stutter", oct=3, shape=0.5)
+
+b2 >> click(dur=P*[1/2, 1/4, 1/2, (1/2, 1)], oct=4,octer=var([0.2, 1.2], [5, 3]), tanh=0.3).every(6, "stutter", oct=3, shape=0.5, hpf=400)
+
+b3 >> click([8, _, 4, 4, 2],dur=Pvar([1/2, 1/4,4]), oct=(4, 5), shape=0.5, mpf=1800, mverb=0.2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

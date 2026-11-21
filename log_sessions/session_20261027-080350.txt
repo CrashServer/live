@@ -1,0 +1,412 @@
+Clock.bpm = 128
+Scale.default = "minor"
+Root.default = 0
+
+nr >> neuroreese([0, 0, 3, -2], dur=[1, 0.5, 0.5, 2], oct=4, morph=linvar([0.2, 0.9], 16), cutoff=linvar([800, 4000], 32), modrate=4, moddepth=600, amp=0.6)
+
+gs >> glitchstab([(0, 4), (3, 7)], dur=PDur(3, 8), oct=5, glitchamt=0.6, bits=var([8, 4], 8), cutoff=4000, amp=0.5)
+
+sk >> subkick(0, dur=[1, 1, 1, 0.5, 0.5], oct=4, click=0.5, punch=0.8, subt=0.3)
+
+sk.stop()
+
+bw >> bowed([0, 2, 4, 3], dur=2, oct=4, force=var([0.6, 1.4], 8), bowpos=0.1, atk=0.3, rel=0.5, amp=0.8)
+
+mb >> membrane([0, 0, -3, 2], dur=[0.75, 0.75, 0.5, 2], oct=4, strike=PWhite(0, 1), tension=0.5, hardness=0.6, decay=0.8)
+
+mb.stop()
+
+mb >> membrane([0, 0, -3, 2], dur=[0.75, 0.75, 0.5, 2], oct=4, strike=PWhite(0, 1), tension=0.5, hardness=0.6, decay=0.8)
+
+Energy.shape("arch", sections=4, bars=4)
+
+mb.enter(0)
+
+bw.enter(0.5)
+
+print(Energy)
+
+print(Energy)
+
+Energy.set(0.6)
+
+Energy.off()
+
+d1 >> play(pat("t2"), dur=1/4, drumBuss=0.6, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2)
+
+d2 >> play(gen_khsor(4), dur=1/4, gatecrush=var([0, 1], [12, 4]), gcrate=8, gcbits=6, amp=0.6)
+
+d1.stop()
+
+d2.stop()
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, duck=1, duckamt=0.8, darkverb=0.5, dvdecay=4, dvcut=1800)
+
+Clock.clear()
+soff()
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env("stab"), amp=env("accent"))
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env("accent"), amp=env("accent"))
+
+m2 >> bass(mel("acid1"), dur=1/8, oct=4, sus=env("pump"))
+
+m2 >> bass(mel("acid1"), dur=1/8, oct=5, sus=env("pump"))
+
+m2 >> bass(mel("acid2"), dur=1/8, oct=5, sus=env("pump"))
+
+m2 >> bass(mel("acid3"), dur=1/8, oct=5, sus=env("pump"))
+
+m2 >> bass(mel(1), dur=1/8, oct=5, sus=env("pump"))
+
+m2 >> bass(mel(2), dur=1/8, oct=5, sus=env("pump"))
+
+m2 >> bass(mel(4), dur=1/8, oct=5, sus=env("pump"))
+
+m2 >> bass(mel(0), dur=1/8, oct=5, sus=env("pump"))
+
+m2 >> bass(mel("mel1"), dur=1/8, oct=5, sus=env("pump"))
+
+m2 >> bass(mel("acid1"), dur=1/8, oct=5, sus=env("pump"))
+
+m3 >> saw(arp("broken1"), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(2), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(3), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(4), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(5), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(6), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(7), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(8), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(9), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(10), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(11), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(12), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(13), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(14), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(15), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(16), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(17), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(18), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(19), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(20), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(21), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(22), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(23), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(24), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(25), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(26), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(27), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(28), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(29), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(30), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(29), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(28), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(27), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(26), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(25), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(24), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(23), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(22), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(21), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(20), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(19), dur=1/16, oct=5, amp=0.4)
+
+m3 >> saw(arp(18), dur=1/16, oct=5, amp=0.4)
+
+ar >> arpy(arp("trance3"), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+ar >> arpy(arp("trance3"), dur=1/4, oct=5, wide=1.3, amp=0.8, sus=env("accent"))
+
+ar >> arpy(arp(1), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+ar >> arpy(arp(1), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+ar >> arpy(arp([1, 2]), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+ar >> arpy(arp([1, "trance3"], 8), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+ar >> arpy(arp([1, 3], [12, 4]), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+ar >> arpy(arp(var([1, 3], 8)), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env(["stab", "swell"], 8))
+
+m4 >> keys(chords("houseprog"), dur=4, oct=5)
+
+Clock.clear()
+soff()
+
+compo.cell_display("B32")
+
+compo.cell_run("B32", stop_after=16)
+
+compo.cell_reload()
+
+compo.rec_stems(bars=8, session="riga", variation="calm")
+
+drum_patterns()
+
+b2 >> play(pbuild("breaks", evolve=8, fill=4, density=0.9), dur=1/4)
+
+Clock.clear()
+soff()
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, duck=1, duckamt=0.8, darkverb=0.5, dvdecay=4, dvcut=1800)
+
+s2 >> blip([0, 4, 7], dur=1/2, oct=5, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+s1.stop()
+
+s2.stop()
+
+s3 >> pads((0, 2, 4), dur=8, oct=4, smorph=1, smorphmix=0.6, smorphfreeze=var([0, 1], 8))
+
+s4 >> saw([0, 3], dur=1, oct=4, resample=var([0, 1], [8, 8]), rsrate=0.5, rsgrains=8, rsjitter=0.1, amp=0.4)
+
+s4.stop()
+
+s3.stop()
+
+s5 >> pluck([0, 2], dur=1/2, oct=5, crunch=0.6, sblur=1, sbluramt=6, sgate=var([0, 1], 8), sgthresh=1)
+
+s5.stop()
+
+s6 >> keys([0, 4], dur=1, oct=5, tstretch=0.5, tstretchsize=0.2, cheapverb=0.6, cvdecay=2)
+
+s6.stop()
+
+s7 >> bass([0, -2], dur=1, oct=4, dynfuzz=0.7, dfgain=1, octclean=0.5, ocsub=0.6, subenh=1, subhfreq=80)
+
+s7.stop()
+
+s8 >> blip([0, 7], dur=1/4, oct=5, csweep=1, cswfreq=300, doppler=1, dopspd=0.5, spring=0.5, sprdecay=1.5)
+
+s8.stop()
+
+s9 >> pads((0, 4), dur=4, oct=4, spwarp=1, spwstr=1.5, gdel=1, gdeltime=0.5, gdelfb=0.3, vowel=1, vowelf=var([0, 1, 2, 3], 4))
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.4)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.3)
+
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+ar.stop()
+
+rz.stop()
+
+ju >> juno([(0, 2, 4), (3, 5, 7)], dur=4, oct=5, junoshape=linvar([0, 1], 32), junochorus=0.006, cutoff=2800, amp=0.5)
+
+ju.stop()
+
+pk >> piacon(chord("maj7"), dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.4, amp=0.5)
+
+pk >> piacon(chord("houseprogr"), dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.4, amp=0.5)
+
+pk >> piacon(chord("houseprogr", "darkprogr"), dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.4, amp=0.5)
+
+pk >> piacon(chord(["houseprogr", "darkprogr"]), dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.4, amp=0.5)
+
+pk.stop()
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.3)
+
+ar.stop()
+
+ju >> juno([(0, 2, 4), (3, 5, 7)], dur=4, oct=5, junoshape=linvar([0, 1], 32), junochorus=0.006, cutoff=2800, amp=0.5)
+
+ju.stop()
+
+chaos(8)
+
+ja >> loop("synth4", dur=4, sample=77, amp=0.86, position=PLife(0.32, 0.55, 0.5)).human(40, 2, 1).every(5, "offbeat" )
+
+Clock.clear()
+soff()
+
+ic >> loop("tsynth8", dur=8, sample=84, amp=1.42, position=fg(8, 0.93, 0.0), pshift=fc(8, -3, -7)).rarely("stutter" , )
+
+attack()
+
+Clock.clear()
+soff()
+
+attack()
+
+attack()
+
+Clock.bpm = 122
+
+Scale.default = "minor"
+
+Scale.default = "minor"
+
+Scale.default = "minor"
+
+Root.default = "D"
+
+#@intro(16)
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,
+    cutoff=linvar([400, 1200], 32), res=0.3, sub=0.2, body=8, growl=0.15,
+    tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+p1 >> darkpad([0, -2], dur=8, sus=10, oct=4, amp=0.6,
+    cutoff=linvar([300, 1800], 48), res=0.3, detune=0.4, dark=0.8,
+    cheapverb=var([0.4, 0.7], [8, 8]), cvdecay=3.5, hpf=120)
+
+Clock.clear()
+soff()
+
+n1 >> play("W ", sample=8)
+
+n1 >> play("W ", sample=9)
+
+n1 >> play("W ", sample=10)
+
+n1 >> play("W ", sample=11)
+
+n1 >> play("W ", sample=12)
+
+n1 >> play("W ", sample=13)
+
+n1 >> play("W ", sample=14)
+
+n1 >> play("W ", sample=15)
+
+n1 >> play("W ", sample=16)
+
+n1 >> play("W ", sample=17)
+
+n1 >> play("W ", sample=18)
+
+n1 >> play("W ", sample=19)
+
+n1 >> play("W ", sample=20)
+
+n1 >> play("W ", sample=21)
+
+n1 >> play("W ", sample=22)
+
+n1 >> play("W ", sample=23)
+
+n1 >> play("W ", sample=24)
+
+n1 >> play("W ", sample=25)
+
+n1 >> play("W ", sample=26)
+
+FoxDot.reload
+
+FoxDot.reload()
+
+n1 >> play("W ", sample=26)
+
+n1 >> play("W ", sample=25)
+
+n1 >> play("W ", sample=24)
+
+n1 >> play("W ", sample=23)
+
+n1 >> play("W ", sample=22)
+
+n1 >> play("W ", sample=21)
+
+n1 >> play("W ", sample=20)
+
+n1 >> play("W ", sample=19)
+
+n1 >> play("W ", sample=18)
+
+n1 >> play("W ", sample=17)
+
+n1 >> play("W ", sample=16)
+
+n1 >> play("W ", sample=15)
+
+n1 >> play("W ", sample=14)
+
+n1 >> play("W ", sample=13)
+
+n1 >> play("W ", sample=12)
+
+n1 >> play("W ", sample=11)
+
+n1 >> play("W ", sample=10)
+
+n1 >> play("W ", sample=9)
+
+n1 >> play("W ", sample=10)
+
+n1 >> play("W ", sample=11)
+
+n1 >> play("W ", sample=12)
+
+n1 >> play("W ", sample=13)
+
+n1 >> play("W ", sample=14)
+
+n1 >> play("W ", sample=15)
+
+n1 >> play("W ", sample=16)
+
+n1 >> play("W ", sample=17)
+
+n1 >> play("W ", sample=18)
+
+n1 >> play("W ", sample=19)
+
+n1 >> play("W ", sample=20)
+
+n1 >> play("W ", sample=21)
+
+n1 >> play("W ", sample=22)
+
+n1 >> play("W ", sample=23)
+
+n1 >> play("W ", sample=24)
+
+n1 >> play("W ", sample=25)
+
+n1 >> play("W ", sample=24)
+
+n1 >> play("W ", sample=23)
+

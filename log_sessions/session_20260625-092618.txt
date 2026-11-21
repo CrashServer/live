@@ -1,0 +1,1524 @@
+Clock.bpm = 60
+
+Scale.default = "minor"
+
+Root.default = "C"
+
+pt >> pianovel([0,3,5,7,5,3,7,5], oct=5, dur=var([1,1,1,0.5,1,1,2,2],[1,1,1,1,1,1,1,2]), sus=var([0.8,0.8,0.8,0.4,0.8,0.8,1.5,1.5],[1,1,1,1,1,1,1,2]), amp=0.5, room=0.75, mix=0.65, pan=sinvar([-0.2,0.2],16))
+
+oj >> pianovel([0,6,5,6], oct=3, dur=1, sus=0.88, amp=0.42, room=0.7, mix=0.6)
+
+oj >> pianovel([0,6,5,6], oct=3, dur=1, sus=0.88, amp=1, room=0.7, mix=0.6)
+
+vi >> viola([0,5,3,4], oct=3, dur=1, sus=0.15, amp=0.22, room=0.7, mix=0.6, pan=-0.3)
+
+vi >> viola([0,5,3,4], oct=4, dur=1, sus=0.15, amp=0.22, room=0.7, mix=0.6, pan=-0.3)
+
+vi >> viola([0,5,3,4], oct=5, dur=1, sus=0.15, amp=0.22, room=0.7, mix=0.6, pan=-0.3)
+
+vi >> viola([0,5,3,4], oct=5, dur=1, sus=0.15, amp=1, room=0.7, mix=0.6, pan=-0.3)
+
+vi >> viola([0,5,3,4], oct=5, dur=1, sus=0.65, amp=1, room=0.7, mix=0.6, pan=-0.3)
+
+vi >> viola([0,5,3,4], oct=4, dur=1, sus=0.65, amp=1, room=0.7, mix=0.6, pan=-0.3)
+
+vi >> viola([0,5,3,4], oct=3, dur=1, sus=0.65, amp=1, room=0.7, mix=0.6, pan=-0.3)
+
+vi >> viola([0,5,3,4], oct=3, a=0.5, dur=1, sus=0.65, amp=1, room=0.7, mix=0.6, pan=-0.3)
+
+sw >> swell([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4, dur=4, sus=5, amp=sinvar([0.1,0.4],32), rate=0.3, wide=0.7, room=0.95, mix=0.88)
+
+vc >> viola([0,-2,3,2,0,5,3,4], oct=4, dur=var([2,1,1,1,2,1,1,2],[2,1,1,1,2,1,1,2]), sus=var([1.8,0.8,0.8,0.8,1.8,0.8,0.8,1.8],[2,1,1,1,2,1,1,2]), amp=sinvar([0.15,0.35],24), room=0.9, mix=0.8, vibrato=sinvar([0,0.25],16))
+
+vc >> viola([0,-2,3,2,0,5,3,4], oct=5, dur=var([2,1,1,1,2,1,1,2],[2,1,1,1,2,1,1,2]), sus=var([1.8,0.8,0.8,0.8,1.8,0.8,0.8,1.8],[2,1,1,1,2,1,1,2]), amp=sinvar([0.15,0.35],24), room=0.9, mix=0.8, vibrato=sinvar([0,0.25],16))
+
+sw.stop()
+
+hp >> karp([0,3,5,7,5,3, 6,1,3,6,3,1, 5,0,3,5,3,0, 4,6,1,4,1,6], oct=5, dur=0.5, sus=PRand([0.4,0.6,0.8],6), amp=0.28, cheapverb=0.5, cvdecay=2, pan=sinvar([-0.4,0.4],6))
+
+hp >> karp([0,3,5,7,5,3, 6,1,3,6,3,1, 5,0,3,5,3,0, 4,6,1,4,1,6], oct=6, dur=0.5, sus=PRand([0.4,0.6,0.8],6), amp=0.28, cheapverb=0.5, cvdecay=2, pan=sinvar([-0.4,0.4],6))
+
+br >> brass2([0,3,5,7,5,3,7,5, 0,3,5,7,9,7,5,3], oct=5, dur=var([1,0.5,0.5,1,0.5,0.5,1,2],[1,1,1,1,1,1,1,1]), sus=var([0.85,0.4,0.4,0.85,0.4,0.4,0.85,1.8],[1,1,1,1,1,1,1,1]), amp=sinvar([0.3,0.6],16), bright=0.75, growl=sinvar([0.1,0.45],16), vibrate=4.5, vibdepth=0.018, room=0.6, mix=0.5)
+
+hp.stop()
+
+hp >> karp([0,3,5,7,5,3, 6,1,3,6,3,1, 5,0,3,5,3,0, 4,6,1,4,1,6], oct=6, dur=0.5, sus=PRand([0.4,0.6,0.8],6), amp=0.28, cheapverb=0.5, cvdecay=2, pan=sinvar([-0.4,0.4],6))
+
+vc.stop()
+
+vc >> viola([0,-2,3,2,0,5,3,4], oct=5, dur=var([2,1,1,1,2,1,1,2],[2,1,1,1,2,1,1,2]), sus=var([1.8,0.8,0.8,0.8,1.8,0.8,0.8,1.8],[2,1,1,1,2,1,1,2]), amp=sinvar([0.15,0.35],24), room=0.9, mix=0.8, vibrato=sinvar([0,0.25],16))
+
+vi.stop()
+
+tm >> gong([0,rest(0),rest(0),rest(0),5,rest(0),rest(0),rest(0),3,rest(0),rest(0),rest(0),4,rest(0),rest(0),rest(0)], oct=4, dur=1, sus=sinvar([0.5,1.2],16), amp=sinvar([0.2,0.55],16), room=0.6, mix=0.5)
+
+tm.stop()
+
+cx >> cs80([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4, dur=4, sus=5, amp=sinvar([0.12,0.32],32), cutoff=sinvar([1000,3500],24), vibspeed=3.5, vibdepth=0.012, room=0.9, mix=0.8)
+
+ch >> choir([0,5,3,4], oct=4, dur=4, sus=sinvar([4,6],16), amp=sinvar([0,0.22],32), room=0.99, mix=0.95, lpf=linvar([500,2000],64))
+
+ch >> choir([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4, dur=4, sus=5.5, amp=sinvar([0.3,0.55],16), room=0.99, mix=0.95, lpf=linvar([800,3000],32))
+
+al >> sinepad([0,3,5,4], oct=6, dur=4, sus=6, amp=sinvar([0.05,0.22],16), room=0.99, mix=0.95, shimmer=0.5)
+
+pt.stop()
+
+oj.stop()
+
+al >> sinepad([0,3,5,4], oct=6, dur=4, sus=6, amp=sinvar([0.05,0.22],16), room=0.99, mix=0.95, shimmer=0.5)
+
+cl >> bell2([7,9,12,7,5,3,7,9,12], oct=6, dur=PRand([0.5,1,2],9), sus=PRand([0.3,0.5,1],9), amp=sinvar([0.1,0.3],8), cheapverb=0.7, cvdecay=3)
+
+pe >> compperc([rest(0),rest(0),0,rest(0),rest(0),rest(0),0,rest(0)], dur=0.5, amp=sinvar([0.3,0.65],16), tone=0.4, body=0.5, noise=0.5, decay=0.12, drive=1.2, room=0.4, mix=0.35)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 86
+
+Scale.default = "major"
+
+Root.default = "B"
+
+gt >> nylon([0,2,4,2,0,2,4,2, 4,6,8,6,4,6,8,6, 5,7,9,7,5,7,9,7, 3,5,7,5,3,5,7,5], oct=5, dur=0.5, sus=0.45, amp=0.5, room=0.65, mix=0.55, chorus=0.2, pan=sinvar([-0.15,0.15],16))
+
+pd >> piano([(0,2,4),(4,6,8),(5,7,9),(3,5,7)], oct=4, dur=4, sus=3.6, amp=0.32, room=0.7, mix=0.6)
+
+ba >> fbass([0,4,5,3], oct=4, dur=4, sus=3.5, amp=0.6, cutoff=350, rq=0.4)
+
+ba >> fbass([0,4,5,3], oct=4, dur=4, sus=3.5, amp=0.5, cutoff=350, rq=0.4).unison(3)
+
+ba >> fbass([0,4,5,3], oct=4, dur=4, sus=3.5, amp=0.5, lpf=400, cutoff=350, rq=0.4).unison(3)
+
+ml >> keys([4,4,3,2,0,2,3,4,4,4,3,2,0], oct=5, dur=var([0.5,1],[8,5]), sus=PRand([0.5,0.7,1,1.5],5), amp=0.45, room=0.7, mix=0.55, chorus=0.15, pan=0.1)
+
+ml >> keys([4,4,3,2,0,2,3,4,4,4,3,2,0], oct=6, dur=var([0.5,1],[8,5]), sus=PRand([0.5,0.7,1,1.5],5), amp=0.45, room=0.7, mix=0.55, chorus=0.15, pan=0.1)
+
+ml >> keys([4,4,3,2,0,2,3,4,4,4,3,2,0], oct=6, dur=var([0.5,1],[8,5]), sus=PRand([0.5,0.7,1,1.5],5), amp=0.45, room=0.7, mix=0.55, chorus=0.15, pan=0.1).unison(3)
+
+ml >> keys([4,4,3,2,0,2,3,4,4,4,3,2,0], oct=6, dur=var([0.5,1],[8,5]), sus=PRand([0.5,0.7,1,1.5],5), amp=0.45, room=0.7, mix=0.55, chorus=0.5, pan=0.1).unison(3)
+
+sw >> swell([-7,-5,0,4], oct=4, dur=4, sus=4.5, amp=sinvar([0.05,0.18],32), rate=0.4, wide=0.4, room=0.9, mix=0.8)
+
+sw.stop()
+
+sw >> swell([-7,-5,0,4], oct=4, dur=4, sus=4.5, amp=sinvar([0.05,0.18],32), rate=0.4, wide=0.4, room=0.9, mix=0.8)
+
+sw >> swell([(0,2,4),(4,6,8),(5,7,9),(3,5,7)], oct=4, dur=4, sus=4.8, amp=sinvar([0.3,0.5],16), rate=0.3, wide=0.8, room=0.95, mix=0.85)
+
+sw >> swell([(0,2,4),(4,6,8),(5,7,9),(3,5,7)], oct=4, dur=4, sus=4.8, amp=sinvar([0.3,0.5],16), rate=0.3, wide=0.8, room=0.95, mix=0.85, shape=0.45)
+
+sw >> swell([(0,2,4),(4,6,8),(5,7,9),(3,5,7)], oct=5, dur=4, sus=4.8, amp=sinvar([0.3,0.5],16), rate=0.3, wide=0.8, room=0.95, mix=0.85, shape=0.45)
+
+sw.stop()
+
+vi >> viola([0,-2,3,2,0,-2], oct=4, dur=var([2,1,1,1,2,1],[4,2,2,2,4,2]), sus=var([1.8,0.8,0.8,0.8,1.8,0.8],[4,2,2,2,4,2]), amp=sinvar([0.15,0.35],16), room=0.9, mix=0.8, vibrato=sinvar([0,0.3],16))
+
+cx >> cs80([0,4,5,3], oct=4, dur=4, sus=4.5, amp=sinvar([0.1,0.28],32), cutoff=sinvar([1500,3500],32), vibspeed=4, vibdepth=0.015, room=0.9, mix=0.8)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 106
+
+Scale.default = "minor"
+
+Root.default = "D"
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.8, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.9, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.8, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.6, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.5, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.5, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.125, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1, decimate=0.5, decbits=4, decrate=4000, decsmooth=0)
+
+~~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), decimate=0.5, decbits=4, decrate=4000, decsmooth=0)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), decimate=0.5, decbits=12, decrate=4000, decsmooth=0)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), decimate=0.5, decbits=12, decrate=400, decsmooth=0)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), decimate=0.5, decbits=12, decrate=40, decsmooth=0)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), decimate=0.5, decbits=12, decrate=12, decsmooth=0)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+~dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.8, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.4, beat_dur=1)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+ht >> play("i", dur=0.25, amp=PLife(0.5), hpf=8000, pan=PRand([-0.25,0,0.25],4))
+
+ht.stop()
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=6, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+dk >> play(pbuild("dnb"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+dk >> play(pbuild("dnb", mute="snare"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.76, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8), lpf=4000)
+
+ag.dur=2
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8), lpf=4000)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=6000, fbspread=0.4, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,-5,-7,-7,4,0], oct=7, dur=0.25, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,4,-7,-7,4,0], oct=7, dur=0.25, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,4,-7,-7,4,0], oct=7, dur=0.25, sus=0.4, hpf=1200,amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,4,-7,-7,4,0], oct=7, dur=0.25, sus=0.4, hpf=400,amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=3)
+
+d2 >> play("X.X.X...X.X.X...", dur=0.25, amp=0.75, sample=4, hpf=60)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=1200, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=1.5, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
+
+hv >> dbass([7,5,0,7,5,7,rest(0),0], oct=6, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+hn >> hnoise(0, oct=5, dur=PFDur((7,8),(5,16)), amp=sinvar([0,0.55],4), lpf=sinvar([2000,14000],4), hpf=1200, dynfuzz=0.75, dfgain=2)
+
+h8 >> play("X ")
+
+hv.oct=5
+
+hv.hpf=1200
+
+cr >> blip([0,-5,0,-7,-5,-7,0,-5], oct=6, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+hn.stop()
+
+dm >> a_gesa3([0,-7,0,-5,0,-7,-12,-7], oct=2, dur=0.5, sus=0.45, amp=0.95, dist2=0.5, lpf=sinvar([80,400],8))
+
+dm >> a_gesa3([0,-7,0,-5,0,-7,-12,-7], oct=2, dur=0.5, sus=0.45, amp=2, dist2=0.5, lpf=sinvar([80,400],8))
+
+dm >> a_gesa3([0,-7,0,-5,0,-7,-12,-7], oct=3, dur=0.5, sus=0.45, amp=2, dist2=0.5, lpf=sinvar([80,400],8))
+
+dm >> a_gesa3([0,-7,0,-5,0,-7,-12,-7], oct=4, dur=0.5, sus=0.45, amp=2, dist2=0.5, lpf=sinvar([80,400],8))
+
+dm >> a_gesa2([0,-7,0,-5,0,-7,-12,-7], oct=4, dur=0.5, sus=0.45, amp=2, dist2=0.5, lpf=sinvar([80,400],8))
+
+ag.dur=4
+ag.stop()
+dm >> a_gesa2([0,-7,0,-5,0,-7,-12,-7], oct=4, dur=0.5, sus=0.45, amp=2, dist2=0.5, lpf=sinvar([80,400],8))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.1, amp=0.85, cutoff=sinvar([4000,20000],2), rq=0.2, rate=sinvar([0.6,1.0],4))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1.1, bright=1.0, growl=sinvar([0.6,1.0],4), tight=0.8, room=0.25, mix=0.2)
+sc >> scratch([7,12,7,5,0,7,12,5], oct=5, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+ht >> play("i", dur=0.25, amp=PLife(0.8), hpf=8000, pan=PRand([-0.4,0,0.4],4), amplify=PFDur((7,16),(5,8)))
+
+ht.stop()
+
+sc.stop()
+
+sc >> scratch([7,12,7,5,0,7,12,5], oct=5, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+sc >> superbass([7,12,7,5,0,7,12,5], oct=5, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+sc >> superbass([7,12,7,5,0,7,12,5], oct=3, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+sc >> superbass([7,12,7,5,0,7,12,5], oct=4, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+sc >> superbass([7,12,7,5,0,7,12,5], oct=3, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+h8.stop()
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+dk >> play(pbuild("dnb", mute="snare"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+cr >> blip([0,-5,0,-7,-5,-7,0,-5], oct=6, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.5, rgate=0.5, rgaterate=4, rgatewave=0,  beat_dur=1)
+
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.5, rgate=0.1, rgaterate=4, rgatewave=0,  beat_dur=1)
+
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=4, rgate=0.1, rgaterate=4, rgatewave=0,  beat_dur=1)
+
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.2, fbcutoff=3000, fbspread=4, rgate=0.1, rgaterate=4, rgatewave=0,  beat_dur=1)
+
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.1, fbtime=0.25, fbfeed=0.2, fbcutoff=3000, fbspread=4, rgate=0.1, rgaterate=4, rgatewave=0,  beat_dur=1)
+
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.1, fbtime=0.25, fbfeed=0.2, fbcutoff=3000, fbspread=4, rgate=0.1, rgaterate=4, rgatewave=0,  beat_dur=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.1, fbtime=0.25, fbfeed=0.2, fbcutoff=3000, fbspread=4, rgate=0.1, rgaterate=4, rgatewave=0,  beat_dur=1, multicrush=4, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=7, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=7, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).solo(32)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=6000, fbspread=0.4, beat_dur=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.5, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.5, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=1000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.5, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=10000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.5, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=1000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.5, amp=1, beef=1, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=1000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.5, amp=1, beef=100, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=1000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.5, amp=1, beef=50, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.4, fbcutoff=1000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+dk.lpf=1200
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+dk >> play(pbuild("dnb", mute="snare"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.76, beef=10, cutoff=sinvar([600,2000],8))
+
+ag.dur=2
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8), lpf=4000)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=6000, fbspread=0.4, beat_dur=1)
+
+~wr >> war([0,0,-5,4,-7,-7,4,0], oct=7, dur=0.25, sus=0.4, hpf=400,amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=3)
+d2 >> play("X.X.X...X.X.X...", dur=0.25, amp=0.75, sample=4, hpf=60)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=1200, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=1.5, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
+
+hv >> dbass([7,5,0,7,5,7,rest(0),0], oct=6, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+h8 >> play("X ")
+hv.oct=5
+hv.hpf=1200
+cr >> blip([0,-5,0,-7,-5,-7,0,-5], oct=6, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+ag.dur=4
+ag.stop()
+dm >> a_gesa2([0,-7,0,-5,0,-7,-12,-7], oct=4, dur=0.5, sus=0.45, amp=2, dist2=0.5, lpf=sinvar([80,400],8))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.1, amp=0.85, cutoff=sinvar([4000,20000],2), rq=0.2, rate=sinvar([0.6,1.0],4))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1.1, bright=1.0, growl=sinvar([0.6,1.0],4), tight=0.8, room=0.25, mix=0.2)
+sc >> scratch([7,12,7,5,0,7,12,5], oct=5, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+ht >> play("i", dur=0.25, amp=PLife(0.8), hpf=8000, pan=PRand([-0.4,0,0.4],4), amplify=PFDur((7,16),(5,8)))
+
+sc >> superbass([7,12,7,5,0,7,12,5], oct=3, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.4, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1)
+dk >> play(pbuild("industrial"), dur=0.25, amp=var([1,0.9,1,0.88],4), fbdelay=0.1, fbtime=0.25, fbfeed=0.2, fbcutoff=3000, fbspread=4, rgate=0.1, rgaterate=4, rgatewave=0,  beat_dur=1, multicrush=4, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=7, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).solo(32)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+#@#@ flow
+Clock.bpm = 140
+Scale.default = "phrygian"
+Root.default = "C"
+
+tb >> tb303([0,-2,3,-2,0,5,-2,3], oct=4, dur=0.25,
+            sus=PRand([0.1,0.2,0.3,0.5],8), amp=0.45,
+            lpf=sinvar([400,3500],24), lpr=0.7,
+            dist2=linvar([0,0.4],32))
+
+dk >> play("X.", dur=0.5, amp=var([1,0.9,1,0.88],4))
+
+ab >> abass([0,-7,0,-5,3,-7,0,-3], oct=4, dur=0.5,            sus=var([0.35,0.3,0.45,0.35],[4,4,4,4]),            amp=0.75, dubdelay=sinvar([0,0.2],16))
+
+ky >> keys([0,2,3,5,7,5,3,0], oct=5, dur=0.5,           sus=PRand([0.3,0.5,0.7,1],8), amp=0.45,           chorus=0.35, room=0.45, mix=0.35,
+           pan=sinvar([-0.3,0.3],8))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 110
+Scale.default = Scale.chromatic
+Root.default = "C"
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, resonbank=0.8, rbfreq=var([300, 400, 500, 600, 650, 700, 800], 8), rbdecay=0.5, rbspread=1.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,6,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",4,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",1,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,8,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,9,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,3,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,2,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,1,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=200, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=0.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=1.8, subenh=0, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=1.8, subenh=4, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=1.8, subenh=0, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, resonbank=0.8, rbfreq=var([300, 400, 500, 600, 650, 700, 800], 8), rbdecay=0.5, rbspread=1.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5,          fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[5,6,5,5,6,5], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=0.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 600], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=PWhite(0.1, 0.9), tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+l2 >> dbass(d2.degree, dur=1/4, shape=0, amp=4, valad=1500, valadr=1, valadd=5, valadt=0, valadc=0.2)
+p3 >> loop("nsbreak16", dur=16, amp=8)
+
+l2 >> dbass(d2.degree, dur=1/4, shape=0, amp=4, valad=1500, valadr=1, valadd=5, valadt=0, valadc=0.2)
+
+p3 >> loop("nsbreak16", dur=16, amp=8)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+p3 >> loop("rock32", dur=32, amp=8)
+
+p3 >> loop("rock32", dur=32, amp=8, sample=8)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d3 >> cbass([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[5,5,5,6,6,6], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+x9 >> play("x-o-", dur=1/4, amp=4, rate=1, sample=8, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+x9 >> play("x-o-", dur=1/4, amp=4, rate=1, sample=8, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/1, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=200, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 110
+Scale.default = Scale.chromatic
+Root.default = "C"
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=3200, vadiodr=0.1, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, resonbank=0.8, rbfreq=var([300, 400, 500, 600, 650, 700, 800], 8), rbdecay=0.5, rbspread=1.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, resonbank=0.8, rbfreq=var([300, 400, 500, 600, 650, 700, 800], 8), rbdecay=0.5, rbspread=1.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5,          fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5,          fbfeed=0.7, fbcutoff=6000, fbspread=0.22, leg=32, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5,          fbfeed=0.7, fbcutoff=6000, fbspread=0.22, leg=8, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[5,6,5,5,6,5], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=0.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 600], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d4 >> plaits(d2.degree)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=PWhite(0.1, 0.9), tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+p3 >> loop("industia16", dur=16, amp=8, sample=8)
+
+l2 >> dbass(d2.degree, dur=1/4, shape=0, amp=4, valad=1500, valadr=1, valadd=5, valadt=0, valadc=0.2)
+p3 >> loop("industia16", dur=16, amp=8, sample=8)
+
+l2 >> dbass(d2.degree, dur=1/4, shape=0, amp=4, valad=1500, valadr=1, valadd=5, valadt=0, valadc=0.2)
+
+p3 >> loop("industia16", dur=16, amp=8, sample=8)
+
+l2 >> dbass(d2.degree, dur=1/4, shape=0, amp=4, valad=1500, valadr=1, valadd=5, valadt=0, valadc=0.2)
+
+p3 >> loop("auto16", dur=16, amp=8, sample=8)
+
+p3.stop()
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d3 >> cbass([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[5,5,5,6,6,6], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+x9 >> play("x-o-", dur=1/4, amp=4, rate=1, sample=8, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/1, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[6,6,6,4,6,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+p3 >> loop("circdrum16", dur=16, amp=8, sample=PRand(8))
+
+l2 >> dbass(d2.degree, dur=1/4, shape=0, amp=4, valad=1500, valadr=1, valadd=5, valadt=0, valadc=0.2, oct=6)
+p3 >> loop("circdrum16", dur=16, amp=8, sample=PRand(8))
+
+d3.oct=6
+x9.stop()
+d2.oct=7
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/1, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+p3.stop()
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> dbass([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> superbass([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> bass([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> plaitsX([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> plaits([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> blip([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> saw([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> organ([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3 >> faim([2,2,4,5,5,2], dur=P*[1,1/2,1/2,1/2,1,1/2] *2, oct=[5,6,6,5,5,6], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, resonbank=1, rbfreq=300, rbdecay=0.5, rbspread=1.0, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5).solo(8)
+
+d3.stop()
+
+Clock.bpm = 80
+
+Scale.default = Scale.mixolydian
+
+Root.default = "D"
+
+d1 >> cbass([0,5,2,5,0,5,6,4,1,4,6,4], dur=1/2, oct=[6,5], amp=0.5).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d4 >> cbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+b1 >> cbass([2,2,4,1,1,3,5,6,0,1,2,4,5,6,0,1,2,2,3,1,1,4,5,6,0,1,2,3,4,5,4,3,2,0], dur=PStutter([2,1/2,2,1/2,1,1/2,1,2,1/2,2,1/2,1,1/2,1/4,2],[1,2,1,6,1,4,1,1,2,1,8,2,1,2,1]), sus=PStutter([1/2,1/8,1,1/2,1/8,1,1/2,1/8,1/2,1,1/2,1/8,2],[8,2,1,2,2,1,8,2,2,2,1,2,1]), oct=PStutter([7,5,6,5,6,7,5,6],[6,1,4,2,3,6,1,11]), amp=0.5)
+
+b2 >> tb304([5,6,0,1,2,4,5,6,0,1,2,2,3,1,1,4,5,6,0,1,2,3,4,5,4,3,2,0], dur=PStutter([1/2,1,1/2,1,2,1/2,2,1/2,1,1/2,1/4,1/3,2],[4,1,4,1,1,2,1,8,2,1,1,1,1]), sus=PStutter([1/2,1/8,1,1/2,1/8,1,3/4,1/2,1/8,1/2,1,1/2,1/8,2],[2,2,1,2,2,1,6,2,2,2,2,1,2,1]), oct=PStutter([4,5,4,5,7,4,5,6],[1,4,2,3,6,1,10,1]), amp=0.5)
+
+p1 >> pluck([0,0,2,6,6,1,0,0,1,6,6,1], dur=[2,1/2,1/2], sus=1/2, oct=6, amp=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 80
+
+Scale.default = Scale.mixolydian
+
+Root.default = "D"
+
+b1 >> cbass([2,2,4,1,1,3,5,6,0,1,2,4,5,6,0,1,2,2,3,1,1,4,5,6,0,1,2,3,4,5,4,3,2,0], dur=PStutter([2,1/2,2,1/2,1,1/2,1,2,1/2,2,1/2,1,1/2,1/4,2],[1,2,1,6,1,4,1,1,2,1,8,2,1,2,1]), sus=PStutter([1/2,1/8,1,1/2,1/8,1,1/2,1/8,1/2,1,1/2,1/8,2],[8,2,1,2,2,1,8,2,2,2,1,2,1]), oct=PStutter([7,5,6,5,6,7,5,6],[6,1,4,2,3,6,1,11]), amp=0.5)
+
+b2 >> tb304([5,6,0,1,2,4,5,6,0,1,2,2,3,1,1,4,5,6,0,1,2,3,4,5,4,3,2,0], dur=PStutter([1/2,1,1/2,1,2,1/2,2,1/2,1,1/2,1/4,1/3,2],[4,1,4,1,1,2,1,8,2,1,1,1,1]), sus=PStutter([1/2,1/8,1,1/2,1/8,1,3/4,1/2,1/8,1/2,1,1/2,1/8,2],[2,2,1,2,2,1,6,2,2,2,2,1,2,1]), oct=PStutter([4,5,4,5,7,4,5,6],[1,4,2,3,6,1,10,1]), amp=0.5)
+
+p1 >> pluck([0,0,2,6,6,1,0,0,1,6,6,1], dur=[2,1/2,1/2], sus=1/2, oct=6, amp=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 105
+
+Scale.default = Scale.major
+
+Root.default = "C#"
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d2 >> dbass([3,2,3,4,5,4,5,3,4,3,2,3,4,5,1,2,3,1,5,0,5,0,5,5,5,5,3,2], dur=[2,1/4,2,1/4,2,2,3/2,2,1/4,4,8,2,1/4,3/2,1/4,1/4,3/2,3,1/4,1/4,3/2,3/2,1/2,1/4,1/4,1,2,1/4], sus=1/4, oct=PStutter([5,4,5,6,5,6,5,6,5],[6,1,7,4,1,1,1,1,6])).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 105
+
+Scale.default = Scale.major
+
+Root.default = "C#"
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d2 >> dbass([3,2,3,4,5,4,5,3,4,3,2,3,4,5,1,2,3,1,5,0,5,0,5,5,5,5,3,2], dur=[2,1/4,2,1/4,2,2,3/2,2,1/4,4,8,2,1/4,3/2,1/4,1/4,3/2,3,1/4,1/4,3/2,3/2,1/2,1/4,1/4,1,2,1/4], sus=1/4, oct=PStutter([5,4,5,6,5,6,5,6,5],[6,1,7,4,1,1,1,1,6])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.5, sprtens=4, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.5, sprtens=1, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.5, sprtens=0.2, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.1, sprtens=0.2, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.1, sprtens=0.2, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.1, sprtens=0.2, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=0.5, sprdamp=0.1, sprtens=0.2, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=1, sprdecay=0.5, sprdamp=0.1, sprtens=0.2, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=1, sprdecay=0.5, sprdamp=0.1, sprtens=0.3, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=1, sprdecay=0.5, sprdamp=0.1, sprtens=0.4, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=1, sprdecay=0.5, sprdamp=0.1, sprtens=0.5, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d2 >> dbass([3,2,3,4,5,4,5,3,4,3,2,3,4,5,1,2,3,1,5,0,5,0,5,5,5,5,3,2], dur=[2,1/4,2,1/4,2,2,3/2,2,1/4,4,8,2,1/4,3/2,1/4,1/4,3/2,3,1/4,1/4,3/2,3/2,1/2,1/4,1/4,1,2,1/4], sus=1/4, oct=PStutter([5,4,5,6,5,6,5,6,5],[6,1,7,4,1,1,1,1,6])).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+
+Scale.default = Scale.mixolydian
+
+Root.default = "C"
+
+d1 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d2 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d1 >> a_gesa(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7)
+
+d1.stop()
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d3 >> bbass(P*[5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.12, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=1.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.125, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+g2.stop()
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+~g2 >> a_gesa(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.5,dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> svdk([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d3 >> svdk([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), hpf=1200)
+
+d3 >> svdk([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), hpf=3200)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,shape=var([0,0.4],[12,4]), multicrush=sinvar([0,0.5],16), mclowdrive=1.5, mcmiddrive=2).unison(3)
+
+dk >> play("X.......X...X...", dur=0.25, amp=var([1,0.9,1,0.85],4), hpf=40)
+
+sn >> play("....o..o....o.oo", dur=0.25, amp=var([0.85,0.45,0.9,0.5],4), sample=2, hpf=200, cheapverb=0.15, cvdecay=0.5)
+
+ht >> play("i", dur=0.125, amp=PLife(0.5), hpf=8000, pan=sinvar([-0.25,0.25],8))
+
+lp >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.25,0.5],16), lpf=sinvar([1500,9000],8), fbdelay=0.75, fbtime=0.375, fbfeed=0.6, fbcutoff=4000, fbspread=0.03,
+  beat_dur=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+
+Scale.default = Scale.mixolydian
+
+Root.default = "C"
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,shape=var([0,0.4],[12,4]), multicrush=sinvar([0,0.5],16), mclowdrive=1.5, mcmiddrive=2).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,shape=var([0,0.4],[12,4]), multicrush=sinvar([0,0.5],16), mclowdrive=1.5, mcmiddrive=2).unison(3)
+dk >> play("X.......X...X...", dur=0.25, amp=var([1,0.9,1,0.85],4), hpf=40)
+sn >> play("....o..o....o.oo", dur=0.25, amp=var([0.85,0.45,0.9,0.5],4), sample=2, hpf=200, cheapverb=0.15, cvdecay=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1, shape=var([0,0.3],[14,4]), multicrush=sinvar([0,0.35],16)).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1, shape=var([0,0.3],[14,4]), multicrush=sinvar([0,0.35],16)).unison(3)
+
+# clear the doubled low voices to make space
+d1.stop()
+d2.stop()
+
+# drums: locked but loose
+dk >> play("X.......X...X...", dur=0.25, amp=var([1,0.9,1,0.85],4), hpf=40)
+sn >> play("....o..o....o.oo", dur=0.25, amp=var([0.85,0.45,0.9,0.5],4), sample=2, hpf=200, cheapverb=0.15, cvdecay=0.5)
+ht >> play("i", dur=0.125, amp=PLife(0.45), hpf=8000, pan=sinvar([-0.25,0.25],8))
+
+r4 >> rhodes([(0,2,4),(-3,0,2),(4,6,8),(-1,1,4)], oct=5, dur=1, sus=PRand([1,1.5,2],4), amp=sinvar([0.18,0.35],24), lpf=sinvar([1200,4000],16), chorus=0.25, room=0.6, mix=0.5)
+
+r4 >> rhodes([(0,2,4),(-3,0,2),(4,6,8),(-1,1,4)], oct=5, dur=1/2, sus=PRand([1,1.5,2],4), amp=sinvar([0.18,0.35],24), lpf=sinvar([1200,4000],16), chorus=0.25, room=0.6, mix=0.5)
+
+r4.stop()
+
+lp >> plaitsX(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, preset=6, amp=sinvar([0.2,0.45],16), lpf=sinvar([2000,9000],8), fbdelay=0.75, fbtime=0.375, fbfeed=0.55, fbcutoff=4000, fbspread=0.03, beat_dur=1, pan=sinvar([0.2,-0.2],12))
+
+pd >> sinepad([(0,2,4),(-3,0,2),(4,6,8),(-1,1,4)], oct=5, dur=8, sus=sinvar([6,10],32), amp=sinvar([0.1,0.26],24), lpf=linvar([500,2200],64), room=0.92, mix=0.85, shimmer=0.3)
+
+pd.stop()
+
+mb >> marimba(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=PFDur((5,8),(3,16)), oct=6, amp=sinvar([0,0.3],8), room=0.5, mix=0.4, pan=PRand([-0.4,0,0.4],4))
+
+cm >> karp([3,5,7,8,7,9,8,5, 4,5,7,5,4,2,4,2, 5,7,9,7,5,7,5,4, 4,5,7,8,7,5,2,0], dur=1/2, oct=6, sus=PRand([0.4,0.6,0.8],4), amp=sinvar([0.22,0.4],16), lpf=sinvar([2000,7000],8), fbdelay=0.5, fbtime=0.375, fbfeed=0.5, fbcutoff=4500, fbspread=0.02, beat_dur=1, room=0.5, mix=0.45, pan=sinvar([-0.3,0.3],12))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+
+Scale.default = Scale.mixolydian
+
+Root.default = "C"
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=4, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=1, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=2, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=3, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=1, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=4, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.4, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.1, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=1, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.5, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.1, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=1, ebsat=0.3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.1, ebsat=0.3, vowel=1, vowelf=0, vowelq=1)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.1, ebsat=0.3, vowel=0.2, vowelf=0, vowelq=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.1, ebsat=0.3, vowel=0, vowelf=0, vowelq=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.3,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.3,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> choir(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> blip(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~lp >> blip(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~lp >> varsaw(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,shape=var([0,0.4],[12,4]), multicrush=sinvar([0,0.5],16), mclowdrive=1.5, mcmiddrive=2).unison(3)
+dk >> play("X.......X...X...", dur=0.25, amp=var([1,0.9,1,0.85],4), hpf=40)
+sn >> play("....o..o....o.oo", dur=0.25, amp=var([0.85,0.45,0.9,0.5],4), sample=2, hpf=200, cheapverb=0.15, cvdecay=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+
+Scale.default = Scale.mixolydian
+
+Root.default = "C"
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.1, ebsat=0.3, vowel=0, vowelf=0, vowelq=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> varsaw(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> a_daft(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> a_daft(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.3,0.0],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> a_daft(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.1,0.0],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1, shape=var([0,0.4],[12,4]), multicrush=sinvar([0,0.5],16), mclowdrive=1.5, mcmiddrive=2).unison(3)
+
+lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.0, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.0],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.0, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.0],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.0],8), shape=sinvar([0.2,0.0],8), dynfuzz=0.6, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.0],8), shape=sinvar([0.0,0.0],8), dynfuzz=0.6, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~lp >> a_xbass(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.0],8), shape=sinvar([0.0,0.0],8), dynfuzz=0.0, dfgain=1.6, dftone=4, lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8), beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Root.default = "C"
+
+### ===== JUSTICE — Phantom =====
+Clock.bpm = 120
+Scale.default = Scale.mixolydian
+Root.default = "C"
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.1, ebsat=0.3, vowel=0, vowelf=0, vowelq=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, hpf=1200, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, hpf=1000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, hpf=800, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, drive=0.1).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4, drive=0.1).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4, drive=0.2).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4, drive=0.3).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4, drive=0.4).unison(3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.4).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.2).unison(3)
+
+~d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> a_daft(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.1,0.0],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> a_daft(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.1,0.0],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.15, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> a_daft(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.1,0.0],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,shape=var([0,0.4],[12,4]), multicrush=sinvar([0,0.5],16), mclowdrive=1.5, mcmiddrive=2).unison(3)
+
+dk >> play("X.......X...X...", dur=0.25, amp=var([1,0.9,1,0.85],4), hpf=40)
+sn >> play("....o..o....o.oo", dur=0.25, amp=var([0.85,0.45,0.9,0.5],4), sample=2, hpf=200, cheapverb=0.15, cvdecay=0.5)
+
+ht >> play("i", dur=0.125, amp=PLife(0.5), hpf=8000, pan=sinvar([-0.25,0.25],8))
+
+lp >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.25,0.5],16), lpf=sinvar([1500,9000],8), fbdelay=0.75, fbtime=0.375, fbfeed=0.6, fbcutoff=4000, fbspread=0.03,  beat_dur=1)
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.1, ebsat=0.3, vowel=0, vowelf=0, vowelq=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, hpf=800, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.4).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+~d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([6,4,2,6,2,4,6,2,4,2,6,4,2,4,2,6, 3,1,6,1,3,6,1,3,1,6,3,1,6,1,3,6, 4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4,  1,6,4,1,6,4,1,6,4,1,6,4,1,6,4,1], dur=1/4, oct=PStutter([6,5,6,7],[3,1,2,1]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000,  fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([0,5,0,2,4,2,5,0,3,1,3,5,2,0,4,2], dur=1/4, oct=PStutter([5,6,7,6],[2,1,1,1]), fbdelay=0.75, fbtime=0.375, fbfeed=0.75,  fbcutoff=3500, fbspread=0.03, beat_dur=1)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,
+  0,4,2,0,4], dur=1/4, oct=PStutter([7,5,6,7,5,8,6,5],[1,1,2,1,3,1,2,2]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000,
+  fbspread=0.02, beat_dur=1)
+
+lp >> a_xbass(PStutter([4,6,8,7,8,10],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.3,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> a_xbass(PStutter([4,6,8,7,8,10],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.3,0.55],16), drive=sinvar([0.3,0.8],8), shape=sinvar([0.0,0.0],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> a_xbass(PStutter([4,6,8,7,8,10],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.8],8), shape=sinvar([0.0,0.0],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> a_xbass(PStutter([4,6,8,7,8,10],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.0],8), shape=sinvar([0.0,0.0],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+lp >> a_xbass(PStutter([4,6,8,7,8,10],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.0],8), shape=sinvar([0.0,0.0],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.0, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+  # a_gesa3 anchor — shift its melodic cell + breathing shape
+d3 >> a_gesa3(PStutter([1,5,4,6,3,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,
+  shape=var([0,0.4,0.2,0.6],[8,4,8,4]), multicrush=sinvar([0,0.5],16)).unison(3)
+
+  # dbass low end — pattern/octave variation
+d2 >> dbass(PStutter([1,3,5,6,4,1],[6,2,2,2,3,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,
+  multicrush=sinvar([0,0.5],16)).unison(3)
+
+  # C — rhythmic variation: straight 1/4 stabs w/ rests instead of riff dur
+lp >> a_xbass([8,7,rest(0),5,4,rest(0),2,4], dur=1/4, oct=7, amp=sinvar([0.35,0.6],16), drive=sinvar([0.4,0.9],8),
+  shape=sinvar([0.3,0.8],8), dynfuzz=0.7, dfgain=1.8, dftone=5, lpf=sinvar([2000,14000],2), fbdelay=0.5, fbtime=0.25, fbfeed=0.8,
+  fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,-2,3],4), beat_dur=1, pan=PRand([-0.3,0,0.3],4))
+
+  # C — rhythmic variation: straight 1/4 stabs w/ rests instead of riff dur
+lp >> a_xbass([8,7,rest(0),5,4,rest(0),2,4], dur=1/4, oct=7, amp=sinvar([0.35,0.6],16), drive=sinvar([0.4,0.9],8),
+  shape=sinvar([0.3,0.8],8), dynfuzz=0.7, dfgain=1.8, dftone=5, lpf=sinvar([2000,14000],2), fbdelay=0.0, fbtime=0.25, fbfeed=0.8,
+  fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,-2,3],4), beat_dur=1, pan=PRand([-0.3,0,0.3],4))
+
+  # C — rhythmic variation: straight 1/4 stabs w/ rests instead of riff dur
+lp >> a_xbass([8,7,rest(0),5,4,rest(0),2,4], dur=1/4, oct=7, amp=sinvar([0.35,0.6],16), drive=sinvar([0.4,0.9],8),
+  shape=sinvar([0.3,0.8],8), dynfuzz=0.0, dfgain=1.8, dftone=5, lpf=sinvar([2000,14000],2), fbdelay=0.0, fbtime=0.25, fbfeed=0.8,
+  fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,-2,3],4), beat_dur=1, pan=PRand([-0.3,0,0.3],4))
+
+  # C — rhythmic variation: straight 1/4 stabs w/ rests instead of riff dur
+lp >> dbass([8,7,rest(0),5,4,rest(0),2,4], dur=1/4, oct=7, amp=sinvar([0.35,0.6],16), drive=sinvar([0.4,0.9],8),
+  shape=sinvar([0.3,0.8],8), dynfuzz=0.0, dfgain=1.8, dftone=5, lpf=sinvar([2000,14000],2), fbdelay=0.0, fbtime=0.25, fbfeed=0.8,
+  fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,-2,3],4), beat_dur=1, pan=PRand([-0.3,0,0.3],4))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=6, eb=0.5, ebfeed=0.5, ebmix=0.2, ebmode=0, ebwow=0.1, ebflutter=0.1, ebsat=0.3, vowel=0, vowelf=0, vowelq=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000).unison(3)
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.2).unison(3)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, hpf=800, fbspread=0.02, beat_dur=1)
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.4).unison(3)
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d2.stop()
+
+d3.stop()
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d3.stop()
+
+~d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]), fbdelay=1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([6,4,2,6,2,4,6,2,4,2,6,4,2,4,2,6, 3,1,6,1,3,6,1,3,1,6,3,1,6,1,3,6, 4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4,  1,6,4,1,6,4,1,6,4,1,6,4,1,6,4,1], dur=1/4, oct=PStutter([6,5,6,7],[3,1,2,1]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000,  fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([6,4,2,6,2,4,6,2,4,2,6,4,2,4,2,6, 3,1,6,1,3,6,1,3,1,6,3,1,6,1,3,6, 4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4,  1,6,4,1,6,4,1,6,4,1,6,4,1,6,4,1], dur=1/4, oct=PStutter([6,5,6,7],[3,1,2,1]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000,  fbspread=0.02, beat_dur=1)
+
+d3 >> bbass([6,4,2,6,2,4,6,2,4,2,6,4,2,4,2,6, 3,1,6,1,3,6,1,3,1,6,3,1,6,1,3,6, 4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4,  1,6,4,1,6,4,1,6,4,1,6,4,1,6,4,1], dur=1/4, oct=PStutter([6,5,6,7],[3,1,2,1]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000,  fbspread=0.02, beat_dur=1).solo(8)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,
+  0,4,2,0,4], dur=1/4, oct=PStutter([7,5,6,7,5,8,6,5],[1,1,2,1,3,1,2,2]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000,
+  fbspread=0.02, beat_dur=1)
+
+lp >> a_xbass(PStutter([4,6,8,7,8,10],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.3,0.55],16), drive=sinvar([0.0,0.0],8), shape=sinvar([0.0,0.0],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0.0, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,
+  0,4,2,0,4], dur=1/4, oct=PStutter([7,5,6,7,5,8,6,5],[1,1,2,1,3,1,2,2]), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000,
+  fbspread=0.02, beat_dur=1)
+
+  # B — wide leaps, jagged contour, more aggressive
+lp >> a_xbass(PStutter([8,3,7,2,9,5],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.35,0.6],16), drive=sinvar([0.4,0.9],8), shape=sinvar([0.3,0.8],8), dynfuzz=0.7, dfgain=1.8, dftone=5,
+  lpf=sinvar([1500,14000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,2,0,-3],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+  # B — wide leaps, jagged contour, more aggressive
+lp >> a_xbass(PStutter([8,3,7,2,9,5],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.35,0.6],16), drive=sinvar([0.1,0],8), shape=sinvar([0.3,0.8],8), dynfuzz=0.7, dfgain=1.8, dftone=5,
+  lpf=sinvar([1500,14000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,2,0,-3],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+  # B — wide leaps, jagged contour, more aggressive
+lp >> a_xbass(PStutter([8,3,7,2,9,5],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.35,0.6],16), drive=sinvar([0.1,0],8), shape=sinvar([0],8), dynfuzz=0.7, dfgain=1.8, dftone=5,
+  lpf=sinvar([1500,14000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,2,0,-3],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+  # B — wide leaps, jagged contour, more aggressive
+lp >> a_xbass(PStutter([8,3,7,2,9,5],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.35,0.6],16), drive=sinvar([0.0,0],8), shape=sinvar([0],8), dynfuzz=0.7, dfgain=1.8, dftone=5,
+  lpf=sinvar([1500,14000],4), fbdelay=0.75, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,2,0,-3],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+  # B — wide leaps, jagged contour, more aggressive
+lp >> a_xbass(PStutter([8,3,7,2,9,5],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.35,0.6],16), drive=sinvar([0.0,0],8), shape=sinvar([0],8), dynfuzz=0.7, dfgain=1.8, dftone=5,
+  lpf=sinvar([1500,14000],4), fbdelay=0.0, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,2,0,-3],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+#   # B — wide leaps, jagged contour, more aggressive
+
+  # C — rhythmic variation: straight 1/4 stabs w/ rests instead of riff dur
+lp >> dbass([8,7,rest(0),5,4,rest(0),2,4], dur=1/4, oct=7, amp=sinvar([0.35,0.6],16), drive=sinvar([0.4,0.9],8),
+  shape=sinvar([0.3,0.8],8), dynfuzz=0.0, dfgain=1.8, dftone=5, lpf=sinvar([2000,14000],2), fbdelay=0.0, fbtime=0.25, fbfeed=0.8,
+  fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,-2,3],4), beat_dur=1, pan=PRand([-0.3,0,0.3],4))
+
+  # C — rhythmic variation: straight 1/4 stabs w/ rests instead of riff dur
+lp >> dbass([8,7,rest(0),5,4,rest(0),2,4], dur=1/4, oct=7, amp=sinvar([0.35,0.6],16), drive=sinvar([0.4,0.9],8),
+  shape=sinvar([0.3,0.8],8), dynfuzz=0.0, dfgain=1.8, dftone=5, lpf=sinvar([2000,14000],2), fbdelay=0.0, fbtime=0.25, fbfeed=0.8,
+  fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,-2,3],4), beat_dur=1, pan=PRand([-0.3,0,0.3],4))
+
+#   shape=sinvar([0.3,0.8],8), dynfuzz=0.0, dfgain=1.8, dftone=5, lpf=sinvar([2000,14000],2), fbdelay=0.0, fbtime=0.25, fbfeed=0.8,
+
+  # a_gesa3 anchor — shift its melodic cell + breathing shape
+d3 >> a_gesa3(PStutter([1,5,4,6,3,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,
+  shape=var([0,0.4,0.2,0.6],[8,4,8,4]), multicrush=sinvar([0,0.5],16)).unison(3)
+
+d2 >> dbass(PStutter([1,3,5,6,4,1],[6,2,2,2,3,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,
+  multicrush=sinvar([0,0.5],16)).unison(3)
+                              
+
+  # in-place nudges (no restart)
+d3.dur = [1/2,1/4,1/4,1,3/4,1/2,3/4,1,1/4,3/4]
+lp.pitchShift = var([0,3,-2,5,0,-4],4)
+d1.eb = sinvar([0.3,0.7],16)
+
+d3 >> a_daft(PStutter([8,7,5,4,2,4],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7,
+  amp=sinvar([0.1,0.55],16), drive=sinvar([0.1,0.0],8), shape=sinvar([0.2,0.7],8), dynfuzz=0.6, dfgain=1.6, dftone=4,
+  lpf=sinvar([1500,12000],4), fbdelay=0, fbtime=0.375, fbfeed=0.85, fbcutoff=5000, fbspread=0.04, pitchShift=var([0,1,0,-2],8),
+  beat_dur=1, pan=sinvar([0.3,-0.3],8))
+
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~g2 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), shape=0.4, dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa3(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1,shape=var([0,0.4],[12,4]), multicrush=sinvar([0,0.5],16), mclowdrive=1.5, mcmiddrive=2).unison(3)
+
+lp >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7, amp=sinvar([0.25,0.5],16), lpf=sinvar([1500,9000],8), fbdelay=0.75, fbtime=0.375, fbfeed=0.6, fbcutoff=4000, fbspread=0.03,  beat_dur=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("dividing 91")
+

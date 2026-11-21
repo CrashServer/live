@@ -1,0 +1,340 @@
+p1 >> a_bd([0,2,4,7], dur=1/2, sus=0.4, amp=0.6)
+
+Clock.clear()
+soff()
+
+Root.default= 0
+
+Clock.bpm = 132;
+
+Scale.default = "minor"
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.3, rbfreq=77, rbdecay=0.5, rbspread=1.0, shape=0.1)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.3, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.5, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+d1.cut=1/4
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.8, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x0 >> play("O...", dur=2, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1 >> reese(dur=1, oct=6, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1 >> reese(dur=1, oct=5, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1 >> reese(dur=1, oct=4, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=linvar([0.2, 0.9], 32), fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.4, echo=0.5) #octave
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1 >> reese(dur=1, oct=4, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=linvar([0.2, 0.9], 32), fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.8, rbfreq=140, rbdecay=0.5, rbspread=1.0, shape=0.4, echo=0.5) #octave
+
+x1 >> reese(dur=1, oct=5, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=linvar([0.2, 0.9], 32), fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.8, rbfreq=140, rbdecay=0.5, rbspread=1.0, shape=0.4, echo=0.5) #octave
+
+x7 >> play("B.", sample=5, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.8, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1 >> reese(dur=1, oct=3, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=linvar([0.2, 0.9], 32), fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.8, rbfreq=140, rbdecay=0.5, rbspread=1.0, shape=0.4, echo=0.5) #octave
+
+x1.stop()
+
+x1.stop()
+
+x1.stop()
+
+x1 >> juno(dur=1, oct=3, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=linvar([0.2, 0.9], 32), fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.8, rbfreq=72, rbdecay=0.5, rbspread=1.0, shape=0.4, echo=0.5) #octave
+
+x1.stop()
+
+x7 >> play("x ", sample=6, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.8, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=linvar([0, 8], 32), multicrush=1.3, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.5, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.5, beat_dur=1, ebfeed=0.8, ebmix=0.9, ebmode=2, ebwow=1, ebflutter=0.56, ebsat=0.9, rgate=0.9, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.25, leg=0)
+
+x9 >> play("x ", sample=1, multicrush=1.3, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.5, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.5, beat_dur=1, ebfeed=0.8, gdel=1, gdeltime=0.1, gdelsize=0.4, gdelsprd=0.5, gdelfb=0.3, ebmix=0.9, ebmode=2, ebwow=1, ebflutter=0.56, ebsat=0.9, rgate=0.9, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.25, leg=0)
+
+x7 >> play("x ", sample=4, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0)
+
+x7 >> play("k ", sample=11, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=4, ebwow=0.5, ebflutter=1.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.5, rbfreq=78, rbdecay=0.5, rbspread=4.0, shape=0.1, amp=3, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1.stop()
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.8, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.8, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.5, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=1400, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=1500, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=1600, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=1700, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=1800, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=1900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=2000, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=2000, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=4000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=4000, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=4000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.3, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.3, rbfreq=77, rbdecay=0.5, rbspread=1.0, shape=0.1)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0)
+
+Clock.clear()
+soff()
+
+Clock.bpm = 132
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0.4, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0.2, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("ebm", 8), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.4, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("dnb", 8, fill=4), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, spwstr=1, spwshift=1, gdel=0.4, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("dnb", 8, fill=4), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, fbdelay=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, spwstr=1, spwshift=1, gdel=0.4, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.3, gdeltime=0.03, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.3, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8, density=0.7, mute="snare"), dur=0.25, sblur=0.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.6, gdeltime=0.1, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.5).unison(3)
+
+Clock.clear()
+soff()
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.3)
+
+q1 >> loop("quake8", dur=8, amp=0.8, lpf=1200, tape=0.6, echo=0.5, tapedrive=0.6)
+
+s3 >> loop("whitedwarf16", dur=16, amp=0.9, hpf=1200, rgate=0.2, chop=4, mverb=0.0).lclip(4)
+
+s3 >> loop("whitedwarf16", dur=16, amp=0.9, hpf=1200, rgate=0.2, chop=4, mverb=0.0).lclip(4)
+
+r3 >> loop("spherics16", dur=16, amp=0.8, lpf=linvar([400, 6000], 32)).unison(5)
+
+z6 >> ikea(hhat=0.1, sn=0.1, harm=0, mverb=0.5, a=0.5, dur=8, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1)
+
+Clock.clear()
+soff()
+
+m1 >> pad2([(0, 2, 4), (0, 4, 7), (0, 2, 7), (0, 3, 6)], dur=PWhite(16, 40), sus=PWhite(29, 70), oct=5, amp=0.8, cutoff=linvar([800, 3200], 120), cheapverb=0.7, cvdecay=3, jpverb=0.4, jpsize=0.95, hpf=220, stereowidth=0.82)
+
+m1 >> pad2([(1, 1, 5), (1, 2, 15), (2, 2, 7), (2, 2, 3)], dur=PWhite(8, 18), sus=PWhite(45, 44), oct=8, amp=0.9, cutoff=linvar([700, 3100], 228), cheapverb=0.5, cvdecay=2, jpverb=0.5, jpsize=0.77, hpf=400, stereowidth=1.37)
+
+Clock.clear()
+soff()
+
+r6 >> dbass()
+
+r6 >> dbass(0)
+
+r6 >> dbass(1)
+
+r6 >> dbass(2)
+
+r6 >> dbass(3)
+
+r6 >> dbass(4)
+
+r6 >> dbass(5)
+
+r6 >> dbass(6)
+
+r6 >> dbass(7)
+
+r6 >> dbass(6)
+
+r6 >> dbass(5)
+
+r6 >> dbass(linvar([1, 7, 5], [2, 1]))
+
+r6 >> dbass(linvar([1, 7, 5], [2, 1]), dur=1/4)
+
+r6 >> dbass(linvar([1, 7, 5], [2, 1]), dur=1/4, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+r6 >> dbass(linvar([1, 7, 5], [2, 1]), dur=1/4, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3)
+
+r6 >> dbass(linvar([1, 7, 5], [2, 1]), dur=1/4, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, eb=0.1, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.4)
+
+r6 >> dbass(linvar([1, 7, 5], [2, 1]), dur=1/4, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, eb=0.1, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.5)
+
+r6 >> dbass(linvar([1, 7, 5], [2, 1]), dur=1/4, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, eb=0.1, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.6)
+
+Clock.clear()
+soff()
+
+Clock.bpm = 120
+
+Scale.default = "minor"
+
+Root.default = "C#"
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.3)
+
+q1 >> loop("quake8", dur=8, amp=0.8, lpf=1200, tape=0.6, echo=0.5, tapedrive=0.6)
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.3)
+
+q1 >> loop("quake8", dur=8, amp=0.8, lpf=1200, tape=0.6, echo=0.5, tapedrive=0.6)
+
+q1 >> loop("quake8", dur=8, amp=0.8, lpf=1200, tape=0.6, echo=0.5, tapedrive=0.6, resonbank=0, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+q1 >> loop("quake8", dur=8, amp=0.8, lpf=1200, tape=0.6, echo=0.5, tapedrive=0.6, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+s3 >> loop("whitedwarf16", dur=16, amp=0.9, hpf=1200, rgate=0.2, chop=4, mverb=0.0).lclip(4)
+
+s4 >> loop("solrot16", dur=8, amp=1.0, lpf=800, bpf=800, hpf=2400, mverb=0.5)
+
+s1.dur=4
+
+q1.dur=4
+
+p1 >> sinepad(dur=PDur(3,8), degree=[0, 2, 4], oct=6, amp=linvar([0.5, 1], 16), sus=var([0.5, 1, 1], 8), atk=0.2, lpf=linvar([800, 3000], 64), mverb=0.2, hpf=1800).unison(3)
+
+s2 >> loop("centauri16", dur=8, amp=0.7, cheapverb=0.6, fshift=2, hpf=1600)
+
+r3 >> loop("spherics16", dur=16, amp=0.8, lpf=linvar([400, 6000], 32)).unison(5)
+
+s5 >> loop("sundrone16", dur=8, delay=4, echo=2, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, amp=1, shimmer=0.5, shimmix=0.4, fshift=1, hpf=1200)
+
+t1 >> loop("carina16", dur=8, amp=var([0, 0.4, 0, 0.5], [8, 8, 12, 4]), clouds=0.3, csize=0.4, cdens=0.6)
+
+r2 >> loop("whistler16", dur=8, amp=1, echo=0.6, echotime=2, lpf=3000)
+
+Clock.clear()
+soff()
+
+s1 >> loop("sundrone16", dur=8, amp=0.8, shimmer=0.6, shimmix=0.5, fshift=2)
+
+Clock.clear()
+soff()
+
+x2 >> loop("exoplanet16", dur=16, amp=0.7, jpverb=0.4, jpmix=0.3)
+
+t4 >> loop("ganymede16", dur=16, amp=0.3, mverb=0.5, lpf=linvar([600, 4000], 32))
+
+Clock.clear()
+soff()
+
+r4 >> loop("satlightning16", dur=16, amp=0.5, dist2=0.0, mverb=0.5, dist2mix=1, dist2shape=0.5)
+
+f1 >> loop("flares16", dur=16, amp=1, dist2=0.4, dist2mix=0.8, hpf=200, lpf=1600, mverb=0.5)
+
+Clock.clear()
+soff()
+
+s5 >> loop("solmodes16", dur=16, amp=0.3, mverb=0.7)
+
+Clock.clear()
+soff()
+
+r1 >> loop("chorus16", dur=8, amp=var([0, 0.35, 0, 0.4], [8, 4, 12, 8]), high=4)
+
+Clock.clear()
+soff()
+
+Clock.bpm = 170
+
+a1 >> play("[--]. ", hpf=4000 + PRand(-400, 400), mpf=8000, delay=(0, [0,0.25], 1.25), echo=(0.5, 0.25), sample=(3, var([0, (5, 2)]), 5)).sometimes("stutter", degree="[--.:]", sample=1, a=0.1, rate=(1,2))
+
+a2 >> play("--", delay=(0.25,0.5), a=PWhite(0, 0.5)).sometimes("stutter", degree="[c-.-]", sample=4, a=2)
+
+a7 >> play("a ", sample=4, shift=(0, 0.5), feed=0.5, tremolo=4, dur=8, delay=4, lpf=1200, room2=1, damp2=0, revus=8, shape=0.2, amp=0.5, spf=400, spfslide=1, spfend=3200, echo=(0.025,0.25), echotime=8)
+
+a8 >> play("p.", dur=1/2, lpf=1400, amp=1, room2=0.2, damp2=1, sample=0, revus=8, shape=0.1, echo=[0.05, 0.25], echotime=x3.dur).sometimes("stutter", 2, rate=2, amp=0.5, dur=1/4)
+
+a9 >> play("p.", dur=1/4, leg=12,lpf=linvar([800, 1400], 32), sample=0, room2=0.1, damp2=0, revus=2, shape=0, amp=[0.5, 0.7], echo=[0.05, 0.25], echotime=a1.dur).often("stutter", 2, rate=4, amp=1, dur=1/2).sometimes("stutter", 16)
+
+a6 >> play("x ", dur=8, lpf=400, room2=0, damp2=0, revus=8, shape=4, echo=0.05, echotime=8, mverb=0.5)
+
+a7 >> play("//", mverb=0.5, dur=32, sample=1)
+
+a_all.sample=var([7, 0], [4, 28])
+
+s1 >> loop("sundrone16", dur=8, amp=linvar([0.4, 0.6], 32), shimmer=0.4, shimmix=0.3)
+
+s1.stop()
+
+s4 >> loop("solrot16", dur=8, amp=1.0, lpf=800, bpf=800, hpf=2400, mverb=0.5)
+
+r4 >> loop("satlightning16", dur=16, amp=0.5, dist2=0.0, mverb=0.5, dist2mix=1, dist2shape=0.5)
+
+t3 >> loop("crab16", dur=16, amp=var([0, 0.4], [8, 8]), clouds=0.5, csize=0.6, cdens=0.3, cmode=1)
+
+Clock.clear()
+soff()
+
+Clock.bpm = 174
+
+Scale.default = "minor"
+
+Root.default = "C"
+
+v2 >> choir([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], vowel=2, vowelf=0, vowelq=1, beat_dur=1, rate=1, mverb=0.85, blur=0, lpf=PRand(1200, 3000), hpf=300, amp=linvar([0, 0.5], 24)).unison(2).only() + (-7, PStep(5, 7, 0))
+
+v2 >> choir([0, 3, 5, P*[7, 10, 5]], dur=[P*[2, 4, 8], P*[2, 4], P*[8, 12]], vowel=2, vowelf=0, vowelq=1, beat_dur=1, rate=1, mverb=0.85, blur=0, lpf=PRand(1200, 3000), hpf=300, amp=linvar([1, 0.5], 24)).unison(2).only() + (-7, PStep(5, 7, 0))
+
+b9 >> bell2([0, 7, 12], dur=16, oct=5, amp=linvar([0, 0.55], 24), atk=4, sus=14, lpf=linvar([400, 2500], 64), room=0.7, mix=0.5, multicrush=1.5, mclowdrive=1.5, mcmiddrive=1.5, mchighdrive=2.5, mclofreq=1200, mchifreq=2800, tube=0.5, tubegain=1.0, tubewarm=0.8, hard=var([0, 1, 2, 4], 8), nharm=2, fmamt=[0, 1, 2, 4], fmratio=12, strike=1, shimmer=2.0)
+
+p1 >> ethpad([0, 1, 7], dur=8, oct=5, attack=4, release=4, amp=linvar([0, 0.32], 32), room=0.9, mix=0.6)
+
+l1 >> loop("breakcore160_16", dur=16, sample=PRand(64), sbrk=fperlin(32, 0.3, 0.9), sbrkdur=PWhite(-4, 30), sbrkmix=1.0, t_reset=PRand(9), decimate=fi(48, 0, 0.7), decbits=PRand(0, 6), decrate=4000, multicrush=2.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=2.5, mclofreq=2000, mchifreq=4000, octafuz=fi(32, 0, 1), amp=0.85)
+
+l1 >> loop("breakcore160_16", dur=16, sample=PRand(64), sbrk=fperlin(32, 0.3, 0.9), sbrkdur=PWhite(-4, 30), sbrkmix=1.0, t_reset=PRand(9), decimate=fi(48, 0, 0.7), decbits=PRand(0, 6), decrate=4000, multicrush=2.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=2.5, mclofreq=2000, mchifreq=4000, octafuz=fi(32, 0, 1), amp=0.85)
+
+b1 >> dbass([0, 0, 0, -5, 0, 7, 0, -7], dur=PDur(7, 8), oct=5, sus=PDur(7, 8)*0.6, hpf=80, cutoff=fb(8, 600, 2400), rq=0.3, dist2=fb(24, 0.4, 1.4), tubedrive=0.1, tubewarm=2, hpr=0.2, subenh=0.5, subhfreq=500, subhgain=1.2, amp=1.1)
+
+b1.stop()
+
+v2.oct=4
+b1.dur=1/2
+a1 >> play("x-", dur=1, sample=var(P[0:10], 64), crush=fb(16, 0, 6), amp=PBern(8)*0.6).sometimes("stutter", PRand(8), rate=4).unison(3).sometimes("amen")
+
+h1 >> play("-(--)-(--)-", dur=1/4, sample=PStep(8, 1, 3), rate=PWhite(0.95, 1.6), amp=PWhite(0.3, 0.55), pan=PWhite(-0.5, 0.5), tremolo=PRand([0.3, 0.5, 0.7]), tremolomix=0.6, formant=PRand(4)).degrade(0.2)
+
+l2 >> loop("electrodrum16", dur=16, sample=(6, 5), comp=1, multicrush=2, mclowdrive=1.5, mcmiddrive=2, mchighdrive=2, mclofreq=200, mchifreq=4000, csweep=0.1, cswfreq=20, cswdepth=0.3, cswrate=0.01, cswdecay=0.5, sbrk=PWhite(0.2, 0.8), bpf=fb(24, 200, 2400), bpr=0.3, amp=0.7)
+
+l2 >> loop("electrodrum16", dur=16, sample=(6, 5), comp=1, multicrush=2, mclowdrive=1.5, mcmiddrive=2, mchighdrive=2, mclofreq=200, mchifreq=4000, csweep=0.1, cswfreq=20, cswdepth=0.3, cswrate=0.01, cswdecay=0.5, sbrk=PWhite(0.2, 0.8), bpf=fb(24, 200, 2400), bpr=0.3, amp=0.7)
+
+m1 >> compperc(PRand([0, 3, 5, 7, 10, 12, -2, -5]), dur=PDur(var([5, 7, 11], [8, 4, 4]), 8), sus=0.08, amp=0.5, tone=0.4, noise=0.4, body=0.3, metal=0.55, ring=0.5, comp=0.55, hpf=900, cheapverb=0.0, cvdecay=2.5, jpverb=0.4, jpsize=0.85, pan=PRand([-0.6, -0.25, 0.25, 0.6]))
+
+Clock.clear()
+soff()
+
+Clock.bpm = 60;
+

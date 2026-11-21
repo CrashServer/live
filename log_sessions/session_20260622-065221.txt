@@ -1,0 +1,1308 @@
+Clock.bpm = 60
+
+Scale.default = "minor"
+
+Root.default = "C"
+
+o1 >> piano([0,6,5,6], oct=3, dur=1, sus=0.88, amp=0.42,room=0.7, mix=0.6)
+
+# solo piano theme — intimately sparse (Morricone "Cinema Paradiso" feel)
+pt >> pianovel([0,3,5,7,5,3,7,5], oct=5,               dur=var([1,1,1,0.5,1,1,2,2],[1,1,1,1,1,1,1,2]),
+               sus=var([0.8,0.8,0.8,0.4,0.8,0.8,1.5,1.5],[1,1,1,1,1,1,1,2]),
+               amp=0.5, room=0.75, mix=0.65,
+               pan=sinvar([-0.2,0.2],16))
+
+# pizzicato cello hint
+vi >> viola([0,5,3,4], oct=3, dur=1, sus=0.15, amp=0.22,
+            room=0.7, mix=0.6, pan=-0.3)
+
+# strings enter — long bows, swell from nothing
+sw >> swell([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4,
+            dur=4, sus=5, amp=sinvar([0.1,0.4],32),
+            rate=0.3, wide=0.7, room=0.95, mix=0.88)
+
+sw >> swell([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4,             dur=4, sus=5, amp=sinvar([0.1,0.4],32),            rate=0.3, wide=0.7, room=0.95, mix=0.88)
+
+# cello counterline — low register moan
+vc >> viola([0,-2,3,2,0,5,3,4], oct=4,            dur=var([2,1,1,1,2,1,1,2],[2,1,1,1,2,1,1,2]),            sus=var([1.8,0.8,0.8,0.8,1.8,0.8,0.8,1.8],[2,1,1,1,2,1,1,2]),            amp=sinvar([0.15,0.35],24),
+            room=0.9, mix=0.8,            vibrato=sinvar([0,0.25],16))
+
+# harp arpeggios — connective tissue
+hp >> karp([0,3,5,7,5,3, 6,1,3,6,3,1, 5,0,3,5,3,0, 4,6,1,4,1,6], oct=5,           dur=0.5, sus=PRand([0.4,0.6,0.8],6), amp=0.28,           cheapverb=0.5, cvdecay=2, pan=sinvar([-0.4,0.4],6))
+
+vi >> viola([0,5,3,4], oct=3, dur=1, sus=0.15, amp=0.22,          room=0.7, mix=0.6, pan=-0.3)
+
+sw >> swell([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4, dur=4, sus=5, amp=sinvar([0.1,0.4],32),            rate=0.3, wide=0.7, room=0.95, mix=0.88)
+
+vc >> viola([0,-2,3,2,0,5,3,4], oct=4, dur=var([2,1,1,1,2,1,1,2],[2,1,1,1,2,1,1,2]),  sus=var([1.8,0.8,0.8,0.8,1.8,0.8,0.8,1.8],[2,1,1,1,2,1,1,2]),            amp=sinvar([0.15,0.35],24),            room=0.9, mix=0.8,            vibrato=sinvar([0,0.25],16))
+
+hp >> karp([0,3,5,7,5,3, 6,1,3,6,3,1, 5,0,3,5,3,0, 4,6,1,4,1,6], oct=5,           dur=0.5, sus=PRand([0.4,0.6,0.8],6), amp=0.28,           cheapverb=0.5, cvdecay=2, pan=sinvar([-0.4,0.4],6))
+
+br >> brass2([0,3,5,7,5,3,7,5, 0,3,5,7,9,7,5,3], oct=5,             dur=var([1,0.5,0.5,1,0.5,0.5,1,2],[1,1,1,1,1,1,1,1]),             sus=var([0.85,0.4,0.4,0.85,0.4,0.4,0.85,1.8],[1,1,1,1,1,1,1,1]),             amp=sinvar([0.3,0.6],16),             bright=0.75, growl=sinvar([0.1,0.45],16),             vibrate=4.5, vibdepth=0.018,
+             room=0.6, mix=0.5)
+
+# CS80 orchestral underbody — Vangelis style
+cx >> cs80([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4,           dur=4, sus=5, amp=sinvar([0.12,0.32],32),
+           cutoff=sinvar([1000,3500],24),           vibspeed=3.5, vibdepth=0.012,
+           room=0.9, mix=0.8)
+
+tm >> gong([0,rest(0),rest(0),rest(0),5,rest(0),rest(0),rest(0),            3,rest(0),rest(0),rest(0),4,rest(0),rest(0),rest(0)], oct=2,           dur=1, sus=sinvar([0.5,1.2],16),
+           amp=sinvar([0.2,0.55],16),           room=0.6, mix=0.5)
+
+tm >> gong([0,rest(0),rest(0),rest(0),5,rest(0),rest(0),rest(0),            3,rest(0),rest(0),rest(0),4,rest(0),rest(0),rest(0)], oct=3,           dur=1, sus=sinvar([0.5,1.2],16),
+           amp=sinvar([0.2,0.55],16),           room=0.6, mix=0.5)
+
+# choir whisper — vowel wash
+ch >> choir([0,5,3,4], oct=4, dur=4,
+            sus=sinvar([4,6],16), amp=sinvar([0,0.22],32),
+            room=0.99, mix=0.95,
+            lpf=linvar([500,2000],64))
+
+# choir whisper — vowel wash
+ch >> choir([0,5,3,4], oct=5, dur=4,
+            sus=sinvar([4,6],16), amp=sinvar([0,0.22],32),
+            room=0.99, mix=0.95,
+            lpf=linvar([500,2000],64))
+
+ch.amp = sinvar([0.25, 0.5], 16)
+
+ch.amp = sinvar([0.25, 0.5], 16)
+ch >> choir([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4,
+            dur=4, sus=5.5, amp=sinvar([0.3,0.55],16),
+            room=0.99, mix=0.95,
+            lpf=linvar([800,3000],32))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# celesta high sparkle (Harry Potter / Hedwig feel)
+cl >> bell2([7,9,12,7,5,3,7,9,12], oct=6,
+            dur=PRand([0.5,1,2],9), sus=PRand([0.3,0.5,1],9),
+            amp=sinvar([0.1,0.3],8),
+            cheapverb=0.7, cvdecay=3)
+
+pe >> compperc([rest(0),rest(0),0,rest(0),rest(0),rest(0),0,rest(0)], dur=0.5,
+               amp=sinvar([0.3,0.65],16),
+               tone=0.4, body=0.5, noise=0.5, decay=0.12, drive=1.2,
+               room=0.4, mix=0.35)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 86
+
+Scale.default = "major"
+
+Root.default = "B"
+
+gt >> nylon([0,2,4,2,0,2,4,2, 4,6,8,6,4,6,8,6, 5,7,9,7,5,7,9,7, 3,5,7,5,3,5,7,5], oct=5, dur=0.5, sus=0.45, amp=0.5, room=0.65, mix=0.55, chorus=0.2, pan=sinvar([-0.15,0.15],16))
+
+pd >> piano([(0,2,4),(4,6,8),(5,7,9),(3,5,7)], oct=4, dur=4, sus=3.6, amp=0.32, room=0.7, mix=0.6)
+
+ba >> fbass([0,4,5,3], oct=3, dur=4, sus=3.5, amp=0.6, cutoff=350, rq=0.4)
+
+ba >> fbass([0,4,5,3], oct=4, dur=4, sus=3.5, amp=0.6, cutoff=350, rq=0.4)
+
+ml >> keys([4,4,3,2,0,2,3,4,4,4,3,2,0], oct=5, dur=var([0.5,1],[8,5]), sus=PRand([0.5,0.7,1,1.5],5), amp=0.45, room=0.7, mix=0.55, chorus=0.15, pan=0.1)
+
+sw >> swell([-7,-5,0,4], oct=4, dur=4, sus=4.5, amp=sinvar([0.05,0.18],32), rate=0.4, wide=0.4, room=0.9, mix=0.8)
+
+sw >> swell([(0,2,4),(4,6,8),(5,7,9),(3,5,7)], oct=4, dur=4, sus=4.8, amp=sinvar([0.3,0.5],16), rate=0.3, wide=0.8, room=0.95, mix=0.85)
+
+vi >> viola([0,-2,3,2,0,-2], oct=4, dur=var([2,1,1,1,2,1],[4,2,2,2,4,2]), sus=var([1.8,0.8,0.8,0.8,1.8,0.8],[4,2,2,2,4,2]), amp=sinvar([0.15,0.35],16), room=0.9, mix=0.8, vibrato=sinvar([0,0.3],16))
+
+cx >> cs80([0,4,5,3], oct=4, dur=4, sus=4.5, amp=sinvar([0.1,0.28],32), cutoff=sinvar([1500,3500],32), vibspeed=4, vibdepth=0.015, room=0.9, mix=0.8)
+
+ba.amp = linvar([0.6, 0.8], 32)
+
+sw.amp = linvar([0.35, 0.05], 16)
+vi.amp = linvar([0.3, 0], 8)
+cx.amp = linvar([0.25, 0], 8)
+ml.amp = linvar([0.45, 0.15], 16)
+
+al >> sinepad([0,4,5,3], oct=6, dur=4, sus=5, amp=sinvar([0,0.12],16), room=0.99, mix=0.95, shimmer=0.4)
+
+sw >> swell([(0,2,4),(4,6,8),(5,7,9),(3,5,7)], oct=4, dur=4, sus=4.8, amp=linvar([0.45, 0], 48), rate=0.3, wide=0.9, room=0.95, mix=0.9)
+
+cx.amp = linvar([0.3, 0], 48)
+
+ml.amp = linvar([0.5, 0], 48)
+
+al.amp = linvar([0.15, 0], 48)
+
+ba.amp = linvar([0.75, 0], 48)
+
+pd.amp = linvar([0.35, 0], 48)
+
+gt.amp = linvar([0.5, 0], 48)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+#@#@ filmscore
+# score — 60 bpm, C minor, philharmonic
+# Zimmer / Williams / Morricone: piano ostinato, string swells, brass theme, choir climax
+Clock.bpm = 60
+Scale.default = "minor"
+Root.default = "C"
+
+pt >> pianovel([0,3,5,7,5,3,7,5], oct=5, dur=var([1,1,1,0.5,1,1,2,2],[1,1,1,1,1,1,1,2]), sus=var([0.8,0.8,0.8,0.4,0.8,0.8,1.5,1.5],[1,1,1,1,1,1,1,2]), amp=0.5, room=0.75, mix=0.65, pan=sinvar([-0.2,0.2],16))
+
+vi >> viola([0,5,3,4], oct=3, dur=1, sus=0.15, amp=0.22, room=0.7, mix=0.6, pan=-0.3)
+
+sw >> swell([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4, dur=4, sus=5, amp=sinvar([0.1,0.4],32), rate=0.3, wide=0.7, room=0.95, mix=0.88)
+
+vc >> viola([0,-2,3,2,0,5,3,4], oct=4, dur=var([2,1,1,1,2,1,1,2],[2,1,1,1,2,1,1,2]), sus=var([1.8,0.8,0.8,0.8,1.8,0.8,0.8,1.8],[2,1,1,1,2,1,1,2]), amp=sinvar([0.15,0.35],24), room=0.9, mix=0.8, vibrato=sinvar([0,0.25],16))
+
+hp >> karp([0,3,5,7,5,3, 6,1,3,6,3,1, 5,0,3,5,3,0, 4,6,1,4,1,6], oct=5, dur=0.5, sus=PRand([0.4,0.6,0.8],6), amp=0.28, cheapverb=0.5, cvdecay=2, pan=sinvar([-0.4,0.4],6))
+
+br >> brass2([0,3,5,7,5,3,7,5, 0,3,5,7,9,7,5,3], oct=5, dur=var([1,0.5,0.5,1,0.5,0.5,1,2],[1,1,1,1,1,1,1,1]), sus=var([0.85,0.4,0.4,0.85,0.4,0.4,0.85,1.8],[1,1,1,1,1,1,1,1]), amp=sinvar([0.3,0.6],16), bright=0.75, growl=sinvar([0.1,0.45],16), vibrate=4.5, vibdepth=0.018, room=0.6, mix=0.5)
+
+cx >> cs80([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4, dur=4, sus=5, amp=sinvar([0.12,0.32],32), cutoff=sinvar([1000,3500],24), vibspeed=3.5, vibdepth=0.012, room=0.9, mix=0.8)
+
+tm >> gong([0,rest(0),rest(0),rest(0),5,rest(0),rest(0),rest(0),3,rest(0),rest(0),rest(0),4,rest(0),rest(0),rest(0)], oct=4, dur=1, sus=sinvar([0.5,1.2],16), amp=sinvar([0.2,0.55],16), room=0.6, mix=0.5)
+
+ch >> choir([0,5,3,4], oct=4, dur=4, sus=sinvar([4,6],16), amp=sinvar([0,0.22],32), room=0.99, mix=0.95, lpf=linvar([500,2000],64))
+
+ch >> choir([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4, dur=4, sus=5.5, amp=sinvar([0.3,0.55],16), room=0.99, mix=0.95, lpf=linvar([800,3000],32))
+
+al >> sinepad([0,3,5,4], oct=6, dur=4, sus=6, amp=sinvar([0.05,0.22],16), room=0.99, mix=0.95, shimmer=0.5)
+
+cl >> bell2([7,9,12,7,5,3,7,9,12], oct=6, dur=PRand([0.5,1,2],9), sus=PRand([0.3,0.5,1],9), amp=sinvar([0.1,0.3],8), cheapverb=0.7, cvdecay=3)
+
+pe >> compperc([rest(0),rest(0),0,rest(0),rest(0),rest(0),0,rest(0)], dur=0.5, amp=sinvar([0.3,0.65],16), tone=0.4, body=0.5, noise=0.5, decay=0.12, drive=1.2, room=0.4, mix=0.35)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+pt >> pianovel([0,3,5,7,5,3,7,5], oct=5, dur=var([1,1,1,0.5,1,1,2,2],[1,1,1,1,1,1,1,2]),
+               sus=var([0.8,0.8,0.8,0.4,0.8,0.8,1.5,1.5],[1,1,1,1,1,1,1,2]),
+               amp=0.5, room=0.75, mix=0.65, pan=sinvar([-0.2,0.2],16))
+
+cx >> cs80([(0,3,5),(6,1,3),(5,0,3),(4,6,1)], oct=4,           dur=4, sus=5, amp=sinvar([0.12,0.32],32),
+           cutoff=sinvar([1000,3500],24),           vibspeed=3.5, vibdepth=0.012,
+           room=0.9, mix=0.8)
+
+br >> brass2([0,3,5,7,5,3,7,5, 0,3,5,7,9,7,5,3], oct=5,             dur=var([1,0.5,0.5,1,0.5,0.5,1,2],[1,1,1,1,1,1,1,1]),             sus=var([0.85,0.4,0.4,0.85,0.4,0.4,0.85,1.8],[1,1,1,1,1,1,1,1]),             amp=sinvar([0.3,0.6],16),             bright=0.75, growl=sinvar([0.1,0.45],16),             vibrate=4.5, vibdepth=0.018,
+             room=0.6, mix=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 106
+
+Scale.default = "minor"
+
+Root.default = "D"
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.3, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.3, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.3, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=4, dur=0.5, sus=0.4, amp=0.7, beef=10, cutoff=sinvar([600,3000],16), rq=0.6)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=0.7, beef=10, cutoff=sinvar([600,3000],16), rq=0.6)
+
+ht >> play("i", dur=0.25, amp=PLife(0.5), hpf=8000, pan=PRand([-0.25,0,0.25],4))
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=5, dur=0.5, sus=PRand([0.1,0.2,0.3],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=0.6, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+wr.cutoff = sinvar([800, 8000], 8)
+wr.beef = 14
+wr.amp = sinvar([0.6, 0.9], 8)
+
+sc >> scratch([7,12,7,rest(0),5,rest(0)], oct=5, dur=PRand([0.5,0.25,1],4), sus=PRand([0.1,0.2,0.3],4), amp=sinvar([0,0.7],4), rate=sinvar([0.1,0.5],2), depth=sinvar([0.3,0.8],4), pitchShift=var([0,1,2,-1],4), dynfuzz=0.5)
+
+ba.dynfuzz = sinvar([0.3, 0.7], 8)
+ba.amp = sinvar([0.8, 1.0], 8)
+
+sc.stop()
+wr.amp = linvar([0.7, 0], 8)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=4, dur=0.5, sus=0.4, amp=0.65, beef=10, cutoff=sinvar([600,2000],8))
+
+br.amp = sinvar([0.5, 0.9], 8)
+br.growl = sinvar([0.4, 0.8], 4)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=4, dur=0.5, sus=0.4, amp=0.9, beef=14, cutoff=sinvar([400,10000],8), rq=0.5)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=4, dur=0.5, sus=0.4, amp=0.9, beef=14, cutoff=sinvar([400,10000],8), rq=0.5)
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=5, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+sc >> scratch([0,7,12,7], oct=5, dur=0.5, sus=0.2, amp=0.6, rate=0.4, depth=0.7, pitchShift=linvar([0,2],16))
+ba.amp = 1.0
+dk.amp = var([1,0.95,1,0.92,1,0.9,1,1],8)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.3, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.4, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.5, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.6, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.8, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=20, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=40, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=80, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=180, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=0.7, beef=10, cutoff=sinvar([600,3000],16), rq=0.6)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=5, dur=0.5, sus=PRand([0.1,0.2,0.3],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4))
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=7, dur=0.5, sus=PRand([0.1,0.2,0.3],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4))
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.1,0.2,0.3],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4))
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4))
+
+ht >> play("i", dur=0.25, amp=PLife(0.5), hpf=8000, pan=PRand([-0.25,0,0.25],4))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=0.6, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+sc >> scratch([7,12,7,rest(0),5,rest(0)], oct=5, dur=PRand([0.5,0.25,1],4), sus=PRand([0.1,0.2,0.3],4), amp=sinvar([0,0.7],4), rate=sinvar([0.1,0.5],2), depth=sinvar([0.3,0.8],4), pitchShift=var([0,1,2,-1],4), dynfuzz=0.5)
+
+ba.dynfuzz = sinvar([0.3, 0.7], 8)
+ba.amp = sinvar([0.8, 1.0], 8)
+
+sc.stop()
+wr.amp = linvar([0.7, 0], 8)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=4, dur=0.5, sus=0.4, amp=0.65, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.4, amp=0.65, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.4, amp=0.66, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.4, amp=0.67, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.4, amp=0.68, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.4, amp=0.69, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.4, amp=0.70, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.4, amp=0.71, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.4, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.5, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+sc >> scratch([0,7,12,7], oct=5, dur=0.5, sus=0.2, amp=0.6, rate=0.4, depth=0.7, pitchShift=linvar([0,2],16))
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=5, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=6, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=8, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=4, dur=0.5, sus=0.4, amp=0.9, beef=14, cutoff=sinvar([400,10000],8), rq=0.5)
+
+wr.stop()
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4))
+ht >> play("i", dur=0.25, amp=PLife(0.5), hpf=8000, pan=PRand([-0.25,0,0.25],4))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4))
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=7, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ht >> play("i", dur=0.25, amp=PLife(0.5), hpf=8000, pan=PRand([-0.25,0,0.25],4))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.1, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+sc >> scratch([7,12,7,rest(0),5,rest(0)], oct=5, dur=PRand([0.5,0.25,1],4), sus=PRand([0.1,0.2,0.3],4), amp=sinvar([0,0.7],4), rate=sinvar([0.1,0.5],2), depth=sinvar([0.3,0.8],4), pitchShift=var([0,1,2,-1],4), dynfuzz=0.5)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+sc >> scratch([0,7,12,7], oct=5, dur=0.5, sus=0.2, amp=0.6, rate=0.4, depth=0.7, pitchShift=linvar([0,2],16))
+
+sc.stop()
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+sc >> scratch([7,12,7,rest(0),5,rest(0)], oct=5, dur=PRand([0.5,0.25,1],4), sus=PRand([0.1,0.2,0.3],4), amp=sinvar([0,0.7],4), rate=sinvar([0.1,0.5],2), depth=sinvar([0.3,0.8],4), pitchShift=var([0,1,2,-1],4), dynfuzz=0.5)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+sc.stop()
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.5, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=6, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=4, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=1.5, mcmiddrive=20, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=1.5, mcmiddrive=4, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+dk >> play("X...X.X.X...X...", dur=0.125, amp=var([1,0.9,1,0.88],4))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=7)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=6)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=5)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=4)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+d2 >> play("X.X.X...X.X.X...", dur=0.25, amp=0.75, sample=4, hpf=60)
+
+ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
+
+cr >> crunch([0,-5,0,-7,-5,-7,0,-5], oct=5, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+cr >> crunch([0,-5,0,-7,-5,-7,0,-5], oct=5, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+hv >> hoover([7,5,0,7,5,7,rest(0),0], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0.3,0.85],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+#@#@ machine
+Clock.bpm = 106
+Scale.default = "minor"
+Root.default = "D"
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ht >> play("i", dur=0.25, amp=PLife(0.5), hpf=8000, pan=PRand([-0.25,0,0.25],4))
+
+ht.stop()
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=3)
+
+d2 >> play("X.X.X...X.X.X...", dur=0.25, amp=0.75, sample=4, hpf=60)
+
+ba.stop()
+
+ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
+
+cr >> crunch([0,-5,0,-7,-5,-7,0,-5], oct=5, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+wr.stop()
+
+ag.stop()
+
+cr >> crunch([0,-5,0,-7,-5,-7,0,-5], oct=5, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+cr >> crunch([0,-5,0,-7,-5,-7,0,-5], oct=5, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+hv >> hoover([7,5,0,7,5,7,rest(0),0], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0.3,0.85],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+hv >> hoover([7,5,0,7,5,7,rest(0),0], oct=4, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0.3,0.85],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+hv >> hoover([7,5,0,7,5,7,rest(0),0], oct=4, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+hv >> hoover([7,5,0,7,5,7,rest(0),0], oct=4, dur=0.5, sus=PRand([0.2,0.3,0.6],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+hv >> hoover([7,5,0,7,5,7,rest(0),0], oct=4, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+hn >> hnoise(0, oct=5, dur=PFDur((7,8),(5,16)), amp=sinvar([0,0.55],4), lpf=sinvar([2000,14000],4), hpf=1200, dynfuzz=0.75, dfgain=2)
+
+hv.stop()
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.1, amp=0.85, cutoff=sinvar([4000,20000],2), rq=0.2, rate=sinvar([0.6,1.0],4))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1.1, bright=1.0, growl=sinvar([0.6,1.0],4), tight=0.8, room=0.25, mix=0.2)
+
+sc >> scratch([7,12,7,5,0,7,12,5], oct=5, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+# ba now has resonbank metallic overtones
+ba.resonbank = sinvar([0,0.5],8)
+ba.rbfreq = [47,62,73,100]
+ba.rbdecay = [0.4,0.3,0.4,0.3]
+
+ba.resonbank = sinvar([0,0.5],8)
+
+ba.rbdecay = [0.4,0.3,0.4,0.3]
+
+ht >> play("i", dur=0.25, amp=PLife(0.8), hpf=8000, pan=PRand([-0.4,0,0.4],4), amplify=PFDur((7,16),(5,8)))
+
+hv >> dbass([7,5,0,7,5,7,rest(0),0], oct=4, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+hv >> dbass([7,5,0,7,5,7,rest(0),0], oct=5, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=3)
+
+d2 >> play("X.X.X...X.X.X...", dur=0.25, amp=0.75, sample=4, hpf=60)
+
+ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
+
+ag.dur=4
+
+ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
+
+ag.stop()
+
+cr >> crunch([0,-5,0,-7,-5,-7,0,-5], oct=5, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+cr >> crunch([0,-5,0,-7,-5,-7,0,-5], oct=6, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+cr >> blip([0,-5,0,-7,-5,-7,0,-5], oct=6, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+hv >> dbass([7,5,0,7,5,7,rest(0),0], oct=5, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+hn >> hnoise(0, oct=5, dur=PFDur((7,8),(5,16)), amp=sinvar([0,0.55],4), lpf=sinvar([2000,14000],4), hpf=1200, dynfuzz=0.75, dfgain=2)
+
+hv >> dbass([7,5,0,7,5,7,rest(0),0], oct=6, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.1, amp=0.85, cutoff=sinvar([4000,20000],2), rq=0.2, rate=sinvar([0.6,1.0],4))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1.1, bright=1.0, growl=sinvar([0.6,1.0],4), tight=0.8, room=0.25, mix=0.2)
+
+sc >> scratch([7,12,7,5,0,7,12,5], oct=5, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+ht >> play("i", dur=0.25, amp=PLife(0.8), hpf=8000, pan=PRand([-0.4,0,0.4],4), amplify=PFDur((7,16),(5,8)))
+
+ba.dur=4
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+sn >> play("....o.......o...", dur=0.25, amp=0.85, sample=2, hpf=200, dynfuzz=0.15, dfgain=1.4, dftone=3)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.73, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.74, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.75, beef=10, cutoff=sinvar([600,2000],8))
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.76, beef=10, cutoff=sinvar([600,2000],8))
+
+ag.dur=4
+
+ag.dur=2
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8))
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8), lpf=4000)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.4, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.4, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=300, fbspread=0.4, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.4, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=6000, fbspread=0.4, beat_dur=1)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=6, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=1120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba.stop()
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=3)
+
+d2 >> play("X.X.X...X.X.X...", dur=0.25, amp=0.75, sample=4, hpf=60)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=3000, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=300, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=1200, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=1200, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=1, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=1200, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=1, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=1200, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=1.5, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
+
+hv >> dbass([7,5,0,7,5,7,rest(0),0], oct=6, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+hn >> hnoise(0, oct=5, dur=PFDur((7,8),(5,16)), amp=sinvar([0,0.55],4), lpf=sinvar([2000,14000],4), hpf=1200, dynfuzz=0.75, dfgain=2)
+
+hn.stop()
+
+h8 >> play("X ")
+
+hv.oct=4
+
+hv.oct=5
+
+hv.hpf=1200
+
+cr >> blip([0,-5,0,-7,-5,-7,0,-5], oct=6, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.1, amp=0.85, cutoff=sinvar([4000,20000],2), rq=0.2, rate=sinvar([0.6,1.0],4))
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1.1, bright=1.0, growl=sinvar([0.6,1.0],4), tight=0.8, room=0.25, mix=0.2)
+
+sc >> scratch([7,12,7,5,0,7,12,5], oct=5, dur=0.25, sus=0.2, amp=sinvar([0.4,0.8],4), rate=sinvar([0.2,0.6],2), depth=sinvar([0.5,1.0],4), pitchShift=linvar([0,3],32), dynfuzz=0.7)
+
+ht >> play("i", dur=0.25, amp=PLife(0.8), hpf=8000, pan=PRand([-0.4,0,0.4],4), amplify=PFDur((7,16),(5,8)))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+#@#@ machine
+Clock.bpm = 106
+Scale.default = "minor"
+Root.default = "D"
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4))
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=4, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpf=120, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+ag >> angst([7,5,0,7,rest(0),5,7,rest(0)], oct=6, dur=0.5, sus=PRand([0.2,0.4,0.6],4), amp=sinvar([0,0.6],8), cutoff=sinvar([800,12000],4), rq=0.4, rate=sinvar([0.3,0.9],8), pitchShift=var([0,1,-1,0],4), fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+br >> brass2([0,-5,-7,-5,0,rest(0),0,rest(0)], oct=5, dur=0.5, sus=PRand([0.15,0.2,0.1],4), amp=1, bright=0.85, growl=0.4, tight=0.7, room=0.3, mix=0.25)
+
+cl >> play("..o.", dur=0.5, sample=3, amp=0.7, amplify=PEuclid(5,8), hpf=3500)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=0.7, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.15, amp=0.7, cutoff=sinvar([2000,16000],4), rq=0.3)
+
+wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.76, beef=10, cutoff=sinvar([600,2000],8))
+
+ag.dur=2
+
+~wr >> war([0,rest(0),rest(0),rest(0),-5,rest(0),-7,rest(0)], oct=6, dur=0.5, sus=0.6, amp=0.72, beef=10, cutoff=sinvar([600,2000],8), lpf=4000)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=6, dur=0.5, sus=0.4, amp=1, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=6000, fbspread=0.4, beat_dur=1)
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=7, dur=0.5, sus=0.4, amp=0.6, beef=10, cutoff=sinvar([600,3000],16), rq=0.6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+dk >> play("X...X.X.X...X...", dur=0.25, amp=var([1,0.9,1,0.88],4), sample=3)
+
+d2 >> play("X.X.X...X.X.X...", dur=0.25, amp=0.75, sample=4, hpf=60)
+
+ba >> jbass([0,0,-5,0,-7,0,-5,-3], oct=5, multicrush=1, mclowdrive=4, mcmiddrive=4, mchighdrive=1.8, mclofreq=2000, mchifreq=1200, dur=0.25, sus=var([0.3,0.2,0.35,0.25],[4,4,4,4]), amp=0.85, dynfuzz=1.5, hpr=0.3, hpf=240, dfgain=1.2, lpf=sinvar([400,2000],16))
+
+ns >> industrialsnare([rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),rest(0),0,rest(0),rest(0),rest(0)], dur=0.25, oct=4, amp=0.9, dynfuzz=0.35, hpf=300)
+
+hv >> dbass([7,5,0,7,5,7,rest(0),0], oct=6, dur=0.5, sus=PRand([0.2,0.3,0.4],4), amp=sinvar([0.3,0.285],8), lpf=sinvar([800,8000],4), dynfuzz=0.6, dfgain=1.5, pitchShift=var([0,1,0,-1],8), fbdelay=0.5, fbtime=0.5, fbfeed=0.6, fbcutoff=5000, beat_dur=1)
+
+wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+h8 >> play("X ")
+
+h8 >> play("X ", amp=2)
+
+hn >> hnoise(0, oct=5, dur=PFDur((7,8),(5,16)), amp=sinvar([0,0.55],4), lpf=sinvar([2000,14000],4), hpf=1200, dynfuzz=0.75, dfgain=2)
+
+hv.oct=5
+
+hv.hpf=1200
+
+cr >> blip([0,-5,0,-7,-5,-7,0,-5], oct=6, dur=0.25, sus=0.15, amp=sinvar([0.35,0.8],8), multicrush=0.6, hpf=600, lpf=sinvar([1500,6000],8))
+
+~wr >> war([0,0,-5,-5,-7,-7,0,0], oct=5, dur=0.5, sus=0.4, amp=1, beef=16, cutoff=sinvar([300,14000],8), rq=0.45, fbdelay=0.5, fbtime=0.25, fbfeed=0.85, fbcutoff=6000, fbspread=0.05, beat_dur=1)
+
+ag >> angst([7,5,0,7,5,0,7,rest(0)], oct=7, dur=0.25, sus=0.1, amp=0.85, cutoff=sinvar([4000,20000],2), rq=0.2, rate=sinvar([0.6,1.0],4))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 110
+Scale.default = Scale.chromatic
+Root.default = "C"
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+p1 >> pad2([-7,-5,0,2], oct=5, dur=8,
+           sus=sinvar([5,9],64), amp=sinvar([0.2,0.4],32),
+           room=0.95, mix=0.85,
+           lpf=sinvar([500,1800],48))
+
+# FM chord swell
+p2 >> omi([(0,4),(2,5),(-2,2),(0,3)], oct=5,
+          dur=var([6,8,4,12],[8,16,8,16]),
+          sus=sinvar([5,10],32), amp=0.18,
+          room=0.99, mix=0.9,
+          lpf=linvar([400,1600],64))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# sub breath — slow root movement
+ba >> subbass([-7,-5,0,-7], oct=3,
+              dur=var([8,12,4,8],[16,16,8,16]),
+              sus=sinvar([6,10],32), amp=sinvar([0.2,0.45],48),
+              lpf=sinvar([80,350],32), room=0.7, mix=0.6)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# bell texture — sparse, panned
+b1 >> bell2([0,4,7,5,2], oct=6,
+            dur=PRand([1,2,3,0.5],5),
+            sus=PRand([0.5,1,2],5),
+            amp=sinvar([0.12,0.3],16),
+            cheapverb=0.7, cvdecay=sinvar([2,4],16),
+            pan=PRand([-0.5,0,0.5],5))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+#@#@ flow
+Clock.bpm = 140
+Scale.default = "phrygian"
+Root.default = "C"
+
+tb >> tb303([0,-2,3,-2,0,5,-2,3], oct=4, dur=0.25,
+            sus=PRand([0.1,0.2,0.3,0.5],8), amp=0.45,
+            lpf=sinvar([400,3500],24), lpr=0.7,
+            dist2=linvar([0,0.4],32))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# kick — 4-on-floor with punch
+dk >> play("X.", dur=0.5, amp=var([1,0.9,1,0.88],4))
+
+ab >> abass([0,-7,0,-5,3,-7,0,-3], oct=4, dur=0.5,            sus=var([0.35,0.3,0.45,0.35],[4,4,4,4]),            amp=0.75, dubdelay=sinvar([0,0.2],16))
+
+# kick — 4-on-floor with punch
+dk >> play("X.", dur=0.5, amp=var([1,0.9,1,0.88],4))
+ab >> abass([0,-7,0,-5,3,-7,0,-3], oct=4, dur=0.5,            sus=var([0.35,0.3,0.45,0.35],[4,4,4,4]),            amp=0.75, dubdelay=sinvar([0,0.2],16))
+ky >> keys([0,2,3,5,7,5,3,0], oct=5, dur=0.5,           sus=PRand([0.3,0.5,0.7,1],8), amp=0.45,           chorus=0.35, room=0.45, mix=0.35,           pan=sinvar([-0.3,0.3],8))
+
+sn >> play("..o.", dur=0.5, amp=var([0.8,0.5,0.8,0.45],4),           cheapverb=0.2, cvdecay=0.7)
+
+ht >> play("i", dur=0.25, amp=Pacc(3,8),           hpf=7000, pan=PRand([-0.25,0,0.25],4))
+
+cl >> play("..u.", dur=0.5, amp=0.55, pan=-0.2,          cheapverb=0.15, cvdecay=0.5)
+
+# svdk chord comping — wide and warm
+sv >> svdk([(0,4,7),(-7,0,4),(2,5,9),(-5,-2,2)], oct=4,
+           dur=var([2,1.5,2,2.5],[8,4,8,4]),
+           sus=var([1.5,1,1.5,2],[8,4,8,4]), amp=0.3,
+           chorus=0.4, dubdelay=sinvar([0,0.3],32),
+           lpf=sinvar([1500,4000],32))
+
+# karp pluck melody — Markov chain
+kp >> karp(melody(), oct=5,
+           dur=PRand([0.5,0.25,1,0.75],4),
+           sus=PRand([0.25,0.4,0.6],4), amp=0.35,
+           cheapverb=0.45, cvdecay=1.5,
+           pan=PRand([-0.4,0,0.4],4))
+
+rh >> rhodes([(0,4,7),(2,5,9),(-2,2,5),(0,3,7)], oct=4,
+             dur=var([2,1.5,2,2.5],[8,4,8,4]),
+             sus=var([1.2,0.8,1.5,1],[8,4,8,4]), amp=0.32,
+             phaser=sinvar([0,0.45],16),
+             room=0.5, mix=0.4)
+
+# marimba top texture — bright pops
+mr >> marimba([7,9,12,7,5,3,7,9], oct=5,
+              dur=PRand([0.5,0.25,1],8),
+              sus=PRand([0.1,0.25,0.4],8), amp=0.28,
+              room=0.5, mix=0.4,
+              pan=PRand([-0.3,0.3],4))
+
+# # marimba top texture — bright pops
+
+# organx clave rhythm chops
+
+# viola pads — wide stereo breath
+vi >> viola([-7,-5,0,2], oct=4,
+            dur=var([4,6,8],[16,8,16]),
+            sus=sinvar([3,6],16), amp=sinvar([0.08,0.22],24),
+            room=0.8, mix=0.7,
+            vibrato=sinvar([0,0.35],16))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+tb >> tb303([0,-2,3,-2,0,5,-2,3], oct=4, dur=0.25,
+            sus=PRand([0.1,0.2,0.3,0.5],8), amp=0.45,
+            lpf=sinvar([400,3500],24), lpr=0.7,
+            dist2=linvar([0,0.4],32))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 110
+Scale.default = Scale.chromatic
+Root.default = "C"
+
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, resonbank=0.8, rbfreq=var([300, 400, 500, 600, 650, 700, 800], 8), rbdecay=0.5, rbspread=1.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, (400, 550)], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=3.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=1.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5,           fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[5,6,5,5,6,5], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=0.1, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400, 600], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=var([0.1, 0.2, 0.5, 0.8, 1, 2]), tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,3,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=PWhite(0.1, 0.9), tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+l2 >> dbass(d2.degree, dur=1/4, shape=0, amp=4, valad=1500, valadr=1, valadd=5, valadt=0, valadc=0.2)
+
+p3 >> loop("nsbreak16", dur=16, amp=8)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d3 >> cbass([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[5,5,5,6,6,6], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+x9 >> play("x-o-", dur=1/4, amp=4, rate=1, sample=8, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/1, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/4, oct=[6,6,6,4,6,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+l2 >> dbass(d2.degree, dur=1/4, shape=0, amp=4, valad=1500, valadr=1, valadd=5, valadt=0, valadc=0.2, oct=6)
+
+p3 >> loop("nsbreak16", dur=16, amp=8, sample=PRand(8))
+
+d3.oct=6
+x9.stop()
+d2.oct=7
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d3.oct=6
+x9.stop()
+d2.oct=7
+d2 >> faim([2,2,4,5,5,2], dur=[1,1/2,1/2,1/2,1,1/2], oct=[4,5,5,4,4,5], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=0.5, tapedrive=1.5, tube=0.4, tubegain=1.5, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+~d2 >> faim([2,2,4,5,5,2], dur=1/1, oct=[4,5,5,4,5,4], vadiod=1500, vadiodr=0.4, vadiodd=1.8, subenh=1, subhfreq=100, subhgain=2, vadiodc=0.5, tape=1.2, tapedrive=2.2, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tubewarm=0.6, tubebias=0.1, tapewarm=0.5, tapewobble=0.1, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=var([1.1, 2, 4, 8, 16], 8), tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+d2 >> faim([2,2,4,5,5,2], dur=([1,1/2,1/2,1/2,1,1/2], 1/4), oct=[4,5,4,4,5,4], vadiod=45500, vadiodr=0.9, vadiodd=1.8, subenh=1, subhfreq=400, subhgain=1, vadiodc=0.5, tape=1.6, tapedrive=16, tube=0.8, tubegain=1.9, echo=0.5, fbdelay=0.9, resonbank=0.8, rbfreq=var([300, 400], 8), rbdecay=0.8, rbspread=1.0, fbtime=0.5, fbfeed=0.7, fbcutoff=6000, fbspread=0.22, beat_dur=1, tubewarm=0.6, tubebias=4, tapewarm=1.4, tapewobble=0.6, shape=var([0,0.1],[28,4])).every(8,"stutter",2,rate=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 80
+
+Clock.bpm = 80
+
+Scale.default = Scale.mixolydian
+
+Root.default = "D"
+
+b1 >> cbass([2,2,4,1,1,3,5,6,0,1,2,4,5,6,0,1,2,2,3,1,1,4,5,6,0,1,2,3,4,5,4,3,2,0], dur=PStutter([2,1/2,2,1/2,1,1/2,1,2,1/2,2,1/2,1,1/2,1/4,2],[1,2,1,6,1,4,1,1,2,1,8,2,1,2,1]), sus=PStutter([1/2,1/8,1,1/2,1/8,1,1/2,1/8,1/2,1,1/2,1/8,2],[8,2,1,2,2,1,8,2,2,2,1,2,1]), oct=PStutter([7,5,6,5,6,7,5,6],[6,1,4,2,3,6,1,11]), amp=0.5)
+
+d4 >> cbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=0.5)
+
+d4 >> cbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=0.6)
+
+d4 >> cbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=0.7)
+
+d4 >> cbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=0.8)
+
+d4 >> cbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=0.9)
+
+d4 >> cbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=1.0)
+
+b2 >> tb304([5,6,0,1,2,4,5,6,0,1,2,2,3,1,1,4,5,6,0,1,2,3,4,5,4,3,2,0], dur=PStutter([1/2,1,1/2,1,2,1/2,2,1/2,1,1/2,1/4,1/3,2],[4,1,4,1,1,2,1,8,2,1,1,1,1]), sus=PStutter([1/2,1/8,1,1/2,1/8,1,3/4,1/2,1/8,1/2,1,1/2,1/8,2],[2,2,1,2,2,1,6,2,2,2,2,1,2,1]), oct=PStutter([4,5,4,5,7,4,5,6],[1,4,2,3,6,1,10,1]), amp=0.5)
+
+p1 >> pluck([0,0,2,6,6,1,0,0,1,6,6,1], dur=[2,1/2,1/2], sus=1/2, oct=6, amp=0.25)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d1 >> cbass([0,5,2,5,0,5,6,4,1,4,6,4], dur=1/2, oct=[6,5], amp=0.5).unison(3)
+
+d2 >> cbass([(5,0,2),(4,6,1)], dur=3, sus=2, amp=0.5, follow=4)
+
+d3 >> cbass([0,5,2,5,0,5,6,4,1,4,6,4], dur=1/2, oct=[5,6], amp=0.7)
+
+d4 >> dbass([5,6,0,1,2,3,3], dur=PStutter([1/2,4,2],[5,1,1]), sus=[1/2,1/2,1/8,1/8,1/2,1/8,2], oct=[6,7,7,7,7,7,7], amp=1.0)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 105
+
+Scale.default = Scale.major
+
+Root.default = "C#"
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d1 >> pluck(Pvar([P[(1,1,3),(1,3),(1,3),(1,3),(0,0,2),(0,2),(0,1),(0,1),(4,6,1),(6,1)],(6,1),P[(5,5,0),(5,0)],(5,0),P[(3,5,0),(5,0)],(5,0)],[5,3,1,3,1,11]), spring=0.2, sprdecay=1.5, sprdamp=0.5, sprtens=0.5, dur=1/2, sus=PStutter([2,1/4,2,1/4,4,1/4,4,1/4,4,1/4],[1,3,1,3,1,7,1,7,1,7]), oct=PStutter([4,5,4,5,3,5,3,4,3,4],[1,3,1,3,1,7,1,7,1,7])).unison(3)
+
+d2 >> dbass([3,2,3,4,5,4,5,3,4,3,2,3,4,5,1,2,3,1,5,0,5,0,5,5,5,5,3,2], dur=[2,1/4,2,1/4,2,2,3/2,2,1/4,4,8,2,1/4,3/2,1/4,1/4,3/2,3,1/4,1/4,3/2,3/2,1/2,1/4,1/4,1,2,1/4], sus=1/4, oct=PStutter([5,4,5,6,5,6,5,6,5],[6,1,7,4,1,1,1,1,6])).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 120
+
+Scale.default = Scale.mixolydian
+
+Root.default = "C"
+
+d1 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+Scale.default = Scale.mixolydian
+
+Root.default = "C"
+
+d1 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d2 >> pianovel(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=4)
+
+d3 >> bbass([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d2 >> dbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+d3 >> a_gesa([5,3,1,5,1,3,5,1,3,1,5,3,1,3,1,5,2,0,5,0,2,5,0,2,0,5,2,0,5,0,2,5,2,0,5,2,0,5,2,0,5,2,0,5,2,0,5,2,4,2,0,4,2,0,4,2,0,4,2,0,4,2,0,4], dur=1/4, oct=PStutter([6,5,6,7,6,5,6,5,6,7,6,5,6,5,6,5,6,5,6,5,6,5,6,5,6],[3,1,3,3,5,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,17]))
+
+d1 >> a_gesa(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=7)
+
+~g2 >> a_xbass(PStutter([1,4,5,6,5,6],[8,1,3,1,5,1]), dur=[1,1,1,1,1,1,3/4,1/2,3/4,1,1,1/4,3/4,1,1,1,3/4,1/2,3/4], oct=5, drive=0.1).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 148
+
+Scale.default = Scale.major
+
+Root.default = "C"
+
+d1 >> dbass([2,4,0,5,1], dur=4, oct=[4,4,5,4,5]).unison(3)
+
+d2 >> tb304(PRand([0,1,2,3,4,5,6]), dur=PRand([1,1/2,3/2]), sus=3/2, oct=PRand([3,4,5]))
+
+d3 >> tb305([2,4,0,5,1], dur=4, oct=4)
+
+b1 >> faim([(2,4),(4,6),(4,0),(2,5),(5,1)], dur=4, oct=5)
+
+b2 >> cs80([(2,6),(4,6),(4,0),(2,0),(5,1),(6,2),(6,1),(0,2),(0,2),(1,3),(2,4),(1,4),(2,4),(5,5),(1,5)], dur=4, oct=PStutter([5,6,5,6],[7,6,1,1]), fatk=0.75, fdec=0.5, fsus=0.4, frel=1.0, cutoff=200, detune=0.002, vibspeed=0.1, vibdepth=0.004, glide=0.8, glidedur=0.015)
+
+p1 >> faim(Pvar([(1,1),P[(1,1),(0,0)],(0,0),(1,1)],[1.5,1,1.5,4]), dur=PStutter([1/2,1/4,1/2,1/4,1/2,1/4,1/2,1/4,1/2,1/4],[1,1,1,1,2,1,1,1,5,8]), sus=PStutter([1/2,1/4,1/2,1/4],[1,4,1,16]), oct=6)
+
+p2 >> pluck(PwRand([(1,1),(0,0),(2,6)],[247,75,1]), dur=PRand([1/2,1/4]), sus=1/4, oct=[3,5])
+
+d4 >> faim(Pvar([P[2,4,0,5,1,2,2,2,2,2,2,2,2,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,1,1,1],P[1,1,1,1,1,2,2,2,2,2,2,2,2,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,1,1,1]],[37.5,580]), dur=PStutter([4,1/2,1/4],[5,1199,1]), sus=PStutter([1/2,1/4],[5,1200]), oct=7)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 122;
+
+Root.default = "E"
+
+Scale.default = "minor"
+
+c9 >> donk([1, var([_, [7, _, 7, (0, 4, 2)]]), 4, 1, 2], dur=1/2, mverb=0.5, scale=Scale.minor, valad=1000, valadr=0.5, valadd=0.5, valadt=0, oct=(var([2, 3, 2]), var([8,5,6, 7])), beef=2).unison(2).sometimes("shuffle")
+
+a1 >> organ([1, var([_, [7, _, 7, (0, 4, 2)]]), 4, 1, 2], mverb=0.8, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0,dur=1/2, leg=4, scale=Scale.minor, shape=0, oct=(var([5, 4, 6]), var([8,5,6, 7]))).unison(2).sometimes("shuffle")
+
+a0.leg=4
+
+a0.leg=4
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 128
+
+Scale.default = "minor"
+
+j1 >> bass([12, 11, 1, 0.5, 4, _, 4, _], oct=(4, 5, 6), dur=PDur(3, 8), shape=j1.degree==2,shift=j1.degree==1,dist2=j1.degree==0.5,mverb=(j1.degree==4)/4, echo=0.5, leg=4, rgate=0.5, rgaterate=4, rgatewave=0).unison(2)
+
+j0 >> play("g ", rate=[-0.5, 0.5,1, -1], a=0.2, delay=4, dur=(4, 2, 1), sample=(2, 7, 8), bitrot=1, rotbits=8, rotrate=0.5, rotjitter=0.1)
+
+j3 >> bass([12, 11, 4],dur=1/4, amp=j1.degree==4, oct=(4, 5), leg=40, vol=1, dist2=2, shape=0.5, cheapverb=0.2, cvdecay=0.5, cvdamp=0.5, rgate=0.5, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, rgaterate=4, rgatewave=0)
+
+~j2 >> loop("hiphop16", dur=16, sample=[4, 7])
+
+v4 >> play("X:")
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# snares — 190 bpm, Eb phrygian, Venetian Snares style
+# Breakcore: chopped amen chaos + piano/strings contrast (Rossz Csillag Alatt Született)
+# 7-note piano phrase phases against 4/4 grid — constant metric displacement
+Clock.bpm = 190
+Scale.default = "phrygian"
+Root.default = "Eb"
+
+pn >> piano([0,-2,3,5,-4,2,-7], oct=5, dur=0.25, sus=PRand([0.2,0.35,0.5],4), amp=0.55, cheapverb=0.45, cvdecay=2, pan=sinvar([-0.25,0.25],7))
+
+vi >> viola([0,-4,3,-7], oct=4, dur=var([2,3,4,2],[8,4,8,4]), sus=sinvar([1.5,3],16), amp=sinvar([0.1,0.3],24), room=0.85, mix=0.75, vibrato=sinvar([0,0.3],16))
+
+vi >> viola([0,-4,3,-7], oct=5, dur=var([2,3,4,2],[8,4,8,4]), sus=sinvar([1.5,3],16), amp=sinvar([0.1,0.3],24), room=0.85, mix=0.75, vibrato=sinvar([0,0.3],16))
+
+dk >> play("X.X.X...X.X.X.X.", dur=0.25, amp=PLife(0.75), hpf=50)
+
+d2 >> play("..X...X...X...X.", dur=0.25, amp=0.7, sample=1)
+
+sn >> play("..o...o.o...o.o.", dur=0.25, amp=PRand([0.8,1,0.6,0.9],4), sample=2)
+
+t2 >> play(".o..o...o..o....", dur=0.25, amp=0.6, sample=3, hpf=2000, pitchShift=var([0,1,-1,0.5],4))
+
+ht >> play("i", dur=0.125, amp=PLife(0.7), hpf=9000, pan=PRand([-0.4,0,0.4],4))
+
+gb >> glitchbass([0,-4,3,-4,0,-7,-4,0], oct=4, dur=0.25, sus=0.15, amp=0.8, cutoff=sinvar([600,8000],4), rq=0.4, rate=sinvar([0.5,2],4))
+
+sc >> scatter(0, oct=5, dur=PFDur((7,16),(5,8)), amp=sinvar([0,0.45],4), lpf=sinvar([3000,14000],4), hpf=2000, rate=sinvar([0.01,0.1],2))
+
+ag >> angst([0,-4,3,-4], oct=7, dur=PRand([0.25,0.5,0.125],4), sus=0.1, amp=sinvar([0.3,0.7],4), cutoff=sinvar([6000,20000],2), rq=0.2, rate=sinvar([0.6,1.0],4))
+
+wr >> war([0,-4,rest(0),-4,0,rest(0),-7,rest(0)], oct=5, dur=0.25, sus=0.1, amp=sinvar([0,0.6],4), beef=12, cutoff=sinvar([1000,8000],4), rq=0.5)
+
+pn.oct = var([5,6],[14,7])
+pn.amp = sinvar([0.45, 0.75], 8)
+
+dk >> play("X.X.X...X.X.X.X.", dur=0.25, amp=PLife(0.9))
+sn >> play("..o...o.o...o.o.", dur=0.25, amp=PRand([0.85,1,0.65,0.95],4), sample=2, pitchShift=var([0,-1,1,0],8))
+t2 >> play(".o..o...o..o....", dur=0.25, amp=PRand([0.65,0.8,0.5,0.7],4), sample=3, pitchShift=var([0,1,-1,2],4))
+ht >> play("i", dur=0.0625, amp=PLife(0.8), hpf=9000)
+
+# piano drops to low octave — inversion of contrast
+pn >> piano([0,-2,3,5,-4,2,-7], oct=3, dur=0.25, sus=PRand([0.15,0.25,0.4],4), amp=0.7, cheapverb=0.4, cvdecay=1.5)
+vi.amp = sinvar([0.25, 0.5], 8)
+gb.amp = sinvar([0.7, 1.0], 4)
+
+d2.amp = linvar([0.7, 0], 16)
+t2.amp = linvar([0.6, 0], 16)
+ag.amp = linvar([0.6, 0], 16)
+wr.amp = linvar([0.5, 0], 12)
+sc.amp = linvar([0.4, 0], 12)
+dk.amp = linvar([0.75, 0], 24)
+sn.amp = linvar([0.85, 0], 24)
+ht.amp = linvar([0.7, 0], 24)
+gb.amp = linvar([0.7, 0], 24)
+pn >> piano([0,-2,3,5,-4,2,-7], oct=5, dur=0.25, sus=PRand([0.2,0.35,0.5],4), amp=linvar([0.6, 0], 48), cheapverb=0.5, cvdecay=2.5)
+vi.amp = linvar([0.4, 0], 48)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+# dnb — 174 bpm, F minor, drum and bass
+# 2-step rolling groove, heavy sub, reese bass, dark atmosphere
+Clock.bpm = 174
+Scale.default = "minor"
+Root.default = "F"
+
+dk >> play("X.....X.X...X...", dur=0.25, amp=var([1,0.9,1,0.85],4), hpf=50)
+
+sn >> play("....o.......o...", dur=0.25, amp=0.88, sample=2, hpf=300, cheapverb=0.12, cvdecay=0.4)
+
+su >> subbass([0,0,0,-7,0,0,-5,0,0,-3,0,-5,0,0,0,-7], oct=2, dur=0.25, sus=0.22, amp=0.95, lpf=sinvar([60,250],16))
+
+su >> subbass([0,0,0,-7,0,0,-5,0,0,-3,0,-5,0,0,0,-7], oct=3, dur=0.25, sus=0.22, amp=0.95, lpf=sinvar([60,250],16))
+
+su >> subbass([0,0,0,-7,0,0,-5,0,0,-3,0,-5,0,0,0,-7], oct=4, dur=0.25, sus=0.22, amp=0.95, lpf=sinvar([60,250],16))
+
+su >> subbass([0,0,0,-7,0,0,-5,0,0,-3,0,-5,0,0,0,-7], oct=5, dur=0.25, sus=0.22, amp=0.95, lpf=sinvar([60,250],16))
+
+su >> subbass([0,0,0,-7,0,0,-5,0,0,-3,0,-5,0,0,0,-7], oct=6, dur=0.25, sus=0.22, amp=0.95, lpf=sinvar([60,250],16))
+
+rb >> jbass([0,0,-5,0,-7,-5,0,-7], oct=4, dur=0.5, sus=var([0.3,0.25,0.35,0.3],[4,4,4,4]), amp=0.75, dynfuzz=0.6, dfgain=1.8, lpf=sinvar([300,2500],24), hpf=80)
+
+ht >> play("i", dur=0.125, amp=PLife(0.55), hpf=8000, pan=PRand([-0.3,0,0.3],4))
+
+pd >> pad2([0,-5,3,-7], oct=4, dur=4, sus=5, amp=sinvar([0.08,0.25],32), lpf=linvar([400,1800],64), room=0.95, mix=0.88)
+
+wb >> wobble2([0,-7,-5,-7], oct=4, dur=2, sus=1.8, amp=sinvar([0.3,0.65],16), wflo=0.1, wfhi=8, wfmax=sinvar([2000,8000],8), wet=0.6)
+
+wb.stop()
+
+cl >> play("....o.......o...", dur=0.25, amp=0.65, sample=4, amplify=PEuclid(3,8), hpf=4000)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

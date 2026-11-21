@@ -136,4 +136,4 @@ clap = clap * amp * 0.6;
 clap = Mix(clap) * 0.5;
 clap = Pan2.ar(clap, pan);
 ReplaceOut.ar(bus, clap)
-}).add;
+}, metadata: (category: \drums)).add;

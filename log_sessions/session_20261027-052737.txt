@@ -1,0 +1,971 @@
+Clock.bpm = 128
+Scale.default = "minor"
+Root.default = 0
+
+nr >> neuroreese([0, 0, 3, -2], dur=[1, 0.5, 0.5, 2], oct=4, morph=linvar([0.2, 0.9], 16), cutoff=linvar([800, 4000], 32), modrate=4, moddepth=600, amp=0.6)
+
+gs >> glitchstab([(0, 4), (3, 7)], dur=PDur(3, 8), oct=5, glitchamt=0.6, bits=var([8, 4], 8), cutoff=4000, amp=0.5)
+
+gs >> glitchstab([(0, 4), (3, 7)], dur=PDur(3, 8), oct=5, glitchamt=0.6, bits=var([8, 4], 8), cutoff=4000, amp=0.6)
+
+gs >> glitchstab([(0, 4), (3, 7)], dur=PDur(3, 8), oct=5, glitchamt=0.6, bits=var([8, 4], 8), cutoff=4000, amp=0.7)
+
+gs >> glitchstab([(0, 4), (3, 7)], dur=PDur(3, 8), oct=5, glitchamt=0.6, bits=var([8, 4], 8), cutoff=4000, amp=0.8)
+
+sk >> subkick(0, dur=[1, 1, 1, 0.5, 0.5], oct=4, click=0.5, punch=0.8, subt=0.3)
+
+sk >> subkick(0, dur=[1, 1, 1, 0.5, 0.5], oct=3, click=0.5, punch=0.8, subt=0.3)
+
+ds >> darksnare(0, dur=2, delay=1, oct=5, tone=0.4, snap=0.8, body=0.6, amp=0.7)
+dm >> doom([0, 0, 5, 3], dur=1/2, oct=4, pw=linvar([0.2, 0.8], 8), cutoff=2400, wnoise=0.1, amp=0.5)
+
+dm >> doom([0, 0, 5, 3], dur=1/2, oct=4, pw=linvar([0.2, 0.8], 8), cutoff=2400, wnoise=0.0, amp=0.5)
+
+dm.stop()
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=5, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=5, feedback=1.2, index=4, vib=0.4, amp=0.4)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.4)
+
+ju >> juno([(0, 2, 4), (3, 5, 7)], dur=4, oct=5, junoshape=linvar([0, 1], 32), junochorus=0.006, cutoff=2800, amp=0.5)
+
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+ju.stop()
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.4)
+
+pk >> piacon(chord("maj7"), dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.4, amp=0.5)
+
+pk >> piacon(chord("maj7"), dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.4, amp=0.5).only()
+
+dc >> dtclap(0, dur=2, delay=1, oct=5, tone=1200, spread=3, snap=0.7, amp=0.6)
+
+pk.stop()
+
+dh >> dthihat(0, dur=1/4, oct=6, tone=8000, open=var([0, 0, 0, 1], 1), metallic=0.7, amp=PWhite(0.3, 0.6))
+
+dw >> dsaw([0, 3, 5], dur=1/2, oct=4, detune=8, cutoff=900, amp=0.4)
+
+d1 >> play(pat("t2"), dur=1/4, drumBuss=0.6, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2)
+
+d2 >> play(gen_khsor(4), dur=1/4, gatecrush=var([0, 1], [12, 4]), gcrate=8, gcbits=6, amp=0.6)
+
+d1.stop()
+
+d2 >> play(gen_khsor(4), dur=1/4, gatecrush=var([0, 1], [12, 4]), gcrate=8, gcbits=6, amp=0.6)
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, duck=1, duckamt=0.8, darkverb=0.5, dvdecay=4, dvcut=1800)
+
+s1.stop()
+
+s2 >> blip([0, 4, 7], dur=1/2, oct=5, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+s2.stop()
+
+s3 >> pads((0, 2, 4), dur=8, oct=4, smorph=1, smorphmix=0.6, smorphfreeze=var([0, 1], 8))
+
+s3.stop()
+
+s4 >> saw([0, 3], dur=1, oct=4, resample=var([0, 1], [8, 8]), rsrate=0.5, rsgrains=8, rsjitter=0.1, amp=0.4)
+
+s4.stop()
+
+s5 >> pluck([0, 2], dur=1/2, oct=5, crunch=0.6, sblur=1, sbluramt=6, sgate=var([0, 1], 8), sgthresh=1)
+
+s6 >> keys([0, 4], dur=1, oct=5, tstretch=0.5, tstretchsize=0.2, cheapverb=0.6, cvdecay=2)
+
+s5.stop()
+
+s6.stop()
+
+s7 >> bass([0, -2], dur=1, oct=4, dynfuzz=0.7, dfgain=1, octclean=0.5, ocsub=0.6, subenh=1, subhfreq=80)
+
+s8 >> blip([0, 7], dur=1/4, oct=5, csweep=1, cswfreq=300, doppler=1, dopspd=0.5, spring=0.5, sprdecay=1.5)
+
+s8.stop()
+
+s9 >> pads((0, 4), dur=4, oct=4, spwarp=1, spwstr=1.5, gdel=1, gdeltime=0.5, gdelfb=0.3, vowel=1, vowelf=var([0, 1, 2, 3], 4))
+
+s0 >> saw([0, 3, 5], dur=1/2, oct=4, mbcomp=1, mbcrat=3, vocod=0.5, voccarr=0.5, amp=0.4)
+
+s0.stop()
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=5)
+
+g2 >> blip([0, 2, 4], dur=PPoly(3, 4), oct=5)
+
+g2.stop()
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=5)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4)
+
+g4 >> keys([0, 4, 7], dur=PAdditive(2, 2, 3), oct=5)
+
+g3.stop()
+
+g5 >> pluck(PMelody(I, style=1, length=16), dur=1/4, oct=5)
+
+g6 >> pads(PCircle(0, steps=8), dur=8, sus=7.5, oct=4)
+
+g7 >> play("-", dur=PGroove("funk", density=0.8))
+
+g6.stop()
+
+g8 >> play("x", dur=PClave("son"))
+
+g9 >> pluck([0, 2, 4, 7], dur=1/2, sus=PArticulation("staccato"), oct=5)
+
+g9.stop()
+
+u1durs, u2durs = PPolyEuclid(3, 8, 5, 8)
+
+u1 >> play("X", dur=u1durs)
+
+u2 >> play("o", dur=u2durs)
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env("stab"), amp=env("accent"))
+
+Clock.clear()
+soff()
+
+m1 >> pluck([0, 2, 4], dur=1/4, oct=5, sus=env("stab"), amp=env("accent"))
+
+m2 >> bass(mel("acid1"), dur=1/8, oct=4, sus=env("pump"))
+
+m3 >> saw(arp("broken1"), dur=1/16, oct=5, amp=0.4)
+
+Clock.clear()
+soff()
+
+b1 >> play(pat("d2"), dur=1/4)
+
+b2 >> play(pbuild("breaks", evolve=8, fill=4, density=0.9), dur=1/4)
+
+Clock.clear()
+soff()
+
+compo.cell_display("B32")
+
+compo.cell_run("B32", stop_after=16)
+
+compo.cell_reload()
+
+compo.cell_display("B32")
+
+compo.cell_run("B32", stop_after=16)
+
+print(gen_khsor(2))
+
+print(gen_khsor(2))
+
+print(gen_khsor(2))
+
+print(gen_khsor(2))
+
+print(gen_khsor(2))
+
+print(gen_khsor(2))
+
+chaos(4, header=1, evt=2, mod=2)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.1, fbdelay=0.0, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.1, fbdelay=0.38, fbtime=0.25, fbfeed=0.4, fbcutoff=3000, fbspread=0.2, beat_dur=1, dist2=3.0)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.1, fbdelay=0.38, fbtime=0.25, fbfeed=1, fbcutoff=1000, fbspread=0.2, beat_dur=1, dist2=3.0, transient=0.1, transattack=1, transsustain=1, transtime=0.05)
+
+d1.stop()
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=40, ringz=0.02, fbdelay=1, fbtime=0.25, fbfeed=1, fbcutoff=14000, fbspread=0.1, beat_dur=1, dist2=3.0, transient=0.6, transattack=1, transsustain=1, transtime=0.05)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=40, ringz=0.02, fbdelay=1, fbtime=0.25, fbfeed=1, fbcutoff=14000, fbspread=0.1, beat_dur=1, dist2=3.0, transient=0.6, transattack=1, transsustain=1, transtime=0.05)
+
+d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=40, ringz=0.02, fbdelay=1, fbtime=0.25, fbfeed=1, fbcutoff=1400, fbspread=0.1, beat_dur=1, dist2=3.0, transient=0.6, transattack=1, transsustain=1, transtime=0.05)
+
+~d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+d1 >> play("x.", sample=(4, 0), amp=1,ringzfreq=40, ringz=0.02, fbdelay=1, fbtime=0.25, fbfeed=1, fbcutoff=1400, fbspread=0.1, beat_dur=1, dist2=3.0, transient=0.6, transattack=1, transsustain=1, transtime=0.05)
+
+~d2 >> play("x.", sample=(4, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+~d2 >> play("x.", sample=(5, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+~d2 >> play("x.", sample=(6, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+~d2 >> play("x.", sample=(7, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+d1 >> play("x.", sample=(5, 0), amp=1,ringzfreq=40, ringz=0.02, fbdelay=1, fbtime=0.25, fbfeed=1, fbcutoff=1400, fbspread=0.1, beat_dur=1, dist2=3.0, transient=0.6, transattack=1, transsustain=1, transtime=0.05)
+
+d1 >> play("x.", sample=(6, 0), amp=1,ringzfreq=40, ringz=0.02, fbdelay=1, fbtime=0.25, fbfeed=1, fbcutoff=1400, fbspread=0.1, beat_dur=1, dist2=3.0, transient=0.6, transattack=1, transsustain=1, transtime=0.05)
+
+~d2 >> play("x.", sample=(3, 0), amp=1,ringzfreq=50, ringz=0.3, fbdelay=0.05, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.2, beat_dur=1)
+
+h4 >> play("d", dur=PDur(3,12,0,1/3))
+
+Clock.clear()
+soff()
+
+nr >> neuroreese([0, 0, 3, -2], dur=[1, 0.5, 0.5, 2], oct=4, morph=linvar([0.2, 0.9], 16), cutoff=linvar([800, 4000], 32), modrate=4, moddepth=600, amp=0.6)
+
+Clock.clear()
+soff()
+
+gs >> glitchstab([(0, 4), (3, 7)], dur=PDur(3, 8), oct=5, glitchamt=0.6, bits=var([8, 4], 8), cutoff=4000, amp=0.5)
+
+gs.stop()
+
+sk >> subkick(0, dur=[1, 1, 1, 0.5, 0.5], oct=4, click=0.5, punch=0.8, subt=0.3)
+
+sk.stop()
+
+ds >> darksnare(0, dur=2, delay=1, oct=5, tone=0.4, snap=0.8, body=0.6, amp=0.7)
+
+ds.stop()
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=5, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=4, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=5, feedback=1.2, index=4, vib=0.4, amp=0.4)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=5, feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=4, feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=5, feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=4, feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=3, feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=2, feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 7), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.4)
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=4, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.6)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.7)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.7).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.6).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.6, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.7, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.9, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=1.0, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.9, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=4, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=14, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=4, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+pk >> piacon(chord("maj7"), dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.4, amp=0.5)
+
+pk.stop()
+
+dc >> dtclap(0, dur=2, delay=1, oct=5, tone=1200, spread=3, snap=0.7, amp=0.6)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.4)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.5)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.6)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.7)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.9)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+ju >> juno([(0, 2, 4), (3, 5, 7)], dur=4, oct=5, junoshape=linvar([0, 1], 32), junochorus=0.006, cutoff=2800, amp=0.5)
+
+ju.stop()
+
+Clock.clear()
+soff()
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=4, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+ar >> arpy(arp("trance2"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+ar.solo()
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+ar >> arpy(arp("trance3"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+ar >> arpy(arp("trance4"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+s4 >> saw([0, 3], dur=1, oct=4, resample=var([0, 1], [8, 8]), rsrate=0.5, rsgrains=8, rsjitter=0.1, amp=0.4)
+
+s4.stop()
+
+s3 >> pads((0, 2, 4), dur=8, oct=4, smorph=1, smorphmix=0.6, smorphfreeze=var([0, 1], 8))
+
+s5 >> pluck([0, 2], dur=1/2, oct=5, crunch=0.6, sblur=1, sbluramt=6, sgate=var([0, 1], 8), sgthresh=1)
+
+s5.stop()
+
+s6 >> keys([0, 4], dur=1, oct=5, tstretch=0.5, tstretchsize=0.2, cheapverb=0.6, cvdecay=2)
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=4, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+g7 >> play("-", dur=PGroove("funk", density=0.8))
+
+g8 >> play("x", dur=PClave("son"))
+
+g9 >> pluck([0, 2, 4, 7], dur=1/2, sus=PArticulation("staccato"), oct=5)
+
+g8.stop()
+
+g7.stop()
+
+u1durs, u2durs = PPolyEuclid(3, 18, 5, 8)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=5)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4).unison(3)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4).unison(4)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=5)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6)
+
+s0 >> saw([0, 3, 5], dur=1/2, oct=4, mbcomp=1, mbcrat=3, vocod=0.5, voccarr=0.5, amp=0.4)
+
+s0.stop()
+
+s9 >> pads((0, 4), dur=4, oct=4, spwarp=1, spwstr=1.5, gdel=1, gdeltime=0.5, gdelfb=0.3, vowel=1, vowelf=var([0, 1, 2, 3], 4))
+
+s9.stop()
+
+s8 >> blip([0, 7], dur=1/4, oct=5, csweep=1, cswfreq=300, doppler=1, dopspd=0.5, spring=0.5, sprdecay=1.5)
+
+s7 >> bass([0, -2], dur=1, oct=4, dynfuzz=0.7, dfgain=1, octclean=0.5, ocsub=0.6, subenh=1, subhfreq=80)
+
+s7 >> bass([0, -2], dur=1, oct=4, dynfuzz=0.7, dfgain=1, octclean=0.5, ocsub=0.6, subenh=1, subhfreq=80, dist2=0.5)
+
+s7.stop()
+
+s3 >> pads((0, 2, 4), dur=8, oct=4, smorph=1, smorphmix=0.6, smorphfreeze=var([0, 1], 8))
+
+s2 >> blip([0, 4, 7], dur=1/2, oct=5, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, duck=1, duckamt=0.8, darkverb=0.5, dvdecay=4, dvcut=1800)
+
+d1 >> play(pat("t2"), dur=1/4, drumBuss=0.6, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2)
+
+d2 >> play(gen_khsor(4), dur=1/4, gatecrush=var([0, 1], [12, 4]), gcrate=8, gcbits=6, amp=0.6)
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, duck=1, duckamt=0.8, darkverb=0.5, dvdecay=4, dvcut=1800)
+
+s2 >> blip([0, 4, 7], dur=1/2, oct=5, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+s3 >> pads((0, 2, 4), dur=8, oct=4, smorph=1, smorphmix=0.6, smorphfreeze=var([0, 1], 8))
+
+ju >> juno([(0, 2, 4), (3, 5, 7)], dur=4, oct=5, junoshape=linvar([0, 1], 32), junochorus=0.006, cutoff=2800, amp=0.5)
+
+ju.stop()
+
+ju >> juno([(0, 2, 4), (3, 5, 7)], dur=4, oct=5, junoshape=linvar([0, 1], 32), junochorus=0.006, cutoff=2800, amp=0.5)
+
+ju.stop()
+
+s6 >> keys([0, 4], dur=1, oct=5, tstretch=0.5, tstretchsize=0.2, cheapverb=0.6, cvdecay=2)
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=4, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+dc >> dtclap(0, dur=2, delay=1, oct=5, tone=1200, spread=3, snap=0.7, amp=0.6)
+dh >> dthihat(0, dur=1/4, oct=6, tone=8000, open=var([0, 0, 0, 1], 1), metallic=0.7, amp=PWhite(0.3, 0.6))
+dw >> dsaw([0, 3, 5], dur=1/2, oct=4, detune=8, cutoff=900, amp=0.4)
+s6 >> keys([0, 4], dur=1, oct=5, tstretch=0.5, tstretchsize=0.2, cheapverb=0.6, cvdecay=2)
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4).unison(4)
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6)
+ju.stop()
+
+Clock.clear()
+soff()
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=4, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+Clock.clear()
+soff()
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+ab.stop()
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+Clock.clear()
+soff()
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.2, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.3, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.4, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.5, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.6, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.7, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.8, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=0.9, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=2, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3, wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=2, wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=1, wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=10,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=9,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=8,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=7,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=6,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=5,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=4,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=4, index=3,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=3, index=3,wave=1, grit=1.0, amp=0.6).unison(3)
+
+ab.stop()
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.1, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.0, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.9, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.8, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.7, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.6, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.4, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.3, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.3, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.4, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.6, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.7, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.8, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.9, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.0, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.1, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.2, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.1, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=1.0, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.9, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.8, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.7, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.6, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.5, index=1, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 6), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=4, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 4), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=6, amp=0.4)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=5, amp=0.4)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=4, amp=0.4)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=3, amp=0.4)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=2, amp=0.4)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=1, amp=0.4)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=2, amp=0.4)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=3, amp=0.4)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=3, amp=0.4).unison(3)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=0.5, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=0.6, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=0.7, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=0.8, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=0.9, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=1.0, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=1.1, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=1.2, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=4, wide=1.3, amp=0.8)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+dc >> dtclap(0, dur=2, delay=1, oct=5, tone=1200, spread=3, snap=0.7, amp=0.6)
+
+dc.stop()
+
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+dc.stop()
+
+dw >> dsaw([0, 3, 5], dur=1/2, oct=4, detune=8, cutoff=900, amp=0.4)
+
+s6 >> keys([0, 4], dur=1, oct=5, tstretch=0.5, tstretchsize=0.2, cheapverb=0.6, cvdecay=2)
+
+s6.stop()
+
+dw.stop()
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=3).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=3, hpf=400, hpr=0.2).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=3, hpf=400, hpr=0.3).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=3, hpf=400, hpr=0.4).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=3, hpf=400, hpr=0.5).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=3, hpf=400, hpr=0.6).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/3, oct=3, hpf=400, hpr=0.6).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/2, oct=3, hpf=400, hpr=0.6).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/2, oct=4, hpf=400, hpr=0.6).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/2, oct=5, hpf=400, hpr=0.6).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/2, oct=5, hpf=400, hpr=0.2).unison(4)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6, amp=1.5)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/2, oct=5, hpf=400, amp=0.5, hpr=0.2).unison(4)
+
+al >> adlead(PGrowArp(0, max_notes=6, growth_rate=8), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+ad >> adlib(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+g3 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/4, oct=4).unison(4)
+
+al.oct=4
+
+ad.oct=4
+
+g3.oct=3
+
+g3.drive=0.5
+
+g3.drive=0.6
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=6, wide=1.3, amp=0.8)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=5, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=3, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=3, drive=0.5, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=3, drive=0.5, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.7)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=3, drive=0.5, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.8)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=3, drive=0.4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.8)
+
+al.oct=3
+
+an.oct=4
+
+an.oct=3
+
+ad.oct=3
+
+ae.stop()
+
+ar.stop()
+
+b3 >> a_bd()
+
+b3 >> a_bd(oct=3)
+
+b3 >> a_bd(oct=3, amp=4)
+
+b3 >> a_bd(oct=3, amp=2)
+
+b3 >> a_bd(oct=3, amp=0)
+
+b3.stop()
+
+g1 >> pluck(PGrowArp(0, max_notes=2, growth_rate=8), dur=1/2, oct=6, amp=1.5)
+al >> adlead(PGrowArp(0, max_notes=2, growth_rate=8), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+ad >> adlib(PGrowArp(0, max_notes=2, growth_rate=8), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+g3 >> pluck(PGrowArp(0, max_notes=2, growth_rate=8), dur=1/4, oct=4).unison(4)
+
+al >> adlead(PGrowArp(0, max_notes=20, growth_rate=8), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+ad >> adlib(PGrowArp(0, max_notes=20, growth_rate=8), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=8), dur=1/4, oct=4).unison(4)
+
+g1 >> pluck(PGrowArp(0, max_notes=7, growth_rate=8), dur=1/2, oct=6, amp=1.5)
+
+g1 >> pluck(PGrowArp(0, max_notes=7, growth_rate=2), dur=1/2, oct=6, amp=1.5)
+
+g1 >> pluck(PGrowArp(0, max_notes=7, growth_rate=2), dur=1/2, oct=6, amp=1.5)
+al >> adlead(PGrowArp(0, max_notes=20, growth_rate=2), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+ad >> adlib(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, oct=4).unison(4)
+
+b9 >> dbass(dur=4)
+
+b9 >> dbass(dur=4, oct=4)
+
+b9 >> dbass(dur=4, oct=4, dist2=0.5)
+
+b9 >> dbass(dur=4, oct=4, dist2=4)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=3, amp=0.4).unison(3)
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=1.3, amp=0.8)
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4).unison(4)
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/2, oct=5, hpf=400, amp=0.5, hpr=0.2).unison(4)
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6, amp=1.5)
+al >> adlead(PGrowArp(0, max_notes=6, growth_rate=8), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+ad >> adlib(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+g3 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/4, oct=4).unison(4)
+al.oct=4
+ad.oct=4
+g3.oct=3
+g3.drive=0.6
+ar >> arpy(arp("trance5"), dur=1/4, oct=6, wide=1.3, amp=0.8)
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=3, drive=0.4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.8)
+ae.stop()
+ar.stop()
+
+Clock.clear()
+soff()
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+ad >> adlib(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+ae >> adbell([0, 4, 7, 11], dur=PDur(5, 8), oct=6, ratio=3.5, index=3, amp=0.4).unison(3)
+
+rz >> reese([0, 0, -1], dur=[2, 1, 1], oct=4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.6)
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=5, wide=1.3, amp=0.8)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=4).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/2, oct=5, hpf=400, amp=0.5, hpr=0.2).unison(4)
+
+g4 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/2, oct=5, hpf=400, amp=0.5, hpr=0.2).unison(4)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6, amp=1.5)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6, amp=1.5).unison(3)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6, amp=0.5).unison(3)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6, amp=0.6).unison(3)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6, amp=0.7).unison(3)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=6, amp=0.8).unison(3)
+
+al >> adlead(PGrowArp(0, max_notes=6, growth_rate=8), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead(PGrowArp(0, max_notes=6, growth_rate=8), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+ad >> adlib(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+g3 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/4, oct=4).unison(4)
+
+al.oct=4
+
+ad.oct=4
+
+g3.oct=3
+
+g3.drive=0.6
+
+an >> addrone((0, 4), dur=8, oct=5, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=5, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+
+al.oct=4
+
+ad.oct=4
+
+g3.oct=3
+
+g3.drive=0.6
+
+ar >> arpy(arp("trance5"), dur=1/4, oct=6, wide=1.3, amp=0.8)
+
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=3, drive=0.4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.8)
+
+ae.stop()
+
+ar.stop()
+
+al.oct=4
+ad.oct=4
+g3.oct=3
+g3.drive=0.6
+ar >> arpy(arp("trance5"), dur=1/4, oct=6, wide=1.3, amp=0.8)
+rz >> reese(PGrowArp(0, max_notes=6, growth_rate=8), oct=3, drive=0.4, detune=0.022, cutoff=linvar([600, 2000], 16), amp=0.8)
+ae.stop()
+ar.stop()
+
+g1 >> pluck(PGrowArp(0, max_notes=7, growth_rate=2), dur=1/2, oct=6, amp=1.5)
+
+al >> adlead(PGrowArp(0, max_notes=20, growth_rate=2), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+ad >> adlib(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, oct=4).unison(4)
+
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, oct=3).unison(4)
+
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, oct=4).unison(4)
+
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, lpf=400, oct=4).unison(4)
+
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, lpf=1400, oct=4).unison(4)
+
+b9 >> dbass(dur=4, oct=4, dist2=4)
+
+ab >> adbass([0, 0, -2, 3], dur=1/2, oct=3, index=3,wave=1, grit=1.0, amp=0.6).unison(3)
+
+dh >> dthihat(0, dur=1/4, oct=6, tone=8000, open=var([0, 0, 0, 1], 1), metallic=0.7, amp=PWhite(0.3, 0.6))
+
+s6 >> keys([0, 4], dur=1, oct=5, tstretch=0.5, tstretchsize=0.2, cheapverb=0.6, cvdecay=2)
+
+s6.stop()
+
+d2 >> play(gen_khsor(4), dur=1/4, gatecrush=var([0, 1], [12, 4]), gcrate=8, gcbits=6, amp=0.6)
+
+d2.stop()
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, duck=1, duckamt=0.8, darkverb=0.5, dvdecay=4, dvcut=1800)
+
+s2 >> blip([0, 4, 7], dur=1/2, oct=5, sshift=1, sshiftmix=0.5, sshiftamt=linvar([-20, 20], 16))
+
+s2.stop()
+
+s3 >> pads((0, 2, 4), dur=8, oct=4, smorph=1, smorphmix=0.6, smorphfreeze=var([0, 1], 8))
+
+s3.stop()
+
+s8 >> blip([0, 7], dur=1/4, oct=5, csweep=1, cswfreq=300, doppler=1, dopspd=0.5, spring=0.5, sprdecay=1.5)
+
+s8.stop()
+
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, lpf=1400, oct=4).unison(4)
+
+g1 >> pluck(PGrowArp(0, max_notes=7, growth_rate=2), dur=1/2, oct=6, amp=1.5)
+al >> adlead(PGrowArp(0, max_notes=20, growth_rate=2), dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+ad >> adlib(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, oct=3, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+g3 >> pluck(PGrowArp(0, max_notes=20, growth_rate=2), dur=1/4, lpf=1400, oct=4).unison(4)
+
+b9.stop()
+
+Server.addFx(lpf=400)
+
+Server.addFx(lpf=100)
+
+Server.addFx(lpf=10)
+
+Server.clearFx()
+
+Server.addFx(lpf=10)
+
+Server.addFx(lpf=10)
+
+Clock.clear()
+soff()
+
+nr >> neuroreese([0, 0, 3, -2], dur=[1, 0.5, 0.5, 2], oct=4, morph=linvar([0.2, 0.9], 16), cutoff=linvar([800, 4000], 32), modrate=4, moddepth=600, amp=0.6)
+
+dm >> doom([0, 0, 5, 3], dur=1/2, oct=4, pw=linvar([0.2, 0.8], 8), cutoff=2400, wnoise=0.1, amp=0.5)
+
+dm.stop()
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+al >> adlead([7, 6, 4, 2], dur=[1.5, 0.5, 1, 1], oct=(2, 3), feedback=0.5, index=4, vib=0.4, amp=0.4).unison(3)
+
+an >> addrone((0, 4), dur=8, oct=4, atk=1.5, rel=1.5, sub=0.35, amp=0.5,drumBuss=0.8, drumBuss_comp=1, drumBuss_boom=0.3, drumBuss_transients=0.2).unison(3)
+

@@ -1,0 +1,8 @@
+Clock.bpm = 48
+Scale.default="locrian"
+Root.default=4
+
+a = 32
+b = expinf(0, 0.5, a * 2)
+i3 >> sos(dur=PRand(16), vib=PRand(10600), lpf=linvar([60,4800],[PRand(8,24), PRand(32,48)]), hpf=expvar([0,500],[PRand(64,96), PRand(8,32)]),fx1=b, fx2=b, output=4, shift=lininf(1, 2, a))
+

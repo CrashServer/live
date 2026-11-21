@@ -1,0 +1,257 @@
+j4 >> dbass(dur=4)
+
+j4 >> dbass(dur=4, lpf=1200)
+
+j4 >> dbass(dur=4, lpf=1200, lpr=0.2)
+
+p3 >> play("k..k....", amp=0.5)
+
+p3 >> play("k..k....", amp=0.5, csweep=0, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+p3 >> play("k..k....", amp=0.5, csweep=0.1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+j4 >> dbass(dur=4, lpf=1200, lpr=0.2).unison(3)
+
+j4 >> dbass(dur=4, lpf=1200, lpr=0.2).unison(2)
+
+p3 >> play("k..k....", amp=0.5, csweep=0.1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, fm_saw=0.5, fm_saw_i=0.7)
+
+p3 >> play("k..k....", amp=0.5, csweep=0.1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, fm_saw=0.5, fm_saw_i=0.7).sometimes("stutter")
+
+s7 >> play("--")
+
+t5 >> play("X ",dur=4)
+
+t5 >> play("X ",dur=4, echo=0.5)
+
+t5 >> play("X ",dur=4, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+attack()
+
+a1 >> play("x-", dur=1, sample=var(P[0:10],64), crush=0, amp=0.2).sometimes("stutter", PRand(8), rate=4).unison(5).sometimes("amen")
+
+e6 >> cluster(dur=4, hpf=400)
+
+e6 >> cluster(dur=4, hpf=1200)
+
+e6 >> cluster(dur=8, hpf=1200)
+
+attack()
+
+k1 >> play("<k(.k)..><..u.><->", sample=1).human(30,5)
+
+e6 >> cluster(dur=8, hpf=1200, dist=0.2, amp=0.5)
+
+drop()
+
+drop()
+
+attack()
+
+c3 >> loop("electrodrum16", dur=16, sample=4, drcomp=0.8)
+
+x9 >> blip(dur=4)
+
+x9 >> blip(dur=4,mver=0.5)
+
+x9 >> blip(dur=4,mverb=0.5)
+
+attack()
+
+b4 >> loop("nbvarp16", dur=32, sample=5, hpf=120)
+
+b4.stop()
+
+n5 >> superbass(PTime()[:8], dur=1/2, cutoff=PFr(1400,9000),rq=0.6,oct=[5,6], wshape=5, sus=1/6, echo=.75).unison(3)
+
+n5.stop()
+
+o4 >> play("..C.", sample=3).sometimes("stutter", PRand(15))
+
+o4.stop()
+
+attack()
+
+attack()
+
+r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur(5,8)]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+Clock.clear()
+soff()
+
+Root.default = "E"
+
+Scale.default = Scale.minor;
+
+r1 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([PDur(4,8),PDur(5,8)]), amp=1, crush=1, crush_=4, crush_d=2, bits=6, bits_=var([12, 16]), fmod=1, lpf=2800, lpr=0.4)
+
+r2 >> organ(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [8, 4]), amp=0.7, crush=1, crush_=4, crush_d=2, fx2=0.2, bits=6, bits_=var([12, 8]), oct=(5, 7), fmod=1, lpf=2800, lpr=0.2).unison(2).every(4, "shuffle")
+
+r3 >> bell(P[var([0,-2,-3,-4],8),4,PStep(4,6,8),2], dur=var([4, PDur(4,8)], [8, 4]), amp=0.6, crush=1, crush_=4, crush_d=2, mverb=0.2, bits=6, bits_=var([12, 8]), delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+r4 >> bell(P[var([0,-2,-3,-4],8),2,PStep(8,5,4),2], dur=var([4, PDur(4,8)], [8, 4]), amp=0.5, crush=1, crush_=4, crush_d=2, mverb=0.5, bits=6, bits_=var([12, 8]), r1=0.5, delay=0.5, oct=(6, 5, 7), fmod=1, lpf=3200, lpr=0.2).unison(2).every(4, "shuffle")
+
+r2 >> varsaw(oct=(3, 4, 5), lpf=(800, linvar([400, 12000], 128)), dur=[6, 2], sus=[4, 8], lpr=0.1, a=0.5)
+
+r1 >> karp()
+
+s1 >> klank(dur=8, oct=(3, 4, 5)).unison(3) # progressif
+
+s2 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 8)* 2)
+
+r1 >> dbass()
+
+r1 >> dbass().unison(3)
+
+r1 >> dbass().unison(3)
+
+q1 >> play("--")
+
+x1 >> play("x.", sample=5, amp=4, lpf=400)
+
+p1 >> play("<E ><p >", sample=1, dur=PDur([3, 5], 8), amp=PWhite(0.3,0.5), hpf=220, chop=1/2, leg=PWhite(15), pan=PWhite(-1,1), fx2=1)
+
+d8 >> dtclap(rate=0, tone=1200, spread=3, thick=0.6, snap=0.7, drive=2, tight=0)
+
+d8 >> dtclap(rate=0, tone=1200, spread=3, thick=0.6, snap=0.7, drive=2, tight=1)
+
+d8 >> dtclap(rate=0, tone=1200, spread=3, thick=0.6, snap=0.7, drive=2, tight=2)
+
+d8 >> dtclap(rate=0, tone=1200, spread=3, thick=0.6, snap=0.7, drive=2, tight=3)
+
+d8 >> dtclap(rate=0, tone=1200, spread=3, thick=0.6, snap=0.7, drive=2, tight=4)
+
+r4 >> dab(dur=PDur(var([4,[5,3,8]],[6,2]),8), leg=([0, 5]), cutoff=400, dist2=0.4, hpf=1000, hpr=0.1)
+
+s3 >> klank(oct=linvar([5, 6], 128), dur=PDur(3, 5)* 2, drive=linvar([0.02, 0.04], 32)).stop()
+
+k4 >> lapin(([-4, -3], 4), oct=(3, 4), shape=0.1, fdistfreq=4000, dur=8, lpf=4000, fdist=1, hpf=200, bpf=0, lofi=1, amp=PCoin(0.2, 0, 0.25)).unison(2).slider()
+
+x4 >> play("..o.")
+
+Clock.clear()
+soff()
+
+r4 >> dab(dur=PDur(var([4,[5,3,8]],[6,2]),8), leg=([0, 5]), cutoff=400, dist2=0.4, hpf=1000, hpr=0.1)
+
+r4.stop()
+
+h0 >> play("X ")
+
+h0.stop()
+
+x6 >> dbass(dur=4)
+
+x6 >> dbass(dur=4)
+
+Clock.clear()
+soff()
+
+h5 >> dbass()
+
+h5 >> dbass(2)
+
+h5 >> dbass([0, 2])
+
+h5 >> dbass([0, 2, 0])
+
+h5 >> dbass([0, 2, 0]).unison(3)
+
+t7 >> play("k ")
+
+t7 >> play("k ")
+
+h5 >> dbass([0, 2, 0, 4]).unison(3)
+
+h5 >> dbass([0, 2, 0, (4, 3)]).unison(3)
+
+h6 >> dbass([0, 2, 0, (4, 3)]).unison(3)
+
+h6 >> dbass([0, 2, 0, (4, 3)], dur=1/2).unison(3)
+
+h6 >> dbass([0, 2, 0, (4, 3)], dur=1/2, oct=(3, 4, 5)).unison(3)
+
+h6 >> dbass([0, 2, 0, (4, 3)], dur=1/2, oct=(3, 4, 6)).unison(3)
+
+h6 >> dbass([0, 2, 0, (4, 3)], dur=1/2, oct=(3, 4, 6), drive=0.5).unison(3)
+
+c5 >> loop("break155_16", dur=32)
+
+h6 >> dbass([0, 2, 0, (4, 3), 5], dur=1/2, oct=(3, 4, 6), drive=0.5).unison(3)
+
+h6 >> dbass([0, 2, 0, (4, 3), 5, [5, 6]], dur=1/2, oct=(3, 4, 6), drive=0.5).unison(3)
+
+h6 >> dbass([0, 2, 0, (4, 3), 5, [5, 6, 8]], dur=1/2, oct=(3, 4, 6), drive=0.5).unison(3)
+
+drop()
+
+c5 >> loop("break155_16", dur=16)
+
+c5 >> loop("break155_16", dur=16).lclip(2)
+
+o5 >> pianovel(dur=4)
+
+o5 >> pianovel(dur=4, oct=7, mverb=5)
+
+o5 >> pianovel(dur=4, oct=7, mverb=0.2)
+
+o5 >> pianovel(dur=4, oct=7, mverb=0.5)
+
+o5 >> pianovel(dur=4, oct=7, mverb=1)
+
+o5 >> pianovel(dur=4, oct=7, mverb=1, amp=1)
+
+o5 >> pianovel(dur=4, oct=7, mverb=1, amp=2)
+
+o5 >> pianovel(dur=1, oct=7, mverb=1, amp=2)
+
+o5 >> pianovel(dur=2, oct=7, mverb=1, amp=2)
+
+o5 >> pianovel(dur=2, oct=(5, 6), mverb=1, amp=2)
+
+o5 >> pianovel(dur=2, oct=(5, 6), mverb=1, amp=1)
+
+a9 >> loop("circlebreak8", dur=8)
+
+drop()
+
+h6 >> dbass([0, 4, 0, (4, 3), 5, [5, 6, 8]], dur=1/2, oct=(3, 4, 6), drive=0.5).unison(3)
+
+u0 >> play("C...")
+
+u0 >> play("C...", amp=4)
+
+u0 >> play("C...", amp=4, echo=0.5)
+
+u0 >> play("C...", amp=4, echo=0.5, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+g9 >> play("X ")
+
+e9 >> play("X ")
+
+u0.stop()
+
+Clock.clear()
+soff()
+
+attack("dive the dice - 92")
+
+x8 >> lfnoise(rate=PWhite(0,1), cutoff=PRand(400, 4800), rq=0.8, vol=.2, dur=8, blur=2, mverb=.2)
+
+o8 >> faim([var([0, -1, -2],8), var([7, 9], 13), var([9, 8, 7, 5],6)], dur=P[1/2,1/2].exp(2), beef=2,  wshape=0, wgain=1, wmix=0.5, mverb=0.7, oct=(5,PStep(9, 7,6)), vol=.8, resonz=0.8, rfreq=410).unison(3)
+
+c1 >> dafbass(dur=PDur(var([1, 4,3,4,5,7],[1, 1, 1, .5]), 16), oct=(4,5), rate=P*[1,2] , valad=linvar([500,4000], [64]), valadr=linvar([.1, .9], [55]), valadd=PStep(16, PWhite(5, 55), 5), valadt=0, valadc=0.2,).unison(3)
+
+x5 >> play("-", dur=PDur(var([1, 4,3,9, 4,5,7],P*[1, 1, .5, 1/4, 1/8]), 8, 1), amp=1, rate=1/x5.dur, mverb=.2)
+
+Clock.bpm=92
+Scale.default="minor"
+Root.default=1
+
+o8 >> faim([var([0, -1, -2],8), var([7, 9], 13), var([9, 8, 7, 5],6)], dur=P[1/2,1/2].exp(1), beef=2,  wshape=3, wgain=1, wmix=0.5, mverb=0.7, oct=(5,PStep(9, 7,6)), vol=0.6).unison(3)
+
+o8 >> svdk([var([0, -1, -2],8), var([7, 9], 13), var([9, 8, 7, 5],6)], dur=P[1/2,1/2].exp(2),  wshape=0, wgain=1, wmix=0.5, mverb=0.7, oct=(5,PStep(9, 7,6)), vol=0.3, r=0).unison(3).trim(0)
+
+Clock.clear()
+soff()
+

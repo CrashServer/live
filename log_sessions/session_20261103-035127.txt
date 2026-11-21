@@ -1,0 +1,109 @@
+Clock.bpm = 174
+
+Scale.default = Scale.minor; Root.default = 4
+
+fx_stop()
+
+fx_hall("plate", decay=3.5)
+
+g1 >> fm_glass([(0, 3, 7, 10), (-4, 0, 3, 7), (-7, -4, 0, 3), (-5, -1, 2, 5)], dur=4, oct=4, scale=Scale.chromatic, root=4, level=-14, tohall=0.5)  # Glass A
+
+d4 >> kit_tight_chat(dur=1/2, velo=0.75, tohall=0.1)  # Drums c.hat
+
+r2 >> sub_reese([7, 9, 5, 6, 4], dur=[5, 3, 5, 1, 2], oct=1, level=-8)  # Reese A
+
+g1 >> fm_glass([(0, 3, 7, 10), (-4, 0, 3, 7), (-7, -4, 0, 3), (-5, -1, 2, 5)], dur=4, oct=4, scale=Scale.chromatic, root=4, level=-14, tohall=0.5)  # Glass A
+
+d1 >> kit_tight_kick(dur=[5/2, 3/4, 3/4], velo=[1, 0.75, 0.75], tohall=0.1)  # Drums kick
+
+d2 >> kit_tight_snare(dur=2, delay=1, tohall=0.1)  # Drums snare
+
+d4 >> kit_tight_chat(dur=1/2, velo=0.75, tohall=0.1)  # Drums c.hat
+
+d7 >> kit_tight_rim(dur=[7/4, 9/4], delay=7/4, velo=0.75, tohall=0.1)  # Drums rim
+
+d7.stop()
+
+g1 >> fm_glass([(0, 3, 7, 10), (-4, 0, 3, 7), (-7, -4, 0, 3), (-5, -1, 2, 5)], dur=4, oct=4, scale=Scale.chromatic, root=4, level=-14, tohall=0.5)  # Glass A
+
+b1 >> fm_bell([0, 3, 7, 0, 3, 7, 0, 3, -4, 0, 3, -4, 0, 3, -4, 0, -7, -4, 0, -7, -4, 0, -7, -4, -5, -1, 2, -5, -1, 2, -5, -1], dur=1/2, sus=0.3, oct=6, scale=Scale.chromatic, root=4, level=-16, tohall=0.4)  # Bells A
+
+b1.stop()
+
+d7 >> kit_tight_rim(dur=[7/4, 9/4], delay=7/4, velo=0.75, tohall=0.1)  # Drums rim
+
+d7.stop()
+
+r2 >> sub_reese([7, 9, 5, 6, 4], dur=[5, 3, 5, 1, 2], oct=1, level=-8)  # Reese A
+
+b1 >> fm_bell([0, 3, 7, 0, 3, 7, 0, 3, -4, 0, 3, -4, 0, 3, -4, 0, -7, -4, 0, -7, -4, 0, -7, -4, -5, -1, 2, -5, -1, 2, -5, -1], dur=1/2, sus=0.3, oct=6, scale=Scale.chromatic, root=4, level=-16, tohall=0.4)  # Bells A
+
+d1 >> kit_tight_kick(dur=[5/2, 3/4, 3/4], velo=[1, 0.75, 0.75], tohall=0.1)  # Drums kick
+
+b1.stop()
+
+d1 >> kit_tight_kick(dur=[5/2, 3/4, 3/4], velo=[1, 0.75, 0.75], tohall=0.1)  # Drums kick
+
+d2 >> kit_tight_snare(dur=[3/4, 5/4, 1/2, 3/2], delay=1, velo=[1, 0.75], tohall=0.1)  # Drums snare
+
+d4 >> kit_tight_chat(dur=1/2, velo=0.75, tohall=0.1)  # Drums c.hat
+
+d7 >> kit_tight_rim(dur=[7/4, 9/4], delay=7/4, velo=0.75, tohall=0.1)  # Drums rim
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+_seq_cancel()
+Clock.bpm = 126
+Scale.default = Scale.minor; Root.default = 2
+fx_stop()
+fx_echo("slapback")
+b1 >> sub_pluck([0, 0, 7, 0, 6, 0, 4, 0, 2, 3, 4], dur=[1/2, 1/4, 1/2, 1/4, 1/2, 1/2, 1/4, 1/4, 1/2, 1/4, 1/4], sus=PStutter([0.1, 0.35, 0.1], [8, 1, 2]), cutcv=[0.03, 0.09, 0.27, 0.06, 0.21, 0.03, 0.18, 0.06, 0.12, 0.15, 0.3], oct=3, cutoff=linvar([300, 249, 653, 1606, 2194, 465], [1/4, 7/2, 33/4, 2, 7/4, 1/4]), res=linvar([0.55, 0.504, 0.71, 0.799, 0.537], [1/4, 47/4, 2, 7/4, 1/4]), fenv=0.45, toecho=0.25)  # Bass, as it is played
+d1 >> kit_tight_kick(dur=1, velo=[1, 0.75, 0.75, 0.75])  # Drums kick
+d3 >> kit_tight_clap(dur=2, delay=1, velo=0.75)  # Drums clap
+d4 >> kit_tight_chat(dur=1, delay=1/2, velo=0.75)  # Drums c.hat
+
+_seq_schedule(16, 1793674692174)
+
+_seq_cancel()
+b1.stop(); d1.stop(); d3.stop(); d4.stop()
+Clock.future(0, fx_stop)
+
+fx_stop()
+
+b1 >> sub_pluck([0, 0, 7, 0, 6, 0, 4, 0, 2, 3, 4], dur=[1/2, 1/4, 1/2, 1/4, 1/2, 1/2, 1/4, 1/4, 1/2, 1/4, 1/4], sus=PStutter([0.1, 0.35, 0.1], [8, 1, 2]), cutcv=[0.03, 0.09, 0.27, 0.06, 0.21, 0.03, 0.18, 0.06, 0.12, 0.15, 0.3], oct=3, cutoff=linvar([300, 249, 653, 1606, 2194, 465], [1/4, 7/2, 33/4, 2, 7/4, 1/4]), res=linvar([0.55, 0.504, 0.71, 0.799, 0.537], [1/4, 47/4, 2, 7/4, 1/4]), fenv=0.45, toecho=0.25)  # Bass, as it is played
+
+d1 >> kit_tight_kick(dur=1, velo=[1, 0.75, 0.75, 0.75])  # Drums kick
+
+d3 >> kit_tight_clap(dur=2, delay=1, velo=0.75)  # Drums clap
+
+d4 >> kit_tight_chat(dur=1, delay=1/2, velo=0.75)  # Drums c.hat
+
+fx_echo("slapback")
+
+b1 >> sub_pluck([0, 0, 7, 0, 6, 0, 4, 0, 2, 3, 4], dur=[1/2, 1/4, 1/2, 1/4, 1/2, 1/2, 1/4, 1/4, 1/2, 1/4, 1/4], sus=PStutter([0.1, 0.35, 0.1], [8, 1, 2]), cutcv=[0.03, 0.09, 0.27, 0.06, 0.21, 0.03, 0.18, 0.06, 0.12, 0.15, 0.3], oct=3, cutoff=linvar([300, 249, 653, 1606, 2194, 465], [1/4, 7/2, 33/4, 2, 7/4, 1/4]), res=linvar([0.55, 0.504, 0.71, 0.799, 0.537], [1/4, 47/4, 2, 7/4, 1/4]), fenv=0.45, toecho=0.25)  # Bass, as it is played
+
+d1 >> kit_tight_kick(dur=1/2, velo=[1, 0.75, 0.75, 0.75])  # Drums kick
+
+d1 >> kit_tight_kick(dur=1, velo=[1, 0.75, 0.75, 0.75])  # Drums kick
+
+b1 >> sub_pluck([0, 0, 7, 0, 6, 0, 4, 0, 2, 3, 4], dur=[1/2, 1/4, 1/2, 1/4, 1/2, 1/2, 1/4, 1/4, 1/2, 1/4, 1/4], sus=PStutter([0.1, 0.35, 0.1], [8, 1, 2]), cutcv=[0.03, 0.09, 0.27, 0.06, 0.21, 0.03, 0.18, 0.06, 0.12, 0.15, 0.3], oct=3, cutoff=linvar([300, 249, 653, 1606, 2194, 465], [1/4, 7/2, 33/4, 2, 7/4, 1/4]), res=linvar([0.55, 0.504, 0.71, 0.799, 0.537], [1/4, 47/4, 2, 7/4, 1/4]), fenv=0.45, toecho=0.6)  # Bass, as it is played
+
+b1 >> sub_pluck([0, 0, 7, 0, 6, 0, 4, 0, 2, 3, 4], dur=[1/2, 1/4, 1/2, 1/4, 1/2, 1/2, 1/4, 1/4, 1/2, 1/4, 1/4], sus=PStutter([0.1, 0.35, 0.1], [8, 1, 2]), cutcv=[0.03, 0.09, 0.27, 0.06, 0.21, 0.03, 0.18, 0.06, 0.12, 0.15, 0.3], oct=3, cutoff=linvar([300, 249, 653, 1606, 2194, 465], [1/4, 7/2, 33/4, 2, 7/4, 1/4]), res=linvar([0.55, 0.504, 0.71, 0.799, 0.537], [1/4, 47/4, 2, 7/4, 1/4]), fenv=0.45, toecho=4)  # Bass, as it is played
+
+# fx_echo("slapback")
+
+# fx_stop()
+
+fx_stop()
+
+fx_stop()
+
+Clock.clear()
+soff()
+
+_seq_cancel()
+

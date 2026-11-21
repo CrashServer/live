@@ -37,5 +37,6 @@ SynthDef.new(\xbass,
 		osc = Pan2.ar(osc, pan + (LFNoise1.ar(0.5) * 0.1));
 
 		ReplaceOut.ar(bus, osc)
-	}
+	},
+metadata: (category: \bass)
 ).add;

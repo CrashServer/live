@@ -1096,6 +1096,54 @@ def _one_fx_module():
     import sys
     return sys.modules.get("FoxDot.lib.Crashserver.oneFX")
 
+def _scd_synths(args_to_remove):
+    ''' Every registered SynthDef as {name, args [(arg, default)], tag}, read from its .scd (autocomplete and
+        sanityCheck). Args end at the closing |, whatever comes after (comments), and may span lines. '''
+    out = []
+    ns = globals()
+    for syn in sorted(f for f in SynthDefs if f):
+        path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
+        try:
+            with open(str(path), "r") as f:
+                txt = " ".join(line.strip() for line in f if line.strip())
+        except OSError:
+            continue
+        synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
+        synthargs = re.findall(r"\{\s*\|(.*?)\|", txt, re.S)
+        if not synthname or not synthargs:
+            continue
+        name = synthname[0]
+        if name.startswith("one_fx_"):
+            continue  # One's effects: driven by fx_hall()... not played
+        if name not in ns and name.lower() in ns:
+            name = name.lower()  # timeStretch is played as timestretch
+        category_match = re.search(r"category:\s*\\(\w+)", txt)
+        tag = category_match.group(1) if category_match else ""
+        if not tag and re.match(r"(berlin|kit|riot)_", name):
+            tag = "One drums"
+        elif not tag and name.startswith("one_"):
+            tag = "One synths"
+        elif not tag and name == "timestretch":
+            tag = "sample"
+        args = []
+        for a in re.split(r"\s*,\s*", synthargs[0].strip()):
+            k, _, v = a.partition("=")
+            k = k.strip()
+            if k and k not in args_to_remove:
+                args.append((k, v.strip()))
+        out.append({"name": name, "args": args, "tag": tag})
+    # One's kit voices as synths of their own: iron_floor_kick, riot_punk_snare... (with the kit's settings)
+    one = _one_fx_module()
+    if one is not None:
+        known = set(s["name"] for s in out)
+        for kit, (voices, _w) in one.KITS.items():
+            for _v, s, a in voices:
+                n = "{}_{}".format(kit, s.split("_", 1)[1])
+                if n not in known:
+                    known.add(n)
+                    out.append({"name": n, "args": [(k, str(v)) for k, v in a.items() if k not in args_to_remove], "tag": "One drums"})
+    return out
+
 def masterFx(name, remove=False):
     ''' Bypass / restore a master effect, keeping its settings (remove=True deletes it).
         Server.addFx ones by name ("lpf"), One's fx_hall/fx_echo... as "one:hall".
@@ -2118,7 +2166,7 @@ class WebsocketServer():
         for fx_name in FxList.keys():
             fxDefault = FxList[fx_name].defaults
             fxTag = FxList[fx_name].tag
-            filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k.endswith('lfo') or k.endswith('lfomul') or k.endswith('lfoadd') or k == 'sus')}
+            filtered_fx = {k: v for k,v in fxDefault.items() if not (k.endswith('_') or k.endswith('_d') or k.endswith('lfo') or k.endswith('lfomul') or k.endswith('lfoadd') or k.endswith('lfophase') or k == 'sus')}
             fx_text = ', '.join([f"{k}={v}" for k, v in filtered_fx.items()])
             fx_json_list.append({'text': fx_text, 'displayText': fx_name + '_', 'tag': fxTag})
         # The sends (tohall, toecho...) are FxList effects now (crashFX.py, tag "one sends"),
@@ -2131,26 +2179,8 @@ class WebsocketServer():
 
     async def sendSynthList(self):
         args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', 'ratelfo', 'ratelfoadd', 'ratelfomul', 'room', 'beat_stretch', 'clip', 'looping' ]
-        synthList = []
-        synth_list = sorted([f for f in SynthDefs])
-        for syn in synth_list:
-            if syn != "":
-                path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
-                with open(str(path), "r") as synth:
-                    synth = synth.readlines()
-                synth_txt = [line.strip() for line in synth if line != "\n"]
-                txt = str(''.join(synth_txt))
-                synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
-                synthargs = re.findall(r"\{\|(.*?)\|\s*var", txt, re.S)
-
-                # Extract category from metadata
-                category_match = re.search(r"category:\s*\\(\w+)", txt)
-                category = category_match.group(1) if category_match else ""
-
-                if (len(synthname) != 0 and len(synthargs) != 0):
-                    filtered_args = ', '.join([arg.strip() for arg in synthargs[0].split(', ') if arg.split('=')[0].strip() not in args_to_remove])
-                    synthList.append({'text': filtered_args, 'displayText': synthname[0], 'tag': category})
-        return synthList
+        return [{'text': ', '.join(k + ('=' + v if v else '') for k, v in d['args']), 'displayText': d['name'], 'tag': d['tag']}
+                for d in _scd_synths(args_to_remove)]
 
     def sendServerState(self):
         ''' Send server state to websocket server '''
@@ -2605,26 +2635,7 @@ def checkIfSynthArgsAreInFxArgs(synthDictArgs):
 
 def getSynthList():
     args_to_remove = ['amp', 'sus', 'gate', 'pan', 'freq', 'vib', 'fmod', 'mul', 'bus', 'atk', 'decay', 'rel', 'level', 'peak', 'blur', 'beat_dur', 'wide', 'buf', 'ratelfo', 'ratelfoadd', 'ratelfomul', 'room', 'beat_stretch', 'clip', 'looping', 'rate' ]
-    synthList = []
-    synth_list = sorted([f for f in SynthDefs])
-    for syn in synth_list:
-        if syn != "":
-            path = os.path.join(FOXDOT_ROOT, "osc", "scsyndef", syn + ".scd")
-            with open(str(path), "r") as synth:
-                synth = synth.readlines()
-            synth_txt = [line.strip() for line in synth if line != "\n"]
-            txt = str(''.join(synth_txt))
-            synthname = re.findall(r"SynthDef(?:\.new)?\(\\(\w+)", txt)
-            synthargs = re.findall(r"\{\|(.*?)\|\s*var", txt, re.S)
-
-            # Extract category from metadata
-            category_match = re.search(r"category:\s*\\(\w+)", txt)
-            category = category_match.group(1) if category_match else ""
-
-            if (len(synthname) != 0 and len(synthargs) != 0):
-                filtered_args = [arg.split('=')[0].strip() for arg in synthargs[0].split(', ') if arg.split('=')[0].strip() not in args_to_remove]
-                synthList.append({'name': synthname[0], 'args': filtered_args, 'tag': category})
-    return synthList
+    return [{'name': d['name'], 'args': [k for k, _ in d['args']], 'tag': d['tag']} for d in _scd_synths(args_to_remove)]
 
 def checkSynthTag(synthDictArgs):
     ''' Check if all synth have a tag for the autocomplete '''

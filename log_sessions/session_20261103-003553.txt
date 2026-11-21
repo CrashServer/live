@@ -1,0 +1,376 @@
+ONE = "/run/media/svdk/storage/DRIVE/500_Apps/SVDKAPP/soundDesign/one/foxdot/synthdefs/"
+
+one_defs = [FileSynthDef(n) for n in ["one_sub", "one_fm", "one_chip"] + ["kit_" + v for v in ["kick", "snare", "clap", "chat", "ohat", "tom", "rim", "bell"]] + ["berlin_" + v for v in ["kick", "clap", "chat", "ohat", "rim", "tom", "stab", "ride"]]]
+
+for d in one_defs: d.filename = ONE + d.name + ".scd"; d.add(); globals()[d.name] = d
+
+print([d.name for d in one_defs])
+
+Clock.bpm = 132
+
+k1 >> berlin_kick(dur=1, x=0.75, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k2 >> berlin_clap(dur=[rest(1), 1, rest(1), 1], sus=4)
+
+k3 >> berlin_ohat(dur=[rest(0.5), 0.5], dec=0.9, sus=4)
+
+k4 >> berlin_chat(dur=1/4, velo=[1, 0.75, 0.75, 0.75], sus=1)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.7, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+e1 >> one_fm([(0, 2, 4), (3, 5, 7)], dur=2, oct=5, algo=1, fb=0.15, r1=1, l1=1, d1=4, r2=14, l2=0.3, d2=0.18, r3=1, l3=0.7, d3=3, r4=1, l4=0.35, d4=1.2, aatk=0.001, adec=2.5, asus=0.3, arel=0.35, velb=0.85, velamp=0.6, level=-8)
+
+c1 >> one_chip([0, 2, 4, 7], dur=1/2, oct=5, wave=1, ovib=30, vibhz=6, vibd=0.3, adec=0.5, asus=0.7, arel=0.12, level=-8)
+
+c1.stop()
+
+e1.stop()
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.8, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.9, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.8, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.7, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.5, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.4, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.5, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=350, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=450, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=550, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=650, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=750, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=850, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=950, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+ONE = "/run/media/svdk/storage/DRIVE/500_Apps/SVDKAPP/soundDesign/one/foxdot/synthdefs/"
+
+one_defs = [FileSynthDef(n) for n in ["one_sub", "one_fm", "one_chip"] + ["kit_" + v for v in ["kick", "snare", "clap", "chat", "ohat", "tom", "rim", "bell"]] + ["berlin_" + v for v in ["kick", "clap", "chat", "ohat", "rim", "tom", "stab", "ride"]]]
+
+for d in one_defs: d.filename = ONE + d.name + ".scd"; d.add(); globals()[d.name] = d
+
+print([d.name for d in one_defs])
+
+k1 >> berlin_kick(dur=1, x=0.75, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.74, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.73, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.72, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.71, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.70, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.69, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.68, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.67, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.66, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.65, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.64, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.63, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.62, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.61, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.60, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.59, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.58, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.57, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.56, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.55, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.54, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.53, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.52, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.51, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.50, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.49, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.48, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.47, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.46, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.45, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.44, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.43, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.42, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.41, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.40, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.39, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.38, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.37, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.36, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.35, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.34, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.33, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.32, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.31, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.30, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.29, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.28, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.27, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.26, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.25, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.24, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.23, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.22, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.21, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.20, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.19, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.18, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.16, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.15, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.14, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.13, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.12, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.11, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.10, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.09, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.08, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.07, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.06, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.05, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.04, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.03, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.02, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.01, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.00, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.01, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.02, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.03, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.04, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.05, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.06, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.07, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.08, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.09, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.10, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.11, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.12, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.13, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.14, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.15, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.16, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=0.7, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=0.8, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=0.9, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.0, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.1, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.2, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.3, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.4, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=2.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=2.7, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=2.8, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=2.9, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.0, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.1, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.2, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.3, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.4, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.5, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.7, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.8, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=3.9, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.0, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.1, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.2, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.3, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.4, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.5, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.6, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.7, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.8, every=60/132, sus=4)
+
+k1 >> berlin_kick(dur=1, x=0.17, rumble=1.5, rdec=4.9, every=60/132, sus=4)
+
+k2 >> berlin_clap(dur=[rest(1), 1, rest(1), 1], sus=4)
+
+k3 >> berlin_ohat(dur=[rest(0.5), 0.5], dec=0.9, sus=4)
+
+k4 >> berlin_chat(dur=1/4, velo=[1, 0.75, 0.75, 0.75], sus=1)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=3, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=4, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=5, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.7, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.6, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.5, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.4, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.3, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.2, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.1, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.0, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.1, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.2, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.3, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.4, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.5, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.6, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.7, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.8, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.9, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=1.0, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.9, fenv=0.6, fdec=0.18, fsus=0, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+
+b1 >> one_sub([0, 0, 3, 0, 5, 0, 7, 5], dur=1/4, oct=6, w1=0, oct1=-1, omix=0, cutoff=1050, res=0.9, fenv=0.6, fdec=0.18, fsus=1, kbd=0.3, odrive=0.5, adec=0.3, asus=1, arel=0.05, level=-6)
+

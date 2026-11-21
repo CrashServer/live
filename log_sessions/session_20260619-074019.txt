@@ -1,0 +1,524 @@
+Scale.default="minor"
+Clock.bpm = 123;
+Root.default = 0;
+
+Scale.default="minor"
+Clock.bpm = 123;
+Root.default = 0;
+
+g7 >> loop("metalgtr16", dur=16, sample=4)
+
+l1 >> loop("cindrum8", dur=8, sample=P*[0,2], sbrk=0.2, sbrkdur=P*[4,0.5,1,2])
+
+l2 >> loop("cindrum16", dur=16, sample=6, sbrk=0.2, sbrkdur=P*[4,0.5,1,2])
+
+l6 >> loop("rbot4", dur=8, delay=4, cut=PWhite(0.1,0.5), sample=2, leg=0)
+l7 >> play("{UMTmt[UU]}", rate=1, delay=7.5, dur=8, hpf=200, amp=2, fx2=0, pan=PWhite(-1,1))
+
+i1 >> plaitsX(preset=10, porta=PWhite(-2,2), oct=(5,6,7), dur=8, glide=PWhite(0.01,1), glidedur=PWhite(0,2), rel=0, chop=P*[0,8], chopwave=(PRand(2,5),PRand(2,5),PRand(2,5)), bright=1, pan=(PWhite(-1,1),PWhite(-1,1),PWhite(-1,1)), spin=0.5, chopmix=PWhite(0, 1), dist2=1, vol=0.4, sus=PRand(1,9), hpf=PRand(500,4000)*1, high=2, mverb=PWhite(0,0.9)*1, lpf=PRand(400, 20000)*1, room2=PWhite(0, 1), damp2=PWhite(0.1, 0.9), revsus=PWhite(0.2, 8), revatk=PWhite(-1, 4))
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1)
+
+g7.stop()
+
+s5 >> faim(s4.degree*-1, dur=1/4, oct=(4), detune=0.2, slide=0, compress=0,tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, rate=0.9, mid=0, low=1, crush=PStep(8,PRand(2,8),0)*1, bits=4, ehpf=var([200,0],[1/4, 3/4]), ehpr=0.8, ehpfa=0.1, ehpc=PRand(-20,20), sus=PStep(16,1/8,1/4))
+
+l1.stop()
+
+l1.stop()
+s4 >> superbass(lininf(21,-7, 4), dur=PDur([4,7,5],8), cutoff=PFrac(0.6,0.3,16,1200, 2000), detune=0.5, oct=6, rq=lininf(0.1, 0.8, 4), slide=0, a=0, crush=0, hpf=0, fdecay=6)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=0.5, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.2, vib=40, hpf=1500)
+
+s6.stop()
+
+i1.stop()
+
+s5.stop()
+
+s4.stop()
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+t1 >> plaitsX(P[-14:14], preset=9, oct=(4,5,6), dur=1/4, a=0, pan=PWhite(-1, 1), chopmix=0.3, chopwave=(2, 3), chop=1, mverb=0.2)
+
+t1.stop()
+
+t1 >> plaitsX(P[-14:14], preset=9, oct=(4,5,6), dur=1/4, a=0, pan=PWhite(-1, 1), chopmix=0.3, chopwave=(2, 3), chop=1, mverb=0.0)
+
+t1.stop()
+
+l7 >> play("{UMTmt[UU]}", rate=1, delay=7.5, dur=8, hpf=200, amp=2, fx2=0, pan=PWhite(-1,1))
+
+l6 >> loop("rbot4", dur=8, delay=4, cut=PWhite(0.1,0.5), sample=2, leg=0)
+
+i1 >> plaitsX(preset=10, porta=PWhite(-2,2), oct=(5,6,7), dur=8, glide=PWhite(0.01,1), glidedur=PWhite(0,2), rel=0, chop=P*[0,8], chopwave=(PRand(2,5),PRand(2,5),PRand(2,5)), bright=1, pan=(PWhite(-1,1),PWhite(-1,1),PWhite(-1,1)), spin=0.5, chopmix=PWhite(0, 1), dist2=1, vol=0.4, sus=PRand(1,9), hpf=PRand(500,4000)*1, high=2, mverb=PWhite(0,0.9)*1, lpf=PRand(400, 20000)*1, room2=PWhite(0, 1), damp2=PWhite(0.1, 0.9), revsus=PWhite(0.2, 8), revatk=PWhite(-1, 4))
+
+l2.stop()
+
+l6.stop()
+
+i1.stop()
+
+i1 >> plaitsX(preset=10, porta=PWhite(-2,2), oct=(5,6,7), dur=8, glide=PWhite(0.01,1), glidedur=PWhite(0,2), rel=0, chop=P*[0,8], chopwave=(PRand(2,5),PRand(2,5),PRand(2,5)), bright=1, pan=(PWhite(-1,1),PWhite(-1,1),PWhite(-1,1)), spin=0.5, chopmix=PWhite(0, 1), dist2=1, vol=0.4, sus=PRand(1,9), hpf=PRand(500,4000)*1, high=2, mverb=PWhite(0,0.9)*1, lpf=PRand(400, 20000)*1, room2=PWhite(0, 1), damp2=PWhite(0.1, 0.9), revsus=PWhite(0.2, 8), revatk=PWhite(-1, 4))
+
+i1.stop()
+
+g7 >> loop("metalgtr16", dur=16, sample=4)
+
+g7.stop()
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1)
+
+s5 >> faim(s4.degree*-1, dur=1/4, oct=(4), detune=0.2, slide=0, compress=0,tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, rate=0.9, mid=0, low=1, crush=PStep(8,PRand(2,8),0)*1, bits=4, ehpf=var([200,0],[1/4, 3/4]), ehpr=0.8, ehpfa=0.1, ehpc=PRand(-20,20), sus=PStep(16,1/8,1/4))
+
+g7.stop()
+
+s5.stop()
+
+s5 >> faim(s4.degree*-1, dur=1/4, oct=(5), detune=0.2, slide=0, compress=0,tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, rate=0.9, mid=0, low=1, crush=PStep(8,PRand(2,8),0)*1, bits=4, ehpf=var([200,0],[1/4, 3/4]), ehpr=0.8, ehpfa=0.1, ehpc=PRand(-20,20), sus=PStep(16,1/8,1/4))
+
+s5 >> faim(s4.degree*-1, dur=1/4, oct=(4), detune=0.2, slide=0, compress=0,tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1, rate=0.9, mid=0, low=1, crush=PStep(8,PRand(2,8),0)*1, bits=4, ehpf=var([200,0],[1/4, 3/4]), ehpr=0.8, ehpfa=0.1, ehpc=PRand(-20,20), sus=PStep(16,1/8,1/4))
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1)
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, multicrush=0.5, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=0.5, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.2, vib=40, hpf=1500)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=0.5, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.2, vib=40, hpf=1500)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=0.5, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.6, vib=40, hpf=1500)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=0.5, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=4)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=0.5, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+s6.stop()
+
+g7.stop()
+
+g7.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=1200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=20, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=120, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=420, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=120, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=0.5, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+s6.stop()
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5),shape=0.5, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5),shape=0.0, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), multicrush=0.5, mclowdrive=1.5, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+g7.stop()
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d7 >> svdk(g3.degree)
+
+d7 >> svdk(g3.degree, cut=1/4)
+
+d7 >> svdk(g3.degree, cut=1/2)
+
+d7 >> svdk(g3.degree, cut=1/2, oct=6)
+
+d7 >> svdk(g3.degree, cut=1/2, oct=6, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d7 >> svdk(g3.degree, cut=1/2, oct=6, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d7 >> svdk(g3.degree, cut=1/2, oct=5, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d7 >> svdk(g3.degree, cut=1/2, oct=5, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=0.5, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=1, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+d7 >> svdk(g3.degree, cut=1/2, oct=5, fbdelay=0.25, hpf=1200, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d7 >> svdk(g3.degree, cut=1/2, oct=5, fbdelay=0.25, hpf=1200, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=1, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/2, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> a_stress( filterFreq=1200, resonance=0.8, distortion=6, attack=0.01, release=0.1, degree=var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> a_stress( filterFreq=120, resonance=0.8, distortion=6, attack=0.01, release=0.1, degree=var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> a_stress( filterFreq=200, resonance=0.8, distortion=6, attack=0.01, release=0.1, degree=var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3.stop()
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=1, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+g7 >> bass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+g7 >> a_gesa2(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+attack("svdkdirty  134")
+
+s3 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.15, oct=4, grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.2)
+
+s4 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.15, oct=5, grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.2)
+
+~s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.15, oct=5, grit=1,          cutoff=1200, res=0.4, body=0.6, harm=0.6, noise=0.2)
+
+s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5)
+
+s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5).only()
+
+s2 >> svdk([0], dur=4, sus=4, grit=1.2, low=2, glide=0, noise=0, oct=4, res=0.9, cutoff=1200, body=1, drift=0.1, harm=1.2, slide=0.4)
+
+g2 >> play("[--]", amp=2)
+s1.oct=4
+s5 >> play("..C.", amp=2)
+
+s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5)
+
+s4.oct=4
+
+g7 >> a_gesa2(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+s1.stop()
+
+s2 >> svdk([0], dur=4, sus=4, grit=1.2, low=2, glide=0, noise=0, oct=4, res=0.9, cutoff=1200, body=1, drift=0.1, harm=1.2, slide=0.4)
+
+s6 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=1, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+d7 >> svdk(g3.degree, cut=1/2, oct=5, fbdelay=0.25, hpf=1200, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d7 >> svdk(g3.degree, cut=1/2, oct=5, fbdelay=0.25, hpf=1200, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+d7 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=1, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+~d7 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=1, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+d7 >> a_gesa2(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+~d7 >> a_gesa2(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), eb=0.5, ebfeed=0.5, ebmix=0.3, ebmode=0, ebwow=0.1, ebflutter=0.15, ebsat=0.3, rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=2)
+
+d7.stop()
+
+s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5).only()
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+s1.stop()
+
+s2 >> svdk([0], dur=4, sus=4, grit=1.2, low=2, glide=0, noise=0, oct=4, res=0.9, cutoff=1200, body=1, drift=0.1, harm=1.2, slide=0.4)
+
+s2.stop()
+
+g2 >> play("[--]", amp=2)
+
+s1.oct=4
+
+s5 >> play("..C.", amp=2)
+
+s5.stop()
+
+g2.stop()
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+i1 >> plaitsX(preset=10, porta=PWhite(-2,2), oct=(5,6,7), dur=8, glide=PWhite(0.01,1), glidedur=PWhite(0,2), rel=0, chop=P*[0,8], chopwave=(PRand(2,5),PRand(2,5),PRand(2,5)), bright=1, pan=(PWhite(-1,1),PWhite(-1,1),PWhite(-1,1)), spin=0.5, chopmix=PWhite(0, 1), dist2=1, vol=0.4, sus=PRand(1,9), hpf=PRand(500,4000)*1, high=2, mverb=PWhite(0,0.9)*1, lpf=PRand(400, 20000)*1, room2=PWhite(0, 1), damp2=PWhite(0.1, 0.9), revsus=PWhite(0.2, 8), revatk=PWhite(-1, 4))
+
+l7 >> play("{UMTmt[UU]}", rate=1, delay=7.5, dur=8, hpf=200, amp=2, fx2=0, pan=PWhite(-1,1))
+
+l7 >> play("{UMTmt[UU]}", rate=1, delay=7.5, dur=8, hpf=200, amp=2, fx2=0, pan=PWhite(-1,1))
+
+l6 >> loop("rbot4", dur=8, delay=4, cut=PWhite(0.1,0.5), sample=2, leg=0)
+
+l7.stop()
+
+l2 >> loop("cindrum16", dur=16, sample=6, sbrk=0.2, sbrkdur=P*[4,0.5,1,2])
+
+l1 >> loop("cindrum8", dur=8, sample=P*[0,2], sbrk=0.2, sbrkdur=P*[4,0.5,1,2])
+
+l1.stop()
+
+l2.stop()
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [1,0])],[P*[4,12,28],1]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> dbass(var([4,linvar([0,PRand(-7,14)], [1,0])],[P*[4,12,28],1]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> dbass(var([4,linvar([0,PRand(-7,14)], [1,0])],[P*[4,12,28],1]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> dbass(var([4,linvar([10,PRand(-7,14)], [1,0])],[P*[4,12,28],1]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+g3 >> dbass(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.6,0.3,16,1400, 8000), detune=0.5, krush=0.4, kutoff=PFrac(0.6,0.3,16,1400, 8000), oct=(6,4,5), rq=0.1, slide=0, compress=1, a=0, rate=0.1, mid=2, crush=PStep(16,PRand(2,8),0), bits=4, hpf=var([160,0], [1/4, 3/4]), amp=1, vadiod=500, vadiodr=0.5, vadiodd=0.5, vadiodc=0.3, multicrush=4, mclowdrive=4, mcmiddrive=2, mchighdrive=1.8, mclofreq=200, mchifreq=3000)
+
+d6 >> play("<x.><..C.><-><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, multicrush=0.5, mclowdrive=1, mcmiddrive=2, mchighdrive=1.8, mclofreq=220, mchifreq=3000, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><-:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<x.><..C.><[--]:><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d6 >> play("<.[xx]><....><[--]><X.>", sample=(7), pan=(0,0,PWhite(-1,1),0), amp=(4,1,2,2), compress=1, lofi=0, dur=1/2).sometimes("stutter", PRand(2,16).rnd(2))
+
+d7 >> svdk(g3.degree, cut=1/2, oct=5, fbdelay=0.25, hpf=1200, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+~d7 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=1, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+d7.stop()
+
+~d7 >> pluck(var([0,linvar([0,PRand(-7,14)], [4,0])],[P*[4,12,28],4]), dur=1/4, cutoff=PFrac(0.3,0.6,16,800, var([1000,8000], [32,0])),slide=0, fdecay=linvar([4,5],[64,0]), decay=0.1, rel=1, oct=(4,5,[6,7]), rq=0.7, rqd=0.1, tanh=1, amp=1, vol=0.5, vib=40, hpf=1500)
+
+d7.stop()
+
+s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5)
+
+s1 >> svdk([0,0,3,0, 5,5,3,0], dur=0.25, sus=0.21, lpf=1200, leg=0, oct=4, grit=1, cutoff=linvar([1300, 2500, 3500, 1500], [2, 6, 8]), res=linvar([0.4, 0.7, 0.1, 1.1, 0.6, 1.3, 0.9], [1, 3, 4, 3, 4, 3]), gdel=0.3, gdeltime=0.5, gdelsize=0.1, gdelsprd=0.5, gdelfb=linvar([0.4, 1.4, 1], [4, 2]), body=linvar([0.3, 1.6, 1.8, 2], [2, 6, 3]), harm=sinvar([0.3, 5.3], 16), noise=linvar([0.3, 1.3, 0.8, 0.3], [4, 3, 4]), csweep=linvar([0.2, 0.3, 0.2, 0.5, 0.1, 0.2], [3, 2, 3, 4, 2]), cswfreq=sinvar([200, 250], 12), cswdepth=linvar([0.4, 0.7, 0.2], 1.5), cswrate=linvar([0.6, 1, 0.1, 0.6], [1.5, 4, 2]), cswdecay=0.5).unison(5).only()
+
+Clock.bpm = 132
+
+kit = pkit("techno", seed=11)
+
+b1 >> a_stress(0, dur=1/4, sus=0.18, oct=3, amp=lininf(1.35,0.3,32), filterFreq=300, resonance=0.9, distortion=8, attack=0.001,  release=0.06, pumper=0, hpf=42)
+
+~d1 >> play(pbuild("techno", 16, fill=8, hat="dnb", seed=11), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.15, cswfreq=80,  cswdepth=0.4, cswrate=0.5, cswdecay=0.5, gdel=0.4, gdeltime=0.015, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.65, fbdelay=0.5,  fbtime=0.25, fbfeed=0.6, fbcutoff=2500, fbspread=0.02, beat_dur=1, low=1.8, lowfreq=65).unison(3)
+
+k2 = pkit("techno", seed=7) | pkit("afro", seed=3)
+
+~d1 >> play(pbuild("techno", 16, fill=8, perc="afro", seed=7), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70,  cswdepth=0.4, cswrate=0.5, cswdecay=0.5, spwarp=0.1, spwstr=1, spwshift=1, gdel=0.4, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8,  gdelfb=0.7, fbdelay=0.5, fbtime=0.25, fbfeed=0.65, fbcutoff=3000, fbspread=0.02, beat_dur=1, resonbank=0.3, rbfreq=220,  rbdecay=0.4, rbspread=0.9, low=1.8).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8, hat="dnb", seed=11), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.15, cswfreq=80,  cswdepth=0.4, cswrate=0.5, cswdecay=0.5, gdel=0.4, gdeltime=0.015, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.65, fbdelay=0.5,  fbtime=0.25, fbfeed=0.6, fbcutoff=2500, fbspread=0.02, beat_dur=1, low=1.8, lowfreq=65).unison(3)
+
+d4 >> play((k2 >> 2).perc, dur=0.25, hpf=2000, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=150, cswdepth=0.5, cswrate=2,  cswdecay=0.3, gdel=0.3, gdeltime=0.03, gdelsize=0.02, gdelsprd=0.6, gdelfb=0.5, pan=PWhite(-0.5,0.5)).unison(2)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+_seq_schedule(32, 1781848702106)
+
+_seq_cancel()
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1781848755682)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1781848759365)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1781848896018)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1781848899676)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1781848903332)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1781848906986)
+
+_seq_cancel()
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, hpf=100).often("stutter", oct=P*[4, 4,5, 6])
+
+_seq_schedule(16, 1781848914281)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+_seq_cancel()
+

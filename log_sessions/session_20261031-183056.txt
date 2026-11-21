@@ -1,0 +1,876 @@
+Clock.bpm = 180
+
+v4 >> play("x", dur=1/16, cut=1/4,lpf=linvar([200, 501], 32), leg=2, lpr=0.3, csweep=0.8, cswfreq=60, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v5 >> play("x", dur=1/4, cut=1/4,lpf=linvar([901, 801], 128), leg=1, lpr=0.4, csweep=0.8, cswfreq=60, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("xB", dur=2/3, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.8, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=2/3, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.8, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.8, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.7, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.6, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.5, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.4, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.3, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.2, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.1, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.0, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+Clock.clear()
+soff()
+
+e0 >> play("x ")
+
+a1 >> dbass()
+
+a1 >> dbass(dur=1/2)
+
+a1 >> dbass(dur=1/2, echo=0.5)
+
+a1 >> dbass(dur=1/2, echo=0.5, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0)
+
+a1 >> dbass(dur=1/2, echo=0.5, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=1)
+
+a1 >> dbass(dur=1/2, echo=0.5, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=2)
+
+a1 >> dbass(dur=1/2, echo=0.5, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=1)
+
+a1 >> dbass(dur=1/2, echo=0.5, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0)
+
+a1 >> dbass(dur=1/2, echo=0.5, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0, mverb=0, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+a1 >> dbass(dur=1/2, echo=0.5, dafilter=1200, dastart=250, darel=0.2, darq=0.5, datype=0, mverb=0.4, mverbmix=0.5, mverbdamp=0.8, mverbdiff=0.625, mverbfreeze=0)
+
+Clock.clear()
+soff()
+
+e0 >> play("x ")
+
+e0 >> play("x ")
+
+h2 >> dbass(dur=1/2)
+
+e0.stop()
+
+Clock.clear()
+soff()
+
+h2 >> dbass(dur=1/2)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.0, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v7 >> play("xB", dur=var([4/3, 2/3], [8, 4]),cut=1/3,lpf=linvar([2901, 3901], 128), leg=1, lpr=0.1, csweep=0.2, cswfreq=20, cswdepth=0.3, cswrate=0.6, cswdecay=0.5)
+
+v7 >> play("xB", dur=var([4/3, 2/3], [8, 4]),cut=1/3,lpf=linvar([2901, 3901], 128), leg=1, lpr=0.1, csweep=0.2, cswfreq=20, cswdepth=0.3, cswrate=0.6, cswdecay=0.5)
+
+v7.stop()
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.0, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v6 >> play("x.", dur=1/2, cut=1/3,lpf=linvar([901, 2001], 128), leg=1, lpr=0.4, csweep=0.0, cswfreq=111, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+l5 >> play(' :', dur=2/3, lpf=2800, amp=2, drumBuss=4, drumBuss_comp=1, drumBuss_drive=0.1, drumBuss_crunch=0.5, drumBuss_transients=0, drumBuss_boom=0.1, drcomp=1)
+
+l5.stop()
+
+l4 >> play('X ', dur=2/3, amp=2, drumBuss=4, drumBuss_comp=1, drumBuss_drive=0.1, drumBuss_crunch=0.5, drumBuss_transients=0, drumBuss_boom=0.1, drcomp=1)
+
+v4 >> play("x", dur=1/16, cut=1/4,lpf=linvar([200, 501], 32), leg=2, lpr=0.3, csweep=0.8, cswfreq=60, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+v4.stop()
+
+Clock.clear()
+soff()
+
+attack()
+
+w9 >> blip(oct=3)
+
+y3 >> adbass(index=3, feedback=0.5, mdec=0.25, msus=0.3, wave=2, mwave=0, grit=0)
+
+w9 >> blip(oct=3, fm_sin=0.98, fm_sin_i=0.5)
+
+w9 >> blip(oct=3, fm_sin=0.98, fm_sin_i=0.6)
+
+w9 >> blip(oct=3, fm_sin=0.98, fm_sin_i=0.7)
+
+w9 >> blip(oct=3, fm_sin=0.98, fm_sin_i=0.8)
+
+w9 >> blip(oct=3, fm_sin=0.97, fm_sin_i=0.8)
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8)
+
+w9 >> blip(oct=3, fm_sin=1.06, fm_sin_i=0.8)
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8)
+
+w9 >> blip(oct=2, fm_sin=0.96, fm_sin_i=0.8, )
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8, )
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.5)
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.4)
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3)
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=500, valadr=0.3, valadd=5, valadt=0, valadc=0.2)
+
+y3 >> adbass(index=3, feedback=0.6, mdec=0.25, msus=0.3, wave=2, mwave=0, grit=0)
+
+y3 >> adbass(index=3, feedback=0.7, mdec=0.25, msus=0.3, wave=2, mwave=0, grit=0)
+
+y3 >> adbass(index=3, feedback=0.8, mdec=0.25, msus=0.3, wave=2, mwave=0, grit=0)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.25, msus=0.3, wave=2, mwave=0, grit=0)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.26, msus=0.3, wave=2, mwave=0, grit=0)
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=500, valadr=0.3, valadd=15, valadt=4, valadc=0.2)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=2, mwave=0, grit=0)
+
+w9 >> blip(oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.2)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=0, grit=0)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=0)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=1)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=2)
+
+w9 >> blip(PStep(8,1,0), oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0),glide=.5, leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0),glide=.05, leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0),glide=0, leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=500, valadr=0.3, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq, valadr=0.3, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.3, valadd=15, valadt=0, valadc=0.2)
+
+y3.stop()
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.3, valadd=15, valadt=1, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.3, valadd=15, valadt=2, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.3, valadd=15, valadt=3, valadc=0.2)
+
+b6 >> adlead(index=4, feedback=1.2, mdec=0.5, msus=0.6, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.4, valadd=15, valadt=3, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.5, valadd=15, valadt=3, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=3, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.7, valadd=15, valadt=3, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.8, valadd=15, valadt=3, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.7, valadd=15, valadt=3, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=3, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=1.2, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=1.3, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=1.4, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=1.5, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=1.6, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=1.7, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=1.8, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=1.9, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=2.0, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=2.1, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=2.2, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=2.3, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=2.4, mdec=0.5, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, msus=0.6, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=4, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=0.6, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=0.7, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=0.8, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=0.9, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.0, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.1, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.2, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.3, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.4, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.5, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.6, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.7, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.8, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=1.9, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=2.0, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=2.1, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=2.2, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=2.3, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=2, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=2.4, wave=0)
+
+b6 >> adlead(index=1, feedback=2.5, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=2.6, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=2.7, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=2.8, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=2.9, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.0, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.8, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=3.1, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.2, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.3, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.4, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.5, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.6, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.7, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.8, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=3.9, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.0, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.1, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.2, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.3, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.4, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.5, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.6, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.7, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.8, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.9, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=5.0, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=5.1, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=5.2, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=5.3, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.6, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.5, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=5.2, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=5.1, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=5.0, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.9, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.6, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=4.8, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.7, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=4.6, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=4.5, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*3, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=4, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=5, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=6, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=7, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=4, oct=3, fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*3, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=8, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=9, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=10, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=11, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=12, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*3, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=11, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=10, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=9, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=8, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=7, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=6, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=4, fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*3, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=7, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=8, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=9, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=10, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=11, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=12, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=13, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=14, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=3, fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*3, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=15, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=16, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=17, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=18, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=19, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=20, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=21, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=22, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=23, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=24, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=25, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=26, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=27, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=28, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=29, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=30, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=31, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=32, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=33, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=34, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=35, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=34, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=33, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=32, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=31, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=30, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=29, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=28, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=27, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6 >> adlead(index=1, feedback=27, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=PStep(3, 4, 3), fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*3, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+b6 >> adlead(index=1, feedback=4, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=PStep(4, 4, 3), fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*3, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=PStep(5, 4, 3), fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*3, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=PStep(5, 4, 3), fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*2, valadr=0.6, valadd=15, valadt=0, valadc=0.2)
+
+r4 >> piacon(velocity=64, hard=0.55, velhard=0.45, muffle=0.8, stretch=0.1, sympa=0.4, body=0.3, hammer=0.12, tone=0.4)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=PStep(5, 4, 3), fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*2, valadr=0.7, valadd=15, valadt=0, valadc=0.2)
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=PStep(5, 4, 3), fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*2, valadr=0.7, valadd=150, valadt=0, valadc=0.2)
+
+r4 >> piacon(velocity=127, hard=0.55, velhard=0.45, muffle=0.8, stretch=0.1, sympa=0.4, body=0.3, hammer=0.12, tone=0.4)
+
+r4 >> piacon(velocity=126, hard=0.55, velhard=0.45, muffle=0.8, stretch=0.1, sympa=0.4, body=0.3, hammer=0.12, tone=0.4)
+
+r4.stop()
+
+h7 >> subkick(click=0.5, punch=0.7, subt=0.3)
+
+r2 >> play("V.")
+
+r2.stop()
+
+w9.stop()
+
+h7 >> subkick(click=0.5, punch=0.7, subt=0.3)
+
+b6.stop()
+
+h7 >> subkick(click=0.5, punch=0.7, subt=0.3)
+
+Clock.clear()
+soff()
+
+h7 >> subkick(click=0.5, punch=0.7, subt=0.3, oct=3)
+
+h7.stop()
+
+b6.stop()
+
+b6 >> adlead(index=1, feedback=4, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6.stop()
+
+f9 >> play('x ')
+
+f9.stop()
+
+f9.stop()
+
+f9 >> play('x ')
+
+f9 >> play('x ')
+
+f9 >> play('x ', dist2=0.4)
+
+f9.stop()
+
+r4 >> piacon(velocity=126, hard=0.55, velhard=0.45, muffle=0.8, stretch=0.1, sympa=0.4, body=0.3, hammer=0.12, tone=0.4)
+
+r4.stop()
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=PStep(5, 4, 3), fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*2, valadr=0.7, valadd=150, valadt=0, valadc=0.2)
+
+w9.stop()
+
+r2.stop()
+
+# tgest 
+
+r2 >> play("V.")
+
+r2.stop()
+
+r2 >> play("V-")
+
+r2 >> play("V-")
+
+r2 >> play("V:")
+
+r2 >> play("V=")
+
+r2 >> play("V:")
+
+r2.stop()
+
+n7 >>  varicelle(rate=1, cutoff=3300, rq=0.2)
+
+n7.stop()
+
+# gegeest ce que tu voix ce que je t'ecris dans le terminal 
+
+# gegeest ce que tu voix ce que je t'ecris dans le terminal 
+
+# gegeest ce que tu voix ce que je t'ecris dans le terminal 
+
+# azidojazoijdazdea
+
+# gegeest ce que tu voix ce que je t'ecris dans le terminal 
+
+# gegeest ce que tu voix ce que je t'ecris dans le terminal 
+
+# azidojazoijdazdea
+
+n7 >>  varicelle(rate=1, cutoff=3300, rq=0.2)
+
+n7.stop()
+
+# ce que j'ecrtis 
+
+n7 >>  varicelle(rate=1, cutoff=3300, rq=0.2)
+
+n7.stop()
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=2)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=2)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=2)
+
+i9 >> play("x ", mverb=0.5)
+
+i9 >> play("x ", mverb=0.5)
+
+i9.stop()
+
+i9 >> play("x ", mverb=0.5)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=2)
+
+i9 >> play("x ", mverb=0.5)
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=2)
+
+Clock.clear()
+soff()
+
+r2 >> play("V:")
+
+r2.stop()
+
+r2 >> play("V:")
+
+r2.stop()
+
+r2 >> play("V:")
+
+r2 >> play("V:", amp=0)
+
+r2 >> play("V:", amp=1)
+
+r2.stop()
+
+w9 >> blip(PStep(8,1,0), leg=3, oct=PStep(5, 4, 3), fm_sin=0.96, fm_sin_i=0.7, idist=0.3, valad=w9.freq*2, valadr=0.7, valadd=150, valadt=0, valadc=0.2, amp=0)
+
+i9 >> play("x ", mverb=0.5)
+
+i9.stop()
+
+y3 >> adbass(index=4, feedback=0.8, mdec=0.5, msus=0.3, wave=3, mwave=1, grit=2)
+
+y3.stop()
+
+r2.stop()
+
+r2 >> play("V:", amp=1)
+
+r2.stop()
+
+r2 >> play("V:", amp=1)
+
+r2 >> play("V:", amp=1, hpf=400)
+
+b6 >> adlead(index=1, feedback=4, mdec=0.5, dur=1/2, msus=2.5, wave=0)
+
+b6.stop()
+
+h7 >> subkick(click=0.5, punch=0.7, subt=0.3, oct=3)
+
+r2 >> play("V:", amp=1, hpf=400)
+
+attack("epicdevo_var 66")
+
+attack("devo_var")
+
+attack("epicdevo 66")
+
+Clock.bpm = 66
+
+_seq_cancel()
+d1 >> industrialdrone([0], dur=16, oct=4, sus=16,  cutoff=linvar([300, 800], 32),  feedback=0.4, noise=0.1, amp=0.4)
+
+_seq_schedule(32, 1793474572927)
+
+r2.stop()
+
+_seq_cancel()
+p1 >> darkpad([0, 6], dur=8, oct=4, sus=4.5, atk=2, rel=3, cutoff=linvar([600, 2000], 16), dark=PWhite(0.5, 0.9),  detune=0.04, amp=0.35, mverb=0.2)
+
+_seq_schedule(8, 1793474601276)
+
+_seq_cancel()
+p2 >> ethpad([0, 1, 7], dur=8, oct=5, attack=3, release=4,  amp=0.57, mverb=0.0)
+
+_seq_schedule(8, 1793474608605)
+
+_seq_cancel()
+d1 >> darkpad([0, 6, 7], dur=4, oct=6, rq=0.2,  amp=linvar([0, 0.3], 16))
+
+_seq_schedule(8, 1793474615937)
+
+_seq_cancel()
+c5 >> faim([0, 1, 6], dur=4, oct=3, beef=1, amp=0.9, fshift=linvar([-20, 20], 16), fmix=0.3)
+p1 >> ethpad(r1.degree, dur=8, oct=3, attack=2, amp=0.2, mverb=0.2)
+
+_seq_schedule(16, 1793474623214)
+
+_seq_cancel()
+t1 >> darkpad([0, 1, 6, 7], dur=var([rest(28), 4], [28, 4]),oct=3, amp=0.8, dark=0.3)
+c3 >> faim(([0, 1, 7], 0), dur=1/2, oct=4, beef=2, amp=0.9, hpf=100).often("stutter", oct=P*[4, 4,5, 6])
+
+_seq_schedule(16, 1793474637816)
+
+_seq_cancel()
+c1 >> cs80([0, 0, 0.5], dur=1/2, oct=(3, PStep(4, 3, 4)), amp=0.3, cutoff=linvar([400, 5000], 8), shape=0.1, vakorg=500, vakorgr=0.5, vakorgd=0.5, vakorgt=0, vakorgc=0.3, shimmer=lininf(0.8,0,32), shimsize=0.8, shimpitch=var([0.0, 0.5, 1, 2, 1, 1, 2, 4, 4, 6, 6, 8, 8]), shimmix=0.4)
+
+c4 >> organ(linvar([17, 1], [8, 1]), dur=[1/2, 1/4], oct=6, beef=1,dist2=0.4, amp=0.3, leg=0, fbdelay=0.5, sus=1/4, resonbank=0.1, rbfreq=200, rbdecay=0.5, rbspread=1.0)
+
+_seq_schedule(32, 1793474652483)
+
+Clock.clear()
+soff()
+
+_seq_cancel()
+
+attack("for my people 88")
+
+_seq_cancel()
+Clock.bpm = 88
+Scale.default="minor"
+Root.default="E"
+p2 >> pianovel(var([(2,4,7),(2,4,7), (1,3,7),(1,3,6.5)], [4]),dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40, 60), PRand(20,43)], lofi=linvar([0.6, 1, 0.4], 1), lofiwow=0.25, lofiamp=0.2)
+
+_seq_schedule(32, 1793474690291)
+
+_seq_cancel()
+p1 >> pianovel([4,5], dur=P[6,2], oct=5, velocity=PRand(60,80), hard=PWhite(0.6,0.8), velhard=PWhite(0.4, 0.6), lofi=0.7, lofiwow=0.5, lofiamp=0.5, mverb=0.5)
+
+_seq_schedule(16, 1793474712922)
+
+_seq_cancel()
+p2 >> pianovel(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5), (0,2,5), (0,2,5), (1,3,7), (2,4,7)], [4]), dur=1, amp=0.8, hard=PWhite(0.2, 0.7), velhard=0.6, oct=4, velocity=[PRand(40, 60), PRand(20, 43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5, lpf=sinvar([2000, 5000], 32))
+
+_seq_schedule(16, 1793474723852)
+
+_seq_cancel()
+p1 >> pianovel([4, 5, _, 7, 5, 4, _, 2], dur=[2, 1, 1, 2, 1, 0.5, 0.5, 2], oct=4, velocity=PRand(55, 80), hard=PWhite(0.5,0.8),velhard=PWhite(0.4, 0.6), lofi=0.7, lofiwow=0.5, lofiamp=0.5, cheapverb=0.2, cvdecay=1)
+
+_seq_schedule(16, 1793474734775)
+
+_seq_cancel()
+p2 >> pianovel(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5), (0,2,5), (0,2,5), (1,3,7), (2,4,7)], [4]), dur=(1, 0.5), amp=0.8, hard=PWhite(0.2, 0.7), velhard=0.8, oct=(4, 5), velocity=[PRand(40, 60), PRand(20, 43)], lofi=0.2, lofiwow=0.25, lofiamp=0.5, lpf=sinvar([2000, 5000], 32))
+
+_seq_schedule(16, 1793474745707)
+
+_seq_cancel()
+b1 >> dbass(var([2, 2, 1, 1, 0, 0, 1, 2], [4]), dur=4, oct=4, sus=3.5, amp=0.6, lpf=300, subenh=0.5, subhfreq=80)
+
+_seq_schedule(16, 1793474756632)
+
+_seq_cancel()
+b1 >> dbass(var([2, 2, 1, 1, 0, 0, 1, 2], [4]), dur=4, oct=4, sus=3.5, amp=0.6, lpf=300, subenh=0.5, subhfreq=80).unison(3)
+
+_seq_schedule(8, 1793474767594)
+
+_seq_cancel()
+d2 >> play("v.....(...{v.})(...{.v}))", cut=2, sample=8, hpf=50, drive=(0,var(PWhite(0,0.2)))).sometimes("stutter")
+
+_seq_schedule(8, 1793474773111)
+
+_seq_cancel()
+d3 >> play("v.....(...{v[vv].}).", sample=8, delay=0.5, hpf=400, amp=var([0, 1], [28, 4]))
+d4 >> play("(...(.p)).((p.).(p.).)((p.).(p.).)", dur=1/4, sample=4, crush=8,bits=8)
+
+_seq_schedule(4, 1793474780207)
+
+_seq_cancel()
+m1 >> soft(melody(), dur=PDur(3,8), oct=6, sus=var([1,2,0.5], [4,4,8]), amp=sinvar([0.15, 0.35], 24), lpf=linvar([1200, 3500], 48),lofi=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1, lofiwow=0.8, lofiamp=1.0, tape=0.2)
+
+_seq_schedule(16, 1793474783047)
+
+_seq_cancel()
+p1.lpf=1200
+q9 >> loop("hiphop16", dur=16, room=0.1, sample=0, tape=0.4, tapedrive=1, tapewarm=0.5)
+
+_seq_schedule(16, 1793474794014)
+
+_seq_cancel()
+d4 >> play("(vV)..v...v...(vV)..", dur=0.5, amp=[0.9, 0.5, 0.7], sample=0)
+
+_seq_schedule(16, 1793474804984)
+
+_seq_cancel()
+e4 >> play("-", dur=1/2, amp=PBin(1664), sample=2, pan=PWhite(-0.5, 0.5)).sometimes("stutter", PRand(2, 8)).human(30, 8) 
+e5 >> play("s", dur=1/4, amp=PWhite(0.05, 0.2), pan=PWhite(-1, 1), sample=1).human(40, 15)                                              
+p2 >> dbass(dur=PDur(3, 8), resonbank=0.2, rbfreq=70, rbdecay=0.5, vocod=0.5, voccarr=0.5, vocbw=0.3, rbspread=1.0, tape=0.5, tapedrive=1.5, tapewarm=0.5, tapewobble=0.1).unison(3)
+
+_seq_schedule(16, 1793474815990)
+
+_seq_cancel()
+e6 >> play("+", dur=1/8, amp=PWhite(0.02, 0.08), pan=PWhite(-1, 1), sample=PRand(0, 3), hpf=2000)
+
+_seq_schedule(8, 1793474826996)
+
+_seq_cancel()
+p1 >> dbass()
+p2 >> dbass(dynfuzz=0.3,dfgain=1, dfatk=0.015, dfdec=0.2, dftone=1.3, tanh=0.8).unison(3)
+
+_seq_schedule(16, 1793474832559)
+
+_seq_cancel()
+p3 >> a_stress(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5), (0,2,5), (0,2,5), (1,3,7), (2,4,7)], [4]), follow=2, dur=1/4, amp=0.8, hard=PWhite(0.2,  0.7), velhard=var([0.4, 0.6, 0.5, 0.7], 8), oct=8, velocity=[PRand(35, 65), PRand(15, 40)], lofi=0.6, lofiwow=fs(16, 0.15, 0.4),lofiamp=0.5, lpf=sinvar([1800, 6000], 32), tape=0.25, tapewarm=0.4, shape=0.1, vowel=0.2, vowelf=0, vowelq=1).unison(3)
+
+_seq_schedule(16, 1793474843618)
+
+Clock.clear()
+soff()
+
+_seq_cancel()
+
+d4 >> play("<([vv].)...>")
+
+e4 >> play("-", dur=1/2, amp=PBin(1664), sample=2, pan=PWhite(-1,1)).sometimes("stutter", PRand(2, 16)).human(40, 10)
+
+_seq_cancel()
+e4 >> play("-", dur=1/2, amp=PBin(1664), sample=2, pan=PWhite(-1,1)).sometimes("stutter", PRand(2, 16)).human(40, 10)
+d4 >> play("<([vv].)...>")
+e4 >> play("...(...z)", sample=2)
+
+_seq_schedule(16, 1793474854858)
+
+_seq_cancel()
+~p2 >> saw(var([(2,4,7),(2,4,7), (1,3,7),(1,3,6.5)], [4]),dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4, velocity=[PRand(40, 60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.2, csweep=0.1, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5)
+
+_seq_schedule(4, 1793474865771)
+
+_seq_cancel()
+p2 >> dbass(var([(2,4,7), (2,4,7), (1,3,7), (1,3,6.5)], [4]), dur=1, amp=1, hard=PWhite(0.2,0.8), velhard=0.6, oct=4,         
+velocity=[PRand(40,60), PRand(20,43)], lofi=0.6, lofiwow=0.25, lofiamp=0.5)
+
+_seq_schedule(16, 1793474868545)
+
+_seq_cancel()
+p1 >> pianovel([4,5], dur=P[6,2], oct=5, velocity=PRand(60,80), hard=PWhite(0.6,0.8), velhard=PWhite(0.4,0.6), lofi=0.7,lofiwow=0.5, lofiamp=0.5)
+
+_seq_schedule(8, 1793474879467)
+
+_seq_cancel()
+b1 >> subbass(p2.degree, dur=4, sus=3.5, amp=0.4, oct=3, lpf=200)
+
+_seq_schedule(8, 1793474884944)
+
+_seq_cancel()
+a1 >> ethpad(var([(0,2,4), (0,2,4), (0,1,4), (0,1,3)], [8]), dur=4, sus=linvar([3,5],32), amp=sinvar([0.15, 0.3], 16), oct=4,lpf=linvar([600, 2200], 64), tape=0.3, tapedrive=0.4)
+a1 >> ethpad(var([(0,2,4), (0,2,4), (0,1,4), (0,1,3)], [8]), dur=4, sus=linvar([3,5],32), amp=sinvar([0.15, 0.3], 16), oct=4,lpf=linvar([600, 2200], 64), tape=0.3, tapedrive=0.4)
+
+_seq_schedule(8, 1793474890409)
+
+_seq_cancel()
+b5 >> loop("hiphop16", dur=16)
+
+_seq_schedule(16, 1793474895885)
+
+_seq_schedule(16, 1793474906827)
+
+_seq_cancel()
+_seq_endfade(16)
+
+Clock.clear()
+soff()
+
+Root.default="E"
+
+Root.default="E"
+
+Scale.default="minor"
+
+Scale.default="minor"
+
+Scale.default="minor"
+
+Clock.bpm = 88
+
+Scale.default="minor"
+
+Root.default="E"
+
+Root.default="E"
+
+Clock.bpm = 88
+
+##### attack@for my people 88.bec:~$ #####
+
+##### attack@for my people 88.bec:~$ #####
+
+Clock.bpm = 88
+
+Root.default="E"
+

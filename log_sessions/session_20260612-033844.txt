@@ -1,0 +1,483 @@
+Root.default = "A"
+
+Scale.default = "minor"
+
+Clock.bpm = linvar([140, 146], [32, 0])
+
+a0 >> dbass(var([0, PWalk(7, [1, 3], 2), -3, PWalk(5, 2, 1)], [6, 4, 2, 4]), dur=[3, 1/4, 1/4, 1/2, 1/4, 1/4, 1/4], oct=(4, 5), pumper=linvar([0.2, 0.85], 48), transient=var([0.5, 3, 6], [8, 4, 4]), transattack=linvar([0.5, 3], 32), multicrush=var([1, 3.5], [12, 4]), combres=linvar([0.5, 9], 64), fbdelay=0.6, fbfeed=linvar([0.3, 0.75], 48), stereowidth=6, amp=0.8)
+
+a1 >> fbass(a0.degree * var([1, -1], 8) + var([0, 7, 12], [8, 4, 4]), dur=PDur(var([7, 5, 9], [4, 4, 8]), 16), oct=PStep(6, (3, 4), 5), lpf=expvar([600, 8000], 16), fmod=linvar([4, 28], [32, 0]), sus=var([1/8, 1/4, 1/16], [6, 4, 6]), drive=linvar([0.2, 0.9], 48), amp=1).unison(4)
+
+b1 >> click(var([0, a0.degree, 7], [4, 10, 2]), dur=PDur(var([3, 5, 7], PRand(8, 16)), 16), oct=(PStep(5, 6, 4), 5), drive=var([0.3, PWhite(0.6, 0.95)], [6, 2]), triode=linvar([2, 8], 32), octer=var([0, 1], [14, 2]), octersub=3, hpf=linvar([200, 1200], 48), amp=0.4, mverb=PStep(12, 0.6, 0)).unison(2).sometimes("stutter", PRand(4, 8), pan=[-1, 1])
+
+b2 >> fbass(PRand([0, 3, 5, 7, 10, 12, -2]), dur=PStep(var([4, 6, 8], [8, 4, 4]), 1/4, 0), oct=(5, 6, 7), sus=1/32, lpf=PRand(2000, 12000), fmod=PRand(12, 40), amp=PStep(6, PRand([0.5, 0.7]), 0) * var([1, 0, 1], [6, 2, 8]), pan=PWhite(-1, 1))
+
+c1 >> varsaw((a0.degree, a0.degree + var([4, 3, 5, 7], [8, 8, 4, 12])), dur=var([4, 2, 8], [8, 4, 4]), oct=linvar([4, 4.2], 64), sus=linvar([2, 5], 32), lpf=linvar([500, 3500], 48), amp=linvar([0.15, 0.35], 32), room=linvar([0.4, 0.85], 64), mix=0.45).unison(5, 0.22, 100)
+
+Clock.clear()
+soff()
+
+a3 >> organx(dec=0.1, d2=0.8, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.1, d2=0.8, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.2, d2=0.8, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.3, d2=0.8, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.8, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.7, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.6, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.5, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.8, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.7, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.6, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.5, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.4, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=-1, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=0, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=1, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=2, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=0, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=1, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=2, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=0, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-1, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=0, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.3)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=0,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=0, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=0.3,leslie=0, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=0.3,leslie=4, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=0.3,leslie=1, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=0.2,leslie=1, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=0,leslie=1, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=4,leslie=1, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=4,leslie=4, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=4,leslie=2, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=4,leslie=2, hpf=200, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=0, d9=0,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=4, d9=0,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=8, d9=0,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=4, d9=0,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=2, d9=0,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=4, d9=0,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=0,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=4,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=8,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=1,click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 1/4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/4,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.4, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=0.4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=0.1, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=0.3, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=0.1, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=4, d4=3, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=4, d4=12, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=4, d4=4, d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=4, d4=ff(4, 0, 8), d5=3, d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=4, d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=-2, oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=4, d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(4, 0, 8), oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=4, d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=4, d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=0.1, d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 8), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 8), d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 8),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=12, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=48, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=40,leslie=1, hpf=2000, leslierate=2,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=10, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=0.1, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=0.1, perchard=0,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=0.1, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 1), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=0.1, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 1), d6=ff(32, 0, 2), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=0.1, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 1), d6=ff(32, 0, 2), oct=(3, 2), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=0.1, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 1), d6=ff(32, 0, 2), oct=(3, 2), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=ff(4, 0, 1),click=4,leslie=1, hpf=2000, leslierate=2,perc=40, perctime=0.1, perchard=1,drive=0.0).unison(4)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 1), d8=ff(4, 0, 1), d9=var([1/2, 1]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.1), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=3, d7=1, d8=6, d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=200, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 8), d9=var([1/2, 4]),click=4,leslie=2, hpf=2000, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(3, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=200, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(4, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=200, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(5, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=200, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(4, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=200, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+Clock.clear()
+soff()
+
+Clock.bpm = 122
+
+Scale.default = "minor"
+
+Root.default = var([2, 5, 7, 2], [8, 4, 2, 8, 32])
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=5, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+l2 >> faim([0, -2, 4, 3, 0, 4, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.75,   oct=5, amp=0.75, atk=0.0015, decay=0.15, rel=0.2, peak=0.9, hpf=200, lpf=sinvar([1000, 9000], 32),   cheapverb=0, leg=8, cvdecay=0).unison(0)
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=4, growl=0.2,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+b1 >> pumpbass([0, -2, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+~b1 >> pumpbass([0, -2, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * 4, dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * 2, dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[2], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[4], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1,    tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.03, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.04, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.05, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.06, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.07, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.08, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.09, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.10, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.11, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.12, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.13, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.14, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.15, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.16, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.17, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.18, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.19, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.20, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=7, amp=lininf(0, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), dist2=0.1, lpf=linvar([1500, 8000], 16),   cheapverb=0.0, cvdecay=0.2).unison(2)
+
+l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=7, amp=lininf(0, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), dist2=0.1, lpf=linvar([1500, 8000], 16),   cheapverb=0.0, resonbank=0, rbfreq=200, rbdecay=0.5, rbspread=1.0, cvdecay=0.2).unison(2)
+
+l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=7, amp=lininf(0, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), dist2=0.1, lpf=linvar([1500, 8000], 16),   cheapverb=0.0, resonbank=0.5, rbfreq=200, rbdecay=0.5, rbspread=1.0, cvdecay=0.2).unison(2)
+
+l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=7, amp=lininf(0, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), dist2=0.1, lpf=linvar([1500, 8000], 16),   cheapverb=0.0, resonbank=0.5, rbfreq=72, rbdecay=0.5, rbspread=1.0, cvdecay=0.2).unison(2)
+
+l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=7, amp=lininf(0, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), dist2=0.1, lpf=linvar([1500, 8000], 16),   cheapverb=0.0, resonbank=0.5, rbfreq=60, rbdecay=0.5, rbspread=1.0, cvdecay=0.2).unison(2)
+
+l1.stop()
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=5, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+l2 >> blip([0, -2, 3, 0, 4, 3, -2, 4], dur=PDur(7, 12), sus=PDur(7, 12)*0.7,   oct=5, amp=0.8, atk=0.02, rel=0.4, cutoff=sinvar([1000, 5000], 32), res=0.5,    drive=var([0.3, 0.7, 0.3, 1.0], [8, 8, 8, 8]),  fuzz=var([0, 0.5, 0.3, 0.8], [8, 4, 4, 4]), lpf=3200).unison(2)
+
+l2 >> plaitsX([0, -2, 3, 0, 4, 3, -2, 4], dur=PDur(7, 12), sus=PDur(7, 12)*0.7,   oct=5, amp=0.8, atk=0.02, rel=0.4, cutoff=sinvar([1000, 5000], 32), res=0.5,    drive=var([0.3, 0.7, 0.3, 1.0], [8, 8, 8, 8]),  fuzz=var([0, 0.5, 0.3, 0.8], [8, 4, 4, 4]), lpf=3200).unison(2)
+
+l2 >> pumpbass([0, -2, 3, 0, 4, 3, -2, 4], dur=PDur(7, 12), sus=PDur(7, 12)*0.7,   oct=5, amp=0.8, atk=0.02, rel=0.4, cutoff=sinvar([1000, 5000], 32), res=0.5,    drive=var([0.3, 0.7, 0.3, 1.0], [8, 8, 8, 8]),  fuzz=var([0, 0.5, 0.3, 0.8], [8, 4, 4, 4]), lpf=3200).unison(2)
+
+l2 >> donk([0, -2, 3, 0, 4, 3, -2, 4], dur=PDur(7, 12), sus=PDur(7, 12)*0.7,   oct=5, amp=0.8, atk=0.02, rel=0.4, cutoff=sinvar([1000, 5000], 32), res=0.5,    drive=var([0.3, 0.7, 0.3, 1.0], [8, 8, 8, 8]),  fuzz=var([0, 0.5, 0.3, 0.8], [8, 4, 4, 4]), lpf=3200).unison(2)
+
+l2.stop()
+
+d3 >> a_hhat(0, dur=1/4, amp=Pacc("ghost")*2, beat_dur=0.25, blur=0.02, atk=0.001, decay=0.08, rel=0.05, hpf=6000)
+
+d3 >> a_hhat(0, dur=1/4, amp=Pacc("ghost")*4, beat_dur=0.25, blur=0.02, atk=0.001, decay=0.08, rel=0.05, hpf=6000)
+
+d3 >> a_hhat(0, dur=1/4, amp=Pacc("ghost")*2, beat_dur=0.25, blur=0.02, atk=0.001, decay=0.08, rel=0.05, hpf=6000)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.25, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+s1.stop()
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=8, growl=0.5,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+b1 >> plaitsX()
+
+b1 >> plaitsX(oct=5)
+
+b1 >> plaitsX(oct=4)
+
+b1 >> plaitsX(oct=3)
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=8, growl=0.5,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+l1 >> dbass()
+
+l2 >> dbass()
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=6, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.6, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+s1.stop()
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=6, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.6, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.2, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.2, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180, mverb=0.5)
+
+l2.stop()
+
+l1.stop()
+
+Clock.clear()
+soff()
+
+Clock.bpm = 122
+
+Scale.default = "minor"
+
+Scale.default = "minor"
+
+Root.default = var([2, 5, 7, 2], [8, 4, 2, 8, 32])
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=5, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+l2 >> faim([0, -2, 4, 3, 0, 4, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.75,   oct=5, amp=0.75, atk=0.0015, decay=0.15, rel=0.2, peak=0.9, hpf=200, lpf=sinvar([1000, 9000], 32),   cheapverb=0, leg=8, cvdecay=0).unison(0)
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=4, growl=0.2,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=5, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.20, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=6, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.20, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=7, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.20, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=6, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.20, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=6, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.20, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+d3 >> a_hhat(0, dur=1/4, amp=Pacc("ghost")*2, beat_dur=0.25, blur=0.02, atk=0.001, decay=0.08, rel=0.05, hpf=6000)
+
+b1 >> plaitsX(oct=3)
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=8, growl=0.5,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+b1.stop()
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=4, growl=0.2,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=6, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.20, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=6, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=6, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.2, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180, mverb=0.5)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.2, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180, mverb=0.5, a=0.5)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.2, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180, mverb=0.5, a=0.2)
+
+o3 >> loop("berlin8", dur=8)
+
+o3 >> loop("berlin8", dur=8)
+
+b1 >> pumpbass([0, 0, -2, 0, 3, 0, 4, 3], dur=PDur(7, 8), sus=PDur(7, 8)*0.85, oct=4, amp=1.8,  cutoff=linvar([400, 1200], 32), res=0.4, sub=0.2, body=4, growl=0.2,  tape=var([0, 0.3, 0, 0.5], [8, 4, 8, 4]), tapedrive=1.2, hpf=60)
+
+l2 >> faim([0, -2, 4, 3, 0, 4, 3, 4], dur=PDur(5, 8), sus=PDur(5, 8)*0.75,   oct=5, amp=0.75, atk=0.0015, decay=0.15, rel=0.2, peak=0.9, hpf=200, lpf=sinvar([1000, 9000], 32),   cheapverb=0, leg=8, cvdecay=0).unison(0)
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=5, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+b1 >> pumpbass([0, -2, 3, 4] * P[1], dur=PDur(5, 8), sus=PDur(5, 8)*0.9, oct=6, amp=1.5,    cutoff=sinvar([300, 900], 16), res=0.2, sub=0.2, body=6, growl=0.35, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.20, beat_dur=1, tape=0.6, tapedrive=1.3, hpf=55).unison(3)
+
+d3 >> a_hhat(0, dur=1/4, amp=Pacc("ghost")*2, beat_dur=0.25, blur=0.02, atk=0.001, decay=0.08, rel=0.05, hpf=6000)
+
+b1 >> plaitsX(oct=3)
+
+~l1 >> faim([0, -2, 4, 3, 0, 4, 3, -2], dur=PDur(5, 8), sus=PDur(5, 8)*0.7,   oct=6, amp=lininf(1, 0.7, 16), atk=0.02, decay=0.5, rel=0.3, peak=0.8,   hpf=linvar([1200, 180], 16), lpf=linvar([1500, 8000], 16)).unison(2)
+
+s1 >> svdk(var([(0,2,4), (-1,1,3), (-2,0,2), (-1,1,3)], 8), dur=4, sus=var([3.5, 5], [16, 16]),   oct=5, amp=0.2, blur=0.4, beat_dur=4,   grit=var([0, 0.3, 0, 0.6], [8, 4, 8, 4]),    cheapverb=0.5, cvdecay=2.5, hpf=180, mverb=0.5, a=0.2)
+
+o3 >> loop("berlin8", dur=8)
+
+Clock.clear()
+soff()
+
+a3 >> organx(dur=1/2,dec=ff(128, 0, 0.5), d2=ff(64, 0, 8), d3=ff(64, 0, 8), d4=ff(4, 0, 8), d5=ff(4, 0, 8), d6=ff(32, 0, 8), oct=(4, 4), d7=ff(4, 0, 8), d8=ff(4, 0, 4), d9=var([1/2, 4]),click=4,leslie=2, hpf=200, leslierate=6,perc=4, perctime=0.2, perchard=1,drive=0.0)
+
+Clock.clear()
+soff()
+
+Clock.bpm = 133
+
+Scale.default = "minor"
+
+Root.default = "E"
+
+Clock.bpm = 130
+
+Clock.bpm = 133
+
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, apan=1, awidth=1, apwave=1, beat_dur=1, pumprate=0, tape=0.2, tapedrive=1.7)
+
+Clock.clear()
+soff()
+
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, apan=1, awidth=1, apwave=1, beat_dur=1, pumprate=0, tape=0.2, tapedrive=1.7)
+
+~b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, apan=1, awidth=1, apwave=1, beat_dur=1, pumprate=0, tape=0.2, tapedrive=1.7)
+
+e1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, apan=1, awidth=1, apwave=1, beat_dur=1, pumprate=0, tape=0.2, tapedrive=1.7)
+
+Clock.clear()
+soff()
+
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, apan=1, awidth=1, apwave=1, beat_dur=1, pumprate=0, tape=0.2, tapedrive=1.7)
+
+Clock.bpm = 133
+Scale.default = "minor"
+Root.default = "E"
+Clock.bpm = 130
+
+FoxDot.reload()
+
+b1 >> pumpbass([0, 0, 3, 0, -3, 0, 5, 0, 0, -3, 0, 3], dur=PDur(7,12), sus=PDur(7,12)*0.85, oct=5, amp=2, cutoff=linvar([700, 1600], 32), res=0.2, sub=0.1, body=4, rgate=0.5, fbdelay=0.5, fbtime=0.5, fbfeed=0.5, fbcutoff=4000, fbspread=0.02, rgaterate=4, rgatewave=1, growl=0.0, pumper=0.0, apan=1, awidth=1, apwave=1, beat_dur=1, pumprate=0, tape=0.2, tapedrive=1.7)
+
+Clock.clear()
+soff()
+

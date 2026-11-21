@@ -1,0 +1,101 @@
+Clock.bpm = 172
+
+one_fx_stop()
+
+one_fx("hall", "one_fx_hall", inb=2, outb=0, outamt=1, pre=10, size=0.7, decay=1.8, damp=12000, width=1, mix=1)
+
+snd_reese = dict(w1=0, oct1=-1, w2=0, semi2=0, fine2=18, omix=0.5, noise=0, ftype=0, cutoff=900, res=0.2, fenv=0, kbd=0.5, odrive=0.3, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.2, lw=0, lrate=0.3, lpitch=0, lcut=0.15, vel=0.6, level=-6)
+
+snd_reese = dict(w1=0, oct1=-1, w2=0, semi2=0, fine2=18, omix=0.5, noise=0, ftype=0, cutoff=900, res=0.2, fenv=0, kbd=0.5, odrive=0.3, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.2, lw=0, lrate=0.3, lpitch=0, lcut=0.15, vel=0.6, level=-6)
+
+snd_drums_kick = dict(sus=4, tune=0, dec=0.8, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_snare = dict(sus=4, tune=2, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_c_hat = dict(sus=4, tune=0, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+r2 >> one_sub([4, 7, 4, 2, 0], dur=[5, 3, 5, 1, 2], sus=[4.99, 2.99, 4.99, 0.99, 1.99], velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_reese)  # Reese A
+
+snd_drums_rim = dict(sus=4, tune=0, dec=1, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+d2 >> kit_snare(dur=2, delay=1, velo=1, **snd_drums_snare)  # Drums snare
+
+d1 >> kit_kick(dur=[5/2, 3/4, 3/4], velo=[1, 0.75, 0.75], **snd_drums_kick)  # Drums kick
+
+r2 >> one_sub([4, 7, 4, 2, 0], dur=[5, 3, 5, 1, 2], sus=[4.99, 2.99, 4.99, 0.99, 1.99], velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_reese)  # Reese A
+
+snd_drums_rim = dict(sus=4, tune=0, dec=1, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_c_hat = dict(sus=4, tune=0, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_c_hat = dict(sus=4, tune=0, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_snare = dict(sus=4, tune=2, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_kick = dict(sus=4, tune=0, dec=0.8, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_reese = dict(w1=0, oct1=-1, w2=0, semi2=0, fine2=18, omix=0.5, noise=0, ftype=0, cutoff=900, res=0.2, fenv=0, kbd=0.5, odrive=0.3, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.2, lw=0, lrate=0.3, lpitch=0, lcut=0.15, vel=0.6, level=-6)
+
+#@s1_loop(16)
+Clock.bpm = 172
+one_fx_stop()
+one_fx("hall", "one_fx_hall", inb=2, outb=0, outamt=1, pre=10, size=0.7, decay=1.8, damp=12000, width=1, mix=1)
+snd_reese = dict(w1=0, oct1=-1, w2=0, semi2=0, fine2=18, omix=0.5, noise=0, ftype=0, cutoff=900, res=0.2, fenv=0, kbd=0.5, odrive=0.3, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.2, lw=0, lrate=0.3, lpitch=0, lcut=0.15, vel=0.6, level=-6)
+snd_drums_kick = dict(sus=4, tune=0, dec=0.8, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+snd_drums_snare = dict(sus=4, tune=2, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+snd_drums_c_hat = dict(sus=4, tune=0, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+snd_drums_rim = dict(sus=4, tune=0, dec=1, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+r2 >> one_sub([4, 7, 4, 2, 0], dur=[5, 3, 5, 1, 2], sus=[4.99, 2.99, 4.99, 0.99, 1.99], velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_reese)  # Reese A
+d1 >> kit_kick(dur=[5/2, 3/4, 3/4], velo=[1, 0.75, 0.75], **snd_drums_kick)  # Drums kick
+d2 >> kit_snare(dur=2, delay=1, velo=1, **snd_drums_snare)  # Drums snare
+d4 >> kit_chat(dur=1/2, velo=0.75, **snd_drums_c_hat)  # Drums c.hat
+d7 >> kit_rim(dur=[7/4, 9/4], delay=7/4, velo=0.75, **snd_drums_rim)  # Drums rim
+
+Clock.clear()
+soff()
+
+snd_reese = dict(w1=0, oct1=-1, w2=0, semi2=0, fine2=18, omix=0.5, noise=0, ftype=0, cutoff=900, res=0.2, fenv=0, kbd=0.5, odrive=0.3, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.2, lw=0, lrate=0.3, lpitch=0, lcut=0.15, vel=0.6, level=-6)
+
+r2 >> one_sub([4, 7, 4, 2, 0], dur=[5, 3, 5, 1, 2], sus=[4.99, 2.99, 4.99, 0.99, 1.99], velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_reese)  # Reese A
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+snd_drums_rim = dict(sus=4, tune=0, dec=1, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+r2 >> one_sub([4, 7, 4, 2, 0], dur=[5, 3, 5, 1, 2], sus=[4.99, 2.99, 4.99, 0.99, 1.99], velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_reese)  # Reese A
+
+snd_drums_kick = dict(sus=4, tune=0, dec=0.8, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+r2 >> one_sub([4, 7, 4, 2, 0], dur=[5, 3, 5, 1, 2], sus=[4.99, 2.99, 4.99, 0.99, 1.99], velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_reese)  # Reese A
+
+d1 >> kit_kick(dur=[5/2, 3/4, 3/4], velo=[1, 0.75, 0.75], **snd_drums_kick)  # Drums kick
+
+one_fx("hall", "one_fx_hall", inb=2, outb=0, outamt=1, pre=10, size=0.7, decay=1.8, damp=12000, width=1, mix=1)
+
+snd_reese = dict(w1=0, oct1=-1, w2=0, semi2=0, fine2=18, omix=0.5, noise=0, ftype=0, cutoff=900, res=0.2, fenv=0, kbd=0.5, odrive=0.3, fatk=0.005, fdec=0.25, fsus=0.2, frel=0.2, aatk=0.003, adec=0.3, asus=1, arel=0.2, lw=0, lrate=0.3, lpitch=0, lcut=0.15, vel=0.6, level=-6)
+
+snd_drums_snare = dict(sus=4, tune=2, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_c_hat = dict(sus=4, tune=0, dec=0.7, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+snd_drums_rim = dict(sus=4, tune=0, dec=1, lvl=-3, pan=0, odrive=0.2, level=-4, s1bus=2, s1amt=0.15)
+
+r2 >> one_sub([4, 7, 4, 2, 0], dur=[5, 3, 5, 1, 2], sus=[4.99, 2.99, 4.99, 0.99, 1.99], velo=0.78, oct=2, scale=Scale.chromatic, root=0, **snd_reese)  # Reese A
+
+d1 >> kit_kick(dur=[5/2, 3/4, 3/4], velo=[1, 0.75, 0.75], **snd_drums_kick)  # Drums kick
+
+d2 >> kit_snare(dur=2, delay=1, velo=1, **snd_drums_snare)  # Drums snare
+
+d7 >> kit_rim(dur=[7/4, 9/4], delay=7/4, velo=0.75, **snd_drums_rim)  # Drums rim
+
+d7 >> kit_rim(dur=[7/4, 9/4], delay=7/4, velo=0.75, **snd_drums_rim)  # Drums rim
+
+d7.stop()
+
+Clock.clear()
+soff()
+

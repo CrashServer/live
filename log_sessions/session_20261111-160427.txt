@@ -1,0 +1,479 @@
+fx_hall("cathedral", decay=3.5)
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=3, semi2=12, fine2=3, omix=0.45, cutoff=900, res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.25)  # Organ A
+
+b1 >> sub_bass([7, 5, 3, 4], dur=4, oct=2, level=-10)  # Bass A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=3000, res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.25)  # Organ A
+
+b1 >> sub_bass([7, 5, 3, 4], dur=4, oct=2, level=-10)  # Bass A
+
+m1 >> fm_bell([7, 3, 0, 5, 3, 2, -1], dur=[3, 1, 4, 2, 1, 1, 4], sus=[2.975, 0.975, 3.975, 1.975, 0.975, 0.975, 3.975], oct=6, scale=Scale.chromatic, root=2, level=-12, tohall=0.45)  # Melody A
+
+m1 >> fm_bell([7, 3, 0, 5, 3, 2, -1], dur=[3, 1, 4, 2, 1, 1, 4], sus=[2.975, 0.975, 3.975, 1.975, 0.975, 0.975, 3.975], oct=6, scale=Scale.chromatic, root=2, level=-12, tohall=1)  # Melody A
+
+o2 >> sub_bass([3, 10, 19, 10, 7, 15, 22, 15, 3, 10, 19, 10, 7, 15, 22, 15, -2, 5, 14, 5, 2, 10, 17, 10, -2, 5, 14, 5, 2, 10, 17, 10, 0, 7, 15, 7, 3, 12, 19, 12, 0, 7, 15, 7, 3, 12, 19, 12, -5, 2, 11, 2, -1, 7, 14, 7, -5, 2, 11, 2, -1, 7, 14, 7], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=3600, res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.25)  # Organ B
+
+b2 >> sub_bass([2, 6, 7, 4], dur=4, oct=2, level=-10)  # Bass B
+
+b2 >> sub_bass([2, 6, 7, 4], dur=4, oct=3, level=-10)  # Bass B
+
+Clock.clear()
+soff()
+
+Clock.bpm = 116
+
+Scale.default = Scale.minor; Root.default = 2
+
+fx_stop()
+
+fx_stop()
+
+fx_stop()
+
+fx_hall("cathedral", decay=3.5)
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=3, semi2=12, fine2=3, omix=0.45, cutoff=900, res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.25)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.26)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.27)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.28)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.29)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.30)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.31)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.32)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.33)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.34)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.35)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.36)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.37)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.38)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.39)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.40)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.41)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.42)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.43)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.44)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.45)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.46)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.47)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.48)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.49)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.50)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.51)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.52)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.53)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.54)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.55)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.56)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.57)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.58)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.59)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.60)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.61)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.62)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.63)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.64)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.65)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.66)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.67)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.68)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.69)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.70)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.71)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.72)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.73)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.74)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.75)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.76)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.77)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.78)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.79)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.80)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.81)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.82)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.83)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.84)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.85)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.86)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.87)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.88)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.89)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.90)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.91)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.92)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.93)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.94)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.95)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.96)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=expvar([900, 3000], [32, inf], start=Clock.now()), res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.97)  # Organ A
+
+o1 >> sub_bass([0, 3, 7, 12, 7, 3, 0, 3, 0, 3, 7, 12, 7, 3, 0, 3, -4, 0, 3, 8, 3, 0, -4, 0, -4, 0, 3, 8, 3, 0, -4, 0, -7, -4, 0, 5, 0, -4, -7, -4, -7, -4, 0, 5, 0, -4, -7, -4, -5, -1, 2, 7, 2, -1, -5, -1, -5, -1, 2, 7, 2, -1, -5, -1], dur=1/4, sus=0.2, velo=0.75, scale=Scale.chromatic, root=2, w1=1, oct1=0, semi2=12, fine2=3, omix=0.45, cutoff=3000, res=0.15, kbd=0.4, odrive=0.05, adec=0.1, arel=0.04, level=-12, tohall=0.25)  # Organ A
+
+b1 >> sub_bass([7, 5, 3, 4], dur=4, oct=2, level=-10)  # Bass A
+
+Clock.clear()
+soff()
+
+Clock.bpm = 60
+
+Scale.default = Scale.minor; Root.default = 5
+
+fx_hall("cathedral", decay=7)
+
+l1 >> one_sub([7, 6, 5, 4], dur=2, oct=2, oct1=-1, fine2=4, cutoff=700, res=0.1, fenv=0, aatk=0.08, asus=1, arel=0.4, tohall=0.3)  # Low organ A
+
+l1 >> one_sub([7, 6, 5, 4], dur=2, oct=2, oct1=-1, fine2=4, cutoff=700, res=0.1, fenv=0, aatk=0.08, asus=1, arel=0.4, tohall=0.3)  # Low organ A
+
+c1 >> fm_glass([(0, 3, 7), (-4, 0, 3), (-7, -4, 0), (-5, -1, 2)], dur=8, scale=Scale.chromatic, root=5, level=-14, dry=0.6, tohall=0.6)  # Choir A
+
+l1 >> one_sub([7, 6, 5, 4], dur=2, oct=2, oct1=-1, fine2=4, cutoff=700, res=0.1, fenv=0, aatk=0.08, asus=1, arel=0.4, tohall=0.3)  # Low organ A
+
+l1 >> one_sub([7, 6, 5, 4], dur=2, oct=2, oct1=-1, fine2=4, cutoff=700, res=0.1, fenv=0, aatk=0.08, asus=1, arel=0.4, tohall=0.3)  # Low organ A
+
+c1 >> fm_glass([(0, 3, 7), (-4, 0, 3), (-7, -4, 0), (-5, -1, 2)], dur=8, scale=Scale.chromatic, root=5, level=-14, dry=0.6, tohall=0.6)  # Choir A
+
+p1 >> sub_pluck([0, 3, 7, 3, 0, 3, 7, 3, 0, 3, 7, 3, 0, 3, 7, 3, -4, 0, 3, 0, -4, 0, 3, 0, -4, 0, 3, 0, -4, 0, 3, 0, -7, -4, 0, -4, -7, -4, 0, -4, -7, -4, 0, -4, -7, -4, 0, -4, -5, -1, 2, -1, -5, -1, 2, -1, -5, -1, 2, -1, -5, -1, 2, -1], dur=1/2, sus=0.3, velo=0.6, scale=Scale.chromatic, root=5, level=-16, tohall=0.4)  # Pulse A
+
+Clock.clear()
+soff()
+
+fx_echo("dub throw")
+
+d1 >> faim(PStutter([2, 14, 4, 5, 17, 2, (2, 14), 14, 4, 5, 17, 2, 14, 4, 5, 17, 2, (2, 14), 14, 4, 5, 17, 2, 14, 4, 5, 17, 2, (2, 14), 14, 4, 5, 17, 2, 14, 4, 5, 17, 2], [4, 2, 2, 2, 2, 5, 1, 1, 2, 2, 2, 4, 2, 2, 2, 2, 5, 1, 1, 2, 2, 2, 4, 2, 2, 2, 2, 5, 1, 1, 2, 2, 2, 4, 2, 2, 2, 2, 2]), dur=PStutter([1/2, 3, 1/4, 3/4, 1/4, 3/4, 1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4], [1, 1, 1, 1, 7, 1, 4, 1, 7, 1, 3, 1, 7, 1, 4, 1, 7, 1, 3, 1, 7, 1, 4, 1, 7, 1, 3, 1, 7, 1, 1, 1]), delay=1/2, sus=1/4, oct=4, scale=Scale.chromatic, root=0, tube=0.8, tape=1.2, vadiodc=0.5, echo=0.5, subenh=1, subhfreq=100, tubebias=0.1, fbfeed=0.7, tubegain=1.9, tapewobble=0.1, fbcutoff=3000, mix=0.1, tapedrive=2.2, fbspread=0.02, subhgain=2, tubewarm=0.6, tapewarm=0.5, vadiodd=1.8, fbdelay=0.5, vadiodr=0.4, vadiod=1500, fbtime=0.25)  # d2 (faim) b2
+
+d2 >> faim([2, 2, 2, (2, 14), 14, 4, 4, 5, 5, 17, 17, 2, 2, 2, 2, 14, 14, 4, 4, 5, 5, 17, 17, 2, 2], dur=PStutter([1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4], [2, 1, 7, 1, 3, 1, 7, 1, 2]), sus=1/4, scale=Scale.chromatic, root=0, tube=0.8, tape=1.2, vadiodc=0.5, echo=0.5, subenh=1, subhfreq=100, tubebias=0.1, fbfeed=0.7, tubegain=1.9, tapewobble=0.1, fbcutoff=3000, mix=0.1, tapedrive=2.2, fbspread=0.02, subhgain=2, tubewarm=0.6, tapewarm=0.5, vadiodd=1.8, fbdelay=0.5, vadiodr=0.4, vadiod=1500, fbtime=0.25)  # d2 (faim) b3
+
+d3 >> faim([2, 2, 2, (2, 14), 14, 4, 4, 5, 5, -7, -7, 2, 2, 2, 2, 14, 14, 4, 4, 5, 5, -7, -7, 2, 2], dur=PStutter([1/4, 1/2, 1/4, 3/4, 1/4, 3/4, 1/4, 3/4, 1/4], [2, 1, 7, 1, 3, 1, 7, 1, 2]), sus=1/4, oct=4, scale=Scale.chromatic, root=0, tube=0.8, tape=1.2, vadiodc=0.5, echo=0.5, subenh=1, subhfreq=100, tubebias=0.1, fbfeed=0.7, tubegain=1.9, tapewobble=0.1, fbcutoff=3000, mix=0.1, tapedrive=2.2, fbspread=0.02, subhgain=2, tubewarm=0.6, tapewarm=0.5, vadiodd=1.8, fbdelay=0.5, vadiodr=0.4, vadiod=1500, fbtime=0.25)  # d2 (faim) b4
+
+u7 >> play("v ", bank=1, sample=PRand(8))
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+u7 >> play("v ", bank=1, sample=PRand(8))
+
+u7 >> play("v ", bank=1, sample=0)
+
+Clock.clear()
+soff()
+
+Clock.bpm = 112
+Scale.default = "minor"
+Root.default = 0
+
+gs >> glitchstab([(0, 4), (3, 7)], dur=PDur(3, 8), oct=5, glitchamt=0.6, bits=var([8, 4], 8), cutoff=4000, amp=0.5)
+
+Clock.clear()
+soff()
+
+ad >> adlib([0, 2, 4, 7], dur=1/4, oct=5, wave=var([0, 1, 2, 3], 4), ratio=2, index=linvar([2, 8], 16), feedback=0.6, grit=0.3, amp=0.5)
+
+Clock.clear()
+soff()
+
+pk >> piacon([(0, 2, 4), (3, 5, 7)], dur=4, oct=5, hard=0.5, muffle=0.7, sympa=0.6, amp=0.7)
+
+Clock.clear()
+soff()
+
+ar >> arpy(arp("trance1"), dur=1/4, oct=5, wide=0.5, amp=0.4)
+
+dh >> dthihat(0, dur=1/4, oct=6, tone=8000, open=var([0, 0, 0, 1], 1), metallic=0.7, amp=PWhite(0.3, 0.6))
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+o1 >> sub_acid([0, 0, 3, 5, 0, 7, 5, 3], dur=1/4, oct=4)
+
+o2 >> fm_glass([(0, 4), (-2, 2)], dur=8, oct=5)
+
+Clock.clear()
+soff()
+
+k1 >> iron_floor.kick(dur=1)
+
+k2 >> iron_floor.clap(dur=2, delay=1)
+
+k3 >> iron_floor.c_hat(dur=1/4, velo=[1, 0.6])
+
+Clock.bpm = 133
+
+k1 >> iron_floor.kick(dur=1, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1)
+
+k4 >> riot.snare.steps("....X.......X..x", swing=0.6)
+
+k5 >> kit_tight.rim.steps("..x...x...x..x..")
+
+Clock.clear()
+soff()
+
+k1 >> iron_floor.kick(dur=1, side=1)
+
+Clock.clear()
+soff()
+
+s1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5, lpf=2400, **lfo("lpf", rate=4, mul=0.5))
+
+Server.addFx(lpf=900)
+
+Server.bypassFx("lpf")
+
+Server.bypassFx("lpf")
+
+masterFx("lpf")
+
+masterFx("lpf", remove=True)
+
+solar(14, 2)
+
+solar(14, 2, keep="d1")
+
+solar(30, 2, solo=0)
+
+solar(6, 2, mode="rnd")
+
+solar(14, 2, depth=0.25)
+
+solar([14, 30], 2)
+
+d1 >> play("x-o-x-o-", dur=1/2)
+b1 >> dbass([0, 0, 3, -2], dur=1, oct=5)
+p1 >> pluck([0, 2, 4, 7], dur=1/4, oct=5)
+
+solar(14, 2)
+
+solar(14, 2)
+
+g2 >> blip([0, 2, 4], dur=PPoly(3, 4), oct=5)
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=5)
+
+g3 >> pluck(PPolyPhase(P[0, 2, 4, 7, 4, 2], [1, 1.05]), dur=1/4, oct=5)
+
+g4 >> keys([0, 4, 7], dur=PAdditive(2, 2, 3), oct=5)
+
+Energy.shape("arch", 4, 4)
+
+d1.enter(0)
+
+b1.enter(0.3)
+
+p1.enter(0.7)
+
+solar(14, PRand([1, 2, 4]))
+
+solar([14, 30], 2)
+
+solar(var([14, 6], 32), 2)
+
+solar(14, 2, depth=0.25)
+
+Clock.clear()
+soff()
+
+g1 >> pluck(PGrowArp(0, max_notes=6, growth_rate=8), dur=1/2, oct=5)
+
+g2 >> blip([0, 2, 4], dur=PPoly(3, 4), oct=5)
+
+g4 >> keys([0, 4, 7], dur=PAdditive(2, 2, 3), oct=5)
+
+g5 >> pluck(PMelody(I, style=1, length=16), dur=1/4, oct=5)
+
+g6 >> pads(PCircle(0, steps=8), dur=8, sus=7.5, oct=4)
+
+g7 >> play("-", dur=PGroove("funk", density=0.8))
+
+g8 >> play("x", dur=PClave("son"))
+
+Clock.clear()
+soff()
+
+g7 >> play("-", dur=PGroove("funk", density=0.8))
+
+g8 >> play("x", dur=PClave("son"))
+
+Clock.clear()
+soff()
+
+m4 >> keys(chords("houseprog"), dur=4, oct=5)
+
+Clock.clear()
+soff()
+
+r1 >> pluck([0, _, 2, _, 4, _, (0, _, 4), _], dur=1/4, oct=5)
+
+r2 >> blip([0, 4], dur=1, oct=5, echo=0.5, echotime=r3.dur)
+
+r3 >> pluck([7, 5], dur=1/2, oct=5)
+
+Clock.clear()
+soff()
+
+find_scale([0, 3, 7])
+
+chaos(4, header=1, evt=2, mod=2)
+
+l1 >> loop("jazza8", dur=16, sample=4).lclip(1)
+
+l1 >> loop("jazza8", dur=8, sample=4).lclip(1)
+
+l1 >> loop("jazza8", dur=16, sample=4).lclip([1, 2, 4])
+
+l1 >> loop("jazza8", dur=8, sample=4).lclip([1, 2, 4])
+
+t1 >> timestretch("jazza8", dur=8, stretchratio=2)
+
+t1 >> timestretch("jazza8", dur=8, stretchratio=0.5)
+
+t1 >> timestretch("jazza8", dur=8, stretchratio=8)
+
+Clock.clear()
+soff()
+
+VidCtrl.load("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
+d1 >> berlin_kick(dur=[1, 1, 1, 1], velo=[1, 0.75, 0.75, 0.75], sus=4, every=0.4412, tune=0, dec=0.75, lvl=0, x=0.4, odrive=0.1, level=-5, oroom=0.25, rumble=0, rdec=2.6, s1bus=6, s1amt=1)  # Drums kick
+
+d1 >> berlin_kick(dur=[1, 1, 1, 1], velo=[1, 0.75, 0.75, 0.75], sus=4, every=0.4412, tune=0, dec=0.75, lvl=0, x=0.4, odrive=0.1, level=-5, oroom=0.5, rumble=0, rdec=2.6, s1bus=6, s1amt=1)  # Drums kick
+
+d1 >> berlin_kick(dur=[1, 1, 1, 1], velo=[1, 0.75, 0.75, 0.75], sus=4, every=0.4412, tune=0, dec=0.75, lvl=0, x=0.4, odrive=0.1, level=-5, oroom=4, rumble=0, rdec=2.6, s1bus=6, s1amt=1)  # Drums kick
+
+d1 >> berlin_kick(dur=[1, 1, 1, 1], velo=[1, 0.75, 0.75, 0.75], sus=4, every=0.4412, tune=0, dec=0.75, lvl=0, x=0.4, odrive=0.1, level=-5, oroom=4, rumble=1, rdec=2.6, s1bus=6, s1amt=1)  # Drums kick
+
+Clock.clear()
+soff()
+
+Clock.bpm = 128
+
+d1 >> kit_dirty_kick(dur=[3/2, 1, 3/2], velo=[1, 0.6, 0.6], pan=1)  # Drums kick
+
+d2 >> kit_dirty_snare(dur=[3/4, 1/2, 3/4, 3/4, 5/4], delay=[1, 1.03, 1.03, 1, 1.03], velo=[1, 0.6, 0.6, 1, 0.6])  # Drums snare
+
+d4 >> kit_dirty_chat(dur=1/2, velo=0.6)  # Drums c.hat
+
+d5 >> kit_dirty_ohat(dur=4, delay=7/2, velo=0.6)  # Drums o.hat
+
+d6 >> kit_dirty_tom(dur=[1/4, 15/4], delay=[7/2, 3.53], velo=0.6)  # Drums tom
+
+Clock.clear()
+soff()
+
+fx_echo("ping 1/4", fb=0.4, out=0.7, into="hall", send=0.3)
+
+fx_hall("plate", decay=3.5)
+
+e1 >> fm_epiano([(0, 3, 7, 10), (-4, 0, 3, 7), (-7, -4, 0, 3), (-5, -1, 2, 5)], dur=4, sus=3.6, oct=4, scale=Scale.chromatic, root=5, level=-10, toecho=0.25)  # E-piano A
+
+Clock.bpm = 174
+
+d4 >> kit_tight_chat(dur=1/2, velo=0.75, tohall=0.08)  # Drums c.hat
+
+g1 >> fm_glass([4, 2, 0, 1], dur=4, level=-16, tohall=0.5)  # Glass A
+
+b1 >> sub_reese([7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6], dur=[1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 9/2], delay=7/2, sus=[0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975], cvw=0, cvrate=8.7, cvph=PStutter([0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0], [1, 6, 1, 6, 1, 6, 1, 5]), cvdepth=0, oct=1, cutoff=700, lcut=0, level=-8)  # Bass, as it is played
+
+b1 >> sub_reese([7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6], dur=[1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 9/2], delay=7/2, sus=[0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975], cvw=0, cvrate=8.7, cvph=PStutter([0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0], [1, 6, 1, 6, 1, 6, 1, 5]), cvdepth=0, oct=2, cutoff=700, lcut=0, level=-8)  # Bass, as it is played
+
+b1 >> sub_reese([7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6, 7, 7, 9, 6, 5, 4, 6], dur=[1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 1, 7/2, 1/2, 3, 1, 6, 1, 9/2], delay=7/2, sus=[0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975, 2.975, 0.475, 1.975, 0.975, 4.975, 0.975, 0.975], cvw=0, cvrate=8.7, cvph=PStutter([0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0], [1, 6, 1, 6, 1, 6, 1, 5]), cvdepth=0, oct=3, cutoff=700, lcut=0, level=-8)  # Bass, as it is played
+
+e1 >> fm_epiano([(0, 3, 7, 10), (-4, 0, 3, 7), (-7, -4, 0, 3), (-5, -1, 2, 5)], dur=4, sus=3.6, oct=4, scale=Scale.chromatic, root=5, level=-10, toecho=0.25)  # E-piano A
+
+d1 >> kit_tight_kick(dur=[5/2, 3/2], velo=[1, 0.75], tohall=0.08)  # Drums kick
+
+d2 >> kit_tight_snare(dur=2, delay=1, tohall=0.08)  # Drums snare
+
+d4 >> kit_tight_chat(dur=[1/2, 1/4, 1/4, 1/2, 1/2, 1/2, 1/4, 1/4, 1/2, 1/4, 1/4], velo=0.75, tohall=0.08)  # Drums c.hat
+
+d7 >> kit_tight_rim(dur=[7/4, 9/4], dela=7/4, velo=0.75, tohall=0.08)  # Drums rim
+
+d4 >> kit_tight_chat(dur=[1/2, 1/4, 1/4, 1/2, 1/2, 1/2, 1/4, 1/4, 1/2, 1/4, 1/4], velo=0.75, tohall=0.08)  # Drums c.hat
+
+d5 >> kit_tight_ohat(dur=4, delay=7/2, velo=0.75, tohall=0.08)  # Drums o.hat
+
+d7 >> kit_tight_rim(dur=[7/4, 9/4], delay=7/4, velo=0.75, tohall=0.08)  # Drums rim
+
+Clock.clear()
+soff()
+

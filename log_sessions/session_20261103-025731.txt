@@ -1,0 +1,361 @@
+Clock.bpm = 140
+
+Scale.default = Scale.minor; Root.default = 5
+
+fx_stop()
+
+snd_wobble = sound(sub_reese, cutoff=400, res=0.5, odrive=0.5, lrate=4.6667, lcut=0.7)
+
+w1 >> snd_wobble([0, 2, -1, 0, 4, 3], dur=[4, 2, 2], oct=2)  # Wobble A
+
+d1 >> kit_boom.kick.steps("X.........x.....")  # Drums kick
+
+d2 >> kit_boom.snare.steps("........X.......")  # Drums snare
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.")  # Drums c.hat
+
+snd_wobble = sound(sub_reese, cutoff=100, res=0.5, odrive=0.5, lrate=4.6667, lcut=0.7)
+
+w1 >> snd_wobble([0, 2, -1, 0, 4, 3], dur=[4, 2, 2], oct=2)  # Wobble A
+
+snd_wobble = sound(sub_reese, cutoff=400, res=0.5, odrive=0.5, lrate=4.6667, lcut=0.7)
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.")  # Drums c.hat
+
+d2 >> kit_boom.snare.steps("........X.......")  # Drums snare
+
+d1 >> kit_boom.kick.steps("X.........x.....")  # Drums kick
+
+Clock.clear()
+soff()
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.")  # Drums c.hat
+
+d2 >> kit_boom.snare.steps("........X.......")  # Drums snare
+
+d1 >> kit_boom.kick.steps("X.........x.....")  # Drums kick
+
+a0 >> kit_kick(dry = 1, todrive = 0, toduck = 0, toecho = 0, tohall = 0, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.25, velo = 1)
+
+a0 >> kit_kick(dry = 1, todrive = 0, toduck = 0, toecho = 0, tohall = 0, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.25, velo = 1)
+
+a0 >> kit_kick(dry = 4, todrive = 0, toduck = 0, toecho = 0, tohall = 0, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.25, velo = 1)
+
+a0 >> kit_kick(dry = 4, todrive = 1, toduck = 0, toecho = 0, tohall = 0, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.25, velo = 1)
+
+a0 >> kit_kick(dry = 4, todrive = 1, toduck = 1, toecho = 0, tohall = 0, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.25, velo = 1)
+
+a0 >> kit_kick(dry = 4, todrive = 1, toduck = 1, toecho = 1, tohall = 0, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.25, velo = 1)
+
+a0 >> kit_kick(dry = 4, todrive = 1, toduck = 1, toecho = 5, tohall = 0, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.25, velo = 1)
+
+a0 >> kit_kick(dry = 4, todrive = 1, toduck = 1, toecho = 5, tohall = 1, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.25, velo = 1)
+
+a0 >> kit_kick(dry = 4, todrive = 1, toduck = 1, toecho = 5, tohall = 1, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.8, velo = 1)
+
+a0 >> kit_kick(dry = 4, todrive = 1, toduck = 1, toecho = 5, tohall = 1, toaux = 0, side = 0, tune = 0, dec = 1, lvl = -3, odrive = 0.0, velo = 1)
+
+#@s1_loop(16)
+Clock.bpm = 140
+Scale.default = Scale.minor; Root.default = 5
+fx_stop()
+snd_wobble = sound(sub_reese, cutoff=400, res=0.5, odrive=0.5, lrate=4.6667, lcut=0.7)
+w1 >> snd_wobble([0, 2, -1, 0, 4, 3], dur=[4, 2, 2], oct=2)  # Wobble A
+d1 >> kit_boom.kick.steps("X.........x.....")  # Drums kick
+d2 >> kit_boom.snare.steps("........X.......")  # Drums snare
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.")  # Drums c.hat
+
+Clock.clear()
+soff()
+
+Clock.bpm = 90
+
+Scale.default = Scale.minor; Root.default = 9
+
+fx_stop()
+
+fx_echo("ping 1/4", fb=0.4, out=0.8, into="hall", send=0.3)
+
+fx_hall("plate", decay=3)
+
+g1 >> fm_glass([(0, 2, 4), (-2, 0, 2)], dur=4, oct=4, level=-14, tohall=0.5)  # Glass A
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.", swing=0.6, tohall=0.1)  # Drums c.hat
+
+b1 >> sub_bass([7, 7, 9, 6, 5, 5, 4, 6, 4], dur=[3/2, 1/2, 1, 1, 3/2, 1/2, 1, 1/2, 1/2], sus=[0.725, 0.225, 0.475, 0.725, 0.725, 0.225, 0.475, 0.475, 0.225], oct=1, level=-6)  # Bass A
+
+e1 >> fm_epiano([(0, 3, 7, 10), (7, 10, 14), (-4, 0, 3, 7), (-5, -1, 2, 5)], dur=[5/2, 3/2, 2, 2], sus=[0.975, 0.225, 0.975, 0.975], oct=4, scale=Scale.chromatic, root=9, toecho=0.2)  # E-piano A
+
+d1 >> kit_boom.kick.steps("X......x..x.....", swing=0.6, tohall=0.1)  # Drums kick
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.", swing=0.6, tohall=0.1)  # Drums c.hat
+
+d2 >> kit_boom.snare.steps("....X.......X...", swing=0.6, tohall=0.1)  # Drums snare
+
+d7 >> kit_boom.rim.steps("..........x.....", swing=0.6, tohall=0.1)  # Drums rim
+
+b1 >> sub_bass([7, 7, 9, 6, 5, 5, 4, 6, 4], dur=[3/2, 1/2, 1, 1, 3/2, 1/2, 1, 1/2, 1/2], sus=[0.725, 0.225, 0.475, 0.725, 0.725, 0.225, 0.475, 0.475, 0.225], oct=1, level=-6)  # Bass A
+
+e1 >> fm_epiano([(0, 3, 7, 10), (7, 10, 14), (-4, 0, 3, 7), (-5, -1, 2, 5)], dur=[5/2, 3/2, 2, 2], sus=[0.975, 0.225, 0.975, 0.975], oct=4, scale=Scale.chromatic, root=9, toecho=0.2)  # E-piano A
+
+g1 >> fm_glass([(0, 2, 4), (-2, 0, 2)], dur=4, oct=4, level=-14, tohall=0.5)  # Glass A
+
+d1 >> kit_boom.kick.steps("X......x..x.....", swing=0.6, tohall=0.1)  # Drums kick
+
+d7 >> kit_boom.rim.steps("..........x.....", swing=0.6, tohall=0.1)  # Drums rim
+
+d7 >> kit_boom.rim.steps("..........x.....", swing=0.6, tohall=0.1)  # Drums rim
+
+d5 >> kit_boom.o_hat.steps("..............x.", swing=0.6, tohall=0.1)  # Drums o.hat
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.", swing=0.6, tohall=0.1)  # Drums c.hat
+
+b1 >> sub_bass([7, 7, 9, 6, 5, 5, 4, 6, 4], dur=[3/2, 1/2, 1, 1, 3/2, 1/2, 1, 1/2, 1/2], sus=[0.725, 0.225, 0.475, 0.725, 0.725, 0.225, 0.475, 0.475, 0.225], oct=1, level=-6)  # Bass A
+
+e1 >> fm_epiano([(0, 3, 7, 10), (7, 10, 14), (-4, 0, 3, 7), (-5, -1, 2, 5)], dur=[5/2, 3/2, 2, 2], sus=[0.975, 0.225, 0.975, 0.975], oct=4, scale=Scale.chromatic, root=9, toecho=0.2)  # E-piano A
+
+d1 >> kit_boom.kick.steps("X......x..x.....", swing=0.6, tohall=0.1)  # Drums kick
+
+d2 >> kit_boom.snare.steps("....X.......X...", swing=0.6, tohall=0.1)  # Drums snare
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.", swing=0.6, tohall=0.1)  # Drums c.hat
+
+d7 >> kit_boom.rim.steps("..........x.....", swing=0.6, tohall=0.1)  # Drums rim
+
+g1 >> fm_glass([(0, 2, 4), (-2, 0, 2)], dur=4, oct=4, level=-14, tohall=0.5)  # Glass A
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.", swing=0.6, tohall=0.1)  # Drums c.hat
+
+#@done(8)
+g1.stop(); d4.stop(); b1.stop(); e1.stop(); d1.stop(); d2.stop(); d7.stop(); d5.stop()
+Clock.future(8, fx_stop)
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+Clock.bpm = 140
+
+d1 >> kit_boom.kick.steps("X.....x...x.....X.........x..x..", swing=0.6, tohall=0.3)  # Drums kick
+
+d2 >> kit_boom.snare.steps("........X...............X.......", swing=0.6, tohall=0.3)  # Drums snare
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, tohall=0.3)  # Drums c.hat
+
+d7 >> kit_boom.rim.steps("...........x...............x....", swing=0.6, tohall=0.3)  # Drums rim
+
+d7 >> kit_boom.rim.steps("...........x...............x....", swing=0.6, tohall=0.3)  # Drums rim
+
+d7 >> kit_boom.rim.steps("...........x...............x....", swing=0.1, tohall=0.3)  # Drums rim
+
+d7 >> kit_boom.rim.steps("...........x...............x....", swing=0.9, tohall=0.3)  # Drums rim
+
+d1 >> kit_boom.kick.steps("X.....x...x.....X.........x..x..", swing=0.1, tohall=0.3)  # Drums kick
+
+d1 >> kit_boom.kick.steps("X.....x...x.....X.........x..x..", swing=0.1, tohall=4)  # Drums kick
+
+d1 >> kit_boom.kick.steps("X.....x...x.....X.........x..x..", swing=0.1, tohall=0)  # Drums kick
+
+d1 >> kit_boom.kick.steps("X.....x...x.....X.........x..x..", swing=0.1, tohall=0.3)  # Drums kick
+
+d1 >> kit_boom.kick.steps("X.....x...x.....X.........x..x..", swing=0.1, tohall=[0.2, 0])  # Drums kick
+
+d1 >> kit_boom.kick.steps("X.....x...x.....X.........x..x..", swing=0.1, tohall=[0.2, 0, 0, 0.5])  # Drums kick
+
+d2 >> kit_boom.snare.steps("........X...............X.......", swing=0.6, tohall=0.3)  # Drums snare
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, tohall=0.3)  # Drums c.hat
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, csweep=0, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, tohall=0.3)  # Drums c.hat
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, csweep=0.2, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, tohall=0.3)  # Drums c.hat
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, csweep=0.3, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, tohall=0.3)  # Drums c.hat
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, csweep=0.4, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, tohall=0.3)  # Drums c.hat
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, csweep=0.5, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, tohall=0.3)  # Drums c.hat
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, csweep=0.6, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, tohall=0.3)  # Drums c.hat
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, csweep=0.7, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, tohall=0.3)  # Drums c.hat
+
+d7 >> kit_boom.rim.steps("...........x...............x....", swing=0.9, tohall=0.3)  # Drums rim
+
+d2 >> kit_boom.snare.steps("........X...............X.......", swing=0.6, tohall=0.3)  # Drums snare
+
+d1 >> kit_boom.kick.steps("X.....x...x.....X.........x..x..", swing=0.1, tohall=[0.2, 0, 0, 0.5])  # Drums kick
+
+d4.stop()
+
+d2.stop()
+
+d4 >> kit_boom.c_hat.steps("x.xx.xx.x.xx.xx.x.xx.xx.x.xx.xxx", swing=0.6, csweep=0.7, cswfreq=200, cswdepth=0.3, cswrate=0.5, cswdecay=0.5, tohall=0.3)  # Drums c.hat
+
+d2 >> kit_boom.snare.steps("........X...............X.......", swing=0.6, tohall=0.3)  # Drums snare
+
+Clock.bpm = 172
+
+one_dir = "/home/svdk/UltimateSamples/one/slice break 172/"
+
+r1 >> loop(one_chunks([one_dir + "r_000.wav"], 16), dur=16, amp=1.4142)  # the rendered part
+
+Clock.bpm = 132
+
+Clock.bpm = 132
+
+d1 >> iron_floor.kick.steps("X...x...x...x...", every=1)  # Drums kick
+
+d2 >> iron_floor.clap.steps("....x.......x...")  # Drums clap
+
+d2 >> iron_floor.clap.steps("....x.......x...")  # Drums clap
+
+d3 >> iron_floor.c_hat.steps("XxxxXxxxXxxxXxxx")  # Drums c.hat
+
+d4 >> iron_floor.o_hat.steps("..x...x...x...x.")  # Drums o.hat
+
+d5 >> iron_floor.rim.steps("......x....x....")  # Drums rim
+
+d3 >> iron_floor.c_hat.steps("exxxXxxxXxxxXxxx")  # Drums c.hat
+
+d3 >> iron_floor.c_hat.steps("efffXxxxXxxxXxxx")  # Drums c.hat
+
+d3 >> iron_floor.c_hat.steps("efffXffffXxxxXxxx")  # Drums c.hat
+
+d3 >> iron_floor.c_hat.steps("efffXffffXxxxXxxx")  # Drums c.hat
+
+d3 >> iron_floor.c_hat.steps("efffXffffXxxxXxxx")  # Drums c.hat
+
+d3 >> iron_floor.c_hat.steps("efffXffffXxxxXxxx")  # Drums c.hat
+
+d4 >> iron_floor.o_hat.steps("..x...x...x...x.")  # Drums o.hat
+
+d5 >> iron_floor.rim.steps("......x....x....")  # Drums rim
+
+d5 >> iron_floor.rim.steps("XxxxXX.x....x....")  # Drums rim
+
+d6 >> iron_floor.rim.steps("X ")
+
+d6 >> iron_floor.rim.steps("X ", shape=4)
+
+d6 >> iron_floor.rim.steps("X ", shape=1)
+
+d1 >> iron_floor.kick.steps("X...x...X...x...", every=1)  # Drums kick
+
+d1 >> iron_floor.kick.steps("X...x...c...x...", every=1)  # Drums kick
+
+d1 >> iron_floor.kick.steps("X.ee..x...c...x...", every=1)  # Drums kick
+
+Clock.clear()
+soff()
+
+Clock.clear()
+soff()
+
+Clock.bpm = 124
+
+Scale.default = Scale.minor; Root.default = 7
+
+b1 >> sub_pluck([0, 7, 0, 0, 7, 2, -1, -2, 5, -2, -1, 6, 4, 3], dur=[1/4, 3/4, 1, 1/4, 1/2, 1/2, 3/4], delay=1/2, sus=0.15, oct=3, oct1=-1, cutoff=500, level=-4)  # Bass A
+
+d1 >> kit_tight.kick.steps("X...x...x...x...", swing=0.55)  # Drums kick
+
+d3 >> kit_tight.clap.steps("....X.......X...", swing=0.55)  # Drums clap
+
+d4 >> kit_tight.c_hat.steps("x.xxx.xxx.xxx.xx", swing=0.55)  # Drums c.hat
+
+d5 >> kit_tight.o_hat.steps("..x...x...x...x.", swing=0.55)  # Drums o.hat
+
+b1 >> sub_pluck([0, 7, 0, 0, 7, 2, -1, -2, 5, -2, -1, 6, 4, 3], dur=[1/4, 3/4, 1, 1/4, 1/2, 1/2, 3/4], delay=1/2, sus=0.15, oct=4, oct1=-1, cutoff=500, level=-4)  # Bass A
+
+b1 >> sub_pluck([0, 7, 0, 0, 7, 2, -1, -2, 5, -2, -1, 6, 4, 3], dur=[1/4, 3/4, 1, 1/4, 1/2, 1/2, 3/4], delay=1/2, sus=0.15, oct=4, oct1=0, cutoff=500, level=-4)  # Bass A
+
+b1 >> sub_pluck([0, 7, 0, 0, 7, 2, -1, -2, 5, -2, -1, 6, 4, 3], dur=[1/4, 3/4, 1, 1/4, 1/2, 1/2, 3/4], delay=1/2, sus=0.15, oct=4, oct1=1, cutoff=500, level=-4)  # Bass A
+
+b1 >> sub_pluck([0, 7, 0, 0, 7, 2, -1, -2, 5, -2, -1, 6, 4, 3], dur=[1/4, 3/4, 1, 1/4, 1/2, 1/2, 3/4], delay=1/2, sus=0.15, oct=4, oct1=2, cutoff=500, level=-4)  # Bass A
+
+b1 >> sub_pluck([0, 7, 0, 0, 7, 2, -1, -2, 5, -2, -1, 6, 4, 3], dur=[1/4, 3/4, 1, 1/4, 1/2, 1/2, 3/4], delay=1/2, sus=0.15, oct=4, oct1=1, cutoff=500, level=-4)  # Bass A
+
+b1 >> sub_pluck([0, 7, 0, 0, 7, 2, -1, -2, 5, -2, -1, 6, 4, 3], dur=[1/4, 3/4, 1, 1/4, 1/2, 1/2, 3/4], delay=1/2, sus=0.15, oct=4, oct1=1, cutoff=1500, level=-4)  # Bass A
+
+d3 >> kit_tight.clap.steps("....X.......[XX]...", swing=0.55)  # Drums clap
+
+d4 >> kit_tight.c_hat.steps("x.xxx.Cxx.xxx.xx", swing=0.55)  # Drums c.hat
+
+d4 >> kit_tight.c_hat.steps("x.xxx.Ccx.xxx.xx", swing=0.55)  # Drums c.hat
+
+d3 >> kit_tight.clap.steps("....X.......[ee]...", swing=0.55)  # Drums clap
+
+Clock.clear()
+soff()
+
+Clock.bpm = 132
+
+Clock.bpm = 96
+
+Scale.default = Scale.minor; Root.default = 7
+
+fx_stop()
+
+fx_echo("dub throw", fb=linvar([0.35, 0.301, 0.359, 0.88, 0.874], [1/4, 43/4, 3, 7/4, 1/4]), out=0.8, into="hall", send=0.4)
+
+fx_hall("plate", decay=linvar([1.8, 2.01, 2.51, 7, 6.95], [1/4, 43/4, 3, 7/4, 1/4]))
+
+fx_hall("plate", decay=linvar([1.8, 2.01, 2.51, 7, 6.95], [1/4, 43/4, 3, 7/4, 1/4]))
+
+fx_hall("plate", decay=linvar([1.8, 2.01, 2.51, 7, 6.95], [1/4, 43/4, 3, 7/4, 1/4]))
+
+s1 >> sub_stab([(0, 3, 7), (-2, 2, 5), (-4, 0, 3), (-5, -1, 2)], dur=4, delay=1/2, sus=0.075, oct=4, scale=Scale.chromatic, root=7, level=-4, toecho=0.6)  # Stab A
+
+Clock.clear()
+soff()
+
+Clock.bpm = 110
+
+Scale.default = Scale.minor; Root.default = 4
+
+fx_stop()
+
+fx_drive("wavefolder", out=0, into="echo")
+
+fx_echo("ping 1/4", mix=0.35, out=0, into="hall")
+
+fx_hall("plate", mix=0.25)
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 1/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0, todrive=1)  # Lead A
+
+# fx_hall("plate", mix=0.25)
+
+# fx_echo("ping 1/4", mix=0.35, out=0, into="hall")
+
+# fx_drive("wavefolder", out=0, into="echo")
+
+fx_hall("plate", mix=0.25)
+
+fx_echo("ping 1/4", mix=0.35, out=0, into="hall")
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 1/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.2, todrive=1)  # Lead A
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 1/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.3, todrive=1)  # Lead A
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 1/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.4, todrive=1)  # Lead A
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 2/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.4, todrive=1)  # Lead A
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 3/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.4, todrive=1)  # Lead A
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 4/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.4, todrive=1)  # Lead A
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 5/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.4, todrive=1)  # Lead A
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 6/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.4, todrive=1)  # Lead A
+
+l1 >> sub_lead([0, 2, 3, 4, 3, 2, 0, -1, 0], dur=[3/4, 1/2, 3/4, 1, 1/2, 7/2, 3/4, 1/2, 11/4], sus=[0.725, 0.475, 0.725, 0.975, 0.475, 0.475, 0.725, 0.475, 1.725], level=-4, dry=0.4, todrive=1)  # Lead A
+
+Clock.clear()
+soff()
+
+Clock.bpm = 124
+

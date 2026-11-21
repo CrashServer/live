@@ -122,4 +122,4 @@ hihat = hihat * amp * 0.5;
 hihat = Mix(hihat) * 0.5;
 hihat = Pan2.ar(hihat, pan);
 ReplaceOut.ar(bus, hihat)
-}).add;
+}, metadata: (category: \drums)).add;

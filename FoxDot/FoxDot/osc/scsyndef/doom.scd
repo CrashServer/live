@@ -30,4 +30,4 @@ SynthDef.new(\doom,
     // Panning & Output
     sig = Pan2.ar(sig, pan);
     ReplaceOut.ar(bus, sig);
-}).add;
+}, metadata: (category: \bass)).add;

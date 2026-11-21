@@ -1,0 +1,632 @@
+q1 >> a_gheavy(drive=12, cutoff=600, bitcrush=8)
+
+q1 >> a_gheavy(drive=12, cutoff=600, bitcrush=8, lpf=100)
+
+q1 >> a_gheavy(drive=12, cutoff=1440, bitcrush=8, lpf=100)
+
+q1 >> a_gheavy(drive=12, cutoff=1440, fm_saw=0.5, fm_saw_i=0.7, bitcrush=8, lpf=100)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Root.default = "D#"
+
+Clock.bpm = 133;
+
+k0 >> dbass([3, 4, 4, 8, 4, 7, 4, [4, 5]], scale=Scale.chromatic, dur=1/3, rate=([4, 2, 1, 0.5], 0.1), lpf=1200, hpf=[1200, 400, 300, 600], lpr=0.4, lofi=PSine(256) + 0.5).every(5, "stutter", rate=0.25, oct=6)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+attack("tabalynch")
+
+v4 >> noloop("lynchvoice8", dur=16, sample=6, comp=1, fx2=0, trig=0, sus=16, amp=1)
+
+Clock.bpm=108
+
+Root.defaul = 4
+
+Scale.default="minor"
+
+Root.default = 4
+
+f8 >> play("<x.><.><....>", sample=0, amp=3).sometimes("stutter")
+
+e4 >> play("...(...z)", sample=2)
+
+f8 >> play("<k.><.><....>", sample=0, amp=3).sometimes("stutter")
+
+f8 >> play("<k.><.><....>", sample=4, amp=3).sometimes("stutter")
+
+f8 >> play("<k.><.><....>", sample=8, amp=3).sometimes("stutter")
+
+c1 >> click(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=linvar([40, 400], 128), drive=[PWhite(0.4,0.8),0.2], oct=(PwRand([3, 4, 5], [8, 1, 1]), PStep(9,5,4)), octer=1, mverb=0, leg=0,  octersub=2, octersubsub=var([2, PRand(15,22)], [15, 1]), triode=4, amp=0.5, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400).gtr(1)
+
+c1 >> dbass(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=linvar([40, 400], 128), drive=[PWhite(0.4,0.8),0.2], oct=(PwRand([3, 4, 5], [8, 1, 1]), PStep(9,5,4)), octer=1, mverb=0, leg=0,  octersub=2, octersubsub=var([2, PRand(15,22)], [15, 1]), triode=4, amp=0.5, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400).gtr(1)
+
+c1 >> dbass(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=linvar([40, 400], 128), drive=[PWhite(0.4,0.8),0.2], oct=(PwRand([3, 4, 5], [8, 1, 1]), PStep(9,5,4)), octer=1, mverb=0, leg=0,  octersub=2, octersubsub=var([2, PRand(15,22)], [15, 1]), triode=4, amp=2, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400).gtr(1)
+
+c1 >> donk(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=linvar([40, 400], 128), drive=[PWhite(0.4,0.8),0.2], oct=(PwRand([3, 4, 5], [8, 1, 1]), PStep(9,5,4)), octer=1, mverb=0, leg=0,  octersub=2, octersubsub=var([2, PRand(15,22)], [15, 1]), triode=4, amp=2, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400).gtr(1)
+
+c1 >> click(0, dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), hpf=linvar([40, 400], 128), drive=[PWhite(0.4,0.8),0.2], oct=(PwRand([3, 4, 5], [8, 1, 1]), PStep(9,5,4)), octer=1, mverb=0, leg=0,  octersub=2, octersubsub=var([2, PRand(15,22)], [15, 1]), triode=4, amp=2, amplify=1).unison(3).rarely("stutter",PRand(6), oct=6, pan=[-1,1], mpf=2860, hpf=400).gtr(1)
+
+c1 >> plaitsX(0,dur=var([PDur(var(PRand(2,7),PRand(2,8)),8),8],[24,8]), preset=P*[2,11], mverb=0.5, leg=4, hpf=P*[4000, 800])
+
+g0 >> tb303(0, dur=1/4, cut=1/2, amp=PBin(), cutoff=var([200, 3200, 4000, 8000], [8, 12, 4, 8]), top=PRand(1200)[:8], rq=0.1, dec=var([-0.9, 0.2, 0.5, 12], [4]))
+
+g1 >> tb303(0, dur=var([1/2, 1/4], [4, 8]), cut=1/2, amp=1, oct=var([4, 5], [24, 8]), dist2=0, cutoff=var([2000, 32000, 400, 800], [32]), top=PRand(1200)[:16], rq=[0.3, 0.3, 0.2, 0.5], dec=var([0.1, 0.2, 0.5, 12], [4]))
+
+g2 >> superbass(var([([7, 0], 0), [(12, 0), ([6, 0], 0), (0, [12, 7])]]),oct=(3, PStep(16, 3, 4)), dur=[1/2, 1/4, 1/4, 1/4, 1/2, 1/4, 1/4, 1/2, 1/4, 1/2], leg=linvar([0, 4], 32), scale=Scale.chromatic, drive=PWhite(0.0, 0.1), hpf=50, hpr=(0.1, 0.9))
+
+c5 >> loop("jazzguitar8", dur=8) # edgy/touchy
+
+u6 >> loop("lynchcrazy16", dur=16, sample=4) # stone electro
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+y2 >> reese(detune=0.022, cutoff=1200, rq=0.65)
+
+y2 >> reese(detune=0.022, cutoff=1200, dur=4, rq=0.65)
+
+y2 >> reese(detune=0.022, cutoff=1200, dur=4, rq=0.65, oct=3)
+
+y2 >> reese(detune=0.022, cutoff=1200, dur=4, rq=0.1, oct=3)
+
+y2 >> reese(detune=0.022, cutoff=1200, dur=4, rq=0.1, oct=(3, 4))
+
+y2 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.1, oct=(3, 4))
+
+y2 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.1, oct=(3, 4), leg=4)
+
+y2 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.1, oct=(3, 4), leg=0)
+
+y2 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.1, oct=(3, 4), chop=0.5, chopmix=0.5)
+
+y2 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.1, oct=(3, 4), chop=0.5, chopmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=400, dur=4, rq=0.1, oct=(3, 4), chop=0.5, chopmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.1, oct=(3, 4), chop=0.5, chopmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.2, oct=(3, 4), chop=0.5, chopmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.3, oct=(3, 4), chop=0.5, chopmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.4, oct=(3, 4), chop=0.5, chopmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.4, oct=(3, 5), chop=0.5, chopmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.4, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=0.5, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.4, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.3, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.2, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=200, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=201, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=202, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=203, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=204, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=205, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=206, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=207, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=208, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=209, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=210, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=211, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=212, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=213, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=214, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=215, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=216, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=217, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=218, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=219, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=220, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=221, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=222, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=223, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=224, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=225, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=226, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=227, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=228, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=229, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=230, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=231, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=232, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=233, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=234, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=235, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=236, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=237, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=238, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=239, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=240, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=500, dur=4, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=500, dur=2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1)
+
+y3 >> reese(detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(3,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(4,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(6,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(4,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(3,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(2,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(3,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(4,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(6,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.022, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.032, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.042, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.052, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.062, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.072, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.082, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.092, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.102, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.112, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.122, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.132, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.142, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.152, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.162, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.172, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.182, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.192, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=500, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=200, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=0.75, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=1, rgaterate=1, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=1, rgaterate=8, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=2, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=0, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, beat_dur=1).chroma()
+
+y3 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 5), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=100, dur=1/2, rq=0.1, oct=(3, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=100, dur=3, rq=0.1, oct=(3, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=100, dur=3, rq=0.1, oct=(4, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=100, dur=3, rq=0.1, oct=(5, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=400, dur=3, rq=0.1, oct=(5, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=200, dur=3, rq=0.1, oct=(5, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=200, dur=3, rq=0.1, oct=(5, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.02,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=200, dur=3, rq=0.1, oct=(5, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.4,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=200, dur=3, rq=0.1, oct=(5, 6), chop=4, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=200, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=4, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=200, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=12, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=200, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=1, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=200, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=400, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.7, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=0.3, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.1,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.2,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.3,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.4,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.5,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.6,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.7,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.03, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.04, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.05, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y4 >> reese(5,detune=0.02, cutoff=300, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=301, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=401, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=501, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=701, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=801, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=901, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1001, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1101, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1201, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1301, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1401, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1501, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1601, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1701, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1801, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1701, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1601, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1501, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1401, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1301, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1201, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1101, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=1001, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=901, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=801, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=701, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=501, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=401, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=501, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(5, 6), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=0.5, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=3, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=12, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=0, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.6, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.7, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.8, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.9, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=1.0, fbfeed=1/3, fbcutoff=3000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=1.0, fbfeed=1/3, fbcutoff=1000, fbspread=0.8,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=1.0, fbfeed=1/3, fbcutoff=1000, fbspread=0.9,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=1.0, fbfeed=1/3, fbcutoff=1000, fbspread=1.0,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=1.0, fbfeed=1/3, fbcutoff=1000, fbspread=1.1,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=1.0, fbfeed=1/3, fbcutoff=1000, fbspread=1.2,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=1.0, fbfeed=1/3, fbcutoff=1000, fbspread=1.3,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=1.0, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.05, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=0.4, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.2, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.3, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.4, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.5, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.6, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.7, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.8, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=1000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=1, tstretchsize=0.2, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=1, tstretchsize=0.02, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 4), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=0.1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(3, 5), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=0.1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=601, dur=3, rq=0.1, oct=(4, 5), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=0.1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=701, dur=3, rq=0.1, oct=(4, 5), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=0.1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=801, dur=3, rq=0.1, oct=(4, 5), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=0.1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=901, dur=3, rq=0.1, oct=(4, 5), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=0.1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=1001, dur=3, rq=0.1, oct=(4, 5), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=0.1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+y5 >> reese(5,detune=1, cutoff=901, dur=3, rq=0.1, oct=(4, 5), chop=1, chopmix=4, rgate=1, rgaterate=1, rgatewave=1, fbdelay=0.5, fbtime=0.5, tstretch=0.1, tstretchsize=0.4, fbfeed=1/3, fbcutoff=2000, fbspread=1.4,  beat_dur=1).chroma()
+
+i4 >> play("X ")
+
+i4.stop()
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+m2 >> pad2([(0, 2, 4), (-2, 1, 5), (0, 4, 7), (-4, -1, 3), (0, 3, 7)], dur=PWhite(16, 32), sus=PWhite(20, 40), oct=5, amp=0.4, cutoff=linvar([400, 2400], 96), cheapverb=0.9, cvdecay=4.5, jpverb=0.65, jpsize=0.97, jpdamp=0.3, hpf=220, stereowidth=0.88)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, sample=2, spwstr=1, spwshift=1, gdel=0.89, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.4, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 132
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.5, sblur=0.1, sbluramt=1, csweep=0.1, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0.4, spwstr=1, spwshift=1, gdel=0.0, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, sample=2, spwstr=1, spwshift=1, gdel=0.89, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.4, fbdelay=0.25, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.4, sbluramt=4, csweep=0.2, cswfreq=80, cswdepth=0.01, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, envdist=0.5, envdistgain=2, envdistsens=1, envdistattack=0.01,spwshift=1, gdel=0.6, gdeltime=0.1, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8, density=0.7, mute="snare"), dur=0.25, sblur=0.4, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.6, gdeltime=0.1, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.5).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), sample=4, dur=0.25, sblur=0.3, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=4, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.5, gdeltime=0.03, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8), dur=0.25, sblur=0.1, sbluramt=4, csweep=0.2, cswfreq=70, cswdepth=0.5, cswrate=0.5, cswdecay=0.5, spwarp=0, spwstr=1, spwshift=1, gdel=0.3, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(3)
+
+~d1 >> play(pbuild("techno", 16, fill=8, mute="snare"), dur=0.25, sblur=0.1, sbluramt=2, csweep=0.2, cswfreq=70, cswdepth=0.2, cswrate=0.5, cswdecay=0.5, spwarp=0, fbdelay=0.7, shape=0.1, fbtime=0.25, fbfeed=0.7, fbcutoff=3000, fbspread=0.02, beat_dur=1, spwstr=1, spwshift=1, gdel=0.4, gdeltime=0.01, gdelsize=0.01, gdelsprd=0.8, gdelfb=0.7).unison(5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+
+Clock.bpm = 132;
+
+Scale.default = "minor"
+
+Root.default= 0
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=0.7, fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.3, rbfreq=77, rbdecay=0.5, rbspread=1.0, shape=0.1)
+
+d1.hpf=3700
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.3, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.5, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+d1.cut=1/4
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.8, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.2, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.3, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.4, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.5, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.4, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.3, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.2, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x9 >> play("x ", sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x0 >> play("O...", dur=2, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1 >> reese(dur=1, oct=6, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1.stop()
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.3, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.4, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.5, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.4, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.3, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.1, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+z8 >> play("X ", amp=2)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=17, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=18, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=19, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=20, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=21, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("k ", sample=1, multicrush=0.2, mclowdrive=22, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.5, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x1 >> reese(dur=1, oct=4, sample=7, multicrush=0.2, mclowdrive=16, mcmiddrive=2, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=linvar([0.2, 0.9], 32), fbtime=var([0.6, 0.8],16), fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.7, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.4, echo=0.5) #octave
+
+x1.stop()
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.5, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=78, rbdecay=0.5, rbspread=1.0, shape=0.2, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.4, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+x7 >> play("x ", sample=1, multicrush=0.2, mclowdrive=16, mcmiddrive=8, mchighdrive=2.2, mclofreq=149, mchifreq=900, eb=0.02, fbdelay=0.25, fbtime=0.2, fbfeed=linvar([0.7, 0.9], 128), fbcutoff=3000, fbspread=0.1, beat_dur=1, ebfeed=0.8, ebmix=0.7, ebmode=2, ebwow=0.5, ebflutter=0.16, ebsat=0.9, rgate=0.7, rgaterate=1, rgatewave=0, resonbank=0.3, rbfreq=79, rbdecay=0.5, rbspread=1.0, shape=0.1, echo=0.5)
+
+Clock.clear()
+soff()
+Server.clearFx()
+

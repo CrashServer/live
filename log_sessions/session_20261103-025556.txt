@@ -1,0 +1,16 @@
+Clock.bpm = 140
+
+Scale.default = Scale.minor; Root.default = 5
+
+fx_stop()
+
+snd_wobble = sound(sub_reese, cutoff=400, res=0.5, odrive=0.5, lrate=4.6667, lcut=0.7)
+
+w1 >> snd_wobble([0, 2, -1, 0, 4, 3], dur=[4, 2, 2], oct=2)  # Wobble A
+
+d1 >> kit_boom.kick.steps("X.........x.....")  # Drums kick
+
+d2 >> kit_boom.snare.steps("........X.......")  # Drums snare
+
+d4 >> kit_boom.c_hat.steps("x.x.x.x.x.x.x.x.")  # Drums c.hat
+

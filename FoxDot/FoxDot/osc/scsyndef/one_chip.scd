@@ -8,12 +8,13 @@
 //  - soft: One's one-pole smoothing of the wave
 // Renamed: vib→ovib (a FoxDot effect), vol→level, aa/ad/as/ar→aatk/adec/asus/arel, vel→velamp, velo = this note's velocity.
 SynthDef.new(\one_chip, {
-	|bus = 0, dry = 1, todrive = 0, toduck = 0, toecho = 0, tohall = 0, toaux = 0, side = 0, freq = 0, amp = 1, sus = 1, pan = 0, blur = 1,
+	|bus = 0, dry = 1, ins = -1, todrive = 0, toduck = 0, toecho = 0, tohall = 0, toaux = 0, side = 0, freq = 0, amp = 1, sus = 1, pan = 0, blur = 1,
 	wave = 1, pwm = 0, soft = 0.2, arp = 0, arphz = 50, sweep = 0, sweept = 0.1, ovib = 0, vibhz = 5.5, vibd = 0.25,
-	aatk = 0.001, adec = 0.3, asus = 0.5, arel = 0.1, steps = 1, velamp = 0.3, velo = 0.8, level = -8|
+	aatk = 0.001, adec = 0.3, asus = 0.5, arel = 0.1, steps = 1, velamp = 0.3, velo = 0.8, level = -8, choke = -1, gl = 0, beat_dur = 0.5, ocut = -1|
 	var sig;
 	var t, gate, e, q, note, st, step, arpOff, f, w, duty, x, y;
-	var fxon;
+	var chk, fxon;
+	sus = Select.kr(gl > 0, [sus, gl * beat_dur]);   // the note's own length when FoxDot's sus is its life (gl, beats)
 	freq = In.kr(bus, 1);
 	note = freq.cpsmidi;
 	t = Sweep.kr(1, 1);
@@ -43,10 +44,21 @@ SynthDef.new(\one_chip, {
 	// (dry = 0, a sound going only through an effect) FoxDot's bus gets an inaudible tone at half the sample rate while
 	// the note lives, so FoxDot does not free it as silent.
 	sig = Balance2.ar(y, y, pan, 2.sqrt);
+	// one voice (choke >= 0, from the exporter): the next note of the same unit takes the voice over, this one fades
+	// in 2 ms (its id on control bus 15400 + choke; choke < 0: plays as it is)
+	chk = [Rand(1, 1000000), Sweep.kr(1, 1) < (ControlDur.ir * 1.5), Select.kr(choke >= 0, [15399, 15400 + choke.max(0)])];
+	chk = chk ++ [In.kr(chk[2])];
+	ReplaceOut.kr(chk[2], Select.kr(chk[1], [chk[3], chk[0]]));
+	sig = sig * EnvGen.kr(Env.asr(0, 1, 0.002), (chk[1] + ((chk[3] - chk[0]).abs < 0.5) + (choke < 0)).min(1), doneAction: 2);
+	// ocut (from the exporter): a section turning this unit down silences it at once, as One does (control bus
+	// 15700 + cut changes: oneFX's one_cut); ocut < 0: nothing
+	sig = sig * EnvGen.kr(Env.asr(0, 1, 0.005), ((In.kr(15700 + ocut.max(0)) - Latch.kr(In.kr(15700 + ocut.max(0)), Impulse.kr(0))).abs < 0.5) + (ocut < 0), doneAction: 2);
 	// an effect that is not running (oneFX.py sets control bus 15360 + its bus to 1 while it runs): a sound sent only
 	// to effects (dry = 0) plays dry instead of not at all; with dry above 0 it only loses that effect.
 	fxon = In.kr(15360 + [2, 6, 8, 10, 12]);
 	dry = Select.kr(dry > 0, [((todrive * (1 - fxon[0])) + (toduck * (1 - fxon[1])) + (tohall * (1 - fxon[2])) + (toecho * (1 - fxon[3])) + (toaux * (1 - fxon[4]))).min(1), dry]);
 	Out.ar(2, sig * todrive); Out.ar(6, sig * toduck); Out.ar(8, sig * tohall); Out.ar(10, sig * toecho); Out.ar(12, sig * toaux); Out.ar(14, sig * side);
-	ReplaceOut.ar(bus, Select.ar(dry > 0, [((LFPulse.ar(SampleRate.ir / 2) * 2) - 1) * 0.00012 ! 2, sig * dry]));
+	// an insert (ins: its bus, from fx_insert): the dry sound goes there, FoxDot's bus keeps the inaudible tone
+	Out.ar(ins.max(0), sig * dry * (ins >= 0));
+	ReplaceOut.ar(bus, Select.ar((dry > 0) * (ins < 0), [((LFPulse.ar(SampleRate.ir / 2) * 2) - 1) * 0.00012 ! 2, sig * dry]));
 }).add;

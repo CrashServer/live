@@ -4,8 +4,8 @@
 // One sums the voices, adds the room and the rumble, then soft-clips the sum (tanh(4 odrive x) / (4 odrive)):
 // here each hit is clipped alone, which is One exactly for a hit on its own.
 SynthDef.new(\berlin_ride, {
-	|bus = 0, dry = 1, todrive = 0, toduck = 0, toecho = 0, tohall = 0, toaux = 0, side = 0, freq = 0, amp = 1, sus = 1, blur = 1, tune = 0, dec = 1, lvl = -11, x = 0.5, pan = 0.35,
-	oroom = 0.4, odrive = 0.2, level = -4, velo = 1|
+	|bus = 0, dry = 1, ins = -1, todrive = 0, toduck = 0, toecho = 0, tohall = 0, toaux = 0, side = 0, freq = 0, amp = 1, sus = 1, blur = 1, tune = 0, dec = 1, lvl = -11, x = 0.5, pan = 0.35,
+	oroom = 0.4, odrive = 0.2, level = -4, velo = 1, ocut = -1|
 	var sig;
 	var t = Sweep.ar(1, 1), tr = 2 ** (tune / 12), nz = WhiteNoise.ar, y, g, l, r, a, wet, sat, done, svf, op, room, extraL = 0, extraR = 0, env = (t.neg / (0.45 * dec)).exp * (1 - (t.neg / 0.0005).exp), m;
 	var fxon;
@@ -41,10 +41,15 @@ SynthDef.new(\berlin_ride, {
 	// (dry = 0, a sound going only through an effect) FoxDot's bus gets an inaudible tone at half the sample rate while
 	// the note lives, so FoxDot does not free it as silent.
 	sig = [sat.(l), sat.(r)] * level.dbamp * 2.sqrt * amp;
+	// ocut (from the exporter): a section turning this unit down silences it at once, as One does (control bus
+	// 15700 + cut changes: oneFX's one_cut); ocut < 0: nothing
+	sig = sig * EnvGen.kr(Env.asr(0, 1, 0.005), ((In.kr(15700 + ocut.max(0)) - Latch.kr(In.kr(15700 + ocut.max(0)), Impulse.kr(0))).abs < 0.5) + (ocut < 0), doneAction: 2);
 	// an effect that is not running (oneFX.py sets control bus 15360 + its bus to 1 while it runs): a sound sent only
 	// to effects (dry = 0) plays dry instead of not at all; with dry above 0 it only loses that effect.
 	fxon = In.kr(15360 + [2, 6, 8, 10, 12]);
 	dry = Select.kr(dry > 0, [((todrive * (1 - fxon[0])) + (toduck * (1 - fxon[1])) + (tohall * (1 - fxon[2])) + (toecho * (1 - fxon[3])) + (toaux * (1 - fxon[4]))).min(1), dry]);
 	Out.ar(2, sig * todrive); Out.ar(6, sig * toduck); Out.ar(8, sig * tohall); Out.ar(10, sig * toecho); Out.ar(12, sig * toaux); Out.ar(14, sig * side);
-	ReplaceOut.ar(bus, Select.ar(dry > 0, [((LFPulse.ar(SampleRate.ir / 2) * 2) - 1) * 0.00012 ! 2, sig * dry]));
+	// an insert (ins: its bus, from fx_insert): the dry sound goes there, FoxDot's bus keeps the inaudible tone
+	Out.ar(ins.max(0), sig * dry * (ins >= 0));
+	ReplaceOut.ar(bus, Select.ar((dry > 0) * (ins < 0), [((LFPulse.ar(SampleRate.ir / 2) * 2) - 1) * 0.00012 ! 2, sig * dry]));
 }).add;

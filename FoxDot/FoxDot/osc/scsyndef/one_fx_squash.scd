@@ -4,10 +4,10 @@
 // The gain computer with a soft knee as One's; the release-held peak (One: max(want, a_r y + (1 - a_r) want)) as a
 // peak follower floored by what is wanted, then the attack smoothing (one-pole); gain(dB), makeup, mix as One's.
 SynthDef.new(\one_fx_squash, {
-	|inb = 12, sideb = 14, outb = 0, outamt = 1, out2b = -1, out2amt = 0, thr = -18, ratio = 4, att = 5, rel = 150, knee = 6, gain = 0, key = 2, mix = 1|
+	|inb = 12, sideb = 14, outb = 0, outamt = 1, out2b = -1, out2amt = 0, out3b = -1, out3amt = 0, thr = -18, ratio = 4, att = 5, rel = 150, knee = 6, gain = 0, key = 2, mix = 1|
 	var sig;
 	var sr = SampleRate.ir, in, side, k, lvl, o, rr, soft, hard, c1, c2, want, aa, ar, y1, gr, g, w;
-	var on2;
+	var on2, on3;
 	in = In.ar(inb, 2); side = In.ar(sideb, 2);
 	ReplaceOut.ar(inb, Silent.ar(2)); ReplaceOut.ar(sideb, Silent.ar(2));
 	k = Select.ar(key >= 2, [in, side]);
@@ -27,7 +27,10 @@ SynthDef.new(\one_fx_squash, {
 	sig = in * w;
 	// sent only into another effect (outamt 0) that is not running: to the speakers instead
 	on2 = In.kr(15360 + out2b.max(0)) * (out2b >= 0);
-	outamt = outamt + ((outamt <= 0) * out2amt * (1 - on2));
+	on3 = In.kr(15360 + out3b.max(0)) * (out3b >= 0);
+	outamt = outamt + ((outamt <= 0) * ((out2amt * (1 - on2)) + (out3amt * (1 - on3) * (out3b >= 0))));
 	Out.ar(outb, sig * outamt);
 	Out.ar(out2b.max(0), sig * out2amt * (out2b >= 0));
+	// and a third (the Echo into the Hall and the Duck)
+	Out.ar(out3b.max(0), sig * out3amt * (out3b >= 0));
 }).add;

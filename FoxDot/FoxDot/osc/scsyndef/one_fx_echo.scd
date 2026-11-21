@@ -3,10 +3,10 @@
 // list: 1/32 … 2 bars) × beat_dur; a change glides (One: 0.0005 a sample). The repeats are low-passed (`tone`) and fed
 // back: stereo through tanh, or ping-pong (the mono input into the left, each side into the other).
 SynthDef.new(\one_fx_echo, {
-	|inb = 10, outb = 0, outamt = 1, out2b = -1, out2amt = 0, sync = 1, div = 7, ms = 350, fb = 0.45, tone = 3500, mode = 1, mix = 0.3, beat_dur = 0.5|
+	|inb = 10, outb = 0, outamt = 1, out2b = -1, out2amt = 0, out3b = -1, out3amt = 0, sync = 1, div = 7, ms = 350, fb = 0.45, tone = 3500, mode = 1, mix = 0.3, beat_dur = 0.5|
 	var sig;
 	var sr = SampleRate.ir, in, x, y, want, time, d, dl, dr, f, c, wl, wr;
-	var on2;
+	var on2, on3;
 	in = In.ar(inb, 2); x = in[0]; y = in[1];
 	ReplaceOut.ar(inb, Silent.ar(2));
 	want = Select.kr(sync, [ms / 1000, Select.kr(div, [0.125, 1 / 6, 0.25, 1 / 3, 0.375, 0.5, 2 / 3, 0.75, 1, 2, 4, 8]) * beat_dur]).clip(1 / sr, 4.1);
@@ -22,7 +22,10 @@ SynthDef.new(\one_fx_echo, {
 	sig = [(x * (1 - mix)) + (dl * mix), (y * (1 - mix)) + (dr * mix)];
 	// sent only into another effect (outamt 0) that is not running: to the speakers instead
 	on2 = In.kr(15360 + out2b.max(0)) * (out2b >= 0);
-	outamt = outamt + ((outamt <= 0) * out2amt * (1 - on2));
+	on3 = In.kr(15360 + out3b.max(0)) * (out3b >= 0);
+	outamt = outamt + ((outamt <= 0) * ((out2amt * (1 - on2)) + (out3amt * (1 - on3) * (out3b >= 0))));
 	Out.ar(outb, sig * outamt);
 	Out.ar(out2b.max(0), sig * out2amt * (out2b >= 0));
+	// and a third (the Echo into the Hall and the Duck)
+	Out.ar(out3b.max(0), sig * out3amt * (out3b >= 0));
 }).add;

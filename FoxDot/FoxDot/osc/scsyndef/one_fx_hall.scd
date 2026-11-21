@@ -4,11 +4,11 @@
 // mixed by an 8×8 Hadamard (× 0.35355), the diffused input added (alternating sign); out: even lines left, odd right.
 // The lines are fed back through LocalIn (one block), so each is read at its length minus a block: the same delay.
 SynthDef.new(\one_fx_hall, {
-	|inb = 8, outb = 0, outamt = 1, out2b = -1, out2amt = 0, pre = 15, size = 1, decay = 2.5, damp = 6000, width = 1, mix = 0.25|
+	|inb = 8, outb = 0, outamt = 1, out2b = -1, out2amt = 0, out3b = -1, out3amt = 0, pre = 15, size = 1, decay = 2.5, damp = 6000, width = 1, mix = 0.25|
 	var sig;
 	var sr = SampleRate.ir, bs = BlockSize.ir, ms = [29.7, 37.1, 41.1, 43.7, 53.0, 59.9, 67.7, 73.1],
 		in, dl, dr, s, len, g, y, lp, x, h, w, l, r, m, sd, had;
-	var on2;
+	var on2, on3;
 	in = In.ar(inb, 2); dl = in[0]; dr = in[1];
 	ReplaceOut.ar(inb, Silent.ar(2));
 	s = DelayN.ar((dl + dr) * 0.5, 0.21, (pre * sr / 1000).floor.max(1) / sr);
@@ -29,7 +29,10 @@ SynthDef.new(\one_fx_hall, {
 	sig = [(dl * (1 - mix)) + ((m + sd) * mix * 0.5), (dr * (1 - mix)) + ((m - sd) * mix * 0.5)];
 	// sent only into another effect (outamt 0) that is not running: to the speakers instead
 	on2 = In.kr(15360 + out2b.max(0)) * (out2b >= 0);
-	outamt = outamt + ((outamt <= 0) * out2amt * (1 - on2));
+	on3 = In.kr(15360 + out3b.max(0)) * (out3b >= 0);
+	outamt = outamt + ((outamt <= 0) * ((out2amt * (1 - on2)) + (out3amt * (1 - on3) * (out3b >= 0))));
 	Out.ar(outb, sig * outamt);
 	Out.ar(out2b.max(0), sig * out2amt * (out2b >= 0));
+	// and a third (the Echo into the Hall and the Duck)
+	Out.ar(out3b.max(0), sig * out3amt * (out3b >= 0));
 }).add;
